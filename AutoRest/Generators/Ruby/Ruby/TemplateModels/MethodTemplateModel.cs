@@ -10,6 +10,9 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
+    /// <summary>
+    /// The model object for regular Ruby methods.
+    /// </summary>
     public class MethodTemplateModel : Method
     {
         private readonly IScopeProvider scopeProvider = new ScopeProvider();
@@ -70,14 +73,14 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Generate the method parameter declaration
+        /// Gets the method parameter declaration parameters list.
         /// </summary>
         public string MethodParameterDeclaration
         {
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in  LocalParameters)
+                foreach (var parameter in LocalParameters)
                 {
                     string format = (parameter.IsRequired ? "{0}" : "{0} = nil");
                     declarations.Add(string.Format(format, parameter.Name));
@@ -86,6 +89,20 @@ namespace Microsoft.Rest.Generator.Ruby
                 declarations.Add("custom_headers = nil");
 
                 return string.Join(", ", declarations);
+            }
+        }
+
+        /// <summary>
+        /// Gets the method parameter invocation parameters list.
+        /// </summary>
+        public string MethodParameterInvocation
+        {
+            get
+            {
+                var invocationParams = LocalParameters.Select(p => p.Name).ToList();
+                invocationParams.Add("custom_headers");
+
+                return string.Join(", ", invocationParams);
             }
         }
 
@@ -122,11 +139,11 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return "MsRest::HttpOperationException";
+                return "MsRest::HttpOperationError";
             }
         }
 
-        public virtual string InitializeResponseBody 
+        public virtual string InitializeResponseBody
         {
             get { return string.Empty; }
         }
@@ -150,14 +167,6 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
-        public string MakeRequestMethodReference
-        {
-            get { return Group == null ? "make_http_request" : "@client.make_http_request"; }
-        }
-
-        /// <summary>
-        /// Generate a reference to the ServiceClient
-        /// </summary>
         public string ClientReference
         {
             get { return Group == null ? "self" : "@client"; }
@@ -176,34 +185,34 @@ namespace Microsoft.Rest.Generator.Ruby
             return string.Format("{0}", (int)code);
         }
 
-        public virtual string CreateDeserializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
+        public virtual string CreateDeserializationString(string inputVariable, IType type, string outputVariable)
         {
             var builder = new IndentedStringBuilder("  ");
+            var tempVariable = "parsed_response";
 
             // Firstly parsing the input json file into temporay variable.
-            builder.AppendLine("{0} = JSON.load({1}) unless {1}.to_s.empty?", "parsed_response", inputVariable);
+            builder.AppendLine("{0} = JSON.load({1}) unless {1}.to_s.empty?", tempVariable, inputVariable);
 
             // Secondly parse each js object into appropriate Ruby type (DateTime, Byte array, etc.)
             // and overwrite temporary variable variable value.
-            string deserializationLogic = type.DeserializeType(this.Scope, "parsed_response", defaultNamespace);
+            string deserializationLogic = type.DeserializeType(this.Scope, tempVariable);
             builder.AppendLine(deserializationLogic);
 
             // Assigning value of temporary variable to the output variable.
-            return builder.AppendLine("{0} = {1}", outputVariable, "parsed_response").ToString();
+            return builder.AppendLine("{0} = {1}", outputVariable, tempVariable).ToString();
         }
 
-        public virtual string CreateSerializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
+        public virtual string CreateSerializationString(string inputVariable, IType type, string outputVariable)
         {
             var builder = new IndentedStringBuilder("  ");
 
             // Firstly recursively serialize each component of the object.
-            string serializationLogic = type.SerializeType(this.Scope, inputVariable, defaultNamespace);
+            string serializationLogic = type.SerializeType(this.Scope, inputVariable);
 
             builder.AppendLine(serializationLogic);
-            builder.AppendLine("request_content = {0}", inputVariable);
 
             // After that - generate JSON object after serializing each component.
-            return builder.AppendLine("{0} = JSON.generate(request_content, quirks_mode: true)", outputVariable).ToString();
+            return builder.AppendLine("{0} = JSON.generate({1}, quirks_mode: true)", outputVariable, inputVariable).ToString();
         }
 
         /// <summary>
@@ -219,7 +228,7 @@ namespace Microsoft.Rest.Generator.Ruby
             // Filling path parameters (which are directly in the url body).
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                builder.AppendLine("{0}['{{{1}}}'] = ERB::Util.url_encode({2})",
+                builder.AppendLine("{0}['{{{1}}}'] = ERB::Util.url_encode({2}) if {0}.include?('{{{1}}}')",
                     inputVariableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(pathParameter.Name));
@@ -231,7 +240,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 builder.AppendLine("{0} = URI.join({1}.base_url, {2})", outputVariableName, ClientReference, inputVariableName);
             }
 
-            // Filling query parameters (which are directly in the url query part). 
+            // Filling query parameters (which are directly in the url query part).
             var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
 
             if (queryParametres.Any())
@@ -256,12 +265,27 @@ namespace Microsoft.Rest.Generator.Ruby
             //builder.AppendLine("# trim all duplicate forward slashes in the url");
             //builder.AppendLine("var regex = /([^:]\\/)\\/+/gi;");
             //builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
-            
+
             return builder.ToString();
         }
 
         /// <summary>
-        /// Gets the expression for default header setting. 
+        /// Gets the list of middelwares required for HTTP requests.
+        /// </summary>
+        public virtual List<string> FaradeyMiddlewares
+        {
+            get
+            {
+                return new List<string>()
+                {
+                    "MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02",
+                    ":cookie_jar"
+                };
+            }
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting.
         /// </summary>
         public virtual string SetDefaultHeaders
         {

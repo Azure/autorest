@@ -8,4 +8,6 @@ group :development, :local, :test do
   gem 'json'
   gem 'timeliness'
   gem 'concurrent-ruby-ext'
+  gem 'faraday'
+  gem 'faraday-cookie_jar'
 end

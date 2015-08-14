@@ -35,7 +35,7 @@ var util = require('util');
 var app = express();
 //set up server log
 var now = new Date();
-var logFileName = 'AcceptenceTest-' + now.getHours() +  
+var logFileName = 'AccTestServer-' + now.getHours() +  
     now.getMinutes() + now.getSeconds() + '.log';
 var logfile = fs.createWriteStream('../../../../TestResults/' + logFileName, {flags: 'a'});
 app.use(morgan('combined', {stream: logfile}));
@@ -414,23 +414,9 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.end(JSON.stringify(err));
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.end(err);
+  res.end(JSON.stringify(err));
 });
-
 
 module.exports = app;

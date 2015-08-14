@@ -11,6 +11,16 @@ module @Settings.Namespace
   # A service client - single point of access to the REST API.
   #
   class @Model.Name < @Model.BaseType
+@if (Model.HasModelTypes)
+{
+    @:include @(Settings.Namespace)::Models
+}
+@foreach (var include in Model.Includes)
+{
+    @:include @include
+}
+    @EmptyLine
+
     # @@return [String] the base URI of the service.
     attr_accessor :base_url
 @EmptyLine
@@ -22,7 +32,7 @@ module @Settings.Namespace
 @EmptyLine
 }
 
-@foreach (var operation in Model.MethodGroups) 
+@foreach (var operation in Model.MethodGroups)
 {
     @:@WrapComment("# ", string.Format("@return {0}", RubyCodeNamer.UnderscoreCase(operation)))
     @:attr_reader :@(RubyCodeNamer.UnderscoreCase(operation))
@@ -43,7 +53,7 @@ module @Settings.Namespace
       fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(MsRest::ServiceClientCredentials)
       @@credentials = credentials
       @EmptyLine
-      @foreach (var operation in Model.MethodGroups) 
+      @foreach (var operation in Model.MethodGroups)
       {
       @:@@@(RubyCodeNamer.UnderscoreCase(operation)) = @(operation).new(self)
       }

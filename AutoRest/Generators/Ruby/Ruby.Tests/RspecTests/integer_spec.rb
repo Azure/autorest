@@ -18,51 +18,51 @@ describe Int do
 
   it 'should get overflow int32' do
     result = @int_client.get_overflow_int32().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(2147483656)
   end
 
   it 'should get underflow int32' do
     result = @int_client.get_underflow_int32().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(-2147483656)
   end
 
   it 'should get overflow int64' do
     result = @int_client.get_overflow_int64().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(9223372036854775910)
   end
 
   it 'should get underflow int64' do
     result = @int_client.get_underflow_int64().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(-9223372036854775910)
   end
 
   it 'should put max32' do
     result = @int_client.put_max32(2147483647).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should put min32' do
     result = @int_client.put_min32(-2147483648).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should put max64' do
     result = @int_client.put_max64(9223372036854776000).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should put min64' do
     result = @int_client.put_min64(-9223372036854776000).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get null' do
     result = @int_client.get_null().value!
-	  expect(result.response).to be_an_instance_of(Net::HTTPOK)
+	  expect(result.response.status).to eq(200)
 	  expect(result.body).to eq(nil)
   end
 

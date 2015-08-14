@@ -20,7 +20,7 @@ describe Date do
 
   it 'should get null' do
     result = @date_client.get_null().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_nil
   end
 
@@ -38,23 +38,23 @@ describe Date do
 
   it 'should put max date' do
     result = @date_client.put_max_date(Date.parse('9999-12-31')).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get max date' do
     result = @date_client.get_max_date().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(Date.parse('9999-12-31'))
   end
 
   it 'should put min date' do
     result = @date_client.put_min_date(Date.parse('0001-01-01')).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get min date' do
     result = @date_client.get_min_date().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(Date.parse('0001-01-01'))
   end
 end

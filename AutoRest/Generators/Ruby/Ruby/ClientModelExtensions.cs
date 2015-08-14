@@ -159,19 +159,6 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         }
 
         /// <summary>
-        /// Esnures that required and optional are correctly set on parameters based on their location
-        /// </summary>
-        /// <param name="parameter">The parameter to check</param>
-        /// <returns>The updated parameter</returns>
-        public static Parameter SetRequiredOptional(this Parameter parameter)
-        {
-            parameter.IsRequired = parameter.IsRequired ||
-                                   (parameter.Location == ParameterLocation.Path ||
-                                    parameter.Location == ParameterLocation.Body);
-            return parameter;
-        }
-
-        /// <summary>
         /// Generats null check instruction.
         /// </summary>
         /// <param name="valueReference">Object for null check.</param>
@@ -225,20 +212,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <returns>True if client contain Model types, false otherwise.</returns>
         public static bool HasModelTypes(this ServiceClient client)
         {
-            return client.ModelTypes.Any() || client.Properties.Any(p => p.Type is CompositeType) ||
-                   client.Methods.Any(m => m.HasModelTypes());
-        }
-
-        /// <summary>
-        /// Verifies whether method includes Model types.
-        /// </summary>
-        /// <param name="method">The method.</param>
-        /// <returns>True if method contain Model types, false otherwise.</returns>
-        public static bool HasModelTypes(this Method method)
-        {
-            return method.Parameters.Any(p => p.Type is CompositeType) ||
-                   method.Responses.Any(r => r.Value is CompositeType) || method.ReturnType is CompositeType ||
-                   method.DefaultResponse is CompositeType;
+            return client.ModelTypes.Any(mt => mt.Extensions.Count == 0);
         }
 
         /// <summary>
@@ -247,13 +221,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <param name="type">Type of object needs to be deserialized.</param>
         /// <param name="scope">Current scope.</param>
         /// <param name="valueReference">Reference to object which needs to be deserialized.</param>
-        /// <param name="defaultNamespace">Current namespace.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string DeserializeType(
             this IType type,
             IScopeProvider scope,
-            string valueReference,
-            string defaultNamespace)
+            string valueReference)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
@@ -292,20 +264,26 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (enumType != null && !string.IsNullOrEmpty(enumType.Name))
             {
-                return builder.AppendLine(
-                    "fail MsRest::DeserializationError.new('Error occured in deserializing the enum', nil, nil, nil) if (!{2}.nil? && !{2}.empty? && !{0}::{1}.constants.any? {{ |e| {0}::{1}.const_get(e) == {2} }})",
-                    defaultNamespace, enumType.Name, valueReference).ToString();
+                return builder
+                    .AppendLine("if (!{0}.nil? && !{0}.empty?)", valueReference)
+                    .AppendLine(
+                        "  enum_is_valid = {0}.constants.any? {{ |e| {0}.const_get(e).to_s.downcase == {1}.downcase }}",
+                        enumType.Name, valueReference)
+                    .AppendLine(
+                        "  fail MsRest::DeserializationError.new('Error occured while deserializing the enum', nil, nil, nil) unless enum_is_valid")
+                    .AppendLine("end")
+                    .ToString();
             }
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar, defaultNamespace);
+                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return
                         builder
-                            .AppendLine("if ({0})", valueReference)
+                            .AppendLine("unless {0}.nil?", valueReference)
                                 .Indent()
                                     .AppendLine("deserialized{0} = [];", sequence.Name)
                                     .AppendLine("{0}.each do |{1}|", valueReference, elementVar)
@@ -323,10 +301,10 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar, defaultNamespace);
+                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
-                    return builder.AppendLine("if ({0})", valueReference)
+                    return builder.AppendLine("unless {0}.nil?", valueReference)
                             .Indent()
                               .AppendLine("{0}.each do |key, {1}|", valueReference, valueVar)
                                 .Indent()
@@ -349,16 +327,16 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                         .Outdent()
                         .AppendLine("else")
                         .Indent()
-                            .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
+                            .AppendLine("{0} = {1}.deserialize_object({0})", valueReference, composite.Name)
                         .Outdent()
                         .AppendLine("end");
 
                     return builder.ToString();
                 }
 
-                return builder.AppendLine("if ({0})", valueReference)
+                return builder.AppendLine("unless {0}.nil?", valueReference)
                     .Indent()
-                        .AppendLine("{0} = {1}::{2}.deserialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
+                        .AppendLine("{0} = {1}.deserialize_object({0})", valueReference, composite.Name)
                     .Outdent()
                     .AppendLine("end").ToString();
             }
@@ -372,13 +350,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <param name="type">Type of object needs to be serialized.</param>
         /// <param name="scope">Current scope.</param>
         /// <param name="valueReference">Reference to object which needs to serialized.</param>
-        /// <param name="defaultNamespace">Current namespace.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string SerializeType(
             this IType type,
             IScopeProvider scope,
-            string valueReference,
-            string defaultNamespace)
+            string valueReference)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
@@ -402,22 +378,22 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar, defaultNamespace);
+                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return
                         builder
-                            .AppendLine("if ({0})", valueReference)
+                            .AppendLine("unless {0}.nil?", valueReference)
                                 .Indent()
-                                    .AppendLine("serialized{0} = [];", sequence.Name)
+                                    .AppendLine("serialized{0} = []", sequence.Name)
                                     .AppendLine("{0}.each do |{1}|", valueReference, elementVar)
                                     .Indent()
                                         .AppendLine(innerSerialization)
-                                        .AppendLine("serialized{0}.push({1});", sequence.Name.ToPascalCase(), elementVar)
+                                        .AppendLine("serialized{0}.push({1})", sequence.Name.ToPascalCase(), elementVar)
                                     .Outdent()
                                     .AppendLine("end")
-                                    .AppendLine("{0} = serialized{1};", valueReference, sequence.Name.ToPascalCase())
+                                    .AppendLine("{0} = serialized{1}", valueReference, sequence.Name.ToPascalCase())
                                 .Outdent()
                             .AppendLine("end")
                             .ToString();
@@ -426,10 +402,10 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar, defaultNamespace);
+                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
-                    return builder.AppendLine("if ({0})", valueReference)
+                    return builder.AppendLine("unless {0}.nil?", valueReference)
                             .Indent()
                               .AppendLine("{0}.each {{ |key, {1}|", valueReference, valueVar)
                                 .Indent()
@@ -452,17 +428,16 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                         .Outdent()
                         .AppendLine("else")
                         .Indent()
-                        .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference,
-                            defaultNamespace + "::Models", composite.Name)
+                        .AppendLine("{0} = {1}.serialize_object({0})", valueReference, composite.Name)
                         .Outdent()
                         .AppendLine("end");
 
                     return builder.ToString();
                 }
 
-                return builder.AppendLine("if ({0})", valueReference)
+                return builder.AppendLine("unless {0}.nil?", valueReference)
                     .Indent()
-                        .AppendLine("{0} = {1}::{2}.serialize_object({0})", valueReference, defaultNamespace + "::Models", composite.Name)
+                        .AppendLine("{0} = {1}.serialize_object({0})", valueReference, composite.Name)
                     .Outdent()
                     .AppendLine("end").ToString();
             }

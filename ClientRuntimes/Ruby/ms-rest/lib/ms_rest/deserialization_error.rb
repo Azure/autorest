@@ -5,7 +5,7 @@ module MsRest
   #
   # Class which represents an error happening during deserialization of server response.
   #
-  class DeserializationError < StandardError
+  class DeserializationError < RestError
 
     # @return [String] the human readable description of error.
     attr_accessor :message

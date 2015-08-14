@@ -76,6 +76,8 @@ require 'ERB'
 require 'securerandom'
 require 'time'
 require 'timeliness'
+require 'faraday'
+require 'faraday-cookie_jar'
 require 'concurrent'
 require 'ms_rest'";
         }
