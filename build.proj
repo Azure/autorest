@@ -145,7 +145,7 @@
   <Target Name="Test" DependsOnTargets="RestoreNugetPackages">
     <CallTarget Targets="TestClientRuntime" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <CallTarget Targets="TestCodeGenerator" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
-    <CallTarget Targets="TestNuGetPackages" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <!--<CallTarget Targets="TestNuGetPackages" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />-->
   </Target>
 
   <Target Name="TestClientRuntime">

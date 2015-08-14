@@ -13,6 +13,7 @@
     "jade": "~1.9.2",
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0",
-    "underscore":"*"
+    "underscore": "*",
+    "morgan": "1.6.1"
   }
 }
