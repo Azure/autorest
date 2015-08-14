@@ -35,7 +35,7 @@ var util = require('util');
 var app = express();
 //set up server log
 var now = new Date();
-var logFileName = 'AcceptenceTest-' + now.getHours() +  
+var logFileName = 'AccTestServer-' + now.getHours() +  
     now.getMinutes() + now.getSeconds() + '.log';
 var logfile = fs.createWriteStream('../../../../TestResults/' + logFileName, {flags: 'a'});
 app.use(morgan('combined', {stream: logfile}));
