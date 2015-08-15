@@ -3,7 +3,8 @@
 
 require 'base64'
 require 'openssl'
-require 'net/http'
+require 'faraday'
+require 'timeliness'
 require 'ms_rest/version'
 
 require 'ms_rest/credentials/token_provider'

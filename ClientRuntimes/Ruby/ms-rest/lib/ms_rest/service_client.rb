@@ -10,22 +10,14 @@ module MsRest
     # @return [MsRest::ServiceClientCredentials] the credentials object.
     attr_accessor :credentials
 
-    # @return [Array] filters to be applied to the HTTP requests.
-    attr_accessor :options
-
-    # @return [String] value of cookies.
-    attr_accessor :cookies
-
     #
     # Creates and initialize new instance of the ServiceClient class.
     #
     # @param credentials [MsRest::ServiceClientCredentials] credentials to authorize
     # HTTP requests made by the service client.
-    # @param options [Array] filters to be applied to the HTTP requests.
     #
-    def initialize(credentials, options)
+    def initialize(credentials)
       @credentials = credentials
-      @options = options
     end
   end
 
