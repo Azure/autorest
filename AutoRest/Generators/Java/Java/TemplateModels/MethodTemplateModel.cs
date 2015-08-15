@@ -64,13 +64,16 @@ namespace Microsoft.Rest.Generator.Java
                         parameter.Location == ParameterLocation.Query ||
                         parameter.Location == ParameterLocation.Header)
                     {
-                        declarationBuilder.Append(string.Format("@{0}(\"{1}\") ",
+                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
+                            "@{0}(\"{1}\") ",
                             parameter.Location.ToString(),
                             parameter.SerializedName));
                     }
                     else if (parameter.Location == ParameterLocation.Body)
                     {
-                        declarationBuilder.Append(string.Format("@{0} ", parameter.Location.ToString()));
+                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture, 
+                            "@{0} ", 
+                            parameter.Location.ToString()));
                     }
                     declarationBuilder.Append(parameter.Type.ToString() + " " + parameter.Name);
                     declarations.Add(declarationBuilder.ToString());
@@ -120,7 +123,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     parameters += ", ";
                 }
-                parameters += string.Format("new ServiceResponseCallback()");
+                parameters += string.Format(CultureInfo.InvariantCulture, "new ServiceResponseCallback()");
                 return parameters;
             }
         }
@@ -148,8 +151,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     parameters += ", ";
                 }
-                parameters += string.Format("ServiceResponseCallback cb",
-                    ReturnType != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType).ToString() : "Void");
+                parameters += "ServiceResponseCallback cb";
                 return parameters;
             }
         }
@@ -163,7 +165,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     parameters += ", ";
                 }
-                parameters += string.Format("final ServiceCallback<{0}> serviceCallback",
+                parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
                     ReturnType != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType).ToString() : "Void");
                 return parameters;
             }

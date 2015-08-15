@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
@@ -34,7 +35,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 string ret = MethodGroupType;
-                if (MethodGroupType.EndsWith("Operations"))
+                if (MethodGroupType.EndsWith("Operations", StringComparison.Ordinal))
                 {
                     ret = MethodGroupType.Substring(0, MethodGroupType.Length - 10);
                 }
@@ -46,7 +47,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                HashSet<String> classes = new HashSet<string>();
+                HashSet<String> classes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
                     .Concat(this.MethodTemplateModels.SelectMany(mtm => mtm.Responses.Select(res => res.Value)))
@@ -57,24 +58,27 @@ namespace Microsoft.Rest.Generator.Java
                 for (int i = 0; i < types.Count; i++)
                 {
                     var type = types[i];
-                    if (type is SequenceType)
+                    var sequenceType = type as SequenceType;
+                    var dictionaryType = type as DictionaryType;
+                    var primaryType = type as PrimaryType;
+                    if (sequenceType != null)
                     {
                         classes.Add("java.util.List");
-                        types.Add(((SequenceType)type).ElementType);
+                        types.Add(sequenceType.ElementType);
                     }
-                    else if (type is DictionaryType)
+                    else if (dictionaryType != null)
                     {
                         classes.Add("java.util.Map");
-                        types.Add(((DictionaryType)type).ValueType);
+                        types.Add(dictionaryType.ValueType);
                     }
                     else if (type is CompositeType || type is EnumType)
                     {
-                        var ctype = type as CompositeType;
-                        classes.Add(string.Join(".", this.Namespace.ToLower(), "models", type.Name));
+                        var fullName = string.Join(".", this.Namespace, "models", type.Name);
+                        classes.Add(fullName.ToLower(CultureInfo.InvariantCulture));
                     }
-                    else if (type is PrimaryType)
+                    else if (primaryType != null)
                     {
-                        var importedFrom = JavaCodeNamer.ImportedFrom(type as PrimaryType);
+                        var importedFrom = JavaCodeNamer.ImportedFrom(primaryType);
                         if (importedFrom != null)
                         {
                             classes.Add(importedFrom);
@@ -89,7 +93,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                HashSet<String> classes = new HashSet<string>();
+                HashSet<String> classes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
                     .Concat(this.MethodTemplateModels.Select(mtm => mtm.ReturnType))
@@ -98,24 +102,27 @@ namespace Microsoft.Rest.Generator.Java
                 for (int i = 0; i < types.Count; i++)
                 {
                     var type = types[i];
-                    if (type is SequenceType)
+                    var sequenceType = type as SequenceType;
+                    var dictionaryType = type as DictionaryType;
+                    var primaryType = type as PrimaryType;
+                    if (sequenceType != null)
                     {
                         classes.Add("java.util.List");
-                        types.Add(((SequenceType)type).ElementType);
+                        types.Add(sequenceType.ElementType);
                     }
-                    else if (type is DictionaryType)
+                    else if (dictionaryType != null)
                     {
                         classes.Add("java.util.Map");
-                        types.Add(((DictionaryType)type).ValueType);
+                        types.Add(dictionaryType.ValueType);
                     }
                     else if (type is CompositeType || type is EnumType)
                     {
-                        var ctype = type as CompositeType;
-                        classes.Add(string.Join(".", this.Namespace.ToLower(), "models", type.Name));
+                        var fullName = string.Join(".", this.Namespace, "models", type.Name);
+                        classes.Add(fullName.ToLower(CultureInfo.InvariantCulture));
                     }
-                    else if (type is PrimaryType && type != PrimaryType.ByteArray)
+                    else if (primaryType != null && primaryType != PrimaryType.ByteArray)
                     {
-                        var importedFrom = JavaCodeNamer.ImportedFrom(type as PrimaryType);
+                        var importedFrom = JavaCodeNamer.ImportedFrom(primaryType);
                         if (importedFrom != null)
                         {
                             classes.Add(importedFrom);
@@ -125,7 +132,7 @@ namespace Microsoft.Rest.Generator.Java
 
                 foreach (var method in this.MethodTemplateModels)
                 {
-                    classes.Add("retrofit.http." + method.HttpMethod.ToString().ToUpper());
+                    classes.Add("retrofit.http." + method.HttpMethod.ToString().ToUpper(CultureInfo.InvariantCulture));
                     foreach (var param in method.Parameters)
                     {
                         if (param.Location != ParameterLocation.None &&
