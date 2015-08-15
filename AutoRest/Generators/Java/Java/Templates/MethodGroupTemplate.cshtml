@@ -36,7 +36,7 @@ public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:/**
-    @:@WrapComment(" * ", method.Documentation)
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
     @: *
     @foreach (var param in method.LocalParameters)
     {
@@ -59,7 +59,7 @@ public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
     @:}
     @EmptyLine
     @:/**
-    @:@WrapComment(" * ", method.Documentation)
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
     @: *
     @foreach (var param in method.LocalParameters)
     {

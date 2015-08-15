@@ -44,7 +44,7 @@ public interface @Model.MethodGroupType {
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:/**
-    @:@WrapComment(" * ", method.Documentation)
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
     @: *
     @foreach (var param in method.LocalParameters)
     {
@@ -59,7 +59,7 @@ public interface @Model.MethodGroupType {
     @:@method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
     @EmptyLine
     @:/**
-    @:@WrapComment(" * ", method.Documentation)
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
     @: *
     @foreach (var param in method.LocalParameters)
     {

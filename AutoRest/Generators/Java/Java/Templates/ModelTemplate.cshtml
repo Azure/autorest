@@ -19,13 +19,13 @@ package @(Settings.Namespace.ToLower()).models;
 @EmptyLine
 
 /**
-@WrapComment(" * ", Model.Documentation ?? "The " + Model.Name + " model.")
+@WrapComment(" * ", Model.Documentation.EscapeXmlComment() ?? "The " + Model.Name + " model.")
  */
 public class @(Model.Name) {
 @foreach (var property in Model.Properties)
 {
 @:    /**
-@:    @WrapComment(" * ", property.Documentation ?? "The " + property.Name + " property.")
+@:    @WrapComment(" * ", property.Documentation.EscapeXmlComment() ?? "The " + property.Name + " property.")
 @:     */
 @:    private @property.Type @property.Name;
 @EmptyLine
