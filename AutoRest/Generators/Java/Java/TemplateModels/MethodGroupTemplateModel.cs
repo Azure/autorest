@@ -47,7 +47,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                HashSet<String> classes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                HashSet<String> classes = new HashSet<string>();
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
                     .Concat(this.MethodTemplateModels.SelectMany(mtm => mtm.Responses.Select(res => res.Value)))
@@ -73,8 +73,11 @@ namespace Microsoft.Rest.Generator.Java
                     }
                     else if (type is CompositeType || type is EnumType)
                     {
-                        var fullName = string.Join(".", this.Namespace, "models", type.Name);
-                        classes.Add(fullName.ToLower(CultureInfo.InvariantCulture));
+                        classes.Add(string.Join(
+                            ".", 
+                            this.Namespace.ToLower(CultureInfo.InvariantCulture),
+                            "models", 
+                            type.Name));
                     }
                     else if (primaryType != null)
                     {
@@ -93,7 +96,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                HashSet<String> classes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                HashSet<String> classes = new HashSet<string>();
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
                     .Concat(this.MethodTemplateModels.Select(mtm => mtm.ReturnType))
@@ -117,8 +120,11 @@ namespace Microsoft.Rest.Generator.Java
                     }
                     else if (type is CompositeType || type is EnumType)
                     {
-                        var fullName = string.Join(".", this.Namespace, "models", type.Name);
-                        classes.Add(fullName.ToLower(CultureInfo.InvariantCulture));
+                        classes.Add(string.Join(
+                            ".", 
+                            this.Namespace.ToLower(CultureInfo.InvariantCulture),
+                            "models", 
+                            type.Name));
                     }
                     else if (primaryType != null && primaryType != PrimaryType.ByteArray)
                     {
