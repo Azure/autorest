@@ -82,7 +82,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return name;
             }
-            return RemoveInvalidCharacters(new Regex("[\\ -]+").Replace(name, "_")).ToUpper();
+            return RemoveInvalidCharacters(new Regex("[\\ -]+").Replace(name, "_")).ToUpper(CultureInfo.InvariantCulture);
         }
 
         public override string GetParameterName(string name)
@@ -312,6 +312,11 @@ namespace Microsoft.Rest.Generator.Java
 
         public static String ImportedFrom(PrimaryType primaryType)
         {
+            if (primaryType == null)
+            {
+                return null;
+            }
+
             if (primaryType == PrimaryType.Date ||
                 primaryType == PrimaryType.DateTime ||
                 primaryType.Name == "Date")
