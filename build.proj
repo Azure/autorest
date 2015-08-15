@@ -59,6 +59,7 @@
     <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
     <LibraryToolsFolder>$(LibraryRoot)Tools</LibraryToolsFolder>
     <BinariesFolder>$(LibraryRoot)binaries</BinariesFolder>
+    <TestResultsFolder>$(LibraryRoot)TestResults</TestResultsFolder>
     <PackageOutputDir>$(BinariesFolder)\packages</PackageOutputDir>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <CodeSign Condition=" '$(CodeSign)' == '' ">false</CodeSign>
@@ -125,6 +126,7 @@
              Targets="Clean"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <RemoveDir Directories="$(BinariesFolder)" />
+    <RemoveDir Directories="$(TestResultsFolder)" />
   </Target>
 
   <Target Name="CodeAnalysis" DependsOnTargets="RestoreNugetPackages">
@@ -154,8 +156,8 @@
     </ItemGroup>
 
     <Message Text="@(TestDlls)" />
-    <MakeDir Directories="$(LibraryRoot)TestResults"/>
-    <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.clientruntime.html" ContinueOnError="false" />
+    <MakeDir Directories="$(TestResultsFolder)"/>
+    <xunit Assemblies="@(TestDlls)" Html="$(TestResultsFolder)\xunit.clientruntime.html" ContinueOnError="false" />
     <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ms-rest\" Command="npm test"/>
     <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ms-rest-azure\" Command="npm test"/>
   </Target>
@@ -172,9 +174,9 @@
     </ItemGroup>
 
     <Message Text="@(TestDlls)" />
-    <MakeDir Directories="$(LibraryRoot)TestResults"/>
+    <MakeDir Directories="$(TestResultsFolder)"/>
     <!-- <Exec WorkingDirectory=".\ClientRuntimes\Ruby\" Command="UpdateRuntime"/> -->
-    <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.codegen.html" ContinueOnError="false" />
+    <xunit Assemblies="@(TestDlls)" Html="$(TestResultsFolder)\xunit.codegen.html" ContinueOnError="false" />
     <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
     <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>
   </Target>

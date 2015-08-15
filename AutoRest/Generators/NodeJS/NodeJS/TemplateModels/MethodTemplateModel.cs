@@ -3,13 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.CSharp;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -213,13 +213,12 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// </summary>
         /// <param name="parameter">Parameter to be documented</param>
         /// <returns>Parameter name in the correct jsdoc notation</returns>
-        public static string GetParameterDocumentationName (Parameter parameter)
+        public static string GetParameterDocumentationName(Parameter parameter)
         {
             if (parameter == null)
             {
                 throw new ArgumentNullException("parameter");
             }
-
             if (parameter.IsRequired)
             {
                 return parameter.Name;
@@ -228,6 +227,30 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 return string.Format(CultureInfo.InvariantCulture, "[{0}]", parameter.Name);
             }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        public static string GetParameterDocumentationType(Parameter parameter)
+        {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+            string typeName = PrimaryType.Object.Name;
+            if (parameter.Type is PrimaryType)
+            {
+                typeName = parameter.Type.Name;
+            }
+            else if (parameter.Type is SequenceType)
+            {
+                typeName = "array";
+            }
+            else if (parameter.Type is EnumType)
+            {
+                typeName = PrimaryType.String.Name;
+            }
+
+            return typeName.ToLower(CultureInfo.InvariantCulture);
         }
 
         public string GetDeserializationString(IType type, string valueReference = "result.body")

@@ -179,7 +179,7 @@ namespace Microsoft.Rest.Generator
             var comment = WrapComment(prefix, Settings.Header);
             if(!string.IsNullOrEmpty(comment))
             {
-                return comment + Environment.NewLine + EmptyLine;
+                return comment + Environment.NewLine;
             }
             return comment;
         }
@@ -199,6 +199,7 @@ namespace Microsoft.Rest.Generator
 
             // escape comment as needed
             comment = comment.Replace("\\", Resources.CommentString);
+            comment = comment.EscapeXmlComment();
 
             int available =
                 MaximumCommentColumn - // Maximum desired width

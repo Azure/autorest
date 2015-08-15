@@ -1,0 +1,100 @@
+﻿@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ServiceClientTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+
+import com.microsoft.rest.ServiceClient;
+import com.squareup.okhttp.OkHttpClient;
+import retrofit.RestAdapter;
+@EmptyLine
+
+/**
+ * Initializes a new instance of the @Model.Name class.
+ */
+public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
+    private String baseUri;
+@EmptyLine
+    /**
+     * Gets the URI used as the base for all cloud service requests.
+     * @@return The BaseUri value.
+     */
+    public String getBaseUri() {
+        return this.baseUri;
+    }
+@{var parameters = Model.Properties.Where(p => p.IsRequired);}
+@foreach (var param in parameters)
+{
+@EmptyLine
+@:    private @(param.Type) @(param.Name.ToCamelCase());
+@EmptyLine
+@:    /**
+@:     * @(param.Documentation)
+@:     *
+@:     * @@return the @(param.Name) value.
+@:     */
+@:    public @(param.Type) get@(param.Name.ToPascalCase())() {
+@:        return this.@(param.Name.ToCamelCase());
+@:    }
+}
+
+@foreach (var operation in Model.Operations)
+{
+@EmptyLine
+@:    private @(operation.MethodGroupType) @(operation.MethodGroupName.ToCamelCase());
+@EmptyLine
+@:    /**
+@:     * Gets the @(operation.MethodGroupType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupName) value.
+@:     */
+@:    public @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())() {
+@:        return this.@(operation.MethodGroupName.ToCamelCase());
+@:    }
+}
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     */
+    public @(Model.Name)Impl() {
+        this("@Model.BaseUrl");
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUri the base URI of the host
+     */
+    public @(Model.Name)Impl(String baseUri) {
+        super();
+        this.baseUri = baseUri;
+        initialize();
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUri the base URI of the host
+     * @@param client the {@@link OkHttpClient} client to use for REST calls
+     * @@param restAdapterBuilder the builder for building up a {@@link RestAdapter}
+     */
+    public @(Model.Name)Impl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+        super(client, restAdapterBuilder);
+        this.baseUri = baseUri;
+        initialize();
+    }
+@EmptyLine
+    private void initialize() {
+        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        @foreach (var operation in Model.Operations)
+        {
+        @:this.@(operation.MethodGroupName.ToCamelCase()) = new @(operation.MethodGroupType)Impl(restAdapter);
+        }
+    }
+}

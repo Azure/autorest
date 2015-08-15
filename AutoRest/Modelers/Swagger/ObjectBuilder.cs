@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -118,6 +119,63 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             return type;
+        }
+
+        public static void SetConstraints(Dictionary<Constraint, string> constraints, SwaggerObject swaggerObject)
+        {
+            if (constraints == null)
+            {
+                throw new ArgumentNullException("constraints");
+            }
+            if (swaggerObject == null)
+            {
+                throw new ArgumentNullException("swaggerObject");
+            }
+
+            if (!string.IsNullOrEmpty(swaggerObject.Maximum) && !swaggerObject.ExclusiveMaximum)
+            {
+                constraints[Constraint.InclusiveMaximum] = swaggerObject.Maximum;
+            }
+            if (!string.IsNullOrEmpty(swaggerObject.Maximum) && swaggerObject.ExclusiveMaximum)
+            {
+                constraints[Constraint.ExclusiveMaximum] = swaggerObject.Maximum;
+            }
+            if (!string.IsNullOrEmpty(swaggerObject.Minimum) && !swaggerObject.ExclusiveMinimum)
+            {
+                constraints[Constraint.InclusiveMinimum] = swaggerObject.Minimum;
+            }
+            if (!string.IsNullOrEmpty(swaggerObject.Minimum) && swaggerObject.ExclusiveMinimum)
+            {
+                constraints[Constraint.ExclusiveMinimum] = swaggerObject.Minimum;
+            }
+            if (!string.IsNullOrEmpty(swaggerObject.MaxLength))
+            {
+                constraints[Constraint.MaxLength] = swaggerObject.MaxLength;
+            }
+            if (!string.IsNullOrEmpty(swaggerObject.MinLength))
+            {
+                constraints[Constraint.MinLength] = swaggerObject.MinLength;
+            }
+            if (!string.IsNullOrEmpty(swaggerObject.Pattern))
+            {
+                constraints[Constraint.Pattern] = swaggerObject.Pattern;
+            }
+            if (!string.IsNullOrEmpty(swaggerObject.MaxItems))
+            {
+                constraints[Constraint.MaxItems] = swaggerObject.MaxItems;
+            }
+            if (!string.IsNullOrEmpty(swaggerObject.MinItems))
+            {
+                constraints[Constraint.MinItems] = swaggerObject.MinItems;
+            }
+            if (!string.IsNullOrEmpty(swaggerObject.MultipleOf))
+            {
+                constraints[Constraint.MultipleOf] = swaggerObject.MultipleOf;
+            }
+            if (swaggerObject.UniqueItems)
+            {
+                constraints[Constraint.UniqueItems] = "true";
+            }
         }
     }
 }

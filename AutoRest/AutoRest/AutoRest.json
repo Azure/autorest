@@ -3,7 +3,7 @@
     "Ruby": {
       "type": "RubyCodeGenerator, AutoRest.Generator.Ruby"
     },
-    "Azure.Ruby":  {
+    "Azure.Ruby": {
       "type": "AzureRubyCodeGenerator, AutoRest.Generator.Azure.Ruby",
       "settings": {
         "includeCredentials": "true",
@@ -29,6 +29,9 @@
         "includeCredentials": "true",
         "requireOperationId": "true"
       }
+    },
+    "Java": {
+      "type": "JavaCodeGenerator, AutoRest.Generator.Java"
     }
   },
   "modelers": {

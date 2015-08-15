@@ -1,0 +1,55 @@
+﻿@using System.Linq
+@using System.Collections.Generic
+@using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Java.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ModelTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower()).models;
+@EmptyLine
+
+@foreach (var importClass in Model.Imports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+@WrapComment(" * ", Model.Documentation ?? "The " + Model.Name + " model.")
+ */
+public class @(Model.Name) {
+@foreach (var property in Model.Properties)
+{
+@:    /**
+@:    @WrapComment(" * ", property.Documentation ?? "The " + property.Name + " property.")
+@:     */
+@:    private @property.Type @property.Name;
+@EmptyLine
+}
+
+@foreach (var property in Model.Properties)
+{
+@:    /**
+@:     * Get the @property.Name value.
+@:     *
+@:     * @@return the @property.Name value
+@:     */ 
+@:    public @property.Type get@(property.Name.ToPascalCase())() {
+@:        return this.@(property.Name);
+@:    }
+@EmptyLine
+@:    /**
+@:     * Set the @property.Name value.
+@:     *
+@:     * @@param @property.Name the @property.Name value to set
+@:     */
+@:    public void set@(property.Name.ToPascalCase())(@property.Type @property.Name) {
+@:        this.@(property.Name) = @property.Name;
+@:    }
+@EmptyLine
+}
+}

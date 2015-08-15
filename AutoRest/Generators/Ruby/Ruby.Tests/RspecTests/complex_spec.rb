@@ -38,26 +38,22 @@ describe 'Complex tests' do
   # Array tests
   it 'should get array valid' do
     result = @client.array.get_valid().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::ArrayWrapper)
     expect(result.body.array.count).to eq(@arrayValue.count)
     expect(result.body.array.zip(@arrayValue).map {|a, e| a == e}.all?).to be_truthy
   end
 
   it 'should put array valid' do
-    begin
-      array_wrapper = Models::ArrayWrapper.new
-      array_wrapper.array = @arrayValue
-      result = @client.array.put_valid(array_wrapper).value!.response
-    rescue e => MsRest::HttpOperationException
-      p e
-    end
-    expect(result).to be_an_instance_of(Net::HTTPOK)
+    array_wrapper = Models::ArrayWrapper.new
+    array_wrapper.array = @arrayValue
+    result = @client.array.put_valid(array_wrapper).value!
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get array empty' do
     result = @client.array.get_empty().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::ArrayWrapper)
     expect(result.body.array.count).to eq(0)
   end
@@ -66,13 +62,13 @@ describe 'Complex tests' do
     @arrayValue.clear
     array_wrapper = Models::ArrayWrapper.new
     array_wrapper.array = @arrayValue
-    result = @client.array.put_empty(array_wrapper).value!.response
-    expect(result).to be_an_instance_of(Net::HTTPOK)
+    result = @client.array.put_empty(array_wrapper).value!
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get array not provided' do
     result = @client.array.get_not_provided().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::ArrayWrapper)
     expect(result.body.array).to be_nil
   end
@@ -80,20 +76,20 @@ describe 'Complex tests' do
   # Basic operations tests
   it 'should get basic valid' do
     result = @client.basic_operations.get_valid().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::Basic)
     expect(result.body.id).to eq(2)
     expect(result.body.name).to eq("abc")
-    expect(result.body.color).to eq(MyNamespace::CMYKColors::YELLOW)
+    expect(result.body.color).to eq(MyNamespace::Models::CMYKColors::YELLOW)
   end
 
   it 'should put basic valid' do
     basic_request = Models::Basic.new
     basic_request.id = 2
     basic_request.name = "abc"
-    basic_request.color = MyNamespace::CMYKColors::Magenta
-    result = @client.basic_operations.put_valid(basic_request).value!.response
-    expect(result).to be_an_instance_of(Net::HTTPOK)
+    basic_request.color = MyNamespace::Models::CMYKColors::Magenta
+    result = @client.basic_operations.put_valid(basic_request).value!
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get basic invalid' do
@@ -102,7 +98,7 @@ describe 'Complex tests' do
 
   it 'should get basic empty' do
     result = @client.basic_operations.get_empty().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::Basic)
     expect(result.body.id).to be_nil
     expect(result.body.name).to be_nil
@@ -111,7 +107,7 @@ describe 'Complex tests' do
 
   it 'should get basic null' do
     result = @client.basic_operations.get_null().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::Basic)
     expect(result.body.id).to be_nil
     expect(result.body.name).to be_nil
@@ -120,14 +116,14 @@ describe 'Complex tests' do
 
   it 'should get basic not provided' do
     result = @client.basic_operations.get_not_provided().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_nil
   end
 
   # Dictionary tests
   it 'should get dictionary valid' do
     result = @client.dictionary.get_valid().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::DictionaryWrapper)
     expect(result.body.default_program).to eq(@dictionary_value)
   end
@@ -135,32 +131,34 @@ describe 'Complex tests' do
   it 'should put dictionary valid' do
     dict_request = Models::DictionaryWrapper.new
     dict_request.default_program = @dictionary_value
-    result = @client.dictionary.put_valid(dict_request).value!.response
-    expect(result).to be_an_instance_of(Net::HTTPOK)
+    result = @client.dictionary.put_valid(dict_request).value!
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get dictionary empty' do
     result = @client.dictionary.get_empty().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::DictionaryWrapper)
     expect(result.body.default_program.count).to eq(0)
   end
 
   it 'should put dictionary empty' do
-    result = @client.dictionary.put_empty(Models::DictionaryWrapper.new).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    dict = Models::DictionaryWrapper.new
+	dict.default_program = {}
+    result = @client.dictionary.put_empty(dict).value!
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get dictionary null' do
     result = @client.dictionary.get_null().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::DictionaryWrapper)
     expect(result.body.default_program).to be_nil
   end
 
   it 'should get dictionary not provided' do
     result = @client.dictionary.get_not_provided().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::DictionaryWrapper)
     expect(result.body.default_program).to be_nil
   end
@@ -168,7 +166,7 @@ describe 'Complex tests' do
   # Inheritance tests
   it 'should get inheritance valid' do
     result = @client.inheritance.get_valid().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body.id).to eq(2)
     expect(result.body.name).to eq("Siameeee")
     expect(result.body.hates[1].id).to eq(-1)
@@ -194,13 +192,13 @@ describe 'Complex tests' do
     inheritance_request.hates = [dog1, dog2]
 
     result = @client.inheritance.put_valid(inheritance_request).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   # Polymorphicrecursive tests
   it 'should get inheritance valid' do
     result = @client.polymorphicrecursive.get_valid().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body.is_a?Salmon).to be_truthy
     expect(result.body.siblings[0].is_a?Shark).to be_truthy
     expect(result.body.siblings[0].siblings[0].is_a?Salmon).to be_truthy
@@ -265,13 +263,13 @@ describe 'Complex tests' do
     recursive_request.siblings = [shark, sawshark2]
 
     result = @client.polymorphicrecursive.put_valid(recursive_request).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   # Polymorphism tests
   it 'should get polymorphism valid' do
     result = @client.polymorphism.get_valid().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
 
     expect(result.body.location).to eq("alaska")
 
@@ -307,7 +305,7 @@ describe 'Complex tests' do
   # Primitive tests
   it 'should get int' do
     result = @client.primitive.get_int().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::IntWrapper)
     expect(result.body.field1).to eq(-1)
     expect(result.body.field2).to eq(2)
@@ -318,12 +316,12 @@ describe 'Complex tests' do
     int_wrapper.field1 = -1
     int_wrapper.field2 = 2
     result = @client.primitive.put_int(int_wrapper).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get long' do
     result = @client.primitive.get_long().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::LongWrapper)
     expect(result.body.field1).to eq(1099511627775)
     expect(result.body.field2).to eq(-999511627788)
@@ -334,12 +332,12 @@ describe 'Complex tests' do
     long_wrapper.field1 = 1099511627775
     long_wrapper.field2 = -999511627788
     result = @client.primitive.put_long(long_wrapper).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get float' do
     result = @client.primitive.get_float().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::FloatWrapper)
     expect(result.body.field1).to eq(1.05)
     expect(result.body.field2).to eq(-0.003)
@@ -350,12 +348,12 @@ describe 'Complex tests' do
     float_wrapper.field1 = 1.05
     float_wrapper.field2 = -0.003
     result = @client.primitive.put_float(float_wrapper).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get double' do
     result = @client.primitive.get_double().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::DoubleWrapper)
     expect(result.body.field1).to eq(3e-100)
     expect(result.body.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose).to eq(-0.000000000000000000000000000000000000000000000000000000005)
@@ -366,12 +364,12 @@ describe 'Complex tests' do
     double_wrapper.field1 = 3e-100
     double_wrapper.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = -0.000000000000000000000000000000000000000000000000000000005
     result = @client.primitive.put_double(double_wrapper).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get bool' do
     result = @client.primitive.get_bool().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::BooleanWrapper)
     expect(result.body.field_true).to eq(true)
     expect(result.body.field_false).to eq(false)
@@ -382,12 +380,12 @@ describe 'Complex tests' do
     bool_wrapper.field_true = true
     bool_wrapper.field_false = false
     result = @client.primitive.put_bool(bool_wrapper).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get date' do
     result = @client.primitive.get_date().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::DateWrapper)
     expect(result.body.field).to eq(Date.parse('0001-01-01'))
     expect(result.body.leap).to eq(Date.parse('2016-02-29'))
@@ -398,12 +396,12 @@ describe 'Complex tests' do
     date_wrapper.field = Date.parse('0001-01-01')
     date_wrapper.leap = Date.parse('2016-02-29')
     result = @client.primitive.put_date(date_wrapper).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get dateTime' do
     result = @client.primitive.get_date_time().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::DatetimeWrapper)
     expect(result.body.field).to eq(DateTime.new(1, 1, 1, 0, 0, 0))
     expect(result.body.now).to eq(DateTime.new(2015, 5, 18, 18, 38, 0))
@@ -415,18 +413,18 @@ describe 'Complex tests' do
     date_time_wrapper.field = DateTime.new(1, 1, 1, 0, 0, 0)
     date_time_wrapper.now = DateTime.new(2015, 5, 18, 18, 38, 0)
     result = @client.primitive.put_date_time(date_time_wrapper).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get byte' do
     result = @client.primitive.get_byte().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_an_instance_of(Models::ByteWrapper)
     expect(result.body.field).to eq(@byte_wrapper.field)
   end
 
   it 'should put byte' do
     result = @client.primitive.put_byte(@byte_wrapper).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 end

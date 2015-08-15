@@ -24,6 +24,17 @@ namespace Microsoft.Rest.Generator.Ruby
 
         public List<MethodTemplateModel> MethodTemplateModels { get; set; }
 
+        /// <summary>
+        /// Gets the list of modules/classes which need to be included.
+        /// </summary>
+        public virtual List<string> Includes
+        {
+            get { return new List<string>(); }
+        }
+
+        /// <summary>
+        /// Gets the base type of the client.
+        /// </summary>
         public virtual string BaseType
         {
             get
