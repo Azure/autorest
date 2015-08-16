@@ -16,8 +16,8 @@ module MsRestAzure
     #
     # Creates and initialize new instance of the ServiceClient class.
     #
-    def initialize(credentials, options)
-      super(credentials, options)
+    def initialize(credentials)
+      super(credentials)
     end
 
     #

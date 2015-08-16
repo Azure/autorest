@@ -20,7 +20,7 @@ module MsRestAzure
     # @return [Integer] delay in seconds which should be used for polling for result of async operation.
     attr_accessor :retry_after
 
-    # @return [MsRestAzure::AzureOperationError] error information about async operation.
+    # @return [MsRestAzure::CloudErrorData] error information about async operation.
     attr_accessor :error
 
     # @return [Stirng] status of polling.
@@ -67,7 +67,7 @@ module MsRestAzure
 
       output_object.error = CloudErrorData.deserialize_object(object['error'])
 
-      output_object.retry_after = Integer.new(object['retryAfter']) unless object['retryAfter'].nil?
+      output_object.retry_after = Integer(object['retryAfter']) unless object['retryAfter'].nil?
 
       output_object
     end

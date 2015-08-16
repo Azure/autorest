@@ -21,10 +21,32 @@ module MsRest
     # @param [Net::HTTPRequest] request the HTTP request object.
     # @param [Net::HTTPResponse] response the HTTP response object.
     # @param [String] body the HTTP response body.
-    def initialize(request, response, body = nil)
-      @request = request
-      @response = response
-      @body = body
+    # @param [String] error message.
+    def initialize(*args)
+      if args.size == 1
+        # When only message is provided.
+        super(args[0])
+      elsif args.size == 2
+        # When only request and response provided, body is nil.
+        @request = args[0]
+        @response = args[1]
+        @body = nil
+        super()
+      elsif args.size == 3
+        # When request, response and body were provided.
+        @request = args[0]
+        @response = args[1]
+        @body = args[2]
+        super()
+      elsif args.size == 4
+        # When request, response, body and message were provided.
+        @request = args[0]
+        @response = args[1]
+        @body = args[2]
+        super(args[3])
+      else
+        fail ArgumentError, 'Invalid number of arguments was provided, valid number: 1, 2, 3 or 4'
+      end
     end
   end
 

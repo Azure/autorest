@@ -88,7 +88,7 @@ module MsRestAzure
     #
     # @return [AzureOperationError] the cloud error.
     def get_operation_error
-      fail AzureOperationError.new @request, @response, @error_data, "Long running operation failed with status #{@status}"
+      AzureOperationError.new @request, @response, @error_data, "Long running operation failed with status #{@status}"
     end
 
     private
