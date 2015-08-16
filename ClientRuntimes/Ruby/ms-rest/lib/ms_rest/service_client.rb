@@ -15,8 +15,9 @@ module MsRest
     #
     # @param credentials [MsRest::ServiceClientCredentials] credentials to authorize
     # HTTP requests made by the service client.
+    # @param options additional parameters for the HTTP request (not implemented yet).
     #
-    def initialize(credentials)
+    def initialize(credentials, options = nil)
       @credentials = credentials
     end
   end

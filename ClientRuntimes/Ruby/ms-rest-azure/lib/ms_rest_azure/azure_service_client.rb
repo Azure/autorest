@@ -14,13 +14,6 @@ module MsRestAzure
     attr_accessor :api_version
 
     #
-    # Creates and initialize new instance of the ServiceClient class.
-    #
-    def initialize(credentials)
-      super(credentials)
-    end
-
-    #
     # Retrieves the result of 'PUT' operation. Perfroms polling of required.
     # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
     # @param custom_headers [Hash] custom HTTP headers to apply to HTTP requests.
