@@ -8,6 +8,8 @@ module MsRest
   #
   class BasicAuthenticationCredentials < ServiceClientCredentials
 
+    private
+
     DEFAULT_SCHEME = 'Basic'
 
     # @return [String] the scheme for composing credentials.
@@ -18,6 +20,8 @@ module MsRest
 
     # @return [String] password for authentication.
     attr_accessor :password
+
+    public
 
     #
     # Creates and initialize new instance of the BasicAuthenticationCredentials class.

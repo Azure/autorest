@@ -9,11 +9,9 @@ module MsRest
     #
     # Initializes a new instance of the RetryPolicyMiddleware class.
     #
-    def initialize(app, options = nil)
-      unless options.nil?
-        @times = options[:times] || 5
-        @delay = options[:delay] || 0.01
-      end
+    def initialize(app, options = {})
+      @times = options[:times] || 5
+      @delay = options[:delay] || 0.01
 
       super(app)
     end
@@ -32,10 +30,11 @@ module MsRest
 
           if @times > 0 && (status_code == 408 || (status_code >= 500 && status_code != 501 && status_code != 505))
             sleep @delay
-            fail
+            fail 'faraday_retry'
           end
         end
       rescue Exception => e
+        raise e if e.message != 'faraday_retry'
         @times = @times - 1
         retry
       end
