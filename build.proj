@@ -152,31 +152,31 @@
 
   <Target Name="TestClientRuntime">
     <ItemGroup>
-      <TestDlls Include="$(LibraryRoot)\ClientRuntimes\CSharp\*.Tests\bin\*\*Tests.dll" />
+      <ClientRuntimeTestDlls Include="$(LibraryRoot)\ClientRuntimes\CSharp\*.Tests\bin\*\*Tests.dll" />
     </ItemGroup>
 
-    <Message Text="@(TestDlls)" />
+    <Message Text="@(ClientRuntimeTestDlls)" />
     <MakeDir Directories="$(TestResultsFolder)"/>
-    <xunit Assemblies="@(TestDlls)" Html="$(TestResultsFolder)\xunit.clientruntime.html" ContinueOnError="false" />
+    <xunit Assemblies="@(ClientRuntimeTestDlls)" Html="$(TestResultsFolder)\xunit.clientruntime.html" ContinueOnError="false" />
     <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ms-rest\" Command="npm test"/>
     <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ms-rest-azure\" Command="npm test"/>
   </Target>
 
   <Target Name="TestCodeGenerator">
     <ItemGroup>
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Azure.Common\Azure.Common.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Common.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\CSharp\CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.CSharp.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\CSharp\Azure.CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.CSharp.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\AutoRest.Core.Tests\bin\Net45-$(Configuration)\AutoRest.Core.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Ruby.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Azure.Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Ruby.Tests.dll" />
+      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Generators\Azure.Common\Azure.Common.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Common.Tests.dll" />
+      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Generators\CSharp\CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.CSharp.Tests.dll" />
+      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Generators\CSharp\Azure.CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.CSharp.Tests.dll" />
+      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\AutoRest.Core.Tests\bin\Net45-$(Configuration)\AutoRest.Core.Tests.dll" />
+      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
+      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Ruby.Tests.dll" />
+      <CodeGenTestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Azure.Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Ruby.Tests.dll" />
     </ItemGroup>
 
-    <Message Text="@(TestDlls)" />
+    <Message Text="@(CodeGenTestDlls)" />
     <MakeDir Directories="$(TestResultsFolder)"/>
     <!-- <Exec WorkingDirectory=".\ClientRuntimes\Ruby\" Command="UpdateRuntime"/> -->
-    <xunit Assemblies="@(TestDlls)" Html="$(TestResultsFolder)\xunit.codegen.html" ContinueOnError="false" />
+    <xunit Assemblies="@(CodeGenTestDlls)" Html="$(TestResultsFolder)\xunit.codegen.html" ContinueOnError="false" />
     <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
     <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>
   </Target>
