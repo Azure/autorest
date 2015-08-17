@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsBodyInteger
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;

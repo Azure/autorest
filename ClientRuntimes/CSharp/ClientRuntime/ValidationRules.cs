@@ -11,17 +11,17 @@ namespace Microsoft.Rest
     public static class ValidationRules
     {
         public static readonly string CannotBeNull = Resources.ValidationCannotBeNull;
-        public static readonly string Maximum = Resources.ValidationMaximum;
+        public static readonly string InclusiveMaximum = Resources.ValidationMaximum;
         public static readonly string ExclusiveMaximum = Resources.ValidationExclusiveMaximum;
-        public static readonly string MaximumLength = Resources.ValidationMaximumLength;
-        public static readonly string MinimumLength = Resources.ValidationMinimumLength;
+        public static readonly string MaxLength = Resources.ValidationMaximumLength;
+        public static readonly string MinLength = Resources.ValidationMinimumLength;
         public static readonly string Pattern = Resources.ValidationPattern;
-        public static readonly string MaximumItems = Resources.ValidationMaximumItems;
-        public static readonly string MinimumItems = Resources.ValidationMinimumItems;
+        public static readonly string MaxItems = Resources.ValidationMaximumItems;
+        public static readonly string MinItems = Resources.ValidationMinimumItems;
         public static readonly string UniqueItems = Resources.ValidationUniqueItems;
         public static readonly string Enum = Resources.ValidationEnum;
         public static readonly string MultipleOf = Resources.ValidationMultipleOf;
-        public static readonly string Minimum = Resources.ValidationMinimum;
+        public static readonly string InclusiveMinimum = Resources.ValidationMinimum;
         public static readonly string ExclusiveMinimum = Resources.ValidationExclusiveMinimum;
     }
 }

@@ -156,6 +156,10 @@
       <Link>Swagger\url.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\AcceptanceTests\swagger\validation.json">
+      <Link>Swagger\validation.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
     <None Include="Swagger\swagger-mirror-polymorphic.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -203,4 +207,9 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties __JSONSchema="http://json.schemastore.org/swagger-2.0" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

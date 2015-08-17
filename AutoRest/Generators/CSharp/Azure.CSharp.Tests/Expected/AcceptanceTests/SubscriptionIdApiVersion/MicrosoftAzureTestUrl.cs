@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Net;
@@ -21,7 +22,6 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
