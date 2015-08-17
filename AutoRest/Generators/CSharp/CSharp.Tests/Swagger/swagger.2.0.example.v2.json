@@ -469,8 +469,8 @@
             "description": "Id of pet that needs to be fetched",
             "required": true,
             "type": "string",
-            "maximum": 5,
-            "minimum": 1
+            "maxLength": 5,
+            "minLength": 1
           }
         ],
         "responses": {
@@ -506,7 +506,7 @@
             "description": "Id of the order that needs to be deleted",
             "required": true,
             "type": "string",
-            "minimum": 1
+            "minLength": 1
           }
         ],
         "responses": {

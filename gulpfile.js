@@ -73,7 +73,8 @@ var defaultMappings = {
   'AcceptanceTests/Http': '../../AcceptanceTests/swagger/httpInfrastructure.json',
   'AcceptanceTests/Report': '../../AcceptanceTests/swagger/report.json',
   'AcceptanceTests/RequiredOptional': '../../AcceptanceTests/swagger/required-optional.json',
-  'AcceptanceTests/Url': '../../AcceptanceTests/swagger/url.json'
+  'AcceptanceTests/Url': '../../AcceptanceTests/swagger/url.json',
+  'AcceptanceTests/Validation': '../../AcceptanceTests/swagger/validation.json'
 };
 
 var defaultAzureMappings = {

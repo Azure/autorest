@@ -31,10 +31,9 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @:}
 @:
         }
-        if(parameter.Location != ParameterLocation.Query &&
-            (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+        if(Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body)
         {
-    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
+    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.Constraints))
         }
     }
     // Tracing

@@ -30,7 +30,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                yield return "System.Linq";
                 if (Methods.Any(m =>
                     m.Parameters.Any(p =>
                         p.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
