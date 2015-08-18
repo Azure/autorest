@@ -124,6 +124,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 }
             }
 
+            builder.AppendLine(SaveExistingUrlItems("properties", outputVariableName));
+
             builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
             builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{value}}\" }}.compact.join('&')", outputVariableName);
 

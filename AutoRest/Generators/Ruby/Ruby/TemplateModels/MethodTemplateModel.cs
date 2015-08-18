@@ -256,11 +256,40 @@ namespace Microsoft.Rest.Generator.Ruby
                 builder.AppendLine("properties = {{ {0} }}",
                     string.Join(", ", queryParametres.Select(x => string.Format("'{0}' => {1}", x.SerializedName, x.Name))));
 
+                builder.AppendLine(SaveExistingUrlItems("properties", outputVariableName));
+
                 builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
                 builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{ERB::Util.url_encode(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
             }
 
-            builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
+            builder
+                .AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Saves url items from the URL into collection.
+        /// </summary>
+        /// <param name="hashName">The name of the collection save url items to.</param>
+        /// <param name="variableName">The URL variable.</param>
+        /// <returns>Generated code of saving url items.</returns>
+        public virtual string SaveExistingUrlItems(string hashName, string variableName)
+        {
+            var builder = new IndentedStringBuilder("  ");
+
+            // Saving existing URL properties into properties hash.
+            builder
+                .AppendLine("unless {0}.query.nil?", variableName)
+                .Indent()
+                    .AppendLine("{0}.query.split('&').each do |url_item|", variableName)
+                    .Indent()
+                        .AppendLine("url_items_parts = url_item.split('=')")
+                        .AppendLine("{0}[url_items_parts[0]] = url_items_parts[1]", hashName)
+                    .Outdent()
+                .AppendLine("end")
+                .Outdent()
+                .AppendLine("end");
 
             return builder.ToString();
         }
