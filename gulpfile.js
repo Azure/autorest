@@ -107,6 +107,7 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:nodeazure',
       'regenerate:expected:ruby',
       'regenerate:expected:rubyazure'
+      'regenerate:expected:java'
     ],
     cb);
 });
