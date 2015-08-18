@@ -1793,6 +1793,12 @@
               }
             }
           },
+          "200": {
+            "description": "Response after completion.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
           "default": {
             "description": "Unexpected error",
             "schema": {
@@ -1837,6 +1843,12 @@
                 "type": "integer",
                 "format": "Int32"
               }
+            }
+          },
+          "200": {
+            "description": "Response after completion.",
+            "schema": {
+              "$ref": "#/definitions/Product"
             }
           },
           "default": {

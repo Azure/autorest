@@ -285,6 +285,7 @@ describe('nodejs', function () {
     it('should work with PostAsyncRetrySucceeded', function (done) {
       testClient.lROs.postAsyncRetrySucceeded(product, function (error, result) {
         should.not.exist(error);
+        result.body.id.should.be.exactly('100');
         done();
       });
     });
@@ -292,6 +293,7 @@ describe('nodejs', function () {
     it('should work with PostAsyncNoRetrySucceeded', function (done) {
       testClient.lROs.postAsyncNoRetrySucceeded(product, function (error, result) {
         should.not.exist(error);
+        result.body.id.should.be.exactly('100');
         done();
       });
     });

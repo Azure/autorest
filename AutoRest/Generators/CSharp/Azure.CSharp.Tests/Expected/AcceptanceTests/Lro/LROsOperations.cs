@@ -6455,10 +6455,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PostAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRetrySucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product> response = await BeginPostAsyncRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -6477,7 +6477,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPostAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -6546,7 +6546,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -6565,12 +6565,18 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationResponse<Product>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            // Deserialize Response
+            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -6593,10 +6599,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> PostAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product> response = await BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -6615,7 +6621,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product>> BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -6684,7 +6690,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -6703,12 +6709,18 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationResponse<Product>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            // Deserialize Response
+            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            {
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
