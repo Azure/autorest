@@ -364,10 +364,13 @@ namespace Microsoft.Rest.Azure
             pollingState.Resource = null;
             if (postOrDelete)
             {
+                //Try to de-serialize to the response model. (Not required for "PutOrPatch" 
+                //which has the fallback of invoking generic "resource get".)
+                string responseContent = await pollingState.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    string responseContent = await pollingState.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    pollingState.Resource = JObject.Parse(responseContent).ToObject<T>(JsonSerializer.Create(client.DeserializationSettings));
+                    pollingState.Resource = 
+                        JObject.Parse(responseContent).ToObject<T>(JsonSerializer.Create(client.DeserializationSettings));
                 }
                 catch { };
             }

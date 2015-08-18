@@ -83,7 +83,7 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
     function (callback) {
       setTimeout(function () {
         if (pollingState.azureAsyncOperationHeaderLink) {
-          self._updateStateFromAzureAsyncOperationHeader(pollingState, function (err) {
+          self._updateStateFromAzureAsyncOperationHeader(pollingState, false, function (err) {
             return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
@@ -159,7 +159,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
     function (callback) {
       setTimeout(function () {
         if (pollingState.azureAsyncOperationHeaderLink) {
-          self._updateStateFromAzureAsyncOperationHeader(pollingState, function (err) {
+          self._updateStateFromAzureAsyncOperationHeader(pollingState, true, function (err) {
             return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
@@ -183,8 +183,9 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
 /**
  * Retrieve operation status by polling from 'azure-asyncoperation' header.
  * @param {object} [pollingState] - The object to persist current operation state.
+ * @param {boolean} [inPostOrDelete] - Invoked by Post Or Delete operation.
  */
-AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = function (pollingState, callback) {
+AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = function (pollingState, inPostOrDelete, callback) {
   this._getStatus(pollingState.azureAsyncOperationHeaderLink, function (err, result) {
     if (err) return callback(err);
     
@@ -197,6 +198,9 @@ AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = functio
     pollingState.response = result.response;
     pollingState.request = result.request;
     pollingState.resource = null;
+    if (inPostOrDelete) {
+      pollingState.resource = result.body;
+    }
     callback(null);
   });
 };

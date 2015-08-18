@@ -685,7 +685,7 @@ var lros = function (coverage) {
       } else {
         removeScenarioCookie(res);
         coverage[scenario]++;
-        var outStr = '{ "status": "' + finalState + '"}';
+        var outStr = '{ "status": "' + finalState + '", "properties": { "provisioningState": "Succeeded"}, "id": "100", "name": "foo" }';
         if (operation == 'postasync' && finalState == 'Failed') {
           outStr = '{ "status": "' + finalState + '", "error": { "code": 500, "message": "Internal Server Error"}}';
         }

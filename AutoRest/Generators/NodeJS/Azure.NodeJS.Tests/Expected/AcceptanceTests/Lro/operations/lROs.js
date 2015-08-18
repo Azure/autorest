@@ -7043,7 +7043,7 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 202) {
+    if (statusCode !== 202 && statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = httpRequest;
@@ -7068,6 +7068,22 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
     result.response = response;
     if (responseBody === '') responseBody = null;
     result.requestId = response.headers['x-ms-request-id'];
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result.body = parsedResponse;
+        if (result.body !== null && result.body !== undefined) {
+          result.body = client._models['Product'].deserialize(result.body);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+    }
 
     return callback(null, result);
   });
@@ -7186,7 +7202,7 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 202) {
+    if (statusCode !== 202 && statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = httpRequest;
@@ -7211,6 +7227,22 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
     result.response = response;
     if (responseBody === '') responseBody = null;
     result.requestId = response.headers['x-ms-request-id'];
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result.body = parsedResponse;
+        if (result.body !== null && result.body !== undefined) {
+          result.body = client._models['Product'].deserialize(result.body);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+    }
 
     return callback(null, result);
   });
