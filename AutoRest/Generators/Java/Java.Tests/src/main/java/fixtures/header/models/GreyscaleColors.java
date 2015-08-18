@@ -10,13 +10,38 @@
 
 package fixtures.header.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Defines values for GreyscaleColors.
  */
 public enum GreyscaleColors {
-    WHITE,
+    WHITE("White"),
 
-    BLACK,
+    BLACK("black"),
 
-    GREY;
+    GREY("GREY");
+
+    private String value;
+
+    private GreyscaleColors(String value) {
+        this.value = value;
+    }
+
+    @JsonValue
+    public String toValue() {
+        return this.value;
+    }
+
+    @JsonCreator
+    public static GreyscaleColors fromValue(String value) {
+        GreyscaleColors[] items = GreyscaleColors.values();
+        for (GreyscaleColors item : items) {
+            if (item.toValue().equals(value)) {
+                return item;
+            }
+        }
+        return null;
+    }
 }

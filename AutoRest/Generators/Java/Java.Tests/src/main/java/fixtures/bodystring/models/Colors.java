@@ -10,13 +10,38 @@
 
 package fixtures.bodystring.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Defines values for Colors.
  */
 public enum Colors {
-    RED_COLOR,
+    RED_COLOR("red color"),
 
-    GREEN_COLOR,
+    GREEN_COLOR("green-color"),
 
-    BLUE_COLOR;
+    BLUE_COLOR("blue_color");
+
+    private String value;
+
+    private Colors(String value) {
+        this.value = value;
+    }
+
+    @JsonValue
+    public String toValue() {
+        return this.value;
+    }
+
+    @JsonCreator
+    public static Colors fromValue(String value) {
+        Colors[] items = Colors.values();
+        for (Colors item : items) {
+            if (item.toValue().equals(value)) {
+                return item;
+            }
+        }
+        return null;
+    }
 }

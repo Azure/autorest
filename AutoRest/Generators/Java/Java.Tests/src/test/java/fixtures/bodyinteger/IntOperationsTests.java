@@ -26,7 +26,8 @@ public class IntOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(NullPointerException.class, exception.getClass());
+            Assert.assertEquals(ServiceException.class, exception.getClass());
+            Assert.assertTrue(exception.getMessage().contains("JsonMappingException"));
         }
     }
 
@@ -37,7 +38,7 @@ public class IntOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("Expected an int but was STRING"));
+            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
         }
     }
 
@@ -48,7 +49,7 @@ public class IntOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("NumberFormatException"));
+            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
         }
     }
 
@@ -59,7 +60,7 @@ public class IntOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("NumberFormatException"));
+            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
         }
     }
 
@@ -70,7 +71,7 @@ public class IntOperationsTests {
             Assert.assertEquals(Long.MAX_VALUE, value);
         } catch (Exception exception) {
             Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("NumberFormatException"));
+            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
         }
     }
 
@@ -81,7 +82,7 @@ public class IntOperationsTests {
             Assert.assertEquals(Long.MIN_VALUE, value);
         } catch (Exception exception) {
             Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("NumberFormatException"));
+            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
         }
     }
 

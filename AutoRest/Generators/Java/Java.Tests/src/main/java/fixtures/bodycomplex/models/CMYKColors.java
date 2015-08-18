@@ -10,15 +10,40 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Defines values for CMYKColors.
  */
 public enum CMYKColors {
-    CYAN,
+    CYAN("cyan"),
 
-    MAGENTA,
+    MAGENTA("Magenta"),
 
-    YELLOW,
+    YELLOW("YELLOW"),
 
-    BLACK;
+    BLACK("blacK");
+
+    private String value;
+
+    private CMYKColors(String value) {
+        this.value = value;
+    }
+
+    @JsonValue
+    public String toValue() {
+        return this.value;
+    }
+
+    @JsonCreator
+    public static CMYKColors fromValue(String value) {
+        CMYKColors[] items = CMYKColors.values();
+        for (CMYKColors item : items) {
+            if (item.toValue().equals(value)) {
+                return item;
+            }
+        }
+        return null;
+    }
 }

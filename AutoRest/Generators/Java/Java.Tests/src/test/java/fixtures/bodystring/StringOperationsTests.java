@@ -24,8 +24,13 @@ public class StringOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        String result = client.getStringOperations().getNull();
-        Assert.assertNull(result);
+        try {
+            client.getStringOperations().getNull();
+            Assert.assertTrue(false);
+        } catch (Exception ex) {
+            Assert.assertEquals(ServiceException.class, ex.getClass());
+            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
+        }
     }
 
     @Test
@@ -86,7 +91,11 @@ public class StringOperationsTests {
 
     @Test
     public void getNotProvided() throws Exception {
-        String result = client.getStringOperations().getNotProvided();
-        Assert.assertNull(result);
+        try {
+            client.getStringOperations().getNotProvided();
+        } catch (Exception ex) {
+            Assert.assertEquals(ServiceException.class, ex.getClass());
+            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
+        }
     }
 }

@@ -12,6 +12,7 @@ import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.*;
 import retrofit.client.OkClient;
+import retrofit.converter.JacksonConverter;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -55,6 +56,7 @@ public abstract class ServiceClient {
         this.restAdapterBuilder = restAdapterBuilder
                 .setClient(okClient)
                 .setLogLevel(RestAdapter.LogLevel.BASIC)
+                .setConverter(new JacksonConverter())
                 .setExecutors(executor, executor);
     }
 
