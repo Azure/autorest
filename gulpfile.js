@@ -58,6 +58,27 @@ var defaultMappings = {
   'AcceptanceTests/Validation': '../../AcceptanceTests/swagger/validation.json'
 };
 
+var rubyMappings = {
+
+    'boolean':['../../AcceptanceTests/swagger/body-boolean.json', 'BooleanModule'],
+    'integer':['../../AcceptanceTests/swagger/body-integer.json','IntegerModule'], 
+    'number':['../../AcceptanceTests/swagger/body-number.json','NumberModule'],
+    'string':['../../AcceptanceTests/swagger/body-string.json','StringModule'],
+    'byte':['../../AcceptanceTests/swagger/body-byte.json','ByteModule'],
+    'array':['../../AcceptanceTests/swagger/body-array.json','ArrayModule'],
+    'dictionary':['../../AcceptanceTests/swagger/body-dictionary.json','DictionaryModule'],
+    'date':['../../AcceptanceTests/swagger/body-date.json','DateModule'],
+    'datetime':['../../AcceptanceTests/swagger/body-datetime.json','DatetimeModule'],
+    'complex':['../../AcceptanceTests/swagger/body-complex.json','ComplexModule'],
+    'url':['../../AcceptanceTests/swagger/url.json','UrlModule'],
+    'url_items':['../../AcceptanceTests/swagger/url.json','UrlModule'],
+    'url_query':['../../AcceptanceTests/swagger/url.json','UrlModule'],
+    'header_folder':['../../AcceptanceTests/swagger/header.json','HeaderModule'],
+    'http_infrastructure':['../../AcceptanceTests/swagger/httpInfrastructure.json','HttpInfrastructureModule'],
+    'required_optional':['../../AcceptanceTests/swagger/required-optional.json','RequiredOptionalModule'],
+    'report':['../../AcceptanceTests/swagger/report.json','ReportModule']
+};
+
 var defaultAzureMappings = {
   'AcceptanceTests/Lro': '../../AcceptanceTests/swagger/lro.json',
   'AcceptanceTests/Paging': '../../AcceptanceTests/swagger/paging.json',
@@ -68,13 +89,25 @@ var defaultAzureMappings = {
   'AcceptanceTests/AzureSpecials': '../../AcceptanceTests/swagger/azure-special-properties.json'
 };
 
+var rubyAzureMappings = {
+    'head':['../../AcceptanceTests/swagger/head.json'],
+    'paging':['../../AcceptanceTests/swagger/paging.json'],
+    'resource_flattening':['../../AcceptanceTests/swagger/resource-flattening.json'],
+    'lro':['../../AcceptanceTests/swagger/lro.json'],
+    'azure_url':['../../AcceptanceTests/swagger/subscriptionId-apiVersion.json'],
+    'azure_special_properties':['../../AcceptanceTests/swagger/azure-special-properties.json'],
+    'azure_report':['../../AcceptanceTests/swagger/azure-report.json'],
+};
+
 gulp.task('regenerate:expected', function(cb){
   runSequence('regenerate:delete',
     [
       'regenerate:expected:csazure',
       'regenerate:expected:cs',
       'regenerate:expected:node',
-      'regenerate:expected:nodeazure'
+      'regenerate:expected:nodeazure',
+	  'regenerate:expected:ruby',
+      'regenerate:expected:rubyazure'
     ],
     cb);
 });
@@ -107,6 +140,31 @@ gulp.task('regenerate:expected:node', function(cb){
     'codeGenerator': 'NodeJS'
   }, cb);
 })
+
+gulp.task('regenerate:expected:rubyazure', function(cb){
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Ruby/Azure.Ruby.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': rubyAzureMappings,
+    'outputDir': 'bin/RspecTests',
+    'codeGenerator': 'Azure.Ruby',
+	'nsPrefix': 'MyNamespace'
+  }, cb);
+  gulp.src('AutoRest/Generators/Ruby/Azure.Ruby.Tests/RspecTests/*').pipe(gulp.dest('AutoRest/Generators/Ruby/Azure.Ruby.Tests/bin/RspecTests'));
+})
+
+gulp.task('regenerate:expected:ruby', function(cb){
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Ruby/Ruby.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': rubyMappings,
+    'outputDir': 'bin/RspecTests',
+    'codeGenerator': 'Ruby',
+	'nsPrefix': 'MyNamespace'
+  }, cb);
+  gulp.src('AutoRest/Generators/Ruby/Ruby.Tests/RspecTests/*').pipe(gulp.dest('AutoRest/Generators/Ruby/Ruby.Tests/bin/RspecTests'));
+})
+
 
 gulp.task('regenerate:expected:csazure', function(cb){
   mappings = mergeOptions(defaultAzureMappings);
