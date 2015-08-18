@@ -62,6 +62,12 @@ nexus {
     snapshotRepositoryUrl = "file://$buildDir/repo-snapshots"
 }
 
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardError"
+    }
+}
+
 javadoc {
     options.encoding = 'UTF-8'
 }
