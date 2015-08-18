@@ -2,7 +2,7 @@ $: << 'RspecTests/number'
 
 require 'body_number'
 
-include MyNamespace
+include NumberModule
 
 describe Number do
   before(:all) do

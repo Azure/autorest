@@ -48,6 +48,14 @@ namespace Microsoft.Rest.Generator.Ruby
             }
         }
 
+        public virtual List<string> ClassNamespaces
+        {
+            get
+            {
+                return new List<string> {};
+            }
+        }
+
         /// <summary>
         /// Gets the list of properties of object including inherted ones.
         /// </summary>
@@ -112,7 +120,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             var builder = new IndentedStringBuilder("  ");
 
-            string serializationLogic = type.SerializeType(this.Scope, variableName);
+            string serializationLogic = type.SerializeType(this.Scope, variableName, ClassNamespaces);
             builder.AppendLine(serializationLogic);
 
             return builder.ToString();
@@ -128,7 +136,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             var builder = new IndentedStringBuilder("  ");
 
-            string serializationLogic = type.DeserializeType(this.Scope, variableName);
+            string serializationLogic = type.DeserializeType(this.Scope, variableName, ClassNamespaces);
             return builder.AppendLine(serializationLogic).ToString();
         }
 

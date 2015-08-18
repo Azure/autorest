@@ -3,9 +3,7 @@ $: << 'RspecTests/date'
 require 'rspec'
 require 'body_date'
 
-include MyNamespace
-
-describe Date do
+describe DateModule::Date do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
@@ -13,12 +11,12 @@ describe Date do
     dummyToken = 'dummy12321343423'
     @credentials = MsRest::TokenCredentials.new(dummyToken)
 
-    client = AutoRestDateTestService.new(@credentials, @base_url)
-    @date_client = MyNamespace::Date.new(client)
+    client = DateModule::AutoRestDateTestService.new(@credentials, @base_url)
+    @date_client = DateModule::Date.new(client)
   end
 
   it 'should create test service' do
-    expect { AutoRestDateTestService.new(@credentials, @base_url) }.not_to raise_error
+    expect { DateModule::AutoRestDateTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get null' do

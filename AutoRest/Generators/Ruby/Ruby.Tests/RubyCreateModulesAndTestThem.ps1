@@ -1,23 +1,23 @@
 
 $tests = 
 @{
-    "boolean"="..\..\AcceptanceTests\swagger\body-boolean.json";
-    "integer"="..\..\AcceptanceTests\swagger\body-integer.json";
-    "number"="..\..\AcceptanceTests\swagger\body-number.json";
-    "string"="..\..\AcceptanceTests\swagger\body-string.json";
-    "byte"="..\..\AcceptanceTests\swagger\body-byte.json";
-    "array"="..\..\AcceptanceTests\swagger\body-array.json";
-    "dictionary"="..\..\AcceptanceTests\swagger\body-dictionary.json";
-    "date"="..\..\AcceptanceTests\swagger\body-date.json";
-    "datetime"="..\..\AcceptanceTests\swagger\body-datetime.json";
-    "complex"="..\..\AcceptanceTests\swagger\body-complex.json";
-    "url"="..\..\AcceptanceTests\swagger\url.json";
-    "url_items"="..\..\AcceptanceTests\swagger\url.json";
-    "url_query"="..\..\AcceptanceTests\swagger\url.json";
-    "header"="..\..\AcceptanceTests\swagger\header.json";
-    "http_infrastructure"="..\..\AcceptanceTests\swagger\httpInfrastructure.json";
-    "required_optional"="..\..\AcceptanceTests\swagger\required-optional.json";
-    "report"="..\..\AcceptanceTests\swagger\report.json";
+    "boolean"="..\..\AcceptanceTests\swagger\body-boolean.json","BooleanModule";
+    "integer"="..\..\AcceptanceTests\swagger\body-integer.json","IntegerModule";
+    "number"="..\..\AcceptanceTests\swagger\body-number.json","NumberModule";
+    "string"="..\..\AcceptanceTests\swagger\body-string.json","StringModule";
+    "byte"="..\..\AcceptanceTests\swagger\body-byte.json","ByteModule";
+    "array"="..\..\AcceptanceTests\swagger\body-array.json","ArrayModule";
+    "dictionary"="..\..\AcceptanceTests\swagger\body-dictionary.json","DictionaryModule";
+    "date"="..\..\AcceptanceTests\swagger\body-date.json","DateModule";
+    "datetime"="..\..\AcceptanceTests\swagger\body-datetime.json","DatetimeModule";
+    "complex"="..\..\AcceptanceTests\swagger\body-complex.json","ComplexModule";
+    "url"="..\..\AcceptanceTests\swagger\url.json","UrlModule";
+    "url_items"="..\..\AcceptanceTests\swagger\url.json","UrlModule";
+    "url_query"="..\..\AcceptanceTests\swagger\url.json","UrlModule";
+    "header_folder"="..\..\AcceptanceTests\swagger\header.json","HeaderModule";
+    "http_infrastructure"="..\..\AcceptanceTests\swagger\httpInfrastructure.json","HttpInfrastructureModule";
+    "required_optional"="..\..\AcceptanceTests\swagger\required-optional.json","RequiredOptionalModule";
+    "report"="..\..\AcceptanceTests\swagger\report.json","ReportModule";
 }
 
 Import-Module "$PSScriptRoot\..\..\..\..\binaries\net45\AutoRest.Core.dll"
@@ -28,10 +28,10 @@ foreach ($test in $tests.GetEnumerator())
     $settings.CodeGenerator = "Ruby";
     $settings.Modeler = "Swagger"
     $settings.OutputDirectory = "$PSScriptRoot\bin\RspecTests\$($test.Key)"
-    $settings.Input = "$PSScriptRoot\$($test.Value)"
+    $settings.Input = "$PSScriptRoot\$($test.Value[0])"
     $settings.Header = "NONE"
-    $settings.Namespace = "MyNamespace"
-    Write-Output "Generating $($test.Value)"
+    $settings.Namespace = $test.Value[1]
+    Write-Output "Generating $($test.Value[0])"
     [Microsoft.Rest.Generator.AutoRest]::Generate($settings)
 }
 

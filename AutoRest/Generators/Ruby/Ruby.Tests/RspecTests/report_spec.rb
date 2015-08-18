@@ -2,7 +2,7 @@ $: << 'RspecTests/report'
 
 require 'report'
 
-include MyNamespace
+include ReportModule
 
 describe AutoRestReportService do
   before(:all) do

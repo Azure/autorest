@@ -2,7 +2,7 @@ $: << 'RspecTests/url_items'
 
 require 'url'
 
-include MyNamespace
+include UrlModule
 
 describe Paths do
   before(:all) do

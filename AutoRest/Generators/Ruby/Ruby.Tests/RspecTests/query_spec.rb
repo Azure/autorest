@@ -3,7 +3,7 @@ $: << 'RspecTests/url_query'
 require 'rspec'
 require 'url'
 
-include MyNamespace
+include UrlModule
 
 describe Queries do
 

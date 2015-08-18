@@ -2,7 +2,7 @@ $: << 'RspecTests/string'
 
 require 'body_string'
 
-include MyNamespace
+include StringModule
 
 describe String do
   before(:all) do
@@ -12,7 +12,7 @@ describe String do
 	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestSwaggerBATService.new(@credentials, @base_url)
-    @string_client = MyNamespace::String.new(client)
+    @string_client = StringModule::String.new(client)
   end
 
   it 'should create test service' do

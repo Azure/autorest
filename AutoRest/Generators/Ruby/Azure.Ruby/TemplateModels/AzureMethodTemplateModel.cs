@@ -142,7 +142,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             var builder = new IndentedStringBuilder("  ");
 
-            string serializationLogic = type.DeserializeType(this.Scope, variableName);
+            string serializationLogic = type.DeserializeType(this.Scope, variableName, ClassNamespaces);
             return builder.AppendLine(serializationLogic).ToString();
         }
 
@@ -166,6 +166,17 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 sb.AppendLine(base.InitializeResponseBody);
 
                 return sb.ToString();
+            }
+        }
+
+        public override List<string> ClassNamespaces
+        {
+            get
+            {
+                return new List<string>
+				{
+					"MsRestAzure"
+				};
             }
         }
 

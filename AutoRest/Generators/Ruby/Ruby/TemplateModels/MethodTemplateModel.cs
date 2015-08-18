@@ -148,6 +148,14 @@ namespace Microsoft.Rest.Generator.Ruby
             get { return string.Empty; }
         }
 
+        public virtual List<string> ClassNamespaces
+        {
+            get
+            {
+                return new List<string> { };
+            }
+        }
+
         /// <summary>
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
@@ -195,7 +203,7 @@ namespace Microsoft.Rest.Generator.Ruby
 
             // Secondly parse each js object into appropriate Ruby type (DateTime, Byte array, etc.)
             // and overwrite temporary variable variable value.
-            string deserializationLogic = type.DeserializeType(this.Scope, tempVariable);
+            string deserializationLogic = type.DeserializeType(this.Scope, tempVariable, ClassNamespaces);
             builder.AppendLine(deserializationLogic);
 
             // Assigning value of temporary variable to the output variable.
@@ -207,7 +215,7 @@ namespace Microsoft.Rest.Generator.Ruby
             var builder = new IndentedStringBuilder("  ");
 
             // Firstly recursively serialize each component of the object.
-            string serializationLogic = type.SerializeType(this.Scope, inputVariable);
+            string serializationLogic = type.SerializeType(this.Scope, inputVariable, ClassNamespaces);
 
             builder.AppendLine(serializationLogic);
 

@@ -2,8 +2,8 @@ $: << 'RspecTests/required_optional'
 
 require 'required_optional'
 
-include MyNamespace
-include MyNamespace::Models
+include RequiredOptionalModule
+include RequiredOptionalModule::Models
 
 describe AutoRestRequiredOptionalTestService do
   before(:all) do

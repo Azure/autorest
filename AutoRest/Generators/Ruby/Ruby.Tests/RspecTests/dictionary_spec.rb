@@ -5,8 +5,8 @@ require 'base64'
 require 'body_dictionary'
 require 'helper'
 
-include MyNamespace
-include MyNamespace::Models
+include DictionaryModule
+include DictionaryModule::Models
 
 describe Dictionary do
 

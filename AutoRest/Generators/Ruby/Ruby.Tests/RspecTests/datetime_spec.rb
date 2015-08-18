@@ -4,7 +4,7 @@ require 'rspec'
 require 'body_datetime'
 require_relative './helper'
 
-include MyNamespace
+include DatetimeModule
 
 describe Date do
 

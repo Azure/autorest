@@ -5,7 +5,8 @@ require 'rspec'
 require 'http_infrastructure.rb'
 require 'helper'
 
-include MyNamespace
+module HttpInfrastructureModule
+  include HttpInfrastructureModule::Models
 
 describe 'HttpInfrastructure' do
 
@@ -500,4 +501,6 @@ describe 'HttpInfrastructure' do
       expect { @multiple_resp_client.get200model_a202valid().value! }.to raise_exception_with_code(202)
     end
   end
+end
+
 end

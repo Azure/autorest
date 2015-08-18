@@ -3,10 +3,10 @@ $: << 'RspecTests/complex'
 require 'base64'
 require 'body_complex'
 
-include MyNamespace
-include MyNamespace::Models
+module ComplexModule
+  include ComplexModule::Models
 
-describe 'Complex tests' do
+describe 'Complex' do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
@@ -47,7 +47,7 @@ describe 'Complex tests' do
   end
 
   it 'should put array valid' do
-    array_wrapper = ArrayWrapper.new
+    array_wrapper = ComplexModule::Models::ArrayWrapper.new
     array_wrapper.array = @arrayValue
     result = @client.array.put_valid(array_wrapper).value!
     expect(result.response.status).to eq(200)
@@ -62,7 +62,7 @@ describe 'Complex tests' do
 
   it 'should put array empty' do
     @arrayValue.clear
-    array_wrapper = ArrayWrapper.new
+    array_wrapper = ComplexModule::Models::ArrayWrapper.new
     array_wrapper.array = @arrayValue
     result = @client.array.put_empty(array_wrapper).value!
     expect(result.response.status).to eq(200)
@@ -71,7 +71,7 @@ describe 'Complex tests' do
   it 'should get array not provided' do
     result = @client.array.get_not_provided().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(ArrayWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::ArrayWrapper)
     expect(result.body.array).to be_nil
   end
 
@@ -79,17 +79,17 @@ describe 'Complex tests' do
   it 'should get basic valid' do
     result = @client.basic_operations.get_valid().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(Basic)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::Basic)
     expect(result.body.id).to eq(2)
     expect(result.body.name).to eq("abc")
-    expect(result.body.color).to eq(CMYKColors::YELLOW)
+    expect(result.body.color).to eq(ComplexModule::Models::CMYKColors::YELLOW)
   end
 
   it 'should put basic valid' do
-    basic_request = Basic.new
+    basic_request = ComplexModule::Models::Basic.new
     basic_request.id = 2
     basic_request.name = "abc"
-    basic_request.color = CMYKColors::Magenta
+    basic_request.color = ComplexModule::Models::CMYKColors::Magenta
     result = @client.basic_operations.put_valid(basic_request).value!
     expect(result.response.status).to eq(200)
   end
@@ -101,7 +101,7 @@ describe 'Complex tests' do
   it 'should get basic empty' do
     result = @client.basic_operations.get_empty().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(Basic)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::Basic)
     expect(result.body.id).to be_nil
     expect(result.body.name).to be_nil
     expect(result.body.color).to be_nil
@@ -110,7 +110,7 @@ describe 'Complex tests' do
   it 'should get basic null' do
     result = @client.basic_operations.get_null().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(Basic)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::Basic)
     expect(result.body.id).to be_nil
     expect(result.body.name).to be_nil
     expect(result.body.color).to be_nil
@@ -126,12 +126,12 @@ describe 'Complex tests' do
   it 'should get dictionary valid' do
     result = @client.dictionary.get_valid().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(DictionaryWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::DictionaryWrapper)
     expect(result.body.default_program).to eq(@dictionary_value)
   end
 
   it 'should put dictionary valid' do
-    dict_request = DictionaryWrapper.new
+    dict_request = ComplexModule::Models::DictionaryWrapper.new
     dict_request.default_program = @dictionary_value
     result = @client.dictionary.put_valid(dict_request).value!
     expect(result.response.status).to eq(200)
@@ -140,12 +140,12 @@ describe 'Complex tests' do
   it 'should get dictionary empty' do
     result = @client.dictionary.get_empty().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(DictionaryWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::DictionaryWrapper)
     expect(result.body.default_program.count).to eq(0)
   end
 
   it 'should put dictionary empty' do
-    dict = DictionaryWrapper.new
+    dict = ComplexModule::Models::DictionaryWrapper.new
 	dict.default_program = {}
     result = @client.dictionary.put_empty(dict).value!
     expect(result.response.status).to eq(200)
@@ -154,14 +154,14 @@ describe 'Complex tests' do
   it 'should get dictionary null' do
     result = @client.dictionary.get_null().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(DictionaryWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::DictionaryWrapper)
     expect(result.body.default_program).to be_nil
   end
 
   it 'should get dictionary not provided' do
     result = @client.dictionary.get_not_provided().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(DictionaryWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::DictionaryWrapper)
     expect(result.body.default_program).to be_nil
   end
 
@@ -176,10 +176,10 @@ describe 'Complex tests' do
   end
 
   it 'should put inheritance valid' do
-    inheritance_request = Siamese.new
+    inheritance_request = ComplexModule::Models::Siamese.new
 
-    dog1 = Dog.new
-    dog2 = Dog.new
+    dog1 = ComplexModule::Models::Dog.new
+    dog2 = ComplexModule::Models::Dog.new
     dog1.id = 1
     dog1.name = "Potato"
     dog1.food = "tomato"
@@ -201,21 +201,21 @@ describe 'Complex tests' do
   it 'should get inheritance valid' do
     result = @client.polymorphicrecursive.get_valid().value!
     expect(result.response.status).to eq(200)
-    expect(result.body.is_a?Salmon).to be_truthy
-    expect(result.body.siblings[0].is_a?Shark).to be_truthy
-    expect(result.body.siblings[0].siblings[0].is_a?Salmon).to be_truthy
+    expect(result.body.is_a?ComplexModule::Models::Salmon).to be_truthy
+    expect(result.body.siblings[0].is_a?ComplexModule::Models::Shark).to be_truthy
+    expect(result.body.siblings[0].siblings[0].is_a?ComplexModule::Models::Salmon).to be_truthy
     expect(result.body.siblings[0].siblings[0].location).to eq("atlantic")
   end
 
   it 'should put inheritance valid' do
-    shark1 = Shark.new
+    shark1 = ComplexModule::Models::Shark.new
     shark1.age = 6
     shark1.length = 20
     shark1.species = "predator"
     shark1.birthday = DateTime.new(2012, 1, 5, 1, 0, 0, 'Z')
 
     # doesn't have children.
-    sawshark = Sawshark.new
+    sawshark = ComplexModule::Models::Sawshark.new
     sawshark.age = 105
     sawshark.length = 10
     sawshark.species = "dangerous"
@@ -223,7 +223,7 @@ describe 'Complex tests' do
     sawshark.picture = [255, 255, 255, 255, 254]
 
     # doesn't have children but has empty array of siblings.
-    sawshark1 = Sawshark.new
+    sawshark1 = ComplexModule::Models::Sawshark.new
     sawshark1.age = 105
     sawshark1.length = 10
     sawshark1.species = "dangerous"
@@ -232,7 +232,7 @@ describe 'Complex tests' do
     sawshark1.picture = [255, 255, 255, 255, 254]
 
     # has two children: shark1 and sawshark.
-    salmon = Salmon.new
+    salmon = ComplexModule::Models::Salmon.new
     salmon.iswild = true
     salmon.length = 2
     salmon.location = "atlantic"
@@ -240,7 +240,7 @@ describe 'Complex tests' do
     salmon.siblings = [shark1, sawshark]
 
     # has two children: salmon and sawshark1
-    shark = Shark.new
+    shark = ComplexModule::Models::Shark.new
     shark.age = 6
     shark.length = 20
     shark.species = "predator"
@@ -248,7 +248,7 @@ describe 'Complex tests' do
     shark.siblings = [salmon, sawshark1]
 
     # doesn't have children but has empty array of siblings.
-    sawshark2 = Sawshark.new
+    sawshark2 = ComplexModule::Models::Sawshark.new
     sawshark2.age = 105
     sawshark2.length = 10
     sawshark2.species = "dangerous"
@@ -257,7 +257,7 @@ describe 'Complex tests' do
     sawshark2.picture = [255, 255, 255, 255, 254]
 
     # has two children: shark and sawshark2.
-    recursive_request = Salmon.new
+    recursive_request = ComplexModule::Models::Salmon.new
     recursive_request.iswild = true
     recursive_request.length = 1
     recursive_request.species = "king"
@@ -275,28 +275,28 @@ describe 'Complex tests' do
 
     expect(result.body.location).to eq("alaska")
 
-    expect(result.body.siblings[0].is_a? Shark).to be_truthy
-    expect(result.body.siblings[1].is_a? Sawshark).to be_truthy
+    expect(result.body.siblings[0].is_a? ComplexModule::Models::Shark).to be_truthy
+    expect(result.body.siblings[1].is_a? ComplexModule::Models::Sawshark).to be_truthy
 
     expect(result.body.siblings[0].age).to eq(6)
     expect(result.body.siblings[1].age).to eq(105)
   end
 
   it 'should put polymorphism valid' do
-    shark = Shark.new
+    shark = ComplexModule::Models::Shark.new
     shark.age = 6
     shark.length = 20
     shark.species = "predator"
     shark.birthday = DateTime.new(2012, 1, 5, 1, 0, 0, 'Z')
 
-    sawshark = Sawshark.new
+    sawshark = ComplexModule::Models::Sawshark.new
     sawshark.age = 105
     sawshark.length = 10
     sawshark.species = "dangerous"
     sawshark.birthday = DateTime.new(1900, 1, 5, 1, 0, 0, 'Z')
     sawshark.picture = [255, 255, 255, 255, 254]
 
-    polymorphism_request = Salmon.new
+    polymorphism_request = ComplexModule::Models::Salmon.new
     polymorphism_request.iswild = true
     polymorphism_request.length = 1
     polymorphism_request.species = "king"
@@ -308,13 +308,13 @@ describe 'Complex tests' do
   it 'should get int' do
     result = @client.primitive.get_int().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(IntWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::IntWrapper)
     expect(result.body.field1).to eq(-1)
     expect(result.body.field2).to eq(2)
   end
 
   it 'should put int' do
-    int_wrapper = IntWrapper.new
+    int_wrapper = ComplexModule::Models::IntWrapper.new
     int_wrapper.field1 = -1
     int_wrapper.field2 = 2
     result = @client.primitive.put_int(int_wrapper).value!
@@ -324,13 +324,13 @@ describe 'Complex tests' do
   it 'should get long' do
     result = @client.primitive.get_long().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(LongWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::LongWrapper)
     expect(result.body.field1).to eq(1099511627775)
     expect(result.body.field2).to eq(-999511627788)
   end
 
   it 'should put long' do
-    long_wrapper = LongWrapper.new
+    long_wrapper = ComplexModule::Models::LongWrapper.new
     long_wrapper.field1 = 1099511627775
     long_wrapper.field2 = -999511627788
     result = @client.primitive.put_long(long_wrapper).value!
@@ -340,13 +340,13 @@ describe 'Complex tests' do
   it 'should get float' do
     result = @client.primitive.get_float().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(FloatWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::FloatWrapper)
     expect(result.body.field1).to eq(1.05)
     expect(result.body.field2).to eq(-0.003)
   end
 
   it 'should put float' do
-    float_wrapper = FloatWrapper.new
+    float_wrapper = ComplexModule::FloatWrapper.new
     float_wrapper.field1 = 1.05
     float_wrapper.field2 = -0.003
     result = @client.primitive.put_float(float_wrapper).value!
@@ -372,13 +372,13 @@ describe 'Complex tests' do
   it 'should get bool' do
     result = @client.primitive.get_bool().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(BooleanWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::BooleanWrapper)
     expect(result.body.field_true).to eq(true)
     expect(result.body.field_false).to eq(false)
   end
 
   it 'should put bool' do
-    bool_wrapper = BooleanWrapper.new
+    bool_wrapper = ComplexModule::BooleanWrapper.new
     bool_wrapper.field_true = true
     bool_wrapper.field_false = false
     result = @client.primitive.put_bool(bool_wrapper).value!
@@ -388,13 +388,13 @@ describe 'Complex tests' do
   it 'should get date' do
     result = @client.primitive.get_date().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(DateWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::DateWrapper)
     expect(result.body.field).to eq(Date.parse('0001-01-01'))
     expect(result.body.leap).to eq(Date.parse('2016-02-29'))
   end
 
   it 'should put date' do
-    date_wrapper = DateWrapper.new
+    date_wrapper = ComplexModule::DateWrapper.new
     date_wrapper.field = Date.parse('0001-01-01')
     date_wrapper.leap = Date.parse('2016-02-29')
     result = @client.primitive.put_date(date_wrapper).value!
@@ -404,14 +404,14 @@ describe 'Complex tests' do
   it 'should get dateTime' do
     result = @client.primitive.get_date_time().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(DatetimeWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::DatetimeWrapper)
     expect(result.body.field).to eq(DateTime.new(1, 1, 1, 0, 0, 0))
     expect(result.body.now).to eq(DateTime.new(2015, 5, 18, 18, 38, 0))
   end
 
   # Test fails because of Azure's issue with server's expectations
   it 'should put dateTime' do
-    date_time_wrapper = DatetimeWrapper.new
+    date_time_wrapper = ComplexModule::DatetimeWrapper.new
     date_time_wrapper.field = DateTime.new(1, 1, 1, 0, 0, 0)
     date_time_wrapper.now = DateTime.new(2015, 5, 18, 18, 38, 0)
     result = @client.primitive.put_date_time(date_time_wrapper).value!
@@ -421,7 +421,7 @@ describe 'Complex tests' do
   it 'should get byte' do
     result = @client.primitive.get_byte().value!
     expect(result.response.status).to eq(200)
-    expect(result.body).to be_an_instance_of(ByteWrapper)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::ByteWrapper)
     expect(result.body.field).to eq(@byte_wrapper.field)
   end
 
@@ -429,4 +429,6 @@ describe 'Complex tests' do
     result = @client.primitive.put_byte(@byte_wrapper).value!
     expect(result.response.status).to eq(200)
   end
+end
+
 end

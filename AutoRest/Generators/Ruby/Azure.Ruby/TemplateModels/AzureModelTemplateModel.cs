@@ -4,6 +4,8 @@
 using System.Collections.Generic;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
+using Microsoft.Rest.Generator.Ruby.TemplateModels;
+using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
@@ -47,6 +49,17 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// Gets the list of modules/classes which need to be included.
         /// </summary>
         public override List<string> Includes
+        {
+            get
+            {
+                return new List<string>
+				{
+					"MsRestAzure"
+				};
+            }
+        }
+
+        public override List<string> ClassNamespaces
         {
             get
             {

@@ -8,6 +8,7 @@ using System.Linq;
 namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 {
     using Utilities;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Keeps a few aux method used across all templates/models.
@@ -254,11 +255,13 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <param name="type">Type of object needs to be deserialized.</param>
         /// <param name="scope">Current scope.</param>
         /// <param name="valueReference">Reference to object which needs to be deserialized.</param>
+        /// <param name="namespacesToLookForClasses">List of namespaces where classes for polymorphic serialization can be found.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string DeserializeType(
             this IType type,
             IScopeProvider scope,
-            string valueReference)
+            string valueReference,
+            List<string> namespacesToLookForClasses)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
@@ -310,7 +313,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar);
+                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar, namespacesToLookForClasses);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -334,7 +337,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar);
+                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar, namespacesToLookForClasses);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return builder.AppendLine("unless {0}.nil?", valueReference)
@@ -356,7 +359,17 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                     builder
                         .AppendLine("unless {0}['dtype'].nil?", valueReference)
                         .Indent()
-                            .AppendLine("{0} = Class::const_get({0}['dtype'].capitalize).deserialize_object({0})", valueReference)
+                            .AppendLine("class_name = {0}['dtype'].capitalize", valueReference)
+                            .AppendLine("class_instance = Models.const_get(class_name)");
+
+                    foreach (var ns in namespacesToLookForClasses)
+                    {
+                        builder
+                            .AppendLine("class_instance = {0}.const_get(class_name) if class_instance.nil?", ns);
+                    }
+
+                    builder
+                        .AppendLine("{0} = class_instance.deserialize_object({0})", valueReference)
                         .Outdent()
                         .AppendLine("else")
                         .Indent()
@@ -383,11 +396,13 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <param name="type">Type of object needs to be serialized.</param>
         /// <param name="scope">Current scope.</param>
         /// <param name="valueReference">Reference to object which needs to serialized.</param>
+        /// <param name="namespacesToLookForClasses">List of namespaces where classes for polymorphic deserialization can be found.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string SerializeType(
             this IType type,
             IScopeProvider scope,
-            string valueReference)
+            string valueReference,
+            List<string> namespacesToLookForClasses)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
@@ -411,7 +426,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar);
+                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar, namespacesToLookForClasses);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -435,7 +450,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar);
+                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar, namespacesToLookForClasses);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return builder.AppendLine("unless {0}.nil?", valueReference)
@@ -457,7 +472,17 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                     builder
                         .AppendLine("unless {0}.dtype.nil?", valueReference)
                         .Indent()
-                        .AppendLine("{0} = Class::const_get({0}.dtype.capitalize).serialize_object({0})", valueReference)
+                        .AppendLine("class_name = {0}.dtype.capitalize", valueReference)
+                        .AppendLine("class_instance = Models.const_get(class_name)");
+
+                    foreach (var ns in namespacesToLookForClasses)
+                    {
+                        builder
+                            .AppendLine("class_instance = {0}.const_get(class_name) if class_instance.nil?", ns);
+                    }
+
+                    builder
+                        .AppendLine("{0} = class_instance.serialize_object({0})", valueReference)
                         .Outdent()
                         .AppendLine("else")
                         .Indent()

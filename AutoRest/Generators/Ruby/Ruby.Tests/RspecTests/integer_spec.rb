@@ -2,7 +2,7 @@ $: << 'RspecTests/integer'
 
 require 'body_integer'
 
-include MyNamespace
+include IntegerModule
 
 describe Int do
   before(:all) do
