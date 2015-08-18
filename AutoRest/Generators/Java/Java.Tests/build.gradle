@@ -23,17 +23,15 @@ dependencies {
     compile group: 'com.microsoft.rest', name:'client-runtime', version:'0.0.1-SNAPSHOT'
     compile group: 'com.squareup.retrofit', name:'retrofit', version:'1.9.0'
     compile group: 'com.squareup.okhttp', name:'okhttp', version:'2.4.0'
-    compile group: 'com.squareup.retrofit', name:'converter-jackson', version:'1.9.0'
-    compile group: 'io.reactivex', name:'rxjava', version:'1.0.13'
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile group: 'junit', name: 'junit-dep', version: '4.11'
 }
 
 modifyPom {
-    setArtifactId 'client-runtime'
+    setArtifactId 'java-code-gen-tests'
     project {
-        name 'Microsoft AutoRest Runtime for Java'
-        description 'This is the client runtime for AutoRest generated Java clients.'
+        name 'Microsoft AutoRest Java Code Generator Tests'
+        description 'This is the Basic Acceptance Tests for Java Code Gen.'
         url 'https://github.com/Azure/autorest'
 
         scm {
@@ -58,11 +56,22 @@ modifyPom {
     }
 }
 
+nexus {
+    sign = true
+    repositoryUrl = "file://$buildDir/repo"
+    snapshotRepositoryUrl = "file://$buildDir/repo-snapshots"
+}
+
 javadoc {
     options.encoding = 'UTF-8'
 }
 
-task npmrestore(type: Exec, dependsOn: 'assemble') {
+task buildRuntime(type: Exec) {
+    workingDir "${projectDir}/../../../../ClientRuntimes/Java"
+    commandLine 'cmd', '/c', 'gradle', 'uploadArchives'
+}
+
+task npmrestore(type: Exec) {
     workingDir "${projectDir}/../../AcceptanceTests/server"
     commandLine 'cmd', '/c', 'npm', 'install'
 }
@@ -76,9 +85,16 @@ task runserver(type: Exec, dependsOn: 'installforever') {
     commandLine 'cmd', '/c', 'forever', 'start', 'startup/www.js'
 }
 
-task stopserver(type: Exec, dependsOn: 'test') {
-    commandLine 'cmd', '/c', 'forever', 'stopall'
+task testcoverage(type: JavaExec, dependsOn: 'runserver') {
+    main = 'fixtures.report.CoverageReporter'
+    classpath = sourceSets.test.runtimeClasspath
 }
 
-tasks.test.dependsOn(runserver)
-tasks.check.dependsOn(stopserver)
+task stopserver(type: Exec, dependsOn: 'testcoverage') {
+    workingDir "${projectDir}/../../AcceptanceTests/server"
+    commandLine 'cmd', '/c', 'forever', 'stop', 'startup/www.js'
+}
+
+compileJava.mustRunAfter 'clean'
+tasks.test.dependsOn 'runserver'
+tasks.test.finalizedBy 'stopserver'
