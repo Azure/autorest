@@ -75,7 +75,7 @@ javadoc {
 
 test {
     reports.getHtml()
-    reports.html.destination = file("${projectDir}/../../TestResults")
+    reports.html.destination = file("${projectDir}/../../TestResults/JavaRuntime")
 }
 
 task npmrestore(type: Exec) {
