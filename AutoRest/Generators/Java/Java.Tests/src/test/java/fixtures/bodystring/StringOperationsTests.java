@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.nio.charset.Charset;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -57,5 +58,35 @@ public class StringOperationsTests {
             }
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+    }
+
+    @Test
+    public void getMbcs() throws Exception {
+        String result = client.getStringOperations().getMbcs();
+        String expected = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑ\uE7C7ɡ〇〾⿻⺁\uE843䜣\uE864€";
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void putMbcs() throws Exception {
+        String content = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑ\uE7C7ɡ〇〾⿻⺁\uE843䜣\uE864€";
+        client.getStringOperations().putMbcs(content);
+    }
+
+    @Test
+    public void getWhitespace() throws Exception {
+        String result = client.getStringOperations().getWhitespace();
+        Assert.assertEquals("    Now is the time for all good men to come to the aid of their country    ", result);
+    }
+
+    @Test
+    public void putWhitespace() throws Exception {
+        client.getStringOperations().putWhitespace("    Now is the time for all good men to come to the aid of their country    ");
+    }
+
+    @Test
+    public void getNotProvided() throws Exception {
+        String result = client.getStringOperations().getNotProvided();
+        Assert.assertNull(result);
     }
 }

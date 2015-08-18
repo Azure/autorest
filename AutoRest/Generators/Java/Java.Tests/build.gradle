@@ -13,6 +13,10 @@ apply plugin: 'com.bmuschko.nexus'
 group = 'com.microsoft.rest'
 version = '0.0.1-SNAPSHOT'
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
 repositories {
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
