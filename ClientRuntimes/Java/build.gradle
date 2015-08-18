@@ -62,3 +62,41 @@ nexus {
     repositoryUrl = "file://$buildDir/repo"
     snapshotRepositoryUrl = "file://$buildDir/repo-snapshots"
 }
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardError"
+    }
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    reports.getHtml()
+    reports.html.destination = file("${projectDir}/../../TestResults")
+}
+
+task npmrestore(type: Exec) {
+    workingDir "${projectDir}/../../AutoRest/Generators/AcceptanceTests/server"
+    commandLine 'cmd', '/c', 'npm', 'install'
+}
+
+task installforever(type: Exec, dependsOn: 'npmrestore') {
+    commandLine 'cmd', '/c', 'npm', 'install', '-g', 'forever'
+}
+
+task runserver(type: Exec, dependsOn: 'installforever') {
+    workingDir "${projectDir}/../../AutoRest/Generators/AcceptanceTests/server"
+    commandLine 'cmd', '/c', 'forever', 'start', 'startup/www.js'
+}
+
+task stopserver(type: Exec) {
+    workingDir "${projectDir}/../../AutoRest/Generators/AcceptanceTests/server"
+    commandLine 'cmd', '/c', 'forever', 'stop', 'startup/www.js'
+}
+
+tasks.compileJava.dependsOn 'clean'
+tasks.test.dependsOn 'runserver'
+tasks.test.finalizedBy 'stopserver'
