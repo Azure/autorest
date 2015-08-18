@@ -10,6 +10,7 @@
 
 package fixtures.url;
 
+
 /**
  * The interface for AutoRestUrlTestService class.
  */
@@ -43,4 +44,5 @@ public interface AutoRestUrlTestService {
      * @return the pathItems value.
      */
     PathItems getPathItems();
+
 }

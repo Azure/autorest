@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+
 /**
  * Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
  */
@@ -71,6 +72,6 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.dictionary = new DictionaryImpl(restAdapter);
+                this.dictionary = new DictionaryImpl(restAdapter);
     }
 }

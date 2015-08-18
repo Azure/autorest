@@ -95,6 +95,15 @@ namespace Microsoft.Rest.Generator.Java
             return base.GetVariableName(GetEscapedReservedName(name, "Variable"));
         }
 
+        public static string GetServiceName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return name + "Service";
+        }
+
         public override void NormalizeClientModel(ServiceClient client)
         {
             if (client == null)

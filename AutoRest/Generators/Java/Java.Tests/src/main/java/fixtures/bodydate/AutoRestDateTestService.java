@@ -10,6 +10,7 @@
 
 package fixtures.bodydate;
 
+
 /**
  * The interface for AutoRestDateTestService class.
  */
@@ -25,4 +26,5 @@ public interface AutoRestDateTestService {
      * @return the dateOperations value.
      */
     DateOperations getDateOperations();
+
 }

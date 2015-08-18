@@ -10,6 +10,7 @@
 
 package fixtures.bodyboolean;
 
+
 /**
  * The interface for AutoRestBoolTestService class.
  */
@@ -25,4 +26,5 @@ public interface AutoRestBoolTestService {
      * @return the bool value.
      */
     Bool getBool();
+
 }

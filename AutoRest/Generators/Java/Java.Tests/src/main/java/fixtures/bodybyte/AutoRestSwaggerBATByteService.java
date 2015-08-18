@@ -10,6 +10,7 @@
 
 package fixtures.bodybyte;
 
+
 /**
  * The interface for AutoRestSwaggerBATByteService class.
  */
@@ -25,4 +26,5 @@ public interface AutoRestSwaggerBATByteService {
      * @return the byteOperations value.
      */
     ByteOperations getByteOperations();
+
 }

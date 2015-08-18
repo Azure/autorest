@@ -39,15 +39,15 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     ret = MethodGroupType.Substring(0, MethodGroupType.Length - 10);
                 }
-                return ret + "Service";
+                return JavaCodeNamer.GetServiceName(ret);
             }
         }
 
-        public IEnumerable<String> ImplImports
+        public IEnumerable<string> ImplImports
         {
             get
             {
-                HashSet<String> classes = new HashSet<string>();
+                HashSet<string> classes = new HashSet<string>();
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
                     .Concat(this.MethodTemplateModels.SelectMany(mtm => mtm.Responses.Select(res => res.Value)))
@@ -92,11 +92,11 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<String> InterfaceImports
+        public IEnumerable<string> InterfaceImports
         {
             get
             {
-                HashSet<String> classes = new HashSet<string>();
+                HashSet<string> classes = new HashSet<string>();
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
                     .Concat(this.MethodTemplateModels.Select(mtm => mtm.ReturnType))

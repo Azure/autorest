@@ -46,11 +46,11 @@ public interface @Model.MethodGroupType {
     @:/**
     @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
     @: *
-    @foreach (var param in method.LocalParameters)
+    foreach (var param in method.LocalParameters)
     {
     @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
     }
-    @if (method.ReturnType != null)
+    if (method.ReturnType != null)
     {
     @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
     }
@@ -61,7 +61,7 @@ public interface @Model.MethodGroupType {
     @:/**
     @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
     @: *
-    @foreach (var param in method.LocalParameters)
+    foreach (var param in method.LocalParameters)
     {
     @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
     }

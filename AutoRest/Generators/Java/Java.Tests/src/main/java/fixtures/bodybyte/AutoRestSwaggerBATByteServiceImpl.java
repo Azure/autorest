@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+
 /**
  * Initializes a new instance of the AutoRestSwaggerBATByteService class.
  */
@@ -71,6 +72,6 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.byteOperations = new ByteOperationsImpl(restAdapter);
+                this.byteOperations = new ByteOperationsImpl(restAdapter);
     }
 }

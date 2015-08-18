@@ -57,3 +57,28 @@ modifyPom {
         }
     }
 }
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+task npmrestore(type: Exec, dependsOn: 'assemble') {
+    workingDir "${projectDir}/../../AcceptanceTests/server"
+    commandLine 'cmd', '/c', 'npm', 'install'
+}
+
+task installforever(type: Exec, dependsOn: 'npmrestore') {
+    commandLine 'cmd', '/c', 'npm', 'install', '-g', 'forever'
+}
+
+task runserver(type: Exec, dependsOn: 'installforever') {
+    workingDir "${projectDir}/../../AcceptanceTests/server"
+    commandLine 'cmd', '/c', 'forever', 'start', 'startup/www.js'
+}
+
+task stopserver(type: Exec, dependsOn: 'test') {
+    commandLine 'cmd', '/c', 'forever', 'stopall'
+}
+
+tasks.test.dependsOn(runserver)
+tasks.check.dependsOn(stopserver)

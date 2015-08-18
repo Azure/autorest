@@ -10,6 +10,7 @@
 
 package fixtures.bodyfile;
 
+
 /**
  * The interface for AutoRestSwaggerBATFileService class.
  */
@@ -25,4 +26,5 @@ public interface AutoRestSwaggerBATFileService {
      * @return the files value.
      */
     Files getFiles();
+
 }

@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+
 /**
  * Initializes a new instance of the AutoRestBoolTestService class.
  */
@@ -71,6 +72,6 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRe
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.bool = new BoolImpl(restAdapter);
+                this.bool = new BoolImpl(restAdapter);
     }
 }

@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFileService class.
  */
@@ -71,6 +72,6 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.files = new FilesImpl(restAdapter);
+                this.files = new FilesImpl(restAdapter);
     }
 }

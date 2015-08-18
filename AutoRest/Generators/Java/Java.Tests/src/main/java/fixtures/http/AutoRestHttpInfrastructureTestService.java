@@ -10,6 +10,7 @@
 
 package fixtures.http;
 
+
 /**
  * The interface for AutoRestHttpInfrastructureTestService class.
  */
@@ -61,4 +62,5 @@ public interface AutoRestHttpInfrastructureTestService {
      * @return the multipleResponses value.
      */
     MultipleResponses getMultipleResponses();
+
 }

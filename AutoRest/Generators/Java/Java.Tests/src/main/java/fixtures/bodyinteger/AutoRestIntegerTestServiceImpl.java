@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+
 /**
  * Initializes a new instance of the AutoRestIntegerTestService class.
  */
@@ -71,6 +72,6 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient implements Aut
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.intOperations = new IntOperationsImpl(restAdapter);
+                this.intOperations = new IntOperationsImpl(restAdapter);
     }
 }

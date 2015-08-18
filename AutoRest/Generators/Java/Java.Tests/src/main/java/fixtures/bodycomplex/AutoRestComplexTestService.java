@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex;
 
+
 /**
  * The interface for AutoRestComplexTestService class.
  */
@@ -61,4 +62,5 @@ public interface AutoRestComplexTestService {
      * @return the polymorphicrecursive value.
      */
     Polymorphicrecursive getPolymorphicrecursive();
+
 }

@@ -10,6 +10,7 @@
 
 package fixtures.bodynumber;
 
+
 /**
  * The interface for AutoRestNumberTestService class.
  */
@@ -25,4 +26,5 @@ public interface AutoRestNumberTestService {
      * @return the number value.
      */
     Number getNumber();
+
 }

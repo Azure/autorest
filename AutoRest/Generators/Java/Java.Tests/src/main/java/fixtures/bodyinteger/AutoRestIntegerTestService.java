@@ -10,6 +10,7 @@
 
 package fixtures.bodyinteger;
 
+
 /**
  * The interface for AutoRestIntegerTestService class.
  */
@@ -25,4 +26,5 @@ public interface AutoRestIntegerTestService {
      * @return the intOperations value.
      */
     IntOperations getIntOperations();
+
 }

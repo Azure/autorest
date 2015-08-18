@@ -15,11 +15,20 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 @EmptyLine
+@foreach (var importClass in Model.ImplImports)
+{
+@:import @importClass;
+}
+@EmptyLine
 
 /**
  * Initializes a new instance of the @Model.Name class.
  */
 public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
+@if (Model.MethodTemplateModels.Any())
+{
+@:    private @Model.ServiceClientServiceType service;
+}
     private String baseUri;
 @EmptyLine
     /**
@@ -92,9 +101,80 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @EmptyLine
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        @if (Model.MethodTemplateModels.Any())
+        {
+        @:service = restAdapter.create(@(Model.ServiceClientServiceType).class);
+        }
         @foreach (var operation in Model.Operations)
         {
         @:this.@(operation.MethodGroupName.ToCamelCase()) = new @(operation.MethodGroupType)Impl(restAdapter);
         }
     }
+@if (Model.MethodTemplateModels.Any())
+{
+@EmptyLine
+<text>
+@foreach (var method in Model.MethodTemplateModels)
+    {
+    @:/**
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    @: *
+    @foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @if (method.ReturnType != null)
+    {
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
+    }
+    @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
+    @: */
+    @:public @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException {
+    @:    try {
+    @:        ServiceResponse<@method.GenericReturnTypeString> response = @(method.Name)Delegate(service.@(method.Name)(@method.MethodParameterInvocation), null);
+    @:        @method.ReturnStatement
+    @:    } catch (RetrofitError error) {
+    @:        ServiceResponse<@method.GenericReturnTypeString> response = @(method.Name)Delegate(error.getResponse(), error);
+    @:        @method.ReturnStatement
+    @:    }
+    @:}
+    @EmptyLine
+    @:/**
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    @: *
+    @foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+    @: */
+    @:public void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback) {
+    @:    service.@(method.Name)Async(@method.MethodParameterInvocationWithCallback {
+    @:        @@Override
+    @:        public void response(Response response, RetrofitError error) {
+    @:            try {
+    @:                serviceCallback.success(@(method.Name)Delegate(response, error));
+    @:            } catch (ServiceException exception) {
+    @:                serviceCallback.failure(exception);
+    @:            }
+    @:        }
+    @:    });
+    @:}
+    @EmptyLine
+    @:private ServiceResponse<@method.GenericReturnTypeString> @(method.Name)Delegate(Response response, RetrofitError error) throws ServiceException {
+    @:    return new ServiceResponseBuilder<@method.GenericReturnTypeString>()
+                foreach (var response in method.Responses)
+                {
+                @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value).Name>(){}.getType())
+                }
+                if (method.DefaultResponse != null)
+                {
+                @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(method.DefaultResponse).Name)>(){}.getType())
+                }
+                @:.build(response, error);
+    @:}
+    @EmptyLine
+    }
+</text>
+}
 }

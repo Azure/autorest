@@ -10,6 +10,7 @@
 
 package fixtures.requiredoptional;
 
+
 /**
  * The interface for AutoRestRequiredOptionalTestService class.
  */
@@ -43,4 +44,5 @@ public interface AutoRestRequiredOptionalTestService {
      * @return the explicit value.
      */
     Explicit getExplicit();
+
 }

@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+
 /**
  * Initializes a new instance of the AutoRestDateTimeTestService class.
  */
@@ -71,6 +72,6 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.datetimeOperations = new DatetimeOperationsImpl(restAdapter);
+                this.datetimeOperations = new DatetimeOperationsImpl(restAdapter);
     }
 }

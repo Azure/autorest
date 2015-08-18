@@ -10,6 +10,13 @@
 
 package fixtures.report;
 
+import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponseCallback;
+import retrofit.client.Response;
+import java.util.Map;
+import retrofit.http.GET;
+
 /**
  * The interface for AutoRestReportService class.
  */
@@ -19,4 +26,32 @@ public interface AutoRestReportService {
      * @return The BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * The interface defining all the services for AutoRestReportService to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface AutoRestReportServiceService {
+        @GET("/report")
+        Response getReport() throws ServiceException;
+
+        @GET("/report")
+        void getReportAsync(ServiceResponseCallback cb);
+
+    }
+    /**
+     * Get test coverage report
+     *
+     * @return the Map&lt;String, Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    Map<String, Integer> getReport() throws ServiceException;
+
+    /**
+     * Get test coverage report
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    void getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+
 }

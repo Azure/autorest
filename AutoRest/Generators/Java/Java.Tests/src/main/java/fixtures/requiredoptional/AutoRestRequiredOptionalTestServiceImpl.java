@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
  */
@@ -103,7 +104,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.implicit = new ImplicitImpl(restAdapter);
+                this.implicit = new ImplicitImpl(restAdapter);
         this.explicit = new ExplicitImpl(restAdapter);
     }
 }

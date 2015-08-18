@@ -10,6 +10,7 @@
 
 package fixtures.bodystring;
 
+
 /**
  * The interface for AutoRestSwaggerBATService class.
  */
@@ -31,4 +32,5 @@ public interface AutoRestSwaggerBATService {
      * @return the enumOperations value.
      */
     EnumOperations getEnumOperations();
+
 }

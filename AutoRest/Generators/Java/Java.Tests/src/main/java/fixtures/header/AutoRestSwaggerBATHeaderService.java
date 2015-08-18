@@ -10,6 +10,7 @@
 
 package fixtures.header;
 
+
 /**
  * The interface for AutoRestSwaggerBATHeaderService class.
  */
@@ -25,4 +26,5 @@ public interface AutoRestSwaggerBATHeaderService {
      * @return the headerOperations value.
      */
     HeaderOperations getHeaderOperations();
+
 }

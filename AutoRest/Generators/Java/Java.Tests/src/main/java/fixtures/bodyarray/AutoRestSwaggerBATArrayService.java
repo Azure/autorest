@@ -10,6 +10,7 @@
 
 package fixtures.bodyarray;
 
+
 /**
  * The interface for AutoRestSwaggerBATArrayService class.
  */
@@ -25,4 +26,5 @@ public interface AutoRestSwaggerBATArrayService {
      * @return the array value.
      */
     Array getArray();
+
 }

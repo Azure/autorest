@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
  */
@@ -131,7 +132,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.httpFailure = new HttpFailureImpl(restAdapter);
+                this.httpFailure = new HttpFailureImpl(restAdapter);
         this.httpSuccess = new HttpSuccessImpl(restAdapter);
         this.httpRedirects = new HttpRedirectsImpl(restAdapter);
         this.httpClientFailure = new HttpClientFailureImpl(restAdapter);

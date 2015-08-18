@@ -10,6 +10,7 @@
 
 package fixtures.bodydictionary;
 
+
 /**
  * The interface for AutoRestSwaggerBATdictionaryService class.
  */
@@ -25,4 +26,5 @@ public interface AutoRestSwaggerBATdictionaryService {
      * @return the dictionary value.
      */
     Dictionary getDictionary();
+
 }

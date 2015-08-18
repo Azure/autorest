@@ -14,10 +14,22 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+import com.google.gson.reflect.TypeToken;
+import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import java.util.Map;
+import fixtures.report.models.Error;
+
 /**
  * Initializes a new instance of the AutoRestReportService class.
  */
 public class AutoRestReportServiceImpl extends ServiceClient implements AutoRestReportService {
+    private AutoRestReportServiceService service;
     private String baseUri;
 
     /**
@@ -61,5 +73,48 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        service = restAdapter.create(AutoRestReportServiceService.class);
+            }
+
+    /**
+     * Get test coverage report
+     *
+     * @return the Map&lt;String, Integer&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public Map<String, Integer> getReport() throws ServiceException {
+        try {
+            ServiceResponse<Map<String, Integer>> response = getReportDelegate(service.getReport(), null);
+            return response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Map<String, Integer>> response = getReportDelegate(error.getResponse(), error);
+            return response.getBody();
+        }
     }
+
+    /**
+     * Get test coverage report
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        service.getReportAsync(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getReportDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Map<String, Integer>>()
+                .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
 }

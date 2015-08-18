@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+
 /**
  * Initializes a new instance of the AutoRestUrlTestService class.
  */
@@ -102,7 +103,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.paths = new PathsImpl(restAdapter);
+                this.paths = new PathsImpl(restAdapter);
         this.queries = new QueriesImpl(restAdapter);
         this.pathItems = new PathItemsImpl(restAdapter);
     }
