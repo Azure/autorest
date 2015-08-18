@@ -33,11 +33,16 @@ var azureSpecial = require('./routes/azureSpecials');
 var util = require('util');
 
 var app = express();
+
 //set up server log
 var now = new Date();
 var logFileName = 'AccTestServer-' + now.getHours() +  
     now.getMinutes() + now.getSeconds() + '.log';
-var logfile = fs.createWriteStream('../../../../TestResults/' + logFileName, {flags: 'a'});
+var testResultDir = '../../../../TestResults';
+if (!fs.existsSync(testResultDir)) {
+  fs.mkdirSync(testResultDir);
+}
+var logfile = fs.createWriteStream(path.join(testResultDir, logFileName), {flags: 'a'});
 app.use(morgan('combined', {stream: logfile}));
 
 var azurecoverage = {};
