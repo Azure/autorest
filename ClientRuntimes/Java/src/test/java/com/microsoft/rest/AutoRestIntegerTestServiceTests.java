@@ -48,7 +48,8 @@ public class AutoRestIntegerTestServiceTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(NullPointerException.class, exception.getClass());
+            Assert.assertEquals(ServiceException.class, exception.getClass());
+            Assert.assertTrue(exception.getMessage().contains("JsonMappingException"));
         }
     }
 
@@ -57,13 +58,14 @@ public class AutoRestIntegerTestServiceTests {
         AutoRestIntegerTestService client = new AutoRestIntegerTestServiceImpl();
         client.getIntOperations().getNullAsync(new ServiceCallback<Integer>() {
             @Override
-            public void failure(ServiceException exception) {}
+            public void failure(ServiceException exception) {
+                Assert.assertEquals(ServiceException.class, exception.getClass());
+                Assert.assertTrue(exception.getMessage().contains("JsonMappingException"));
+                lock.countDown();
+            }
 
             @Override
             public void success(ServiceResponse<Integer> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
-                Assert.assertNull(response.getBody());
-                lock.countDown();
             }
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
@@ -77,7 +79,7 @@ public class AutoRestIntegerTestServiceTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("Expected an int but was STRING"));
+            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
         }
     }
 }
