@@ -9,6 +9,9 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
+    /// <summary>
+    /// The model for requirements template (the main file which contains list of autoloading files).
+    /// </summary>
     public class RequirementsTemplateModel : ServiceClient
     {
         /// <summary>

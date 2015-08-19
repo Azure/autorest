@@ -1,5 +1,5 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +15,24 @@ namespace Microsoft.Rest.Generator.Ruby
     /// </summary>
     public class MethodTemplateModel : Method
     {
+        /// <summary>
+        /// The scope provider (used for creating new variables with non-conflict names).
+        /// </summary>
         private readonly IScopeProvider scopeProvider = new ScopeProvider();
 
+        /// <summary>
+        /// Gets the scope.
+        /// </summary>
+        public IScopeProvider Scope
+        {
+            get { return scopeProvider; }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the class MethodTemplateModel.
+        /// </summary>
+        /// <param name="source">The source object.</param>
+        /// <param name="serviceClient">The service client.</param>
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -25,15 +41,19 @@ namespace Microsoft.Rest.Generator.Ruby
             ServiceClient = serviceClient;
         }
 
+        /// <summary>
+        /// Gets the reference to the service client object.
+        /// </summary>
         public ServiceClient ServiceClient { get; set; }
 
+        /// <summary>
+        /// Gets the list of method paramater templates.
+        /// </summary>
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
-        public IScopeProvider Scope
-        {
-            get { return scopeProvider; }
-        }
-
+        /// <summary>
+        /// Gets the list of parameter which need to be included into HTTP header.
+        /// </summary>
         public IEnumerable<Parameter> Headers
         {
             get
@@ -42,6 +62,9 @@ namespace Microsoft.Rest.Generator.Ruby
             }
         }
 
+        /// <summary>
+        /// Gets the URL without query parameters.
+        /// </summary>
         public string UrlWithoutParameters
         {
             get
@@ -122,7 +145,7 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Get the return type name for the underlyign interface method
+        /// Gets the return type name for the underlyign interface method
         /// </summary>
         public virtual string OperationResponseReturnTypeString
         {
@@ -133,7 +156,7 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Get the type for operation exception
+        /// Gets the type for operation exception
         /// </summary>
         public virtual string OperationExceptionTypeString
         {
@@ -143,11 +166,18 @@ namespace Microsoft.Rest.Generator.Ruby
             }
         }
 
+        /// <summary>
+        /// Gets the code required to initialize response body.
+        /// </summary>
         public virtual string InitializeResponseBody
         {
             get { return string.Empty; }
         }
 
+        /// <summary>
+        /// Gets the list of namespaces where we look for classes that need to
+        /// be instantiated dynamically due to polymorphism.
+        /// </summary>
         public virtual List<string> ClassNamespaces
         {
             get
@@ -180,6 +210,9 @@ namespace Microsoft.Rest.Generator.Ruby
             get { return Group == null ? "self" : "@client"; }
         }
 
+        /// <summary>
+        /// Gets the flag indicating whether URL contains path parameters.
+        /// </summary>
         public bool UrlWithPath
         {
             get
@@ -188,11 +221,23 @@ namespace Microsoft.Rest.Generator.Ruby
             }
         }
 
+        /// <summary>
+        /// Gets the formatted status code.
+        /// </summary>
+        /// <param name="code">The status code.</param>
+        /// <returns>Formatted status code.</returns>
         public string GetStatusCodeReference(HttpStatusCode code)
         {
             return string.Format("{0}", (int)code);
         }
 
+        /// <summary>
+        /// Creates a code in form of string which deserializes given input variable of given type.
+        /// </summary>
+        /// <param name="inputVariable">The input variable.</param>
+        /// <param name="type">The type of input variable.</param>
+        /// <param name="outputVariable">The output variable.</param>
+        /// <returns>The deserialization string.</returns>
         public virtual string CreateDeserializationString(string inputVariable, IType type, string outputVariable)
         {
             var builder = new IndentedStringBuilder("  ");
@@ -210,6 +255,13 @@ namespace Microsoft.Rest.Generator.Ruby
             return builder.AppendLine("{0} = {1}", outputVariable, tempVariable).ToString();
         }
 
+        /// <summary>
+        /// Creates a code in form of string which serializes given input variable of given type.
+        /// </summary>
+        /// <param name="inputVariable">The input variable.</param>
+        /// <param name="type">The type of input variable.</param>
+        /// <param name="outputVariable">The output variable.</param>
+        /// <returns>The serialization code.</returns>
         public virtual string CreateSerializationString(string inputVariable, IType type, string outputVariable)
         {
             var builder = new IndentedStringBuilder("  ");

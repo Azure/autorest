@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Azure.Ruby.Templates;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
 using Microsoft.Rest.Generator.Ruby.Templates;
-using System.IO;
-using System.Linq;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
@@ -51,7 +51,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <summary>
         /// Normalizes client model by updating names and types to be language specific.
         /// </summary>
-        /// <param name="serviceClient"></param>
+        /// <param name="serviceClient">The service client.</param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             Settings.AddCredentials = true;
@@ -88,8 +88,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <summary>
         /// Generates C# code for service client.
         /// </summary>
-        /// <param name="serviceClient"></param>
-        /// <returns></returns>
+        /// <param name="serviceClient">The service client.</param>
+        /// <returns>Async tasks which generates SDK files.</returns>
         public override async Task Generate(ServiceClient serviceClient)
         {
             // Service client
@@ -120,7 +120,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new AzureModelTemplateModel(model, serviceClient),
+                    Model = new AzureModelTemplateModel(model),
                 };
 
                 await Write(modelTemplate, Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));

@@ -48,6 +48,10 @@ namespace Microsoft.Rest.Generator.Ruby
             }
         }
 
+        /// <summary>
+        /// Gets the list of namespaces where we look for classes that need to
+        /// be instantiated dynamically due to polymorphism.
+        /// </summary>
         public virtual List<string> ClassNamespaces
         {
             get
@@ -97,8 +101,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// Initializes a new instance of the ModelTemplateModel class.
         /// </summary>
         /// <param name="source">The object to create model from.</param>
-        /// <param name="serviceClient">The service client.</param>
-        public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
+        public ModelTemplateModel(CompositeType source)
         {
             this.LoadFrom(source);
             PropertyTemplateModels = new List<PropertyTemplateModel>();
@@ -106,7 +109,7 @@ namespace Microsoft.Rest.Generator.Ruby
 
             if (source.BaseModelType != null)
             {
-                parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
+                parent = new ModelTemplateModel(source.BaseModelType);
             }
         }
 

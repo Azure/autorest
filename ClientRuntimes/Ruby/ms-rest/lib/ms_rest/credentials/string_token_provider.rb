@@ -9,8 +9,6 @@ module MsRest
 
     private
 
-
-
     # @return [String] the access token.
     attr_accessor :token
 

@@ -6,11 +6,13 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in ms_rest.gemspec
 gemspec
 
-group :development, :local, :test do
-  gem 'rspec'
+group :development do
   gem 'json'
   gem 'timeliness'
   gem 'concurrent-ruby-ext'
   gem 'faraday'
-  gem 'faraday-cookie_jar'
+end
+
+group :test do
+  gem 'rspec'
 end

@@ -26,7 +26,7 @@ describe DateModule::Date do
   end
 
   it 'should get invalid date' do
-    expect{@date_client.get_invalid_date().value!}.to raise_exception
+    expect { @date_client.get_invalid_date().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should get overflow date' do

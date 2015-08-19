@@ -1,5 +1,5 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
 using System.Collections.Generic;
@@ -171,6 +171,10 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             }
         }
 
+        /// <summary>
+        /// Gets the list of namespaces where we look for classes that need to
+        /// be instantiated dynamically due to polymorphism.
+        /// </summary>
         public override List<string> ClassNamespaces
         {
             get
@@ -197,7 +201,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Returns AzureOperationResponse generic type declaration.
+        /// Gets AzureOperationResponse generic type declaration.
         /// </summary>
         public override string OperationResponseReturnTypeString
         {
@@ -223,7 +227,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Get the type for operation exception.
+        /// Gets the type for operation exception.
         /// </summary>
         public override string OperationExceptionTypeString
         {

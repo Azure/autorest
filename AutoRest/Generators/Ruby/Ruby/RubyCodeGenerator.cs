@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Threading.Tasks;
+using System.IO;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby.Templates;
-using System.IO;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
@@ -126,8 +126,8 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <summary>
         /// Generates C# code for service client.
         /// </summary>
-        /// <param name="serviceClient"></param>
-        /// <returns></returns>
+        /// <param name="serviceClient">The service client.</param>
+        /// <returns>Async task for generating SDK files.</returns>
         public override async Task Generate(ServiceClient serviceClient)
         {
             // Service client
@@ -154,7 +154,7 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new ModelTemplateModel(model, serviceClient),
+                    Model = new ModelTemplateModel(model)
                 };
                 await Write(modelTemplate,
                     Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));

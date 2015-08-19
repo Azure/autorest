@@ -6,13 +6,18 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
+    /// <summary>
+    /// The model for parameter template.
+    /// </summary>
     public class ParameterTemplateModel : Parameter
     {
+        /// <summary>
+        /// Initializes a new instance of the class ParameterTemplateModel.
+        /// </summary>
+        /// <param name="source">The source parameter object.</param>
         public ParameterTemplateModel(Parameter source)
         {
             this.LoadFrom(source);
         }
-
-        public string ToStringExpression { get; set; }
     }
 }
