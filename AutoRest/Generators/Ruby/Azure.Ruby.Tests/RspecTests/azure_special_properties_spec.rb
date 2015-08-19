@@ -5,7 +5,7 @@ require 'securerandom'
 
 require 'azure_special_properties'
 
-include MyNamespace
+include AzureSpecialPropertiesModule
 
 describe 'Azure Special properties behaviour' do
   before(:all) do

@@ -5,7 +5,7 @@ require 'securerandom'
 
 require 'subscription_id_api_version'
 
-include MyNamespace
+include AzureUrlModule
 
 describe Group do
   before(:all) do

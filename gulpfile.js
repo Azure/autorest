@@ -90,13 +90,13 @@ var defaultAzureMappings = {
 };
 
 var rubyAzureMappings = {
-    'head':['../../AcceptanceTests/swagger/head.json'],
-    'paging':['../../AcceptanceTests/swagger/paging.json'],
-    'resource_flattening':['../../AcceptanceTests/swagger/resource-flattening.json'],
-    'lro':['../../AcceptanceTests/swagger/lro.json'],
-    'azure_url':['../../AcceptanceTests/swagger/subscriptionId-apiVersion.json'],
-    'azure_special_properties':['../../AcceptanceTests/swagger/azure-special-properties.json'],
-    'azure_report':['../../AcceptanceTests/swagger/azure-report.json'],
+    'head':['../../AcceptanceTests/swagger/head.json', 'HeadModule'],
+    'paging':['../../AcceptanceTests/swagger/paging.json', 'PagingModule'],
+    'resource_flattening':['../../AcceptanceTests/swagger/resource-flattening.json', 'ResourceFlatteningModule'],
+    'lro':['../../AcceptanceTests/swagger/lro.json', 'LroModule'],
+    'azure_url':['../../AcceptanceTests/swagger/subscriptionId-apiVersion.json', 'AzureUrlModule'],
+    'azure_special_properties':['../../AcceptanceTests/swagger/azure-special-properties.json', 'AzureSpecialPropertiesModule'],
+    'azure_report':['../../AcceptanceTests/swagger/azure-report.json', 'AzureReportModule'],
 };
 
 gulp.task('regenerate:expected', function(cb){

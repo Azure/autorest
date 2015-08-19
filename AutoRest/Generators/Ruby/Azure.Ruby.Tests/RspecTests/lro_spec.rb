@@ -3,8 +3,8 @@ $: << 'RspecTests/lro'
 require 'rspec'
 require 'lro'
 
-include MyNamespace
-include MyNamespace::Models
+include LroModule
+include LroModule::Models
 
 describe 'LongRunningOperation' do
 

@@ -3,8 +3,8 @@ $: << 'RspecTests/resource_flattening'
 require 'securerandom'
 require 'resource_flattening'
 
-include MyNamespace
-include MyNamespace::Models
+include ResourceFlatteningModule
+include ResourceFlatteningModule::Models
 
 describe 'ResourceFlattening' do
   before(:all) do

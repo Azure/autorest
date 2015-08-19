@@ -3,7 +3,7 @@ $: << 'RspecTests/head'
 require 'rspec'
 require 'head'
 
-include MyNamespace
+include HeadModule
 
 describe 'Head' do
   before(:all) do

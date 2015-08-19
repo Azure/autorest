@@ -2,7 +2,7 @@ $: << 'RspecTests/azure_report'
 
 require 'azure_report'
 
-include MyNamespace
+include AzureReportModule
 
 describe 'AutoRestReportService' do
   before(:all) do

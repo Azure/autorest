@@ -3,7 +3,7 @@ $: << 'RspecTests/paging'
 require 'rspec'
 require 'paging'
 
-include MyNamespace
+include PagingModule
 
 describe 'Paging' do
   before(:all) do
