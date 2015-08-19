@@ -15,7 +15,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
 import java.util.List;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import fixtures.bodyarray.models.Product;
 import java.util.Map;
 import retrofit.http.GET;
@@ -207,10 +208,10 @@ public interface Array {
         void getDateValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/date/valid")
-        Response putDateValid(@Body List<Date> arrayBody) throws ServiceException;
+        Response putDateValid(@Body List<LocalDate> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/date/valid")
-        void putDateValidAsync(@Body List<Date> arrayBody, ServiceResponseCallback cb);
+        void putDateValidAsync(@Body List<LocalDate> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/date/invalidnull")
         Response getDateInvalidNull() throws ServiceException;
@@ -231,10 +232,10 @@ public interface Array {
         void getDateTimeValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/date-time/valid")
-        Response putDateTimeValid(@Body List<Date> arrayBody) throws ServiceException;
+        Response putDateTimeValid(@Body List<DateTime> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/date-time/valid")
-        void putDateTimeValidAsync(@Body List<Date> arrayBody, ServiceResponseCallback cb);
+        void putDateTimeValidAsync(@Body List<DateTime> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/date-time/invalidnull")
         Response getDateTimeInvalidNull() throws ServiceException;
@@ -805,72 +806,72 @@ public interface Array {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    List<Date> getDateValid() throws ServiceException;
+    List<LocalDate> getDateValid() throws ServiceException;
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateValidAsync(final ServiceCallback<List<Date>> serviceCallback);
+    void getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
      *
-     * @param arrayBody the List&lt;Date&gt; value
+     * @param arrayBody the List&lt;LocalDate&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putDateValid(List<Date> arrayBody) throws ServiceException;
+    void putDateValid(List<LocalDate> arrayBody) throws ServiceException;
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
      *
-     * @param arrayBody the List&lt;Date&gt; value
+     * @param arrayBody the List&lt;LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putDateValidAsync(List<Date> arrayBody, final ServiceCallback<Void> serviceCallback);
+    void putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04']
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    List<Date> getDateInvalidNull() throws ServiceException;
+    List<LocalDate> getDateInvalidNull() throws ServiceException;
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateInvalidNullAsync(final ServiceCallback<List<Date>> serviceCallback);
+    void getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get date array value ['2011-03-22', 'date']
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    List<Date> getDateInvalidChars() throws ServiceException;
+    List<LocalDate> getDateInvalidChars() throws ServiceException;
 
     /**
      * Get date array value ['2011-03-22', 'date']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateInvalidCharsAsync(final ServiceCallback<List<Date>> serviceCallback);
+    void getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z',
      * '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    List<Date> getDateTimeValid() throws ServiceException;
+    List<DateTime> getDateTimeValid() throws ServiceException;
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z',
@@ -878,55 +879,55 @@ public interface Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateTimeValidAsync(final ServiceCallback<List<Date>> serviceCallback);
+    void getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
      * '1492-10-12T10:15:01-08:00']
      *
-     * @param arrayBody the List&lt;Date&gt; value
+     * @param arrayBody the List&lt;DateTime&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putDateTimeValid(List<Date> arrayBody) throws ServiceException;
+    void putDateTimeValid(List<DateTime> arrayBody) throws ServiceException;
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
      * '1492-10-12T10:15:01-08:00']
      *
-     * @param arrayBody the List&lt;Date&gt; value
+     * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putDateTimeValidAsync(List<Date> arrayBody, final ServiceCallback<Void> serviceCallback);
+    void putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null]
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    List<Date> getDateTimeInvalidNull() throws ServiceException;
+    List<DateTime> getDateTimeInvalidNull() throws ServiceException;
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateTimeInvalidNullAsync(final ServiceCallback<List<Date>> serviceCallback);
+    void getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time']
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    List<Date> getDateTimeInvalidChars() throws ServiceException;
+    List<DateTime> getDateTimeInvalidChars() throws ServiceException;
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateTimeInvalidCharsAsync(final ServiceCallback<List<Date>> serviceCallback);
+    void getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,

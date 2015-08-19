@@ -14,7 +14,8 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import fixtures.header.models.GreyscaleColors;
 import retrofit.http.POST;
 import retrofit.http.Header;
@@ -126,10 +127,10 @@ public interface HeaderOperations {
         void responseStringAsync(@Header("scenario") String scenario, ServiceResponseCallback cb);
 
         @POST("/header/param/prim/date")
-        Response paramDate(@Header("scenario") String scenario, @Header("value") Date value) throws ServiceException;
+        Response paramDate(@Header("scenario") String scenario, @Header("value") LocalDate value) throws ServiceException;
 
         @POST("/header/param/prim/date")
-        void paramDateAsync(@Header("scenario") String scenario, @Header("value") Date value, ServiceResponseCallback cb);
+        void paramDateAsync(@Header("scenario") String scenario, @Header("value") LocalDate value, ServiceResponseCallback cb);
 
         @POST("/header/response/prim/date")
         Response responseDate(@Header("scenario") String scenario) throws ServiceException;
@@ -138,10 +139,10 @@ public interface HeaderOperations {
         void responseDateAsync(@Header("scenario") String scenario, ServiceResponseCallback cb);
 
         @POST("/header/param/prim/datetime")
-        Response paramDatetime(@Header("scenario") String scenario, @Header("value") Date value) throws ServiceException;
+        Response paramDatetime(@Header("scenario") String scenario, @Header("value") DateTime value) throws ServiceException;
 
         @POST("/header/param/prim/datetime")
-        void paramDatetimeAsync(@Header("scenario") String scenario, @Header("value") Date value, ServiceResponseCallback cb);
+        void paramDatetimeAsync(@Header("scenario") String scenario, @Header("value") DateTime value, ServiceResponseCallback cb);
 
         @POST("/header/response/prim/datetime")
         Response responseDatetime(@Header("scenario") String scenario) throws ServiceException;
@@ -468,7 +469,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramDate(String scenario, Date value) throws ServiceException;
+    void paramDate(String scenario, LocalDate value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value":
@@ -478,7 +479,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void paramDateAsync(String scenario, Date value, final ServiceCallback<Void> serviceCallback);
+    void paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01"
@@ -505,7 +506,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramDatetime(String scenario, Date value) throws ServiceException;
+    void paramDatetime(String scenario, DateTime value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value":
@@ -516,7 +517,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void paramDatetimeAsync(String scenario, Date value, final ServiceCallback<Void> serviceCallback);
+    void paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or

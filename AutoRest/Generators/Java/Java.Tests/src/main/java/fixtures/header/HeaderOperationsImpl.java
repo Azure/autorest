@@ -19,7 +19,8 @@ import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import org.apache.commons.lang3.ArrayUtils;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.Error;
@@ -735,7 +736,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramDate(String scenario, Date value) throws ServiceException {
+    public void paramDate(String scenario, LocalDate value) throws ServiceException {
         try {
             ServiceResponse<Void> response = paramDateDelegate(service.paramDate(scenario, value), null);
             response.getBody();
@@ -753,7 +754,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void paramDateAsync(String scenario, Date value, final ServiceCallback<Void> serviceCallback) {
+    public void paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
         service.paramDateAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -824,7 +825,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramDatetime(String scenario, Date value) throws ServiceException {
+    public void paramDatetime(String scenario, DateTime value) throws ServiceException {
         try {
             ServiceResponse<Void> response = paramDatetimeDelegate(service.paramDatetime(scenario, value), null);
             response.getBody();
@@ -843,7 +844,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void paramDatetimeAsync(String scenario, Date value, final ServiceCallback<Void> serviceCallback) {
+    public void paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
         service.paramDatetimeAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

@@ -7,12 +7,9 @@
 
 package com.microsoft.rest;
 
-import com.google.gson.Gson;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.converter.Converter;
-import retrofit.converter.GsonConverter;
-import retrofit.converter.JacksonConverter;
 import retrofit.mime.TypedInput;
 
 import java.lang.reflect.Type;
@@ -30,7 +27,7 @@ public class ServiceResponseBuilder<T> {
      * Create a ServiceResponseBuilder instance.
      */
     public ServiceResponseBuilder() {
-        this(new HashMap<Integer, Type>(), new JacksonConverter());
+        this(new HashMap<Integer, Type>(), JacksonConverterBuilder.build());
     }
 
     /**

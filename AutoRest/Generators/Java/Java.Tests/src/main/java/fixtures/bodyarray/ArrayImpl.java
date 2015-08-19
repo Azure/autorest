@@ -21,7 +21,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import java.util.List;
 import fixtures.bodyarray.models.Error;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import fixtures.bodyarray.models.Product;
 import java.util.Map;
 
@@ -1190,15 +1191,15 @@ public class ArrayImpl implements Array {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public List<Date> getDateValid() throws ServiceException {
+    public List<LocalDate> getDateValid() throws ServiceException {
         try {
-            ServiceResponse<List<Date>> response = getDateValidDelegate(service.getDateValid(), null);
+            ServiceResponse<List<LocalDate>> response = getDateValidDelegate(service.getDateValid(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<List<Date>> response = getDateValidDelegate(error.getResponse(), error);
+            ServiceResponse<List<LocalDate>> response = getDateValidDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1208,7 +1209,7 @@ public class ArrayImpl implements Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateValidAsync(final ServiceCallback<List<Date>> serviceCallback) {
+    public void getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         service.getDateValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1221,9 +1222,9 @@ public class ArrayImpl implements Array {
         });
     }
 
-    private ServiceResponse<List<Date>> getDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<List<Date>>()
-                .register(200, new TypeToken<List<Date>>(){}.getType())
+    private ServiceResponse<List<LocalDate>> getDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<LocalDate>>()
+                .register(200, new TypeToken<List<LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1231,10 +1232,10 @@ public class ArrayImpl implements Array {
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
      *
-     * @param arrayBody the List&lt;Date&gt; value
+     * @param arrayBody the List&lt;LocalDate&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putDateValid(List<Date> arrayBody) throws ServiceException {
+    public void putDateValid(List<LocalDate> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDateValidDelegate(service.putDateValid(arrayBody), null);
             response.getBody();
@@ -1247,10 +1248,10 @@ public class ArrayImpl implements Array {
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
      *
-     * @param arrayBody the List&lt;Date&gt; value
+     * @param arrayBody the List&lt;LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDateValidAsync(List<Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public void putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1273,15 +1274,15 @@ public class ArrayImpl implements Array {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04']
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public List<Date> getDateInvalidNull() throws ServiceException {
+    public List<LocalDate> getDateInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<List<Date>> response = getDateInvalidNullDelegate(service.getDateInvalidNull(), null);
+            ServiceResponse<List<LocalDate>> response = getDateInvalidNullDelegate(service.getDateInvalidNull(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<List<Date>> response = getDateInvalidNullDelegate(error.getResponse(), error);
+            ServiceResponse<List<LocalDate>> response = getDateInvalidNullDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1291,7 +1292,7 @@ public class ArrayImpl implements Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateInvalidNullAsync(final ServiceCallback<List<Date>> serviceCallback) {
+    public void getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         service.getDateInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1304,9 +1305,9 @@ public class ArrayImpl implements Array {
         });
     }
 
-    private ServiceResponse<List<Date>> getDateInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<List<Date>>()
-                .register(200, new TypeToken<List<Date>>(){}.getType())
+    private ServiceResponse<List<LocalDate>> getDateInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<LocalDate>>()
+                .register(200, new TypeToken<List<LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1314,15 +1315,15 @@ public class ArrayImpl implements Array {
     /**
      * Get date array value ['2011-03-22', 'date']
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public List<Date> getDateInvalidChars() throws ServiceException {
+    public List<LocalDate> getDateInvalidChars() throws ServiceException {
         try {
-            ServiceResponse<List<Date>> response = getDateInvalidCharsDelegate(service.getDateInvalidChars(), null);
+            ServiceResponse<List<LocalDate>> response = getDateInvalidCharsDelegate(service.getDateInvalidChars(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<List<Date>> response = getDateInvalidCharsDelegate(error.getResponse(), error);
+            ServiceResponse<List<LocalDate>> response = getDateInvalidCharsDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1332,7 +1333,7 @@ public class ArrayImpl implements Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateInvalidCharsAsync(final ServiceCallback<List<Date>> serviceCallback) {
+    public void getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         service.getDateInvalidCharsAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1345,9 +1346,9 @@ public class ArrayImpl implements Array {
         });
     }
 
-    private ServiceResponse<List<Date>> getDateInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<List<Date>>()
-                .register(200, new TypeToken<List<Date>>(){}.getType())
+    private ServiceResponse<List<LocalDate>> getDateInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<LocalDate>>()
+                .register(200, new TypeToken<List<LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1356,15 +1357,15 @@ public class ArrayImpl implements Array {
      * Get date-time array value ['2000-12-01t00:00:01z',
      * '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public List<Date> getDateTimeValid() throws ServiceException {
+    public List<DateTime> getDateTimeValid() throws ServiceException {
         try {
-            ServiceResponse<List<Date>> response = getDateTimeValidDelegate(service.getDateTimeValid(), null);
+            ServiceResponse<List<DateTime>> response = getDateTimeValidDelegate(service.getDateTimeValid(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<List<Date>> response = getDateTimeValidDelegate(error.getResponse(), error);
+            ServiceResponse<List<DateTime>> response = getDateTimeValidDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1375,7 +1376,7 @@ public class ArrayImpl implements Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateTimeValidAsync(final ServiceCallback<List<Date>> serviceCallback) {
+    public void getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         service.getDateTimeValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1388,9 +1389,9 @@ public class ArrayImpl implements Array {
         });
     }
 
-    private ServiceResponse<List<Date>> getDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<List<Date>>()
-                .register(200, new TypeToken<List<Date>>(){}.getType())
+    private ServiceResponse<List<DateTime>> getDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<DateTime>>()
+                .register(200, new TypeToken<List<DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1399,10 +1400,10 @@ public class ArrayImpl implements Array {
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
      * '1492-10-12T10:15:01-08:00']
      *
-     * @param arrayBody the List&lt;Date&gt; value
+     * @param arrayBody the List&lt;DateTime&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putDateTimeValid(List<Date> arrayBody) throws ServiceException {
+    public void putDateTimeValid(List<DateTime> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null);
             response.getBody();
@@ -1416,10 +1417,10 @@ public class ArrayImpl implements Array {
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
      * '1492-10-12T10:15:01-08:00']
      *
-     * @param arrayBody the List&lt;Date&gt; value
+     * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDateTimeValidAsync(List<Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public void putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1442,15 +1443,15 @@ public class ArrayImpl implements Array {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null]
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public List<Date> getDateTimeInvalidNull() throws ServiceException {
+    public List<DateTime> getDateTimeInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<List<Date>> response = getDateTimeInvalidNullDelegate(service.getDateTimeInvalidNull(), null);
+            ServiceResponse<List<DateTime>> response = getDateTimeInvalidNullDelegate(service.getDateTimeInvalidNull(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<List<Date>> response = getDateTimeInvalidNullDelegate(error.getResponse(), error);
+            ServiceResponse<List<DateTime>> response = getDateTimeInvalidNullDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1460,7 +1461,7 @@ public class ArrayImpl implements Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateTimeInvalidNullAsync(final ServiceCallback<List<Date>> serviceCallback) {
+    public void getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         service.getDateTimeInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1473,9 +1474,9 @@ public class ArrayImpl implements Array {
         });
     }
 
-    private ServiceResponse<List<Date>> getDateTimeInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<List<Date>>()
-                .register(200, new TypeToken<List<Date>>(){}.getType())
+    private ServiceResponse<List<DateTime>> getDateTimeInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<DateTime>>()
+                .register(200, new TypeToken<List<DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1483,15 +1484,15 @@ public class ArrayImpl implements Array {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time']
      *
-     * @return the List&lt;Date&gt; object if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public List<Date> getDateTimeInvalidChars() throws ServiceException {
+    public List<DateTime> getDateTimeInvalidChars() throws ServiceException {
         try {
-            ServiceResponse<List<Date>> response = getDateTimeInvalidCharsDelegate(service.getDateTimeInvalidChars(), null);
+            ServiceResponse<List<DateTime>> response = getDateTimeInvalidCharsDelegate(service.getDateTimeInvalidChars(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<List<Date>> response = getDateTimeInvalidCharsDelegate(error.getResponse(), error);
+            ServiceResponse<List<DateTime>> response = getDateTimeInvalidCharsDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1501,7 +1502,7 @@ public class ArrayImpl implements Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateTimeInvalidCharsAsync(final ServiceCallback<List<Date>> serviceCallback) {
+    public void getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         service.getDateTimeInvalidCharsAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1514,9 +1515,9 @@ public class ArrayImpl implements Array {
         });
     }
 
-    private ServiceResponse<List<Date>> getDateTimeInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<List<Date>>()
-                .register(200, new TypeToken<List<Date>>(){}.getType())
+    private ServiceResponse<List<DateTime>> getDateTimeInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<DateTime>>()
+                .register(200, new TypeToken<List<DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }

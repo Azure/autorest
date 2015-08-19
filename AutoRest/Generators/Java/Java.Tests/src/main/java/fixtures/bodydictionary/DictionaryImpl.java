@@ -21,7 +21,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import java.util.Map;
 import fixtures.bodydictionary.models.Error;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import fixtures.bodydictionary.models.Widget;
 import java.util.List;
 
@@ -1318,15 +1319,15 @@ public class DictionaryImpl implements Dictionary {
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
      * "2": "1492-10-12"}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, Date> getDateValid() throws ServiceException {
+    public Map<String, LocalDate> getDateValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Date>> response = getDateValidDelegate(service.getDateValid(), null);
+            ServiceResponse<Map<String, LocalDate>> response = getDateValidDelegate(service.getDateValid(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Date>> response = getDateValidDelegate(error.getResponse(), error);
+            ServiceResponse<Map<String, LocalDate>> response = getDateValidDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1337,7 +1338,7 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateValidAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
+    public void getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         service.getDateValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1350,9 +1351,9 @@ public class DictionaryImpl implements Dictionary {
         });
     }
 
-    private ServiceResponse<Map<String, Date>> getDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
+    private ServiceResponse<Map<String, LocalDate>> getDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Map<String, LocalDate>>()
+                .register(200, new TypeToken<Map<String, LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1361,10 +1362,10 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
      * "1492-10-12"}
      *
-     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putDateValid(Map<String, Date> arrayBody) throws ServiceException {
+    public void putDateValid(Map<String, LocalDate> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDateValidDelegate(service.putDateValid(arrayBody), null);
             response.getBody();
@@ -1378,10 +1379,10 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
      * "1492-10-12"}
      *
-     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDateValidAsync(Map<String, Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public void putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1405,15 +1406,15 @@ public class DictionaryImpl implements Dictionary {
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
      * "1776-07-04"}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, Date> getDateInvalidNull() throws ServiceException {
+    public Map<String, LocalDate> getDateInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Date>> response = getDateInvalidNullDelegate(service.getDateInvalidNull(), null);
+            ServiceResponse<Map<String, LocalDate>> response = getDateInvalidNullDelegate(service.getDateInvalidNull(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Date>> response = getDateInvalidNullDelegate(error.getResponse(), error);
+            ServiceResponse<Map<String, LocalDate>> response = getDateInvalidNullDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1424,7 +1425,7 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateInvalidNullAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
+    public void getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         service.getDateInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1437,9 +1438,9 @@ public class DictionaryImpl implements Dictionary {
         });
     }
 
-    private ServiceResponse<Map<String, Date>> getDateInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
+    private ServiceResponse<Map<String, LocalDate>> getDateInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Map<String, LocalDate>>()
+                .register(200, new TypeToken<Map<String, LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1447,15 +1448,15 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, Date> getDateInvalidChars() throws ServiceException {
+    public Map<String, LocalDate> getDateInvalidChars() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Date>> response = getDateInvalidCharsDelegate(service.getDateInvalidChars(), null);
+            ServiceResponse<Map<String, LocalDate>> response = getDateInvalidCharsDelegate(service.getDateInvalidChars(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Date>> response = getDateInvalidCharsDelegate(error.getResponse(), error);
+            ServiceResponse<Map<String, LocalDate>> response = getDateInvalidCharsDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1465,7 +1466,7 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateInvalidCharsAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
+    public void getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         service.getDateInvalidCharsAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1478,9 +1479,9 @@ public class DictionaryImpl implements Dictionary {
         });
     }
 
-    private ServiceResponse<Map<String, Date>> getDateInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
+    private ServiceResponse<Map<String, LocalDate>> getDateInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Map<String, LocalDate>>()
+                .register(200, new TypeToken<Map<String, LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1489,15 +1490,15 @@ public class DictionaryImpl implements Dictionary {
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
      * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, Date> getDateTimeValid() throws ServiceException {
+    public Map<String, DateTime> getDateTimeValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Date>> response = getDateTimeValidDelegate(service.getDateTimeValid(), null);
+            ServiceResponse<Map<String, DateTime>> response = getDateTimeValidDelegate(service.getDateTimeValid(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Date>> response = getDateTimeValidDelegate(error.getResponse(), error);
+            ServiceResponse<Map<String, DateTime>> response = getDateTimeValidDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1508,7 +1509,7 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateTimeValidAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
+    public void getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         service.getDateTimeValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1521,9 +1522,9 @@ public class DictionaryImpl implements Dictionary {
         });
     }
 
-    private ServiceResponse<Map<String, Date>> getDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
+    private ServiceResponse<Map<String, DateTime>> getDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Map<String, DateTime>>()
+                .register(200, new TypeToken<Map<String, DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1532,10 +1533,10 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
      * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
-     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putDateTimeValid(Map<String, Date> arrayBody) throws ServiceException {
+    public void putDateTimeValid(Map<String, DateTime> arrayBody) throws ServiceException {
         try {
             ServiceResponse<Void> response = putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null);
             response.getBody();
@@ -1549,10 +1550,10 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
      * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
-     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDateTimeValidAsync(Map<String, Date> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public void putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1575,15 +1576,15 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, Date> getDateTimeInvalidNull() throws ServiceException {
+    public Map<String, DateTime> getDateTimeInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Date>> response = getDateTimeInvalidNullDelegate(service.getDateTimeInvalidNull(), null);
+            ServiceResponse<Map<String, DateTime>> response = getDateTimeInvalidNullDelegate(service.getDateTimeInvalidNull(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Date>> response = getDateTimeInvalidNullDelegate(error.getResponse(), error);
+            ServiceResponse<Map<String, DateTime>> response = getDateTimeInvalidNullDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1593,7 +1594,7 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
+    public void getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         service.getDateTimeInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1606,9 +1607,9 @@ public class DictionaryImpl implements Dictionary {
         });
     }
 
-    private ServiceResponse<Map<String, Date>> getDateTimeInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
+    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Map<String, DateTime>>()
+                .register(200, new TypeToken<Map<String, DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1617,15 +1618,15 @@ public class DictionaryImpl implements Dictionary {
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
      * "date-time"}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, Date> getDateTimeInvalidChars() throws ServiceException {
+    public Map<String, DateTime> getDateTimeInvalidChars() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Date>> response = getDateTimeInvalidCharsDelegate(service.getDateTimeInvalidChars(), null);
+            ServiceResponse<Map<String, DateTime>> response = getDateTimeInvalidCharsDelegate(service.getDateTimeInvalidChars(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Date>> response = getDateTimeInvalidCharsDelegate(error.getResponse(), error);
+            ServiceResponse<Map<String, DateTime>> response = getDateTimeInvalidCharsDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1636,7 +1637,7 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, Date>> serviceCallback) {
+    public void getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         service.getDateTimeInvalidCharsAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1649,9 +1650,9 @@ public class DictionaryImpl implements Dictionary {
         });
     }
 
-    private ServiceResponse<Map<String, Date>> getDateTimeInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Date>>()
-                .register(200, new TypeToken<Map<String, Date>>(){}.getType())
+    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Map<String, DateTime>>()
+                .register(200, new TypeToken<Map<String, DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }

@@ -10,7 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 /**
  * The DateWrapper model.
@@ -19,19 +19,19 @@ public class DateWrapper {
     /**
      * The field property.
      */
-    private Date field;
+    private LocalDate field;
 
     /**
      * The leap property.
      */
-    private Date leap;
+    private LocalDate leap;
 
     /**
      * Get the field value.
      *
      * @return the field value
      */ 
-    public Date getField() {
+    public LocalDate getField() {
         return this.field;
     }
 
@@ -40,7 +40,7 @@ public class DateWrapper {
      *
      * @param field the field value to set
      */
-    public void setField(Date field) {
+    public void setField(LocalDate field) {
         this.field = field;
     }
 
@@ -49,7 +49,7 @@ public class DateWrapper {
      *
      * @return the leap value
      */ 
-    public Date getLeap() {
+    public LocalDate getLeap() {
         return this.leap;
     }
 
@@ -58,7 +58,7 @@ public class DateWrapper {
      *
      * @param leap the leap value to set
      */
-    public void setLeap(Date leap) {
+    public void setLeap(LocalDate leap) {
         this.leap = leap;
     }
 

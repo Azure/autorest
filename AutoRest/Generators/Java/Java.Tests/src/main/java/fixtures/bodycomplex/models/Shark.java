@@ -10,7 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  * The Shark model.
@@ -24,7 +24,7 @@ public class Shark {
     /**
      * The birthday property.
      */
-    private Date birthday;
+    private DateTime birthday;
 
     /**
      * Get the age value.
@@ -49,7 +49,7 @@ public class Shark {
      *
      * @return the birthday value
      */ 
-    public Date getBirthday() {
+    public DateTime getBirthday() {
         return this.birthday;
     }
 
@@ -58,7 +58,7 @@ public class Shark {
      *
      * @param birthday the birthday value to set
      */
-    public void setBirthday(Date birthday) {
+    public void setBirthday(DateTime birthday) {
         this.birthday = birthday;
     }
 

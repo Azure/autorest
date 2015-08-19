@@ -15,7 +15,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
 import fixtures.url.models.UriColor;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
@@ -144,28 +145,28 @@ public interface Paths {
         void byteNullAsync(@Path("bytePath") byte[] bytePath, ServiceResponseCallback cb);
 
         @GET("/paths/date/2012-01-01/{datePath}")
-        Response dateValid(@Path("datePath") Date datePath) throws ServiceException;
+        Response dateValid(@Path("datePath") LocalDate datePath) throws ServiceException;
 
         @GET("/paths/date/2012-01-01/{datePath}")
-        void dateValidAsync(@Path("datePath") Date datePath, ServiceResponseCallback cb);
+        void dateValidAsync(@Path("datePath") LocalDate datePath, ServiceResponseCallback cb);
 
         @GET("/paths/date/null/{datePath}")
-        Response dateNull(@Path("datePath") Date datePath) throws ServiceException;
+        Response dateNull(@Path("datePath") LocalDate datePath) throws ServiceException;
 
         @GET("/paths/date/null/{datePath}")
-        void dateNullAsync(@Path("datePath") Date datePath, ServiceResponseCallback cb);
+        void dateNullAsync(@Path("datePath") LocalDate datePath, ServiceResponseCallback cb);
 
         @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-        Response dateTimeValid(@Path("dateTimePath") Date dateTimePath) throws ServiceException;
+        Response dateTimeValid(@Path("dateTimePath") DateTime dateTimePath) throws ServiceException;
 
         @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-        void dateTimeValidAsync(@Path("dateTimePath") Date dateTimePath, ServiceResponseCallback cb);
+        void dateTimeValidAsync(@Path("dateTimePath") DateTime dateTimePath, ServiceResponseCallback cb);
 
         @GET("/paths/datetime/null/{dateTimePath}")
-        Response dateTimeNull(@Path("dateTimePath") Date dateTimePath) throws ServiceException;
+        Response dateTimeNull(@Path("dateTimePath") DateTime dateTimePath) throws ServiceException;
 
         @GET("/paths/datetime/null/{dateTimePath}")
-        void dateTimeNullAsync(@Path("dateTimePath") Date dateTimePath, ServiceResponseCallback cb);
+        void dateTimeNullAsync(@Path("dateTimePath") DateTime dateTimePath, ServiceResponseCallback cb);
 
     }
     /**
@@ -478,7 +479,7 @@ public interface Paths {
      * @param datePath '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateValid(Date datePath) throws ServiceException;
+    void dateValid(LocalDate datePath) throws ServiceException;
 
     /**
      * Get '2012-01-01' as date
@@ -486,7 +487,7 @@ public interface Paths {
      * @param datePath '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateValidAsync(Date datePath, final ServiceCallback<Void> serviceCallback);
+    void dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date - this should throw or be unusable on the client side,
@@ -495,7 +496,7 @@ public interface Paths {
      * @param datePath null as date (should throw)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateNull(Date datePath) throws ServiceException;
+    void dateNull(LocalDate datePath) throws ServiceException;
 
     /**
      * Get null as date - this should throw or be unusable on the client side,
@@ -504,7 +505,7 @@ public interface Paths {
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateNullAsync(Date datePath, final ServiceCallback<Void> serviceCallback);
+    void dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
@@ -512,7 +513,7 @@ public interface Paths {
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateTimeValid(Date dateTimePath) throws ServiceException;
+    void dateTimeValid(DateTime dateTimePath) throws ServiceException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
@@ -520,7 +521,7 @@ public interface Paths {
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateTimeValidAsync(Date dateTimePath, final ServiceCallback<Void> serviceCallback);
+    void dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on
@@ -529,7 +530,7 @@ public interface Paths {
      * @param dateTimePath null as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateTimeNull(Date dateTimePath) throws ServiceException;
+    void dateTimeNull(DateTime dateTimePath) throws ServiceException;
 
     /**
      * Get null as date-time, should be disallowed or throw depending on
@@ -538,6 +539,6 @@ public interface Paths {
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateTimeNullAsync(Date dateTimePath, final ServiceCallback<Void> serviceCallback);
+    void dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback);
 
 }

@@ -10,9 +10,8 @@ package com.microsoft.rest;
 import com.microsoft.rest.retry.RetryHandler;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.*;
+import retrofit.RestAdapter;
 import retrofit.client.OkClient;
-import retrofit.converter.JacksonConverter;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -24,7 +23,6 @@ import java.util.concurrent.Executors;
 public abstract class ServiceClient {
     protected OkHttpClient client;
     protected RestAdapter.Builder restAdapterBuilder;
-
     /**
      * Initializes a new instance of the ServiceClient class.
      */
@@ -56,7 +54,7 @@ public abstract class ServiceClient {
         this.restAdapterBuilder = restAdapterBuilder
                 .setClient(okClient)
                 .setLogLevel(RestAdapter.LogLevel.BASIC)
-                .setConverter(new JacksonConverter())
+                .setConverter(JacksonConverterBuilder.build())
                 .setExecutors(executor, executor);
     }
 

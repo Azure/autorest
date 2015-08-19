@@ -21,7 +21,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import fixtures.url.models.UriColor;
 import org.apache.commons.lang3.ArrayUtils;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import fixtures.url.models.Error;
 
 public class PathsImpl implements Paths {
@@ -835,7 +836,7 @@ public class PathsImpl implements Paths {
      * @param datePath '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateValid(Date datePath) throws ServiceException {
+    public void dateValid(LocalDate datePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateValidDelegate(service.dateValid(datePath), null);
             response.getBody();
@@ -851,7 +852,7 @@ public class PathsImpl implements Paths {
      * @param datePath '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateValidAsync(Date datePath, final ServiceCallback<Void> serviceCallback) {
+    public void dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
         service.dateValidAsync(datePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -878,7 +879,7 @@ public class PathsImpl implements Paths {
      * @param datePath null as date (should throw)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateNull(Date datePath) throws ServiceException {
+    public void dateNull(LocalDate datePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateNullDelegate(service.dateNull(datePath), null);
             response.getBody();
@@ -895,7 +896,7 @@ public class PathsImpl implements Paths {
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateNullAsync(Date datePath, final ServiceCallback<Void> serviceCallback) {
+    public void dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
         service.dateNullAsync(datePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -921,7 +922,7 @@ public class PathsImpl implements Paths {
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateTimeValid(Date dateTimePath) throws ServiceException {
+    public void dateTimeValid(DateTime dateTimePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateTimeValidDelegate(service.dateTimeValid(dateTimePath), null);
             response.getBody();
@@ -937,7 +938,7 @@ public class PathsImpl implements Paths {
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateTimeValidAsync(Date dateTimePath, final ServiceCallback<Void> serviceCallback) {
+    public void dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
         service.dateTimeValidAsync(dateTimePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -964,7 +965,7 @@ public class PathsImpl implements Paths {
      * @param dateTimePath null as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateTimeNull(Date dateTimePath) throws ServiceException {
+    public void dateTimeNull(DateTime dateTimePath) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateTimeNullDelegate(service.dateTimeNull(dateTimePath), null);
             response.getBody();
@@ -981,7 +982,7 @@ public class PathsImpl implements Paths {
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateTimeNullAsync(Date dateTimePath, final ServiceCallback<Void> serviceCallback) {
+    public void dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
         service.dateTimeNullAsync(dateTimePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

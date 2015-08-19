@@ -224,11 +224,11 @@ namespace Microsoft.Rest.Generator.Java
             }
             else if (primaryType == PrimaryType.Date)
             {
-                primaryType.Name = "Date";
+                primaryType.Name = "LocalDate";
             }
             else if (primaryType == PrimaryType.DateTime)
             {
-                primaryType.Name = "Date";
+                primaryType.Name = "DateTime";
             }
             else if (primaryType == PrimaryType.Double)
             {
@@ -327,10 +327,14 @@ namespace Microsoft.Rest.Generator.Java
             }
 
             if (primaryType == PrimaryType.Date ||
-                primaryType == PrimaryType.DateTime ||
-                primaryType.Name == "Date")
+                primaryType.Name == "LocalDate")
             {
-                return "java.util.Date";
+                return "org.joda.time.LocalDate";
+            }
+            else if (primaryType == PrimaryType.DateTime || 
+                primaryType.Name == "DateTime")
+            {
+                return "org.joda.time.DateTime";
             }
             else if (primaryType == PrimaryType.Stream ||
                 primaryType.Name == "InputStream")

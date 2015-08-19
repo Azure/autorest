@@ -10,7 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  * The DatetimeWrapper model.
@@ -19,19 +19,19 @@ public class DatetimeWrapper {
     /**
      * The field property.
      */
-    private Date field;
+    private DateTime field;
 
     /**
      * The now property.
      */
-    private Date now;
+    private DateTime now;
 
     /**
      * Get the field value.
      *
      * @return the field value
      */ 
-    public Date getField() {
+    public DateTime getField() {
         return this.field;
     }
 
@@ -40,7 +40,7 @@ public class DatetimeWrapper {
      *
      * @param field the field value to set
      */
-    public void setField(Date field) {
+    public void setField(DateTime field) {
         this.field = field;
     }
 
@@ -49,7 +49,7 @@ public class DatetimeWrapper {
      *
      * @return the now value
      */ 
-    public Date getNow() {
+    public DateTime getNow() {
         return this.now;
     }
 
@@ -58,7 +58,7 @@ public class DatetimeWrapper {
      *
      * @param now the now value to set
      */
-    public void setNow(Date now) {
+    public void setNow(DateTime now) {
         this.now = now;
     }
 

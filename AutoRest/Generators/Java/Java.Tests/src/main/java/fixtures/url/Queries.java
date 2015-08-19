@@ -15,7 +15,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
 import fixtures.url.models.UriColor;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import java.util.List;
 import retrofit.http.GET;
 import retrofit.http.Query;
@@ -175,28 +176,28 @@ public interface Queries {
         void byteNullAsync(@Query("byteQuery") byte[] byteQuery, ServiceResponseCallback cb);
 
         @GET("/queries/date/2012-01-01")
-        Response dateValid(@Query("dateQuery") Date dateQuery) throws ServiceException;
+        Response dateValid(@Query("dateQuery") LocalDate dateQuery) throws ServiceException;
 
         @GET("/queries/date/2012-01-01")
-        void dateValidAsync(@Query("dateQuery") Date dateQuery, ServiceResponseCallback cb);
+        void dateValidAsync(@Query("dateQuery") LocalDate dateQuery, ServiceResponseCallback cb);
 
         @GET("/queries/date/null")
-        Response dateNull(@Query("dateQuery") Date dateQuery) throws ServiceException;
+        Response dateNull(@Query("dateQuery") LocalDate dateQuery) throws ServiceException;
 
         @GET("/queries/date/null")
-        void dateNullAsync(@Query("dateQuery") Date dateQuery, ServiceResponseCallback cb);
+        void dateNullAsync(@Query("dateQuery") LocalDate dateQuery, ServiceResponseCallback cb);
 
         @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-        Response dateTimeValid(@Query("dateTimeQuery") Date dateTimeQuery) throws ServiceException;
+        Response dateTimeValid(@Query("dateTimeQuery") DateTime dateTimeQuery) throws ServiceException;
 
         @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-        void dateTimeValidAsync(@Query("dateTimeQuery") Date dateTimeQuery, ServiceResponseCallback cb);
+        void dateTimeValidAsync(@Query("dateTimeQuery") DateTime dateTimeQuery, ServiceResponseCallback cb);
 
         @GET("/queries/datetime/null")
-        Response dateTimeNull(@Query("dateTimeQuery") Date dateTimeQuery) throws ServiceException;
+        Response dateTimeNull(@Query("dateTimeQuery") DateTime dateTimeQuery) throws ServiceException;
 
         @GET("/queries/datetime/null")
-        void dateTimeNullAsync(@Query("dateTimeQuery") Date dateTimeQuery, ServiceResponseCallback cb);
+        void dateTimeNullAsync(@Query("dateTimeQuery") DateTime dateTimeQuery, ServiceResponseCallback cb);
 
         @GET("/queries/array/csv/string/valid")
         Response arrayStringCsvValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
@@ -625,7 +626,7 @@ public interface Queries {
      * @param dateQuery '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateValid(Date dateQuery) throws ServiceException;
+    void dateValid(LocalDate dateQuery) throws ServiceException;
 
     /**
      * Get '2012-01-01' as date
@@ -633,7 +634,7 @@ public interface Queries {
      * @param dateQuery '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateValidAsync(Date dateQuery, final ServiceCallback<Void> serviceCallback);
+    void dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date - this should result in no query parameters in uri
@@ -641,7 +642,7 @@ public interface Queries {
      * @param dateQuery null as date (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateNull(Date dateQuery) throws ServiceException;
+    void dateNull(LocalDate dateQuery) throws ServiceException;
 
     /**
      * Get null as date - this should result in no query parameters in uri
@@ -649,7 +650,7 @@ public interface Queries {
      * @param dateQuery null as date (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateNullAsync(Date dateQuery, final ServiceCallback<Void> serviceCallback);
+    void dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
@@ -657,7 +658,7 @@ public interface Queries {
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateTimeValid(Date dateTimeQuery) throws ServiceException;
+    void dateTimeValid(DateTime dateTimeQuery) throws ServiceException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
@@ -665,7 +666,7 @@ public interface Queries {
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateTimeValidAsync(Date dateTimeQuery, final ServiceCallback<Void> serviceCallback);
+    void dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date-time, should result in no query parameters in uri
@@ -673,7 +674,7 @@ public interface Queries {
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateTimeNull(Date dateTimeQuery) throws ServiceException;
+    void dateTimeNull(DateTime dateTimeQuery) throws ServiceException;
 
     /**
      * Get null as date-time, should result in no query parameters in uri
@@ -681,7 +682,7 @@ public interface Queries {
      * @param dateTimeQuery null as date-time (no query parameters)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateTimeNullAsync(Date dateTimeQuery, final ServiceCallback<Void> serviceCallback);
+    void dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@

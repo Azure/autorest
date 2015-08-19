@@ -21,7 +21,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import fixtures.url.models.UriColor;
 import org.apache.commons.lang3.ArrayUtils;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import java.util.List;
 import fixtures.url.models.Error;
 
@@ -1046,7 +1047,7 @@ public class QueriesImpl implements Queries {
      * @param dateQuery '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateValid(Date dateQuery) throws ServiceException {
+    public void dateValid(LocalDate dateQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateValidDelegate(service.dateValid(dateQuery), null);
             response.getBody();
@@ -1062,7 +1063,7 @@ public class QueriesImpl implements Queries {
      * @param dateQuery '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateValidAsync(Date dateQuery, final ServiceCallback<Void> serviceCallback) {
+    public void dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
         service.dateValidAsync(dateQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1088,7 +1089,7 @@ public class QueriesImpl implements Queries {
      * @param dateQuery null as date (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateNull(Date dateQuery) throws ServiceException {
+    public void dateNull(LocalDate dateQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateNullDelegate(service.dateNull(dateQuery), null);
             response.getBody();
@@ -1104,7 +1105,7 @@ public class QueriesImpl implements Queries {
      * @param dateQuery null as date (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateNullAsync(Date dateQuery, final ServiceCallback<Void> serviceCallback) {
+    public void dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
         service.dateNullAsync(dateQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1130,7 +1131,7 @@ public class QueriesImpl implements Queries {
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateTimeValid(Date dateTimeQuery) throws ServiceException {
+    public void dateTimeValid(DateTime dateTimeQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateTimeValidDelegate(service.dateTimeValid(dateTimeQuery), null);
             response.getBody();
@@ -1146,7 +1147,7 @@ public class QueriesImpl implements Queries {
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateTimeValidAsync(Date dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
+    public void dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
         service.dateTimeValidAsync(dateTimeQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1172,7 +1173,7 @@ public class QueriesImpl implements Queries {
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateTimeNull(Date dateTimeQuery) throws ServiceException {
+    public void dateTimeNull(DateTime dateTimeQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = dateTimeNullDelegate(service.dateTimeNull(dateTimeQuery), null);
             response.getBody();
@@ -1188,7 +1189,7 @@ public class QueriesImpl implements Queries {
      * @param dateTimeQuery null as date-time (no query parameters)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateTimeNullAsync(Date dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
+    public void dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
         service.dateTimeNullAsync(dateTimeQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

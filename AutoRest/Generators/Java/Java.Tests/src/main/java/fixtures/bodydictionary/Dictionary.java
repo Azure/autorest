@@ -15,7 +15,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
 import java.util.Map;
-import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import fixtures.bodydictionary.models.Widget;
 import java.util.List;
 import retrofit.http.GET;
@@ -225,10 +226,10 @@ public interface Dictionary {
         void getDateValidAsync(ServiceResponseCallback cb);
 
         @PUT("/dictionary/prim/date/valid")
-        Response putDateValid(@Body Map<String, Date> arrayBody) throws ServiceException;
+        Response putDateValid(@Body Map<String, LocalDate> arrayBody) throws ServiceException;
 
         @PUT("/dictionary/prim/date/valid")
-        void putDateValidAsync(@Body Map<String, Date> arrayBody, ServiceResponseCallback cb);
+        void putDateValidAsync(@Body Map<String, LocalDate> arrayBody, ServiceResponseCallback cb);
 
         @GET("/dictionary/prim/date/invalidnull")
         Response getDateInvalidNull() throws ServiceException;
@@ -249,10 +250,10 @@ public interface Dictionary {
         void getDateTimeValidAsync(ServiceResponseCallback cb);
 
         @PUT("/dictionary/prim/date-time/valid")
-        Response putDateTimeValid(@Body Map<String, Date> arrayBody) throws ServiceException;
+        Response putDateTimeValid(@Body Map<String, DateTime> arrayBody) throws ServiceException;
 
         @PUT("/dictionary/prim/date-time/valid")
-        void putDateTimeValidAsync(@Body Map<String, Date> arrayBody, ServiceResponseCallback cb);
+        void putDateTimeValidAsync(@Body Map<String, DateTime> arrayBody, ServiceResponseCallback cb);
 
         @GET("/dictionary/prim/date-time/invalidnull")
         Response getDateTimeInvalidNull() throws ServiceException;
@@ -873,10 +874,10 @@ public interface Dictionary {
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
      * "2": "1492-10-12"}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, Date> getDateValid() throws ServiceException;
+    Map<String, LocalDate> getDateValid() throws ServiceException;
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
@@ -884,34 +885,34 @@ public interface Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateValidAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+    void getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
      * "1492-10-12"}
      *
-     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putDateValid(Map<String, Date> arrayBody) throws ServiceException;
+    void putDateValid(Map<String, LocalDate> arrayBody) throws ServiceException;
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
      * "1492-10-12"}
      *
-     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putDateValidAsync(Map<String, Date> arrayBody, final ServiceCallback<Void> serviceCallback);
+    void putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
      * "1776-07-04"}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, Date> getDateInvalidNull() throws ServiceException;
+    Map<String, LocalDate> getDateInvalidNull() throws ServiceException;
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
@@ -919,31 +920,31 @@ public interface Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateInvalidNullAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+    void getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, Date> getDateInvalidChars() throws ServiceException;
+    Map<String, LocalDate> getDateInvalidChars() throws ServiceException;
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateInvalidCharsAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+    void getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
      * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, Date> getDateTimeValid() throws ServiceException;
+    Map<String, DateTime> getDateTimeValid() throws ServiceException;
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
@@ -951,49 +952,49 @@ public interface Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateTimeValidAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+    void getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
      * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
-     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putDateTimeValid(Map<String, Date> arrayBody) throws ServiceException;
+    void putDateTimeValid(Map<String, DateTime> arrayBody) throws ServiceException;
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
      * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
-     * @param arrayBody the Map&lt;String, Date&gt; value
+     * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putDateTimeValidAsync(Map<String, Date> arrayBody, final ServiceCallback<Void> serviceCallback);
+    void putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, Date> getDateTimeInvalidNull() throws ServiceException;
+    Map<String, DateTime> getDateTimeInvalidNull() throws ServiceException;
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+    void getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
      * "date-time"}
      *
-     * @return the Map&lt;String, Date&gt; object if successful.
+     * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, Date> getDateTimeInvalidChars() throws ServiceException;
+    Map<String, DateTime> getDateTimeInvalidChars() throws ServiceException;
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
@@ -1001,7 +1002,7 @@ public interface Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, Date>> serviceCallback);
+    void getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
