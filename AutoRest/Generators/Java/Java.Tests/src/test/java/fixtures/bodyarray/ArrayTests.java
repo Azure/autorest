@@ -15,10 +15,8 @@ import org.junit.Test;
 import org.joda.time.LocalDate;
 
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
+
 import org.apache.commons.codec.binary.Base64;
 
 public class ArrayTests {
@@ -372,5 +370,157 @@ public class ArrayTests {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
         }
+    }
+
+    @Test
+    public void getComplexEmpty() throws Exception {
+        List<Product> result = client.getArray().getComplexEmpty();
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test
+    public void getComplexItemNull() throws Exception {
+        List<Product> result = client.getArray().getComplexItemNull();
+        Assert.assertEquals(3, result.size());
+        Assert.assertNull(result.get(1));
+    }
+
+    @Test
+    public void getComplexItemEmpty() throws Exception {
+        List<Product> result = client.getArray().getComplexItemEmpty();
+        Assert.assertEquals(3, result.size());
+        Assert.assertNull(result.get(1).getStringProperty());
+    }
+
+    @Test
+    public void getComplexValid() throws Exception {
+        List<Product> result = client.getArray().getComplexValid();
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals(5, result.get(2).getInteger());
+        Assert.assertEquals("6", result.get(2).getStringProperty());
+    }
+
+    @Test
+    public void putComplexValid() throws Exception {
+        List<Product> body = new ArrayList<Product>();
+        Product p1 = new Product();
+        p1.setInteger(1);
+        p1.setStringProperty("2");
+        body.add(p1);
+        Product p2 = new Product();
+        p2.setInteger(3);
+        p2.setStringProperty("4");
+        body.add(p2);
+        Product p3 = new Product();
+        p3.setInteger(5);
+        p3.setStringProperty("6");
+        body.add(p3);
+        client.getArray().putComplexValid(body);
+    }
+
+    @Test
+    public void getArrayNull() throws Exception {
+        try {
+            List<List<String>> result = client.getArray().getArrayNull();
+        } catch (ServiceException ex) {
+            // expected
+            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
+        }
+    }
+
+    @Test
+    public void getArrayEmpty() throws Exception {
+        List<List<String>> result = client.getArray().getArrayEmpty();
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test
+    public void getArrayItemNull() throws Exception {
+        List<List<String>> result = client.getArray().getArrayItemNull();
+        Assert.assertEquals(3, result.size());
+        Assert.assertNull(result.get(1));
+    }
+
+    @Test
+    public void getArrayItemEmpty() throws Exception {
+        List<List<String>> result = client.getArray().getArrayItemEmpty();
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals(0, result.get(1).size());
+    }
+
+    @Test
+    public void getArrayValid() throws Exception {
+        List<List<String>> result = client.getArray().getArrayValid();
+        Assert.assertEquals(new String[] {"1", "2", "3"}, result.get(0).toArray());
+        Assert.assertEquals(new String[] {"4", "5", "6"}, result.get(1).toArray());
+        Assert.assertEquals(new String[] {"7", "8", "9"}, result.get(2).toArray());
+    }
+
+    @Test
+    public void putArrayValid() throws Exception {
+        List<List<String>> body = new ArrayList<List<String>>();
+        body.add(Arrays.asList("1", "2", "3"));
+        body.add(Arrays.asList("4", "5", "6"));
+        body.add(Arrays.asList("7", "8", "9"));
+        client.getArray().putArrayValid(body);
+    }
+
+    @Test
+    public void getDictionaryNull() throws Exception {
+        try {
+            List<Map<String, String>> result = client.getArray().getDictionaryNull();
+        } catch (ServiceException ex) {
+            // expected
+            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
+        }
+    }
+
+    @Test
+    public void getDictionaryEmpty() throws Exception {
+        List<Map<String, String>> result = client.getArray().getDictionaryEmpty();
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test
+    public void getDictionaryItemNull() throws Exception {
+        List<Map<String, String>> result = client.getArray().getDictionaryItemNull();
+        Assert.assertEquals(3, result.size());
+        Assert.assertNull(result.get(1));
+    }
+
+    @Test
+    public void getDictionaryItemEmpty() throws Exception {
+        List<Map<String, String>> result = client.getArray().getDictionaryItemEmpty();
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals(0, result.get(1).size());
+    }
+
+    @Test
+    public void getDictionaryValid() throws Exception {
+        List<Map<String, String>> result = client.getArray().getDictionaryValid();
+        Assert.assertEquals("seven", result.get(2).get("7"));
+        Assert.assertEquals("five", result.get(1).get("5"));
+        Assert.assertEquals("three", result.get(0).get("3"));
+    }
+
+    @Test
+    public void putDictionaryValid() throws Exception {
+        List<Map<String, String>> body = new ArrayList<Map<String, String>>();
+        Map<String, String> m1 = new HashMap<String, String>();
+        m1.put("1", "one");
+        m1.put("2", "two");
+        m1.put("3", "three");
+        body.add(m1);
+        Map<String, String> m2 = new HashMap<String, String>();
+        m2.put("4", "four");
+        m2.put("5", "five");
+        m2.put("6", "six");
+        body.add(m2);
+        Map<String, String> m3 = new HashMap<String, String>();
+        m3.put("7", "seven");
+        m3.put("8", "eight");
+        m3.put("9", "nine");
+        body.add(m3);
+        client.getArray().putDictionaryValid(body);
     }
 }
