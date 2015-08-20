@@ -8,6 +8,7 @@
 package com.microsoft.rest;
 
 import com.microsoft.rest.retry.RetryHandler;
+import com.microsoft.rest.serializer.JacksonConverterBuilder;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;

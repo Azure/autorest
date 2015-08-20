@@ -122,6 +122,13 @@ public class DatetimeOperationsTests {
     }
 
     @Test
+    public void getLocalNegativeOffsetUppercaseMaxDateTime() throws Exception {
+        DateTime result = client.getDatetimeOperations().getLocalNegativeOffsetUppercaseMaxDateTime();
+        DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(-14)).toDateTime(DateTimeZone.UTC);
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
     public void putUtcMinDateTime() throws Exception {
         DateTime body = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC);
         client.getDatetimeOperations().putUtcMinDateTime(body);

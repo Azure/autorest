@@ -7,6 +7,7 @@
 
 package com.microsoft.rest;
 
+import com.microsoft.rest.serializer.JacksonConverterBuilder;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.converter.Converter;
