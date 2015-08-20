@@ -6,5 +6,6 @@ group :development, :local, :test do
   gem 'concurrent-ruby-ext'
   gem 'faraday'
   gem 'faraday-cookie_jar'
+  gem 'ms_rest', path:'../../../../ClientRuntimes/Ruby/ms-rest'
   gem 'ms_rest_azure', path:'../../../../ClientRuntimes/Ruby/ms-rest-azure'
 end
