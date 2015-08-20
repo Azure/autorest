@@ -73,17 +73,10 @@ else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Pa
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.@(Model.GetMethod.Name)(@(Model.GetMethod.MethodParameterDeclaration)callback);
-    };
-    return cb;
-  }
   // Send request
-  self.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
+  this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 </text>

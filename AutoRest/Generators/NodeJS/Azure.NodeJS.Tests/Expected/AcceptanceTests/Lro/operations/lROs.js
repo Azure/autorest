@@ -60,17 +60,10 @@ LROs.prototype.put200Succeeded = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.get200Succeeded(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPut200Succeeded(product, options, function (err, result){
+  this.beginPut200Succeeded(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -200,119 +193,6 @@ LROs.prototype.beginPut200Succeeded = function (product, options, callback) {
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Succeeded’.
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.get200Succeeded = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/put/200/succeeded';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -340,17 +220,10 @@ LROs.prototype.put200SucceededNoState = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.get200SucceededNoState(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPut200SucceededNoState(product, options, function (err, result){
+  this.beginPut200SucceededNoState(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -480,119 +353,6 @@ LROs.prototype.beginPut200SucceededNoState = function (product, options, callbac
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Succeeded’.
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.get200SucceededNoState = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/put/200/succeeded/nostate';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 202 to the initial request,
  * with a location header that points to a polling URL that returns a 200 and
@@ -621,17 +381,10 @@ LROs.prototype.put202Retry200 = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getPut202Retry200(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPut202Retry200(product, options, function (err, result){
+  this.beginPut202Retry200(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -762,119 +515,6 @@ LROs.prototype.beginPut202Retry200 = function (product, options, callback) {
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Succeeded’.
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getPut202Retry200 = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/put/202/retry/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 201 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
@@ -904,17 +544,10 @@ LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.get201CreatingSucceeded200Polling(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPut201CreatingSucceeded200(product, options, function (err, result){
+  this.beginPut201CreatingSucceeded200(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -1062,119 +695,6 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, cal
 };
 
 /**
- * Long running put request poller, service returns a ‘200’ with
- * ProvisioningState=’Succeeded’
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.get201CreatingSucceeded200Polling = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/put/201/creating/succeeded/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 201 to the initial request,
  * with an entity that contains ProvisioningState=’Updating’.  Polls return
@@ -1204,17 +724,10 @@ LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.get200CreatingSucceeded200Poll(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPut200UpdatingSucceeded204(product, options, function (err, result){
+  this.beginPut200UpdatingSucceeded204(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -1346,118 +859,6 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (product, options, cal
 };
 
 /**
- * Polling endpoinnt for Long running put request, service returns a 200
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.get200CreatingSucceeded200Poll = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/put/200/updating/succeeded/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 201 to the initial request,
  * with an entity that contains ProvisioningState=’Created’.  Polls return
@@ -1487,17 +888,10 @@ LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.get201CreatingFailed200Polling(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPut201CreatingFailed200(product, options, function (err, result){
+  this.beginPut201CreatingFailed200(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -1645,119 +1039,6 @@ LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callba
 };
 
 /**
- * Long running put request poller, service returns a ‘200’ with
- * ProvisioningState=’Succeeded’
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.get201CreatingFailed200Polling = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/put/201/created/failed/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 201 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
@@ -1787,17 +1068,10 @@ LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.get200Acceptedcanceled200Poll(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPut200Acceptedcanceled200(product, options, function (err, result){
+  this.beginPut200Acceptedcanceled200(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -1929,118 +1203,6 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (product, options, call
 };
 
 /**
- * Polling endpoinnt for Long running put request, service returns a 200
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.get200Acceptedcanceled200Poll = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/put/200/accepted/canceled/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 202 to the initial request with
  * location header. Subsequent calls to operation status do not contain
@@ -2069,17 +1231,10 @@ LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getPutNoHeaderInRetry(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPutNoHeaderInRetry(product, options, function (err, result){
+  this.beginPutNoHeaderInRetry(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -2210,119 +1365,6 @@ LROs.prototype.beginPutNoHeaderInRetry = function (product, options, callback) {
 };
 
 /**
- * Long running get request for you to retrieve create resource. This method
- * should not be invoked
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getPutNoHeaderInRetry = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/put/noheader/202/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
@@ -2351,17 +1393,10 @@ LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getAsyncRetrySucceeded(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPutAsyncRetrySucceeded(product, options, function (err, result){
+  this.beginPutAsyncRetrySucceeded(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -2492,120 +1527,6 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (product, options, callbac
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getAsyncRetrySucceeded = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/putasync/retry/succeeded';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
@@ -2634,17 +1555,10 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getAsyncNoRetrySucceeded(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPutAsyncNoRetrySucceeded(product, options, function (err, result){
+  this.beginPutAsyncNoRetrySucceeded(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -2775,120 +1689,6 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (product, options, callb
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getAsyncNoRetrySucceeded = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/putasync/noretry/succeeded';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
@@ -2917,17 +1717,10 @@ LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getAsyncRetryFailed(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPutAsyncRetryFailed(product, options, function (err, result){
+  this.beginPutAsyncRetryFailed(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -3058,120 +1851,6 @@ LROs.prototype.beginPutAsyncRetryFailed = function (product, options, callback) 
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getAsyncRetryFailed = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/putasync/retry/failed';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
@@ -3200,17 +1879,10 @@ LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getAsyncNoRetrycanceled(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPutAsyncNoRetrycanceled(product, options, function (err, result){
+  this.beginPutAsyncNoRetrycanceled(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -3341,120 +2013,6 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (product, options, callba
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getAsyncNoRetrycanceled = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/putasync/noretry/canceled';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request, service returns a 202 to the initial request with
  * Azure-AsyncOperation header. Subsequent calls to operation status do not
@@ -3483,17 +2041,10 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getPutAsyncNoHeaderInRetry(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPutAsyncNoHeaderInRetry(product, options, function (err, result){
+  this.beginPutAsyncNoHeaderInRetry(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -3624,118 +2175,6 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, options, callba
 };
 
 /**
- * Long running get request for you to retrieve create resource
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getPutAsyncNoHeaderInRetry = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/putasync/noheader/201/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request with non resource.
  * @param {object} [sku] sku to put
@@ -3762,17 +2201,10 @@ LROs.prototype.putNonResource = function (sku, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getNonResource(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPutNonResource(sku, options, function (err, result){
+  this.beginPutNonResource(sku, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -3901,118 +2333,6 @@ LROs.prototype.beginPutNonResource = function (sku, options, callback) {
 };
 
 /**
- * Long running get request for you to retrieve created non resource
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getNonResource = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/putnonresource/202/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Sku'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request with non resource.
  * @param {object} [sku] Sku to put
@@ -4039,17 +2359,10 @@ LROs.prototype.putAsyncNonResource = function (sku, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getAsyncNonResource(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPutAsyncNonResource(sku, options, function (err, result){
+  this.beginPutAsyncNonResource(sku, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -4178,118 +2491,6 @@ LROs.prototype.beginPutAsyncNonResource = function (sku, options, callback) {
 };
 
 /**
- * Long running get request for you to retrieve created non resource
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getAsyncNonResource = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/putnonresourceasync/202/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Sku'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request with sub resource.
  * @param {object} [product] Sub Product to put
@@ -4316,17 +2517,10 @@ LROs.prototype.putSubResource = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getSubResource(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPutSubResource(product, options, function (err, result){
+  this.beginPutSubResource(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -4455,118 +2649,6 @@ LROs.prototype.beginPutSubResource = function (product, options, callback) {
 };
 
 /**
- * Long running get request for you to retrieve created sub resource
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getSubResource = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/putsubresource/202/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['SubProduct'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
  *
  * Long running put request with sub resource.
  * @param {object} [product] Sub Product to put
@@ -4593,17 +2675,10 @@ LROs.prototype.putAsyncSubResource = function (product, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.getAsyncSubResource(options, callback);
-    };
-    return cb;
-  }
   // Send request
-  self.beginPutAsyncSubResource(product, options, function (err, result){
+  this.beginPutAsyncSubResource(product, options, function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 
@@ -4712,118 +2787,6 @@ LROs.prototype.beginPutAsyncSubResource = function (product, options, callback) 
     result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 202) {
-      var parsedResponse;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['SubProduct'].deserialize(result.body);
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result);
-  });
-};
-
-/**
- * Long running get request for you to retrieve created sub resource
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {stream} The Response stream
- */
-LROs.prototype.getAsyncSubResource = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//lro/putsubresourceasync/202/200';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
-    // Deserialize Response
-    if (statusCode === 200) {
       var parsedResponse;
       try {
         parsedResponse = JSON.parse(responseBody);

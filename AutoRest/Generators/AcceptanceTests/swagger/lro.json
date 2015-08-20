@@ -51,27 +51,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROs_get200Succeeded",
-        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Succeeded'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/put/200/succeeded/nostate": {
@@ -106,27 +85,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROs_get200SucceededNoState",
-        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Succeeded'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/put/202/retry/200": {
@@ -149,27 +107,6 @@
         ],
         "responses": {
           "202": {
-            "description": "Initial response with ProvisioningState='Succeeded'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROs_getPut202Retry200",
-        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
             "description": "Initial response with ProvisioningState='Succeeded'",
             "schema": {
               "$ref": "#/definitions/Product"
@@ -222,27 +159,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROs_get201CreatingSucceeded200Polling",
-        "description": "Long running put request poller, service returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState='Succeeded'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/put/200/updating/succeeded/200": {
@@ -266,27 +182,6 @@
         "responses": {
           "200": {
             "description": "Initial response with ProvisioningState='Updating'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROs_get200CreatingSucceeded200Poll",
-        "description": "Polling endpoinnt for Long running put request, service returns a 200",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Succeeded'",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -338,27 +233,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROs_get201CreatingFailed200Polling",
-        "description": "Long running put request poller, service returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState='Failed'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/put/200/accepted/canceled/200": {
@@ -382,27 +256,6 @@
         "responses": {
           "200": {
             "description": "Initial response with ProvisioningState='Updating'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROs_get200Acceptedcanceled200Poll",
-        "description": "Polling endpoinnt for Long running put request, service returns a 200",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Canceled'",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -454,27 +307,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROs_getPutNoHeaderInRetry",
-        "description": "Long running get request for you to retrieve create resource. This method should not be invoked",
-        "tags": [
-          "LROs Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response with create resource",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/putasync/retry/succeeded": {
@@ -494,42 +326,6 @@
               "$ref": "#/definitions/Product"
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Updating'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
-                "type": "integer",
-                "format": "Int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROs_getAsyncRetrySucceeded",
-        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
         ],
         "responses": {
           "200": {
@@ -604,37 +400,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROs_getAsyncNoRetrySucceeded",
-        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Updating'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/noretry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/noretry/succeeded/operationResults/200",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/putasync/retry/failed": {
@@ -654,42 +419,6 @@
               "$ref": "#/definitions/Product"
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Updating'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
-                "type": "integer",
-                "format": "Int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROs_getAsyncRetryFailed",
-        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
         ],
         "responses": {
           "200": {
@@ -764,37 +493,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROs_getAsyncNoRetrycanceled",
-        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Canceled'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/putasync/noheader/201/200": {
@@ -823,27 +521,6 @@
                 "type": "string"
               }
             },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROs_getPutAsyncNoHeaderInRetry",
-        "description": "Long running get request for you to retrieve create resource",
-        "tags": [
-          "LROs Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response with create resource",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -889,27 +566,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROs_getNonResource",
-        "description": "Long running get request for you to retrieve created non resource",
-        "tags": [
-          "LROs Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response with created non resource",
-            "schema": {
-              "$ref": "#/definitions/Sku"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/putnonresourceasync/202/200": {
@@ -933,27 +589,6 @@
         "responses": {
           "202": {
             "description": "Initial response with ProvisioningState='Accepted'",
-            "schema": {
-              "$ref": "#/definitions/Sku"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROs_getAsyncNonResource",
-        "description": "Long running get request for you to retrieve created non resource",
-        "tags": [
-          "LROs Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response with created sub resource",
             "schema": {
               "$ref": "#/definitions/Sku"
             }
@@ -999,27 +634,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROs_getSubResource",
-        "description": "Long running get request for you to retrieve created sub resource",
-        "tags": [
-          "LROs Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response with created sub resource",
-            "schema": {
-              "$ref": "#/definitions/SubProduct"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/putsubresourceasync/202/200": {
@@ -1043,27 +657,6 @@
         "responses": {
           "202": {
             "description": "Initial response with ProvisioningState='Accepted'",
-            "schema": {
-              "$ref": "#/definitions/SubProduct"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROs_getAsyncSubResource",
-        "description": "Long running get request for you to retrieve created sub resource",
-        "tags": [
-          "LROs Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response with created sub resource",
             "schema": {
               "$ref": "#/definitions/SubProduct"
             }
@@ -1116,27 +709,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_getProvisioning202Accepted200Succeeded",
-        "description": "Long running put request poller, service returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState='Succeeded'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/delete/provisioning/202/deleting/200/failed": {
@@ -1178,27 +750,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_getProvisioning202Deleting200Failed",
-        "description": "Long running put request poller, service returns a ‘200’ with ProvisioningState=’Failed’",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState='Failed'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/delete/provisioning/202/deleting/200/canceled": {
@@ -1229,27 +780,6 @@
                 "format": "Int32"
               }
             },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_getProvisioning202Deleting200canceled",
-        "description": "Long running put request poller, service returns a ‘200’ with ProvisioningState=’Canceled’",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState='canceled'",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -1320,24 +850,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_getDelete202Retry200",
-        "description": "Long running put request poller, service returns a ‘200’ with no location header",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion"
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/delete/202/noretry/204": {
@@ -1368,24 +880,6 @@
                 "format": "Int32"
               }
             }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_get202NoRetry204",
-        "description": "Long running put request poller, service returns a ‘200’ with no location header",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "204": {
-            "description": "Response after completion"
           },
           "default": {
             "description": "Unexpected error",
@@ -1670,27 +1164,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_post202Retry200Polling",
-        "description": "Long running post request poller, service returns a ‘200’ with a Product.  Client should return with success from long-running operation",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion.",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/post/202/noretry/204": {
@@ -1728,24 +1201,6 @@
             "schema": {
               "$ref": "#/definitions/Product"
             }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_post202NoRetry204Polling",
-        "description": "Long running post request poller, service returns a ‘204' with no enetity body.  Client should return with success from long-running operation",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "204": {
-            "description": "Response after completion."
           },
           "default": {
             "description": "Unexpected error",
@@ -1990,27 +1445,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LRORetrys_getRetry201CreatingSucceeded200Polling",
-        "description": "Long running put request poller, service returns a 500, then a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRORetrys Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState='Succeeded'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/retryerror/putasync/retry/succeeded": {
@@ -2030,42 +1464,6 @@
               "$ref": "#/definitions/Product"
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Updating'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/retryerror/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/retryerror/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
-                "type": "integer",
-                "format": "Int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LRORetrys_getAsyncRelativeRetrySucceeded",
-        "description": "Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRORetry Operations"
         ],
         "responses": {
           "200": {
@@ -2137,27 +1535,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_getRetryProvisioning202Accepted200Succeeded",
-        "description": "Long running put request poller, service returns a 500, then a  ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState='Succeeded'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/retryerror/delete/202/retry/200": {
@@ -2182,24 +1559,6 @@
                 "format": "Int32"
               }
             }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_getRetry202Retry200",
-        "description": "Long running put request poller, service returns a 500, then a  ‘200’ with no location header",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion"
           },
           "default": {
             "description": "Unexpected error",
@@ -2277,27 +1636,6 @@
                 "type": "integer",
                 "format": "Int32"
               }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_postRetry202Retry200Polling",
-        "description": "Long running post request poller, service returns a 500, then a  ‘200’ with a Product.  Client should return with success from long-running operation",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion.",
-            "schema": {
-              "$ref": "#/definitions/Product"
             }
           },
           "default": {
@@ -2393,27 +1731,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROSADs_getNonRetry400",
-        "description": "DO NOT CALL THIS METHOD. For completion only",
-        "tags": [
-          "LROSADs Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState='Succeeded'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/nonretryerror/put/201/creating/400": {
@@ -2454,27 +1771,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROSADs_getNonRetry201Creating400",
-        "description": "Long running opeartion polling returns a 400 with no error body",
-        "tags": [
-          "LROSADs Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState='Succeeded'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/nonretryerror/putasync/retry/400": {
@@ -2494,42 +1790,6 @@
               "$ref": "#/definitions/Product"
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Updating'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/nonretryerror/putasync/retry/operationResults/400",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/nonretryerror/putasync/retry/operationResults/400",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
-                "type": "integer",
-                "format": "Int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROSADs_getAsyncRelativeRetry400",
-        "description": "DO NOT CALL THIS METHOD. For completion only",
-        "tags": [
-          "LROSAD Operations"
         ],
         "responses": {
           "200": {
@@ -2592,24 +1852,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_getNonRetry400",
-        "description": "DO NOT CALL THIS METHOD. For completion only",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion"
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/nonretryerror/delete/202/retry/400": {
@@ -2634,24 +1876,6 @@
                 "format": "Int32"
               }
             }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_getRetry202NonRetry400",
-        "description": "Long running put request poller, service returns a 400 with an error body",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion"
           },
           "default": {
             "description": "Unexpected error",
@@ -2738,27 +1962,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_postRetry202Retry400Polling",
-        "description": "Long running post request poller, service returns a 500, then a  ‘200’ with a Product.  Client should return with success from long-running operation",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion.",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/nonretryerror/post/202/retry/400": {
@@ -2792,27 +1995,6 @@
                 "type": "integer",
                 "format": "Int32"
               }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_postRetry202NonRetry400Polling",
-        "description": "Long running post request poller, service returns a 400 with an error body",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion.",
-            "schema": {
-              "$ref": "#/definitions/Product"
             }
           },
           "default": {
@@ -2908,27 +2090,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROSADs_getError201NoProvisioningStatePayload",
-        "description": "DO NOT CALL THIS METHOD. For completion only",
-        "tags": [
-          "LROSADs Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState missing",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/error/putasync/retry/nostatus": {
@@ -2978,42 +2139,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROSADs_getAsyncRelativeRetryNoStatus",
-        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Updating'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
-                "type": "integer",
-                "format": "Int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/error/putasync/retry/nostatuspayload": {
@@ -3033,42 +2158,6 @@
               "$ref": "#/definitions/Product"
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Updating'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
-                "type": "integer",
-                "format": "Int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROSADs_getAsyncRelativeRetryNoStatusPayload",
-        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
         ],
         "responses": {
           "200": {
@@ -3281,27 +2370,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROSADs_get200Succeeded",
-        "description": "SHOUD NOT BE CALLED",
-        "tags": [
-          "LROSAD Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Succeeded'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/error/putasync/retry/invalidheader": {
@@ -3351,42 +2419,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROSADs_getAsyncRelativeRetryInvalidHeader",
-        "description": "SHOULD NOT BE CALLED",
-        "tags": [
-          "LROSAD Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Updating'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
-                "type": "integer",
-                "format": "Int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/error/putasync/retry/invalidjsonpolling": {
@@ -3406,42 +2438,6 @@
               "$ref": "#/definitions/Product"
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Updating'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
-                "type": "integer",
-                "format": "Int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROSADs_getAsyncRelativeRetryInvalidJsonPolling",
-        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
         ],
         "responses": {
           "200": {
@@ -3759,42 +2755,6 @@
             }
           }
         }
-      },
-      "get": {
-        "operationId": "LROsCustomHeader_getAsyncRetrySucceeded",
-        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Initial response with ProvisioningState='Updating'",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
-                "type": "integer",
-                "format": "Int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
       }
     },
     "/lro/customheader/put/201/creating/succeeded/200": {
@@ -3824,27 +2784,6 @@
           },
           "201": {
             "description": "Initial response, with ProvisioningState = 'Creating'",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "LROsCustomHeader_get201CreatingSucceeded200Polling",
-        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request poller, service returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRO Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion, with ProvisioningState='Succeeded'",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -3889,27 +2828,6 @@
                 "type": "integer",
                 "format": "Int32"
               }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "DONOTCALLs_post202Retry200PollingCustomHeader",
-        "description": "Long running post request poller, service returns a ‘200’ with a Product.  Client should return with success from long-running operation",
-        "tags": [
-          "DONOTCALL Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response after completion.",
-            "schema": {
-              "$ref": "#/definitions/Product"
             }
           },
           "default": {

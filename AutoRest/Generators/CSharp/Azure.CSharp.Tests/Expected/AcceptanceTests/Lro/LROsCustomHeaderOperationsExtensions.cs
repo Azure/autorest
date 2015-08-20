@@ -102,40 +102,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <summary>
             /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
             /// message header for all requests. Long running put request, service
-            /// returns a 200 to the initial request, with an entity that contains
-            /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-            /// Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product GetAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).GetAsyncRetrySucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-            /// message header for all requests. Long running put request, service
-            /// returns a 200 to the initial request, with an entity that contains
-            /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-            /// Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetAsyncRetrySucceededAsync( this ILROsCustomHeaderOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetAsyncRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
-            /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-            /// message header for all requests. Long running put request, service
             /// returns a 201 to the initial request, with an entity that contains
             /// ProvisioningState=’Creating’.  Polls return this value until the last
             /// poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -210,36 +176,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async Task<Product> BeginPut201CreatingSucceeded200Async( this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 AzureOperationResponse<Product> result = await operations.BeginPut201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
-            /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-            /// message header for all requests. Long running put request poller, service
-            /// returns a ‘200’ with ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product Get201CreatingSucceeded200Polling(this ILROsCustomHeaderOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).Get201CreatingSucceeded200PollingAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-            /// message header for all requests. Long running put request poller, service
-            /// returns a ‘200’ with ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> Get201CreatingSucceeded200PollingAsync( this ILROsCustomHeaderOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.Get201CreatingSucceeded200PollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

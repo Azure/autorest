@@ -62,8 +62,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
         public virtual ILROsOperations LROs { get; private set; }
 
-        public virtual IDONOTCALLsOperations DONOTCALLs { get; private set; }
-
         public virtual ILRORetrysOperations LRORetrys { get; private set; }
 
         public virtual ILROSADsOperations LROSADs { get; private set; }
@@ -176,7 +174,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         private void Initialize()
         {
             this.LROs = new LROsOperations(this);
-            this.DONOTCALLs = new DONOTCALLsOperations(this);
             this.LRORetrys = new LRORetrysOperations(this);
             this.LROSADs = new LROSADsOperations(this);
             this.LROsCustomHeader = new LROsCustomHeaderOperations(this);
