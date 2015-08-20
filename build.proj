@@ -242,7 +242,8 @@
     <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest" Command ="rake build"/>
 
     <Message Text="Updating ms-rest-azure dependencies"/>
-    <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest-azure" Command ="bundle install"/>
+    <!-- Disabled until ms-rest gem is properly referenced in the ms-rest-azure -->
+    <!-- <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest-azure" Command ="bundle install"/> -->
     <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest-azure" Command ="rake build"/>
 
     <Message Text="Updating ruby tests dependencies"/>
