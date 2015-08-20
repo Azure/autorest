@@ -57,7 +57,7 @@ function gulpRegenerateExpected(options, done) {
 
     if (!!opts.nsPrefix) {
       args.push('-Namespace');
-      if (optsMappingsValue[1] !== undefined) {
+      if (optsMappingsValue instanceof Array && optsMappingsValue[1] !== undefined) {
           args.push(optsMappingsValue[1]);
 	  }else{
 		args.push([opts.nsPrefix, key.replace(/\/|\./, '')].join('.'));
