@@ -1,23 +1,15 @@
 package fixtures.bodyarray;
 
-import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import fixtures.bodyarray.models.Product;
-import fixtures.bodyboolean.AutoRestBoolTestService;
-import fixtures.bodyboolean.AutoRestBoolTestServiceImpl;
-import fixtures.bodyboolean.Bool;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import org.joda.time.LocalDate;
-
-import java.sql.Time;
 import java.util.*;
-
-import org.apache.commons.codec.binary.Base64;
 
 public class ArrayTests {
     static AutoRestSwaggerBATArrayService client;
