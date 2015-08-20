@@ -81,7 +81,6 @@ describe Date do
   end
 
   it 'should put utc max date' do
-    pending('proper working with datetime isnt implemented yet')
     result = @date_client.put_utc_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999)).value!
     expect(result.response.status).to eq(200)
   end
@@ -92,7 +91,6 @@ describe Date do
   end
 
   it 'should put local positive offset min date time' do
-    pending('proper working with datetime isnt implemented yet')
     result = @date_client.put_local_positive_offset_min_date_time(DateTime.new(0001, 01, 01, 00, 00, 00, '+14')).value!
     expect(result.response.status).to eq(200)
   end
@@ -103,7 +101,6 @@ describe Date do
   end
 
   it 'should put local positive offset max date time' do
-    pending('proper working with datetime isnt implemented yet')
     result = @date_client.put_local_positive_offset_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999, '+14:00')).value!
     expect(result.response.status).to eq(200)
   end
