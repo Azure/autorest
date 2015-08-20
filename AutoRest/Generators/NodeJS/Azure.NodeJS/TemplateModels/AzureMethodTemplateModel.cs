@@ -36,24 +36,6 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         }
 
         /// <summary>
-        /// Long running put request poller method
-        /// </summary>
-        public AzureMethodTemplateModel GetMethod
-        {
-            get
-            {
-                var getMethod = ServiceClient.Methods.FirstOrDefault(m => m.Url == Url
-                                                                          && m.HttpMethod == HttpMethod.Get &&
-                                                                          m.Group == Group);
-                if (getMethod == null)
-                {
-                    throw new InvalidOperationException(Resources.InvalidLongRunningOperationForCreateOrUpdate);
-                }
-                return new AzureMethodTemplateModel(getMethod, ServiceClient);
-            }
-        }
-
-        /// <summary>
         /// Gets the expression for response body initialization 
         /// </summary>
         public override string InitializeResponseBody

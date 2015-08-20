@@ -15,7 +15,6 @@
 'use strict';
 
 exports.LROs = require('./lROs');
-exports.DONOTCALLs = require('./dONOTCALLs');
 exports.LRORetrys = require('./lRORetrys');
 exports.LROSADs = require('./lROSADs');
 exports.LROsCustomHeader = require('./lROsCustomHeader');

@@ -56,8 +56,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
         ILROsOperations LROs { get; }
 
-        IDONOTCALLsOperations DONOTCALLs { get; }
-
         ILRORetrysOperations LRORetrys { get; }
 
         ILROSADsOperations LROSADs { get; }

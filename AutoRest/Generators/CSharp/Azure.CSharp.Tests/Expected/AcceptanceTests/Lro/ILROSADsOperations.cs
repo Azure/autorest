@@ -51,16 +51,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutNonRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// DO NOT CALL THIS METHOD. For completion only
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> GetNonRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
         /// Long running put request, service returns a Product with
         /// 'ProvisioningState' = 'Creating' and 201 response code
         /// </summary>
@@ -88,16 +78,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutNonRetry201Creating400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running opeartion polling returns a 400 with no error body
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> GetNonRetry201Creating400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 with
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
@@ -128,16 +108,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// DO NOT CALL THIS METHOD. For completion only
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetry400WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 400 with an error
         /// body
@@ -319,16 +289,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutError201NoProvisioningStatePayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// DO NOT CALL THIS METHOD. For completion only
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> GetError201NoProvisioningStatePayloadWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
@@ -366,19 +326,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
         /// Azure-AsyncOperation header for operation status
         /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
-        /// </summary>
         /// <param name='product'>
         /// Product to put
         /// </param>
@@ -405,19 +352,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 204 to the initial
         /// request, indicating success.
@@ -553,16 +487,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPut200InvalidJsonWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// SHOUD NOT BE CALLED
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> Get200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
         /// ProvisioningState=’Creating’. The endpoint indicated in the
@@ -595,16 +519,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// SHOULD NOT BE CALLED
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
         /// Long running put request, service returns a 200 to the initial
         /// request, with an entity that contains
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
@@ -636,19 +550,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request receing a reponse with an invalid 'Location' and
