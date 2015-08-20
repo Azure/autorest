@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 $: << 'RspecTests/integer'
 
 require 'body_integer'

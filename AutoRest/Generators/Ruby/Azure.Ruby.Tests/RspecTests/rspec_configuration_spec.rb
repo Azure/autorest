@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'open3'
 RSpec.configure do |config|
   config.register_ordering(:global) do |items|

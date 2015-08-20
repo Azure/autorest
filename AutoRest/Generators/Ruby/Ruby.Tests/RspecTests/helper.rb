@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 RSpec::Matchers.define :be_equal_datetimes do |expected|
   match do |actual|
       (expected == nil && actual == nil) ||

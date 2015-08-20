@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 $: << 'RspecTests/complex'
 
 require 'base64'

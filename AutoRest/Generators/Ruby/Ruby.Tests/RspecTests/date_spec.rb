@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 $: << 'RspecTests/date'
 
 require 'rspec'

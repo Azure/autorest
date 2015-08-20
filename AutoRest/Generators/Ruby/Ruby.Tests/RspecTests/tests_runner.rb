@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'open3'
 
 server_dir = "#{File.dirname(__FILE__)}/../../../../AcceptanceTests/server/"

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 $: << 'RspecTests/string'
 
 require 'body_string'

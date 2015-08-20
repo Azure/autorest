@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 $: << 'RspecTests/azure_special_properties'
 
 require 'rspec'

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 $: << 'RspecTests/azure_report'
 
 require 'azure_report'
