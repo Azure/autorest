@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'ms_rest_azure'
   spec.version       = MsRestAzure::VERSION
   spec.authors       = 'Microsoft Corporation'
-  spec.email         = 'azureruby@microsoft.com'
+  spec.email         = 'azsdkteam@microsoft.com'
 
   spec.summary       = %q{Azure Client Library for Ruby.}
   spec.description   = %q{Azure Client Library for Ruby.}
