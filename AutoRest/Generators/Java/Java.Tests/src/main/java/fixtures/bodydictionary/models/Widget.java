@@ -10,6 +10,7 @@
 
 package fixtures.bodydictionary.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Widget model.
@@ -23,6 +24,7 @@ public class Widget {
     /**
      * The stringProperty property.
      */
+    @JsonProperty("string")
     private String stringProperty;
 
     /**

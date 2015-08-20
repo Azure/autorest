@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The StringWrapper model.
@@ -28,6 +29,7 @@ public class StringWrapper {
     /**
      * The nullProperty property.
      */
+    @JsonProperty("null")
     private String nullProperty;
 
     /**

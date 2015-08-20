@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The BooleanWrapper model.
@@ -18,11 +19,13 @@ public class BooleanWrapper {
     /**
      * The fieldTrue property.
      */
+    @JsonProperty("field_true")
     private boolean fieldTrue;
 
     /**
      * The fieldFalse property.
      */
+    @JsonProperty("field_false")
     private boolean fieldFalse;
 
     /**

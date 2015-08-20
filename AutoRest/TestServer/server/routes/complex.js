@@ -96,7 +96,7 @@ var complex = function(coverage) {
             }
         } else if (req.params.scenario === 'string') {
             console.log(JSON.stringify(req.body));
-            if (JSON.stringify(req.body) === stringBodyInbound) {
+            if (JSON.stringify(req.body) === stringBody || JSON.stringify(req.body) === stringBodyInbound) {
                 coverage['putComplexPrimitiveString']++;
                 res.status(200).end();
             } else {
@@ -206,7 +206,7 @@ var complex = function(coverage) {
     var dictionaryValidBody = '{"defaultProgram":{"txt":"notepad","bmp":"mspaint","xls":"excel","exe":"","":null}}';
     router.put('/dictionary/typed/:scenario', function(req, res, next) {
         if (req.params.scenario === 'valid') {
-            if (JSON.stringify(req.body) === dictionaryValidBody) {
+            if (_.isEqual(req.body, JSON.parse(dictionaryValidBody))) {
                 coverage['putComplexDictionaryValid']++;
                 res.status(200).end();
             } else {

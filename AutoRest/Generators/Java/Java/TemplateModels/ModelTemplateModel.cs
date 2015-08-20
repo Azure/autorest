@@ -147,6 +147,11 @@ namespace Microsoft.Rest.Generator.Java
                             classes.Add(importedFrom);
                         }
                     }
+
+                    if (property.Name != property.SerializedName)
+                    {
+                        classes.Add("com.fasterxml.jackson.annotation.JsonProperty");
+                    }
                 }
                 return classes.AsEnumerable();
             }

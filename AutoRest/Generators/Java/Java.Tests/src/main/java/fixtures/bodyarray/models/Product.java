@@ -10,7 +10,6 @@
 
 package fixtures.bodyarray.models;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -20,7 +19,6 @@ public class Product {
     /**
      * The integer property.
      */
-    @JsonProperty("integer")
     private int integer;
 
     /**

@@ -27,6 +27,10 @@ public class @(Model.Name) {
 @:    /**
 @:    @WrapComment(" * ", property.Documentation.EscapeXmlComment() ?? "The " + property.Name + " property.")
 @:     */
+if (property.Name != property.SerializedName)
+{
+@:    @@JsonProperty("@(property.SerializedName)")
+}
 @:    private @property.Type @property.Name;
 @EmptyLine
 }
