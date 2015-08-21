@@ -78,6 +78,41 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public string EvaluatedPolymorphicDiscriminator
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.PolymorphicDiscriminator))
+                {
+                    return this.PolymorphicDiscriminator;
+                }
+                else if (this._parent != null)
+                {
+                    return _parent.EvaluatedPolymorphicDiscriminator;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
+
+        public IEnumerable<CompositeType> SubTypes
+        {
+            get
+            {
+                if (IsPolymorphic) {
+                    foreach (CompositeType type in ServiceClient.ModelTypes) {
+                        if (type.BaseModelType != null &&
+                            type.BaseModelType.SerializedName == this.SerializedName)
+                        {
+                            yield return type;
+                        }
+                    }
+                }
+            }
+        }
+
         public string ValidateProperty(string objectName, Property property)
         {
             if (property == null)
@@ -139,7 +174,7 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         classes.Add("java.util.Map");
                     }
-                    else if (property.Type is PrimaryType)
+                    else if (property.Type is PrimaryType && property.Type != PrimaryType.ByteArray)
                     {
                         var importedFrom = JavaCodeNamer.ImportedFrom(property.Type as PrimaryType);
                         if (importedFrom != null)
@@ -148,13 +183,37 @@ namespace Microsoft.Rest.Generator.Java
                         }
                     }
 
-                    if (property.Name != property.SerializedName)
+                    if (this.Properties.Any(p => !GetJsonProperty(p).IsNullOrEmpty()))
                     {
                         classes.Add("com.fasterxml.jackson.annotation.JsonProperty");
                     }
                 }
+                // For polymorphism
+                if (IsPolymorphic)
+                {
+                    classes.Add("com.fasterxml.jackson.annotation.JsonTypeInfo");
+                    classes.Add("com.fasterxml.jackson.annotation.JsonTypeName");
+                    if (SubTypes.Any())
+                    {
+                        classes.Add("com.fasterxml.jackson.annotation.JsonSubTypes");
+                    }
+                }
                 return classes.AsEnumerable();
             }
+        }
+
+        public String GetJsonProperty(Property property)
+        {
+            List<string> settings = new List<string>();
+            if (property.Name != property.SerializedName)
+            {
+                settings.Add(string.Format("value = \"{0}\"", property.SerializedName));
+            }
+            if (property.IsRequired)
+            {
+                settings.Add("required = true");
+            }
+            return string.Join(", ", settings);
         }
     }
 }

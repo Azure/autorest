@@ -14,7 +14,7 @@ package fixtures.bodycomplex.models;
 /**
  * The Siamese model.
  */
-public class Siamese {
+public class Siamese extends Cat {
     /**
      * The breed property.
      */

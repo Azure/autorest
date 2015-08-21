@@ -10,6 +10,7 @@
 
 package fixtures.requiredoptional.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Product model.
@@ -18,6 +19,7 @@ public class Product {
     /**
      * The id property.
      */
+    @JsonProperty(required = true)
     private int id;
 
     /**

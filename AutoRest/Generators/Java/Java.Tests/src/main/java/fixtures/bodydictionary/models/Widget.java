@@ -24,7 +24,7 @@ public class Widget {
     /**
      * The stringProperty property.
      */
-    @JsonProperty("string")
+    @JsonProperty(value = "string")
     private String stringProperty;
 
     /**

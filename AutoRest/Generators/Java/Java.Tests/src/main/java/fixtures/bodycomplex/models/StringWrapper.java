@@ -29,7 +29,7 @@ public class StringWrapper {
     /**
      * The nullProperty property.
      */
-    @JsonProperty("null")
+    @JsonProperty(value = "null")
     private String nullProperty;
 
     /**

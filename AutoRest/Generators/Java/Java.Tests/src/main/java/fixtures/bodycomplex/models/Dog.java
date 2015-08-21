@@ -14,7 +14,7 @@ package fixtures.bodycomplex.models;
 /**
  * The Dog model.
  */
-public class Dog {
+public class Dog extends Pet {
     /**
      * The food property.
      */

@@ -21,15 +21,33 @@ package @(Settings.Namespace.ToLower()).models;
 /**
 @WrapComment(" * ", Model.Documentation.EscapeXmlComment() ?? "The " + Model.Name + " model.")
  */
-public class @(Model.Name) {
+@if (Model.IsPolymorphic)
+{
+@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(Model.EvaluatedPolymorphicDiscriminator)")
+@:@@JsonTypeName("@(Model.SerializedName)")
+var types = Model.SubTypes.ToList();
+if (types.Any())
+{
+@:@@JsonSubTypes({
+for (int i = 0; i < types.Count - 1; i++)
+{
+var type = types[i];
+@:    @@JsonSubTypes.Type(name="@(type.SerializedName)", value=@(type.Name).class),
+}
+@:    @@JsonSubTypes.Type(name="@(types.Last().SerializedName)", value=@(types.Last().Name).class)
+@:})
+}
+}
+public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.BaseModelType.Name : "") {
 @foreach (var property in Model.Properties)
 {
 @:    /**
 @:    @WrapComment(" * ", property.Documentation.EscapeXmlComment() ?? "The " + property.Name + " property.")
 @:     */
-if (property.Name != property.SerializedName)
+var jsonSetting = Model.GetJsonProperty(property);
+if (!jsonSetting.IsNullOrEmpty())
 {
-@:    @@JsonProperty("@(property.SerializedName)")
+@:    @@JsonProperty(@(jsonSetting))
 }
 @:    private @property.Type @property.Name;
 @EmptyLine

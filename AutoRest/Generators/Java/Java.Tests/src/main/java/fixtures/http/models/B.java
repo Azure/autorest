@@ -14,7 +14,7 @@ package fixtures.http.models;
 /**
  * The B model.
  */
-public class B {
+public class B extends A {
     /**
      * The textStatusCode property.
      */

@@ -10,12 +10,15 @@
 
 package fixtures.bodycomplex.models;
 
-import org.apache.commons.lang3.ArrayUtils;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * The Sawshark model.
  */
-public class Sawshark {
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "dtype")
+@JsonTypeName("sawshark")
+public class Sawshark extends Shark {
     /**
      * The picture property.
      */

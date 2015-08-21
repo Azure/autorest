@@ -19,13 +19,13 @@ public class BooleanWrapper {
     /**
      * The fieldTrue property.
      */
-    @JsonProperty("field_true")
+    @JsonProperty(value = "field_true")
     private boolean fieldTrue;
 
     /**
      * The fieldFalse property.
      */
-    @JsonProperty("field_false")
+    @JsonProperty(value = "field_false")
     private boolean fieldFalse;
 
     /**

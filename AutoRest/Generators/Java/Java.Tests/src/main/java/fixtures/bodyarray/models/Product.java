@@ -24,7 +24,7 @@ public class Product {
     /**
      * The stringProperty property.
      */
-    @JsonProperty("string")
+    @JsonProperty(value = "string")
     private String stringProperty;
 
     /**

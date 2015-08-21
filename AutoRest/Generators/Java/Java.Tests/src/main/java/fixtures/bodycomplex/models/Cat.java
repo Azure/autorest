@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * The Cat model.
  */
-public class Cat {
+public class Cat extends Pet {
     /**
      * The color property.
      */

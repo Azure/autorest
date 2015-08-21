@@ -10,6 +10,7 @@
 
 package fixtures.requiredoptional.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The IntWrapper model.
@@ -18,6 +19,7 @@ public class IntWrapper {
     /**
      * The value property.
      */
+    @JsonProperty(required = true)
     private int value;
 
     /**

@@ -10,12 +10,21 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.joda.time.DateTime;
 
 /**
  * The Shark model.
  */
-public class Shark {
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "dtype")
+@JsonTypeName("shark")
+@JsonSubTypes({
+    @JsonSubTypes.Type(name="sawshark", value=Sawshark.class)
+})
+public class Shark extends Fish {
     /**
      * The age property.
      */
@@ -24,6 +33,7 @@ public class Shark {
     /**
      * The birthday property.
      */
+    @JsonProperty(required = true)
     private DateTime birthday;
 
     /**
