@@ -264,5 +264,5 @@ gulp.task('analysis', function(cb) {
 
 gulp.task('default', function(cb){
   // build is not called here because analysis causes a rebuild of the solutions
-  runSequence('clean', 'analysis', 'package', 'test', cb);
+  runSequence('clean', 'build', 'analysis', 'package', 'test', cb);
 });
