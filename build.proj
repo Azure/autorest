@@ -158,7 +158,7 @@
   <!-- Run tests. -->
   <Target Name="Test" DependsOnTargets="RestoreNugetPackages;RestoreRubyDependencies">
     <Exec Command="gulp test"/>
-  </Target>
+   </Target>
 
   <PropertyGroup>
     <!-- This property is used by the continuous intergration job.
@@ -251,6 +251,7 @@
 
     <Message Text="Updating azure ruby tests dependencies"/>
     <Exec WorkingDirectory=".\AutoRest\Generators\Ruby\Azure.Ruby.Tests" Command ="bundle install"/>
+    <Exec WorkingDirectory="$(LibraryRoot)\" Command ="bundle install"/>
   </Target>
 
   <!-- Official releases require tools only available on corp network. -->
