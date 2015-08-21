@@ -158,7 +158,7 @@
   <!-- Run tests. -->
   <Target Name="Test" DependsOnTargets="RestoreNugetPackages;RestoreRubyDependencies">
     <Exec Command="gulp test"/>
-   </Target>
+  </Target>
 
   <PropertyGroup>
     <!-- This property is used by the continuous intergration job.
@@ -242,8 +242,7 @@
     <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest" Command ="rake build"/>
 
     <Message Text="Updating ms-rest-azure dependencies"/>
-    <!-- Disabled until ms-rest gem is properly referenced in the ms-rest-azure -->
-    <!-- <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest-azure" Command ="bundle install"/> -->
+    <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest-azure" Command ="bundle install"/>
     <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest-azure" Command ="rake build"/>
 
     <Message Text="Updating ruby tests dependencies"/>
