@@ -226,6 +226,7 @@ gulp.task('build', function(cb) {
     stdout: process.stdout, 
     stderr: process.stderr,
     maxBuffer: MAX_BUFFER,
+    errorOnFail: true,
     properties: { WarningsNotAsErrors: 0219 }
   }));
 });
@@ -235,6 +236,7 @@ gulp.task('package', function(cb) {
     targets: ['package'],
     stdout: process.stdout,
     stderr: process.stderr,
+    errorOnFail: true,
     maxBuffer: MAX_BUFFER
   }));
 });
@@ -244,6 +246,7 @@ gulp.task('test', function (cb) {
     targets: ['test'],
     stdout: process.stdout,
     stderr: process.stderr,
+    errorOnFail: true,
     maxBuffer: MAX_BUFFER
   }));
 });
@@ -254,6 +257,7 @@ gulp.task('analysis', function(cb) {
     stdout: process.stdout,
     stderr: process.stderr,
     maxBuffer: MAX_BUFFER,
+    errorOnFail: true,
     properties: { WarningsNotAsErrors: 0219 }
   }));
 });
