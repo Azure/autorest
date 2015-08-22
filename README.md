@@ -15,6 +15,7 @@ Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by 
 AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
 
 ### .Net
+#### on Windows 
 Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or get them with [Visual Studio](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
 Ensure that msbuild is in your path by running vcvarsall.bat
 >C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat
@@ -23,7 +24,7 @@ If you are using Visual Studio 2013,
 - Ensure "Nuget Package Manager For Visual Studio" is updated to a newer version, like "2.8.60723.765", which is needed to install xunit.
 - Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
 
-### Mono
+#### on Mac
 Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
 
 ### Node.js
@@ -36,14 +37,6 @@ Ensure that the JDK binaries are in your `PATH`.
 
 Ensure that your environment includes the `JAVA_HOME`.
 >set JAVA_HOME=C:\Program Files\java\jdk1.8.0_45
-
-#### Maven
-Install the `Maven Project Management tool` from [Apache downloads](http://maven.apache.org/download.cgi).
-Ensure Maven is in your `PATH`.
->set PATH=PATH;C:\Maven\bin
-
-Ensure that your environment includes the `MAVEN_HOME`.
->set MAVEN_HOME=C:\Maven
 
 #### Java IDE
 You may want a Java IDE.
@@ -63,7 +56,9 @@ The DevKit installer just unpacks files. Navigate to the directory and run the f
 >ruby dk.rb install
 
 ## Build the Code
-We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. If you would like to see what commands are
+We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
+>npm install gulp -g
+If you would like to see what commands are
 available to you, run `gulp -T`. That will list all of the gulp tasks you can run. By default, just running `gulp` will
 run a build that will execute clean, build, code analysis, package and test.
 
