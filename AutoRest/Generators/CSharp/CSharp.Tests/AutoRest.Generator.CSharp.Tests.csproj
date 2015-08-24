@@ -66,103 +66,103 @@
       <Link>AutoRest.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\azure-report.json">
+    <None Include="..\..\..\NuGetTests\swagger\azure-report.json">
       <Link>Swagger\azure-report.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\azure-special-properties.json">
+    <None Include="..\..\..\NuGetTests\swagger\azure-special-properties.json">
       <Link>Swagger\azure-special-properties.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-array.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-array.json">
       <Link>Swagger\body-array.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-boolean.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-boolean.json">
       <Link>Swagger\body-boolean.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-byte.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-byte.json">
       <Link>Swagger\body-byte.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-complex.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-complex.json">
       <Link>Swagger\body-complex.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-date.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-date.json">
       <Link>Swagger\body-date.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-datetime.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-datetime.json">
       <Link>Swagger\body-datetime.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-dictionary.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-dictionary.json">
       <Link>Swagger\body-dictionary.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-file.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-file.json">
       <Link>Swagger\body-file.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-integer.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-integer.json">
       <Link>Swagger\body-integer.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-number.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-number.json">
       <Link>Swagger\body-number.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-string.json">
+    <None Include="..\..\..\NuGetTests\swagger\body-string.json">
       <Link>Swagger\body-string.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\head.json">
+    <None Include="..\..\..\NuGetTests\swagger\head.json">
       <Link>Swagger\head.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\header.json">
+    <None Include="..\..\..\NuGetTests\swagger\header.json">
       <Link>Swagger\header.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\httpInfrastructure.json">
+    <None Include="..\..\..\NuGetTests\swagger\httpInfrastructure.json">
       <Link>Swagger\httpInfrastructure.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\lro.json">
+    <None Include="..\..\..\NuGetTests\swagger\lro.json">
       <Link>Swagger\lro.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\paging.json">
+    <None Include="..\..\..\NuGetTests\swagger\paging.json">
       <Link>Swagger\paging.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\report.json">
+    <None Include="..\..\..\NuGetTests\swagger\report.json">
       <Link>Swagger\report.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\required-optional.json">
+    <None Include="..\..\..\NuGetTests\swagger\required-optional.json">
       <Link>Swagger\required-optional.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\resource-flattening-reference.json">
+    <None Include="..\..\..\NuGetTests\swagger\resource-flattening-reference.json">
       <Link>Swagger\resource-flattening-reference.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\resource-flattening.json">
+    <None Include="..\..\..\NuGetTests\swagger\resource-flattening.json">
       <Link>Swagger\resource-flattening.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json">
+    <None Include="..\..\..\NuGetTests\swagger\subscriptionId-apiVersion.json">
       <Link>Swagger\subscriptionId-apiVersion.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\url.json">
+    <None Include="..\..\..\NuGetTests\swagger\url.json">
       <Link>Swagger\url.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\validation.json">
+    <None Include="..\..\..\NuGetTests\swagger\validation.json">
       <Link>Swagger\validation.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -208,7 +208,7 @@
     <Compile Include="Expected\**\*.cs"/>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\AcceptanceTests\server\routes\sample.png">
+    <Content Include="..\..\..\NuGetTests\server\routes\sample.png">
       <Link>sample.png</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -66,14 +66,6 @@
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\AutoRest\Generators\CSharp\Azure.CSharp.Tests\AutoRest.Generator.Azure.CSharp.Tests.csproj">
-      <Project>{ca4ddaa2-9558-47b9-8838-a077a628e94c}</Project>
-      <Name>AutoRest.Generator.Azure.CSharp.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\AutoRest\Generators\CSharp\CSharp.Tests\AutoRest.Generator.CSharp.Tests.csproj">
-      <Project>{84211169-9441-44f9-b626-10bf75ff25a6}</Project>
-      <Name>AutoRest.Generator.CSharp.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ruby.Tests\AutoRest.Generator.Ruby.Tests.csproj">
       <Project>{cd930eb5-a0c1-49bf-a320-1c2aeb028e7e}</Project>
       <Name>AutoRest.Generator.Ruby.Tests</Name>

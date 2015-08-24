@@ -9,7 +9,7 @@ var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
 
-var complexClient = require('../Expected/AcceptanceTests/BodyComplex/AutoRestComplexTestService');
+var complexClient = require('../Expected/AcceptanceTests/BodyComplex/autoRestComplexTestService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);

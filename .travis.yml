@@ -2,7 +2,9 @@ language: csharp
 mono:
   - nightly
 before_script:
+  - npm install -g npm@'>=1.4.3'
   - npm install
+  - rvm use 2.2.1 --install --binary --fuzzy
   - gem install bundler
   - bundle install
 script:

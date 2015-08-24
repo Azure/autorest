@@ -3,7 +3,7 @@
   <Import Project="packages\xunit.runner.visualstudio.2.1.0-beta4-build1109\build\net20\xunit.runner.visualstudio.props" Condition="Exists('packages\xunit.runner.visualstudio.2.1.0-beta4-build1109\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="packages\xunit.core.2.1.0-beta4-build3109\build\portable-net45+netcore45+wp8+wpa81\xunit.core.props" Condition="Exists('packages\xunit.core.2.1.0-beta4-build3109\build\portable-net45+netcore45+wp8+wpa81\xunit.core.props')" />
   <PropertyGroup>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{41421AA6-CE53-4E96-933F-33C13493323A}</ProjectGuid>
@@ -55,10 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include=".\Generated\CSharp\**\*.cs"></Compile>
-    <Compile Include="..\..\CSharp\CSharp.Tests\Utilities\ProcessOutputListener.cs">
+    <Compile Include="..\..\Generators\CSharp\CSharp.Tests\Utilities\ProcessOutputListener.cs">
       <Link>ProcessOutputListener.cs</Link>
     </Compile>
-    <Compile Include="..\..\CSharp\CSharp.Tests\Utilities\ServiceController.cs">
+    <Compile Include="..\..\Generators\CSharp\CSharp.Tests\Utilities\ServiceController.cs">
       <Link>ServiceController.cs</Link>
     </Compile>
     <Compile Include="PackageTests.cs" />

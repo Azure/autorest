@@ -10,7 +10,7 @@ var assert = require('assert');
 var msRest = require('ms-rest');
 var _ = require('underscore')
 
-var reportClient = require('../Expected/AcceptanceTests/Report/AutoRestReportService');
+var reportClient = require('../Expected/AcceptanceTests/Report/autoRestReportService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);

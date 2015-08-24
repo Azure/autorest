@@ -10,7 +10,7 @@ var assert = require('assert');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 
-var pagingClient = require('../Expected/AcceptanceTests/Paging/AutoRestPagingTestService');
+var pagingClient = require('../Expected/AcceptanceTests/Paging/autoRestPagingTestService');
 
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';

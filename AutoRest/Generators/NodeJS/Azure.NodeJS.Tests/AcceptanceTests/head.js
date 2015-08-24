@@ -10,7 +10,7 @@ var assert = require('assert');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 
-var headClient = require('../Expected/AcceptanceTests/Head/AutoRestHeadTestService');
+var headClient = require('../Expected/AcceptanceTests/Head/autoRestHeadTestService');
 
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';
