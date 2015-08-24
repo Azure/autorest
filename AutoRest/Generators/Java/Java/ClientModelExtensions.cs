@@ -571,5 +571,24 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             return parameter.Extensions.ContainsKey(CodeGenerator.SkipUrlEncodingExtension) &&
                    (bool)parameter.Extensions[CodeGenerator.SkipUrlEncodingExtension];
         }
+
+        public static String GetJsonProperty(this Property property)
+        {
+            if (property == null)
+            {
+                return null;
+            }
+
+            List<string> settings = new List<string>();
+            if (property.Name != property.SerializedName)
+            {
+                settings.Add(string.Format(CultureInfo.InvariantCulture, "value = \"{0}\"", property.SerializedName));
+            }
+            if (property.IsRequired)
+            {
+                settings.Add("required = true");
+            }
+            return string.Join(", ", settings);
+        }
     }
 }

@@ -16,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.joda.time.DateTime;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * The Shark model.
  */
@@ -33,6 +35,7 @@ public class Shark extends Fish {
     /**
      * The birthday property.
      */
+    @NotNull
     @JsonProperty(required = true)
     private DateTime birthday;
 

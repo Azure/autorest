@@ -44,7 +44,7 @@ public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.Ba
 @:    /**
 @:    @WrapComment(" * ", property.Documentation.EscapeXmlComment() ?? "The " + property.Name + " property.")
 @:     */
-var jsonSetting = Model.GetJsonProperty(property);
+var jsonSetting = property.GetJsonProperty();
 if (!jsonSetting.IsNullOrEmpty())
 {
 @:    @@JsonProperty(@(jsonSetting))

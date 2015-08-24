@@ -1,6 +1,6 @@
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
 import fixtures.bodycomplex.models.Sawshark;
@@ -10,7 +10,7 @@ import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Ignore;
+
 import java.util.ArrayList;
 
 public class PolymorphismTests {
@@ -66,7 +66,6 @@ public class PolymorphismTests {
     }
 
     @Test
-    @Ignore("Pending validation work")
     public void putValidMissingRequired() throws Exception {
         try {
             Salmon body = new Salmon();
@@ -90,9 +89,12 @@ public class PolymorphismTests {
             sib2.setSpecies("dangerous");
             body.getSiblings().add(sib2);
 
-            client.getPolymorphism().putValid(body);
-        } catch (ServiceException ex) {
+            Validator.validate(body, Salmon.class);
+
+            client.getPolymorphism().putValidMissingRequired(body);
+        } catch (NullPointerException ex) {
             //expected
+            Assert.assertTrue(ex.getMessage().contains("birthday == null"));
         }
     }
 }

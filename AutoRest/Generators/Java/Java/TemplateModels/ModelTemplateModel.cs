@@ -183,7 +183,7 @@ namespace Microsoft.Rest.Generator.Java
                         }
                     }
 
-                    if (this.Properties.Any(p => !GetJsonProperty(p).IsNullOrEmpty()))
+                    if (this.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
                     {
                         classes.Add("com.fasterxml.jackson.annotation.JsonProperty");
                     }
@@ -200,20 +200,6 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 return classes.AsEnumerable();
             }
-        }
-
-        public String GetJsonProperty(Property property)
-        {
-            List<string> settings = new List<string>();
-            if (property.Name != property.SerializedName)
-            {
-                settings.Add(string.Format("value = \"{0}\"", property.SerializedName));
-            }
-            if (property.IsRequired)
-            {
-                settings.Add("required = true");
-            }
-            return string.Join(", ", settings);
         }
     }
 }
