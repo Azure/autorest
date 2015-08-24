@@ -245,7 +245,7 @@ var xunitTestsDlls = [
 ];
 
 gulp.task('test:xunit', function () {
-  var xunitRunner = 'packages/xunit.runner.console.2.1.0-beta4-build3109/tools/xunit.console.x86.exe <%= file.path %> -noshadow';
+  var xunitRunner = 'packages/xunit.runner.console.2.1.0-beta4-build3109/tools/xunit.console.x86.exe <%= file.path %> -noshadow -noappdomain';
   var isWindows = (process.platform.lastIndexOf('win') === 0);
   var cmd = isWindows ? xunitRunner : ('mono ' + xunitRunner);
   return gulp.src(xunitTestsDlls).pipe(shell(cmd, {verbosity: 3}))
