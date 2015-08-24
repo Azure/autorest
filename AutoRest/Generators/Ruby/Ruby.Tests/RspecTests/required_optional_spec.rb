@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/required_optional'
+$: << 'RspecTests/Generated/required_optional'
 
 require 'required_optional'
 

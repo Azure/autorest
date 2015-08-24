@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/number'
+$: << 'RspecTests/Generated/number'
 
 require 'body_number'
 

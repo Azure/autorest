@@ -146,11 +146,10 @@ gulp.task('regenerate:expected:rubyazure', function(cb){
     'outputBaseDir': 'AutoRest/Generators/Ruby/Azure.Ruby.Tests',
     'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
     'mappings': rubyAzureMappings,
-    'outputDir': 'bin/RspecTests',
+    'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Azure.Ruby',
 	'nsPrefix': 'MyNamespace'
   }, cb);
-  gulp.src('AutoRest/Generators/Ruby/Azure.Ruby.Tests/RspecTests/*').pipe(gulp.dest('AutoRest/Generators/Ruby/Azure.Ruby.Tests/bin/RspecTests'));
 })
 
 gulp.task('regenerate:expected:ruby', function(cb){
@@ -158,11 +157,10 @@ gulp.task('regenerate:expected:ruby', function(cb){
     'outputBaseDir': 'AutoRest/Generators/Ruby/Ruby.Tests',
     'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
     'mappings': rubyMappings,
-    'outputDir': 'bin/RspecTests',
+    'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Ruby',
 	'nsPrefix': 'MyNamespace'
   }, cb);
-  gulp.src('AutoRest/Generators/Ruby/Ruby.Tests/RspecTests/*').pipe(gulp.dest('AutoRest/Generators/Ruby/Ruby.Tests/bin/RspecTests'));
 })
 
 

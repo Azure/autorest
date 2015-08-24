@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/azure_url'
+$: << 'RspecTests/Generated/azure_url'
 
 require 'rspec'
 require 'securerandom'

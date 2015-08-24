@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/byte'
+$: << 'RspecTests/Generated/byte'
 
 require 'body_byte'
 

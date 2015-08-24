@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/complex'
+$: << 'RspecTests/Generated/complex'
 
 require 'base64'
 require 'body_complex'

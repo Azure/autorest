@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 $: << 'RspecTests'
-$: << 'RspecTests/boolean'
+$: << 'RspecTests/Generated/boolean'
 
 require 'body_boolean'
 

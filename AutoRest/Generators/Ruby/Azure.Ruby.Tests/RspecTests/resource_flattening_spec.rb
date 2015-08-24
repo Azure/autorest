@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/resource_flattening'
+$: << 'RspecTests/Generated/resource_flattening'
 
 require 'securerandom'
 require 'resource_flattening'

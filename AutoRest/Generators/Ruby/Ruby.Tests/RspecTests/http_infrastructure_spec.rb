@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/http_infrastructure'
+$: << 'RspecTests/Generated/http_infrastructure'
 $: << 'RspecTests'
 
 require 'rspec'

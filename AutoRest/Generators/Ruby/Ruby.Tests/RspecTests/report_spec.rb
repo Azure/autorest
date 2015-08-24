@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/report'
+$: << 'RspecTests/Generated/report'
 
 require 'report'
 

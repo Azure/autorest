@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/head'
+$: << 'RspecTests/Generated/head'
 
 require 'rspec'
 require 'head'

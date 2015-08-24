@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 $: << 'RspecTests'
-$: << 'RspecTests/array'
+$: << 'RspecTests/Generated/array'
 
 require 'rspec'
 require 'body_array'

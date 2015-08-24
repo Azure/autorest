@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/dictionary'
+$: << 'RspecTests/Generated/dictionary'
 $: << 'RspecTests'
 
 require 'base64'

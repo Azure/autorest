@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 $: << 'RspecTests'
-$: << 'RspecTests/header_folder'
+$: << 'RspecTests/Generated/header_folder'
 
 
 require "base64"

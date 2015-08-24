@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/datetime'
+$: << 'RspecTests/Generated/datetime'
 
 require 'rspec'
 require 'body_datetime'

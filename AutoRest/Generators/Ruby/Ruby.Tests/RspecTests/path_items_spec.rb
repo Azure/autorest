@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/url_items'
+$: << 'RspecTests/Generated/url_items'
 
 require 'url'
 

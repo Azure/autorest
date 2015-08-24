@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-$: << 'RspecTests/azure_special_properties'
+$: << 'RspecTests/Generated/azure_special_properties'
 
 require 'rspec'
 require 'securerandom'

@@ -167,3 +167,4 @@ Thumbs.db
 #old nuget restore folder
 .nuget/
 AutoRest/Generators/Ruby/*Tests/Gemfile.lock
+AutoRest/Generators/Ruby/*/RspecTests/Generated/*
