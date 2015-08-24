@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
-require 'Base64'
+require 'base64'
 require 'openssl'
 require 'net/http'
 require 'ms_rest/version'
