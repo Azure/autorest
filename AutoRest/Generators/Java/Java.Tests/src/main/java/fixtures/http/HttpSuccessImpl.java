@@ -115,7 +115,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put200(boolean booleanValue) throws ServiceException {
+    public void put200(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = put200Delegate(service.put200(booleanValue), null);
             response.getBody();
@@ -131,7 +131,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put200Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.put200Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -157,7 +157,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch200(boolean booleanValue) throws ServiceException {
+    public void patch200(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = patch200Delegate(service.patch200(booleanValue), null);
             response.getBody();
@@ -173,7 +173,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void patch200Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.patch200Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -199,7 +199,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post200(boolean booleanValue) throws ServiceException {
+    public void post200(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = post200Delegate(service.post200(booleanValue), null);
             response.getBody();
@@ -215,7 +215,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post200Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.post200Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -241,7 +241,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete200(boolean booleanValue) throws ServiceException {
+    public void delete200(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = delete200Delegate(service.delete200(booleanValue), null);
             response.getBody();
@@ -257,7 +257,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete200Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.delete200Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -283,7 +283,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put201(boolean booleanValue) throws ServiceException {
+    public void put201(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = put201Delegate(service.put201(booleanValue), null);
             response.getBody();
@@ -299,7 +299,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put201Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.put201Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -325,7 +325,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post201(boolean booleanValue) throws ServiceException {
+    public void post201(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = post201Delegate(service.post201(booleanValue), null);
             response.getBody();
@@ -341,7 +341,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post201Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.post201Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -367,7 +367,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put202(boolean booleanValue) throws ServiceException {
+    public void put202(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = put202Delegate(service.put202(booleanValue), null);
             response.getBody();
@@ -383,7 +383,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put202Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.put202Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -409,7 +409,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch202(boolean booleanValue) throws ServiceException {
+    public void patch202(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = patch202Delegate(service.patch202(booleanValue), null);
             response.getBody();
@@ -425,7 +425,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void patch202Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.patch202Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -451,7 +451,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post202(boolean booleanValue) throws ServiceException {
+    public void post202(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = post202Delegate(service.post202(booleanValue), null);
             response.getBody();
@@ -467,7 +467,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post202Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.post202Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -493,7 +493,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete202(boolean booleanValue) throws ServiceException {
+    public void delete202(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = delete202Delegate(service.delete202(booleanValue), null);
             response.getBody();
@@ -509,7 +509,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete202Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.delete202Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -575,7 +575,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put204(boolean booleanValue) throws ServiceException {
+    public void put204(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = put204Delegate(service.put204(booleanValue), null);
             response.getBody();
@@ -591,7 +591,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put204Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.put204Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -617,7 +617,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch204(boolean booleanValue) throws ServiceException {
+    public void patch204(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = patch204Delegate(service.patch204(booleanValue), null);
             response.getBody();
@@ -633,7 +633,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void patch204Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.patch204Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -659,7 +659,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post204(boolean booleanValue) throws ServiceException {
+    public void post204(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = post204Delegate(service.post204(booleanValue), null);
             response.getBody();
@@ -675,7 +675,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post204Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.post204Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -701,7 +701,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete204(boolean booleanValue) throws ServiceException {
+    public void delete204(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = delete204Delegate(service.delete204(booleanValue), null);
             response.getBody();
@@ -717,7 +717,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete204Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.delete204Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

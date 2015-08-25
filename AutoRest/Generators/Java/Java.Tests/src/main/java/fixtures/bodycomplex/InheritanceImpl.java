@@ -21,6 +21,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import fixtures.bodycomplex.models.Siamese;
 import fixtures.bodycomplex.models.Error;
+import com.microsoft.rest.Validator;
 
 public class InheritanceImpl implements Inheritance {
     private InheritanceService service;
@@ -77,6 +78,11 @@ public class InheritanceImpl implements Inheritance {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putValid(Siamese complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putValidDelegate(service.putValid(complexBody), null);
             response.getBody();
@@ -93,6 +99,11 @@ public class InheritanceImpl implements Inheritance {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

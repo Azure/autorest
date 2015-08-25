@@ -24,6 +24,7 @@ import org.joda.time.DateTime;
 import org.apache.commons.lang3.ArrayUtils;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.Error;
+import com.microsoft.rest.Validator;
 
 public class HeaderOperationsImpl implements HeaderOperations {
     private HeaderService service;
@@ -1005,6 +1006,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramEnum(String scenario, GreyscaleColors value) throws ServiceException {
+        Validator.validate(value);
         try {
             ServiceResponse<Void> response = paramEnumDelegate(service.paramEnum(scenario, value), null);
             response.getBody();
@@ -1023,6 +1025,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(value, serviceCallback);
         service.paramEnumAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

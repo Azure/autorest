@@ -11,12 +11,10 @@
 package fixtures.bodycomplex.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
+import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import org.joda.time.DateTime;
-
-import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 /**
  * The Shark model.
@@ -30,12 +28,11 @@ public class Shark extends Fish {
     /**
      * The age property.
      */
-    private int age;
+    private Integer age;
 
     /**
      * The birthday property.
      */
-    @NotNull
     @JsonProperty(required = true)
     private DateTime birthday;
 
@@ -44,7 +41,7 @@ public class Shark extends Fish {
      *
      * @return the age value
      */ 
-    public int getAge() {
+    public Integer getAge() {
         return this.age;
     }
 
@@ -53,7 +50,7 @@ public class Shark extends Fish {
      *
      * @param age the age value to set
      */
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

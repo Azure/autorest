@@ -18,7 +18,7 @@ public class Error {
     /**
      * The status property.
      */
-    private int status;
+    private Integer status;
 
     /**
      * The message property.
@@ -30,7 +30,7 @@ public class Error {
      *
      * @return the status value
      */ 
-    public int getStatus() {
+    public Integer getStatus() {
         return this.status;
     }
 
@@ -39,7 +39,7 @@ public class Error {
      *
      * @param status the status value to set
      */
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

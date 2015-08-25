@@ -18,19 +18,19 @@ public class FloatWrapper {
     /**
      * The field1 property.
      */
-    private double field1;
+    private Double field1;
 
     /**
      * The field2 property.
      */
-    private double field2;
+    private Double field2;
 
     /**
      * Get the field1 value.
      *
      * @return the field1 value
      */ 
-    public double getField1() {
+    public Double getField1() {
         return this.field1;
     }
 
@@ -39,7 +39,7 @@ public class FloatWrapper {
      *
      * @param field1 the field1 value to set
      */
-    public void setField1(double field1) {
+    public void setField1(Double field1) {
         this.field1 = field1;
     }
 
@@ -48,7 +48,7 @@ public class FloatWrapper {
      *
      * @return the field2 value
      */ 
-    public double getField2() {
+    public Double getField2() {
         return this.field2;
     }
 
@@ -57,7 +57,7 @@ public class FloatWrapper {
      *
      * @param field2 the field2 value to set
      */
-    public void setField2(double field2) {
+    public void setField2(Double field2) {
         this.field2 = field2;
     }
 

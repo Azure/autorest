@@ -20,20 +20,20 @@ public class BooleanWrapper {
      * The fieldTrue property.
      */
     @JsonProperty(value = "field_true")
-    private boolean fieldTrue;
+    private Boolean fieldTrue;
 
     /**
      * The fieldFalse property.
      */
     @JsonProperty(value = "field_false")
-    private boolean fieldFalse;
+    private Boolean fieldFalse;
 
     /**
      * Get the fieldTrue value.
      *
      * @return the fieldTrue value
      */ 
-    public boolean getFieldTrue() {
+    public Boolean getFieldTrue() {
         return this.fieldTrue;
     }
 
@@ -42,7 +42,7 @@ public class BooleanWrapper {
      *
      * @param fieldTrue the fieldTrue value to set
      */
-    public void setFieldTrue(boolean fieldTrue) {
+    public void setFieldTrue(Boolean fieldTrue) {
         this.fieldTrue = fieldTrue;
     }
 
@@ -51,7 +51,7 @@ public class BooleanWrapper {
      *
      * @return the fieldFalse value
      */ 
-    public boolean getFieldFalse() {
+    public Boolean getFieldFalse() {
         return this.fieldFalse;
     }
 
@@ -60,7 +60,7 @@ public class BooleanWrapper {
      *
      * @param fieldFalse the fieldFalse value to set
      */
-    public void setFieldFalse(boolean fieldFalse) {
+    public void setFieldFalse(Boolean fieldFalse) {
         this.fieldFalse = fieldFalse;
     }
 

@@ -21,6 +21,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.Error;
+import com.microsoft.rest.Validator;
 
 public class EnumOperationsImpl implements EnumOperations {
     private EnumService service;
@@ -80,6 +81,11 @@ public class EnumOperationsImpl implements EnumOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putNotExpandable(Colors stringBody) throws ServiceException {
+        if (stringBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+        }
+        Validator.validate(stringBody);
         try {
             ServiceResponse<Void> response = putNotExpandableDelegate(service.putNotExpandable(stringBody), null);
             response.getBody();
@@ -97,6 +103,11 @@ public class EnumOperationsImpl implements EnumOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
+        if (stringBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+        }
+        Validator.validate(stringBody, serviceCallback);
         service.putNotExpandableAsync(stringBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

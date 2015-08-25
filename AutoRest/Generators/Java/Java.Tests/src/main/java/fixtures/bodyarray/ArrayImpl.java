@@ -25,6 +25,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import fixtures.bodyarray.models.Product;
 import java.util.Map;
+import com.microsoft.rest.Validator;
 
 public class ArrayImpl implements Array {
     private ArrayService service;
@@ -163,6 +164,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putEmpty(List<String> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(arrayBody), null);
             response.getBody();
@@ -179,6 +185,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putEmptyAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -246,6 +257,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putBooleanTfft(List<Boolean> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putBooleanTfftDelegate(service.putBooleanTfft(arrayBody), null);
             response.getBody();
@@ -262,6 +278,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putBooleanTfftAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -411,6 +432,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putIntegerValid(List<Integer> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putIntegerValidDelegate(service.putIntegerValid(arrayBody), null);
             response.getBody();
@@ -427,6 +453,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putIntegerValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -576,6 +607,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putLongValid(List<Long> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putLongValidDelegate(service.putLongValid(arrayBody), null);
             response.getBody();
@@ -592,6 +628,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putLongValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -741,6 +782,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putFloatValid(List<Double> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putFloatValidDelegate(service.putFloatValid(arrayBody), null);
             response.getBody();
@@ -757,6 +803,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putFloatValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -906,6 +957,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDoubleValid(List<Double> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putDoubleValidDelegate(service.putDoubleValid(arrayBody), null);
             response.getBody();
@@ -922,6 +978,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putDoubleValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1071,6 +1132,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putStringValid(List<String> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putStringValidDelegate(service.putStringValid(arrayBody), null);
             response.getBody();
@@ -1087,6 +1153,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putStringValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1236,6 +1307,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDateValid(List<LocalDate> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putDateValidDelegate(service.putDateValid(arrayBody), null);
             response.getBody();
@@ -1252,6 +1328,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1404,6 +1485,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDateTimeValid(List<DateTime> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null);
             response.getBody();
@@ -1421,6 +1507,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1573,6 +1664,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putByteValid(List<Byte[]> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putByteValidDelegate(service.putByteValid(arrayBody), null);
             response.getBody();
@@ -1590,6 +1686,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putByteValidAsync(List<Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putByteValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1871,6 +1972,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putComplexValid(List<Product> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putComplexValidDelegate(service.putComplexValid(arrayBody), null);
             response.getBody();
@@ -1888,6 +1994,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putComplexValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -2124,6 +2235,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putArrayValid(List<List<String>> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putArrayValidDelegate(service.putArrayValid(arrayBody), null);
             response.getBody();
@@ -2141,6 +2257,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putArrayValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -2388,6 +2509,11 @@ public class ArrayImpl implements Array {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putDictionaryValidDelegate(service.putDictionaryValid(arrayBody), null);
             response.getBody();
@@ -2406,6 +2532,11 @@ public class ArrayImpl implements Array {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putDictionaryValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

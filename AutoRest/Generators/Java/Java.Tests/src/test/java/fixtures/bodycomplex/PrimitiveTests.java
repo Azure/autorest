@@ -25,8 +25,8 @@ public class PrimitiveTests {
     @Test
     public void getInt() throws Exception {
         IntWrapper result = client.getPrimitive().getInt();
-        Assert.assertEquals(-1, result.getField1());
-        Assert.assertEquals(2, result.getField2());
+        Assert.assertEquals(Integer.valueOf(-1), result.getField1());
+        Assert.assertEquals(Integer.valueOf(2), result.getField2());
     }
 
     @Test
@@ -40,8 +40,8 @@ public class PrimitiveTests {
     @Test
     public void getLong() throws Exception {
         LongWrapper result = client.getPrimitive().getLong();
-        Assert.assertEquals(1099511627775l, result.getField1());
-        Assert.assertEquals(-999511627788l, result.getField2());
+        Assert.assertEquals(Long.valueOf(1099511627775l), result.getField1());
+        Assert.assertEquals(Long.valueOf(-999511627788l), result.getField2());
     }
 
     @Test
@@ -148,7 +148,7 @@ public class PrimitiveTests {
     @Test
     public void getByte() throws Exception {
         ByteWrapper result = client.getPrimitive().getByte();
-        byte[] expected = new byte[] {
+        Byte[] expected = new Byte[] {
                 (byte)255, (byte)254, (byte)253, (byte)252, (byte)0,
                 (byte)250, (byte)249, (byte)248, (byte)247, (byte)246
         };
@@ -158,7 +158,7 @@ public class PrimitiveTests {
     @Test
     public void putByte() throws Exception {
         ByteWrapper body = new ByteWrapper();
-        byte[] byteArray = new byte[] {
+        Byte[] byteArray = new Byte[] {
                 (byte)255, (byte)254, (byte)253, (byte)252, (byte)0,
                 (byte)250, (byte)249, (byte)248, (byte)247, (byte)246
         };

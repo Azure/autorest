@@ -202,7 +202,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put301(boolean booleanValue) throws ServiceException {
+    public void put301(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = put301Delegate(service.put301(booleanValue), null);
             response.getBody();
@@ -220,7 +220,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put301Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.put301Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -330,7 +330,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch302(boolean booleanValue) throws ServiceException {
+    public void patch302(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = patch302Delegate(service.patch302(booleanValue), null);
             response.getBody();
@@ -348,7 +348,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void patch302Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.patch302Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -376,7 +376,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post303(boolean booleanValue) throws ServiceException {
+    public void post303(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = post303Delegate(service.post303(booleanValue), null);
             response.getBody();
@@ -394,7 +394,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post303Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.post303Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -503,7 +503,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put307(boolean booleanValue) throws ServiceException {
+    public void put307(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = put307Delegate(service.put307(booleanValue), null);
             response.getBody();
@@ -519,7 +519,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put307Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.put307Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -546,7 +546,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch307(boolean booleanValue) throws ServiceException {
+    public void patch307(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = patch307Delegate(service.patch307(booleanValue), null);
             response.getBody();
@@ -562,7 +562,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void patch307Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.patch307Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -589,7 +589,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post307(boolean booleanValue) throws ServiceException {
+    public void post307(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = post307Delegate(service.post307(booleanValue), null);
             response.getBody();
@@ -605,7 +605,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post307Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.post307Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -632,7 +632,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete307(boolean booleanValue) throws ServiceException {
+    public void delete307(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = delete307Delegate(service.delete307(booleanValue), null);
             response.getBody();
@@ -648,7 +648,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete307Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.delete307Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

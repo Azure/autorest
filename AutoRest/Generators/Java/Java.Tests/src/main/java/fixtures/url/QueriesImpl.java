@@ -20,11 +20,11 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import fixtures.url.models.UriColor;
-import org.apache.commons.lang3.ArrayUtils;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import java.util.List;
 import fixtures.url.models.Error;
+import com.microsoft.rest.Validator;
 
 public class QueriesImpl implements Queries {
     private QueriesService service;
@@ -39,7 +39,7 @@ public class QueriesImpl implements Queries {
      * @param boolQuery true boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getBooleanTrue(boolean boolQuery) throws ServiceException {
+    public void getBooleanTrue(Boolean boolQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getBooleanTrueDelegate(service.getBooleanTrue(boolQuery), null);
             response.getBody();
@@ -55,7 +55,7 @@ public class QueriesImpl implements Queries {
      * @param boolQuery true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBooleanTrueAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
+    public void getBooleanTrueAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
         service.getBooleanTrueAsync(boolQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -81,7 +81,7 @@ public class QueriesImpl implements Queries {
      * @param boolQuery false boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getBooleanFalse(boolean boolQuery) throws ServiceException {
+    public void getBooleanFalse(Boolean boolQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getBooleanFalseDelegate(service.getBooleanFalse(boolQuery), null);
             response.getBody();
@@ -97,7 +97,7 @@ public class QueriesImpl implements Queries {
      * @param boolQuery false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBooleanFalseAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
+    public void getBooleanFalseAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
         service.getBooleanFalseAsync(boolQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -123,7 +123,7 @@ public class QueriesImpl implements Queries {
      * @param boolQuery null boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getBooleanNull(boolean boolQuery) throws ServiceException {
+    public void getBooleanNull(Boolean boolQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getBooleanNullDelegate(service.getBooleanNull(boolQuery), null);
             response.getBody();
@@ -139,7 +139,7 @@ public class QueriesImpl implements Queries {
      * @param boolQuery null boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBooleanNullAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
+    public void getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
         service.getBooleanNullAsync(boolQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -165,7 +165,7 @@ public class QueriesImpl implements Queries {
      * @param intQuery '1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getIntOneMillion(int intQuery) throws ServiceException {
+    public void getIntOneMillion(Integer intQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getIntOneMillionDelegate(service.getIntOneMillion(intQuery), null);
             response.getBody();
@@ -181,7 +181,7 @@ public class QueriesImpl implements Queries {
      * @param intQuery '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getIntOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback) {
+    public void getIntOneMillionAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) {
         service.getIntOneMillionAsync(intQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -207,7 +207,7 @@ public class QueriesImpl implements Queries {
      * @param intQuery '-1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getIntNegativeOneMillion(int intQuery) throws ServiceException {
+    public void getIntNegativeOneMillion(Integer intQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getIntNegativeOneMillionDelegate(service.getIntNegativeOneMillion(intQuery), null);
             response.getBody();
@@ -223,7 +223,7 @@ public class QueriesImpl implements Queries {
      * @param intQuery '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getIntNegativeOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback) {
+    public void getIntNegativeOneMillionAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) {
         service.getIntNegativeOneMillionAsync(intQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -249,7 +249,7 @@ public class QueriesImpl implements Queries {
      * @param intQuery null integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getIntNull(int intQuery) throws ServiceException {
+    public void getIntNull(Integer intQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getIntNullDelegate(service.getIntNull(intQuery), null);
             response.getBody();
@@ -265,7 +265,7 @@ public class QueriesImpl implements Queries {
      * @param intQuery null integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getIntNullAsync(int intQuery, final ServiceCallback<Void> serviceCallback) {
+    public void getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) {
         service.getIntNullAsync(intQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -291,7 +291,7 @@ public class QueriesImpl implements Queries {
      * @param longQuery '10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getTenBillion(long longQuery) throws ServiceException {
+    public void getTenBillion(Long longQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getTenBillionDelegate(service.getTenBillion(longQuery), null);
             response.getBody();
@@ -307,7 +307,7 @@ public class QueriesImpl implements Queries {
      * @param longQuery '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback) {
+    public void getTenBillionAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) {
         service.getTenBillionAsync(longQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -333,7 +333,7 @@ public class QueriesImpl implements Queries {
      * @param longQuery '-10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getNegativeTenBillion(long longQuery) throws ServiceException {
+    public void getNegativeTenBillion(Long longQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getNegativeTenBillionDelegate(service.getNegativeTenBillion(longQuery), null);
             response.getBody();
@@ -349,7 +349,7 @@ public class QueriesImpl implements Queries {
      * @param longQuery '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNegativeTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback) {
+    public void getNegativeTenBillionAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) {
         service.getNegativeTenBillionAsync(longQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -375,7 +375,7 @@ public class QueriesImpl implements Queries {
      * @param longQuery null 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getLongNull(long longQuery) throws ServiceException {
+    public void getLongNull(Long longQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = getLongNullDelegate(service.getLongNull(longQuery), null);
             response.getBody();
@@ -391,7 +391,7 @@ public class QueriesImpl implements Queries {
      * @param longQuery null 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getLongNullAsync(long longQuery, final ServiceCallback<Void> serviceCallback) {
+    public void getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) {
         service.getLongNullAsync(longQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -417,7 +417,7 @@ public class QueriesImpl implements Queries {
      * @param floatQuery '1.034E+20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void floatScientificPositive(double floatQuery) throws ServiceException {
+    public void floatScientificPositive(Double floatQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = floatScientificPositiveDelegate(service.floatScientificPositive(floatQuery), null);
             response.getBody();
@@ -433,7 +433,7 @@ public class QueriesImpl implements Queries {
      * @param floatQuery '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void floatScientificPositiveAsync(double floatQuery, final ServiceCallback<Void> serviceCallback) {
+    public void floatScientificPositiveAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) {
         service.floatScientificPositiveAsync(floatQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -459,7 +459,7 @@ public class QueriesImpl implements Queries {
      * @param floatQuery '-1.034E-20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void floatScientificNegative(double floatQuery) throws ServiceException {
+    public void floatScientificNegative(Double floatQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = floatScientificNegativeDelegate(service.floatScientificNegative(floatQuery), null);
             response.getBody();
@@ -475,7 +475,7 @@ public class QueriesImpl implements Queries {
      * @param floatQuery '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void floatScientificNegativeAsync(double floatQuery, final ServiceCallback<Void> serviceCallback) {
+    public void floatScientificNegativeAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) {
         service.floatScientificNegativeAsync(floatQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -501,7 +501,7 @@ public class QueriesImpl implements Queries {
      * @param floatQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void floatNull(double floatQuery) throws ServiceException {
+    public void floatNull(Double floatQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = floatNullDelegate(service.floatNull(floatQuery), null);
             response.getBody();
@@ -517,7 +517,7 @@ public class QueriesImpl implements Queries {
      * @param floatQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void floatNullAsync(double floatQuery, final ServiceCallback<Void> serviceCallback) {
+    public void floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) {
         service.floatNullAsync(floatQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -543,7 +543,7 @@ public class QueriesImpl implements Queries {
      * @param doubleQuery '9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void doubleDecimalPositive(double doubleQuery) throws ServiceException {
+    public void doubleDecimalPositive(Double doubleQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = doubleDecimalPositiveDelegate(service.doubleDecimalPositive(doubleQuery), null);
             response.getBody();
@@ -559,7 +559,7 @@ public class QueriesImpl implements Queries {
      * @param doubleQuery '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void doubleDecimalPositiveAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback) {
+    public void doubleDecimalPositiveAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) {
         service.doubleDecimalPositiveAsync(doubleQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -585,7 +585,7 @@ public class QueriesImpl implements Queries {
      * @param doubleQuery '-9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void doubleDecimalNegative(double doubleQuery) throws ServiceException {
+    public void doubleDecimalNegative(Double doubleQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = doubleDecimalNegativeDelegate(service.doubleDecimalNegative(doubleQuery), null);
             response.getBody();
@@ -601,7 +601,7 @@ public class QueriesImpl implements Queries {
      * @param doubleQuery '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void doubleDecimalNegativeAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback) {
+    public void doubleDecimalNegativeAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) {
         service.doubleDecimalNegativeAsync(doubleQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -627,7 +627,7 @@ public class QueriesImpl implements Queries {
      * @param doubleQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void doubleNull(double doubleQuery) throws ServiceException {
+    public void doubleNull(Double doubleQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = doubleNullDelegate(service.doubleNull(doubleQuery), null);
             response.getBody();
@@ -643,7 +643,7 @@ public class QueriesImpl implements Queries {
      * @param doubleQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void doubleNullAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback) {
+    public void doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) {
         service.doubleNullAsync(doubleQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -838,6 +838,7 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void enumValid(UriColor enumQuery) throws ServiceException {
+        Validator.validate(enumQuery);
         try {
             ServiceResponse<Void> response = enumValidDelegate(service.enumValid(enumQuery), null);
             response.getBody();
@@ -854,6 +855,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(enumQuery, serviceCallback);
         service.enumValidAsync(enumQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -880,6 +882,7 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void enumNull(UriColor enumQuery) throws ServiceException {
+        Validator.validate(enumQuery);
         try {
             ServiceResponse<Void> response = enumNullDelegate(service.enumNull(enumQuery), null);
             response.getBody();
@@ -896,6 +899,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(enumQuery, serviceCallback);
         service.enumNullAsync(enumQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -921,7 +925,7 @@ public class QueriesImpl implements Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void byteMultiByte(byte[] byteQuery) throws ServiceException {
+    public void byteMultiByte(Byte[] byteQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = byteMultiByteDelegate(service.byteMultiByte(byteQuery), null);
             response.getBody();
@@ -937,7 +941,7 @@ public class QueriesImpl implements Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+    public void byteMultiByteAsync(Byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
         service.byteMultiByteAsync(byteQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -963,7 +967,7 @@ public class QueriesImpl implements Queries {
      * @param byteQuery '' as byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void byteEmpty(byte[] byteQuery) throws ServiceException {
+    public void byteEmpty(Byte[] byteQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = byteEmptyDelegate(service.byteEmpty(byteQuery), null);
             response.getBody();
@@ -979,7 +983,7 @@ public class QueriesImpl implements Queries {
      * @param byteQuery '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void byteEmptyAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+    public void byteEmptyAsync(Byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
         service.byteEmptyAsync(byteQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1005,7 +1009,7 @@ public class QueriesImpl implements Queries {
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void byteNull(byte[] byteQuery) throws ServiceException {
+    public void byteNull(Byte[] byteQuery) throws ServiceException {
         try {
             ServiceResponse<Void> response = byteNullDelegate(service.byteNull(byteQuery), null);
             response.getBody();
@@ -1021,7 +1025,7 @@ public class QueriesImpl implements Queries {
      * @param byteQuery null as byte array (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+    public void byteNullAsync(Byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
         service.byteNullAsync(byteQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1217,6 +1221,7 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringCsvValid(List<String> arrayQuery) throws ServiceException {
+        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringCsvValidDelegate(service.arrayStringCsvValid(arrayQuery), null);
             response.getBody();
@@ -1234,6 +1239,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringCsvValidAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1260,6 +1266,7 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringCsvNull(List<String> arrayQuery) throws ServiceException {
+        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringCsvNullDelegate(service.arrayStringCsvNull(arrayQuery), null);
             response.getBody();
@@ -1276,6 +1283,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringCsvNullAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1302,6 +1310,7 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException {
+        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringCsvEmptyDelegate(service.arrayStringCsvEmpty(arrayQuery), null);
             response.getBody();
@@ -1318,6 +1327,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringCsvEmptyAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1345,6 +1355,7 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringSsvValid(List<String> arrayQuery) throws ServiceException {
+        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringSsvValidDelegate(service.arrayStringSsvValid(arrayQuery), null);
             response.getBody();
@@ -1362,6 +1373,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringSsvValidAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1389,6 +1401,7 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringTsvValid(List<String> arrayQuery) throws ServiceException {
+        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringTsvValidDelegate(service.arrayStringTsvValid(arrayQuery), null);
             response.getBody();
@@ -1406,6 +1419,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringTsvValidAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1433,6 +1447,7 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringPipesValid(List<String> arrayQuery) throws ServiceException {
+        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringPipesValidDelegate(service.arrayStringPipesValid(arrayQuery), null);
             response.getBody();
@@ -1450,6 +1465,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringPipesValidAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

@@ -26,27 +26,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string DeserializeProperty(string objectName, Property property)
-        {
-            if (property == null || property.Type == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            return property.Type.DeserializeType(_scope, objectName + "." + property.Name, "models");
-        }
-
-        public IScopeProvider Scope
-        {
-            get { return _scope; }
-        }
-
         public ServiceClient ServiceClient { get; set; }
-
-        public virtual IEnumerable<string> Usings
-        {
-            get { return Enumerable.Empty<string>(); }
-        }
 
         public IEnumerable<Property> ComposedProperties
         {
@@ -111,19 +91,6 @@ namespace Microsoft.Rest.Generator.Java
                     }
                 }
             }
-        }
-
-        public string ValidateProperty(string objectName, Property property)
-        {
-            if (property == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            var propertyName = string.Format(CultureInfo.InvariantCulture, 
-                "{0}['{1}']", objectName, property.Name);
-
-            return property.Type.ValidateType(_scope, propertyName, property.IsRequired, "models");
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ public class DoubleWrapper {
     /**
      * The field1 property.
      */
-    private double field1;
+    private Double field1;
 
     /**
      * The
@@ -27,14 +27,14 @@ public class DoubleWrapper {
      * property.
      */
     @JsonProperty(value = "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose")
-    private double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
+    private Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
 
     /**
      * Get the field1 value.
      *
      * @return the field1 value
      */ 
-    public double getField1() {
+    public Double getField1() {
         return this.field1;
     }
 
@@ -43,7 +43,7 @@ public class DoubleWrapper {
      *
      * @param field1 the field1 value to set
      */
-    public void setField1(double field1) {
+    public void setField1(Double field1) {
         this.field1 = field1;
     }
 
@@ -52,7 +52,7 @@ public class DoubleWrapper {
      *
      * @return the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value
      */ 
-    public double getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose() {
+    public Double getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose() {
         return this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
     }
 
@@ -61,7 +61,7 @@ public class DoubleWrapper {
      *
      * @param field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value to set
      */
-    public void setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose) {
+    public void setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose) {
         this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
     }
 

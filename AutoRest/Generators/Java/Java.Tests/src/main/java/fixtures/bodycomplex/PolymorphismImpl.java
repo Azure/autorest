@@ -21,6 +21,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Error;
+import com.microsoft.rest.Validator;
 
 public class PolymorphismImpl implements Polymorphism {
     private PolymorphismService service;
@@ -101,6 +102,11 @@ public class PolymorphismImpl implements Polymorphism {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putValid(Fish complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putValidDelegate(service.putValid(complexBody), null);
             response.getBody();
@@ -141,6 +147,11 @@ public class PolymorphismImpl implements Polymorphism {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -193,6 +204,11 @@ public class PolymorphismImpl implements Polymorphism {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putValidMissingRequired(Fish complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putValidMissingRequiredDelegate(service.putValidMissingRequired(complexBody), null);
             response.getBody();
@@ -235,6 +251,11 @@ public class PolymorphismImpl implements Polymorphism {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putValidMissingRequiredAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

@@ -74,7 +74,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put500(boolean booleanValue) throws ServiceException {
+    public void put500(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = put500Delegate(service.put500(booleanValue), null);
             response.getBody();
@@ -90,7 +90,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put500Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.put500Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -116,7 +116,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch500(boolean booleanValue) throws ServiceException {
+    public void patch500(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = patch500Delegate(service.patch500(booleanValue), null);
             response.getBody();
@@ -132,7 +132,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void patch500Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.patch500Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -198,7 +198,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post503(boolean booleanValue) throws ServiceException {
+    public void post503(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = post503Delegate(service.post503(booleanValue), null);
             response.getBody();
@@ -214,7 +214,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post503Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.post503Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -240,7 +240,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete503(boolean booleanValue) throws ServiceException {
+    public void delete503(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = delete503Delegate(service.delete503(booleanValue), null);
             response.getBody();
@@ -256,7 +256,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete503Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.delete503Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -282,7 +282,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put504(boolean booleanValue) throws ServiceException {
+    public void put504(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = put504Delegate(service.put504(booleanValue), null);
             response.getBody();
@@ -298,7 +298,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put504Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.put504Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -324,7 +324,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch504(boolean booleanValue) throws ServiceException {
+    public void patch504(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Void> response = patch504Delegate(service.patch504(booleanValue), null);
             response.getBody();
@@ -340,7 +340,7 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void patch504Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public void patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         service.patch504Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

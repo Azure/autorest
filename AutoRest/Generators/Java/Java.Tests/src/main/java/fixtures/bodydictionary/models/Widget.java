@@ -19,7 +19,7 @@ public class Widget {
     /**
      * The integer property.
      */
-    private int integer;
+    private Integer integer;
 
     /**
      * The stringProperty property.
@@ -32,7 +32,7 @@ public class Widget {
      *
      * @return the integer value
      */ 
-    public int getInteger() {
+    public Integer getInteger() {
         return this.integer;
     }
 
@@ -41,7 +41,7 @@ public class Widget {
      *
      * @param integer the integer value to set
      */
-    public void setInteger(int integer) {
+    public void setInteger(Integer integer) {
         this.integer = integer;
     }
 

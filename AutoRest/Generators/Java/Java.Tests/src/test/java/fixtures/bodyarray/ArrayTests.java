@@ -388,7 +388,7 @@ public class ArrayTests {
     public void getComplexValid() throws Exception {
         List<Product> result = client.getArray().getComplexValid();
         Assert.assertEquals(3, result.size());
-        Assert.assertEquals(5, result.get(2).getInteger());
+        Assert.assertEquals(5, result.get(2).getInteger().intValue());
         Assert.assertEquals("6", result.get(2).getStringProperty());
     }
 
@@ -443,9 +443,9 @@ public class ArrayTests {
     @Test
     public void getArrayValid() throws Exception {
         List<List<String>> result = client.getArray().getArrayValid();
-        Assert.assertEquals(new String[] {"1", "2", "3"}, result.get(0).toArray());
-        Assert.assertEquals(new String[] {"4", "5", "6"}, result.get(1).toArray());
-        Assert.assertEquals(new String[] {"7", "8", "9"}, result.get(2).toArray());
+        Assert.assertArrayEquals(new String[]{"1", "2", "3"}, result.get(0).toArray());
+        Assert.assertArrayEquals(new String[]{"4", "5", "6"}, result.get(1).toArray());
+        Assert.assertArrayEquals(new String[] {"7", "8", "9"}, result.get(2).toArray());
     }
 
     @Test

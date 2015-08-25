@@ -46,10 +46,10 @@ public interface Explicit {
         void postRequiredIntegerParameterAsync(@Body int bodyParameter, ServiceResponseCallback cb);
 
         @POST("/reqopt/optional/integer/parameter")
-        Response postOptionalIntegerParameter(@Body int bodyParameter) throws ServiceException;
+        Response postOptionalIntegerParameter(@Body Integer bodyParameter) throws ServiceException;
 
         @POST("/reqopt/optional/integer/parameter")
-        void postOptionalIntegerParameterAsync(@Body int bodyParameter, ServiceResponseCallback cb);
+        void postOptionalIntegerParameterAsync(@Body Integer bodyParameter, ServiceResponseCallback cb);
 
         @POST("/reqopt/requied/integer/property")
         Response postRequiredIntegerProperty(@Body IntWrapper bodyParameter) throws ServiceException;
@@ -70,10 +70,10 @@ public interface Explicit {
         void postRequiredIntegerHeaderAsync(@Header("headerParameter") int headerParameter, ServiceResponseCallback cb);
 
         @POST("/reqopt/optional/integer/header")
-        Response postOptionalIntegerHeader(@Header("headerParameter") int headerParameter) throws ServiceException;
+        Response postOptionalIntegerHeader(@Header("headerParameter") Integer headerParameter) throws ServiceException;
 
         @POST("/reqopt/optional/integer/header")
-        void postOptionalIntegerHeaderAsync(@Header("headerParameter") int headerParameter, ServiceResponseCallback cb);
+        void postOptionalIntegerHeaderAsync(@Header("headerParameter") Integer headerParameter, ServiceResponseCallback cb);
 
         @POST("/reqopt/requied/string/parameter")
         Response postRequiredStringParameter(@Body String bodyParameter) throws ServiceException;
@@ -194,18 +194,18 @@ public interface Explicit {
     /**
      * Test explicitly optional integer. Please put null.
      *
-     * @param bodyParameter the int value
+     * @param bodyParameter the Integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postOptionalIntegerParameter(int bodyParameter) throws ServiceException;
+    void postOptionalIntegerParameter(Integer bodyParameter) throws ServiceException;
 
     /**
      * Test explicitly optional integer. Please put null.
      *
-     * @param bodyParameter the int value
+     * @param bodyParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void postOptionalIntegerParameterAsync(int bodyParameter, final ServiceCallback<Void> serviceCallback);
+    void postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with
@@ -271,19 +271,19 @@ public interface Explicit {
      * Test explicitly optional integer. Please put a header 'headerParameter'
      * =&gt; null.
      *
-     * @param headerParameter the int value
+     * @param headerParameter the Integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postOptionalIntegerHeader(int headerParameter) throws ServiceException;
+    void postOptionalIntegerHeader(Integer headerParameter) throws ServiceException;
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter'
      * =&gt; null.
      *
-     * @param headerParameter the int value
+     * @param headerParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void postOptionalIntegerHeaderAsync(int headerParameter, final ServiceCallback<Void> serviceCallback);
+    void postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly required string. Please put null and the client library

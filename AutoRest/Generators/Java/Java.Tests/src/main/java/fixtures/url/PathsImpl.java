@@ -24,6 +24,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import fixtures.url.models.Error;
+import com.microsoft.rest.Validator;
 
 public class PathsImpl implements Paths {
     private PathsService service;
@@ -627,6 +628,11 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void enumValid(UriColor enumPath) throws ServiceException {
+        if (enumPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
+        }
+        Validator.validate(enumPath);
         try {
             ServiceResponse<Void> response = enumValidDelegate(service.enumValid(enumPath), null);
             response.getBody();
@@ -643,6 +649,11 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+        if (enumPath == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
+        }
+        Validator.validate(enumPath, serviceCallback);
         service.enumValidAsync(enumPath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -669,6 +680,11 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void enumNull(UriColor enumPath) throws ServiceException {
+        if (enumPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
+        }
+        Validator.validate(enumPath);
         try {
             ServiceResponse<Void> response = enumNullDelegate(service.enumNull(enumPath), null);
             response.getBody();
@@ -685,6 +701,11 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+        if (enumPath == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
+        }
+        Validator.validate(enumPath, serviceCallback);
         service.enumNullAsync(enumPath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

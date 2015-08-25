@@ -88,6 +88,12 @@ namespace Microsoft.Rest.Generator.Java
                         }
                     }
                 }
+
+                if (this.MethodTemplateModels.SelectMany(mtm => mtm.Parameters)
+                    .Any(p => !(p.Type is Microsoft.Rest.Generator.ClientModel.PrimaryType)))
+                {
+                    classes.Add("com.microsoft.rest.Validator");
+                }
                 return classes.AsEnumerable();
             }
         }

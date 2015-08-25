@@ -27,7 +27,7 @@ public class Salmon extends Fish {
     /**
      * The iswild property.
      */
-    private boolean iswild;
+    private Boolean iswild;
 
     /**
      * Get the location value.
@@ -52,7 +52,7 @@ public class Salmon extends Fish {
      *
      * @return the iswild value
      */ 
-    public boolean getIswild() {
+    public Boolean getIswild() {
         return this.iswild;
     }
 
@@ -61,7 +61,7 @@ public class Salmon extends Fish {
      *
      * @param iswild the iswild value to set
      */
-    public void setIswild(boolean iswild) {
+    public void setIswild(Boolean iswild) {
         this.iswild = iswild;
     }
 

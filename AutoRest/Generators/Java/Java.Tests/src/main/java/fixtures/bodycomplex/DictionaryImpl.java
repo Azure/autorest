@@ -21,6 +21,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.Error;
+import com.microsoft.rest.Validator;
 
 public class DictionaryImpl implements Dictionary {
     private DictionaryService service;
@@ -77,6 +78,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putValid(DictionaryWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putValidDelegate(service.putValid(complexBody), null);
             response.getBody();
@@ -93,6 +99,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -160,6 +171,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putEmpty(DictionaryWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(complexBody), null);
             response.getBody();
@@ -176,6 +192,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putEmptyAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

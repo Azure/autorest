@@ -18,14 +18,14 @@ public class IntOptionalWrapper {
     /**
      * The value property.
      */
-    private int value;
+    private Integer value;
 
     /**
      * Get the value value.
      *
      * @return the value value
      */ 
-    public int getValue() {
+    public Integer getValue() {
         return this.value;
     }
 
@@ -34,7 +34,7 @@ public class IntOptionalWrapper {
      *
      * @param value the value value to set
      */
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

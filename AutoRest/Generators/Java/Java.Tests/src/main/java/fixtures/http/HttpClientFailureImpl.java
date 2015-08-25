@@ -115,7 +115,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error put400(boolean booleanValue) throws ServiceException {
+    public Error put400(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = put400Delegate(service.put400(booleanValue), null);
             return response.getBody();
@@ -131,7 +131,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.put400Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -157,7 +157,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error patch400(boolean booleanValue) throws ServiceException {
+    public Error patch400(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = patch400Delegate(service.patch400(booleanValue), null);
             return response.getBody();
@@ -173,7 +173,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void patch400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.patch400Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -199,7 +199,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error post400(boolean booleanValue) throws ServiceException {
+    public Error post400(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = post400Delegate(service.post400(booleanValue), null);
             return response.getBody();
@@ -215,7 +215,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.post400Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -241,7 +241,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error delete400(boolean booleanValue) throws ServiceException {
+    public Error delete400(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = delete400Delegate(service.delete400(booleanValue), null);
             return response.getBody();
@@ -257,7 +257,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete400Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.delete400Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -403,7 +403,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error put404(boolean booleanValue) throws ServiceException {
+    public Error put404(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = put404Delegate(service.put404(booleanValue), null);
             return response.getBody();
@@ -419,7 +419,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put404Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.put404Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -445,7 +445,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error patch405(boolean booleanValue) throws ServiceException {
+    public Error patch405(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = patch405Delegate(service.patch405(booleanValue), null);
             return response.getBody();
@@ -461,7 +461,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void patch405Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.patch405Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -487,7 +487,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error post406(boolean booleanValue) throws ServiceException {
+    public Error post406(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = post406Delegate(service.post406(booleanValue), null);
             return response.getBody();
@@ -503,7 +503,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post406Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.post406Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -529,7 +529,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error delete407(boolean booleanValue) throws ServiceException {
+    public Error delete407(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = delete407Delegate(service.delete407(booleanValue), null);
             return response.getBody();
@@ -545,7 +545,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete407Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.delete407Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -571,7 +571,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error put409(boolean booleanValue) throws ServiceException {
+    public Error put409(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = put409Delegate(service.put409(booleanValue), null);
             return response.getBody();
@@ -587,7 +587,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put409Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.put409Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -733,7 +733,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error put413(boolean booleanValue) throws ServiceException {
+    public Error put413(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = put413Delegate(service.put413(booleanValue), null);
             return response.getBody();
@@ -749,7 +749,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put413Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.put413Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -775,7 +775,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error patch414(boolean booleanValue) throws ServiceException {
+    public Error patch414(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = patch414Delegate(service.patch414(booleanValue), null);
             return response.getBody();
@@ -791,7 +791,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void patch414Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.patch414Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -817,7 +817,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error post415(boolean booleanValue) throws ServiceException {
+    public Error post415(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = post415Delegate(service.post415(booleanValue), null);
             return response.getBody();
@@ -833,7 +833,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post415Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.post415Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -899,7 +899,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error delete417(boolean booleanValue) throws ServiceException {
+    public Error delete417(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = delete417Delegate(service.delete417(booleanValue), null);
             return response.getBody();
@@ -915,7 +915,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete417Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.delete417Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

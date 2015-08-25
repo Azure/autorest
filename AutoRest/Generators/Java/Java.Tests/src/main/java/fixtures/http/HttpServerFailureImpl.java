@@ -115,7 +115,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error post505(boolean booleanValue) throws ServiceException {
+    public Error post505(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = post505Delegate(service.post505(booleanValue), null);
             return response.getBody();
@@ -131,7 +131,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post505Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.post505Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -157,7 +157,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error delete505(boolean booleanValue) throws ServiceException {
+    public Error delete505(Boolean booleanValue) throws ServiceException {
         try {
             ServiceResponse<Error> response = delete505Delegate(service.delete505(booleanValue), null);
             return response.getBody();
@@ -173,7 +173,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete505Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public void delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         service.delete505Async(booleanValue, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

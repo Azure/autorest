@@ -29,6 +29,7 @@ import fixtures.bodycomplex.models.DateWrapper;
 import fixtures.bodycomplex.models.DatetimeWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Error;
+import com.microsoft.rest.Validator;
 
 public class PrimitiveImpl implements Primitive {
     private PrimitiveService service;
@@ -85,6 +86,11 @@ public class PrimitiveImpl implements Primitive {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putInt(IntWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putIntDelegate(service.putInt(complexBody), null);
             response.getBody();
@@ -101,6 +107,11 @@ public class PrimitiveImpl implements Primitive {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putIntAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -168,6 +179,11 @@ public class PrimitiveImpl implements Primitive {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putLong(LongWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putLongDelegate(service.putLong(complexBody), null);
             response.getBody();
@@ -184,6 +200,11 @@ public class PrimitiveImpl implements Primitive {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putLongAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -251,6 +272,11 @@ public class PrimitiveImpl implements Primitive {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putFloat(FloatWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putFloatDelegate(service.putFloat(complexBody), null);
             response.getBody();
@@ -267,6 +293,11 @@ public class PrimitiveImpl implements Primitive {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putFloatAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -334,6 +365,11 @@ public class PrimitiveImpl implements Primitive {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDouble(DoubleWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putDoubleDelegate(service.putDouble(complexBody), null);
             response.getBody();
@@ -350,6 +386,11 @@ public class PrimitiveImpl implements Primitive {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putDoubleAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -417,6 +458,11 @@ public class PrimitiveImpl implements Primitive {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putBool(BooleanWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putBoolDelegate(service.putBool(complexBody), null);
             response.getBody();
@@ -433,6 +479,11 @@ public class PrimitiveImpl implements Primitive {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putBoolAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -500,6 +551,11 @@ public class PrimitiveImpl implements Primitive {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putString(StringWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putStringDelegate(service.putString(complexBody), null);
             response.getBody();
@@ -516,6 +572,11 @@ public class PrimitiveImpl implements Primitive {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putStringAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -583,6 +644,11 @@ public class PrimitiveImpl implements Primitive {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDate(DateWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putDateDelegate(service.putDate(complexBody), null);
             response.getBody();
@@ -599,6 +665,11 @@ public class PrimitiveImpl implements Primitive {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putDateAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -666,6 +737,11 @@ public class PrimitiveImpl implements Primitive {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDateTime(DatetimeWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putDateTimeDelegate(service.putDateTime(complexBody), null);
             response.getBody();
@@ -682,6 +758,11 @@ public class PrimitiveImpl implements Primitive {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putDateTimeAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -749,6 +830,11 @@ public class PrimitiveImpl implements Primitive {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putByte(ByteWrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
         try {
             ServiceResponse<Void> response = putByteDelegate(service.putByte(complexBody), null);
             response.getBody();
@@ -765,6 +851,11 @@ public class PrimitiveImpl implements Primitive {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
         service.putByteAsync(complexBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

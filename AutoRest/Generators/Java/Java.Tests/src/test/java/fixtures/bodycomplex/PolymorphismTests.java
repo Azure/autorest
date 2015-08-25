@@ -1,6 +1,5 @@
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
 import fixtures.bodycomplex.models.Sawshark;
@@ -34,7 +33,7 @@ public class PolymorphismTests {
         Assert.assertEquals(Sawshark.class, salmon.getSiblings().get(1).getClass());
         Sawshark sib2 = (Sawshark)(salmon.getSiblings().get(1));
         Assert.assertArrayEquals(
-                new byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254},
+                new Byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254},
                 sib2.getPicture());
     }
 
@@ -58,7 +57,7 @@ public class PolymorphismTests {
         sib2.setAge(105);
         sib2.setBirthday(new DateTime(1900, 1, 5, 1, 0, 0, DateTimeZone.UTC));
         sib2.setLength(10.0);
-        sib2.setPicture(new byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
+        sib2.setPicture(new Byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
         sib2.setSpecies("dangerous");
         body.getSiblings().add(sib2);
 
@@ -85,16 +84,14 @@ public class PolymorphismTests {
             Sawshark sib2 = new Sawshark();
             sib2.setAge(105);
             sib2.setLength(10.0);
-            sib2.setPicture(new byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
+            sib2.setPicture(new Byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
             sib2.setSpecies("dangerous");
             body.getSiblings().add(sib2);
 
-            Validator.validate(body, Salmon.class);
-
             client.getPolymorphism().putValidMissingRequired(body);
-        } catch (NullPointerException ex) {
+        } catch (IllegalArgumentException ex) {
             //expected
-            Assert.assertTrue(ex.getMessage().contains("birthday == null"));
+            Assert.assertTrue(ex.getMessage().contains("birthday is required and cannot be null."));
         }
     }
 }

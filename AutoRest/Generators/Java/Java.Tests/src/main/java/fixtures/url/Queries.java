@@ -32,94 +32,94 @@ public interface Queries {
      */
     interface QueriesService {
         @GET("/queries/bool/true")
-        Response getBooleanTrue(@Query("boolQuery") boolean boolQuery) throws ServiceException;
+        Response getBooleanTrue(@Query("boolQuery") Boolean boolQuery) throws ServiceException;
 
         @GET("/queries/bool/true")
-        void getBooleanTrueAsync(@Query("boolQuery") boolean boolQuery, ServiceResponseCallback cb);
+        void getBooleanTrueAsync(@Query("boolQuery") Boolean boolQuery, ServiceResponseCallback cb);
 
         @GET("/queries/bool/false")
-        Response getBooleanFalse(@Query("boolQuery") boolean boolQuery) throws ServiceException;
+        Response getBooleanFalse(@Query("boolQuery") Boolean boolQuery) throws ServiceException;
 
         @GET("/queries/bool/false")
-        void getBooleanFalseAsync(@Query("boolQuery") boolean boolQuery, ServiceResponseCallback cb);
+        void getBooleanFalseAsync(@Query("boolQuery") Boolean boolQuery, ServiceResponseCallback cb);
 
         @GET("/queries/bool/null")
-        Response getBooleanNull(@Query("boolQuery") boolean boolQuery) throws ServiceException;
+        Response getBooleanNull(@Query("boolQuery") Boolean boolQuery) throws ServiceException;
 
         @GET("/queries/bool/null")
-        void getBooleanNullAsync(@Query("boolQuery") boolean boolQuery, ServiceResponseCallback cb);
+        void getBooleanNullAsync(@Query("boolQuery") Boolean boolQuery, ServiceResponseCallback cb);
 
         @GET("/queries/int/1000000")
-        Response getIntOneMillion(@Query("intQuery") int intQuery) throws ServiceException;
+        Response getIntOneMillion(@Query("intQuery") Integer intQuery) throws ServiceException;
 
         @GET("/queries/int/1000000")
-        void getIntOneMillionAsync(@Query("intQuery") int intQuery, ServiceResponseCallback cb);
+        void getIntOneMillionAsync(@Query("intQuery") Integer intQuery, ServiceResponseCallback cb);
 
         @GET("/queries/int/-1000000")
-        Response getIntNegativeOneMillion(@Query("intQuery") int intQuery) throws ServiceException;
+        Response getIntNegativeOneMillion(@Query("intQuery") Integer intQuery) throws ServiceException;
 
         @GET("/queries/int/-1000000")
-        void getIntNegativeOneMillionAsync(@Query("intQuery") int intQuery, ServiceResponseCallback cb);
+        void getIntNegativeOneMillionAsync(@Query("intQuery") Integer intQuery, ServiceResponseCallback cb);
 
         @GET("/queries/int/null")
-        Response getIntNull(@Query("intQuery") int intQuery) throws ServiceException;
+        Response getIntNull(@Query("intQuery") Integer intQuery) throws ServiceException;
 
         @GET("/queries/int/null")
-        void getIntNullAsync(@Query("intQuery") int intQuery, ServiceResponseCallback cb);
+        void getIntNullAsync(@Query("intQuery") Integer intQuery, ServiceResponseCallback cb);
 
         @GET("/queries/long/10000000000")
-        Response getTenBillion(@Query("longQuery") long longQuery) throws ServiceException;
+        Response getTenBillion(@Query("longQuery") Long longQuery) throws ServiceException;
 
         @GET("/queries/long/10000000000")
-        void getTenBillionAsync(@Query("longQuery") long longQuery, ServiceResponseCallback cb);
+        void getTenBillionAsync(@Query("longQuery") Long longQuery, ServiceResponseCallback cb);
 
         @GET("/queries/long/-10000000000")
-        Response getNegativeTenBillion(@Query("longQuery") long longQuery) throws ServiceException;
+        Response getNegativeTenBillion(@Query("longQuery") Long longQuery) throws ServiceException;
 
         @GET("/queries/long/-10000000000")
-        void getNegativeTenBillionAsync(@Query("longQuery") long longQuery, ServiceResponseCallback cb);
+        void getNegativeTenBillionAsync(@Query("longQuery") Long longQuery, ServiceResponseCallback cb);
 
         @GET("/queries/long/null")
-        Response getLongNull(@Query("longQuery") long longQuery) throws ServiceException;
+        Response getLongNull(@Query("longQuery") Long longQuery) throws ServiceException;
 
         @GET("/queries/long/null")
-        void getLongNullAsync(@Query("longQuery") long longQuery, ServiceResponseCallback cb);
+        void getLongNullAsync(@Query("longQuery") Long longQuery, ServiceResponseCallback cb);
 
         @GET("/queries/float/1.034E+20")
-        Response floatScientificPositive(@Query("floatQuery") double floatQuery) throws ServiceException;
+        Response floatScientificPositive(@Query("floatQuery") Double floatQuery) throws ServiceException;
 
         @GET("/queries/float/1.034E+20")
-        void floatScientificPositiveAsync(@Query("floatQuery") double floatQuery, ServiceResponseCallback cb);
+        void floatScientificPositiveAsync(@Query("floatQuery") Double floatQuery, ServiceResponseCallback cb);
 
         @GET("/queries/float/-1.034E-20")
-        Response floatScientificNegative(@Query("floatQuery") double floatQuery) throws ServiceException;
+        Response floatScientificNegative(@Query("floatQuery") Double floatQuery) throws ServiceException;
 
         @GET("/queries/float/-1.034E-20")
-        void floatScientificNegativeAsync(@Query("floatQuery") double floatQuery, ServiceResponseCallback cb);
+        void floatScientificNegativeAsync(@Query("floatQuery") Double floatQuery, ServiceResponseCallback cb);
 
         @GET("/queries/float/null")
-        Response floatNull(@Query("floatQuery") double floatQuery) throws ServiceException;
+        Response floatNull(@Query("floatQuery") Double floatQuery) throws ServiceException;
 
         @GET("/queries/float/null")
-        void floatNullAsync(@Query("floatQuery") double floatQuery, ServiceResponseCallback cb);
+        void floatNullAsync(@Query("floatQuery") Double floatQuery, ServiceResponseCallback cb);
 
         @GET("/queries/double/9999999.999")
-        Response doubleDecimalPositive(@Query("doubleQuery") double doubleQuery) throws ServiceException;
+        Response doubleDecimalPositive(@Query("doubleQuery") Double doubleQuery) throws ServiceException;
 
         @GET("/queries/double/9999999.999")
-        void doubleDecimalPositiveAsync(@Query("doubleQuery") double doubleQuery, ServiceResponseCallback cb);
+        void doubleDecimalPositiveAsync(@Query("doubleQuery") Double doubleQuery, ServiceResponseCallback cb);
 
         @GET("/queries/double/-9999999.999")
-        Response doubleDecimalNegative(@Query("doubleQuery") double doubleQuery) throws ServiceException;
+        Response doubleDecimalNegative(@Query("doubleQuery") Double doubleQuery) throws ServiceException;
 
         @GET("/queries/double/-9999999.999")
-        void doubleDecimalNegativeAsync(@Query("doubleQuery") double doubleQuery, ServiceResponseCallback cb);
+        void doubleDecimalNegativeAsync(@Query("doubleQuery") Double doubleQuery, ServiceResponseCallback cb);
 
         @GET("/queries/double/null")
-        Response doubleNull(@Query("doubleQuery") double doubleQuery) throws ServiceException;
+        Response doubleNull(@Query("doubleQuery") Double doubleQuery) throws ServiceException;
 
         @GET("/queries/double/null")
-        void doubleNullAsync(@Query("doubleQuery") double doubleQuery, ServiceResponseCallback cb);
+        void doubleNullAsync(@Query("doubleQuery") Double doubleQuery, ServiceResponseCallback cb);
 
         @GET("/queries/string/unicode/")
         Response stringUnicode(@Query("stringQuery") String stringQuery) throws ServiceException;
@@ -158,22 +158,22 @@ public interface Queries {
         void enumNullAsync(@Query("enumQuery") UriColor enumQuery, ServiceResponseCallback cb);
 
         @GET("/queries/byte/multibyte")
-        Response byteMultiByte(@Query("byteQuery") byte[] byteQuery) throws ServiceException;
+        Response byteMultiByte(@Query("byteQuery") Byte[] byteQuery) throws ServiceException;
 
         @GET("/queries/byte/multibyte")
-        void byteMultiByteAsync(@Query("byteQuery") byte[] byteQuery, ServiceResponseCallback cb);
+        void byteMultiByteAsync(@Query("byteQuery") Byte[] byteQuery, ServiceResponseCallback cb);
 
         @GET("/queries/byte/empty")
-        Response byteEmpty(@Query("byteQuery") byte[] byteQuery) throws ServiceException;
+        Response byteEmpty(@Query("byteQuery") Byte[] byteQuery) throws ServiceException;
 
         @GET("/queries/byte/empty")
-        void byteEmptyAsync(@Query("byteQuery") byte[] byteQuery, ServiceResponseCallback cb);
+        void byteEmptyAsync(@Query("byteQuery") Byte[] byteQuery, ServiceResponseCallback cb);
 
         @GET("/queries/byte/null")
-        Response byteNull(@Query("byteQuery") byte[] byteQuery) throws ServiceException;
+        Response byteNull(@Query("byteQuery") Byte[] byteQuery) throws ServiceException;
 
         @GET("/queries/byte/null")
-        void byteNullAsync(@Query("byteQuery") byte[] byteQuery, ServiceResponseCallback cb);
+        void byteNullAsync(@Query("byteQuery") Byte[] byteQuery, ServiceResponseCallback cb);
 
         @GET("/queries/date/2012-01-01")
         Response dateValid(@Query("dateQuery") LocalDate dateQuery) throws ServiceException;
@@ -242,7 +242,7 @@ public interface Queries {
      * @param boolQuery true boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getBooleanTrue(boolean boolQuery) throws ServiceException;
+    void getBooleanTrue(Boolean boolQuery) throws ServiceException;
 
     /**
      * Get true Boolean value on path
@@ -250,7 +250,7 @@ public interface Queries {
      * @param boolQuery true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getBooleanTrueAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    void getBooleanTrueAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get false Boolean value on path
@@ -258,7 +258,7 @@ public interface Queries {
      * @param boolQuery false boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getBooleanFalse(boolean boolQuery) throws ServiceException;
+    void getBooleanFalse(Boolean boolQuery) throws ServiceException;
 
     /**
      * Get false Boolean value on path
@@ -266,7 +266,7 @@ public interface Queries {
      * @param boolQuery false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getBooleanFalseAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    void getBooleanFalseAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null Boolean value on query (query string should be absent)
@@ -274,7 +274,7 @@ public interface Queries {
      * @param boolQuery null boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getBooleanNull(boolean boolQuery) throws ServiceException;
+    void getBooleanNull(Boolean boolQuery) throws ServiceException;
 
     /**
      * Get null Boolean value on query (query string should be absent)
@@ -282,7 +282,7 @@ public interface Queries {
      * @param boolQuery null boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getBooleanNullAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    void getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '1000000' integer value
@@ -290,7 +290,7 @@ public interface Queries {
      * @param intQuery '1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getIntOneMillion(int intQuery) throws ServiceException;
+    void getIntOneMillion(Integer intQuery) throws ServiceException;
 
     /**
      * Get '1000000' integer value
@@ -298,7 +298,7 @@ public interface Queries {
      * @param intQuery '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getIntOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
+    void getIntOneMillionAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1000000' integer value
@@ -306,7 +306,7 @@ public interface Queries {
      * @param intQuery '-1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getIntNegativeOneMillion(int intQuery) throws ServiceException;
+    void getIntNegativeOneMillion(Integer intQuery) throws ServiceException;
 
     /**
      * Get '-1000000' integer value
@@ -314,7 +314,7 @@ public interface Queries {
      * @param intQuery '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getIntNegativeOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
+    void getIntNegativeOneMillionAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null integer value (no query parameter)
@@ -322,7 +322,7 @@ public interface Queries {
      * @param intQuery null integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getIntNull(int intQuery) throws ServiceException;
+    void getIntNull(Integer intQuery) throws ServiceException;
 
     /**
      * Get null integer value (no query parameter)
@@ -330,7 +330,7 @@ public interface Queries {
      * @param intQuery null integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getIntNullAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
+    void getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '10000000000' 64 bit integer value
@@ -338,7 +338,7 @@ public interface Queries {
      * @param longQuery '10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getTenBillion(long longQuery) throws ServiceException;
+    void getTenBillion(Long longQuery) throws ServiceException;
 
     /**
      * Get '10000000000' 64 bit integer value
@@ -346,7 +346,7 @@ public interface Queries {
      * @param longQuery '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
+    void getTenBillionAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-10000000000' 64 bit integer value
@@ -354,7 +354,7 @@ public interface Queries {
      * @param longQuery '-10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getNegativeTenBillion(long longQuery) throws ServiceException;
+    void getNegativeTenBillion(Long longQuery) throws ServiceException;
 
     /**
      * Get '-10000000000' 64 bit integer value
@@ -362,7 +362,7 @@ public interface Queries {
      * @param longQuery '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getNegativeTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
+    void getNegativeTenBillionAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri)
@@ -370,7 +370,7 @@ public interface Queries {
      * @param longQuery null 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getLongNull(long longQuery) throws ServiceException;
+    void getLongNull(Long longQuery) throws ServiceException;
 
     /**
      * Get 'null 64 bit integer value (no query param in uri)
@@ -378,7 +378,7 @@ public interface Queries {
      * @param longQuery null 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getLongNullAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
+    void getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '1.034E+20' numeric value
@@ -386,7 +386,7 @@ public interface Queries {
      * @param floatQuery '1.034E+20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void floatScientificPositive(double floatQuery) throws ServiceException;
+    void floatScientificPositive(Double floatQuery) throws ServiceException;
 
     /**
      * Get '1.034E+20' numeric value
@@ -394,7 +394,7 @@ public interface Queries {
      * @param floatQuery '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void floatScientificPositiveAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
+    void floatScientificPositiveAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1.034E-20' numeric value
@@ -402,7 +402,7 @@ public interface Queries {
      * @param floatQuery '-1.034E-20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void floatScientificNegative(double floatQuery) throws ServiceException;
+    void floatScientificNegative(Double floatQuery) throws ServiceException;
 
     /**
      * Get '-1.034E-20' numeric value
@@ -410,7 +410,7 @@ public interface Queries {
      * @param floatQuery '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void floatScientificNegativeAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
+    void floatScientificNegativeAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter)
@@ -418,7 +418,7 @@ public interface Queries {
      * @param floatQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void floatNull(double floatQuery) throws ServiceException;
+    void floatNull(Double floatQuery) throws ServiceException;
 
     /**
      * Get null numeric value (no query parameter)
@@ -426,7 +426,7 @@ public interface Queries {
      * @param floatQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void floatNullAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
+    void floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '9999999.999' numeric value
@@ -434,7 +434,7 @@ public interface Queries {
      * @param doubleQuery '9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void doubleDecimalPositive(double doubleQuery) throws ServiceException;
+    void doubleDecimalPositive(Double doubleQuery) throws ServiceException;
 
     /**
      * Get '9999999.999' numeric value
@@ -442,7 +442,7 @@ public interface Queries {
      * @param doubleQuery '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void doubleDecimalPositiveAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    void doubleDecimalPositiveAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-9999999.999' numeric value
@@ -450,7 +450,7 @@ public interface Queries {
      * @param doubleQuery '-9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void doubleDecimalNegative(double doubleQuery) throws ServiceException;
+    void doubleDecimalNegative(Double doubleQuery) throws ServiceException;
 
     /**
      * Get '-9999999.999' numeric value
@@ -458,7 +458,7 @@ public interface Queries {
      * @param doubleQuery '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void doubleDecimalNegativeAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    void doubleDecimalNegativeAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter)
@@ -466,7 +466,7 @@ public interface Queries {
      * @param doubleQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void doubleNull(double doubleQuery) throws ServiceException;
+    void doubleNull(Double doubleQuery) throws ServiceException;
 
     /**
      * Get null numeric value (no query parameter)
@@ -474,7 +474,7 @@ public interface Queries {
      * @param doubleQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void doubleNullAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    void doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -578,7 +578,7 @@ public interface Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteMultiByte(byte[] byteQuery) throws ServiceException;
+    void byteMultiByte(Byte[] byteQuery) throws ServiceException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -586,7 +586,7 @@ public interface Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    void byteMultiByteAsync(Byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '' as byte array
@@ -594,7 +594,7 @@ public interface Queries {
      * @param byteQuery '' as byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteEmpty(byte[] byteQuery) throws ServiceException;
+    void byteEmpty(Byte[] byteQuery) throws ServiceException;
 
     /**
      * Get '' as byte array
@@ -602,7 +602,7 @@ public interface Queries {
      * @param byteQuery '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void byteEmptyAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    void byteEmptyAsync(Byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as byte array (no query parameters in uri)
@@ -610,7 +610,7 @@ public interface Queries {
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteNull(byte[] byteQuery) throws ServiceException;
+    void byteNull(Byte[] byteQuery) throws ServiceException;
 
     /**
      * Get null as byte array (no query parameters in uri)
@@ -618,7 +618,7 @@ public interface Queries {
      * @param byteQuery null as byte array (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    void byteNullAsync(Byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01' as date

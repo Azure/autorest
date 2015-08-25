@@ -18,7 +18,7 @@ public class Pet {
     /**
      * The id property.
      */
-    private int id;
+    private Integer id;
 
     /**
      * The name property.
@@ -30,7 +30,7 @@ public class Pet {
      *
      * @return the id value
      */ 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -39,7 +39,7 @@ public class Pet {
      *
      * @param id the id value to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

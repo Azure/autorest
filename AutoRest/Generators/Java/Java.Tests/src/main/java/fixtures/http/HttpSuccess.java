@@ -45,64 +45,64 @@ public interface HttpSuccess {
         void get200Async(ServiceResponseCallback cb);
 
         @PUT("/http/success/200")
-        Response put200(@Body boolean booleanValue) throws ServiceException;
+        Response put200(@Body Boolean booleanValue) throws ServiceException;
 
         @PUT("/http/success/200")
-        void put200Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void put200Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/success/200")
-        Response patch200(@Body boolean booleanValue) throws ServiceException;
+        Response patch200(@Body Boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/success/200")
-        void patch200Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void patch200Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/success/200")
-        Response post200(@Body boolean booleanValue) throws ServiceException;
+        Response post200(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/success/200")
-        void post200Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void post200Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/success/200")
-        Response delete200(@Body boolean booleanValue) throws ServiceException;
+        Response delete200(@Body Boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/success/200")
-        void delete200Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void delete200Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PUT("/http/success/201")
-        Response put201(@Body boolean booleanValue) throws ServiceException;
+        Response put201(@Body Boolean booleanValue) throws ServiceException;
 
         @PUT("/http/success/201")
-        void put201Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void put201Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/success/201")
-        Response post201(@Body boolean booleanValue) throws ServiceException;
+        Response post201(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/success/201")
-        void post201Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void post201Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PUT("/http/success/202")
-        Response put202(@Body boolean booleanValue) throws ServiceException;
+        Response put202(@Body Boolean booleanValue) throws ServiceException;
 
         @PUT("/http/success/202")
-        void put202Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void put202Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/success/202")
-        Response patch202(@Body boolean booleanValue) throws ServiceException;
+        Response patch202(@Body Boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/success/202")
-        void patch202Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void patch202Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/success/202")
-        Response post202(@Body boolean booleanValue) throws ServiceException;
+        Response post202(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/success/202")
-        void post202Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void post202Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/success/202")
-        Response delete202(@Body boolean booleanValue) throws ServiceException;
+        Response delete202(@Body Boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/success/202")
-        void delete202Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void delete202Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @HEAD("/http/success/204")
         Response head204() throws ServiceException;
@@ -111,28 +111,28 @@ public interface HttpSuccess {
         void head204Async(ServiceResponseCallback cb);
 
         @PUT("/http/success/204")
-        Response put204(@Body boolean booleanValue) throws ServiceException;
+        Response put204(@Body Boolean booleanValue) throws ServiceException;
 
         @PUT("/http/success/204")
-        void put204Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void put204Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/success/204")
-        Response patch204(@Body boolean booleanValue) throws ServiceException;
+        Response patch204(@Body Boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/success/204")
-        void patch204Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void patch204Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @POST("/http/success/204")
-        Response post204(@Body boolean booleanValue) throws ServiceException;
+        Response post204(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/success/204")
-        void post204Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void post204Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/success/204")
-        Response delete204(@Body boolean booleanValue) throws ServiceException;
+        Response delete204(@Body Boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/success/204")
-        void delete204Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void delete204Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @HEAD("/http/success/404")
         Response head404() throws ServiceException;
@@ -176,7 +176,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void put200(boolean booleanValue) throws ServiceException;
+    void put200(Boolean booleanValue) throws ServiceException;
 
     /**
      * Put boolean value true returning 200 success
@@ -184,7 +184,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put200Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returning 200
@@ -192,7 +192,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void patch200(boolean booleanValue) throws ServiceException;
+    void patch200(Boolean booleanValue) throws ServiceException;
 
     /**
      * Patch true Boolean value in request returning 200
@@ -200,7 +200,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void patch200Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post bollean value true in request that returns a 200
@@ -208,7 +208,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void post200(boolean booleanValue) throws ServiceException;
+    void post200(Boolean booleanValue) throws ServiceException;
 
     /**
      * Post bollean value true in request that returns a 200
@@ -216,7 +216,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void post200Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete simple boolean value true returns 200
@@ -224,7 +224,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void delete200(boolean booleanValue) throws ServiceException;
+    void delete200(Boolean booleanValue) throws ServiceException;
 
     /**
      * Delete simple boolean value true returns 200
@@ -232,7 +232,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void delete200Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 201
@@ -240,7 +240,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void put201(boolean booleanValue) throws ServiceException;
+    void put201(Boolean booleanValue) throws ServiceException;
 
     /**
      * Put true Boolean value in request returns 201
@@ -248,7 +248,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put201Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 201 (Created)
@@ -256,7 +256,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void post201(boolean booleanValue) throws ServiceException;
+    void post201(Boolean booleanValue) throws ServiceException;
 
     /**
      * Post true Boolean value in request returns 201 (Created)
@@ -264,7 +264,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void post201Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted)
@@ -272,7 +272,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void put202(boolean booleanValue) throws ServiceException;
+    void put202(Boolean booleanValue) throws ServiceException;
 
     /**
      * Put true Boolean value in request returns 202 (Accepted)
@@ -280,7 +280,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put202Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returns 202
@@ -288,7 +288,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void patch202(boolean booleanValue) throws ServiceException;
+    void patch202(Boolean booleanValue) throws ServiceException;
 
     /**
      * Patch true Boolean value in request returns 202
@@ -296,7 +296,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void patch202Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted)
@@ -304,7 +304,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void post202(boolean booleanValue) throws ServiceException;
+    void post202(Boolean booleanValue) throws ServiceException;
 
     /**
      * Post true Boolean value in request returns 202 (Accepted)
@@ -312,7 +312,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void post202Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete true Boolean value in request returns 202 (accepted)
@@ -320,7 +320,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void delete202(boolean booleanValue) throws ServiceException;
+    void delete202(Boolean booleanValue) throws ServiceException;
 
     /**
      * Delete true Boolean value in request returns 202 (accepted)
@@ -328,7 +328,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void delete202Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 204 status code if successful
@@ -350,7 +350,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void put204(boolean booleanValue) throws ServiceException;
+    void put204(Boolean booleanValue) throws ServiceException;
 
     /**
      * Put true Boolean value in request returns 204 (no content)
@@ -358,7 +358,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put204Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returns 204 (no content)
@@ -366,7 +366,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void patch204(boolean booleanValue) throws ServiceException;
+    void patch204(Boolean booleanValue) throws ServiceException;
 
     /**
      * Patch true Boolean value in request returns 204 (no content)
@@ -374,7 +374,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void patch204Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 204 (no content)
@@ -382,7 +382,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void post204(boolean booleanValue) throws ServiceException;
+    void post204(Boolean booleanValue) throws ServiceException;
 
     /**
      * Post true Boolean value in request returns 204 (no content)
@@ -390,7 +390,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void post204Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete true Boolean value in request returns 204 (no content)
@@ -398,7 +398,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void delete204(boolean booleanValue) throws ServiceException;
+    void delete204(Boolean booleanValue) throws ServiceException;
 
     /**
      * Delete true Boolean value in request returns 204 (no content)
@@ -406,7 +406,7 @@ public interface HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void delete204Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 404 status code

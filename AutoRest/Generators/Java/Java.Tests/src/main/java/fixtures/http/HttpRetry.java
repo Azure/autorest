@@ -39,16 +39,16 @@ public interface HttpRetry {
         void head408Async(ServiceResponseCallback cb);
 
         @PUT("/http/retry/500")
-        Response put500(@Body boolean booleanValue) throws ServiceException;
+        Response put500(@Body Boolean booleanValue) throws ServiceException;
 
         @PUT("/http/retry/500")
-        void put500Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void put500Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/retry/500")
-        Response patch500(@Body boolean booleanValue) throws ServiceException;
+        Response patch500(@Body Boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/retry/500")
-        void patch500Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void patch500Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @GET("/http/retry/502")
         Response get502() throws ServiceException;
@@ -57,28 +57,28 @@ public interface HttpRetry {
         void get502Async(ServiceResponseCallback cb);
 
         @POST("/http/retry/503")
-        Response post503(@Body boolean booleanValue) throws ServiceException;
+        Response post503(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/retry/503")
-        void post503Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void post503Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/retry/503")
-        Response delete503(@Body boolean booleanValue) throws ServiceException;
+        Response delete503(@Body Boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/retry/503")
-        void delete503Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void delete503Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PUT("/http/retry/504")
-        Response put504(@Body boolean booleanValue) throws ServiceException;
+        Response put504(@Body Boolean booleanValue) throws ServiceException;
 
         @PUT("/http/retry/504")
-        void put504Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void put504Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @PATCH("/http/retry/504")
-        Response patch504(@Body boolean booleanValue) throws ServiceException;
+        Response patch504(@Body Boolean booleanValue) throws ServiceException;
 
         @PATCH("/http/retry/504")
-        void patch504Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void patch504Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
     }
     /**
@@ -101,7 +101,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void put500(boolean booleanValue) throws ServiceException;
+    void put500(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 500 status code, then 200 after retry
@@ -109,7 +109,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put500Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry
@@ -117,7 +117,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void patch500(boolean booleanValue) throws ServiceException;
+    void patch500(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 500 status code, then 200 after retry
@@ -125,7 +125,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void patch500Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 502 status code, then 200 after retry
@@ -147,7 +147,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void post503(boolean booleanValue) throws ServiceException;
+    void post503(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 503 status code, then 200 after retry
@@ -155,7 +155,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void post503Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry
@@ -163,7 +163,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void delete503(boolean booleanValue) throws ServiceException;
+    void delete503(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 503 status code, then 200 after retry
@@ -171,7 +171,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void delete503Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry
@@ -179,7 +179,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void put504(boolean booleanValue) throws ServiceException;
+    void put504(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 504 status code, then 200 after retry
@@ -187,7 +187,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put504Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry
@@ -195,7 +195,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void patch504(boolean booleanValue) throws ServiceException;
+    void patch504(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 504 status code, then 200 after retry
@@ -203,6 +203,6 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void patch504Async(boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    void patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
 }

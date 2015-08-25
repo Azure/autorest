@@ -132,6 +132,11 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         parameter.Name = scope.GetVariableName(parameter.Name);
                     }
+
+                    if (!parameter.IsRequired)
+                    {
+                        parameter.Type = WrapPrimitiveType(parameter.Type);
+                    }
                 }
             }
         }
@@ -207,6 +212,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 property.Name = GetPropertyName(property.Name);
                 property.Type = NormalizeType(property.Type);
+                if (!property.IsRequired)
+                {
+                    property.Type = WrapPrimitiveType(property.Type);
+                }
             }
 
             return compositeType;

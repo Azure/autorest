@@ -25,6 +25,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import fixtures.bodydictionary.models.Widget;
 import java.util.List;
+import com.microsoft.rest.Validator;
 
 public class DictionaryImpl implements Dictionary {
     private DictionaryService service;
@@ -122,6 +123,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putEmpty(Map<String, String> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(arrayBody), null);
             response.getBody();
@@ -138,6 +144,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putEmptyAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -372,6 +383,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putBooleanTfftDelegate(service.putBooleanTfft(arrayBody), null);
             response.getBody();
@@ -389,6 +405,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putBooleanTfftAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -538,6 +559,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putIntegerValidDelegate(service.putIntegerValid(arrayBody), null);
             response.getBody();
@@ -554,6 +580,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putIntegerValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -703,6 +734,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putLongValid(Map<String, Long> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putLongValidDelegate(service.putLongValid(arrayBody), null);
             response.getBody();
@@ -719,6 +755,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putLongValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -868,6 +909,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putFloatValid(Map<String, Double> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putFloatValidDelegate(service.putFloatValid(arrayBody), null);
             response.getBody();
@@ -884,6 +930,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putFloatValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1033,6 +1084,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDoubleValid(Map<String, Double> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putDoubleValidDelegate(service.putDoubleValid(arrayBody), null);
             response.getBody();
@@ -1049,6 +1105,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putDoubleValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1198,6 +1259,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putStringValid(Map<String, String> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putStringValidDelegate(service.putStringValid(arrayBody), null);
             response.getBody();
@@ -1214,6 +1280,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putStringValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1366,6 +1437,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDateValid(Map<String, LocalDate> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putDateValidDelegate(service.putDateValid(arrayBody), null);
             response.getBody();
@@ -1383,6 +1459,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1537,6 +1618,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDateTimeValid(Map<String, DateTime> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null);
             response.getBody();
@@ -1554,6 +1640,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1708,6 +1799,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putByteValid(Map<String, Byte[]> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putByteValidDelegate(service.putByteValid(arrayBody), null);
             response.getBody();
@@ -1725,6 +1821,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putByteValidAsync(Map<String, Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putByteValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -2009,6 +2110,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putComplexValid(Map<String, Widget> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putComplexValidDelegate(service.putComplexValid(arrayBody), null);
             response.getBody();
@@ -2027,6 +2133,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putComplexValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -2265,6 +2376,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putArrayValidDelegate(service.putArrayValid(arrayBody), null);
             response.getBody();
@@ -2282,6 +2398,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putArrayValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -2532,6 +2653,11 @@ public class DictionaryImpl implements Dictionary {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
         try {
             ServiceResponse<Void> response = putDictionaryValidDelegate(service.putDictionaryValid(arrayBody), null);
             response.getBody();
@@ -2551,6 +2677,11 @@ public class DictionaryImpl implements Dictionary {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+           serviceCallback.failure(new ServiceException(
+               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
         service.putDictionaryValidAsync(arrayBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

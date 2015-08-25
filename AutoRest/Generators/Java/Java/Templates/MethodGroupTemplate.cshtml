@@ -49,6 +49,17 @@ public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
     @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
     @: */
     @:public @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException {
+    foreach (var param in method.Parameters.Where(p => !(p.Type is Microsoft.Rest.Generator.ClientModel.PrimaryType)))
+    {
+    if (param.IsRequired)
+    {
+    @:    if (@param.Name == null) {
+    @:        throw new ServiceException(
+    @:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
+    @:    }
+    }
+    @:    Validator.validate(@(param.Name));
+    }
     @:    try {
     @:        ServiceResponse<@method.GenericReturnTypeString> response = @(method.Name)Delegate(service.@(method.Name)(@method.MethodParameterInvocation), null);
     @:        @method.ReturnStatement
@@ -68,6 +79,17 @@ public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
     @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
     @: */
     @:public void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback) {
+    foreach (var param in method.Parameters.Where(p => !(p.Type is Microsoft.Rest.Generator.ClientModel.PrimaryType)))
+    {
+    if (param.IsRequired)
+    {
+    @:    if (@param.Name == null) {
+    @:       serviceCallback.failure(new ServiceException(
+    @:           new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+    @:    }
+    }
+    @:    Validator.validate(@(param.Name), serviceCallback);
+    }
     @:    service.@(method.Name)Async(@method.MethodParameterInvocationWithCallback {
     @:        @@Override
     @:        public void response(Response response, RetrofitError error) {

@@ -44,16 +44,16 @@ public interface HttpServerFailure {
         void get501Async(ServiceResponseCallback cb);
 
         @POST("/http/failure/server/505")
-        Response post505(@Body boolean booleanValue) throws ServiceException;
+        Response post505(@Body Boolean booleanValue) throws ServiceException;
 
         @POST("/http/failure/server/505")
-        void post505Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void post505Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
         @DELETE("/http/failure/server/505")
-        Response delete505(@Body boolean booleanValue) throws ServiceException;
+        Response delete505(@Body Boolean booleanValue) throws ServiceException;
 
         @DELETE("/http/failure/server/505")
-        void delete505Async(@Body boolean booleanValue, ServiceResponseCallback cb);
+        void delete505Async(@Body Boolean booleanValue, ServiceResponseCallback cb);
 
     }
     /**
@@ -93,7 +93,7 @@ public interface HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Error post505(boolean booleanValue) throws ServiceException;
+    Error post505(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 505 status code - should be represented in the client as an error
@@ -101,7 +101,7 @@ public interface HttpServerFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void post505Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    void post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 505 status code - should be represented in the client as an error
@@ -110,7 +110,7 @@ public interface HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Error delete505(boolean booleanValue) throws ServiceException;
+    Error delete505(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 505 status code - should be represented in the client as an error
@@ -118,6 +118,6 @@ public interface HttpServerFailure {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void delete505Async(boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    void delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
 }
