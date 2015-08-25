@@ -1,5 +1,6 @@
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.ServiceException;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
 import fixtures.bodycomplex.models.Sawshark;
@@ -89,9 +90,9 @@ public class PolymorphismTests {
             body.getSiblings().add(sib2);
 
             client.getPolymorphism().putValidMissingRequired(body);
-        } catch (IllegalArgumentException ex) {
+        } catch (ServiceException ex) {
             //expected
-            Assert.assertTrue(ex.getMessage().contains("birthday is required and cannot be null."));
+            Assert.assertTrue(ex.getMessage().contains("siblings.birthday is required and cannot be null."));
         }
     }
 }

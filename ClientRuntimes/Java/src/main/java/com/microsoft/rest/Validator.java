@@ -13,6 +13,7 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
+import javax.xml.ws.Service;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ import java.util.Map;
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
 public class Validator {
-    public static void validate(Object parameter) throws IllegalArgumentException {
+    public static void validate(Object parameter) throws ServiceException {
         // Validation of top level payload is done outside
         if (parameter == null) {
             return;
@@ -35,11 +36,12 @@ public class Validator {
             try {
                 property = field.get(parameter);
             } catch (IllegalAccessException e) {
-                // Ignore inaccessible fields
+                throw new ServiceException(e);
             }
             if (property == null) {
                 if (annotation != null && annotation.required()) {
-                    throw new IllegalArgumentException(field.getName() + " is required and cannot be null.");
+                    throw new ServiceException(
+                            new IllegalArgumentException(field.getName() + " is required and cannot be null."));
                 }
             } else {
                 try {
@@ -64,9 +66,15 @@ public class Validator {
                             ClassUtils.isAssignable(propertyType, String.class))) {
                         Validator.validate(property);
                     }
-                } catch (IllegalArgumentException ex) {
-                    // Build property chain
-                    throw new IllegalArgumentException(field.getName() + "." + ex.getMessage());
+                } catch (ServiceException ex) {
+                    IllegalArgumentException cause = (IllegalArgumentException)(ex.getCause());
+                    if (cause != null) {
+                        // Build property chain
+                        throw new ServiceException(
+                                new IllegalArgumentException(field.getName() + "." + cause.getMessage()));
+                    } else {
+                        throw ex;
+                    }
                 }
             }
         }
@@ -75,8 +83,8 @@ public class Validator {
     public static void validate(Object parameter, ServiceCallback<?> serviceCallback) {
         try {
             validate(parameter);
-        } catch (IllegalArgumentException ex) {
-            serviceCallback.failure(new ServiceException(ex));
+        } catch (ServiceException ex) {
+            serviceCallback.failure(ex);
         }
     }
 }
