@@ -20,7 +20,7 @@ import retrofit.http.PUT;
 import retrofit.http.Body;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
-import retrofit.http.DELETE;
+import com.microsoft.rest.DELETE;
 
 /**
  * An instance of this class provides access to all the operations defined

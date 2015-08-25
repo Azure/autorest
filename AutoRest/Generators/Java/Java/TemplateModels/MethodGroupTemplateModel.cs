@@ -143,7 +143,14 @@ namespace Microsoft.Rest.Generator.Java
 
                 foreach (var method in this.MethodTemplateModels)
                 {
-                    classes.Add("retrofit.http." + method.HttpMethod.ToString().ToUpper(CultureInfo.InvariantCulture));
+                    if (method.HttpMethod == HttpMethod.Delete)
+                    {
+                        classes.Add("com.microsoft.rest.DELETE");
+                    }
+                    else
+                    {
+                        classes.Add("retrofit.http." + method.HttpMethod.ToString().ToUpper(CultureInfo.InvariantCulture));
+                    }
                     foreach (var param in method.Parameters)
                     {
                         if (param.Location != ParameterLocation.None &&

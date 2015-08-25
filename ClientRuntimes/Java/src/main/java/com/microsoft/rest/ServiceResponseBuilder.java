@@ -97,7 +97,7 @@ public class ServiceResponseBuilder<T> {
     @SuppressWarnings("unchecked")
     public ServiceResponse<T> build(Response response, RetrofitError error) throws ServiceException {
         if (response == null) {
-            throw new ServiceException("No response returned.", error);
+            throw new ServiceException(error);
         }
 
         ServiceResponse<T> result;
@@ -123,7 +123,7 @@ public class ServiceResponseBuilder<T> {
                 // standard HTTP error codes
                 ServiceException exception = new ServiceException(error);
                 exception.setResponse(response);
-                if (responseTypes.containsKey(0)) {
+                if (responseTypes.containsKey(0) && responseContent.length() > 0) {
                     exception.setErrorModel(this.converter.fromBody(
                             responseContent,
                             Object.class));
@@ -134,7 +134,9 @@ public class ServiceResponseBuilder<T> {
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new ServiceException(ex);
+            ServiceException exception = new ServiceException(ex);
+            exception.setResponse(response);
+            throw exception;
         }
     }
 }

@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.fail;
+
 public class ExplicitTests {
     static AutoRestRequiredOptionalTestService client;
 
@@ -62,6 +64,7 @@ public class ExplicitTests {
     public void postRequiredStringParameter() throws Exception {
         try {
             client.getExplicit().postRequiredStringParameter(null);
+            fail();
         } catch (ServiceException ex) {
             Assert.assertTrue(ex.getCause().getMessage().contains("Parameter bodyParameter is required"));
         }
@@ -82,6 +85,7 @@ public class ExplicitTests {
             StringWrapper body = new StringWrapper();
             body.setValue(null);
             client.getExplicit().postRequiredStringProperty(body);
+            fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(IllegalArgumentException.class, ex.getCause().getClass());
             Assert.assertTrue(ex.getMessage().contains("value is required"));
@@ -117,6 +121,7 @@ public class ExplicitTests {
     public void postRequiredClassParameter() throws Exception {
         try {
             client.getExplicit().postRequiredClassParameter(null);
+            fail();
         } catch (ServiceException ex) {
             Assert.assertTrue(ex.getCause().getMessage().contains("Parameter bodyParameter is required"));
         }
@@ -137,6 +142,7 @@ public class ExplicitTests {
             ClassWrapper body = new ClassWrapper();
             body.setValue(null);
             client.getExplicit().postRequiredClassProperty(body);
+            fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(IllegalArgumentException.class, ex.getCause().getClass());
             Assert.assertTrue(ex.getMessage().contains("value is required"));
@@ -154,6 +160,7 @@ public class ExplicitTests {
     public void postRequiredArrayParameter() throws Exception {
         try {
             client.getExplicit().postRequiredArrayParameter(null);
+            fail();
         } catch (ServiceException ex) {
             Assert.assertTrue(ex.getCause().getMessage().contains("Parameter bodyParameter is required"));
         }
@@ -174,6 +181,7 @@ public class ExplicitTests {
             ArrayWrapper body = new ArrayWrapper();
             body.setValue(null);
             client.getExplicit().postRequiredArrayProperty(body);
+            fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(IllegalArgumentException.class, ex.getCause().getClass());
             Assert.assertTrue(ex.getMessage().contains("value is required"));

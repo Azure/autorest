@@ -14,6 +14,8 @@ import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -49,6 +51,9 @@ public abstract class ServiceClient {
         this.client = client;
         this.client.interceptors().add(new RetryHandler());
         OkClient okClient = new OkClient(client);
+        CookieManager cookieManager = new CookieManager();
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+        client.setCookieHandler(cookieManager);
 
         // Set up rest adapter builder
         Executor executor = Executors.newCachedThreadPool();
