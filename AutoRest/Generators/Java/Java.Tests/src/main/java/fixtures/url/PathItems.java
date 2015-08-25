@@ -29,28 +29,28 @@ public interface PathItems {
      */
     interface PathItemsService {
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
-        Response getAllWithValues(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
+        Response getAllWithValues(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery) throws ServiceException;
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
-        void getAllWithValuesAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceResponseCallback cb);
+        void getAllWithValuesAsync(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery, ServiceResponseCallback cb);
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
-        Response getGlobalQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
+        Response getGlobalQueryNull(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery) throws ServiceException;
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
-        void getGlobalQueryNullAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceResponseCallback cb);
+        void getGlobalQueryNullAsync(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery, ServiceResponseCallback cb);
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
-        Response getGlobalAndLocalQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
+        Response getGlobalAndLocalQueryNull(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery) throws ServiceException;
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
-        void getGlobalAndLocalQueryNullAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceResponseCallback cb);
+        void getGlobalAndLocalQueryNullAsync(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery, ServiceResponseCallback cb);
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
-        Response getLocalPathItemQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery) throws ServiceException;
+        Response getLocalPathItemQueryNull(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery) throws ServiceException;
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
-        void getLocalPathItemQueryNullAsync(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, ServiceResponseCallback cb);
+        void getLocalPathItemQueryNullAsync(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery, ServiceResponseCallback cb);
 
     }
     /**

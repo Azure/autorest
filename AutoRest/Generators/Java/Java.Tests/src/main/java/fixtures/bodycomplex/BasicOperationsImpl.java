@@ -25,9 +25,11 @@ import com.microsoft.rest.Validator;
 
 public class BasicOperationsImpl implements BasicOperations {
     private BasicService service;
+    AutoRestComplexTestService client;
 
-    public BasicOperationsImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(BasicService.class);
+    public BasicOperationsImpl(RestAdapter restAdapter, AutoRestComplexTestService client) {
+        this.service = restAdapter.create(BasicService.class);
+        this.client = client;
     }
 
     /**
@@ -100,8 +102,8 @@ public class BasicOperationsImpl implements BasicOperations {
      */
     public void putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putValidAsync(complexBody, new ServiceResponseCallback() {

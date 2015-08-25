@@ -38,8 +38,7 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
     public String getBaseUri() {
         return this.baseUri;
     }
-@{var parameters = Model.Properties.Where(p => p.IsRequired);}
-@foreach (var param in parameters)
+@foreach (var param in Model.Properties)
 {
 @EmptyLine
 @:    private @(param.Type) @(param.Name.ToCamelCase());
@@ -101,14 +100,14 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @EmptyLine
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        @if (Model.MethodTemplateModels.Any())
-        {
-        @:service = restAdapter.create(@(Model.ServiceClientServiceType).class);
-        }
-        @foreach (var operation in Model.Operations)
-        {
-        @:this.@(operation.MethodGroupName.ToCamelCase()) = new @(operation.MethodGroupType)Impl(restAdapter);
-        }
+@if (Model.MethodTemplateModels.Any())
+{
+@:        service = restAdapter.create(@(Model.ServiceClientServiceType).class);
+}
+@foreach (var operation in Model.Operations)
+{
+@:        this.@(operation.MethodGroupName.ToCamelCase()) = new @(operation.MethodGroupType)Impl(restAdapter, this);
+}
     }
 @if (Model.MethodTemplateModels.Any())
 {

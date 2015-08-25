@@ -23,9 +23,11 @@ import fixtures.bodystring.models.Error;
 
 public class StringOperationsImpl implements StringOperations {
     private StringService service;
+    AutoRestSwaggerBATService client;
 
-    public StringOperationsImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(StringService.class);
+    public StringOperationsImpl(RestAdapter restAdapter, AutoRestSwaggerBATService client) {
+        this.service = restAdapter.create(StringService.class);
+        this.client = client;
     }
 
     /**
@@ -159,6 +161,10 @@ public class StringOperationsImpl implements StringOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putEmpty(String stringBody) throws ServiceException {
+        if (stringBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(stringBody), null);
             response.getBody();
@@ -175,6 +181,10 @@ public class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        if (stringBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+        }
         service.putEmptyAsync(stringBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -248,6 +258,10 @@ public class StringOperationsImpl implements StringOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putMbcs(String stringBody) throws ServiceException {
+        if (stringBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putMbcsDelegate(service.putMbcs(stringBody), null);
             response.getBody();
@@ -266,6 +280,10 @@ public class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        if (stringBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+        }
         service.putMbcsAsync(stringBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -342,6 +360,10 @@ public class StringOperationsImpl implements StringOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putWhitespace(String stringBody) throws ServiceException {
+        if (stringBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putWhitespaceDelegate(service.putWhitespace(stringBody), null);
             response.getBody();
@@ -361,6 +383,10 @@ public class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        if (stringBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+        }
         service.putWhitespaceAsync(stringBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

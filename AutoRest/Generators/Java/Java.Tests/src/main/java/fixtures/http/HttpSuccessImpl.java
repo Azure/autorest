@@ -23,9 +23,11 @@ import fixtures.http.models.Error;
 
 public class HttpSuccessImpl implements HttpSuccess {
     private HttpSuccessService service;
+    AutoRestHttpInfrastructureTestService client;
 
-    public HttpSuccessImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(HttpSuccessService.class);
+    public HttpSuccessImpl(RestAdapter restAdapter, AutoRestHttpInfrastructureTestService client) {
+        this.service = restAdapter.create(HttpSuccessService.class);
+        this.client = client;
     }
 
     /**

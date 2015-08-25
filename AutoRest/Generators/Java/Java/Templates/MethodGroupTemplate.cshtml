@@ -27,9 +27,11 @@ import retrofit.client.Response;
 
 public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
     private @Model.MethodGroupServiceType service;
+    @Model.Name client;
     @EmptyLine
-    public @(Model.MethodGroupType)Impl(RestAdapter restAdapter) {
-        service = restAdapter.create(@(Model.MethodGroupServiceType).class);
+    public @(Model.MethodGroupType)Impl(RestAdapter restAdapter, @Model.Name client) {
+        this.service = restAdapter.create(@(Model.MethodGroupServiceType).class);
+        this.client = client;
     }
     @EmptyLine
 
@@ -49,15 +51,15 @@ public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
     @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
     @: */
     @:public @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException {
-    foreach (var param in method.Parameters.Where(p => !(p.Type is Microsoft.Rest.Generator.ClientModel.PrimaryType)))
-    {
-    if (param.IsRequired)
+    foreach (var param in method.RequiredNullableParameters)
     {
     @:    if (@param.Name == null) {
     @:        throw new ServiceException(
     @:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
     @:    }
     }
+    foreach (var param in method.ParametersToValidate)
+    {
     @:    Validator.validate(@(param.Name));
     }
     @:    try {
@@ -79,15 +81,15 @@ public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
     @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
     @: */
     @:public void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback) {
-    foreach (var param in method.Parameters.Where(p => !(p.Type is Microsoft.Rest.Generator.ClientModel.PrimaryType)))
-    {
-    if (param.IsRequired)
+    foreach (var param in method.RequiredNullableParameters)
     {
     @:    if (@param.Name == null) {
-    @:       serviceCallback.failure(new ServiceException(
-    @:           new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+    @:        serviceCallback.failure(new ServiceException(
+    @:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
     @:    }
     }
+    foreach (var param in method.ParametersToValidate)
+    {
     @:    Validator.validate(@(param.Name), serviceCallback);
     }
     @:    service.@(method.Name)Async(@method.MethodParameterInvocationWithCallback {

@@ -25,9 +25,11 @@ import com.microsoft.rest.Validator;
 
 public class PolymorphismImpl implements Polymorphism {
     private PolymorphismService service;
+    AutoRestComplexTestService client;
 
-    public PolymorphismImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(PolymorphismService.class);
+    public PolymorphismImpl(RestAdapter restAdapter, AutoRestComplexTestService client) {
+        this.service = restAdapter.create(PolymorphismService.class);
+        this.client = client;
     }
 
     /**
@@ -148,8 +150,8 @@ public class PolymorphismImpl implements Polymorphism {
      */
     public void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
@@ -252,8 +254,8 @@ public class PolymorphismImpl implements Polymorphism {
      */
     public void putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putValidMissingRequiredAsync(complexBody, new ServiceResponseCallback() {

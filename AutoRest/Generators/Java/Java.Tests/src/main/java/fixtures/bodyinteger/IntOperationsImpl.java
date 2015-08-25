@@ -23,9 +23,11 @@ import fixtures.bodyinteger.models.Error;
 
 public class IntOperationsImpl implements IntOperations {
     private IntService service;
+    AutoRestIntegerTestService client;
 
-    public IntOperationsImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(IntService.class);
+    public IntOperationsImpl(RestAdapter restAdapter, AutoRestIntegerTestService client) {
+        this.service = restAdapter.create(IntService.class);
+        this.client = client;
     }
 
     /**

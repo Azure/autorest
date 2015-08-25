@@ -53,7 +53,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
+                foreach (var parameter in ParameterTemplateModels)
                 {
                     StringBuilder declarationBuilder = new StringBuilder();
                     if (Url.Contains("{" + parameter.Name + "}"))
@@ -75,7 +75,8 @@ namespace Microsoft.Rest.Generator.Java
                             "@{0} ", 
                             parameter.Location.ToString()));
                     }
-                    declarationBuilder.Append(parameter.Type.ToString() + " " + parameter.Name);
+                    var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
+                    declarationBuilder.Append(parameter.Type.ToString() + " " + declarativeName);
                     declarations.Add(declarationBuilder.ToString());
                 }
 
@@ -104,7 +105,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
+                foreach (var parameter in ParameterTemplateModels)
                 {
                     declarations.Add(parameter.Name);
                 }
@@ -125,6 +126,43 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "new ServiceResponseCallback()");
                 return parameters;
+            }
+        }
+
+        public IEnumerable<ParameterTemplateModel> RequiredNullableParameters
+        {
+            get
+            {
+                foreach (var param in ParameterTemplateModels)
+                {
+                    if (param.Type != PrimaryType.Int &&
+                        param.Type != PrimaryType.Double &&
+                        param.Type != PrimaryType.Boolean &&
+                        param.Type != PrimaryType.Long &&
+                        param.IsRequired)
+                    {
+                        yield return param;
+                    }
+                }
+            }
+        }
+
+        public IEnumerable<ParameterTemplateModel> ParametersToValidate
+        {
+            get
+            {
+                foreach (var param in ParameterTemplateModels)
+                {
+                    if (param.Type is PrimaryType ||
+                        param.Type is EnumType)
+                    {
+                        continue;
+                    }
+                    if (param.IsRequired)
+                    {
+                        yield return param;
+                    }
+                }
             }
         }
 

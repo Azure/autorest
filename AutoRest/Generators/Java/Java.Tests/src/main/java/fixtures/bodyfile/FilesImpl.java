@@ -24,9 +24,11 @@ import fixtures.bodyfile.models.Error;
 
 public class FilesImpl implements Files {
     private FilesService service;
+    AutoRestSwaggerBATFileService client;
 
-    public FilesImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(FilesService.class);
+    public FilesImpl(RestAdapter restAdapter, AutoRestSwaggerBATFileService client) {
+        this.service = restAdapter.create(FilesService.class);
+        this.client = client;
     }
 
     /**

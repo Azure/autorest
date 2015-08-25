@@ -24,13 +24,14 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import fixtures.url.models.Error;
-import com.microsoft.rest.Validator;
 
 public class PathsImpl implements Paths {
     private PathsService service;
+    AutoRestUrlTestService client;
 
-    public PathsImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(PathsService.class);
+    public PathsImpl(RestAdapter restAdapter, AutoRestUrlTestService client) {
+        this.service = restAdapter.create(PathsService.class);
+        this.client = client;
     }
 
     /**
@@ -460,6 +461,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void stringUnicode(String stringPath) throws ServiceException {
+        if (stringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = stringUnicodeDelegate(service.stringUnicode(stringPath), null);
             response.getBody();
@@ -476,6 +481,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+        if (stringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter stringPath is required and cannot be null.")));
+        }
         service.stringUnicodeAsync(stringPath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -502,6 +511,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void stringUrlEncoded(String stringPath) throws ServiceException {
+        if (stringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = stringUrlEncodedDelegate(service.stringUrlEncoded(stringPath), null);
             response.getBody();
@@ -518,6 +531,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+        if (stringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter stringPath is required and cannot be null.")));
+        }
         service.stringUrlEncodedAsync(stringPath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -544,6 +561,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void stringEmpty(String stringPath) throws ServiceException {
+        if (stringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = stringEmptyDelegate(service.stringEmpty(stringPath), null);
             response.getBody();
@@ -560,6 +581,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+        if (stringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter stringPath is required and cannot be null.")));
+        }
         service.stringEmptyAsync(stringPath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -586,6 +611,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void stringNull(String stringPath) throws ServiceException {
+        if (stringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = stringNullDelegate(service.stringNull(stringPath), null);
             response.getBody();
@@ -602,6 +631,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+        if (stringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter stringPath is required and cannot be null.")));
+        }
         service.stringNullAsync(stringPath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -632,7 +665,6 @@ public class PathsImpl implements Paths {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
-        Validator.validate(enumPath);
         try {
             ServiceResponse<Void> response = enumValidDelegate(service.enumValid(enumPath), null);
             response.getBody();
@@ -650,10 +682,9 @@ public class PathsImpl implements Paths {
      */
     public void enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
         if (enumPath == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
         }
-        Validator.validate(enumPath, serviceCallback);
         service.enumValidAsync(enumPath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -684,7 +715,6 @@ public class PathsImpl implements Paths {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
-        Validator.validate(enumPath);
         try {
             ServiceResponse<Void> response = enumNullDelegate(service.enumNull(enumPath), null);
             response.getBody();
@@ -702,10 +732,9 @@ public class PathsImpl implements Paths {
      */
     public void enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
         if (enumPath == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
         }
-        Validator.validate(enumPath, serviceCallback);
         service.enumNullAsync(enumPath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -732,6 +761,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void byteMultiByte(byte[] bytePath) throws ServiceException {
+        if (bytePath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = byteMultiByteDelegate(service.byteMultiByte(bytePath), null);
             response.getBody();
@@ -748,6 +781,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+        if (bytePath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter bytePath is required and cannot be null.")));
+        }
         service.byteMultiByteAsync(bytePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -774,6 +811,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void byteEmpty(byte[] bytePath) throws ServiceException {
+        if (bytePath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = byteEmptyDelegate(service.byteEmpty(bytePath), null);
             response.getBody();
@@ -790,6 +831,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+        if (bytePath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter bytePath is required and cannot be null.")));
+        }
         service.byteEmptyAsync(bytePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -816,6 +861,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void byteNull(byte[] bytePath) throws ServiceException {
+        if (bytePath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = byteNullDelegate(service.byteNull(bytePath), null);
             response.getBody();
@@ -832,6 +881,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+        if (bytePath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter bytePath is required and cannot be null.")));
+        }
         service.byteNullAsync(bytePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -858,6 +911,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void dateValid(LocalDate datePath) throws ServiceException {
+        if (datePath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter datePath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = dateValidDelegate(service.dateValid(datePath), null);
             response.getBody();
@@ -874,6 +931,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
+        if (datePath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter datePath is required and cannot be null.")));
+        }
         service.dateValidAsync(datePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -901,6 +962,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void dateNull(LocalDate datePath) throws ServiceException {
+        if (datePath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter datePath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = dateNullDelegate(service.dateNull(datePath), null);
             response.getBody();
@@ -918,6 +983,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
+        if (datePath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter datePath is required and cannot be null.")));
+        }
         service.dateNullAsync(datePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -944,6 +1013,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void dateTimeValid(DateTime dateTimePath) throws ServiceException {
+        if (dateTimePath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = dateTimeValidDelegate(service.dateTimeValid(dateTimePath), null);
             response.getBody();
@@ -960,6 +1033,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
+        if (dateTimePath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.")));
+        }
         service.dateTimeValidAsync(dateTimePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -987,6 +1064,10 @@ public class PathsImpl implements Paths {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void dateTimeNull(DateTime dateTimePath) throws ServiceException {
+        if (dateTimePath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = dateTimeNullDelegate(service.dateTimeNull(dateTimePath), null);
             response.getBody();
@@ -1004,6 +1085,10 @@ public class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
+        if (dateTimePath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.")));
+        }
         service.dateTimeNullAsync(dateTimePath, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

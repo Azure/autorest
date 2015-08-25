@@ -72,6 +72,6 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient implements Aut
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-                this.intOperations = new IntOperationsImpl(restAdapter);
+        this.intOperations = new IntOperationsImpl(restAdapter, this);
     }
 }

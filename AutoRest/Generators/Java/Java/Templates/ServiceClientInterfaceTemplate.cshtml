@@ -25,8 +25,7 @@ public interface @Model.Name {
      * @@return The BaseUri value.
      */
     String getBaseUri();
-@{var parameters = Model.Properties.Where(p => p.IsRequired);}
-@foreach (var param in parameters)
+@foreach (var param in Model.Properties)
 {
 @EmptyLine
 @:    /**

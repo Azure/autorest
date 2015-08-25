@@ -72,6 +72,6 @@ public class AutoRestNumberTestServiceImpl extends ServiceClient implements Auto
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-                this.number = new NumberImpl(restAdapter);
+        this.number = new NumberImpl(restAdapter, this);
     }
 }

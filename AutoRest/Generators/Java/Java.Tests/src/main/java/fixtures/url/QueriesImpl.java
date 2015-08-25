@@ -24,13 +24,14 @@ import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import java.util.List;
 import fixtures.url.models.Error;
-import com.microsoft.rest.Validator;
 
 public class QueriesImpl implements Queries {
     private QueriesService service;
+    AutoRestUrlTestService client;
 
-    public QueriesImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(QueriesService.class);
+    public QueriesImpl(RestAdapter restAdapter, AutoRestUrlTestService client) {
+        this.service = restAdapter.create(QueriesService.class);
+        this.client = client;
     }
 
     /**
@@ -838,7 +839,6 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void enumValid(UriColor enumQuery) throws ServiceException {
-        Validator.validate(enumQuery);
         try {
             ServiceResponse<Void> response = enumValidDelegate(service.enumValid(enumQuery), null);
             response.getBody();
@@ -855,7 +855,6 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(enumQuery, serviceCallback);
         service.enumValidAsync(enumQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -882,7 +881,6 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void enumNull(UriColor enumQuery) throws ServiceException {
-        Validator.validate(enumQuery);
         try {
             ServiceResponse<Void> response = enumNullDelegate(service.enumNull(enumQuery), null);
             response.getBody();
@@ -899,7 +897,6 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(enumQuery, serviceCallback);
         service.enumNullAsync(enumQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1221,7 +1218,6 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringCsvValid(List<String> arrayQuery) throws ServiceException {
-        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringCsvValidDelegate(service.arrayStringCsvValid(arrayQuery), null);
             response.getBody();
@@ -1239,7 +1235,6 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringCsvValidAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1266,7 +1261,6 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringCsvNull(List<String> arrayQuery) throws ServiceException {
-        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringCsvNullDelegate(service.arrayStringCsvNull(arrayQuery), null);
             response.getBody();
@@ -1283,7 +1277,6 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringCsvNullAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1310,7 +1303,6 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException {
-        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringCsvEmptyDelegate(service.arrayStringCsvEmpty(arrayQuery), null);
             response.getBody();
@@ -1327,7 +1319,6 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringCsvEmptyAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1355,7 +1346,6 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringSsvValid(List<String> arrayQuery) throws ServiceException {
-        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringSsvValidDelegate(service.arrayStringSsvValid(arrayQuery), null);
             response.getBody();
@@ -1373,7 +1363,6 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringSsvValidAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1401,7 +1390,6 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringTsvValid(List<String> arrayQuery) throws ServiceException {
-        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringTsvValidDelegate(service.arrayStringTsvValid(arrayQuery), null);
             response.getBody();
@@ -1419,7 +1407,6 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringTsvValidAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1447,7 +1434,6 @@ public class QueriesImpl implements Queries {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void arrayStringPipesValid(List<String> arrayQuery) throws ServiceException {
-        Validator.validate(arrayQuery);
         try {
             ServiceResponse<Void> response = arrayStringPipesValidDelegate(service.arrayStringPipesValid(arrayQuery), null);
             response.getBody();
@@ -1465,7 +1451,6 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(arrayQuery, serviceCallback);
         service.arrayStringPipesValidAsync(arrayQuery, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

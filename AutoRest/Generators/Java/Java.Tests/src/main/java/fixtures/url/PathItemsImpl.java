@@ -23,9 +23,11 @@ import fixtures.url.models.Error;
 
 public class PathItemsImpl implements PathItems {
     private PathItemsService service;
+    AutoRestUrlTestService client;
 
-    public PathItemsImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(PathItemsService.class);
+    public PathItemsImpl(RestAdapter restAdapter, AutoRestUrlTestService client) {
+        this.service = restAdapter.create(PathItemsService.class);
+        this.client = client;
     }
 
     /**
@@ -43,8 +45,20 @@ public class PathItemsImpl implements PathItems {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
+        if (localStringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+        }
+        if (pathItemStringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
+        }
         try {
-            ServiceResponse<Void> response = getAllWithValuesDelegate(service.getAllWithValues(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null);
+            ServiceResponse<Void> response = getAllWithValuesDelegate(service.getAllWithValues(localStringPath, localStringQuery, pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery()), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = getAllWithValuesDelegate(error.getResponse(), error);
@@ -67,7 +81,19 @@ public class PathItemsImpl implements PathItems {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        service.getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
+        if (localStringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter localStringPath is required and cannot be null.")));
+        }
+        if (pathItemStringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.")));
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.")));
+        }
+        service.getAllWithValuesAsync(localStringPath, localStringQuery, pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -100,8 +126,20 @@ public class PathItemsImpl implements PathItems {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
+        if (localStringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+        }
+        if (pathItemStringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
+        }
         try {
-            ServiceResponse<Void> response = getGlobalQueryNullDelegate(service.getGlobalQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null);
+            ServiceResponse<Void> response = getGlobalQueryNullDelegate(service.getGlobalQueryNull(localStringPath, localStringQuery, pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery()), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = getGlobalQueryNullDelegate(error.getResponse(), error);
@@ -123,7 +161,19 @@ public class PathItemsImpl implements PathItems {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        service.getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
+        if (localStringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter localStringPath is required and cannot be null.")));
+        }
+        if (pathItemStringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.")));
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.")));
+        }
+        service.getGlobalQueryNullAsync(localStringPath, localStringQuery, pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -155,8 +205,20 @@ public class PathItemsImpl implements PathItems {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
+        if (localStringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+        }
+        if (pathItemStringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
+        }
         try {
-            ServiceResponse<Void> response = getGlobalAndLocalQueryNullDelegate(service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null);
+            ServiceResponse<Void> response = getGlobalAndLocalQueryNullDelegate(service.getGlobalAndLocalQueryNull(localStringPath, localStringQuery, pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery()), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = getGlobalAndLocalQueryNullDelegate(error.getResponse(), error);
@@ -177,7 +239,19 @@ public class PathItemsImpl implements PathItems {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        service.getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
+        if (localStringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter localStringPath is required and cannot be null.")));
+        }
+        if (pathItemStringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.")));
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.")));
+        }
+        service.getGlobalAndLocalQueryNullAsync(localStringPath, localStringQuery, pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -210,8 +284,20 @@ public class PathItemsImpl implements PathItems {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
+        if (localStringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+        }
+        if (pathItemStringPath == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
+        }
         try {
-            ServiceResponse<Void> response = getLocalPathItemQueryNullDelegate(service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), null);
+            ServiceResponse<Void> response = getLocalPathItemQueryNullDelegate(service.getLocalPathItemQueryNull(localStringPath, localStringQuery, pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery()), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = getLocalPathItemQueryNullDelegate(error.getResponse(), error);
@@ -233,7 +319,19 @@ public class PathItemsImpl implements PathItems {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        service.getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, new ServiceResponseCallback() {
+        if (localStringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter localStringPath is required and cannot be null.")));
+        }
+        if (pathItemStringPath == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.")));
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.")));
+        }
+        service.getLocalPathItemQueryNullAsync(localStringPath, localStringQuery, pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {

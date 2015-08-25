@@ -25,9 +25,11 @@ import com.microsoft.rest.Validator;
 
 public class ArrayImpl implements Array {
     private ArrayService service;
+    AutoRestComplexTestService client;
 
-    public ArrayImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(ArrayService.class);
+    public ArrayImpl(RestAdapter restAdapter, AutoRestComplexTestService client) {
+        this.service = restAdapter.create(ArrayService.class);
+        this.client = client;
     }
 
     /**
@@ -100,8 +102,8 @@ public class ArrayImpl implements Array {
      */
     public void putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
@@ -193,8 +195,8 @@ public class ArrayImpl implements Array {
      */
     public void putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putEmptyAsync(complexBody, new ServiceResponseCallback() {

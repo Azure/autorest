@@ -24,13 +24,14 @@ import org.joda.time.DateTime;
 import org.apache.commons.lang3.ArrayUtils;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.Error;
-import com.microsoft.rest.Validator;
 
 public class HeaderOperationsImpl implements HeaderOperations {
     private HeaderService service;
+    AutoRestSwaggerBATHeaderService client;
 
-    public HeaderOperationsImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(HeaderService.class);
+    public HeaderOperationsImpl(RestAdapter restAdapter, AutoRestSwaggerBATHeaderService client) {
+        this.service = restAdapter.create(HeaderService.class);
+        this.client = client;
     }
 
     /**
@@ -40,6 +41,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramExistingKey(String userAgent) throws ServiceException {
+        if (userAgent == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter userAgent is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramExistingKeyDelegate(service.paramExistingKey(userAgent), null);
             response.getBody();
@@ -56,6 +61,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
+        if (userAgent == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter userAgent is required and cannot be null.")));
+        }
         service.paramExistingKeyAsync(userAgent, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -122,6 +131,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramProtectedKey(String contentType) throws ServiceException {
+        if (contentType == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter contentType is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramProtectedKeyDelegate(service.paramProtectedKey(contentType), null);
             response.getBody();
@@ -138,6 +151,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
+        if (contentType == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter contentType is required and cannot be null.")));
+        }
         service.paramProtectedKeyAsync(contentType, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -206,6 +223,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramInteger(String scenario, int value) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramIntegerDelegate(service.paramInteger(scenario, value), null);
             response.getBody();
@@ -224,6 +245,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.paramIntegerAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -250,6 +275,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void responseInteger(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = responseIntegerDelegate(service.responseInteger(scenario), null);
             response.getBody();
@@ -266,6 +295,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.responseIntegerAsync(scenario, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -294,6 +327,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramLong(String scenario, long value) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramLongDelegate(service.paramLong(scenario, value), null);
             response.getBody();
@@ -312,6 +349,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.paramLongAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -338,6 +379,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void responseLong(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = responseLongDelegate(service.responseLong(scenario), null);
             response.getBody();
@@ -354,6 +399,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.responseLongAsync(scenario, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -382,6 +431,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramFloat(String scenario, double value) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramFloatDelegate(service.paramFloat(scenario, value), null);
             response.getBody();
@@ -400,6 +453,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.paramFloatAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -426,6 +483,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void responseFloat(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = responseFloatDelegate(service.responseFloat(scenario), null);
             response.getBody();
@@ -442,6 +503,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.responseFloatAsync(scenario, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -470,6 +535,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramDouble(String scenario, double value) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramDoubleDelegate(service.paramDouble(scenario, value), null);
             response.getBody();
@@ -488,6 +557,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.paramDoubleAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -514,6 +587,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void responseDouble(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = responseDoubleDelegate(service.responseDouble(scenario), null);
             response.getBody();
@@ -530,6 +607,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.responseDoubleAsync(scenario, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -558,6 +639,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramBool(String scenario, boolean value) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramBoolDelegate(service.paramBool(scenario, value), null);
             response.getBody();
@@ -576,6 +661,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.paramBoolAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -602,6 +691,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void responseBool(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = responseBoolDelegate(service.responseBool(scenario), null);
             response.getBody();
@@ -618,6 +711,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.responseBoolAsync(scenario, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -647,6 +744,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramString(String scenario, String value) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramStringDelegate(service.paramString(scenario, value), null);
             response.getBody();
@@ -666,6 +767,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.paramStringAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -693,6 +798,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void responseString(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = responseStringDelegate(service.responseString(scenario), null);
             response.getBody();
@@ -710,6 +819,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.responseStringAsync(scenario, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -738,6 +851,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramDate(String scenario, LocalDate value) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        if (value == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter value is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramDateDelegate(service.paramDate(scenario, value), null);
             response.getBody();
@@ -756,6 +877,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
+        if (value == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter value is required and cannot be null.")));
+        }
         service.paramDateAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -782,6 +911,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void responseDate(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = responseDateDelegate(service.responseDate(scenario), null);
             response.getBody();
@@ -798,6 +931,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.responseDateAsync(scenario, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -827,6 +964,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramDatetime(String scenario, DateTime value) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        if (value == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter value is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramDatetimeDelegate(service.paramDatetime(scenario, value), null);
             response.getBody();
@@ -846,6 +991,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
+        if (value == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter value is required and cannot be null.")));
+        }
         service.paramDatetimeAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -873,6 +1026,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void responseDatetime(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = responseDatetimeDelegate(service.responseDatetime(scenario), null);
             response.getBody();
@@ -890,6 +1047,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.responseDatetimeAsync(scenario, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -918,6 +1079,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramByte(String scenario, byte[] value) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        if (value == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter value is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramByteDelegate(service.paramByte(scenario, value), null);
             response.getBody();
@@ -936,6 +1105,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
+        if (value == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter value is required and cannot be null.")));
+        }
         service.paramByteAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -962,6 +1139,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void responseByte(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = responseByteDelegate(service.responseByte(scenario), null);
             response.getBody();
@@ -978,6 +1159,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.responseByteAsync(scenario, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1006,7 +1191,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void paramEnum(String scenario, GreyscaleColors value) throws ServiceException {
-        Validator.validate(value);
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = paramEnumDelegate(service.paramEnum(scenario, value), null);
             response.getBody();
@@ -1025,7 +1213,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(value, serviceCallback);
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.paramEnumAsync(scenario, value, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1052,6 +1243,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void responseEnum(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = responseEnumDelegate(service.responseEnum(scenario), null);
             response.getBody();
@@ -1068,6 +1263,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
         service.responseEnumAsync(scenario, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

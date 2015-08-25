@@ -23,9 +23,11 @@ import fixtures.requiredoptional.models.Error;
 
 public class ImplicitImpl implements Implicit {
     private ImplicitService service;
+    AutoRestRequiredOptionalTestService client;
 
-    public ImplicitImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(ImplicitService.class);
+    public ImplicitImpl(RestAdapter restAdapter, AutoRestRequiredOptionalTestService client) {
+        this.service = restAdapter.create(ImplicitService.class);
+        this.client = client;
     }
 
     /**
@@ -36,6 +38,10 @@ public class ImplicitImpl implements Implicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Error getRequiredPath(String pathParameter) throws ServiceException {
+        if (pathParameter == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter pathParameter is required and cannot be null."));
+        }
         try {
             ServiceResponse<Error> response = getRequiredPathDelegate(service.getRequiredPath(pathParameter), null);
             return response.getBody();
@@ -52,6 +58,10 @@ public class ImplicitImpl implements Implicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
+        if (pathParameter == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter pathParameter is required and cannot be null.")));
+        }
         service.getRequiredPathAsync(pathParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -203,8 +213,12 @@ public class ImplicitImpl implements Implicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Error getRequiredGlobalPath() throws ServiceException {
+        if (this.client.getRequiredGlobalPath() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
+        }
         try {
-            ServiceResponse<Error> response = getRequiredGlobalPathDelegate(service.getRequiredGlobalPath(), null);
+            ServiceResponse<Error> response = getRequiredGlobalPathDelegate(service.getRequiredGlobalPath(this.client.getRequiredGlobalPath()), null);
             return response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Error> response = getRequiredGlobalPathDelegate(error.getResponse(), error);
@@ -218,7 +232,11 @@ public class ImplicitImpl implements Implicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
-        service.getRequiredGlobalPathAsync(new ServiceResponseCallback() {
+        if (this.client.getRequiredGlobalPath() == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null.")));
+        }
+        service.getRequiredGlobalPathAsync(this.client.getRequiredGlobalPath(), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -243,8 +261,12 @@ public class ImplicitImpl implements Implicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Error getRequiredGlobalQuery() throws ServiceException {
+        if (this.client.getRequiredGlobalQuery() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
+        }
         try {
-            ServiceResponse<Error> response = getRequiredGlobalQueryDelegate(service.getRequiredGlobalQuery(), null);
+            ServiceResponse<Error> response = getRequiredGlobalQueryDelegate(service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery()), null);
             return response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Error> response = getRequiredGlobalQueryDelegate(error.getResponse(), error);
@@ -258,7 +280,11 @@ public class ImplicitImpl implements Implicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        service.getRequiredGlobalQueryAsync(new ServiceResponseCallback() {
+        if (this.client.getRequiredGlobalQuery() == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null.")));
+        }
+        service.getRequiredGlobalQueryAsync(this.client.getRequiredGlobalQuery(), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -284,7 +310,7 @@ public class ImplicitImpl implements Implicit {
      */
     public Error getOptionalGlobalQuery() throws ServiceException {
         try {
-            ServiceResponse<Error> response = getOptionalGlobalQueryDelegate(service.getOptionalGlobalQuery(), null);
+            ServiceResponse<Error> response = getOptionalGlobalQueryDelegate(service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery()), null);
             return response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Error> response = getOptionalGlobalQueryDelegate(error.getResponse(), error);
@@ -298,7 +324,7 @@ public class ImplicitImpl implements Implicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        service.getOptionalGlobalQueryAsync(new ServiceResponseCallback() {
+        service.getOptionalGlobalQueryAsync(this.client.getOptionalGlobalQuery(), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {

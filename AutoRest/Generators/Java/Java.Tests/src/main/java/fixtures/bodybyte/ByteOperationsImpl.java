@@ -24,9 +24,11 @@ import fixtures.bodybyte.models.Error;
 
 public class ByteOperationsImpl implements ByteOperations {
     private ByteService service;
+    AutoRestSwaggerBATByteService client;
 
-    public ByteOperationsImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(ByteService.class);
+    public ByteOperationsImpl(RestAdapter restAdapter, AutoRestSwaggerBATByteService client) {
+        this.service = restAdapter.create(ByteService.class);
+        this.client = client;
     }
 
     /**
@@ -159,6 +161,10 @@ public class ByteOperationsImpl implements ByteOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putNonAscii(byte[] byteBody) throws ServiceException {
+        if (byteBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter byteBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putNonAsciiDelegate(service.putNonAscii(byteBody), null);
             response.getBody();
@@ -175,6 +181,10 @@ public class ByteOperationsImpl implements ByteOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
+        if (byteBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter byteBody is required and cannot be null.")));
+        }
         service.putNonAsciiAsync(byteBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

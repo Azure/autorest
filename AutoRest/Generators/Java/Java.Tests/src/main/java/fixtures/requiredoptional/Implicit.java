@@ -57,22 +57,22 @@ public interface Implicit {
         void putOptionalBodyAsync(@Body String bodyParameter, ServiceResponseCallback cb);
 
         @GET("/reqopt/global/required/path/{required-global-path}")
-        Response getRequiredGlobalPath() throws ServiceException;
+        Response getRequiredGlobalPath(@Path("required-global-path") String requiredGlobalPath) throws ServiceException;
 
         @GET("/reqopt/global/required/path/{required-global-path}")
-        void getRequiredGlobalPathAsync(ServiceResponseCallback cb);
+        void getRequiredGlobalPathAsync(@Path("required-global-path") String requiredGlobalPath, ServiceResponseCallback cb);
 
         @GET("/reqopt/global/required/query")
-        Response getRequiredGlobalQuery() throws ServiceException;
+        Response getRequiredGlobalQuery(@Query("required-global-query") String requiredGlobalQuery) throws ServiceException;
 
         @GET("/reqopt/global/required/query")
-        void getRequiredGlobalQueryAsync(ServiceResponseCallback cb);
+        void getRequiredGlobalQueryAsync(@Query("required-global-query") String requiredGlobalQuery, ServiceResponseCallback cb);
 
         @GET("/reqopt/global/optional/query")
-        Response getOptionalGlobalQuery() throws ServiceException;
+        Response getOptionalGlobalQuery(@Query("optional-global-query") Integer optionalGlobalQuery) throws ServiceException;
 
         @GET("/reqopt/global/optional/query")
-        void getOptionalGlobalQueryAsync(ServiceResponseCallback cb);
+        void getOptionalGlobalQueryAsync(@Query("optional-global-query") Integer optionalGlobalQuery, ServiceResponseCallback cb);
 
     }
     /**

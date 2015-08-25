@@ -34,9 +34,11 @@ import com.microsoft.rest.Validator;
 
 public class ExplicitImpl implements Explicit {
     private ExplicitService service;
+    AutoRestRequiredOptionalTestService client;
 
-    public ExplicitImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(ExplicitService.class);
+    public ExplicitImpl(RestAdapter restAdapter, AutoRestRequiredOptionalTestService client) {
+        this.service = restAdapter.create(ExplicitService.class);
+        this.client = client;
     }
 
     /**
@@ -159,8 +161,8 @@ public class ExplicitImpl implements Explicit {
      */
     public void postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
         service.postRequiredIntegerPropertyAsync(bodyParameter, new ServiceResponseCallback() {
@@ -189,7 +191,6 @@ public class ExplicitImpl implements Explicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException {
-        Validator.validate(bodyParameter);
         try {
             ServiceResponse<Void> response = postOptionalIntegerPropertyDelegate(service.postOptionalIntegerProperty(bodyParameter), null);
             response.getBody();
@@ -207,7 +208,6 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(bodyParameter, serviceCallback);
         service.postOptionalIntegerPropertyAsync(bodyParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -326,6 +326,10 @@ public class ExplicitImpl implements Explicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Error postRequiredStringParameter(String bodyParameter) throws ServiceException {
+        if (bodyParameter == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+        }
         try {
             ServiceResponse<Error> response = postRequiredStringParameterDelegate(service.postRequiredStringParameter(bodyParameter), null);
             return response.getBody();
@@ -343,6 +347,10 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
+        if (bodyParameter == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+        }
         service.postRequiredStringParameterAsync(bodyParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -437,8 +445,8 @@ public class ExplicitImpl implements Explicit {
      */
     public void postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
         service.postRequiredStringPropertyAsync(bodyParameter, new ServiceResponseCallback() {
@@ -467,7 +475,6 @@ public class ExplicitImpl implements Explicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException {
-        Validator.validate(bodyParameter);
         try {
             ServiceResponse<Void> response = postOptionalStringPropertyDelegate(service.postOptionalStringProperty(bodyParameter), null);
             response.getBody();
@@ -485,7 +492,6 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(bodyParameter, serviceCallback);
         service.postOptionalStringPropertyAsync(bodyParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -515,6 +521,10 @@ public class ExplicitImpl implements Explicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Error postRequiredStringHeader(String headerParameter) throws ServiceException {
+        if (headerParameter == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
+        }
         try {
             ServiceResponse<Error> response = postRequiredStringHeaderDelegate(service.postRequiredStringHeader(headerParameter), null);
             return response.getBody();
@@ -533,6 +543,10 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
+        if (headerParameter == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
+        }
         service.postRequiredStringHeaderAsync(headerParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -627,8 +641,8 @@ public class ExplicitImpl implements Explicit {
      */
     public void postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
         service.postRequiredClassParameterAsync(bodyParameter, new ServiceResponseCallback() {
@@ -656,7 +670,6 @@ public class ExplicitImpl implements Explicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalClassParameter(Product bodyParameter) throws ServiceException {
-        Validator.validate(bodyParameter);
         try {
             ServiceResponse<Void> response = postOptionalClassParameterDelegate(service.postOptionalClassParameter(bodyParameter), null);
             response.getBody();
@@ -673,7 +686,6 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(bodyParameter, serviceCallback);
         service.postOptionalClassParameterAsync(bodyParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -727,8 +739,8 @@ public class ExplicitImpl implements Explicit {
      */
     public void postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
         service.postRequiredClassPropertyAsync(bodyParameter, new ServiceResponseCallback() {
@@ -757,7 +769,6 @@ public class ExplicitImpl implements Explicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException {
-        Validator.validate(bodyParameter);
         try {
             ServiceResponse<Void> response = postOptionalClassPropertyDelegate(service.postOptionalClassProperty(bodyParameter), null);
             response.getBody();
@@ -775,7 +786,6 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(bodyParameter, serviceCallback);
         service.postOptionalClassPropertyAsync(bodyParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -827,8 +837,8 @@ public class ExplicitImpl implements Explicit {
      */
     public void postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
         service.postRequiredArrayParameterAsync(bodyParameter, new ServiceResponseCallback() {
@@ -856,7 +866,6 @@ public class ExplicitImpl implements Explicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalArrayParameter(List<String> bodyParameter) throws ServiceException {
-        Validator.validate(bodyParameter);
         try {
             ServiceResponse<Void> response = postOptionalArrayParameterDelegate(service.postOptionalArrayParameter(bodyParameter), null);
             response.getBody();
@@ -873,7 +882,6 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(bodyParameter, serviceCallback);
         service.postOptionalArrayParameterAsync(bodyParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -927,8 +935,8 @@ public class ExplicitImpl implements Explicit {
      */
     public void postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
         service.postRequiredArrayPropertyAsync(bodyParameter, new ServiceResponseCallback() {
@@ -957,7 +965,6 @@ public class ExplicitImpl implements Explicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException {
-        Validator.validate(bodyParameter);
         try {
             ServiceResponse<Void> response = postOptionalArrayPropertyDelegate(service.postOptionalArrayProperty(bodyParameter), null);
             response.getBody();
@@ -975,7 +982,6 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(bodyParameter, serviceCallback);
         service.postOptionalArrayPropertyAsync(bodyParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1029,8 +1035,8 @@ public class ExplicitImpl implements Explicit {
      */
     public void postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
         }
         Validator.validate(headerParameter, serviceCallback);
         service.postRequiredArrayHeaderAsync(headerParameter, new ServiceResponseCallback() {
@@ -1059,7 +1065,6 @@ public class ExplicitImpl implements Explicit {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalArrayHeader(List<String> headerParameter) throws ServiceException {
-        Validator.validate(headerParameter);
         try {
             ServiceResponse<Void> response = postOptionalArrayHeaderDelegate(service.postOptionalArrayHeader(headerParameter), null);
             response.getBody();
@@ -1077,7 +1082,6 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        Validator.validate(headerParameter, serviceCallback);
         service.postOptionalArrayHeaderAsync(headerParameter, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

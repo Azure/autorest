@@ -24,9 +24,11 @@ import fixtures.bodydatetime.models.Error;
 
 public class DatetimeOperationsImpl implements DatetimeOperations {
     private DatetimeService service;
+    AutoRestDateTimeTestService client;
 
-    public DatetimeOperationsImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(DatetimeService.class);
+    public DatetimeOperationsImpl(RestAdapter restAdapter, AutoRestDateTimeTestService client) {
+        this.service = restAdapter.create(DatetimeService.class);
+        this.client = client;
     }
 
     /**
@@ -200,6 +202,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putUtcMaxDateTime(DateTime datetimeBody) throws ServiceException {
+        if (datetimeBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putUtcMaxDateTimeDelegate(service.putUtcMaxDateTime(datetimeBody), null);
             response.getBody();
@@ -216,6 +222,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+        if (datetimeBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+        }
         service.putUtcMaxDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -325,6 +335,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException {
+        if (datetimeBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putLocalPositiveOffsetMaxDateTimeDelegate(service.putLocalPositiveOffsetMaxDateTime(datetimeBody), null);
             response.getBody();
@@ -342,6 +356,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+        if (datetimeBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+        }
         service.putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -455,6 +473,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException {
+        if (datetimeBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putLocalNegativeOffsetMaxDateTimeDelegate(service.putLocalNegativeOffsetMaxDateTime(datetimeBody), null);
             response.getBody();
@@ -472,6 +494,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+        if (datetimeBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+        }
         service.putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -584,6 +610,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putUtcMinDateTime(DateTime datetimeBody) throws ServiceException {
+        if (datetimeBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putUtcMinDateTimeDelegate(service.putUtcMinDateTime(datetimeBody), null);
             response.getBody();
@@ -600,6 +630,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+        if (datetimeBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+        }
         service.putUtcMinDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -667,6 +701,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ServiceException {
+        if (datetimeBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putLocalPositiveOffsetMinDateTimeDelegate(service.putLocalPositiveOffsetMinDateTime(datetimeBody), null);
             response.getBody();
@@ -683,6 +721,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+        if (datetimeBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+        }
         service.putLocalPositiveOffsetMinDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -750,6 +792,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ServiceException {
+        if (datetimeBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putLocalNegativeOffsetMinDateTimeDelegate(service.putLocalNegativeOffsetMinDateTime(datetimeBody), null);
             response.getBody();
@@ -766,6 +812,10 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+        if (datetimeBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+        }
         service.putLocalNegativeOffsetMinDateTimeAsync(datetimeBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

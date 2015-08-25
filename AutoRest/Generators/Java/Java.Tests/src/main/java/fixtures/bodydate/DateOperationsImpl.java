@@ -24,9 +24,11 @@ import fixtures.bodydate.models.Error;
 
 public class DateOperationsImpl implements DateOperations {
     private DateService service;
+    AutoRestDateTestService client;
 
-    public DateOperationsImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(DateService.class);
+    public DateOperationsImpl(RestAdapter restAdapter, AutoRestDateTestService client) {
+        this.service = restAdapter.create(DateService.class);
+        this.client = client;
     }
 
     /**
@@ -200,6 +202,10 @@ public class DateOperationsImpl implements DateOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putMaxDate(LocalDate dateBody) throws ServiceException {
+        if (dateBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putMaxDateDelegate(service.putMaxDate(dateBody), null);
             response.getBody();
@@ -216,6 +222,10 @@ public class DateOperationsImpl implements DateOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+        if (dateBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter dateBody is required and cannot be null.")));
+        }
         service.putMaxDateAsync(dateBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -283,6 +293,10 @@ public class DateOperationsImpl implements DateOperations {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putMinDate(LocalDate dateBody) throws ServiceException {
+        if (dateBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
+        }
         try {
             ServiceResponse<Void> response = putMinDateDelegate(service.putMinDate(dateBody), null);
             response.getBody();
@@ -299,6 +313,10 @@ public class DateOperationsImpl implements DateOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+        if (dateBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter dateBody is required and cannot be null.")));
+        }
         service.putMinDateAsync(dateBody, new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {

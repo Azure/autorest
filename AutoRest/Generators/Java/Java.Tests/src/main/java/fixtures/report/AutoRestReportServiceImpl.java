@@ -74,7 +74,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
         service = restAdapter.create(AutoRestReportServiceService.class);
-            }
+    }
 
     /**
      * Get test coverage report

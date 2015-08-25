@@ -25,9 +25,11 @@ import com.microsoft.rest.Validator;
 
 public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
     private PolymorphicrecursiveService service;
+    AutoRestComplexTestService client;
 
-    public PolymorphicrecursiveImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(PolymorphicrecursiveService.class);
+    public PolymorphicrecursiveImpl(RestAdapter restAdapter, AutoRestComplexTestService client) {
+        this.service = restAdapter.create(PolymorphicrecursiveService.class);
+        this.client = client;
     }
 
     /**
@@ -204,8 +206,8 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
      */
     public void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putValidAsync(complexBody, new ServiceResponseCallback() {

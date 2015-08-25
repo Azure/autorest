@@ -124,9 +124,9 @@ namespace Microsoft.Rest.Generator.Java
                     if (parameter.ClientProperty != null)
                     {
                         parameter.Name = string.Format(CultureInfo.InvariantCulture,
-                            "{0}.{1}",
+                            "{0}.get{1}()",
                             method.Group == null ? "this" : "this.client",
-                            parameter.ClientProperty.Name);
+                            parameter.ClientProperty.Name.ToPascalCase());
                     }
                     else
                     {

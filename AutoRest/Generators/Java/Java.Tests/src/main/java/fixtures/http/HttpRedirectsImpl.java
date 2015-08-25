@@ -24,9 +24,11 @@ import fixtures.http.models.Error;
 
 public class HttpRedirectsImpl implements HttpRedirects {
     private HttpRedirectsService service;
+    AutoRestHttpInfrastructureTestService client;
 
-    public HttpRedirectsImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(HttpRedirectsService.class);
+    public HttpRedirectsImpl(RestAdapter restAdapter, AutoRestHttpInfrastructureTestService client) {
+        this.service = restAdapter.create(HttpRedirectsService.class);
+        this.client = client;
     }
 
     /**

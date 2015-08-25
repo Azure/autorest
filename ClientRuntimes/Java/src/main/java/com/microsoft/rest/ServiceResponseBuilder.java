@@ -105,6 +105,7 @@ public class ServiceResponseBuilder<T> {
             TypedInput responseContent = response.getBody();
             int statusCode = response.getStatus();
             if (responseTypes.containsKey(statusCode)) {
+                // Pre-defined successful status code
                 T body = null;
                 Type type = responseTypes.get(statusCode);
                 if (type != null && type != Void.class) {
@@ -113,7 +114,13 @@ public class ServiceResponseBuilder<T> {
                             responseTypes.get(statusCode));
                 }
                 result = new ServiceResponse<T>(body, response);
+            } else if (error == null && (responseTypes.isEmpty() ||
+                    (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
+                // no pre-defined successful status code, use retrofit default
+                result = new ServiceResponse<T>(null, response);
             } else {
+                // not in pre-defined successful status code list or
+                // standard HTTP error codes
                 ServiceException exception = new ServiceException(error);
                 exception.setResponse(response);
                 if (responseTypes.containsKey(0)) {

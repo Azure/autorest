@@ -25,9 +25,11 @@ import com.microsoft.rest.Validator;
 
 public class InheritanceImpl implements Inheritance {
     private InheritanceService service;
+    AutoRestComplexTestService client;
 
-    public InheritanceImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(InheritanceService.class);
+    public InheritanceImpl(RestAdapter restAdapter, AutoRestComplexTestService client) {
+        this.service = restAdapter.create(InheritanceService.class);
+        this.client = client;
     }
 
     /**
@@ -100,8 +102,8 @@ public class InheritanceImpl implements Inheritance {
      */
     public void putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putValidAsync(complexBody, new ServiceResponseCallback() {

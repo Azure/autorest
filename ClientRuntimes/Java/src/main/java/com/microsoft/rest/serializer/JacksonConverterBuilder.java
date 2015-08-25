@@ -8,6 +8,7 @@
 package com.microsoft.rest.serializer;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -27,6 +28,7 @@ public class JacksonConverterBuilder {
         if (objectMapper == null) {
             objectMapper = new ObjectMapper()
                     .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                    .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
                     .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                     .registerModule(new JodaModule())
                     .registerModule(ByteArraySerializer.getModule())

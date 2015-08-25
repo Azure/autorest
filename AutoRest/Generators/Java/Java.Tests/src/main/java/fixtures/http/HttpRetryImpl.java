@@ -23,9 +23,11 @@ import fixtures.http.models.Error;
 
 public class HttpRetryImpl implements HttpRetry {
     private HttpRetryService service;
+    AutoRestHttpInfrastructureTestService client;
 
-    public HttpRetryImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(HttpRetryService.class);
+    public HttpRetryImpl(RestAdapter restAdapter, AutoRestHttpInfrastructureTestService client) {
+        this.service = restAdapter.create(HttpRetryService.class);
+        this.client = client;
     }
 
     /**

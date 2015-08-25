@@ -34,6 +34,12 @@ public interface AutoRestRequiredOptionalTestService {
     String getRequiredGlobalQuery();
 
     /**
+     * Gets number of items to skip.
+     * @return the optionalGlobalQuery value.
+     */
+    int getOptionalGlobalQuery();
+
+    /**
      * Gets the Implicit object to access its operations.
      * @return the implicit value.
      */

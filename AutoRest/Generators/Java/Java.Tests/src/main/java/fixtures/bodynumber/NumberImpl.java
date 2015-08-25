@@ -23,9 +23,11 @@ import fixtures.bodynumber.models.Error;
 
 public class NumberImpl implements Number {
     private NumberService service;
+    AutoRestNumberTestService client;
 
-    public NumberImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(NumberService.class);
+    public NumberImpl(RestAdapter restAdapter, AutoRestNumberTestService client) {
+        this.service = restAdapter.create(NumberService.class);
+        this.client = client;
     }
 
     /**

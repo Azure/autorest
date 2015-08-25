@@ -33,9 +33,11 @@ import com.microsoft.rest.Validator;
 
 public class PrimitiveImpl implements Primitive {
     private PrimitiveService service;
+    AutoRestComplexTestService client;
 
-    public PrimitiveImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(PrimitiveService.class);
+    public PrimitiveImpl(RestAdapter restAdapter, AutoRestComplexTestService client) {
+        this.service = restAdapter.create(PrimitiveService.class);
+        this.client = client;
     }
 
     /**
@@ -108,8 +110,8 @@ public class PrimitiveImpl implements Primitive {
      */
     public void putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putIntAsync(complexBody, new ServiceResponseCallback() {
@@ -201,8 +203,8 @@ public class PrimitiveImpl implements Primitive {
      */
     public void putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putLongAsync(complexBody, new ServiceResponseCallback() {
@@ -294,8 +296,8 @@ public class PrimitiveImpl implements Primitive {
      */
     public void putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putFloatAsync(complexBody, new ServiceResponseCallback() {
@@ -387,8 +389,8 @@ public class PrimitiveImpl implements Primitive {
      */
     public void putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putDoubleAsync(complexBody, new ServiceResponseCallback() {
@@ -480,8 +482,8 @@ public class PrimitiveImpl implements Primitive {
      */
     public void putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putBoolAsync(complexBody, new ServiceResponseCallback() {
@@ -573,8 +575,8 @@ public class PrimitiveImpl implements Primitive {
      */
     public void putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putStringAsync(complexBody, new ServiceResponseCallback() {
@@ -666,8 +668,8 @@ public class PrimitiveImpl implements Primitive {
      */
     public void putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putDateAsync(complexBody, new ServiceResponseCallback() {
@@ -759,8 +761,8 @@ public class PrimitiveImpl implements Primitive {
      */
     public void putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putDateTimeAsync(complexBody, new ServiceResponseCallback() {
@@ -852,8 +854,8 @@ public class PrimitiveImpl implements Primitive {
      */
     public void putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putByteAsync(complexBody, new ServiceResponseCallback() {

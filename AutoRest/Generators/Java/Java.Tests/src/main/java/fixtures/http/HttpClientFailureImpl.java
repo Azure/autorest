@@ -23,9 +23,11 @@ import fixtures.http.models.Error;
 
 public class HttpClientFailureImpl implements HttpClientFailure {
     private HttpClientFailureService service;
+    AutoRestHttpInfrastructureTestService client;
 
-    public HttpClientFailureImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(HttpClientFailureService.class);
+    public HttpClientFailureImpl(RestAdapter restAdapter, AutoRestHttpInfrastructureTestService client) {
+        this.service = restAdapter.create(HttpClientFailureService.class);
+        this.client = client;
     }
 
     /**

@@ -29,9 +29,11 @@ import com.microsoft.rest.Validator;
 
 public class DictionaryImpl implements Dictionary {
     private DictionaryService service;
+    AutoRestSwaggerBATdictionaryService client;
 
-    public DictionaryImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(DictionaryService.class);
+    public DictionaryImpl(RestAdapter restAdapter, AutoRestSwaggerBATdictionaryService client) {
+        this.service = restAdapter.create(DictionaryService.class);
+        this.client = client;
     }
 
     /**
@@ -145,8 +147,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putEmptyAsync(arrayBody, new ServiceResponseCallback() {
@@ -406,8 +408,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putBooleanTfftAsync(arrayBody, new ServiceResponseCallback() {
@@ -581,8 +583,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putIntegerValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -756,8 +758,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putLongValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -931,8 +933,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putFloatValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -1106,8 +1108,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putDoubleValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -1281,8 +1283,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putStringValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -1460,8 +1462,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -1641,8 +1643,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -1822,8 +1824,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putByteValidAsync(Map<String, Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putByteValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -2134,8 +2136,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putComplexValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -2399,8 +2401,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putArrayValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -2678,8 +2680,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putDictionaryValidAsync(arrayBody, new ServiceResponseCallback() {

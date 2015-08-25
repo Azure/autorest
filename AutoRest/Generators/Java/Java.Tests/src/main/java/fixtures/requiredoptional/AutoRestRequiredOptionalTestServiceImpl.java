@@ -51,6 +51,17 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
         return this.requiredGlobalQuery;
     }
 
+    private int optionalGlobalQuery;
+
+    /**
+     * number of items to skip
+     *
+     * @return the optionalGlobalQuery value.
+     */
+    public int getOptionalGlobalQuery() {
+        return this.optionalGlobalQuery;
+    }
+
     private Implicit implicit;
 
     /**
@@ -104,7 +115,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-                this.implicit = new ImplicitImpl(restAdapter);
-        this.explicit = new ExplicitImpl(restAdapter);
+        this.implicit = new ImplicitImpl(restAdapter, this);
+        this.explicit = new ExplicitImpl(restAdapter, this);
     }
 }

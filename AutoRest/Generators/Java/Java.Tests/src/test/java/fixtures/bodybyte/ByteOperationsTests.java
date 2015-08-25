@@ -30,7 +30,7 @@ public class ByteOperationsTests {
     @Test
     public void getEmpty() throws Exception {
         byte[] result = client.getByteOperations().getEmpty();
-        Assert.assertEquals(0, result.length);
+        Assert.assertNull(result);
     }
 
     @Test

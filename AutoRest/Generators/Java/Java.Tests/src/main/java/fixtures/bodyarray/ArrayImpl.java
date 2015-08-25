@@ -29,9 +29,11 @@ import com.microsoft.rest.Validator;
 
 public class ArrayImpl implements Array {
     private ArrayService service;
+    AutoRestSwaggerBATArrayService client;
 
-    public ArrayImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(ArrayService.class);
+    public ArrayImpl(RestAdapter restAdapter, AutoRestSwaggerBATArrayService client) {
+        this.service = restAdapter.create(ArrayService.class);
+        this.client = client;
     }
 
     /**
@@ -186,8 +188,8 @@ public class ArrayImpl implements Array {
      */
     public void putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putEmptyAsync(arrayBody, new ServiceResponseCallback() {
@@ -279,8 +281,8 @@ public class ArrayImpl implements Array {
      */
     public void putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putBooleanTfftAsync(arrayBody, new ServiceResponseCallback() {
@@ -454,8 +456,8 @@ public class ArrayImpl implements Array {
      */
     public void putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putIntegerValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -629,8 +631,8 @@ public class ArrayImpl implements Array {
      */
     public void putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putLongValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -804,8 +806,8 @@ public class ArrayImpl implements Array {
      */
     public void putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putFloatValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -979,8 +981,8 @@ public class ArrayImpl implements Array {
      */
     public void putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putDoubleValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -1154,8 +1156,8 @@ public class ArrayImpl implements Array {
      */
     public void putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putStringValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -1329,8 +1331,8 @@ public class ArrayImpl implements Array {
      */
     public void putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -1508,8 +1510,8 @@ public class ArrayImpl implements Array {
      */
     public void putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -1687,8 +1689,8 @@ public class ArrayImpl implements Array {
      */
     public void putByteValidAsync(List<Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putByteValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -1995,8 +1997,8 @@ public class ArrayImpl implements Array {
      */
     public void putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putComplexValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -2258,8 +2260,8 @@ public class ArrayImpl implements Array {
      */
     public void putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putArrayValidAsync(arrayBody, new ServiceResponseCallback() {
@@ -2533,8 +2535,8 @@ public class ArrayImpl implements Array {
      */
     public void putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
         service.putDictionaryValidAsync(arrayBody, new ServiceResponseCallback() {

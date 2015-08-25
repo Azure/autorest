@@ -23,9 +23,11 @@ import fixtures.bodyboolean.models.Error;
 
 public class BoolImpl implements Bool {
     private BoolService service;
+    AutoRestBoolTestService client;
 
-    public BoolImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(BoolService.class);
+    public BoolImpl(RestAdapter restAdapter, AutoRestBoolTestService client) {
+        this.service = restAdapter.create(BoolService.class);
+        this.client = client;
     }
 
     /**

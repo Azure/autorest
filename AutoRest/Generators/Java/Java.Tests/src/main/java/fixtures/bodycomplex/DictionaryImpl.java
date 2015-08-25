@@ -25,9 +25,11 @@ import com.microsoft.rest.Validator;
 
 public class DictionaryImpl implements Dictionary {
     private DictionaryService service;
+    AutoRestComplexTestService client;
 
-    public DictionaryImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(DictionaryService.class);
+    public DictionaryImpl(RestAdapter restAdapter, AutoRestComplexTestService client) {
+        this.service = restAdapter.create(DictionaryService.class);
+        this.client = client;
     }
 
     /**
@@ -100,8 +102,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putValidAsync(complexBody, new ServiceResponseCallback() {
@@ -193,8 +195,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public void putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-           serviceCallback.failure(new ServiceException(
-               new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
         service.putEmptyAsync(complexBody, new ServiceResponseCallback() {

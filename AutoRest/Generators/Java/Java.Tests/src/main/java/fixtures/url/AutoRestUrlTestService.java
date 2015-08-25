@@ -28,6 +28,12 @@ public interface AutoRestUrlTestService {
     String getGlobalStringPath();
 
     /**
+     * Gets should contain value null.
+     * @return the globalStringQuery value.
+     */
+    String getGlobalStringQuery();
+
+    /**
      * Gets the Paths object to access its operations.
      * @return the paths value.
      */

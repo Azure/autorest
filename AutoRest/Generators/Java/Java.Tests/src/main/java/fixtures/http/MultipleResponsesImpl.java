@@ -27,9 +27,11 @@ import fixtures.http.models.Error;
 
 public class MultipleResponsesImpl implements MultipleResponses {
     private MultipleResponsesService service;
+    AutoRestHttpInfrastructureTestService client;
 
-    public MultipleResponsesImpl(RestAdapter restAdapter) {
-        service = restAdapter.create(MultipleResponsesService.class);
+    public MultipleResponsesImpl(RestAdapter restAdapter, AutoRestHttpInfrastructureTestService client) {
+        this.service = restAdapter.create(MultipleResponsesService.class);
+        this.client = client;
     }
 
     /**

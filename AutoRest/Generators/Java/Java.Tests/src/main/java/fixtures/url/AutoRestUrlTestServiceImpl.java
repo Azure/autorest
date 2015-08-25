@@ -40,6 +40,17 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
         return this.globalStringPath;
     }
 
+    private String globalStringQuery;
+
+    /**
+     * should contain value null
+     *
+     * @return the globalStringQuery value.
+     */
+    public String getGlobalStringQuery() {
+        return this.globalStringQuery;
+    }
+
     private Paths paths;
 
     /**
@@ -103,8 +114,8 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     private void initialize() {
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-                this.paths = new PathsImpl(restAdapter);
-        this.queries = new QueriesImpl(restAdapter);
-        this.pathItems = new PathItemsImpl(restAdapter);
+        this.paths = new PathsImpl(restAdapter, this);
+        this.queries = new QueriesImpl(restAdapter, this);
+        this.pathItems = new PathItemsImpl(restAdapter, this);
     }
 }
