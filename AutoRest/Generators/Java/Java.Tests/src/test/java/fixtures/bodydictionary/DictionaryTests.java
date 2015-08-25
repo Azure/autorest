@@ -13,6 +13,8 @@ import org.junit.Test;
 
 import java.util.*;
 
+import static org.junit.Assert.fail;
+
 public class DictionaryTests {
     static AutoRestSwaggerBATdictionaryService client;
 
@@ -25,7 +27,7 @@ public class DictionaryTests {
     public void getNull() throws Exception {
         try {
             client.getDictionary().getNull();
-            Assert.assertTrue(false);
+            fail();
         } catch (ServiceException exception) {
             // expected
             Assert.assertTrue(exception.getMessage().contains("JsonMappingException"));
@@ -36,7 +38,7 @@ public class DictionaryTests {
     public void getInvalid() throws Exception {
         try {
             client.getDictionary().getInvalid();
-            Assert.assertTrue(false);
+            fail();
         } catch (ServiceException exception) {
             // expected
             Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
@@ -52,6 +54,29 @@ public class DictionaryTests {
     @Test
     public void putEmpty() throws Exception {
         client.getDictionary().putEmpty(new HashMap<String,String>());
+    }
+
+    @Test
+    public void getNullValue() throws Exception {
+        Map<String, String> result = client.getDictionary().getNullValue();
+        Assert.assertNull(result.get("key1"));
+    }
+
+    @Test
+    public void getNullKey() throws Exception {
+        try {
+            client.getDictionary().getNullKey();
+            fail();
+        } catch (ServiceException exception) {
+            // expected
+            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+        }
+    }
+
+    @Test
+    public void getEmptyStringKey() throws Exception {
+        Map<String, String> result = client.getDictionary().getEmptyStringKey();
+        Assert.assertEquals("val1", result.get(""));
     }
 
     @Test
@@ -77,12 +102,8 @@ public class DictionaryTests {
 
     @Test
     public void getBooleanInvalidNull() throws Exception {
-        try {
-            Map<String, Boolean> result = client.getDictionary().getBooleanInvalidNull();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Map<String, Boolean> result = client.getDictionary().getBooleanInvalidNull();
+        Assert.assertNull(result.get("1"));
     }
 
     @Test
@@ -118,18 +139,15 @@ public class DictionaryTests {
 
     @Test
     public void getIntInvalidNull() throws Exception {
-        try {
-            Map<String, Integer> result = client.getDictionary().getIntInvalidNull();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Map<String, Integer> result = client.getDictionary().getIntInvalidNull();
+        Assert.assertNull(result.get("1"));
     }
 
     @Test
     public void getIntInvalidString() throws Exception {
         try {
             Map<String, Integer> result = client.getDictionary().getIntInvalidString();
+            fail();
         } catch (ServiceException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
@@ -159,18 +177,15 @@ public class DictionaryTests {
 
     @Test
     public void getLongInvalidNull() throws Exception {
-        try {
-            Map<String, Long> result = client.getDictionary().getLongInvalidNull();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Map<String, Long> result = client.getDictionary().getLongInvalidNull();
+        Assert.assertNull(result.get("1"));
     }
 
     @Test
     public void getLongInvalidString() throws Exception {
         try {
             Map<String, Long> result = client.getDictionary().getLongInvalidString();
+            fail();
         } catch (ServiceException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
@@ -183,7 +198,7 @@ public class DictionaryTests {
         Map<String, Double> expected = new HashMap<String, Double>();
         expected.put("0", 0d);
         expected.put("1", -0.01d);
-        expected.put("2", 1.2e20d);
+        expected.put("2", -1.2e20d);
         Assert.assertEquals(expected, result);
     }
 
@@ -192,24 +207,21 @@ public class DictionaryTests {
         Map<String, Double> testdata = new HashMap<String, Double>();
         testdata.put("0", 0d);
         testdata.put("1", -0.01d);
-        testdata.put("2", 1.2e20d);
+        testdata.put("2", -1.2e20d);
         client.getDictionary().putFloatValid(testdata);
     }
 
     @Test
     public void getFloatInvalidNull() throws Exception {
-        try {
-            Map<String, Double> result = client.getDictionary().getFloatInvalidNull();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Map<String, Double> result = client.getDictionary().getFloatInvalidNull();
+        Assert.assertNull(result.get("1"));
     }
 
     @Test
     public void getFloatInvalidString() throws Exception {
         try {
             Map<String, Double> result = client.getDictionary().getFloatInvalidString();
+            fail();
         } catch (ServiceException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
@@ -222,7 +234,7 @@ public class DictionaryTests {
         Map<String, Double> expected = new HashMap<String, Double>();
         expected.put("0", 0d);
         expected.put("1", -0.01d);
-        expected.put("2", 1.2e20d);
+        expected.put("2", -1.2e20d);
         Assert.assertEquals(expected, result);
     }
 
@@ -232,24 +244,21 @@ public class DictionaryTests {
         Map<String, Double> testdata = new HashMap<String, Double>();
         testdata.put("0", 0d);
         testdata.put("1", -0.01d);
-        testdata.put("2", 1.2e20d);
+        testdata.put("2", -1.2e20d);
         client.getDictionary().putDoubleValid(testdata);
     }
 
     @Test
     public void getDoubleInvalidNull() throws Exception {
-        try {
-            Map<String, Double> result = client.getDictionary().getDoubleInvalidNull();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Map<String, Double> result = client.getDictionary().getDoubleInvalidNull();
+        Assert.assertNull(result.get("1"));
     }
 
     @Test
     public void getDoubleInvalidString() throws Exception {
         try {
             Map<String, Double> result = client.getDictionary().getDoubleInvalidString();
+            fail();
         } catch (ServiceException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
@@ -277,22 +286,14 @@ public class DictionaryTests {
 
     @Test
     public void getStringWithNull() throws Exception {
-        try {
-            Map<String, String> result = client.getDictionary().getStringWithNull();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Map<String, String> result = client.getDictionary().getStringWithNull();
+        Assert.assertNull(result.get("1"));
     }
 
     @Test
     public void getStringWithInvalid() throws Exception {
-        try {
-            Map<String, String> result = client.getDictionary().getStringWithInvalid();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
-        }
+        Map<String, String> result = client.getDictionary().getStringWithInvalid();
+        Assert.assertEquals("123", result.get("1"));
     }
 
     @Test
@@ -316,18 +317,15 @@ public class DictionaryTests {
 
     @Test
     public void getDateInvalidNull() throws Exception {
-        try {
-            Map<String, LocalDate> result = client.getDictionary().getDateInvalidNull();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Map<String, LocalDate> result = client.getDictionary().getDateInvalidNull();
+        Assert.assertNull(result.get("1"));
     }
 
     @Test
     public void getDateInvalidString() throws Exception {
         try {
             Map<String, LocalDate> result = client.getDictionary().getDateInvalidChars();
+            fail();
         } catch (ServiceException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -339,8 +337,10 @@ public class DictionaryTests {
         Map<String, DateTime> result = client.getDictionary().getDateTimeValid();
         Map<String, DateTime> expected = new HashMap<String, DateTime>();
         expected.put("0", new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC));
-        expected.put("1", new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC));
-        expected.put("2", new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC));
+        expected.put("1", new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.forOffsetHours(1))
+                            .withZone(DateTimeZone.UTC));
+        expected.put("2", new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.forOffsetHours(-8))
+                            .withZone(DateTimeZone.UTC));
         Assert.assertEquals(expected, result);
     }
 
@@ -348,25 +348,22 @@ public class DictionaryTests {
     public void putDateTimeValid() throws Exception {
         Map<String, DateTime> testdata = new HashMap<String, DateTime>();
         testdata.put("0", new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC));
-        testdata.put("1", new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC));
-        testdata.put("2", new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC));
+        testdata.put("1", new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.forOffsetHours(1)));
+        testdata.put("2", new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.forOffsetHours(-8)));
         client.getDictionary().putDateTimeValid(testdata);
     }
 
     @Test
     public void getDateTimeInvalidNull() throws Exception {
-        try {
-            Map<String, DateTime> result = client.getDictionary().getDateTimeInvalidNull();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Map<String, DateTime> result = client.getDictionary().getDateTimeInvalidNull();
+        Assert.assertNull(result.get("1"));
     }
 
     @Test
     public void getDateTimeInvalidString() throws Exception {
         try {
             Map<String, DateTime> result = client.getDictionary().getDateTimeInvalidChars();
+            fail();
         } catch (ServiceException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -380,7 +377,9 @@ public class DictionaryTests {
         expected.put("0", new Byte[] {(byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFA});
         expected.put("1", new Byte[] {(byte)0x01, (byte)0x02, (byte)0x03});
         expected.put("2", new Byte[] {(byte)0x25, (byte)0x29, (byte)0x43});
-        Assert.assertEquals(expected, result);
+        Assert.assertArrayEquals(expected.get("0"), result.get("0"));
+        Assert.assertArrayEquals(expected.get("1"), result.get("1"));
+        Assert.assertArrayEquals(expected.get("2"), result.get("2"));
     }
 
     @Test
@@ -394,8 +393,15 @@ public class DictionaryTests {
 
     @Test
     public void getByteInvalidNull() throws Exception {
+        Map<String, Byte[]> result = client.getDictionary().getByteInvalidNull();
+        Assert.assertNull(result.get("1"));
+    }
+
+    @Test
+    public void getComplexNull() throws Exception {
         try {
-            Map<String, Byte[]> result = client.getDictionary().getByteInvalidNull();
+            Map<String, Widget> result = client.getDictionary().getComplexNull();
+            fail();
         } catch (ServiceException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -403,12 +409,167 @@ public class DictionaryTests {
     }
 
     @Test
-    public void getComplexNull() throws Exception {
+    public void getComplexEmpty() throws Exception {
+        Map<String, Widget> result = client.getDictionary().getComplexEmpty();
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test
+    public void getComplexItemNull() throws Exception {
+        Map<String, Widget> result = client.getDictionary().getComplexItemNull();
+        Assert.assertEquals(3, result.size());
+        Assert.assertNull(result.get("1"));
+    }
+
+    @Test
+    public void getComplexItemEmpty() throws Exception {
+        Map<String, Widget> result = client.getDictionary().getComplexItemEmpty();
+        Assert.assertEquals(3, result.size());
+        Assert.assertNull(result.get("1").getInteger());
+        Assert.assertNull(result.get("1").getStringProperty());
+    }
+
+    @Test
+    public void getComplexValid() throws Exception {
+        Map<String, Widget> result = client.getDictionary().getComplexValid();
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals(1, result.get("0").getInteger().intValue());
+        Assert.assertEquals("4", result.get("1").getStringProperty());
+    }
+
+    @Test
+    public void putComplexValid() throws Exception {
+        Map<String, Widget> body = new HashMap<String, Widget>();
+        Widget w1 = new Widget();
+        w1.setInteger(1);
+        w1.setStringProperty("2");
+        body.put("0", w1);
+        Widget w2 = new Widget();
+        w2.setInteger(3);
+        w2.setStringProperty("4");
+        body.put("1", w2);
+        Widget w3 = new Widget();
+        w3.setInteger(5);
+        w3.setStringProperty("6");
+        body.put("2", w3);
+        client.getDictionary().putComplexValid(body);
+    }
+
+    @Test
+    public void getArrayNull() throws Exception {
         try {
-            Map<String, Widget> result = client.getDictionary().getComplexNull();
+            Map<String, List<String>> result = client.getDictionary().getArrayNull();
+            fail();
         } catch (ServiceException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
         }
+    }
+
+    @Test
+    public void getArrayEmpty() throws Exception {
+        Map<String, List<String>> result = client.getDictionary().getArrayEmpty();
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test
+    public void getArrayItemNull() throws Exception {
+        Map<String, List<String>> result = client.getDictionary().getArrayItemNull();
+        Assert.assertNull(result.get("1"));
+    }
+
+    @Test
+    public void getArrayItemEmpty() throws Exception {
+        Map<String, List<String>> result = client.getDictionary().getArrayItemEmpty();
+        Assert.assertEquals(0, result.get("1").size());
+    }
+
+    @Test
+    public void getArrayValid() throws  Exception {
+        Map<String, List<String>> result = client.getDictionary().getArrayValid();
+        Assert.assertArrayEquals(new String[] { "1", "2", "3"}, result.get("0").toArray());
+        Assert.assertArrayEquals(new String[] { "4", "5", "6"}, result.get("1").toArray());
+        Assert.assertArrayEquals(new String[] { "7", "8", "9"}, result.get("2").toArray());
+    }
+
+    @Test
+    public void putArrayValid() throws Exception {
+        Map<String, List<String>> body = new HashMap<String, List<String>>();
+        body.put("0", Arrays.asList("1", "2", "3"));
+        body.put("1", Arrays.asList("4", "5", "6"));
+        body.put("2", Arrays.asList("7", "8", "9"));
+        client.getDictionary().putArrayValid(body);
+    }
+
+    @Test
+    public void getDictionaryNull() throws Exception {
+        try {
+            Map<String, Map<String, String>> result = client.getDictionary().getDictionaryNull();
+            fail();
+        } catch (ServiceException ex) {
+            // expected
+            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
+        }
+    }
+
+    @Test
+    public void getDictionaryEmpty() throws Exception {
+        Map<String, Map<String, String>> result = client.getDictionary().getDictionaryEmpty();
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test
+    public void getDictionaryItemNull() throws Exception {
+        Map<String, Map<String, String>> result = client.getDictionary().getDictionaryItemNull();
+        Assert.assertNull(result.get("1"));
+    }
+
+    @Test
+    public void getDictionaryItemEmpty() throws Exception {
+        Map<String, Map<String, String>> result = client.getDictionary().getDictionaryItemEmpty();
+        Assert.assertEquals(0, result.get("1").size());
+    }
+
+    @Test
+    public void getDictionaryValid() throws  Exception {
+        Map<String, Map<String, String>> result = client.getDictionary().getDictionaryValid();
+        Map<String, String> map1 = new HashMap<String, String>();
+        map1.put("1", "one");
+        map1.put("2", "two");
+        map1.put("3", "three");
+        Map<String, String> map2 = new HashMap<String, String>();
+        map2.put("4", "four");
+        map2.put("5", "five");
+        map2.put("6", "six");
+        Map<String, String> map3 = new HashMap<String, String>();
+        map3.put("7", "seven");
+        map3.put("8", "eight");
+        map3.put("9", "nine");
+        Map<String, Map<String, String>> expected = new HashMap<String, Map<String, String>>();
+        expected.put("0", map1);
+        expected.put("1", map2);
+        expected.put("2", map3);
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void putDictionaryValid() throws Exception {
+        Map<String, String> map1 = new HashMap<String, String>();
+        map1.put("1", "one");
+        map1.put("2", "two");
+        map1.put("3", "three");
+        Map<String, String> map2 = new HashMap<String, String>();
+        map2.put("4", "four");
+        map2.put("5", "five");
+        map2.put("6", "six");
+        Map<String, String> map3 = new HashMap<String, String>();
+        map3.put("7", "seven");
+        map3.put("8", "eight");
+        map3.put("9", "nine");
+        Map<String, Map<String, String>> body = new HashMap<String, Map<String, String>>();
+        body.put("0", map1);
+        body.put("1", map2);
+        body.put("2", map3);
+        client.getDictionary().putDictionaryValid(body);
     }
 }

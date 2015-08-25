@@ -61,7 +61,7 @@ public class DictionaryTests {
 
     @Test
     public void getNotProvided() throws Exception {
-        ArrayWrapper result = client.getArray().getNotProvided();
-        Assert.assertNull(result.getArray());
+        DictionaryWrapper result = client.getDictionary().getNotProvided();
+        Assert.assertNull(result.getDefaultProgram());
     }
 }

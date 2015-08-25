@@ -24,7 +24,8 @@ var datetime = function(coverage, optionalCoverage) {
                 utils.send400(res, next, "Did not like the value provided for max datetime in the req " + util.inspect(req.body));
             }
         } else if (req.params.type === 'localnegativeoffset') {
-            if (new Date(req.body).toString() === new Date('9999-12-31T23:59:59.9999999-14:00').toString()) {
+            if (new Date(req.body).toString() === new Date('9999-12-31T23:59:59.9999999-14:00').toString() ||
+                req.body === '10000-01-01T13:59:59.999Z') {
                 optionalCoverage['putDateTimeMaxLocalNegativeOffset']++;
                 res.status(200).end();
             } else {

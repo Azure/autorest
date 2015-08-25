@@ -29,7 +29,8 @@ public class JacksonConverterBuilder {
                     .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                     .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                     .registerModule(new JodaModule())
-                    .registerModule(ByteArraySerializer.getModule());
+                    .registerModule(ByteArraySerializer.getModule())
+                    .registerModule(DateTimeSerializer.getModule());
         }
         return objectMapper;
     }
