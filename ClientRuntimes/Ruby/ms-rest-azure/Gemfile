@@ -12,8 +12,7 @@ group :development do
   gem 'concurrent-ruby-ext'
   gem 'faraday'
   gem 'faraday-cookie_jar'
-  # gem 'ms_rest'
-  gem 'ms_rest', path: '../ms-rest' # (TODO: change back to global gem before publishing)
+  gem 'ms_rest', path: '../ms-rest'
 end
 
 group :test do
