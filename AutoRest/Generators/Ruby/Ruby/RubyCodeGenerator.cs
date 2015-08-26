@@ -55,7 +55,7 @@ namespace Microsoft.Rest.Generator.Ruby
 
             sdkName = RubyCodeNamer.UnderscoreCase(codeNamer.RubyRemoveInvalidCharacters(sdkName));
             sdkPath = sdkName;
-            modelsPath = sdkPath + "\\models";
+            modelsPath = Path.Combine(sdkPath, "models");
         }
 
         /// <summary>
