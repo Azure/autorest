@@ -156,7 +156,7 @@
   </Target>
 
   <!-- Run tests. -->
-  <Target Name="Test" DependsOnTargets="RestoreNugetPackages;RestoreRubyDependencies">
+  <Target Name="Test" DependsOnTargets="RestoreNugetPackages">
     <Exec Command="gulp test"/>
 </Target>
 
@@ -234,23 +234,6 @@
     <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <Exec Command="$(NuGetCommand) restore $(ClientRuntimeWindowsSolution)" ContinueOnError="false" Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' != 'Unix'" />
-  </Target>
-
-  <Target Name="RestoreRubyDependencies">
-    <Message Text="Update ms-rest dependencies"/>
-    <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest" Command ="bundle install"/>
-    <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest" Command ="rake build"/>
-
-    <Message Text="Updating ms-rest-azure dependencies"/>
-    <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest-azure" Command ="bundle install"/>
-    <Exec WorkingDirectory=".\ClientRuntimes\Ruby\ms-rest-azure" Command ="rake build"/>
-
-    <Message Text="Updating ruby tests dependencies"/>
-    <Exec WorkingDirectory=".\AutoRest\Generators\Ruby\Ruby.Tests" Command ="bundle install"/>
-
-    <Message Text="Updating azure ruby tests dependencies"/>
-    <Exec WorkingDirectory=".\AutoRest\Generators\Ruby\Azure.Ruby.Tests" Command ="bundle install"/>
-    <Exec WorkingDirectory="$(LibraryRoot)\" Command ="bundle install"/>
   </Target>
 
   <!-- Official releases require tools only available on corp network. -->
