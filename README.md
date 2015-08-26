@@ -42,8 +42,7 @@ Ensure that your environment includes the `JAVA_HOME`.
 You may want a Java IDE.
 - Install Jetbrains IntelliJ IDEA from [JetBrains downloads](https://www.jetbrains.com/idea/download/.)
  OR
-- Install `Eclipse IDE for Java EE Developer` from [Eclipse downloads](http://eclipse.org/downloads/) and
-- Install the `Maven Eclipse Integration` from [Eclipse m2e downloads](http://www.eclipse.org/m2e/m2e-downloads.html).
+- Install `Eclipse IDE for Java EE Developer` from [Eclipse downloads](http://eclipse.org/downloads/) 
 
 ### Ruby
 [RubyInstaller](http://rubyinstaller.org/downloads/) version 2+ - 32-bit version.
