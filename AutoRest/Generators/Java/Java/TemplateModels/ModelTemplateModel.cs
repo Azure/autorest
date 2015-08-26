@@ -13,7 +13,6 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class ModelTemplateModel : CompositeType
     {
-        private readonly IScopeProvider _scope = new ScopeProvider();
         private ModelTemplateModel _parent = null;
         
         public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)

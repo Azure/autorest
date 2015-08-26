@@ -232,7 +232,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 if (ReturnType != null)
                 {
-                    return ReturnType.Name;
+                    return JavaCodeNamer.WrapPrimitiveType(ReturnType).Name;
                 }
                 return "void";
             }

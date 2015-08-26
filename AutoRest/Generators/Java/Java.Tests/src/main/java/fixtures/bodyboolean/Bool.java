@@ -68,10 +68,10 @@ public interface Bool {
     /**
      * Get true Boolean value
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    boolean getTrue() throws ServiceException;
+    Boolean getTrue() throws ServiceException;
 
     /**
      * Get true Boolean value
@@ -99,10 +99,10 @@ public interface Bool {
     /**
      * Get false Boolean value
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    boolean getFalse() throws ServiceException;
+    Boolean getFalse() throws ServiceException;
 
     /**
      * Get false Boolean value
@@ -130,10 +130,10 @@ public interface Bool {
     /**
      * Get null Boolean value
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    boolean getNull() throws ServiceException;
+    Boolean getNull() throws ServiceException;
 
     /**
      * Get null Boolean value
@@ -145,10 +145,10 @@ public interface Bool {
     /**
      * Get invalid Boolean value
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    boolean getInvalid() throws ServiceException;
+    Boolean getInvalid() throws ServiceException;
 
     /**
      * Get invalid Boolean value

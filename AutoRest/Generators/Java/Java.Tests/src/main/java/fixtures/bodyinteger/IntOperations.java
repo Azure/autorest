@@ -92,10 +92,10 @@ public interface IntOperations {
     /**
      * Get null Int value
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    int getNull() throws ServiceException;
+    Integer getNull() throws ServiceException;
 
     /**
      * Get null Int value
@@ -107,10 +107,10 @@ public interface IntOperations {
     /**
      * Get invalid Int value
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    int getInvalid() throws ServiceException;
+    Integer getInvalid() throws ServiceException;
 
     /**
      * Get invalid Int value
@@ -122,10 +122,10 @@ public interface IntOperations {
     /**
      * Get overflow Int32 value
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    int getOverflowInt32() throws ServiceException;
+    Integer getOverflowInt32() throws ServiceException;
 
     /**
      * Get overflow Int32 value
@@ -137,10 +137,10 @@ public interface IntOperations {
     /**
      * Get underflow Int32 value
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    int getUnderflowInt32() throws ServiceException;
+    Integer getUnderflowInt32() throws ServiceException;
 
     /**
      * Get underflow Int32 value
@@ -152,10 +152,10 @@ public interface IntOperations {
     /**
      * Get overflow Int64 value
      *
-     * @return the long object if successful.
+     * @return the Long object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    long getOverflowInt64() throws ServiceException;
+    Long getOverflowInt64() throws ServiceException;
 
     /**
      * Get overflow Int64 value
@@ -167,10 +167,10 @@ public interface IntOperations {
     /**
      * Get underflow Int64 value
      *
-     * @return the long object if successful.
+     * @return the Long object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    long getUnderflowInt64() throws ServiceException;
+    Long getUnderflowInt64() throws ServiceException;
 
     /**
      * Get underflow Int64 value

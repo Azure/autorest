@@ -24,13 +24,7 @@ public class StringOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        try {
-            client.getStringOperations().getNull();
-            Assert.assertTrue(false);
-        } catch (Exception ex) {
-            Assert.assertEquals(ServiceException.class, ex.getClass());
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Assert.assertNull(client.getStringOperations().getNull());
     }
 
     @Test

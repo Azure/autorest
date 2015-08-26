@@ -108,16 +108,21 @@ public class ServiceResponseBuilder<T> {
                 // Pre-defined successful status code
                 T body = null;
                 Type type = responseTypes.get(statusCode);
-                if (type != null && type != Void.class) {
-                    body = (T) this.converter.fromBody(
-                            responseContent,
-                            responseTypes.get(statusCode));
+                if (type != null && type != Void.class && responseContent.length() > 0) {
+                    body = (T) this.converter.fromBody(responseContent, type);
                 }
                 result = new ServiceResponse<T>(body, response);
-            } else if (error == null && (responseTypes.isEmpty() ||
-                    (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
+            } else if (error == null && responseTypes.isEmpty()) {
                 // no pre-defined successful status code, use retrofit default
                 result = new ServiceResponse<T>(null, response);
+            } else if (error == null && responseTypes.size() == 1 && responseTypes.containsKey(0)) {
+                // no pre-defined successful status code, use retrofit default
+                T body = null;
+                Type type = responseTypes.get(0);
+                if (type != null && type != Void.class && responseContent.length() > 0) {
+                    body = (T) this.converter.fromBody(responseContent, type);
+                }
+                result = new ServiceResponse<T>(body, response);
             } else {
                 // not in pre-defined successful status code list or
                 // standard HTTP error codes

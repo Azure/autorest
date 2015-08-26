@@ -21,13 +21,7 @@ public class ArrayTests {
 
     @Test
     public void getNull() throws Exception {
-        try {
-            client.getArray().getNull();
-            Assert.assertTrue(false);
-        } catch (ServiceException exception) {
-            // expected
-            Assert.assertTrue(exception.getMessage().contains("JsonMappingException"));
-        }
+        Assert.assertNull(client.getArray().getNull());
     }
 
     @Test

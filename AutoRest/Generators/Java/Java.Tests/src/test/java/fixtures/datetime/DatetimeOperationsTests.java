@@ -25,14 +25,7 @@ public class DatetimeOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        try {
-            client.getDatetimeOperations().getNull();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonMappingException"));
-        }
+        Assert.assertNull(client.getDatetimeOperations().getNull());
     }
 
     @Test

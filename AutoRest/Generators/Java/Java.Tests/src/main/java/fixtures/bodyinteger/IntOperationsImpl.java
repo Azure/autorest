@@ -33,10 +33,10 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get null Int value
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public int getNull() throws ServiceException {
+    public Integer getNull() throws ServiceException {
         try {
             ServiceResponse<Integer> response = getNullDelegate(service.getNull(), null);
             return response.getBody();
@@ -74,10 +74,10 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get invalid Int value
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public int getInvalid() throws ServiceException {
+    public Integer getInvalid() throws ServiceException {
         try {
             ServiceResponse<Integer> response = getInvalidDelegate(service.getInvalid(), null);
             return response.getBody();
@@ -115,10 +115,10 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get overflow Int32 value
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public int getOverflowInt32() throws ServiceException {
+    public Integer getOverflowInt32() throws ServiceException {
         try {
             ServiceResponse<Integer> response = getOverflowInt32Delegate(service.getOverflowInt32(), null);
             return response.getBody();
@@ -156,10 +156,10 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get underflow Int32 value
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public int getUnderflowInt32() throws ServiceException {
+    public Integer getUnderflowInt32() throws ServiceException {
         try {
             ServiceResponse<Integer> response = getUnderflowInt32Delegate(service.getUnderflowInt32(), null);
             return response.getBody();
@@ -197,10 +197,10 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get overflow Int64 value
      *
-     * @return the long object if successful.
+     * @return the Long object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public long getOverflowInt64() throws ServiceException {
+    public Long getOverflowInt64() throws ServiceException {
         try {
             ServiceResponse<Long> response = getOverflowInt64Delegate(service.getOverflowInt64(), null);
             return response.getBody();
@@ -238,10 +238,10 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get underflow Int64 value
      *
-     * @return the long object if successful.
+     * @return the Long object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public long getUnderflowInt64() throws ServiceException {
+    public Long getUnderflowInt64() throws ServiceException {
         try {
             ServiceResponse<Long> response = getUnderflowInt64Delegate(service.getUnderflowInt64(), null);
             return response.getBody();

@@ -158,10 +158,10 @@ public interface HttpSuccess {
     /**
      * Get 200 success
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    boolean get200() throws ServiceException;
+    Boolean get200() throws ServiceException;
 
     /**
      * Get 200 success

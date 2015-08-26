@@ -33,10 +33,10 @@ public class NumberImpl implements Number {
     /**
      * Get null Number value
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public double getNull() throws ServiceException {
+    public Double getNull() throws ServiceException {
         try {
             ServiceResponse<Double> response = getNullDelegate(service.getNull(), null);
             return response.getBody();
@@ -74,10 +74,10 @@ public class NumberImpl implements Number {
     /**
      * Get invalid float Number value
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public double getInvalidFloat() throws ServiceException {
+    public Double getInvalidFloat() throws ServiceException {
         try {
             ServiceResponse<Double> response = getInvalidFloatDelegate(service.getInvalidFloat(), null);
             return response.getBody();
@@ -115,10 +115,10 @@ public class NumberImpl implements Number {
     /**
      * Get invalid double Number value
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public double getInvalidDouble() throws ServiceException {
+    public Double getInvalidDouble() throws ServiceException {
         try {
             ServiceResponse<Double> response = getInvalidDoubleDelegate(service.getInvalidDouble(), null);
             return response.getBody();
@@ -198,10 +198,10 @@ public class NumberImpl implements Number {
     /**
      * Get big float value 3.402823e+20
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public double getBigFloat() throws ServiceException {
+    public Double getBigFloat() throws ServiceException {
         try {
             ServiceResponse<Double> response = getBigFloatDelegate(service.getBigFloat(), null);
             return response.getBody();
@@ -281,10 +281,10 @@ public class NumberImpl implements Number {
     /**
      * Get big double value 2.5976931e+101
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public double getBigDouble() throws ServiceException {
+    public Double getBigDouble() throws ServiceException {
         try {
             ServiceResponse<Double> response = getBigDoubleDelegate(service.getBigDouble(), null);
             return response.getBody();
@@ -364,10 +364,10 @@ public class NumberImpl implements Number {
     /**
      * Get big double value 99999999.99
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public double getBigDoublePositiveDecimal() throws ServiceException {
+    public Double getBigDoublePositiveDecimal() throws ServiceException {
         try {
             ServiceResponse<Double> response = getBigDoublePositiveDecimalDelegate(service.getBigDoublePositiveDecimal(), null);
             return response.getBody();
@@ -447,10 +447,10 @@ public class NumberImpl implements Number {
     /**
      * Get big double value -99999999.99
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public double getBigDoubleNegativeDecimal() throws ServiceException {
+    public Double getBigDoubleNegativeDecimal() throws ServiceException {
         try {
             ServiceResponse<Double> response = getBigDoubleNegativeDecimalDelegate(service.getBigDoubleNegativeDecimal(), null);
             return response.getBody();
@@ -530,10 +530,10 @@ public class NumberImpl implements Number {
     /**
      * Get big double value 3.402823e-20
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public double getSmallFloat() throws ServiceException {
+    public Double getSmallFloat() throws ServiceException {
         try {
             ServiceResponse<Double> response = getSmallFloatDelegate(service.getSmallFloat(), null);
             return response.getBody();
@@ -613,10 +613,10 @@ public class NumberImpl implements Number {
     /**
      * Get big double value 2.5976931e-101
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public double getSmallDouble() throws ServiceException {
+    public Double getSmallDouble() throws ServiceException {
         try {
             ServiceResponse<Double> response = getSmallDoubleDelegate(service.getSmallDouble(), null);
             return response.getBody();

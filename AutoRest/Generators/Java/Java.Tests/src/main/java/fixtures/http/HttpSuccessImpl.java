@@ -73,10 +73,10 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public boolean get200() throws ServiceException {
+    public Boolean get200() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = get200Delegate(service.get200(), null);
             return response.getBody();

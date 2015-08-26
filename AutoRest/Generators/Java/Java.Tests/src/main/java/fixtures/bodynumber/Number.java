@@ -122,10 +122,10 @@ public interface Number {
     /**
      * Get null Number value
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    double getNull() throws ServiceException;
+    Double getNull() throws ServiceException;
 
     /**
      * Get null Number value
@@ -137,10 +137,10 @@ public interface Number {
     /**
      * Get invalid float Number value
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    double getInvalidFloat() throws ServiceException;
+    Double getInvalidFloat() throws ServiceException;
 
     /**
      * Get invalid float Number value
@@ -152,10 +152,10 @@ public interface Number {
     /**
      * Get invalid double Number value
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    double getInvalidDouble() throws ServiceException;
+    Double getInvalidDouble() throws ServiceException;
 
     /**
      * Get invalid double Number value
@@ -183,10 +183,10 @@ public interface Number {
     /**
      * Get big float value 3.402823e+20
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    double getBigFloat() throws ServiceException;
+    Double getBigFloat() throws ServiceException;
 
     /**
      * Get big float value 3.402823e+20
@@ -214,10 +214,10 @@ public interface Number {
     /**
      * Get big double value 2.5976931e+101
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    double getBigDouble() throws ServiceException;
+    Double getBigDouble() throws ServiceException;
 
     /**
      * Get big double value 2.5976931e+101
@@ -245,10 +245,10 @@ public interface Number {
     /**
      * Get big double value 99999999.99
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    double getBigDoublePositiveDecimal() throws ServiceException;
+    Double getBigDoublePositiveDecimal() throws ServiceException;
 
     /**
      * Get big double value 99999999.99
@@ -276,10 +276,10 @@ public interface Number {
     /**
      * Get big double value -99999999.99
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    double getBigDoubleNegativeDecimal() throws ServiceException;
+    Double getBigDoubleNegativeDecimal() throws ServiceException;
 
     /**
      * Get big double value -99999999.99
@@ -307,10 +307,10 @@ public interface Number {
     /**
      * Get big double value 3.402823e-20
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    double getSmallFloat() throws ServiceException;
+    Double getSmallFloat() throws ServiceException;
 
     /**
      * Get big double value 3.402823e-20
@@ -338,10 +338,10 @@ public interface Number {
     /**
      * Get big double value 2.5976931e-101
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    double getSmallDouble() throws ServiceException;
+    Double getSmallDouble() throws ServiceException;
 
     /**
      * Get big double value 2.5976931e-101

@@ -33,10 +33,10 @@ public class HttpFailureImpl implements HttpFailure {
     /**
      * Get empty error form server
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public boolean getEmptyError() throws ServiceException {
+    public Boolean getEmptyError() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = getEmptyErrorDelegate(service.getEmptyError(), null);
             return response.getBody();

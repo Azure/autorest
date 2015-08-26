@@ -17,26 +17,19 @@ public class ByteOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        try {
-            client.getByteOperations().getNull();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonMappingException"));
-        }
+        Assert.assertNull(client.getByteOperations().getNull());
     }
 
     @Test
     public void getEmpty() throws Exception {
-        byte[] result = client.getByteOperations().getEmpty();
+        Byte[] result = client.getByteOperations().getEmpty();
         Assert.assertNull(result);
     }
 
     @Test
     public void getNonAscii() throws Exception {
-        byte[] result = client.getByteOperations().getNonAscii();
-        byte[] expected = new byte[] {
+        Byte[] result = client.getByteOperations().getNonAscii();
+        Byte[] expected = new Byte[] {
                 (byte) 0xff, (byte) 0xfe, (byte) 0xfd, (byte) 0xfc, (byte) 0xfb,
                 (byte) 0xfa, (byte) 0xf9, (byte) 0xf8, (byte) 0xf7, (byte) 0xf6
         };

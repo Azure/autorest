@@ -34,16 +34,16 @@ public class ByteOperationsImpl implements ByteOperations {
     /**
      * Get null byte value
      *
-     * @return the byte[] object if successful.
+     * @return the Byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public byte[] getNull() throws ServiceException {
+    public Byte[] getNull() throws ServiceException {
         try {
             ServiceResponse<Byte[]> response = getNullDelegate(service.getNull(), null);
-            return ArrayUtils.toPrimitive(response.getBody());
+            return response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Byte[]> response = getNullDelegate(error.getResponse(), error);
-            return ArrayUtils.toPrimitive(response.getBody());
+            return response.getBody();
         }
     }
 
@@ -75,16 +75,16 @@ public class ByteOperationsImpl implements ByteOperations {
     /**
      * Get empty byte value ''
      *
-     * @return the byte[] object if successful.
+     * @return the Byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public byte[] getEmpty() throws ServiceException {
+    public Byte[] getEmpty() throws ServiceException {
         try {
             ServiceResponse<Byte[]> response = getEmptyDelegate(service.getEmpty(), null);
-            return ArrayUtils.toPrimitive(response.getBody());
+            return response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Byte[]> response = getEmptyDelegate(error.getResponse(), error);
-            return ArrayUtils.toPrimitive(response.getBody());
+            return response.getBody();
         }
     }
 
@@ -116,16 +116,16 @@ public class ByteOperationsImpl implements ByteOperations {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
-     * @return the byte[] object if successful.
+     * @return the Byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public byte[] getNonAscii() throws ServiceException {
+    public Byte[] getNonAscii() throws ServiceException {
         try {
             ServiceResponse<Byte[]> response = getNonAsciiDelegate(service.getNonAscii(), null);
-            return ArrayUtils.toPrimitive(response.getBody());
+            return response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Byte[]> response = getNonAsciiDelegate(error.getResponse(), error);
-            return ArrayUtils.toPrimitive(response.getBody());
+            return response.getBody();
         }
     }
 
@@ -207,16 +207,16 @@ public class ByteOperationsImpl implements ByteOperations {
     /**
      * Get invalid byte value ':::SWAGGER::::'
      *
-     * @return the byte[] object if successful.
+     * @return the Byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public byte[] getInvalid() throws ServiceException {
+    public Byte[] getInvalid() throws ServiceException {
         try {
             ServiceResponse<Byte[]> response = getInvalidDelegate(service.getInvalid(), null);
-            return ArrayUtils.toPrimitive(response.getBody());
+            return response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Byte[]> response = getInvalidDelegate(error.getResponse(), error);
-            return ArrayUtils.toPrimitive(response.getBody());
+            return response.getBody();
         }
     }
 

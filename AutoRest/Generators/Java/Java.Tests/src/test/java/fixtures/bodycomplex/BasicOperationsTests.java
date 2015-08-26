@@ -60,13 +60,6 @@ public class BasicOperationsTests {
 
     @Test
     public void getNotProvided() throws Exception {
-        try {
-            client.getBasicOperations().getNotProvided();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("ConversionException"));
-        }
+        Assert.assertNull(client.getBasicOperations().getNotProvided());
     }
 }

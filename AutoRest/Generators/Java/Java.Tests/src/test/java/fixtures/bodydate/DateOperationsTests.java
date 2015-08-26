@@ -19,14 +19,7 @@ public class DateOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        try {
-            client.getDateOperations().getNull();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonMappingException"));
-        }
+        Assert.assertNull(client.getDateOperations().getNull());
     }
 
     @Test

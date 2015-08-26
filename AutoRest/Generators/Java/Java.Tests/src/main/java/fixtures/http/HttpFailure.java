@@ -36,10 +36,10 @@ public interface HttpFailure {
     /**
      * Get empty error form server
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    boolean getEmptyError() throws ServiceException;
+    Boolean getEmptyError() throws ServiceException;
 
     /**
      * Get empty error form server

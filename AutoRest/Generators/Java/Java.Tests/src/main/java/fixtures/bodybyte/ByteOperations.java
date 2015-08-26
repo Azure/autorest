@@ -62,10 +62,10 @@ public interface ByteOperations {
     /**
      * Get null byte value
      *
-     * @return the byte[] object if successful.
+     * @return the Byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    byte[] getNull() throws ServiceException;
+    Byte[] getNull() throws ServiceException;
 
     /**
      * Get null byte value
@@ -77,10 +77,10 @@ public interface ByteOperations {
     /**
      * Get empty byte value ''
      *
-     * @return the byte[] object if successful.
+     * @return the Byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    byte[] getEmpty() throws ServiceException;
+    Byte[] getEmpty() throws ServiceException;
 
     /**
      * Get empty byte value ''
@@ -92,10 +92,10 @@ public interface ByteOperations {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
-     * @return the byte[] object if successful.
+     * @return the Byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    byte[] getNonAscii() throws ServiceException;
+    Byte[] getNonAscii() throws ServiceException;
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
@@ -123,10 +123,10 @@ public interface ByteOperations {
     /**
      * Get invalid byte value ':::SWAGGER::::'
      *
-     * @return the byte[] object if successful.
+     * @return the Byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    byte[] getInvalid() throws ServiceException;
+    Byte[] getInvalid() throws ServiceException;
 
     /**
      * Get invalid byte value ':::SWAGGER::::'

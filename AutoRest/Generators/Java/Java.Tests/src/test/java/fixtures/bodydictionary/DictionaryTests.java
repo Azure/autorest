@@ -25,13 +25,7 @@ public class DictionaryTests {
 
     @Test
     public void getNull() throws Exception {
-        try {
-            client.getDictionary().getNull();
-            fail();
-        } catch (ServiceException exception) {
-            // expected
-            Assert.assertTrue(exception.getMessage().contains("JsonMappingException"));
-        }
+        Assert.assertNull(client.getDictionary().getNull());
     }
 
     @Test
@@ -399,13 +393,8 @@ public class DictionaryTests {
 
     @Test
     public void getComplexNull() throws Exception {
-        try {
-            Map<String, Widget> result = client.getDictionary().getComplexNull();
-            fail();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Map<String, Widget> result = client.getDictionary().getComplexNull();
+        Assert.assertNull(result);
     }
 
     @Test
@@ -457,13 +446,8 @@ public class DictionaryTests {
 
     @Test
     public void getArrayNull() throws Exception {
-        try {
-            Map<String, List<String>> result = client.getDictionary().getArrayNull();
-            fail();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Map<String, List<String>> result = client.getDictionary().getArrayNull();
+        Assert.assertNull(result);
     }
 
     @Test
@@ -503,13 +487,7 @@ public class DictionaryTests {
 
     @Test
     public void getDictionaryNull() throws Exception {
-        try {
-            Map<String, Map<String, String>> result = client.getDictionary().getDictionaryNull();
-            fail();
-        } catch (ServiceException ex) {
-            // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+        Assert.assertNull(client.getDictionary().getDictionaryNull());
     }
 
     @Test

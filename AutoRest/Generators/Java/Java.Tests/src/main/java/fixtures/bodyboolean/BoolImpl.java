@@ -33,10 +33,10 @@ public class BoolImpl implements Bool {
     /**
      * Get true Boolean value
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public boolean getTrue() throws ServiceException {
+    public Boolean getTrue() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = getTrueDelegate(service.getTrue(), null);
             return response.getBody();
@@ -116,10 +116,10 @@ public class BoolImpl implements Bool {
     /**
      * Get false Boolean value
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public boolean getFalse() throws ServiceException {
+    public Boolean getFalse() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = getFalseDelegate(service.getFalse(), null);
             return response.getBody();
@@ -199,10 +199,10 @@ public class BoolImpl implements Bool {
     /**
      * Get null Boolean value
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public boolean getNull() throws ServiceException {
+    public Boolean getNull() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = getNullDelegate(service.getNull(), null);
             return response.getBody();
@@ -240,10 +240,10 @@ public class BoolImpl implements Bool {
     /**
      * Get invalid Boolean value
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public boolean getInvalid() throws ServiceException {
+    public Boolean getInvalid() throws ServiceException {
         try {
             ServiceResponse<Boolean> response = getInvalidDelegate(service.getInvalid(), null);
             return response.getBody();
