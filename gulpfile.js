@@ -289,8 +289,8 @@ gulp.task('package', function(cb) {
 
 gulp.task('test:clientruntime:node', shell.task('npm test', { cwd: './ClientRuntimes/NodeJS/ms-rest/', verbosity: 3 }));
 gulp.task('test:clientruntime:nodeazure', shell.task('npm test', { cwd: './ClientRuntimes/NodeJS/ms-rest-azure/', verbosity: 3 }));
-gulp.task('test:clientruntime:ruby', shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest/', verbosity: 3 }));
-gulp.task('test:clientruntime:rubyazure', shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest-azure/', verbosity: 3 }));
+gulp.task('test:clientruntime:ruby', ['syncDependencies:runtime:ruby'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest/', verbosity: 3 }));
+gulp.task('test:clientruntime:rubyazure', ['syncDependencies:runtime:rubyazure'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest-azure/', verbosity: 3 }));
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
     'test:clientruntime:ruby', 'test:clientruntime:rubyazure', cb);
