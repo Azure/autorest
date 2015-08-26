@@ -141,7 +141,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        protected override IType NormalizeType(IType type)
+        public override IType NormalizeType(IType type)
         {
             if (type == null)
             {
