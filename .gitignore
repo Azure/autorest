@@ -1,5 +1,5 @@
 ## Ignore generated code
-AutoRest/Generators/AcceptanceTests/NugetPackageTest/Generated
+AutoRest/NuGetTests/NugetPackageTest/Generated
 
 ## Ignore user-specific files, temporary files, build results, etc.
 AutoRest/**/Templates/*.cs

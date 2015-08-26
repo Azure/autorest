@@ -144,7 +144,20 @@ namespace Microsoft.Rest.Generator.Extensibility
 
                 try
                 {
-                    Assembly loadedAssembly = Assembly.Load(assemblyName);
+                    Assembly loadedAssembly;
+                    try
+                    {
+                        loadedAssembly = Assembly.Load(assemblyName);
+                    }
+                    catch(FileNotFoundException)
+                    {
+                        loadedAssembly = Assembly.LoadFrom(assemblyName + ".dll");
+                        if(loadedAssembly == null)
+                        {
+                            throw;
+                        }
+                    }
+
                     Type loadedType = loadedAssembly.GetTypes()
                         .Single(t => string.IsNullOrEmpty(typeName) ||
                                      t.Name == typeName ||

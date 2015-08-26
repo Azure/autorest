@@ -9,7 +9,7 @@ var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
 
-var reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/AutoRestRequiredOptionalTestService');
+var reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/autoRestRequiredOptionalTestService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);

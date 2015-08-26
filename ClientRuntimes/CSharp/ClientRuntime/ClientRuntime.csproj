@@ -11,8 +11,14 @@
     <AssemblyName>Microsoft.Rest.ClientRuntime</AssemblyName>
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
+    <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Net45-Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="BasicAuthenticationCredentials.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -78,7 +84,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="$(SolutionDir)Tools\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\..\Tools\CustomDictionary.xml">
       <SubType>Designer</SubType>
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>

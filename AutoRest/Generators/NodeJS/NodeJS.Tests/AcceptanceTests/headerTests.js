@@ -10,7 +10,7 @@ var assert = require('assert');
 var msRest = require('ms-rest');
 var _ = require('underscore')
 
-var headerClient = require('../Expected/AcceptanceTests/Header/AutoRestSwaggerBATHeaderService');
+var headerClient = require('../Expected/AcceptanceTests/Header/autoRestSwaggerBATHeaderService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);

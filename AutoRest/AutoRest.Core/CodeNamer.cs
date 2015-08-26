@@ -105,7 +105,7 @@ namespace Microsoft.Rest.Generator
             }
             client.EnumTypes.Clear();
             normalizedEnums.ForEach((item) => client.EnumTypes.Add(item));
-            
+
             foreach (var method in client.Methods)
             {
                 method.Name = GetMethodName(method.Name);
@@ -262,7 +262,7 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        protected abstract IType NormalizeType(IType type);
+        public abstract IType NormalizeType(IType type);
 
         /// <summary>
         /// Formats a string as upper or lower case. Two-letter inputs that are all upper case are both lowered.
@@ -323,7 +323,7 @@ namespace Microsoft.Rest.Generator
             var correctName = RemoveInvalidCharacters(name, allowerCharacters);
 
             // here we have only letters and digits or an empty string
-            if (string.IsNullOrEmpty(correctName) || 
+            if (string.IsNullOrEmpty(correctName) ||
                 basicLaticCharacters.ContainsKey(correctName[0]))
             {
                 var sb = new StringBuilder();
@@ -364,7 +364,7 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
-        /// If the provided name is a reserved word in a programming language then the method converts the 
+        /// If the provided name is a reserved word in a programming language then the method converts the
         /// name by appending the provided appendValue
         /// </summary>
         /// <param name="name">Name.</param>
@@ -463,7 +463,7 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <param name="exclusionDictionary"></param>
-        protected virtual void ResolveMethodGroupNameCollision(ServiceClient serviceClient, 
+        protected virtual void ResolveMethodGroupNameCollision(ServiceClient serviceClient,
             Dictionary<string, string> exclusionDictionary)
         {
             if (serviceClient == null)
@@ -545,7 +545,7 @@ namespace Microsoft.Rest.Generator
             {
                 return Enumerable.Empty<string>();
             }
-            // else we do not need the last part of the namespace 
+            // else we do not need the last part of the namespace
             return namespaceWords.Take(namespaceWords.Length - 1);
         }
 

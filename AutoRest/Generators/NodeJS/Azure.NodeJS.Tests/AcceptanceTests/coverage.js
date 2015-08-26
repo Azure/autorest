@@ -12,7 +12,7 @@ var _ = require('underscore')
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 
-var reportClient = require('../Expected/AcceptanceTests/AzureReport/AutoRestReportServiceForAzure');
+var reportClient = require('../Expected/AcceptanceTests/AzureReport/autoRestReportServiceForAzure');
 
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';

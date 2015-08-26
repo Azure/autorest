@@ -7,7 +7,7 @@
     "node": ">= 0.8.26"
   },
   "dependencies": {
-    "ms-rest": "file:../../../../ClientRuntimes/NodeJS/ms-rest"
+    "ms-rest": "file:../../../ClientRuntimes/NodeJS/ms-rest"
   },
   "devDependencies":{
     "mocha": "2.2.5",
