@@ -34,7 +34,7 @@ var getHttpScenarioName = function(scenario, method, code) {
             },
             '404' : {
                 'head': 'HttpSuccess404Head'
-            }        
+            }
         },
         'Redirect': {
             '300' : {
@@ -53,7 +53,7 @@ var getHttpScenarioName = function(scenario, method, code) {
             },
             '303' : {
                 'post': 'HttpRedirect303Post'
-            },           
+            },
             '307' : {
                 'head': 'HttpRedirect307Head',
                 'get': 'HttpRedirect307Get',
@@ -62,7 +62,7 @@ var getHttpScenarioName = function(scenario, method, code) {
                 'post': 'HttpRedirect307Post',
                 'patch': 'HttpRedirect307Patch',
                 'delete': 'HttpRedirect307Delete'
-            }   
+            }
         },
         'Retry': {
             '408' : {
@@ -79,7 +79,7 @@ var getHttpScenarioName = function(scenario, method, code) {
             '503' : {
                 'post': 'HttpRetry503Post',
                 'delete': 'HttpRetry503Delete'
-            },          
+            },
             '504' : {
                 'put': 'HttpRetry504Put',
                 'patch': 'HttpRetry504Patch'
@@ -415,7 +415,7 @@ var httpResponses = function(coverage, optionalCoverage) {
     coverage['ResponsesScenarioH400NonMatchingInvalid'] = 0;
     coverage['ResponsesScenarioH202NonMatchingModel'] = 0;
     coverage['ResponsesScenarioEmptyErrorBody'] = 0;
-    
+
     var updateScenarioCoverage = function(scenario, method) {
         if (method.toLowerCase() === 'options') {
             optionalCoverage[scenario]++
@@ -506,14 +506,14 @@ var httpResponses = function(coverage, optionalCoverage) {
         }
         else {
             utils.send400(res, next, 'Unable to parse retry scenario with return code "' + req.params.code + '"');
-        }        
+        }
     });
 
     router.get('/payloads/200/A/204/none/default/Error/response/:code/:type', function( req, res, next) {
         var code = JSON.parse(req.params.code);
         var scenario = getMultipleResponseScenarioName("A", req.params.code, req.params.type);
         if (scenario !== null) {
-            coverage[scenario]++;            
+            coverage[scenario]++;
             if (req.params.type === 'valid') {
                 if (code === 200 || code === 201) {
                     res.status(code).end('{ "statusCode": "' + code + '" }');
@@ -525,36 +525,36 @@ var httpResponses = function(coverage, optionalCoverage) {
             } else if (req.params.type === 'invalid') {
                res.status(code).end();
             } else {
-                utils.send400(res, next, 'Unable to parse multiple response scenario with return code "' + req.params.code + 
+                utils.send400(res, next, 'Unable to parse multiple response scenario with return code "' + req.params.code +
                     '" and type "' + req.params.type + '"');
             }
         }
         else {
-            utils.send400(res, next, 'Unable to parse multiple response scenario A (One success response with model, one success response with no model, default error model) with return code "' + req.params.code + 
+            utils.send400(res, next, 'Unable to parse multiple response scenario A (One success response with model, one success response with no model, default error model) with return code "' + req.params.code +
                 '" and type "' + req.params.type + '"');
-        }        
+        }
     });
 
     router.get('/payloads/200/A/201/B/default/Error/response/:code/:type', function( req, res, next) {
         var code = JSON.parse(req.params.code);
         var scenario = getMultipleResponseScenarioName("B", req.params.code, req.params.type);
         if (scenario !== null) {
-            coverage[scenario]++;            
+            coverage[scenario]++;
             if (req.params.type === 'valid') {
                 if (code === 200 ) {
                     res.status(200).end('{ "statusCode": "200" }');
-                } else if (code === 201) { 
+                } else if (code === 201) {
                     res.status(201).end('{ "statusCode": "201" , "textStatusCode": "Created" }');
                 } else {
                     utils.send400(res, next, 'client error');
                 }
             } else {
-                utils.send400(res, next, 'Unable to parse multiple response scenario B with return code "' + req.params.code + 
+                utils.send400(res, next, 'Unable to parse multiple response scenario B with return code "' + req.params.code +
                     '" and type "' + req.params.type + '"');
             }
         }
         else {
-            utils.send400(res, next, 'Unable to parse multiple response scenario B (Two success responses with common base model, default error response with model) with return code "' + req.params.code + 
+            utils.send400(res, next, 'Unable to parse multiple response scenario B (Two success responses with common base model, default error response with model) with return code "' + req.params.code +
                 '" and type "' + req.params.type + '"');
         }
     });
@@ -563,13 +563,13 @@ var httpResponses = function(coverage, optionalCoverage) {
         var code = JSON.parse(req.params.code);
         var scenario = getMultipleResponseScenarioName("C", req.params.code, req.params.type);
         if (scenario !== null) {
-            coverage[scenario]++;            
+            coverage[scenario]++;
             if (req.params.type === 'valid') {
                 if (code === 200 ) {
                     res.status(200).end('{ "statusCode": "200" }');
-                } else if (code === 201) { 
+                } else if (code === 201) {
                     res.status(201).end('{ "httpCode": "201" }');
-                } else if (code === 404) { 
+                } else if (code === 404) {
                     res.status(404).end('{ "httpStatusCode": "404" }');
                 } else {
                     utils.send400(res, next, 'client error');
@@ -579,16 +579,16 @@ var httpResponses = function(coverage, optionalCoverage) {
             }
         }
         else {
-            utils.send400(res, next, 'Unable to parse multiple response scenario C (Three success responses with models with no common base type, default error response with model) with return code "' + req.params.code + 
+            utils.send400(res, next, 'Unable to parse multiple response scenario C (Three success responses with models with no common base type, default error response with model) with return code "' + req.params.code +
                 '" and type "' + req.params.type + '"');
-        }        
+        }
     });
 
     router.get('/payloads/202/none/204/none/default/Error/response/:code/:type', function( req, res, next) {
         var code = JSON.parse(req.params.code);
         var scenario = getMultipleResponseScenarioName("D", req.params.code, req.params.type);
         if (scenario !== null) {
-            coverage[scenario]++;            
+            coverage[scenario]++;
             if (req.params.type === 'none') {
                 res.status(code).end();
             } else {
@@ -596,16 +596,16 @@ var httpResponses = function(coverage, optionalCoverage) {
             }
         }
         else {
-            utils.send400(res, next, 'Unable to parse multiple response scenario D (Two success responses with no model and one default response with no model) with return code "' + req.params.code + 
+            utils.send400(res, next, 'Unable to parse multiple response scenario D (Two success responses with no model and one default response with no model) with return code "' + req.params.code +
                 '" and type "' + req.params.type + '"');
-        }        
+        }
     });
 
     router.get('/payloads/202/none/204/none/default/none/response/:code/:type', function( req, res, next) {
         var code = JSON.parse(req.params.code);
         var scenario = getMultipleResponseScenarioName("E", req.params.code, req.params.type);
         if (scenario !== null) {
-            coverage[scenario]++;            
+            coverage[scenario]++;
             if (req.params.type === 'none') {
                 res.status(code).end();
             } else if (req.params.type === 'invalid') {
@@ -615,16 +615,16 @@ var httpResponses = function(coverage, optionalCoverage) {
             }
         }
         else {
-            utils.send400(res, next, 'Unable to parse multiple response scenario E (Two success responses with no model and one default response with no model) with return code "' + req.params.code + 
+            utils.send400(res, next, 'Unable to parse multiple response scenario E (Two success responses with no model and one default response with no model) with return code "' + req.params.code +
                 '" and type "' + req.params.type + '"');
-        }        
+        }
     });
 
     router.get('/payloads/default/A/response/:code/:type', function( req, res, next) {
         var code = JSON.parse(req.params.code);
         var scenario = getMultipleResponseScenarioName("F", req.params.code, req.params.type);
         if (scenario !== null) {
-            coverage[scenario]++;            
+            coverage[scenario]++;
             if (req.params.type === 'none') {
                 res.status(code).end();
             } else if (req.params.type === 'valid') {
@@ -634,16 +634,16 @@ var httpResponses = function(coverage, optionalCoverage) {
             }
         }
         else {
-            utils.send400(res, next, 'Unable to parse multiple response scenario F (One default response with model) with return code "' + req.params.code + 
+            utils.send400(res, next, 'Unable to parse multiple response scenario F (One default response with model) with return code "' + req.params.code +
                 '" and type "' + req.params.type + '"');
-        }        
+        }
     });
 
     router.get('/payloads/default/none/response/:code/:type', function( req, res, next) {
         var code = JSON.parse(req.params.code);
         var scenario = getMultipleResponseScenarioName("G", req.params.code, req.params.type);
         if (scenario !== null) {
-            coverage[scenario]++;            
+            coverage[scenario]++;
             if (req.params.type === 'none') {
                 res.status(code).end();
             } else if (req.params.type === 'invalid') {
@@ -653,16 +653,16 @@ var httpResponses = function(coverage, optionalCoverage) {
             }
         }
         else {
-            utils.send400(res, next, 'Unable to parse multiple response scenario G (One default response with no model) with return code "' + req.params.code + 
+            utils.send400(res, next, 'Unable to parse multiple response scenario G (One default response with no model) with return code "' + req.params.code +
                 '" and type "' + req.params.type + '"');
-        }        
+        }
     });
 
     router.get('/payloads/200/A/response/:code/:type', function( req, res, next) {
         var code = JSON.parse(req.params.code);
         var scenario = getMultipleResponseScenarioName("H", req.params.code, req.params.type);
         if (scenario !== null) {
-            coverage[scenario]++;            
+            coverage[scenario]++;
             if (req.params.type === 'none') {
                 res.status(code).end();
             } else if (req.params.type === 'valid') {
@@ -674,9 +674,9 @@ var httpResponses = function(coverage, optionalCoverage) {
             }
         }
         else {
-            utils.send400(res, next, 'Unable to parse multiple response scenario H (One success response with model) with return code "' + req.params.code + 
+            utils.send400(res, next, 'Unable to parse multiple response scenario H (One success response with model) with return code "' + req.params.code +
                 '" and type "' + req.params.type + '"');
-        }        
+        }
     });}
 
 httpResponses.prototype.router = router;

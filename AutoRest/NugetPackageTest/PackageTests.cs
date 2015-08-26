@@ -10,7 +10,7 @@ using Microsoft.Rest.Generator.CSharp.Tests;
 
 namespace NugetPackageTest
 {
-    //we random port over a C# acceptance test so to verify in sanity 
+    //we random port over a C# acceptance test so to verify in sanity
     //that the freshly built out nuget packages (runtime and generator) works.
     public class PackageTests : IClassFixture<ServiceController>
     {

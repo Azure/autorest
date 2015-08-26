@@ -5,7 +5,7 @@ var constants = require('../util/constants');
 var utils = require('../util/utils');
 
 var files = function (coverage) {
-  
+
   coverage['FileStreamNonempty'] = 0;
   router.get('/stream/nonempty', function (req, res, next) {
     console.log("inside router\n");

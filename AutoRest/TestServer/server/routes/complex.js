@@ -3,7 +3,7 @@ var router = express.Router();
 var util = require('util');
 var _ = require('underscore');
 var utils = require('../util/utils')
- 
+
 var complex = function(coverage) {
     /**
      * Put and get for basic complex classes.
@@ -43,7 +43,7 @@ var complex = function(coverage) {
     });
 
     /**
-     * Put and get for primitive 
+     * Put and get for primitive
      */
     var intBody = '{"field1":-1,"field2":2}';
     var longBody = '{"field1":1099511627775,"field2":-999511627788}';
@@ -283,7 +283,7 @@ var complex = function(coverage) {
     /**
      * Put and get for polymorphism.
      */
-    var rawFish = 
+    var rawFish =
       {
         'dtype':'salmon',
         'location':'alaska',

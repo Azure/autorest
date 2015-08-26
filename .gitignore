@@ -1,5 +1,5 @@
 ## Ignore generated code
-AutoRest/NuGetTests/NugetPackageTest/Generated
+AutoRest/NugetPackageTest/Generated
 
 ## Ignore user-specific files, temporary files, build results, etc.
 AutoRest/**/Templates/*.cs
@@ -41,7 +41,7 @@ binaries/
 
 *.pidb
 
-*.log
+*.log*
 *.scc
 # Visual C++ cache files
 ipch/

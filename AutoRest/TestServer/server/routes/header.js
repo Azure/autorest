@@ -26,7 +26,7 @@ var header = function (coverage, optionalCoverage) {
       utils.send400(res, next, "Did not like scenario \"" + req.params.scenario);
     }
   });
-  
+
   router.post('/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0', function (req, res, next) {
     if (req.get("x-ms-client-request-id").toLowerCase() === "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0".toLowerCase()) {
       optionalCoverage['CustomHeaderInRequest']++;
@@ -35,7 +35,7 @@ var header = function (coverage, optionalCoverage) {
       utils.send400(res, next, "Did not like client request id \"" + req.get("x-ms-client-request-id"));
     }
   });
-  
+
   router.post('/response/:scenario', function (req, res, next) {
     if (req.params.scenario === "existingkey") {
       coverage['HeaderResponseExistingKey']++;
@@ -47,7 +47,7 @@ var header = function (coverage, optionalCoverage) {
       utils.send400(res, next, "Did not like scenario \"" + req.params.scenario);
     }
   });
-  
+
   router.post('/param/prim/:type', function (req, res, next) {
     var scenario = req.get("scenario");
     var value = req.get("value");
@@ -207,7 +207,7 @@ var header = function (coverage, optionalCoverage) {
         utils.send400(res, next, 'Must provide a valid primitive type.');
     }
   });
-  
+
   router.post('/response/prim/:type', function (req, res, next) {
     var scenario = req.get("scenario");
     var value = req.get("value");

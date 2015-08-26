@@ -3,6 +3,7 @@
 
 var util = require('util');
 var fs = require('fs');
+var path = require('path');
 var child_process = require('child_process');
 require('shelljs/global');
 
@@ -15,7 +16,7 @@ before(function (done) {
 
   var nodePath = which('node') || which('node.exe');
 
-  child = child_process.spawn(nodePath, [__dirname + '/../server/startup/www']);
+  child = child_process.spawn(nodePath, [path.join(__dirname, '../TestServer/server/startup/www')]);
 
   child.stdout.on('data', function (data) {
     fs.writeSync(out, data.toString('UTF-8'));

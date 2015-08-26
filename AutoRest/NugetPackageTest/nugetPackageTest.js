@@ -17,4 +17,3 @@ describe('AutoRest NuGet Package Node JS code generator smoke test', function ()
     });
   });
 });
-
