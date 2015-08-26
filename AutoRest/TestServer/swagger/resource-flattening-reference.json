@@ -203,7 +203,7 @@
           "type": "string",
           "description": "Resource Name",
           "readOnly": true
-        }
+        },
       }
     },
     "FlattenedProduct": {
@@ -214,34 +214,21 @@
       ],
       "properties": {
         "properties": {
-          "properties": {
-            "pname": {
-              "type": "string" 
-            },
-            "type": {
-              "type": "string" 
-            },
-            "provisioningStateValues": {
-              "type": "string",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "canceled",
-                "Accepted",
-                "Creating",
-                "Created",
-                "Updating",
-                "Updated",
-                "Deleting",
-                "Deleted",
-                "OK"
-              ],
-              "readOnly": true
-            },
-            "provisioningState": {
-              "type": "string"          
-            }
-          }
+          "$ref": "#/definitions/FlattenedResourceProperties"
+        }
+      }
+    },
+    "FlattenedResourceProperties": {
+      "properties": {
+        "pname": {
+          "type": "string"
+        },
+        "lsize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "provisioningState": {
+          "type": "string"
         }
       }
     },

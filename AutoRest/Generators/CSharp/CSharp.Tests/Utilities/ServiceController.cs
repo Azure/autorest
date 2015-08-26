@@ -32,7 +32,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         /// </summary>
         private static string AcceptanceTestsPath
         {
-            get { return @"..\..\..\..\..\NuGetTests\server"; }
+            get { return Path.Combine(Environment.GetEnvironmentVariable("AUTOREST_TEST_SERVER_PATH"), "server"); }
         }
 
         /// <summary>

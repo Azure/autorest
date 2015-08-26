@@ -57,7 +57,7 @@ var getScenarioName = function (type, scenario) {
   if (!parsedScenario || !parsedType) {
     return null;
   }
-  
+
   console.log('Got parsed type "' + parsedType + '" and parsed scenario "' + parsedScenario + '"\n');
   return '' + parsedType + parsedScenario;
 }
@@ -65,11 +65,11 @@ var getScenarioName = function (type, scenario) {
 var getQueryParameterName = function (type) {
   console.log('received type "' + type + '"\n');
   var queryParam = queryParameterMap[type];
-  
+
   if (!queryParam) {
     return null;
   }
-  
+
   console.log('Got parsed query parameter name "' + queryParam + '\n');
   return '' + queryParam;
 }
@@ -85,7 +85,7 @@ var queries = function (coverage) {
     var type = req.params.type;
     var scenario = "empty";
     var queryName = getQueryParameterName(type);
-    
+
     var test = getScenarioName(type, scenario);
     var queryParamCount = Object.keys(req.query).length;
     if (test === null) {
@@ -100,13 +100,13 @@ var queries = function (coverage) {
       utils.send400(res, next, 'Failed null test for type "' + type + '" received query parameter "' + util.inspect(req.query) + '"');
     }
   });
-  
+
   router.get('/:type/null', function (req, res, next) {
     console.log("inside router\n");
     var type = req.params.type;
     var scenario = "null";
     var queryName = getQueryParameterName(type);
-    
+
     var test = getScenarioName(type, scenario);
     if (test === null) {
       console.log("test was null\n");
@@ -120,13 +120,13 @@ var queries = function (coverage) {
       utils.send400(res, next, 'Failed null test for type "' + type + '" received query parameter "' + util.inspect(req.query) + '"');
     }
   });
-  
+
   router.get('/array/:format/string/:scenario', function (req, res, next) {
     console.log("inside router\n");
     var type = req.params.type;
     var scenario = req.params.scenario;
     var format = req.params.format;
-    
+
     var test = getScenarioName(type, scenario);
     if (format === 'csv') {
       console.log("In csv test\n");
@@ -171,7 +171,7 @@ var queries = function (coverage) {
       utils.send400(res, next, 'Unable to find matching Array scenario for format "' + format + '" scenario "' + scenario + '"');
     }
   });
-  
+
   router.get('/:type/:scenario', function (req, res, next) {
     var type = req.params.type;
     var scenario = req.params.scenario;
@@ -181,19 +181,19 @@ var queries = function (coverage) {
     console.log('inside main function with values type "' + type + '" scenario "' + scenario +
             '" queryName "' + queryName + '" wireParameter "' + wireParameter + '"\n');
     var bytes = new Buffer(constants.MULTIBYTE_BUFFER);
-    
+
     if (type === 'enum' || type === 'date' ||
-           type === 'datetime' || 
+           type === 'datetime' ||
            scenario === 'multibyte' ||
            (type === 'string' &&
            scenario.indexOf('begin') === 0)) {
       scenario = '"' + scenario + '"';
       wireParameter = '"' + wireParameter + '"';
     }
-    
+
     scenario = JSON.parse(scenario);
     wireParameter = JSON.parse(wireParameter);
-    
+
     if (test === null) {
       console.log("test was null\n");
       utils.send400(res, next, 'Unable to parse scenario \"\/paths\/' + type + '\/' + scenario + '\"');

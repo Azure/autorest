@@ -27,12 +27,12 @@ var resourceFlatten = function (coverage) {
           },
           tags: { tag1: 'value1', tag2: 'value3' },
           type: 'Microsoft.Web/sites'
-        }, 
+        },
         {
-          id: '2', 
-          name: 'Resource2', 
+          id: '2',
+          name: 'Resource2',
           location: 'Building 44'
-        }, 
+        },
         {
           id: '3',
           name: 'Resource3'
@@ -54,12 +54,12 @@ var resourceFlatten = function (coverage) {
           },
           tags: { tag1: 'value1', tag2: 'value3' },
           type: 'Microsoft.Web/sites'
-        }, 
+        },
         Product2: {
-          id: '2', 
-          name: 'Resource2', 
+          id: '2',
+          name: 'Resource2',
           location: 'Building 44'
-        }, 
+        },
         Product3: {
           id: '3',
           name: 'Resource3'
@@ -82,12 +82,12 @@ var resourceFlatten = function (coverage) {
             },
             tags: { tag1: 'value1', tag2: 'value3' },
             type: 'Microsoft.Web/sites'
-          }, 
+          },
           Product2: {
-            id: '2', 
-            name: 'Resource2', 
+            id: '2',
+            name: 'Resource2',
             location: 'Building 44'
-          }, 
+          },
           Product3: {
             id: '3',
             name: 'Resource3'
@@ -106,12 +106,12 @@ var resourceFlatten = function (coverage) {
             },
             tags: { tag1: 'value1', tag2: 'value3' },
             type: 'Microsoft.Web/sites'
-          }, 
+          },
           {
-            id: '5', 
-            name: 'Resource5', 
+            id: '5',
+            name: 'Resource5',
             location: 'Building 44'
-          }, 
+          },
           {
             id: '6',
             name: 'Resource6'
@@ -128,17 +128,17 @@ var resourceFlatten = function (coverage) {
       utils.send400(res, next, "Request path must contain 'array', 'dictionary' or 'resourcecollection'");
     }
   });
-  
-  var arrayBody = '[{"location":"West US","tags":{"tag1":"value1","tag2":"value3"},"properties":{"pname":"Product1","type":"Flat"}},' + 
+
+  var arrayBody = '[{"location":"West US","tags":{"tag1":"value1","tag2":"value3"},"properties":{"pname":"Product1","type":"Flat"}},' +
                    '{"location":"Building 44","properties":{"pname":"Product2"}}]';
-  
-  var dictionaryBody = '{"Resource1":{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"},"properties":{"pname":"Product1","type":"Flat"}},' + 
+
+  var dictionaryBody = '{"Resource1":{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"},"properties":{"pname":"Product1","type":"Flat"}},' +
                         '"Resource2":{"location":"Building 44", "properties":{"pname":"Product2","type":"Flat"}}}';
-  
-  var resourceCollectionBody = '{"arrayofresources":[' + 
+
+  var resourceCollectionBody = '{"arrayofresources":[' +
                             '{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "properties":{"pname":"Product1","type":"Flat"}},' +
                             '{"location":"East US", "properties":{"pname":"Product2","type":"Flat"}}],' +
-                            '"dictionaryofresources":' + dictionaryBody + ',' + 
+                            '"dictionaryofresources":' + dictionaryBody + ',' +
                             '"productresource":{"location":"India", "properties":{"pname":"Azure","type":"Flat"}}}';
   router.put('/:type', function (req, res, next) {
     if (req.body) {

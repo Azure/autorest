@@ -40,10 +40,10 @@ var string = function(coverage) {
     });
 
     router.get('/:scenario', function(req, res, next) {
-        if (req.params.scenario === 'null') { 
+        if (req.params.scenario === 'null') {
             coverage['getStringNull']++;
             res.status(200).end();
-        } else if (req.params.scenario === 'notProvided') { 
+        } else if (req.params.scenario === 'notProvided') {
             coverage['getStringNotProvided']++;
             res.status(200).end();
         } else if (req.params.scenario === 'empty') {

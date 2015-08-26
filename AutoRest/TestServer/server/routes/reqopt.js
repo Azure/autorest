@@ -54,11 +54,11 @@ var reqopt = function(coverage) {
             utils.send400(res, next, 'Must specify either it\'s "required" or "optional", "' + req.params.required + '" provided.');
         }
     });
-    
+
     router.put('/required/:type/:scenario', function(req, res, next) {
         utils.send400(res, next, 'Client library failed to throw when a required value type is not provided.');
     });
-    
+
     router.post('/optional/:type/:scenario', function(req, res, next) {
         var covered = "Optional" + utils.toPascalCase(req.params.type) + utils.toPascalCase(req.params.scenario);
         console.log('scenario: ' + covered + '\n');
@@ -94,16 +94,16 @@ var reqopt = function(coverage) {
             res.status(200).set('value', null).end();
         }
     });
-    
+
     router.get('/global/required/path/:required_global_path', function(req, res, next) {
         utils.send400(res, next, 'Client library failed to throw when an implicitly required path parameter is not provided.');
     });
-    
+
     router.get('/global/required/query', function(req, res, next) {
         utils.send400(res, next, 'Client library failed to throw when an explicitly required query parameter is not provided.');
     });
-    
-    router.get('/global/optional/query', function(req, res, next) {       
+
+    router.get('/global/optional/query', function(req, res, next) {
         if (!req.query.optional_global_query) {
             coverage["OptionalGlobalQuery"]++;
             res.status(200).end();

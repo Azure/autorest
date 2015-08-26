@@ -44,7 +44,7 @@ var getScenarioName = function (type, scenario) {
   if (!parsedScenario || !parsedType) {
     return null;
   }
-  
+
   console.log('Got parsed type "' + parsedType + '" and parsed scenario "' + parsedScenario + '"\n');
   return '' + parsedType + parsedScenario;
 }
@@ -54,7 +54,7 @@ var paths = function (coverage) {
     console.log("inside router\n");
     var type = req.params.type;
     var scenario = "empty";
-    
+
     var test = getScenarioName(type, scenario);
     if (test === null) {
       console.log("test was null\n");
@@ -68,28 +68,28 @@ var paths = function (coverage) {
       utils.send400(res, next, 'Unable to find matching empty scenario for type "' + type + '"');
     }
   });
-  
+
   router.get('/:type/:scenario/:wireParameter', function (req, res, next) {
     console.log("inside router\n");
-    
+
     var type = req.params.type;
     var scenario = req.params.scenario;
     var wireParameter = req.params.wireParameter;
     var test = getScenarioName(type, scenario);
     var bytes = new Buffer(constants.MULTIBYTE_BUFFER);
-    
+
     if (type === 'enum' || type === 'date' ||
-           type === 'datetime' || 
+           type === 'datetime' ||
            scenario === 'multibyte' ||
            (type === 'string' &&
            scenario.indexOf('begin') === 0)) {
       scenario = '"' + scenario + '"';
       wireParameter = '"' + wireParameter + '"';
     }
-    
+
     scenario = JSON.parse(scenario);
     wireParameter = JSON.parse(wireParameter);
-    
+
     if (test === null) {
       console.log("test was null\n");
       utils.send400(res, next, 'Unable to parse scenario \"\/paths\/' + type + '\/' + scenario + '\"');

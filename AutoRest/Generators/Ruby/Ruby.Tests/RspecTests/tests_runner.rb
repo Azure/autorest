@@ -2,7 +2,7 @@
 
 require 'open3'
 
-server_dir = "#{File.dirname(__FILE__)}/../../../../NuGetTests/server/"
+server_dir = "#{File.dirname(__FILE__)}/../../../../TestServer/server/"
 Dir.chdir(server_dir){
   system('npm install')
 }

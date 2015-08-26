@@ -12,10 +12,10 @@ var azureUrl = function (coverage) {
     var groupName = req.params.resourceGroup;
     var queryParamCount = Object.keys(req.query).length;
     if (!subscriptionId || typeof subscriptionId !== 'string') {
-      utils.send400(res, next, 'The provided subscriptionId ' + util.inspect(subscriptionId) + 
+      utils.send400(res, next, 'The provided subscriptionId ' + util.inspect(subscriptionId) +
         'is not defined or is not of type string');
     } else if (queryParamCount !== 1 || apiVersion !== '2014-04-01-preview') {
-      utils.send400(res, next, 'The provided api-version ' + util.inspect(apiVersion) + 
+      utils.send400(res, next, 'The provided api-version ' + util.inspect(apiVersion) +
         'is not equal to "2014-04-01-preview".');
     } else {
       coverage['SubscriptionIdAndApiVersion']++;

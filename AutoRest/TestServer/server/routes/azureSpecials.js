@@ -31,9 +31,9 @@ var specials = function (coverage) {
   coverage['AzureMethodQueryUrlEncodingNull'] = 0;
   coverage['AzureXmsRequestClientOverwrite'] = 0;
   coverage['AzureXmsRequestClientOverwriteViaParameter'] = 0;
-  
 
-  router.post('/subscriptionId/:location/string/none/path/:scope/:scenario/:subscription', function (req, res, next) {  
+
+  router.post('/subscriptionId/:location/string/none/path/:scope/:scenario/:subscription', function (req, res, next) {
     var location = req.params.location;
     var scope = req.params.scope;
     var scenario = req.params.scenario;
@@ -74,17 +74,17 @@ var specials = function (coverage) {
     } else {
       utils.send400(res, next, 'Unable to parse definition location: "' + util.inspect(location) + '"');
     }
-    
+
     if (scenario === subscription) {
         coverage[coverageScenario]++;
         res.send(200).end();
     } else {
            utils.send400(res, next, 'Expected subscription: "' + util.inspect(scenario) + '" did not match actual "' + subscription + '"');
     }
-   
+
   });
-  
-  router.get('/apiVersion/:location/string/none/query/:scope/:scenario', function (req, res, next) {  
+
+  router.get('/apiVersion/:location/string/none/query/:scope/:scenario', function (req, res, next) {
     var location = req.params.location;
     var scope = req.params.scope;
     var scenario = req.params.scenario;
@@ -124,14 +124,14 @@ var specials = function (coverage) {
     } else {
       utils.send400(res, next, 'Unable to parse definition location: "' + util.inspect(location) + '"');
     }
-    
+
     if (scenario === apiVersion || (scenario === 'null' && Object.keys(req.query).length === 0)) {
         coverage[coverageScenario]++;
         res.send(200).end();
     } else {
            utils.send400(res, next, 'Expected api-version: "' + util.inspect(scenario) + '" did not match actual "' + apiVersion + '"');
     }
-   
+
   });
 
   router.get('/skipUrlEncoding/:location/path/valid/path1/path2/path3', function (req, res, next) {
@@ -149,7 +149,7 @@ var specials = function (coverage) {
       var location = req.params.location;
       if (location === 'method'  || location === 'path' || location === 'swagger') {
         var scenario = 'Azure' + utils.toPascalCase(location) + 'QueryUrlEncoding';
-        if (Object.keys(req.query).length > 2 && req.query['q1'] === 'value1' && 
+        if (Object.keys(req.query).length > 2 && req.query['q1'] === 'value1' &&
           req.query['q2'] === 'value2' && req.query['q3'] === 'value3') {
           coverage[scenario]++;
           res.status(200).end();
@@ -162,7 +162,7 @@ var specials = function (coverage) {
   });
 
   router.get('/skipUrlEncoding/method/query/null', function (req, res, next) {
-      
+
         var scenario = 'AzureMethodQueryUrlEncodingNull';
         if (Object.keys(req.query).length <= 1 && (req.query['q1'] === undefined || req.query['q1'] === null)) {
           coverage[scenario]++;
@@ -170,7 +170,7 @@ var specials = function (coverage) {
         } else {
           utils.send400(res, next, 'Unexpected query values for scenario "' + scenario + '": "' + util.inspect(req.query) + '"');
         }
-  });  
+  });
 
   router.get('/overwrite/x-ms-client-request-id/method/', function (req, res, next) {
         var headers = {

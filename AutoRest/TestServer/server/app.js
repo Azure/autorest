@@ -36,7 +36,7 @@ var app = express();
 
 //set up server log
 var now = new Date();
-var logFileName = 'AccTestServer-' + now.getHours() +  
+var logFileName = 'AccTestServer-' + now.getHours() +
     now.getMinutes() + now.getSeconds() + '.log';
 var testResultDir = '../../../../TestResults';
 if (!fs.existsSync(testResultDir)) {
