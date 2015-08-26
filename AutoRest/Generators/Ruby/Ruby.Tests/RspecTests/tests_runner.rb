@@ -2,7 +2,7 @@
 
 require 'open3'
 
-server_dir = "#{File.dirname(__FILE__)}/../../../AcceptanceTests/server/"
+server_dir = "#{File.dirname(__FILE__)}/../../../../NuGetTests/server/"
 Dir.chdir(server_dir){
   system('npm install')
 }
@@ -16,6 +16,7 @@ Dir.chdir("#{server_dir}/startup"){
 ENV['StubServerURI'] = "http://localhost:#{random_port}"
 
 Dir.chdir("#{File.dirname(__FILE__)}/.."){
+  system('bundle install')
   @exit_code = system("bundle exec rspec #{Dir['RspecTests/*_spec.rb'].join(' ')}")
 }
 
