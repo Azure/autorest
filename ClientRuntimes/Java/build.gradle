@@ -79,25 +79,4 @@ test {
     reports.html.destination = file("${projectDir}/../../TestResults/JavaRuntime")
 }
 
-task npmrestore(type: Exec) {
-    workingDir "${projectDir}/../../AutoRest/Generators/AcceptanceTests/server"
-    commandLine 'cmd', '/c', 'npm', 'install'
-}
-
-task installforever(type: Exec, dependsOn: 'npmrestore') {
-    commandLine 'cmd', '/c', 'npm', 'install', '-g', 'forever'
-}
-
-task runserver(type: Exec, dependsOn: 'installforever') {
-    workingDir "${projectDir}/../../AutoRest/Generators/AcceptanceTests/server"
-    commandLine 'cmd', '/c', 'forever', 'start', 'startup/www.js'
-}
-
-task stopserver(type: Exec) {
-    workingDir "${projectDir}/../../AutoRest/Generators/AcceptanceTests/server"
-    commandLine 'cmd', '/c', 'forever', 'stop', 'startup/www.js'
-}
-
 tasks.compileJava.dependsOn 'clean'
-tasks.test.dependsOn 'runserver'
-tasks.test.finalizedBy 'stopserver'

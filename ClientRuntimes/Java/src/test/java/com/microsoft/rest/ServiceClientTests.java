@@ -9,7 +9,7 @@ package com.microsoft.rest;
 
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Response;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
