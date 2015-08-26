@@ -53,13 +53,13 @@ By default, Ruby installs to C:\Ruby21 or Ruby22, etc. Ensure that C:\Ruby21\bin
 The DevKit installer just unpacks files. Navigate to the directory and run the following:
 >ruby dk.rb init
 >ruby dk.rb install
+>gem install bundler
 
 ## Build the Code
 We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
 >npm install gulp -g
-If you would like to see what commands are
-available to you, run `gulp -T`. That will list all of the gulp tasks you can run. By default, just running `gulp` will
-run a build that will execute clean, build, code analysis, package and test.
+
+If you would like to see what commands are available to you, run `gulp -T`. That will list all of the gulp tasks you can run. By default, just running `gulp` will run a build that will execute clean, build, code analysis, package and test.
 
 ### Output from gulp -T
 ```bash
@@ -89,8 +89,7 @@ run a build that will execute clean, build, code analysis, package and test.
 ```
 
 ### Running the tests
-Prior to executing `gulp build test` to build and then test the code. Make sure that the latest tools are setup for your
-build environment.
+Prior to executing `gulp` to build and then test the code, make sure that the latest tools are setup for your build environment.
 
 - run `bundle install` from the root directory
 

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -121,6 +122,7 @@ namespace Microsoft.Rest.Generator.Extensibility
             return settings.FileSystem.ReadFileAsText(path);
         }
 
+        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom")]
         private static T LoadTypeFromAssembly<T>(IDictionary<string, AutoRestProviderConfiguration> section,
             string key, Settings settings)
         {
