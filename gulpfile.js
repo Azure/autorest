@@ -139,13 +139,19 @@ gulp.task('regenerate:expected:cs', function(cb){
   }, cb);
 });
 
+var msbuildDefaults = {
+  stdout: process.stdout,
+  stderr: process.stderr,
+  maxBuffer: MAX_BUFFER,
+  verbosity: 'minimal',
+  errorOnFail: true,
+  toolsVersion: 12.0
+};
+
 gulp.task('clean:build', function (cb) {
-  return gulp.src('build.proj').pipe(msbuild({
-    targets: ['clean'],
-    stdout: process.stdout,
-    stderr: process.stderr,
-    maxBuffer: MAX_BUFFER
-  }));
+  return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
+    targets: ['clean'] 
+  })));
 });
 
 gulp.task('clean:templates', function(cb) {
@@ -199,14 +205,6 @@ gulp.task('syncDependencies:nuspec', function() {
 gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDependencies:runtime:csazure', 'syncDependencies:runtime:node', 'syncDependencies:runtime:nodeazure']);
 
 gulp.task('syncDependencies', ['syncDependencies:nugetProj', 'syncDependencies:nuspec', 'syncDependencies:runtime']);
-
-var msbuildDefaults = {
-  stdout: process.stdout,
-  stderr: process.stderr,
-  maxBuffer: MAX_BUFFER,
-  verbosity: 'minimal',
-  errorOnFail: true,
-};
 
 gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild

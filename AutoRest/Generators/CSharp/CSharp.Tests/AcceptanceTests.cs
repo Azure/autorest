@@ -1615,7 +1615,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 float executedTests = report.Values.Count(v => v > 0);
                 Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "The test coverage is {0}/{1}.",
                     executedTests, totalTests));
-                Assert.Equal(executedTests, totalTests);
+                Assert.Equal(totalTests, executedTests);
             }
         }
 
