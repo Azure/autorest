@@ -158,7 +158,7 @@ gulp.task('regenerate:expected:ruby', function(cb){
     'mappings': rubyMappings,
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Ruby',
-	'nsPrefix': 'MyNamespace'
+    'nsPrefix': 'MyNamespace'
   }, cb);
 })
 
