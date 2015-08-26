@@ -1,5 +1,10 @@
-require_relative 'Url/sdk_requirements'
-include MyNamespace
+# encoding: utf-8
+
+$: << 'RspecTests/url'
+
+require 'url'
+
+include UrlModule
 
 describe Paths do
   before(:all) do
@@ -9,7 +14,7 @@ describe Paths do
     @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestUrlTestService.new(@credentials, @base_url)
-    @paths_client = MyNamespace::Paths.new(client)
+    @paths_client = Paths.new(client)
   end
 
   it 'should create test service' do

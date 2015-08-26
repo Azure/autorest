@@ -1,5 +1,10 @@
-require_relative 'UrlItems/sdk_requirements'
-include MyNamespace
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/url_items'
+
+require 'url'
+
+include UrlModule
 
 describe Paths do
   before(:all) do
@@ -8,12 +13,12 @@ describe Paths do
     dummyToken = 'dummy12321343423'
     @credentials = MsRest::TokenCredentials.new(dummyToken)
 
-    @client = MyNamespace::AutoRestUrlTestService.new(@credentials, @base_url)
-    @paths_items_client = MyNamespace::PathItems.new(@client)
+    @client = AutoRestUrlTestService.new(@credentials, @base_url)
+    @paths_items_client = PathItems.new(@client)
   end
 
   it 'should create test service' do
-    expect { MyNamespace::AutoRestUrlTestService.new(@credentials, @base_url) }.not_to raise_error
+    expect { AutoRestUrlTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get all with values' do

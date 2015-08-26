@@ -1,19 +1,27 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
+    /// <summary>
+    /// The model for the enum template.
+    /// </summary>
     public class EnumTemplateModel : EnumType
     {
+        /// <summary>
+        /// Initializes a new instance of the class EnumTemplateModel.
+        /// </summary>
+        /// <param name="source">The source object.</param>
         public EnumTemplateModel(EnumType source)
         {
             this.LoadFrom(source);
         }
+
         /// <summary>
-        /// Trim the Trailing '?' from the Type Name so that it 
+        /// Gets the trimmed name so that '?'
         /// does not occur in the type definition
         /// </summary>
         public string TypeDefinitionName

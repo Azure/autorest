@@ -1,5 +1,10 @@
-require_relative 'AzureReport/sdk_requirements'
-include MyNamespace
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/azure_report'
+
+require 'azure_report'
+
+include AzureReportModule
 
 describe 'AutoRestReportService' do
   before(:all) do

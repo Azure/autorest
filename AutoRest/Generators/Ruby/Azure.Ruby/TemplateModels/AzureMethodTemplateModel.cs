@@ -1,5 +1,5 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
 using System.Collections.Generic;
@@ -112,7 +112,9 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             foreach (var param in queryParametres)
             {
-                if (param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
+                bool hasSkipUrlExtension = param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension);
+
+                if (hasSkipUrlExtension)
                 {
                     builder.AppendLine("properties['{0}'] = {1} unless {1}.nil?", param.SerializedName, param.Name);
                 }
@@ -121,6 +123,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     builder.AppendLine("properties['{0}'] = ERB::Util.url_encode({1}.to_s) unless {1}.nil?", param.SerializedName, param.Name);
                 }
             }
+
+            builder.AppendLine(SaveExistingUrlItems("properties", outputVariableName));
 
             builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
             builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{value}}\" }}.compact.join('&')", outputVariableName);
@@ -140,7 +144,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             var builder = new IndentedStringBuilder("  ");
 
-            string serializationLogic = type.DeserializeType(this.Scope, variableName);
+            string serializationLogic = type.DeserializeType(this.Scope, variableName, ClassNamespaces);
             return builder.AppendLine(serializationLogic).ToString();
         }
 
@@ -168,6 +172,21 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
+        /// Gets the list of namespaces where we look for classes that need to
+        /// be instantiated dynamically due to polymorphism.
+        /// </summary>
+        public override List<string> ClassNamespaces
+        {
+            get
+            {
+                return new List<string>
+				{
+					"MsRestAzure"
+				};
+            }
+        }
+
+        /// <summary>
         /// Gets the expression for default header setting.
         /// </summary>
         public override string SetDefaultHeaders
@@ -182,7 +201,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Returns AzureOperationResponse generic type declaration.
+        /// Gets AzureOperationResponse generic type declaration.
         /// </summary>
         public override string OperationResponseReturnTypeString
         {
@@ -208,7 +227,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Get the type for operation exception.
+        /// Gets the type for operation exception.
         /// </summary>
         public override string OperationExceptionTypeString
         {

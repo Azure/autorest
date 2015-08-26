@@ -1,8 +1,12 @@
-require 'securerandom'
-require_relative 'ResourceFlattening/sdk_requirements'
+# encoding: utf-8
 
-include MyNamespace
-include MyNamespace::Models
+$: << 'RspecTests/Generated/resource_flattening'
+
+require 'securerandom'
+require 'resource_flattening'
+
+include ResourceFlatteningModule
+include ResourceFlatteningModule::Models
 
 describe 'ResourceFlattening' do
   before(:all) do

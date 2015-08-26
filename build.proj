@@ -158,7 +158,7 @@
   <!-- Run tests. -->
   <Target Name="Test" DependsOnTargets="RestoreNugetPackages">
     <Exec Command="gulp test"/>
-  </Target>
+</Target>
 
   <PropertyGroup>
     <!-- This property is used by the continuous intergration job.

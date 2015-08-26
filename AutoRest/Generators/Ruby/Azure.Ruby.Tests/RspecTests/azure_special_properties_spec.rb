@@ -1,7 +1,13 @@
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/azure_special_properties'
+
 require 'rspec'
 require 'securerandom'
-require_relative 'AzureSpecialProperties/sdk_requirements'
-include MyNamespace
+
+require 'azure_special_properties'
+
+include AzureSpecialPropertiesModule
 
 describe 'Azure Special properties behaviour' do
   before(:all) do

@@ -1,21 +1,24 @@
-require 'rspec'
-require_relative 'Date/sdk_requirements'
-include MyNamespace
+# encoding: utf-8
 
-describe Date do
+$: << 'RspecTests/Generated/date'
+
+require 'rspec'
+require 'body_date'
+
+describe DateModule::Date do
 
   before(:all) do
     @base_url = ENV['StubServerURI']
 
-	dummyToken = 'dummy12321343423'
-	@credentials = MsRest::TokenCredentials.new(dummyToken)
+    dummyToken = 'dummy12321343423'
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
 
-    client = AutoRestDateTestService.new(@credentials, @base_url)
-    @date_client = MyNamespace::Date.new(client)
+    client = DateModule::AutoRestDateTestService.new(@credentials, @base_url)
+    @date_client = DateModule::Date.new(client)
   end
 
   it 'should create test service' do
-    expect { AutoRestDateTestService.new(@credentials, @base_url) }.not_to raise_error
+    expect { DateModule::AutoRestDateTestService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get null' do
@@ -25,7 +28,7 @@ describe Date do
   end
 
   it 'should get invalid date' do
-    expect{@date_client.get_invalid_date().value!}.to raise_exception
+    expect { @date_client.get_invalid_date().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should get overflow date' do

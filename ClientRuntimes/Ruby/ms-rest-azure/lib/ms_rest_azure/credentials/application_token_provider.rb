@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
@@ -84,7 +85,7 @@ module MsRestAzure
     #
     # @return [String] new authentication token.
     def acquire_token
-      token_acquire_url = TOKEN_ACQUIRE_URL
+      token_acquire_url = TOKEN_ACQUIRE_URL.dup
       token_acquire_url['{authentication_endpoint}'] = @settings.authentication_endpoint
       token_acquire_url['{tenant_id}'] = @tenant_id
 
@@ -94,7 +95,7 @@ module MsRestAzure
         builder.adapter Faraday.default_adapter
       end
 
-      request_body = REQUEST_BODY_PATTERN
+      request_body = REQUEST_BODY_PATTERN.dup
       request_body['{resource_uri}'] = ERB::Util.url_encode(@settings.token_audience)
       request_body['{client_id}'] = ERB::Util.url_encode(@client_id)
       request_body['{client_secret}'] = ERB::Util.url_encode(@client_secret)

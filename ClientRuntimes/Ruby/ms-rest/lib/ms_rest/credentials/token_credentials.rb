@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
@@ -22,14 +23,16 @@ module MsRest
     # @param token [String] the token.
     def initialize(*args)
       if (args.size == 1)
-        if args[0].is_a?(TokenProvider)
+        if args[0].respond_to? :get_authentication_header
           @token_provider = args[0]
-        else
+        elsif args[0].is_a? String
           @token_provider = StringTokenProvider.new args[0], DEFAULT_SCHEME
+        else
+          fail ArgumentError, 'Invalid argument was passed, is can be either TokenProvider or token'
         end
       elsif (args.size == 2)
         token = args[0]
-        token_type = args[0]
+        token_type = args[1]
         @token_provider = StringTokenProvider.new token, token_type
       else
         fail ArgumentError, 'Invalid number of parameters was passed to TokenCredentials constructor, valid number is 1 or 2'

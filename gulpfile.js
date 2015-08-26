@@ -39,33 +39,64 @@ function mergeOptions(obj1,obj2){
 }
 
 var defaultMappings = {
-  'AcceptanceTests/BodyArray': '../../AcceptanceTests/swagger/body-array.json',
-  'AcceptanceTests/BodyBoolean': '../../AcceptanceTests/swagger/body-boolean.json',
-  'AcceptanceTests/BodyByte': '../../AcceptanceTests/swagger/body-byte.json',
-  'AcceptanceTests/BodyComplex': '../../AcceptanceTests/swagger/body-complex.json',
-  'AcceptanceTests/BodyDate': '../../AcceptanceTests/swagger/body-date.json',
-  'AcceptanceTests/BodyDateTime': '../../AcceptanceTests/swagger/body-datetime.json',
-  'AcceptanceTests/BodyDictionary': '../../AcceptanceTests/swagger/body-dictionary.json',
-  'AcceptanceTests/BodyFile': '../../AcceptanceTests/swagger/body-file.json',
-  'AcceptanceTests/BodyInteger': '../../AcceptanceTests/swagger/body-integer.json',
-  'AcceptanceTests/BodyNumber': '../../AcceptanceTests/swagger/body-number.json',
-  'AcceptanceTests/BodyString': '../../AcceptanceTests/swagger/body-string.json',
-  'AcceptanceTests/Header': '../../AcceptanceTests/swagger/header.json',
-  'AcceptanceTests/Http': '../../AcceptanceTests/swagger/httpInfrastructure.json',
-  'AcceptanceTests/Report': '../../AcceptanceTests/swagger/report.json',
-  'AcceptanceTests/RequiredOptional': '../../AcceptanceTests/swagger/required-optional.json',
-  'AcceptanceTests/Url': '../../AcceptanceTests/swagger/url.json',
-  'AcceptanceTests/Validation': '../../AcceptanceTests/swagger/validation.json'
+  'AcceptanceTests/BodyArray': '../../../NuGetTests/swagger/body-array.json',
+  'AcceptanceTests/BodyBoolean': '../../../NuGetTests/swagger/body-boolean.json',
+  'AcceptanceTests/BodyByte': '../../../NuGetTests/swagger/body-byte.json',
+  'AcceptanceTests/BodyComplex': '../../../NuGetTests/swagger/body-complex.json',
+  'AcceptanceTests/BodyDate': '../../../NuGetTests/swagger/body-date.json',
+  'AcceptanceTests/BodyDateTime': '../../../NuGetTests/swagger/body-datetime.json',
+  'AcceptanceTests/BodyDictionary': '../../../NuGetTests/swagger/body-dictionary.json',
+  'AcceptanceTests/BodyFile': '../../../NuGetTests/swagger/body-file.json',
+  'AcceptanceTests/BodyInteger': '../../../NuGetTests/swagger/body-integer.json',
+  'AcceptanceTests/BodyNumber': '../../../NuGetTests/swagger/body-number.json',
+  'AcceptanceTests/BodyString': '../../../NuGetTests/swagger/body-string.json',
+  'AcceptanceTests/Header': '../../../NuGetTests/swagger/header.json',
+  'AcceptanceTests/Http': '../../../NuGetTests/swagger/httpInfrastructure.json',
+  'AcceptanceTests/Report': '../../../NuGetTests/swagger/report.json',
+  'AcceptanceTests/RequiredOptional': '../../../NuGetTests/swagger/required-optional.json',
+  'AcceptanceTests/Url': '../../../NuGetTests/swagger/url.json',
+  'AcceptanceTests/Validation': '../../../NuGetTests/swagger/validation.json'
+};
+
+var rubyMappings = {
+
+    'boolean':['../../../NuGetTests/swagger/body-boolean.json', 'BooleanModule'],
+    'integer':['../../../NuGetTests/swagger/body-integer.json','IntegerModule'], 
+    'number':['../../../NuGetTests/swagger/body-number.json','NumberModule'],
+    'string':['../../../NuGetTests/swagger/body-string.json','StringModule'],
+    'byte':['../../../NuGetTests/swagger/body-byte.json','ByteModule'],
+    'array':['../../../NuGetTests/swagger/body-array.json','ArrayModule'],
+    'dictionary':['../../../NuGetTests/swagger/body-dictionary.json','DictionaryModule'],
+    'date':['../../../NuGetTests/swagger/body-date.json','DateModule'],
+    'datetime':['../../../NuGetTests/swagger/body-datetime.json','DatetimeModule'],
+    'complex':['../../../NuGetTests/swagger/body-complex.json','ComplexModule'],
+    'url':['../../../NuGetTests/swagger/url.json','UrlModule'],
+    'url_items':['../../../NuGetTests/swagger/url.json','UrlModule'],
+    'url_query':['../../../NuGetTests/swagger/url.json','UrlModule'],
+    'header_folder':['../../../NuGetTests/swagger/header.json','HeaderModule'],
+    'http_infrastructure':['../../../NuGetTests/swagger/httpInfrastructure.json','HttpInfrastructureModule'],
+    'required_optional':['../../../NuGetTests/swagger/required-optional.json','RequiredOptionalModule'],
+    'report':['../../../NuGetTests/swagger/report.json','ReportModule']
 };
 
 var defaultAzureMappings = {
-  'AcceptanceTests/Lro': '../../AcceptanceTests/swagger/lro.json',
-  'AcceptanceTests/Paging': '../../AcceptanceTests/swagger/paging.json',
-  'AcceptanceTests/AzureReport': '../../AcceptanceTests/swagger/azure-report.json',
-  'AcceptanceTests/ResourceFlattening': '../../AcceptanceTests/swagger/resource-flattening.json',
-  'AcceptanceTests/Head': '../../AcceptanceTests/swagger/head.json',
-  'AcceptanceTests/SubscriptionIdApiVersion': '../../AcceptanceTests/swagger/subscriptionId-apiVersion.json',
-  'AcceptanceTests/AzureSpecials': '../../AcceptanceTests/swagger/azure-special-properties.json'
+  'AcceptanceTests/Lro': '../../../NuGetTests/swagger/lro.json',
+  'AcceptanceTests/Paging': '../../../NuGetTests/swagger/paging.json',
+  'AcceptanceTests/AzureReport': '../../../NuGetTests/swagger/azure-report.json',
+  'AcceptanceTests/ResourceFlattening': '../../../NuGetTests/swagger/resource-flattening.json',
+  'AcceptanceTests/Head': '../../../NuGetTests/swagger/head.json',
+  'AcceptanceTests/SubscriptionIdApiVersion': '../../../NuGetTests/swagger/subscriptionId-apiVersion.json',
+  'AcceptanceTests/AzureSpecials': '../../../NuGetTests/swagger/azure-special-properties.json'
+};
+
+var rubyAzureMappings = {
+    'head':['../../../NuGetTests/swagger/head.json', 'HeadModule'],
+    'paging':['../../../NuGetTests/swagger/paging.json', 'PagingModule'],
+    'resource_flattening':['../../../NuGetTests/swagger/resource-flattening.json', 'ResourceFlatteningModule'],
+    'lro':['../../../NuGetTests/swagger/lro.json', 'LroModule'],
+    'azure_url':['../../../NuGetTests/swagger/subscriptionId-apiVersion.json', 'AzureUrlModule'],
+    'azure_special_properties': ['../../../NuGetTests/swagger/azure-special-properties.json', 'AzureSpecialPropertiesModule'],
+    'azure_report':['../../../NuGetTests/swagger/azure-report.json', 'AzureReportModule'],
 };
 
 gulp.task('regenerate:expected', function(cb){
@@ -74,7 +105,9 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:csazure',
       'regenerate:expected:cs',
       'regenerate:expected:node',
-      'regenerate:expected:nodeazure'
+      'regenerate:expected:nodeazure',
+	  'regenerate:expected:ruby',
+      'regenerate:expected:rubyazure'
     ],
     cb);
 });
@@ -107,6 +140,29 @@ gulp.task('regenerate:expected:node', function(cb){
     'codeGenerator': 'NodeJS'
   }, cb);
 })
+
+gulp.task('regenerate:expected:rubyazure', function(cb){
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Ruby/Azure.Ruby.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': rubyAzureMappings,
+    'outputDir': 'RspecTests/Generated',
+    'codeGenerator': 'Azure.Ruby',
+	'nsPrefix': 'MyNamespace'
+  }, cb);
+})
+
+gulp.task('regenerate:expected:ruby', function(cb){
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Ruby/Ruby.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': rubyMappings,
+    'outputDir': 'RspecTests/Generated',
+    'codeGenerator': 'Ruby',
+	'nsPrefix': 'MyNamespace'
+  }, cb);
+})
+
 
 gulp.task('regenerate:expected:csazure', function(cb){
   mappings = mergeOptions(defaultAzureMappings);
@@ -202,7 +258,7 @@ gulp.task('syncDependencies:nuspec', function() {
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDependencies:runtime:csazure', 'syncDependencies:runtime:node', 'syncDependencies:runtime:nodeazure']);
+gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDependencies:runtime:csazure', 'syncDependencies:runtime:node', 'syncDependencies:runtime:nodeazure', 'syncDependencies:runtime:ruby', 'syncDependencies:runtime:rubyazure']);
 
 gulp.task('syncDependencies', ['syncDependencies:nugetProj', 'syncDependencies:nuspec', 'syncDependencies:runtime']);
 
@@ -229,16 +285,26 @@ gulp.task('package', function(cb) {
   })));
 });
 
+gulp.task('test:clientruntime:node', shell.task('npm test', { cwd: './ClientRuntimes/NodeJS/ms-rest/', verbosity: 3 }));
+gulp.task('test:clientruntime:nodeazure', shell.task('npm test', { cwd: './ClientRuntimes/NodeJS/ms-rest-azure/', verbosity: 3 }));
+gulp.task('test:clientruntime:ruby', ['syncDependencies:runtime:ruby'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest/', verbosity: 3 }));
+gulp.task('test:clientruntime:rubyazure', ['syncDependencies:runtime:rubyazure'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest-azure/', verbosity: 3 }));
+gulp.task('test:clientruntime', function (cb) {
+  runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
+    'test:clientruntime:ruby', 'test:clientruntime:rubyazure', cb);
+});
+
 gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/NodeJS.Tests/', verbosity: 3}));
 gulp.task('test:node:azure', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/', verbosity: 3}));
+
+gulp.task('test:ruby', ['regenerate:expected:ruby'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Ruby.Tests', verbosity: 3 }));
+gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Azure.Ruby.Tests', verbosity: 3 }));
 
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
   'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
   'AutoRest/Generators/CSharp/Azure.CSharp.Tests/bin/Net45-Debug/Azure.CSharp.Tests.dll',
   'AutoRest/Generators/CSharp/CSharp.Tests/bin/Net45-Debug/CSharp.Tests.dll',
-  'AutoRest/Generators/Ruby/Azure.Ruby.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Ruby.Tests.dll',
-  'AutoRest/Generators/Ruby/Ruby.Tests/bin/Net45-Debug/AutoRest.Generator.Ruby.Tests.dll',
   'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Swagger.Tests.dll',
   'ClientRuntimes/CSharp/ClientRuntime.Azure.Tests/bin/Net45-Debug/ClientRuntime.Azure.Tests.dll',
   'ClientRuntimes/CSharp/ClientRuntime.Tests/bin/Net45-Debug/ClientRuntime.Tests.dll',
@@ -296,7 +362,7 @@ gulp.task('test:nugetPackages', ['test:nugetPackagesTest:restore', 'test:nugetPa
 });
 
 gulp.task('test', function(cb){
-  runSequence('test:xunit', 'test:node', 'test:node:azure', 'test:nugetPackages', cb);
+  runSequence('test:xunit', 'test:clientruntime', 'test:node', 'test:node:azure', 'test:ruby', 'test:ruby:azure', 'test:nugetPackages', cb);
 });
 
 gulp.task('analysis', function(cb) {

@@ -1,6 +1,11 @@
+# encoding: utf-8
+
+$: << 'RspecTests/url_query'
+
 require 'rspec'
-require_relative 'UrlQuery/sdk_requirements'
-include MyNamespace
+require 'url'
+
+include UrlModule
 
 describe Queries do
 
@@ -11,7 +16,7 @@ describe Queries do
     @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestUrlTestService.new(@credentials, @base_url)
-    @queries_client = MyNamespace::Queries.new(client)
+    @queries_client = Queries.new(client)
   end
 
   it 'should create test service' do

@@ -9,6 +9,9 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
+    /// <summary>
+    /// The model for the Azure service client.
+    /// </summary>
     public class AzureServiceClientTemplateModel : ServiceClientTemplateModel
     {
         /// <summary>

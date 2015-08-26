@@ -1,7 +1,11 @@
-require 'rspec'
-require_relative 'Head/sdk_requirements'
+# encoding: utf-8
 
-include MyNamespace
+$: << 'RspecTests/Generated/head'
+
+require 'rspec'
+require 'head'
+
+include HeadModule
 
 describe 'Head' do
   before(:all) do

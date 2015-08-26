@@ -1,5 +1,10 @@
-require_relative 'String/sdk_requirements'
-include MyNamespace
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/string'
+
+require 'body_string'
+
+include StringModule
 
 describe String do
   before(:all) do
@@ -8,12 +13,12 @@ describe String do
 	dummyToken = 'dummy12321343423'
 	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
-    client = MyNamespace::AutoRestSwaggerBATService.new(@credentials, @base_url)
-    @string_client = MyNamespace::String.new(client)
+    client = AutoRestSwaggerBATService.new(@credentials, @base_url)
+    @string_client = StringModule::String.new(client)
   end
 
   it 'should create test service' do
-    expect { MyNamespace::AutoRestSwaggerBATService.new(@credentials, @base_url) }.not_to raise_error
+    expect { AutoRestSwaggerBATService.new(@credentials, @base_url) }.not_to raise_error
   end
 
   it 'should get null' do

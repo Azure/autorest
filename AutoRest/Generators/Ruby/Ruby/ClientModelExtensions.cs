@@ -8,6 +8,7 @@ using System.Linq;
 namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 {
     using Utilities;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Keeps a few aux method used across all templates/models.
@@ -15,17 +16,17 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
     public static class ClientModelExtensions
     {
         /// <summary>
-        /// Determines if a type can be assigned the value null
+        /// Determines if a type can be assigned the value null.
         /// </summary>
-        /// <param name="type">The type to check</param>
-        /// <returns>true if null can be assigned, otherwise false</returns>
+        /// <param name="type">The type to check.</param>
+        /// <returns>True if null can be assigned, otherwise false.</returns>
         public static bool IsNullable(this IType type)
         {
             return true;
         }
 
         /// <summary>
-        /// Simple conversion of the type to string
+        /// Simple conversion of the type to string.
         /// </summary>
         /// <param name="type">The type to convert</param>
         /// <param name="reference">a reference to an instance of the type</param>
@@ -45,9 +46,10 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <returns>Doc in form of string.</returns>
         private static string PrepareTypeForDocRecursively(IType type)
         {
-            // TODO: add more primitive types, also dictionary and composite ones.
             var sequenceType = type as SequenceType;
             var compositeType = type as CompositeType;
+            var enumType = type as EnumType;
+            var dictionaryType = type as DictionaryType;
 
             if (type == PrimaryType.String)
             {
@@ -69,9 +71,29 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 return "Float";
             }
 
+            if (type == PrimaryType.Date)
+            {
+                return "Date";
+            }
+
+            if (type == PrimaryType.DateTime)
+            {
+                return "DateTime";
+            }
+
+            if (type == PrimaryType.ByteArray)
+            {
+                return "Array<Integer>";
+            }
+
             if (compositeType != null)
             {
                 return compositeType.Name;
+            }
+
+            if (enumType != null)
+            {
+                return enumType.Name;
             }
 
             if (sequenceType != null)
@@ -86,14 +108,26 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 return string.Empty;
             }
 
+            if (dictionaryType != null)
+            {
+                string internalString = PrepareTypeForDocRecursively(dictionaryType.ValueType);
+
+                if (!string.IsNullOrEmpty(internalString))
+                {
+                    return string.Format("Hash{{String => {0}}}", internalString);
+                }
+
+                return string.Empty;
+            }
+
             return string.Empty;
         }
 
         /// <summary>
-        /// Return the separator associated with a given collectionFormat
+        /// Return the separator associated with a given collectionFormat.
         /// </summary>
-        /// <param name="format">The collection format</param>
-        /// <returns>The separator</returns>
+        /// <param name="format">The collection format.</param>
+        /// <returns>The separator.</returns>
         private static string GetSeparator(this CollectionFormat format)
         {
             switch (format)
@@ -112,10 +146,10 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         }
 
         /// <summary>
-        /// Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
+        /// Format the value of a sequence given the modeled element format. Note that only sequences of strings are supported.
         /// </summary>
-        /// <param name="parameter">The parameter to format</param>
-        /// <returns>A reference to the formatted parameter value</returns>
+        /// <param name="parameter">The parameter to format.</param>
+        /// <returns>A reference to the formatted parameter value.</returns>
         public static string GetFormattedReferenceValue(this Parameter parameter)
         {
             SequenceType sequence = parameter.Type as SequenceType;
@@ -159,23 +193,12 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         }
 
         /// <summary>
-        /// Generats null check instruction.
+        /// Generate code to perform required validation on a type.
         /// </summary>
-        /// <param name="valueReference">Object for null check.</param>
-        /// <param name="executionBlock">Code to execute if given object isn't null.</param>
-        /// <returns>Generated Ruby code for null check.</returns>
-        public static string CheckNull(string valueReference, string executionBlock)
-        {
-            return string.Format("{1} unless {0}.nil?", valueReference, executionBlock);
-        }
-
-        /// <summary>
-        /// Generate code to perform required validation on a type
-        /// </summary>
-        /// <param name="type">The type to validate</param>
-        /// <param name="scope">A scope provider for generating variable names as necessary</param>
-        /// <param name="valueReference">A reference to the value being validated</param>
-        /// <returns>The code to validate the reference of the given type</returns>
+        /// <param name="type">The type to validate.</param>
+        /// <param name="scope">A scope provider for generating variable names as necessary.</param>
+        /// <param name="valueReference">A reference to the value being validated.</param>
+        /// <returns>The code to validate the reference of the given type.</returns>
         public static string ValidateType(this IType type, IScopeProvider scope, string valueReference)
         {
             CompositeType model = type as CompositeType;
@@ -196,9 +219,9 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         }
 
         /// <summary>
-        /// Determine whether a model should be serializable
+        /// Determine whether a model should be serializable.
         /// </summary>
-        /// <param name="type">The type to check</param>
+        /// <param name="type">The type to check.</param>
         public static bool IsSerializable(this IType type)
         {
             var known = type as PrimaryType;
@@ -206,10 +229,10 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         }
 
         /// <summary>
-        /// Verifies whether client includes Model types.
+        /// Verifies whether client includes model types.
         /// </summary>
         /// <param name="client">The client.</param>
-        /// <returns>True if client contain Model types, false otherwise.</returns>
+        /// <returns>True if client contain model types, false otherwise.</returns>
         public static bool HasModelTypes(this ServiceClient client)
         {
             return client.ModelTypes.Any(mt => mt.Extensions.Count == 0);
@@ -221,11 +244,13 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <param name="type">Type of object needs to be deserialized.</param>
         /// <param name="scope">Current scope.</param>
         /// <param name="valueReference">Reference to object which needs to be deserialized.</param>
+        /// <param name="namespacesToLookForClasses">List of namespaces where classes for polymorphic serialization can be found.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string DeserializeType(
             this IType type,
             IScopeProvider scope,
-            string valueReference)
+            string valueReference,
+            List<string> namespacesToLookForClasses)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
@@ -277,7 +302,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar);
+                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar, namespacesToLookForClasses);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -301,7 +326,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar);
+                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar, namespacesToLookForClasses);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return builder.AppendLine("unless {0}.nil?", valueReference)
@@ -323,7 +348,17 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                     builder
                         .AppendLine("unless {0}['dtype'].nil?", valueReference)
                         .Indent()
-                            .AppendLine("{0} = Class::const_get({0}['dtype'].capitalize).deserialize_object({0})", valueReference)
+                            .AppendLine("class_name = {0}['dtype'].capitalize", valueReference)
+                            .AppendLine("class_instance = Models.const_get(class_name)");
+
+                    foreach (var ns in namespacesToLookForClasses)
+                    {
+                        builder
+                            .AppendLine("class_instance = {0}.const_get(class_name) if class_instance.nil?", ns);
+                    }
+
+                    builder
+                        .AppendLine("{0} = class_instance.deserialize_object({0})", valueReference)
                         .Outdent()
                         .AppendLine("else")
                         .Indent()
@@ -350,11 +385,13 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <param name="type">Type of object needs to be serialized.</param>
         /// <param name="scope">Current scope.</param>
         /// <param name="valueReference">Reference to object which needs to serialized.</param>
+        /// <param name="namespacesToLookForClasses">List of namespaces where classes for polymorphic deserialization can be found.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string SerializeType(
             this IType type,
             IScopeProvider scope,
-            string valueReference)
+            string valueReference,
+            List<string> namespacesToLookForClasses)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
@@ -378,7 +415,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar);
+                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar, namespacesToLookForClasses);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -402,7 +439,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar);
+                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar, namespacesToLookForClasses);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return builder.AppendLine("unless {0}.nil?", valueReference)
@@ -424,7 +461,17 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                     builder
                         .AppendLine("unless {0}.dtype.nil?", valueReference)
                         .Indent()
-                        .AppendLine("{0} = Class::const_get({0}.dtype.capitalize).serialize_object({0})", valueReference)
+                        .AppendLine("class_name = {0}.dtype.capitalize", valueReference)
+                        .AppendLine("class_instance = Models.const_get(class_name)");
+
+                    foreach (var ns in namespacesToLookForClasses)
+                    {
+                        builder
+                            .AppendLine("class_instance = {0}.const_get(class_name) if class_instance.nil?", ns);
+                    }
+
+                    builder
+                        .AppendLine("{0} = class_instance.serialize_object({0})", valueReference)
                         .Outdent()
                         .AppendLine("else")
                         .Indent()

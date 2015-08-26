@@ -1,13 +1,20 @@
+# encoding: utf-8
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See License.txt in the project root for license information.
+
 source 'https://rubygems.org'
 
 # Specify your gem's dependencies in ms_rest_azure.gemspec
 gemspec
 
-group :development, :local, :test do
-  gem 'rspec'
+group :development do
   gem 'json'
   gem 'concurrent-ruby-ext'
   gem 'faraday'
   gem 'faraday-cookie_jar'
-  gem 'ms_rest'
+  gem 'ms_rest', path: '../ms-rest'
+end
+
+group :test do
+  gem 'rspec'
 end

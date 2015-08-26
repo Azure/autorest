@@ -1,7 +1,14 @@
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/http_infrastructure'
+$: << 'RspecTests'
+
 require 'rspec'
-require_relative 'HttpInfrastructure/sdk_requirements'
-require_relative './helper'
-include MyNamespace
+require 'http_infrastructure.rb'
+require 'helper'
+
+module HttpInfrastructureModule
+  include HttpInfrastructureModule::Models
 
 describe 'HttpInfrastructure' do
 
@@ -12,12 +19,12 @@ describe 'HttpInfrastructure' do
     @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestHttpInfrastructureTestService.new(@credentials, @base_url)
-    @failure_client = MyNamespace::HttpClientFailure.new(client)
-    @redirect_client = MyNamespace::HttpRedirects.new(client)
-    @retry_client = MyNamespace::HttpRetry.new(client)
-    @server_fail_client = MyNamespace::HttpServerFailure.new(client)
-    @success_client = MyNamespace::HttpSuccess.new(client)
-    @multiple_resp_client = MyNamespace::MultipleResponses.new(client)
+    @failure_client = HttpClientFailure.new(client)
+    @redirect_client = HttpRedirects.new(client)
+    @retry_client = HttpRetry.new(client)
+    @server_fail_client = HttpServerFailure.new(client)
+    @success_client = HttpSuccess.new(client)
+    @multiple_resp_client = MultipleResponses.new(client)
   end
 
   it 'should create test service' do
@@ -496,4 +503,6 @@ describe 'HttpInfrastructure' do
       expect { @multiple_resp_client.get200model_a202valid().value! }.to raise_exception_with_code(202)
     end
   end
+end
+
 end

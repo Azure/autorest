@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
@@ -7,15 +8,11 @@ module MsRestAzure
   #
   class AzureServiceClient < MsRest::ServiceClient
 
+    # @return [Integer] execution interval for long running operations.
+    attr_accessor :long_running_operation_retry_timeout
+
     # @return [String] api version of the Azure in string format.
     attr_accessor :api_version
-
-    #
-    # Creates and initialize new instance of the ServiceClient class.
-    #
-    def initialize(credentials, options)
-      super(credentials, options)
-    end
 
     #
     # Retrieves the result of 'PUT' operation. Perfroms polling of required.
@@ -33,7 +30,7 @@ module MsRestAzure
         fail AzureOperationError, "Unexpected polling status code from long running operation #{status_code}"
       end
 
-      polling_state = PollingState.new(azure_response, 1) # TODO: add timeout
+      polling_state = PollingState.new(azure_response, @long_running_operation_retry_timeout)
       operation_url = azure_response.request.url_prefix.to_s
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
@@ -56,7 +53,10 @@ module MsRestAzure
           end
         end
 
-        task.execution_interval = polling_state.get_delay_in_milliseconds()
+        polling_delay = polling_state.get_delay
+        polling_delay = 0.1 if polling_delay.nil? || polling_delay == 0
+
+        task.execution_interval = polling_delay
         task.execute
         task.wait_for_termination
 
@@ -92,7 +92,7 @@ module MsRestAzure
         fail AzureOperationError, "Unexpected polling status code from long running operation #{status_code}"
       end
 
-      polling_state = PollingState.new(azure_response, 1) # TODO: add timeout
+      polling_state = PollingState.new(azure_response, @long_running_operation_retry_timeout)
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do
@@ -115,7 +115,10 @@ module MsRestAzure
           end
         end
 
-        task.execution_interval = polling_state.get_delay_in_milliseconds()
+        polling_delay = polling_state.get_delay
+        polling_delay = 0.1 if polling_delay.nil? || polling_delay == 0
+
+        task.execution_interval = polling_delay
         task.execute
         task.wait_for_termination
 
@@ -174,8 +177,11 @@ module MsRestAzure
       if (status_code == 202)
         polling_state.status = AsyncOperationStatus::IN_PROGRESS_STATUS
       elsif (status_code == 200 || status_code == 201)
-        fail AzureOperationError, 'The response from long running operation does not contain a body' if (result.body.nil?)
-      if (result.body.respond_to?(:properties) && result.body.properties.respond_to?(:provisioning_state) && !result.body.properties.provisioning_state.nil?)
+        fail AzureOperationError, 'The response from long running operation does not contain a body' if result.body.nil?
+
+        # In 202 pattern on PUT ProvisioningState may not be present in
+        # the response. In that case the assumption is the status is Succeeded.
+        if (result.body.respond_to?(:properties) && result.body.properties.respond_to?(:provisioning_state) && !result.body.properties.provisioning_state.nil?)
           polling_state.status = result.body.properties.provisioning_state
         else
           polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
@@ -269,8 +275,7 @@ module MsRestAzure
     def get_async_common(operation_url, custom_headers)
       fail ValidationError, 'Operation url cannot be nil' if operation_url.nil?
 
-      # TODO: add url encoding.
-      url = URI(operation_url)
+      url = URI(operation_url.gsub(' ', '%20'))
 
       fail URI::Error unless url.to_s =~ /\A#{URI::regexp}\z/
 

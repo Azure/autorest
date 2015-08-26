@@ -1,6 +1,11 @@
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/paging'
+
 require 'rspec'
-require_relative 'Paging/sdk_requirements'
-include MyNamespace
+require 'paging'
+
+include PagingModule
 
 describe 'Paging' do
   before(:all) do

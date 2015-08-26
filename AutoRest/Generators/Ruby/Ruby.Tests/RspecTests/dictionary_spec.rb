@@ -1,7 +1,14 @@
-require'base64'
-require_relative 'Dictionary/sdk_requirements'
-require_relative './helper'
-include MyNamespace
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/dictionary'
+$: << 'RspecTests'
+
+require 'base64'
+require 'body_dictionary'
+require 'helper'
+
+include DictionaryModule
+include DictionaryModule::Models
 
 describe Dictionary do
 
@@ -12,19 +19,19 @@ describe Dictionary do
 	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestSwaggerBATdictionaryService.new(@credentials, @base_url)
-    @dictionary_client = MyNamespace::Dictionary.new(client)
+    @dictionary_client = Dictionary.new(client)
     @dict_bool = { "0" => true, "1" => false, "2" => false, "3" => true}
     @dict_string = {"0"=> "foo1", "1"=> "foo2", "2"=> "foo3"}
     @dict_int = {"0"=> 1, "1"=> -1, "2"=> 3, "3"=> 300}
     @dict_float = {"0"=> 0, "1"=> -0.01, "2" => -1.2e20}
     @dict_date = {"0"=> Date.new(2000, 12, 01, 0), "1"=> Date.new(1980, 1, 2, 0), "2"=> Date.new(1492, 10, 12, 0)}
-    @widget_0 = Models::Widget.new
+    @widget_0 = Widget.new
     @widget_0.string = "2"
     @widget_0.integer = 1
-    @widget_1 = Models::Widget.new
+    @widget_1 = Widget.new
     @widget_1.string = "4"
     @widget_1.integer = 3
-    @widget_2 = Models::Widget.new
+    @widget_2 = Widget.new
     @widget_2.string = "6"
     @widget_2.integer = 5
     @dict_complex = {"0"=> @widget_0, "1"=> @widget_1 , "2"=> @widget_2}
@@ -67,12 +74,12 @@ describe Dictionary do
 
   it 'should get empty string key' do
     result = @dictionary_client.get_empty_string_key().value!
-	expect(result.response.status).to eq(200)
-	expect(result.body).to eq({"" => "val1"})
+    expect(result.response.status).to eq(200)
+    expect(result.body).to eq({"" => "val1"})
   end
 
   it 'should get invalid' do
-    expect{@dictionary_client.get_invalid().value!}.to raise_error(MsRest::DeserializationError)
+    expect { @dictionary_client.get_invalid().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   # Boolean tests
@@ -300,7 +307,7 @@ describe Dictionary do
   end
 
   it 'should get complex item empty' do
-    dict_empty = { "0"=> @widget_0, "1"=> Models::Widget.new, "2"=> @widget_2 }
+    dict_empty = { "0"=> @widget_0, "1"=> Widget.new, "2"=> @widget_2 }
     result = @dictionary_client.get_complex_item_empty().value!
     expect(result.response.status).to eq(200)
     expect(result.body.keys.count).to eq(dict_empty.keys.count)
