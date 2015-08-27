@@ -23,8 +23,8 @@ import fixtures.url.models.UriColor;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import fixtures.url.models.Error;
-import com.microsoft.rest.serializer.JacksonConverterBuilder;
 import org.apache.commons.codec.binary.Base64;
+import com.microsoft.rest.serializer.JacksonConverterBuilder;
 
 public class PathsImpl implements Paths {
     private PathsService service;

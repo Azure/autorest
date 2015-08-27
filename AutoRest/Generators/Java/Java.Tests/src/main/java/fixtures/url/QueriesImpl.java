@@ -24,9 +24,9 @@ import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import java.util.List;
 import fixtures.url.models.Error;
+import org.apache.commons.codec.binary.Base64;
 import com.microsoft.rest.serializer.JacksonConverterBuilder;
 import com.microsoft.rest.serializer.CollectionFormat;
-import org.apache.commons.codec.binary.Base64;
 
 public class QueriesImpl implements Queries {
     private QueriesService service;

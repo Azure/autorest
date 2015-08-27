@@ -27,6 +27,10 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
         /// <returns></returns>
         public static string ToString(this Parameter parameter, string reference)
         {
+            if (parameter == null)
+            {
+                return null;
+            }
             var type = parameter.Type;
             var known = type as PrimaryType;
             var sequence = type as SequenceType;

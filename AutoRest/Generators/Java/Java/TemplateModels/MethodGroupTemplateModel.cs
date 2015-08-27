@@ -43,76 +43,92 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        private HashSet<string> TypeImports(IList<IType> types)
+        {
+            HashSet<string> imports = new HashSet<string>();
+            if (types == null)
+            {
+                return imports;
+            }
+
+            for (int i = 0; i < types.Count; i++)
+            {
+                var type = types[i];
+                var sequenceType = type as SequenceType;
+                var dictionaryType = type as DictionaryType;
+                var primaryType = type as PrimaryType;
+                if (sequenceType != null)
+                {
+                    imports.Add("java.util.List");
+                    types.Add(sequenceType.ElementType);
+                }
+                else if (dictionaryType != null)
+                {
+                    imports.Add("java.util.Map");
+                    types.Add(dictionaryType.ValueType);
+                }
+                else if (type is CompositeType || type is EnumType)
+                {
+                    imports.Add(string.Join(
+                        ".",
+                        this.Namespace.ToLower(CultureInfo.InvariantCulture),
+                        "models",
+                        type.Name));
+                }
+                else if (primaryType != null)
+                {
+                    var importedFrom = JavaCodeNamer.ImportedFrom(primaryType);
+                    if (importedFrom != null)
+                    {
+                        imports.Add(importedFrom);
+                    }
+                }
+            }
+            return imports;
+        }
+
         public IEnumerable<string> ImplImports
         {
             get
             {
-                HashSet<string> classes = new HashSet<string>();
-                IList<IType> types = this.MethodTemplateModels
-                    .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
+                var parameters = this.MethodTemplateModels
+                    .SelectMany(m => m.ParameterTemplateModels);
+
+                var types = parameters.Select(p => p.Type)
                     .Concat(this.MethodTemplateModels.SelectMany(mtm => mtm.Responses.Select(res => res.Value)))
                     .Concat(this.MethodTemplateModels.Select(mtm => mtm.DefaultResponse))
                     .Distinct()
                     .ToList();
 
-                for (int i = 0; i < types.Count; i++)
-                {
-                    var type = types[i];
-                    var sequenceType = type as SequenceType;
-                    var dictionaryType = type as DictionaryType;
-                    var primaryType = type as PrimaryType;
-                    if (sequenceType != null)
-                    {
-                        classes.Add("java.util.List");
-                        types.Add(sequenceType.ElementType);
-                    }
-                    else if (dictionaryType != null)
-                    {
-                        classes.Add("java.util.Map");
-                        types.Add(dictionaryType.ValueType);
-                    }
-                    else if (type is CompositeType || type is EnumType)
-                    {
-                        classes.Add(string.Join(
-                            ".", 
-                            this.Namespace.ToLower(CultureInfo.InvariantCulture),
-                            "models", 
-                            type.Name));
-                    }
-                    else if (primaryType != null)
-                    {
-                        var importedFrom = JavaCodeNamer.ImportedFrom(primaryType);
-                        if (importedFrom != null)
-                        {
-                            classes.Add(importedFrom);
-                        }
-                    }
-                }
+                HashSet<string> classes = TypeImports(types);
 
                 if (this.MethodTemplateModels.Any(m => !m.ParametersToValidate.IsNullOrEmpty()))
                 {
                     classes.Add("com.microsoft.rest.Validator");
                 }
 
-                IEnumerable<ParameterTemplateModel> nonBodyParams = this.MethodTemplateModels
-                    .SelectMany(m => m.ParameterTemplateModels)
-                    .Where(p => p.Location != ParameterLocation.Body);
-                if (nonBodyParams.Any(p => p.Type.Name == "LocalDate" ||
-                        p.Type.Name == "DateTime" ||
-                        p.Type is CompositeType || 
-                        p.Type is SequenceType ||
-                        p.Type is DictionaryType))
+                IEnumerable<ParameterTemplateModel> nonBodyParams = parameters.Where(p => p.Location != ParameterLocation.Body);
+
+                foreach (var param in nonBodyParams)
                 {
-                    classes.Add("com.microsoft.rest.serializer.JacksonConverterBuilder");
+                    if (param.Type.Name == "LocalDate" ||
+                        param.Type.Name == "DateTime" ||
+                        param.Type is CompositeType ||
+                        param.Type is SequenceType ||
+                        param.Type is DictionaryType)
+                    {
+                        classes.Add("com.microsoft.rest.serializer.JacksonConverterBuilder");
+                    }
+                    if (param.Type is SequenceType)
+                    {
+                        classes.Add("com.microsoft.rest.serializer.CollectionFormat");
+                    }
+                    if (param.Type == PrimaryType.ByteArray)
+                    {
+                        classes.Add("org.apache.commons.codec.binary.Base64");
+                    }
                 }
-                if (nonBodyParams.Any(p => p.Type is SequenceType))
-                {
-                    classes.Add("com.microsoft.rest.serializer.CollectionFormat");
-                }
-                if (nonBodyParams.Any(p => p.Type == PrimaryType.ByteArray))
-                {
-                    classes.Add("org.apache.commons.codec.binary.Base64");
-                }
+                
                 return classes.AsEnumerable();
             }
         }
@@ -121,45 +137,13 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                HashSet<string> classes = new HashSet<string>();
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
                     .Concat(this.MethodTemplateModels.Select(mtm => mtm.ReturnType))
                     .Distinct()
                     .ToList();
-                for (int i = 0; i < types.Count; i++)
-                {
-                    var type = types[i];
-                    var sequenceType = type as SequenceType;
-                    var dictionaryType = type as DictionaryType;
-                    var primaryType = type as PrimaryType;
-                    if (sequenceType != null)
-                    {
-                        classes.Add("java.util.List");
-                        types.Add(sequenceType.ElementType);
-                    }
-                    else if (dictionaryType != null)
-                    {
-                        classes.Add("java.util.Map");
-                        types.Add(dictionaryType.ValueType);
-                    }
-                    else if (type is CompositeType || type is EnumType)
-                    {
-                        classes.Add(string.Join(
-                            ".", 
-                            this.Namespace.ToLower(CultureInfo.InvariantCulture),
-                            "models", 
-                            type.Name));
-                    }
-                    else if (primaryType != null && primaryType != PrimaryType.ByteArray)
-                    {
-                        var importedFrom = JavaCodeNamer.ImportedFrom(primaryType);
-                        if (importedFrom != null)
-                        {
-                            classes.Add(importedFrom);
-                        }
-                    }
-                }
+
+                HashSet<string> classes = TypeImports(types);
 
                 foreach (var method in this.MethodTemplateModels)
                 {
