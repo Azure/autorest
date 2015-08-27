@@ -24,6 +24,9 @@ import org.joda.time.DateTime;
 import org.apache.commons.lang3.ArrayUtils;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.Error;
+import org.apache.commons.lang3.StringUtils;
+import com.microsoft.rest.serializer.JacksonConverterBuilder;
+import org.apache.commons.codec.binary.Base64;
 
 public class HeaderOperationsImpl implements HeaderOperations {
     private HeaderService service;
@@ -860,7 +863,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter value is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramDateDelegate(service.paramDate(scenario, value), null);
+            ServiceResponse<Void> response = paramDateDelegate(service.paramDate(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\"")), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = paramDateDelegate(error.getResponse(), error);
@@ -885,7 +888,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
         }
-        service.paramDateAsync(scenario, value, new ServiceResponseCallback() {
+        service.paramDateAsync(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\""), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -973,7 +976,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter value is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramDatetimeDelegate(service.paramDatetime(scenario, value), null);
+            ServiceResponse<Void> response = paramDatetimeDelegate(service.paramDatetime(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\"")), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = paramDatetimeDelegate(error.getResponse(), error);
@@ -999,7 +1002,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
         }
-        service.paramDatetimeAsync(scenario, value, new ServiceResponseCallback() {
+        service.paramDatetimeAsync(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\""), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1088,7 +1091,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter value is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramByteDelegate(service.paramByte(scenario, value), null);
+            ServiceResponse<Void> response = paramByteDelegate(service.paramByte(scenario, Base64.encodeBase64String(value)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = paramByteDelegate(error.getResponse(), error);
@@ -1113,7 +1116,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
         }
-        service.paramByteAsync(scenario, value, new ServiceResponseCallback() {
+        service.paramByteAsync(scenario, Base64.encodeBase64String(value), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1196,7 +1199,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramEnumDelegate(service.paramEnum(scenario, value), null);
+            ServiceResponse<Void> response = paramEnumDelegate(service.paramEnum(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\"")), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = paramEnumDelegate(error.getResponse(), error);
@@ -1217,7 +1220,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
         }
-        service.paramEnumAsync(scenario, value, new ServiceResponseCallback() {
+        service.paramEnumAsync(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\""), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {

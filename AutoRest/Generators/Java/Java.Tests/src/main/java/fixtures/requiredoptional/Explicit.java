@@ -160,16 +160,16 @@ public interface Explicit {
         void postOptionalArrayPropertyAsync(@Body ArrayOptionalWrapper bodyParameter, ServiceResponseCallback cb);
 
         @POST("/reqopt/requied/array/header")
-        Response postRequiredArrayHeader(@Header("headerParameter") List<String> headerParameter) throws ServiceException;
+        Response postRequiredArrayHeader(@Header("headerParameter") String headerParameter) throws ServiceException;
 
         @POST("/reqopt/requied/array/header")
-        void postRequiredArrayHeaderAsync(@Header("headerParameter") List<String> headerParameter, ServiceResponseCallback cb);
+        void postRequiredArrayHeaderAsync(@Header("headerParameter") String headerParameter, ServiceResponseCallback cb);
 
         @POST("/reqopt/optional/array/header")
-        Response postOptionalArrayHeader(@Header("headerParameter") List<String> headerParameter) throws ServiceException;
+        Response postOptionalArrayHeader(@Header("headerParameter") String headerParameter) throws ServiceException;
 
         @POST("/reqopt/optional/array/header")
-        void postOptionalArrayHeaderAsync(@Header("headerParameter") List<String> headerParameter, ServiceResponseCallback cb);
+        void postOptionalArrayHeaderAsync(@Header("headerParameter") String headerParameter, ServiceResponseCallback cb);
 
     }
     /**

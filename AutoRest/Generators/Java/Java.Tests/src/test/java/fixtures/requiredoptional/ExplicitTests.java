@@ -26,6 +26,7 @@ public class ExplicitTests {
     public void postOptionalIntegerParameter() throws Exception {
         try {
             client.getExplicit().postOptionalIntegerParameter(null);
+            fail();
         } catch (ServiceException ex) {
             // Body parameter cannot be null
         }
@@ -53,11 +54,7 @@ public class ExplicitTests {
 
     @Test
     public void postOptionalIntegerHeader() throws Exception {
-        try {
-            client.getExplicit().postOptionalIntegerHeader(null);
-        } catch (ServiceException ex) {
-            // Post must contain body
-        }
+        client.getExplicit().postOptionalIntegerHeader(null);
     }
 
     @Test
@@ -74,6 +71,7 @@ public class ExplicitTests {
     public void postOptionalStringParameter() throws Exception {
         try {
             client.getExplicit().postOptionalIntegerParameter(null);
+            fail();
         } catch (ServiceException ex) {
             // Body parameter cannot be null
         }
@@ -103,18 +101,15 @@ public class ExplicitTests {
     public void postRequiredStringHeader() throws Exception {
         try {
             client.getExplicit().postRequiredStringHeader(null);
+            fail();
         } catch (ServiceException ex) {
-            // Post must contain body
+            Assert.assertTrue(ex.getMessage().contains("Parameter headerParameter is required"));
         }
     }
 
     @Test
     public void postOptionalStringHeader() throws Exception {
-        try {
-            client.getExplicit().postOptionalStringHeader(null);
-        } catch (ServiceException ex) {
-            // Post must contain body
-        }
+        client.getExplicit().postOptionalStringHeader(null);
     }
 
     @Test
@@ -131,6 +126,7 @@ public class ExplicitTests {
     public void postOptionalClassParameter() throws Exception {
         try {
             client.getExplicit().postOptionalClassParameter(null);
+            fail();
         } catch (ServiceException ex) {
             // Body parameter cannot be null
         }
@@ -170,6 +166,7 @@ public class ExplicitTests {
     public void postOptionalArrayParameter() throws Exception {
         try {
             client.getExplicit().postOptionalArrayParameter(null);
+            fail();
         } catch (ServiceException ex) {
             // Body parameter cannot be null
         }
@@ -199,17 +196,14 @@ public class ExplicitTests {
     public void postRequiredArrayHeader() throws Exception {
         try {
             client.getExplicit().postRequiredArrayHeader(null);
+            fail();
         } catch (ServiceException ex) {
-            // Post must contain body
+            Assert.assertTrue(ex.getCause().getMessage().contains("Parameter headerParameter is required"));
         }
     }
 
     @Test
     public void postOptionalArrayHeader() throws Exception {
-        try {
-            client.getExplicit().postOptionalArrayHeader(null);
-        } catch (ServiceException ex) {
-            // Post must contain body
-        }
+        client.getExplicit().postOptionalArrayHeader(null);
     }
 }

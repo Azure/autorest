@@ -31,6 +31,8 @@ import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.Error;
 import com.microsoft.rest.Validator;
+import org.apache.commons.lang3.StringUtils;
+import com.microsoft.rest.serializer.JacksonConverterBuilder;
 
 public class ExplicitImpl implements Explicit {
     private ExplicitService service;
@@ -1017,7 +1019,7 @@ public class ExplicitImpl implements Explicit {
         }
         Validator.validate(headerParameter);
         try {
-            ServiceResponse<Error> response = postRequiredArrayHeaderDelegate(service.postRequiredArrayHeader(headerParameter), null);
+            ServiceResponse<Error> response = postRequiredArrayHeaderDelegate(service.postRequiredArrayHeader(StringUtils.strip(JacksonConverterBuilder.serialize(headerParameter), "\"")), null);
             return response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Error> response = postRequiredArrayHeaderDelegate(error.getResponse(), error);
@@ -1039,7 +1041,7 @@ public class ExplicitImpl implements Explicit {
                 new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
         }
         Validator.validate(headerParameter, serviceCallback);
-        service.postRequiredArrayHeaderAsync(headerParameter, new ServiceResponseCallback() {
+        service.postRequiredArrayHeaderAsync(StringUtils.strip(JacksonConverterBuilder.serialize(headerParameter), "\""), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1066,7 +1068,7 @@ public class ExplicitImpl implements Explicit {
      */
     public void postOptionalArrayHeader(List<String> headerParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalArrayHeaderDelegate(service.postOptionalArrayHeader(headerParameter), null);
+            ServiceResponse<Void> response = postOptionalArrayHeaderDelegate(service.postOptionalArrayHeader(StringUtils.strip(JacksonConverterBuilder.serialize(headerParameter), "\"")), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = postOptionalArrayHeaderDelegate(error.getResponse(), error);
@@ -1082,7 +1084,7 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalArrayHeaderAsync(headerParameter, new ServiceResponseCallback() {
+        service.postOptionalArrayHeaderAsync(StringUtils.strip(JacksonConverterBuilder.serialize(headerParameter), "\""), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {

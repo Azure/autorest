@@ -27,22 +27,12 @@ public class ImplicitTests {
 
     @Test
     public void putOptionalQuery() throws Exception {
-        try {
-            client.getImplicit().putOptionalQuery(null);
-            fail();
-        } catch (ServiceException ex) {
-            Assert.assertTrue(ex.getCause().getMessage().contains("method PUT must have a request body"));
-        }
+        client.getImplicit().putOptionalQuery(null);
     }
 
     @Test
     public void putOptionalHeader() throws Exception {
-        try {
-            client.getImplicit().putOptionalHeader(null);
-            fail();
-        } catch (ServiceException ex) {
-            Assert.assertTrue(ex.getCause().getMessage().contains("method PUT must have a request body"));
-        }
+        client.getImplicit().putOptionalHeader(null);
     }
 
     @Test

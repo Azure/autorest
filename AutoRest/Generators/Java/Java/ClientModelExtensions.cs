@@ -84,6 +84,13 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
+        public static bool NeedsSpecialSerialization(this IType type)
+        {
+            var known = type as PrimaryType;
+            return (known != null && (known.Name == "LocalDate" || known.Name == "DateTime" || known.Name == "Byte[]" || known == PrimaryType.ByteArray)) ||
+                type is EnumType || type is CompositeType || type is SequenceType || type is DictionaryType;
+        }
+
         /// <summary>
         /// Simple conversion of the type to string
         /// </summary>
@@ -93,26 +100,21 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
         public static string ToString(this IType type, string reference)
         {
             var known = type as PrimaryType;
-            var enumType = type as EnumType;
-            if (enumType != null || known == PrimaryType.String)
+            if (known != null && known.Name != "LocalDate" && known.Name != "DateTime")
             {
-                return reference;
+                if (known == PrimaryType.ByteArray)
+                {
+                    return "Base64.encodeBase64String(" + reference + ")";
+                }
+                else
+                {
+                    return reference;
+                }
             }
-
-            if (known == PrimaryType.Date)
+            else
             {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "msRest.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
+                return "StringUtils.strip(JacksonConverterBuilder.serialize(" + reference + @"), ""\"""")";
             }
-
-            if (known == PrimaryType.DateTime
-                || known == PrimaryType.ByteArray)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "msRest.serializeObject({0})", reference);
-            }
-
-            return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
         }
 
         /// <summary>

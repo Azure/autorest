@@ -93,6 +93,23 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     classes.Add("com.microsoft.rest.Validator");
                 }
+
+                IEnumerable<ParameterTemplateModel> headerParameters = this.MethodTemplateModels
+                    .SelectMany(m => m.ParameterTemplateModels)
+                    .Where(p => p.Location == ParameterLocation.Header);
+                if (headerParameters.Any(p => p.Type.Name == "LocalDate" ||
+                        p.Type.Name == "DateTime" ||
+                        p.Type is CompositeType || 
+                        p.Type is SequenceType ||
+                        p.Type is DictionaryType))
+                {
+                    classes.Add("org.apache.commons.lang3.StringUtils");
+                    classes.Add("com.microsoft.rest.serializer.JacksonConverterBuilder");
+                }
+                if (headerParameters.Any(p => p.Type == PrimaryType.ByteArray || p.Type.Name == "Byte[]"))
+                {
+                    classes.Add("org.apache.commons.codec.binary.Base64");
+                }
                 return classes.AsEnumerable();
             }
         }

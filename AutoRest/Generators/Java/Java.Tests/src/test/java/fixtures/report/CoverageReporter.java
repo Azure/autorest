@@ -27,9 +27,10 @@ public class CoverageReporter {
         report.put("OptionalArrayHeader", 1);
 
         // Put must contain a body
-        report.put("OptionalImplicitQuery", 1);
-        report.put("OptionalImplicitHeader", 1);
         report.put("OptionalImplicitBody", 1);
+
+        // OkHttp can actually overwrite header "Content-Type"
+        report.put("HeaderParameterProtectedKey", 1);
 
         int total = report.size();
         int hit = 0;

@@ -76,7 +76,15 @@ namespace Microsoft.Rest.Generator.Java
                             parameter.Location.ToString()));
                     }
                     var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
-                    declarationBuilder.Append(parameter.Type.ToString() + " " + declarativeName);
+                    if (parameter.Location == ParameterLocation.Header && parameter.Type.NeedsSpecialSerialization())
+                    {
+                        declarationBuilder.Append("String");
+                    }
+                    else
+                    {
+                        declarationBuilder.Append(parameter.Type.ToString());
+                    }
+                    declarationBuilder.Append(" " + declarativeName);
                     declarations.Add(declarationBuilder.ToString());
                 }
 
@@ -107,7 +115,14 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in ParameterTemplateModels)
                 {
-                    declarations.Add(parameter.Name);
+                    if (parameter.Location == ParameterLocation.Header && parameter.Type.NeedsSpecialSerialization())
+                    {
+                        declarations.Add(parameter.Type.ToString(parameter.Name));
+                    }
+                    else
+                    {
+                        declarations.Add(parameter.Name);
+                    }
                 }
 
                 var declaration = string.Join(", ", declarations);

@@ -127,10 +127,10 @@ public interface HeaderOperations {
         void responseStringAsync(@Header("scenario") String scenario, ServiceResponseCallback cb);
 
         @POST("/header/param/prim/date")
-        Response paramDate(@Header("scenario") String scenario, @Header("value") LocalDate value) throws ServiceException;
+        Response paramDate(@Header("scenario") String scenario, @Header("value") String value) throws ServiceException;
 
         @POST("/header/param/prim/date")
-        void paramDateAsync(@Header("scenario") String scenario, @Header("value") LocalDate value, ServiceResponseCallback cb);
+        void paramDateAsync(@Header("scenario") String scenario, @Header("value") String value, ServiceResponseCallback cb);
 
         @POST("/header/response/prim/date")
         Response responseDate(@Header("scenario") String scenario) throws ServiceException;
@@ -139,10 +139,10 @@ public interface HeaderOperations {
         void responseDateAsync(@Header("scenario") String scenario, ServiceResponseCallback cb);
 
         @POST("/header/param/prim/datetime")
-        Response paramDatetime(@Header("scenario") String scenario, @Header("value") DateTime value) throws ServiceException;
+        Response paramDatetime(@Header("scenario") String scenario, @Header("value") String value) throws ServiceException;
 
         @POST("/header/param/prim/datetime")
-        void paramDatetimeAsync(@Header("scenario") String scenario, @Header("value") DateTime value, ServiceResponseCallback cb);
+        void paramDatetimeAsync(@Header("scenario") String scenario, @Header("value") String value, ServiceResponseCallback cb);
 
         @POST("/header/response/prim/datetime")
         Response responseDatetime(@Header("scenario") String scenario) throws ServiceException;
@@ -151,10 +151,10 @@ public interface HeaderOperations {
         void responseDatetimeAsync(@Header("scenario") String scenario, ServiceResponseCallback cb);
 
         @POST("/header/param/prim/byte")
-        Response paramByte(@Header("scenario") String scenario, @Header("value") byte[] value) throws ServiceException;
+        Response paramByte(@Header("scenario") String scenario, @Header("value") String value) throws ServiceException;
 
         @POST("/header/param/prim/byte")
-        void paramByteAsync(@Header("scenario") String scenario, @Header("value") byte[] value, ServiceResponseCallback cb);
+        void paramByteAsync(@Header("scenario") String scenario, @Header("value") String value, ServiceResponseCallback cb);
 
         @POST("/header/response/prim/byte")
         Response responseByte(@Header("scenario") String scenario) throws ServiceException;
@@ -163,10 +163,10 @@ public interface HeaderOperations {
         void responseByteAsync(@Header("scenario") String scenario, ServiceResponseCallback cb);
 
         @POST("/header/param/prim/enum")
-        Response paramEnum(@Header("scenario") String scenario, @Header("value") GreyscaleColors value) throws ServiceException;
+        Response paramEnum(@Header("scenario") String scenario, @Header("value") String value) throws ServiceException;
 
         @POST("/header/param/prim/enum")
-        void paramEnumAsync(@Header("scenario") String scenario, @Header("value") GreyscaleColors value, ServiceResponseCallback cb);
+        void paramEnumAsync(@Header("scenario") String scenario, @Header("value") String value, ServiceResponseCallback cb);
 
         @POST("/header/response/prim/enum")
         Response responseEnum(@Header("scenario") String scenario) throws ServiceException;
