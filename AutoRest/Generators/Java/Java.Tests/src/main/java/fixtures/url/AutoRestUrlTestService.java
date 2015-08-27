@@ -23,15 +23,31 @@ public interface AutoRestUrlTestService {
 
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path.
+     *
      * @return the globalStringPath value.
      */
     String getGlobalStringPath();
 
     /**
+     * Sets A string value 'globalItemStringPath' that appears in the path.
+     *
+     * @param globalStringPath the globalStringPath value.
+     */
+    void setGlobalStringPath(String globalStringPath);
+
+    /**
      * Gets should contain value null.
+     *
      * @return the globalStringQuery value.
      */
     String getGlobalStringQuery();
+
+    /**
+     * Sets should contain value null.
+     *
+     * @param globalStringQuery the globalStringQuery value.
+     */
+    void setGlobalStringQuery(String globalStringQuery);
 
     /**
      * Gets the Paths object to access its operations.

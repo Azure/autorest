@@ -19,7 +19,6 @@ import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import org.apache.commons.lang3.ArrayUtils;
 import fixtures.bodybyte.models.Error;
 
 public class ByteOperationsImpl implements ByteOperations {
@@ -34,15 +33,15 @@ public class ByteOperationsImpl implements ByteOperations {
     /**
      * Get null byte value
      *
-     * @return the Byte[] object if successful.
+     * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Byte[] getNull() throws ServiceException {
+    public byte[] getNull() throws ServiceException {
         try {
-            ServiceResponse<Byte[]> response = getNullDelegate(service.getNull(), null);
+            ServiceResponse<byte[]> response = getNullDelegate(service.getNull(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Byte[]> response = getNullDelegate(error.getResponse(), error);
+            ServiceResponse<byte[]> response = getNullDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -52,7 +51,7 @@ public class ByteOperationsImpl implements ByteOperations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNullAsync(final ServiceCallback<Byte[]> serviceCallback) {
+    public void getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
         service.getNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -65,9 +64,9 @@ public class ByteOperationsImpl implements ByteOperations {
         });
     }
 
-    private ServiceResponse<Byte[]> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Byte[]>()
-                .register(200, new TypeToken<Byte[]>(){}.getType())
+    private ServiceResponse<byte[]> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<byte[]>()
+                .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -75,15 +74,15 @@ public class ByteOperationsImpl implements ByteOperations {
     /**
      * Get empty byte value ''
      *
-     * @return the Byte[] object if successful.
+     * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Byte[] getEmpty() throws ServiceException {
+    public byte[] getEmpty() throws ServiceException {
         try {
-            ServiceResponse<Byte[]> response = getEmptyDelegate(service.getEmpty(), null);
+            ServiceResponse<byte[]> response = getEmptyDelegate(service.getEmpty(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Byte[]> response = getEmptyDelegate(error.getResponse(), error);
+            ServiceResponse<byte[]> response = getEmptyDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -93,7 +92,7 @@ public class ByteOperationsImpl implements ByteOperations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getEmptyAsync(final ServiceCallback<Byte[]> serviceCallback) {
+    public void getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
         service.getEmptyAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -106,9 +105,9 @@ public class ByteOperationsImpl implements ByteOperations {
         });
     }
 
-    private ServiceResponse<Byte[]> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Byte[]>()
-                .register(200, new TypeToken<Byte[]>(){}.getType())
+    private ServiceResponse<byte[]> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<byte[]>()
+                .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -116,15 +115,15 @@ public class ByteOperationsImpl implements ByteOperations {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
-     * @return the Byte[] object if successful.
+     * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Byte[] getNonAscii() throws ServiceException {
+    public byte[] getNonAscii() throws ServiceException {
         try {
-            ServiceResponse<Byte[]> response = getNonAsciiDelegate(service.getNonAscii(), null);
+            ServiceResponse<byte[]> response = getNonAsciiDelegate(service.getNonAscii(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Byte[]> response = getNonAsciiDelegate(error.getResponse(), error);
+            ServiceResponse<byte[]> response = getNonAsciiDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -134,7 +133,7 @@ public class ByteOperationsImpl implements ByteOperations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNonAsciiAsync(final ServiceCallback<Byte[]> serviceCallback) {
+    public void getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
         service.getNonAsciiAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -147,9 +146,9 @@ public class ByteOperationsImpl implements ByteOperations {
         });
     }
 
-    private ServiceResponse<Byte[]> getNonAsciiDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Byte[]>()
-                .register(200, new TypeToken<Byte[]>(){}.getType())
+    private ServiceResponse<byte[]> getNonAsciiDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<byte[]>()
+                .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -207,15 +206,15 @@ public class ByteOperationsImpl implements ByteOperations {
     /**
      * Get invalid byte value ':::SWAGGER::::'
      *
-     * @return the Byte[] object if successful.
+     * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Byte[] getInvalid() throws ServiceException {
+    public byte[] getInvalid() throws ServiceException {
         try {
-            ServiceResponse<Byte[]> response = getInvalidDelegate(service.getInvalid(), null);
+            ServiceResponse<byte[]> response = getInvalidDelegate(service.getInvalid(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Byte[]> response = getInvalidDelegate(error.getResponse(), error);
+            ServiceResponse<byte[]> response = getInvalidDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -225,7 +224,7 @@ public class ByteOperationsImpl implements ByteOperations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getInvalidAsync(final ServiceCallback<Byte[]> serviceCallback) {
+    public void getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
         service.getInvalidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -238,9 +237,9 @@ public class ByteOperationsImpl implements ByteOperations {
         });
     }
 
-    private ServiceResponse<Byte[]> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Byte[]>()
-                .register(200, new TypeToken<Byte[]>(){}.getType())
+    private ServiceResponse<byte[]> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<byte[]>()
+                .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }

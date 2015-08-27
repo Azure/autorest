@@ -148,7 +148,7 @@ public class PrimitiveTests {
     @Test
     public void getByte() throws Exception {
         ByteWrapper result = client.getPrimitive().getByte();
-        Byte[] expected = new Byte[] {
+        byte[] expected = new byte[] {
                 (byte)255, (byte)254, (byte)253, (byte)252, (byte)0,
                 (byte)250, (byte)249, (byte)248, (byte)247, (byte)246
         };
@@ -158,7 +158,7 @@ public class PrimitiveTests {
     @Test
     public void putByte() throws Exception {
         ByteWrapper body = new ByteWrapper();
-        Byte[] byteArray = new Byte[] {
+        byte[] byteArray = new byte[] {
                 (byte)255, (byte)254, (byte)253, (byte)252, (byte)0,
                 (byte)250, (byte)249, (byte)248, (byte)247, (byte)246
         };

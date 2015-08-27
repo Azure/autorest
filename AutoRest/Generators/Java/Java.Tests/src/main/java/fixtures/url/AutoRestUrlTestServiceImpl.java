@@ -32,7 +32,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     private String globalStringPath;
 
     /**
-     * A string value 'globalItemStringPath' that appears in the path
+     * Gets A string value 'globalItemStringPath' that appears in the path
      *
      * @return the globalStringPath value.
      */
@@ -40,15 +40,33 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
         return this.globalStringPath;
     }
 
+    /**
+     * Sets A string value 'globalItemStringPath' that appears in the path
+     *
+     * @param globalStringPath the globalStringPath value.
+     */
+    public void setGlobalStringPath(String globalStringPath) {
+        this.globalStringPath = globalStringPath;
+    }
+
     private String globalStringQuery;
 
     /**
-     * should contain value null
+     * Gets should contain value null
      *
      * @return the globalStringQuery value.
      */
     public String getGlobalStringQuery() {
         return this.globalStringQuery;
+    }
+
+    /**
+     * Sets should contain value null
+     *
+     * @param globalStringQuery the globalStringQuery value.
+     */
+    public void setGlobalStringQuery(String globalStringQuery) {
+        this.globalStringQuery = globalStringQuery;
     }
 
     private Paths paths;

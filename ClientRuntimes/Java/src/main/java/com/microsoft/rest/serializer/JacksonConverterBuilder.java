@@ -8,19 +8,17 @@
 package com.microsoft.rest.serializer;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.gson.reflect.TypeToken;
-import com.microsoft.rest.ServiceException;
-import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 import retrofit.converter.JacksonConverter;
 
-import java.io.IOException;
 import java.io.StringWriter;
-import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Inner callback used to merge both successful and failed responses into one
@@ -63,10 +61,23 @@ public class JacksonConverterBuilder {
         }
     }
 
+    public static <T> String serializeRaw(T object) {
+        if (object == null) return null;
+        return StringUtils.strip(serialize(object), "\"");
+    }
+
+    public static <E> String serializeList(List<E> collection, CollectionFormat format) {
+        if (collection == null) return null;
+        List<String> serialized = new ArrayList<String>();
+        for (E element : collection) {
+            String raw = serializeRaw(element);
+            serialized.add(raw != null ? raw : "");
+        }
+        return String.join(format.getDelimeter(), serialized);
+    }
+
     @SuppressWarnings("unchecked")
     public static <T> T deserialize(String value) {
-        Byte[] a = new Byte[] {(byte) 255};
-        Base64.encodeBase64String(a);
         if (value == null) return null;
         try {
             return (T)getObjectMapper().readValue(value, new TypeToken<T>(){}.getRawType());

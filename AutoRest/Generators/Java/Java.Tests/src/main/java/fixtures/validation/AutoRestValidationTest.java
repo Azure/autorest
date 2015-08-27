@@ -33,15 +33,31 @@ public interface AutoRestValidationTest {
 
     /**
      * Gets Subscription ID..
+     *
      * @return the subscriptionId value.
      */
     String getSubscriptionId();
 
     /**
+     * Sets Subscription ID..
+     *
+     * @param subscriptionId the subscriptionId value.
+     */
+    void setSubscriptionId(String subscriptionId);
+
+    /**
      * Gets Required string following pattern \d{2}-\d{2}-\d{4}.
+     *
      * @return the apiVersion value.
      */
     String getApiVersion();
+
+    /**
+     * Sets Required string following pattern \d{2}-\d{2}-\d{4}.
+     *
+     * @param apiVersion the apiVersion value.
+     */
+    void setApiVersion(String apiVersion);
 
     /**
      * The interface defining all the services for AutoRestValidationTest to be

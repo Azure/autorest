@@ -30,9 +30,17 @@ public interface @Model.Name {
 @EmptyLine
 @:    /**
 @:     * Gets @(param.Documentation).
+@:     *
 @:     * @@return the @(param.Name) value.
 @:     */
 @:    @param.Type get@(param.Name.ToPascalCase())();
+@EmptyLine
+@:    /**
+@:     * Sets @(param.Documentation).
+@:     *
+@:     * @@param @(param.Name.ToCamelCase()) the @(param.Name) value.
+@:     */
+@:    void set@(param.Name.ToPascalCase())(@(param.Type) @(param.Name.ToCamelCase()));
 }
 
 @foreach (var operation in Model.Operations)

@@ -53,7 +53,7 @@ public class PolymorphismrecursiveTests {
         sib2.setAge(105);
         sib2.setBirthday(new DateTime(1900, 1, 5, 1, 0, 0, DateTimeZone.UTC));
         sib2.setLength(10.0);
-        sib2.setPicture(new Byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
+        sib2.setPicture(new byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
         sib2.setSpecies("dangerous");
         sib2.setSiblings(new ArrayList<Fish>());
         body.getSiblings().add(sib2);
@@ -78,7 +78,7 @@ public class PolymorphismrecursiveTests {
         sib112.setAge(105);
         sib112.setBirthday(new DateTime(1900, 1, 5, 1, 0, 0, DateTimeZone.UTC));
         sib112.setLength(10.0);
-        sib112.setPicture(new Byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
+        sib112.setPicture(new byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
         sib112.setSpecies("dangerous");
         sib11.getSiblings().add(sib112);
 

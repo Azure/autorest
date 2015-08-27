@@ -99,6 +99,7 @@ task installforever(type: Exec, dependsOn: 'npmrestore') {
 }
 
 task runserver(type: Exec, dependsOn: 'installforever') {
+    environment 'PORT', '3002'
     workingDir "${projectDir}/../../../TestServer/server"
     commandLine 'cmd', '/c', 'forever', 'start', 'startup/www.js'
 }

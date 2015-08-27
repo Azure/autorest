@@ -115,58 +115,58 @@ public interface Paths {
         void stringNullAsync(@Path("stringPath") String stringPath, ServiceResponseCallback cb);
 
         @GET("/paths/enum/green%20color/{enumPath}")
-        Response enumValid(@Path("enumPath") UriColor enumPath) throws ServiceException;
+        Response enumValid(@Path("enumPath") String enumPath) throws ServiceException;
 
         @GET("/paths/enum/green%20color/{enumPath}")
-        void enumValidAsync(@Path("enumPath") UriColor enumPath, ServiceResponseCallback cb);
+        void enumValidAsync(@Path("enumPath") String enumPath, ServiceResponseCallback cb);
 
         @GET("/paths/string/null/{enumPath}")
-        Response enumNull(@Path("enumPath") UriColor enumPath) throws ServiceException;
+        Response enumNull(@Path("enumPath") String enumPath) throws ServiceException;
 
         @GET("/paths/string/null/{enumPath}")
-        void enumNullAsync(@Path("enumPath") UriColor enumPath, ServiceResponseCallback cb);
+        void enumNullAsync(@Path("enumPath") String enumPath, ServiceResponseCallback cb);
 
         @GET("/paths/byte/multibyte/{bytePath}")
-        Response byteMultiByte(@Path("bytePath") byte[] bytePath) throws ServiceException;
+        Response byteMultiByte(@Path("bytePath") String bytePath) throws ServiceException;
 
         @GET("/paths/byte/multibyte/{bytePath}")
-        void byteMultiByteAsync(@Path("bytePath") byte[] bytePath, ServiceResponseCallback cb);
+        void byteMultiByteAsync(@Path("bytePath") String bytePath, ServiceResponseCallback cb);
 
         @GET("/paths/byte/empty/{bytePath}")
-        Response byteEmpty(@Path("bytePath") byte[] bytePath) throws ServiceException;
+        Response byteEmpty(@Path("bytePath") String bytePath) throws ServiceException;
 
         @GET("/paths/byte/empty/{bytePath}")
-        void byteEmptyAsync(@Path("bytePath") byte[] bytePath, ServiceResponseCallback cb);
+        void byteEmptyAsync(@Path("bytePath") String bytePath, ServiceResponseCallback cb);
 
         @GET("/paths/byte/null/{bytePath}")
-        Response byteNull(@Path("bytePath") byte[] bytePath) throws ServiceException;
+        Response byteNull(@Path("bytePath") String bytePath) throws ServiceException;
 
         @GET("/paths/byte/null/{bytePath}")
-        void byteNullAsync(@Path("bytePath") byte[] bytePath, ServiceResponseCallback cb);
+        void byteNullAsync(@Path("bytePath") String bytePath, ServiceResponseCallback cb);
 
         @GET("/paths/date/2012-01-01/{datePath}")
-        Response dateValid(@Path("datePath") LocalDate datePath) throws ServiceException;
+        Response dateValid(@Path("datePath") String datePath) throws ServiceException;
 
         @GET("/paths/date/2012-01-01/{datePath}")
-        void dateValidAsync(@Path("datePath") LocalDate datePath, ServiceResponseCallback cb);
+        void dateValidAsync(@Path("datePath") String datePath, ServiceResponseCallback cb);
 
         @GET("/paths/date/null/{datePath}")
-        Response dateNull(@Path("datePath") LocalDate datePath) throws ServiceException;
+        Response dateNull(@Path("datePath") String datePath) throws ServiceException;
 
         @GET("/paths/date/null/{datePath}")
-        void dateNullAsync(@Path("datePath") LocalDate datePath, ServiceResponseCallback cb);
+        void dateNullAsync(@Path("datePath") String datePath, ServiceResponseCallback cb);
 
         @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-        Response dateTimeValid(@Path("dateTimePath") DateTime dateTimePath) throws ServiceException;
+        Response dateTimeValid(@Path("dateTimePath") String dateTimePath) throws ServiceException;
 
         @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-        void dateTimeValidAsync(@Path("dateTimePath") DateTime dateTimePath, ServiceResponseCallback cb);
+        void dateTimeValidAsync(@Path("dateTimePath") String dateTimePath, ServiceResponseCallback cb);
 
         @GET("/paths/datetime/null/{dateTimePath}")
-        Response dateTimeNull(@Path("dateTimePath") DateTime dateTimePath) throws ServiceException;
+        Response dateTimeNull(@Path("dateTimePath") String dateTimePath) throws ServiceException;
 
         @GET("/paths/datetime/null/{dateTimePath}")
-        void dateTimeNullAsync(@Path("dateTimePath") DateTime dateTimePath, ServiceResponseCallback cb);
+        void dateTimeNullAsync(@Path("dateTimePath") String dateTimePath, ServiceResponseCallback cb);
 
     }
     /**

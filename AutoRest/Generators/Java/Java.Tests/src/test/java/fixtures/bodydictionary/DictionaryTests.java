@@ -366,11 +366,11 @@ public class DictionaryTests {
 
     @Test
     public void getByteValid() throws Exception {
-        Map<String, Byte[]> result = client.getDictionary().getByteValid();
-        Map<String, Byte[]> expected = new HashMap<String, Byte[]>();
-        expected.put("0", new Byte[] {(byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFA});
-        expected.put("1", new Byte[] {(byte)0x01, (byte)0x02, (byte)0x03});
-        expected.put("2", new Byte[] {(byte)0x25, (byte)0x29, (byte)0x43});
+        Map<String, byte[]> result = client.getDictionary().getByteValid();
+        Map<String, byte[]> expected = new HashMap<String, byte[]>();
+        expected.put("0", new byte[] {(byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFA});
+        expected.put("1", new byte[] {(byte)0x01, (byte)0x02, (byte)0x03});
+        expected.put("2", new byte[] {(byte)0x25, (byte)0x29, (byte)0x43});
         Assert.assertArrayEquals(expected.get("0"), result.get("0"));
         Assert.assertArrayEquals(expected.get("1"), result.get("1"));
         Assert.assertArrayEquals(expected.get("2"), result.get("2"));
@@ -378,16 +378,16 @@ public class DictionaryTests {
 
     @Test
     public void putByteValid() throws Exception {
-        Map<String, Byte[]> testdata = new HashMap<String, Byte[]>();
-        testdata.put("0", new Byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFA});
-        testdata.put("1", new Byte[]{(byte) 0x01, (byte) 0x02, (byte) 0x03});
-        testdata.put("2", new Byte[]{(byte) 0x25, (byte) 0x29, (byte) 0x43});
+        Map<String, byte[]> testdata = new HashMap<String, byte[]>();
+        testdata.put("0", new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFA});
+        testdata.put("1", new byte[]{(byte) 0x01, (byte) 0x02, (byte) 0x03});
+        testdata.put("2", new byte[]{(byte) 0x25, (byte) 0x29, (byte) 0x43});
         client.getDictionary().putByteValid(testdata);
     }
 
     @Test
     public void getByteInvalidNull() throws Exception {
-        Map<String, Byte[]> result = client.getDictionary().getByteInvalidNull();
+        Map<String, byte[]> result = client.getDictionary().getByteInvalidNull();
         Assert.assertNull(result.get("1"));
     }
 

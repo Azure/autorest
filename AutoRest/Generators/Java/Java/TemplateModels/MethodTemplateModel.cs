@@ -76,7 +76,8 @@ namespace Microsoft.Rest.Generator.Java
                             parameter.Location.ToString()));
                     }
                     var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
-                    if (parameter.Location == ParameterLocation.Header && parameter.Type.NeedsSpecialSerialization())
+                    if ((parameter.Location != ParameterLocation.Body)
+                        && parameter.Type.NeedsSpecialSerialization())
                     {
                         declarationBuilder.Append("String");
                     }
@@ -115,9 +116,10 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in ParameterTemplateModels)
                 {
-                    if (parameter.Location == ParameterLocation.Header && parameter.Type.NeedsSpecialSerialization())
+                    if ((parameter.Location != ParameterLocation.Body)
+                         && parameter.Type.NeedsSpecialSerialization())
                     {
-                        declarations.Add(parameter.Type.ToString(parameter.Name));
+                        declarations.Add(parameter.ToString(parameter.Name));
                     }
                     else
                     {
@@ -273,15 +275,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     sb.Append("return ");
                 }
-                string value = "response.getBody()";
-                if (this.ReturnTypeString == "byte[]")
-                {
-                    sb.Append("ArrayUtils.toPrimitive(").Append(value).Append(");");
-                }
-                else
-                {
-                    sb.Append(value).Append(";");
-                }
+                sb.Append("response.getBody();");
                 return sb.ToString();
             }
         }

@@ -320,11 +320,11 @@ public class ArrayTests {
 
     @Test
     public void getByteValid() throws Exception {
-        List<Byte[]> result = client.getArray().getByteValid();
-        Object[] expected = new Byte[][] {
-                new Byte[] {(byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFA},
-                new Byte[] {(byte)0x01, (byte)0x02, (byte)0x03},
-                new Byte[] {(byte)0x25, (byte)0x29, (byte)0x43}
+        List<byte[]> result = client.getArray().getByteValid();
+        Object[] expected = new byte[][] {
+                new byte[] {(byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFA},
+                new byte[] {(byte)0x01, (byte)0x02, (byte)0x03},
+                new byte[] {(byte)0x25, (byte)0x29, (byte)0x43}
         };
         Assert.assertArrayEquals(expected, result.toArray());
     }
@@ -332,16 +332,16 @@ public class ArrayTests {
     @Test
     public void putByteValid() throws Exception {
         client.getArray().putByteValid(Arrays.asList(
-                new Byte[] {(byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFA},
-                new Byte[] {(byte)0x01, (byte)0x02, (byte)0x03},
-                new Byte[] {(byte)0x25, (byte)0x29, (byte)0x43}
+                new byte[] {(byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFA},
+                new byte[] {(byte)0x01, (byte)0x02, (byte)0x03},
+                new byte[] {(byte)0x25, (byte)0x29, (byte)0x43}
         ));
     }
 
     @Test
     public void getByteInvalidNull() throws Exception {
         try {
-            List<Byte[]> result = client.getArray().getByteInvalidNull();
+            List<byte[]> result = client.getArray().getByteInvalidNull();
         } catch (ServiceException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));

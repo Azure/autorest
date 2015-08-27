@@ -256,10 +256,10 @@ public interface Array {
         void getByteValidAsync(ServiceResponseCallback cb);
 
         @PUT("/array/prim/byte/valid")
-        Response putByteValid(@Body List<Byte[]> arrayBody) throws ServiceException;
+        Response putByteValid(@Body List<byte[]> arrayBody) throws ServiceException;
 
         @PUT("/array/prim/byte/valid")
-        void putByteValidAsync(@Body List<Byte[]> arrayBody, ServiceResponseCallback cb);
+        void putByteValidAsync(@Body List<byte[]> arrayBody, ServiceResponseCallback cb);
 
         @GET("/array/prim/byte/invalidnull")
         Response getByteInvalidNull() throws ServiceException;
@@ -933,10 +933,10 @@ public interface Array {
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
      * 43)] with each item encoded in base64
      *
-     * @return the List&lt;Byte[]&gt; object if successful.
+     * @return the List&lt;byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    List<Byte[]> getByteValid() throws ServiceException;
+    List<byte[]> getByteValid() throws ServiceException;
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
@@ -944,34 +944,34 @@ public interface Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getByteValidAsync(final ServiceCallback<List<Byte[]>> serviceCallback);
+    void getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
      * with each elementencoded in base 64
      *
-     * @param arrayBody the List&lt;Byte[]&gt; value
+     * @param arrayBody the List&lt;byte[]&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putByteValid(List<Byte[]> arrayBody) throws ServiceException;
+    void putByteValid(List<byte[]> arrayBody) throws ServiceException;
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
      * with each elementencoded in base 64
      *
-     * @param arrayBody the List&lt;Byte[]&gt; value
+     * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putByteValidAsync(List<Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
+    void putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64
      * encoded
      *
-     * @return the List&lt;Byte[]&gt; object if successful.
+     * @return the List&lt;byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    List<Byte[]> getByteInvalidNull() throws ServiceException;
+    List<byte[]> getByteInvalidNull() throws ServiceException;
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64
@@ -979,7 +979,7 @@ public interface Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getByteInvalidNullAsync(final ServiceCallback<List<Byte[]>> serviceCallback);
+    void getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get array of complex type null value

@@ -1619,15 +1619,15 @@ public class ArrayImpl implements Array {
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
      * 43)] with each item encoded in base64
      *
-     * @return the List&lt;Byte[]&gt; object if successful.
+     * @return the List&lt;byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public List<Byte[]> getByteValid() throws ServiceException {
+    public List<byte[]> getByteValid() throws ServiceException {
         try {
-            ServiceResponse<List<Byte[]>> response = getByteValidDelegate(service.getByteValid(), null);
+            ServiceResponse<List<byte[]>> response = getByteValidDelegate(service.getByteValid(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<List<Byte[]>> response = getByteValidDelegate(error.getResponse(), error);
+            ServiceResponse<List<byte[]>> response = getByteValidDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1638,7 +1638,7 @@ public class ArrayImpl implements Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getByteValidAsync(final ServiceCallback<List<Byte[]>> serviceCallback) {
+    public void getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
         service.getByteValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1651,9 +1651,9 @@ public class ArrayImpl implements Array {
         });
     }
 
-    private ServiceResponse<List<Byte[]>> getByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<List<Byte[]>>()
-                .register(200, new TypeToken<List<Byte[]>>(){}.getType())
+    private ServiceResponse<List<byte[]>> getByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<byte[]>>()
+                .register(200, new TypeToken<List<byte[]>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1662,10 +1662,10 @@ public class ArrayImpl implements Array {
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
      * with each elementencoded in base 64
      *
-     * @param arrayBody the List&lt;Byte[]&gt; value
+     * @param arrayBody the List&lt;byte[]&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putByteValid(List<Byte[]> arrayBody) throws ServiceException {
+    public void putByteValid(List<byte[]> arrayBody) throws ServiceException {
         if (arrayBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
@@ -1684,10 +1684,10 @@ public class ArrayImpl implements Array {
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
      * with each elementencoded in base 64
      *
-     * @param arrayBody the List&lt;Byte[]&gt; value
+     * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putByteValidAsync(List<Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public void putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
@@ -1716,15 +1716,15 @@ public class ArrayImpl implements Array {
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64
      * encoded
      *
-     * @return the List&lt;Byte[]&gt; object if successful.
+     * @return the List&lt;byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public List<Byte[]> getByteInvalidNull() throws ServiceException {
+    public List<byte[]> getByteInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<List<Byte[]>> response = getByteInvalidNullDelegate(service.getByteInvalidNull(), null);
+            ServiceResponse<List<byte[]>> response = getByteInvalidNullDelegate(service.getByteInvalidNull(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<List<Byte[]>> response = getByteInvalidNullDelegate(error.getResponse(), error);
+            ServiceResponse<List<byte[]>> response = getByteInvalidNullDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1735,7 +1735,7 @@ public class ArrayImpl implements Array {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getByteInvalidNullAsync(final ServiceCallback<List<Byte[]>> serviceCallback) {
+    public void getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
         service.getByteInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1748,9 +1748,9 @@ public class ArrayImpl implements Array {
         });
     }
 
-    private ServiceResponse<List<Byte[]>> getByteInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<List<Byte[]>>()
-                .register(200, new TypeToken<List<Byte[]>>(){}.getType())
+    private ServiceResponse<List<byte[]>> getByteInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<List<byte[]>>()
+                .register(200, new TypeToken<List<byte[]>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }

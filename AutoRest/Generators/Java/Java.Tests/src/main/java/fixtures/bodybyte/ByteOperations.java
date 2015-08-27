@@ -62,47 +62,47 @@ public interface ByteOperations {
     /**
      * Get null byte value
      *
-     * @return the Byte[] object if successful.
+     * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Byte[] getNull() throws ServiceException;
+    byte[] getNull() throws ServiceException;
 
     /**
      * Get null byte value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getNullAsync(final ServiceCallback<Byte[]> serviceCallback);
+    void getNullAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get empty byte value ''
      *
-     * @return the Byte[] object if successful.
+     * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Byte[] getEmpty() throws ServiceException;
+    byte[] getEmpty() throws ServiceException;
 
     /**
      * Get empty byte value ''
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getEmptyAsync(final ServiceCallback<Byte[]> serviceCallback);
+    void getEmptyAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
-     * @return the Byte[] object if successful.
+     * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Byte[] getNonAscii() throws ServiceException;
+    byte[] getNonAscii() throws ServiceException;
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getNonAsciiAsync(final ServiceCallback<Byte[]> serviceCallback);
+    void getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
@@ -123,16 +123,16 @@ public interface ByteOperations {
     /**
      * Get invalid byte value ':::SWAGGER::::'
      *
-     * @return the Byte[] object if successful.
+     * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Byte[] getInvalid() throws ServiceException;
+    byte[] getInvalid() throws ServiceException;
 
     /**
      * Get invalid byte value ':::SWAGGER::::'
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getInvalidAsync(final ServiceCallback<Byte[]> serviceCallback);
+    void getInvalidAsync(final ServiceCallback<byte[]> serviceCallback);
 
 }

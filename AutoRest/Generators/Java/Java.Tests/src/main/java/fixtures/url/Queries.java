@@ -146,94 +146,94 @@ public interface Queries {
         void stringNullAsync(@Query("stringQuery") String stringQuery, ServiceResponseCallback cb);
 
         @GET("/queries/enum/green%20color")
-        Response enumValid(@Query("enumQuery") UriColor enumQuery) throws ServiceException;
+        Response enumValid(@Query("enumQuery") String enumQuery) throws ServiceException;
 
         @GET("/queries/enum/green%20color")
-        void enumValidAsync(@Query("enumQuery") UriColor enumQuery, ServiceResponseCallback cb);
+        void enumValidAsync(@Query("enumQuery") String enumQuery, ServiceResponseCallback cb);
 
         @GET("/queries/enum/null")
-        Response enumNull(@Query("enumQuery") UriColor enumQuery) throws ServiceException;
+        Response enumNull(@Query("enumQuery") String enumQuery) throws ServiceException;
 
         @GET("/queries/enum/null")
-        void enumNullAsync(@Query("enumQuery") UriColor enumQuery, ServiceResponseCallback cb);
+        void enumNullAsync(@Query("enumQuery") String enumQuery, ServiceResponseCallback cb);
 
         @GET("/queries/byte/multibyte")
-        Response byteMultiByte(@Query("byteQuery") Byte[] byteQuery) throws ServiceException;
+        Response byteMultiByte(@Query("byteQuery") String byteQuery) throws ServiceException;
 
         @GET("/queries/byte/multibyte")
-        void byteMultiByteAsync(@Query("byteQuery") Byte[] byteQuery, ServiceResponseCallback cb);
+        void byteMultiByteAsync(@Query("byteQuery") String byteQuery, ServiceResponseCallback cb);
 
         @GET("/queries/byte/empty")
-        Response byteEmpty(@Query("byteQuery") Byte[] byteQuery) throws ServiceException;
+        Response byteEmpty(@Query("byteQuery") String byteQuery) throws ServiceException;
 
         @GET("/queries/byte/empty")
-        void byteEmptyAsync(@Query("byteQuery") Byte[] byteQuery, ServiceResponseCallback cb);
+        void byteEmptyAsync(@Query("byteQuery") String byteQuery, ServiceResponseCallback cb);
 
         @GET("/queries/byte/null")
-        Response byteNull(@Query("byteQuery") Byte[] byteQuery) throws ServiceException;
+        Response byteNull(@Query("byteQuery") String byteQuery) throws ServiceException;
 
         @GET("/queries/byte/null")
-        void byteNullAsync(@Query("byteQuery") Byte[] byteQuery, ServiceResponseCallback cb);
+        void byteNullAsync(@Query("byteQuery") String byteQuery, ServiceResponseCallback cb);
 
         @GET("/queries/date/2012-01-01")
-        Response dateValid(@Query("dateQuery") LocalDate dateQuery) throws ServiceException;
+        Response dateValid(@Query("dateQuery") String dateQuery) throws ServiceException;
 
         @GET("/queries/date/2012-01-01")
-        void dateValidAsync(@Query("dateQuery") LocalDate dateQuery, ServiceResponseCallback cb);
+        void dateValidAsync(@Query("dateQuery") String dateQuery, ServiceResponseCallback cb);
 
         @GET("/queries/date/null")
-        Response dateNull(@Query("dateQuery") LocalDate dateQuery) throws ServiceException;
+        Response dateNull(@Query("dateQuery") String dateQuery) throws ServiceException;
 
         @GET("/queries/date/null")
-        void dateNullAsync(@Query("dateQuery") LocalDate dateQuery, ServiceResponseCallback cb);
+        void dateNullAsync(@Query("dateQuery") String dateQuery, ServiceResponseCallback cb);
 
         @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-        Response dateTimeValid(@Query("dateTimeQuery") DateTime dateTimeQuery) throws ServiceException;
+        Response dateTimeValid(@Query("dateTimeQuery") String dateTimeQuery) throws ServiceException;
 
         @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-        void dateTimeValidAsync(@Query("dateTimeQuery") DateTime dateTimeQuery, ServiceResponseCallback cb);
+        void dateTimeValidAsync(@Query("dateTimeQuery") String dateTimeQuery, ServiceResponseCallback cb);
 
         @GET("/queries/datetime/null")
-        Response dateTimeNull(@Query("dateTimeQuery") DateTime dateTimeQuery) throws ServiceException;
+        Response dateTimeNull(@Query("dateTimeQuery") String dateTimeQuery) throws ServiceException;
 
         @GET("/queries/datetime/null")
-        void dateTimeNullAsync(@Query("dateTimeQuery") DateTime dateTimeQuery, ServiceResponseCallback cb);
+        void dateTimeNullAsync(@Query("dateTimeQuery") String dateTimeQuery, ServiceResponseCallback cb);
 
         @GET("/queries/array/csv/string/valid")
-        Response arrayStringCsvValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+        Response arrayStringCsvValid(@Query("arrayQuery") String arrayQuery) throws ServiceException;
 
         @GET("/queries/array/csv/string/valid")
-        void arrayStringCsvValidAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceResponseCallback cb);
+        void arrayStringCsvValidAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
 
         @GET("/queries/array/csv/string/null")
-        Response arrayStringCsvNull(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+        Response arrayStringCsvNull(@Query("arrayQuery") String arrayQuery) throws ServiceException;
 
         @GET("/queries/array/csv/string/null")
-        void arrayStringCsvNullAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceResponseCallback cb);
+        void arrayStringCsvNullAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
 
         @GET("/queries/array/csv/string/empty")
-        Response arrayStringCsvEmpty(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+        Response arrayStringCsvEmpty(@Query("arrayQuery") String arrayQuery) throws ServiceException;
 
         @GET("/queries/array/csv/string/empty")
-        void arrayStringCsvEmptyAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceResponseCallback cb);
+        void arrayStringCsvEmptyAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
 
         @GET("/queries/array/ssv/string/valid")
-        Response arrayStringSsvValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+        Response arrayStringSsvValid(@Query("arrayQuery") String arrayQuery) throws ServiceException;
 
         @GET("/queries/array/ssv/string/valid")
-        void arrayStringSsvValidAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceResponseCallback cb);
+        void arrayStringSsvValidAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
 
         @GET("/queries/array/tsv/string/valid")
-        Response arrayStringTsvValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+        Response arrayStringTsvValid(@Query("arrayQuery") String arrayQuery) throws ServiceException;
 
         @GET("/queries/array/tsv/string/valid")
-        void arrayStringTsvValidAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceResponseCallback cb);
+        void arrayStringTsvValidAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
 
         @GET("/queries/array/pipes/string/valid")
-        Response arrayStringPipesValid(@Query("arrayQuery") List<String> arrayQuery) throws ServiceException;
+        Response arrayStringPipesValid(@Query("arrayQuery") String arrayQuery) throws ServiceException;
 
         @GET("/queries/array/pipes/string/valid")
-        void arrayStringPipesValidAsync(@Query("arrayQuery") List<String> arrayQuery, ServiceResponseCallback cb);
+        void arrayStringPipesValidAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
 
     }
     /**
@@ -578,7 +578,7 @@ public interface Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteMultiByte(Byte[] byteQuery) throws ServiceException;
+    void byteMultiByte(byte[] byteQuery) throws ServiceException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -586,7 +586,7 @@ public interface Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void byteMultiByteAsync(Byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    void byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '' as byte array
@@ -594,7 +594,7 @@ public interface Queries {
      * @param byteQuery '' as byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteEmpty(Byte[] byteQuery) throws ServiceException;
+    void byteEmpty(byte[] byteQuery) throws ServiceException;
 
     /**
      * Get '' as byte array
@@ -602,7 +602,7 @@ public interface Queries {
      * @param byteQuery '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void byteEmptyAsync(Byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    void byteEmptyAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as byte array (no query parameters in uri)
@@ -610,7 +610,7 @@ public interface Queries {
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteNull(Byte[] byteQuery) throws ServiceException;
+    void byteNull(byte[] byteQuery) throws ServiceException;
 
     /**
      * Get null as byte array (no query parameters in uri)
@@ -618,7 +618,7 @@ public interface Queries {
      * @param byteQuery null as byte array (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void byteNullAsync(Byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    void byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01' as date

@@ -21,10 +21,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
-import org.apache.commons.lang3.ArrayUtils;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.Error;
-import org.apache.commons.lang3.StringUtils;
 import com.microsoft.rest.serializer.JacksonConverterBuilder;
 import org.apache.commons.codec.binary.Base64;
 
@@ -863,7 +861,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter value is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramDateDelegate(service.paramDate(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\"")), null);
+            ServiceResponse<Void> response = paramDateDelegate(service.paramDate(scenario, JacksonConverterBuilder.serializeRaw(value)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = paramDateDelegate(error.getResponse(), error);
@@ -888,7 +886,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
         }
-        service.paramDateAsync(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\""), new ServiceResponseCallback() {
+        service.paramDateAsync(scenario, JacksonConverterBuilder.serializeRaw(value), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -976,7 +974,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter value is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramDatetimeDelegate(service.paramDatetime(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\"")), null);
+            ServiceResponse<Void> response = paramDatetimeDelegate(service.paramDatetime(scenario, JacksonConverterBuilder.serializeRaw(value)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = paramDatetimeDelegate(error.getResponse(), error);
@@ -1002,7 +1000,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
         }
-        service.paramDatetimeAsync(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\""), new ServiceResponseCallback() {
+        service.paramDatetimeAsync(scenario, JacksonConverterBuilder.serializeRaw(value), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1199,7 +1197,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramEnumDelegate(service.paramEnum(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\"")), null);
+            ServiceResponse<Void> response = paramEnumDelegate(service.paramEnum(scenario, JacksonConverterBuilder.serializeRaw(value)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = paramEnumDelegate(error.getResponse(), error);
@@ -1220,7 +1218,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
         }
-        service.paramEnumAsync(scenario, StringUtils.strip(JacksonConverterBuilder.serialize(value), "\""), new ServiceResponseCallback() {
+        service.paramEnumAsync(scenario, JacksonConverterBuilder.serializeRaw(value), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {

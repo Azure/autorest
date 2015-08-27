@@ -274,10 +274,10 @@ public interface Dictionary {
         void getByteValidAsync(ServiceResponseCallback cb);
 
         @PUT("/dictionary/prim/byte/valid")
-        Response putByteValid(@Body Map<String, Byte[]> arrayBody) throws ServiceException;
+        Response putByteValid(@Body Map<String, byte[]> arrayBody) throws ServiceException;
 
         @PUT("/dictionary/prim/byte/valid")
-        void putByteValidAsync(@Body Map<String, Byte[]> arrayBody, ServiceResponseCallback cb);
+        void putByteValidAsync(@Body Map<String, byte[]> arrayBody, ServiceResponseCallback cb);
 
         @GET("/dictionary/prim/byte/invalidnull")
         Response getByteInvalidNull() throws ServiceException;
@@ -1008,10 +1008,10 @@ public interface Dictionary {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
      * "2": hex (25, 29, 43)} with each item encoded in base64
      *
-     * @return the Map&lt;String, Byte[]&gt; object if successful.
+     * @return the Map&lt;String, byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, Byte[]> getByteValid() throws ServiceException;
+    Map<String, byte[]> getByteValid() throws ServiceException;
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
@@ -1019,34 +1019,34 @@ public interface Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getByteValidAsync(final ServiceCallback<Map<String, Byte[]>> serviceCallback);
+    void getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback);
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
      * "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
-     * @param arrayBody the Map&lt;String, Byte[]&gt; value
+     * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putByteValid(Map<String, Byte[]> arrayBody) throws ServiceException;
+    void putByteValid(Map<String, byte[]> arrayBody) throws ServiceException;
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
      * "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
-     * @param arrayBody the Map&lt;String, Byte[]&gt; value
+     * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putByteValidAsync(Map<String, Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
+    void putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
      * first item base64 encoded
      *
-     * @return the Map&lt;String, Byte[]&gt; object if successful.
+     * @return the Map&lt;String, byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, Byte[]> getByteInvalidNull() throws ServiceException;
+    Map<String, byte[]> getByteInvalidNull() throws ServiceException;
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
@@ -1054,7 +1054,7 @@ public interface Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getByteInvalidNullAsync(final ServiceCallback<Map<String, Byte[]>> serviceCallback);
+    void getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback);
 
     /**
      * Get dictionary of complex type null value

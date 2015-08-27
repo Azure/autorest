@@ -43,7 +43,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     private String subscriptionId;
 
     /**
-     * Subscription ID.
+     * Gets Subscription ID.
      *
      * @return the subscriptionId value.
      */
@@ -51,15 +51,33 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         return this.subscriptionId;
     }
 
+    /**
+     * Sets Subscription ID.
+     *
+     * @param subscriptionId the subscriptionId value.
+     */
+    public void setSubscriptionId(String subscriptionId) {
+        this.subscriptionId = subscriptionId;
+    }
+
     private String apiVersion;
 
     /**
-     * Required string following pattern \d{2}-\d{2}-\d{4}
+     * Gets Required string following pattern \d{2}-\d{2}-\d{4}
      *
      * @return the apiVersion value.
      */
     public String getApiVersion() {
         return this.apiVersion;
+    }
+
+    /**
+     * Sets Required string following pattern \d{2}-\d{2}-\d{4}
+     *
+     * @param apiVersion the apiVersion value.
+     */
+    public void setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
     }
 
     /**

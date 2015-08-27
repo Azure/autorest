@@ -18,14 +18,14 @@ public class ByteWrapper {
     /**
      * The field property.
      */
-    private Byte[] field;
+    private byte[] field;
 
     /**
      * Get the field value.
      *
      * @return the field value
      */ 
-    public Byte[] getField() {
+    public byte[] getField() {
         return this.field;
     }
 
@@ -34,7 +34,7 @@ public class ByteWrapper {
      *
      * @param field the field value to set
      */
-    public void setField(Byte[] field) {
+    public void setField(byte[] field) {
         this.field = field;
     }
 

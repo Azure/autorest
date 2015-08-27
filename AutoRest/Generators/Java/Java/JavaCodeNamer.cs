@@ -280,10 +280,6 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     primaryType.Name = "Boolean";
                 }
-                else if (type.Name == "byte[]")
-                {
-                    primaryType.Name = "Byte[]";
-                }
                 else if (type.Name == "double")
                 {
                     primaryType.Name = "Double";
@@ -298,7 +294,7 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 else
                 {
-                    primaryType.Name = type.Name;
+                    return type;
                 }
                 return primaryType;
             }
@@ -354,11 +350,6 @@ namespace Microsoft.Rest.Generator.Java
                 primaryType.Name == "Period")
             {
                 return "java.time.Period";
-            }
-            else if (primaryType == PrimaryType.ByteArray ||
-                primaryType.Name == "byte[]")
-            {
-                return "org.apache.commons.lang3.ArrayUtils";
             }
             else
             {

@@ -1754,15 +1754,15 @@ public class DictionaryImpl implements Dictionary {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
      * "2": hex (25, 29, 43)} with each item encoded in base64
      *
-     * @return the Map&lt;String, Byte[]&gt; object if successful.
+     * @return the Map&lt;String, byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, Byte[]> getByteValid() throws ServiceException {
+    public Map<String, byte[]> getByteValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Byte[]>> response = getByteValidDelegate(service.getByteValid(), null);
+            ServiceResponse<Map<String, byte[]>> response = getByteValidDelegate(service.getByteValid(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Byte[]>> response = getByteValidDelegate(error.getResponse(), error);
+            ServiceResponse<Map<String, byte[]>> response = getByteValidDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1773,7 +1773,7 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getByteValidAsync(final ServiceCallback<Map<String, Byte[]>> serviceCallback) {
+    public void getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
         service.getByteValidAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1786,9 +1786,9 @@ public class DictionaryImpl implements Dictionary {
         });
     }
 
-    private ServiceResponse<Map<String, Byte[]>> getByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Byte[]>>()
-                .register(200, new TypeToken<Map<String, Byte[]>>(){}.getType())
+    private ServiceResponse<Map<String, byte[]>> getByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Map<String, byte[]>>()
+                .register(200, new TypeToken<Map<String, byte[]>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }
@@ -1797,10 +1797,10 @@ public class DictionaryImpl implements Dictionary {
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
      * "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
-     * @param arrayBody the Map&lt;String, Byte[]&gt; value
+     * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putByteValid(Map<String, Byte[]> arrayBody) throws ServiceException {
+    public void putByteValid(Map<String, byte[]> arrayBody) throws ServiceException {
         if (arrayBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
@@ -1819,10 +1819,10 @@ public class DictionaryImpl implements Dictionary {
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
      * "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
-     * @param arrayBody the Map&lt;String, Byte[]&gt; value
+     * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putByteValidAsync(Map<String, Byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public void putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
@@ -1851,15 +1851,15 @@ public class DictionaryImpl implements Dictionary {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
      * first item base64 encoded
      *
-     * @return the Map&lt;String, Byte[]&gt; object if successful.
+     * @return the Map&lt;String, byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, Byte[]> getByteInvalidNull() throws ServiceException {
+    public Map<String, byte[]> getByteInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Byte[]>> response = getByteInvalidNullDelegate(service.getByteInvalidNull(), null);
+            ServiceResponse<Map<String, byte[]>> response = getByteInvalidNullDelegate(service.getByteInvalidNull(), null);
             return response.getBody();
         } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Byte[]>> response = getByteInvalidNullDelegate(error.getResponse(), error);
+            ServiceResponse<Map<String, byte[]>> response = getByteInvalidNullDelegate(error.getResponse(), error);
             return response.getBody();
         }
     }
@@ -1870,7 +1870,7 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getByteInvalidNullAsync(final ServiceCallback<Map<String, Byte[]>> serviceCallback) {
+    public void getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
         service.getByteInvalidNullAsync(new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
@@ -1883,9 +1883,9 @@ public class DictionaryImpl implements Dictionary {
         });
     }
 
-    private ServiceResponse<Map<String, Byte[]>> getByteInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Byte[]>>()
-                .register(200, new TypeToken<Map<String, Byte[]>>(){}.getType())
+    private ServiceResponse<Map<String, byte[]>> getByteInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Map<String, byte[]>>()
+                .register(200, new TypeToken<Map<String, byte[]>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, error);
     }

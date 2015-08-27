@@ -44,12 +44,21 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @:    private @(param.Type) @(param.Name.ToCamelCase());
 @EmptyLine
 @:    /**
-@:     * @(param.Documentation)
+@:     * Gets @(param.Documentation)
 @:     *
 @:     * @@return the @(param.Name) value.
 @:     */
 @:    public @(param.Type) get@(param.Name.ToPascalCase())() {
 @:        return this.@(param.Name.ToCamelCase());
+@:    }
+@EmptyLine
+@:    /**
+@:     * Sets @(param.Documentation)
+@:     *
+@:     * @@param @(param.Name.ToCamelCase()) the @(param.Name) value.
+@:     */
+@:    public void set@(param.Name.ToPascalCase())(@(param.Type) @(param.Name.ToCamelCase())) {
+@:        this.@(param.Name.ToCamelCase()) = @(param.Name.ToCamelCase());
 @:    }
 }
 

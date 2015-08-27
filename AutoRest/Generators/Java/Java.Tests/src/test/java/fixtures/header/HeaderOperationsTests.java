@@ -15,7 +15,9 @@ import org.junit.Test;
 import retrofit.client.Header;
 
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -595,7 +597,7 @@ public class HeaderOperationsTests {
     }
 
     @Test
-    @Ignore("Does not support custom headers")
+    @Ignore("Custom header not supported yet")
     public void customRequestId() throws Exception {
         client.getHeaderOperations().customRequestId();
     }

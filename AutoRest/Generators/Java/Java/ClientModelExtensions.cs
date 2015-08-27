@@ -12,94 +12,24 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
 {
     public static class ClientModelExtensions
     {
-        public static string GetHttpMethod(this HttpMethod method)
-        {
-            if (method == HttpMethod.Patch)
-            {
-                return "new HttpMethod(\"Patch\")";
-            }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, "HttpMethod.{0}", method);
-            }
-        }
-
-        /// <summary>
-        /// Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
-        /// </summary>
-        /// <param name="parameter">The parameter to format</param>
-        /// <returns>A reference to the formatted parameter value</returns>
-        public static string GetFormattedReferenceValue(this Parameter parameter)
-        {
-            if (parameter == null)
-            {
-                throw new ArgumentNullException("parameter");
-            }
-
-            SequenceType sequence = parameter.Type as SequenceType;
-            if (sequence == null)
-            {
-                return parameter.Type.ToString(parameter.Name);
-            }
-
-            PrimaryType primaryType = sequence.ElementType as PrimaryType;
-            EnumType enumType = sequence.ElementType as EnumType;
-            if (enumType != null && enumType.IsExpandable)
-            {
-                primaryType = PrimaryType.String;
-            }
-
-            if (primaryType != PrimaryType.String)
-            {
-                throw new InvalidOperationException(
-                    string.Format(CultureInfo.InvariantCulture,
-                    "Cannot generate a formatted sequence from a " +
-                                  "non-string array parameter {0}", parameter));
-            }
-
-            return string.Format(CultureInfo.InvariantCulture,
-                "{0}.join('{1}')", parameter.Name, parameter.CollectionFormat.GetSeparator());
-        }
-
-        /// <summary>
-        /// Return the separator associated with a given collectionFormat
-        /// </summary>
-        /// <param name="format">The collection format</param>
-        /// <returns>The separator</returns>
-        private static string GetSeparator(this CollectionFormat format)
-        {
-            switch (format)
-            {
-                case CollectionFormat.Csv:
-                    return ",";
-                case CollectionFormat.Pipes:
-                    return "|";
-                case CollectionFormat.Ssv:
-                    return " ";
-                case CollectionFormat.Tsv:
-                    return "\t";
-                default:
-                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
-                        "Collection format {0} is not supported.", format));
-            }
-        }
-
         public static bool NeedsSpecialSerialization(this IType type)
         {
             var known = type as PrimaryType;
-            return (known != null && (known.Name == "LocalDate" || known.Name == "DateTime" || known.Name == "Byte[]" || known == PrimaryType.ByteArray)) ||
+            return (known != null && (known.Name == "LocalDate" || known.Name == "DateTime" || known == PrimaryType.ByteArray)) ||
                 type is EnumType || type is CompositeType || type is SequenceType || type is DictionaryType;
         }
 
         /// <summary>
         /// Simple conversion of the type to string
         /// </summary>
-        /// <param name="type">The type to convert</param>
+        /// <param name="parameter">The parameter to convert</param>
         /// <param name="reference">a reference to an instance of the type</param>
         /// <returns></returns>
-        public static string ToString(this IType type, string reference)
+        public static string ToString(this Parameter parameter, string reference)
         {
+            var type = parameter.Type;
             var known = type as PrimaryType;
+            var sequence = type as SequenceType;
             if (known != null && known.Name != "LocalDate" && known.Name != "DateTime")
             {
                 if (known == PrimaryType.ByteArray)
@@ -111,9 +41,14 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
                     return reference;
                 }
             }
+            else if (sequence != null)
+            {
+                return "JacksonConverterBuilder.serializeList(" + reference + 
+                    ", CollectionFormat." + parameter.CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture) + ")";
+            }
             else
             {
-                return "StringUtils.strip(JacksonConverterBuilder.serialize(" + reference + @"), ""\"""")";
+                return "JacksonConverterBuilder.serializeRaw(" + reference + ")";
             }
         }
 
