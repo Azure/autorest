@@ -3,6 +3,8 @@ package fixtures.report;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class CoverageReporter {
@@ -21,24 +23,27 @@ public class CoverageReporter {
         report.put("OptionalClassParameter", 1);
         report.put("OptionalArrayParameter", 1);
 
-        // Post must contain a body
-        report.put("OptionalIntegerHeader", 1);
-        report.put("OptionalStringHeader", 1);
-        report.put("OptionalArrayHeader", 1);
-
         // Put must contain a body
         report.put("OptionalImplicitBody", 1);
 
         // OkHttp can actually overwrite header "Content-Type"
         report.put("HeaderParameterProtectedKey", 1);
 
+        // Redirects not suppoted by OkHttp
+        report.put("HttpRedirect301Put", 1);
+        report.put("HttpRedirect302Patch", 1);
+
         int total = report.size();
         int hit = 0;
-        for (int i : report.values()) {
-            if (i != 0) {
+        List<String> missing = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : report.entrySet()) {
+            if (entry.getValue() != 0) {
                 hit++;
+            } else {
+                missing.add(entry.getKey());
             }
         }
-        System.out.println(hit + " out of " + total + " tests run.");
+        System.out.println(hit + " out of " + total + " tests hit. Missing tests:");
+        missing.forEach(System.out::println);
     }
 }

@@ -32,6 +32,7 @@ dependencies {
     compile 'javax.validation:validation-api:1.1.0.Final'
     testCompile 'junit:junit:4.11'
     testCompile 'junit:junit-dep:4.11'
+    testCompile 'commons-io:commons-io:2.4'
 }
 
 modifyPom {
@@ -99,7 +100,6 @@ task installforever(type: Exec, dependsOn: 'npmrestore') {
 }
 
 task runserver(type: Exec, dependsOn: 'installforever') {
-    environment 'PORT', '3002'
     workingDir "${projectDir}/../../../TestServer/server"
     commandLine 'cmd', '/c', 'forever', 'start', 'startup/www.js'
 }

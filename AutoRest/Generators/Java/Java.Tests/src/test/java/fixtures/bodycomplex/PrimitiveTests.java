@@ -1,18 +1,12 @@
 package fixtures.bodycomplex;
 
-import fixtures.bodyboolean.Bool;
 import fixtures.bodycomplex.models.*;
-import fixtures.http.models.A;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.time.DateTimeException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PrimitiveTests {
     static AutoRestComplexTestService client;

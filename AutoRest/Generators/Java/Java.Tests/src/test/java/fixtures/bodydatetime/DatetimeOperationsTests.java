@@ -1,22 +1,14 @@
-package fixtures.datetime;
+package fixtures.bodydatetime;
 
 import com.microsoft.rest.ServiceException;
-import fixtures.bodydate.AutoRestDateTestService;
-import fixtures.bodydate.AutoRestDateTestServiceImpl;
-import fixtures.bodydatetime.AutoRestDateTimeTestService;
-import fixtures.bodydatetime.AutoRestDateTimeTestServiceImpl;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.concurrent.CountDownLatch;
-
 public class DatetimeOperationsTests {
     static AutoRestDateTimeTestService client;
-    private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
     public static void setup() {

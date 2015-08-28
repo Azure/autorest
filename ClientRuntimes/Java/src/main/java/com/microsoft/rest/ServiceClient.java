@@ -59,7 +59,7 @@ public abstract class ServiceClient {
         Executor executor = Executors.newCachedThreadPool();
         this.restAdapterBuilder = restAdapterBuilder
                 .setClient(okClient)
-                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setLogLevel(RestAdapter.LogLevel.BASIC)
                 .setConverter(JacksonConverterBuilder.build())
                 .setExecutors(executor, executor);
     }

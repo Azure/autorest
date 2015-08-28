@@ -13,6 +13,7 @@ import retrofit.client.Response;
 import retrofit.converter.Converter;
 import retrofit.mime.TypedInput;
 
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -108,7 +109,10 @@ public class ServiceResponseBuilder<T> {
                 // Pre-defined successful status code
                 T body = null;
                 Type type = responseTypes.get(statusCode);
-                if (type != null && type != Void.class && responseContent.length() > 0) {
+                if (type != null && type == InputStream.class) {
+                    body = (T) responseContent.in();
+                }
+                else if (type != null && type != Void.class && responseContent.length() > 0) {
                     body = (T) this.converter.fromBody(responseContent, type);
                 }
                 result = new ServiceResponse<T>(body, response);
@@ -119,7 +123,10 @@ public class ServiceResponseBuilder<T> {
                 // no pre-defined successful status code, use retrofit default
                 T body = null;
                 Type type = responseTypes.get(0);
-                if (type != null && type != Void.class && responseContent.length() > 0) {
+                if (type != null && type == InputStream.class) {
+                    body = (T) responseContent.in();
+                }
+                else if (type != null && type != Void.class && responseContent.length() > 0) {
                     body = (T) this.converter.fromBody(responseContent, type);
                 }
                 result = new ServiceResponse<T>(body, response);
