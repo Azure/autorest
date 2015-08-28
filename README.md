@@ -51,9 +51,11 @@ By default, Ruby installs to C:\Ruby21 or Ruby22, etc. Ensure that C:\Ruby21\bin
 
 [RubyDevKit](http://rubyinstaller.org/downloads/) 32-bit version for use with Ruby 2.0 and above
 The DevKit installer just unpacks files. Navigate to the directory and run the following:
->ruby dk.rb init
->ruby dk.rb install
->gem install bundler
+```bash
+ruby dk.rb init
+ruby dk.rb install
+gem install bundler
+```
 
 ## Build the Code
 We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
