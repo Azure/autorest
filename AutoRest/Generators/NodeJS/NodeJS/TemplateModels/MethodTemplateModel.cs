@@ -10,6 +10,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
+using System.Text;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -89,6 +90,34 @@ namespace Microsoft.Rest.Generator.NodeJS
         }
 
         /// <summary>
+        /// Generate the method parameter declarations for a method, using TypeScript declaration syntax
+        /// </summary>
+        public string MethodParameterDeclarationTS {
+            get
+            {
+                StringBuilder declarations = new StringBuilder();
+
+                bool first = true;
+                foreach (var parameter in LocalParameters) {
+                    if (!first)
+                        declarations.Append(", ");
+
+                    declarations.Append(parameter.Name);
+                    declarations.Append(": ");
+                    declarations.Append(parameter.Type.TSType());
+
+                    first = false;
+                }
+
+                if (!first)
+                    declarations.Append(", ");
+                declarations.Append("options: RequestOptions");
+                
+                return declarations.ToString();
+            }
+        }
+
+        /// <summary>
         /// Gets the expression for response body initialization 
         /// </summary>
         public virtual string InitializeResponseBody
@@ -108,6 +137,19 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 var parameters = MethodParameterDeclaration;
                 parameters += "callback";
+                return parameters;
+            }
+        }
+
+        /// <summary>
+        /// Generate the method parameter declarations with callback for a method, using TypeScript method syntax
+        /// </summary>
+        public string MethodParameterDeclarationWithCallbackTS {
+            get
+            {
+                var parameters = MethodParameterDeclarationTS;
+                var returnTypeTSString = ReturnType == null ? "void" : ReturnType.TSType();
+                parameters += ", callback: (err: Error, result: HttpOperationResponse<" + returnTypeTSString + ">) => void";
                 return parameters;
             }
         }

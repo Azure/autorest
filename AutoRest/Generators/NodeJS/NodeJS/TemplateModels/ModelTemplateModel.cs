@@ -92,6 +92,23 @@ namespace Microsoft.Rest.Generator.NodeJS
         }
 
         /// <summary>
+        /// Returns the TypeScript string to define the specified property, including its type and whether it's optional or not
+        /// </summary>
+        /// <param name="property">Model property to query</param>
+        /// <returns>TypeScript property definition</returns>
+        public string PropertyTS(Property property) {
+            if (property == null) {
+                throw new ArgumentNullException("property");
+            }
+
+            string typeString = property.Type.TSType();
+
+            if (! property.IsRequired)
+                return property.Name + "?: " + typeString;
+            else return property.Name + ": " + typeString;
+        }
+
+        /// <summary>
         /// Returns list of properties that needs to be explicitly deserializes for a model.
         /// </summary>
         public IEnumerable<Property> SpecialProperties

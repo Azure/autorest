@@ -7,6 +7,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
+using System.Text;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -74,5 +75,36 @@ namespace Microsoft.Rest.Generator.NodeJS
                 return string.Join(", ", requireParams);
             }
         }
+
+        /// <summary>
+        /// Return the service client constructor required parameters, in TypeScript syntax.
+        /// </summary>
+        public string RequiredConstructorParametersTS {
+            get {
+                StringBuilder requiredParams = new StringBuilder();
+
+                bool first = true;
+                foreach (var p in this.Properties) {
+                    if (! p.IsRequired)
+                        continue;
+
+                    if (!first)
+                        requiredParams.Append(", ");
+
+                    requiredParams.Append(p.Name);
+                    requiredParams.Append(": ");
+                    requiredParams.Append(p.Type.TSType());
+
+                    first = false;
+                }
+
+                if (!first)
+                    requiredParams.Append(", ");
+
+                requiredParams.Append("baseUri: string");
+                return requiredParams.ToString();
+            }
+        }
+
     }
 }

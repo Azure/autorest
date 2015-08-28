@@ -1,0 +1,55 @@
+﻿@using Microsoft.Rest.Generator.NodeJS
+@using Microsoft.Rest.Generator.NodeJS.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ServiceClientTemplateModel>
+@Header("// ")
+@EmptyLine
+// After TypeScript 1.6 launches this can be simplified to use node module loading
+import { ServiceClientOptions, RequestOptions, HttpOperationResponse } from "node_modules/ms-rest/lib/msRest";
+@if (Model.ModelTypes.Any())
+{
+@EmptyLine
+@:import * as models from "models/index";
+}
+@if (Model.MethodGroups.Any()) {
+@:import * as operations from "operations/index";
+}
+@EmptyLine
+declare class @(Model.Name) {
+    @{var parameters = Model.Properties.Where(p => p.IsRequired);}
+    /**
+     * @@class
+     * Initializes a new instance of the @Model.Name class.
+     * @@constructor
+     *
+    @foreach (var param in parameters)
+    {
+    @: * @@param {@param.Type.Name} @param.Name @param.Documentation
+    @: *
+    }
+     * @@param {string} [baseUri] - The base URI of the service.
+     *
+     * @@param {object} [options] - The parameter options
+     *
+     * @@param {Array} [options.filters] - Filters to be added to the request pipeline
+     *
+     * @@param {object} [options.requestOptions] - Options for the underlying request object
+     * {@@link https://github.com/request/request#requestoptions-callback Options doc}
+     *
+     * @@param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+     */
+    constructor(@(Model.RequiredConstructorParametersTS), options: ServiceClientOptions);
+
+    @if (Model.MethodGroupModels.Any())
+    {
+    @EmptyLine
+    @:// Operation groups
+    foreach (var methodGroup in Model.MethodGroupModels)
+    {
+    @:@(methodGroup.MethodGroupName): operations.@(methodGroup.MethodGroupType);
+    }
+    }
+}
+@EmptyLine
+export default @Model.Name;

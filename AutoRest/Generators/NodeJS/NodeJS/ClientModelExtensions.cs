@@ -155,7 +155,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                           .AppendLine("}").ToString();
         }
 
-        private static string ValidatePrimaryType(this PrimaryType primary, IScopeProvider scope, string valueReference, bool isRequired)
+        private static string ValidatePrimaryType(this PrimaryType   primary, IScopeProvider scope, string valueReference, bool isRequired)
         {
             if (scope == null)
             {
@@ -234,6 +234,26 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
                     "'{0}' not implemented", valueReference));
+            }
+        }
+
+        /// <summary>
+        /// Returns the TypeScript type string for the specified primary type
+        /// </summary>
+        /// <param name="primary">primary type to query</param>
+        /// <returns>The TypeScript type correspoinding to this model primary type</returns>
+        private static string PrimaryTSType(this PrimaryType primary) {
+            if (primary == PrimaryType.Boolean)
+                return "boolean";
+            else if (primary == PrimaryType.Double || primary == PrimaryType.Int || primary == PrimaryType.Long)
+                return "number";
+            else if (primary == PrimaryType.String)
+                return "string";
+            else if (primary == PrimaryType.Date || primary == PrimaryType.DateTime)
+                return "Date";
+            else {
+                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
+                    "Type '{0}' not implemented", primary));
             }
         }
 
@@ -444,6 +464,45 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Return the TypeScript type (as a string) for specified type.
+        /// </summary>
+        public static string TSType(this IType type) {
+            CompositeType composite = type as CompositeType;
+            SequenceType sequence = type as SequenceType;
+            DictionaryType dictionary = type as DictionaryType;
+            PrimaryType primary = type as PrimaryType;
+            EnumType enumType = type as EnumType;
+
+            string tsType;
+            if (primary != null)
+            {
+                tsType = primary.PrimaryTSType();
+            }
+            else if (enumType != null)
+            {
+                tsType = "string";
+            }
+            else if (composite != null)
+            {
+                tsType = "models." + composite.Name;
+            }
+            else if (sequence != null)
+            {
+                tsType = sequence.ElementType.TSType() + "[]";
+            }
+            else if (dictionary != null)
+            {
+                // TODO: Confirm with Mark exactly what cases for additionalProperties AutoRest intends to handle (what about
+                // additonalProperties combined with explicit properties?) and add support for those if needed to at least match
+                // C# target level of functionality
+                tsType = "{ [propertyName: string]: " + dictionary.ValueType.TSType() + " }";
+            }
+            else throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "Type '{0}' not implemented", type));
+
+            return tsType;
         }
 
         /// <summary>
