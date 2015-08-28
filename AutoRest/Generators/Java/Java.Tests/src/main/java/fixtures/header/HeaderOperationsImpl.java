@@ -23,7 +23,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.Error;
-import com.microsoft.rest.serializer.JacksonConverterBuilder;
+import com.microsoft.rest.serializer.JacksonHelper;
 import org.apache.commons.codec.binary.Base64;
 
 public class HeaderOperationsImpl implements HeaderOperations {
@@ -861,7 +861,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter value is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramDateDelegate(service.paramDate(scenario, JacksonConverterBuilder.serializeRaw(value)), null);
+            ServiceResponse<Void> response = paramDateDelegate(service.paramDate(scenario, JacksonHelper.serializeRaw(value)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = paramDateDelegate(error.getResponse(), error);
@@ -886,7 +886,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
         }
-        service.paramDateAsync(scenario, JacksonConverterBuilder.serializeRaw(value), new ServiceResponseCallback() {
+        service.paramDateAsync(scenario, JacksonHelper.serializeRaw(value), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -974,7 +974,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter value is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramDatetimeDelegate(service.paramDatetime(scenario, JacksonConverterBuilder.serializeRaw(value)), null);
+            ServiceResponse<Void> response = paramDatetimeDelegate(service.paramDatetime(scenario, JacksonHelper.serializeRaw(value)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = paramDatetimeDelegate(error.getResponse(), error);
@@ -1000,7 +1000,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
         }
-        service.paramDatetimeAsync(scenario, JacksonConverterBuilder.serializeRaw(value), new ServiceResponseCallback() {
+        service.paramDatetimeAsync(scenario, JacksonHelper.serializeRaw(value), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1197,7 +1197,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramEnumDelegate(service.paramEnum(scenario, JacksonConverterBuilder.serializeRaw(value)), null);
+            ServiceResponse<Void> response = paramEnumDelegate(service.paramEnum(scenario, JacksonHelper.serializeRaw(value)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = paramEnumDelegate(error.getResponse(), error);
@@ -1218,7 +1218,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
         }
-        service.paramEnumAsync(scenario, JacksonConverterBuilder.serializeRaw(value), new ServiceResponseCallback() {
+        service.paramEnumAsync(scenario, JacksonHelper.serializeRaw(value), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {

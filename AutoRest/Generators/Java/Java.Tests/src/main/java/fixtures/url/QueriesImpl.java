@@ -25,7 +25,7 @@ import org.joda.time.DateTime;
 import java.util.List;
 import fixtures.url.models.Error;
 import org.apache.commons.codec.binary.Base64;
-import com.microsoft.rest.serializer.JacksonConverterBuilder;
+import com.microsoft.rest.serializer.JacksonHelper;
 import com.microsoft.rest.serializer.CollectionFormat;
 
 public class QueriesImpl implements Queries {
@@ -843,7 +843,7 @@ public class QueriesImpl implements Queries {
      */
     public void enumValid(UriColor enumQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = enumValidDelegate(service.enumValid(JacksonConverterBuilder.serializeRaw(enumQuery)), null);
+            ServiceResponse<Void> response = enumValidDelegate(service.enumValid(JacksonHelper.serializeRaw(enumQuery)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = enumValidDelegate(error.getResponse(), error);
@@ -858,7 +858,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        service.enumValidAsync(JacksonConverterBuilder.serializeRaw(enumQuery), new ServiceResponseCallback() {
+        service.enumValidAsync(JacksonHelper.serializeRaw(enumQuery), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -885,7 +885,7 @@ public class QueriesImpl implements Queries {
      */
     public void enumNull(UriColor enumQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = enumNullDelegate(service.enumNull(JacksonConverterBuilder.serializeRaw(enumQuery)), null);
+            ServiceResponse<Void> response = enumNullDelegate(service.enumNull(JacksonHelper.serializeRaw(enumQuery)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = enumNullDelegate(error.getResponse(), error);
@@ -900,7 +900,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        service.enumNullAsync(JacksonConverterBuilder.serializeRaw(enumQuery), new ServiceResponseCallback() {
+        service.enumNullAsync(JacksonHelper.serializeRaw(enumQuery), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1053,7 +1053,7 @@ public class QueriesImpl implements Queries {
      */
     public void dateValid(LocalDate dateQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = dateValidDelegate(service.dateValid(JacksonConverterBuilder.serializeRaw(dateQuery)), null);
+            ServiceResponse<Void> response = dateValidDelegate(service.dateValid(JacksonHelper.serializeRaw(dateQuery)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = dateValidDelegate(error.getResponse(), error);
@@ -1068,7 +1068,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
-        service.dateValidAsync(JacksonConverterBuilder.serializeRaw(dateQuery), new ServiceResponseCallback() {
+        service.dateValidAsync(JacksonHelper.serializeRaw(dateQuery), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1095,7 +1095,7 @@ public class QueriesImpl implements Queries {
      */
     public void dateNull(LocalDate dateQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = dateNullDelegate(service.dateNull(JacksonConverterBuilder.serializeRaw(dateQuery)), null);
+            ServiceResponse<Void> response = dateNullDelegate(service.dateNull(JacksonHelper.serializeRaw(dateQuery)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = dateNullDelegate(error.getResponse(), error);
@@ -1110,7 +1110,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
-        service.dateNullAsync(JacksonConverterBuilder.serializeRaw(dateQuery), new ServiceResponseCallback() {
+        service.dateNullAsync(JacksonHelper.serializeRaw(dateQuery), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1137,7 +1137,7 @@ public class QueriesImpl implements Queries {
      */
     public void dateTimeValid(DateTime dateTimeQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = dateTimeValidDelegate(service.dateTimeValid(JacksonConverterBuilder.serializeRaw(dateTimeQuery)), null);
+            ServiceResponse<Void> response = dateTimeValidDelegate(service.dateTimeValid(JacksonHelper.serializeRaw(dateTimeQuery)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = dateTimeValidDelegate(error.getResponse(), error);
@@ -1152,7 +1152,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
-        service.dateTimeValidAsync(JacksonConverterBuilder.serializeRaw(dateTimeQuery), new ServiceResponseCallback() {
+        service.dateTimeValidAsync(JacksonHelper.serializeRaw(dateTimeQuery), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1179,7 +1179,7 @@ public class QueriesImpl implements Queries {
      */
     public void dateTimeNull(DateTime dateTimeQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = dateTimeNullDelegate(service.dateTimeNull(JacksonConverterBuilder.serializeRaw(dateTimeQuery)), null);
+            ServiceResponse<Void> response = dateTimeNullDelegate(service.dateTimeNull(JacksonHelper.serializeRaw(dateTimeQuery)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = dateTimeNullDelegate(error.getResponse(), error);
@@ -1194,7 +1194,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
-        service.dateTimeNullAsync(JacksonConverterBuilder.serializeRaw(dateTimeQuery), new ServiceResponseCallback() {
+        service.dateTimeNullAsync(JacksonHelper.serializeRaw(dateTimeQuery), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1222,7 +1222,7 @@ public class QueriesImpl implements Queries {
      */
     public void arrayStringCsvValid(List<String> arrayQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = arrayStringCsvValidDelegate(service.arrayStringCsvValid(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.CSV)), null);
+            ServiceResponse<Void> response = arrayStringCsvValidDelegate(service.arrayStringCsvValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = arrayStringCsvValidDelegate(error.getResponse(), error);
@@ -1238,7 +1238,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        service.arrayStringCsvValidAsync(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.CSV), new ServiceResponseCallback() {
+        service.arrayStringCsvValidAsync(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1265,7 +1265,7 @@ public class QueriesImpl implements Queries {
      */
     public void arrayStringCsvNull(List<String> arrayQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = arrayStringCsvNullDelegate(service.arrayStringCsvNull(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.CSV)), null);
+            ServiceResponse<Void> response = arrayStringCsvNullDelegate(service.arrayStringCsvNull(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = arrayStringCsvNullDelegate(error.getResponse(), error);
@@ -1280,7 +1280,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        service.arrayStringCsvNullAsync(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.CSV), new ServiceResponseCallback() {
+        service.arrayStringCsvNullAsync(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1307,7 +1307,7 @@ public class QueriesImpl implements Queries {
      */
     public void arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = arrayStringCsvEmptyDelegate(service.arrayStringCsvEmpty(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.CSV)), null);
+            ServiceResponse<Void> response = arrayStringCsvEmptyDelegate(service.arrayStringCsvEmpty(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = arrayStringCsvEmptyDelegate(error.getResponse(), error);
@@ -1322,7 +1322,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        service.arrayStringCsvEmptyAsync(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.CSV), new ServiceResponseCallback() {
+        service.arrayStringCsvEmptyAsync(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1350,7 +1350,7 @@ public class QueriesImpl implements Queries {
      */
     public void arrayStringSsvValid(List<String> arrayQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = arrayStringSsvValidDelegate(service.arrayStringSsvValid(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.SSV)), null);
+            ServiceResponse<Void> response = arrayStringSsvValidDelegate(service.arrayStringSsvValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.SSV)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = arrayStringSsvValidDelegate(error.getResponse(), error);
@@ -1366,7 +1366,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        service.arrayStringSsvValidAsync(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.SSV), new ServiceResponseCallback() {
+        service.arrayStringSsvValidAsync(JacksonHelper.serializeList(arrayQuery, CollectionFormat.SSV), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1394,7 +1394,7 @@ public class QueriesImpl implements Queries {
      */
     public void arrayStringTsvValid(List<String> arrayQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = arrayStringTsvValidDelegate(service.arrayStringTsvValid(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.TSV)), null);
+            ServiceResponse<Void> response = arrayStringTsvValidDelegate(service.arrayStringTsvValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.TSV)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = arrayStringTsvValidDelegate(error.getResponse(), error);
@@ -1410,7 +1410,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        service.arrayStringTsvValidAsync(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.TSV), new ServiceResponseCallback() {
+        service.arrayStringTsvValidAsync(JacksonHelper.serializeList(arrayQuery, CollectionFormat.TSV), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1438,7 +1438,7 @@ public class QueriesImpl implements Queries {
      */
     public void arrayStringPipesValid(List<String> arrayQuery) throws ServiceException {
         try {
-            ServiceResponse<Void> response = arrayStringPipesValidDelegate(service.arrayStringPipesValid(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.PIPES)), null);
+            ServiceResponse<Void> response = arrayStringPipesValidDelegate(service.arrayStringPipesValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.PIPES)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = arrayStringPipesValidDelegate(error.getResponse(), error);
@@ -1454,7 +1454,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public void arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        service.arrayStringPipesValidAsync(JacksonConverterBuilder.serializeList(arrayQuery, CollectionFormat.PIPES), new ServiceResponseCallback() {
+        service.arrayStringPipesValidAsync(JacksonHelper.serializeList(arrayQuery, CollectionFormat.PIPES), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {

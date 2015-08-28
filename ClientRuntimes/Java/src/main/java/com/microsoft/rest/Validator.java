@@ -28,11 +28,20 @@ public class Validator {
             return;
         }
 
-        Field[] fields = FieldUtils.getAllFields(parameter.getClass());
+        Class parameterType = parameter.getClass();
+        if (ClassUtils.isPrimitiveOrWrapper(parameterType) ||
+                parameterType.isEnum() ||
+                ClassUtils.isAssignable(parameterType, LocalDate.class) ||
+                ClassUtils.isAssignable(parameterType, DateTime.class) ||
+                ClassUtils.isAssignable(parameterType, String.class)) {
+            return;
+        }
+
+        Field[] fields = FieldUtils.getAllFields(parameterType);
         for (Field field : fields) {
             field.setAccessible(true);
             JsonProperty annotation = field.getAnnotation(JsonProperty.class);
-            Object property = null;
+            Object property;
             try {
                 property = field.get(parameter);
             } catch (IllegalAccessException e) {
@@ -52,18 +61,14 @@ public class Validator {
                             Validator.validate(item);
                         }
                     }
-                    if (ClassUtils.isAssignable(propertyType, Map.class)) {
+                    else if (ClassUtils.isAssignable(propertyType, Map.class)) {
                         Map<?, ?> entries = (Map<?, ?>)property;
                         for (Map.Entry<?, ?> entry : entries.entrySet()) {
                             Validator.validate(entry.getKey());
                             Validator.validate(entry.getValue());
                         }
                     }
-                    else if (!(ClassUtils.isPrimitiveOrWrapper(propertyType) ||
-                            propertyType.isEnum() ||
-                            ClassUtils.isAssignable(propertyType, LocalDate.class) ||
-                            ClassUtils.isAssignable(propertyType, DateTime.class) ||
-                            ClassUtils.isAssignable(propertyType, String.class))) {
+                    else if (parameter.getClass().getDeclaringClass() != propertyType) {
                         Validator.validate(property);
                     }
                 } catch (ServiceException ex) {

@@ -47,12 +47,12 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
             else if (sequence != null)
             {
-                return "JacksonConverterBuilder.serializeList(" + reference + 
+                return "JacksonHelper.serializeList(" + reference + 
                     ", CollectionFormat." + parameter.CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture) + ")";
             }
             else
             {
-                return "JacksonConverterBuilder.serializeRaw(" + reference + ")";
+                return "JacksonHelper.serializeRaw(" + reference + ")";
             }
         }
 

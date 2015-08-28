@@ -24,7 +24,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import fixtures.url.models.Error;
 import org.apache.commons.codec.binary.Base64;
-import com.microsoft.rest.serializer.JacksonConverterBuilder;
+import com.microsoft.rest.serializer.JacksonHelper;
 
 public class PathsImpl implements Paths {
     private PathsService service;
@@ -667,7 +667,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = enumValidDelegate(service.enumValid(JacksonConverterBuilder.serializeRaw(enumPath)), null);
+            ServiceResponse<Void> response = enumValidDelegate(service.enumValid(JacksonHelper.serializeRaw(enumPath)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = enumValidDelegate(error.getResponse(), error);
@@ -686,7 +686,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
         }
-        service.enumValidAsync(JacksonConverterBuilder.serializeRaw(enumPath), new ServiceResponseCallback() {
+        service.enumValidAsync(JacksonHelper.serializeRaw(enumPath), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -717,7 +717,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = enumNullDelegate(service.enumNull(JacksonConverterBuilder.serializeRaw(enumPath)), null);
+            ServiceResponse<Void> response = enumNullDelegate(service.enumNull(JacksonHelper.serializeRaw(enumPath)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = enumNullDelegate(error.getResponse(), error);
@@ -736,7 +736,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
         }
-        service.enumNullAsync(JacksonConverterBuilder.serializeRaw(enumPath), new ServiceResponseCallback() {
+        service.enumNullAsync(JacksonHelper.serializeRaw(enumPath), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -917,7 +917,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter datePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = dateValidDelegate(service.dateValid(JacksonConverterBuilder.serializeRaw(datePath)), null);
+            ServiceResponse<Void> response = dateValidDelegate(service.dateValid(JacksonHelper.serializeRaw(datePath)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = dateValidDelegate(error.getResponse(), error);
@@ -936,7 +936,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datePath is required and cannot be null.")));
         }
-        service.dateValidAsync(JacksonConverterBuilder.serializeRaw(datePath), new ServiceResponseCallback() {
+        service.dateValidAsync(JacksonHelper.serializeRaw(datePath), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -968,7 +968,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter datePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = dateNullDelegate(service.dateNull(JacksonConverterBuilder.serializeRaw(datePath)), null);
+            ServiceResponse<Void> response = dateNullDelegate(service.dateNull(JacksonHelper.serializeRaw(datePath)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = dateNullDelegate(error.getResponse(), error);
@@ -988,7 +988,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datePath is required and cannot be null.")));
         }
-        service.dateNullAsync(JacksonConverterBuilder.serializeRaw(datePath), new ServiceResponseCallback() {
+        service.dateNullAsync(JacksonHelper.serializeRaw(datePath), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1019,7 +1019,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = dateTimeValidDelegate(service.dateTimeValid(JacksonConverterBuilder.serializeRaw(dateTimePath)), null);
+            ServiceResponse<Void> response = dateTimeValidDelegate(service.dateTimeValid(JacksonHelper.serializeRaw(dateTimePath)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = dateTimeValidDelegate(error.getResponse(), error);
@@ -1038,7 +1038,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.")));
         }
-        service.dateTimeValidAsync(JacksonConverterBuilder.serializeRaw(dateTimePath), new ServiceResponseCallback() {
+        service.dateTimeValidAsync(JacksonHelper.serializeRaw(dateTimePath), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {
@@ -1070,7 +1070,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = dateTimeNullDelegate(service.dateTimeNull(JacksonConverterBuilder.serializeRaw(dateTimePath)), null);
+            ServiceResponse<Void> response = dateTimeNullDelegate(service.dateTimeNull(JacksonHelper.serializeRaw(dateTimePath)), null);
             response.getBody();
         } catch (RetrofitError error) {
             ServiceResponse<Void> response = dateTimeNullDelegate(error.getResponse(), error);
@@ -1090,7 +1090,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.")));
         }
-        service.dateTimeNullAsync(JacksonConverterBuilder.serializeRaw(dateTimePath), new ServiceResponseCallback() {
+        service.dateTimeNullAsync(JacksonHelper.serializeRaw(dateTimePath), new ServiceResponseCallback() {
             @Override
             public void response(Response response, RetrofitError error) {
                 try {

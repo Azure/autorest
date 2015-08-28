@@ -117,7 +117,7 @@ namespace Microsoft.Rest.Generator.Java
                         param.Type is SequenceType ||
                         param.Type is DictionaryType)
                     {
-                        classes.Add("com.microsoft.rest.serializer.JacksonConverterBuilder");
+                        classes.Add("com.microsoft.rest.serializer.JacksonHelper");
                     }
                     if (param.Type is SequenceType)
                     {

@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.microsoft.rest.retry.RetryHandler;
-import com.microsoft.rest.serializer.JacksonConverterBuilder;
+import com.microsoft.rest.serializer.JacksonHelper;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
@@ -60,7 +60,7 @@ public abstract class ServiceClient {
         this.restAdapterBuilder = restAdapterBuilder
                 .setClient(okClient)
                 .setLogLevel(RestAdapter.LogLevel.BASIC)
-                .setConverter(JacksonConverterBuilder.build())
+                .setConverter(JacksonHelper.getConverter())
                 .setExecutors(executor, executor);
     }
 

@@ -24,11 +24,11 @@ import java.util.List;
  * Inner callback used to merge both successful and failed responses into one
  * callback for customized response handling in a response handling delegate.
  */
-public class JacksonConverterBuilder {
+public class JacksonHelper {
     private static ObjectMapper objectMapper;
     private static JacksonConverter converter;
 
-    private JacksonConverterBuilder() {}
+    private JacksonHelper() {}
 
     public static ObjectMapper getObjectMapper() {
         if (objectMapper == null) {
@@ -43,7 +43,7 @@ public class JacksonConverterBuilder {
         return objectMapper;
     }
 
-    public static JacksonConverter build() {
+    public static JacksonConverter getConverter() {
         if (converter == null) {
             converter = new JacksonConverter(getObjectMapper());
         }
@@ -73,7 +73,7 @@ public class JacksonConverterBuilder {
             String raw = serializeRaw(element);
             serialized.add(raw != null ? raw : "");
         }
-        return String.join(format.getDelimeter(), serialized);
+        return StringUtils.join(serialized, format.getDelimeter());
     }
 
     @SuppressWarnings("unchecked")

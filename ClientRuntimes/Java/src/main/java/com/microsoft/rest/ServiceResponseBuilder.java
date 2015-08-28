@@ -7,7 +7,7 @@
 
 package com.microsoft.rest;
 
-import com.microsoft.rest.serializer.JacksonConverterBuilder;
+import com.microsoft.rest.serializer.JacksonHelper;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.converter.Converter;
@@ -29,7 +29,7 @@ public class ServiceResponseBuilder<T> {
      * Create a ServiceResponseBuilder instance.
      */
     public ServiceResponseBuilder() {
-        this(new HashMap<Integer, Type>(), JacksonConverterBuilder.build());
+        this(new HashMap<Integer, Type>(), JacksonHelper.getConverter());
     }
 
     /**
