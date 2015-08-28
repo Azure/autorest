@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <Import Project="$(LibrarySourceFolder)\ClientRuntimes\**\*.nuget.proj" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime' "/>
-
-  <Import Project="$(LibrarySourceFolder)\AutoRest\AutoRest.Core\*.nuget.proj"/>
+  
+  <Import Project="$(LibrarySourceFolder)\AutoRest\AutoRest.Core\*.nuget.proj" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator' "/>
 
   <PropertyGroup>
     <NuGetVerbosity>normal</NuGetVerbosity>
