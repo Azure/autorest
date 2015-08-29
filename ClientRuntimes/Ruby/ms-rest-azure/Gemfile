@@ -8,10 +8,6 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
-  gem 'json'
-  gem 'concurrent-ruby-ext'
-  gem 'faraday'
-  gem 'faraday-cookie_jar'
   gem 'ms_rest', path: '../ms-rest'
 end
 
