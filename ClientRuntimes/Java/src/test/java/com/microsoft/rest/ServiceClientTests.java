@@ -18,32 +18,6 @@ import java.io.IOException;
 
 public class ServiceClientTests {
     @Test
-    public void UserAgentTests() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() {};
-        serviceClient.getClientInterceptors().add(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                String header = chain.request().header("User-Agent");
-                if (header != null && header.equals("AutoRest-Java")) {
-                    return new Response.Builder()
-                            .request(chain.request())
-                            .code(200)
-                            .protocol(Protocol.HTTP_1_1)
-                            .build();
-                } else {
-                    return new Response.Builder()
-                            .request(chain.request())
-                            .code(400)
-                            .protocol(Protocol.HTTP_1_1)
-                            .build();
-                }
-            }
-        });
-        Response response = serviceClient.client.newCall(new Request.Builder().get().url("localhost").build()).execute();
-        Assert.assertEquals(200, response.code());
-    }
-
-    @Test
     public void FilterTests() throws Exception {
         ServiceClient serviceClient = new ServiceClient() {};
         serviceClient.getClientInterceptors().add(0, new FirstFilter());
