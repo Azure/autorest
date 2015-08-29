@@ -2,9 +2,6 @@ source 'https://rubygems.org'
 
 group :development, :local, :test do
   gem 'rspec'
-  gem 'json'
-  gem 'concurrent-ruby-ext'
-  gem 'faraday'
-  gem 'faraday-cookie_jar'
+  gem 'faraday-cookie_jar', '~> 0.0.6'
   gem 'ms_rest', path:'../../../../ClientRuntimes/Ruby/ms-rest'
 end
