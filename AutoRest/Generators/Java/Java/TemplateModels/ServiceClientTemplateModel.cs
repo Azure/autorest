@@ -79,39 +79,7 @@ namespace Microsoft.Rest.Generator.Java
                     .Distinct()
                     .ToList();
 
-                for (int i = 0; i < types.Count; i++)
-                {
-                    var type = types[i];
-                    var sequenceType = type as SequenceType;
-                    var dictionaryType = type as DictionaryType;
-                    var primaryType = type as PrimaryType;
-                    if (sequenceType != null)
-                    {
-                        classes.Add("java.util.List");
-                        types.Add(sequenceType.ElementType);
-                    }
-                    else if (dictionaryType != null)
-                    {
-                        classes.Add("java.util.Map");
-                        types.Add(dictionaryType.ValueType);
-                    }
-                    else if (type is CompositeType || type is EnumType)
-                    {
-                        classes.Add(string.Join(
-                            ".",
-                            this.Namespace.ToLower(CultureInfo.InvariantCulture),
-                            "models",
-                            type.Name));
-                    }
-                    else if (primaryType != null)
-                    {
-                        var importedFrom = JavaCodeNamer.ImportedFrom(primaryType);
-                        if (importedFrom != null)
-                        {
-                            classes.Add(importedFrom);
-                        }
-                    }
-                }
+                classes.UnionWith(types.TypeImports(this.Namespace));
                 return classes.AsEnumerable();
             }
         }
@@ -138,39 +106,7 @@ namespace Microsoft.Rest.Generator.Java
                     .Concat(this.MethodTemplateModels.Select(mtm => mtm.ReturnType))
                     .Distinct()
                     .ToList();
-                for (int i = 0; i < types.Count; i++)
-                {
-                    var type = types[i];
-                    var sequenceType = type as SequenceType;
-                    var dictionaryType = type as DictionaryType;
-                    var primaryType = type as PrimaryType;
-                    if (sequenceType != null)
-                    {
-                        classes.Add("java.util.List");
-                        types.Add(sequenceType.ElementType);
-                    }
-                    else if (dictionaryType != null)
-                    {
-                        classes.Add("java.util.Map");
-                        types.Add(dictionaryType.ValueType);
-                    }
-                    else if (type is CompositeType || type is EnumType)
-                    {
-                        classes.Add(string.Join(
-                            ".",
-                            this.Namespace.ToLower(CultureInfo.InvariantCulture),
-                            "models",
-                            type.Name));
-                    }
-                    else if (primaryType != null && primaryType != PrimaryType.ByteArray)
-                    {
-                        var importedFrom = JavaCodeNamer.ImportedFrom(primaryType);
-                        if (importedFrom != null)
-                        {
-                            classes.Add(importedFrom);
-                        }
-                    }
-                }
+                classes.UnionWith(types.TypeImports(this.Namespace));
 
                 foreach (var method in this.MethodTemplateModels)
                 {

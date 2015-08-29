@@ -15,6 +15,10 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 @EmptyLine
+@if (Settings.AddCredentials)
+{
+@:import com.microsoft.rest.credentials.ServiceClientCredentials;
+}
 @foreach (var importClass in Model.ImplImports)
 {
 @:import @importClass;
@@ -38,6 +42,18 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
     public String getBaseUri() {
         return this.baseUri;
     }
+@if (Settings.AddCredentials)
+{
+@EmptyLine
+@:    private ServiceClientCredentials credentials;
+@EmptyLine
+@:    /**
+@:     * Sets the credential to apply on the service client for all requests.
+@:     */
+@:    public void setCredentials(ServiceClientCredentials credentials) {
+@:        this.credentials = credentials;
+@:    }
+}
 @foreach (var param in Model.Properties)
 {
 @EmptyLine
@@ -108,6 +124,14 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
     }
 @EmptyLine
     private void initialize() {
+    @if (Settings.AddCredentials)
+    {
+@:        if (this.credentials != null)
+@:        {
+@:            this.credentials.applyCredentialsFilter(this);
+@:        }
+    }
+
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
 @if (Model.MethodTemplateModels.Any())
 {

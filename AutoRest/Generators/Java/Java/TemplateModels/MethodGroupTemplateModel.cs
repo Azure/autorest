@@ -43,49 +43,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        private HashSet<string> TypeImports(IList<IType> types)
-        {
-            HashSet<string> imports = new HashSet<string>();
-            if (types == null)
-            {
-                return imports;
-            }
-
-            for (int i = 0; i < types.Count; i++)
-            {
-                var type = types[i];
-                var sequenceType = type as SequenceType;
-                var dictionaryType = type as DictionaryType;
-                var primaryType = type as PrimaryType;
-                if (sequenceType != null)
-                {
-                    imports.Add("java.util.List");
-                    types.Add(sequenceType.ElementType);
-                }
-                else if (dictionaryType != null)
-                {
-                    imports.Add("java.util.Map");
-                    types.Add(dictionaryType.ValueType);
-                }
-                else if (type is CompositeType || type is EnumType)
-                {
-                    imports.Add(string.Join(
-                        ".",
-                        this.Namespace.ToLower(CultureInfo.InvariantCulture),
-                        "models",
-                        type.Name));
-                }
-                else if (primaryType != null)
-                {
-                    var importedFrom = JavaCodeNamer.ImportedFrom(primaryType);
-                    if (importedFrom != null)
-                    {
-                        imports.Add(importedFrom);
-                    }
-                }
-            }
-            return imports;
-        }
+        
 
         public IEnumerable<string> ImplImports
         {
@@ -100,7 +58,7 @@ namespace Microsoft.Rest.Generator.Java
                     .Distinct()
                     .ToList();
 
-                HashSet<string> classes = TypeImports(types);
+                HashSet<string> classes = types.TypeImports(this.Namespace);
 
                 if (this.MethodTemplateModels.Any(m => !m.ParametersToValidate.IsNullOrEmpty()))
                 {
@@ -143,7 +101,7 @@ namespace Microsoft.Rest.Generator.Java
                     .Distinct()
                     .ToList();
 
-                HashSet<string> classes = TypeImports(types);
+                HashSet<string> classes = types.TypeImports(this.Namespace);
 
                 foreach (var method in this.MethodTemplateModels)
                 {

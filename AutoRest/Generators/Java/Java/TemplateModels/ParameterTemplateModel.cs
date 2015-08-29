@@ -12,13 +12,5 @@ namespace Microsoft.Rest.Generator.Java
         {
             this.LoadFrom(source);
         }
-
-        /// <summary>
-        /// Gets parameter declaration
-        /// </summary>
-        public virtual string DeclarationExpression
-        {
-            get { return this.Type.Name; }
-        }
     }
 }
