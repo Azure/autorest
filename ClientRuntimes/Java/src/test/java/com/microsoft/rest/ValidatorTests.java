@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 

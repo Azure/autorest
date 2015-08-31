@@ -12,7 +12,6 @@ apply plugin: 'com.bmuschko.nexus'
 
 group = 'com.microsoft.rest'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.6
 
 repositories {
     mavenCentral()

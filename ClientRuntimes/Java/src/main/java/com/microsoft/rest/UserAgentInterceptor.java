@@ -40,13 +40,13 @@ public class UserAgentInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        String value = chain.request().header("User-Agent");
-        if (value != null) {
-            userAgent = value + " " + userAgent;
+        Request request = chain.request();
+        String header = request.header("User-Agent");
+        if (header != null && header.equals(DEFAULT_USER_AGENT_HEADER)) {
+            request = chain.request().newBuilder()
+                    .header("User-Agent", userAgent)
+                    .build();
         }
-        Request newRequest = chain.request().newBuilder()
-                .header("User-Agent", userAgent)
-                .build();
-        return chain.proceed(newRequest);
+        return chain.proceed(request);
     }
 }

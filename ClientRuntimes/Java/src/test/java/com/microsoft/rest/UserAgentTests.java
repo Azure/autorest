@@ -42,7 +42,7 @@ public class UserAgentTests {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 String header = chain.request().header("User-Agent");
-                Assert.assertEquals("AutoRest-Java Awesome", header);
+                Assert.assertEquals("Awesome", header);
                 return new Response.Builder()
                             .request(chain.request())
                             .code(200)

@@ -87,21 +87,37 @@ test {
 
 task buildRuntime(type: Exec) {
     workingDir "${projectDir}/../../../../ClientRuntimes/Java"
-    commandLine 'cmd', '/c', 'gradle', 'uploadArchives'
+    if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+        commandLine 'cmd', '/c', 'gradle', 'uploadArchives'
+    } else {
+        commandLine 'gradle', 'uploadArchives'
+    }
 }
 
 task npmrestore(type: Exec) {
     workingDir "${projectDir}/../../../TestServer/server"
-    commandLine 'cmd', '/c', 'npm', 'install'
+    if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+        commandLine 'cmd', '/c', 'npm', 'install'
+    } else {
+        commandLine 'npm', 'install'
+    }
 }
 
 task installforever(type: Exec, dependsOn: 'npmrestore') {
-    commandLine 'cmd', '/c', 'npm', 'install', '-g', 'forever'
+    if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+        commandLine 'cmd', '/c', 'npm', 'install', '-g', 'forever'
+    } else {
+        commandLine 'npm', 'install', '-g', 'forever'
+    }
 }
 
 task runserver(type: Exec, dependsOn: 'installforever') {
     workingDir "${projectDir}/../../../TestServer/server"
-    commandLine 'cmd', '/c', 'forever', 'start', 'startup/www.js'
+    if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+        commandLine 'cmd', '/c', 'forever', 'start', 'startup/www.js'
+    } else {
+        commandLine 'forever', 'start', 'startup/www.js'
+    }
 }
 
 task testcoverage(type: JavaExec, dependsOn: 'runserver') {
@@ -111,7 +127,11 @@ task testcoverage(type: JavaExec, dependsOn: 'runserver') {
 
 task stopserver(type: Exec, dependsOn: 'testcoverage') {
     workingDir "${projectDir}/../../../TestServer/server"
-    commandLine 'cmd', '/c', 'forever', 'stop', 'startup/www.js'
+    if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+        commandLine 'cmd', '/c', 'forever', 'stop', 'startup/www.js'
+    } else {
+        commandLine 'forever', 'stop', 'startup/www.js'
+    }
 }
 
 tasks.compileJava.dependsOn 'clean'
