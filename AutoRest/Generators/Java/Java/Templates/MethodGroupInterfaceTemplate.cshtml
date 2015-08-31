@@ -1,0 +1,74 @@
+﻿@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq;
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodGroupTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponseCallback;
+import retrofit.client.Response;
+@foreach (var importClass in Model.InterfaceImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * An instance of this class provides access to all the operations defined
+ * in @(Model.MethodGroupType).
+ */
+public interface @Model.MethodGroupType {
+    /**
+     * The interface defining all the services for @Model.MethodGroupType to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface @Model.MethodGroupServiceType {
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    Response @(method.Name)(@method.MethodParameterApiDeclaration) throws ServiceException;
+    @EmptyLine
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    void @(method.Name)Async(@method.MethodParameterApiDeclarationWithCallback);
+    @EmptyLine
+    }
+    }
+
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:/**
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    @: *
+    foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    if (method.ReturnType != null)
+    {
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
+    }
+    @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
+    @: */
+    @:@method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
+    @EmptyLine
+    @:/**
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    @: *
+    foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+    @: */
+    @:void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
+    @EmptyLine
+    }
+}
+

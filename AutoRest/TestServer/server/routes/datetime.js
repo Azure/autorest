@@ -10,21 +10,22 @@ var datetime = function(coverage, optionalCoverage) {
     optionalCoverage['putDateTimeMinLocalNegativeOffset']= 0;
         router.put('/max/:type', function(req, res, next) {
         if (req.params.type === 'utc') {
-            if (req.body === '9999-12-31T23:59:59.9999999Z') {
+            if (new Date(req.body).toString() === new Date('9999-12-31T23:59:59.9999999Z').toString()) {
                 coverage['putDateTimeMaxUtc']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like the value provided for max datetime in the req " + util.inspect(req.body));
             }
         } else if (req.params.type === 'localpositiveoffset') {
-            if (req.body === '9999-12-31T09:59:59.9999999Z') {
+            if (new Date(req.body).toString() === new Date('9999-12-31T09:59:59.9999999Z').toString()) {
                 optionalCoverage['putDateTimeMaxLocalPositiveOffset']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like the value provided for max datetime in the req " + util.inspect(req.body));
             }
         } else if (req.params.type === 'localnegativeoffset') {
-            if (req.body === '9999-12-31T23:59:59.9999999-14:00') {
+            if (new Date(req.body).toString() === new Date('9999-12-31T23:59:59.9999999-14:00').toString() ||
+                req.body === '10000-01-01T13:59:59.999Z') {
                 optionalCoverage['putDateTimeMaxLocalNegativeOffset']++;
                 res.status(200).end();
             } else {
@@ -69,21 +70,21 @@ var datetime = function(coverage, optionalCoverage) {
 
     router.put('/min/:type', function(req, res, next) {
         if (req.params.type === 'utc') {
-            if (req.body === '0001-01-01T00:00:00Z') {
+            if (new Date(req.body).toString() === new Date('0001-01-01T00:00:00Z').toString()) {
                 coverage["putDateTimeMinUtc"]++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like the value provided for min datetime in the req " + util.inspect(req.body));
             }
         } else if (req.params.type === 'localpositiveoffset') {
-            if (req.body === '0001-01-01T10:00:00Z' || req.body === '0001-01-01T00:00:00+14:00') {
+            if (req.body === '0001-01-01T10:00:00Z' || new Date(req.body).toString() === new Date('0001-01-01T00:00:00+14:00').toString()) {
                 optionalCoverage["putDateTimeMinLocalPositiveOffset"]++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like the value provided for min datetime in the req " + util.inspect(req.body));
             }
         } else if (req.params.type === 'localnegativeoffset') {
-            if (req.body === '0001-01-01T14:00:00Z' || req.body === '0001-01-01T00:00:00-14:00') {
+            if (new Date(req.body).toString() === new Date('0001-01-01T14:00:00Z').toString()) {
                 optionalCoverage["putDateTimeMinLocalNegativeOffset"]++;
                 res.status(200).end();
             } else {

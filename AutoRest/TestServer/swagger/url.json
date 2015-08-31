@@ -475,6 +475,7 @@
           "parameters": [
             {
               "name": "enumPath",
+              "in": "path",
               "type": "string",
               "description": "send null should throw",
               "enum": [ "red color", "green color", "blue color" ],

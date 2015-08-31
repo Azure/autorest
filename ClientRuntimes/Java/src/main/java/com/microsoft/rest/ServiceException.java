@@ -7,11 +7,8 @@
 
 package com.microsoft.rest;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-
-import java.io.IOException;
+import retrofit.client.Request;
+import retrofit.client.Response;
 
 /**
  * Exception thrown for an invalid response with custom error information.
@@ -19,19 +16,14 @@ import java.io.IOException;
 public class ServiceException extends Exception {
 
     /**
-     * Information about the associated HTTP request.
-     */
-    private HttpRequest request;
-
-    /**
      * Information about the associated HTTP response.
      */
-    private HttpResponse response;
+    private Response response;
 
     /**
-     * The HTTP response object, wrapped in a ServiceExceptionModel.
+     * The HTTP response object.
      */
-    private ServiceExceptionModel errorModel;
+    private Object errorModel;
 
     /**
      * Initializes a new instance of the ServiceException class.
@@ -69,39 +61,21 @@ public class ServiceException extends Exception {
     }
 
     /**
-     * Gets information about the associated HTTP request.
-     *
-     * @return the HTTP request
-     */
-    public HttpRequest getRequest() {
-        return request;
-    }
-
-    /**
      * Gets information about the associated HTTP response.
      *
      * @return the HTTP response
      */
-    public HttpResponse getResponse() {
+    public Response getResponse() {
         return response;
     }
 
     /**
-     * Gets the HTTP response object, wrapped in a ServiceExceptionModel.
+     * Gets the HTTP response object.
      *
      * @return the response object
      */
-    public ServiceExceptionModel getErrorModel() {
+    public Object getErrorModel() {
         return errorModel;
-    }
-
-    /**
-     * Sets the HTTP request.
-     *
-     * @param request the HTTP request
-     */
-    public void setRequest(HttpRequest request) {
-        this.request = request;
     }
 
     /**
@@ -109,16 +83,16 @@ public class ServiceException extends Exception {
      *
      * @param response the HTTP response
      */
-    public void setResponse(HttpResponse response) {
+    public void setResponse(Response response) {
         this.response = response;
     }
 
     /**
-     * Sets the HTTP response object, wrapped in a ServiceExceptionModel.
+     * Sets the HTTP response object.
      *
      * @param errorModel the response object
      */
-    public void setErrorModel(ServiceExceptionModel errorModel) {
+    public void setErrorModel(Object errorModel) {
         this.errorModel = errorModel;
     }
 }

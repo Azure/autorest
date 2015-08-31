@@ -13,14 +13,11 @@ import com.microsoft.rest.ServiceClient;
  * ServiceClientCredentials is the abstraction for credentials used by
  * ServiceClients accessing REST services.
  */
-public abstract class ServiceClientCredentials {
-
+public interface ServiceClientCredentials {
     /**
      * Apply the credentials to the HTTP client builder.
      *
      * @param client the ServiceClient instance
      */
-    public void applyCredentialsFilter(ServiceClient client) {
-        return;
-    }
+    void applyCredentialsFilter(ServiceClient client);
 }

@@ -486,6 +486,10 @@ var httpResponses = function(coverage, optionalCoverage) {
         var scenario = getHttpScenarioName("Failure", req.method, req.params.code);
         if (scenario !== null) {
             updateScenarioCoverage(scenario, req.method);
+            var status = JSON.parse(req.params.code);
+            if (req.params.code === '407') {
+                console.log('@@@ here /' + status);
+            }
             res.status(JSON.parse(req.params.code)).end();
         }
         else {
