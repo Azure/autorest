@@ -96,34 +96,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             /// <summary>
-            /// Long running put request poller, service returns a 500, then a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product GetRetry201CreatingSucceeded200Polling(this ILRORetrysOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).GetRetry201CreatingSucceeded200PollingAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request poller, service returns a 500, then a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetRetry201CreatingSucceeded200PollingAsync( this ILRORetrysOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetRetry201CreatingSucceeded200PollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
             /// Long running put request, service returns a 500, then a 200 to the initial
             /// request, with an entity that contains ProvisioningState=’Creating’. Poll
             /// the endpoint indicated in the Azure-AsyncOperation header for operation
@@ -196,38 +168,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async Task<Product> BeginPutAsyncRelativeRetrySucceededAsync( this ILRORetrysOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 AzureOperationResponse<Product> result = await operations.BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 500, then a 200 to the initial
-            /// request, with an entity that contains ProvisioningState=’Creating’. Poll
-            /// the endpoint indicated in the Azure-AsyncOperation header for operation
-            /// status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product GetAsyncRelativeRetrySucceeded(this ILRORetrysOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).GetAsyncRelativeRetrySucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 500, then a 200 to the initial
-            /// request, with an entity that contains ProvisioningState=’Creating’. Poll
-            /// the endpoint indicated in the Azure-AsyncOperation header for operation
-            /// status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetAsyncRelativeRetrySucceededAsync( this ILRORetrysOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetAsyncRelativeRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

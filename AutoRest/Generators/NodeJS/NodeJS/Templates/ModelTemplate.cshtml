@@ -3,12 +3,23 @@
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.NodeJS.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ModelTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
 'use strict';
 @EmptyLine
-var util = require('util');
+@if (Model.ContainsPropertiesInCompositeType())
+{
+@:var models = require('./index');
 @EmptyLine
-var models = require('./index');
+}
+@if (Model.ContainsPropertiesInSequenceType())
+{
+@:var util = require('util');
 @EmptyLine
+}
+
 /**
  * @@class
  * Initializes a new instance of the @(Model.Name) class.

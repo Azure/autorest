@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -29,7 +30,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             string parameterName = _swaggerParameter.Name;
             SwaggerParameter unwrappedParameter = _swaggerParameter;
-            
+
             if (_swaggerParameter.Reference != null)
             {
                 unwrappedParameter = Modeler.Unwrap(_swaggerParameter);
@@ -55,11 +56,12 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Location = (Generator.ClientModel.ParameterLocation)Enum.Parse(typeof(Generator.ClientModel.ParameterLocation), unwrappedParameter.In.ToString())
             };
             parameter.IsRequired = parameter.IsRequired || parameter.Location == Generator.ClientModel.ParameterLocation.Path;
+            SetConstraints(parameter.Constraints, unwrappedParameter);
 
             parameter.CollectionFormat = unwrappedParameter.CollectionFormat;
             parameter.Documentation = unwrappedParameter.Description;
 
-            if(_swaggerParameter.Reference != null)
+            if (_swaggerParameter.Reference != null)
             {
                 var clientProperty = Modeler.ServiceClient.Properties.First(p => p.Name == unwrappedParameter.Name);
                 parameter.ClientProperty = clientProperty;
@@ -78,7 +80,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
                 parameter.Documentation += "Possible values for this parameter include: " +
                                            string.Join(", ", enumType.Values.Select(v =>
-                                               string.Format(CultureInfo.InvariantCulture, 
+                                               string.Format(CultureInfo.InvariantCulture,
                                                "'{0}'", v.Name)));
             }
             unwrappedParameter.Extensions.ForEach(e => parameter.Extensions[e.Key] = e.Value);

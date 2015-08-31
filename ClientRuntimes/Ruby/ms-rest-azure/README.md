@@ -1,39 +1,48 @@
-# MsRestAzure
+# Intro
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ms_rest_azure`. To experiment with that code, run `bin/console` for an interactive prompt.
+MsRestAzure is a library which supports the Azure clients (SDKs) generated with Autorest tool. It contains core logic and helper classes for error handling and authentication. Also it includes azure specific logic like long polling functionality and Azure application authentication. Usually it is not supposed to be used as a standalone gem but only as a dependency for generated client gems.
 
-TODO: Delete this and the text above, and describe your gem
+# Supported Ruby Versions
 
-## Installation
+* Ruby 1.9.3
+* Ruby 2.0
+* Ruby 2.1
+* Ruby 2.2
 
-Add this line to your application's Gemfile:
+Note: x64 Ruby for Windows is known to have some compatibility issues.
 
-```ruby
-gem 'ms_rest_azure'
+# Installation
+
+install the appropriate gem:
+
+```
+gem install ms_rest_azure
 ```
 
-And then execute:
+and reference it in your code:
 
-    $ bundle
+```Ruby
+require 'ms_rest_azure'
+```
 
-Or install it yourself as:
+# Running tests
 
-    $ gem install ms_rest_azure
+MsRestAzure has only unit tests which doesn't require any preparation, just run 'rspec' command from the gem directory.
 
-## Usage
+# Contribution
 
-TODO: Write usage instructions here
+To start working on the gem the only additional dev dependecy is required - rspec. After you've added a new feature and all specs pass - you're good to go with PR. But before starting any bug/feature - please make sure you've thoroughly discussed it with repository maintainers. This gem already powers a few SDKs and backward compatibility should taken in account.
 
-## Development
+# Adding gem to you generated SDK
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+Reference it in the gemfile and also add this line to your client's gemspec file:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+spec.add_runtime_dependency 'ms_rest_azure', '~> 0.1.0'
+```
 
-## Contributing
+Don't forget to correct the version.
 
-1. Fork it ( https://github.com/[my-github-username]/ms_rest_azure/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+# Provide feedback
+
+Send email to the azsdkteam@microsoft.com or file new issue in this repository.

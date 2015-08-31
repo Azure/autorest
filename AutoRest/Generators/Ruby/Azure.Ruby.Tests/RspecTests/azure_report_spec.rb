@@ -1,11 +1,15 @@
-require_relative 'AzureReport/sdk_requirements'
-include MyNamespace
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/azure_report'
+
+require 'azure_report'
+
+include AzureReportModule
 
 describe 'AutoRestReportService' do
   before(:all) do
     dummyToken = 'dummy12321343423'
-    dummySubscription = '1-1-1-1'
-    @credentials = MsRestAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     @base_url = ENV['StubServerURI']
 

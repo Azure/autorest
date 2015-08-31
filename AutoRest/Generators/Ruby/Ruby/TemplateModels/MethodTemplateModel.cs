@@ -1,5 +1,5 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,29 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
+    /// <summary>
+    /// The model object for regular Ruby methods.
+    /// </summary>
     public class MethodTemplateModel : Method
     {
+        /// <summary>
+        /// The scope provider (used for creating new variables with non-conflict names).
+        /// </summary>
         private readonly IScopeProvider scopeProvider = new ScopeProvider();
 
+        /// <summary>
+        /// Gets the scope.
+        /// </summary>
+        public IScopeProvider Scope
+        {
+            get { return scopeProvider; }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the class MethodTemplateModel.
+        /// </summary>
+        /// <param name="source">The source object.</param>
+        /// <param name="serviceClient">The service client.</param>
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -22,15 +41,19 @@ namespace Microsoft.Rest.Generator.Ruby
             ServiceClient = serviceClient;
         }
 
+        /// <summary>
+        /// Gets the reference to the service client object.
+        /// </summary>
         public ServiceClient ServiceClient { get; set; }
 
+        /// <summary>
+        /// Gets the list of method paramater templates.
+        /// </summary>
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
-        public IScopeProvider Scope
-        {
-            get { return scopeProvider; }
-        }
-
+        /// <summary>
+        /// Gets the list of parameter which need to be included into HTTP header.
+        /// </summary>
         public IEnumerable<Parameter> Headers
         {
             get
@@ -39,6 +62,9 @@ namespace Microsoft.Rest.Generator.Ruby
             }
         }
 
+        /// <summary>
+        /// Gets the URL without query parameters.
+        /// </summary>
         public string UrlWithoutParameters
         {
             get
@@ -70,14 +96,14 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Generate the method parameter declaration
+        /// Gets the method parameter declaration parameters list.
         /// </summary>
         public string MethodParameterDeclaration
         {
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in  LocalParameters)
+                foreach (var parameter in LocalParameters)
                 {
                     string format = (parameter.IsRequired ? "{0}" : "{0} = nil");
                     declarations.Add(string.Format(format, parameter.Name));
@@ -86,6 +112,20 @@ namespace Microsoft.Rest.Generator.Ruby
                 declarations.Add("custom_headers = nil");
 
                 return string.Join(", ", declarations);
+            }
+        }
+
+        /// <summary>
+        /// Gets the method parameter invocation parameters list.
+        /// </summary>
+        public string MethodParameterInvocation
+        {
+            get
+            {
+                var invocationParams = LocalParameters.Select(p => p.Name).ToList();
+                invocationParams.Add("custom_headers");
+
+                return string.Join(", ", invocationParams);
             }
         }
 
@@ -105,7 +145,7 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Get the return type name for the underlyign interface method
+        /// Gets the return type name for the underlyign interface method
         /// </summary>
         public virtual string OperationResponseReturnTypeString
         {
@@ -116,19 +156,34 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Get the type for operation exception
+        /// Gets the type for operation exception
         /// </summary>
         public virtual string OperationExceptionTypeString
         {
             get
             {
-                return "MsRest::HttpOperationException";
+                return "MsRest::HttpOperationError";
             }
         }
 
-        public virtual string InitializeResponseBody 
+        /// <summary>
+        /// Gets the code required to initialize response body.
+        /// </summary>
+        public virtual string InitializeResponseBody
         {
             get { return string.Empty; }
+        }
+
+        /// <summary>
+        /// Gets the list of namespaces where we look for classes that need to
+        /// be instantiated dynamically due to polymorphism.
+        /// </summary>
+        public virtual List<string> ClassNamespaces
+        {
+            get
+            {
+                return new List<string> { };
+            }
         }
 
         /// <summary>
@@ -150,19 +205,14 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
-        public string MakeRequestMethodReference
-        {
-            get { return Group == null ? "make_http_request" : "@client.make_http_request"; }
-        }
-
-        /// <summary>
-        /// Generate a reference to the ServiceClient
-        /// </summary>
         public string ClientReference
         {
             get { return Group == null ? "self" : "@client"; }
         }
 
+        /// <summary>
+        /// Gets the flag indicating whether URL contains path parameters.
+        /// </summary>
         public bool UrlWithPath
         {
             get
@@ -171,39 +221,58 @@ namespace Microsoft.Rest.Generator.Ruby
             }
         }
 
+        /// <summary>
+        /// Gets the formatted status code.
+        /// </summary>
+        /// <param name="code">The status code.</param>
+        /// <returns>Formatted status code.</returns>
         public string GetStatusCodeReference(HttpStatusCode code)
         {
             return string.Format("{0}", (int)code);
         }
 
-        public virtual string CreateDeserializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
+        /// <summary>
+        /// Creates a code in form of string which deserializes given input variable of given type.
+        /// </summary>
+        /// <param name="inputVariable">The input variable.</param>
+        /// <param name="type">The type of input variable.</param>
+        /// <param name="outputVariable">The output variable.</param>
+        /// <returns>The deserialization string.</returns>
+        public virtual string CreateDeserializationString(string inputVariable, IType type, string outputVariable)
         {
             var builder = new IndentedStringBuilder("  ");
+            var tempVariable = "parsed_response";
 
             // Firstly parsing the input json file into temporay variable.
-            builder.AppendLine("{0} = JSON.load({1}) unless {1}.to_s.empty?", "parsed_response", inputVariable);
+            builder.AppendLine("{0} = JSON.load({1}) unless {1}.to_s.empty?", tempVariable, inputVariable);
 
             // Secondly parse each js object into appropriate Ruby type (DateTime, Byte array, etc.)
             // and overwrite temporary variable variable value.
-            string deserializationLogic = type.DeserializeType(this.Scope, "parsed_response", defaultNamespace);
+            string deserializationLogic = type.DeserializeType(this.Scope, tempVariable, ClassNamespaces);
             builder.AppendLine(deserializationLogic);
 
             // Assigning value of temporary variable to the output variable.
-            return builder.AppendLine("{0} = {1}", outputVariable, "parsed_response").ToString();
+            return builder.AppendLine("{0} = {1}", outputVariable, tempVariable).ToString();
         }
 
-        public virtual string CreateSerializationString(string inputVariable, IType type, string outputVariable, string defaultNamespace)
+        /// <summary>
+        /// Creates a code in form of string which serializes given input variable of given type.
+        /// </summary>
+        /// <param name="inputVariable">The input variable.</param>
+        /// <param name="type">The type of input variable.</param>
+        /// <param name="outputVariable">The output variable.</param>
+        /// <returns>The serialization code.</returns>
+        public virtual string CreateSerializationString(string inputVariable, IType type, string outputVariable)
         {
             var builder = new IndentedStringBuilder("  ");
 
             // Firstly recursively serialize each component of the object.
-            string serializationLogic = type.SerializeType(this.Scope, inputVariable, defaultNamespace);
+            string serializationLogic = type.SerializeType(this.Scope, inputVariable, ClassNamespaces);
 
             builder.AppendLine(serializationLogic);
-            builder.AppendLine("request_content = {0}", inputVariable);
 
             // After that - generate JSON object after serializing each component.
-            return builder.AppendLine("{0} = JSON.generate(request_content, quirks_mode: true)", outputVariable).ToString();
+            return builder.AppendLine("{0} = JSON.generate({1}, quirks_mode: true)", outputVariable, inputVariable).ToString();
         }
 
         /// <summary>
@@ -219,7 +288,7 @@ namespace Microsoft.Rest.Generator.Ruby
             // Filling path parameters (which are directly in the url body).
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                builder.AppendLine("{0}['{{{1}}}'] = ERB::Util.url_encode({2})",
+                builder.AppendLine("{0}['{{{1}}}'] = ERB::Util.url_encode({2}) if {0}.include?('{{{1}}}')",
                     inputVariableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(pathParameter.Name));
@@ -231,7 +300,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 builder.AppendLine("{0} = URI.join({1}.base_url, {2})", outputVariableName, ClientReference, inputVariableName);
             }
 
-            // Filling query parameters (which are directly in the url query part). 
+            // Filling query parameters (which are directly in the url query part).
             var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
 
             if (queryParametres.Any())
@@ -239,29 +308,77 @@ namespace Microsoft.Rest.Generator.Ruby
                 builder.AppendLine("properties = {{ {0} }}",
                     string.Join(", ", queryParametres.Select(x => string.Format("'{0}' => {1}", x.SerializedName, x.Name))));
 
+                builder.AppendLine(SaveExistingUrlItems("properties", outputVariableName));
+
                 builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
                 builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{ERB::Util.url_encode(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
             }
 
-            builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
+            builder
+                .AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
 
-            return builder.ToString();
-        }
-
-        public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
-        {
-            var builder = new IndentedStringBuilder("  ");
-
-            // TODO: convert it to Ruby.
-            //builder.AppendLine("# trim all duplicate forward slashes in the url");
-            //builder.AppendLine("var regex = /([^:]\\/)\\/+/gi;");
-            //builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);
-            
             return builder.ToString();
         }
 
         /// <summary>
-        /// Gets the expression for default header setting. 
+        /// Saves url items from the URL into collection.
+        /// </summary>
+        /// <param name="hashName">The name of the collection save url items to.</param>
+        /// <param name="variableName">The URL variable.</param>
+        /// <returns>Generated code of saving url items.</returns>
+        public virtual string SaveExistingUrlItems(string hashName, string variableName)
+        {
+            var builder = new IndentedStringBuilder("  ");
+
+            // Saving existing URL properties into properties hash.
+            builder
+                .AppendLine("unless {0}.query.nil?", variableName)
+                .Indent()
+                    .AppendLine("{0}.query.split('&').each do |url_item|", variableName)
+                    .Indent()
+                        .AppendLine("url_items_parts = url_item.split('=')")
+                        .AppendLine("{0}[url_items_parts[0]] = url_items_parts[1]", hashName)
+                    .Outdent()
+                .AppendLine("end")
+                .Outdent()
+                .AppendLine("end");
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Ensures that there is no duplicate forward slashes in the url.
+        /// </summary>
+        /// <param name="urlVariableName">The url variable.</param>
+        /// <returns>Updated url.</returns>
+        public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
+        {
+            var builder = new IndentedStringBuilder("  ");
+
+            // Removing duplicate forward slashes.
+            builder.AppendLine(@"corrected_url = {0}.to_s.gsub(/([^:])\/\//, '\1/')", urlVariableName);
+            builder.AppendLine(@"{0} = URI.parse(corrected_url)", urlVariableName);
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Gets the list of middelwares required for HTTP requests.
+        /// </summary>
+        public virtual List<string> FaradeyMiddlewares
+        {
+            get
+            {
+                return new List<string>()
+                {
+                    "MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02",
+                    ":cookie_jar"
+                };
+            }
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting.
         /// </summary>
         public virtual string SetDefaultHeaders
         {

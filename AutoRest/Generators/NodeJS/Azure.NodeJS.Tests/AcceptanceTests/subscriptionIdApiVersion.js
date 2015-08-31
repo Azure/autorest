@@ -7,9 +7,9 @@ var should = require('should');
 var http = require('http');
 var util = require('util');
 var assert = require('assert');
-var msRestAzure = require('ms-rest-Azure');
+var msRestAzure = require('ms-rest-azure');
 
-var azureUrlClient = require('../Expected/AcceptanceTests/SubscriptionIdApiVersion/MicrosoftAzureTestUrl');
+var azureUrlClient = require('../Expected/AcceptanceTests/SubscriptionIdApiVersion/microsoftAzureTestUrl');
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';
 var credentials = new msRestAzure.TokenCredentials(dummyToken);

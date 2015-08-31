@@ -1,16 +1,19 @@
-require 'securerandom'
-require_relative 'ResourceFlattening/sdk_requirements'
+# encoding: utf-8
 
-include MyNamespace
-include MyNamespace::Models
+$: << 'RspecTests/Generated/resource_flattening'
+
+require 'securerandom'
+require 'resource_flattening'
+
+include ResourceFlatteningModule
+include ResourceFlatteningModule::Models
 
 describe 'ResourceFlattening' do
   before(:all) do
     @base_url = ENV['StubServerURI']
 
     dummyToken = 'dummy12321343423'
-    dummySubscription = '1-1-1-1'
-    @credentials = MsRestAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     @client = AutoRestResourceFlatteningTestService.new(@credentials, @base_url)
 

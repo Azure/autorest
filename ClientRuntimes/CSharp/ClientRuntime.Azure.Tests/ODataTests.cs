@@ -14,12 +14,14 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void DefaultODataQueryTest()
         {
-            var date = new DateTime(2013, 11, 5);
+            var date = DateTime.SpecifyKind(new DateTime(2013, 11, 5), DateTimeKind.Utc);
+            var date2 = DateTime.SpecifyKind(new DateTime(2004, 11, 5), DateTimeKind.Utc);
 
             var result = FilterString.Generate<Param1>(p => p.Foo == "foo" || p.Val < 20 || p.Foo == "bar" && p.Val == null &&
-                p.Date > new DateTime(2004, 11, 5) && p.Date < date && p.Values.Contains("x"));
-            string time1 = Uri.EscapeDataString("2004-11-05T08:00:00Z");
-            string time2 = Uri.EscapeDataString("2013-11-05T08:00:00Z");
+                p.Date > date2 &&
+                p.Date < date && p.Values.Contains("x"));
+            string time1 = Uri.EscapeDataString("2004-11-05T00:00:00Z");
+            string time2 = Uri.EscapeDataString("2013-11-05T00:00:00Z");
             string expected = string.Format("foo eq 'foo' or Val lt 20 or foo eq 'bar' and Val eq null and d gt '{0}' " +
                 "and d lt '{1}' and vals/any(c: c eq 'x')", time1, time2);
             Assert.Equal(expected, result);
@@ -115,7 +117,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void UnsupportedMethodThrowsNotSupportedException()
         {
-            var param = new InputParam2
+			new InputParam2
             {
                 Param = new InputParam1
                 {

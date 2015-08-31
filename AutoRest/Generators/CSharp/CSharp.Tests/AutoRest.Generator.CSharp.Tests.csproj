@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(SolutionDir)\packages\xunit.runner.visualstudio.2.1.0-beta4-build1093\build\net20\xunit.runner.visualstudio.props" Condition="Exists('$(SolutionDir)\packages\xunit.runner.visualstudio.2.1.0-beta4-build1093\build\net20\xunit.runner.visualstudio.props')" />
-  <Import Project="$(SolutionDir)\packages\xunit.core.2.1.0-beta4-build3050\build\portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props" Condition="Exists('$(SolutionDir)\packages\xunit.core.2.1.0-beta4-build3050\build\portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" />
+  <Import Project="$(SolutionDir)\packages\xunit.runner.visualstudio.2.1.0-beta4-build1109\build\net20\xunit.runner.visualstudio.props" Condition="Exists('$(SolutionDir)\packages\xunit.runner.visualstudio.2.1.0-beta4-build1109\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="$(SolutionDir)\packages\xunit.core.2.1.0-beta4-build3109\build\portable-net45+netcore45+wp8+wpa81\xunit.core.props" Condition="Exists('$(SolutionDir)\packages\xunit.core.2.1.0-beta4-build3109\build\portable-net45+netcore45+wp8+wpa81\xunit.core.props')" />
   <PropertyGroup>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -15,8 +15,14 @@
     <RestorePackages>true</RestorePackages>
     <AutoRestTest>true</AutoRestTest>
     <NuGetPackageImportStamp>c999b926</NuGetPackageImportStamp>
+    <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Net45-Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <PropertyGroup>
     <NoWarn>1570;1591</NoWarn>
   </PropertyGroup>
@@ -28,10 +34,10 @@
       <HintPath>$(SolutionDir)\packages\xunit.abstractions.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.abstractions.dll</HintPath>
     </Reference>
     <Reference Include="xunit.assert">
-      <HintPath>$(SolutionDir)\packages\xunit.assert.2.1.0-beta4-build3050\lib\portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\xunit.assert.2.1.0-beta4-build3109\lib\portable-net45+netcore45+wp8+wpa81\xunit.assert.dll</HintPath>
     </Reference>
     <Reference Include="xunit.core">
-      <HintPath>$(SolutionDir)\packages/xunit.extensibility.core.2.1.0-beta4-build3050/lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\xunit.extensibility.core.2.1.0-beta4-build3109\lib\portable-net45+netcore45+wp8+wpa81\xunit.core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -60,104 +66,107 @@
       <Link>AutoRest.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\azure-report.json">
+    <None Include="..\..\..\TestServer\swagger\azure-report.json">
       <Link>Swagger\azure-report.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\azure-special-properties.json">
+    <None Include="..\..\..\TestServer\swagger\azure-special-properties.json">
       <Link>Swagger\azure-special-properties.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-array.json">
+    <None Include="..\..\..\TestServer\swagger\body-array.json">
       <Link>Swagger\body-array.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-boolean.json">
+    <None Include="..\..\..\TestServer\swagger\body-boolean.json">
       <Link>Swagger\body-boolean.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-byte.json">
+    <None Include="..\..\..\TestServer\swagger\body-byte.json">
       <Link>Swagger\body-byte.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-complex.json">
+    <None Include="..\..\..\TestServer\swagger\body-complex.json">
       <Link>Swagger\body-complex.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-date.json">
+    <None Include="..\..\..\TestServer\swagger\body-date.json">
       <Link>Swagger\body-date.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-datetime.json">
+    <None Include="..\..\..\TestServer\swagger\body-datetime.json">
       <Link>Swagger\body-datetime.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-dictionary.json">
+    <None Include="..\..\..\TestServer\swagger\body-dictionary.json">
       <Link>Swagger\body-dictionary.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-file.json">
+    <None Include="..\..\..\TestServer\swagger\body-file.json">
       <Link>Swagger\body-file.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-integer.json">
+    <None Include="..\..\..\TestServer\swagger\body-integer.json">
       <Link>Swagger\body-integer.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-number.json">
+    <None Include="..\..\..\TestServer\swagger\body-number.json">
       <Link>Swagger\body-number.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\body-string.json">
+    <None Include="..\..\..\TestServer\swagger\body-string.json">
       <Link>Swagger\body-string.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\head.json">
+    <None Include="..\..\..\TestServer\swagger\head.json">
       <Link>Swagger\head.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\header.json">
+    <None Include="..\..\..\TestServer\swagger\header.json">
       <Link>Swagger\header.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\httpInfrastructure.json">
+    <None Include="..\..\..\TestServer\swagger\httpInfrastructure.json">
       <Link>Swagger\httpInfrastructure.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\lro.json">
+    <None Include="..\..\..\TestServer\swagger\lro.json">
       <Link>Swagger\lro.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\paging.json">
+    <None Include="..\..\..\TestServer\swagger\paging.json">
       <Link>Swagger\paging.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\report.json">
+    <None Include="..\..\..\TestServer\swagger\report.json">
       <Link>Swagger\report.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\required-optional.json">
+    <None Include="..\..\..\TestServer\swagger\required-optional.json">
       <Link>Swagger\required-optional.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\resource-flattening-reference.json">
+    <None Include="..\..\..\TestServer\swagger\resource-flattening-reference.json">
       <Link>Swagger\resource-flattening-reference.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\resource-flattening.json">
+    <None Include="..\..\..\TestServer\swagger\resource-flattening.json">
       <Link>Swagger\resource-flattening.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\subscriptionId-apiVersion.json">
+    <None Include="..\..\..\TestServer\swagger\subscriptionId-apiVersion.json">
       <Link>Swagger\subscriptionId-apiVersion.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\AcceptanceTests\swagger\url.json">
+    <None Include="..\..\..\TestServer\swagger\url.json">
       <Link>Swagger\url.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\..\TestServer\swagger\validation.json">
+      <Link>Swagger\validation.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
-    <None Include="RegenerateExpectedClasses.ps1" />
     <None Include="Swagger\swagger-mirror-polymorphic.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -178,6 +187,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Expected\**\*.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -193,15 +205,18 @@
     <Compile Include="Utilities\ServiceController.cs" />
     <Compile Include="AcceptanceTestOrderer.cs" />
     <Compile Include="Utilities\TestExtensions.cs" />
-    <Compile Include="Expected\**\*.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Expected\**\*.cs"/>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\AcceptanceTests\server\routes\sample.png">
+    <Content Include="..\..\..\TestServer\server\routes\sample.png">
       <Link>sample.png</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties __JSONSchema="http://json.schemastore.org/swagger-2.0" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

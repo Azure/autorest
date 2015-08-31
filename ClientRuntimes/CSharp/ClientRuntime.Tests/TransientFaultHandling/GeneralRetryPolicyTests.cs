@@ -18,7 +18,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
             try
             {
                 // First, instantiate a policy directly bypassing the configuration data validation.
-                var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(-1);
+                new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(-1);
                 Assert.True(false, "When the RetryCount is negative, the retry policy should throw an exception.");
             }
             catch (ArgumentOutOfRangeException ex)
@@ -33,7 +33,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.TransientFaultHandling
             try
             {
                 // First, instantiate a policy directly bypassing the configuration data validation.
-                var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(-2));
+                new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(3, TimeSpan.FromMilliseconds(-2));
                 Assert.True(false, "When the RetryInterval is negative, the retry policy should throw an exception.");
             }
             catch (ArgumentOutOfRangeException ex)

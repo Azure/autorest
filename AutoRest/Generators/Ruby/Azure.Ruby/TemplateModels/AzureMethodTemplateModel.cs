@@ -1,5 +1,5 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,9 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
+    /// <summary>
+    /// The model object for Azure methods.
+    /// </summary>
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
         /// <summary>
@@ -39,7 +42,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
         }
-        
+
         /// <summary>
         /// Gets the Get method model.
         /// </summary>
@@ -76,14 +79,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 string variableName = pathParameter.Type.ToString(pathParameter.Name);
 
-                string addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = ERB::Util.url_encode({2})",
+                string addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = ERB::Util.url_encode({2}) if {0}.include?('{{{1}}}')",
                     inputVariableName,
                     pathParameter.SerializedName,
                     variableName);
 
                 if (pathParameter.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
                 {
-                    addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = {2}",
+                    addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = {2} if {0}.include?('{{{1}}}')",
                         inputVariableName,
                         pathParameter.SerializedName,
                         variableName);
@@ -102,14 +105,16 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 builder.AppendLine("{0} = URI.parse({1})", outputVariableName, inputVariableName);
             }
 
-            // Filling query parameters (which are directly in the url query part). 
+            // Filling query parameters (which are directly in the url query part).
             var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
 
             builder.AppendLine("properties = {}");
 
             foreach (var param in queryParametres)
             {
-                if (param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
+                bool hasSkipUrlExtension = param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension);
+
+                if (hasSkipUrlExtension)
                 {
                     builder.AppendLine("properties['{0}'] = {1} unless {1}.nil?", param.SerializedName, param.Name);
                 }
@@ -118,6 +123,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     builder.AppendLine("properties['{0}'] = ERB::Util.url_encode({1}.to_s) unless {1}.nil?", param.SerializedName, param.Name);
                 }
             }
+
+            builder.AppendLine(SaveExistingUrlItems("properties", outputVariableName));
 
             builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
             builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{value}}\" }}.compact.join('&')", outputVariableName);
@@ -132,16 +139,12 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         /// <param name="variableName">Variable name which keeps the response.</param>
         /// <param name="type">Type of response.</param>
-        /// <param name="isRequired">If the property required.</param>
-        /// <param name="defaultNamespace">The namespace.</param>
         /// <returns>Ruby code in form of string for deserializing polling response.</returns>
-        public string DeserializePollingResponse(string variableName, IType type, bool isRequired, string defaultNamespace)
+        public string DeserializePollingResponse(string variableName, IType type)
         {
-            // TODO: handle required property via "unless deserialized_property.nil?"
-
             var builder = new IndentedStringBuilder("  ");
 
-            string serializationLogic = type.DeserializeType(this.Scope, variableName, defaultNamespace);
+            string serializationLogic = type.DeserializeType(this.Scope, variableName, ClassNamespaces);
             return builder.AppendLine(serializationLogic).ToString();
         }
 
@@ -169,21 +172,36 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Gets the expression for default header setting. 
+        /// Gets the list of namespaces where we look for classes that need to
+        /// be instantiated dynamically due to polymorphism.
+        /// </summary>
+        public override List<string> ClassNamespaces
+        {
+            get
+            {
+                return new List<string>
+				{
+					"MsRestAzure"
+				};
+            }
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting.
         /// </summary>
         public override string SetDefaultHeaders
         {
             get
             {
                 IndentedStringBuilder sb = new IndentedStringBuilder();
-                sb.AppendLine("http_request['x-ms-client-request-id'] = SecureRandom.uuid")
+                sb.AppendLine("request_headers['x-ms-client-request-id'] = SecureRandom.uuid")
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
             }
         }
 
         /// <summary>
-        /// Returns AzureOperationResponse generic type declaration.
+        /// Gets AzureOperationResponse generic type declaration.
         /// </summary>
         public override string OperationResponseReturnTypeString
         {
@@ -194,16 +212,32 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Get the type for operation exception.
+        /// Gets the list of middelwares required for HTTP requests.
+        /// </summary>
+        public override List<string> FaradeyMiddlewares
+        {
+            get
+            {
+                return new List<string>()
+                {
+                    "MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02",
+                    ":cookie_jar"
+                };
+            }
+        }
+
+        /// <summary>
+        /// Gets the type for operation exception.
         /// </summary>
         public override string OperationExceptionTypeString
         {
             get
             {
-                //if (DefaultResponse == null || DefaultResponse.Name == "CloudError")
-                //{
-                //    return "CloudException";
-                //}
+                if (DefaultResponse == null || DefaultResponse.Name == "CloudError")
+                {
+                    return "MsRestAzure::AzureOperationError";
+                }
+
                 return base.OperationExceptionTypeString;
             }
         }

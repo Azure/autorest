@@ -36,7 +36,7 @@
     "url": "http://github.com/Azure/AutoRest/issues"
   },
   "scripts": {
-    "pretest": "npm install --prefix ../../AcceptanceTests/server && npm install", 
+    "pretest": "npm install --prefix ../../../TestServer/server && npm install",
     "test": "npm -s run-script jshint && npm -s run-script unit",
     "unit": "node unit.js testlist.txt list",
     "xunit": "node unit.js testlist.txt",

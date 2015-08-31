@@ -4,9 +4,11 @@
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ModelTemplateModel>
 @Header("// ")
+@EmptyLine
 namespace @(Settings.Namespace).Models
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using Newtonsoft.Json;
     using Microsoft.Rest;
@@ -62,10 +64,10 @@ namespace @(Settings.Namespace).Models
             @:}
             @:
             }
-            foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
+            foreach (var property in Model.Properties.Where(p => p.Constraints.Any() || !(p.Type is PrimaryType)))
             {
                 anythingToValidate = true;
-            @:@property.Type.ValidateType(Model.Scope, string.Format("this.{0}", property.Name))
+            @:@property.Type.ValidateType(Model.Scope, string.Format("this.{0}", property.Name), property.Constraints)
             @:
             }
             if (!anythingToValidate)

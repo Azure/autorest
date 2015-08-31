@@ -6,58 +6,70 @@
 
 @if (!Model.IsLongRunningOperation)
 {
-    @:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
+@:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
 }
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
 {
-    <text>
-    #
-    # @WrapComment("# ", Model.Documentation)
-    @foreach (var parameter in Model.Parameters)
-    {
-        @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
-    }
-    @WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add type"))
-    #
-    def @(Model.Name)(@(Model.MethodParameterDeclaration))
-      # Send request
-      response = begin_@(Model.Name)(@(Model.MethodParameterDeclaration)).value!
-      @EmptyLine
-      # Defining deserialization method.
-      deserialize_method = lambda do |parsed_response|
-        @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType, false, Settings.Namespace))
-      end
-      @EmptyLine
-      # Waiting for response.
-      return @(Model.ClientReference).get_post_or_delete_operation_result(response, nil, deserialize_method)
+<text>
+#
+@WrapComment("# ", Model.Documentation)
+@foreach (var parameter in Model.LocalParameters)
+{
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+}
+@WrapComment("# ", "@return [Concurrent::Promise] promise which provides async access to http response.")
+#
+def @(Model.Name)(@(Model.MethodParameterDeclaration))
+  # Send request
+  promise = begin_@(Model.Name)(@(Model.MethodParameterInvocation))
+  @EmptyLine
+
+  promise = promise.then do |response|
+    # Defining deserialization method.
+    deserialize_method = lambda do |parsed_response|
+      @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType))
     end
-    </text>
+
+   @EmptyLine
+   # Waiting for response.
+   @(Model.ClientReference).get_post_or_delete_operation_result(response, nil, deserialize_method)
+  end
+
+  @EmptyLine
+  promise
+end
+</text>
 }
 else
 {
-    <text>
-    #
-    # @WrapComment("# ", Model.Documentation)
-    @foreach (var parameter in Model.Parameters)
-    {
-      @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
-    }
-    @WrapComment("# ", string.Format("@return [{0}] TODO: add text", "TODO: add type"))
-    #
-    def @(Model.Name)(@(Model.MethodParameterDeclaration))
-      # Send request
-      response = begin_@(Model.Name)(@(Model.MethodParameterDeclaration)).value!
-      @EmptyLine
-      # Defining polling method.
-      get_method = lambda { self.@(Model.GetMethod.Name)(@(Model.GetMethod.MethodParameterDeclaration)) }
-      @EmptyLine
-      # Defining deserialization method.
-      deserialize_method = lambda do |parsed_response|
-        @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType, false, Settings.Namespace))
-      end
-      @EmptyLine
-      # Waiting for response.
-      return @(Model.ClientReference).get_put_operation_result(response, get_method, nil, deserialize_method)
+<text>
+#
+@WrapComment("# ", Model.Documentation)
+@foreach (var parameter in Model.Parameters)
+{
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+}
+#
+@WrapComment("# ", "@return [Concurrent::Promise] promise which provides async access to http response.")
+#
+def @(Model.Name)(@(Model.MethodParameterDeclaration))
+  # Send request
+  promise = begin_@(Model.Name)(@(Model.MethodParameterInvocation))
+  @EmptyLine
+
+  promise = promise.then do |response|
+    # Defining deserialization method.
+    deserialize_method = lambda do |parsed_response|
+      @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType))
     end
-    </text>
+
+    @EmptyLine
+    # Waiting for response.
+    @(Model.ClientReference).get_put_operation_result(response, custom_headers, deserialize_method)
+  end
+
+  @EmptyLine
+  promise
+end
+</text>
 }

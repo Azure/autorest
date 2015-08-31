@@ -179,7 +179,7 @@ namespace Microsoft.Rest.Generator
             var comment = WrapComment(prefix, Settings.Header);
             if(!string.IsNullOrEmpty(comment))
             {
-                return comment + Environment.NewLine + EmptyLine;
+                return comment + Environment.NewLine;
             }
             return comment;
         }

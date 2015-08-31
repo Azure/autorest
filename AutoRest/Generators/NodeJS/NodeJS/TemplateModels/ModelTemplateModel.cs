@@ -78,6 +78,19 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        public bool ContainsPropertiesInSequenceType()
+        {
+            var sample = ComposedProperties.FirstOrDefault(p => p.Type is SequenceType);
+            return sample != null;
+        }
+
+        public bool ContainsPropertiesInCompositeType()
+        {
+            var sample = ComposedProperties.FirstOrDefault(p => 
+                p.Type is CompositeType || p.Type is SequenceType && (p.Type as SequenceType).ElementType is CompositeType);
+            return sample != null;
+        }
+
         public string ValidateProperty(string objectName, Property property)
         {
             if (property == null)

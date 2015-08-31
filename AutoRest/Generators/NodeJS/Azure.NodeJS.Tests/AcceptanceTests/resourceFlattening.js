@@ -10,7 +10,7 @@ var assert = require('assert');
 var msRestAzure = require('ms-rest-azure');
 var msRest = require('ms-rest');
 
-var flatteningClient = require('../Expected/AcceptanceTests/ResourceFlattening/AutoRestResourceFlatteningTestService');
+var flatteningClient = require('../Expected/AcceptanceTests/ResourceFlattening/autoRestResourceFlatteningTestService');
 
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';

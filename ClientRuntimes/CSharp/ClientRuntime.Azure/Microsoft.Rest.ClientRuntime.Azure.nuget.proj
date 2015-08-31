@@ -5,7 +5,7 @@
     Microsoft.Rest.ClientRuntime.Azure
     -->
     <SdkNuGetPackage Include="Microsoft.Rest.ClientRuntime.Azure">
-      <PackageVersion>1.0.20</PackageVersion>
+      <PackageVersion>1.0.21</PackageVersion>
       <Folder>ClientRuntimes/CSharp/ClientRuntime.Azure/</Folder>
       <Name>Microsoft.Rest.ClientRuntime.Azure</Name>
       <Hidden>true</Hidden>

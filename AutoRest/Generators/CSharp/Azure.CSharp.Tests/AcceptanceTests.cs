@@ -154,9 +154,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 exception = Assert.Throws<CloudException>(() => client.LROs.PostAsyncRetrycanceled());
                 Assert.Contains("Long running operation failed with status 'Canceled'", exception.Message,
                     StringComparison.Ordinal);
-                client.LROs.PostAsyncRetrySucceeded();
-                client.LROs.PostAsyncNoRetrySucceeded();
-                client.LROs.PostAsyncNoRetrySucceeded();
+                Product prod = client.LROs.PostAsyncRetrySucceeded();
+                Assert.Equal("100", prod.Id);
+                prod = client.LROs.PostAsyncNoRetrySucceeded();
+                Assert.Equal("100", prod.Id);
                 var sku = client.LROs.Post200WithPayload();
                 Assert.Equal("1", sku.Id);
                 // Retryable errors

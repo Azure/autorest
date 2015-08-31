@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Ruby
@@ -36,7 +35,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 "unless",   "begin",    "ensure",   "redo",     "until",
                 "break",    "false",    "rescue",   "when",     "case",
                 "for",      "retry",    "while",    "class",    "if",
-                "return",   "while",    "def",      "in",       "self",   
+                "return",   "while",    "def",      "in",       "self",
                 "__file__", "defined?", "module",   "super",    "__line__",
                 "yield"
             }.ForEach(s => ReservedWords.Add(s));
@@ -70,10 +69,10 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Returns the correct method name.
+        /// Returns name for the method which doesn't contain forbidden characters for current language.
         /// </summary>
-        /// <param name="name">The name of method.</param>
-        /// <returns>Corrected method name.</returns>
+        /// <param name="name">The intended name of method.</param>
+        /// <returns>The corrected name of method.</returns>
         public override string GetMethodName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -84,33 +83,55 @@ namespace Microsoft.Rest.Generator.Ruby
             return UnderscoreCase(RubyRemoveInvalidCharacters(GetEscapedReservedName(name, "Operation")));
         }
 
+        /// <summary>
+        /// Returns name for the field which doesn't contain forbidden characters for current language.
+        /// </summary>
+        /// <param name="name">The intended name of field.</param>
+        /// <returns>The corrected name of field.</returns>
         public override string GetFieldName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 return name;
             }
+
             return GetVariableName(name);
         }
 
+        /// <summary>
+        /// Returns name for the property which doesn't contain forbidden characters for current language.
+        /// </summary>
+        /// <param name="name">The intended name of property.</param>
+        /// <returns>The corrected name of property.</returns>
         public override string GetPropertyName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 return name;
             }
+
             return UnderscoreCase(RubyRemoveInvalidCharacters(GetEscapedReservedName(name, "Property")));
         }
 
+        /// <summary>
+        /// Returns name for the variable which doesn't contain forbidden characters for current language.
+        /// </summary>
+        /// <param name="name">The intended name of variable.</param>
+        /// <returns>The corrected name of variable.</returns>
         public override string GetVariableName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 return name;
             }
+
             return UnderscoreCase(RubyRemoveInvalidCharacters(GetEscapedReservedName(name, "Variable")));
         }
 
+        /// <summary>
+        /// Normalizes client model - corrects names/types to adapt them to current language.
+        /// </summary>
+        /// <param name="client">The service client.</param>
         public override void NormalizeClientModel(ServiceClient client)
         {
             if (client == null)
@@ -139,11 +160,6 @@ namespace Microsoft.Rest.Generator.Ruby
                     {
                         parameter.Name = scope.GetVariableName(parameter.Name);
                     }
-
-                    parameter.Name = scope.GetVariableName(parameter.Name);
-
-                    // TODO: verify whether we need set required.
-                    // parameter.SetRequiredOptional();
                 }
             }
         }
@@ -153,7 +169,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         /// <param name="type">Type to normalize.</param>
         /// <returns>Normalized type.</returns>
-        protected override IType NormalizeType(IType type)
+        public override IType NormalizeType(IType type)
         {
             if (type == null)
             {
@@ -225,7 +241,6 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     enumType.Values[i].Name = GetEnumMemberName(RubyRemoveInvalidCharacters(enumType.Values[i].Name));
                 }
-                
             }
 
             return enumType;
@@ -264,7 +279,7 @@ namespace Microsoft.Rest.Generator.Ruby
             }
             else if (primaryType == PrimaryType.Stream)
             {
-                //TODO: verify this
+                // TODO: Ruby doesn't supports streams.
                 primaryType.Name = "System.IO.Stream";
             }
             else if (primaryType == PrimaryType.String)

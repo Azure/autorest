@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsHttp
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;

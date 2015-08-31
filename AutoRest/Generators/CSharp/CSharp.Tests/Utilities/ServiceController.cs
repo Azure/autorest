@@ -20,6 +20,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         private ProcessOutputListener _listener;
 
+        private object _sync = new object();
         public ServiceController()
         {
             Port = GetRandomPortNumber();
@@ -31,7 +32,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         /// </summary>
         private static string AcceptanceTestsPath
         {
-            get { return @"..\..\..\..\AcceptanceTests\server"; }
+            get { return Path.Combine(Environment.GetEnvironmentVariable("AUTOREST_TEST_SERVER_PATH"), "server"); }
         }
 
         /// <summary>
@@ -69,10 +70,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         /// </summary>
         public void EnsureService()
         {
-            // TODO: not thread safe. Add a lock.
-            if (ServiceProcess == null)
+            lock (_sync)
             {
-                StartServiceProcess();
+                if (ServiceProcess == null)
+                {
+                    StartServiceProcess();
+                }
             }
         }
 

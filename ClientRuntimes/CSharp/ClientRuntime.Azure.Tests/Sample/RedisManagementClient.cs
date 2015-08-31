@@ -904,12 +904,12 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task BeginDeleteAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse result = await operations.BeginDeleteWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            await operations.BeginDeleteWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return;
         }
         public static async Task DeleteAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse result = await operations.DeleteWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            await operations.DeleteWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return;
         }
 

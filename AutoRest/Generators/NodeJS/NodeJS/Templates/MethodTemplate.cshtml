@@ -10,7 +10,7 @@
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @:* @@param {@parameter.Type.Name} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
+ @:* @@param {@MethodTemplateModel.GetParameterDocumentationType(parameter)} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
  @:*
 }
 @WrapComment(" * ", " @param {object} [options]")
@@ -19,7 +19,7 @@
  *
 @WrapComment(" * ",  " @param {function} callback")
  *
-@WrapComment(" * ",  " @returns {Stream} The Response stream")
+@WrapComment(" * ",  " @returns {stream} The Response stream")
  */
 @(Model.OperationName).prototype.@(Model.Name.ToCamelCase()) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);

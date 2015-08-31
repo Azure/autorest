@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8e7b23e3-7e9f-478b-8f69-ab0b531647ab}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>
     </StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
@@ -120,7 +120,6 @@
     <Content Include="bin\Net45-Debug\Swagger\swagger-simple-spec.json" />
     <Content Include="bin\Net45-Debug\Swagger\swagger-streaming.json" />
     <Content Include="packages.config" />
-    <Content Include="RegenerateExpectedClasses.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AcceptanceTests" />

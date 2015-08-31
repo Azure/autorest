@@ -6,11 +6,9 @@
     <NightlyBuildVersion Condition=" $(NightlyBuild) == 'true' ">-Nightly$(NightlyBuildVersion)</NightlyBuildVersion>
   </PropertyGroup>
 
-  <Import Project="$(LibrarySourceFolder)\ClientRuntimes\**\*.nuget.proj"
-      Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime' "/>
-
-  <Import Project="$(LibrarySourceFolder)\AutoRest\**\*.nuget.proj"
-      Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator' "/>
+  <Import Project="$(LibrarySourceFolder)\ClientRuntimes\**\*.nuget.proj" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime' "/>
+  
+  <Import Project="$(LibrarySourceFolder)\AutoRest\AutoRest.Core\*.nuget.proj" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator' "/>
 
   <PropertyGroup>
     <NuGetVerbosity>normal</NuGetVerbosity>

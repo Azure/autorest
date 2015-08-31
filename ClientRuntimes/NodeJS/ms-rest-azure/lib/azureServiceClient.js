@@ -38,11 +38,10 @@ util.inherits(AzureServiceClient, msrest.ServiceClient);
 /**
  * Poll Azure long running PUT operation.
  * @param {object} [resultOfInitialRequest] - Response of the initial request for the long running operation.
- * @param {function} [poller] - Poller function used to poll operation result.
  * @param {object} [options]
  * @param {object} [options.customHeaders] headers that will be added to request
  */
-AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRequest, poller, options, callback) {
+AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfInitialRequest, options, callback) {
   var self = this;
 
   if(!callback && typeof options === 'function') {
@@ -57,10 +56,6 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
     return callback(new Error('Missing resultOfInitialRequest parameter'));
   }
   
-  if (!poller) {
-    return callback(new Error('Missing poller parameter'));
-  }
-  
   if (resultOfInitialRequest.response.statusCode !== 200 &&
       resultOfInitialRequest.response.statusCode !== 201 &&
       resultOfInitialRequest.response.statusCode !== 202) {
@@ -69,6 +64,7 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
   }
   
   var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
+  var resourceUrl = resultOfInitialRequest.request.url;
   this._options = options;
   
   async.whilst(
@@ -83,7 +79,7 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
     function (callback) {
       setTimeout(function () {
         if (pollingState.azureAsyncOperationHeaderLink) {
-          self._updateStateFromAzureAsyncOperationHeader(pollingState, function (err) {
+          self._updateStateFromAzureAsyncOperationHeader(pollingState, false, function (err) {
             return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
@@ -91,7 +87,7 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
             return callback(err);
           });
         } else {
-          self._updateStateFromGetResourceOperation(poller, pollingState, function (err) {
+          self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function (err) {
             return callback(err);
           });
         }
@@ -101,7 +97,7 @@ AzureServiceClient.prototype.getPutOperationResult = function (resultOfInitialRe
     function (err) {
       if (pollingState.status === LroStates.Succeeded) {
         if (!pollingState.resource) {
-          self._updateStateFromGetResourceOperation(poller, pollingState, function (err) {
+          self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function (err) {
             return callback(err, pollingState.getOperationResponse());
           });
         } else {
@@ -159,7 +155,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
     function (callback) {
       setTimeout(function () {
         if (pollingState.azureAsyncOperationHeaderLink) {
-          self._updateStateFromAzureAsyncOperationHeader(pollingState, function (err) {
+          self._updateStateFromAzureAsyncOperationHeader(pollingState, true, function (err) {
             return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
@@ -183,8 +179,9 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
 /**
  * Retrieve operation status by polling from 'azure-asyncoperation' header.
  * @param {object} [pollingState] - The object to persist current operation state.
+ * @param {boolean} [inPostOrDelete] - Invoked by Post Or Delete operation.
  */
-AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = function (pollingState, callback) {
+AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = function (pollingState, inPostOrDelete, callback) {
   this._getStatus(pollingState.azureAsyncOperationHeaderLink, function (err, result) {
     if (err) return callback(err);
     
@@ -197,6 +194,9 @@ AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = functio
     pollingState.response = result.response;
     pollingState.request = result.request;
     pollingState.resource = null;
+    if (inPostOrDelete) {
+      pollingState.resource = result.body;
+    }
     callback(null);
   });
 };
@@ -268,12 +268,12 @@ AzureServiceClient.prototype._updateStateFromLocationHeaderOnPostOrDelete = func
 };
 
 /**
- * Retrieve operation status by invoking the poller function.
- * @param {function} [poller] - Poller function used to poll operation result.
+ * Polling for resource status.
+ * @param {function} [resourceUrl] - The url of resource.
  * @param {object} [pollingState] - The object to persist current operation state.
  */
-AzureServiceClient.prototype._updateStateFromGetResourceOperation = function (poller, pollingState, callback) {
-  var pollerCallback = function (err, result) {
+AzureServiceClient.prototype._updateStateFromGetResourceOperation = function (resourceUrl, pollingState, callback) {
+  this._getStatus(resourceUrl, function (err, result) {
     if (err) return callback(err);
     if (!result.body) {
       return callback(new Error('The response from long running operation does not contain a body.'));
@@ -297,8 +297,7 @@ AzureServiceClient.prototype._updateStateFromGetResourceOperation = function (po
     
     //nothing to return, the 'pollingState' has all the info we care.
     callback(null);
-  };
-  poller.apply(this, [pollerCallback]);
+  });
 };
 
 /**

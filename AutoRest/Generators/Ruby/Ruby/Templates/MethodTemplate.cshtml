@@ -1,14 +1,17 @@
-﻿@using System.Linq;
+﻿@using System
+@using System.Linq;
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Ruby.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Ruby.MethodTemplateModel>
 
 #
 @WrapComment("# ", Model.Documentation)
-@foreach (var parameter in Model.Parameters)
+@foreach (var parameter in Model.LocalParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
+@WrapComment("# ", string.Format("@param [{0}] The hash of custom headers need to be applied to HTTP request.", "Hash{String => String}"))
+#
 @WrapComment("# ", string.Format("@return [{0}] Promise object which allows to get HTTP response.", "Concurrent::Promise"))
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
@@ -28,9 +31,15 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @(Model.RemoveDuplicateForwardSlashes("url"))
 
   @EmptyLine
-  # Create HTTP transport objects
-  http_request = Net::HTTP::@(Model.HttpMethod.ToString()).new(url.request_uri)
+  connection = Faraday.new(:url => url) do |faraday|
+  @foreach (var middelware in Model.FaradeyMiddlewares)
+  {
+    @:faraday.use @middelware
+  }
+    faraday.adapter Faraday.default_adapter
+  end
 
+  request_headers = Hash.new
   @if (Model.Parameters.Any(p => p.Location == ParameterLocation.Header))
   {
   @EmptyLine
@@ -42,13 +51,13 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
         {
   @:fail RuntimeError, 'Header Content-Type is forbidden to change'
         }
-  @:http_request["@(parameter.SerializedName)"] = @parameter.Type.ToString(parameter.Name)
+  @:request_headers["@(parameter.SerializedName)"] = @(parameter.Type.ToString(parameter.Name)) unless @(parameter.Type.ToString(parameter.Name)).nil?
     }
   }
   @EmptyLine
   unless custom_headers.nil?
     custom_headers.each do |key, value|
-      http_request[key] = value
+      request_headers[key] = value
     end
   end
 
@@ -56,33 +65,42 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   {
   @EmptyLine
   @:# Serialize Request
-  @:http_request.add_field('Content-Type', 'application/json')
-  @:@Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "http_request.body", Settings.Namespace)
+  @:request_headers['Content-Type'] = 'application/json'
+  @:@Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "request_content")
   }
 
   @EmptyLine
   # Send Request
-  promise = Concurrent::Promise.new { @(Model.MakeRequestMethodReference)(http_request, url) }
+  promise = Concurrent::Promise.new do
+    connection.@(Model.HttpMethod.ToString().ToLower()) do |request|
+      request.headers = request_headers
+@if (Model.RequestBody != null)
+{
+      @:request.body = request_content
+}
+      @(Model.ClientReference).credentials.sign_request(request) unless @(Model.ClientReference).credentials.nil?
+    end
+  end
 
   @EmptyLine
   promise = promise.then do |http_response|
-    status_code = http_response.code.to_i
+    status_code = http_response.status
     response_content = http_response.body
     unless (@Model.SuccessStatusCodePredicate)
       @if (Model.DefaultResponse != null)
       {
       @:error_model = JSON.load(response_content)
-      @:fail @(Model.OperationExceptionTypeString).new(http_request, http_response, error_model)
+      @:fail @(Model.OperationExceptionTypeString).new(connection, http_response, error_model)
       }
       else
       {
-      @:fail @(Model.OperationExceptionTypeString).new(http_request, http_response)
+      @:fail @(Model.OperationExceptionTypeString).new(connection, http_response)
       }
     end
 
     @EmptyLine
     # Create Result
-    result = @(Model.OperationResponseReturnTypeString).new(http_request, http_response)
+    result = @(Model.OperationResponseReturnTypeString).new(connection, http_response)
     @Model.InitializeResponseBody
 
     @foreach (var responsePair in Model.Responses.Where(r => r.Value != null && r.Value.IsSerializable()))
@@ -91,7 +109,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     # Deserialize Response
     if status_code == @Model.GetStatusCodeReference(responsePair.Key)
       begin
-        @(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace))
+        @(Model.CreateDeserializationString("response_content", responsePair.Value, "result.body"))
       rescue Exception => e
         fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
       end
@@ -103,7 +121,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     {
     <text>
     begin
-      @(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body", Settings.Namespace))
+      @(Model.CreateDeserializationString("response_content", Model.ReturnType, "result.body"))
     rescue Exception => e
       fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
     end

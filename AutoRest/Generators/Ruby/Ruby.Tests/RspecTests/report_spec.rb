@@ -1,12 +1,17 @@
-require_relative 'Report/sdk_requirements'
-include MyNamespace
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/report'
+
+require 'report'
+
+include ReportModule
 
 describe AutoRestReportService do
   before(:all) do
     @base_url = ENV['StubServerURI']
 
-	dummyToken = 'dummy12321343423'
-	@credentials = MsRest::TokenCredentials.new('Bearer', dummyToken)
+    dummyToken = 'dummy12321343423'
+    @credentials = MsRest::TokenCredentials.new('Bearer', dummyToken)
     @client = AutoRestReportService.new(@credentials, @base_url)
   end
 

@@ -15,6 +15,7 @@ Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by 
 AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
 
 ### .Net
+#### on Windows 
 Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or get them with [Visual Studio](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
 Ensure that msbuild is in your path by running vcvarsall.bat
 >C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat
@@ -23,7 +24,7 @@ If you are using Visual Studio 2013,
 - Ensure "Nuget Package Manager For Visual Studio" is updated to a newer version, like "2.8.60723.765", which is needed to install xunit.
 - Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
 
-### Mono
+#### on Mac
 Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
 
 ### Node.js
@@ -37,20 +38,11 @@ Ensure that the JDK binaries are in your `PATH`.
 Ensure that your environment includes the `JAVA_HOME`.
 >set JAVA_HOME=C:\Program Files\java\jdk1.8.0_45
 
-#### Maven
-Install the `Maven Project Management tool` from [Apache downloads](http://maven.apache.org/download.cgi).
-Ensure Maven is in your `PATH`.
->set PATH=PATH;C:\Maven\bin
-
-Ensure that your environment includes the `MAVEN_HOME`.
->set MAVEN_HOME=C:\Maven
-
 #### Java IDE
 You may want a Java IDE.
 - Install Jetbrains IntelliJ IDEA from [JetBrains downloads](https://www.jetbrains.com/idea/download/.)
  OR
-- Install `Eclipse IDE for Java EE Developer` from [Eclipse downloads](http://eclipse.org/downloads/) and
-- Install the `Maven Eclipse Integration` from [Eclipse m2e downloads](http://www.eclipse.org/m2e/m2e-downloads.html).
+- Install `Eclipse IDE for Java EE Developer` from [Eclipse downloads](http://eclipse.org/downloads/) 
 
 ### Ruby
 [RubyInstaller](http://rubyinstaller.org/downloads/) version 2+ - 32-bit version.
@@ -59,13 +51,17 @@ By default, Ruby installs to C:\Ruby21 or Ruby22, etc. Ensure that C:\Ruby21\bin
 
 [RubyDevKit](http://rubyinstaller.org/downloads/) 32-bit version for use with Ruby 2.0 and above
 The DevKit installer just unpacks files. Navigate to the directory and run the following:
->ruby dk.rb init
->ruby dk.rb install
+```bash
+ruby dk.rb init
+ruby dk.rb install
+gem install bundler
+```
 
 ## Build the Code
-We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. If you would like to see what commands are
-available to you, run `gulp -T`. That will list all of the gulp tasks you can run. By default, just running `gulp` will
-run a build that will execute clean, build, code analysis, package and test.
+We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
+>npm install gulp -g
+
+If you would like to see what commands are available to you, run `gulp -T`. That will list all of the gulp tasks you can run. By default, just running `gulp` will run a build that will execute clean, build, code analysis, package and test.
 
 ### Output from gulp -T
 ```bash
@@ -95,8 +91,7 @@ run a build that will execute clean, build, code analysis, package and test.
 ```
 
 ### Running the tests
-Prior to executing `gulp build test` to build and then test the code. Make sure that the latest tools are setup for your
-build environment.
+Prior to executing `gulp` to build and then test the code, make sure that the latest tools are setup for your build environment.
 
 - run `bundle install` from the root directory
 

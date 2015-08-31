@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Threading.Tasks;
+using System.IO;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby.Templates;
-using System.IO;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
@@ -19,12 +19,43 @@ namespace Microsoft.Rest.Generator.Ruby
         private readonly RubyCodeNamer codeNamer;
 
         /// <summary>
+        /// The name of the SDK. Determined in the following way:
+        /// if the parameter 'Name' is provided that it becames the
+        /// name of the SDK, otherwise the name of input swagger is converted
+        /// into Ruby style and taken as name.
+        /// </summary>
+        protected readonly string sdkName;
+
+        /// <summary>
+        /// Relative path to produced SDK files.
+        /// </summary>
+        protected readonly string sdkPath;
+
+        /// <summary>
+        /// Relative path to produced SDK model files.
+        /// </summary>
+        protected readonly string modelsPath;
+
+        /// <summary>
         /// Initializes a new instance of the class RubyCodeGenerator.
         /// </summary>
         /// <param name="settings">The settings.</param>
         public RubyCodeGenerator(Settings settings) : base(settings)
         {
             codeNamer = new RubyCodeNamer();
+
+            if (Settings.CustomSettings.ContainsKey("Name"))
+            {
+                sdkName = Settings.CustomSettings["Name"];
+            }
+            else
+            {
+                sdkName = Path.GetFileNameWithoutExtension(Settings.Input);
+            }
+
+            sdkName = RubyCodeNamer.UnderscoreCase(codeNamer.RubyRemoveInvalidCharacters(sdkName));
+            sdkPath = sdkName;
+            modelsPath = Path.Combine(sdkPath, "models");
         }
 
         /// <summary>
@@ -48,7 +79,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public override string UsageInstructions
         {
-            get { return "Require to install ms-rest gem"; }
+            get { return "The gem 'ms-rest' is required for working with generated code."; }
         }
 
         /// <summary>
@@ -95,8 +126,8 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <summary>
         /// Generates C# code for service client.
         /// </summary>
-        /// <param name="serviceClient"></param>
-        /// <returns></returns>
+        /// <param name="serviceClient">The service client.</param>
+        /// <returns>Async task for generating SDK files.</returns>
         public override async Task Generate(ServiceClient serviceClient)
         {
             // Service client
@@ -105,7 +136,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 Model = new ServiceClientTemplateModel(serviceClient),
             };
             await Write(serviceClientTemplate,
-                RubyCodeNamer.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension);
+                Path.Combine(sdkPath, RubyCodeNamer.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension));
 
             // Method groups
             foreach (var group in serviceClient.MethodGroups)
@@ -115,7 +146,7 @@ namespace Microsoft.Rest.Generator.Ruby
                     Model = new MethodGroupTemplateModel(serviceClient, group),
                 };
                 await Write(groupTemplate,
-                    RubyCodeNamer.UnderscoreCase(group) + ImplementationFileExtension);
+                    Path.Combine(sdkPath, RubyCodeNamer.UnderscoreCase(group) + ImplementationFileExtension));
             }
 
             // Models
@@ -123,10 +154,10 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new ModelTemplateModel(model, serviceClient),
+                    Model = new ModelTemplateModel(model)
                 };
-                await Write(modelTemplate, Path.Combine("models",
-                    RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
+                await Write(modelTemplate,
+                    Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
             }
 
             // Enums
@@ -136,16 +167,17 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, Path.Combine("models", RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension));
+                await Write(enumTemplate,
+                    Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(enumTemplate.Model.TypeDefinitionName) + ImplementationFileExtension));
             }
 
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new RequirementsTemplateModel(serviceClient),
+                Model = new RequirementsTemplateModel(serviceClient, sdkName, this.ImplementationFileExtension),
             };
             await Write(requirementsTemplate,
-                RubyCodeNamer.UnderscoreCase("sdk_requirements") + ImplementationFileExtension);
+                RubyCodeNamer.UnderscoreCase(sdkName) + ImplementationFileExtension);
         }
     }
 }

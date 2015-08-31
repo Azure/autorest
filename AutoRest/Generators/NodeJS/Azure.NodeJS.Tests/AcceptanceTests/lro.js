@@ -10,7 +10,7 @@ var assert = require('assert');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 
-var lroClient = require('../Expected/AcceptanceTests/Lro/AutoRestLongRunningOperationTestService');
+var lroClient = require('../Expected/AcceptanceTests/Lro/autoRestLongRunningOperationTestService');
 
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';
@@ -285,6 +285,7 @@ describe('nodejs', function () {
     it('should work with PostAsyncRetrySucceeded', function (done) {
       testClient.lROs.postAsyncRetrySucceeded(product, function (error, result) {
         should.not.exist(error);
+        result.body.id.should.be.exactly('100');
         done();
       });
     });
@@ -292,6 +293,7 @@ describe('nodejs', function () {
     it('should work with PostAsyncNoRetrySucceeded', function (done) {
       testClient.lROs.postAsyncNoRetrySucceeded(product, function (error, result) {
         should.not.exist(error);
+        result.body.id.should.be.exactly('100');
         done();
       });
     });

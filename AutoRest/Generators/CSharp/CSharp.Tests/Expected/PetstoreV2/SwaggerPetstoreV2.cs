@@ -9,6 +9,7 @@
 namespace Fixtures.PetstoreV2
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -971,6 +972,17 @@ namespace Fixtures.PetstoreV2
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "orderId");
             }
+            if (orderId != null)
+            {
+                if (orderId.Length > 5)
+                {
+                    throw new ValidationException(ValidationRules.MaxLength, "orderId", 5);
+                }
+                if (orderId.Length < 1)
+                {
+                    throw new ValidationException(ValidationRules.MinLength, "orderId", 1);
+                }
+            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -1061,6 +1073,13 @@ namespace Fixtures.PetstoreV2
             if (orderId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "orderId");
+            }
+            if (orderId != null)
+            {
+                if (orderId.Length < 1)
+                {
+                    throw new ValidationException(ValidationRules.MinLength, "orderId", 1);
+                }
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

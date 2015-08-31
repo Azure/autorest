@@ -20,7 +20,7 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @:* @@param {@parameter.Type.Name} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
+ @:* @@param {@MethodTemplateModel.GetParameterDocumentationType(parameter)} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
  @:*
 }
 @WrapComment(" * ", " @param {object} [options]")
@@ -29,7 +29,7 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
  *
 @WrapComment(" * ", " @param {function} callback")
  *
-@WrapComment(" * ", " @returns {Stream} The Response stream")
+@WrapComment(" * ", " @returns {stream} The Response stream")
  */
 @(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var self = @(Model.ClientReference);
@@ -53,7 +53,7 @@ else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Pa
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @:* @@param {@parameter.Type.Name} [@parameter.Name] @parameter.Documentation
+ @:* @@param {@MethodTemplateModel.GetParameterDocumentationType(parameter)} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
  @:*
 }
 @WrapComment(" * ", " @param {object} [options]")
@@ -62,7 +62,7 @@ else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Pa
  *
 @WrapComment(" * ", " @param {function} callback")
  *
-@WrapComment(" * ", " @returns {Stream} The Response stream")
+@WrapComment(" * ", " @returns {stream} The Response stream")
  */
 @(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);
@@ -73,17 +73,10 @@ else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Pa
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var self = this;
-  function getMethod() {
-    var cb = function (callback) {
-      return self.@(Model.GetMethod.Name)(@(Model.GetMethod.MethodParameterDeclaration)callback);
-    };
-    return cb;
-  }
   // Send request
-  self.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
+  this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
     if (err) return callback(err);
-    client.getPutOperationResult(result, getMethod(), options, callback);
+    client.getPutOrPatchOperationResult(result, options, callback);
   });
 };
 </text>

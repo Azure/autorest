@@ -12,8 +12,14 @@
     <OutputType>Library</OutputType>
     <RestorePackages>true</RestorePackages>
     <AssemblyName>Microsoft.Rest.ClientRuntime.Azure</AssemblyName>
+    <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\tools\AutoRest.Settings.targets" />
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Net45-Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="Microsoft.Rest.ClientRuntime.Azure.nuget.proj" />
     <None Include="Microsoft.Rest.ClientRuntime.Azure.nuspec" />
@@ -58,7 +64,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="$(SolutionDir)\Tools\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\..\Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
