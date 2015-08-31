@@ -20,10 +20,20 @@ public class UserAgentInterceptor implements Interceptor {
     private static final String DEFAULT_USER_AGENT_HEADER = "AutoRest-Java";
     private String userAgent;
 
+    /**
+     * Initialize an instance of {@link UserAgentInterceptor} class with the default
+     * 'User-Agent' header.
+     */
     public UserAgentInterceptor() {
         this(DEFAULT_USER_AGENT_HEADER);
     }
 
+    /**
+     * Initialize an instance of {@link UserAgentInterceptor} class with the specified
+     * 'User-Agent' header.
+     *
+     * @param userAgent the 'User-Agent' header value.
+     */
     public UserAgentInterceptor(String userAgent) {
         this.userAgent = userAgent;
     }

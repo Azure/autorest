@@ -19,8 +19,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import java.io.IOException;
 
 /**
- * Inner callback used to merge both successful and failed responses into one
- * callback for customized response handling in a response handling delegate.
+ * Custom serializer for serializing {@link DateTime} object into ISO8601 formats.
  */
 public class DateTimeSerializer extends JsonSerializer<DateTime> {
     public static SimpleModule getModule() {

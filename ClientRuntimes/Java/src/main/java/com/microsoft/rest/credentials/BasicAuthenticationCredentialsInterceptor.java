@@ -15,7 +15,7 @@ import org.apache.commons.codec.binary.Base64;
 import java.io.IOException;
 
 /**
- * Basic Auth credentials filter for placing a basic auth credentials into Apache pipeline.
+ * Basic Auth credentials interceptor for placing a basic auth credential into request headers.
  */
 public class BasicAuthenticationCredentialsInterceptor implements Interceptor {
     private BasicAuthenticationCredentials credentials;

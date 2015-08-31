@@ -16,7 +16,9 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-/** Make a DELETE request to a REST path relative to base URL. */
+/**
+ * A customized Delete method that allows a body payload.
+ */
 @Documented
 @Target(METHOD)
 @Retention(RUNTIME)

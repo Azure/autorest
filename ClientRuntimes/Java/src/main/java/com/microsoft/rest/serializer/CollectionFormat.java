@@ -7,6 +7,11 @@
 
 package com.microsoft.rest.serializer;
 
+/**
+ * Swagger collection format to use for joining {@link java.util.List} parameters in
+ * paths, queries, and headers.
+ * See <a href="https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#fixed-fields-7">https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#fixed-fields-7</a>.
+ */
 public enum CollectionFormat {
     CSV(","),
     SSV(" "),
@@ -14,13 +19,17 @@ public enum CollectionFormat {
     PIPES("|"),
     MULTI("&");
 
-    private String delimeter;
+    private String delimiter;
 
-    private CollectionFormat(String delimeter) {
-        this.delimeter = delimeter;
+    private CollectionFormat(String delimiter) {
+        this.delimiter = delimiter;
     }
 
-    public String getDelimeter() {
-        return delimeter;
+    /**
+     * Gets the delimiter used to join a list of parameters.
+     * @return the delimiter of the current collection format.
+     */
+    public String getDelimiter() {
+        return delimiter;
     }
 }

@@ -17,8 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 /**
- * Inner callback used to merge both successful and failed responses into one
- * callback for customized response handling in a response handling delegate.
+ * Custom serializer for serializing {@link Byte[]} objects into Base64 strings.
  */
 public class ByteArraySerializer extends JsonSerializer<Byte[]> {
     public static SimpleModule getModule() {

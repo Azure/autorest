@@ -26,5 +26,11 @@ public abstract class ServiceResponseCallback extends ResponseCallback {
         response(response, null);
     }
 
+    /**
+     * Override this method to handle REST call responses.
+     *
+     * @param response the response returned by Retrofit, if any
+     * @param error the error returned by Retrofit, if any
+     */
     public abstract void response(Response response, RetrofitError error);
 }

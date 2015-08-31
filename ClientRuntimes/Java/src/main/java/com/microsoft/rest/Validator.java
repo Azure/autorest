@@ -12,16 +12,24 @@ import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import retrofit.RetrofitError;
 
-import javax.xml.ws.Service;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
 /**
- * ServiceClient is the abstraction for accessing REST operations and their payload data types.
+ * Validates user provided parameters are not null if they are required.
  */
 public class Validator {
+    /**
+     * Validates a user provided required parameter to be not null. Returns if
+     * the parameter passes the validation. A {@link ServiceException} is thrown
+     * if a property fails the validation.
+     *
+     * @param parameter the parameter to validate
+     * @throws ServiceException failures wrapped in {@link ServiceException}
+     */
     public static void validate(Object parameter) throws ServiceException {
         // Validation of top level payload is done outside
         if (parameter == null) {
@@ -85,6 +93,14 @@ public class Validator {
         }
     }
 
+    /**
+     * Validates a user provided required parameter to be not null. Returns if
+     * the parameter passes the validation. A {@link ServiceException} is passed
+     * to the {@link ServiceCallback#failure(RetrofitError)} if a property fails the validation.
+     *
+     * @param parameter the parameter to validate
+     * @param serviceCallback the callback to call with the failure
+     */
     public static void validate(Object parameter, ServiceCallback<?> serviceCallback) {
         try {
             validate(parameter);

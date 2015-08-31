@@ -21,8 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Inner callback used to merge both successful and failed responses into one
- * callback for customized response handling in a response handling delegate.
+ * A serialization helper class wrapped around {@link JacksonConverter} and {@link ObjectMapper}.
  */
 public class JacksonHelper {
     private static ObjectMapper objectMapper;
@@ -30,6 +29,11 @@ public class JacksonHelper {
 
     private JacksonHelper() {}
 
+    /**
+     * Gets a static instance of {@link ObjectMapper}.
+     *
+     * @return an instance of {@link ObjectMapper}.
+     */
     public static ObjectMapper getObjectMapper() {
         if (objectMapper == null) {
             objectMapper = new ObjectMapper()
@@ -43,6 +47,11 @@ public class JacksonHelper {
         return objectMapper;
     }
 
+    /**
+     * Gets a static instance of {@link JacksonConverter}.
+     *
+     * @return an instance of {@link JacksonConverter}.
+     */
     public static JacksonConverter getConverter() {
         if (converter == null) {
             converter = new JacksonConverter(getObjectMapper());
@@ -50,7 +59,13 @@ public class JacksonHelper {
         return converter;
     }
 
-    public static <T> String serialize(T object) {
+    /**
+     * Serializes an object into a JSON string using the current {@link ObjectMapper}.
+     *
+     * @param object the object to serialize.
+     * @return the serialized string. Null if the object to serialize is null.
+     */
+    public static String serialize(Object object) {
         if (object == null) return null;
         try {
             StringWriter writer = new StringWriter();
@@ -61,21 +76,44 @@ public class JacksonHelper {
         }
     }
 
-    public static <T> String serializeRaw(T object) {
+    /**
+     * Serializes an object into a raw string using the current {@link ObjectMapper}.
+     * The leading and trailing quotes will be trimmed.
+     *
+     * @param object the object to serialize.
+     * @return the serialized string. Null if the object to serialize is null.
+     */
+    public static String serializeRaw(Object object) {
         if (object == null) return null;
         return StringUtils.strip(serialize(object), "\"");
     }
 
-    public static <E> String serializeList(List<E> collection, CollectionFormat format) {
-        if (collection == null) return null;
+    /**
+     * Serializes a list into a string with the delimiter specified with the
+     * Swagger collection format joining each individual serialized items in
+     * the list.
+     *
+     * @param list the list to serialize.
+     * @param format the Swagger collection format.
+     * @return the serialized string
+     */
+    public static String serializeList(List<?> list, CollectionFormat format) {
+        if (list == null) return null;
         List<String> serialized = new ArrayList<String>();
-        for (E element : collection) {
+        for (Object element : list) {
             String raw = serializeRaw(element);
             serialized.add(raw != null ? raw : "");
         }
-        return StringUtils.join(serialized, format.getDelimeter());
+        return StringUtils.join(serialized, format.getDelimiter());
     }
 
+    /**
+     * Deserializes a string into a {@link T} object using the current {@link ObjectMapper}.
+     *
+     * @param value the string value to deserialize.
+     * @param <T> the type of the deserialized object.
+     * @return the deserialized object.
+     */
     @SuppressWarnings("unchecked")
     public static <T> T deserialize(String value) {
         if (value == null) return null;

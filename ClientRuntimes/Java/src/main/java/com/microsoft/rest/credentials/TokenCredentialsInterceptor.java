@@ -14,7 +14,7 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 
 /**
- * Token credentials filter for placing a token credentials into Apache pipeline.
+ * Token credentials filter for placing a token credential into request headers.
  */
 public class TokenCredentialsInterceptor implements Interceptor {
     private TokenCredentials credentials;

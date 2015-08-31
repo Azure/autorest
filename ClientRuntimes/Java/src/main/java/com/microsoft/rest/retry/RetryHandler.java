@@ -13,6 +13,9 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
+/**
+ * An instance of this interceptor placed in the request pipeline handles retriable errors.
+ */
 public class RetryHandler implements Interceptor {
     private static final int DEFAULT_NUMBER_OF_ATTEMPTS = 3;
     private static final int DEFAULT_BACKOFF_DELTA = 1000 * 10;
@@ -21,6 +24,10 @@ public class RetryHandler implements Interceptor {
 
     private RetryStrategy retryStrategy;
 
+    /**
+     * Initialized an instance of {@link RetryHandler} class.
+     * Sets default retry strategy base on Exponential Backoff.
+     */
     public RetryHandler() {
         this.retryStrategy = new ExponentialBackoffRetryStrategy(
                 DEFAULT_NUMBER_OF_ATTEMPTS,
@@ -29,6 +36,11 @@ public class RetryHandler implements Interceptor {
                 DEFAULT_BACKOFF_DELTA);
     }
 
+    /**
+     * Initialized an instance of {@link RetryHandler} class.
+     *
+     * @param retryStrategy retry strategy to use.
+     */
     public RetryHandler(RetryStrategy retryStrategy) {
         this.retryStrategy = retryStrategy;
     }
