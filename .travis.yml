@@ -4,7 +4,7 @@ mono:
   - nightly
 before_script:
   - sudo add-apt-repository ppa:cwchien/gradle -y
-  - sodo apt-get update
+  - sudo apt-get update
   - sudo apt-get install gradle
   - npm install
   - rvm use 2.2.1 --install --binary --fuzzy
