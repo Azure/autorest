@@ -192,7 +192,7 @@ public class QueriesTests {
 
     @Test
     public void arrayStringCsvEmpty() throws Exception {
-        client.getQueries().arrayStringCsvEmpty(new ArrayList<>());
+        client.getQueries().arrayStringCsvEmpty(new ArrayList<String>());
     }
 
     @Test

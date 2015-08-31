@@ -44,6 +44,8 @@ public class CoverageReporter {
             }
         }
         System.out.println(hit + " out of " + total + " tests hit. Missing tests:");
-        missing.forEach(System.out::println);
+        for (String scenario : missing) {
+            System.out.println(scenario);
+        }
     }
 }
