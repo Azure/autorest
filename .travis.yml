@@ -7,7 +7,7 @@ before_script:
   - sudo apt-get update
   - sudo apt-get install default-jdk
   - sudo apt-get install gradle
-  - npm install -g npm@'>=1.4.3'
+  - sudo npm install -g npm@'>=1.4.3'
   - npm install
   - rvm use 2.2.1 --install --binary --fuzzy
   - gem install bundler
