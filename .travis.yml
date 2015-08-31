@@ -1,13 +1,13 @@
-sodu: required
 language: csharp
 mono:
   - nightly
 before_script:
-  - sudo add-apt-repository ppa:cwchien/gradle -y
-  - sudo apt-get update
-  - sudo apt-get install default-jdk
-  - sudo apt-get install gradle
-  - sudo npm install -g npm@'>=1.4.3'
+  - npm -v
+  - add-apt-repository ppa:cwchien/gradle -y
+  - apt-get update
+  - apt-get install default-jdk
+  - apt-get install gradle
+  - npm install -g npm@'>=1.4.3'
   - npm install
   - rvm use 2.2.1 --install --binary --fuzzy
   - gem install bundler
