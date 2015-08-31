@@ -7,5 +7,8 @@ before_script:
   - rvm use 2.2.1 --install --binary --fuzzy
   - gem install bundler
   - bundle install
+  - wget https://services.gradle.org/distributions/gradle-2.6-bin.zip
+  - unzip gradle-2.6-bin.zip
+  - PATH=$PATH:$(pwd)/gradle-2.6/bin
 script:
   - gulp
