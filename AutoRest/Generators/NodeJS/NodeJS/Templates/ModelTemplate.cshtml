@@ -25,7 +25,39 @@
  * Initializes a new instance of the @(Model.Name) class.
  * @@constructor
  */
-function @(Model.Name)() { }
+function @(Model.Name)(parameters) {
+@{ 
+  if (Model.BaseModelType != null)
+  {
+  @:@(Model.Name)['super_'].call(this, parameters);
+  }
+  if (Model.Properties.Count > 0)
+  {
+  @:if (parameters !== null && parameters !== undefined) {
+    for (int i = 0; i < Model.Properties.Count; i++) 
+    {
+    @:if (parameters['@(Model.Properties[i].Name)'] !== null && parameters['@(Model.Properties[i].Name)'] !== undefined) {
+      if (Model.Properties[i].Type.GetType().Name == "CompositeType")
+      {
+      @:this['@(Model.Properties[i].Name)'] = new models['@(Model.Properties[i].Type.Name)'](parameters['@(Model.Properties[i].Name)']);
+      }
+      else
+      {
+      @:this['@(Model.Properties[i].Name)'] = parameters['@(Model.Properties[i].Name)'];
+      }
+    @:}
+    }
+  @:}    
+  }
+}
+}
+@EmptyLine
+@{
+if (Model.BaseModelType != null)
+{
+@:util.inherits(@(Model.Name), models['@(Model.BaseModelType.Name)']);
+}
+}
 @EmptyLine
 /**
  * Validate the payload against the @Model.Name schema
@@ -33,11 +65,13 @@ function @(Model.Name)() { }
  * @@param {JSON} payload
  *
  */
-@(Model.Name).prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('@(Model.Name) cannot be null.');
+@(Model.Name).prototype.serialize = function () {
+  var payload = {};
+@{
+  if (Model.BaseModelType != null)
+  {
+  @:payload = @(Model.Name)['super_'].prototype.serialize.call(this);
   }
-  @{
   var propertyList = new List<Property>(Model.ComposedProperties);
   for (int i = 0; i < propertyList.Count; i++)
   {
@@ -58,6 +92,10 @@ function @(Model.Name)() { }
  */
 @(Model.Name).prototype.deserialize = function (instance) {
   @{
+  if (Model.BaseModelType != null)
+  {
+  @:@(Model.Name)['super_'].prototype.deserialize.call(this, instance);
+  }
   var specialProperties = Model.SpecialProperties;
   if (specialProperties.Count() > 0)
   {
@@ -77,4 +115,4 @@ function @(Model.Name)() { }
   }
 };
 @EmptyLine
-module.exports = new @(Model.Name)();
+module.exports = @(Model.Name);

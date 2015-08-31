@@ -137,5 +137,56 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             return false;
         }
+
+        /// <summary>
+        /// Provides the property name in the correct jsdoc notation depending on 
+        /// whether it is required or optional
+        /// </summary>
+        /// <param name="property">Parameter to be documented</param>
+        /// <returns>Parameter name in the correct jsdoc notation</returns>
+        public static string GetPropertyDocumentationName(Property property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+            if (property.IsRequired)
+            {
+                return property.Name;
+            }
+            else
+            {
+                return string.Format(CultureInfo.InvariantCulture, "[{0}]", property.Name);
+            }
+        }
+
+        /// <summary>
+        /// Provides the type of the property
+        /// </summary>
+        /// <param name="property">Parameter to be documented</param>
+        /// <returns>Parameter name in the correct jsdoc notation</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        public static string GetPropertyDocumentationType(Property property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+            string typeName = PrimaryType.Object.Name;
+            if (property.Type is PrimaryType)
+            {
+                typeName = property.Type.Name;
+            }
+            else if (property.Type is SequenceType)
+            {
+                typeName = "array";
+            }
+            else if (property.Type is EnumType)
+            {
+                typeName = PrimaryType.String.Name;
+            }
+
+            return typeName.ToLower(CultureInfo.InvariantCulture);
+        }
     }
 }
