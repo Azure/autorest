@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
         public static HashSet<string> TypeImports(this IList<IType> types, String ns)
         {
             HashSet<string> imports = new HashSet<string>();
-            if (types == null)
+            if (types == null || ns == null)
             {
                 return imports;
             }
