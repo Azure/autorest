@@ -16,6 +16,29 @@ var models = require('./index');
  * @class
  * Initializes a new instance of the StorageAccount class.
  * @constructor
+ * The storage account.
+ * @member {string} [provisioningState] Gets the status of the storage account at the time the operation was called. Possible values for this property include: 'Creating', 'ResolvingDNS', 'Succeeded'.
+ *
+ * @member {string} [accountType] Gets the type of the storage account. Possible values for this property include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+ *
+ * @member {object} [primaryEndpoints] Gets the URLs that are used to perform a retrieval of a public blob, queue or table object.Note that StandardZRS and PremiumLRS accounts only return the blob endpoint.
+ *
+ * @member {string} [primaryLocation] Gets the location of the primary for the storage account.
+ *
+ * @member {string} [statusOfPrimary] Gets the status indicating whether the primary location of the storage account is available or unavailable. Possible values for this property include: 'Available', 'Unavailable'.
+ *
+ * @member {date} [lastGeoFailoverTime] Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is StandardGRS or StandardRAGRS.
+ *
+ * @member {string} [secondaryLocation] Gets the location of the geo replicated secondary for the storage account. Only available if the accountType is StandardGRS or StandardRAGRS.
+ *
+ * @member {string} [statusOfSecondary] Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the accountType is StandardGRS or StandardRAGRS. Possible values for this property include: 'Available', 'Unavailable'.
+ *
+ * @member {date} [creationTime] Gets the creation date and time of the storage account in UTC.
+ *
+ * @member {object} [customDomain] Gets the user assigned custom domain assigned to this storage account.
+ *
+ * @member {object} [secondaryEndpoints] Gets the URLs that are used to perform a retrieval of a public blob, queue or table object from the secondary location of the storage account. Only available if the accountType is StandardRAGRS.
+ *
  */
 function StorageAccount(parameters) {
   StorageAccount['super_'].call(this, parameters);
@@ -65,88 +88,63 @@ util.inherits(StorageAccount, models['Resource']);
  *
  */
 StorageAccount.prototype.serialize = function () {
-  var payload = {};
-  payload = StorageAccount['super_'].prototype.serialize.call(this);
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'].valueOf() !== 'string') {
-    throw new Error('payload[\'id\'] must be of type string.');
-  }
-
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
-  }
-
-  if (payload['type'] !== null && payload['type'] !== undefined && typeof payload['type'].valueOf() !== 'string') {
-    throw new Error('payload[\'type\'] must be of type string.');
-  }
-
-  if (payload['location'] === null || payload['location'] === undefined || typeof payload['location'].valueOf() !== 'string') {
-    throw new Error('payload[\'location\'] cannot be null or undefined and it must be of type string.');
-  }
-
-  if (payload['tags'] && typeof payload['tags'] === 'object') {
-    for(var valueElement in payload['tags']) {
-      if (payload['tags'][valueElement] !== null && payload['tags'][valueElement] !== undefined && typeof payload['tags'][valueElement].valueOf() !== 'string') {
-        throw new Error('payload[\'tags\'][valueElement] must be of type string.');
-      }
-    }
-  }
-
-  if (payload['provisioningState']) {
+  var payload = StorageAccount['super_'].prototype.serialize.call(this);
+  if (this['provisioningState']) {
     var allowedValues = [ 'Creating', 'ResolvingDNS', 'Succeeded' ];
-    if (!allowedValues.some( function(item) { return item === payload['provisioningState']; })) {
-      throw new Error(payload['provisioningState'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === this['provisioningState']; })) {
+      throw new Error(this['provisioningState'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
   }
 
-  if (payload['accountType']) {
+  if (this['accountType']) {
     var allowedValues1 = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    if (!allowedValues1.some( function(item) { return item === payload['accountType']; })) {
-      throw new Error(payload['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues1);
+    if (!allowedValues1.some( function(item) { return item === this['accountType']; })) {
+      throw new Error(this['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues1);
     }
   }
 
-  if (payload['primaryEndpoints']) {
-    models['Endpoints'].validate(payload['primaryEndpoints']);
+  if (this['primaryEndpoints']) {
+    models['Endpoints'].validate(this['primaryEndpoints']);
   }
 
-  if (payload['primaryLocation'] !== null && payload['primaryLocation'] !== undefined && typeof payload['primaryLocation'].valueOf() !== 'string') {
-    throw new Error('payload[\'primaryLocation\'] must be of type string.');
+  if (this['primaryLocation'] !== null && this['primaryLocation'] !== undefined && typeof this['primaryLocation'].valueOf() !== 'string') {
+    throw new Error('this[\'primaryLocation\'] must be of type string.');
   }
 
-  if (payload['statusOfPrimary']) {
+  if (this['statusOfPrimary']) {
     var allowedValues2 = [ 'Available', 'Unavailable' ];
-    if (!allowedValues2.some( function(item) { return item === payload['statusOfPrimary']; })) {
-      throw new Error(payload['statusOfPrimary'] + ' is not a valid value. The valid values are: ' + allowedValues2);
+    if (!allowedValues2.some( function(item) { return item === this['statusOfPrimary']; })) {
+      throw new Error(this['statusOfPrimary'] + ' is not a valid value. The valid values are: ' + allowedValues2);
     }
   }
 
-  if (payload['lastGeoFailoverTime'] && !(payload['lastGeoFailoverTime'] instanceof Date || 
-      (typeof payload['lastGeoFailoverTime'].valueOf() === 'string' && !isNaN(Date.parse(payload['lastGeoFailoverTime']))))) {
-    throw new Error('payload[\'lastGeoFailoverTime\'] must be of type date.');
+  if (this['lastGeoFailoverTime'] && !(this['lastGeoFailoverTime'] instanceof Date || 
+      (typeof this['lastGeoFailoverTime'].valueOf() === 'string' && !isNaN(Date.parse(this['lastGeoFailoverTime']))))) {
+    throw new Error('this[\'lastGeoFailoverTime\'] must be of type date.');
   }
 
-  if (payload['secondaryLocation'] !== null && payload['secondaryLocation'] !== undefined && typeof payload['secondaryLocation'].valueOf() !== 'string') {
-    throw new Error('payload[\'secondaryLocation\'] must be of type string.');
+  if (this['secondaryLocation'] !== null && this['secondaryLocation'] !== undefined && typeof this['secondaryLocation'].valueOf() !== 'string') {
+    throw new Error('this[\'secondaryLocation\'] must be of type string.');
   }
 
-  if (payload['statusOfSecondary']) {
+  if (this['statusOfSecondary']) {
     var allowedValues3 = [ 'Available', 'Unavailable' ];
-    if (!allowedValues3.some( function(item) { return item === payload['statusOfSecondary']; })) {
-      throw new Error(payload['statusOfSecondary'] + ' is not a valid value. The valid values are: ' + allowedValues3);
+    if (!allowedValues3.some( function(item) { return item === this['statusOfSecondary']; })) {
+      throw new Error(this['statusOfSecondary'] + ' is not a valid value. The valid values are: ' + allowedValues3);
     }
   }
 
-  if (payload['creationTime'] && !(payload['creationTime'] instanceof Date || 
-      (typeof payload['creationTime'].valueOf() === 'string' && !isNaN(Date.parse(payload['creationTime']))))) {
-    throw new Error('payload[\'creationTime\'] must be of type date.');
+  if (this['creationTime'] && !(this['creationTime'] instanceof Date || 
+      (typeof this['creationTime'].valueOf() === 'string' && !isNaN(Date.parse(this['creationTime']))))) {
+    throw new Error('this[\'creationTime\'] must be of type date.');
   }
 
-  if (payload['customDomain']) {
-    models['CustomDomain'].validate(payload['customDomain']);
+  if (this['customDomain']) {
+    models['CustomDomain'].validate(this['customDomain']);
   }
 
-  if (payload['secondaryEndpoints']) {
-    models['Endpoints'].validate(payload['secondaryEndpoints']);
+  if (this['secondaryEndpoints']) {
+    models['Endpoints'].validate(this['secondaryEndpoints']);
   }
 };
 
@@ -159,24 +157,48 @@ StorageAccount.prototype.serialize = function () {
 StorageAccount.prototype.deserialize = function (instance) {
   StorageAccount['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.primaryEndpoints !== null && instance.primaryEndpoints !== undefined) {
-      instance.primaryEndpoints = models['Endpoints'].deserialize(instance.primaryEndpoints);
+    if (instance.properties.provisioningState !== null && instance.properties.provisioningState !== undefined) {
+      this.provisioningState = instance.properties.provisioningState;
     }
 
-    if (instance.lastGeoFailoverTime !== null && instance.lastGeoFailoverTime !== undefined) {
-      instance.lastGeoFailoverTime = new Date(instance.lastGeoFailoverTime);
+    if (instance.properties.accountType !== null && instance.properties.accountType !== undefined) {
+      this.accountType = instance.properties.accountType;
     }
 
-    if (instance.creationTime !== null && instance.creationTime !== undefined) {
-      instance.creationTime = new Date(instance.creationTime);
+    if (instance.properties.primaryEndpoints !== null && instance.properties.primaryEndpoints !== undefined) {
+      this.primaryEndpoints = new models['Endpoints']().deserialize(instance.properties.primaryEndpoints);
     }
 
-    if (instance.customDomain !== null && instance.customDomain !== undefined) {
-      instance.customDomain = models['CustomDomain'].deserialize(instance.customDomain);
+    if (instance.properties.primaryLocation !== null && instance.properties.primaryLocation !== undefined) {
+      this.primaryLocation = instance.properties.primaryLocation;
     }
 
-    if (instance.secondaryEndpoints !== null && instance.secondaryEndpoints !== undefined) {
-      instance.secondaryEndpoints = models['Endpoints'].deserialize(instance.secondaryEndpoints);
+    if (instance.properties.statusOfPrimary !== null && instance.properties.statusOfPrimary !== undefined) {
+      this.statusOfPrimary = instance.properties.statusOfPrimary;
+    }
+
+    if (instance.properties.lastGeoFailoverTime !== null && instance.properties.lastGeoFailoverTime !== undefined) {
+      this.lastGeoFailoverTime = new Date(instance.properties.lastGeoFailoverTime);
+    }
+
+    if (instance.properties.secondaryLocation !== null && instance.properties.secondaryLocation !== undefined) {
+      this.secondaryLocation = instance.properties.secondaryLocation;
+    }
+
+    if (instance.properties.statusOfSecondary !== null && instance.properties.statusOfSecondary !== undefined) {
+      this.statusOfSecondary = instance.properties.statusOfSecondary;
+    }
+
+    if (instance.properties.creationTime !== null && instance.properties.creationTime !== undefined) {
+      this.creationTime = new Date(instance.properties.creationTime);
+    }
+
+    if (instance.properties.customDomain !== null && instance.properties.customDomain !== undefined) {
+      this.customDomain = new models['CustomDomain']().deserialize(instance.properties.customDomain);
+    }
+
+    if (instance.properties.secondaryEndpoints !== null && instance.properties.secondaryEndpoints !== undefined) {
+      this.secondaryEndpoints = new models['Endpoints']().deserialize(instance.properties.secondaryEndpoints);
     }
   }
   return instance;

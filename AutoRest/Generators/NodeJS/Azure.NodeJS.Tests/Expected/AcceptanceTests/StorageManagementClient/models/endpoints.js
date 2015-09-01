@@ -14,6 +14,14 @@
  * @class
  * Initializes a new instance of the Endpoints class.
  * @constructor
+ * The URIs that are used to perform a retrieval of a public blob, queue or
+ * table object.
+ * @member {string} [blob] Gets the blob endpoint.
+ *
+ * @member {string} [queue] Gets the queue endpoint.
+ *
+ * @member {string} [table] Gets the table endpoint.
+ *
  */
 function Endpoints(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -38,16 +46,16 @@ function Endpoints(parameters) {
  */
 Endpoints.prototype.serialize = function () {
   var payload = {};
-  if (payload['blob'] !== null && payload['blob'] !== undefined && typeof payload['blob'].valueOf() !== 'string') {
-    throw new Error('payload[\'blob\'] must be of type string.');
+  if (this['blob'] !== null && this['blob'] !== undefined && typeof this['blob'].valueOf() !== 'string') {
+    throw new Error('this[\'blob\'] must be of type string.');
   }
 
-  if (payload['queue'] !== null && payload['queue'] !== undefined && typeof payload['queue'].valueOf() !== 'string') {
-    throw new Error('payload[\'queue\'] must be of type string.');
+  if (this['queue'] !== null && this['queue'] !== undefined && typeof this['queue'].valueOf() !== 'string') {
+    throw new Error('this[\'queue\'] must be of type string.');
   }
 
-  if (payload['table'] !== null && payload['table'] !== undefined && typeof payload['table'].valueOf() !== 'string') {
-    throw new Error('payload[\'table\'] must be of type string.');
+  if (this['table'] !== null && this['table'] !== undefined && typeof this['table'].valueOf() !== 'string') {
+    throw new Error('this[\'table\'] must be of type string.');
   }
 };
 
@@ -58,6 +66,19 @@ Endpoints.prototype.serialize = function () {
  *
  */
 Endpoints.prototype.deserialize = function (instance) {
+  if (instance) {
+    if (instance.blob !== null && instance.blob !== undefined) {
+      this.blob = instance.blob;
+    }
+
+    if (instance.queue !== null && instance.queue !== undefined) {
+      this.queue = instance.queue;
+    }
+
+    if (instance.table !== null && instance.table !== undefined) {
+      this.table = instance.table;
+    }
+  }
   return instance;
 };
 

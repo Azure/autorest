@@ -16,6 +16,11 @@ var models = require('./index');
  * @class
  * Initializes a new instance of the StorageAccountUpdateParameters class.
  * @constructor
+ * The parameters to update on the account.
+ * @member {string} [accountType] Gets or sets the account type. Note that StandardZRS and PremiumLRS accounts cannot be changed to other account types, and other account types cannot be changed to StandardZRS or PremiumLRS. Possible values for this property include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+ *
+ * @member {object} [customDomain] User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property.
+ *
  */
 function StorageAccountUpdateParameters(parameters) {
   StorageAccountUpdateParameters['super_'].call(this, parameters);
@@ -38,41 +43,16 @@ util.inherits(StorageAccountUpdateParameters, models['Resource']);
  *
  */
 StorageAccountUpdateParameters.prototype.serialize = function () {
-  var payload = {};
-  payload = StorageAccountUpdateParameters['super_'].prototype.serialize.call(this);
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'].valueOf() !== 'string') {
-    throw new Error('payload[\'id\'] must be of type string.');
-  }
-
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
-  }
-
-  if (payload['type'] !== null && payload['type'] !== undefined && typeof payload['type'].valueOf() !== 'string') {
-    throw new Error('payload[\'type\'] must be of type string.');
-  }
-
-  if (payload['location'] === null || payload['location'] === undefined || typeof payload['location'].valueOf() !== 'string') {
-    throw new Error('payload[\'location\'] cannot be null or undefined and it must be of type string.');
-  }
-
-  if (payload['tags'] && typeof payload['tags'] === 'object') {
-    for(var valueElement in payload['tags']) {
-      if (payload['tags'][valueElement] !== null && payload['tags'][valueElement] !== undefined && typeof payload['tags'][valueElement].valueOf() !== 'string') {
-        throw new Error('payload[\'tags\'][valueElement] must be of type string.');
-      }
-    }
-  }
-
-  if (payload['accountType']) {
+  var payload = StorageAccountUpdateParameters['super_'].prototype.serialize.call(this);
+  if (this['accountType']) {
     var allowedValues = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    if (!allowedValues.some( function(item) { return item === payload['accountType']; })) {
-      throw new Error(payload['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === this['accountType']; })) {
+      throw new Error(this['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
   }
 
-  if (payload['customDomain']) {
-    models['CustomDomain'].validate(payload['customDomain']);
+  if (this['customDomain']) {
+    models['CustomDomain'].validate(this['customDomain']);
   }
 };
 
@@ -85,8 +65,12 @@ StorageAccountUpdateParameters.prototype.serialize = function () {
 StorageAccountUpdateParameters.prototype.deserialize = function (instance) {
   StorageAccountUpdateParameters['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.customDomain !== null && instance.customDomain !== undefined) {
-      instance.customDomain = models['CustomDomain'].deserialize(instance.customDomain);
+    if (instance.properties.accountType !== null && instance.properties.accountType !== undefined) {
+      this.accountType = instance.properties.accountType;
+    }
+
+    if (instance.properties.customDomain !== null && instance.properties.customDomain !== undefined) {
+      this.customDomain = new models['CustomDomain']().deserialize(instance.properties.customDomain);
     }
   }
   return instance;

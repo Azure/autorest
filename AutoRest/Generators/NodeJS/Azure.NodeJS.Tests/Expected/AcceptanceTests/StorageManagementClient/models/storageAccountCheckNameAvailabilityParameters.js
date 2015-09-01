@@ -14,6 +14,10 @@
  * @class
  * Initializes a new instance of the StorageAccountCheckNameAvailabilityParameters class.
  * @constructor
+ * @member {string} [name] 
+ *
+ * @member {string} [type] 
+ *
  */
 function StorageAccountCheckNameAvailabilityParameters(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -35,12 +39,12 @@ function StorageAccountCheckNameAvailabilityParameters(parameters) {
  */
 StorageAccountCheckNameAvailabilityParameters.prototype.serialize = function () {
   var payload = {};
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
+  if (this['name'] !== null && this['name'] !== undefined && typeof this['name'].valueOf() !== 'string') {
+    throw new Error('this[\'name\'] must be of type string.');
   }
 
-  if (payload['type'] !== null && payload['type'] !== undefined && typeof payload['type'].valueOf() !== 'string') {
-    throw new Error('payload[\'type\'] must be of type string.');
+  if (this['type'] !== null && this['type'] !== undefined && typeof this['type'].valueOf() !== 'string') {
+    throw new Error('this[\'type\'] must be of type string.');
   }
 };
 
@@ -51,6 +55,15 @@ StorageAccountCheckNameAvailabilityParameters.prototype.serialize = function () 
  *
  */
 StorageAccountCheckNameAvailabilityParameters.prototype.deserialize = function (instance) {
+  if (instance) {
+    if (instance.name !== null && instance.name !== undefined) {
+      this.name = instance.name;
+    }
+
+    if (instance.type !== null && instance.type !== undefined) {
+      this.type = instance.type;
+    }
+  }
   return instance;
 };
 

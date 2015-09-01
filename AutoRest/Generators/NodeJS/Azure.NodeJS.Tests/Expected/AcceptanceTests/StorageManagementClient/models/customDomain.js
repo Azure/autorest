@@ -14,6 +14,12 @@
  * @class
  * Initializes a new instance of the CustomDomain class.
  * @constructor
+ * The custom domain assigned to this storage account. This can be set via
+ * Update.
+ * @member {string} [name] Gets or sets the custom domain name. Name is the CNAME source.
+ *
+ * @member {boolean} [useSubDomain] Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates
+ *
  */
 function CustomDomain(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -35,12 +41,12 @@ function CustomDomain(parameters) {
  */
 CustomDomain.prototype.serialize = function () {
   var payload = {};
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
+  if (this['name'] !== null && this['name'] !== undefined && typeof this['name'].valueOf() !== 'string') {
+    throw new Error('this[\'name\'] must be of type string.');
   }
 
-  if (payload['useSubDomain'] !== null && payload['useSubDomain'] !== undefined && typeof payload['useSubDomain'] !== 'boolean') {
-    throw new Error('payload[\'useSubDomain\'] must be of type boolean.');
+  if (this['useSubDomain'] !== null && this['useSubDomain'] !== undefined && typeof this['useSubDomain'] !== 'boolean') {
+    throw new Error('this[\'useSubDomain\'] must be of type boolean.');
   }
 };
 
@@ -51,6 +57,15 @@ CustomDomain.prototype.serialize = function () {
  *
  */
 CustomDomain.prototype.deserialize = function (instance) {
+  if (instance) {
+    if (instance.name !== null && instance.name !== undefined) {
+      this.name = instance.name;
+    }
+
+    if (instance.useSubDomain !== null && instance.useSubDomain !== undefined) {
+      this.useSubDomain = instance.useSubDomain;
+    }
+  }
   return instance;
 };
 

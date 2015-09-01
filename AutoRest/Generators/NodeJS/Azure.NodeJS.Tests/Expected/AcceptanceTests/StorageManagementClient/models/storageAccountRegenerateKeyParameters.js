@@ -14,6 +14,8 @@
  * @class
  * Initializes a new instance of the StorageAccountRegenerateKeyParameters class.
  * @constructor
+ * @member {string} [keyName] Possible values for this property include: 'key1', 'key2'.
+ *
  */
 function StorageAccountRegenerateKeyParameters(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -32,10 +34,10 @@ function StorageAccountRegenerateKeyParameters(parameters) {
  */
 StorageAccountRegenerateKeyParameters.prototype.serialize = function () {
   var payload = {};
-  if (payload['keyName']) {
+  if (this['keyName']) {
     var allowedValues = [ 'key1', 'key2' ];
-    if (!allowedValues.some( function(item) { return item === payload['keyName']; })) {
-      throw new Error(payload['keyName'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === this['keyName']; })) {
+      throw new Error(this['keyName'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
   }
 };
@@ -47,6 +49,11 @@ StorageAccountRegenerateKeyParameters.prototype.serialize = function () {
  *
  */
 StorageAccountRegenerateKeyParameters.prototype.deserialize = function (instance) {
+  if (instance) {
+    if (instance.keyName !== null && instance.keyName !== undefined) {
+      this.keyName = instance.keyName;
+    }
+  }
   return instance;
 };
 

@@ -14,6 +14,9 @@
  * @class
  * Initializes a new instance of the StorageAccountCreateParameters class.
  * @constructor
+ * The parameters to provide for the account.
+ * @member {string} [accountType] Gets or sets the account type. Possible values for this property include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+ *
  */
 function StorageAccountCreateParameters(parameters) {
   StorageAccountCreateParameters['super_'].call(this, parameters);
@@ -28,42 +31,16 @@ util.inherits(StorageAccountCreateParameters, models['Resource']);
 
 /**
  * Validate the payload against the StorageAccountCreateParameters schema
- * @inheritdoc
  *
  * @param {JSON} payload
  *
  */
 StorageAccountCreateParameters.prototype.serialize = function () {
-  var payload = {};
-  payload = StorageAccountCreateParameters['super_'].prototype.serialize.call(this);
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'].valueOf() !== 'string') {
-    throw new Error('payload[\'id\'] must be of type string.');
-  }
-
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
-  }
-
-  if (payload['type'] !== null && payload['type'] !== undefined && typeof payload['type'].valueOf() !== 'string') {
-    throw new Error('payload[\'type\'] must be of type string.');
-  }
-
-  if (payload['location'] === null || payload['location'] === undefined || typeof payload['location'].valueOf() !== 'string') {
-    throw new Error('payload[\'location\'] cannot be null or undefined and it must be of type string.');
-  }
-
-  if (payload['tags'] && typeof payload['tags'] === 'object') {
-    for(var valueElement in payload['tags']) {
-      if (payload['tags'][valueElement] !== null && payload['tags'][valueElement] !== undefined && typeof payload['tags'][valueElement].valueOf() !== 'string') {
-        throw new Error('payload[\'tags\'][valueElement] must be of type string.');
-      }
-    }
-  }
-
-  if (payload['accountType']) {
+  var payload = StorageAccountCreateParameters['super_'].prototype.serialize.call(this);
+  if (this['accountType']) {
     var allowedValues = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    if (!allowedValues.some( function(item) { return item === payload['accountType']; })) {
-      throw new Error(payload['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === this['accountType']; })) {
+      throw new Error(this['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
   }
 };
@@ -76,6 +53,11 @@ StorageAccountCreateParameters.prototype.serialize = function () {
  */
 StorageAccountCreateParameters.prototype.deserialize = function (instance) {
   StorageAccountCreateParameters['super_'].prototype.deserialize.call(this, instance);
+  if (instance) {
+    if (instance.properties.accountType !== null && instance.properties.accountType !== undefined) {
+      this.accountType = instance.properties.accountType;
+    }
+  }
   return instance;
 };
 

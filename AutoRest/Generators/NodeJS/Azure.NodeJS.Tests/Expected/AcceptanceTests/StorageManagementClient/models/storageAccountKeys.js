@@ -14,6 +14,11 @@
  * @class
  * Initializes a new instance of the StorageAccountKeys class.
  * @constructor
+ * The access keys for the storage account.
+ * @member {string} [key1] Gets the value of key 1.
+ *
+ * @member {string} [key2] Gets the value of key 2.
+ *
  */
 function StorageAccountKeys(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -35,12 +40,12 @@ function StorageAccountKeys(parameters) {
  */
 StorageAccountKeys.prototype.serialize = function () {
   var payload = {};
-  if (payload['key1'] !== null && payload['key1'] !== undefined && typeof payload['key1'].valueOf() !== 'string') {
-    throw new Error('payload[\'key1\'] must be of type string.');
+  if (this['key1'] !== null && this['key1'] !== undefined && typeof this['key1'].valueOf() !== 'string') {
+    throw new Error('this[\'key1\'] must be of type string.');
   }
 
-  if (payload['key2'] !== null && payload['key2'] !== undefined && typeof payload['key2'].valueOf() !== 'string') {
-    throw new Error('payload[\'key2\'] must be of type string.');
+  if (this['key2'] !== null && this['key2'] !== undefined && typeof this['key2'].valueOf() !== 'string') {
+    throw new Error('this[\'key2\'] must be of type string.');
   }
 };
 
@@ -51,6 +56,15 @@ StorageAccountKeys.prototype.serialize = function () {
  *
  */
 StorageAccountKeys.prototype.deserialize = function (instance) {
+  if (instance) {
+    if (instance.key1 !== null && instance.key1 !== undefined) {
+      this.key1 = instance.key1;
+    }
+
+    if (instance.key2 !== null && instance.key2 !== undefined) {
+      this.key2 = instance.key2;
+    }
+  }
   return instance;
 };
 

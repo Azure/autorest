@@ -14,6 +14,11 @@
  * @class
  * Initializes a new instance of the UsageName class.
  * @constructor
+ * The Usage Names.
+ * @member {string} [value] Gets a string describing the resource name.
+ *
+ * @member {string} [localizedValue] Gets a localized string describing the resource name.
+ *
  */
 function UsageName(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -35,12 +40,12 @@ function UsageName(parameters) {
  */
 UsageName.prototype.serialize = function () {
   var payload = {};
-  if (payload['value'] !== null && payload['value'] !== undefined && typeof payload['value'].valueOf() !== 'string') {
-    throw new Error('payload[\'value\'] must be of type string.');
+  if (this['value'] !== null && this['value'] !== undefined && typeof this['value'].valueOf() !== 'string') {
+    throw new Error('this[\'value\'] must be of type string.');
   }
 
-  if (payload['localizedValue'] !== null && payload['localizedValue'] !== undefined && typeof payload['localizedValue'].valueOf() !== 'string') {
-    throw new Error('payload[\'localizedValue\'] must be of type string.');
+  if (this['localizedValue'] !== null && this['localizedValue'] !== undefined && typeof this['localizedValue'].valueOf() !== 'string') {
+    throw new Error('this[\'localizedValue\'] must be of type string.');
   }
 };
 
@@ -51,6 +56,15 @@ UsageName.prototype.serialize = function () {
  *
  */
 UsageName.prototype.deserialize = function (instance) {
+  if (instance) {
+    if (instance.value !== null && instance.value !== undefined) {
+      this.value = instance.value;
+    }
+
+    if (instance.localizedValue !== null && instance.localizedValue !== undefined) {
+      this.localizedValue = instance.localizedValue;
+    }
+  }
   return instance;
 };
 

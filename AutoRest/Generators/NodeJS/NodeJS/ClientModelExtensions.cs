@@ -451,28 +451,38 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// </summary>
         /// <param name="type">The type to deserialize</param>
         /// <param name="scope">A scope provider for generating variable names as necessary</param>
+        /// <param name="objectReference">A reference to the object that will be assigned the deserialized value</param>
         /// <param name="valueReference">A reference to the value being deserialized</param>
         /// <param name="modelReference">A reference to the models</param>
         /// <returns>The code to deserialize the given type</returns>
-        public static string DeserializeType(this IType type, IScopeProvider scope, string valueReference, string modelReference = "self._models")
+        public static string DeserializeType(this IType type, IScopeProvider scope, string objectReference, string valueReference, string modelReference = "self._models")
         {
             if (scope == null)
             {
                 throw new ArgumentNullException("scope");
             }
 
+            EnumType enumType = type as EnumType;
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
             PrimaryType primary = type as PrimaryType;
             var builder = new IndentedStringBuilder("  ");
-            if (primary != null)
+            if (enumType != null)
+            {
+                return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                        .Indent()
+                          .AppendLine("{1} = {0};", valueReference, objectReference)
+                        .Outdent()
+                       .AppendLine("}").ToString();
+            }
+            else if (primary != null)
             {
                 if (primary == PrimaryType.ByteArray)
                 {
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() === 'string') {{", valueReference)
                             .Indent()
-                                .AppendLine("{0} = new Buffer({0}, 'base64');", valueReference)
+                                .AppendLine("{1} = new Buffer({0}, 'base64');", valueReference, objectReference)
                             .Outdent()
                             .AppendLine("}").ToString();
                 }
@@ -480,10 +490,16 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
                             .Indent()
-                              .AppendLine("{0} = new Date({0});", valueReference)
+                              .AppendLine("{1} = new Date({0});", valueReference, objectReference)
                             .Outdent()
                           .AppendLine("}").ToString();
                 }
+                return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                        .Indent()
+                          .AppendLine("{1} = {0};", valueReference, objectReference)
+                        .Outdent()
+                       .AppendLine("}").ToString();
+
             }
             else if (composite != null && composite.Properties.Any())
             {
@@ -495,9 +511,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                         valueReference,
                                         composite.PolymorphicDiscriminator, modelReference)
                         .Indent()
-                            .AppendLine("{0} = {2}.discriminators[{0}['{1}']].deserialize({0});",
+                            .AppendLine("{3} = new {2}.discriminators[{0}['{1}']]().deserialize({0});",
                                 valueReference,
-                                composite.PolymorphicDiscriminator, modelReference)
+                                composite.PolymorphicDiscriminator, modelReference, objectReference)
                         .Outdent()
                         .AppendLine("}} else {{", valueReference)
                         .Indent()
@@ -509,7 +525,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 }
                 else
                 {
-                    builder.AppendLine("{0} = {2}['{1}'].deserialize({0});", valueReference, composite.Name, modelReference);
+                    builder.AppendLine("{3} = new {2}['{1}']().deserialize({0});", valueReference, composite.Name, modelReference, objectReference);
                 }
                 builder.Outdent().AppendLine("}");
 
@@ -518,7 +534,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar, modelReference);
+                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar, elementVar, modelReference);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
@@ -530,7 +546,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                   .AppendLine("deserialized{0}.push({1});", sequence.Name.ToPascalCase(), elementVar)
                                 .Outdent()
                               .AppendLine("});")
-                              .AppendLine("{0} = deserialized{1};", valueReference, sequence.Name.ToPascalCase())
+                              .AppendLine("{0} = deserialized{1};", objectReference, sequence.Name.ToPascalCase())
                             .Outdent()
                           .AppendLine("}").ToString();
                 }
@@ -538,7 +554,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueReference + "[" + valueVar + "]", modelReference);
+                var innerSerialization = dictionary.ValueType.DeserializeType(scope,
+                                                                              objectReference + "[" + valueVar + "]",
+                                                                              valueReference + "[" + valueVar + "]",
+                                                                              modelReference);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)

@@ -1,6 +1,7 @@
 ﻿@using System.Linq
 @using System.Collections.Generic
 @using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.NodeJS
 @using Microsoft.Rest.Generator.NodeJS.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ModelTemplateModel>
 /*
@@ -24,6 +25,12 @@
  * @@class
  * Initializes a new instance of the @(Model.Name) class.
  * @@constructor
+@WrapComment(" * ", Model.Documentation)
+@foreach (var parameter in Model.Properties)
+{
+ @:* @@member {@ModelTemplateModel.GetPropertyDocumentationType(parameter)} @ModelTemplateModel.GetPropertyDocumentationName(parameter) @parameter.Documentation
+ @:*
+}
  */
 function @(Model.Name)(parameters) {
 @{ 
@@ -66,16 +73,19 @@ if (Model.BaseModelType != null)
  *
  */
 @(Model.Name).prototype.serialize = function () {
-  var payload = {};
 @{
   if (Model.BaseModelType != null)
   {
-  @:payload = @(Model.Name)['super_'].prototype.serialize.call(this);
+  @:var payload = @(Model.Name)['super_'].prototype.serialize.call(this);
   }
-  var propertyList = new List<Property>(Model.ComposedProperties);
+  else
+  {
+  @:var payload = {};
+  }
+  var propertyList = new List<Property>(Model.Properties);
   for (int i = 0; i < propertyList.Count; i++)
   {
-  @:@(Model.ValidateProperty("payload", propertyList[i]))
+  @:@(Model.ValidateProperty("this", propertyList[i]))
   if (i != propertyList.Count-1)
   {
   @EmptyLine
@@ -96,15 +106,15 @@ if (Model.BaseModelType != null)
   {
   @:@(Model.Name)['super_'].prototype.deserialize.call(this, instance);
   }
-  var specialProperties = Model.SpecialProperties;
-  if (specialProperties.Count() > 0)
+  var properties = Model.Properties;
+  if (properties.Count > 0)
   {
   @:if (instance) {
-    var specialPropertyList = new List<Property>(Model.SpecialProperties);
-    for (int i = 0; i < specialPropertyList.Count; i++)
+    var propertiesList = new List<Property>(Model.Properties);
+    for (int i = 0; i < propertiesList.Count; i++)
     {
-    @:@(Model.DeserializeProperty("instance", specialPropertyList[i]))
-    if (i != specialPropertyList.Count - 1)
+    @:@(Model.DeserializeProperty("this", "instance", propertiesList[i]))
+    if (i != propertiesList.Count - 1)
     {
     @EmptyLine
     }

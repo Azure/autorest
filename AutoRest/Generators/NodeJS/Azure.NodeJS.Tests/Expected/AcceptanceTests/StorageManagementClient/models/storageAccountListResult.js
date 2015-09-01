@@ -18,6 +18,9 @@ var util = require('util');
  * @class
  * Initializes a new instance of the StorageAccountListResult class.
  * @constructor
+ * The list storage accounts operation response.
+ * @member {array} [value] Gets the list of storage accounts and their properties.
+ *
  */
 function StorageAccountListResult(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -36,10 +39,10 @@ function StorageAccountListResult(parameters) {
  */
 StorageAccountListResult.prototype.serialize = function () {
   var payload = {};
-  if (util.isArray(payload['value'])) {
-    for (var i = 0; i < payload['value'].length; i++) {
-      if (payload['value'][i]) {
-        models['StorageAccount'].validate(payload['value'][i]);
+  if (util.isArray(this['value'])) {
+    for (var i = 0; i < this['value'].length; i++) {
+      if (this['value'][i]) {
+        models['StorageAccount'].validate(this['value'][i]);
       }
     }
   }
@@ -57,11 +60,11 @@ StorageAccountListResult.prototype.deserialize = function (instance) {
       var deserializedArray = [];
       instance.value.forEach(function(element) {
         if (element !== null && element !== undefined) {
-          element = models['StorageAccount'].deserialize(element);
+          element = new models['StorageAccount']().deserialize(element);
         }
         deserializedArray.push(element);
       });
-      instance.value = deserializedArray;
+      this.value = deserializedArray;
     }
   }
   return instance;

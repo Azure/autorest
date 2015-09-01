@@ -18,6 +18,9 @@ var util = require('util');
  * @class
  * Initializes a new instance of the UsageListResult class.
  * @constructor
+ * The List Usages operation response.
+ * @member {array} [value] Gets or sets the list Storage Resource Usages.
+ *
  */
 function UsageListResult(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -36,10 +39,10 @@ function UsageListResult(parameters) {
  */
 UsageListResult.prototype.serialize = function () {
   var payload = {};
-  if (util.isArray(payload['value'])) {
-    for (var i = 0; i < payload['value'].length; i++) {
-      if (payload['value'][i]) {
-        models['Usage'].validate(payload['value'][i]);
+  if (util.isArray(this['value'])) {
+    for (var i = 0; i < this['value'].length; i++) {
+      if (this['value'][i]) {
+        models['Usage'].validate(this['value'][i]);
       }
     }
   }
@@ -57,11 +60,11 @@ UsageListResult.prototype.deserialize = function (instance) {
       var deserializedArray = [];
       instance.value.forEach(function(element) {
         if (element !== null && element !== undefined) {
-          element = models['Usage'].deserialize(element);
+          element = new models['Usage']().deserialize(element);
         }
         deserializedArray.push(element);
       });
-      instance.value = deserializedArray;
+      this.value = deserializedArray;
     }
   }
   return instance;

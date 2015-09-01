@@ -14,6 +14,13 @@
  * @class
  * Initializes a new instance of the CheckNameAvailabilityResult class.
  * @constructor
+ * The CheckNameAvailability operation response.
+ * @member {boolean} [nameAvailable] Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used.
+ *
+ * @member {string} [reason] Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false. Possible values for this property include: 'AccountNameInvalid', 'AlreadyExists'.
+ *
+ * @member {string} [message] Gets an error message explaining the Reason value in more detail.
+ *
  */
 function CheckNameAvailabilityResult(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -38,19 +45,19 @@ function CheckNameAvailabilityResult(parameters) {
  */
 CheckNameAvailabilityResult.prototype.serialize = function () {
   var payload = {};
-  if (payload['nameAvailable'] !== null && payload['nameAvailable'] !== undefined && typeof payload['nameAvailable'] !== 'boolean') {
-    throw new Error('payload[\'nameAvailable\'] must be of type boolean.');
+  if (this['nameAvailable'] !== null && this['nameAvailable'] !== undefined && typeof this['nameAvailable'] !== 'boolean') {
+    throw new Error('this[\'nameAvailable\'] must be of type boolean.');
   }
 
-  if (payload['reason']) {
+  if (this['reason']) {
     var allowedValues = [ 'AccountNameInvalid', 'AlreadyExists' ];
-    if (!allowedValues.some( function(item) { return item === payload['reason']; })) {
-      throw new Error(payload['reason'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === this['reason']; })) {
+      throw new Error(this['reason'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
   }
 
-  if (payload['message'] !== null && payload['message'] !== undefined && typeof payload['message'].valueOf() !== 'string') {
-    throw new Error('payload[\'message\'] must be of type string.');
+  if (this['message'] !== null && this['message'] !== undefined && typeof this['message'].valueOf() !== 'string') {
+    throw new Error('this[\'message\'] must be of type string.');
   }
 };
 
@@ -61,6 +68,19 @@ CheckNameAvailabilityResult.prototype.serialize = function () {
  *
  */
 CheckNameAvailabilityResult.prototype.deserialize = function (instance) {
+  if (instance) {
+    if (instance.nameAvailable !== null && instance.nameAvailable !== undefined) {
+      this.nameAvailable = instance.nameAvailable;
+    }
+
+    if (instance.reason !== null && instance.reason !== undefined) {
+      this.reason = instance.reason;
+    }
+
+    if (instance.message !== null && instance.message !== undefined) {
+      this.message = instance.message;
+    }
+  }
   return instance;
 };
 
