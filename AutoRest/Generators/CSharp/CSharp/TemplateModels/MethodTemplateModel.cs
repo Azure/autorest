@@ -249,6 +249,14 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
+        /// Get the method's form data (or null if there is no form data)
+        /// </summary>
+        public ParameterTemplateModel FormData
+        {
+            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.FormData); }
+        }
+
+        /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
         public string ClientReference

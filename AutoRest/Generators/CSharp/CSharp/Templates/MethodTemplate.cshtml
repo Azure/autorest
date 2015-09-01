@@ -102,6 +102,22 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         </text>
     }
 
+    @if (Model.FormData != null)
+    {
+        <text>
+    // Serialize Request
+    var multiPartContent = new MultipartFormDataContent();
+    var fileStreamContent = new StreamContent(fileContent);
+    fileStreamContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+	{
+	    Name = "\"fileUpload\"",
+	    FileName = "\"" + fileName + "\""
+	};
+    fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream"); 
+    multiPartContent.Add(fileStreamContent);
+    httpRequest.Content = multiPartContent; 
+        </text>
+    }
 
     @if (Model.RequestBody != null)
     {
