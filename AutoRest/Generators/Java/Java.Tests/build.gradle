@@ -20,7 +20,7 @@ tasks.withType(JavaCompile) {
 repositories {
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    maven { url "../../../../ClientRuntimes/Java/build/repo-snapshots/"}
+    maven { url "../../../../ClientRuntimes/Java/client-runtime/build/repo-snapshots/"}
 }
 
 dependencies {
@@ -86,7 +86,7 @@ test {
 }
 
 task buildRuntime(type: Exec) {
-    workingDir "${projectDir}/../../../../ClientRuntimes/Java"
+    workingDir "${projectDir}/../../../../ClientRuntimes/Java/client-runtime"
     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
         commandLine 'cmd', '/c', 'gradle', 'uploadArchives'
     } else {

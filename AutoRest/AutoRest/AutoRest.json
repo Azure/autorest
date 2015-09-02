@@ -32,6 +32,13 @@
     },
     "Java": {
       "type": "JavaCodeGenerator, AutoRest.Generator.Java"
+    },
+    "Azure.Java": {
+      "type": "AzureJavaCodeGenerator, AutoRest.Generator.Azure.Java",
+      "settings": {
+        "includeCredentials": "true",
+        "requireOperationId": "true"
+      }
     }
   },
   "modelers": {

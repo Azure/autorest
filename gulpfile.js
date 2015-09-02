@@ -107,7 +107,8 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:nodeazure',
       'regenerate:expected:ruby',
       'regenerate:expected:rubyazure',
-      'regenerate:expected:java'
+      'regenerate:expected:java',
+      'regenerate:expected:javaazure'
     ],
     cb);
 });
@@ -117,7 +118,9 @@ gulp.task('regenerate:delete', function(cb){
     'AutoRest/Generators/CSharp/Azure.CSharp.Tests/Expected',
     'AutoRest/Generators/CSharp/CSharp.Tests/Expected',
     'AutoRest/Generators/NodeJS/NodeJS.Tests/Expected',
-    'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/Expected'
+    'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/Expected',
+    'AutoRest/Generators/Java/Java.Tests/src/main/java',
+    'AutoRest/Generators/Java/Azure.Java.Tests/src/main/java'
   ], cb);
 });
 
@@ -160,6 +163,21 @@ gulp.task('regenerate:expected:ruby', function(cb){
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Ruby',
     'nsPrefix': 'MyNamespace'
+  }, cb);
+})
+
+gulp.task('regenerate:expected:javaazure', function(cb){
+  mappings = {};
+  for (var key in defaultAzureMappings) {
+    mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key];
+  }
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Java/Azure.Java.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'src/main/java/fixtures',
+    'codeGenerator': 'Azure.Java',
+    'nsPrefix': 'Fixtures'
   }, cb);
 })
 
@@ -303,7 +321,7 @@ gulp.task('test:clientruntime:node', shell.task('npm test', { cwd: './ClientRunt
 gulp.task('test:clientruntime:nodeazure', shell.task('npm test', { cwd: './ClientRuntimes/NodeJS/ms-rest-azure/', verbosity: 3 }));
 gulp.task('test:clientruntime:ruby', ['syncDependencies:runtime:ruby'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest/', verbosity: 3 }));
 gulp.task('test:clientruntime:rubyazure', ['syncDependencies:runtime:rubyazure'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest-azure/', verbosity: 3 }));
-gulp.task('test:clientruntime:java', shell.task('gradle build uploadArchives', { cwd: './ClientRuntimes/Java/', verbosity: 3 }));
+gulp.task('test:clientruntime:java', shell.task('gradle build uploadArchives', { cwd: './ClientRuntimes/Java/client-runtime/', verbosity: 3 }));
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
     'test:clientruntime:ruby', 'test:clientruntime:rubyazure', 
