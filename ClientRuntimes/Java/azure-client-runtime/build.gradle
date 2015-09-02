@@ -1,0 +1,78 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.bmuschko.nexus'
+
+group = 'com.microsoft.rest'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "../client-runtime/build/repo-snapshots/"}
+}
+
+dependencies {
+    compile 'com.microsoft.rest:client-runtime:0.0.1-SNAPSHOT'
+    testCompile 'junit:junit:4.11'
+    testCompile 'junit:junit-dep:4.11'
+}
+
+modifyPom {
+    setArtifactId 'azure-client-runtime'
+    project {
+        name 'Microsoft Azure AutoRest Runtime for Java'
+        description 'This is the client runtime for AutoRest generated Azure Java clients.'
+        url 'https://github.com/Azure/autorest'
+
+        scm {
+            url 'scm:git:https://github.com/Azure/AutoRest'
+            connection 'scm:git:git://github.com/Azure/AutoRest.git'
+        }
+
+        licenses {
+            license {
+                name 'The MIT License (MIT)'
+                url 'http://opensource.org/licenses/MIT'
+                distribution 'repo'
+            }
+        }
+
+        developers {
+            developer {
+                id 'microsoft'
+                name 'Microsoft'
+            }
+        }
+    }
+}
+
+nexus {
+    sign = true
+    repositoryUrl = "file://$buildDir/repo"
+    snapshotRepositoryUrl = "file://$buildDir/repo-snapshots"
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardError"
+    }
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    reports.getHtml()
+    reports.html.destination = file("${projectDir}/../../../TestResults/JavaAzureRuntime")
+}
+
+tasks.compileJava.dependsOn 'clean'

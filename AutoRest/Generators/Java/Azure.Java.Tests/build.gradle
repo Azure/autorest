@@ -21,12 +21,14 @@ repositories {
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     maven { url "../../../../ClientRuntimes/Java/client-runtime/build/repo-snapshots/"}
+    maven { url "../../../../ClientRuntimes/Java/azure-client-runtime/build/repo-snapshots/"}
 }
 
 dependencies {
     compile 'commons-codec:commons-codec:1.10'
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'com.microsoft.rest:client-runtime:0.0.1-SNAPSHOT'
+    compile 'com.microsoft.rest:azure-client-runtime:0.0.1-SNAPSHOT'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'joda-time:joda-time:2.8.2'
     compile 'javax.validation:validation-api:1.1.0.Final'
@@ -36,10 +38,10 @@ dependencies {
 }
 
 modifyPom {
-    setArtifactId 'java-code-gen-tests'
+    setArtifactId 'azure-java-code-gen-tests'
     project {
-        name 'Microsoft AutoRest Java Code Generator Tests'
-        description 'This is the Basic Acceptance Tests for Java Code Gen.'
+        name 'Microsoft AutoRest Azure Java Code Generator Tests'
+        description 'This is the Basic Acceptance Tests for Azure Java Code Gen.'
         url 'https://github.com/Azure/autorest'
 
         scm {
@@ -82,11 +84,11 @@ javadoc {
 
 test {
     reports.getHtml()
-    reports.html.destination = file("${projectDir}/../../../../TestResults/JavaCodeGen")
+    reports.html.destination = file("${projectDir}/../../../../TestResults/JavaAzureCodeGen")
 }
 
 task buildRuntime(type: Exec) {
-    workingDir "${projectDir}/../../../../ClientRuntimes/Java/client-runtime"
+    workingDir "${projectDir}/../../../../ClientRuntimes/Java"
     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
         commandLine 'cmd', '/c', 'gradle', 'uploadArchives'
     } else {
@@ -121,7 +123,7 @@ task runserver(type: Exec, dependsOn: 'installforever') {
 }
 
 task testcoverage(type: JavaExec, dependsOn: 'runserver') {
-    main = 'fixtures.report.CoverageReporter'
+    main = 'fixtures.azurereport.CoverageReporter'
     classpath = sourceSets.test.runtimeClasspath
 }
 

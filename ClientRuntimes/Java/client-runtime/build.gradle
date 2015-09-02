@@ -76,7 +76,7 @@ javadoc {
 
 test {
     reports.getHtml()
-    reports.html.destination = file("${projectDir}/../../TestResults/JavaRuntime")
+    reports.html.destination = file("${projectDir}/../../../TestResults/JavaRuntime")
 }
 
 tasks.compileJava.dependsOn 'clean'
