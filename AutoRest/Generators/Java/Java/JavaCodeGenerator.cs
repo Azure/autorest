@@ -54,9 +54,27 @@ namespace Microsoft.Rest.Generator.Java
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            PopulateAdditionalProperties(serviceClient);
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
+        }
+
+        private void PopulateAdditionalProperties(ServiceClient serviceClient)
+        {
+            if (Settings.AddCredentials)
+            {
+                serviceClient.Properties.Add(new Property
+                {
+                    Name = "credentials",
+                    Type = new CompositeType
+                    {
+                        Name = "ServiceClientCredentials"
+                    },
+                    IsRequired = true,
+                    Documentation = "Subscription credentials which uniquely identify client subscription."
+                });
+            }
         }
 
         /// <summary>

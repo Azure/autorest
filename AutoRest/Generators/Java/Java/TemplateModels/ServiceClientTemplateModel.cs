@@ -55,13 +55,25 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
+                HashSet<string> classes = new HashSet<string>();
+
+                if (this.Properties.Any(p => p.Type != null &&
+                                             p.Type.Name.Equals("ServiceClientCredentials", System.StringComparison.OrdinalIgnoreCase)))
+                {
+                    classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
+                }
+                classes.AddRange(new[]{
+                        "com.microsoft.rest.ServiceClient",
+                        "com.squareup.okhttp.OkHttpClient",
+                        "retrofit.RestAdapter" 
+                    });
+                
                 if (this.MethodTemplateModels.IsNullOrEmpty())
                 {
-                    return new HashSet<string>();
+                    return classes;
                 }
 
-                HashSet<string> classes = new HashSet<string>
-                {
+                classes.AddRange(new[]{
                     "com.google.gson.reflect.TypeToken",
                     "com.microsoft.rest.ServiceCallback",
                     "com.microsoft.rest.ServiceException",
@@ -70,7 +82,7 @@ namespace Microsoft.Rest.Generator.Java
                     "com.microsoft.rest.ServiceResponseCallback",
                     "retrofit.RetrofitError",
                     "retrofit.client.Response"
-                };
+                });
 
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
@@ -80,6 +92,8 @@ namespace Microsoft.Rest.Generator.Java
                     .ToList();
 
                 classes.UnionWith(types.TypeImports(this.Namespace));
+
+
                 return classes.AsEnumerable();
             }
         }
@@ -88,18 +102,25 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (this.MethodTemplateModels.IsNullOrEmpty())
+                HashSet<string> classes = new HashSet<string>();
+
+                if (this.Properties.Any(p => p.Type != null &&
+                                             p.Type.Name.Equals("ServiceClientCredentials", System.StringComparison.OrdinalIgnoreCase)))
                 {
-                    return new HashSet<string>();
+                    classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }
 
-                HashSet<string> classes = new HashSet<string>
+                if (this.MethodTemplateModels.IsNullOrEmpty())
                 {
+                    return classes;
+                }
+
+                classes.AddRange(new[]{
                     "com.microsoft.rest.ServiceCallback",
                     "com.microsoft.rest.ServiceException",
                     "com.microsoft.rest.ServiceResponseCallback",
                     "retrofit.client.Response"
-                };
+                });
 
                 IList<IType> types = this.MethodTemplateModels
                     .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
@@ -118,6 +139,7 @@ namespace Microsoft.Rest.Generator.Java
                             classes.Add("retrofit.http." + param.Location.ToString());
                     }
                 }
+
                 return classes.AsEnumerable();
             }
         }

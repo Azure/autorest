@@ -75,6 +75,19 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             return string.Join(", ", settings);
         }
 
+        public static void AddRange<T>(this HashSet<T> hashSet, IEnumerable<T> range)
+        {
+            if( hashSet == null || range == null)
+            {
+                return;
+            }
+
+            foreach(var item in range)
+            {
+                hashSet.Add(item);
+            }
+        }
+
         public static HashSet<string> TypeImports(this IList<IType> types, String ns)
         {
             HashSet<string> imports = new HashSet<string>();
