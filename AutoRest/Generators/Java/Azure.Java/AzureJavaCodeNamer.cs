@@ -34,43 +34,6 @@ namespace Microsoft.Rest.Generator.Java
             {
                 throw new ArgumentNullException("serviceClient");
             }
-
-            var pageTypeFormat = "Page<{0}>";
-
-            var convertedTypes = new Dictionary<IType, CompositeType>();
-
-            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
-            {
-                foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
-                {
-                    var compositType = (CompositeType) method.Responses[responseStatus];
-                    var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
-
-                    // if the type is a wrapper over page-able response
-                    if(sequenceType != null &&
-                       compositType.Properties.Count == 2 && 
-                       compositType.Properties.Any(p => p.SerializedName.Equals("nextLink", StringComparison.OrdinalIgnoreCase)))
-                    {
-                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, sequenceType.ElementType.Name);
-                        
-                        CompositeType pagedResult = new CompositeType
-                        {
-                            Name = pagableTypeName
-                        };
-                        pagedResult.Extensions[AzureCodeGenerator.ExternalExtension] = true;
-
-                        convertedTypes[method.Responses[responseStatus]] = pagedResult;
-                        method.Responses[responseStatus] = pagedResult;
-                    }
-                }
-
-                if (convertedTypes.ContainsKey(method.ReturnType))
-                {
-                    method.ReturnType = convertedTypes[method.ReturnType];
-                }
-            }
-
-            AzureCodeGenerator.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
         }
     }
 }

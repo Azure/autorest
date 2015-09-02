@@ -14,7 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import fixtures.paging.models.Page<Product>;
+import fixtures.paging.models.ProductResult;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.Path;
@@ -117,41 +117,41 @@ public interface Paging {
     /**
      * A paging operation that finishes on the first call without a nextlink
      *
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getSinglePages() throws ServiceException;
+    ProductResult getSinglePages() throws ServiceException;
 
     /**
      * A paging operation that finishes on the first call without a nextlink
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getSinglePagesAsync(final ServiceCallback<Page<Product>> serviceCallback);
+    void getSinglePagesAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
      *
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getMultiplePages() throws ServiceException;
+    ProductResult getMultiplePages() throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getMultiplePagesAsync(final ServiceCallback<Page<Product>> serviceCallback);
+    void getMultiplePagesAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that fails on the first call with 500 and then
      * retries and then get a response including a nextLink that has 10 pages
      *
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getMultiplePagesRetryFirst() throws ServiceException;
+    ProductResult getMultiplePagesRetryFirst() throws ServiceException;
 
     /**
      * A paging operation that fails on the first call with 500 and then
@@ -159,17 +159,17 @@ public interface Paging {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getMultiplePagesRetryFirstAsync(final ServiceCallback<Page<Product>> serviceCallback);
+    void getMultiplePagesRetryFirstAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which
      * the 2nd call fails first with 500. The client should retry and finish
      * all 10 pages eventually.
      *
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getMultiplePagesRetrySecond() throws ServiceException;
+    ProductResult getMultiplePagesRetrySecond() throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which
@@ -178,61 +178,61 @@ public interface Paging {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getMultiplePagesRetrySecondAsync(final ServiceCallback<Page<Product>> serviceCallback);
+    void getMultiplePagesRetrySecondAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the first call
      *
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getSinglePagesFailure() throws ServiceException;
+    ProductResult getSinglePagesFailure() throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the first call
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getSinglePagesFailureAsync(final ServiceCallback<Page<Product>> serviceCallback);
+    void getSinglePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the second call
      *
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getMultiplePagesFailure() throws ServiceException;
+    ProductResult getMultiplePagesFailure() throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the second call
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getMultiplePagesFailureAsync(final ServiceCallback<Page<Product>> serviceCallback);
+    void getMultiplePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives an invalid nextLink
      *
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getMultiplePagesFailureUri() throws ServiceException;
+    ProductResult getMultiplePagesFailureUri() throws ServiceException;
 
     /**
      * A paging operation that receives an invalid nextLink
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getMultiplePagesFailureUriAsync(final ServiceCallback<Page<Product>> serviceCallback);
+    void getMultiplePagesFailureUriAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that finishes on the first call without a nextlink
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getSinglePagesNext(String nextPageLink) throws ServiceException;
+    ProductResult getSinglePagesNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that finishes on the first call without a nextlink
@@ -240,16 +240,16 @@ public interface Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getSinglePagesNextAsync(String nextPageLink, final ServiceCallback<Page<Product>> serviceCallback);
+    void getSinglePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getMultiplePagesNext(String nextPageLink) throws ServiceException;
+    ProductResult getMultiplePagesNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
@@ -257,17 +257,17 @@ public interface Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getMultiplePagesNextAsync(String nextPageLink, final ServiceCallback<Page<Product>> serviceCallback);
+    void getMultiplePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that fails on the first call with 500 and then
      * retries and then get a response including a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException;
+    ProductResult getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that fails on the first call with 500 and then
@@ -276,7 +276,7 @@ public interface Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getMultiplePagesRetryFirstNextAsync(String nextPageLink, final ServiceCallback<Page<Product>> serviceCallback);
+    void getMultiplePagesRetryFirstNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which
@@ -284,10 +284,10 @@ public interface Paging {
      * all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException;
+    ProductResult getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which
@@ -297,16 +297,16 @@ public interface Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getMultiplePagesRetrySecondNextAsync(String nextPageLink, final ServiceCallback<Page<Product>> serviceCallback);
+    void getMultiplePagesRetrySecondNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the first call
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getSinglePagesFailureNext(String nextPageLink) throws ServiceException;
+    ProductResult getSinglePagesFailureNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the first call
@@ -314,16 +314,16 @@ public interface Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getSinglePagesFailureNextAsync(String nextPageLink, final ServiceCallback<Page<Product>> serviceCallback);
+    void getSinglePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the second call
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getMultiplePagesFailureNext(String nextPageLink) throws ServiceException;
+    ProductResult getMultiplePagesFailureNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the second call
@@ -331,16 +331,16 @@ public interface Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getMultiplePagesFailureNextAsync(String nextPageLink, final ServiceCallback<Page<Product>> serviceCallback);
+    void getMultiplePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives an invalid nextLink
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the Page&lt;Product&gt; object if successful.
+     * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Page<Product> getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException;
+    ProductResult getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that receives an invalid nextLink
@@ -348,6 +348,6 @@ public interface Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getMultiplePagesFailureUriNextAsync(String nextPageLink, final ServiceCallback<Page<Product>> serviceCallback);
+    void getMultiplePagesFailureUriNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
 }
