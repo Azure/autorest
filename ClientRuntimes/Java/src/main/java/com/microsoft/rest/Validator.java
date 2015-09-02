@@ -23,9 +23,8 @@ import java.util.Map;
  */
 public class Validator {
     /**
-     * Validates a user provided required parameter to be not null. Returns if
-     * the parameter passes the validation. A {@link ServiceException} is thrown
-     * if a property fails the validation.
+     * Validates a user provided required parameter to be not null.
+     * A {@link ServiceException} is thrown if a property fails the validation.
      *
      * @param parameter the parameter to validate
      * @throws ServiceException failures wrapped in {@link ServiceException}

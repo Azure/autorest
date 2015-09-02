@@ -14,7 +14,6 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.RestAdapter;
 
-
 /**
  * Initializes a new instance of the AutoRestSwaggerBATHeaderService class.
  */

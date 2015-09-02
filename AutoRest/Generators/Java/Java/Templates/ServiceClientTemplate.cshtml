@@ -9,16 +9,8 @@
 @EmptyLine
 
 package @(Settings.Namespace.ToLower());
-@EmptyLine
 
-import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
 @EmptyLine
-@if (Settings.AddCredentials)
-{
-@:import com.microsoft.rest.credentials.ServiceClientCredentials;
-}
 @foreach (var importClass in Model.ImplImports)
 {
 @:import @importClass;
@@ -42,40 +34,31 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
     public String getBaseUri() {
         return this.baseUri;
     }
-@if (Settings.AddCredentials)
+@foreach (var property in Model.Properties)
 {
 @EmptyLine
-@:    private ServiceClientCredentials credentials;
+@:    private @(property.Type) @(property.Name.ToCamelCase());
 @EmptyLine
 @:    /**
-@:     * Sets the credential to apply on the service client for all requests.
+@:     * Gets @(property.Documentation)
+@:     *
+@:     * @@return the @(property.Name) value.
 @:     */
-@:    public void setCredentials(ServiceClientCredentials credentials) {
-@:        this.credentials = credentials;
+@:    public @(property.Type) get@(property.Name.ToPascalCase())() {
+@:        return this.@(property.Name.ToCamelCase());
+@:    }
+if(!property.IsReadOnly)
+{ 
+@EmptyLine
+@:    /**
+@:     * Sets @(property.Documentation)
+@:     *
+@:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     */
+@:    public void set@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
+@:        this.@(property.Name.ToCamelCase()) = @(property.Name.ToCamelCase());
 @:    }
 }
-@foreach (var param in Model.Properties)
-{
-@EmptyLine
-@:    private @(param.Type) @(param.Name.ToCamelCase());
-@EmptyLine
-@:    /**
-@:     * Gets @(param.Documentation)
-@:     *
-@:     * @@return the @(param.Name) value.
-@:     */
-@:    public @(param.Type) get@(param.Name.ToPascalCase())() {
-@:        return this.@(param.Name.ToCamelCase());
-@:    }
-@EmptyLine
-@:    /**
-@:     * Sets @(param.Documentation)
-@:     *
-@:     * @@param @(param.Name.ToCamelCase()) the @(param.Name) value.
-@:     */
-@:    public void set@(param.Name.ToPascalCase())(@(param.Type) @(param.Name.ToCamelCase())) {
-@:        this.@(param.Name.ToCamelCase()) = @(param.Name.ToCamelCase());
-@:    }
 }
 
 @foreach (var operation in Model.Operations)

@@ -43,8 +43,6 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        
-
         public IEnumerable<string> ImplImports
         {
             get
