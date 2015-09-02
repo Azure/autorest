@@ -41,12 +41,18 @@ function CustomDomain(parameters) {
  */
 CustomDomain.prototype.serialize = function () {
   var payload = {};
-  if (this['name'] !== null && this['name'] !== undefined && typeof this['name'].valueOf() !== 'string') {
+  if (this['name'] !== null && this['name'] !== undefined) {
+    if (typeof this['name'].valueOf() !== 'string') {
     throw new Error('this[\'name\'] must be of type string.');
   }
+  payload['name'] = this['name'];
+  }
 
-  if (this['useSubDomain'] !== null && this['useSubDomain'] !== undefined && typeof this['useSubDomain'] !== 'boolean') {
+  if (this['useSubDomain'] !== null && this['useSubDomain'] !== undefined) {
+    if (typeof this['useSubDomain'] !== 'boolean') {
     throw new Error('this[\'useSubDomain\'] must be of type boolean.');
+  }
+  payload['useSubDomain'] = this['useSubDomain'];
   }
 };
 

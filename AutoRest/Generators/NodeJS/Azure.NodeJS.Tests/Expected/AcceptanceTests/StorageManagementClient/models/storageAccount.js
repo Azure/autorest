@@ -89,62 +89,76 @@ util.inherits(StorageAccount, models['Resource']);
  */
 StorageAccount.prototype.serialize = function () {
   var payload = StorageAccount['super_'].prototype.serialize.call(this);
-  if (this['provisioningState']) {
+  if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
     var allowedValues = [ 'Creating', 'ResolvingDNS', 'Succeeded' ];
-    if (!allowedValues.some( function(item) { return item === this['provisioningState']; })) {
-      throw new Error(this['provisioningState'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === payload['properties.provisioningState']; })) {
+      throw new Error(payload['properties.provisioningState'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
+    payload['properties.provisioningState'] = this['provisioningState'];
   }
 
-  if (this['accountType']) {
+  if (this['accountType'] !== null && this['accountType'] !== undefined) {
     var allowedValues1 = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    if (!allowedValues1.some( function(item) { return item === this['accountType']; })) {
-      throw new Error(this['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues1);
+    if (!allowedValues1.some( function(item) { return item === payload['properties.accountType']; })) {
+      throw new Error(payload['properties.accountType'] + ' is not a valid value. The valid values are: ' + allowedValues1);
     }
+    payload['properties.accountType'] = this['accountType'];
   }
 
   if (this['primaryEndpoints']) {
-    models['Endpoints'].validate(this['primaryEndpoints']);
+    payload['properties.primaryEndpoints'] = this['primaryEndpoints'].serialize();
   }
 
-  if (this['primaryLocation'] !== null && this['primaryLocation'] !== undefined && typeof this['primaryLocation'].valueOf() !== 'string') {
+  if (this['primaryLocation'] !== null && this['primaryLocation'] !== undefined) {
+    if (typeof this['primaryLocation'].valueOf() !== 'string') {
     throw new Error('this[\'primaryLocation\'] must be of type string.');
   }
-
-  if (this['statusOfPrimary']) {
-    var allowedValues2 = [ 'Available', 'Unavailable' ];
-    if (!allowedValues2.some( function(item) { return item === this['statusOfPrimary']; })) {
-      throw new Error(this['statusOfPrimary'] + ' is not a valid value. The valid values are: ' + allowedValues2);
-    }
+  payload['properties.primaryLocation'] = this['primaryLocation'];
   }
 
-  if (this['lastGeoFailoverTime'] && !(this['lastGeoFailoverTime'] instanceof Date || 
-      (typeof this['lastGeoFailoverTime'].valueOf() === 'string' && !isNaN(Date.parse(this['lastGeoFailoverTime']))))) {
+  if (this['statusOfPrimary'] !== null && this['statusOfPrimary'] !== undefined) {
+    var allowedValues2 = [ 'Available', 'Unavailable' ];
+    if (!allowedValues2.some( function(item) { return item === payload['properties.statusOfPrimary']; })) {
+      throw new Error(payload['properties.statusOfPrimary'] + ' is not a valid value. The valid values are: ' + allowedValues2);
+    }
+    payload['properties.statusOfPrimary'] = this['statusOfPrimary'];
+  }
+
+  if (this['lastGeoFailoverTime']) { !(this['lastGeoFailoverTime'] instanceof Date || 
+    if (!(this['lastGeoFailoverTime'] instanceof Date || typeof this['lastGeoFailoverTime'].valueOf() === 'string' && !isNaN(Date.parse(this['lastGeoFailoverTime']))))) {
     throw new Error('this[\'lastGeoFailoverTime\'] must be of type date.');
   }
+  payload['properties.lastGeoFailoverTime'] = (this['lastGeoFailoverTime'] instanceof Date) ? this['lastGeoFailoverTime'].toISOString('base64') : this['lastGeoFailoverTime'];
+  }
 
-  if (this['secondaryLocation'] !== null && this['secondaryLocation'] !== undefined && typeof this['secondaryLocation'].valueOf() !== 'string') {
+  if (this['secondaryLocation'] !== null && this['secondaryLocation'] !== undefined) {
+    if (typeof this['secondaryLocation'].valueOf() !== 'string') {
     throw new Error('this[\'secondaryLocation\'] must be of type string.');
   }
-
-  if (this['statusOfSecondary']) {
-    var allowedValues3 = [ 'Available', 'Unavailable' ];
-    if (!allowedValues3.some( function(item) { return item === this['statusOfSecondary']; })) {
-      throw new Error(this['statusOfSecondary'] + ' is not a valid value. The valid values are: ' + allowedValues3);
-    }
+  payload['properties.secondaryLocation'] = this['secondaryLocation'];
   }
 
-  if (this['creationTime'] && !(this['creationTime'] instanceof Date || 
-      (typeof this['creationTime'].valueOf() === 'string' && !isNaN(Date.parse(this['creationTime']))))) {
+  if (this['statusOfSecondary'] !== null && this['statusOfSecondary'] !== undefined) {
+    var allowedValues3 = [ 'Available', 'Unavailable' ];
+    if (!allowedValues3.some( function(item) { return item === payload['properties.statusOfSecondary']; })) {
+      throw new Error(payload['properties.statusOfSecondary'] + ' is not a valid value. The valid values are: ' + allowedValues3);
+    }
+    payload['properties.statusOfSecondary'] = this['statusOfSecondary'];
+  }
+
+  if (this['creationTime']) { !(this['creationTime'] instanceof Date || 
+    if (!(this['creationTime'] instanceof Date || typeof this['creationTime'].valueOf() === 'string' && !isNaN(Date.parse(this['creationTime']))))) {
     throw new Error('this[\'creationTime\'] must be of type date.');
+  }
+  payload['properties.creationTime'] = (this['creationTime'] instanceof Date) ? this['creationTime'].toISOString('base64') : this['creationTime'];
   }
 
   if (this['customDomain']) {
-    models['CustomDomain'].validate(this['customDomain']);
+    payload['properties.customDomain'] = this['customDomain'].serialize();
   }
 
   if (this['secondaryEndpoints']) {
-    models['Endpoints'].validate(this['secondaryEndpoints']);
+    payload['properties.secondaryEndpoints'] = this['secondaryEndpoints'].serialize();
   }
 };
 

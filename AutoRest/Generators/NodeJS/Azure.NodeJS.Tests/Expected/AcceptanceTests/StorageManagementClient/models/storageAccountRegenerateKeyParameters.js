@@ -34,11 +34,12 @@ function StorageAccountRegenerateKeyParameters(parameters) {
  */
 StorageAccountRegenerateKeyParameters.prototype.serialize = function () {
   var payload = {};
-  if (this['keyName']) {
+  if (this['keyName'] !== null && this['keyName'] !== undefined) {
     var allowedValues = [ 'key1', 'key2' ];
-    if (!allowedValues.some( function(item) { return item === this['keyName']; })) {
-      throw new Error(this['keyName'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === payload['keyName']; })) {
+      throw new Error(payload['keyName'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
+    payload['keyName'] = this['keyName'];
   }
 };
 

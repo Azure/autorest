@@ -446,6 +446,330 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return null;
         }
 
+        private static string SerializePrimaryType(this PrimaryType primary, IScopeProvider scope, string objectReference, string valueReference, bool isRequired)
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            var conditionBuilder = new IndentedStringBuilder("  ");
+            var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
+            var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
+            string condition = "";
+            string result = "";
+
+            if (primary == PrimaryType.Boolean ||
+                primary == PrimaryType.Double ||
+                primary == PrimaryType.Int ||
+                primary == PrimaryType.Long)
+            {
+                if (isRequired)
+                {
+                    result = ConstructValidationCheck("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{",
+                                                    requiredTypeErrorMessage, objectReference, primary.Name);
+                    return builder.AppendLine(result)
+                                  .AppendLine("{0} = {1};", valueReference, objectReference).ToString();
+                }
+                condition = conditionBuilder.AppendLine("if ({0} !== null && {0} !== undefined) {{")
+                                              .Indent()
+                                              .AppendLine("if (typeof {0} !== '{1}') {{").ToString();
+                result = ConstructValidationCheck(condition, typeErrorMessage, objectReference, primary.Name);
+                return builder.AppendLine(result)
+                              .AppendLine("{0} = {1};", valueReference, objectReference)
+                            .Outdent()
+                            .AppendLine("}").ToString();
+            }
+            else if (primary == PrimaryType.String)
+            {
+                if (isRequired)
+                {
+                    //empty string can be a valid value hence we cannot implement the simple check if (!{0})
+                    result = ConstructValidationCheck("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{",
+                                                      requiredTypeErrorMessage, objectReference, primary.Name);
+                    return builder.AppendLine(result)
+                                  .AppendLine("{0} = {1};", valueReference, objectReference).ToString();
+                }
+                condition = conditionBuilder.AppendLine("if ({0} !== null && {0} !== undefined) {{")
+                                              .Indent()
+                                              .AppendLine("if (typeof {0}.valueOf() !== '{1}') {{").ToString();
+                result = ConstructValidationCheck(condition, typeErrorMessage, objectReference, primary.Name);
+                return builder.AppendLine(result)
+                              .AppendLine("{0} = {1};", valueReference, objectReference)
+                            .Outdent()
+                            .AppendLine("}").ToString();
+            }
+            else if (primary == PrimaryType.ByteArray)
+            {
+                if (isRequired)
+                {
+                    result = ConstructValidationCheck("if (!Buffer.isBuffer({0})) {{", requiredTypeErrorMessage, objectReference, primary.Name);
+                    return builder.AppendLine(result)
+                                  .AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference).ToString();
+                }
+                condition = conditionBuilder.AppendLine("if ({0}) {{")
+                                              .Indent()
+                                              .AppendLine("if (!Buffer.isBuffer({0})) {{").ToString();
+                result = ConstructValidationCheck(condition, typeErrorMessage, objectReference, primary.Name);
+                return builder.AppendLine(result)
+                              .AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference)
+                            .Outdent()
+                            .AppendLine("}").ToString();
+            }
+            else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
+            {
+                if (isRequired)
+                {
+                    condition = conditionBuilder.AppendLine("if(!{0} || !({0} instanceof Date || ")
+                                                  .Indent()
+                                                  .Indent()
+                                                  .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{").ToString();
+                    result = ConstructValidationCheck(condition, requiredTypeErrorMessage, objectReference, primary.Name);
+                    return builder.AppendLine(result)
+                                  .AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString('base64') : {1};", valueReference, objectReference).ToString();
+                }
+
+                condition = conditionBuilder.AppendLine("if ({0}) {{ !({0} instanceof Date || ")
+                                              .Indent()
+                                              .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{").ToString();
+                result = ConstructValidationCheck(condition, typeErrorMessage, objectReference, primary.Name);
+                return builder.AppendLine(result)
+                                  .AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString('base64') : {1};", valueReference, objectReference)
+                                .Outdent()
+                                .AppendLine("}").ToString();
+            }
+            else if (primary == PrimaryType.Object)
+            {
+                if (isRequired)
+                {
+                    result = ConstructValidationCheck("if ({0} !== null || {0} !== undefined || typeof {0} !== '{1}') {{",
+                                                    requiredTypeErrorMessage, objectReference, primary.Name);
+                    return builder.AppendLine(result)
+                                  .AppendLine("{0} = JSON.stringify({1});", valueReference, objectReference).ToString();
+                }
+
+                return builder.ToString();
+            }
+            else
+            {
+                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
+                    "'{0}' not implemented", valueReference));
+            }
+        }
+
+        private static string SerializeEnumType(this EnumType enumType, IScopeProvider scope, string objectReference, string valueReference, bool isRequired)
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            var allowedValues = scope.GetVariableName("allowedValues");
+
+            builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference)
+                        .Indent()
+                            .AppendLine("var {0} = {1};", allowedValues, enumType.GetEnumValuesArray())
+                            .AppendLine("if (!{0}.some( function(item) {{ return item === {1}; }})) {{", allowedValues, valueReference)
+                            .Indent()
+                                .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", valueReference, allowedValues)
+                            .Outdent()
+                            .AppendLine("}")
+                            .AppendLine("{0} = {1};", valueReference, objectReference)
+                        .Outdent()
+                        .AppendLine("}");
+            if (isRequired)
+            {
+                builder.Append(" else {")
+                    .Indent()
+                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", valueReference)
+                    .Outdent()
+                    .AppendLine("}");
+            }
+
+            return builder.ToString();
+        }
+
+        private static string SerializeCompositeType(this CompositeType composite, IScopeProvider scope, string objectReference, 
+            string valueReference, bool isRequired, string modelReference = "client._models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            var escapedObjectReference = objectReference.EscapeSingleQuotes();
+
+            builder.AppendLine("if ({0}) {{", objectReference).Indent();
+
+            if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
+            {
+                builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
+                                    objectReference,
+                                    composite.PolymorphicDiscriminator, modelReference)
+                    .Indent()
+                        .AppendLine("{0} = {1}.serialize();", valueReference, objectReference)
+                    .Outdent()
+                    .AppendLine("}} else {{", valueReference)
+                    .Indent()
+                        .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
+                                    composite.PolymorphicDiscriminator,
+                                    escapedObjectReference)
+                    .Outdent()
+                    .AppendLine("}");
+            }
+            else
+            {
+                builder.AppendLine("{0} = {1}.serialize();", valueReference, objectReference);
+            }
+            builder.Outdent().AppendLine("}");
+
+            if (isRequired)
+            {
+                builder.Append(" else {")
+                    .Indent()
+                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedObjectReference)
+                    .Outdent()
+                    .AppendLine("}");
+            }
+            return builder.ToString();
+        }
+
+        private static string SerializeSequenceType(this SequenceType sequence, IScopeProvider scope, string objectReference, 
+            string valueReference, bool isRequired, string modelReference = "client._models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            var escapedObjectReference = objectReference.EscapeSingleQuotes();
+
+            var indexVar = scope.GetVariableName("i");
+            var innerSerialization = sequence.ElementType.SerializeType(scope, objectReference + "[" + indexVar + "]", valueReference + "[" + indexVar + "]", false, modelReference);
+            if (!string.IsNullOrEmpty(innerSerialization))
+            {
+                if (isRequired)
+                {
+                    return builder.AppendLine("if (!util.isArray({0})) {{", objectReference)
+                        .Indent()
+                          .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
+                          escapedObjectReference, sequence.Name.ToLower(CultureInfo.InvariantCulture))
+                        .Outdent()
+                      .AppendLine("}")
+                      .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
+                            .Indent()
+                              .AppendLine(innerSerialization)
+                            .Outdent()
+                          .AppendLine("}").ToString();
+                }
+
+                return builder.AppendLine("if (util.isArray({0})) {{", objectReference)
+                        .Indent()
+                          .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
+                            .Indent()
+                              .AppendLine(innerSerialization)
+                            .Outdent()
+                          .AppendLine("}")
+                        .Outdent()
+                      .AppendLine("}").ToString();
+            }
+
+            return null;
+        }
+
+        private static string SerializeDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string objectReference, string valueReference, 
+            bool isRequired, string modelReference = "client._models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            var escapedObjectReference = objectReference.EscapeSingleQuotes();
+            var valueVar = scope.GetVariableName("valueElement");
+            var innerSerialization = dictionary.ValueType.SerializeType(scope, objectReference + "[" + valueVar + "]", valueReference + "[" + valueVar + "]", false, modelReference);
+            if (!string.IsNullOrEmpty(innerSerialization))
+            {
+                if (isRequired)
+                {
+                    return builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== 'object') {{", objectReference)
+                        .Indent()
+                          .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
+                            escapedObjectReference, dictionary.Name.ToLower(CultureInfo.InvariantCulture))
+                        .Outdent()
+                      .AppendLine("}")
+                      .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
+                        .Indent()
+                          .AppendLine(innerSerialization)
+                        .Outdent()
+                      .AppendLine("}").ToString();
+                }
+
+                return builder.AppendLine("if ({0} && typeof {0} === 'object') {{", objectReference)
+                        .Indent()
+                          .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
+                            .Indent()
+                              .AppendLine(innerSerialization)
+                            .Outdent()
+                          .AppendLine("}")
+                        .Outdent()
+                      .AppendLine("}").ToString();
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Generate code to perform serialization on a parameter or property
+        /// </summary>
+        /// <param name="type">The type to validate</param>
+        /// <param name="scope">A scope provider for generating variable names as necessary</param>
+        /// <param name="objectReference">A reference to the object being serialized</param>
+        /// <param name="valueReference">A reference to the value that will be assigned the serialized object</param>
+        /// <param name="isRequired">True if the parameter or property is required.</param>
+        /// <param name="modelReference">A reference to the models</param>
+        /// <returns>The code to serialize the given type</returns>
+        public static string SerializeType(this IType type, IScopeProvider scope, string objectReference, string valueReference, bool isRequired, string modelReference = "client._models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            CompositeType composite = type as CompositeType;
+            SequenceType sequence = type as SequenceType;
+            DictionaryType dictionary = type as DictionaryType;
+            PrimaryType primary = type as PrimaryType;
+            EnumType enumType = type as EnumType;
+            if (primary != null)
+            {
+                return primary.SerializePrimaryType(scope, objectReference, valueReference, isRequired);
+            }
+            else if (enumType != null && enumType.Values.Any())
+            {
+                return enumType.SerializeEnumType(scope, objectReference, valueReference, isRequired);
+            }
+            else if (composite != null && composite.Properties.Any())
+            {
+                return composite.SerializeCompositeType(scope, objectReference, valueReference, isRequired, modelReference);
+            }
+            else if (sequence != null)
+            {
+                return sequence.SerializeSequenceType(scope, objectReference, valueReference, isRequired, modelReference);
+            }
+            else if (dictionary != null)
+            {
+                return dictionary.SerializeDictionaryType(scope, objectReference, valueReference, isRequired, modelReference);
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Generate code to perform deserialization on a parameter or property
         /// </summary>

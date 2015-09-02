@@ -45,19 +45,26 @@ function CheckNameAvailabilityResult(parameters) {
  */
 CheckNameAvailabilityResult.prototype.serialize = function () {
   var payload = {};
-  if (this['nameAvailable'] !== null && this['nameAvailable'] !== undefined && typeof this['nameAvailable'] !== 'boolean') {
+  if (this['nameAvailable'] !== null && this['nameAvailable'] !== undefined) {
+    if (typeof this['nameAvailable'] !== 'boolean') {
     throw new Error('this[\'nameAvailable\'] must be of type boolean.');
   }
-
-  if (this['reason']) {
-    var allowedValues = [ 'AccountNameInvalid', 'AlreadyExists' ];
-    if (!allowedValues.some( function(item) { return item === this['reason']; })) {
-      throw new Error(this['reason'] + ' is not a valid value. The valid values are: ' + allowedValues);
-    }
+  payload['nameAvailable'] = this['nameAvailable'];
   }
 
-  if (this['message'] !== null && this['message'] !== undefined && typeof this['message'].valueOf() !== 'string') {
+  if (this['reason'] !== null && this['reason'] !== undefined) {
+    var allowedValues = [ 'AccountNameInvalid', 'AlreadyExists' ];
+    if (!allowedValues.some( function(item) { return item === payload['reason']; })) {
+      throw new Error(payload['reason'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    }
+    payload['reason'] = this['reason'];
+  }
+
+  if (this['message'] !== null && this['message'] !== undefined) {
+    if (typeof this['message'].valueOf() !== 'string') {
     throw new Error('this[\'message\'] must be of type string.');
+  }
+  payload['message'] = this['message'];
   }
 };
 

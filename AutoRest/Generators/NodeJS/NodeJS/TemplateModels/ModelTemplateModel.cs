@@ -91,7 +91,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             return sample != null;
         }
 
-        public string ValidateProperty(string objectName, Property property)
+        public string SerializeProperty(string objectName, string serializedName, Property property)
         {
             if (property == null)
             {
@@ -100,8 +100,10 @@ namespace Microsoft.Rest.Generator.NodeJS
 
             var propertyName = string.Format(CultureInfo.InvariantCulture, 
                 "{0}['{1}']", objectName, property.Name);
+            var serializedPropertyName = string.Format(CultureInfo.InvariantCulture,
+                "{0}['{1}']", serializedName, property.SerializedName);
 
-            return property.Type.ValidateType(_scope, propertyName, property.IsRequired, "models");
+            return property.Type.SerializeType(_scope, propertyName, serializedPropertyName, property.IsRequired, "models");
         }
 
         /// <summary>

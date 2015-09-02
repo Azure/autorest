@@ -42,7 +42,7 @@ StorageAccountListResult.prototype.serialize = function () {
   if (util.isArray(this['value'])) {
     for (var i = 0; i < this['value'].length; i++) {
       if (this['value'][i]) {
-        models['StorageAccount'].validate(this['value'][i]);
+        payload['value'][i] = this['value'][i].serialize();
       }
     }
   }

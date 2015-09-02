@@ -40,12 +40,18 @@ function StorageAccountKeys(parameters) {
  */
 StorageAccountKeys.prototype.serialize = function () {
   var payload = {};
-  if (this['key1'] !== null && this['key1'] !== undefined && typeof this['key1'].valueOf() !== 'string') {
+  if (this['key1'] !== null && this['key1'] !== undefined) {
+    if (typeof this['key1'].valueOf() !== 'string') {
     throw new Error('this[\'key1\'] must be of type string.');
   }
+  payload['key1'] = this['key1'];
+  }
 
-  if (this['key2'] !== null && this['key2'] !== undefined && typeof this['key2'].valueOf() !== 'string') {
+  if (this['key2'] !== null && this['key2'] !== undefined) {
+    if (typeof this['key2'].valueOf() !== 'string') {
     throw new Error('this[\'key2\'] must be of type string.');
+  }
+  payload['key2'] = this['key2'];
   }
 };
 

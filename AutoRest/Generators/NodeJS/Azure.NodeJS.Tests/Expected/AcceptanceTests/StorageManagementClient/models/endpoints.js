@@ -46,16 +46,25 @@ function Endpoints(parameters) {
  */
 Endpoints.prototype.serialize = function () {
   var payload = {};
-  if (this['blob'] !== null && this['blob'] !== undefined && typeof this['blob'].valueOf() !== 'string') {
+  if (this['blob'] !== null && this['blob'] !== undefined) {
+    if (typeof this['blob'].valueOf() !== 'string') {
     throw new Error('this[\'blob\'] must be of type string.');
   }
-
-  if (this['queue'] !== null && this['queue'] !== undefined && typeof this['queue'].valueOf() !== 'string') {
-    throw new Error('this[\'queue\'] must be of type string.');
+  payload['blob'] = this['blob'];
   }
 
-  if (this['table'] !== null && this['table'] !== undefined && typeof this['table'].valueOf() !== 'string') {
+  if (this['queue'] !== null && this['queue'] !== undefined) {
+    if (typeof this['queue'].valueOf() !== 'string') {
+    throw new Error('this[\'queue\'] must be of type string.');
+  }
+  payload['queue'] = this['queue'];
+  }
+
+  if (this['table'] !== null && this['table'] !== undefined) {
+    if (typeof this['table'].valueOf() !== 'string') {
     throw new Error('this[\'table\'] must be of type string.');
+  }
+  payload['table'] = this['table'];
   }
 };
 

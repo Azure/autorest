@@ -39,12 +39,18 @@ function StorageAccountCheckNameAvailabilityParameters(parameters) {
  */
 StorageAccountCheckNameAvailabilityParameters.prototype.serialize = function () {
   var payload = {};
-  if (this['name'] !== null && this['name'] !== undefined && typeof this['name'].valueOf() !== 'string') {
+  if (this['name'] !== null && this['name'] !== undefined) {
+    if (typeof this['name'].valueOf() !== 'string') {
     throw new Error('this[\'name\'] must be of type string.');
   }
+  payload['name'] = this['name'];
+  }
 
-  if (this['type'] !== null && this['type'] !== undefined && typeof this['type'].valueOf() !== 'string') {
+  if (this['type'] !== null && this['type'] !== undefined) {
+    if (typeof this['type'].valueOf() !== 'string') {
     throw new Error('this[\'type\'] must be of type string.');
+  }
+  payload['type'] = this['type'];
   }
 };
 

@@ -52,23 +52,30 @@ function Usage(parameters) {
  */
 Usage.prototype.serialize = function () {
   var payload = {};
-  if (this['unit']) {
+  if (this['unit'] !== null && this['unit'] !== undefined) {
     var allowedValues = [ 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond' ];
-    if (!allowedValues.some( function(item) { return item === this['unit']; })) {
-      throw new Error(this['unit'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === payload['unit']; })) {
+      throw new Error(payload['unit'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
+    payload['unit'] = this['unit'];
   }
 
-  if (this['currentValue'] !== null && this['currentValue'] !== undefined && typeof this['currentValue'] !== 'number') {
+  if (this['currentValue'] !== null && this['currentValue'] !== undefined) {
+    if (typeof this['currentValue'] !== 'number') {
     throw new Error('this[\'currentValue\'] must be of type number.');
   }
+  payload['currentValue'] = this['currentValue'];
+  }
 
-  if (this['limit'] !== null && this['limit'] !== undefined && typeof this['limit'] !== 'number') {
+  if (this['limit'] !== null && this['limit'] !== undefined) {
+    if (typeof this['limit'] !== 'number') {
     throw new Error('this[\'limit\'] must be of type number.');
+  }
+  payload['limit'] = this['limit'];
   }
 
   if (this['name']) {
-    models['UsageName'].validate(this['name']);
+    payload['name'] = this['name'].serialize();
   }
 };
 

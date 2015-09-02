@@ -40,12 +40,18 @@ function UsageName(parameters) {
  */
 UsageName.prototype.serialize = function () {
   var payload = {};
-  if (this['value'] !== null && this['value'] !== undefined && typeof this['value'].valueOf() !== 'string') {
+  if (this['value'] !== null && this['value'] !== undefined) {
+    if (typeof this['value'].valueOf() !== 'string') {
     throw new Error('this[\'value\'] must be of type string.');
   }
+  payload['value'] = this['value'];
+  }
 
-  if (this['localizedValue'] !== null && this['localizedValue'] !== undefined && typeof this['localizedValue'].valueOf() !== 'string') {
+  if (this['localizedValue'] !== null && this['localizedValue'] !== undefined) {
+    if (typeof this['localizedValue'].valueOf() !== 'string') {
     throw new Error('this[\'localizedValue\'] must be of type string.');
+  }
+  payload['localizedValue'] = this['localizedValue'];
   }
 };
 

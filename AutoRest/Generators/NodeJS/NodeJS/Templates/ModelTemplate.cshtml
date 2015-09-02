@@ -85,7 +85,7 @@ if (Model.BaseModelType != null)
   var propertyList = new List<Property>(Model.Properties);
   for (int i = 0; i < propertyList.Count; i++)
   {
-  @:@(Model.ValidateProperty("this", propertyList[i]))
+  @:@(Model.SerializeProperty("this", "payload", propertyList[i]))
   if (i != propertyList.Count-1)
   {
   @EmptyLine
