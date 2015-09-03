@@ -24,14 +24,14 @@
  */
 function CheckNameAvailabilityResult(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters['nameAvailable'] !== null && parameters['nameAvailable'] !== undefined) {
-      this['nameAvailable'] = parameters['nameAvailable'];
+    if (parameters.nameAvailable !== null && parameters.nameAvailable !== undefined) {
+      this.nameAvailable = parameters.nameAvailable;
     }
-    if (parameters['reason'] !== null && parameters['reason'] !== undefined) {
-      this['reason'] = parameters['reason'];
+    if (parameters.reason !== null && parameters.reason !== undefined) {
+      this.reason = parameters.reason;
     }
-    if (parameters['message'] !== null && parameters['message'] !== undefined) {
-      this['message'] = parameters['message'];
+    if (parameters.message !== null && parameters.message !== undefined) {
+      this.message = parameters.message;
     }
   }    
 }
@@ -47,9 +47,9 @@ CheckNameAvailabilityResult.prototype.serialize = function () {
   var payload = {};
   if (this['nameAvailable'] !== null && this['nameAvailable'] !== undefined) {
     if (typeof this['nameAvailable'] !== 'boolean') {
-    throw new Error('this[\'nameAvailable\'] must be of type boolean.');
-  }
-  payload['nameAvailable'] = this['nameAvailable'];
+      throw new Error('this[\'nameAvailable\'] must be of type boolean.');
+    }
+    payload['nameAvailable'] = this['nameAvailable'];
   }
 
   if (this['reason'] !== null && this['reason'] !== undefined) {
@@ -62,9 +62,9 @@ CheckNameAvailabilityResult.prototype.serialize = function () {
 
   if (this['message'] !== null && this['message'] !== undefined) {
     if (typeof this['message'].valueOf() !== 'string') {
-    throw new Error('this[\'message\'] must be of type string.');
-  }
-  payload['message'] = this['message'];
+      throw new Error('this[\'message\'] must be of type string.');
+    }
+    payload['message'] = this['message'];
   }
 };
 

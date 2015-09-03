@@ -28,17 +28,17 @@ var models = require('./index');
  */
 function Usage(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters['unit'] !== null && parameters['unit'] !== undefined) {
-      this['unit'] = parameters['unit'];
+    if (parameters.unit !== null && parameters.unit !== undefined) {
+      this.unit = parameters.unit;
     }
-    if (parameters['currentValue'] !== null && parameters['currentValue'] !== undefined) {
-      this['currentValue'] = parameters['currentValue'];
+    if (parameters.currentValue !== null && parameters.currentValue !== undefined) {
+      this.currentValue = parameters.currentValue;
     }
-    if (parameters['limit'] !== null && parameters['limit'] !== undefined) {
-      this['limit'] = parameters['limit'];
+    if (parameters.limit !== null && parameters.limit !== undefined) {
+      this.limit = parameters.limit;
     }
-    if (parameters['name'] !== null && parameters['name'] !== undefined) {
-      this['name'] = new models['UsageName'](parameters['name']);
+    if (parameters.name !== null && parameters.name !== undefined) {
+      this.name = new models['UsageName'](parameters.name);
     }
   }    
 }
@@ -62,16 +62,16 @@ Usage.prototype.serialize = function () {
 
   if (this['currentValue'] !== null && this['currentValue'] !== undefined) {
     if (typeof this['currentValue'] !== 'number') {
-    throw new Error('this[\'currentValue\'] must be of type number.');
-  }
-  payload['currentValue'] = this['currentValue'];
+      throw new Error('this[\'currentValue\'] must be of type number.');
+    }
+    payload['currentValue'] = this['currentValue'];
   }
 
   if (this['limit'] !== null && this['limit'] !== undefined) {
     if (typeof this['limit'] !== 'number') {
-    throw new Error('this[\'limit\'] must be of type number.');
-  }
-  payload['limit'] = this['limit'];
+      throw new Error('this[\'limit\'] must be of type number.');
+    }
+    payload['limit'] = this['limit'];
   }
 
   if (this['name']) {

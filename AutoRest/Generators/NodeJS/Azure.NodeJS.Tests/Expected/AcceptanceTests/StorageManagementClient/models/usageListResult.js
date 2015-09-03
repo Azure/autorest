@@ -24,8 +24,15 @@ var util = require('util');
  */
 function UsageListResult(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters['value'] !== null && parameters['value'] !== undefined) {
-      this['value'] = parameters['value'];
+    if (parameters.value !== null && parameters.value !== undefined) {
+      var initializedArray = [];
+      parameters.value.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = new models['Usage'](element);
+        }
+        initializedArray.push(element);
+      });
+      this.value = initializedArray;
     }
   }    
 }
@@ -58,11 +65,11 @@ UsageListResult.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance.value !== null && instance.value !== undefined) {
       var deserializedArray = [];
-      instance.value.forEach(function(element) {
-        if (element !== null && element !== undefined) {
-          element = new models['Usage']().deserialize(element);
+      instance.value.forEach(function(element1) {
+        if (element1 !== null && element1 !== undefined) {
+          element1 = new models['Usage']().deserialize(element1);
         }
-        deserializedArray.push(element);
+        deserializedArray.push(element1);
       });
       this.value = deserializedArray;
     }

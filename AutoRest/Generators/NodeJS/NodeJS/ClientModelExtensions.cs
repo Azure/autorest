@@ -142,17 +142,15 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return valueReference.Replace("'", "\\'");
         }
 
-        private static string ConstructValidationCheck(string condition, string errorMessage, string valueReference, string typeName)
+        private static IndentedStringBuilder ConstructValidationCheck(IndentedStringBuilder builder, string errorMessage, string valueReference, string typeName)
         {
-            var builder = new IndentedStringBuilder("  ");
             var escapedValueReference = valueReference.EscapeSingleQuotes();
             var lowercaseTypeName = typeName.ToLower(CultureInfo.InvariantCulture);
 
-            return builder.AppendLine(condition, valueReference, lowercaseTypeName)
-                            .Indent()
-                                .AppendLine(errorMessage, escapedValueReference, lowercaseTypeName)
-                            .Outdent()
-                          .AppendLine("}").ToString();
+            return builder.Indent()
+                            .AppendLine(errorMessage, escapedValueReference, lowercaseTypeName)
+                          .Outdent()
+                          .AppendLine("}");
         }
 
         private static string ValidatePrimaryType(this PrimaryType primary, IScopeProvider scope, string valueReference, bool isRequired)
@@ -166,7 +164,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var conditionBuilder = new IndentedStringBuilder("  ");
             var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
             var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
-
+            var lowercaseTypeName = primary.Name.ToLower(CultureInfo.InvariantCulture);
             if (primary == PrimaryType.Boolean ||
                 primary == PrimaryType.Double ||
                 primary == PrimaryType.Int ||
@@ -174,58 +172,59 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 if (isRequired)
                 {
-                    return ConstructValidationCheck("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{",
-                                                    requiredTypeErrorMessage, valueReference, primary.Name);
+                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
                 }
 
-                return ConstructValidationCheck("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{",
-                                                typeErrorMessage, valueReference, primary.Name);
+                builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
+                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else if (primary == PrimaryType.String)
             {
                 if (isRequired)
                 {
                     //empty string can be a valid value hence we cannot implement the simple check if (!{0})
-                    return ConstructValidationCheck("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{",
-                                                    requiredTypeErrorMessage, valueReference, primary.Name);
+                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
                 }
 
-                return ConstructValidationCheck("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{",
-                                                typeErrorMessage, valueReference, primary.Name);
+                builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
+                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else if (primary == PrimaryType.ByteArray)
             {
                 if (isRequired)
                 {
-                    return ConstructValidationCheck("if (!Buffer.isBuffer({0})) {{", requiredTypeErrorMessage, valueReference, primary.Name);
+                    builder.AppendLine("if (!Buffer.isBuffer({0})) {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
                 }
 
-                return ConstructValidationCheck("if ({0} && !Buffer.isBuffer({0})) {{", typeErrorMessage, valueReference, primary.Name);
+                builder.AppendLine("if ({0} && !Buffer.isBuffer({0})) {{", valueReference, lowercaseTypeName);
+                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
             {
-                string condition = "";
                 if (isRequired)
                 {
-                    condition = conditionBuilder.AppendLine("if(!{0} || !({0} instanceof Date || ")
-                                                  .Indent()
-                                                  .Indent()
-                                                  .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{").ToString();
-                    return ConstructValidationCheck(condition, requiredTypeErrorMessage, valueReference, primary.Name);
+                    builder.AppendLine("if(!{0} || !({0} instanceof Date || ", valueReference)
+                              .Indent()
+                                .Indent()
+                                .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
                 }
 
-                condition = conditionBuilder.AppendLine("if ({0} && !({0} instanceof Date || ")
-                                              .Indent()
-                                              .Indent()
-                                              .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{").ToString();
-                return ConstructValidationCheck(condition, typeErrorMessage, valueReference, primary.Name);
+                builder.AppendLine("if ({0} && !({0} instanceof Date || ", valueReference)
+                         .Indent()
+                           .Indent()
+                           .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
+                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else if (primary == PrimaryType.Object)
             {
                 if (isRequired)
                 {
-                    return ConstructValidationCheck("if ({0} !== null || {0} !== undefined || typeof {0} !== '{1}') {{",
-                                                    requiredTypeErrorMessage, valueReference, primary.Name);
+                    builder.AppendLine("if ({0} !== null || {0} !== undefined || typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
                 }
 
                 return builder.ToString();
@@ -457,8 +456,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var conditionBuilder = new IndentedStringBuilder("  ");
             var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
             var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
-            string condition = "";
-            string result = "";
+            var lowercaseTypeName = primary.Name.ToLower(CultureInfo.InvariantCulture);
 
             if (primary == PrimaryType.Boolean ||
                 primary == PrimaryType.Double ||
@@ -467,17 +465,16 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 if (isRequired)
                 {
-                    result = ConstructValidationCheck("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{",
-                                                    requiredTypeErrorMessage, objectReference, primary.Name);
-                    return builder.AppendLine(result)
-                                  .AppendLine("{0} = {1};", valueReference, objectReference).ToString();
+                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{", 
+                        objectReference, lowercaseTypeName);
+                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    return builder.AppendLine("{0} = {1};", valueReference, objectReference).ToString();
                 }
-                condition = conditionBuilder.AppendLine("if ({0} !== null && {0} !== undefined) {{")
-                                              .Indent()
-                                              .AppendLine("if (typeof {0} !== '{1}') {{").ToString();
-                result = ConstructValidationCheck(condition, typeErrorMessage, objectReference, primary.Name);
-                return builder.AppendLine(result)
-                              .AppendLine("{0} = {1};", valueReference, objectReference)
+                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference)
+                         .Indent()
+                         .AppendLine("if (typeof {0} !== '{1}') {{", objectReference, lowercaseTypeName);
+                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                return builder.AppendLine("{0} = {1};", valueReference, objectReference)
                             .Outdent()
                             .AppendLine("}").ToString();
             }
@@ -486,17 +483,16 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 if (isRequired)
                 {
                     //empty string can be a valid value hence we cannot implement the simple check if (!{0})
-                    result = ConstructValidationCheck("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{",
-                                                      requiredTypeErrorMessage, objectReference, primary.Name);
-                    return builder.AppendLine(result)
-                                  .AppendLine("{0} = {1};", valueReference, objectReference).ToString();
+                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{",
+                        objectReference, lowercaseTypeName);
+                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    return builder.AppendLine("{0} = {1};", valueReference, objectReference).ToString();
                 }
-                condition = conditionBuilder.AppendLine("if ({0} !== null && {0} !== undefined) {{")
-                                              .Indent()
-                                              .AppendLine("if (typeof {0}.valueOf() !== '{1}') {{").ToString();
-                result = ConstructValidationCheck(condition, typeErrorMessage, objectReference, primary.Name);
-                return builder.AppendLine(result)
-                              .AppendLine("{0} = {1};", valueReference, objectReference)
+                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference)
+                         .Indent()
+                         .AppendLine("if (typeof {0}.valueOf() !== '{1}') {{", objectReference, lowercaseTypeName);
+                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                return builder.AppendLine("{0} = {1};", valueReference, objectReference)
                             .Outdent()
                             .AppendLine("}").ToString();
             }
@@ -504,16 +500,15 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 if (isRequired)
                 {
-                    result = ConstructValidationCheck("if (!Buffer.isBuffer({0})) {{", requiredTypeErrorMessage, objectReference, primary.Name);
-                    return builder.AppendLine(result)
-                                  .AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference).ToString();
+                    builder.AppendLine("if (!Buffer.isBuffer({0})) {{", objectReference);
+                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    return builder.AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference).ToString();
                 }
-                condition = conditionBuilder.AppendLine("if ({0}) {{")
-                                              .Indent()
-                                              .AppendLine("if (!Buffer.isBuffer({0})) {{").ToString();
-                result = ConstructValidationCheck(condition, typeErrorMessage, objectReference, primary.Name);
-                return builder.AppendLine(result)
-                              .AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference)
+                builder.AppendLine("if ({0}) {{", objectReference)
+                         .Indent()
+                         .AppendLine("if (!Buffer.isBuffer({0})) {{", objectReference);
+                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                return builder.AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference)
                             .Outdent()
                             .AppendLine("}").ToString();
             }
@@ -521,21 +516,21 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 if (isRequired)
                 {
-                    condition = conditionBuilder.AppendLine("if(!{0} || !({0} instanceof Date || ")
-                                                  .Indent()
-                                                  .Indent()
-                                                  .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{").ToString();
-                    result = ConstructValidationCheck(condition, requiredTypeErrorMessage, objectReference, primary.Name);
-                    return builder.AppendLine(result)
-                                  .AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString('base64') : {1};", valueReference, objectReference).ToString();
+                    builder.AppendLine("if(!{0} || !({0} instanceof Date || ", objectReference)
+                             .Indent()
+                               .Indent()
+                               .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", objectReference);
+                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString('base64') : {1};", 
+                        valueReference, objectReference).ToString();
                 }
 
-                condition = conditionBuilder.AppendLine("if ({0}) {{ !({0} instanceof Date || ")
-                                              .Indent()
-                                              .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{").ToString();
-                result = ConstructValidationCheck(condition, typeErrorMessage, objectReference, primary.Name);
-                return builder.AppendLine(result)
-                                  .AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString('base64') : {1};", valueReference, objectReference)
+                builder.AppendLine("if ({0}) {{", objectReference)
+                         .Indent()
+                         .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", 
+                         objectReference);
+                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString('base64') : {1};", valueReference, objectReference)
                                 .Outdent()
                                 .AppendLine("}").ToString();
             }
@@ -543,10 +538,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 if (isRequired)
                 {
-                    result = ConstructValidationCheck("if ({0} !== null || {0} !== undefined || typeof {0} !== '{1}') {{",
-                                                    requiredTypeErrorMessage, objectReference, primary.Name);
-                    return builder.AppendLine(result)
-                                  .AppendLine("{0} = JSON.stringify({1});", valueReference, objectReference).ToString();
+                    builder.AppendLine("if ({0} !== null || {0} !== undefined || typeof {0} !== '{1}') {{", objectReference, lowercaseTypeName);
+                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    return builder.AppendLine("{0} = JSON.stringify({1});", valueReference, objectReference).ToString();
                 }
 
                 return builder.ToString();
@@ -889,6 +883,101 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                               .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
                                 .Indent()
                                   .AppendLine(innerSerialization)
+                                .Outdent()
+                              .AppendLine("}")
+                            .Outdent()
+                          .AppendLine("}").ToString();
+                }
+            }
+
+            return null;
+        }
+
+        public static string InitializeType(this IType type, IScopeProvider scope, string objectReference, string valueReference, string modelReference = "models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            EnumType enumType = type as EnumType;
+            CompositeType composite = type as CompositeType;
+            SequenceType sequence = type as SequenceType;
+            DictionaryType dictionary = type as DictionaryType;
+            PrimaryType primary = type as PrimaryType;
+            var builder = new IndentedStringBuilder("  ");
+            if (enumType != null || primary != null)
+            {
+                return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                        .Indent()
+                          .AppendLine("{0} = {1};", objectReference, valueReference)
+                        .Outdent()
+                       .AppendLine("}").ToString();
+            }
+            else if (composite != null && composite.Properties.Any())
+            {
+                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference).Indent();
+
+                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
+                {
+                    builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
+                                        valueReference,
+                                        composite.PolymorphicDiscriminator, modelReference)
+                        .Indent()
+                            .AppendLine("{3} = new {2}.discriminators[{0}['{1}']]({0});",
+                                valueReference,
+                                composite.PolymorphicDiscriminator, modelReference, objectReference)
+                        .Outdent()
+                        .AppendLine("}} else {{", valueReference)
+                        .Indent()
+                            .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
+                                        composite.PolymorphicDiscriminator,
+                                        valueReference)
+                        .Outdent()
+                        .AppendLine("}");
+                }
+                else
+                {
+                    builder.AppendLine("{3} = new {2}['{1}']({0});", valueReference, composite.Name, modelReference, objectReference);
+                }
+                builder.Outdent().AppendLine("}");
+
+                return builder.ToString();
+            }
+            else if (sequence != null)
+            {
+                var elementVar = scope.GetVariableName("element");
+                var innerInitialization = sequence.ElementType.InitializeType(scope, elementVar, elementVar, modelReference);
+                if (!string.IsNullOrEmpty(innerInitialization))
+                {
+                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                            .Indent()
+                              .AppendLine("var initialized{0} = [];", sequence.Name.ToPascalCase())
+                              .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
+                                .Indent()
+                                  .AppendLine(innerInitialization)
+                                  .AppendLine("initialized{0}.push({1});", sequence.Name.ToPascalCase(), elementVar)
+                                .Outdent()
+                              .AppendLine("});")
+                              .AppendLine("{0} = initialized{1};", objectReference, sequence.Name.ToPascalCase())
+                            .Outdent()
+                          .AppendLine("}").ToString();
+                }
+            }
+            else if (dictionary != null)
+            {
+                var valueVar = scope.GetVariableName("valueElement");
+                var innerInitialization = dictionary.ValueType.InitializeType(scope,
+                                                                              objectReference + "[" + valueVar + "]",
+                                                                              valueReference + "[" + valueVar + "]",
+                                                                              modelReference);
+                if (!string.IsNullOrEmpty(innerInitialization))
+                {
+                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                            .Indent()
+                              .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
+                                .Indent()
+                                  .AppendLine(innerInitialization)
                                 .Outdent()
                               .AppendLine("}")
                             .Outdent()

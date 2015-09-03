@@ -23,11 +23,11 @@
  */
 function CustomDomain(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters['name'] !== null && parameters['name'] !== undefined) {
-      this['name'] = parameters['name'];
+    if (parameters.name !== null && parameters.name !== undefined) {
+      this.name = parameters.name;
     }
-    if (parameters['useSubDomain'] !== null && parameters['useSubDomain'] !== undefined) {
-      this['useSubDomain'] = parameters['useSubDomain'];
+    if (parameters.useSubDomain !== null && parameters.useSubDomain !== undefined) {
+      this.useSubDomain = parameters.useSubDomain;
     }
   }    
 }
@@ -43,16 +43,16 @@ CustomDomain.prototype.serialize = function () {
   var payload = {};
   if (this['name'] !== null && this['name'] !== undefined) {
     if (typeof this['name'].valueOf() !== 'string') {
-    throw new Error('this[\'name\'] must be of type string.');
-  }
-  payload['name'] = this['name'];
+      throw new Error('this[\'name\'] must be of type string.');
+    }
+    payload['name'] = this['name'];
   }
 
   if (this['useSubDomain'] !== null && this['useSubDomain'] !== undefined) {
     if (typeof this['useSubDomain'] !== 'boolean') {
-    throw new Error('this[\'useSubDomain\'] must be of type boolean.');
-  }
-  payload['useSubDomain'] = this['useSubDomain'];
+      throw new Error('this[\'useSubDomain\'] must be of type boolean.');
+    }
+    payload['useSubDomain'] = this['useSubDomain'];
   }
 };
 

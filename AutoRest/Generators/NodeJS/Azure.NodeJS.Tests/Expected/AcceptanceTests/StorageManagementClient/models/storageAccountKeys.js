@@ -22,11 +22,11 @@
  */
 function StorageAccountKeys(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters['key1'] !== null && parameters['key1'] !== undefined) {
-      this['key1'] = parameters['key1'];
+    if (parameters.key1 !== null && parameters.key1 !== undefined) {
+      this.key1 = parameters.key1;
     }
-    if (parameters['key2'] !== null && parameters['key2'] !== undefined) {
-      this['key2'] = parameters['key2'];
+    if (parameters.key2 !== null && parameters.key2 !== undefined) {
+      this.key2 = parameters.key2;
     }
   }    
 }
@@ -42,16 +42,16 @@ StorageAccountKeys.prototype.serialize = function () {
   var payload = {};
   if (this['key1'] !== null && this['key1'] !== undefined) {
     if (typeof this['key1'].valueOf() !== 'string') {
-    throw new Error('this[\'key1\'] must be of type string.');
-  }
-  payload['key1'] = this['key1'];
+      throw new Error('this[\'key1\'] must be of type string.');
+    }
+    payload['key1'] = this['key1'];
   }
 
   if (this['key2'] !== null && this['key2'] !== undefined) {
     if (typeof this['key2'].valueOf() !== 'string') {
-    throw new Error('this[\'key2\'] must be of type string.');
-  }
-  payload['key2'] = this['key2'];
+      throw new Error('this[\'key2\'] must be of type string.');
+    }
+    payload['key2'] = this['key2'];
   }
 };
 

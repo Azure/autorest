@@ -22,11 +22,11 @@
  */
 function UsageName(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters['value'] !== null && parameters['value'] !== undefined) {
-      this['value'] = parameters['value'];
+    if (parameters.value !== null && parameters.value !== undefined) {
+      this.value = parameters.value;
     }
-    if (parameters['localizedValue'] !== null && parameters['localizedValue'] !== undefined) {
-      this['localizedValue'] = parameters['localizedValue'];
+    if (parameters.localizedValue !== null && parameters.localizedValue !== undefined) {
+      this.localizedValue = parameters.localizedValue;
     }
   }    
 }
@@ -42,16 +42,16 @@ UsageName.prototype.serialize = function () {
   var payload = {};
   if (this['value'] !== null && this['value'] !== undefined) {
     if (typeof this['value'].valueOf() !== 'string') {
-    throw new Error('this[\'value\'] must be of type string.');
-  }
-  payload['value'] = this['value'];
+      throw new Error('this[\'value\'] must be of type string.');
+    }
+    payload['value'] = this['value'];
   }
 
   if (this['localizedValue'] !== null && this['localizedValue'] !== undefined) {
     if (typeof this['localizedValue'].valueOf() !== 'string') {
-    throw new Error('this[\'localizedValue\'] must be of type string.');
-  }
-  payload['localizedValue'] = this['localizedValue'];
+      throw new Error('this[\'localizedValue\'] must be of type string.');
+    }
+    payload['localizedValue'] = this['localizedValue'];
   }
 };
 

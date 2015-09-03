@@ -19,8 +19,8 @@
  */
 function StorageAccountRegenerateKeyParameters(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters['keyName'] !== null && parameters['keyName'] !== undefined) {
-      this['keyName'] = parameters['keyName'];
+    if (parameters.keyName !== null && parameters.keyName !== undefined) {
+      this.keyName = parameters.keyName;
     }
   }    
 }

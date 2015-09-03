@@ -21,11 +21,11 @@
  */
 function StorageAccountCheckNameAvailabilityParameters(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters['name'] !== null && parameters['name'] !== undefined) {
-      this['name'] = parameters['name'];
+    if (parameters.name !== null && parameters.name !== undefined) {
+      this.name = parameters.name;
     }
-    if (parameters['type'] !== null && parameters['type'] !== undefined) {
-      this['type'] = parameters['type'];
+    if (parameters.type !== null && parameters.type !== undefined) {
+      this.type = parameters.type;
     }
   }    
 }
@@ -41,16 +41,16 @@ StorageAccountCheckNameAvailabilityParameters.prototype.serialize = function () 
   var payload = {};
   if (this['name'] !== null && this['name'] !== undefined) {
     if (typeof this['name'].valueOf() !== 'string') {
-    throw new Error('this[\'name\'] must be of type string.');
-  }
-  payload['name'] = this['name'];
+      throw new Error('this[\'name\'] must be of type string.');
+    }
+    payload['name'] = this['name'];
   }
 
   if (this['type'] !== null && this['type'] !== undefined) {
     if (typeof this['type'].valueOf() !== 'string') {
-    throw new Error('this[\'type\'] must be of type string.');
-  }
-  payload['type'] = this['type'];
+      throw new Error('this[\'type\'] must be of type string.');
+    }
+    payload['type'] = this['type'];
   }
 };
 

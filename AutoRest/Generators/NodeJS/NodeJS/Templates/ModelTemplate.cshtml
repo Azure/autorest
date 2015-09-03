@@ -15,7 +15,7 @@
 @:var models = require('./index');
 @EmptyLine
 }
-@if (Model.ContainsPropertiesInSequenceType())
+@if (Model.ContainsPropertiesInSequenceType() || Model.BaseModelType != null)
 {
 @:var util = require('util');
 @EmptyLine
@@ -38,21 +38,13 @@ function @(Model.Name)(parameters) {
   {
   @:@(Model.Name)['super_'].call(this, parameters);
   }
-  if (Model.Properties.Count > 0)
+  var propertyList = new List<Property>(Model.Properties);
+  if (propertyList.Count > 0)
   {
   @:if (parameters !== null && parameters !== undefined) {
-    for (int i = 0; i < Model.Properties.Count; i++) 
+    for (int i = 0; i < propertyList.Count; i++) 
     {
-    @:if (parameters['@(Model.Properties[i].Name)'] !== null && parameters['@(Model.Properties[i].Name)'] !== undefined) {
-      if (Model.Properties[i].Type.GetType().Name == "CompositeType")
-      {
-      @:this['@(Model.Properties[i].Name)'] = new models['@(Model.Properties[i].Type.Name)'](parameters['@(Model.Properties[i].Name)']);
-      }
-      else
-      {
-      @:this['@(Model.Properties[i].Name)'] = parameters['@(Model.Properties[i].Name)'];
-      }
-    @:}
+    @:@(Model.InitializeProperty("this", "parameters", propertyList[i]))
     }
   @:}    
   }
@@ -82,11 +74,11 @@ if (Model.BaseModelType != null)
   {
   @:var payload = {};
   }
-  var propertyList = new List<Property>(Model.Properties);
-  for (int i = 0; i < propertyList.Count; i++)
+  var serializationPropertyList = new List<Property>(Model.Properties);
+  for (int i = 0; i < serializationPropertyList.Count; i++)
   {
-  @:@(Model.SerializeProperty("this", "payload", propertyList[i]))
-  if (i != propertyList.Count-1)
+  @:@(Model.SerializeProperty("this", "payload", serializationPropertyList[i]))
+  if (i != serializationPropertyList.Count - 1)
   {
   @EmptyLine
   }

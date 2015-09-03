@@ -26,16 +26,6 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
-        public string DeserializeProperty(string objectName, string valueName, Property property)
-        {
-            if (property == null || property.Type == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            return property.Type.DeserializeType(_scope, objectName + "." + property.Name, valueName + "." + property.SerializedName, "models");
-        }
-
         public IScopeProvider Scope
         {
             get { return _scope; }
@@ -91,9 +81,19 @@ namespace Microsoft.Rest.Generator.NodeJS
             return sample != null;
         }
 
+        public string InitializeProperty(string objectName, string valueName, Property property)
+        {
+            if (property == null || property.Type == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            return property.Type.InitializeType(_scope, objectName + "." + property.Name, valueName + "." + property.SerializedName);
+        }
+
         public string SerializeProperty(string objectName, string serializedName, Property property)
         {
-            if (property == null)
+            if (property == null || property.Type == null)
             {
                 throw new ArgumentNullException("property");
             }
@@ -101,9 +101,19 @@ namespace Microsoft.Rest.Generator.NodeJS
             var propertyName = string.Format(CultureInfo.InvariantCulture, 
                 "{0}['{1}']", objectName, property.Name);
             var serializedPropertyName = string.Format(CultureInfo.InvariantCulture,
-                "{0}['{1}']", serializedName, property.SerializedName);
+                "{0}['{1}']", serializedName, property.SerializedName.Replace(".", "']['"));
 
             return property.Type.SerializeType(_scope, propertyName, serializedPropertyName, property.IsRequired, "models");
+        }
+
+        public string DeserializeProperty(string objectName, string valueName, Property property)
+        {
+            if (property == null || property.Type == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            return property.Type.DeserializeType(_scope, objectName + "." + property.Name, valueName + "." + property.SerializedName, "models");
         }
 
         /// <summary>

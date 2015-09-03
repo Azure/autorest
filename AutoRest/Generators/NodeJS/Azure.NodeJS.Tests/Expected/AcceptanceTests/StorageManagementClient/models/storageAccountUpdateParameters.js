@@ -12,6 +12,8 @@
 
 var models = require('./index');
 
+var util = require('util');
+
 /**
  * @class
  * Initializes a new instance of the StorageAccountUpdateParameters class.
@@ -25,11 +27,11 @@ var models = require('./index');
 function StorageAccountUpdateParameters(parameters) {
   StorageAccountUpdateParameters['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters['accountType'] !== null && parameters['accountType'] !== undefined) {
-      this['accountType'] = parameters['accountType'];
+    if (parameters.properties.accountType !== null && parameters.properties.accountType !== undefined) {
+      this.accountType = parameters.properties.accountType;
     }
-    if (parameters['customDomain'] !== null && parameters['customDomain'] !== undefined) {
-      this['customDomain'] = new models['CustomDomain'](parameters['customDomain']);
+    if (parameters.properties.customDomain !== null && parameters.properties.customDomain !== undefined) {
+      this.customDomain = new models['CustomDomain'](parameters.properties.customDomain);
     }
   }    
 }
@@ -46,14 +48,14 @@ StorageAccountUpdateParameters.prototype.serialize = function () {
   var payload = StorageAccountUpdateParameters['super_'].prototype.serialize.call(this);
   if (this['accountType'] !== null && this['accountType'] !== undefined) {
     var allowedValues = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    if (!allowedValues.some( function(item) { return item === payload['properties.accountType']; })) {
-      throw new Error(payload['properties.accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === payload['properties']['accountType']; })) {
+      throw new Error(payload['properties']['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
-    payload['properties.accountType'] = this['accountType'];
+    payload['properties']['accountType'] = this['accountType'];
   }
 
   if (this['customDomain']) {
-    payload['properties.customDomain'] = this['customDomain'].serialize();
+    payload['properties']['customDomain'] = this['customDomain'].serialize();
   }
 };
 

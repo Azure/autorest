@@ -10,6 +10,8 @@
 
 'use strict';
 
+var util = require('util');
+
 /**
  * @class
  * Initializes a new instance of the StorageAccountCreateParameters class.
@@ -21,8 +23,8 @@
 function StorageAccountCreateParameters(parameters) {
   StorageAccountCreateParameters['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters['accountType'] !== null && parameters['accountType'] !== undefined) {
-      this['accountType'] = parameters['accountType'];
+    if (parameters.properties.accountType !== null && parameters.properties.accountType !== undefined) {
+      this.accountType = parameters.properties.accountType;
     }
   }    
 }
@@ -39,10 +41,10 @@ StorageAccountCreateParameters.prototype.serialize = function () {
   var payload = StorageAccountCreateParameters['super_'].prototype.serialize.call(this);
   if (this['accountType'] !== null && this['accountType'] !== undefined) {
     var allowedValues = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    if (!allowedValues.some( function(item) { return item === payload['properties.accountType']; })) {
-      throw new Error(payload['properties.accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === payload['properties']['accountType']; })) {
+      throw new Error(payload['properties']['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
-    payload['properties.accountType'] = this['accountType'];
+    payload['properties']['accountType'] = this['accountType'];
   }
 };
 
