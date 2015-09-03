@@ -1,0 +1,195 @@
+﻿@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ServiceClientTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+
+@EmptyLine
+@foreach (var importClass in Model.ImplImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * Initializes a new instance of the @Model.Name class.
+ */
+public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
+@if (Model.MethodTemplateModels.Any())
+{
+@:    private @Model.ServiceClientServiceType service;
+}
+    private String baseUri;
+@EmptyLine
+    /**
+     * Gets the URI used as the base for all cloud service requests.
+     * @@return The BaseUri value.
+     */
+    public String getBaseUri() {
+        return this.baseUri;
+    }
+@foreach (var property in Model.Properties)
+{
+@EmptyLine
+@:    private @(property.Type) @(property.Name.ToCamelCase());
+@EmptyLine
+@:    /**
+@:     * Gets @(property.Documentation)
+@:     *
+@:     * @@return the @(property.Name) value.
+@:     */
+@:    public @(property.Type) get@(property.Name.ToPascalCase())() {
+@:        return this.@(property.Name.ToCamelCase());
+@:    }
+if(!property.IsReadOnly)
+{ 
+@EmptyLine
+@:    /**
+@:     * Sets @(property.Documentation)
+@:     *
+@:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     */
+@:    public void set@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
+@:        this.@(property.Name.ToCamelCase()) = @(property.Name.ToCamelCase());
+@:    }
+}
+}
+
+@foreach (var operation in Model.Operations)
+{
+@EmptyLine
+@:    private @(operation.MethodGroupType) @(operation.MethodGroupName.ToCamelCase());
+@EmptyLine
+@:    /**
+@:     * Gets the @(operation.MethodGroupType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupName) value.
+@:     */
+@:    public @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())() {
+@:        return this.@(operation.MethodGroupName.ToCamelCase());
+@:    }
+}
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     */
+    public @(Model.Name)Impl() {
+        this("@Model.BaseUrl");
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUri the base URI of the host
+     */
+    public @(Model.Name)Impl(String baseUri) {
+        super();
+        this.baseUri = baseUri;
+        initialize();
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUri the base URI of the host
+     * @@param client the {@@link OkHttpClient} client to use for REST calls
+     * @@param restAdapterBuilder the builder for building up a {@@link RestAdapter}
+     */
+    public @(Model.Name)Impl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+        super(client, restAdapterBuilder);
+        this.baseUri = baseUri;
+        initialize();
+    }
+@EmptyLine
+    private void initialize() {
+    @if (Settings.AddCredentials)
+    {
+@:        if (this.credentials != null)
+@:        {
+@:            this.credentials.applyCredentialsFilter(this);
+@:        }
+    }
+
+        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+@if (Model.MethodTemplateModels.Any())
+{
+@:        service = restAdapter.create(@(Model.ServiceClientServiceType).class);
+}
+@foreach (var operation in Model.Operations)
+{
+@:        this.@(operation.MethodGroupName.ToCamelCase()) = new @(operation.MethodGroupType)Impl(restAdapter, this);
+}
+    }
+@if (Model.MethodTemplateModels.Any())
+{
+@EmptyLine
+<text>
+@foreach (var method in Model.MethodTemplateModels)
+    {
+    @:/**
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    @: *
+    @foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @if (method.ReturnType != null)
+    {
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
+    }
+    @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
+    @: */
+    @:public @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException {
+    @:    try {
+    @:        ServiceResponse<@method.GenericReturnTypeString> response = @(method.Name)Delegate(service.@(method.Name)(@method.MethodParameterInvocation), null);
+    @:        @method.ReturnStatement
+    @:    } catch (RetrofitError error) {
+    @:        ServiceResponse<@method.GenericReturnTypeString> response = @(method.Name)Delegate(error.getResponse(), error);
+    @:        @method.ReturnStatement
+    @:    }
+    @:}
+    @EmptyLine
+    @:/**
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    @: *
+    @foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+    @: */
+    @:public void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback) {
+    @:    service.@(method.Name)Async(@method.MethodParameterInvocationWithCallback {
+    @:        @@Override
+    @:        public void response(Response response, RetrofitError error) {
+    @:            try {
+    @:                serviceCallback.success(@(method.Name)Delegate(response, error));
+    @:            } catch (ServiceException exception) {
+    @:                serviceCallback.failure(exception);
+    @:            }
+    @:        }
+    @:    });
+    @:}
+    @EmptyLine
+    @:private ServiceResponse<@method.GenericReturnTypeString> @(method.Name)Delegate(Response response, RetrofitError error) throws ServiceException {
+    @:    return new ServiceResponseBuilder<@method.GenericReturnTypeString>()
+                foreach (var response in method.Responses)
+                {
+                @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value).Name>(){}.getType())
+                }
+                if (method.DefaultResponse != null)
+                {
+                @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(method.DefaultResponse).Name)>(){}.getType())
+                }
+                @:.build(response, error);
+    @:}
+    @EmptyLine
+    }
+</text>
+}
+}

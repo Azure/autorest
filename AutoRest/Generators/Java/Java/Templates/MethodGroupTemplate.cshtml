@@ -1,0 +1,122 @@
+﻿@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq;
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodGroupTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+import com.google.gson.reflect.TypeToken;
+import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+@foreach (var importClass in Model.ImplImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
+    private @Model.MethodGroupServiceType service;
+    @Model.Name client;
+    @EmptyLine
+    public @(Model.MethodGroupType)Impl(RestAdapter restAdapter, @Model.Name client) {
+        this.service = restAdapter.create(@(Model.MethodGroupServiceType).class);
+        this.client = client;
+    }
+    @EmptyLine
+
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:/**
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    @: *
+    @foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @if (method.ReturnType != null)
+    {
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
+    }
+    @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
+    @: */
+    @:public @method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException {
+    foreach (var param in method.RequiredNullableParameters)
+    {
+    @:    if (@param.Name == null) {
+    @:        throw new ServiceException(
+    @:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
+    @:    }
+    }
+    foreach (var param in method.ParametersToValidate)
+    {
+    @:    Validator.validate(@(param.Name));
+    }
+    @:    try {
+    @:        ServiceResponse<@method.GenericReturnTypeString> response = @(method.Name)Delegate(service.@(method.Name)(@method.MethodParameterInvocation), null);
+    @:        @method.ReturnStatement
+    @:    } catch (RetrofitError error) {
+    @:        ServiceResponse<@method.GenericReturnTypeString> response = @(method.Name)Delegate(error.getResponse(), error);
+    @:        @method.ReturnStatement
+    @:    }
+    @:}
+    @EmptyLine
+    @:/**
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    @: *
+    @foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+    @: */
+    @:public void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback) {
+    foreach (var param in method.RequiredNullableParameters)
+    {
+    @:    if (@param.Name == null) {
+    @:        serviceCallback.failure(new ServiceException(
+    @:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+    @:    }
+    }
+    foreach (var param in method.ParametersToValidate)
+    {
+    @:    Validator.validate(@(param.Name), serviceCallback);
+    }
+    @:    service.@(method.Name)Async(@method.MethodParameterInvocationWithCallback {
+    @:        @@Override
+    @:        public void response(Response response, RetrofitError error) {
+    @:            try {
+    @:                serviceCallback.success(@(method.Name)Delegate(response, error));
+    @:            } catch (ServiceException exception) {
+    @:                serviceCallback.failure(exception);
+    @:            }
+    @:        }
+    @:    });
+    @:}
+    @EmptyLine
+    @:private ServiceResponse<@method.GenericReturnTypeString> @(method.Name)Delegate(Response response, RetrofitError error) throws ServiceException {
+    @:    return new ServiceResponseBuilder<@method.GenericReturnTypeString>()
+                foreach (var response in method.Responses)
+                {
+                @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value).Name>(){}.getType())
+                }
+                if (method.DefaultResponse != null)
+                {
+                @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(method.DefaultResponse).Name)>(){}.getType())
+                }
+                @:.build(response, error);
+    @:}
+    @EmptyLine
+    }
+}
+

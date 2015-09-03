@@ -3,7 +3,7 @@
     "Ruby": {
       "type": "RubyCodeGenerator, AutoRest.Generator.Ruby"
     },
-    "Azure.Ruby":  {
+    "Azure.Ruby": {
       "type": "AzureRubyCodeGenerator, AutoRest.Generator.Azure.Ruby",
       "settings": {
         "includeCredentials": "true",
@@ -25,6 +25,16 @@
     },
     "Azure.NodeJS": {
       "type": "AzureNodeJSCodeGenerator, AutoRest.Generator.Azure.NodeJS",
+      "settings": {
+        "includeCredentials": "true",
+        "requireOperationId": "true"
+      }
+    },
+    "Java": {
+      "type": "JavaCodeGenerator, AutoRest.Generator.Java"
+    },
+    "Azure.Java": {
+      "type": "AzureJavaCodeGenerator, AutoRest.Generator.Azure.Java",
       "settings": {
         "includeCredentials": "true",
         "requireOperationId": "true"

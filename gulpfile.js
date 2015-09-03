@@ -106,7 +106,9 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:node',
       'regenerate:expected:nodeazure',
       'regenerate:expected:ruby',
-      'regenerate:expected:rubyazure'
+      'regenerate:expected:rubyazure',
+      'regenerate:expected:java',
+      'regenerate:expected:javaazure'
     ],
     cb);
 });
@@ -116,7 +118,9 @@ gulp.task('regenerate:delete', function(cb){
     'AutoRest/Generators/CSharp/Azure.CSharp.Tests/Expected',
     'AutoRest/Generators/CSharp/CSharp.Tests/Expected',
     'AutoRest/Generators/NodeJS/NodeJS.Tests/Expected',
-    'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/Expected'
+    'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/Expected',
+    'AutoRest/Generators/Java/Java.Tests/src/main/java',
+    'AutoRest/Generators/Java/Azure.Java.Tests/src/main/java'
   ], cb);
 });
 
@@ -162,6 +166,35 @@ gulp.task('regenerate:expected:ruby', function(cb){
   }, cb);
 })
 
+gulp.task('regenerate:expected:javaazure', function(cb){
+  mappings = {};
+  for (var key in defaultAzureMappings) {
+    mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key];
+  }
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Java/Azure.Java.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'src/main/java/fixtures',
+    'codeGenerator': 'Azure.Java',
+    'nsPrefix': 'Fixtures'
+  }, cb);
+})
+
+gulp.task('regenerate:expected:java', function(cb){
+  mappings = {};
+  for (var key in defaultMappings) {
+    mappings[key.substring(16).toLowerCase()] = defaultMappings[key];
+  }
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Java/Java.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'src/main/java/fixtures',
+    'codeGenerator': 'Java',
+    'nsPrefix': 'Fixtures'
+  }, cb);
+})
 
 gulp.task('regenerate:expected:csazure', function(cb){
   mappings = mergeOptions(defaultAzureMappings);
@@ -288,9 +321,12 @@ gulp.task('test:clientruntime:node', shell.task('npm test', { cwd: './ClientRunt
 gulp.task('test:clientruntime:nodeazure', shell.task('npm test', { cwd: './ClientRuntimes/NodeJS/ms-rest-azure/', verbosity: 3 }));
 gulp.task('test:clientruntime:ruby', ['syncDependencies:runtime:ruby'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest/', verbosity: 3 }));
 gulp.task('test:clientruntime:rubyazure', ['syncDependencies:runtime:rubyazure'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest-azure/', verbosity: 3 }));
+gulp.task('test:clientruntime:java', shell.task('gradle build uploadArchives', { cwd: './ClientRuntimes/Java/client-runtime/', verbosity: 3 }));
+gulp.task('test:clientruntime:javaazure', shell.task('gradle build uploadArchives', { cwd: './ClientRuntimes/Java/azure-client-runtime/', verbosity: 3 }));
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
-    'test:clientruntime:ruby', 'test:clientruntime:rubyazure', cb);
+    'test:clientruntime:ruby', 'test:clientruntime:rubyazure', 
+    'test:clientruntime:java', 'test:clientruntime:javaazure', cb);
 });
 
 gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/NodeJS.Tests/', verbosity: 3}));
@@ -298,6 +334,9 @@ gulp.task('test:node:azure', shell.task('npm test', {cwd: './AutoRest/Generators
 
 gulp.task('test:ruby', ['regenerate:expected:ruby'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Ruby.Tests', verbosity: 3 }));
 gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Azure.Ruby.Tests', verbosity: 3 }));
+
+gulp.task('test:java', shell.task('gradle build', {cwd: './AutoRest/Generators/Java/Java.Tests/', verbosity: 3}));
+gulp.task('test:java:azure', shell.task('gradle build', {cwd: './AutoRest/Generators/Java/Azure.Java.Tests/', verbosity: 3}));
 
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
@@ -387,6 +426,8 @@ gulp.task('test', function(cb){
     'test:node:azure',
     'test:ruby',
     'test:ruby:azure',
+    'test:java',
+    'test:java:azure',
     'test:nugetPackages',
     cb);
 });

@@ -1,0 +1,109 @@
+﻿@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ServiceClientTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+@foreach (var importClass in Model.InterfaceImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * The interface for @Model.Name class.
+ */
+public interface @Model.Name {
+    /**
+     * Gets the URI used as the base for all cloud service requests.
+     * @@return The BaseUri value.
+     */
+    String getBaseUri();
+@foreach (var property in Model.Properties)
+{
+@EmptyLine
+@:    /**
+@:     * Gets @(property.Documentation).
+@:     *
+@:     * @@return the @(property.Name) value.
+@:     */
+@:    @property.Type get@(property.Name.ToPascalCase())();
+if(!property.IsReadOnly)
+{
+@EmptyLine    
+@:    /**
+@:     * Sets @(property.Documentation).
+@:     *
+@:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     */
+@:    void set@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
+}
+}
+
+@foreach (var operation in Model.Operations)
+{
+@EmptyLine
+@:    /**
+@:     * Gets the @(operation.MethodGroupType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupName) value.
+@:     */
+@:    @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())();
+}
+@EmptyLine
+@if (Model.MethodTemplateModels.Any())
+{
+<text>
+    /**
+     * The interface defining all the services for @Model.Name to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface @Model.ServiceClientServiceType {
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    Response @(method.Name)(@method.MethodParameterApiDeclaration) throws ServiceException;
+    @EmptyLine
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    void @(method.Name)Async(@method.MethodParameterApiDeclarationWithCallback);
+    }
+    @EmptyLine
+    }
+
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:/**
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    @: *
+    foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    if (method.ReturnType != null)
+    {
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
+    }
+    @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
+    @: */
+    @:@method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
+    @EmptyLine
+    @:/**
+    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    @: *
+    foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+    @: */
+    @:void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
+    }
+    @EmptyLine
+</text>
+}
+}

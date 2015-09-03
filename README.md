@@ -1,3 +1,5 @@
+[![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
+
 # <img align="center" src="Documentation/images/autorest-small-flat.png">  AutoRest
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Swagger](http://github.com/swagger-api/swagger-spec) format.
@@ -38,6 +40,14 @@ Ensure that the JDK binaries are in your `PATH`.
 Ensure that your environment includes the `JAVA_HOME`.
 >set JAVA_HOME=C:\Program Files\java\jdk1.8.0_45
 
+#### Gradle
+Install the `Gradle build system` from [Gradle downloads](http://gradle.org/gradle-download/).
+Ensure Gradle is in your `PATH`.
+>set PATH=PATH;C:\gradle-2.6\bin
+
+Ensure that your environment includes the `GRADLE_HOME`.
+>set GRADLE_HOME=C:\gradle-2.6
+
 #### Java IDE
 You may want a Java IDE.
 - Install Jetbrains IntelliJ IDEA from [JetBrains downloads](https://www.jetbrains.com/idea/download/.)
@@ -56,8 +66,7 @@ ruby dk.rb init
 ruby dk.rb install
 gem install bundler
 ```
-
-## Build the Code
+## Gulp
 We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
 >npm install gulp -g
 
