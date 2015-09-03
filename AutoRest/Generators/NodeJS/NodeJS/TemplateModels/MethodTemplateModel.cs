@@ -136,7 +136,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 var traversalStack = new Stack<ParameterTemplateModel>();
                 var visitedHash = new Dictionary<string, ParameterTemplateModel>();
-                var retValue = new List<ParameterTemplateModel>();
+                var retValue = new Stack<ParameterTemplateModel>();
 
                 foreach (var param in LocalParameters)
                 {
@@ -146,12 +146,17 @@ namespace Microsoft.Rest.Generator.NodeJS
                 while (traversalStack.Count() != 0)
                 {
                     var param = traversalStack.Pop();
-                    retValue.Add(param);
+                    if (!(param.Type is CompositeType))
+                    {
+                        retValue.Push(param);
+                    }
+                    
                     if (param.Type is CompositeType)
                     {
                         if (!visitedHash.ContainsKey(param.Type.Name))
                         {
-                            foreach (var property in ((CompositeType)param.Type).Properties)
+                            traversalStack.Push(param);
+                            foreach (var property in param.ComposedProperties)
                             {
                                 if (property.IsReadOnly)
                                 {
@@ -164,12 +169,17 @@ namespace Microsoft.Rest.Generator.NodeJS
                                 propertyParameter.Documentation = property.Documentation;
                                 traversalStack.Push(new ParameterTemplateModel(propertyParameter));
                             }
+                            
                             visitedHash.Add(param.Type.Name, new ParameterTemplateModel(param));
+                        }
+                        else
+                        {
+                            retValue.Push(param);
                         }
                     }
                 }
 
-                return retValue.OrderBy(p => p.Name).ToList();
+                return retValue.ToList();
             }
         }
 

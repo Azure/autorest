@@ -173,13 +173,17 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  * the Update Storage Account API. If an account is already created and
  * subsequent PUT request is issued with exact same set of properties, then
  * HTTP 200 would be returned.
+ * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
+ *
  * @param {string} accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  
  *
  * @param {object} parameters The parameters to provide for the created account.
  *
  * @param {string} [parameters.accountType] Gets or sets the account type. Possible values for this property include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
  *
- * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
+ * @param {string} [parameters.location] Resource location
+ *
+ * @param {object} [parameters.tags] Resource tags
  *
  * @param {object} [options]
  *
@@ -212,13 +216,17 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  * the Update Storage Account API. If an account is already created and
  * subsequent PUT request is issued with exact same set of properties, then
  * HTTP 200 would be returned.
+ * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
+ *
  * @param {string} accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  
  *
  * @param {object} parameters The parameters to provide for the created account.
  *
  * @param {string} [parameters.accountType] Gets or sets the account type. Possible values for this property include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
  *
- * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
+ * @param {string} [parameters.location] Resource location
+ *
+ * @param {object} [parameters.tags] Resource tags
  *
  * @param {object} [options]
  *
@@ -356,9 +364,9 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
 
 /**
  * Deletes a storage account in Microsoft Azure.
- * @param {string} accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  
- *
  * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
+ *
+ * @param {string} accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  
  *
  * @param {object} [options]
  *
@@ -471,9 +479,9 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  * Returns the properties for the specified storage account including but not
  * limited to name, account type, location, and account status. The ListKeys
  * operation should be used to retrieve storage keys.
- * @param {string} accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  
- *
  * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
+ *
+ * @param {string} accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  
  *
  * @param {object} [options]
  *
@@ -611,6 +619,8 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  * storage keys for the account. If you want to change storage account keys,
  * use the RegenerateKey operation. The location and name of the storage
  * account cannot be changed after creation.
+ * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
+ *
  * @param {string} accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  
  *
  * @param {object} parameters The parameters to update on the account. Note that only one property can be changed at a time using this API. 
@@ -623,7 +633,9 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  *
  * @param {boolean} [parameters.customDomain.useSubDomain] Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates
  *
- * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
+ * @param {string} [parameters.location] Resource location
+ *
+ * @param {object} [parameters.tags] Resource tags
  *
  * @param {object} [options]
  *
@@ -759,9 +771,9 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
 
 /**
  * Lists the access keys for the specified storage account.
- * @param {string} accountName The name of the storage account.
- *
  * @param {string} resourceGroupName The name of the resource group.
+ *
+ * @param {string} accountName The name of the storage account.
  *
  * @param {object} [options]
  *
@@ -1140,13 +1152,13 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
 
 /**
  * Regenerates the access keys for the specified storage account.
+ * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
+ *
  * @param {string} accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  
  *
  * @param {object} regenerateKey Specifies name of the key which should be regenerated.
  *
  * @param {string} [regenerateKey.keyName] Possible values for this property include: 'key1', 'key2'.
- *
- * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
  *
  * @param {object} [options]
  *
