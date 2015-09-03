@@ -66,8 +66,7 @@ ruby dk.rb init
 ruby dk.rb install
 gem install bundler
 ```
-
-## Build the Code
+## Gulp
 We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
 >npm install gulp -g
 
