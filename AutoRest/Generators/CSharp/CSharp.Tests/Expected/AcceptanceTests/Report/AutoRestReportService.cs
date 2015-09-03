@@ -140,7 +140,7 @@ namespace Fixtures.AcceptanceTestsReport
                 ServiceClientTracing.Enter(invocationId, this, "GetReport", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/report").ToString();
+            var url = new Uri(this.BaseUri, "report").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

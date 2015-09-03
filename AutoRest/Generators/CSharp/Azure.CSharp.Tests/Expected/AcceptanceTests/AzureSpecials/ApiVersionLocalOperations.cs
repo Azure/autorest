@@ -80,7 +80,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodLocalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/apiVersion/method/string/none/query/local/2.0").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/method/string/none/query/local/2.0").ToString();
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -195,7 +195,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodLocalNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/apiVersion/method/string/none/query/local/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/method/string/none/query/local/null").ToString();
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -314,7 +314,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetPathLocalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/apiVersion/path/string/none/query/local/2.0").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/path/string/none/query/local/2.0").ToString();
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -433,7 +433,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetSwaggerLocalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/apiVersion/swagger/string/none/query/local/2.0").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/swagger/string/none/query/local/2.0").ToString();
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {

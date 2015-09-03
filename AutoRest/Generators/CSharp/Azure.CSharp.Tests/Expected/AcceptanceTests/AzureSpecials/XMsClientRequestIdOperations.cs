@@ -71,7 +71,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "Get", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/overwrite/x-ms-client-request-id/method/").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/overwrite/x-ms-client-request-id/method").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -186,7 +186,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "ParamGet", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/overwrite/x-ms-client-request-id/via-param/method/").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/overwrite/x-ms-client-request-id/via-param/method").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

@@ -70,7 +70,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetSinglePages", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/single").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/single").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -182,7 +182,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetMultiplePages", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/multiple").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/multiple").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -295,7 +295,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetMultiplePagesRetryFirst", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/multiple/retryfirst").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/multiple/retryfirst").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -409,7 +409,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetMultiplePagesRetrySecond", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/multiple/retrysecond").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/multiple/retrysecond").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -521,7 +521,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetSinglePagesFailure", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/single/failure").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/single/failure").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -633,7 +633,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetMultiplePagesFailure", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/multiple/failure").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/multiple/failure").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -745,7 +745,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetMultiplePagesFailureUri", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/multiple/failureuri").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/multiple/failureuri").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

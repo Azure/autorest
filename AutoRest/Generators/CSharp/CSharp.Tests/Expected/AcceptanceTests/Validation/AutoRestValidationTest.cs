@@ -212,7 +212,7 @@ namespace Fixtures.AcceptanceTestsValidation
                 ServiceClientTracing.Enter(invocationId, this, "ValidationOfMethodParameters", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
+            var url = new Uri(this.BaseUri, "fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             url = url.Replace("{id}", Uri.EscapeDataString(JsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));
@@ -379,7 +379,7 @@ namespace Fixtures.AcceptanceTestsValidation
                 ServiceClientTracing.Enter(invocationId, this, "ValidationOfBody", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
+            var url = new Uri(this.BaseUri, "fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             url = url.Replace("{id}", Uri.EscapeDataString(JsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));

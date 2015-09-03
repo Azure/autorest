@@ -70,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "GetValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/inheritance/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/inheritance/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -168,7 +168,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "PutValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/inheritance/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/inheritance/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

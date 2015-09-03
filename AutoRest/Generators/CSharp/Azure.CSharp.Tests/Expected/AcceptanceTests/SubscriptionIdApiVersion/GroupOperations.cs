@@ -86,7 +86,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
                 ServiceClientTracing.Enter(invocationId, this, "GetSampleResourceGroup", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}").ToString();
+            var url = new Uri(this.Client.BaseUri, "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(this.Client.SubscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             List<string> queryParameters = new List<string>();

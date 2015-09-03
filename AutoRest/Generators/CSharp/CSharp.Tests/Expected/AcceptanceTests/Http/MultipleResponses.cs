@@ -70,7 +70,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200Model204NoModelDefaultError200Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/204/none/default/Error/response/200/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/204/none/default/Error/response/200/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -157,7 +157,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200Model204NoModelDefaultError204Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/204/none/default/Error/response/204/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/204/none/default/Error/response/204/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -244,7 +244,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200Model204NoModelDefaultError201Invalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/204/none/default/Error/response/201/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/204/none/default/Error/response/201/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -331,7 +331,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200Model204NoModelDefaultError202None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/204/none/default/Error/response/202/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/204/none/default/Error/response/202/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -419,7 +419,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200Model204NoModelDefaultError400Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/204/none/default/Error/response/400/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/204/none/default/Error/response/400/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -506,7 +506,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200Model201ModelDefaultError200Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/201/B/default/Error/response/200/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/201/B/default/Error/response/200/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -600,7 +600,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200Model201ModelDefaultError201Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/201/B/default/Error/response/201/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/201/B/default/Error/response/201/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -694,7 +694,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200Model201ModelDefaultError400Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/201/B/default/Error/response/400/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/201/B/default/Error/response/400/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -787,7 +787,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError200Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/201/C/404/D/default/Error/response/200/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -886,7 +886,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError201Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/201/C/404/D/default/Error/response/201/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -985,7 +985,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError404Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/201/C/404/D/default/Error/response/404/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1085,7 +1085,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError400Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/201/C/404/D/default/Error/response/400/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1184,7 +1184,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get202None204NoneDefaultError202None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/202/none/204/none/default/Error/response/202/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/202/none/204/none/default/Error/response/202/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1265,7 +1265,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get202None204NoneDefaultError204None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/202/none/204/none/default/Error/response/204/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/202/none/204/none/default/Error/response/204/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1347,7 +1347,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get202None204NoneDefaultError400Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/202/none/204/none/default/Error/response/400/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/202/none/204/none/default/Error/response/400/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1428,7 +1428,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get202None204NoneDefaultNone202Invalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/202/none/204/none/default/none/response/202/invalid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/202/none/204/none/default/none/response/202/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1503,7 +1503,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get202None204NoneDefaultNone204None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/202/none/204/none/default/none/response/204/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/202/none/204/none/default/none/response/204/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1578,7 +1578,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get202None204NoneDefaultNone400None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/202/none/204/none/default/none/response/400/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/202/none/204/none/default/none/response/400/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1653,7 +1653,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get202None204NoneDefaultNone400Invalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/202/none/204/none/default/none/response/400/invalid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/202/none/204/none/default/none/response/400/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1728,7 +1728,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "GetDefaultModelA200Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/default/A/response/200/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/default/A/response/200/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1811,7 +1811,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "GetDefaultModelA200None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/default/A/response/200/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/default/A/response/200/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1894,7 +1894,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "GetDefaultModelA400Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/default/A/response/400/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/default/A/response/400/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1977,7 +1977,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "GetDefaultModelA400None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/default/A/response/400/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/default/A/response/400/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2060,7 +2060,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "GetDefaultNone200Invalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/default/none/response/200/invalid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/default/none/response/200/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2135,7 +2135,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "GetDefaultNone200None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/default/none/response/200/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/default/none/response/200/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2210,7 +2210,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "GetDefaultNone400Invalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/default/none/response/400/invalid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/default/none/response/400/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2285,7 +2285,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "GetDefaultNone400None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/default/none/response/400/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/default/none/response/400/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2361,7 +2361,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA200None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/response/200/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/response/200/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2442,7 +2442,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA200Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/response/200/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/response/200/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2523,7 +2523,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA200Invalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/response/200/invalid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/response/200/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2605,7 +2605,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA400None", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/response/400/none").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/response/400/none").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2686,7 +2686,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA400Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/response/400/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/response/400/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2767,7 +2767,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA400Invalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/response/400/invalid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/response/400/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2848,7 +2848,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200ModelA202Valid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/payloads/200/A/response/202/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/payloads/200/A/response/202/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
