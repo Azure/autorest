@@ -38,10 +38,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public void UrlIsCorrectWhenBaseUriContainsSegment()
         {
             var product = MirrorTestHelpers.GenerateProduct();
-            var handler = new RecordedDelegatingHandler(new HttpResponseMessage
-            {
-                Content = new StringContent("")
-            });
+            using (var content = new StringContent(""))
+            using (var message = new HttpResponseMessage { Content = content })
+            using (var handler = new RecordedDelegatingHandler(message))
             using (var client = MirrorTestHelpers.CreateDataClient(handler))
             {
                 client.BaseUri = new Uri("http://somesite/segment1/");
