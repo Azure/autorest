@@ -12,3 +12,6 @@ before_script:
   - PATH=$PATH:$(pwd)/gradle-2.6/bin
 script:
   - gulp
+notifications:
+  slack:
+    secure: d0PFVLcyqcMxNtmZ8JaEpIBzXbUbZCgKs8QtBB5qEIXDnxflSR3AhczlILNhTBKtMEBlwVzsz65yP09XcmvB6xpAfJbHqSRzk2frKa5viPcAD8Wr/NYamt9/UiTCsnql8MqzjVy0tLdMscXKRmsUey4YF570zl0b7gAbq7XTqxM=
