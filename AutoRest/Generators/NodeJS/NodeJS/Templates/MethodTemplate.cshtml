@@ -19,7 +19,7 @@
  *
 @WrapComment(" * ",  " @param {function} callback")
  *
-@WrapComment(" * ",  " @returns {stream} The Response stream")
+@WrapComment(" * ",  " @returns {function} callback(err, result, request, response)")
  */
 @(Model.OperationName).prototype.@(Model.Name.ToCamelCase()) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);
@@ -41,7 +41,7 @@
     if (parameter.IsRequired)
     {
     @:if (@(parameter.Name) === null || @(parameter.Name) === undefined) {
-    @:throw new Error('\'@(parameter.Name)\' cannot be null');
+    @:  throw new Error('\'@(parameter.Name)\' cannot be null or undefined.');
     @:}
     @:
     }
@@ -97,7 +97,22 @@
   <text>
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(@(Model.RequestBody.Name)));
+  var resultModel = null;
+  try {
+  @if (Model.RequestBody.Type is CompositeType)
+  {
+    @:resultModel = new client._models['@(Model.RequestBody.Type.Name)'](@(Model.RequestBody.Name));
+  }
+  else
+  {
+    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "resultModel", Model.RequestBody.IsRequired))
+  }
+    requestContent = JSON.stringify(resultModel.serialize());
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(resultModel, {depth: null})));
+    return callback(serializationError);
+  }
+  
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   </text>

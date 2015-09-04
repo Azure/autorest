@@ -130,7 +130,7 @@ StorageAccount.prototype.serialize = function () {
     if (!(this['lastGeoFailoverTime'] instanceof Date || typeof this['lastGeoFailoverTime'].valueOf() === 'string' && !isNaN(Date.parse(this['lastGeoFailoverTime']))))) {
       throw new Error('this[\'lastGeoFailoverTime\'] must be of type date.');
     }
-    payload['properties']['lastGeoFailoverTime'] = (this['lastGeoFailoverTime'] instanceof Date) ? this['lastGeoFailoverTime'].toISOString('base64') : this['lastGeoFailoverTime'];
+    payload['properties']['lastGeoFailoverTime'] = (this['lastGeoFailoverTime'] instanceof Date) ? this['lastGeoFailoverTime'].toISOString() : this['lastGeoFailoverTime'];
   }
 
   if (this['secondaryLocation'] !== null && this['secondaryLocation'] !== undefined) {
@@ -152,7 +152,7 @@ StorageAccount.prototype.serialize = function () {
     if (!(this['creationTime'] instanceof Date || typeof this['creationTime'].valueOf() === 'string' && !isNaN(Date.parse(this['creationTime']))))) {
       throw new Error('this[\'creationTime\'] must be of type date.');
     }
-    payload['properties']['creationTime'] = (this['creationTime'] instanceof Date) ? this['creationTime'].toISOString('base64') : this['creationTime'];
+    payload['properties']['creationTime'] = (this['creationTime'] instanceof Date) ? this['creationTime'].toISOString() : this['creationTime'];
   }
 
   if (this['customDomain']) {

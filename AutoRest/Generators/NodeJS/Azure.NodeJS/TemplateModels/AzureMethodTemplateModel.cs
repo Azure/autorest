@@ -42,15 +42,12 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         {
             get
             {
-                //result.requestId = result.httpRequest.headers['x-ms-request-id'];
                 var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
                     this.ReturnType != null)
                 {
-                    sb.AppendLine("result.body = (statusCode === 204);");
+                    sb.AppendLine("result = (statusCode === 204);");
                 }
-                sb.AppendLine("result.requestId = response.headers['x-ms-request-id'];")
-                    .AppendLine(base.InitializeResponseBody);
                 return sb.ToString();
             }
         }

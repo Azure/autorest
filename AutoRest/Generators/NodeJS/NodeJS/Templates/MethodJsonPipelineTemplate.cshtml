@@ -37,9 +37,7 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
   }
 
   // Create Result
-  var result = new msRest.HttpOperationResponse();
-  result.request = httpRequest;
-  result.response = response;
+  var result = null;
   if (responseBody === '') responseBody = null;
   @Model.InitializeResponseBody
 
@@ -48,19 +46,29 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
       <text>
   // Deserialize Response
   if (statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
-    var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
+  @if (Model.ReturnType is CompositeType)
+  {
+      if (!string.IsNullOrEmpty(((CompositeType)Model.ReturnType).PolymorphicDiscriminator))
+      {
+      @:result = new client._models.discriminators[parsedResponse[@(((CompositeType)Model.ReturnType).PolymorphicDiscriminator)']]();
+      }
+      else
+      {
+      @:result = new client._models['@(Model.ReturnType.Name)']();
+      }
+  }
   @{
       var deserializeBody = Model.GetDeserializationString(Model.ReturnType);
       if (!string.IsNullOrWhiteSpace(deserializeBody))
       {
-@:      if (result.body !== null && result.body !== undefined) {
+@:    if (parsedResponse !== null && parsedResponse !== undefined) {
 @:        @(deserializeBody)
 @:      }
       }
-          }
+   }
     } catch (error) {
       @(Model.DeserializationError)
     }
@@ -69,14 +77,24 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
   }
   @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
   {
-@:  var parsedResponse;
+@:  var parsedResponse = null;
 @:  try {
 @:    parsedResponse = JSON.parse(responseBody);
-@:    result.body = parsedResponse;
+  if (Model.DefaultResponse is CompositeType)
+  {
+      if (!string.IsNullOrEmpty(((CompositeType)Model.DefaultResponse).PolymorphicDiscriminator))
+      {
+    @:result = new client._models.discriminators[parsedResponse[@(((CompositeType)Model.DefaultResponse).PolymorphicDiscriminator)']]();
+      }
+      else
+      {
+    @:result = new client._models['@(Model.DefaultResponse.Name)']();
+      }
+  }
     var deserializeBody = Model.GetDeserializationString(Model.DefaultResponse);
     if (!string.IsNullOrWhiteSpace(deserializeBody))
     {
-@:    if (result.body !== null && result.body !== undefined) {
+@:    if (parsedResponse !== null && parsedResponse !== undefined) {
 @:      @(deserializeBody)
 @:    }
     }
@@ -86,5 +104,5 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
   }
   @EmptyLine
 
-  return callback(null, result);
+  return callback(null, result, httpRequest, response);
 });

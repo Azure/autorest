@@ -278,39 +278,13 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var builder = new IndentedStringBuilder("  ");
             var escapedValueReference = valueReference.EscapeSingleQuotes();
 
-            builder.AppendLine("if ({0}) {{", valueReference).Indent();
-
-            if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
-            {
-                builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
-                                    valueReference,
-                                    composite.PolymorphicDiscriminator, modelReference)
-                    .Indent()
-                        .AppendLine("{2}.discriminators[{0}['{1}']].validate({0});",
-                            valueReference,
-                            composite.PolymorphicDiscriminator, modelReference)
-                    .Outdent()
-                    .AppendLine("}} else {{", valueReference)
-                    .Indent()
-                        .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
-                                    composite.PolymorphicDiscriminator,
-                                    escapedValueReference)
-                    .Outdent()
-                    .AppendLine("}");
-            }
-            else
-            {
-                builder.AppendLine("{2}['{0}'].validate({1});", composite.Name, valueReference, modelReference);
-            }
-            builder.Outdent().AppendLine("}");
-
             if (isRequired)
             {
-                builder.Append(" else {")
-                    .Indent()
-                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedValueReference)
-                    .Outdent()
-                    .AppendLine("}");
+                builder.AppendLine("if ({0} === null || {0} === undefined {{", valueReference)
+                         .Indent()
+                         .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedValueReference)
+                       .Outdent()
+                       .AppendLine("}");
             }
             return builder.ToString();
         }
@@ -516,12 +490,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 if (isRequired)
                 {
-                    builder.AppendLine("if(!{0} || !({0} instanceof Date || ", objectReference)
-                             .Indent()
-                               .Indent()
-                               .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", objectReference);
+                    builder.AppendLine("if(!{0} || !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", 
+                        objectReference);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
-                    return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString('base64') : {1};", 
+                    return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", 
                         valueReference, objectReference).ToString();
                 }
 
@@ -530,7 +502,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", 
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString('base64') : {1};", valueReference, objectReference)
+                return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", valueReference, objectReference)
                                 .Outdent()
                                 .AppendLine("}").ToString();
             }

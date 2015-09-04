@@ -263,7 +263,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             return typeName.ToLower(CultureInfo.InvariantCulture);
         }
 
-        public string GetDeserializationString(IType type, string valueReference = "result.body")
+        public string GetDeserializationString(IType type, string valueReference = "result")
         {
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
@@ -338,27 +338,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else if (composite != null)
             {
-                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
-                {
-                    builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && client._models.discriminators[{0}['{1}']]) {{",
-                        valueReference,
-                        composite.PolymorphicDiscriminator)
-                        .Indent()
-                            .AppendLine("{0} = client._models.discriminators[{0}['{1}']].deserialize({0});",
-                                valueReference,
-                                composite.PolymorphicDiscriminator)
-                            .Outdent()
-                        .AppendLine("} else {")
-                        .Indent()
-                            .AppendLine("throw new Error('No discriminator field \"{0}\" was found in response.');",
-                                composite.PolymorphicDiscriminator)
-                            .Outdent()
-                        .AppendLine("}");
-                }
-                else
-                {
-                    builder.AppendLine("{0} = client._models['{1}'].deserialize({0});", valueReference, type.Name);
-                }
+                builder.AppendLine("{0}.deserialize(parsedResponse);", valueReference);
             }
             else if (enumType != null)
             {
