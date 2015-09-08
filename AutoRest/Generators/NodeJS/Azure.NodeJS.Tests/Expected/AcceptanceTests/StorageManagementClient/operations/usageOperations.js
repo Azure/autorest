@@ -43,6 +43,14 @@ function UsageOperations(client) {
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 UsageOperations.prototype.list = function (options, callback) {
   var client = this.client;

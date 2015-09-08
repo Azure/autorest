@@ -205,7 +205,7 @@ namespace Microsoft.Rest.Generator
                 GetIndentation().Length - // - Space used for indent
                 prefix.Length - // - Prefix //'s length
                 1; // - Extra space between prefix and text
-            return string.Join("\r\n", comment.WordWrap(available)
+            return string.Join(Environment.NewLine, comment.WordWrap(available)
                 .Select(s => string.Format(CultureInfo.InvariantCulture, "{0}{1}", prefix, s)));
         }
 

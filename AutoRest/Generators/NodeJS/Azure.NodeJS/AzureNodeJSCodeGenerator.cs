@@ -65,7 +65,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
             base.NormalizeClientModel(serviceClient);
-            AzureCodeGenerator.AddLongRunningOperations(serviceClient);
+            //AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizeCredentials(serviceClient);
         }
