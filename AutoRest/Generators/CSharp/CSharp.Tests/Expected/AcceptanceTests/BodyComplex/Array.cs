@@ -70,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "GetValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/array/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/array/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -166,7 +166,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "PutValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/array/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/array/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -251,7 +251,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "GetEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/array/empty").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/array/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -346,7 +346,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "PutEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/array/empty").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/array/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -432,7 +432,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "GetNotProvided", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/array/notprovided").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/array/notprovided").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

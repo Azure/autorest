@@ -70,7 +70,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "GetEmptyError", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/failure/emptybody/error").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/failure/emptybody/error").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

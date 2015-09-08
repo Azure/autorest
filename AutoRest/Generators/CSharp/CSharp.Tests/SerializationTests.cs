@@ -16,6 +16,7 @@ using Microsoft.Rest.Modeler.Swagger.Tests;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
+using System.Net.Http;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
@@ -31,6 +32,21 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         private static string SwaggerPath(string file)
         {
             return Path.Combine("Swagger", file);
+        }
+
+        [Fact]
+        public void UrlIsCorrectWhenBaseUriContainsSegment()
+        {
+            var product = MirrorTestHelpers.GenerateProduct();
+            using (var content = new StringContent(""))
+            using (var message = new HttpResponseMessage { Content = content })
+            using (var handler = new RecordedDelegatingHandler(message))
+            using (var client = MirrorTestHelpers.CreateDataClient(handler))
+            {
+                client.BaseUri = new Uri("http://somesite/segment1/");
+                client.PutProduct("200", product);
+                Assert.Equal("http://somesite/segment1/datatypes", handler.Uri.AbsoluteUri);
+            }
         }
 
         [Fact]

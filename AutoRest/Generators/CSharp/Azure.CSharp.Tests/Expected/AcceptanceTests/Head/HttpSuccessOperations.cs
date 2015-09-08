@@ -69,7 +69,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 ServiceClientTracing.Enter(invocationId, this, "Head204", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/success/204").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/success/204").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -176,7 +176,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 ServiceClientTracing.Enter(invocationId, this, "Head404", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/success/404").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/success/404").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

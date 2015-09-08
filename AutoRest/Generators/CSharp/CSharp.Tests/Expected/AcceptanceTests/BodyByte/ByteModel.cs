@@ -70,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/byte/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "byte/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -157,7 +157,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 ServiceClientTracing.Enter(invocationId, this, "GetEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/byte/empty").ToString();
+            var url = new Uri(this.Client.BaseUri, "byte/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -244,7 +244,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 ServiceClientTracing.Enter(invocationId, this, "GetNonAscii", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/byte/nonAscii").ToString();
+            var url = new Uri(this.Client.BaseUri, "byte/nonAscii").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -339,7 +339,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 ServiceClientTracing.Enter(invocationId, this, "PutNonAscii", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/byte/nonAscii").ToString();
+            var url = new Uri(this.Client.BaseUri, "byte/nonAscii").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -424,7 +424,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 ServiceClientTracing.Enter(invocationId, this, "GetInvalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/byte/invalid").ToString();
+            var url = new Uri(this.Client.BaseUri, "byte/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

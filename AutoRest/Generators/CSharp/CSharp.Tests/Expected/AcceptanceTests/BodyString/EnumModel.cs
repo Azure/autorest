@@ -71,7 +71,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "GetNotExpandable", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/enum/notExpandable").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/enum/notExpandable").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -168,7 +168,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "PutNotExpandable", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/enum/notExpandable").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/enum/notExpandable").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

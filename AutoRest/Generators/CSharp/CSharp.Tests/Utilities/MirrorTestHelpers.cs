@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net.Http;
 using Fixtures.MirrorPrimitives;
 using Fixtures.MirrorPrimitives.Models;
 using Fixtures.MirrorSequences;
@@ -146,7 +147,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public static SwaggerDataTypesClient CreateDataClient()
         {
-            return new SwaggerDataTypesClient(new MirroringHandler());
+            return CreateDataClient(new MirroringHandler());
+        }
+
+        public static SwaggerDataTypesClient CreateDataClient(DelegatingHandler handler)
+        {
+            return new SwaggerDataTypesClient(handler);
         }
 
         public static SequenceRequestResponseTest CreateSequenceClient()

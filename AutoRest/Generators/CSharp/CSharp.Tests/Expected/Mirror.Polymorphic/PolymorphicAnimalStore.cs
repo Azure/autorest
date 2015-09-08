@@ -149,7 +149,7 @@ namespace Fixtures.MirrorPolymorphic
                 ServiceClientTracing.Enter(invocationId, this, "CreateOrUpdatePolymorphicAnimals", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/getpolymorphicAnimals").ToString();
+            var url = new Uri(this.BaseUri, "getpolymorphicAnimals").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

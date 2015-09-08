@@ -102,7 +102,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetAllWithValues", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery").ToString();
+            var url = new Uri(this.Client.BaseUri, "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery").ToString();
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
             url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
@@ -235,7 +235,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetGlobalQueryNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery").ToString();
+            var url = new Uri(this.Client.BaseUri, "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery").ToString();
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
             url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
@@ -367,7 +367,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetGlobalAndLocalQueryNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null").ToString();
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
             url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
@@ -499,7 +499,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetLocalPathItemQueryNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null").ToString();
             url = url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             url = url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
             url = url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
