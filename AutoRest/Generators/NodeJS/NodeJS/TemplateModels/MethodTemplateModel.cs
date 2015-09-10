@@ -379,6 +379,44 @@ namespace Microsoft.Rest.Generator.NodeJS
             return result;
         }
 
+        public string DeserializeResponse(IType type)
+        {
+            var builder = new IndentedStringBuilder("  ");
+            builder.AppendLine("var parsedResponse = null;")
+                   .AppendLine("try {")
+                   .Indent()
+                     .AppendLine("parsedResponse = JSON.parse(responseBody);");
+            if (type is CompositeType)
+            {
+                if (!string.IsNullOrEmpty(((CompositeType)type).PolymorphicDiscriminator))
+                {
+                    builder.AppendLine("result = new client._models.discriminators[parsedResponse['{0}']]();", ((CompositeType)type).PolymorphicDiscriminator);
+                }
+                else
+                {
+                    builder.AppendLine("result = new client._models['{0}']();", type.Name);
+                }
+            }
+
+            var deserializeBody = this.GetDeserializationString(type);
+            if (!string.IsNullOrWhiteSpace(deserializeBody))
+            {
+                builder.AppendLine("if (parsedResponse !== null && parsedResponse !== undefined) {")
+                       .Indent()
+                         .AppendLine(deserializeBody)
+                       .Outdent()
+                       .AppendLine("}")
+                     .Outdent()
+                     .AppendLine("} catch (error) {")
+                       .Indent()
+                       .AppendLine(DeserializationError)
+                     .Outdent()
+                     .AppendLine("}");
+            }
+
+            return builder.ToString();
+        }
+
         /// <summary>
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
