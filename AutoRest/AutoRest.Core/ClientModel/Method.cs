@@ -14,10 +14,7 @@ namespace Microsoft.Rest.Generator.ClientModel
     /// <summary>
     /// Defines a method for the client model.
     /// </summary>
-    public class Method 
-#if !DNXCORE50
-         : ICloneable
-#endif
+    public class Method : ICloneable
     {
         /// <summary>
         /// Initializes a new instance of the Method class.
