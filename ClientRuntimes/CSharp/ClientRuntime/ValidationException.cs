@@ -4,7 +4,7 @@
 using System;
 using System.Globalization;
 using System.Runtime.Serialization;
-#if !PORTABLE
+#if !PORTABLE && !DNXCORE50
 using System.Security.Permissions;
 #endif
 
@@ -13,7 +13,7 @@ namespace Microsoft.Rest
     /// <summary>
     /// Validation exception for Microsoft Rest Client. 
     /// </summary>
-#if !PORTABLE
+#if !PORTABLE && !DNXCORE50
     [Serializable]
 #endif
     public class ValidationException : RestException
@@ -85,7 +85,7 @@ namespace Microsoft.Rest
         {
         }
 
-#if !PORTABLE
+#if !PORTABLE && !DNXCORE50
         /// <summary>
         /// Initializes a new instance of the ValidationException class.
         /// </summary>
