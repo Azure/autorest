@@ -1,0 +1,28 @@
+﻿@using System.Linq
+@using System.Collections.Generic
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.NodeJS.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ModelTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
+import * as models from "index";
+@EmptyLine
+
+/**
+ * @@class
+ * Initializes a new instance of the @(Model.Name) class.
+ * @@constructor
+ */
+interface @(Model.Name) {
+  @{
+  var propertyList = new List<Property>(Model.ComposedProperties);
+  for (int i = 0; i < propertyList.Count; i++)
+  {
+  @:@(Model.PropertyTS(propertyList[i]));
+  }
+}
+}
+@EmptyLine
+export default @(Model.Name)

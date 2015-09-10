@@ -1,0 +1,13 @@
+﻿@using Microsoft.Rest.Generator.NodeJS
+@using Microsoft.Rest.Generator.NodeJS.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ServiceClientTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
+@foreach (var methodGroup in Model.MethodGroupModels)
+{
+@:import @methodGroup.MethodGroupType from './@(methodGroup.MethodGroupType.ToCamelCase())'; export { @methodGroup.MethodGroupType };
+}
