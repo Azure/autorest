@@ -82,7 +82,7 @@ PollingState.prototype.getOperationResponse = function () {
   var result = new msRest.HttpOperationResponse();
   result.request = this.request;
   result.response = this.response;
-  result.body = this.resource;
+  result.body = JSON.stringify(this.resource);
   return result;
 };
 

@@ -101,7 +101,7 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfIn
             return callback(err, pollingState.getOperationResponse());
           });
         } else {
-          return callback(null, pollingState.getOperationResponse()); 
+          return callback(null, pollingState.getOperationResponse());
         }
       } else {
         return callback(pollingState.getCloudError(err));
