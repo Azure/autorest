@@ -218,13 +218,211 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
     callback = options;
     options = null;
   }
+
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
   // Send request
-  this.beginCreate(resourceGroupName, accountName, parameters, options, function (err, result){
+  this.beginCreate(resourceGroupName, accountName, parameters, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+
+    if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = parsedResult;
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+      // Deserialize Response
+      if (response.statusCode === 200) {
+        var parsedResponse = null;
+        try {
+          parsedResponse = JSON.parse(responseBody);
+          result = new client._models['StorageAccount']();
+          if (parsedResponse !== null && parsedResponse !== undefined) {
+            result.deserialize(parsedResponse);
+          }
+        } catch (error) {
+          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+          deserializationError.request = httpRequest;
+          deserializationError.response = response;
+          return callback(deserializationError);
+        }
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
+  });
+};
+
+/**
+ * Asynchronously creates a new storage account with the specified parameters.
+ * Existing accounts cannot be updated with this API and should instead use
+ * the Update Storage Account API. If an account is already created and
+ * subsequent PUT request is issued with exact same set of properties, then
+ * HTTP 200 would be returned.
+ * @param {string} resourceGroupName The name of the resource group within the userâ€™s subscription.
+ *
+ * @param {string} accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  
+ *
+ * @param {object} parameters The parameters to provide for the created account.
+ *
+ * @param {string} [parameters.accountType] Gets or sets the account type. Possible values for this property include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+ *
+ * @param {string} [parameters.location] Resource location
+ *
+ * @param {object} [parameters.tags] Resource tags
+ *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName, parameters, options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
+      throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
+    }
+    if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
+      throw new Error('accountName cannot be null or undefined and it must be of type string.');
+    }
+    if (parameters === null || parameters === undefined {
+      throw new Error('parameters cannot be null or undefined.');
+    }
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined || typeof this.client.apiVersion.valueOf() !== 'string') {
+      throw new Error('this.client.apiVersion cannot be null or undefined and it must be of type string.');
+    }
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined || typeof this.client.subscriptionId.valueOf() !== 'string') {
+      throw new Error('this.client.subscriptionId cannot be null or undefined and it must be of type string.');
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri + 
+                   '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
+  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
+  requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  var queryParameters = [];
+  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'PUT';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var resultModel = null;
+  try {
+    resultModel = new client._models['StorageAccountCreateParameters'](parameters);
+    requestContent = JSON.stringify(resultModel.serialize());
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(resultModel, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200 && statusCode !== 202) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = parsedErrorResponse;
+        if (error.body !== null && error.body !== undefined) {
+          error.body.deserialize(parsedResponse);
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = new client._models['StorageAccount']();
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
   });
 };
 
