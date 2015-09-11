@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests

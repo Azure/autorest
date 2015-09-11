@@ -2,16 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
 using Microsoft.Rest.Generator.Azure.NodeJS.Templates;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.Utilities;
-using System.Linq;
-using System.Threading.Tasks;
-using System.IO;
-using System.Globalization;
-using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {

@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Properties;
 using Xunit;
 
 namespace Microsoft.Rest.Generator.Test
