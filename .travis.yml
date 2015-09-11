@@ -1,6 +1,6 @@
 language: csharp
 mono:
-  - nightly
+  - alpha
 before_script:
   - npm install -g npm@'>=1.4.3'
   - npm install

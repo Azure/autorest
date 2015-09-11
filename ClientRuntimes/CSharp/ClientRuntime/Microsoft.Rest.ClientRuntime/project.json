@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0-preview",
+    "description": "Microsoft.Rest.ClientRuntime",
+    "authors": [ "Microsoft" ],
+    "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+
+    "dependencies": {
+    },
+
+    "commands": {
+    },
+
+    "frameworks": {
+        "dnxcore50": {
+            "dependencies": {
+                "System.Diagnostics.Tools": "4.0.1-beta-23225",
+                "System.Net.Http": "4.0.1-beta-23225",
+                "System.Threading.Tasks": "4.0.11-beta-23225",
+                "Microsoft.CSharp": "4.0.1-beta-23225",
+                "Newtonsoft.Json": "6.0.8"
+            }
+        }
+    },
+    "compile": [
+      "../*.cs",
+      "../Serialization/*.cs",
+      "../TransientFaultHandling/*.cs",
+      "../Properties/*.cs"
+    ]
+}

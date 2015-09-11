@@ -4,7 +4,7 @@
 using System;
 using System.Net.Http;
 using System.Runtime.Serialization;
-#if !PORTABLE
+#if !PORTABLE && !DNXCORE50
 using System.Security.Permissions;
 #endif
 
@@ -13,7 +13,7 @@ namespace Microsoft.Rest
     /// <summary>
     /// Exception thrown for an invalid response with custom error information.
     /// </summary>
-#if !PORTABLE
+#if !PORTABLE && !DNXCORE50
     [Serializable]
 #endif
     public class HttpOperationException : RestException
@@ -59,7 +59,7 @@ namespace Microsoft.Rest
         {
         }
 
-#if !PORTABLE
+#if !PORTABLE && !DNXCORE50
         /// <summary>
         /// Initializes a new instance of the HttpOperationException class.
         /// </summary>

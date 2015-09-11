@@ -19,7 +19,7 @@ namespace Microsoft.Rest
         /// <returns>The timed Task.</returns>
         public static Task Delay(TimeSpan delayTime)
         {
-#if NET45
+#if NET45 || DNXCORE50
             return Task.Delay(delayTime);
 #else
             return TaskEx.Delay(delayTime);
@@ -34,7 +34,7 @@ namespace Microsoft.Rest
         /// <returns>The timed Task.</returns>
         public static Task Delay(int millisecondsDelay, CancellationToken cancellationToken)
         {
-#if NET45
+#if NET45 || DNXCORE50
             return Task.Delay(millisecondsDelay, cancellationToken);
 #else
             return TaskEx.Delay(millisecondsDelay, cancellationToken);
@@ -48,7 +48,7 @@ namespace Microsoft.Rest
         /// <returns>The completed Task.</returns>
         public static Task<T> FromResult<T>(T result)
         {
-#if NET45
+#if NET45 || DNXCORE50
             return Task.FromResult<T>(result);
 #else
             return TaskEx.FromResult<T>(result);
