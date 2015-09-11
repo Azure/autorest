@@ -217,7 +217,6 @@ StorageAccount.prototype.deserialize = function (instance) {
       this.secondaryEndpoints = new models['Endpoints']().deserialize(instance.properties.secondaryEndpoints);
     }
   }
-  return instance;
 };
 
 module.exports = StorageAccount;

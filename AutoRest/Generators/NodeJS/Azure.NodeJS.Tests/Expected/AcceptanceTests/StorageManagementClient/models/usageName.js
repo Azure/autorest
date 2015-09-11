@@ -71,7 +71,6 @@ UsageName.prototype.deserialize = function (instance) {
       this.localizedValue = instance.localizedValue;
     }
   }
-  return instance;
 };
 
 module.exports = UsageName;

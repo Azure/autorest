@@ -55,7 +55,6 @@ StorageAccountRegenerateKeyParameters.prototype.deserialize = function (instance
       this.keyName = instance.keyName;
     }
   }
-  return instance;
 };
 
 module.exports = StorageAccountRegenerateKeyParameters;

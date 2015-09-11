@@ -76,7 +76,6 @@ StorageAccountUpdateParameters.prototype.deserialize = function (instance) {
       this.customDomain = new models['CustomDomain']().deserialize(instance.properties.customDomain);
     }
   }
-  return instance;
 };
 
 module.exports = StorageAccountUpdateParameters;

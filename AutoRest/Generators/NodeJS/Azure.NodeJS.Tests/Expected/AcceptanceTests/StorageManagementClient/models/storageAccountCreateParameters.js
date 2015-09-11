@@ -61,7 +61,6 @@ StorageAccountCreateParameters.prototype.deserialize = function (instance) {
       this.accountType = instance.properties.accountType;
     }
   }
-  return instance;
 };
 
 module.exports = StorageAccountCreateParameters;

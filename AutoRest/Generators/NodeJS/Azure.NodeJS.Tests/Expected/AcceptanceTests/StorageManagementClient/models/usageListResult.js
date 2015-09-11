@@ -74,7 +74,6 @@ UsageListResult.prototype.deserialize = function (instance) {
       this.value = deserializedArray;
     }
   }
-  return instance;
 };
 
 module.exports = UsageListResult;

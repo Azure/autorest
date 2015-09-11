@@ -88,7 +88,6 @@ Endpoints.prototype.deserialize = function (instance) {
       this.table = instance.table;
     }
   }
-  return instance;
 };
 
 module.exports = Endpoints;

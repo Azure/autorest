@@ -88,7 +88,6 @@ CheckNameAvailabilityResult.prototype.deserialize = function (instance) {
       this.message = instance.message;
     }
   }
-  return instance;
 };
 
 module.exports = CheckNameAvailabilityResult;

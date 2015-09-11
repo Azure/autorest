@@ -72,7 +72,6 @@ CustomDomain.prototype.deserialize = function (instance) {
       this.useSubDomain = instance.useSubDomain;
     }
   }
-  return instance;
 };
 
 module.exports = CustomDomain;

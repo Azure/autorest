@@ -103,7 +103,6 @@ Usage.prototype.deserialize = function (instance) {
       this.name = new models['UsageName']().deserialize(instance.name);
     }
   }
-  return instance;
 };
 
 module.exports = Usage;
