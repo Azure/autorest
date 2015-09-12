@@ -171,7 +171,7 @@ namespace Fixtures.MirrorRecursiveTypes
                 ServiceClientTracing.Enter(invocationId, this, "Post", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}").ToString();
+            var url = new Uri(this.BaseUri, "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             url = url.Replace("{apiVersion}", Uri.EscapeDataString(apiVersion));

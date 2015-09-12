@@ -74,7 +74,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetBooleanTrue", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/bool/true").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/bool/true").ToString();
             List<string> queryParameters = new List<string>();
             if (boolQuery != null)
             {
@@ -168,7 +168,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetBooleanFalse", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/bool/false").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/bool/false").ToString();
             List<string> queryParameters = new List<string>();
             if (boolQuery != null)
             {
@@ -262,7 +262,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetBooleanNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/bool/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/bool/null").ToString();
             List<string> queryParameters = new List<string>();
             if (boolQuery != null)
             {
@@ -356,7 +356,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetIntOneMillion", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/int/1000000").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/int/1000000").ToString();
             List<string> queryParameters = new List<string>();
             if (intQuery != null)
             {
@@ -450,7 +450,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetIntNegativeOneMillion", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/int/-1000000").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/int/-1000000").ToString();
             List<string> queryParameters = new List<string>();
             if (intQuery != null)
             {
@@ -544,7 +544,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetIntNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/int/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/int/null").ToString();
             List<string> queryParameters = new List<string>();
             if (intQuery != null)
             {
@@ -638,7 +638,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetTenBillion", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/long/10000000000").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/long/10000000000").ToString();
             List<string> queryParameters = new List<string>();
             if (longQuery != null)
             {
@@ -732,7 +732,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetNegativeTenBillion", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/long/-10000000000").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/long/-10000000000").ToString();
             List<string> queryParameters = new List<string>();
             if (longQuery != null)
             {
@@ -826,7 +826,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetLongNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/long/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/long/null").ToString();
             List<string> queryParameters = new List<string>();
             if (longQuery != null)
             {
@@ -920,7 +920,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "FloatScientificPositive", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/float/1.034E+20").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/float/1.034E+20").ToString();
             List<string> queryParameters = new List<string>();
             if (floatQuery != null)
             {
@@ -1014,7 +1014,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "FloatScientificNegative", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/float/-1.034E-20").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/float/-1.034E-20").ToString();
             List<string> queryParameters = new List<string>();
             if (floatQuery != null)
             {
@@ -1108,7 +1108,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "FloatNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/float/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/float/null").ToString();
             List<string> queryParameters = new List<string>();
             if (floatQuery != null)
             {
@@ -1202,7 +1202,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DoubleDecimalPositive", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/double/9999999.999").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/double/9999999.999").ToString();
             List<string> queryParameters = new List<string>();
             if (doubleQuery != null)
             {
@@ -1296,7 +1296,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DoubleDecimalNegative", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/double/-9999999.999").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/double/-9999999.999").ToString();
             List<string> queryParameters = new List<string>();
             if (doubleQuery != null)
             {
@@ -1390,7 +1390,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DoubleNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/double/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/double/null").ToString();
             List<string> queryParameters = new List<string>();
             if (doubleQuery != null)
             {
@@ -1485,7 +1485,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "StringUnicode", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/string/unicode/").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/string/unicode").ToString();
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1580,7 +1580,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "StringUrlEncoded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend").ToString();
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1674,7 +1674,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "StringEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/string/empty").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/string/empty").ToString();
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1768,7 +1768,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "StringNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/string/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/string/null").ToString();
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1863,7 +1863,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "EnumValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/enum/green%20color").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/enum/green%20color").ToString();
             List<string> queryParameters = new List<string>();
             if (enumQuery != null)
             {
@@ -1958,7 +1958,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "EnumNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/enum/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/enum/null").ToString();
             List<string> queryParameters = new List<string>();
             if (enumQuery != null)
             {
@@ -2052,7 +2052,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ByteMultiByte", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/byte/multibyte").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/byte/multibyte").ToString();
             List<string> queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2146,7 +2146,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ByteEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/byte/empty").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/byte/empty").ToString();
             List<string> queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2240,7 +2240,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ByteNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/byte/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/byte/null").ToString();
             List<string> queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2334,7 +2334,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DateValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/date/2012-01-01").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/date/2012-01-01").ToString();
             List<string> queryParameters = new List<string>();
             if (dateQuery != null)
             {
@@ -2428,7 +2428,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DateNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/date/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/date/null").ToString();
             List<string> queryParameters = new List<string>();
             if (dateQuery != null)
             {
@@ -2522,7 +2522,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DateTimeValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/datetime/2012-01-01T01%3A01%3A01Z").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/datetime/2012-01-01T01%3A01%3A01Z").ToString();
             List<string> queryParameters = new List<string>();
             if (dateTimeQuery != null)
             {
@@ -2616,7 +2616,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DateTimeNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/datetime/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/datetime/null").ToString();
             List<string> queryParameters = new List<string>();
             if (dateTimeQuery != null)
             {
@@ -2712,7 +2712,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringCsvValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/array/csv/string/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/array/csv/string/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -2806,7 +2806,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringCsvNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/array/csv/string/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/array/csv/string/null").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -2900,7 +2900,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringCsvEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/array/csv/string/empty").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/array/csv/string/empty").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -2996,7 +2996,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringSsvValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/array/ssv/string/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/array/ssv/string/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3092,7 +3092,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringTsvValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/array/tsv/string/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/array/tsv/string/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3188,7 +3188,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringPipesValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/queries/array/pipes/string/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "queries/array/pipes/string/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {

@@ -4,7 +4,7 @@
 using System;
 using System.Net.Http;
 using System.Runtime.Serialization;
-#if !PORTABLE
+#if !PORTABLE && !DNXCORE50
 using System.Security.Permissions;
 #endif
 using Microsoft.Rest;
@@ -14,7 +14,7 @@ namespace Microsoft.Rest.Azure
     /// <summary>
     /// An exception generated from an http response returned from a Microsoft Azure service
     /// </summary>
-#if !PORTABLE
+#if !PORTABLE && !DNXCORE50
     [Serializable]
 #endif
     public class CloudException : RestException
@@ -58,7 +58,7 @@ namespace Microsoft.Rest.Azure
         {
         }
 
-#if !PORTABLE        
+#if !PORTABLE && !DNXCORE50       
         /// <summary>
         /// Initializes a new instance of the CloudException class.
         /// </summary>

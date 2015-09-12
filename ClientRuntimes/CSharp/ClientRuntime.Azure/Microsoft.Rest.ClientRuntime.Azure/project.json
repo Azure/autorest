@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0-preview",
+    "description": "Microsoft.Rest.ClientRuntime.Azure",
+    "authors": [ "Microsoft" ],
+    "tags": [ "Microsoft AutoRest ClientRuntime Azure REST" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+
+    "dependencies": {
+    },
+
+    "commands": {
+    },
+
+    "frameworks": {
+        "dnxcore50": {
+            "dependencies": {
+                "Microsoft.Rest.ClientRuntime": "2.0.0-preview"
+            }
+        }
+    },
+    "compile": [
+      "../*.cs",
+      "../OData/*.cs",
+      "../Properties/*.cs"
+    ]
+}

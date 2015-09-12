@@ -12,6 +12,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 {
     public class MirroringHandler : DelegatingHandler
     {
+
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {

@@ -78,7 +78,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodPathValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}").ToString();
             url = url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
@@ -192,7 +192,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetPathPathValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}").ToString();
             url = url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
@@ -307,7 +307,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetSwaggerPathValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}").ToString();
             url = url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
@@ -422,7 +422,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodQueryValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/method/query/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/method/query/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -535,7 +535,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodQueryNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/method/query/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/method/query/null").ToString();
             List<string> queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -653,7 +653,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetPathQueryValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/path/query/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/path/query/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -769,7 +769,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetSwaggerQueryValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/swagger/query/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/swagger/query/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (q1 != null)
             {
