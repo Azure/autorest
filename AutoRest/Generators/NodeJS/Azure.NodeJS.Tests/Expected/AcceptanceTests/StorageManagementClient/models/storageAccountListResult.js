@@ -21,6 +21,8 @@ var util = require('util');
  * The list storage accounts operation response.
  * @member {array} [value] Gets the list of storage accounts and their properties.
  *
+ * @member {string} [nextLink] Gets the link to the next set of results. Currently this will always be empty as the API does not support pagination.
+ *
  */
 function StorageAccountListResult(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -33,6 +35,9 @@ function StorageAccountListResult(parameters) {
         initializedArray.push(element);
       });
       this.value = initializedArray;
+    }
+    if (parameters.nextLink !== null && parameters.nextLink !== undefined) {
+      this.nextLink = parameters.nextLink;
     }
   }    
 }
@@ -53,6 +58,13 @@ StorageAccountListResult.prototype.serialize = function () {
       }
     }
   }
+
+  if (this['nextLink'] !== null && this['nextLink'] !== undefined) {
+    if (typeof this['nextLink'].valueOf() !== 'string') {
+      throw new Error('this[\'nextLink\'] must be of type string.');
+    }
+    payload['nextLink'] = this['nextLink'];
+  }
 };
 
 /**
@@ -72,6 +84,10 @@ StorageAccountListResult.prototype.deserialize = function (instance) {
         deserializedArray.push(element1);
       });
       this.value = deserializedArray;
+    }
+
+    if (instance.nextLink !== null && instance.nextLink !== undefined) {
+      this.nextLink = instance.nextLink;
     }
   }
 };

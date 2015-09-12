@@ -68,6 +68,59 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        public IEnumerable<Property> DocumentationProperties
+        {
+            get
+            {
+                var traversalStack = new Stack<Property>();
+                var visitedHash = new Dictionary<string, Property>();
+                var retValue = new Stack<Property>();
+
+                foreach (var property in Properties)
+                {
+                    traversalStack.Push(property);
+                }
+
+                while (traversalStack.Count() != 0)
+                {
+                    var property = traversalStack.Pop();
+                    if (!(property.Type is CompositeType))
+                    {
+                        retValue.Push(property);
+                    }
+
+                    if (property.Type is CompositeType)
+                    {
+                        if (!visitedHash.ContainsKey(property.Type.Name))
+                        {
+                            traversalStack.Push(property);
+                            /*foreach (var property in property.ComposedProperties)
+                            {
+                                if (property.IsReadOnly)
+                                {
+                                    continue;
+                                }
+
+                                var propertyParameter = new Parameter();
+                                propertyParameter.Type = property.Type;
+                                propertyParameter.Name = property.Name + "." + property.Name;
+                                propertyParameter.Documentation = property.Documentation;
+                                traversalStack.Push(new ParameterTemplateModel(propertyParameter));
+                            }*/
+
+                            visitedHash.Add(property.Type.Name, property);
+                        }
+                        else
+                        {
+                            retValue.Push(property);
+                        }
+                    }
+                }
+
+                return retValue.ToList();
+            }
+        }
+
         public bool ContainsPropertiesInSequenceType()
         {
             var sample = ComposedProperties.FirstOrDefault(p => p.Type is SequenceType);

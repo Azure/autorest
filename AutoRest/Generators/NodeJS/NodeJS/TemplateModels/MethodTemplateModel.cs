@@ -10,6 +10,7 @@ using Microsoft.CSharp;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Collections;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -183,6 +184,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        
         /// <summary>
         /// Get the type name for the method's return type
         /// </summary>

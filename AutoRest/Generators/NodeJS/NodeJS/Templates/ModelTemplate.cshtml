@@ -26,7 +26,7 @@
  * Initializes a new instance of the @(Model.Name) class.
  * @@constructor
 @WrapComment(" * ", Model.Documentation)
-@foreach (var parameter in Model.Properties)
+@foreach (var parameter in Model.DocumentationProperties)
 {
  @:* @@member {@ModelTemplateModel.GetPropertyDocumentationType(parameter)} @ModelTemplateModel.GetPropertyDocumentationName(parameter) @parameter.Documentation
  @:*

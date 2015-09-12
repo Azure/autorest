@@ -284,7 +284,8 @@
               "$ref": "#/definitions/StorageAccountListResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": true      
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts": {
@@ -316,7 +317,8 @@
               "$ref": "#/definitions/StorageAccountListResult"
             }
           }
-        }
+        },
+        "x-ms-pageable": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
@@ -593,6 +595,10 @@
             "$ref": "#/definitions/StorageAccount"
           },
           "description": "Gets the list of storage accounts and their properties."
+        },
+        "nextLink": {  
+          "type": "string",
+            "description": "Gets the link to the next set of results. Currently this will always be empty as the API does not support pagination."
         }
       },
       "description": "The list storage accounts operation response."
