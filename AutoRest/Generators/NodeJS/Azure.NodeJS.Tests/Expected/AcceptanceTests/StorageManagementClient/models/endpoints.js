@@ -17,11 +17,11 @@
  * The URIs that are used to perform a retrieval of a public blob, queue or
  * table object.
  * @member {string} [blob] Gets the blob endpoint.
- *
+ * 
  * @member {string} [queue] Gets the queue endpoint.
- *
+ * 
  * @member {string} [table] Gets the table endpoint.
- *
+ * 
  */
 function Endpoints(parameters) {
   if (parameters !== null && parameters !== undefined) {

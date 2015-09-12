@@ -20,7 +20,7 @@ var util = require('util');
  * @constructor
  * The List Usages operation response.
  * @member {array} [value] Gets or sets the list Storage Resource Usages.
- *
+ * 
  */
 function UsageListResult(parameters) {
   if (parameters !== null && parameters !== undefined) {

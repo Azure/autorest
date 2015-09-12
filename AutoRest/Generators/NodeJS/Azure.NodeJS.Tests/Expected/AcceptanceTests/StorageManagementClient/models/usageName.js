@@ -16,9 +16,9 @@
  * @constructor
  * The Usage Names.
  * @member {string} [value] Gets a string describing the resource name.
- *
+ * 
  * @member {string} [localizedValue] Gets a localized string describing the resource name.
- *
+ * 
  */
 function UsageName(parameters) {
   if (parameters !== null && parameters !== undefined) {

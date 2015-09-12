@@ -17,8 +17,9 @@ var util = require('util');
  * Initializes a new instance of the StorageAccountCreateParameters class.
  * @constructor
  * The parameters to provide for the account.
- * @member {string} [accountType] Gets or sets the account type. Possible values for this property include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
- *
+ * @member {string} [accountType] Gets or sets the account type. Possible values for this property
+ * include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+ * 
  */
 function StorageAccountCreateParameters(parameters) {
   StorageAccountCreateParameters['super_'].call(this, parameters);

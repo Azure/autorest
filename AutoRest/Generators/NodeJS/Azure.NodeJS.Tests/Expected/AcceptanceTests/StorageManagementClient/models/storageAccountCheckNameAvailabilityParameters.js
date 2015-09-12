@@ -14,10 +14,10 @@
  * @class
  * Initializes a new instance of the StorageAccountCheckNameAvailabilityParameters class.
  * @constructor
- * @member {string} [name] 
- *
- * @member {string} [type] 
- *
+ * @member {string} [name]
+ * 
+ * @member {string} [type]
+ * 
  */
 function StorageAccountCheckNameAvailabilityParameters(parameters) {
   if (parameters !== null && parameters !== undefined) {
