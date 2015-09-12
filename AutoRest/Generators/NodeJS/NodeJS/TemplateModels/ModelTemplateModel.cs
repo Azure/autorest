@@ -16,7 +16,6 @@ namespace Microsoft.Rest.Generator.NodeJS
     {
         private readonly IScopeProvider _scope = new ScopeProvider();
         private ModelTemplateModel _parent = null;
-        private string _lastLiteral = String.Empty;
         
         public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
         {
@@ -118,19 +117,11 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
-        public string CreatePropertyDocumentation()
+        public string ConstructPropertyDocumentation(string propertyDocumentation)
         {
             var builder = new IndentedStringBuilder("  ");
-            string result = null;
-            foreach (var property in this.DocumentationPropertyList)
-            {
-                builder.AppendLine(WrapDocumentationComment(" * ", "@member {" + ModelTemplateModel.GetPropertyDocumentationType(property)
-                                                                               + "} " + ModelTemplateModel.GetPropertyDocumentationName(property) 
-                                                                               + " " + property.Documentation))
-                       .AppendLine(" * ");
-            }
-            result = builder.ToString();
-            return result;
+            return builder.AppendLine(propertyDocumentation)
+                          .AppendLine(" * ").ToString();
         }
 
         public bool ContainsPropertiesInSequenceType()
@@ -264,39 +255,6 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
 
             return typeName.ToLower(CultureInfo.InvariantCulture);
-        }
-
-        protected string WrapDocumentationComment(string prefix, string comment)
-        {
-            if (string.IsNullOrWhiteSpace(comment))
-            {
-                return null;
-            }
-
-            // escape comment as needed
-            comment = comment.Replace("\\", "\\\\");
-
-            int available =
-                100 - // Maximum desired width
-                GetIndentation().Length - // - Space used for indent
-                prefix.Length - // - Prefix //'s length
-                1; // - Extra space between prefix and text
-            return string.Join(Environment.NewLine, comment.WordWrap(available)
-                .Select(s => string.Format(CultureInfo.InvariantCulture, "{0}{1}", prefix, s)));
-        }
-
-        private string GetIndentation()
-        {
-            int lineStart = 0;
-            for (int i = _lastLiteral.Length - 1; i >= 0; i--)
-            {
-                if (_lastLiteral[i] == '\r' || _lastLiteral[i] == '\n')
-                {
-                    lineStart = i + 1;
-                    break;
-                }
-            }
-            return _lastLiteral.Substring(lineStart, _lastLiteral.Length - lineStart);
         }
     }
 }

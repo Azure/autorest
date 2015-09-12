@@ -184,6 +184,12 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        public string ConstructParameterDocumentation(string paramDoc)
+        {
+            var builder = new IndentedStringBuilder("  ");
+            return builder.AppendLine(paramDoc)
+                          .AppendLine(" * ").ToString();
+        }
         
         /// <summary>
         /// Get the type name for the method's return type

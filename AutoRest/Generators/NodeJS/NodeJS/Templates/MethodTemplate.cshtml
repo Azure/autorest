@@ -10,8 +10,11 @@
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @:* @@param {@MethodTemplateModel.GetParameterDocumentationType(parameter)} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
- @:*
+ @Model.ConstructParameterDocumentation(
+                      WrapComment(" * ", "@param {" 
+                                        + MethodTemplateModel.GetParameterDocumentationType(parameter)
+                                        + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
+                                        + " " + parameter.Documentation))
 }
 @WrapComment(" * ", " @param {object} [options]")
  *
