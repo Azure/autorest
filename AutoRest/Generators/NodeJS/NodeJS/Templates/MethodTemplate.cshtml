@@ -113,12 +113,13 @@
   @if (Model.RequestBody.Type is CompositeType)
   {
     @:requestModel = new client._models['@(Model.RequestBody.Type.Name)'](@(Model.RequestBody.Name));
+    @:requestContent = JSON.stringify(requestModel.serialize());
   }
   else
   {
     @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired))
+    @:requestContent = JSON.stringify(requestModel);
   }
-    requestContent = JSON.stringify(result.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
