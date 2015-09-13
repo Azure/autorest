@@ -172,23 +172,6 @@ namespace Microsoft.Rest.Generator.NodeJS
             return property.Type.DeserializeType(_scope, objectName + "." + property.Name, valueName + "." + property.SerializedName, "models");
         }
 
-        /// <summary>
-        /// Returns list of properties that needs to be explicitly deserializes for a model.
-        /// </summary>
-        public IEnumerable<Property> SpecialProperties
-        {
-            get
-            {
-                foreach (var property in ComposedProperties)
-                {
-                    if (isSpecial(property.Type))
-                    {
-                        yield return property;
-                    }
-                }
-            }
-        }
-
         private bool isSpecial(IType type)
         {
             if (type == PrimaryType.DateTime || type == PrimaryType.Date || type == PrimaryType.ByteArray || type is CompositeType)

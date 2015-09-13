@@ -405,6 +405,10 @@ namespace Microsoft.Rest.Generator.NodeJS
                     builder.AppendLine("result = new client._models['{0}']();", type.Name);
                 }
             }
+            else
+            {
+                builder.AppendLine("result = parsedResponse;");
+            }
 
             var deserializeBody = this.GetDeserializationString(type);
             if (!string.IsNullOrWhiteSpace(deserializeBody))
@@ -413,14 +417,14 @@ namespace Microsoft.Rest.Generator.NodeJS
                        .Indent()
                          .AppendLine(deserializeBody)
                        .Outdent()
-                       .AppendLine("}")
-                     .Outdent()
-                     .AppendLine("} catch (error) {")
-                       .Indent()
-                       .AppendLine(DeserializationError)
-                     .Outdent()
-                     .AppendLine("}");
+                       .AppendLine("}");
             }
+            builder.Outdent()
+                   .AppendLine("} catch (error) {")
+                     .Indent()
+                     .AppendLine(DeserializationError)
+                   .Outdent()
+                   .AppendLine("}");
 
             return builder.ToString();
         }
