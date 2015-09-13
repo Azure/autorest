@@ -44,7 +44,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         public void SampleTest()
         {
             SwaggerSpecHelper.RunTests<AzureNodeJSCodeGenerator>(
-                SwaggerPath("storage.json"), ExpectedPath("StorageManagementClient"));
+                SwaggerPath("body-integer.json"), ExpectedPath("IntegerClient"));
         }
     }
 }
