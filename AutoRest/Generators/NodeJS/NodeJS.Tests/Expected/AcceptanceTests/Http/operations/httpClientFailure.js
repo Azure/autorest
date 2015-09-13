@@ -40,7 +40,15 @@ function HttpClientFailure(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.head400 = function (options, callback) {
   var client = this.client;
@@ -90,9 +98,9 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -101,25 +109,23 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -132,7 +138,15 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.get400 = function (options, callback) {
   var client = this.client;
@@ -182,9 +196,9 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -193,32 +207,30 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 400 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -226,7 +238,15 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -269,7 +289,19 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -287,9 +319,9 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -298,32 +330,30 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 400 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -331,7 +361,15 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -374,7 +412,19 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -392,9 +442,9 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -403,32 +453,30 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 400 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -436,7 +484,15 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.post400 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -479,7 +535,19 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -497,9 +565,9 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -508,32 +576,30 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 400 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -541,7 +607,15 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.delete400 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -584,7 +658,19 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -602,9 +688,9 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -613,25 +699,23 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -644,7 +728,15 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.head401 = function (options, callback) {
   var client = this.client;
@@ -694,9 +786,9 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -705,25 +797,23 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -736,7 +826,15 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.get402 = function (options, callback) {
   var client = this.client;
@@ -786,9 +884,9 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -797,25 +895,23 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -828,7 +924,15 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.get403 = function (options, callback) {
   var client = this.client;
@@ -878,9 +982,9 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -889,32 +993,30 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 404 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -922,7 +1024,15 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -965,7 +1075,19 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -983,9 +1105,9 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -994,32 +1116,30 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 405 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1027,7 +1147,15 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1070,7 +1198,19 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1088,9 +1228,9 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1099,32 +1239,30 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 406 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1132,7 +1270,15 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.post406 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1175,7 +1321,19 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1193,9 +1351,9 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1204,32 +1362,30 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 407 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1237,7 +1393,15 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.delete407 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1280,7 +1444,19 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1298,9 +1474,9 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1309,32 +1485,30 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 409 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1342,7 +1516,15 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1385,7 +1567,19 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1403,9 +1597,9 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1414,25 +1608,23 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1445,7 +1637,15 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.head410 = function (options, callback) {
   var client = this.client;
@@ -1495,9 +1695,9 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1506,25 +1706,23 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1537,7 +1735,15 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.get411 = function (options, callback) {
   var client = this.client;
@@ -1587,9 +1793,9 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1598,25 +1804,23 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1629,7 +1833,15 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.get412 = function (options, callback) {
   var client = this.client;
@@ -1679,9 +1891,9 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1690,32 +1902,30 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 413 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1723,7 +1933,15 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1766,7 +1984,19 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1784,9 +2014,9 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1795,32 +2025,30 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 414 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1828,7 +2056,15 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1871,7 +2107,19 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1889,9 +2137,9 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1900,32 +2148,30 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 415 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1933,7 +2179,15 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.post415 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1976,7 +2230,19 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1994,9 +2260,9 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2005,25 +2271,23 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2036,7 +2300,15 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.get416 = function (options, callback) {
   var client = this.client;
@@ -2086,9 +2358,9 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2097,32 +2369,30 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 417 status code - should be represented in the client as an error
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2130,7 +2400,15 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.delete417 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -2173,7 +2451,19 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -2191,9 +2481,9 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2202,25 +2492,23 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2233,7 +2521,15 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpClientFailure.prototype.head429 = function (options, callback) {
   var client = this.client;
@@ -2283,9 +2579,9 @@ HttpClientFailure.prototype.head429 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2294,25 +2590,23 @@ HttpClientFailure.prototype.head429 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = new client._models['ErrorModel']();
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

@@ -18,8 +18,31 @@ var util = require('util');
  * @class
  * Initializes a new instance of the Cat class.
  * @constructor
+ * @member {string} [color]
+ * 
+ * @member {array} [hates]
+ * 
  */
-function Cat() { }
+function Cat(parameters) {
+  Cat['super_'].call(this, parameters);
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.color !== null && parameters.color !== undefined) {
+      this.color = parameters.color;
+    }
+    if (parameters.hates !== null && parameters.hates !== undefined) {
+      var initializedArray = [];
+      parameters.hates.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = new models['Dog'](element);
+        }
+        initializedArray.push(element);
+      });
+      this.hates = initializedArray;
+    }
+  }    
+}
+
+util.inherits(Cat, models['Pet']);
 
 /**
  * Validate the payload against the Cat schema
@@ -27,26 +50,19 @@ function Cat() { }
  * @param {JSON} payload
  *
  */
-Cat.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Cat cannot be null.');
-  }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'number') {
-    throw new Error('payload[\'id\'] must be of type number.');
-  }
-
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
+Cat.prototype.serialize = function () {
+  var payload = Cat['super_'].prototype.serialize.call(this);
+  if (this['color'] !== null && this['color'] !== undefined) {
+    if (typeof this['color'].valueOf() !== 'string') {
+      throw new Error('this[\'color\'] must be of type string.');
+    }
+    payload['color'] = this['color'];
   }
 
-  if (payload['color'] !== null && payload['color'] !== undefined && typeof payload['color'].valueOf() !== 'string') {
-    throw new Error('payload[\'color\'] must be of type string.');
-  }
-
-  if (util.isArray(payload['hates'])) {
-    for (var i = 0; i < payload['hates'].length; i++) {
-      if (payload['hates'][i]) {
-        models['Dog'].validate(payload['hates'][i]);
+  if (util.isArray(this['hates'])) {
+    for (var i = 0; i < this['hates'].length; i++) {
+      if (this['hates'][i]) {
+        payload['hates'][i] = this['hates'][i].serialize();
       }
     }
   }
@@ -59,19 +75,23 @@ Cat.prototype.validate = function (payload) {
  *
  */
 Cat.prototype.deserialize = function (instance) {
+  Cat['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
+    if (instance.color !== null && instance.color !== undefined) {
+      this.color = instance.color;
+    }
+
     if (instance.hates !== null && instance.hates !== undefined) {
       var deserializedArray = [];
-      instance.hates.forEach(function(element) {
-        if (element !== null && element !== undefined) {
-          element = models['Dog'].deserialize(element);
+      instance.hates.forEach(function(element1) {
+        if (element1 !== null && element1 !== undefined) {
+          element1 = new models['Dog']().deserialize(element1);
         }
-        deserializedArray.push(element);
+        deserializedArray.push(element1);
       });
-      instance.hates = deserializedArray;
+      this.hates = deserializedArray;
     }
   }
-  return instance;
 };
 
-module.exports = new Cat();
+module.exports = Cat;

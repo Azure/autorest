@@ -14,8 +14,28 @@
  * @class
  * Initializes a new instance of the Basic class.
  * @constructor
+ * @member {number} [id]
+ * 
+ * @member {string} [name]
+ * 
+ * @member {string} [color] Possible values for this property include: 'cyan',
+ * 'Magenta', 'YELLOW', 'blacK'.
+ * 
  */
-function Basic() { }
+function Basic(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.id !== null && parameters.id !== undefined) {
+      this.id = parameters.id;
+    }
+    if (parameters.name !== null && parameters.name !== undefined) {
+      this.name = parameters.name;
+    }
+    if (parameters.color !== null && parameters.color !== undefined) {
+      this.color = parameters.color;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the Basic schema
@@ -23,23 +43,28 @@ function Basic() { }
  * @param {JSON} payload
  *
  */
-Basic.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Basic cannot be null.');
-  }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'number') {
-    throw new Error('payload[\'id\'] must be of type number.');
-  }
-
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
+Basic.prototype.serialize = function () {
+  var payload = {};
+  if (this['id'] !== null && this['id'] !== undefined) {
+    if (typeof this['id'] !== 'number') {
+      throw new Error('this[\'id\'] must be of type number.');
+    }
+    payload['id'] = this['id'];
   }
 
-  if (payload['color']) {
+  if (this['name'] !== null && this['name'] !== undefined) {
+    if (typeof this['name'].valueOf() !== 'string') {
+      throw new Error('this[\'name\'] must be of type string.');
+    }
+    payload['name'] = this['name'];
+  }
+
+  if (this['color'] !== null && this['color'] !== undefined) {
     var allowedValues = [ 'cyan', 'Magenta', 'YELLOW', 'blacK' ];
     if (!allowedValues.some( function(item) { return item === payload['color']; })) {
       throw new Error(payload['color'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
+    payload['color'] = this['color'];
   }
 };
 
@@ -50,7 +75,19 @@ Basic.prototype.validate = function (payload) {
  *
  */
 Basic.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance.id !== null && instance.id !== undefined) {
+      this.id = instance.id;
+    }
+
+    if (instance.name !== null && instance.name !== undefined) {
+      this.name = instance.name;
+    }
+
+    if (instance.color !== null && instance.color !== undefined) {
+      this.color = instance.color;
+    }
+  }
 };
 
-module.exports = new Basic();
+module.exports = Basic;

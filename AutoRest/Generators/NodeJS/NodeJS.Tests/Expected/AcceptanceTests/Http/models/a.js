@@ -14,8 +14,17 @@
  * @class
  * Initializes a new instance of the A class.
  * @constructor
+ * @member {string} [statusCode]
+ * 
  */
-function A() { }
+function A(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.statusCode !== null && parameters.statusCode !== undefined) {
+      this.statusCode = parameters.statusCode;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the A schema
@@ -23,12 +32,13 @@ function A() { }
  * @param {JSON} payload
  *
  */
-A.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('A cannot be null.');
-  }
-  if (payload['statusCode'] !== null && payload['statusCode'] !== undefined && typeof payload['statusCode'].valueOf() !== 'string') {
-    throw new Error('payload[\'statusCode\'] must be of type string.');
+A.prototype.serialize = function () {
+  var payload = {};
+  if (this['statusCode'] !== null && this['statusCode'] !== undefined) {
+    if (typeof this['statusCode'].valueOf() !== 'string') {
+      throw new Error('this[\'statusCode\'] must be of type string.');
+    }
+    payload['statusCode'] = this['statusCode'];
   }
 };
 
@@ -39,7 +49,11 @@ A.prototype.validate = function (payload) {
  *
  */
 A.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance.statusCode !== null && instance.statusCode !== undefined) {
+      this.statusCode = instance.statusCode;
+    }
+  }
 };
 
-module.exports = new A();
+module.exports = A;

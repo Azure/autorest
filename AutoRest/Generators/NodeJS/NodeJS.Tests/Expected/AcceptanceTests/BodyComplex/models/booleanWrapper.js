@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the BooleanWrapper class.
  * @constructor
+ * @member {boolean} [fieldTrue]
+ * 
+ * @member {boolean} [fieldFalse]
+ * 
  */
-function BooleanWrapper() { }
+function BooleanWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.field_true !== null && parameters.field_true !== undefined) {
+      this.fieldTrue = parameters.field_true;
+    }
+    if (parameters.field_false !== null && parameters.field_false !== undefined) {
+      this.fieldFalse = parameters.field_false;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the BooleanWrapper schema
@@ -23,16 +37,20 @@ function BooleanWrapper() { }
  * @param {JSON} payload
  *
  */
-BooleanWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('BooleanWrapper cannot be null.');
-  }
-  if (payload['fieldTrue'] !== null && payload['fieldTrue'] !== undefined && typeof payload['fieldTrue'] !== 'boolean') {
-    throw new Error('payload[\'fieldTrue\'] must be of type boolean.');
+BooleanWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['fieldTrue'] !== null && this['fieldTrue'] !== undefined) {
+    if (typeof this['fieldTrue'] !== 'boolean') {
+      throw new Error('this[\'fieldTrue\'] must be of type boolean.');
+    }
+    payload['field_true'] = this['fieldTrue'];
   }
 
-  if (payload['fieldFalse'] !== null && payload['fieldFalse'] !== undefined && typeof payload['fieldFalse'] !== 'boolean') {
-    throw new Error('payload[\'fieldFalse\'] must be of type boolean.');
+  if (this['fieldFalse'] !== null && this['fieldFalse'] !== undefined) {
+    if (typeof this['fieldFalse'] !== 'boolean') {
+      throw new Error('this[\'fieldFalse\'] must be of type boolean.');
+    }
+    payload['field_false'] = this['fieldFalse'];
   }
 };
 
@@ -43,7 +61,15 @@ BooleanWrapper.prototype.validate = function (payload) {
  *
  */
 BooleanWrapper.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance.field_true !== null && instance.field_true !== undefined) {
+      this.fieldTrue = instance.field_true;
+    }
+
+    if (instance.field_false !== null && instance.field_false !== undefined) {
+      this.fieldFalse = instance.field_false;
+    }
+  }
 };
 
-module.exports = new BooleanWrapper();
+module.exports = BooleanWrapper;

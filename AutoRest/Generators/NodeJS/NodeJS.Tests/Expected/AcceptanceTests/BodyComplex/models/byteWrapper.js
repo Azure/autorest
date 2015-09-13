@@ -14,8 +14,17 @@
  * @class
  * Initializes a new instance of the ByteWrapper class.
  * @constructor
+ * @member {buffer} [field]
+ * 
  */
-function ByteWrapper() { }
+function ByteWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.field !== null && parameters.field !== undefined) {
+      this.field = parameters.field;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the ByteWrapper schema
@@ -23,12 +32,13 @@ function ByteWrapper() { }
  * @param {JSON} payload
  *
  */
-ByteWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('ByteWrapper cannot be null.');
-  }
-  if (payload['field'] && !Buffer.isBuffer(payload['field'])) {
-    throw new Error('payload[\'field\'] must be of type buffer.');
+ByteWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['field']) {
+    if (!Buffer.isBuffer(this['field'])) {
+      throw new Error('this[\'field\'] must be of type buffer.');
+    }
+    payload['field'] = this['field'].toString('base64');
   }
 };
 
@@ -41,10 +51,9 @@ ByteWrapper.prototype.validate = function (payload) {
 ByteWrapper.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance.field !== null && instance.field !== undefined && typeof instance.field.valueOf() === 'string') {
-      instance.field = new Buffer(instance.field, 'base64');
+      this.field = new Buffer(instance.field, 'base64');
     }
   }
-  return instance;
 };
 
-module.exports = new ByteWrapper();
+module.exports = ByteWrapper;

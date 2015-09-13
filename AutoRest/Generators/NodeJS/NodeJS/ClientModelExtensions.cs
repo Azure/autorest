@@ -280,7 +280,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             if (isRequired)
             {
-                builder.AppendLine("if ({0} === null || {0} === undefined {{", valueReference)
+                builder.AppendLine("if ({0} === null || {0} === undefined) {{", valueReference)
                          .Indent()
                          .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedValueReference)
                        .Outdent()
@@ -499,7 +499,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 builder.AppendLine("if ({0}) {{", objectReference)
                          .Indent()
-                         .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", 
+                         .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{", 
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", valueReference, objectReference)

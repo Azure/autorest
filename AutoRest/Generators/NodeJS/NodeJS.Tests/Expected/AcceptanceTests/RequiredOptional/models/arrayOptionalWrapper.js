@@ -16,8 +16,24 @@ var util = require('util');
  * @class
  * Initializes a new instance of the ArrayOptionalWrapper class.
  * @constructor
+ * @member {array} [value]
+ * 
  */
-function ArrayOptionalWrapper() { }
+function ArrayOptionalWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.value !== null && parameters.value !== undefined) {
+      var initializedArray = [];
+      parameters.value.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArray.push(element);
+      });
+      this.value = initializedArray;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the ArrayOptionalWrapper schema
@@ -25,14 +41,15 @@ function ArrayOptionalWrapper() { }
  * @param {JSON} payload
  *
  */
-ArrayOptionalWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('ArrayOptionalWrapper cannot be null.');
-  }
-  if (util.isArray(payload['value'])) {
-    for (var i = 0; i < payload['value'].length; i++) {
-      if (payload['value'][i] !== null && payload['value'][i] !== undefined && typeof payload['value'][i].valueOf() !== 'string') {
-        throw new Error('payload[\'value\'][i] must be of type string.');
+ArrayOptionalWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (util.isArray(this['value'])) {
+    for (var i = 0; i < this['value'].length; i++) {
+      if (this['value'][i] !== null && this['value'][i] !== undefined) {
+        if (typeof this['value'][i].valueOf() !== 'string') {
+          throw new Error('this[\'value\'][i] must be of type string.');
+        }
+        payload['value'][i] = this['value'][i];
       }
     }
   }
@@ -45,7 +62,18 @@ ArrayOptionalWrapper.prototype.validate = function (payload) {
  *
  */
 ArrayOptionalWrapper.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance.value !== null && instance.value !== undefined) {
+      var deserializedArray = [];
+      instance.value.forEach(function(element1) {
+        if (element1 !== null && element1 !== undefined) {
+          element1 = element1;
+        }
+        deserializedArray.push(element1);
+      });
+      this.value = deserializedArray;
+    }
+  }
 };
 
-module.exports = new ArrayOptionalWrapper();
+module.exports = ArrayOptionalWrapper;

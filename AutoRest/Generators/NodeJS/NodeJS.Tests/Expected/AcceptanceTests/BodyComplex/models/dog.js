@@ -10,12 +10,27 @@
 
 'use strict';
 
+var models = require('./index');
+
+var util = require('util');
+
 /**
  * @class
  * Initializes a new instance of the Dog class.
  * @constructor
+ * @member {string} [food]
+ * 
  */
-function Dog() { }
+function Dog(parameters) {
+  Dog['super_'].call(this, parameters);
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.food !== null && parameters.food !== undefined) {
+      this.food = parameters.food;
+    }
+  }    
+}
+
+util.inherits(Dog, models['Pet']);
 
 /**
  * Validate the payload against the Dog schema
@@ -23,20 +38,13 @@ function Dog() { }
  * @param {JSON} payload
  *
  */
-Dog.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Dog cannot be null.');
-  }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'number') {
-    throw new Error('payload[\'id\'] must be of type number.');
-  }
-
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
-  }
-
-  if (payload['food'] !== null && payload['food'] !== undefined && typeof payload['food'].valueOf() !== 'string') {
-    throw new Error('payload[\'food\'] must be of type string.');
+Dog.prototype.serialize = function () {
+  var payload = Dog['super_'].prototype.serialize.call(this);
+  if (this['food'] !== null && this['food'] !== undefined) {
+    if (typeof this['food'].valueOf() !== 'string') {
+      throw new Error('this[\'food\'] must be of type string.');
+    }
+    payload['food'] = this['food'];
   }
 };
 
@@ -47,7 +55,12 @@ Dog.prototype.validate = function (payload) {
  *
  */
 Dog.prototype.deserialize = function (instance) {
-  return instance;
+  Dog['super_'].prototype.deserialize.call(this, instance);
+  if (instance) {
+    if (instance.food !== null && instance.food !== undefined) {
+      this.food = instance.food;
+    }
+  }
 };
 
-module.exports = new Dog();
+module.exports = Dog;

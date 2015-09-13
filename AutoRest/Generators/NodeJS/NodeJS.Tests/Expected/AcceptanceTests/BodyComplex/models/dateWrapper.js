@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the DateWrapper class.
  * @constructor
+ * @member {date} [field]
+ * 
+ * @member {date} [leap]
+ * 
  */
-function DateWrapper() { }
+function DateWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.field !== null && parameters.field !== undefined) {
+      this.field = parameters.field;
+    }
+    if (parameters.leap !== null && parameters.leap !== undefined) {
+      this.leap = parameters.leap;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the DateWrapper schema
@@ -23,18 +37,20 @@ function DateWrapper() { }
  * @param {JSON} payload
  *
  */
-DateWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('DateWrapper cannot be null.');
-  }
-  if (payload['field'] && !(payload['field'] instanceof Date || 
-      (typeof payload['field'].valueOf() === 'string' && !isNaN(Date.parse(payload['field']))))) {
-    throw new Error('payload[\'field\'] must be of type date.');
+DateWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['field']) {
+    if (!(this['field'] instanceof Date || typeof this['field'].valueOf() === 'string' && !isNaN(Date.parse(this['field'])))) {
+      throw new Error('this[\'field\'] must be of type date.');
+    }
+    payload['field'] = (this['field'] instanceof Date) ? this['field'].toISOString() : this['field'];
   }
 
-  if (payload['leap'] && !(payload['leap'] instanceof Date || 
-      (typeof payload['leap'].valueOf() === 'string' && !isNaN(Date.parse(payload['leap']))))) {
-    throw new Error('payload[\'leap\'] must be of type date.');
+  if (this['leap']) {
+    if (!(this['leap'] instanceof Date || typeof this['leap'].valueOf() === 'string' && !isNaN(Date.parse(this['leap'])))) {
+      throw new Error('this[\'leap\'] must be of type date.');
+    }
+    payload['leap'] = (this['leap'] instanceof Date) ? this['leap'].toISOString() : this['leap'];
   }
 };
 
@@ -47,14 +63,13 @@ DateWrapper.prototype.validate = function (payload) {
 DateWrapper.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance.field !== null && instance.field !== undefined) {
-      instance.field = new Date(instance.field);
+      this.field = new Date(instance.field);
     }
 
     if (instance.leap !== null && instance.leap !== undefined) {
-      instance.leap = new Date(instance.leap);
+      this.leap = new Date(instance.leap);
     }
   }
-  return instance;
 };
 
-module.exports = new DateWrapper();
+module.exports = DateWrapper;

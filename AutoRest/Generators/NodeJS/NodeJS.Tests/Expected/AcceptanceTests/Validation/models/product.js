@@ -16,8 +16,36 @@ var util = require('util');
  * @class
  * Initializes a new instance of the Product class.
  * @constructor
+ * The product documentation.
+ * @member {array} [displayNames] Non required array of unique items from 0 to
+ * 6 elements.
+ * 
+ * @member {number} [capacity] Non required int betwen 0 and 100 exclusive.
+ * 
+ * @member {string} [image] Image URL representing the product.
+ * 
  */
-function Product() { }
+function Product(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.display_names !== null && parameters.display_names !== undefined) {
+      var initializedArray = [];
+      parameters.display_names.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArray.push(element);
+      });
+      this.displayNames = initializedArray;
+    }
+    if (parameters.capacity !== null && parameters.capacity !== undefined) {
+      this.capacity = parameters.capacity;
+    }
+    if (parameters.image !== null && parameters.image !== undefined) {
+      this.image = parameters.image;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the Product schema
@@ -25,24 +53,31 @@ function Product() { }
  * @param {JSON} payload
  *
  */
-Product.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Product cannot be null.');
-  }
-  if (util.isArray(payload['displayNames'])) {
-    for (var i = 0; i < payload['displayNames'].length; i++) {
-      if (payload['displayNames'][i] !== null && payload['displayNames'][i] !== undefined && typeof payload['displayNames'][i].valueOf() !== 'string') {
-        throw new Error('payload[\'displayNames\'][i] must be of type string.');
+Product.prototype.serialize = function () {
+  var payload = {};
+  if (util.isArray(this['displayNames'])) {
+    for (var i = 0; i < this['displayNames'].length; i++) {
+      if (this['displayNames'][i] !== null && this['displayNames'][i] !== undefined) {
+        if (typeof this['displayNames'][i].valueOf() !== 'string') {
+          throw new Error('this[\'displayNames\'][i] must be of type string.');
+        }
+        payload['display_names'][i] = this['displayNames'][i];
       }
     }
   }
 
-  if (payload['capacity'] !== null && payload['capacity'] !== undefined && typeof payload['capacity'] !== 'number') {
-    throw new Error('payload[\'capacity\'] must be of type number.');
+  if (this['capacity'] !== null && this['capacity'] !== undefined) {
+    if (typeof this['capacity'] !== 'number') {
+      throw new Error('this[\'capacity\'] must be of type number.');
+    }
+    payload['capacity'] = this['capacity'];
   }
 
-  if (payload['image'] !== null && payload['image'] !== undefined && typeof payload['image'].valueOf() !== 'string') {
-    throw new Error('payload[\'image\'] must be of type string.');
+  if (this['image'] !== null && this['image'] !== undefined) {
+    if (typeof this['image'].valueOf() !== 'string') {
+      throw new Error('this[\'image\'] must be of type string.');
+    }
+    payload['image'] = this['image'];
   }
 };
 
@@ -53,7 +88,26 @@ Product.prototype.validate = function (payload) {
  *
  */
 Product.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance.display_names !== null && instance.display_names !== undefined) {
+      var deserializedArray = [];
+      instance.display_names.forEach(function(element1) {
+        if (element1 !== null && element1 !== undefined) {
+          element1 = element1;
+        }
+        deserializedArray.push(element1);
+      });
+      this.displayNames = deserializedArray;
+    }
+
+    if (instance.capacity !== null && instance.capacity !== undefined) {
+      this.capacity = instance.capacity;
+    }
+
+    if (instance.image !== null && instance.image !== undefined) {
+      this.image = instance.image;
+    }
+  }
 };
 
-module.exports = new Product();
+module.exports = Product;

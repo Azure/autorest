@@ -18,13 +18,28 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
     var parsedErrorResponse;
     try {
       parsedErrorResponse = JSON.parse(responseBody);
-      error.body = parsedErrorResponse;
   @if (Model.DefaultResponse != null)
   {
-      var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse, "error.body");
+      if (Model.DefaultResponse is CompositeType)
+      {
+          if (!string.IsNullOrEmpty(((CompositeType)Model.DefaultResponse).PolymorphicDiscriminator))
+          {
+      @:error.body = new client._models.discriminators[parsedErrorResponse['@(((CompositeType)Model.DefaultResponse).PolymorphicDiscriminator)']]();
+          }
+          else
+          {
+      @:error.body = new client._models['@(Model.DefaultResponse.Name)']();
+          }
+      }
+      else
+      {
+      @:error.body = parsedErrorResponse;
+      }
+      
+      var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse, "error.body", "parsedErrorResponse");
       if (!string.IsNullOrWhiteSpace(deserializeErrorBody))
       {
-@:      if (error.body !== null && error.body !== undefined) {
+@:      if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
 @:        @(deserializeErrorBody)
 @:      }
       }

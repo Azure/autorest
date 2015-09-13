@@ -16,8 +16,24 @@ var util = require('util');
  * @class
  * Initializes a new instance of the ArrayWrapper class.
  * @constructor
+ * @member {array} [array]
+ * 
  */
-function ArrayWrapper() { }
+function ArrayWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.array !== null && parameters.array !== undefined) {
+      var initializedArray = [];
+      parameters.array.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArray.push(element);
+      });
+      this.array = initializedArray;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the ArrayWrapper schema
@@ -25,14 +41,15 @@ function ArrayWrapper() { }
  * @param {JSON} payload
  *
  */
-ArrayWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('ArrayWrapper cannot be null.');
-  }
-  if (util.isArray(payload['array'])) {
-    for (var i = 0; i < payload['array'].length; i++) {
-      if (payload['array'][i] !== null && payload['array'][i] !== undefined && typeof payload['array'][i].valueOf() !== 'string') {
-        throw new Error('payload[\'array\'][i] must be of type string.');
+ArrayWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (util.isArray(this['array'])) {
+    for (var i = 0; i < this['array'].length; i++) {
+      if (this['array'][i] !== null && this['array'][i] !== undefined) {
+        if (typeof this['array'][i].valueOf() !== 'string') {
+          throw new Error('this[\'array\'][i] must be of type string.');
+        }
+        payload['array'][i] = this['array'][i];
       }
     }
   }
@@ -45,7 +62,18 @@ ArrayWrapper.prototype.validate = function (payload) {
  *
  */
 ArrayWrapper.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance.array !== null && instance.array !== undefined) {
+      var deserializedArray = [];
+      instance.array.forEach(function(element1) {
+        if (element1 !== null && element1 !== undefined) {
+          element1 = element1;
+        }
+        deserializedArray.push(element1);
+      });
+      this.array = deserializedArray;
+    }
+  }
 };
 
-module.exports = new ArrayWrapper();
+module.exports = ArrayWrapper;

@@ -18,8 +18,38 @@ var util = require('util');
  * @class
  * Initializes a new instance of the Fish class.
  * @constructor
+ * @member {string} [species]
+ * 
+ * @member {number} length
+ * 
+ * @member {array} [siblings]
+ * 
  */
-function Fish() { }
+function Fish(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.species !== null && parameters.species !== undefined) {
+      this.species = parameters.species;
+    }
+    if (parameters.length !== null && parameters.length !== undefined) {
+      this.length = parameters.length;
+    }
+    if (parameters.siblings !== null && parameters.siblings !== undefined) {
+      var initializedArray = [];
+      parameters.siblings.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          if(element['dtype'] !== null && element['dtype'] !== undefined && models.discriminators[element['dtype']]) {
+            element = new models.discriminators[element['dtype']](element);
+          } else {
+            throw new Error('No discriminator field "dtype" was found in parameter "element".');
+          }
+        }
+        initializedArray.push(element);
+      });
+      this.siblings = initializedArray;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the Fish schema
@@ -27,25 +57,27 @@ function Fish() { }
  * @param {JSON} payload
  *
  */
-Fish.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Fish cannot be null.');
-  }
-  if (payload['species'] !== null && payload['species'] !== undefined && typeof payload['species'].valueOf() !== 'string') {
-    throw new Error('payload[\'species\'] must be of type string.');
-  }
-
-  if (payload['length'] === null || payload['length'] === undefined || typeof payload['length'] !== 'number') {
-    throw new Error('payload[\'length\'] cannot be null or undefined and it must be of type number.');
+Fish.prototype.serialize = function () {
+  var payload = {};
+  if (this['species'] !== null && this['species'] !== undefined) {
+    if (typeof this['species'].valueOf() !== 'string') {
+      throw new Error('this[\'species\'] must be of type string.');
+    }
+    payload['species'] = this['species'];
   }
 
-  if (util.isArray(payload['siblings'])) {
-    for (var i = 0; i < payload['siblings'].length; i++) {
-      if (payload['siblings'][i]) {
-        if(payload['siblings'][i]['dtype'] !== null && payload['siblings'][i]['dtype'] !== undefined && models.discriminators[payload['siblings'][i]['dtype']]) {
-          models.discriminators[payload['siblings'][i]['dtype']].validate(payload['siblings'][i]);
+  if (this['length'] === null || this['length'] === undefined || typeof this['length'] !== 'number') {
+    throw new Error('this[\'length\'] cannot be null or undefined and it must be of type number.');
+  }
+  payload['length'] = this['length'];
+
+  if (util.isArray(this['siblings'])) {
+    for (var i = 0; i < this['siblings'].length; i++) {
+      if (this['siblings'][i]) {
+        if(this['siblings'][i]['dtype'] !== null && this['siblings'][i]['dtype'] !== undefined && models.discriminators[this['siblings'][i]['dtype']]) {
+          payload['siblings'][i] = this['siblings'][i].serialize();
         } else {
-          throw new Error('No discriminator field "dtype" was found in parameter "payload[\'siblings\'][i]".');
+          throw new Error('No discriminator field "dtype" was found in parameter "this[\'siblings\'][i]".');
         }
       }
     }
@@ -60,22 +92,29 @@ Fish.prototype.validate = function (payload) {
  */
 Fish.prototype.deserialize = function (instance) {
   if (instance) {
+    if (instance.species !== null && instance.species !== undefined) {
+      this.species = instance.species;
+    }
+
+    if (instance.length !== null && instance.length !== undefined) {
+      this.length = instance.length;
+    }
+
     if (instance.siblings !== null && instance.siblings !== undefined) {
       var deserializedArray = [];
-      instance.siblings.forEach(function(element) {
-        if (element !== null && element !== undefined) {
-          if(element['dtype'] !== null && element['dtype'] !== undefined && models.discriminators[element['dtype']]) {
-            element = models.discriminators[element['dtype']].deserialize(element);
+      instance.siblings.forEach(function(element1) {
+        if (element1 !== null && element1 !== undefined) {
+          if(element1['dtype'] !== null && element1['dtype'] !== undefined && models.discriminators[element1['dtype']]) {
+            element1 = new models.discriminators[element1['dtype']]().deserialize(element1);
           } else {
-            throw new Error('No discriminator field "dtype" was found in parameter "element".');
+            throw new Error('No discriminator field "dtype" was found in parameter "element1".');
           }
         }
-        deserializedArray.push(element);
+        deserializedArray.push(element1);
       });
-      instance.siblings = deserializedArray;
+      this.siblings = deserializedArray;
     }
   }
-  return instance;
 };
 
-module.exports = new Fish();
+module.exports = Fish;

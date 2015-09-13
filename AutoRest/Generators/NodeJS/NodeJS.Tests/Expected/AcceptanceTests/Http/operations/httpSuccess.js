@@ -40,7 +40,15 @@ function HttpSuccess(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.head200 = function (options, callback) {
   var client = this.client;
@@ -90,9 +98,9 @@ HttpSuccess.prototype.head200 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -101,12 +109,10 @@ HttpSuccess.prototype.head200 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -119,7 +125,15 @@ HttpSuccess.prototype.head200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.get200 = function (options, callback) {
   var client = this.client;
@@ -169,9 +183,9 @@ HttpSuccess.prototype.get200 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -180,16 +194,14 @@ HttpSuccess.prototype.get200 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
+        result = parsedResponse;
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -198,14 +210,14 @@ HttpSuccess.prototype.get200 = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put boolean value true returning 200 success
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -213,7 +225,15 @@ HttpSuccess.prototype.get200 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -256,7 +276,19 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -274,9 +306,9 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -285,19 +317,17 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Patch true Boolean value in request returning 200
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -305,7 +335,15 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -348,7 +386,19 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -366,9 +416,9 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -377,19 +427,17 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Post bollean value true in request that returns a 200
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -397,7 +445,15 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -440,7 +496,19 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -458,9 +526,9 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -469,19 +537,17 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Delete simple boolean value true returns 200
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -489,7 +555,15 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -532,7 +606,19 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -550,9 +636,9 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -561,19 +647,17 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put true Boolean value in request returns 201
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -581,7 +665,15 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -624,7 +716,19 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -642,9 +746,9 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -653,19 +757,17 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Post true Boolean value in request returns 201 (Created)
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -673,7 +775,15 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -716,7 +826,19 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -734,9 +856,9 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -745,19 +867,17 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put true Boolean value in request returns 202 (Accepted)
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -765,7 +885,15 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -808,7 +936,19 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -826,9 +966,9 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -837,19 +977,17 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Patch true Boolean value in request returns 202
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -857,7 +995,15 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -900,7 +1046,19 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -918,9 +1076,9 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -929,19 +1087,17 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Post true Boolean value in request returns 202 (Accepted)
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -949,7 +1105,15 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -992,7 +1156,19 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1010,9 +1186,9 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1021,19 +1197,17 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Delete true Boolean value in request returns 202 (accepted)
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1041,7 +1215,15 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1084,7 +1266,19 @@ HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1102,9 +1296,9 @@ HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1113,12 +1307,10 @@ HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1131,7 +1323,15 @@ HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.head204 = function (options, callback) {
   var client = this.client;
@@ -1181,9 +1381,9 @@ HttpSuccess.prototype.head204 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1192,19 +1392,17 @@ HttpSuccess.prototype.head204 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put true Boolean value in request returns 204 (no content)
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1212,7 +1410,15 @@ HttpSuccess.prototype.head204 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1255,7 +1461,19 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1273,9 +1491,9 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1284,19 +1502,17 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Patch true Boolean value in request returns 204 (no content)
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1304,7 +1520,15 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1347,7 +1571,19 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1365,9 +1601,9 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1376,19 +1612,17 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Post true Boolean value in request returns 204 (no content)
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1396,7 +1630,15 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1439,7 +1681,19 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1457,9 +1711,9 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1468,19 +1722,17 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Delete true Boolean value in request returns 204 (no content)
  * @param {boolean} [booleanValue] Simple boolean value true
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1488,7 +1740,15 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
   var client = this.client;
@@ -1531,7 +1791,19 @@ HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(booleanValue));
+  var requestModel = null;
+  try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      if (typeof booleanValue !== 'boolean') {
+        throw new Error('booleanValue must be of type boolean.');
+      }
+      requestModel = booleanValue;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1549,9 +1821,9 @@ HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1560,12 +1832,10 @@ HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1578,7 +1848,15 @@ HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.head404 = function (options, callback) {
   var client = this.client;
@@ -1628,9 +1906,9 @@ HttpSuccess.prototype.head404 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1639,12 +1917,10 @@ HttpSuccess.prototype.head404 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

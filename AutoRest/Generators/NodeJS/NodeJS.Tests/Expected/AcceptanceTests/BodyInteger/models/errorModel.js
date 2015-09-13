@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the ErrorModel class.
  * @constructor
+ * @member {number} [status]
+ * 
+ * @member {string} [message]
+ * 
  */
-function ErrorModel() { }
+function ErrorModel(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.status !== null && parameters.status !== undefined) {
+      this.status = parameters.status;
+    }
+    if (parameters.message !== null && parameters.message !== undefined) {
+      this.message = parameters.message;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the ErrorModel schema
@@ -23,16 +37,20 @@ function ErrorModel() { }
  * @param {JSON} payload
  *
  */
-ErrorModel.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('ErrorModel cannot be null.');
-  }
-  if (payload['status'] !== null && payload['status'] !== undefined && typeof payload['status'] !== 'number') {
-    throw new Error('payload[\'status\'] must be of type number.');
+ErrorModel.prototype.serialize = function () {
+  var payload = {};
+  if (this['status'] !== null && this['status'] !== undefined) {
+    if (typeof this['status'] !== 'number') {
+      throw new Error('this[\'status\'] must be of type number.');
+    }
+    payload['status'] = this['status'];
   }
 
-  if (payload['message'] !== null && payload['message'] !== undefined && typeof payload['message'].valueOf() !== 'string') {
-    throw new Error('payload[\'message\'] must be of type string.');
+  if (this['message'] !== null && this['message'] !== undefined) {
+    if (typeof this['message'].valueOf() !== 'string') {
+      throw new Error('this[\'message\'] must be of type string.');
+    }
+    payload['message'] = this['message'];
   }
 };
 
@@ -43,7 +61,15 @@ ErrorModel.prototype.validate = function (payload) {
  *
  */
 ErrorModel.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance.status !== null && instance.status !== undefined) {
+      this.status = instance.status;
+    }
+
+    if (instance.message !== null && instance.message !== undefined) {
+      this.message = instance.message;
+    }
+  }
 };
 
-module.exports = new ErrorModel();
+module.exports = ErrorModel;

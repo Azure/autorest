@@ -40,7 +40,15 @@ function ArrayModel(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ArrayModel.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -90,9 +98,9 @@ ArrayModel.prototype.getValid = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -101,18 +109,16 @@ ArrayModel.prototype.getValid = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ArrayWrapper'].deserialize(result.body);
+        result = new client._models['ArrayWrapper']();
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -122,16 +128,17 @@ ArrayModel.prototype.getValid = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put complex types with array property
- * @param {object} complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
- *
- * @param {array} [complexBody.array] 
- *
+ * @param {object} complexBody Please put an array with 4 items: "1, 2, 3, 4",
+ * "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
+ * 
+ * @param {array} [complexBody.array]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -139,7 +146,15 @@ ArrayModel.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ArrayModel.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;
@@ -152,10 +167,8 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
   }
   // Validate
   try {
-    if (complexBody) {
-      client._models['ArrayWrapper'].validate(complexBody);
-    }
-     else {  throw new Error('complexBody cannot be null or undefined.');
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
@@ -184,7 +197,14 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(complexBody));
+  var requestModel = null;
+  try {
+    requestModel = new client._models['ArrayWrapper'](complexBody);
+    requestContent = JSON.stringify(requestModel.serialize());
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -202,9 +222,9 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -213,12 +233,10 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -231,7 +249,15 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ArrayModel.prototype.getEmpty = function (options, callback) {
   var client = this.client;
@@ -281,9 +307,9 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -292,18 +318,16 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ArrayWrapper'].deserialize(result.body);
+        result = new client._models['ArrayWrapper']();
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -313,16 +337,16 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put complex types with array property which is empty
  * @param {object} complexBody Please put an empty array
- *
- * @param {array} [complexBody.array] 
- *
+ * 
+ * @param {array} [complexBody.array]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -330,7 +354,15 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
   var client = this.client;
@@ -343,10 +375,8 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
   }
   // Validate
   try {
-    if (complexBody) {
-      client._models['ArrayWrapper'].validate(complexBody);
-    }
-     else {  throw new Error('complexBody cannot be null or undefined.');
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
@@ -375,7 +405,14 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(complexBody));
+  var requestModel = null;
+  try {
+    requestModel = new client._models['ArrayWrapper'](complexBody);
+    requestContent = JSON.stringify(requestModel.serialize());
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -393,9 +430,9 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -404,12 +441,10 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -423,7 +458,15 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ArrayModel.prototype.getNotProvided = function (options, callback) {
   var client = this.client;
@@ -473,9 +516,9 @@ ArrayModel.prototype.getNotProvided = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -484,18 +527,16 @@ ArrayModel.prototype.getNotProvided = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ArrayWrapper'].deserialize(result.body);
+        result = new client._models['ArrayWrapper']();
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -505,7 +546,7 @@ ArrayModel.prototype.getNotProvided = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

@@ -18,8 +18,19 @@ var util = require('util');
  * @class
  * Initializes a new instance of the Siamese class.
  * @constructor
+ * @member {string} [breed]
+ * 
  */
-function Siamese() { }
+function Siamese(parameters) {
+  Siamese['super_'].call(this, parameters);
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.breed !== null && parameters.breed !== undefined) {
+      this.breed = parameters.breed;
+    }
+  }    
+}
+
+util.inherits(Siamese, models['Cat']);
 
 /**
  * Validate the payload against the Siamese schema
@@ -27,32 +38,13 @@ function Siamese() { }
  * @param {JSON} payload
  *
  */
-Siamese.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Siamese cannot be null.');
-  }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'number') {
-    throw new Error('payload[\'id\'] must be of type number.');
-  }
-
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
-  }
-
-  if (payload['color'] !== null && payload['color'] !== undefined && typeof payload['color'].valueOf() !== 'string') {
-    throw new Error('payload[\'color\'] must be of type string.');
-  }
-
-  if (util.isArray(payload['hates'])) {
-    for (var i = 0; i < payload['hates'].length; i++) {
-      if (payload['hates'][i]) {
-        models['Dog'].validate(payload['hates'][i]);
-      }
+Siamese.prototype.serialize = function () {
+  var payload = Siamese['super_'].prototype.serialize.call(this);
+  if (this['breed'] !== null && this['breed'] !== undefined) {
+    if (typeof this['breed'].valueOf() !== 'string') {
+      throw new Error('this[\'breed\'] must be of type string.');
     }
-  }
-
-  if (payload['breed'] !== null && payload['breed'] !== undefined && typeof payload['breed'].valueOf() !== 'string') {
-    throw new Error('payload[\'breed\'] must be of type string.');
+    payload['breed'] = this['breed'];
   }
 };
 
@@ -63,19 +55,12 @@ Siamese.prototype.validate = function (payload) {
  *
  */
 Siamese.prototype.deserialize = function (instance) {
+  Siamese['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.hates !== null && instance.hates !== undefined) {
-      var deserializedArray = [];
-      instance.hates.forEach(function(element) {
-        if (element !== null && element !== undefined) {
-          element = models['Dog'].deserialize(element);
-        }
-        deserializedArray.push(element);
-      });
-      instance.hates = deserializedArray;
+    if (instance.breed !== null && instance.breed !== undefined) {
+      this.breed = instance.breed;
     }
   }
-  return instance;
 };
 
-module.exports = new Siamese();
+module.exports = Siamese;

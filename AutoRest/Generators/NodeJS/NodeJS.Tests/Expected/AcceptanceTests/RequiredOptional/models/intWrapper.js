@@ -14,8 +14,17 @@
  * @class
  * Initializes a new instance of the IntWrapper class.
  * @constructor
+ * @member {number} value
+ * 
  */
-function IntWrapper() { }
+function IntWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.value !== null && parameters.value !== undefined) {
+      this.value = parameters.value;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the IntWrapper schema
@@ -23,13 +32,12 @@ function IntWrapper() { }
  * @param {JSON} payload
  *
  */
-IntWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('IntWrapper cannot be null.');
+IntWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['value'] === null || this['value'] === undefined || typeof this['value'] !== 'number') {
+    throw new Error('this[\'value\'] cannot be null or undefined and it must be of type number.');
   }
-  if (payload['value'] === null || payload['value'] === undefined || typeof payload['value'] !== 'number') {
-    throw new Error('payload[\'value\'] cannot be null or undefined and it must be of type number.');
-  }
+  payload['value'] = this['value'];
 };
 
 /**
@@ -39,7 +47,11 @@ IntWrapper.prototype.validate = function (payload) {
  *
  */
 IntWrapper.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance.value !== null && instance.value !== undefined) {
+      this.value = instance.value;
+    }
+  }
 };
 
-module.exports = new IntWrapper();
+module.exports = IntWrapper;

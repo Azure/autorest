@@ -10,7 +10,7 @@
 @EmptyLine
 'use strict';
 @EmptyLine
-@if (Model.ContainsPropertiesInCompositeType())
+@if (Model.ContainsPropertiesInCompositeType() || Model.BaseModelType != null)
 {
 @:var models = require('./index');
 @EmptyLine

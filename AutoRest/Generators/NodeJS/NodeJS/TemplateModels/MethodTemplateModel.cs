@@ -271,7 +271,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             return typeName.ToLower(CultureInfo.InvariantCulture);
         }
 
-        public string GetDeserializationString(IType type, string valueReference = "result")
+        public string GetDeserializationString(IType type, string valueReference = "result", string responseVariable = "parsedResponse")
         {
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
@@ -346,7 +346,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else if (composite != null)
             {
-                builder.AppendLine("{0}.deserialize(parsedResponse);", valueReference);
+                builder.AppendLine("{0}.deserialize({1});", valueReference, responseVariable);
             }
             else if (enumType != null)
             {
@@ -387,33 +387,40 @@ namespace Microsoft.Rest.Generator.NodeJS
             return result;
         }
 
-        public string DeserializeResponse(IType type)
+        public string DeserializeResponse(IType type, string valueReference = "result", string responseVariable = "parsedResponse")
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
             var builder = new IndentedStringBuilder("  ");
-            builder.AppendLine("var parsedResponse = null;")
+            builder.AppendLine("var {0} = null;", responseVariable)
                    .AppendLine("try {")
                    .Indent()
-                     .AppendLine("parsedResponse = JSON.parse(responseBody);");
+                     .AppendLine("{0} = JSON.parse(responseBody);", responseVariable);
+
             if (type is CompositeType)
             {
                 if (!string.IsNullOrEmpty(((CompositeType)type).PolymorphicDiscriminator))
                 {
-                    builder.AppendLine("result = new client._models.discriminators[parsedResponse['{0}']]();", ((CompositeType)type).PolymorphicDiscriminator);
+                    builder.AppendLine("{0} = new client._models.discriminators[{1}['{2}']]();", 
+                        valueReference, responseVariable, ((CompositeType)type).PolymorphicDiscriminator);
                 }
                 else
                 {
-                    builder.AppendLine("result = new client._models['{0}']();", type.Name);
+                    builder.AppendLine("{0} = new client._models['{1}']();", valueReference, type.Name);
                 }
             }
             else
             {
-                builder.AppendLine("result = parsedResponse;");
+                builder.AppendLine("{0} = {1};", valueReference, responseVariable);
             }
 
-            var deserializeBody = this.GetDeserializationString(type);
+            var deserializeBody = this.GetDeserializationString(type, valueReference, responseVariable);
             if (!string.IsNullOrWhiteSpace(deserializeBody))
             {
-                builder.AppendLine("if (parsedResponse !== null && parsedResponse !== undefined) {")
+                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", responseVariable)
                        .Indent()
                          .AppendLine(deserializeBody)
                        .Outdent()
@@ -443,15 +450,6 @@ namespace Microsoft.Rest.Generator.NodeJS
         public string ClientReference
         {
             get { return Group == null ? "this" : "this.client"; }
-        }
-
-        // TODO: no callers. Is this needed for NodeJS generator?
-        public string GetExtensionParameters(string methodParameters)
-        {
-            string operationsParameter = "this I" + OperationName + " operations";
-            return string.IsNullOrWhiteSpace(methodParameters)
-                ? operationsParameter
-                : operationsParameter + ", " + methodParameters;
         }
 
         public static string GetStatusCodeReference(HttpStatusCode code)
