@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the ProductProperties class.
  * @constructor
+ * @member {number} [id]
+ * 
+ * @member {string} [name]
+ * 
  */
-function ProductProperties() { }
+function ProductProperties(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.id !== null && parameters.id !== undefined) {
+      this.id = parameters.id;
+    }
+    if (parameters.name !== null && parameters.name !== undefined) {
+      this.name = parameters.name;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the ProductProperties schema
@@ -23,16 +37,20 @@ function ProductProperties() { }
  * @param {JSON} payload
  *
  */
-ProductProperties.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('ProductProperties cannot be null.');
-  }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'number') {
-    throw new Error('payload[\'id\'] must be of type number.');
+ProductProperties.prototype.serialize = function () {
+  var payload = {};
+  if (this['id'] !== null && this['id'] !== undefined) {
+    if (typeof this['id'] !== 'number') {
+      throw new Error('this[\'id\'] must be of type number.');
+    }
+    payload['id'] = this['id'];
   }
 
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
+  if (this['name'] !== null && this['name'] !== undefined) {
+    if (typeof this['name'].valueOf() !== 'string') {
+      throw new Error('this[\'name\'] must be of type string.');
+    }
+    payload['name'] = this['name'];
   }
 };
 
@@ -43,7 +61,15 @@ ProductProperties.prototype.validate = function (payload) {
  *
  */
 ProductProperties.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['id'] !== null && instance['id'] !== undefined) {
+      this['id'] = instance['id'];
+    }
+
+    if (instance['name'] !== null && instance['name'] !== undefined) {
+      this['name'] = instance['name'];
+    }
+  }
 };
 
-module.exports = new ProductProperties();
+module.exports = ProductProperties;

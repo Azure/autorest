@@ -14,8 +14,19 @@
  * @class
  * Initializes a new instance of the OperationResult class.
  * @constructor
+ * @member {string} [status] The status of the request. Possible values for
+ * this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
+ * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
+ * 
  */
-function OperationResult() { }
+function OperationResult(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.status !== null && parameters.status !== undefined) {
+      this.status = parameters.status;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the OperationResult schema
@@ -23,12 +34,13 @@ function OperationResult() { }
  * @param {JSON} payload
  *
  */
-OperationResult.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('OperationResult cannot be null.');
-  }
-  if (payload['status'] !== null && payload['status'] !== undefined && typeof payload['status'].valueOf() !== 'string') {
-    throw new Error('payload[\'status\'] must be of type string.');
+OperationResult.prototype.serialize = function () {
+  var payload = {};
+  if (this['status'] !== null && this['status'] !== undefined) {
+    if (typeof this['status'].valueOf() !== 'string') {
+      throw new Error('this[\'status\'] must be of type string.');
+    }
+    payload['status'] = this['status'];
   }
 };
 
@@ -39,7 +51,11 @@ OperationResult.prototype.validate = function (payload) {
  *
  */
 OperationResult.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['status'] !== null && instance['status'] !== undefined) {
+      this['status'] = instance['status'];
+    }
+  }
 };
 
-module.exports = new OperationResult();
+module.exports = OperationResult;

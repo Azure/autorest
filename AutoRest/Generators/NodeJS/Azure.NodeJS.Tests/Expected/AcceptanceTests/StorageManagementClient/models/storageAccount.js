@@ -87,38 +87,38 @@ var util = require('util');
 function StorageAccount(parameters) {
   StorageAccount['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.properties.provisioningState !== null && parameters.properties.provisioningState !== undefined) {
-      this.provisioningState = parameters.properties.provisioningState;
+    if (parameters.provisioningState !== null && parameters.provisioningState !== undefined) {
+      this.provisioningState = parameters.provisioningState;
     }
-    if (parameters.properties.accountType !== null && parameters.properties.accountType !== undefined) {
-      this.accountType = parameters.properties.accountType;
+    if (parameters.accountType !== null && parameters.accountType !== undefined) {
+      this.accountType = parameters.accountType;
     }
-    if (parameters.properties.primaryEndpoints !== null && parameters.properties.primaryEndpoints !== undefined) {
-      this.primaryEndpoints = new models['Endpoints'](parameters.properties.primaryEndpoints);
+    if (parameters.primaryEndpoints !== null && parameters.primaryEndpoints !== undefined) {
+      this.primaryEndpoints = new models['Endpoints'](parameters.primaryEndpoints);
     }
-    if (parameters.properties.primaryLocation !== null && parameters.properties.primaryLocation !== undefined) {
-      this.primaryLocation = parameters.properties.primaryLocation;
+    if (parameters.primaryLocation !== null && parameters.primaryLocation !== undefined) {
+      this.primaryLocation = parameters.primaryLocation;
     }
-    if (parameters.properties.statusOfPrimary !== null && parameters.properties.statusOfPrimary !== undefined) {
-      this.statusOfPrimary = parameters.properties.statusOfPrimary;
+    if (parameters.statusOfPrimary !== null && parameters.statusOfPrimary !== undefined) {
+      this.statusOfPrimary = parameters.statusOfPrimary;
     }
-    if (parameters.properties.lastGeoFailoverTime !== null && parameters.properties.lastGeoFailoverTime !== undefined) {
-      this.lastGeoFailoverTime = parameters.properties.lastGeoFailoverTime;
+    if (parameters.lastGeoFailoverTime !== null && parameters.lastGeoFailoverTime !== undefined) {
+      this.lastGeoFailoverTime = parameters.lastGeoFailoverTime;
     }
-    if (parameters.properties.secondaryLocation !== null && parameters.properties.secondaryLocation !== undefined) {
-      this.secondaryLocation = parameters.properties.secondaryLocation;
+    if (parameters.secondaryLocation !== null && parameters.secondaryLocation !== undefined) {
+      this.secondaryLocation = parameters.secondaryLocation;
     }
-    if (parameters.properties.statusOfSecondary !== null && parameters.properties.statusOfSecondary !== undefined) {
-      this.statusOfSecondary = parameters.properties.statusOfSecondary;
+    if (parameters.statusOfSecondary !== null && parameters.statusOfSecondary !== undefined) {
+      this.statusOfSecondary = parameters.statusOfSecondary;
     }
-    if (parameters.properties.creationTime !== null && parameters.properties.creationTime !== undefined) {
-      this.creationTime = parameters.properties.creationTime;
+    if (parameters.creationTime !== null && parameters.creationTime !== undefined) {
+      this.creationTime = parameters.creationTime;
     }
-    if (parameters.properties.customDomain !== null && parameters.properties.customDomain !== undefined) {
-      this.customDomain = new models['CustomDomain'](parameters.properties.customDomain);
+    if (parameters.customDomain !== null && parameters.customDomain !== undefined) {
+      this.customDomain = new models['CustomDomain'](parameters.customDomain);
     }
-    if (parameters.properties.secondaryEndpoints !== null && parameters.properties.secondaryEndpoints !== undefined) {
-      this.secondaryEndpoints = new models['Endpoints'](parameters.properties.secondaryEndpoints);
+    if (parameters.secondaryEndpoints !== null && parameters.secondaryEndpoints !== undefined) {
+      this.secondaryEndpoints = new models['Endpoints'](parameters.secondaryEndpoints);
     }
   }    
 }
@@ -215,48 +215,48 @@ StorageAccount.prototype.serialize = function () {
 StorageAccount.prototype.deserialize = function (instance) {
   StorageAccount['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.properties.provisioningState !== null && instance.properties.provisioningState !== undefined) {
-      this.provisioningState = instance.properties.provisioningState;
+    if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
+      this['provisioningState'] = instance['properties']['provisioningState'];
     }
 
-    if (instance.properties.accountType !== null && instance.properties.accountType !== undefined) {
-      this.accountType = instance.properties.accountType;
+    if (instance['properties']['accountType'] !== null && instance['properties']['accountType'] !== undefined) {
+      this['accountType'] = instance['properties']['accountType'];
     }
 
-    if (instance.properties.primaryEndpoints !== null && instance.properties.primaryEndpoints !== undefined) {
-      this.primaryEndpoints = new models['Endpoints']().deserialize(instance.properties.primaryEndpoints);
+    if (instance['properties']['primaryEndpoints'] !== null && instance['properties']['primaryEndpoints'] !== undefined) {
+      this['primaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['primaryEndpoints']);
     }
 
-    if (instance.properties.primaryLocation !== null && instance.properties.primaryLocation !== undefined) {
-      this.primaryLocation = instance.properties.primaryLocation;
+    if (instance['properties']['primaryLocation'] !== null && instance['properties']['primaryLocation'] !== undefined) {
+      this['primaryLocation'] = instance['properties']['primaryLocation'];
     }
 
-    if (instance.properties.statusOfPrimary !== null && instance.properties.statusOfPrimary !== undefined) {
-      this.statusOfPrimary = instance.properties.statusOfPrimary;
+    if (instance['properties']['statusOfPrimary'] !== null && instance['properties']['statusOfPrimary'] !== undefined) {
+      this['statusOfPrimary'] = instance['properties']['statusOfPrimary'];
     }
 
-    if (instance.properties.lastGeoFailoverTime !== null && instance.properties.lastGeoFailoverTime !== undefined) {
-      this.lastGeoFailoverTime = new Date(instance.properties.lastGeoFailoverTime);
+    if (instance['properties']['lastGeoFailoverTime'] !== null && instance['properties']['lastGeoFailoverTime'] !== undefined) {
+      this['lastGeoFailoverTime'] = new Date(instance['properties']['lastGeoFailoverTime']);
     }
 
-    if (instance.properties.secondaryLocation !== null && instance.properties.secondaryLocation !== undefined) {
-      this.secondaryLocation = instance.properties.secondaryLocation;
+    if (instance['properties']['secondaryLocation'] !== null && instance['properties']['secondaryLocation'] !== undefined) {
+      this['secondaryLocation'] = instance['properties']['secondaryLocation'];
     }
 
-    if (instance.properties.statusOfSecondary !== null && instance.properties.statusOfSecondary !== undefined) {
-      this.statusOfSecondary = instance.properties.statusOfSecondary;
+    if (instance['properties']['statusOfSecondary'] !== null && instance['properties']['statusOfSecondary'] !== undefined) {
+      this['statusOfSecondary'] = instance['properties']['statusOfSecondary'];
     }
 
-    if (instance.properties.creationTime !== null && instance.properties.creationTime !== undefined) {
-      this.creationTime = new Date(instance.properties.creationTime);
+    if (instance['properties']['creationTime'] !== null && instance['properties']['creationTime'] !== undefined) {
+      this['creationTime'] = new Date(instance['properties']['creationTime']);
     }
 
-    if (instance.properties.customDomain !== null && instance.properties.customDomain !== undefined) {
-      this.customDomain = new models['CustomDomain']().deserialize(instance.properties.customDomain);
+    if (instance['properties']['customDomain'] !== null && instance['properties']['customDomain'] !== undefined) {
+      this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
     }
 
-    if (instance.properties.secondaryEndpoints !== null && instance.properties.secondaryEndpoints !== undefined) {
-      this.secondaryEndpoints = new models['Endpoints']().deserialize(instance.properties.secondaryEndpoints);
+    if (instance['properties']['secondaryEndpoints'] !== null && instance['properties']['secondaryEndpoints'] !== undefined) {
+      this['secondaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['secondaryEndpoints']);
     }
   }
 };

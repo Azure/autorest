@@ -74,16 +74,16 @@ StringWrapper.prototype.serialize = function () {
  */
 StringWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.field !== null && instance.field !== undefined) {
-      this.field = instance.field;
+    if (instance['field'] !== null && instance['field'] !== undefined) {
+      this['field'] = instance['field'];
     }
 
-    if (instance.empty !== null && instance.empty !== undefined) {
-      this.empty = instance.empty;
+    if (instance['empty'] !== null && instance['empty'] !== undefined) {
+      this['empty'] = instance['empty'];
     }
 
-    if (instance.null !== null && instance.null !== undefined) {
-      this.null = instance.null;
+    if (instance['null'] !== null && instance['null'] !== undefined) {
+      this['null'] = instance['null'];
     }
   }
 };

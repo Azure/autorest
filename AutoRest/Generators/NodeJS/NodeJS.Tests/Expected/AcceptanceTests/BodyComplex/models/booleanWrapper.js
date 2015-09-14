@@ -21,11 +21,11 @@
  */
 function BooleanWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.field_true !== null && parameters.field_true !== undefined) {
-      this.fieldTrue = parameters.field_true;
+    if (parameters.fieldTrue !== null && parameters.fieldTrue !== undefined) {
+      this.fieldTrue = parameters.fieldTrue;
     }
-    if (parameters.field_false !== null && parameters.field_false !== undefined) {
-      this.fieldFalse = parameters.field_false;
+    if (parameters.fieldFalse !== null && parameters.fieldFalse !== undefined) {
+      this.fieldFalse = parameters.fieldFalse;
     }
   }    
 }
@@ -62,12 +62,12 @@ BooleanWrapper.prototype.serialize = function () {
  */
 BooleanWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.field_true !== null && instance.field_true !== undefined) {
-      this.fieldTrue = instance.field_true;
+    if (instance['field_true'] !== null && instance['field_true'] !== undefined) {
+      this['fieldTrue'] = instance['field_true'];
     }
 
-    if (instance.field_false !== null && instance.field_false !== undefined) {
-      this.fieldFalse = instance.field_false;
+    if (instance['field_false'] !== null && instance['field_false'] !== undefined) {
+      this['fieldFalse'] = instance['field_false'];
     }
   }
 };

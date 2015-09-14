@@ -64,12 +64,12 @@ UsageName.prototype.serialize = function () {
  */
 UsageName.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.value !== null && instance.value !== undefined) {
-      this.value = instance.value;
+    if (instance['value'] !== null && instance['value'] !== undefined) {
+      this['value'] = instance['value'];
     }
 
-    if (instance.localizedValue !== null && instance.localizedValue !== undefined) {
-      this.localizedValue = instance.localizedValue;
+    if (instance['localizedValue'] !== null && instance['localizedValue'] !== undefined) {
+      this['localizedValue'] = instance['localizedValue'];
     }
   }
 };

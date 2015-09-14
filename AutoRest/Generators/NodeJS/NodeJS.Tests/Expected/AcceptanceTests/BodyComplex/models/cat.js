@@ -77,19 +77,19 @@ Cat.prototype.serialize = function () {
 Cat.prototype.deserialize = function (instance) {
   Cat['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.color !== null && instance.color !== undefined) {
-      this.color = instance.color;
+    if (instance['color'] !== null && instance['color'] !== undefined) {
+      this['color'] = instance['color'];
     }
 
-    if (instance.hates !== null && instance.hates !== undefined) {
+    if (instance['hates'] !== null && instance['hates'] !== undefined) {
       var deserializedInstancehates = [];
-      instance.hates.forEach(function(element1) {
+      instance['hates'].forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
           element1 = new models['Dog']().deserialize(element1);
         }
         deserializedInstancehates.push(element1);
       });
-      this.hates = deserializedInstancehates;
+      this['hates'] = deserializedInstancehates;
     }
   }
 };

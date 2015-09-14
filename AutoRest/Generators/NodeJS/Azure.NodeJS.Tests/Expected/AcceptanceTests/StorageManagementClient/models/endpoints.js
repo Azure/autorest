@@ -76,16 +76,16 @@ Endpoints.prototype.serialize = function () {
  */
 Endpoints.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.blob !== null && instance.blob !== undefined) {
-      this.blob = instance.blob;
+    if (instance['blob'] !== null && instance['blob'] !== undefined) {
+      this['blob'] = instance['blob'];
     }
 
-    if (instance.queue !== null && instance.queue !== undefined) {
-      this.queue = instance.queue;
+    if (instance['queue'] !== null && instance['queue'] !== undefined) {
+      this['queue'] = instance['queue'];
     }
 
-    if (instance.table !== null && instance.table !== undefined) {
-      this.table = instance.table;
+    if (instance['table'] !== null && instance['table'] !== undefined) {
+      this['table'] = instance['table'];
     }
   }
 };

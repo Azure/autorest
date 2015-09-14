@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 {
@@ -82,6 +83,12 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                         "Collection format {0} is not supported.", format));
             }
+        }
+
+        private static string NormalizeValueReference(this string valueReference)
+        {
+            Regex pattern = new Regex("['.\\[\\]]");
+            return pattern.Replace(valueReference, "");
         }
 
         /// <summary>
@@ -827,7 +834,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar, elementVar, modelReference);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
-                    var arrayName = valueReference.Replace(".", "").ToPascalCase();
+                    var arrayName = valueReference.ToPascalCase().NormalizeValueReference();
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
                             .Indent()
                               .AppendLine("var deserialized{0} = [];", arrayName)
@@ -923,7 +930,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 var innerInitialization = sequence.ElementType.InitializeType(scope, elementVar, elementVar, modelReference);
                 if (!string.IsNullOrEmpty(innerInitialization))
                 {
-                    var arrayName = valueReference.Replace(".","").ToPascalCase();
+                    var arrayName = valueReference.ToPascalCase().NormalizeValueReference();
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
                             .Indent()
                               .AppendLine("var initialized{0} = [];", arrayName)

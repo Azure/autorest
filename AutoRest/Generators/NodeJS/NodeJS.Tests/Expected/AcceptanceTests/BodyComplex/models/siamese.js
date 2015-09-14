@@ -57,8 +57,8 @@ Siamese.prototype.serialize = function () {
 Siamese.prototype.deserialize = function (instance) {
   Siamese['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.breed !== null && instance.breed !== undefined) {
-      this.breed = instance.breed;
+    if (instance['breed'] !== null && instance['breed'] !== undefined) {
+      this['breed'] = instance['breed'];
     }
   }
 };

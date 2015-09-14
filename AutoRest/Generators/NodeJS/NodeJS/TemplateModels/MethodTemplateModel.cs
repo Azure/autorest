@@ -371,7 +371,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                     {
                         builder.AppendLine("if ({0} === null || {0} === undefined) {{", parameter.Name)
                                  .Indent()
-                                 .AppendLine("throw new Error('\'{0}\' cannot be null or undefined.');", parameter.Name)
+                                 .AppendLine("throw new Error('{0} cannot be null or undefined.');", parameter.Name)
                                .Outdent()
                                .AppendLine("}");
                     }

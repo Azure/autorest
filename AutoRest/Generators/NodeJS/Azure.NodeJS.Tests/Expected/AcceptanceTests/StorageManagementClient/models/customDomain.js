@@ -67,12 +67,12 @@ CustomDomain.prototype.serialize = function () {
  */
 CustomDomain.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.name !== null && instance.name !== undefined) {
-      this.name = instance.name;
+    if (instance['name'] !== null && instance['name'] !== undefined) {
+      this['name'] = instance['name'];
     }
 
-    if (instance.useSubDomain !== null && instance.useSubDomain !== undefined) {
-      this.useSubDomain = instance.useSubDomain;
+    if (instance['useSubDomain'] !== null && instance['useSubDomain'] !== undefined) {
+      this['useSubDomain'] = instance['useSubDomain'];
     }
   }
 };

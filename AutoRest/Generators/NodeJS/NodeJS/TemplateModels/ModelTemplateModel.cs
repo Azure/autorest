@@ -144,7 +144,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 throw new ArgumentNullException("property");
             }
 
-            return property.Type.InitializeType(_scope, objectName + "." + property.Name, valueName + "." + property.SerializedName);
+            return property.Type.InitializeType(_scope, objectName + "." + property.Name, valueName + "." + property.Name);
         }
 
         public string SerializeProperty(string objectName, string serializedName, Property property)
@@ -169,7 +169,12 @@ namespace Microsoft.Rest.Generator.NodeJS
                 throw new ArgumentNullException("property");
             }
 
-            return property.Type.DeserializeType(_scope, objectName + "." + property.Name, valueName + "." + property.SerializedName, "models");
+            var propertyName = string.Format(CultureInfo.InvariantCulture,
+                "{0}['{1}']", objectName, property.Name);
+            var deserializedPropertyName = string.Format(CultureInfo.InvariantCulture,
+                "{0}['{1}']", valueName, property.SerializedName.Replace(".", "']['"));
+
+            return property.Type.DeserializeType(_scope, propertyName, deserializedPropertyName, "models");
         }
 
         private bool isSpecial(IType type)

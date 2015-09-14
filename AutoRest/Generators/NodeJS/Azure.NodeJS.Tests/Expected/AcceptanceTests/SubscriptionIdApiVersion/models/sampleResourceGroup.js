@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the SampleResourceGroup class.
  * @constructor
+ * @member {string} [name] resource group name 'testgroup101'
+ * 
+ * @member {string} [location] resource group location 'West US'
+ * 
  */
-function SampleResourceGroup() { }
+function SampleResourceGroup(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.name !== null && parameters.name !== undefined) {
+      this.name = parameters.name;
+    }
+    if (parameters.location !== null && parameters.location !== undefined) {
+      this.location = parameters.location;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the SampleResourceGroup schema
@@ -23,16 +37,20 @@ function SampleResourceGroup() { }
  * @param {JSON} payload
  *
  */
-SampleResourceGroup.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('SampleResourceGroup cannot be null.');
-  }
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
+SampleResourceGroup.prototype.serialize = function () {
+  var payload = {};
+  if (this['name'] !== null && this['name'] !== undefined) {
+    if (typeof this['name'].valueOf() !== 'string') {
+      throw new Error('this[\'name\'] must be of type string.');
+    }
+    payload['name'] = this['name'];
   }
 
-  if (payload['location'] !== null && payload['location'] !== undefined && typeof payload['location'].valueOf() !== 'string') {
-    throw new Error('payload[\'location\'] must be of type string.');
+  if (this['location'] !== null && this['location'] !== undefined) {
+    if (typeof this['location'].valueOf() !== 'string') {
+      throw new Error('this[\'location\'] must be of type string.');
+    }
+    payload['location'] = this['location'];
   }
 };
 
@@ -43,7 +61,15 @@ SampleResourceGroup.prototype.validate = function (payload) {
  *
  */
 SampleResourceGroup.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['name'] !== null && instance['name'] !== undefined) {
+      this['name'] = instance['name'];
+    }
+
+    if (instance['location'] !== null && instance['location'] !== undefined) {
+      this['location'] = instance['location'];
+    }
+  }
 };
 
-module.exports = new SampleResourceGroup();
+module.exports = SampleResourceGroup;

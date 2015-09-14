@@ -55,8 +55,8 @@ ClassWrapper.prototype.serialize = function () {
  */
 ClassWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.value !== null && instance.value !== undefined) {
-      this.value = new models['Product']().deserialize(instance.value);
+    if (instance['value'] !== null && instance['value'] !== undefined) {
+      this['value'] = new models['Product']().deserialize(instance['value']);
     }
   }
 };

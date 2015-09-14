@@ -41,11 +41,11 @@ var util = require('util');
 function StorageAccountUpdateParameters(parameters) {
   StorageAccountUpdateParameters['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.properties.accountType !== null && parameters.properties.accountType !== undefined) {
-      this.accountType = parameters.properties.accountType;
+    if (parameters.accountType !== null && parameters.accountType !== undefined) {
+      this.accountType = parameters.accountType;
     }
-    if (parameters.properties.customDomain !== null && parameters.properties.customDomain !== undefined) {
-      this.customDomain = new models['CustomDomain'](parameters.properties.customDomain);
+    if (parameters.customDomain !== null && parameters.customDomain !== undefined) {
+      this.customDomain = new models['CustomDomain'](parameters.customDomain);
     }
   }    
 }
@@ -82,12 +82,12 @@ StorageAccountUpdateParameters.prototype.serialize = function () {
 StorageAccountUpdateParameters.prototype.deserialize = function (instance) {
   StorageAccountUpdateParameters['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.properties.accountType !== null && instance.properties.accountType !== undefined) {
-      this.accountType = instance.properties.accountType;
+    if (instance['properties']['accountType'] !== null && instance['properties']['accountType'] !== undefined) {
+      this['accountType'] = instance['properties']['accountType'];
     }
 
-    if (instance.properties.customDomain !== null && instance.properties.customDomain !== undefined) {
-      this.customDomain = new models['CustomDomain']().deserialize(instance.properties.customDomain);
+    if (instance['properties']['customDomain'] !== null && instance['properties']['customDomain'] !== undefined) {
+      this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
     }
   }
 };

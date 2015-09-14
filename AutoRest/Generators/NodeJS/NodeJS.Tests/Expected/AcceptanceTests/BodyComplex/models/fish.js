@@ -92,17 +92,17 @@ Fish.prototype.serialize = function () {
  */
 Fish.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.species !== null && instance.species !== undefined) {
-      this.species = instance.species;
+    if (instance['species'] !== null && instance['species'] !== undefined) {
+      this['species'] = instance['species'];
     }
 
-    if (instance.length !== null && instance.length !== undefined) {
-      this.length = instance.length;
+    if (instance['length'] !== null && instance['length'] !== undefined) {
+      this['length'] = instance['length'];
     }
 
-    if (instance.siblings !== null && instance.siblings !== undefined) {
+    if (instance['siblings'] !== null && instance['siblings'] !== undefined) {
       var deserializedInstancesiblings = [];
-      instance.siblings.forEach(function(element1) {
+      instance['siblings'].forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
           if(element1['dtype'] !== null && element1['dtype'] !== undefined && models.discriminators[element1['dtype']]) {
             element1 = new models.discriminators[element1['dtype']]().deserialize(element1);
@@ -112,7 +112,7 @@ Fish.prototype.deserialize = function (instance) {
         }
         deserializedInstancesiblings.push(element1);
       });
-      this.siblings = deserializedInstancesiblings;
+      this['siblings'] = deserializedInstancesiblings;
     }
   }
 };

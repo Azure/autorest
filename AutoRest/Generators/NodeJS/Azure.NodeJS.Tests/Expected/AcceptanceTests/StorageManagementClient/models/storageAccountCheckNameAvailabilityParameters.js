@@ -62,12 +62,12 @@ StorageAccountCheckNameAvailabilityParameters.prototype.serialize = function () 
  */
 StorageAccountCheckNameAvailabilityParameters.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.name !== null && instance.name !== undefined) {
-      this.name = instance.name;
+    if (instance['name'] !== null && instance['name'] !== undefined) {
+      this['name'] = instance['name'];
     }
 
-    if (instance.type !== null && instance.type !== undefined) {
-      this.type = instance.type;
+    if (instance['type'] !== null && instance['type'] !== undefined) {
+      this['type'] = instance['type'];
     }
   }
 };

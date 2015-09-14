@@ -50,8 +50,8 @@ D.prototype.serialize = function () {
  */
 D.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.httpStatusCode !== null && instance.httpStatusCode !== undefined) {
-      this.httpStatusCode = instance.httpStatusCode;
+    if (instance['httpStatusCode'] !== null && instance['httpStatusCode'] !== undefined) {
+      this['httpStatusCode'] = instance['httpStatusCode'];
     }
   }
 };

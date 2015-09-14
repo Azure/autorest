@@ -63,12 +63,12 @@ StorageAccountKeys.prototype.serialize = function () {
  */
 StorageAccountKeys.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.key1 !== null && instance.key1 !== undefined) {
-      this.key1 = instance.key1;
+    if (instance['key1'] !== null && instance['key1'] !== undefined) {
+      this['key1'] = instance['key1'];
     }
 
-    if (instance.key2 !== null && instance.key2 !== undefined) {
-      this.key2 = instance.key2;
+    if (instance['key2'] !== null && instance['key2'] !== undefined) {
+      this['key2'] = instance['key2'];
     }
   }
 };

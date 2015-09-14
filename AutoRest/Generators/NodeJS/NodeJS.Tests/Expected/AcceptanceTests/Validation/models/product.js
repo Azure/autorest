@@ -27,9 +27,9 @@ var util = require('util');
  */
 function Product(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.display_names !== null && parameters.display_names !== undefined) {
+    if (parameters.displayNames !== null && parameters.displayNames !== undefined) {
       var initializedParametersdisplayNames = [];
-      parameters.display_names.forEach(function(element) {
+      parameters.displayNames.forEach(function(element) {
         if (element !== null && element !== undefined) {
           element = element;
         }
@@ -89,23 +89,23 @@ Product.prototype.serialize = function () {
  */
 Product.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.display_names !== null && instance.display_names !== undefined) {
+    if (instance['display_names'] !== null && instance['display_names'] !== undefined) {
       var deserializedInstancedisplayNames = [];
-      instance.display_names.forEach(function(element1) {
+      instance['display_names'].forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
           element1 = element1;
         }
         deserializedInstancedisplayNames.push(element1);
       });
-      this.displayNames = deserializedInstancedisplayNames;
+      this['displayNames'] = deserializedInstancedisplayNames;
     }
 
-    if (instance.capacity !== null && instance.capacity !== undefined) {
-      this.capacity = instance.capacity;
+    if (instance['capacity'] !== null && instance['capacity'] !== undefined) {
+      this['capacity'] = instance['capacity'];
     }
 
-    if (instance.image !== null && instance.image !== undefined) {
-      this.image = instance.image;
+    if (instance['image'] !== null && instance['image'] !== undefined) {
+      this['image'] = instance['image'];
     }
   }
 };

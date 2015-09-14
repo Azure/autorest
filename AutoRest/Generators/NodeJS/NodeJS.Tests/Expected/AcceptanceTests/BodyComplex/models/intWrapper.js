@@ -62,12 +62,12 @@ IntWrapper.prototype.serialize = function () {
  */
 IntWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.field1 !== null && instance.field1 !== undefined) {
-      this.field1 = instance.field1;
+    if (instance['field1'] !== null && instance['field1'] !== undefined) {
+      this['field1'] = instance['field1'];
     }
 
-    if (instance.field2 !== null && instance.field2 !== undefined) {
-      this.field2 = instance.field2;
+    if (instance['field2'] !== null && instance['field2'] !== undefined) {
+      this['field2'] = instance['field2'];
     }
   }
 };

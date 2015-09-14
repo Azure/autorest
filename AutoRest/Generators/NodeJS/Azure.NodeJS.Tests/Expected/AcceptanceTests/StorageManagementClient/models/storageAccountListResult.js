@@ -29,14 +29,14 @@ var util = require('util');
 function StorageAccountListResult(parameters) {
   if (parameters !== null && parameters !== undefined) {
     if (parameters.value !== null && parameters.value !== undefined) {
-      var initializedArray = [];
+      var initializedParametersvalue = [];
       parameters.value.forEach(function(element) {
         if (element !== null && element !== undefined) {
           element = new models['StorageAccount'](element);
         }
-        initializedArray.push(element);
+        initializedParametersvalue.push(element);
       });
-      this.value = initializedArray;
+      this.value = initializedParametersvalue;
     }
     if (parameters.nextLink !== null && parameters.nextLink !== undefined) {
       this.nextLink = parameters.nextLink;
@@ -77,19 +77,19 @@ StorageAccountListResult.prototype.serialize = function () {
  */
 StorageAccountListResult.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.value !== null && instance.value !== undefined) {
-      var deserializedArray = [];
-      instance.value.forEach(function(element1) {
+    if (instance['value'] !== null && instance['value'] !== undefined) {
+      var deserializedInstancevalue = [];
+      instance['value'].forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
           element1 = new models['StorageAccount']().deserialize(element1);
         }
-        deserializedArray.push(element1);
+        deserializedInstancevalue.push(element1);
       });
-      this.value = deserializedArray;
+      this['value'] = deserializedInstancevalue;
     }
 
-    if (instance.nextLink !== null && instance.nextLink !== undefined) {
-      this.nextLink = instance.nextLink;
+    if (instance['nextLink'] !== null && instance['nextLink'] !== undefined) {
+      this['nextLink'] = instance['nextLink'];
     }
   }
 };

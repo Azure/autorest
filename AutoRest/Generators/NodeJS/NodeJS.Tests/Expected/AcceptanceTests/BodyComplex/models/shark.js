@@ -67,12 +67,12 @@ Shark.prototype.serialize = function () {
 Shark.prototype.deserialize = function (instance) {
   Shark['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.age !== null && instance.age !== undefined) {
-      this.age = instance.age;
+    if (instance['age'] !== null && instance['age'] !== undefined) {
+      this['age'] = instance['age'];
     }
 
-    if (instance.birthday !== null && instance.birthday !== undefined) {
-      this.birthday = new Date(instance.birthday);
+    if (instance['birthday'] !== null && instance['birthday'] !== undefined) {
+      this['birthday'] = new Date(instance['birthday']);
     }
   }
 };

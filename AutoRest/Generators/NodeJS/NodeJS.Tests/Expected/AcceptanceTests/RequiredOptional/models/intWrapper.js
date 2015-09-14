@@ -48,8 +48,8 @@ IntWrapper.prototype.serialize = function () {
  */
 IntWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.value !== null && instance.value !== undefined) {
-      this.value = instance.value;
+    if (instance['value'] !== null && instance['value'] !== undefined) {
+      this['value'] = instance['value'];
     }
   }
 };

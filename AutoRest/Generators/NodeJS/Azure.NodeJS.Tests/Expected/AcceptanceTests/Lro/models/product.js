@@ -12,12 +12,32 @@
 
 var models = require('./index');
 
+var util = require('util');
+
 /**
  * @class
  * Initializes a new instance of the Product class.
  * @constructor
+ * @member {string} [provisioningState]
+ * 
+ * @member {string} [provisioningStateValues] Possible values for this
+ * property include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
+ * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
+ * 
  */
-function Product() { }
+function Product(parameters) {
+  Product['super_'].call(this, parameters);
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.provisioningState !== null && parameters.provisioningState !== undefined) {
+      this.provisioningState = parameters.provisioningState;
+    }
+    if (parameters.provisioningStateValues !== null && parameters.provisioningStateValues !== undefined) {
+      this.provisioningStateValues = parameters.provisioningStateValues;
+    }
+  }    
+}
+
+util.inherits(Product, models['Resource']);
 
 /**
  * Validate the payload against the Product schema
@@ -25,36 +45,20 @@ function Product() { }
  * @param {JSON} payload
  *
  */
-Product.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Product cannot be null.');
-  }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'].valueOf() !== 'string') {
-    throw new Error('payload[\'id\'] must be of type string.');
-  }
-
-  if (payload['type'] !== null && payload['type'] !== undefined && typeof payload['type'].valueOf() !== 'string') {
-    throw new Error('payload[\'type\'] must be of type string.');
-  }
-
-  if (payload['tags'] && typeof payload['tags'] === 'object') {
-    for(var valueElement in payload['tags']) {
-      if (payload['tags'][valueElement] !== null && payload['tags'][valueElement] !== undefined && typeof payload['tags'][valueElement].valueOf() !== 'string') {
-        throw new Error('payload[\'tags\'][valueElement] must be of type string.');
-      }
+Product.prototype.serialize = function () {
+  var payload = Product['super_'].prototype.serialize.call(this);
+  if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
+    if (typeof this['provisioningState'].valueOf() !== 'string') {
+      throw new Error('this[\'provisioningState\'] must be of type string.');
     }
+    payload['properties']['provisioningState'] = this['provisioningState'];
   }
 
-  if (payload['location'] !== null && payload['location'] !== undefined && typeof payload['location'].valueOf() !== 'string') {
-    throw new Error('payload[\'location\'] must be of type string.');
-  }
-
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
-  }
-
-  if (payload['properties']) {
-    models['ProductProperties'].validate(payload['properties']);
+  if (this['provisioningStateValues'] !== null && this['provisioningStateValues'] !== undefined) {
+    if (typeof this['provisioningStateValues'].valueOf() !== 'string') {
+      throw new Error('this[\'provisioningStateValues\'] must be of type string.');
+    }
+    payload['properties']['provisioningStateValues'] = this['provisioningStateValues'];
   }
 };
 
@@ -65,12 +69,16 @@ Product.prototype.validate = function (payload) {
  *
  */
 Product.prototype.deserialize = function (instance) {
+  Product['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.properties !== null && instance.properties !== undefined) {
-      instance.properties = models['ProductProperties'].deserialize(instance.properties);
+    if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
+      this['provisioningState'] = instance['properties']['provisioningState'];
+    }
+
+    if (instance['properties']['provisioningStateValues'] !== null && instance['properties']['provisioningStateValues'] !== undefined) {
+      this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
     }
   }
-  return instance;
 };
 
-module.exports = new Product();
+module.exports = Product;

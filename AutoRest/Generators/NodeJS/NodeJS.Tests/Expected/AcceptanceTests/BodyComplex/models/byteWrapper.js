@@ -50,8 +50,8 @@ ByteWrapper.prototype.serialize = function () {
  */
 ByteWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.field !== null && instance.field !== undefined && typeof instance.field.valueOf() === 'string') {
-      this.field = new Buffer(instance.field, 'base64');
+    if (instance['field'] !== null && instance['field'] !== undefined && typeof instance['field'].valueOf() === 'string') {
+      this['field'] = new Buffer(instance['field'], 'base64');
     }
   }
 };

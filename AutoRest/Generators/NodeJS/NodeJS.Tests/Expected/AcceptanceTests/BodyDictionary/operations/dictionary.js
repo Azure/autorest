@@ -5713,14 +5713,14 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
     if (arrayBody !== null && arrayBody !== undefined) {
       for(var valueElement1 in arrayBody) {
         if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          var initializedArrayBody[valueElement1] = [];
+          var initializedArrayBodyvalueElement1 = [];
           arrayBody[valueElement1].forEach(function(element) {
             if (element !== null && element !== undefined) {
               element = element;
             }
-            initializedArrayBody[valueElement1].push(element);
+            initializedArrayBodyvalueElement1.push(element);
           });
-          requestModel[valueElement1] = initializedArrayBody[valueElement1];
+          requestModel[valueElement1] = initializedArrayBodyvalueElement1;
         }
       }
     }

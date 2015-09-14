@@ -12,12 +12,42 @@
 
 var models = require('./index');
 
+var util = require('util');
+
 /**
  * @class
  * Initializes a new instance of the FlattenedProduct class.
  * @constructor
+ * @member {string} [pname]
+ * 
+ * @member {string} [flattenedProductType]
+ * 
+ * @member {string} [provisioningStateValues] Possible values for this
+ * property include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
+ * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
+ * 
+ * @member {string} [provisioningState]
+ * 
  */
-function FlattenedProduct() { }
+function FlattenedProduct(parameters) {
+  FlattenedProduct['super_'].call(this, parameters);
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.pname !== null && parameters.pname !== undefined) {
+      this.pname = parameters.pname;
+    }
+    if (parameters.flattenedProductType !== null && parameters.flattenedProductType !== undefined) {
+      this.flattenedProductType = parameters.flattenedProductType;
+    }
+    if (parameters.provisioningStateValues !== null && parameters.provisioningStateValues !== undefined) {
+      this.provisioningStateValues = parameters.provisioningStateValues;
+    }
+    if (parameters.provisioningState !== null && parameters.provisioningState !== undefined) {
+      this.provisioningState = parameters.provisioningState;
+    }
+  }    
+}
+
+util.inherits(FlattenedProduct, models['Resource']);
 
 /**
  * Validate the payload against the FlattenedProduct schema
@@ -25,36 +55,34 @@ function FlattenedProduct() { }
  * @param {JSON} payload
  *
  */
-FlattenedProduct.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('FlattenedProduct cannot be null.');
-  }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'].valueOf() !== 'string') {
-    throw new Error('payload[\'id\'] must be of type string.');
-  }
-
-  if (payload['type'] !== null && payload['type'] !== undefined && typeof payload['type'].valueOf() !== 'string') {
-    throw new Error('payload[\'type\'] must be of type string.');
-  }
-
-  if (payload['tags'] && typeof payload['tags'] === 'object') {
-    for(var valueElement in payload['tags']) {
-      if (payload['tags'][valueElement] !== null && payload['tags'][valueElement] !== undefined && typeof payload['tags'][valueElement].valueOf() !== 'string') {
-        throw new Error('payload[\'tags\'][valueElement] must be of type string.');
-      }
+FlattenedProduct.prototype.serialize = function () {
+  var payload = FlattenedProduct['super_'].prototype.serialize.call(this);
+  if (this['pname'] !== null && this['pname'] !== undefined) {
+    if (typeof this['pname'].valueOf() !== 'string') {
+      throw new Error('this[\'pname\'] must be of type string.');
     }
+    payload['properties']['pname'] = this['pname'];
   }
 
-  if (payload['location'] !== null && payload['location'] !== undefined && typeof payload['location'].valueOf() !== 'string') {
-    throw new Error('payload[\'location\'] must be of type string.');
+  if (this['flattenedProductType'] !== null && this['flattenedProductType'] !== undefined) {
+    if (typeof this['flattenedProductType'].valueOf() !== 'string') {
+      throw new Error('this[\'flattenedProductType\'] must be of type string.');
+    }
+    payload['properties']['type'] = this['flattenedProductType'];
   }
 
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
+  if (this['provisioningStateValues'] !== null && this['provisioningStateValues'] !== undefined) {
+    if (typeof this['provisioningStateValues'].valueOf() !== 'string') {
+      throw new Error('this[\'provisioningStateValues\'] must be of type string.');
+    }
+    payload['properties']['provisioningStateValues'] = this['provisioningStateValues'];
   }
 
-  if (payload['properties']) {
-    models['FlattenedProductProperties'].validate(payload['properties']);
+  if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
+    if (typeof this['provisioningState'].valueOf() !== 'string') {
+      throw new Error('this[\'provisioningState\'] must be of type string.');
+    }
+    payload['properties']['provisioningState'] = this['provisioningState'];
   }
 };
 
@@ -65,12 +93,24 @@ FlattenedProduct.prototype.validate = function (payload) {
  *
  */
 FlattenedProduct.prototype.deserialize = function (instance) {
+  FlattenedProduct['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.properties !== null && instance.properties !== undefined) {
-      instance.properties = models['FlattenedProductProperties'].deserialize(instance.properties);
+    if (instance['properties']['pname'] !== null && instance['properties']['pname'] !== undefined) {
+      this['pname'] = instance['properties']['pname'];
+    }
+
+    if (instance['properties']['type'] !== null && instance['properties']['type'] !== undefined) {
+      this['flattenedProductType'] = instance['properties']['type'];
+    }
+
+    if (instance['properties']['provisioningStateValues'] !== null && instance['properties']['provisioningStateValues'] !== undefined) {
+      this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
+    }
+
+    if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
+      this['provisioningState'] = instance['properties']['provisioningState'];
     }
   }
-  return instance;
 };
 
-module.exports = new FlattenedProduct();
+module.exports = FlattenedProduct;

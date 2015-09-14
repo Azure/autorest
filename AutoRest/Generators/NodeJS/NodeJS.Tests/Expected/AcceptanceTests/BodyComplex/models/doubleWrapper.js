@@ -25,8 +25,8 @@ function DoubleWrapper(parameters) {
     if (parameters.field1 !== null && parameters.field1 !== undefined) {
       this.field1 = parameters.field1;
     }
-    if (parameters.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose !== null && parameters.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose !== undefined) {
-      this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = parameters.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose;
+    if (parameters.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose !== null && parameters.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose !== undefined) {
+      this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = parameters.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
     }
   }    
 }
@@ -63,12 +63,12 @@ DoubleWrapper.prototype.serialize = function () {
  */
 DoubleWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.field1 !== null && instance.field1 !== undefined) {
-      this.field1 = instance.field1;
+    if (instance['field1'] !== null && instance['field1'] !== undefined) {
+      this['field1'] = instance['field1'];
     }
 
-    if (instance.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose !== null && instance.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose !== undefined) {
-      this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = instance.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose;
+    if (instance['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'] !== null && instance['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'] !== undefined) {
+      this['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'] = instance['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'];
     }
   }
 };

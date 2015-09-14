@@ -12,12 +12,32 @@
 
 var models = require('./index');
 
+var util = require('util');
+
 /**
  * @class
  * Initializes a new instance of the SubProduct class.
  * @constructor
+ * @member {string} [provisioningState]
+ * 
+ * @member {string} [provisioningStateValues] Possible values for this
+ * property include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
+ * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
+ * 
  */
-function SubProduct() { }
+function SubProduct(parameters) {
+  SubProduct['super_'].call(this, parameters);
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.provisioningState !== null && parameters.provisioningState !== undefined) {
+      this.provisioningState = parameters.provisioningState;
+    }
+    if (parameters.provisioningStateValues !== null && parameters.provisioningStateValues !== undefined) {
+      this.provisioningStateValues = parameters.provisioningStateValues;
+    }
+  }    
+}
+
+util.inherits(SubProduct, models['SubResource']);
 
 /**
  * Validate the payload against the SubProduct schema
@@ -25,16 +45,20 @@ function SubProduct() { }
  * @param {JSON} payload
  *
  */
-SubProduct.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('SubProduct cannot be null.');
-  }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'].valueOf() !== 'string') {
-    throw new Error('payload[\'id\'] must be of type string.');
+SubProduct.prototype.serialize = function () {
+  var payload = SubProduct['super_'].prototype.serialize.call(this);
+  if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
+    if (typeof this['provisioningState'].valueOf() !== 'string') {
+      throw new Error('this[\'provisioningState\'] must be of type string.');
+    }
+    payload['properties']['provisioningState'] = this['provisioningState'];
   }
 
-  if (payload['properties']) {
-    models['SubProductProperties'].validate(payload['properties']);
+  if (this['provisioningStateValues'] !== null && this['provisioningStateValues'] !== undefined) {
+    if (typeof this['provisioningStateValues'].valueOf() !== 'string') {
+      throw new Error('this[\'provisioningStateValues\'] must be of type string.');
+    }
+    payload['properties']['provisioningStateValues'] = this['provisioningStateValues'];
   }
 };
 
@@ -45,12 +69,16 @@ SubProduct.prototype.validate = function (payload) {
  *
  */
 SubProduct.prototype.deserialize = function (instance) {
+  SubProduct['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance.properties !== null && instance.properties !== undefined) {
-      instance.properties = models['SubProductProperties'].deserialize(instance.properties);
+    if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
+      this['provisioningState'] = instance['properties']['provisioningState'];
+    }
+
+    if (instance['properties']['provisioningStateValues'] !== null && instance['properties']['provisioningStateValues'] !== undefined) {
+      this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
     }
   }
-  return instance;
 };
 
-module.exports = new SubProduct();
+module.exports = SubProduct;

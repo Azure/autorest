@@ -62,12 +62,12 @@ DateWrapper.prototype.serialize = function () {
  */
 DateWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.field !== null && instance.field !== undefined) {
-      this.field = new Date(instance.field);
+    if (instance['field'] !== null && instance['field'] !== undefined) {
+      this['field'] = new Date(instance['field']);
     }
 
-    if (instance.leap !== null && instance.leap !== undefined) {
-      this.leap = new Date(instance.leap);
+    if (instance['leap'] !== null && instance['leap'] !== undefined) {
+      this['leap'] = new Date(instance['leap']);
     }
   }
 };

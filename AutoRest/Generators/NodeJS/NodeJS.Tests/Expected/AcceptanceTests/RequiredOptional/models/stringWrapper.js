@@ -48,8 +48,8 @@ StringWrapper.prototype.serialize = function () {
  */
 StringWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.value !== null && instance.value !== undefined) {
-      this.value = instance.value;
+    if (instance['value'] !== null && instance['value'] !== undefined) {
+      this['value'] = instance['value'];
     }
   }
 };

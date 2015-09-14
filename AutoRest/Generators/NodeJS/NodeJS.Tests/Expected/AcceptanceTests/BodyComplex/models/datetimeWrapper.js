@@ -62,12 +62,12 @@ DatetimeWrapper.prototype.serialize = function () {
  */
 DatetimeWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.field !== null && instance.field !== undefined) {
-      this.field = new Date(instance.field);
+    if (instance['field'] !== null && instance['field'] !== undefined) {
+      this['field'] = new Date(instance['field']);
     }
 
-    if (instance.now !== null && instance.now !== undefined) {
-      this.now = new Date(instance.now);
+    if (instance['now'] !== null && instance['now'] !== undefined) {
+      this['now'] = new Date(instance['now']);
     }
   }
 };

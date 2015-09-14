@@ -60,12 +60,12 @@ Product.prototype.serialize = function () {
  */
 Product.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.id !== null && instance.id !== undefined) {
-      this.id = instance.id;
+    if (instance['id'] !== null && instance['id'] !== undefined) {
+      this['id'] = instance['id'];
     }
 
-    if (instance.name !== null && instance.name !== undefined) {
-      this.name = instance.name;
+    if (instance['name'] !== null && instance['name'] !== undefined) {
+      this['name'] = instance['name'];
     }
   }
 };

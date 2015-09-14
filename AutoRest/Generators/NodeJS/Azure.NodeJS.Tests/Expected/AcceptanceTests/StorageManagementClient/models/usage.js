@@ -96,20 +96,20 @@ Usage.prototype.serialize = function () {
  */
 Usage.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.unit !== null && instance.unit !== undefined) {
-      this.unit = instance.unit;
+    if (instance['unit'] !== null && instance['unit'] !== undefined) {
+      this['unit'] = instance['unit'];
     }
 
-    if (instance.currentValue !== null && instance.currentValue !== undefined) {
-      this.currentValue = instance.currentValue;
+    if (instance['currentValue'] !== null && instance['currentValue'] !== undefined) {
+      this['currentValue'] = instance['currentValue'];
     }
 
-    if (instance.limit !== null && instance.limit !== undefined) {
-      this.limit = instance.limit;
+    if (instance['limit'] !== null && instance['limit'] !== undefined) {
+      this['limit'] = instance['limit'];
     }
 
-    if (instance.name !== null && instance.name !== undefined) {
-      this.name = new models['UsageName']().deserialize(instance.name);
+    if (instance['name'] !== null && instance['name'] !== undefined) {
+      this['name'] = new models['UsageName']().deserialize(instance['name']);
     }
   }
 };
