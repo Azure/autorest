@@ -683,6 +683,9 @@ IntModel.prototype.putMax32 = function (intBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (intBody !== null && intBody !== undefined) {
+      requestModel = intBody;
+    }
     if (intBody === null || intBody === undefined || typeof intBody !== 'number') {
       throw new Error('intBody cannot be null or undefined and it must be of type number.');
     }
@@ -791,6 +794,9 @@ IntModel.prototype.putMax64 = function (intBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (intBody !== null && intBody !== undefined) {
+      requestModel = intBody;
+    }
     if (intBody === null || intBody === undefined || typeof intBody !== 'number') {
       throw new Error('intBody cannot be null or undefined and it must be of type number.');
     }
@@ -899,6 +905,9 @@ IntModel.prototype.putMin32 = function (intBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (intBody !== null && intBody !== undefined) {
+      requestModel = intBody;
+    }
     if (intBody === null || intBody === undefined || typeof intBody !== 'number') {
       throw new Error('intBody cannot be null or undefined and it must be of type number.');
     }
@@ -1007,6 +1016,9 @@ IntModel.prototype.putMin64 = function (intBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (intBody !== null && intBody !== undefined) {
+      requestModel = intBody;
+    }
     if (intBody === null || intBody === undefined || typeof intBody !== 'number') {
       throw new Error('intBody cannot be null or undefined and it must be of type number.');
     }

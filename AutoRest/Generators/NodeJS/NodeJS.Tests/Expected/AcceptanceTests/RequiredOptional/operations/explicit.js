@@ -96,6 +96,9 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
   var requestContent = null;
   var requestModel = null;
   try {
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = bodyParameter;
+    }
     if (bodyParameter === null || bodyParameter === undefined || typeof bodyParameter !== 'number') {
       throw new Error('bodyParameter cannot be null or undefined and it must be of type number.');
     }
@@ -218,6 +221,9 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = bodyParameter;
+    }
+    if (bodyParameter !== null && bodyParameter !== undefined) {
       if (typeof bodyParameter !== 'number') {
         throw new Error('bodyParameter must be of type number.');
       }
@@ -331,7 +337,9 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['IntWrapper'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = new client._models['IntWrapper'](bodyParameter);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -418,11 +426,6 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  // Validate
-  try {
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -449,7 +452,9 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['IntOptionalWrapper'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = new client._models['IntOptionalWrapper'](bodyParameter);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -766,6 +771,9 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
   var requestContent = null;
   var requestModel = null;
   try {
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = bodyParameter;
+    }
     if (bodyParameter === null || bodyParameter === undefined || typeof bodyParameter.valueOf() !== 'string') {
       throw new Error('bodyParameter cannot be null or undefined and it must be of type string.');
     }
@@ -888,6 +896,9 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = bodyParameter;
+    }
+    if (bodyParameter !== null && bodyParameter !== undefined) {
       if (typeof bodyParameter.valueOf() !== 'string') {
         throw new Error('bodyParameter must be of type string.');
       }
@@ -1001,7 +1012,9 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['StringWrapper'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = new client._models['StringWrapper'](bodyParameter);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1088,11 +1101,6 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  // Validate
-  try {
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -1119,7 +1127,9 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['StringOptionalWrapper'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = new client._models['StringOptionalWrapper'](bodyParameter);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1440,7 +1450,9 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['Product'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = new client._models['Product'](bodyParameter);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1528,11 +1540,6 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  // Validate
-  try {
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -1559,7 +1566,9 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['Product'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = new client._models['Product'](bodyParameter);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1672,7 +1681,9 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['ClassWrapper'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = new client._models['ClassWrapper'](bodyParameter);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1763,11 +1774,6 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  // Validate
-  try {
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -1794,7 +1800,9 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['ClassOptionalWrapper'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = new client._models['ClassOptionalWrapper'](bodyParameter);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1905,6 +1913,16 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      var initializedBodyParameter = [];
+      bodyParameter.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedBodyParameter.push(element);
+      });
+      requestModel = initializedBodyParameter;
+    }
     if (!util.isArray(bodyParameter)) {
       throw new Error('bodyParameter cannot be null or undefined and it must be of type array.');
     }
@@ -2037,6 +2055,16 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      var initializedBodyParameter = [];
+      bodyParameter.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedBodyParameter.push(element);
+      });
+      requestModel = initializedBodyParameter;
+    }
     if (util.isArray(bodyParameter)) {
       for (var i1 = 0; i1 < bodyParameter.length; i1++) {
         if (bodyParameter[i1] !== null && bodyParameter[i1] !== undefined) {
@@ -2155,7 +2183,9 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['ArrayWrapper'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = new client._models['ArrayWrapper'](bodyParameter);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -2242,11 +2272,6 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  // Validate
-  try {
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -2273,7 +2298,9 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['ArrayOptionalWrapper'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = new client._models['ArrayOptionalWrapper'](bodyParameter);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));

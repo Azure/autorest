@@ -451,6 +451,9 @@ HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
+      requestModel = booleanValue;
+    }
+    if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
       }
@@ -733,6 +736,9 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
+      requestModel = booleanValue;
+    }
+    if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
       }
@@ -844,6 +850,9 @@ HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      requestModel = booleanValue;
+    }
     if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
@@ -1125,6 +1134,9 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
+      requestModel = booleanValue;
+    }
+    if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
       }
@@ -1234,6 +1246,9 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      requestModel = booleanValue;
+    }
     if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
@@ -1345,6 +1360,9 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
+      requestModel = booleanValue;
+    }
+    if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
       }
@@ -1454,6 +1472,9 @@ HttpRedirects.prototype.delete307 = function (booleanValue, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (booleanValue !== null && booleanValue !== undefined) {
+      requestModel = booleanValue;
+    }
     if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');

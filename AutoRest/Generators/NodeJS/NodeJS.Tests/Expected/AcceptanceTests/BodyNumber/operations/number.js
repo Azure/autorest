@@ -389,6 +389,9 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (numberBody !== null && numberBody !== undefined) {
+      requestModel = numberBody;
+    }
     if (numberBody === null || numberBody === undefined || typeof numberBody !== 'number') {
       throw new Error('numberBody cannot be null or undefined and it must be of type number.');
     }
@@ -595,6 +598,9 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (numberBody !== null && numberBody !== undefined) {
+      requestModel = numberBody;
+    }
     if (numberBody === null || numberBody === undefined || typeof numberBody !== 'number') {
       throw new Error('numberBody cannot be null or undefined and it must be of type number.');
     }
@@ -801,6 +807,9 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
   var requestContent = null;
   var requestModel = null;
   try {
+    if (numberBody !== null && numberBody !== undefined) {
+      requestModel = numberBody;
+    }
     if (numberBody === null || numberBody === undefined || typeof numberBody !== 'number') {
       throw new Error('numberBody cannot be null or undefined and it must be of type number.');
     }
@@ -1007,6 +1016,9 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
   var requestContent = null;
   var requestModel = null;
   try {
+    if (numberBody !== null && numberBody !== undefined) {
+      requestModel = numberBody;
+    }
     if (numberBody === null || numberBody === undefined || typeof numberBody !== 'number') {
       throw new Error('numberBody cannot be null or undefined and it must be of type number.');
     }
@@ -1213,6 +1225,9 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (numberBody !== null && numberBody !== undefined) {
+      requestModel = numberBody;
+    }
     if (numberBody === null || numberBody === undefined || typeof numberBody !== 'number') {
       throw new Error('numberBody cannot be null or undefined and it must be of type number.');
     }
@@ -1419,6 +1434,9 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (numberBody !== null && numberBody !== undefined) {
+      requestModel = numberBody;
+    }
     if (numberBody === null || numberBody === undefined || typeof numberBody !== 'number') {
       throw new Error('numberBody cannot be null or undefined and it must be of type number.');
     }

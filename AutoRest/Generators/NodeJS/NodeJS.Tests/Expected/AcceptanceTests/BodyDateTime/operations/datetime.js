@@ -500,6 +500,9 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
   var requestContent = null;
   var requestModel = null;
   try {
+    if (datetimeBody !== null && datetimeBody !== undefined) {
+      requestModel = datetimeBody;
+    }
     if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
       throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
@@ -812,6 +815,9 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
   var requestContent = null;
   var requestModel = null;
   try {
+    if (datetimeBody !== null && datetimeBody !== undefined) {
+      requestModel = datetimeBody;
+    }
     if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
       throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
@@ -1126,6 +1132,9 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
   var requestContent = null;
   var requestModel = null;
   try {
+    if (datetimeBody !== null && datetimeBody !== undefined) {
+      requestModel = datetimeBody;
+    }
     if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
       throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
@@ -1439,6 +1448,9 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
   var requestContent = null;
   var requestModel = null;
   try {
+    if (datetimeBody !== null && datetimeBody !== undefined) {
+      requestModel = datetimeBody;
+    }
     if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
       throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
@@ -1649,6 +1661,9 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
   var requestContent = null;
   var requestModel = null;
   try {
+    if (datetimeBody !== null && datetimeBody !== undefined) {
+      requestModel = datetimeBody;
+    }
     if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
       throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }
@@ -1859,6 +1874,9 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
   var requestContent = null;
   var requestModel = null;
   try {
+    if (datetimeBody !== null && datetimeBody !== undefined) {
+      requestModel = datetimeBody;
+    }
     if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
       throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
     }

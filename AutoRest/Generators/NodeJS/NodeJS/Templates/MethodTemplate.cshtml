@@ -43,28 +43,18 @@
   }
   @if (Model.ParameterTemplateModels.Any())
   {
-  @:// Validate
-  @:try {
-  @foreach (var parameter in Model.ParameterTemplateModels)
+  var validationBlock = Model.GetValidationString();
+  if (!string.IsNullOrWhiteSpace(validationBlock))
   {
-    if ((Model.HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
-    {
-    if (parameter.IsRequired)
-    {
-    @:if (@(parameter.Name) === null || @(parameter.Name) === undefined) {
-    @:  throw new Error('\'@(parameter.Name)\' cannot be null or undefined.');
-    @:}
-    @:
-    }
-    }
-    else
-    {
-    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.IsRequired))
-    }
+  <text>
+  // Validate
+  try {
+    @(validationBlock)
+  } catch (error) {
+    return callback(error);
   }
-  @:} catch (error) {
-    @:return callback(error);
-  @:}
+  </text>
+  }
   }
   @EmptyLine
   // Construct URL
@@ -110,9 +100,9 @@
   var requestContent = null;
   var requestModel = null;
   try {
+    @(Model.InitializeRequestBody)
   @if (Model.RequestBody.Type is CompositeType)
   {
-    @:requestModel = new client._models['@(Model.RequestBody.Type.Name)'](@(Model.RequestBody.Name));
     @:requestContent = JSON.stringify(requestModel.serialize());
   }
   else

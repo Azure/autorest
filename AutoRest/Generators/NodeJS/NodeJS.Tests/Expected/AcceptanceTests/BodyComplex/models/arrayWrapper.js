@@ -22,14 +22,14 @@ var util = require('util');
 function ArrayWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
     if (parameters.array !== null && parameters.array !== undefined) {
-      var initializedArray = [];
+      var initializedParametersarray = [];
       parameters.array.forEach(function(element) {
         if (element !== null && element !== undefined) {
           element = element;
         }
-        initializedArray.push(element);
+        initializedParametersarray.push(element);
       });
-      this.array = initializedArray;
+      this.array = initializedParametersarray;
     }
   }    
 }
@@ -64,14 +64,14 @@ ArrayWrapper.prototype.serialize = function () {
 ArrayWrapper.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance.array !== null && instance.array !== undefined) {
-      var deserializedArray = [];
+      var deserializedInstancearray = [];
       instance.array.forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
           element1 = element1;
         }
-        deserializedArray.push(element1);
+        deserializedInstancearray.push(element1);
       });
-      this.array = deserializedArray;
+      this.array = deserializedInstancearray;
     }
   }
 };

@@ -359,6 +359,30 @@ namespace Microsoft.Rest.Generator.NodeJS
             return builder.ToString();
         }
 
+
+        public string GetValidationString()
+        {
+            var builder = new IndentedStringBuilder("  ");
+            foreach (var parameter in this.ParameterTemplateModels)
+            {
+                if ((this.HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
+                {
+                    if (parameter.IsRequired)
+                    {
+                        builder.AppendLine("if ({0} === null || {0} === undefined) {{", parameter.Name)
+                                 .Indent()
+                                 .AppendLine("throw new Error('\'{0}\' cannot be null or undefined.');", parameter.Name)
+                               .Outdent()
+                               .AppendLine("}");
+                    }
+                }
+                else
+                {
+                    builder.AppendLine(parameter.Type.ValidateType(this.Scope, parameter.Name, parameter.IsRequired));
+                }
+            }
+            return builder.ToString();
+        }
         /// <summary>
         /// If the element type of a sequenece or value type of a dictionary 
         /// contains one of the following special types then it needs to be 
@@ -581,6 +605,20 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 return string.Empty;
+            }
+        }
+
+        public string InitializeRequestBody
+        {
+            get
+            {
+                string result = null;
+                if (this.RequestBody != null)
+                {
+                    result = this.RequestBody.Type.InitializeType(Scope, "requestModel", RequestBody.Name, "client._models");
+                }
+
+                return result;
             }
         }
     }

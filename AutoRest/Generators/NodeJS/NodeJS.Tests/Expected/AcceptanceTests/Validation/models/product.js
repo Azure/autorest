@@ -28,14 +28,14 @@ var util = require('util');
 function Product(parameters) {
   if (parameters !== null && parameters !== undefined) {
     if (parameters.display_names !== null && parameters.display_names !== undefined) {
-      var initializedArray = [];
+      var initializedParametersdisplayNames = [];
       parameters.display_names.forEach(function(element) {
         if (element !== null && element !== undefined) {
           element = element;
         }
-        initializedArray.push(element);
+        initializedParametersdisplayNames.push(element);
       });
-      this.displayNames = initializedArray;
+      this.displayNames = initializedParametersdisplayNames;
     }
     if (parameters.capacity !== null && parameters.capacity !== undefined) {
       this.capacity = parameters.capacity;
@@ -90,14 +90,14 @@ Product.prototype.serialize = function () {
 Product.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance.display_names !== null && instance.display_names !== undefined) {
-      var deserializedArray = [];
+      var deserializedInstancedisplayNames = [];
       instance.display_names.forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
           element1 = element1;
         }
-        deserializedArray.push(element1);
+        deserializedInstancedisplayNames.push(element1);
       });
-      this.displayNames = deserializedArray;
+      this.displayNames = deserializedInstancedisplayNames;
     }
 
     if (instance.capacity !== null && instance.capacity !== undefined) {

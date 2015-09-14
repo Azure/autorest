@@ -405,6 +405,9 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
+      requestModel = bodyParameter;
+    }
+    if (bodyParameter !== null && bodyParameter !== undefined) {
       if (typeof bodyParameter.valueOf() !== 'string') {
         throw new Error('bodyParameter must be of type string.');
       }

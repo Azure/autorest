@@ -288,7 +288,9 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['Product'](body);
+    if (body !== null && body !== undefined) {
+      requestModel = new client._models['Product'](body);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));

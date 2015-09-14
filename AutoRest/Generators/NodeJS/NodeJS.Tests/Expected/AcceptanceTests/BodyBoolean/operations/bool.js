@@ -193,6 +193,9 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (boolBody !== null && boolBody !== undefined) {
+      requestModel = boolBody;
+    }
     if (boolBody === null || boolBody === undefined || typeof boolBody !== 'boolean') {
       throw new Error('boolBody cannot be null or undefined and it must be of type boolean.');
     }
@@ -399,6 +402,9 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (boolBody !== null && boolBody !== undefined) {
+      requestModel = boolBody;
+    }
     if (boolBody === null || boolBody === undefined || typeof boolBody !== 'boolean') {
       throw new Error('boolBody cannot be null or undefined and it must be of type boolean.');
     }

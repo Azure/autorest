@@ -394,6 +394,16 @@ ArrayModel.prototype.putEmpty = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -612,6 +622,16 @@ ArrayModel.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -1026,6 +1046,16 @@ ArrayModel.prototype.putIntegerValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -1440,6 +1470,16 @@ ArrayModel.prototype.putLongValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -1854,6 +1894,16 @@ ArrayModel.prototype.putFloatValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -2268,6 +2318,16 @@ ArrayModel.prototype.putDoubleValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -2682,6 +2742,16 @@ ArrayModel.prototype.putStringValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -3104,6 +3174,16 @@ ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -3542,6 +3622,16 @@ ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) 
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -3979,6 +4069,16 @@ ArrayModel.prototype.putByteValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = element;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -4695,11 +4795,6 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  // Validate
-  try {
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
@@ -4726,6 +4821,16 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = new client._models['Product'](element);
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -5339,6 +5444,23 @@ ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          var initializedElement = [];
+          element.forEach(function(element1) {
+            if (element1 !== null && element1 !== undefined) {
+              element1 = element1;
+            }
+            initializedElement.push(element1);
+          });
+          element = initializedElement;
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
@@ -5965,17 +6087,31 @@ ArrayModel.prototype.putDictionaryValid = function (arrayBody, options, callback
   var requestContent = null;
   var requestModel = null;
   try {
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          for(var valueElement1 in element) {
+            if (element[valueElement1] !== null && element[valueElement1] !== undefined) {
+              element[valueElement1] = element[valueElement1];
+            }
+          }
+        }
+        initializedArrayBody.push(element);
+      });
+      requestModel = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
     for (var i1 = 0; i1 < arrayBody.length; i1++) {
       if (arrayBody[i1] && typeof arrayBody[i1] === 'object') {
-        for(var valueElement1 in arrayBody[i1]) {
-          if (arrayBody[i1][valueElement1] !== null && arrayBody[i1][valueElement1] !== undefined) {
-            if (typeof arrayBody[i1][valueElement1].valueOf() !== 'string') {
-              throw new Error('arrayBody[i1][valueElement1] must be of type string.');
+        for(var valueElement2 in arrayBody[i1]) {
+          if (arrayBody[i1][valueElement2] !== null && arrayBody[i1][valueElement2] !== undefined) {
+            if (typeof arrayBody[i1][valueElement2].valueOf() !== 'string') {
+              throw new Error('arrayBody[i1][valueElement2] must be of type string.');
             }
-            requestModel[i1][valueElement1] = arrayBody[i1][valueElement1];
+            requestModel[i1][valueElement2] = arrayBody[i1][valueElement2];
           }
         }
       }

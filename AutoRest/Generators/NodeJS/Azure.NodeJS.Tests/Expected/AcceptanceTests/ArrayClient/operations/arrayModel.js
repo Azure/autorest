@@ -12,6 +12,7 @@
 
 var util = require('util');
 var msRest = require('ms-rest');
+var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
 
@@ -19,20 +20,20 @@ var models = require('../models');
 
 /**
  * @class
- * Dictionary
+ * ArrayModel
  * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestSwaggerBATdictionaryService.
- * Initializes a new instance of the Dictionary class.
+ * instance of the AutoRestSwaggerBATArrayService.
+ * Initializes a new instance of the ArrayModel class.
  * @constructor
  *
- * @param {AutoRestSwaggerBATdictionaryService} client Reference to the service client.
+ * @param {AutoRestSwaggerBATArrayService} client Reference to the service client.
  */
-function Dictionary(client) {
+function ArrayModel(client) {
   this.client = client;
 }
 
 /**
- * Get null dictionary value
+ * Get null array value
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -50,7 +51,7 @@ function Dictionary(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getNull = function (options, callback) {
+ArrayModel.prototype.getNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -59,10 +60,22 @@ Dictionary.prototype.getNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/null';
+                   '//array/null';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -73,6 +86,10 @@ Dictionary.prototype.getNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -130,7 +147,7 @@ Dictionary.prototype.getNull = function (options, callback) {
 };
 
 /**
- * Get empty dictionary value {}
+ * Get invalid array [1, 2, 3
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -148,7 +165,7 @@ Dictionary.prototype.getNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getEmpty = function (options, callback) {
+ArrayModel.prototype.getInvalid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -157,10 +174,22 @@ Dictionary.prototype.getEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/empty';
+                   '//array/invalid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -171,6 +200,10 @@ Dictionary.prototype.getEmpty = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -228,8 +261,122 @@ Dictionary.prototype.getEmpty = function (options, callback) {
 };
 
 /**
- * Set dictionary value empty {}
- * @param {object} arrayBody
+ * Get empty array value []
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+ArrayModel.prototype.getEmpty = function (options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri + 
+                   '//array/empty';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'GET';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Set array value empty []
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -248,7 +395,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
+ArrayModel.prototype.putEmpty = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -259,13 +406,16 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement].valueOf() !== 'string') {
-        throw new Error('arrayBody[valueElement] must be of type string.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i].valueOf() !== 'string') {
+        throw new Error('arrayBody[i] must be of type string.');
       }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -273,7 +423,11 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/empty';
+                   '//array/empty';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -284,6 +438,10 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -296,22 +454,15 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = arrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
-        if (typeof arrayBody[valueElement2].valueOf() !== 'string') {
-          throw new Error('arrayBody[valueElement2] must be of type string.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1] !== null && arrayBody[i1] !== undefined) {
+        if (typeof arrayBody[i1].valueOf() !== 'string') {
+          throw new Error('arrayBody[i1] must be of type string.');
         }
-        requestModel[valueElement2] = arrayBody[valueElement2];
+        requestModel[i1] = arrayBody[i1];
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -355,7 +506,7 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
 };
 
 /**
- * Get Dictionary with null value
+ * Get boolean array value [true, false, false, true]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -373,7 +524,7 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getNullValue = function (options, callback) {
+ArrayModel.prototype.getBooleanTfft = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -382,10 +533,22 @@ Dictionary.prototype.getNullValue = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/nullvalue';
+                   '//array/prim/boolean/tfft';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -396,6 +559,10 @@ Dictionary.prototype.getNullValue = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -453,400 +620,8 @@ Dictionary.prototype.getNullValue = function (options, callback) {
 };
 
 /**
- * Get Dictionary with null key
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Dictionary.prototype.getNullKey = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//dictionary/nullkey';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = new client._models['ErrorModel']();
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse = null;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Get Dictionary with key as empty string
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Dictionary.prototype.getEmptyStringKey = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//dictionary/keyemptystring';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = new client._models['ErrorModel']();
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse = null;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Get invalid Dictionary value
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Dictionary.prototype.getInvalid = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//dictionary/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = new client._models['ErrorModel']();
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse = null;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Dictionary.prototype.getBooleanTfft = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-
-  // Construct URL
-  var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/boolean/tfft';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        error.body = new client._models['ErrorModel']();
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse = null;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
- * @param {object} arrayBody
+ * Set array value empty [true, false, false, true]
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -865,7 +640,7 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
+ArrayModel.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -876,13 +651,16 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement] !== 'boolean') {
-        throw new Error('arrayBody[valueElement] must be of type boolean.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'boolean') {
+        throw new Error('arrayBody[i] must be of type boolean.');
       }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -890,7 +668,11 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/boolean/tfft';
+                   '//array/prim/boolean/tfft';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -901,6 +683,10 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -913,22 +699,15 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = arrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
-        if (typeof arrayBody[valueElement2] !== 'boolean') {
-          throw new Error('arrayBody[valueElement2] must be of type boolean.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1] !== null && arrayBody[i1] !== undefined) {
+        if (typeof arrayBody[i1] !== 'boolean') {
+          throw new Error('arrayBody[i1] must be of type boolean.');
         }
-        requestModel[valueElement2] = arrayBody[valueElement2];
+        requestModel[i1] = arrayBody[i1];
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -972,7 +751,7 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
 };
 
 /**
- * Get boolean dictionary value {"0": true, "1": null, "2": false }
+ * Get boolean array value [true, null, false]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -990,7 +769,7 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
+ArrayModel.prototype.getBooleanInvalidNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -999,10 +778,22 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/boolean/true.null.false';
+                   '//array/prim/boolean/true.null.false';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1013,6 +804,10 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1070,7 +865,7 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
 };
 
 /**
- * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
+ * Get boolean array value [true, 'boolean', false]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1088,7 +883,7 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
+ArrayModel.prototype.getBooleanInvalidString = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1097,10 +892,22 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/boolean/true.boolean.false';
+                   '//array/prim/boolean/true.boolean.false';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1111,6 +918,10 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1168,7 +979,7 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
 };
 
 /**
- * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+ * Get integer array value [1, -1, 3, 300]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1186,7 +997,7 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getIntegerValid = function (options, callback) {
+ArrayModel.prototype.getIntegerValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1195,10 +1006,22 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/integer/1.-1.3.300';
+                   '//array/prim/integer/1.-1.3.300';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1209,6 +1032,10 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1266,8 +1093,8 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
 };
 
 /**
- * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
- * @param {object} arrayBody
+ * Set array value empty [1, -1, 3, 300]
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -1286,7 +1113,7 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putIntegerValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1297,13 +1124,16 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement] !== 'number') {
-        throw new Error('arrayBody[valueElement] must be of type number.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'number') {
+        throw new Error('arrayBody[i] must be of type number.');
       }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -1311,7 +1141,11 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/integer/1.-1.3.300';
+                   '//array/prim/integer/1.-1.3.300';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1322,6 +1156,10 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1334,22 +1172,15 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = arrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
-        if (typeof arrayBody[valueElement2] !== 'number') {
-          throw new Error('arrayBody[valueElement2] must be of type number.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1] !== null && arrayBody[i1] !== undefined) {
+        if (typeof arrayBody[i1] !== 'number') {
+          throw new Error('arrayBody[i1] must be of type number.');
         }
-        requestModel[valueElement2] = arrayBody[valueElement2];
+        requestModel[i1] = arrayBody[i1];
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -1393,7 +1224,7 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
 };
 
 /**
- * Get integer dictionary value {"0": 1, "1": null, "2": 0}
+ * Get integer array value [1, null, 0]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1411,7 +1242,7 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getIntInvalidNull = function (options, callback) {
+ArrayModel.prototype.getIntInvalidNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1420,10 +1251,22 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/integer/1.null.zero';
+                   '//array/prim/integer/1.null.zero';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1434,6 +1277,10 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1491,7 +1338,7 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
 };
 
 /**
- * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
+ * Get integer array value [1, 'integer', 0]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1509,7 +1356,7 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getIntInvalidString = function (options, callback) {
+ArrayModel.prototype.getIntInvalidString = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1518,10 +1365,22 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/integer/1.integer.0';
+                   '//array/prim/integer/1.integer.0';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1532,6 +1391,10 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1589,7 +1452,7 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
 };
 
 /**
- * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+ * Get integer array value [1, -1, 3, 300]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1607,7 +1470,7 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getLongValid = function (options, callback) {
+ArrayModel.prototype.getLongValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1616,10 +1479,22 @@ Dictionary.prototype.getLongValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/long/1.-1.3.300';
+                   '//array/prim/long/1.-1.3.300';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1630,6 +1505,10 @@ Dictionary.prototype.getLongValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1687,8 +1566,8 @@ Dictionary.prototype.getLongValid = function (options, callback) {
 };
 
 /**
- * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
- * @param {object} arrayBody
+ * Set array value empty [1, -1, 3, 300]
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -1707,7 +1586,7 @@ Dictionary.prototype.getLongValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putLongValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1718,13 +1597,16 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement] !== 'number') {
-        throw new Error('arrayBody[valueElement] must be of type number.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'number') {
+        throw new Error('arrayBody[i] must be of type number.');
       }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -1732,7 +1614,11 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/long/1.-1.3.300';
+                   '//array/prim/long/1.-1.3.300';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1743,6 +1629,10 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1755,22 +1645,15 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = arrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
-        if (typeof arrayBody[valueElement2] !== 'number') {
-          throw new Error('arrayBody[valueElement2] must be of type number.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1] !== null && arrayBody[i1] !== undefined) {
+        if (typeof arrayBody[i1] !== 'number') {
+          throw new Error('arrayBody[i1] must be of type number.');
         }
-        requestModel[valueElement2] = arrayBody[valueElement2];
+        requestModel[i1] = arrayBody[i1];
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -1814,7 +1697,7 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
 };
 
 /**
- * Get long dictionary value {"0": 1, "1": null, "2": 0}
+ * Get long array value [1, null, 0]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1832,7 +1715,7 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getLongInvalidNull = function (options, callback) {
+ArrayModel.prototype.getLongInvalidNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1841,10 +1724,22 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/long/1.null.zero';
+                   '//array/prim/long/1.null.zero';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1855,6 +1750,10 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1912,7 +1811,7 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
 };
 
 /**
- * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
+ * Get long array value [1, 'integer', 0]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1930,7 +1829,7 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getLongInvalidString = function (options, callback) {
+ArrayModel.prototype.getLongInvalidString = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1939,10 +1838,22 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/long/1.integer.0';
+                   '//array/prim/long/1.integer.0';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -1953,6 +1864,10 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -2010,7 +1925,7 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
 };
 
 /**
- * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+ * Get float array value [0, -0.01, 1.2e20]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2028,7 +1943,7 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getFloatValid = function (options, callback) {
+ArrayModel.prototype.getFloatValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2037,10 +1952,22 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/float/0--0.01-1.2e20';
+                   '//array/prim/float/0--0.01-1.2e20';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -2051,6 +1978,10 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -2108,8 +2039,8 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
 };
 
 /**
- * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
- * @param {object} arrayBody
+ * Set array value [0, -0.01, 1.2e20]
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -2128,7 +2059,7 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putFloatValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2139,13 +2070,16 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement] !== 'number') {
-        throw new Error('arrayBody[valueElement] must be of type number.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'number') {
+        throw new Error('arrayBody[i] must be of type number.');
       }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -2153,7 +2087,11 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/float/0--0.01-1.2e20';
+                   '//array/prim/float/0--0.01-1.2e20';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -2164,6 +2102,10 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -2176,22 +2118,15 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = arrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
-        if (typeof arrayBody[valueElement2] !== 'number') {
-          throw new Error('arrayBody[valueElement2] must be of type number.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1] !== null && arrayBody[i1] !== undefined) {
+        if (typeof arrayBody[i1] !== 'number') {
+          throw new Error('arrayBody[i1] must be of type number.');
         }
-        requestModel[valueElement2] = arrayBody[valueElement2];
+        requestModel[i1] = arrayBody[i1];
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -2235,7 +2170,7 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
 };
 
 /**
- * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+ * Get float array value [0.0, null, -1.2e20]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2253,7 +2188,7 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
+ArrayModel.prototype.getFloatInvalidNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2262,10 +2197,22 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/float/0.0-null-1.2e20';
+                   '//array/prim/float/0.0-null-1.2e20';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -2276,6 +2223,10 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -2333,7 +2284,7 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
 };
 
 /**
- * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+ * Get boolean array value [1.0, 'number', 0.0]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2351,7 +2302,7 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getFloatInvalidString = function (options, callback) {
+ArrayModel.prototype.getFloatInvalidString = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2360,10 +2311,22 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/float/1.number.0';
+                   '//array/prim/float/1.number.0';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -2374,6 +2337,10 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -2431,7 +2398,7 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
 };
 
 /**
- * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+ * Get float array value [0, -0.01, 1.2e20]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2449,7 +2416,7 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDoubleValid = function (options, callback) {
+ArrayModel.prototype.getDoubleValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2458,10 +2425,22 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/double/0--0.01-1.2e20';
+                   '//array/prim/double/0--0.01-1.2e20';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -2472,6 +2451,10 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -2529,8 +2512,8 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
 };
 
 /**
- * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
- * @param {object} arrayBody
+ * Set array value [0, -0.01, 1.2e20]
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -2549,7 +2532,7 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putDoubleValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2560,13 +2543,16 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement] !== 'number') {
-        throw new Error('arrayBody[valueElement] must be of type number.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i] !== 'number') {
+        throw new Error('arrayBody[i] must be of type number.');
       }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -2574,7 +2560,11 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/double/0--0.01-1.2e20';
+                   '//array/prim/double/0--0.01-1.2e20';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -2585,6 +2575,10 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -2597,22 +2591,15 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = arrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
-        if (typeof arrayBody[valueElement2] !== 'number') {
-          throw new Error('arrayBody[valueElement2] must be of type number.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1] !== null && arrayBody[i1] !== undefined) {
+        if (typeof arrayBody[i1] !== 'number') {
+          throw new Error('arrayBody[i1] must be of type number.');
         }
-        requestModel[valueElement2] = arrayBody[valueElement2];
+        requestModel[i1] = arrayBody[i1];
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -2656,7 +2643,7 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
 };
 
 /**
- * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+ * Get float array value [0.0, null, -1.2e20]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2674,7 +2661,7 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
+ArrayModel.prototype.getDoubleInvalidNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2683,10 +2670,22 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/double/0.0-null-1.2e20';
+                   '//array/prim/double/0.0-null-1.2e20';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -2697,6 +2696,10 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -2754,7 +2757,7 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
 };
 
 /**
- * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+ * Get boolean array value [1.0, 'number', 0.0]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2772,7 +2775,7 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
+ArrayModel.prototype.getDoubleInvalidString = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2781,10 +2784,22 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/double/1.number.0';
+                   '//array/prim/double/1.number.0';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -2795,6 +2810,10 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -2852,7 +2871,7 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
 };
 
 /**
- * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+ * Get string array value ['foo1', 'foo2', 'foo3']
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2870,7 +2889,7 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getStringValid = function (options, callback) {
+ArrayModel.prototype.getStringValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2879,10 +2898,22 @@ Dictionary.prototype.getStringValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/string/foo1.foo2.foo3';
+                   '//array/prim/string/foo1.foo2.foo3';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -2893,6 +2924,10 @@ Dictionary.prototype.getStringValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -2950,8 +2985,8 @@ Dictionary.prototype.getStringValid = function (options, callback) {
 };
 
 /**
- * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
- * @param {object} arrayBody
+ * Set array value ['foo1', 'foo2', 'foo3']
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -2970,7 +3005,7 @@ Dictionary.prototype.getStringValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putStringValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2981,13 +3016,16 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement].valueOf() !== 'string') {
-        throw new Error('arrayBody[valueElement] must be of type string.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i].valueOf() !== 'string') {
+        throw new Error('arrayBody[i] must be of type string.');
       }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -2995,7 +3033,11 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/string/foo1.foo2.foo3';
+                   '//array/prim/string/foo1.foo2.foo3';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -3006,6 +3048,10 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -3018,22 +3064,15 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = arrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
-        if (typeof arrayBody[valueElement2].valueOf() !== 'string') {
-          throw new Error('arrayBody[valueElement2] must be of type string.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1] !== null && arrayBody[i1] !== undefined) {
+        if (typeof arrayBody[i1].valueOf() !== 'string') {
+          throw new Error('arrayBody[i1] must be of type string.');
         }
-        requestModel[valueElement2] = arrayBody[valueElement2];
+        requestModel[i1] = arrayBody[i1];
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -3077,7 +3116,7 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
 };
 
 /**
- * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
+ * Get string array value ['foo', null, 'foo2']
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3095,7 +3134,7 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getStringWithNull = function (options, callback) {
+ArrayModel.prototype.getStringWithNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3104,10 +3143,22 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/string/foo.null.foo2';
+                   '//array/prim/string/foo.null.foo2';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -3118,6 +3169,10 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -3175,7 +3230,7 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
 };
 
 /**
- * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
+ * Get string array value ['foo', 123, 'foo2']
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3193,7 +3248,7 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getStringWithInvalid = function (options, callback) {
+ArrayModel.prototype.getStringWithInvalid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3202,10 +3257,22 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/string/foo.123.foo2';
+                   '//array/prim/string/foo.123.foo2';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -3216,6 +3283,10 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -3273,8 +3344,7 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
 };
 
 /**
- * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2":
- * "1492-10-12"}
+ * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3292,7 +3362,7 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateValid = function (options, callback) {
+ArrayModel.prototype.getDateValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3301,10 +3371,22 @@ Dictionary.prototype.getDateValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/date/valid';
+                   '//array/prim/date/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -3315,6 +3397,10 @@ Dictionary.prototype.getDateValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -3360,9 +3446,9 @@ Dictionary.prototype.getDateValid = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property] = new Date(result[property]);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i] = new Date(result[i]);
             }
           }
         }
@@ -3379,9 +3465,8 @@ Dictionary.prototype.getDateValid = function (options, callback) {
 };
 
 /**
- * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
- * "1492-10-12"}
- * @param {object} arrayBody
+ * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -3400,7 +3485,7 @@ Dictionary.prototype.getDateValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3411,14 +3496,17 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] && !(arrayBody[valueElement] instanceof Date || 
-          (typeof arrayBody[valueElement].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement]))))) {
-            throw new Error('arrayBody[valueElement] must be of type date.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] && !(arrayBody[i] instanceof Date || 
+          (typeof arrayBody[i].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[i]))))) {
+            throw new Error('arrayBody[i] must be of type date.');
           }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -3426,7 +3514,11 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/date/valid';
+                   '//array/prim/date/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -3437,6 +3529,10 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -3449,22 +3545,15 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = arrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2]) {
-        if (!(arrayBody[valueElement2] instanceof Date || typeof arrayBody[valueElement2].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement2])))) {
-          throw new Error('arrayBody[valueElement2] must be of type date.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1]) {
+        if (!(arrayBody[i1] instanceof Date || typeof arrayBody[i1].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[i1])))) {
+          throw new Error('arrayBody[i1] must be of type date.');
         }
-        requestModel[valueElement2] = (arrayBody[valueElement2] instanceof Date) ? arrayBody[valueElement2].toISOString() : arrayBody[valueElement2];
+        requestModel[i1] = (arrayBody[i1] instanceof Date) ? arrayBody[i1].toISOString() : arrayBody[i1];
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -3508,7 +3597,7 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
 };
 
 /**
- * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
+ * Get date array value ['2012-01-01', null, '1776-07-04']
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3526,7 +3615,7 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateInvalidNull = function (options, callback) {
+ArrayModel.prototype.getDateInvalidNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3535,10 +3624,22 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/date/invalidnull';
+                   '//array/prim/date/invalidnull';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -3549,6 +3650,10 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -3594,9 +3699,9 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property] = new Date(result[property]);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i] = new Date(result[i]);
             }
           }
         }
@@ -3613,7 +3718,7 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
 };
 
 /**
- * Get date dictionary value {"0": "2011-03-22", "1": "date"}
+ * Get date array value ['2011-03-22', 'date']
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3631,7 +3736,7 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateInvalidChars = function (options, callback) {
+ArrayModel.prototype.getDateInvalidChars = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3640,10 +3745,22 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/date/invalidchars';
+                   '//array/prim/date/invalidchars';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -3654,6 +3771,10 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -3699,9 +3820,9 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property] = new Date(result[property]);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i] = new Date(result[i]);
             }
           }
         }
@@ -3718,8 +3839,8 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
 };
 
 /**
- * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
- * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+ * Get date-time array value ['2000-12-01t00:00:01z',
+ * '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3737,7 +3858,7 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateTimeValid = function (options, callback) {
+ArrayModel.prototype.getDateTimeValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3746,10 +3867,22 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/date-time/valid';
+                   '//array/prim/date-time/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -3760,6 +3893,10 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -3805,9 +3942,9 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property] = new Date(result[property]);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i] = new Date(result[i]);
             }
           }
         }
@@ -3824,9 +3961,9 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
 };
 
 /**
- * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
- * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
- * @param {object} arrayBody
+ * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
+ * '1492-10-12T10:15:01-08:00']
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -3845,7 +3982,7 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3856,14 +3993,17 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] && !(arrayBody[valueElement] instanceof Date || 
-          (typeof arrayBody[valueElement].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement]))))) {
-            throw new Error('arrayBody[valueElement] must be of type date.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] && !(arrayBody[i] instanceof Date || 
+          (typeof arrayBody[i].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[i]))))) {
+            throw new Error('arrayBody[i] must be of type date.');
           }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -3871,7 +4011,11 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/date-time/valid';
+                   '//array/prim/date-time/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -3882,6 +4026,10 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -3894,22 +4042,15 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = arrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2]) {
-        if (!(arrayBody[valueElement2] instanceof Date || typeof arrayBody[valueElement2].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement2])))) {
-          throw new Error('arrayBody[valueElement2] must be of type date.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1]) {
+        if (!(arrayBody[i1] instanceof Date || typeof arrayBody[i1].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[i1])))) {
+          throw new Error('arrayBody[i1] must be of type date.');
         }
-        requestModel[valueElement2] = (arrayBody[valueElement2] instanceof Date) ? arrayBody[valueElement2].toISOString() : arrayBody[valueElement2];
+        requestModel[i1] = (arrayBody[i1] instanceof Date) ? arrayBody[i1].toISOString() : arrayBody[i1];
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -3953,7 +4094,7 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
 };
 
 /**
- * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
+ * Get date array value ['2000-12-01t00:00:01z', null]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3971,7 +4112,7 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
+ArrayModel.prototype.getDateTimeInvalidNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3980,10 +4121,22 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/date-time/invalidnull';
+                   '//array/prim/date-time/invalidnull';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -3994,6 +4147,10 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -4039,9 +4196,9 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property] = new Date(result[property]);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i] = new Date(result[i]);
             }
           }
         }
@@ -4058,7 +4215,7 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
 };
 
 /**
- * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
+ * Get date array value ['2000-12-01t00:00:01z', 'date-time']
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4076,7 +4233,7 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
+ArrayModel.prototype.getDateTimeInvalidChars = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -4085,10 +4242,22 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/date-time/invalidchars';
+                   '//array/prim/date-time/invalidchars';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -4099,6 +4268,10 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -4144,9 +4317,9 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property] = new Date(result[property]);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i] = new Date(result[i]);
             }
           }
         }
@@ -4163,8 +4336,8 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
 };
 
 /**
- * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
- * hex (25, 29, 43)} with each item encoded in base64
+ * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
+ * with each item encoded in base64
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4182,7 +4355,7 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getByteValid = function (options, callback) {
+ArrayModel.prototype.getByteValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -4191,10 +4364,22 @@ Dictionary.prototype.getByteValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/byte/valid';
+                   '//array/prim/byte/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -4205,6 +4390,10 @@ Dictionary.prototype.getByteValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -4250,9 +4439,9 @@ Dictionary.prototype.getByteValid = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property] = new Buffer(result[property], 'base64');
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i] = new Buffer(result[i], 'base64');
             }
           }
         }
@@ -4269,9 +4458,9 @@ Dictionary.prototype.getByteValid = function (options, callback) {
 };
 
 /**
- * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
- * hex (25, 29, 43)} with each elementencoded in base 64
- * @param {object} arrayBody
+ * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
+ * with each elementencoded in base 64
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -4290,7 +4479,7 @@ Dictionary.prototype.getByteValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putByteValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -4301,13 +4490,16 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] && !Buffer.isBuffer(arrayBody[valueElement])) {
-        throw new Error('arrayBody[valueElement] must be of type buffer.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] && !Buffer.isBuffer(arrayBody[i])) {
+        throw new Error('arrayBody[i] must be of type buffer.');
       }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -4315,7 +4507,11 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/byte/valid';
+                   '//array/prim/byte/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -4326,6 +4522,10 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -4338,22 +4538,15 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = arrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2]) {
-        if (!Buffer.isBuffer(arrayBody[valueElement2])) {
-          throw new Error('arrayBody[valueElement2] must be of type buffer.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1]) {
+        if (!Buffer.isBuffer(arrayBody[i1])) {
+          throw new Error('arrayBody[i1] must be of type buffer.');
         }
-        requestModel[valueElement2] = arrayBody[valueElement2].toString('base64');
+        requestModel[i1] = arrayBody[i1].toString('base64');
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -4397,8 +4590,8 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
 };
 
 /**
- * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first
- * item base64 encoded
+ * Get byte array value [hex(AB, AC, AD), null] with the first item base64
+ * encoded
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4416,7 +4609,7 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getByteInvalidNull = function (options, callback) {
+ArrayModel.prototype.getByteInvalidNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -4425,10 +4618,22 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/prim/byte/invalidnull';
+                   '//array/prim/byte/invalidnull';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -4439,6 +4644,10 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -4484,9 +4693,9 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property] = new Buffer(result[property], 'base64');
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i] = new Buffer(result[i], 'base64');
             }
           }
         }
@@ -4503,7 +4712,7 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
 };
 
 /**
- * Get dictionary of complex type null value
+ * Get array of complex type null value
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4521,7 +4730,7 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getComplexNull = function (options, callback) {
+ArrayModel.prototype.getComplexNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -4530,10 +4739,22 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/complex/null';
+                   '//array/complex/null';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -4544,6 +4765,10 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -4589,9 +4814,9 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i].deserialize(parsedResponse);
             }
           }
         }
@@ -4608,7 +4833,7 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
 };
 
 /**
- * Get empty dictionary of complex type {}
+ * Get empty array of complex type []
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4626,7 +4851,7 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getComplexEmpty = function (options, callback) {
+ArrayModel.prototype.getComplexEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -4635,10 +4860,22 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/complex/empty';
+                   '//array/complex/empty';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -4649,6 +4886,10 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -4694,9 +4935,9 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i].deserialize(parsedResponse);
             }
           }
         }
@@ -4713,8 +4954,8 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
 };
 
 /**
- * Get dictionary of complex type with null item {"0": {"integer": 1,
- * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+ * Get array of complex type with null item [{'integer': 1 'string': '2'},
+ * null, {'integer': 5, 'string': '6'}]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4732,7 +4973,7 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getComplexItemNull = function (options, callback) {
+ArrayModel.prototype.getComplexItemNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -4741,10 +4982,22 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/complex/itemnull';
+                   '//array/complex/itemnull';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -4755,6 +5008,10 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -4800,9 +5057,9 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i].deserialize(parsedResponse);
             }
           }
         }
@@ -4819,8 +5076,8 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
 };
 
 /**
- * Get dictionary of complex type with empty item {"0": {"integer": 1,
- * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+ * Get array of complex type with empty item [{'integer': 1 'string': '2'},
+ * {}, {'integer': 5, 'string': '6'}]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4838,7 +5095,7 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
+ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -4847,10 +5104,22 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/complex/itemempty';
+                   '//array/complex/itemempty';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -4861,6 +5130,10 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -4906,9 +5179,9 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i].deserialize(parsedResponse);
             }
           }
         }
@@ -4925,8 +5198,8 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
 };
 
 /**
- * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"},
- * "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
+ * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer':
+ * 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4944,7 +5217,7 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getComplexValid = function (options, callback) {
+ArrayModel.prototype.getComplexValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -4953,10 +5226,22 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/complex/valid';
+                   '//array/complex/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -4967,6 +5252,10 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -5012,9 +5301,9 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+          for (var i = 0; i < result.length; i++) {
+            if (result[i] !== null && result[i] !== undefined) {
+              result[i].deserialize(parsedResponse);
             }
           }
         }
@@ -5031,10 +5320,9 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
 };
 
 /**
- * Put an dictionary of complex type with values {"0": {"integer": 1,
- * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
- * "string": "6"}}
- * @param {object} arrayBody
+ * Put an array of complex type with values [{'integer': 1 'string': '2'},
+ * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -5053,7 +5341,7 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -5062,10 +5350,22 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/complex/valid';
+                   '//array/complex/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -5076,6 +5376,10 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -5088,19 +5392,12 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          requestModel[valueElement1] = new client._models['Widget'](arrayBody[valueElement1]);
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (arrayBody[valueElement2]) {
-        requestModel[valueElement2] = arrayBody[valueElement2].serialize();
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1]) {
+        requestModel[i1] = arrayBody[i1].serialize();
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -5162,7 +5459,7 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getArrayNull = function (options, callback) {
+ArrayModel.prototype.getArrayNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -5171,10 +5468,22 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/array/null';
+                   '//array/array/null';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -5185,6 +5494,10 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -5242,7 +5555,7 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
 };
 
 /**
- * Get an empty dictionary {}
+ * Get an empty array []
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5260,7 +5573,7 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getArrayEmpty = function (options, callback) {
+ArrayModel.prototype.getArrayEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -5269,10 +5582,22 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/array/empty';
+                   '//array/array/empty';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -5283,6 +5608,10 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -5340,8 +5669,7 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
 };
 
 /**
- * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
- * "2": ["7", "8", "9"]}
+ * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5359,7 +5687,7 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getArrayItemNull = function (options, callback) {
+ArrayModel.prototype.getArrayItemNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -5368,10 +5696,22 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/array/itemnull';
+                   '//array/array/itemnull';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -5382,6 +5722,10 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -5439,8 +5783,7 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
 };
 
 /**
- * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
- * ["7", "8", "9"]}
+ * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5458,7 +5801,7 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
+ArrayModel.prototype.getArrayItemEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -5467,10 +5810,22 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/array/itemempty';
+                   '//array/array/itemempty';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -5481,6 +5836,10 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -5538,8 +5897,8 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
 };
 
 /**
- * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
- * "6"], "2": ["7", "8", "9"]}
+ * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
+ * '8', '9']]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5557,7 +5916,7 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getArrayValid = function (options, callback) {
+ArrayModel.prototype.getArrayValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -5566,10 +5925,22 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/array/valid';
+                   '//array/array/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -5580,6 +5951,10 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -5637,9 +6012,9 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
 };
 
 /**
- * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
- * "6"], "2": ["7", "8", "9"]}
- * @param {object} arrayBody
+ * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
+ * '8', '9']]
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -5658,7 +6033,7 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -5669,17 +6044,20 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (util.isArray(arrayBody[valueElement])) {
-        for (var i = 0; i < arrayBody[valueElement].length; i++) {
-          if (arrayBody[valueElement][i] !== null && arrayBody[valueElement][i] !== undefined && typeof arrayBody[valueElement][i].valueOf() !== 'string') {
-            throw new Error('arrayBody[valueElement][i] must be of type string.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (util.isArray(arrayBody[i])) {
+        for (var i1 = 0; i1 < arrayBody[i].length; i1++) {
+          if (arrayBody[i][i1] !== null && arrayBody[i][i1] !== undefined && typeof arrayBody[i][i1].valueOf() !== 'string') {
+            throw new Error('arrayBody[i][i1] must be of type string.');
           }
         }
       }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -5687,7 +6065,11 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/array/valid';
+                   '//array/array/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -5698,6 +6080,10 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -5710,31 +6096,17 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          var initializedArrayBody[valueElement1] = [];
-          arrayBody[valueElement1].forEach(function(element) {
-            if (element !== null && element !== undefined) {
-              element = element;
-            }
-            initializedArrayBody[valueElement1].push(element);
-          });
-          requestModel[valueElement1] = initializedArrayBody[valueElement1];
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement2 in arrayBody) {
-      if (util.isArray(arrayBody[valueElement2])) {
-        for (var i1 = 0; i1 < arrayBody[valueElement2].length; i1++) {
-          if (arrayBody[valueElement2][i1] !== null && arrayBody[valueElement2][i1] !== undefined) {
-            if (typeof arrayBody[valueElement2][i1].valueOf() !== 'string') {
-              throw new Error('arrayBody[valueElement2][i1] must be of type string.');
+    for (var i2 = 0; i2 < arrayBody.length; i2++) {
+      if (util.isArray(arrayBody[i2])) {
+        for (var i3 = 0; i3 < arrayBody[i2].length; i3++) {
+          if (arrayBody[i2][i3] !== null && arrayBody[i2][i3] !== undefined) {
+            if (typeof arrayBody[i2][i3].valueOf() !== 'string') {
+              throw new Error('arrayBody[i2][i3] must be of type string.');
             }
-            requestModel[valueElement2][i1] = arrayBody[valueElement2][i1];
+            requestModel[i2][i3] = arrayBody[i2][i3];
           }
         }
       }
@@ -5780,7 +6152,7 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
 };
 
 /**
- * Get an dictionaries of dictionaries with value null
+ * Get an array of Dictionaries with value null
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5798,7 +6170,7 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDictionaryNull = function (options, callback) {
+ArrayModel.prototype.getDictionaryNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -5807,10 +6179,22 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/dictionary/null';
+                   '//array/dictionary/null';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -5821,6 +6205,10 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -5878,7 +6266,7 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
 };
 
 /**
- * Get an dictionaries of dictionaries of type <string, string> with value {}
+ * Get an array of Dictionaries of type <string, string> with value []
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5896,7 +6284,7 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
+ArrayModel.prototype.getDictionaryEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -5905,10 +6293,22 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/dictionary/empty';
+                   '//array/dictionary/empty';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -5919,6 +6319,10 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -5976,9 +6380,9 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
 };
 
 /**
- * Get an dictionaries of dictionaries of type <string, string> with value
- * {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7":
- * "seven", "8": "eight", "9": "nine"}}
+ * Get an array of Dictionaries of type <string, string> with value [{'1':
+ * 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9':
+ * 'nine'}]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5996,7 +6400,7 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
+ArrayModel.prototype.getDictionaryItemNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -6005,10 +6409,22 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/dictionary/itemnull';
+                   '//array/dictionary/itemnull';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -6019,6 +6435,10 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -6076,9 +6496,9 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
 };
 
 /**
- * Get an dictionaries of dictionaries of type <string, string> with value
- * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven",
- * "8": "eight", "9": "nine"}}
+ * Get an array of Dictionaries of type <string, string> with value [{'1':
+ * 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9':
+ * 'nine'}]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -6096,7 +6516,7 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
+ArrayModel.prototype.getDictionaryItemEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -6105,10 +6525,22 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/dictionary/itemempty';
+                   '//array/dictionary/itemempty';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -6119,6 +6551,10 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -6176,9 +6612,9 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
 };
 
 /**
- * Get an dictionaries of dictionaries of type <string, string> with value
- * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
- * "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+ * Get an array of Dictionaries of type <string, string> with value [{'1':
+ * 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'},
+ * {'7': 'seven', '8': 'eight', '9': 'nine'}]
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -6196,7 +6632,7 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDictionaryValid = function (options, callback) {
+ArrayModel.prototype.getDictionaryValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -6205,10 +6641,22 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/dictionary/valid';
+                   '//array/dictionary/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -6219,6 +6667,10 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -6276,10 +6728,10 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
 };
 
 /**
- * Get an dictionaries of dictionaries of type <string, string> with value
- * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
- * "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
- * @param {object} arrayBody
+ * Get an array of Dictionaries of type <string, string> with value [{'1':
+ * 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'},
+ * {'7': 'seven', '8': 'eight', '9': 'nine'}]
+ * @param {array} arrayBody
  * 
  * @param {object} [options]
  *
@@ -6298,7 +6750,7 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback) {
+ArrayModel.prototype.putDictionaryValid = function (arrayBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -6309,17 +6761,20 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
   }
   // Validate
   try {
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    for(var valueElement in arrayBody) {
-      if (arrayBody[valueElement] && typeof arrayBody[valueElement] === 'object') {
-        for(var valueElement1 in arrayBody[valueElement]) {
-          if (arrayBody[valueElement][valueElement1] !== null && arrayBody[valueElement][valueElement1] !== undefined && typeof arrayBody[valueElement][valueElement1].valueOf() !== 'string') {
-            throw new Error('arrayBody[valueElement][valueElement1] must be of type string.');
+    for (var i = 0; i < arrayBody.length; i++) {
+      if (arrayBody[i] && typeof arrayBody[i] === 'object') {
+        for(var valueElement in arrayBody[i]) {
+          if (arrayBody[i][valueElement] !== null && arrayBody[i][valueElement] !== undefined && typeof arrayBody[i][valueElement].valueOf() !== 'string') {
+            throw new Error('arrayBody[i][valueElement] must be of type string.');
           }
         }
       }
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -6327,7 +6782,11 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
 
   // Construct URL
   var requestUrl = this.client.baseUri + 
-                   '//dictionary/dictionary/valid';
+                   '//array/dictionary/valid';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -6338,6 +6797,10 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
+  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
   if(options) {
     for(var headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -6350,28 +6813,17 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement2 in arrayBody) {
-        if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
-          for(var valueElement3 in arrayBody[valueElement2]) {
-            if (arrayBody[valueElement2][valueElement3] !== null && arrayBody[valueElement2][valueElement3] !== undefined) {
-              requestModel[valueElement2][valueElement3] = arrayBody[valueElement2][valueElement3];
-            }
-          }
-        }
-      }
+    if (!util.isArray(arrayBody)) {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
-    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
-      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
-    }
-    for(var valueElement4 in arrayBody) {
-      if (arrayBody[valueElement4] && typeof arrayBody[valueElement4] === 'object') {
-        for(var valueElement5 in arrayBody[valueElement4]) {
-          if (arrayBody[valueElement4][valueElement5] !== null && arrayBody[valueElement4][valueElement5] !== undefined) {
-            if (typeof arrayBody[valueElement4][valueElement5].valueOf() !== 'string') {
-              throw new Error('arrayBody[valueElement4][valueElement5] must be of type string.');
+    for (var i1 = 0; i1 < arrayBody.length; i1++) {
+      if (arrayBody[i1] && typeof arrayBody[i1] === 'object') {
+        for(var valueElement1 in arrayBody[i1]) {
+          if (arrayBody[i1][valueElement1] !== null && arrayBody[i1][valueElement1] !== undefined) {
+            if (typeof arrayBody[i1][valueElement1].valueOf() !== 'string') {
+              throw new Error('arrayBody[i1][valueElement1] must be of type string.');
             }
-            requestModel[valueElement4][valueElement5] = arrayBody[valueElement4][valueElement5];
+            requestModel[i1][valueElement1] = arrayBody[i1][valueElement1];
           }
         }
       }
@@ -6417,4 +6869,4 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
 };
 
 
-module.exports = Dictionary;
+module.exports = ArrayModel;

@@ -254,7 +254,13 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['Fish'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      if(complexBody['dtype'] !== null && complexBody['dtype'] !== undefined && client._models.discriminators[complexBody['dtype']]) {
+        requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+      } else {
+        throw new Error('No discriminator field "dtype" was found in parameter "complexBody".');
+      }
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));

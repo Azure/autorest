@@ -194,6 +194,9 @@ String.prototype.putNull = function (stringBody, options, callback) {
   var requestModel = null;
   try {
     if (stringBody !== null && stringBody !== undefined) {
+      requestModel = stringBody;
+    }
+    if (stringBody !== null && stringBody !== undefined) {
       if (typeof stringBody.valueOf() !== 'string') {
         throw new Error('stringBody must be of type string.');
       }
@@ -401,6 +404,9 @@ String.prototype.putEmpty = function (stringBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (stringBody !== null && stringBody !== undefined) {
+      requestModel = stringBody;
+    }
     if (stringBody === null || stringBody === undefined || typeof stringBody.valueOf() !== 'string') {
       throw new Error('stringBody cannot be null or undefined and it must be of type string.');
     }
@@ -610,6 +616,9 @@ String.prototype.putMbcs = function (stringBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (stringBody !== null && stringBody !== undefined) {
+      requestModel = stringBody;
+    }
     if (stringBody === null || stringBody === undefined || typeof stringBody.valueOf() !== 'string') {
       throw new Error('stringBody cannot be null or undefined and it must be of type string.');
     }
@@ -822,6 +831,9 @@ String.prototype.putWhitespace = function (stringBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
+    if (stringBody !== null && stringBody !== undefined) {
+      requestModel = stringBody;
+    }
     if (stringBody === null || stringBody === undefined || typeof stringBody.valueOf() !== 'string') {
       throw new Error('stringBody cannot be null or undefined and it must be of type string.');
     }

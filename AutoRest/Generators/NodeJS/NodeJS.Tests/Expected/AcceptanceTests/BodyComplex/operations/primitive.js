@@ -200,7 +200,9 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['IntWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['IntWrapper'](complexBody);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -410,7 +412,9 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['LongWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['LongWrapper'](complexBody);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -620,7 +624,9 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['FloatWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['FloatWrapper'](complexBody);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -832,7 +838,9 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['DoubleWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['DoubleWrapper'](complexBody);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1042,7 +1050,9 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['BooleanWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['BooleanWrapper'](complexBody);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1254,7 +1264,9 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['StringWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['StringWrapper'](complexBody);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1464,7 +1476,9 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['DateWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['DateWrapper'](complexBody);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1675,7 +1689,9 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['DatetimeWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['DatetimeWrapper'](complexBody);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -1884,7 +1900,9 @@ Primitive.prototype.putByte = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['ByteWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['ByteWrapper'](complexBody);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));

@@ -205,7 +205,9 @@ Inheritance.prototype.putValid = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['Siamese'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['Siamese'](complexBody);
+    }
     requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));

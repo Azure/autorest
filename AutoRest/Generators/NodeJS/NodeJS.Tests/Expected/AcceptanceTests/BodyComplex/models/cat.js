@@ -30,14 +30,14 @@ function Cat(parameters) {
       this.color = parameters.color;
     }
     if (parameters.hates !== null && parameters.hates !== undefined) {
-      var initializedArray = [];
+      var initializedParametershates = [];
       parameters.hates.forEach(function(element) {
         if (element !== null && element !== undefined) {
           element = new models['Dog'](element);
         }
-        initializedArray.push(element);
+        initializedParametershates.push(element);
       });
-      this.hates = initializedArray;
+      this.hates = initializedParametershates;
     }
   }    
 }
@@ -82,14 +82,14 @@ Cat.prototype.deserialize = function (instance) {
     }
 
     if (instance.hates !== null && instance.hates !== undefined) {
-      var deserializedArray = [];
+      var deserializedInstancehates = [];
       instance.hates.forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
           element1 = new models['Dog']().deserialize(element1);
         }
-        deserializedArray.push(element1);
+        deserializedInstancehates.push(element1);
       });
-      this.hates = deserializedArray;
+      this.hates = deserializedInstancehates;
     }
   }
 };

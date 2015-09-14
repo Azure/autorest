@@ -34,7 +34,7 @@ function Fish(parameters) {
       this.length = parameters.length;
     }
     if (parameters.siblings !== null && parameters.siblings !== undefined) {
-      var initializedArray = [];
+      var initializedParameterssiblings = [];
       parameters.siblings.forEach(function(element) {
         if (element !== null && element !== undefined) {
           if(element['dtype'] !== null && element['dtype'] !== undefined && models.discriminators[element['dtype']]) {
@@ -43,9 +43,9 @@ function Fish(parameters) {
             throw new Error('No discriminator field "dtype" was found in parameter "element".');
           }
         }
-        initializedArray.push(element);
+        initializedParameterssiblings.push(element);
       });
-      this.siblings = initializedArray;
+      this.siblings = initializedParameterssiblings;
     }
   }    
 }
@@ -101,7 +101,7 @@ Fish.prototype.deserialize = function (instance) {
     }
 
     if (instance.siblings !== null && instance.siblings !== undefined) {
-      var deserializedArray = [];
+      var deserializedInstancesiblings = [];
       instance.siblings.forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
           if(element1['dtype'] !== null && element1['dtype'] !== undefined && models.discriminators[element1['dtype']]) {
@@ -110,9 +110,9 @@ Fish.prototype.deserialize = function (instance) {
             throw new Error('No discriminator field "dtype" was found in parameter "element1".');
           }
         }
-        deserializedArray.push(element1);
+        deserializedInstancesiblings.push(element1);
       });
-      this.siblings = deserializedArray;
+      this.siblings = deserializedInstancesiblings;
     }
   }
 };

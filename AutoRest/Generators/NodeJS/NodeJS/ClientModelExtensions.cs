@@ -827,16 +827,17 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar, elementVar, modelReference);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
+                    var arrayName = valueReference.Replace(".", "").ToPascalCase();
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
                             .Indent()
-                              .AppendLine("var deserialized{0} = [];", sequence.Name.ToPascalCase())
+                              .AppendLine("var deserialized{0} = [];", arrayName)
                               .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
                                 .Indent()
                                   .AppendLine(innerSerialization)
-                                  .AppendLine("deserialized{0}.push({1});", sequence.Name.ToPascalCase(), elementVar)
+                                  .AppendLine("deserialized{0}.push({1});", arrayName, elementVar)
                                 .Outdent()
                               .AppendLine("});")
-                              .AppendLine("{0} = deserialized{1};", objectReference, sequence.Name.ToPascalCase())
+                              .AppendLine("{0} = deserialized{1};", objectReference, arrayName)
                             .Outdent()
                           .AppendLine("}").ToString();
                 }
@@ -922,16 +923,17 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 var innerInitialization = sequence.ElementType.InitializeType(scope, elementVar, elementVar, modelReference);
                 if (!string.IsNullOrEmpty(innerInitialization))
                 {
+                    var arrayName = valueReference.Replace(".","").ToPascalCase();
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
                             .Indent()
-                              .AppendLine("var initialized{0} = [];", sequence.Name.ToPascalCase())
+                              .AppendLine("var initialized{0} = [];", arrayName)
                               .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
                                 .Indent()
                                   .AppendLine(innerInitialization)
-                                  .AppendLine("initialized{0}.push({1});", sequence.Name.ToPascalCase(), elementVar)
+                                  .AppendLine("initialized{0}.push({1});", arrayName, elementVar)
                                 .Outdent()
                               .AppendLine("});")
-                              .AppendLine("{0} = initialized{1};", objectReference, sequence.Name.ToPascalCase())
+                              .AppendLine("{0} = initialized{1};", objectReference, arrayName)
                             .Outdent()
                           .AppendLine("}").ToString();
                 }
