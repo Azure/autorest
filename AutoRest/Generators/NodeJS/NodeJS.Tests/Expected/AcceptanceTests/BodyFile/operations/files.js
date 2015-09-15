@@ -100,11 +100,8 @@ Files.prototype.getFile = function (options, callback) {
     }
 
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    result.body = response;
-    return callback(null, result);
+    var result = response;
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -177,11 +174,8 @@ Files.prototype.getEmptyFile = function (options, callback) {
     }
 
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    result.body = response;
-    return callback(null, result);
+    var result = response;
+    return callback(null, result, httpRequest, response);
   });
 };
 

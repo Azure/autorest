@@ -44,6 +44,7 @@ function ArrayWrapper(parameters) {
 ArrayWrapper.prototype.serialize = function () {
   var payload = {};
   if (util.isArray(this['array'])) {
+    payload['array'] = []
     for (var i = 0; i < this['array'].length; i++) {
       if (this['array'][i] !== null && this['array'][i] !== undefined) {
         if (typeof this['array'][i].valueOf() !== 'string') {
@@ -53,6 +54,8 @@ ArrayWrapper.prototype.serialize = function () {
       }
     }
   }
+
+  return payload;
 };
 
 /**
@@ -74,6 +77,8 @@ ArrayWrapper.prototype.deserialize = function (instance) {
       this['array'] = deserializedInstancearray;
     }
   }
+
+  return this;
 };
 
 module.exports = ArrayWrapper;

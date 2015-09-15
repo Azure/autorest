@@ -46,6 +46,8 @@ Sawshark.prototype.serialize = function () {
     }
     payload['picture'] = this['picture'].toString('base64');
   }
+
+  return payload;
 };
 
 /**
@@ -61,6 +63,8 @@ Sawshark.prototype.deserialize = function (instance) {
       this['picture'] = new Buffer(instance['picture'], 'base64');
     }
   }
+
+  return this;
 };
 
 module.exports = Sawshark;

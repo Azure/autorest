@@ -116,7 +116,10 @@ Dictionary.prototype.getValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['DictionaryWrapper']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['DictionaryWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -327,7 +330,10 @@ Dictionary.prototype.getEmpty = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['DictionaryWrapper']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['DictionaryWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -537,7 +543,10 @@ Dictionary.prototype.getNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['DictionaryWrapper']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['DictionaryWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -639,7 +648,10 @@ Dictionary.prototype.getNotProvided = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['DictionaryWrapper']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['DictionaryWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

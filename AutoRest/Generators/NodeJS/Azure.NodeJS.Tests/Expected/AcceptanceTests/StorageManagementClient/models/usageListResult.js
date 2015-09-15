@@ -47,12 +47,15 @@ function UsageListResult(parameters) {
 UsageListResult.prototype.serialize = function () {
   var payload = {};
   if (util.isArray(this['value'])) {
+    payload['value'] = []
     for (var i = 0; i < this['value'].length; i++) {
       if (this['value'][i]) {
         payload['value'][i] = this['value'][i].serialize();
       }
     }
   }
+
+  return payload;
 };
 
 /**

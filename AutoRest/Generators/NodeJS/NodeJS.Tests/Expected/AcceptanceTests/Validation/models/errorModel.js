@@ -64,6 +64,8 @@ ErrorModel.prototype.serialize = function () {
     }
     payload['fields'] = this['fields'];
   }
+
+  return payload;
 };
 
 /**
@@ -86,6 +88,8 @@ ErrorModel.prototype.deserialize = function (instance) {
       this['fields'] = instance['fields'];
     }
   }
+
+  return this;
 };
 
 module.exports = ErrorModel;

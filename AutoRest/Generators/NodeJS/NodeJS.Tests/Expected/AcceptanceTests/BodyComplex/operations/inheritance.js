@@ -116,7 +116,10 @@ Inheritance.prototype.getValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['Siamese']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Siamese'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

@@ -202,16 +202,13 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
   var requestModel = null;
   try {
     if (stringBody !== null && stringBody !== undefined) {
-      requestModel = stringBody;
-    }
-    if (stringBody !== null && stringBody !== undefined) {
       var allowedValues1 = [ 'red color', 'green-color', 'blue_color' ];
-      if (!allowedValues1.some( function(item) { return item === requestModel; })) {
-        throw new Error(requestModel + ' is not a valid value. The valid values are: ' + allowedValues1);
+      if (!allowedValues1.some( function(item) { return item === stringBody; })) {
+        throw new Error(stringBody + ' is not a valid value. The valid values are: ' + allowedValues1);
       }
       requestModel = stringBody;
     }
-     else {  throw new Error('requestModel cannot be null or undefined.');
+     else {  throw new Error('stringBody cannot be null or undefined.');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {

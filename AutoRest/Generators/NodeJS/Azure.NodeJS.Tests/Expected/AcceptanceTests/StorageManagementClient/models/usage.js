@@ -63,8 +63,8 @@ Usage.prototype.serialize = function () {
   var payload = {};
   if (this['unit'] !== null && this['unit'] !== undefined) {
     var allowedValues = [ 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond' ];
-    if (!allowedValues.some( function(item) { return item === payload['unit']; })) {
-      throw new Error(payload['unit'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === this['unit']; })) {
+      throw new Error(this['unit'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
     payload['unit'] = this['unit'];
   }
@@ -86,6 +86,8 @@ Usage.prototype.serialize = function () {
   if (this['name']) {
     payload['name'] = this['name'].serialize();
   }
+
+  return payload;
 };
 
 /**

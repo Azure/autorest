@@ -38,6 +38,8 @@ StringWrapper.prototype.serialize = function () {
     throw new Error('this[\'value\'] cannot be null or undefined and it must be of type string.');
   }
   payload['value'] = this['value'];
+
+  return payload;
 };
 
 /**
@@ -52,6 +54,8 @@ StringWrapper.prototype.deserialize = function (instance) {
       this['value'] = instance['value'];
     }
   }
+
+  return this;
 };
 
 module.exports = StringWrapper;

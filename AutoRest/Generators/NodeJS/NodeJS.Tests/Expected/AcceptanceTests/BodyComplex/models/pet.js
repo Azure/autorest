@@ -52,6 +52,8 @@ Pet.prototype.serialize = function () {
     }
     payload['name'] = this['name'];
   }
+
+  return payload;
 };
 
 /**
@@ -70,6 +72,8 @@ Pet.prototype.deserialize = function (instance) {
       this['name'] = instance['name'];
     }
   }
+
+  return this;
 };
 
 module.exports = Pet;

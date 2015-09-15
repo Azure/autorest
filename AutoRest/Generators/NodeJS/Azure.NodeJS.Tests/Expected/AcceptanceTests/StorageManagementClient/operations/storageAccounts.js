@@ -164,7 +164,10 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['CheckNameAvailabilityResult']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['CheckNameAvailabilityResult'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -257,7 +260,10 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
         var parsedResponse = null;
         try {
           parsedResponse = JSON.parse(responseBody);
-          result = new client._models['StorageAccount']();
+          result = parsedResponse;
+          if (parsedResponse !== null && parsedResponse !== undefined) {
+            result = new client._models['StorageAccount'](parsedResponse);
+          }
           if (parsedResponse !== null && parsedResponse !== undefined) {
             result.deserialize(parsedResponse);
           }
@@ -428,7 +434,10 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['StorageAccount']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['StorageAccount'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -690,7 +699,10 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['StorageAccount']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['StorageAccount'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -781,6 +793,9 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
+    }
+    if (parameters === null || parameters === undefined) {
+      throw new Error('parameters cannot be null or undefined.');
     }
     if (parameters === null || parameters === undefined) {
       throw new Error('parameters cannot be null or undefined.');
@@ -878,7 +893,10 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['StorageAccount']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['StorageAccount'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -1015,7 +1033,10 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['StorageAccountKeys']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['StorageAccountKeys'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -1141,7 +1162,10 @@ StorageAccounts.prototype.list = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['StorageAccountListResult']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['StorageAccountListResult'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -1275,7 +1299,10 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['StorageAccountListResult']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['StorageAccountListResult'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -1436,7 +1463,10 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['StorageAccountKeys']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['StorageAccountKeys'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -1556,7 +1586,10 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['StorageAccountListResult']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['StorageAccountListResult'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -1677,7 +1710,10 @@ StorageAccounts.prototype.listByResourceGroupNext = function (nextPageLink, opti
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['StorageAccountListResult']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['StorageAccountListResult'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

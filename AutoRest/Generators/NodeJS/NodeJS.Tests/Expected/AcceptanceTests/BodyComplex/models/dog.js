@@ -46,6 +46,8 @@ Dog.prototype.serialize = function () {
     }
     payload['food'] = this['food'];
   }
+
+  return payload;
 };
 
 /**
@@ -61,6 +63,8 @@ Dog.prototype.deserialize = function (instance) {
       this['food'] = instance['food'];
     }
   }
+
+  return this;
 };
 
 module.exports = Dog;

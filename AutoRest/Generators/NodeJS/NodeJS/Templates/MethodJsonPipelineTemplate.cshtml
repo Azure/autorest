@@ -61,7 +61,7 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
       <text>
   // Deserialize Response
   if (statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
-    @(Model.DeserializeResponse(Model.ReturnType))
+    @(Model.DeserializeResponse(responsePair.Value))
   }
       </text>
   }

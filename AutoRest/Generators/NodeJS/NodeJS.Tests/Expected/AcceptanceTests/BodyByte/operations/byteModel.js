@@ -399,9 +399,6 @@ ByteModel.prototype.putNonAscii = function (byteBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (byteBody !== null && byteBody !== undefined) {
-      requestModel = byteBody;
-    }
     if (!Buffer.isBuffer(byteBody)) {
       throw new Error('byteBody cannot be null or undefined and it must be of type buffer.');
     }

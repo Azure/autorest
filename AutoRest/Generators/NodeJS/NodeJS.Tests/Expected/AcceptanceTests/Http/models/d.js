@@ -40,6 +40,8 @@ D.prototype.serialize = function () {
     }
     payload['httpStatusCode'] = this['httpStatusCode'];
   }
+
+  return payload;
 };
 
 /**
@@ -54,6 +56,8 @@ D.prototype.deserialize = function (instance) {
       this['httpStatusCode'] = instance['httpStatusCode'];
     }
   }
+
+  return this;
 };
 
 module.exports = D;

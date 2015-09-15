@@ -116,7 +116,10 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -217,7 +220,10 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -318,7 +324,10 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -419,7 +428,10 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -521,7 +533,10 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -622,7 +637,10 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -638,7 +656,10 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['B'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -740,7 +761,10 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -756,7 +780,10 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['B'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -858,7 +885,10 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -874,7 +904,10 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['B'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -976,6 +1009,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -989,6 +1028,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['C'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError1.request = httpRequest;
@@ -1002,6 +1047,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['D'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError2 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError2.request = httpRequest;
@@ -1100,6 +1151,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1113,6 +1170,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['C'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError1.request = httpRequest;
@@ -1126,6 +1189,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['D'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError2 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError2.request = httpRequest;
@@ -1224,6 +1293,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1237,6 +1312,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['C'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError1.request = httpRequest;
@@ -1250,6 +1331,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['D'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError2 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError2.request = httpRequest;
@@ -1349,6 +1436,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1362,6 +1455,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['C'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError1.request = httpRequest;
@@ -1375,6 +1474,12 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['D'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
       } catch (error) {
         var deserializationError2 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError2.request = httpRequest;
@@ -2050,7 +2155,10 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['A']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['A'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -2148,7 +2256,10 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['A']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['A'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -2246,7 +2357,10 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['A']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['A'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -2344,7 +2458,10 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['A']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['A'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -2765,7 +2882,10 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -2862,7 +2982,10 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -2959,7 +3082,10 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -3057,7 +3183,10 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -3154,7 +3283,10 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -3251,7 +3383,10 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -3348,7 +3483,10 @@ MultipleResponses.prototype.get200ModelA202Valid = function (options, callback) 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['A']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['A'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

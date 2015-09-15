@@ -291,7 +291,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                     builder.AppendLine("{0} = new Buffer({0}, 'base64');", valueReference);
                 }
             }
-            else if (IsSpecialDeserializationRequired(sequence))
+            else if (IsSpecialProcessingRequired(sequence))
             {
                 builder.AppendLine("for (var i = 0; i < {0}.length; i++) {{", valueReference)
                     .Indent()
@@ -319,7 +319,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                         .Outdent()
                     .AppendLine("}");
             }
-            else if (IsSpecialDeserializationRequired(dictionary))
+            else if (IsSpecialProcessingRequired(dictionary))
             {
                 builder.AppendLine("for (var property in {0}) {{", valueReference)
                     .Indent()
@@ -376,7 +376,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                                .AppendLine("}");
                     }
                 }
-                else
+                
                 {
                     builder.AppendLine(parameter.Type.ValidateType(this.Scope, parameter.Name, parameter.IsRequired));
                 }
@@ -386,12 +386,12 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <summary>
         /// If the element type of a sequenece or value type of a dictionary 
         /// contains one of the following special types then it needs to be 
-        /// deserialized. The special types are: Date, DateTime, ByteArray 
+        /// processed. The special types are: Date, DateTime, ByteArray 
         /// and CompositeType
         /// </summary>
         /// <param name="type">The type to determine if special deserialization is required</param>
         /// <returns>True if special deserialization is required. False, otherwise.</returns>
-        private static bool IsSpecialDeserializationRequired(IType type)
+        private static bool IsSpecialProcessingRequired(IType type)
         {
             PrimaryType[] validTypes = new PrimaryType[] { PrimaryType.DateTime, PrimaryType.Date, PrimaryType.ByteArray };
             SequenceType sequence = type as SequenceType;
@@ -422,9 +422,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             builder.AppendLine("var {0} = null;", responseVariable)
                    .AppendLine("try {")
                    .Indent()
-                     .AppendLine("{0} = JSON.parse(responseBody);", responseVariable);
-
-            if (type is CompositeType)
+                     .AppendLine("{0} = JSON.parse(responseBody);", responseVariable)
+                     .AppendLine("{0} = {1};", valueReference, responseVariable)
+                     .AppendLine(type.InitializeSerializationType(Scope, valueReference, responseVariable, "client._models"));
+            /*if (type is CompositeType)
             {
                 if (!string.IsNullOrEmpty(((CompositeType)type).PolymorphicDiscriminator))
                 {
@@ -439,8 +440,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             else
             {
                 builder.AppendLine("{0} = {1};", valueReference, responseVariable);
-            }
-
+            }*/
             var deserializeBody = this.GetDeserializationString(type, valueReference, responseVariable);
             if (!string.IsNullOrWhiteSpace(deserializeBody))
             {
@@ -612,13 +612,20 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             get
             {
-                string result = null;
+                var builder = new IndentedStringBuilder("  ");
                 if (this.RequestBody != null)
                 {
-                    result = this.RequestBody.Type.InitializeType(Scope, "requestModel", RequestBody.Name, "client._models");
+                    if (this.RequestBody.Type is CompositeType)
+                    {
+                        builder.AppendLine(RequestBody.Type.InitializeSerializationType(Scope, "requestModel", RequestBody.Name, "client._models"));
+                    }
+                    else
+                    {
+                        builder.AppendLine(RequestBody.Type.InitializeSerializationType(Scope, RequestBody.Name, RequestBody.Name, "client._models"));
+                    }
                 }
 
-                return result;
+                return builder.ToString();
             }
         }
     }

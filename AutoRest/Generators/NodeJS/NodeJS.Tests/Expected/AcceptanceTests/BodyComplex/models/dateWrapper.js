@@ -52,6 +52,8 @@ DateWrapper.prototype.serialize = function () {
     }
     payload['leap'] = (this['leap'] instanceof Date) ? this['leap'].toISOString() : this['leap'];
   }
+
+  return payload;
 };
 
 /**
@@ -70,6 +72,8 @@ DateWrapper.prototype.deserialize = function (instance) {
       this['leap'] = new Date(instance['leap']);
     }
   }
+
+  return this;
 };
 
 module.exports = DateWrapper;

@@ -39,6 +39,7 @@ function DictionaryWrapper(parameters) {
 DictionaryWrapper.prototype.serialize = function () {
   var payload = {};
   if (this['defaultProgram'] && typeof this['defaultProgram'] === 'object') {
+    payload['defaultProgram'] = {}
     for(var valueElement1 in this['defaultProgram']) {
       if (this['defaultProgram'][valueElement1] !== null && this['defaultProgram'][valueElement1] !== undefined) {
         if (typeof this['defaultProgram'][valueElement1].valueOf() !== 'string') {
@@ -48,6 +49,8 @@ DictionaryWrapper.prototype.serialize = function () {
       }
     }
   }
+
+  return payload;
 };
 
 /**
@@ -66,6 +69,8 @@ DictionaryWrapper.prototype.deserialize = function (instance) {
       }
     }
   }
+
+  return this;
 };
 
 module.exports = DictionaryWrapper;

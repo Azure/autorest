@@ -50,6 +50,8 @@ Product.prototype.serialize = function () {
     }
     payload['name'] = this['name'];
   }
+
+  return payload;
 };
 
 /**
@@ -68,6 +70,8 @@ Product.prototype.deserialize = function (instance) {
       this['name'] = instance['name'];
     }
   }
+
+  return this;
 };
 
 module.exports = Product;

@@ -43,6 +43,8 @@ ClassOptionalWrapper.prototype.serialize = function () {
   if (this['value']) {
     payload['value'] = this['value'].serialize();
   }
+
+  return payload;
 };
 
 /**
@@ -57,6 +59,8 @@ ClassOptionalWrapper.prototype.deserialize = function (instance) {
       this['value'] = new models['Product']().deserialize(instance['value']);
     }
   }
+
+  return this;
 };
 
 module.exports = ClassOptionalWrapper;

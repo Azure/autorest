@@ -125,7 +125,10 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -405,9 +408,6 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = bodyParameter;
-    }
-    if (bodyParameter !== null && bodyParameter !== undefined) {
       if (typeof bodyParameter.valueOf() !== 'string') {
         throw new Error('bodyParameter must be of type string.');
       }
@@ -545,7 +545,10 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -656,7 +659,10 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -769,7 +775,10 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }

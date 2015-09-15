@@ -46,6 +46,7 @@ ArrayWrapper.prototype.serialize = function () {
   if (!util.isArray(this['value'])) {
     throw new Error('this[\'value\'] cannot be null or undefined and it must be of type array.');
   }
+  payload['value'] = []
   for (var i = 0; i < this['value'].length; i++) {
     if (this['value'][i] !== null && this['value'][i] !== undefined) {
       if (typeof this['value'][i].valueOf() !== 'string') {
@@ -54,6 +55,8 @@ ArrayWrapper.prototype.serialize = function () {
       payload['value'][i] = this['value'][i];
     }
   }
+
+  return payload;
 };
 
 /**
@@ -75,6 +78,8 @@ ArrayWrapper.prototype.deserialize = function (instance) {
       this['value'] = deserializedInstancevalue;
     }
   }
+
+  return this;
 };
 
 module.exports = ArrayWrapper;

@@ -53,6 +53,8 @@ DoubleWrapper.prototype.serialize = function () {
     }
     payload['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'] = this['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'];
   }
+
+  return payload;
 };
 
 /**
@@ -71,6 +73,8 @@ DoubleWrapper.prototype.deserialize = function (instance) {
       this['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'] = instance['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'];
     }
   }
+
+  return this;
 };
 
 module.exports = DoubleWrapper;

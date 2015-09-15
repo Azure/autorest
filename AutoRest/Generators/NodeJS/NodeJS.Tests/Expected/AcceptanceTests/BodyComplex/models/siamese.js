@@ -46,6 +46,8 @@ Siamese.prototype.serialize = function () {
     }
     payload['breed'] = this['breed'];
   }
+
+  return payload;
 };
 
 /**
@@ -61,6 +63,8 @@ Siamese.prototype.deserialize = function (instance) {
       this['breed'] = instance['breed'];
     }
   }
+
+  return this;
 };
 
 module.exports = Siamese;

@@ -20,7 +20,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 settings = new Settings
                 {
                     Input = specFile,
-                    OutputDirectory = "D:\\work\\sdk\\AutoRest\\AutoRest\\Generators\\NodeJS\\Azure.NodeJS.Tests\\Expected\\AcceptanceTests\\StorageManagementClient",
+                    OutputDirectory = "D:\\sdk\\AutoRest\\AutoRest\\Generators\\NodeJS\\Azure.NodeJS.Tests\\Expected\\AcceptanceTests\\StorageManagementClient",
                     Header = "MICROSOFT_MIT",
                     Modeler = modeler
                 };

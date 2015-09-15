@@ -135,16 +135,16 @@ StorageAccount.prototype.serialize = function () {
   var payload = StorageAccount['super_'].prototype.serialize.call(this);
   if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
     var allowedValues = [ 'Creating', 'ResolvingDNS', 'Succeeded' ];
-    if (!allowedValues.some( function(item) { return item === payload['properties']['provisioningState']; })) {
-      throw new Error(payload['properties']['provisioningState'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === this['provisioningState']; })) {
+      throw new Error(this['provisioningState'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
     payload['properties']['provisioningState'] = this['provisioningState'];
   }
 
   if (this['accountType'] !== null && this['accountType'] !== undefined) {
     var allowedValues1 = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    if (!allowedValues1.some( function(item) { return item === payload['properties']['accountType']; })) {
-      throw new Error(payload['properties']['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues1);
+    if (!allowedValues1.some( function(item) { return item === this['accountType']; })) {
+      throw new Error(this['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues1);
     }
     payload['properties']['accountType'] = this['accountType'];
   }
@@ -162,8 +162,8 @@ StorageAccount.prototype.serialize = function () {
 
   if (this['statusOfPrimary'] !== null && this['statusOfPrimary'] !== undefined) {
     var allowedValues2 = [ 'Available', 'Unavailable' ];
-    if (!allowedValues2.some( function(item) { return item === payload['properties']['statusOfPrimary']; })) {
-      throw new Error(payload['properties']['statusOfPrimary'] + ' is not a valid value. The valid values are: ' + allowedValues2);
+    if (!allowedValues2.some( function(item) { return item === this['statusOfPrimary']; })) {
+      throw new Error(this['statusOfPrimary'] + ' is not a valid value. The valid values are: ' + allowedValues2);
     }
     payload['properties']['statusOfPrimary'] = this['statusOfPrimary'];
   }
@@ -184,8 +184,8 @@ StorageAccount.prototype.serialize = function () {
 
   if (this['statusOfSecondary'] !== null && this['statusOfSecondary'] !== undefined) {
     var allowedValues3 = [ 'Available', 'Unavailable' ];
-    if (!allowedValues3.some( function(item) { return item === payload['properties']['statusOfSecondary']; })) {
-      throw new Error(payload['properties']['statusOfSecondary'] + ' is not a valid value. The valid values are: ' + allowedValues3);
+    if (!allowedValues3.some( function(item) { return item === this['statusOfSecondary']; })) {
+      throw new Error(this['statusOfSecondary'] + ' is not a valid value. The valid values are: ' + allowedValues3);
     }
     payload['properties']['statusOfSecondary'] = this['statusOfSecondary'];
   }
@@ -204,6 +204,8 @@ StorageAccount.prototype.serialize = function () {
   if (this['secondaryEndpoints']) {
     payload['properties']['secondaryEndpoints'] = this['secondaryEndpoints'].serialize();
   }
+
+  return payload;
 };
 
 /**

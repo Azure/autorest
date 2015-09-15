@@ -114,7 +114,10 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -212,7 +215,10 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -292,9 +298,6 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
-      requestModel = booleanValue;
-    }
-    if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
       }
@@ -338,7 +341,10 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -418,9 +424,6 @@ HttpServerFailure.prototype.delete505 = function (booleanValue, options, callbac
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
-      requestModel = booleanValue;
-    }
-    if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
       }
@@ -464,7 +467,10 @@ HttpServerFailure.prototype.delete505 = function (booleanValue, options, callbac
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }

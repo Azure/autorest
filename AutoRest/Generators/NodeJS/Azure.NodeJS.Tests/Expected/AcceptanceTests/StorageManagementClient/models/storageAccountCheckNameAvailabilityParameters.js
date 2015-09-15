@@ -52,6 +52,8 @@ StorageAccountCheckNameAvailabilityParameters.prototype.serialize = function () 
     }
     payload['type'] = this['type'];
   }
+
+  return payload;
 };
 
 /**

@@ -61,8 +61,8 @@ CheckNameAvailabilityResult.prototype.serialize = function () {
 
   if (this['reason'] !== null && this['reason'] !== undefined) {
     var allowedValues = [ 'AccountNameInvalid', 'AlreadyExists' ];
-    if (!allowedValues.some( function(item) { return item === payload['reason']; })) {
-      throw new Error(payload['reason'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === this['reason']; })) {
+      throw new Error(this['reason'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
     payload['reason'] = this['reason'];
   }
@@ -73,6 +73,8 @@ CheckNameAvailabilityResult.prototype.serialize = function () {
     }
     payload['message'] = this['message'];
   }
+
+  return payload;
 };
 
 /**

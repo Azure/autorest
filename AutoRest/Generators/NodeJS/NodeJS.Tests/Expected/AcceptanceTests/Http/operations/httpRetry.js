@@ -181,9 +181,6 @@ HttpRetry.prototype.put500 = function (booleanValue, options, callback) {
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
-      requestModel = booleanValue;
-    }
-    if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
       }
@@ -293,9 +290,6 @@ HttpRetry.prototype.patch500 = function (booleanValue, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (booleanValue !== null && booleanValue !== undefined) {
-      requestModel = booleanValue;
-    }
     if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
@@ -492,9 +486,6 @@ HttpRetry.prototype.post503 = function (booleanValue, options, callback) {
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
-      requestModel = booleanValue;
-    }
-    if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
       }
@@ -604,9 +595,6 @@ HttpRetry.prototype.delete503 = function (booleanValue, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (booleanValue !== null && booleanValue !== undefined) {
-      requestModel = booleanValue;
-    }
     if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
@@ -718,9 +706,6 @@ HttpRetry.prototype.put504 = function (booleanValue, options, callback) {
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
-      requestModel = booleanValue;
-    }
-    if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');
       }
@@ -830,9 +815,6 @@ HttpRetry.prototype.patch504 = function (booleanValue, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (booleanValue !== null && booleanValue !== undefined) {
-      requestModel = booleanValue;
-    }
     if (booleanValue !== null && booleanValue !== undefined) {
       if (typeof booleanValue !== 'boolean') {
         throw new Error('booleanValue must be of type boolean.');

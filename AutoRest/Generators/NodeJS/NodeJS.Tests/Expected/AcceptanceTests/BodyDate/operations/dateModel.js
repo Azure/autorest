@@ -500,9 +500,6 @@ DateModel.prototype.putMaxDate = function (dateBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (dateBody !== null && dateBody !== undefined) {
-      requestModel = dateBody;
-    }
     if(!dateBody || !(dateBody instanceof Date || (typeof dateBody.valueOf() === 'string' && !isNaN(Date.parse(dateBody))))) {
       throw new Error('dateBody cannot be null or undefined and it must be of type date.');
     }
@@ -713,9 +710,6 @@ DateModel.prototype.putMinDate = function (dateBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (dateBody !== null && dateBody !== undefined) {
-      requestModel = dateBody;
-    }
     if(!dateBody || !(dateBody instanceof Date || (typeof dateBody.valueOf() === 'string' && !isNaN(Date.parse(dateBody))))) {
       throw new Error('dateBody cannot be null or undefined and it must be of type date.');
     }

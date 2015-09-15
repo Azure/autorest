@@ -66,6 +66,8 @@ Endpoints.prototype.serialize = function () {
     }
     payload['table'] = this['table'];
   }
+
+  return payload;
 };
 
 /**

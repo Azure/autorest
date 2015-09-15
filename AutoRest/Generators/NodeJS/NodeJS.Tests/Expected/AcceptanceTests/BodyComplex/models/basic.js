@@ -61,11 +61,14 @@ Basic.prototype.serialize = function () {
 
   if (this['color'] !== null && this['color'] !== undefined) {
     var allowedValues = [ 'cyan', 'Magenta', 'YELLOW', 'blacK' ];
-    if (!allowedValues.some( function(item) { return item === payload['color']; })) {
-      throw new Error(payload['color'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    var thiscolor = this['color'];
+    if (!allowedValues.some( function(item) { return item === thiscolor; })) {
+      throw new Error(this['color'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
     payload['color'] = this['color'];
   }
+
+  return payload;
 };
 
 /**
@@ -88,6 +91,8 @@ Basic.prototype.deserialize = function (instance) {
       this['color'] = instance['color'];
     }
   }
+
+  return this;
 };
 
 module.exports = Basic;

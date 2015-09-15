@@ -52,6 +52,8 @@ Widget.prototype.serialize = function () {
     }
     payload['string'] = this['string'];
   }
+
+  return payload;
 };
 
 /**
@@ -70,6 +72,8 @@ Widget.prototype.deserialize = function (instance) {
       this['string'] = instance['string'];
     }
   }
+
+  return this;
 };
 
 module.exports = Widget;

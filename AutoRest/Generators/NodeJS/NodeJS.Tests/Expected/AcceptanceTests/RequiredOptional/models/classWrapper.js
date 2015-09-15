@@ -45,6 +45,8 @@ ClassWrapper.prototype.serialize = function () {
   }
    else {  throw new Error('this[\'value\'] cannot be null or undefined.');
   }
+
+  return payload;
 };
 
 /**
@@ -59,6 +61,8 @@ ClassWrapper.prototype.deserialize = function (instance) {
       this['value'] = new models['Product']().deserialize(instance['value']);
     }
   }
+
+  return this;
 };
 
 module.exports = ClassWrapper;

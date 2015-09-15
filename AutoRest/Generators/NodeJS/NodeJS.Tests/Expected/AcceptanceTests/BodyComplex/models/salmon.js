@@ -58,6 +58,8 @@ Salmon.prototype.serialize = function () {
     }
     payload['iswild'] = this['iswild'];
   }
+
+  return payload;
 };
 
 /**
@@ -77,6 +79,8 @@ Salmon.prototype.deserialize = function (instance) {
       this['iswild'] = instance['iswild'];
     }
   }
+
+  return this;
 };
 
 module.exports = Salmon;

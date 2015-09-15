@@ -53,6 +53,8 @@ StorageAccountKeys.prototype.serialize = function () {
     }
     payload['key2'] = this['key2'];
   }
+
+  return payload;
 };
 
 /**

@@ -96,9 +96,6 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = bodyParameter;
-    }
     if (bodyParameter === null || bodyParameter === undefined || typeof bodyParameter !== 'number') {
       throw new Error('bodyParameter cannot be null or undefined and it must be of type number.');
     }
@@ -141,7 +138,10 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -220,9 +220,6 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = bodyParameter;
-    }
     if (bodyParameter !== null && bodyParameter !== undefined) {
       if (typeof bodyParameter !== 'number') {
         throw new Error('bodyParameter must be of type number.');
@@ -378,7 +375,10 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -592,7 +592,10 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -771,9 +774,6 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = bodyParameter;
-    }
     if (bodyParameter === null || bodyParameter === undefined || typeof bodyParameter.valueOf() !== 'string') {
       throw new Error('bodyParameter cannot be null or undefined and it must be of type string.');
     }
@@ -816,7 +816,10 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -895,9 +898,6 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = bodyParameter;
-    }
     if (bodyParameter !== null && bodyParameter !== undefined) {
       if (typeof bodyParameter.valueOf() !== 'string') {
         throw new Error('bodyParameter must be of type string.');
@@ -1053,7 +1053,10 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -1267,7 +1270,10 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -1491,7 +1497,10 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -1722,7 +1731,10 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -1913,19 +1925,10 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      var initializedBodyParameter = [];
-      bodyParameter.forEach(function(element) {
-        if (element !== null && element !== undefined) {
-          element = element;
-        }
-        initializedBodyParameter.push(element);
-      });
-      requestModel = initializedBodyParameter;
-    }
     if (!util.isArray(bodyParameter)) {
       throw new Error('bodyParameter cannot be null or undefined and it must be of type array.');
     }
+    requestModel = []
     for (var i1 = 0; i1 < bodyParameter.length; i1++) {
       if (bodyParameter[i1] !== null && bodyParameter[i1] !== undefined) {
         if (typeof bodyParameter[i1].valueOf() !== 'string') {
@@ -1972,7 +1975,10 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -2055,17 +2061,8 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      var initializedBodyParameter = [];
-      bodyParameter.forEach(function(element) {
-        if (element !== null && element !== undefined) {
-          element = element;
-        }
-        initializedBodyParameter.push(element);
-      });
-      requestModel = initializedBodyParameter;
-    }
     if (util.isArray(bodyParameter)) {
+      requestModel = []
       for (var i1 = 0; i1 < bodyParameter.length; i1++) {
         if (bodyParameter[i1] !== null && bodyParameter[i1] !== undefined) {
           if (typeof bodyParameter[i1].valueOf() !== 'string') {
@@ -2224,7 +2221,10 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -2443,7 +2443,10 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = new client._models['ErrorModel']();
+      result = parsedResponse;
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }

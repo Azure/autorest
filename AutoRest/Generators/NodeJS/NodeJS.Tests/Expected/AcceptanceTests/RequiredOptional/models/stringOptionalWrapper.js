@@ -40,6 +40,8 @@ StringOptionalWrapper.prototype.serialize = function () {
     }
     payload['value'] = this['value'];
   }
+
+  return payload;
 };
 
 /**
@@ -54,6 +56,8 @@ StringOptionalWrapper.prototype.deserialize = function (instance) {
       this['value'] = instance['value'];
     }
   }
+
+  return this;
 };
 
 module.exports = StringOptionalWrapper;

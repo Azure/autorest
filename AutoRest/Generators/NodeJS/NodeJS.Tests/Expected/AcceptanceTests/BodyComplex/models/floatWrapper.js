@@ -52,6 +52,8 @@ FloatWrapper.prototype.serialize = function () {
     }
     payload['field2'] = this['field2'];
   }
+
+  return payload;
 };
 
 /**
@@ -70,6 +72,8 @@ FloatWrapper.prototype.deserialize = function (instance) {
       this['field2'] = instance['field2'];
     }
   }
+
+  return this;
 };
 
 module.exports = FloatWrapper;

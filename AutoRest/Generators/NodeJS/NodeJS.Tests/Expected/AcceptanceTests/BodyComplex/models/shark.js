@@ -56,6 +56,8 @@ Shark.prototype.serialize = function () {
     throw new Error('this[\'birthday\'] cannot be null or undefined and it must be of type date.');
   }
   payload['birthday'] = (this['birthday'] instanceof Date) ? this['birthday'].toISOString() : this['birthday'];
+
+  return payload;
 };
 
 /**
@@ -75,6 +77,8 @@ Shark.prototype.deserialize = function (instance) {
       this['birthday'] = new Date(instance['birthday']);
     }
   }
+
+  return this;
 };
 
 module.exports = Shark;

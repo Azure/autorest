@@ -57,6 +57,8 @@ CustomDomain.prototype.serialize = function () {
     }
     payload['useSubDomain'] = this['useSubDomain'];
   }
+
+  return payload;
 };
 
 /**

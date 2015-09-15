@@ -52,6 +52,8 @@ BooleanWrapper.prototype.serialize = function () {
     }
     payload['field_false'] = this['fieldFalse'];
   }
+
+  return payload;
 };
 
 /**
@@ -70,6 +72,8 @@ BooleanWrapper.prototype.deserialize = function (instance) {
       this['fieldFalse'] = instance['field_false'];
     }
   }
+
+  return this;
 };
 
 module.exports = BooleanWrapper;

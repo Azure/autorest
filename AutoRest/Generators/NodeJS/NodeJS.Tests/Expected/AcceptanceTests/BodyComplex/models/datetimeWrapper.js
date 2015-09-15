@@ -52,6 +52,8 @@ DatetimeWrapper.prototype.serialize = function () {
     }
     payload['now'] = (this['now'] instanceof Date) ? this['now'].toISOString() : this['now'];
   }
+
+  return payload;
 };
 
 /**
@@ -70,6 +72,8 @@ DatetimeWrapper.prototype.deserialize = function (instance) {
       this['now'] = new Date(instance['now']);
     }
   }
+
+  return this;
 };
 
 module.exports = DatetimeWrapper;

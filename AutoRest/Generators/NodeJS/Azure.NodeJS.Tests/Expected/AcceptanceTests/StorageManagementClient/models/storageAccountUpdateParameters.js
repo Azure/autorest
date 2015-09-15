@@ -62,8 +62,8 @@ StorageAccountUpdateParameters.prototype.serialize = function () {
   var payload = StorageAccountUpdateParameters['super_'].prototype.serialize.call(this);
   if (this['accountType'] !== null && this['accountType'] !== undefined) {
     var allowedValues = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    if (!allowedValues.some( function(item) { return item === payload['properties']['accountType']; })) {
-      throw new Error(payload['properties']['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (!allowedValues.some( function(item) { return item === this['accountType']; })) {
+      throw new Error(this['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
     payload['properties']['accountType'] = this['accountType'];
   }
@@ -71,6 +71,8 @@ StorageAccountUpdateParameters.prototype.serialize = function () {
   if (this['customDomain']) {
     payload['properties']['customDomain'] = this['customDomain'].serialize();
   }
+
+  return payload;
 };
 
 /**

@@ -64,6 +64,8 @@ StringWrapper.prototype.serialize = function () {
     }
     payload['null'] = this['null'];
   }
+
+  return payload;
 };
 
 /**
@@ -86,6 +88,8 @@ StringWrapper.prototype.deserialize = function (instance) {
       this['null'] = instance['null'];
     }
   }
+
+  return this;
 };
 
 module.exports = StringWrapper;

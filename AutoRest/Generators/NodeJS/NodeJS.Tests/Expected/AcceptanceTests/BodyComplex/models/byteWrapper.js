@@ -40,6 +40,8 @@ ByteWrapper.prototype.serialize = function () {
     }
     payload['field'] = this['field'].toString('base64');
   }
+
+  return payload;
 };
 
 /**
@@ -54,6 +56,8 @@ ByteWrapper.prototype.deserialize = function (instance) {
       this['field'] = new Buffer(instance['field'], 'base64');
     }
   }
+
+  return this;
 };
 
 module.exports = ByteWrapper;

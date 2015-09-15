@@ -22,10 +22,7 @@ return client.pipeline(httpRequest, function (err, response) {
 @EmptyLine
 
   // Create Result
-  var result = new msRest.HttpOperationResponse();
-  result.request = httpRequest;
-  result.response = response;
+  var result = response;
   @Model.InitializeResponseBody
-  result.body = response;
-  return callback(null, result);
+  return callback(null, result, httpRequest, response);
 });

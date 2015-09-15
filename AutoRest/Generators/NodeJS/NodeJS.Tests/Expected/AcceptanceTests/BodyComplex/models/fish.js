@@ -72,6 +72,7 @@ Fish.prototype.serialize = function () {
   payload['length'] = this['length'];
 
   if (util.isArray(this['siblings'])) {
+    payload['siblings'] = []
     for (var i = 0; i < this['siblings'].length; i++) {
       if (this['siblings'][i]) {
         if(this['siblings'][i]['dtype'] !== null && this['siblings'][i]['dtype'] !== undefined && models.discriminators[this['siblings'][i]['dtype']]) {
@@ -82,6 +83,8 @@ Fish.prototype.serialize = function () {
       }
     }
   }
+
+  return payload;
 };
 
 /**
@@ -115,6 +118,8 @@ Fish.prototype.deserialize = function (instance) {
       this['siblings'] = deserializedInstancesiblings;
     }
   }
+
+  return this;
 };
 
 module.exports = Fish;

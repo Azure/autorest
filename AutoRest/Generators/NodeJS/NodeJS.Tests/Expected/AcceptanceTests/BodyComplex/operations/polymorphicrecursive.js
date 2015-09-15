@@ -116,7 +116,14 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models.discriminators[parsedResponse['dtype']]();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          if(parsedResponse['dtype'] !== null && parsedResponse['dtype'] !== undefined && client._models.discriminators[parsedResponse['dtype']]) {
+            result = new client._models.discriminators[parsedResponse['dtype']](parsedResponse);
+          } else {
+            throw new Error('No discriminator field "dtype" was found in parameter "parsedResponse".');
+          }
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

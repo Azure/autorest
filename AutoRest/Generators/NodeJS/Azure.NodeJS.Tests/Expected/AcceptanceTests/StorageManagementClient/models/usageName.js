@@ -54,6 +54,8 @@ UsageName.prototype.serialize = function () {
     }
     payload['localizedValue'] = this['localizedValue'];
   }
+
+  return payload;
 };
 
 /**
