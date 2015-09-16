@@ -311,7 +311,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                 else if (sequence.ElementType is CompositeType)
                 {
                     builder.AppendLine(GetDeserializationString(sequence.ElementType,
-                        string.Format(CultureInfo.InvariantCulture, "{0}[i]", valueReference)));
+                        string.Format(CultureInfo.InvariantCulture, "{0}[i]", valueReference),
+                        string.Format(CultureInfo.InvariantCulture, "{0}[i]", responseVariable)));
                 }
 
                 builder.Outdent()
@@ -337,7 +338,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                 else if (dictionary.ValueType is CompositeType)
                 {
                     builder.AppendLine(GetDeserializationString(dictionary.ValueType,
-                        string.Format(CultureInfo.InvariantCulture, "{0}[property]", valueReference)));
+                        string.Format(CultureInfo.InvariantCulture, "{0}[property]", valueReference),
+                        string.Format(CultureInfo.InvariantCulture, "{0}[property]", responseVariable)));
                 }
                 builder.Outdent()
                         .AppendLine("}")
