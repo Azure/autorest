@@ -117,9 +117,7 @@ BasicOperations.prototype.getValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          result = new client._models['Basic'](parsedResponse);
-        }
+        result = new client._models['Basic'](parsedResponse);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -207,10 +205,12 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (complexBody !== null && complexBody !== undefined) {
-      requestModel = new client._models['Basic'](complexBody);
+    requestModel = new client._models['Basic'](complexBody);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -336,9 +336,7 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          result = new client._models['Basic'](parsedResponse);
-        }
+        result = new client._models['Basic'](parsedResponse);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -440,9 +438,7 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          result = new client._models['Basic'](parsedResponse);
-        }
+        result = new client._models['Basic'](parsedResponse);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -544,9 +540,7 @@ BasicOperations.prototype.getNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          result = new client._models['Basic'](parsedResponse);
-        }
+        result = new client._models['Basic'](parsedResponse);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -648,9 +642,7 @@ BasicOperations.prototype.getNotProvided = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          result = new client._models['Basic'](parsedResponse);
-        }
+        result = new client._models['Basic'](parsedResponse);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

@@ -20,6 +20,7 @@
 function DictionaryWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
     if (parameters.defaultProgram !== null && parameters.defaultProgram !== undefined) {
+      this.defaultProgram = {};
       for(var valueElement in parameters.defaultProgram) {
         if (parameters.defaultProgram[valueElement] !== null && parameters.defaultProgram[valueElement] !== undefined) {
           this.defaultProgram[valueElement] = parameters.defaultProgram[valueElement];
@@ -39,7 +40,7 @@ function DictionaryWrapper(parameters) {
 DictionaryWrapper.prototype.serialize = function () {
   var payload = {};
   if (this['defaultProgram'] && typeof this['defaultProgram'] === 'object') {
-    payload['defaultProgram'] = {}
+    payload['defaultProgram'] = {};
     for(var valueElement1 in this['defaultProgram']) {
       if (this['defaultProgram'][valueElement1] !== null && this['defaultProgram'][valueElement1] !== undefined) {
         if (typeof this['defaultProgram'][valueElement1].valueOf() !== 'string') {
@@ -62,6 +63,7 @@ DictionaryWrapper.prototype.serialize = function () {
 DictionaryWrapper.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance['defaultProgram'] !== null && instance['defaultProgram'] !== undefined) {
+      this['defaultProgram'] = {};
       for(var valueElement2 in instance['defaultProgram']) {
         if (instance['defaultProgram'][valueElement2] !== null && instance['defaultProgram'][valueElement2] !== undefined) {
           this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];

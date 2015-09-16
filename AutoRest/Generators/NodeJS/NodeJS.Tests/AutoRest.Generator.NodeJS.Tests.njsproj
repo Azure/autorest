@@ -20,9 +20,12 @@
     <Content Include="package.json" />
     <Content Include="RegenerateExpectedClasses.ps1" />
     <Content Include="xunit.xml" />
-    <Compile Include="AcceptanceTests\acceptanceTests.js" />
-    <Compile Include="AcceptanceTests\coverageTest.js">
+    <Compile Include="AcceptanceTests\acceptanceTests.js">
       <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="AcceptanceTests\coverageTest.js">
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\headerTests.js">
       <TestFramework>Mocha</TestFramework>

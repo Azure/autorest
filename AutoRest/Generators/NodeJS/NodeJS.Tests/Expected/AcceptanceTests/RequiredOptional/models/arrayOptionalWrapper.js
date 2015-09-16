@@ -44,7 +44,7 @@ function ArrayOptionalWrapper(parameters) {
 ArrayOptionalWrapper.prototype.serialize = function () {
   var payload = {};
   if (util.isArray(this['value'])) {
-    payload['value'] = []
+    payload['value'] = [];
     for (var i = 0; i < this['value'].length; i++) {
       if (this['value'][i] !== null && this['value'][i] !== undefined) {
         if (typeof this['value'][i].valueOf() !== 'string') {

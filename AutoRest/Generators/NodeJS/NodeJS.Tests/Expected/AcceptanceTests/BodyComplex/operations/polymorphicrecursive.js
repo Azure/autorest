@@ -117,13 +117,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          if(parsedResponse['dtype'] !== null && parsedResponse['dtype'] !== undefined && client._models.discriminators[parsedResponse['dtype']]) {
-            result = new client._models.discriminators[parsedResponse['dtype']](parsedResponse);
-          } else {
-            throw new Error('No discriminator field "dtype" was found in parameter "parsedResponse".');
-          }
-        }
+        result = new client._models.discriminators[parsedResponse['dtype']](parsedResponse);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -201,6 +195,8 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  * 
  * @param {array} [complexBody.siblings]
  * 
+ * @param {string} [complexBody.dtype] Polymorhpic Discriminator
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -261,14 +257,12 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
   var requestContent = null;
   var requestModel = null;
   try {
-    if (complexBody !== null && complexBody !== undefined) {
-      if(complexBody['dtype'] !== null && complexBody['dtype'] !== undefined && client._models.discriminators[complexBody['dtype']]) {
-        requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
-      } else {
-        throw new Error('No discriminator field "dtype" was found in parameter "complexBody".');
-      }
+    requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);

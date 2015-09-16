@@ -122,8 +122,8 @@ describe('nodejs', function () {
         testClient.primitive.getDouble(function (error, result) {
           should.not.exist(error);
           result.field1.should.equal(3e-100);
-          result.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose.should.equal(-0.000000000000000000000000000000000000000000000000000000005);
-          testClient.primitive.putDouble({ 'field1': 3e-100, 'field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose': -0.000000000000000000000000000000000000000000000000000000005 }, function (error, result) {
+          result.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.should.equal(-0.000000000000000000000000000000000000000000000000000000005);
+          testClient.primitive.putDouble({ 'field1': 3e-100, 'field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose': -0.000000000000000000000000000000000000000000000000000000005 }, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -133,9 +133,9 @@ describe('nodejs', function () {
       it('should get and put valid bool properties', function (done) {
         testClient.primitive.getBool(function (error, result) {
           should.not.exist(error);
-          result.field_true.should.equal(true);
-          result.field_false.should.equal(false);
-          testClient.primitive.putBool({ 'field_true': true, 'field_false': false }, function (error, result) {
+          result.fieldTrue.should.equal(true);
+          result.fieldFalse.should.equal(false);
+          testClient.primitive.putBool({ 'fieldTrue': true, 'fieldFalse': false }, function (error, result) {
             should.not.exist(error);
             done();
           });

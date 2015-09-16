@@ -180,9 +180,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          result = new client._models['Product'](parsedResponse);
-        }
+        result = new client._models['Product'](parsedResponse);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -291,10 +289,12 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (body !== null && body !== undefined) {
-      requestModel = new client._models['Product'](body);
+    requestModel = new client._models['Product'](body);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -335,9 +335,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          result = new client._models['Product'](parsedResponse);
-        }
+        result = new client._models['Product'](parsedResponse);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

@@ -638,7 +638,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                           escapedObjectReference, sequence.Name.ToLower(CultureInfo.InvariantCulture))
                         .Outdent()
                       .AppendLine("}")
-                      .AppendLine("{0} = []", valueReference)
+                      .AppendLine("{0} = [];", valueReference)
                       .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
                             .Indent()
                               .AppendLine(innerSerialization)
@@ -648,7 +648,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 return builder.AppendLine("if (util.isArray({0})) {{", objectReference)
                         .Indent()
-                          .AppendLine("{0} = []", valueReference)
+                          .AppendLine("{0} = [];", valueReference)
                           .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
                             .Indent()
                               .AppendLine(innerSerialization)
@@ -683,7 +683,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                             escapedObjectReference, dictionary.Name.ToLower(CultureInfo.InvariantCulture))
                         .Outdent()
                       .AppendLine("}")
-                      .AppendLine("{0} = {{}}", valueReference)
+                      .AppendLine("{0} = {{}};", valueReference)
                       .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
                         .Indent()
                           .AppendLine(innerSerialization)
@@ -693,7 +693,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 return builder.AppendLine("if ({0} && typeof {0} === 'object') {{", objectReference)
                         .Indent()
-                          .AppendLine("{0} = {{}}", valueReference)
+                          .AppendLine("{0} = {{}};", valueReference)
                           .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
                             .Indent()
                               .AppendLine(innerSerialization)
@@ -786,7 +786,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 if (primary == PrimaryType.ByteArray)
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() === 'string') {{", valueReference)
+                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
                             .Indent()
                                 .AppendLine("{1} = new Buffer({0}, 'base64');", valueReference, objectReference)
                             .Outdent()
@@ -869,6 +869,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
                             .Indent()
+                            .AppendLine("{0} = {{}};", objectReference)
                               .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
                                 .Indent()
                                   .AppendLine(innerSerialization)
@@ -965,6 +966,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
                             .Indent()
+                              .AppendLine("{0} = {{}};", objectReference)
                               .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
                                 .Indent()
                                   .AppendLine(innerInitialization)
@@ -992,31 +994,31 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var builder = new IndentedStringBuilder("  ");
             if (composite != null && composite.Properties.Any())
             {
-                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference).Indent();
+                //builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference).Indent();
 
                 if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
                 {
-                    builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
-                                        valueReference,
-                                        composite.PolymorphicDiscriminator, modelReference)
-                        .Indent()
-                            .AppendLine("{3} = new {2}.discriminators[{0}['{1}']]({0});",
-                                valueReference,
-                                composite.PolymorphicDiscriminator, modelReference, objectReference)
-                        .Outdent()
-                        .AppendLine("}} else {{", valueReference)
-                        .Indent()
-                            .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
-                                        composite.PolymorphicDiscriminator,
-                                        valueReference)
-                        .Outdent()
-                        .AppendLine("}");
+                    //builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
+                    //                    valueReference,
+                     //                   composite.PolymorphicDiscriminator, modelReference)
+                           //.Indent()
+                    builder.AppendLine("{3} = new {2}.discriminators[{0}['{1}']]({0});",
+                       valueReference,
+                       composite.PolymorphicDiscriminator, modelReference, objectReference);
+                        //.Outdent()
+                        //.AppendLine("}} else {{", valueReference)
+                        //.Indent()
+                         //   .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
+                         //               composite.PolymorphicDiscriminator,
+                         //               valueReference)
+                        //.Outdent()
+                        //.AppendLine("}");
                 }
                 else
                 {
                     builder.AppendLine("{3} = new {2}['{1}']({0});", valueReference, composite.Name, modelReference, objectReference);
                 }
-                builder.Outdent().AppendLine("}");
+                //builder.Outdent().AppendLine("}");
 
                 return builder.ToString();
             }
@@ -1027,18 +1029,18 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 if (!string.IsNullOrEmpty(innerInitialization))
                 {
                     var arrayName = valueReference.ToPascalCase().NormalizeValueReference();
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                            .Indent()
-                              .AppendLine("var initialized{0} = [];", arrayName)
+                    return //builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                            //.Indent()
+                              builder.AppendLine("var initialized{0} = [];", arrayName)
                               .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
                                 .Indent()
                                   .AppendLine(innerInitialization)
                                   .AppendLine("initialized{0}.push({1});", arrayName, elementVar)
                                 .Outdent()
                               .AppendLine("});")
-                              .AppendLine("{0} = initialized{1};", objectReference, arrayName)
-                            .Outdent()
-                          .AppendLine("}").ToString();
+                              .AppendLine("{0} = initialized{1};", objectReference, arrayName).ToString();
+                            //.Outdent()
+                          //.AppendLine("}").ToString();
                 }
             }
             else if (dictionary != null)
@@ -1050,15 +1052,15 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                                                                            modelReference);
                 if (!string.IsNullOrEmpty(innerInitialization))
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                            .Indent()
-                              .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
+                    return //builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                           // .Indent()
+                              builder.AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
                                 .Indent()
                                   .AppendLine(innerInitialization)
                                 .Outdent()
-                              .AppendLine("}")
-                            .Outdent()
-                          .AppendLine("}").ToString();
+                              .AppendLine("}").ToString();
+                            //.Outdent()
+                          //.AppendLine("}").ToString();
                 }
             }
 

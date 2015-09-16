@@ -19,9 +19,24 @@ namespace Microsoft.Rest.Generator.NodeJS
         
         public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
         {
+            if (!string.IsNullOrEmpty(source.PolymorphicDiscriminator))
+            {
+                if (!source.Properties.Any(p => p.Name == source.PolymorphicDiscriminator))
+                {
+                    var polymorphicProperty = new Property
+                    {
+                        IsRequired = true,
+                        Name = source.PolymorphicDiscriminator,
+                        SerializedName = source.PolymorphicDiscriminator,
+                        Documentation = "Polymorhpic Discriminator",
+                        Type = PrimaryType.String
+                    };
+                    source.Properties.Add(polymorphicProperty);
+                }
+            }
             this.LoadFrom(source);
             ServiceClient = serviceClient;
-            if(source.BaseModelType != null)
+            if (source.BaseModelType != null)
             {
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
             }

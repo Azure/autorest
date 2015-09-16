@@ -117,9 +117,7 @@ Inheritance.prototype.getValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          result = new client._models['Siamese'](parsedResponse);
-        }
+        result = new client._models['Siamese'](parsedResponse);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -208,10 +206,12 @@ Inheritance.prototype.putValid = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (complexBody !== null && complexBody !== undefined) {
-      requestModel = new client._models['Siamese'](complexBody);
+    requestModel = new client._models['Siamese'](complexBody);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);

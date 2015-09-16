@@ -60,7 +60,7 @@ Cat.prototype.serialize = function () {
   }
 
   if (util.isArray(this['hates'])) {
-    payload['hates'] = []
+    payload['hates'] = [];
     for (var i = 0; i < this['hates'].length; i++) {
       if (this['hates'][i]) {
         payload['hates'][i] = this['hates'][i].serialize();

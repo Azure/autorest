@@ -139,9 +139,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -334,10 +332,12 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = new client._models['IntWrapper'](bodyParameter);
+    requestModel = new client._models['IntWrapper'](bodyParameter);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -376,9 +376,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -452,10 +450,12 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = new client._models['IntOptionalWrapper'](bodyParameter);
+    requestModel = new client._models['IntOptionalWrapper'](bodyParameter);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -593,9 +593,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -817,9 +815,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -1012,10 +1008,12 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = new client._models['StringWrapper'](bodyParameter);
+    requestModel = new client._models['StringWrapper'](bodyParameter);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -1054,9 +1052,7 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -1130,10 +1126,12 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = new client._models['StringOptionalWrapper'](bodyParameter);
+    requestModel = new client._models['StringOptionalWrapper'](bodyParameter);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -1271,9 +1269,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -1456,10 +1452,12 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = new client._models['Product'](bodyParameter);
+    requestModel = new client._models['Product'](bodyParameter);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -1498,9 +1496,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -1575,10 +1571,12 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = new client._models['Product'](bodyParameter);
+    requestModel = new client._models['Product'](bodyParameter);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -1690,10 +1688,12 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = new client._models['ClassWrapper'](bodyParameter);
+    requestModel = new client._models['ClassWrapper'](bodyParameter);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -1732,9 +1732,7 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -1812,10 +1810,12 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = new client._models['ClassOptionalWrapper'](bodyParameter);
+    requestModel = new client._models['ClassOptionalWrapper'](bodyParameter);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -1928,7 +1928,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
     if (!util.isArray(bodyParameter)) {
       throw new Error('bodyParameter cannot be null or undefined and it must be of type array.');
     }
-    requestModel = []
+    requestModel = [];
     for (var i1 = 0; i1 < bodyParameter.length; i1++) {
       if (bodyParameter[i1] !== null && bodyParameter[i1] !== undefined) {
         if (typeof bodyParameter[i1].valueOf() !== 'string') {
@@ -1976,9 +1976,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -2062,7 +2060,7 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
   var requestModel = null;
   try {
     if (util.isArray(bodyParameter)) {
-      requestModel = []
+      requestModel = [];
       for (var i1 = 0; i1 < bodyParameter.length; i1++) {
         if (bodyParameter[i1] !== null && bodyParameter[i1] !== undefined) {
           if (typeof bodyParameter[i1].valueOf() !== 'string') {
@@ -2180,10 +2178,12 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = new client._models['ArrayWrapper'](bodyParameter);
+    requestModel = new client._models['ArrayWrapper'](bodyParameter);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -2222,9 +2222,7 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -2298,10 +2296,12 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
-      requestModel = new client._models['ArrayOptionalWrapper'](bodyParameter);
+    requestModel = new client._models['ArrayOptionalWrapper'](bodyParameter);
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -2444,9 +2444,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }

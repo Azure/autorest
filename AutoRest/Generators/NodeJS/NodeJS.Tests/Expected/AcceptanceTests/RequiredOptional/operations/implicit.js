@@ -126,9 +126,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -546,9 +544,7 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -660,9 +656,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -776,9 +770,7 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }

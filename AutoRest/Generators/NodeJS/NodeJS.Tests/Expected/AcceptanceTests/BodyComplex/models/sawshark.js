@@ -59,7 +59,7 @@ Sawshark.prototype.serialize = function () {
 Sawshark.prototype.deserialize = function (instance) {
   Sawshark['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['picture'] !== null && instance['picture'] !== undefined && typeof instance['picture'].valueOf() === 'string') {
+    if (instance['picture'] !== null && instance['picture'] !== undefined) {
       this['picture'] = new Buffer(instance['picture'], 'base64');
     }
   }

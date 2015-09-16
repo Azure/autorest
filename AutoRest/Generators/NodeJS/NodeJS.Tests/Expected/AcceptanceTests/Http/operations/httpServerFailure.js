@@ -115,9 +115,7 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -216,9 +214,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -342,9 +338,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }
@@ -468,9 +462,7 @@ HttpServerFailure.prototype.delete505 = function (booleanValue, options, callbac
     try {
       parsedResponse = JSON.parse(responseBody);
       result = parsedResponse;
-      if (parsedResponse !== null && parsedResponse !== undefined) {
-        result = new client._models['ErrorModel'](parsedResponse);
-      }
+      result = new client._models['ErrorModel'](parsedResponse);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result.deserialize(parsedResponse);
       }

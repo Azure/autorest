@@ -56,7 +56,7 @@ function Product(parameters) {
 Product.prototype.serialize = function () {
   var payload = {};
   if (util.isArray(this['displayNames'])) {
-    payload['display_names'] = []
+    payload['display_names'] = [];
     for (var i = 0; i < this['displayNames'].length; i++) {
       if (this['displayNames'][i] !== null && this['displayNames'][i] !== undefined) {
         if (typeof this['displayNames'][i].valueOf() !== 'string') {

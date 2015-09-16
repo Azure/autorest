@@ -299,7 +299,7 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
         if (typeof arrayBody[valueElement2].valueOf() !== 'string') {
@@ -910,7 +910,7 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
         if (typeof arrayBody[valueElement2] !== 'boolean') {
@@ -1325,7 +1325,7 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
         if (typeof arrayBody[valueElement2] !== 'number') {
@@ -1740,7 +1740,7 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
         if (typeof arrayBody[valueElement2] !== 'number') {
@@ -2155,7 +2155,7 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
         if (typeof arrayBody[valueElement2] !== 'number') {
@@ -2570,7 +2570,7 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
         if (typeof arrayBody[valueElement2] !== 'number') {
@@ -2985,7 +2985,7 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2] !== null && arrayBody[valueElement2] !== undefined) {
         if (typeof arrayBody[valueElement2].valueOf() !== 'string') {
@@ -3410,7 +3410,7 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2]) {
         if (!(arrayBody[valueElement2] instanceof Date || typeof arrayBody[valueElement2].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement2])))) {
@@ -3849,7 +3849,7 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2]) {
         if (!(arrayBody[valueElement2] instanceof Date || typeof arrayBody[valueElement2].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement2])))) {
@@ -4287,7 +4287,7 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2]) {
         if (!Buffer.isBuffer(arrayBody[valueElement2])) {
@@ -4528,12 +4528,8 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
-              result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
-            }
-          }
+        for(var valueElement in parsedResponse) {
+          result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
@@ -4640,12 +4636,8 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
-              result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
-            }
-          }
+        for(var valueElement in parsedResponse) {
+          result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
@@ -4753,12 +4745,8 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
-              result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
-            }
-          }
+        for(var valueElement in parsedResponse) {
+          result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
@@ -4866,12 +4854,8 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
-              result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
-            }
-          }
+        for(var valueElement in parsedResponse) {
+          result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
@@ -4979,12 +4963,8 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
-              result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
-            }
-          }
+        for(var valueElement in parsedResponse) {
+          result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
@@ -5063,17 +5043,13 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
-          arrayBody[valueElement1] = new client._models['Widget'](arrayBody[valueElement1]);
-        }
-      }
+    for(var valueElement1 in arrayBody) {
+      arrayBody[valueElement1] = new client._models['Widget'](arrayBody[valueElement1]);
     }
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (arrayBody[valueElement2]) {
         requestModel[valueElement2] = arrayBody[valueElement2].serialize();
@@ -5689,10 +5665,10 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement2 in arrayBody) {
       if (util.isArray(arrayBody[valueElement2])) {
-        requestModel[valueElement2] = []
+        requestModel[valueElement2] = [];
         for (var i1 = 0; i1 < arrayBody[valueElement2].length; i1++) {
           if (arrayBody[valueElement2][i1] !== null && arrayBody[valueElement2][i1] !== undefined) {
             if (typeof arrayBody[valueElement2][i1].valueOf() !== 'string') {
@@ -6317,10 +6293,10 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    requestModel = {}
+    requestModel = {};
     for(var valueElement4 in arrayBody) {
       if (arrayBody[valueElement4] && typeof arrayBody[valueElement4] === 'object') {
-        requestModel[valueElement4] = {}
+        requestModel[valueElement4] = {};
         for(var valueElement5 in arrayBody[valueElement4]) {
           if (arrayBody[valueElement4][valueElement5] !== null && arrayBody[valueElement4][valueElement5] !== undefined) {
             if (typeof arrayBody[valueElement4][valueElement5].valueOf() !== 'string') {

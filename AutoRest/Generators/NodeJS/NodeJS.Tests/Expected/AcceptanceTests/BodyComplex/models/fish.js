@@ -24,6 +24,8 @@ var util = require('util');
  * 
  * @member {array} [siblings]
  * 
+ * @member {string} dtype Polymorhpic Discriminator
+ * 
  */
 function Fish(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -46,6 +48,9 @@ function Fish(parameters) {
         initializedParameterssiblings.push(element);
       });
       this.siblings = initializedParameterssiblings;
+    }
+    if (parameters.dtype !== null && parameters.dtype !== undefined) {
+      this.dtype = parameters.dtype;
     }
   }    
 }
@@ -72,7 +77,7 @@ Fish.prototype.serialize = function () {
   payload['length'] = this['length'];
 
   if (util.isArray(this['siblings'])) {
-    payload['siblings'] = []
+    payload['siblings'] = [];
     for (var i = 0; i < this['siblings'].length; i++) {
       if (this['siblings'][i]) {
         if(this['siblings'][i]['dtype'] !== null && this['siblings'][i]['dtype'] !== undefined && models.discriminators[this['siblings'][i]['dtype']]) {
@@ -83,6 +88,11 @@ Fish.prototype.serialize = function () {
       }
     }
   }
+
+  if (this['dtype'] === null || this['dtype'] === undefined || typeof this['dtype'].valueOf() !== 'string') {
+    throw new Error('this[\'dtype\'] cannot be null or undefined and it must be of type string.');
+  }
+  payload['dtype'] = this['dtype'];
 
   return payload;
 };
@@ -116,6 +126,10 @@ Fish.prototype.deserialize = function (instance) {
         deserializedInstancesiblings.push(element1);
       });
       this['siblings'] = deserializedInstancesiblings;
+    }
+
+    if (instance['dtype'] !== null && instance['dtype'] !== undefined) {
+      this['dtype'] = instance['dtype'];
     }
   }
 

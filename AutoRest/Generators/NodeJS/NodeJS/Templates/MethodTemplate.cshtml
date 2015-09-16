@@ -103,7 +103,13 @@
     @(Model.InitializeRequestBody)
   @if (Model.RequestBody.Type is CompositeType)
   {
-    @:requestContent = JSON.stringify(requestModel.serialize());
+  <text>
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  </text>
   }
   else
   {

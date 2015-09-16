@@ -79,7 +79,7 @@ else
         <text>
       // Deserialize Response
       if (response.statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
-        @(Model.DeserializeResponse(Model.ReturnType))
+        @(Model.DeserializeResponse(responsePair.Value))
       }
         </text>
       }
