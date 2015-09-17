@@ -1,15 +1,13 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp
 {

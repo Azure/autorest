@@ -4,16 +4,19 @@
 // TODO: file length is getting excessive.
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Diagnostics;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Fixtures.AcceptanceTestsBodyArray;
 using Fixtures.AcceptanceTestsBodyArray.Models;
 using Fixtures.AcceptanceTestsBodyBoolean;
 using Fixtures.AcceptanceTestsBodyByte;
+using Fixtures.AcceptanceTestsBodyComplex;
+using Fixtures.AcceptanceTestsBodyComplex.Models;
 using Fixtures.AcceptanceTestsBodyDate;
 using Fixtures.AcceptanceTestsBodyDateTime;
 using Fixtures.AcceptanceTestsBodyDictionary;
@@ -23,22 +26,19 @@ using Fixtures.AcceptanceTestsBodyInteger;
 using Fixtures.AcceptanceTestsBodyNumber;
 using Fixtures.AcceptanceTestsBodyString;
 using Fixtures.AcceptanceTestsBodyString.Models;
-using Fixtures.AcceptanceTestsBodyComplex;
-using Fixtures.AcceptanceTestsBodyComplex.Models;
+using Fixtures.AcceptanceTestsHeader;
+using Fixtures.AcceptanceTestsHeader.Models;
 using Fixtures.AcceptanceTestsHttp;
 using Fixtures.AcceptanceTestsHttp.Models;
 using Fixtures.AcceptanceTestsReport;
+using Fixtures.AcceptanceTestsRequiredOptional;
 using Fixtures.AcceptanceTestsUrl;
 using Fixtures.AcceptanceTestsUrl.Models;
-using Fixtures.AcceptanceTestsHeader;
-using Fixtures.AcceptanceTestsHeader.Models;
-using Fixtures.AcceptanceTestsRequiredOptional;
 using Fixtures.AcceptanceTestsValidation;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
 using Newtonsoft.Json;
 using Xunit;
-using System.Text;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests

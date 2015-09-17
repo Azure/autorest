@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.ClientModel;
@@ -12,8 +13,6 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
-using System.Globalization;
-using System.Text;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {

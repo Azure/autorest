@@ -2,11 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {

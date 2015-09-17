@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Modeler.Swagger.Model;
-using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {

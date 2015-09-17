@@ -3,26 +3,26 @@
 
 // TODO: file length is getting excessive.
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Collections.Generic;
-using Microsoft.Rest.Azure;
+using System.Linq;
+using Fixtures.Azure.AcceptanceTestsAzureReport;
 using Fixtures.Azure.AcceptanceTestsAzureSpecials;
-using Fixtures.Azure.AcceptanceTestsLro.Models;
+using Fixtures.Azure.AcceptanceTestsHead;
 using Fixtures.Azure.AcceptanceTestsLro;
+using Fixtures.Azure.AcceptanceTestsLro.Models;
 using Fixtures.Azure.AcceptanceTestsPaging;
+using Fixtures.Azure.AcceptanceTestsResourceFlattening;
+using Fixtures.Azure.AcceptanceTestsResourceFlattening.Models;
+using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
+using Microsoft.Rest.Azure;
 using Microsoft.Rest.Generator.CSharp.Azure.Tests.Properties;
 using Microsoft.Rest.Generator.CSharp.Tests;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
-using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
-using Fixtures.Azure.AcceptanceTestsResourceFlattening;
-using Fixtures.Azure.AcceptanceTestsResourceFlattening.Models;
-using Fixtures.Azure.AcceptanceTestsHead;
-using Fixtures.Azure.AcceptanceTestsAzureReport;
-using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
