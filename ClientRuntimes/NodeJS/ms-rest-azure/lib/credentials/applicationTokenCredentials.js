@@ -30,7 +30,7 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
     throw new Error('domain must be a non empty string.');
   }
   
-  if (!Boolean(secret) || typeof secret !== 'string') {
+  if (!Boolean(secret) || typeof username !== 'string') {
     throw new Error('secret must be a non empty string.');
   }
   
