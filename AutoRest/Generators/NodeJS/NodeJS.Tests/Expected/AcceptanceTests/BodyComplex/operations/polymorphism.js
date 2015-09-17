@@ -117,7 +117,9 @@ Polymorphism.prototype.getValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models.discriminators[parsedResponse['dtype']](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models.discriminators[parsedResponse['dtype']](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -230,7 +232,9 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+    }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
     } else {
@@ -374,7 +378,9 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+    }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
     } else {

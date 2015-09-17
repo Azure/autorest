@@ -180,7 +180,9 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['Product'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -289,7 +291,9 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['Product'](body);
+    if (body !== null && body !== undefined) {
+      requestModel = new client._models['Product'](body);
+    }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
     } else {
@@ -335,7 +339,9 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['Product'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

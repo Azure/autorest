@@ -20,19 +20,24 @@
     <Content Include=".jshintrc" />
     <Content Include="package.json" />
     <Compile Include="AcceptanceTests\coverage.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\azureSpecialProperties.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\subscriptionIdApiVersion.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\head.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\paging.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\resourceFlattening.js">
       <TestFramework>Mocha</TestFramework>
@@ -92,10 +97,12 @@
     <Compile Include="unit.js" />
     <Content Include="AcceptanceTests\testlist.txt" />
     <Compile Include="AcceptanceTests\lro.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\startServer.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Content Include="bin\Net45-Debug\AutoRest.json" />
     <Content Include="bin\Net45-Debug\AutoRest.Core.xml" />

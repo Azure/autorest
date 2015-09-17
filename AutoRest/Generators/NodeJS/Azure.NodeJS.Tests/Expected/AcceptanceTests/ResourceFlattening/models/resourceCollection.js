@@ -51,6 +51,7 @@ function ResourceCollection(parameters) {
       this.arrayofresources = initializedParametersarrayofresources;
     }
     if (parameters.dictionaryofresources !== null && parameters.dictionaryofresources !== undefined) {
+      this.dictionaryofresources = {};
       for(var valueElement in parameters.dictionaryofresources) {
         if (parameters.dictionaryofresources[valueElement] !== null && parameters.dictionaryofresources[valueElement] !== undefined) {
           this.dictionaryofresources[valueElement] = new models['FlattenedProduct'](parameters.dictionaryofresources[valueElement]);
@@ -74,6 +75,7 @@ ResourceCollection.prototype.serialize = function () {
   }
 
   if (util.isArray(this['arrayofresources'])) {
+    payload['arrayofresources'] = [];
     for (var i = 0; i < this['arrayofresources'].length; i++) {
       if (this['arrayofresources'][i]) {
         payload['arrayofresources'][i] = this['arrayofresources'][i].serialize();
@@ -82,12 +84,15 @@ ResourceCollection.prototype.serialize = function () {
   }
 
   if (this['dictionaryofresources'] && typeof this['dictionaryofresources'] === 'object') {
+    payload['dictionaryofresources'] = {};
     for(var valueElement1 in this['dictionaryofresources']) {
       if (this['dictionaryofresources'][valueElement1]) {
         payload['dictionaryofresources'][valueElement1] = this['dictionaryofresources'][valueElement1].serialize();
       }
     }
   }
+
+  return payload;
 };
 
 /**
@@ -114,6 +119,7 @@ ResourceCollection.prototype.deserialize = function (instance) {
     }
 
     if (instance['dictionaryofresources'] !== null && instance['dictionaryofresources'] !== undefined) {
+      this['dictionaryofresources'] = {};
       for(var valueElement2 in instance['dictionaryofresources']) {
         if (instance['dictionaryofresources'][valueElement2] !== null && instance['dictionaryofresources'][valueElement2] !== undefined) {
           this['dictionaryofresources'][valueElement2] = new models['FlattenedProduct']().deserialize(instance['dictionaryofresources'][valueElement2]);
@@ -121,6 +127,8 @@ ResourceCollection.prototype.deserialize = function (instance) {
       }
     }
   }
+
+  return this;
 };
 
 module.exports = ResourceCollection;

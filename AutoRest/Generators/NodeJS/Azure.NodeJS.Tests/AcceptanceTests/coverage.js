@@ -28,11 +28,11 @@ describe('nodejs', function () {
     it('should have 100% coverage for Azure', function (done) {
       testClient.getReport(function (error, result) {
         should.not.exist(error);
-        //console.log('The test coverage for azure is ' + util.inspect(result.body));
-        var total = _.keys(result.body).length;
+        //console.log('The test coverage for azure is ' + util.inspect(result));
+        var total = _.keys(result).length;
         var passed = 0;
-        _.keys(result.body).forEach(function(item) {
-          if (result.body[item] > 0) {
+        _.keys(result).forEach(function(item) {
+          if (result[item] > 0) {
             passed++;
           } else {
             console.log('No coverage for scenario: ' + item + '\n');

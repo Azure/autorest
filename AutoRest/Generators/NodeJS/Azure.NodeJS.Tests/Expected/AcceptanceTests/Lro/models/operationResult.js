@@ -57,6 +57,8 @@ OperationResult.prototype.serialize = function () {
   if (this['error']) {
     payload['error'] = this['error'].serialize();
   }
+
+  return payload;
 };
 
 /**
@@ -67,14 +69,14 @@ OperationResult.prototype.serialize = function () {
  */
 OperationResult.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['status'] !== null && instance['status'] !== undefined) {
-      this['status'] = instance['status'];
-    }
+    this['status'] = instance['status'];
 
     if (instance['error'] !== null && instance['error'] !== undefined) {
       this['error'] = new models['OperationResultError']().deserialize(instance['error']);
     }
   }
+
+  return this;
 };
 
 module.exports = OperationResult;

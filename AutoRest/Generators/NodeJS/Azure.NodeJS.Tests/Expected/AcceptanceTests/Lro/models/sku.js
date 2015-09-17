@@ -52,6 +52,8 @@ Sku.prototype.serialize = function () {
     }
     payload['id'] = this['id'];
   }
+
+  return payload;
 };
 
 /**
@@ -62,14 +64,12 @@ Sku.prototype.serialize = function () {
  */
 Sku.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['name'] !== null && instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
+    this['name'] = instance['name'];
 
-    if (instance['id'] !== null && instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
+    this['id'] = instance['id'];
   }
+
+  return this;
 };
 
 module.exports = Sku;

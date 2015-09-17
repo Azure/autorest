@@ -827,7 +827,7 @@ describe('nodejs', function () {
             assert.deepEqual(result, testNull);
             testClient.arrayModel.getComplexItemEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result, testEmpty);
+              JSON.stringify(result).should.equal(JSON.stringify(testEmpty));
               done();
             });
           });
@@ -1260,7 +1260,7 @@ describe('nodejs', function () {
             assert.deepEqual(result, testNull);
             testClient.dictionary.getComplexItemEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result, testEmpty);
+              JSON.stringify(result).should.equal(JSON.stringify(testEmpty));
               done();
             });
           });

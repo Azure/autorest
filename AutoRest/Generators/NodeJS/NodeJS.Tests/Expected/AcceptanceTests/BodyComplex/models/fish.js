@@ -39,11 +39,7 @@ function Fish(parameters) {
       var initializedParameterssiblings = [];
       parameters.siblings.forEach(function(element) {
         if (element !== null && element !== undefined) {
-          if(element['dtype'] !== null && element['dtype'] !== undefined && models.discriminators[element['dtype']]) {
-            element = new models.discriminators[element['dtype']](element);
-          } else {
-            throw new Error('No discriminator field "dtype" was found in parameter "element".');
-          }
+          element = new models.discriminators[element['dtype']](element);
         }
         initializedParameterssiblings.push(element);
       });
@@ -105,32 +101,22 @@ Fish.prototype.serialize = function () {
  */
 Fish.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['species'] !== null && instance['species'] !== undefined) {
-      this['species'] = instance['species'];
-    }
+    this['species'] = instance['species'];
 
-    if (instance['length'] !== null && instance['length'] !== undefined) {
-      this['length'] = instance['length'];
-    }
+    this['length'] = instance['length'];
 
     if (instance['siblings'] !== null && instance['siblings'] !== undefined) {
       var deserializedInstancesiblings = [];
       instance['siblings'].forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
-          if(element1['dtype'] !== null && element1['dtype'] !== undefined && models.discriminators[element1['dtype']]) {
-            element1 = new models.discriminators[element1['dtype']]().deserialize(element1);
-          } else {
-            throw new Error('No discriminator field "dtype" was found in parameter "element1".');
-          }
+          element1 = new models.discriminators[element1['dtype']]().deserialize(element1);
         }
         deserializedInstancesiblings.push(element1);
       });
       this['siblings'] = deserializedInstancesiblings;
     }
 
-    if (instance['dtype'] !== null && instance['dtype'] !== undefined) {
-      this['dtype'] = instance['dtype'];
-    }
+    this['dtype'] = instance['dtype'];
   }
 
   return this;

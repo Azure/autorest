@@ -52,6 +52,8 @@ SampleResourceGroup.prototype.serialize = function () {
     }
     payload['location'] = this['location'];
   }
+
+  return payload;
 };
 
 /**
@@ -62,14 +64,12 @@ SampleResourceGroup.prototype.serialize = function () {
  */
 SampleResourceGroup.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['name'] !== null && instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
+    this['name'] = instance['name'];
 
-    if (instance['location'] !== null && instance['location'] !== undefined) {
-      this['location'] = instance['location'];
-    }
+    this['location'] = instance['location'];
   }
+
+  return this;
 };
 
 module.exports = SampleResourceGroup;

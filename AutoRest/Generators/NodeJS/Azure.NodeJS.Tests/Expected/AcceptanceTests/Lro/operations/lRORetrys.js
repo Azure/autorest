@@ -78,12 +78,12 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
   this.beginPut201CreatingSucceeded200(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
 
-    if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
-    initialResult.body = parsedResult;
+    initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
@@ -98,7 +98,10 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
         var parsedResponse = null;
         try {
           parsedResponse = JSON.parse(responseBody);
-          result = new client._models['Product']();
+          result = parsedResponse;
+          if (parsedResponse !== null && parsedResponse !== undefined) {
+            result = new client._models['Product'](parsedResponse);
+          }
           if (parsedResponse !== null && parsedResponse !== undefined) {
             result.deserialize(parsedResponse);
           }
@@ -114,7 +117,10 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
         var parsedResponse = null;
         try {
           parsedResponse = JSON.parse(responseBody);
-          result = new client._models['Product']();
+          result = parsedResponse;
+          if (parsedResponse !== null && parsedResponse !== undefined) {
+            result = new client._models['Product'](parsedResponse);
+          }
           if (parsedResponse !== null && parsedResponse !== undefined) {
             result.deserialize(parsedResponse);
           }
@@ -215,7 +221,11 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
     if (product !== null && product !== undefined) {
       requestModel = new client._models['Product'](product);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -255,7 +265,10 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['Product']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -271,7 +284,10 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['Product']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -333,12 +349,12 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
   this.beginPutAsyncRelativeRetrySucceeded(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
 
-    if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
-    initialResult.body = parsedResult;
+    initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
@@ -353,7 +369,10 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
         var parsedResponse = null;
         try {
           parsedResponse = JSON.parse(responseBody);
-          result = new client._models['Product']();
+          result = parsedResponse;
+          if (parsedResponse !== null && parsedResponse !== undefined) {
+            result = new client._models['Product'](parsedResponse);
+          }
           if (parsedResponse !== null && parsedResponse !== undefined) {
             result.deserialize(parsedResponse);
           }
@@ -454,7 +473,11 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
     if (product !== null && product !== undefined) {
       requestModel = new client._models['Product'](product);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -494,7 +517,10 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['Product']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -548,12 +574,12 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
   this.beginDeleteProvisioning202Accepted200Succeeded(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
 
-    if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
-    initialResult.body = parsedResult;
+    initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
@@ -568,7 +594,10 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
         var parsedResponse = null;
         try {
           parsedResponse = JSON.parse(responseBody);
-          result = new client._models['Product']();
+          result = parsedResponse;
+          if (parsedResponse !== null && parsedResponse !== undefined) {
+            result = new client._models['Product'](parsedResponse);
+          }
           if (parsedResponse !== null && parsedResponse !== undefined) {
             result.deserialize(parsedResponse);
           }
@@ -584,7 +613,10 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
         var parsedResponse = null;
         try {
           parsedResponse = JSON.parse(responseBody);
-          result = new client._models['Product']();
+          result = parsedResponse;
+          if (parsedResponse !== null && parsedResponse !== undefined) {
+            result = new client._models['Product'](parsedResponse);
+          }
           if (parsedResponse !== null && parsedResponse !== undefined) {
             result.deserialize(parsedResponse);
           }
@@ -705,7 +737,10 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['Product']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -721,7 +756,10 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['Product']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -774,12 +812,12 @@ LRORetrys.prototype.delete202Retry200 = function (options, callback) {
   this.beginDelete202Retry200(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
 
-    if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
-    initialResult.body = parsedResult;
+    initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
@@ -935,12 +973,12 @@ LRORetrys.prototype.deleteAsyncRelativeRetrySucceeded = function (options, callb
   this.beginDeleteAsyncRelativeRetrySucceeded(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
 
-    if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
-    initialResult.body = parsedResult;
+    initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
@@ -1104,12 +1142,12 @@ LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
   this.beginPost202Retry200(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
 
-    if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
-    initialResult.body = parsedResult;
+    initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
@@ -1208,7 +1246,11 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
     if (product !== null && product !== undefined) {
       requestModel = new client._models['Product'](product);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -1294,12 +1336,12 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options
   this.beginPostAsyncRelativeRetrySucceeded(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
 
-    if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
-    initialResult.body = parsedResult;
+    initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
@@ -1399,7 +1441,11 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (product, op
     if (product !== null && product !== undefined) {
       requestModel = new client._models['Product'](product);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);

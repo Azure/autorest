@@ -57,12 +57,12 @@ else
   this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
     @EmptyLine
-    if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
     @EmptyLine
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
-    initialResult.body = parsedResult;
+    initialResult.body = response.body;
     client.@(Model.GetLongRunningOperationMethodNameInRuntime())(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
       @EmptyLine

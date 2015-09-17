@@ -43,7 +43,7 @@ describe('nodejs', function () {
             if (nextLink !== null && nextLink !== undefined) {
               testClient.paging.getMultiplePagesNext(nextLink, function (err, res) {
                 should.not.exist(err);
-                loop(res.body.nextLink, count + 1);
+                loop(res.nextLink, count + 1);
               });
             } else {
               count.should.be.exactly(10);
@@ -63,7 +63,7 @@ describe('nodejs', function () {
             if (nextLink !== null && nextLink !== undefined) {
               testClient.paging.getMultiplePagesRetryFirstNext(nextLink, function (err, res) {
                 should.not.exist(err);
-                loop(res.body.nextLink, count + 1);
+                loop(res.nextLink, count + 1);
               });
             } else {
               count.should.be.exactly(10);
@@ -83,7 +83,7 @@ describe('nodejs', function () {
             if (nextLink !== null && nextLink !== undefined) {
               testClient.paging.getMultiplePagesRetrySecondNext(nextLink, function (err, res) {
                 should.not.exist(err);
-                loop(res.body.nextLink, count + 1);
+                loop(res.nextLink, count + 1);
               });
             } else {
               count.should.be.exactly(10);

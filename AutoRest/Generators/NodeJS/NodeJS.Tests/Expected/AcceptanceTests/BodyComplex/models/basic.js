@@ -79,17 +79,11 @@ Basic.prototype.serialize = function () {
  */
 Basic.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['id'] !== null && instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
+    this['id'] = instance['id'];
 
-    if (instance['name'] !== null && instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
+    this['name'] = instance['name'];
 
-    if (instance['color'] !== null && instance['color'] !== undefined) {
-      this['color'] = instance['color'];
-    }
+    this['color'] = instance['color'];
   }
 
   return this;

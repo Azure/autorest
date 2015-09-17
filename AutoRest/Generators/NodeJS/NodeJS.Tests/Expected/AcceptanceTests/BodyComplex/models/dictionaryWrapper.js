@@ -65,9 +65,7 @@ DictionaryWrapper.prototype.deserialize = function (instance) {
     if (instance['defaultProgram'] !== null && instance['defaultProgram'] !== undefined) {
       this['defaultProgram'] = {};
       for(var valueElement2 in instance['defaultProgram']) {
-        if (instance['defaultProgram'][valueElement2] !== null && instance['defaultProgram'][valueElement2] !== undefined) {
-          this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
-        }
+        this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
       }
     }
   }

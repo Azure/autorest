@@ -52,6 +52,8 @@ ErrorModel.prototype.serialize = function () {
     }
     payload['message'] = this['message'];
   }
+
+  return payload;
 };
 
 /**
@@ -62,14 +64,12 @@ ErrorModel.prototype.serialize = function () {
  */
 ErrorModel.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['code'] !== null && instance['code'] !== undefined) {
-      this['code'] = instance['code'];
-    }
+    this['code'] = instance['code'];
 
-    if (instance['message'] !== null && instance['message'] !== undefined) {
-      this['message'] = instance['message'];
-    }
+    this['message'] = instance['message'];
   }
+
+  return this;
 };
 
 module.exports = ErrorModel;

@@ -84,6 +84,8 @@ FlattenedProduct.prototype.serialize = function () {
     }
     payload['properties']['provisioningState'] = this['provisioningState'];
   }
+
+  return payload;
 };
 
 /**
@@ -95,22 +97,16 @@ FlattenedProduct.prototype.serialize = function () {
 FlattenedProduct.prototype.deserialize = function (instance) {
   FlattenedProduct['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['properties']['pname'] !== null && instance['properties']['pname'] !== undefined) {
-      this['pname'] = instance['properties']['pname'];
-    }
+    this['pname'] = instance['properties']['pname'];
 
-    if (instance['properties']['type'] !== null && instance['properties']['type'] !== undefined) {
-      this['flattenedProductType'] = instance['properties']['type'];
-    }
+    this['flattenedProductType'] = instance['properties']['type'];
 
-    if (instance['properties']['provisioningStateValues'] !== null && instance['properties']['provisioningStateValues'] !== undefined) {
-      this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
-    }
+    this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
 
-    if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
-      this['provisioningState'] = instance['properties']['provisioningState'];
-    }
+    this['provisioningState'] = instance['properties']['provisioningState'];
   }
+
+  return this;
 };
 
 module.exports = FlattenedProduct;

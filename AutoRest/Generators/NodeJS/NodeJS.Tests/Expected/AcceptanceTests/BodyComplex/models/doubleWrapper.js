@@ -65,13 +65,9 @@ DoubleWrapper.prototype.serialize = function () {
  */
 DoubleWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['field1'] !== null && instance['field1'] !== undefined) {
-      this['field1'] = instance['field1'];
-    }
+    this['field1'] = instance['field1'];
 
-    if (instance['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'] !== null && instance['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'] !== undefined) {
-      this['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'] = instance['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'];
-    }
+    this['field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose'] = instance['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'];
   }
 
   return this;

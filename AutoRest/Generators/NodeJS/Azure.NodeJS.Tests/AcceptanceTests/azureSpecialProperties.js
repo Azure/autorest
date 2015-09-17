@@ -22,18 +22,18 @@ describe('nodejs', function () {
   describe('Azure Special Properties', function () {
     var testClient = new specialsClient(credentials, dummySubscriptionId, baseUri, clientOptions);
     it('should use the default api-version when no api-version parameter is present', function (done) {
-      testClient.apiVersionDefault.getMethodGlobalValid(function (error, result) {
+      testClient.apiVersionDefault.getMethodGlobalValid(function (error, result, request, response) {
         should.not.exist(error);
-        result.response.statusCode.should.equal(200);
-        testClient.apiVersionDefault.getMethodGlobalNotProvidedValid(function (error, result) {
+        response.statusCode.should.equal(200);
+        testClient.apiVersionDefault.getMethodGlobalNotProvidedValid(function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
-          testClient.apiVersionDefault.getPathGlobalValid(function (error, result) {
+          response.statusCode.should.equal(200);
+          testClient.apiVersionDefault.getPathGlobalValid(function (error, result, request, response) {
             should.not.exist(error);
-            result.response.statusCode.should.equal(200);
-            testClient.apiVersionDefault.getSwaggerGlobalValid(function (error, result) {
+            response.statusCode.should.equal(200);
+            testClient.apiVersionDefault.getSwaggerGlobalValid(function (error, result, request, response) {
               should.not.exist(error);
-              result.response.statusCode.should.equal(200);
+              response.statusCode.should.equal(200);
               done();
             });
           });
@@ -42,18 +42,18 @@ describe('nodejs', function () {
     });
 
     it('should use the api-version parameter instead of the default api-version when it is present', function (done) {
-      testClient.apiVersionLocal.getMethodLocalNull(null, function (error, result) {
+      testClient.apiVersionLocal.getMethodLocalNull(null, function (error, result, request, response) {
         should.not.exist(error);
-        result.response.statusCode.should.equal(200);
-        testClient.apiVersionLocal.getMethodLocalValid('2.0', function (error, result) {
+        response.statusCode.should.equal(200);
+        testClient.apiVersionLocal.getMethodLocalValid('2.0', function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
-          testClient.apiVersionLocal.getPathLocalValid('2.0', function (error, result) {
+          response.statusCode.should.equal(200);
+          testClient.apiVersionLocal.getPathLocalValid('2.0', function (error, result, request, response) {
             should.not.exist(error);
-            result.response.statusCode.should.equal(200);
-            testClient.apiVersionLocal.getSwaggerLocalValid('2.0', function (error, result) {
+            response.statusCode.should.equal(200);
+            testClient.apiVersionLocal.getSwaggerLocalValid('2.0', function (error, result, request, response) {
               should.not.exist(error);
-              result.response.statusCode.should.equal(200);
+              response.statusCode.should.equal(200);
               done();
             });
           });
@@ -62,18 +62,18 @@ describe('nodejs', function () {
     });
 
     it('should use the subscriptionId from credentials by default', function (done) {
-      testClient.subscriptionInCredentials.postMethodGlobalNotProvidedValid(function (error, result) {
+      testClient.subscriptionInCredentials.postMethodGlobalNotProvidedValid(function (error, result, request, response) {
         should.not.exist(error);
-        result.response.statusCode.should.equal(200);
-        testClient.subscriptionInCredentials.postMethodGlobalValid(function (error, result) {
+        response.statusCode.should.equal(200);
+        testClient.subscriptionInCredentials.postMethodGlobalValid(function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
-          testClient.subscriptionInCredentials.postPathGlobalValid(function (error, result) {
+          response.statusCode.should.equal(200);
+          testClient.subscriptionInCredentials.postPathGlobalValid(function (error, result, request, response) {
             should.not.exist(error);
-            result.response.statusCode.should.equal(200);
-            testClient.subscriptionInCredentials.postSwaggerGlobalValid(function (error, result) {
+            response.statusCode.should.equal(200);
+            testClient.subscriptionInCredentials.postSwaggerGlobalValid(function (error, result, request, response) {
               should.not.exist(error);
-              result.response.statusCode.should.equal(200);
+              response.statusCode.should.equal(200);
               done();
             });
           });
@@ -85,15 +85,15 @@ describe('nodejs', function () {
       testClient.subscriptionInMethod.postMethodLocalNull(null, function (error, result) {
         should.exist(error);
         error.message.should.match(/subscriptionId cannot be null or undefined and it must be of type string./ig);
-        testClient.subscriptionInMethod.postMethodLocalValid(dummySubscriptionId, function (error, result) {
+        testClient.subscriptionInMethod.postMethodLocalValid(dummySubscriptionId, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
-          testClient.subscriptionInMethod.postPathLocalValid(dummySubscriptionId, function (error, result) {
+          response.statusCode.should.equal(200);
+          testClient.subscriptionInMethod.postPathLocalValid(dummySubscriptionId, function (error, result, request, response) {
             should.not.exist(error);
-            result.response.statusCode.should.equal(200);
-            testClient.subscriptionInMethod.postSwaggerLocalValid(dummySubscriptionId, function (error, result) {
+            response.statusCode.should.equal(200);
+            testClient.subscriptionInMethod.postSwaggerLocalValid(dummySubscriptionId, function (error, result, request, response) {
               should.not.exist(error);
-              result.response.statusCode.should.equal(200);
+              response.statusCode.should.equal(200);
               done();
             });
           });
@@ -103,15 +103,15 @@ describe('nodejs', function () {
 
     it('should skip url encoding when specified for path parameters', function (done) {
       var unencodedPath = 'path1/path2/path3';
-      testClient.skipUrlEncoding.getMethodPathValid(unencodedPath, function (error, result) {
+      testClient.skipUrlEncoding.getMethodPathValid(unencodedPath, function (error, result, request, response) {
         should.not.exist(error);
-        result.response.statusCode.should.equal(200);
-        testClient.skipUrlEncoding.getPathPathValid(unencodedPath, function (error, result) {
+        response.statusCode.should.equal(200);
+        testClient.skipUrlEncoding.getPathPathValid(unencodedPath, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
-          testClient.skipUrlEncoding.getSwaggerPathValid(unencodedPath, function (error, result) {
+          response.statusCode.should.equal(200);
+          testClient.skipUrlEncoding.getSwaggerPathValid(unencodedPath, function (error, result, request, response) {
             should.not.exist(error);
-            result.response.statusCode.should.equal(200);
+            response.statusCode.should.equal(200);
             done();
           });
         });
@@ -120,18 +120,18 @@ describe('nodejs', function () {
 
     it('should skip url encoding when specified for query parameters', function (done) {
       var unencodedQuery = 'value1&q2=value2&q3=value3';
-      testClient.skipUrlEncoding.getMethodQueryValid(unencodedQuery, function (error, result) {
+      testClient.skipUrlEncoding.getMethodQueryValid(unencodedQuery, function (error, result, request, response) {
         should.not.exist(error);
-        result.response.statusCode.should.equal(200);
-        testClient.skipUrlEncoding.getPathQueryValid(unencodedQuery, function (error, result) {
+        response.statusCode.should.equal(200);
+        testClient.skipUrlEncoding.getPathQueryValid(unencodedQuery, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
-          testClient.skipUrlEncoding.getSwaggerQueryValid(unencodedQuery, function (error, result) {
+          response.statusCode.should.equal(200);
+          testClient.skipUrlEncoding.getSwaggerQueryValid(unencodedQuery, function (error, result, request, response) {
             should.not.exist(error);
-            result.response.statusCode.should.equal(200);
-            testClient.skipUrlEncoding.getMethodQueryNull(null, function (error, result) {
+            response.statusCode.should.equal(200);
+            testClient.skipUrlEncoding.getMethodQueryNull(null, function (error, result, request, response) {
               should.not.exist(error);
-              result.response.statusCode.should.equal(200);
+              response.statusCode.should.equal(200);
               done();
             });
           });
@@ -141,19 +141,19 @@ describe('nodejs', function () {
 
     it('should overwrite x-ms-client-request-id', function (done) {
       var validClientId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0';
-      testClient.xMsClientRequestId.paramGet(validClientId, function (error, result) {
+      testClient.xMsClientRequestId.paramGet(validClientId, function (error, result, request, response) {
         should.not.exist(error);
-        result.response.statusCode.should.equal(200);
-        result.requestId.should.equal('123');
+        response.statusCode.should.equal(200);
+        response.headers['x-ms-request-id'].should.equal('123');
         var options = {
           customHeaders: {
             'x-ms-client-request-id': validClientId
           }
         };
-        testClient.xMsClientRequestId.get(options, function (error, result) {
+        testClient.xMsClientRequestId.get(options, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
-          result.requestId.should.equal('123');
+          response.statusCode.should.equal(200);
+          response.headers['x-ms-request-id'].should.equal('123');
           done();
         });
       });

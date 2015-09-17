@@ -43,6 +43,8 @@ Product.prototype.serialize = function () {
   if (this['properties']) {
     payload['properties'] = this['properties'].serialize();
   }
+
+  return payload;
 };
 
 /**
@@ -57,6 +59,8 @@ Product.prototype.deserialize = function (instance) {
       this['properties'] = new models['ProductProperties']().deserialize(instance['properties']);
     }
   }
+
+  return this;
 };
 
 module.exports = Product;

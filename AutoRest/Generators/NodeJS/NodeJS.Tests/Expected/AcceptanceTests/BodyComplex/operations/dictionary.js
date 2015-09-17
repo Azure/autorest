@@ -117,7 +117,9 @@ Dictionary.prototype.getValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['DictionaryWrapper'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['DictionaryWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -200,7 +202,9 @@ Dictionary.prototype.putValid = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['DictionaryWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['DictionaryWrapper'](complexBody);
+    }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
     } else {
@@ -331,7 +335,9 @@ Dictionary.prototype.getEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['DictionaryWrapper'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['DictionaryWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -413,7 +419,9 @@ Dictionary.prototype.putEmpty = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['DictionaryWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['DictionaryWrapper'](complexBody);
+    }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
     } else {
@@ -544,7 +552,9 @@ Dictionary.prototype.getNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['DictionaryWrapper'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['DictionaryWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -647,7 +657,9 @@ Dictionary.prototype.getNotProvided = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['DictionaryWrapper'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['DictionaryWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

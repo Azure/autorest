@@ -117,7 +117,9 @@ ArrayModel.prototype.getValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['ArrayWrapper'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['ArrayWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -200,7 +202,9 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['ArrayWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['ArrayWrapper'](complexBody);
+    }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
     } else {
@@ -331,7 +335,9 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['ArrayWrapper'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['ArrayWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -413,7 +419,9 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['ArrayWrapper'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['ArrayWrapper'](complexBody);
+    }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
     } else {
@@ -545,7 +553,9 @@ ArrayModel.prototype.getNotProvided = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['ArrayWrapper'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['ArrayWrapper'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

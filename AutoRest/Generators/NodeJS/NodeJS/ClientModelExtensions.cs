@@ -813,21 +813,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
                 {
-                    /*builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
-                                        valueReference,
-                                        composite.PolymorphicDiscriminator, modelReference)
-                        .Indent()*/
-                            builder.AppendLine("{3} = new {2}.discriminators[{0}['{1}']]().deserialize({0});",
-                                valueReference,
-                                composite.PolymorphicDiscriminator, modelReference, objectReference).ToString();
-                        /*.Outdent()
-                        .AppendLine("}} else {{", valueReference)
-                        .Indent()
-                            .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
-                                        composite.PolymorphicDiscriminator,
-                                        valueReference)
-                        .Outdent()
-                        .AppendLine("}");*/
+                    builder.AppendLine("{3} = new {2}.discriminators[{0}['{1}']]().deserialize({0});",
+                        valueReference,
+                        composite.PolymorphicDiscriminator, modelReference, objectReference).ToString();
                 }
                 else
                 {
@@ -898,11 +886,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var builder = new IndentedStringBuilder("  ");
             if (enumType != null || primary != null)
             {
-                return //builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                    //.Indent()
-                          builder.AppendLine("{0} = {1};", objectReference, valueReference).ToString();
-                        //.Outdent()
-                       //.AppendLine("}").ToString();
+                return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                                .Indent()
+                                .AppendLine("{0} = {1};", objectReference, valueReference)
+                              .Outdent()
+                              .AppendLine("}").ToString();
             }
             else if (composite != null && composite.Properties.Any())
             {
@@ -910,21 +898,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
                 {
-                    /*builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
-                                        valueReference,
-                                        composite.PolymorphicDiscriminator, modelReference)
-                            .Indent()*/
-                            builder.AppendLine("{3} = new {2}.discriminators[{0}['{1}']]({0});",
-                                valueReference,
-                                composite.PolymorphicDiscriminator, modelReference, objectReference).ToString();
-                        /*.Outdent()
-                        .AppendLine("}} else {{", valueReference)
-                        .Indent()
-                            .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
-                                        composite.PolymorphicDiscriminator,
-                                        valueReference)
-                        .Outdent()
-                        .AppendLine("}");*/
+                    builder.AppendLine("{3} = new {2}.discriminators[{0}['{1}']]({0});",
+                        valueReference,
+                        composite.PolymorphicDiscriminator, modelReference, objectReference).ToString();
                 }
                 else
                 {
@@ -998,21 +974,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
                 {
-                    //builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
-                    //                    valueReference,
-                     //                   composite.PolymorphicDiscriminator, modelReference)
-                           //.Indent()
                     builder.AppendLine("{3} = new {2}.discriminators[{0}['{1}']]({0});",
                        valueReference,
                        composite.PolymorphicDiscriminator, modelReference, objectReference);
-                        //.Outdent()
-                        //.AppendLine("}} else {{", valueReference)
-                        //.Indent()
-                         //   .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
-                         //               composite.PolymorphicDiscriminator,
-                         //               valueReference)
-                        //.Outdent()
-                        //.AppendLine("}");
                 }
                 else
                 {

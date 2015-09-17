@@ -95,21 +95,15 @@ Product.prototype.deserialize = function (instance) {
     if (instance['display_names'] !== null && instance['display_names'] !== undefined) {
       var deserializedInstancedisplayNames = [];
       instance['display_names'].forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
-          element1 = element1;
-        }
+        element1 = element1;
         deserializedInstancedisplayNames.push(element1);
       });
       this['displayNames'] = deserializedInstancedisplayNames;
     }
 
-    if (instance['capacity'] !== null && instance['capacity'] !== undefined) {
-      this['capacity'] = instance['capacity'];
-    }
+    this['capacity'] = instance['capacity'];
 
-    if (instance['image'] !== null && instance['image'] !== undefined) {
-      this['image'] = instance['image'];
-    }
+    this['image'] = instance['image'];
   }
 
   return this;

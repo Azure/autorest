@@ -52,6 +52,8 @@ ProductProperties.prototype.serialize = function () {
     }
     payload['name'] = this['name'];
   }
+
+  return payload;
 };
 
 /**
@@ -62,14 +64,12 @@ ProductProperties.prototype.serialize = function () {
  */
 ProductProperties.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['id'] !== null && instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
+    this['id'] = instance['id'];
 
-    if (instance['name'] !== null && instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
+    this['name'] = instance['name'];
   }
+
+  return this;
 };
 
 module.exports = ProductProperties;

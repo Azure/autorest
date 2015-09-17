@@ -4528,13 +4528,17 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        for(var valueElement in parsedResponse) {
-          result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          for(var valueElement in parsedResponse) {
+            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+              result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
+            }
+          }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+              result[property].deserialize(parsedResponse[property]);
             }
           }
         }
@@ -4636,13 +4640,17 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        for(var valueElement in parsedResponse) {
-          result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          for(var valueElement in parsedResponse) {
+            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+              result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
+            }
+          }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+              result[property].deserialize(parsedResponse[property]);
             }
           }
         }
@@ -4745,13 +4753,17 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        for(var valueElement in parsedResponse) {
-          result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          for(var valueElement in parsedResponse) {
+            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+              result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
+            }
+          }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+              result[property].deserialize(parsedResponse[property]);
             }
           }
         }
@@ -4854,13 +4866,17 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        for(var valueElement in parsedResponse) {
-          result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          for(var valueElement in parsedResponse) {
+            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+              result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
+            }
+          }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+              result[property].deserialize(parsedResponse[property]);
             }
           }
         }
@@ -4963,13 +4979,17 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        for(var valueElement in parsedResponse) {
-          result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          for(var valueElement in parsedResponse) {
+            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+              result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
+            }
+          }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+              result[property].deserialize(parsedResponse[property]);
             }
           }
         }
@@ -5043,8 +5063,12 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    for(var valueElement1 in arrayBody) {
-      arrayBody[valueElement1] = new client._models['Widget'](arrayBody[valueElement1]);
+    if (arrayBody !== null && arrayBody !== undefined) {
+      for(var valueElement1 in arrayBody) {
+        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
+          arrayBody[valueElement1] = new client._models['Widget'](arrayBody[valueElement1]);
+        }
+      }
     }
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');

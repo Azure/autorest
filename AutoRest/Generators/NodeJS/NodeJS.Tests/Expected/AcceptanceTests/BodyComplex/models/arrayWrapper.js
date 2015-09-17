@@ -69,9 +69,7 @@ ArrayWrapper.prototype.deserialize = function (instance) {
     if (instance['array'] !== null && instance['array'] !== undefined) {
       var deserializedInstancearray = [];
       instance['array'].forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
-          element1 = element1;
-        }
+        element1 = element1;
         deserializedInstancearray.push(element1);
       });
       this['array'] = deserializedInstancearray;

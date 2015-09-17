@@ -105,8 +105,10 @@ Resource.prototype.deserialize = function (instance) {
     if (instance['name'] !== null && instance['name'] !== undefined) {
       this.name = instance['name'];
     }
-    if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
-      this.provisioningState = instance['properties']['provisioningState'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
+        this.provisioningState = instance['properties']['provisioningState'];
+      }
     }
     if (instance['tags'] !== null && instance['tags'] !== undefined) {
       this.tags = instance['tags'];

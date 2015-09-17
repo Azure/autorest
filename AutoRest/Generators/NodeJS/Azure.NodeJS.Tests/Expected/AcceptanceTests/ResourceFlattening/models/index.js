@@ -17,6 +17,7 @@
 var msRestAzure = require('ms-rest-azure');
 
 exports.Resource = msRestAzure.Resource;
+exports.SubResource = msRestAzure.SubResource;
 exports.CloudError = msRestAzure.CloudError;
 exports.ErrorModel = require('./errorModel');
 exports.FlattenedProduct = require('./flattenedProduct');

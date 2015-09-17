@@ -142,9 +142,10 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
         }
         initializedResourceArray.push(element);
       });
-      requestModel = initializedResourceArray;
+      resourceArray = initializedResourceArray;
     }
     if (util.isArray(resourceArray)) {
+      requestModel = [];
       for (var i1 = 0; i1 < resourceArray.length; i1++) {
         if (resourceArray[i1]) {
           requestModel[i1] = resourceArray[i1].serialize();
@@ -294,9 +295,19 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
+          var initializedParsedResponse = [];
+          parsedResponse.forEach(function(element) {
+            if (element !== null && element !== undefined) {
+              element = new client._models['FlattenedProduct'](element);
+            }
+            initializedParsedResponse.push(element);
+          });
+          result = initializedParsedResponse;
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
             if (result[i] !== null && result[i] !== undefined) {
-              result[i].deserialize(parsedResponse);
+              result[i].deserialize(parsedResponse[i]);
             }
           }
         }
@@ -388,11 +399,12 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
     if (resourceDictionary !== null && resourceDictionary !== undefined) {
       for(var valueElement1 in resourceDictionary) {
         if (resourceDictionary[valueElement1] !== null && resourceDictionary[valueElement1] !== undefined) {
-          requestModel[valueElement1] = new client._models['FlattenedProduct'](resourceDictionary[valueElement1]);
+          resourceDictionary[valueElement1] = new client._models['FlattenedProduct'](resourceDictionary[valueElement1]);
         }
       }
     }
     if (resourceDictionary && typeof resourceDictionary === 'object') {
+      requestModel = {};
       for(var valueElement2 in resourceDictionary) {
         if (resourceDictionary[valueElement2]) {
           requestModel[valueElement2] = resourceDictionary[valueElement2].serialize();
@@ -542,9 +554,16 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
         if (parsedResponse !== null && parsedResponse !== undefined) {
+          for(var valueElement in parsedResponse) {
+            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+              result[valueElement] = new client._models['FlattenedProduct'](parsedResponse[valueElement]);
+            }
+          }
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse);
+              result[property].deserialize(parsedResponse[property]);
             }
           }
         }
@@ -654,7 +673,11 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
     if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
       requestModel = new client._models['ResourceCollection'](resourceComplexObject);
     }
-    requestContent = JSON.stringify(requestModel.serialize());
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -795,7 +818,10 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = new client._models['ResourceCollection']();
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['ResourceCollection'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

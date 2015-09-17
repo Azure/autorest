@@ -52,9 +52,7 @@ A.prototype.serialize = function () {
  */
 A.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['statusCode'] !== null && instance['statusCode'] !== undefined) {
-      this['statusCode'] = instance['statusCode'];
-    }
+    this['statusCode'] = instance['statusCode'];
   }
 
   return this;

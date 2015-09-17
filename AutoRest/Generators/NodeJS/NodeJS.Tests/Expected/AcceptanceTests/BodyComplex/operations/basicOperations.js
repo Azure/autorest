@@ -117,7 +117,9 @@ BasicOperations.prototype.getValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['Basic'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Basic'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -205,7 +207,9 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    requestModel = new client._models['Basic'](complexBody);
+    if (complexBody !== null && complexBody !== undefined) {
+      requestModel = new client._models['Basic'](complexBody);
+    }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
     } else {
@@ -336,7 +340,9 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['Basic'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Basic'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -438,7 +444,9 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['Basic'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Basic'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -540,7 +548,9 @@ BasicOperations.prototype.getNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['Basic'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Basic'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }
@@ -642,7 +652,9 @@ BasicOperations.prototype.getNotProvided = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        result = new client._models['Basic'](parsedResponse);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Basic'](parsedResponse);
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
         }

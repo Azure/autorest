@@ -4232,16 +4232,20 @@ ArrayModel.prototype.getComplexNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        var initializedParsedResponse = [];
-        parsedResponse.forEach(function(element) {
-          element = new client._models['Product'](element);
-          initializedParsedResponse.push(element);
-        });
-        result = initializedParsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var initializedParsedResponse = [];
+          parsedResponse.forEach(function(element) {
+            if (element !== null && element !== undefined) {
+              element = new client._models['Product'](element);
+            }
+            initializedParsedResponse.push(element);
+          });
+          result = initializedParsedResponse;
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
             if (result[i] !== null && result[i] !== undefined) {
-              result[i].deserialize(parsedResponse);
+              result[i].deserialize(parsedResponse[i]);
             }
           }
         }
@@ -4343,16 +4347,20 @@ ArrayModel.prototype.getComplexEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        var initializedParsedResponse = [];
-        parsedResponse.forEach(function(element) {
-          element = new client._models['Product'](element);
-          initializedParsedResponse.push(element);
-        });
-        result = initializedParsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var initializedParsedResponse = [];
+          parsedResponse.forEach(function(element) {
+            if (element !== null && element !== undefined) {
+              element = new client._models['Product'](element);
+            }
+            initializedParsedResponse.push(element);
+          });
+          result = initializedParsedResponse;
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
             if (result[i] !== null && result[i] !== undefined) {
-              result[i].deserialize(parsedResponse);
+              result[i].deserialize(parsedResponse[i]);
             }
           }
         }
@@ -4455,16 +4463,20 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        var initializedParsedResponse = [];
-        parsedResponse.forEach(function(element) {
-          element = new client._models['Product'](element);
-          initializedParsedResponse.push(element);
-        });
-        result = initializedParsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var initializedParsedResponse = [];
+          parsedResponse.forEach(function(element) {
+            if (element !== null && element !== undefined) {
+              element = new client._models['Product'](element);
+            }
+            initializedParsedResponse.push(element);
+          });
+          result = initializedParsedResponse;
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
             if (result[i] !== null && result[i] !== undefined) {
-              result[i].deserialize(parsedResponse);
+              result[i].deserialize(parsedResponse[i]);
             }
           }
         }
@@ -4567,16 +4579,20 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        var initializedParsedResponse = [];
-        parsedResponse.forEach(function(element) {
-          element = new client._models['Product'](element);
-          initializedParsedResponse.push(element);
-        });
-        result = initializedParsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var initializedParsedResponse = [];
+          parsedResponse.forEach(function(element) {
+            if (element !== null && element !== undefined) {
+              element = new client._models['Product'](element);
+            }
+            initializedParsedResponse.push(element);
+          });
+          result = initializedParsedResponse;
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
             if (result[i] !== null && result[i] !== undefined) {
-              result[i].deserialize(parsedResponse);
+              result[i].deserialize(parsedResponse[i]);
             }
           }
         }
@@ -4679,16 +4695,20 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = parsedResponse;
-        var initializedParsedResponse = [];
-        parsedResponse.forEach(function(element) {
-          element = new client._models['Product'](element);
-          initializedParsedResponse.push(element);
-        });
-        result = initializedParsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var initializedParsedResponse = [];
+          parsedResponse.forEach(function(element) {
+            if (element !== null && element !== undefined) {
+              element = new client._models['Product'](element);
+            }
+            initializedParsedResponse.push(element);
+          });
+          result = initializedParsedResponse;
+        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
             if (result[i] !== null && result[i] !== undefined) {
-              result[i].deserialize(parsedResponse);
+              result[i].deserialize(parsedResponse[i]);
             }
           }
         }
@@ -4761,12 +4781,16 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    var initializedArrayBody = [];
-    arrayBody.forEach(function(element) {
-      element = new client._models['Product'](element);
-      initializedArrayBody.push(element);
-    });
-    arrayBody = initializedArrayBody;
+    if (arrayBody !== null && arrayBody !== undefined) {
+      var initializedArrayBody = [];
+      arrayBody.forEach(function(element) {
+        if (element !== null && element !== undefined) {
+          element = new client._models['Product'](element);
+        }
+        initializedArrayBody.push(element);
+      });
+      arrayBody = initializedArrayBody;
+    }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }

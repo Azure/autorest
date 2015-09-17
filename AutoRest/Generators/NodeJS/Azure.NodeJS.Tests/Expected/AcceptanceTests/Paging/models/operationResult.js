@@ -42,6 +42,8 @@ OperationResult.prototype.serialize = function () {
     }
     payload['status'] = this['status'];
   }
+
+  return payload;
 };
 
 /**
@@ -52,10 +54,10 @@ OperationResult.prototype.serialize = function () {
  */
 OperationResult.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['status'] !== null && instance['status'] !== undefined) {
-      this['status'] = instance['status'];
-    }
+    this['status'] = instance['status'];
   }
+
+  return this;
 };
 
 module.exports = OperationResult;

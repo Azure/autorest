@@ -229,7 +229,7 @@ describe('nodejs', function () {
 
     describe('Dictionary Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
-      it('should get valid dictionary type properties', function (done) {
+      it('should get and put valid dictionary type properties', function (done) {
         var testDictionary = { 'txt': 'notepad', 'bmp': 'mspaint', 'xls': 'excel', 'exe': '', '': null };
         testClient.dictionary.getValid(function (error, result) {
           should.not.exist(error);

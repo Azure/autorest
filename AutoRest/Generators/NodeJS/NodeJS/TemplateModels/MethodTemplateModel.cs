@@ -294,25 +294,32 @@ namespace Microsoft.Rest.Generator.NodeJS
             else if (IsSpecialProcessingRequired(sequence))
             {
                 builder.AppendLine("for (var i = 0; i < {0}.length; i++) {{", valueReference)
-                    .Indent()
-                    .AppendLine("if ({0}[i] !== null && {0}[i] !== undefined) {{", valueReference)
-                        .Indent();
+                         .Indent();
+                    
                 // Loop through the sequence if each property is Date, DateTime or ByteArray 
                 // as they need special treatment for deserialization
-                if (sequence.ElementType == PrimaryType.DateTime ||
-                    sequence.ElementType == PrimaryType.Date)
+                if (sequence.ElementType is PrimaryType)
                 {
-                    builder.AppendLine("{0}[i] = new Date({0}[i]);", valueReference);
-                }
-                else if (sequence.ElementType == PrimaryType.ByteArray)
-                {
-                    builder.AppendLine("{0}[i] = new Buffer({0}[i], 'base64');", valueReference);
+                    builder.AppendLine("if ({0}[i] !== null && {0}[i] !== undefined) {{", valueReference)
+                             .Indent();
+                    if (sequence.ElementType == PrimaryType.DateTime ||
+                       sequence.ElementType == PrimaryType.Date)
+                    {
+                        builder.AppendLine("{0}[i] = new Date({0}[i]);", valueReference);
+                    }
+                    else if (sequence.ElementType == PrimaryType.ByteArray)
+                    {
+                        builder.AppendLine("{0}[i] = new Buffer({0}[i], 'base64');", valueReference);
+                    }
+
                 }
                 else if (sequence.ElementType is CompositeType)
                 {
-                    builder.AppendLine(GetDeserializationString(sequence.ElementType,
-                        string.Format(CultureInfo.InvariantCulture, "{0}[i]", valueReference),
-                        string.Format(CultureInfo.InvariantCulture, "{0}[i]", responseVariable)));
+                    builder.AppendLine("if ({0}[i] !== null && {0}[i] !== undefined) {{", valueReference)
+                             .Indent()
+                             .AppendLine(GetDeserializationString(sequence.ElementType,
+                                string.Format(CultureInfo.InvariantCulture, "{0}[i]", valueReference),
+                                string.Format(CultureInfo.InvariantCulture, "{0}[i]", responseVariable)));
                 }
 
                 builder.Outdent()
@@ -323,23 +330,28 @@ namespace Microsoft.Rest.Generator.NodeJS
             else if (IsSpecialProcessingRequired(dictionary))
             {
                 builder.AppendLine("for (var property in {0}) {{", valueReference)
-                    .Indent()
-                    .AppendLine("if ({0}[property] !== null && {0}[property] !== undefined) {{", valueReference)
-                        .Indent();
-                if (dictionary.ValueType == PrimaryType.DateTime ||
-                    dictionary.ValueType == PrimaryType.Date)
+                    .Indent();
+                if (dictionary.ValueType is PrimaryType)
                 {
-                    builder.AppendLine("{0}[property] = new Date({0}[property]);", valueReference);
-                }
-                else if (dictionary.ValueType == PrimaryType.ByteArray)
-                {
-                    builder.AppendLine("{0}[property] = new Buffer({0}[property], 'base64');", valueReference);
+                    builder.AppendLine("if ({0}[property] !== null && {0}[property] !== undefined) {{", valueReference)
+                             .Indent();
+                    if (dictionary.ValueType == PrimaryType.DateTime || 
+                        dictionary.ValueType == PrimaryType.Date)
+                    {
+                        builder.AppendLine("{0}[property] = new Date({0}[property]);", valueReference);
+                    }
+                    else if (dictionary.ValueType == PrimaryType.ByteArray)
+                    {
+                        builder.AppendLine("{0}[property] = new Buffer({0}[property], 'base64');", valueReference);
+                    }
                 }
                 else if (dictionary.ValueType is CompositeType)
                 {
-                    builder.AppendLine(GetDeserializationString(dictionary.ValueType,
-                        string.Format(CultureInfo.InvariantCulture, "{0}[property]", valueReference),
-                        string.Format(CultureInfo.InvariantCulture, "{0}[property]", responseVariable)));
+                    builder.AppendLine("if ({0}[property] !== null && {0}[property] !== undefined) {{", valueReference)
+                             .Indent()
+                             .AppendLine(GetDeserializationString(dictionary.ValueType,
+                                string.Format(CultureInfo.InvariantCulture, "{0}[property]", valueReference),
+                                string.Format(CultureInfo.InvariantCulture, "{0}[property]", responseVariable)));
                 }
                 builder.Outdent()
                         .AppendLine("}")
@@ -427,27 +439,11 @@ namespace Microsoft.Rest.Generator.NodeJS
                      .AppendLine("{0} = JSON.parse(responseBody);", responseVariable)
                      .AppendLine("{0} = {1};", valueReference, responseVariable)
                      .AppendLine(type.InitializeSerializationType(Scope, valueReference, responseVariable, "client._models"));
-            /*if (type is CompositeType)
-            {
-                if (!string.IsNullOrEmpty(((CompositeType)type).PolymorphicDiscriminator))
-                {
-                    builder.AppendLine("{0} = new client._models.discriminators[{1}['{2}']]();", 
-                        valueReference, responseVariable, ((CompositeType)type).PolymorphicDiscriminator);
-                }
-                else
-                {
-                    builder.AppendLine("{0} = new client._models['{1}']();", valueReference, type.Name);
-                }
-            }
-            else
-            {
-                builder.AppendLine("{0} = {1};", valueReference, responseVariable);
-            }*/
             var deserializeBody = this.GetDeserializationString(type, valueReference, responseVariable);
             if (!string.IsNullOrWhiteSpace(deserializeBody))
-            {
+            {             
                 builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", responseVariable)
-                       .Indent()
+                         .Indent()
                          .AppendLine(deserializeBody)
                        .Outdent()
                        .AppendLine("}");

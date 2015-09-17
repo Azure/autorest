@@ -64,13 +64,9 @@ Pet.prototype.serialize = function () {
  */
 Pet.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['id'] !== null && instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
+    this['id'] = instance['id'];
 
-    if (instance['name'] !== null && instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
+    this['name'] = instance['name'];
   }
 
   return this;

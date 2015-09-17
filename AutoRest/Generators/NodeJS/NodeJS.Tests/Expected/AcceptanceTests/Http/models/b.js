@@ -59,9 +59,7 @@ B.prototype.serialize = function () {
 B.prototype.deserialize = function (instance) {
   B['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['textStatusCode'] !== null && instance['textStatusCode'] !== undefined) {
-      this['textStatusCode'] = instance['textStatusCode'];
-    }
+    this['textStatusCode'] = instance['textStatusCode'];
   }
 
   return this;

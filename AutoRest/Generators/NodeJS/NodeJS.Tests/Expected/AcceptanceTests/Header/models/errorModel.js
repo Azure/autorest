@@ -64,13 +64,9 @@ ErrorModel.prototype.serialize = function () {
  */
 ErrorModel.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['status'] !== null && instance['status'] !== undefined) {
-      this['status'] = instance['status'];
-    }
+    this['status'] = instance['status'];
 
-    if (instance['message'] !== null && instance['message'] !== undefined) {
-      this['message'] = instance['message'];
-    }
+    this['message'] = instance['message'];
   }
 
   return this;

@@ -80,9 +80,7 @@ Cat.prototype.serialize = function () {
 Cat.prototype.deserialize = function (instance) {
   Cat['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['color'] !== null && instance['color'] !== undefined) {
-      this['color'] = instance['color'];
-    }
+    this['color'] = instance['color'];
 
     if (instance['hates'] !== null && instance['hates'] !== undefined) {
       var deserializedInstancehates = [];
