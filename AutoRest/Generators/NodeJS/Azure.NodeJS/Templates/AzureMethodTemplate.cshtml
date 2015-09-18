@@ -73,19 +73,16 @@ else
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
       @Model.InitializeResponseBody
-      
-      @foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
-      {
-        <text>
+      @EmptyLine
       // Deserialize Response
-      if (response.statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
-        @(Model.DeserializeResponse(responsePair.Value))
+      @if (Model.ReturnType != null)
+      {
+      @:@(Model.DeserializeResponse(Model.ReturnType))
       }
-        </text>
-      }
+
       @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
       {
-        @(Model.DeserializeResponse(Model.DefaultResponse))
+      @:@(Model.DeserializeResponse(Model.DefaultResponse))
       }
       @EmptyLine
       return callback(null, result, httpRequest, response);

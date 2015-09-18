@@ -20,7 +20,23 @@ function PollingState(resultOfInitialRequest, retryTimeout) {
   this._retryTimeout = retryTimeout;
   this.updateResponse(resultOfInitialRequest.response);
   this.request = resultOfInitialRequest.request;
-  this.resource = resultOfInitialRequest.body;
+  //Parse response.body & assign it as the resource
+  try {
+    if (resultOfInitialRequest.body !== null && 
+        resultOfInitialRequest.body !== undefined && 
+        typeof resultOfInitialRequest.body.valueOf() === 'string' &&
+        resultOfInitialRequest.body.length > 0) {
+      this.resource = JSON.parse(resultOfInitialRequest.body);
+    } else {
+      this.resource = resultOfInitialRequest.body;
+    } 
+  } catch (error) {
+    var deserializationError = new Error(util.format('Error "%s" occurred in parsing the responseBody - "%s"', 
+      error, resultOfInitialRequest.body));
+    deserializationError.request = resultOfInitialRequest.request;
+    deserializationError.response = resultOfInitialRequest.response;
+    return callback(deserializationError);
+  }
   
   if (this.resource && this.resource.properties && this.resource.properties.provisioningState) {
     this.status = this.resource.properties.provisioningState;
@@ -82,7 +98,11 @@ PollingState.prototype.getOperationResponse = function () {
   var result = new msRest.HttpOperationResponse();
   result.request = this.request;
   result.response = this.response;
-  result.body = typeof this.resource.valueOf() === 'string' ? this.resource : JSON.stringify(this.resource);
+  if (this.resource !== null && this.resource !== undefined && typeof this.resource.valueOf() === 'string') {
+    result.body = this.resource;
+  } else {
+    result.body = JSON.stringify(this.resource);
+  }
   return result;
 };
 

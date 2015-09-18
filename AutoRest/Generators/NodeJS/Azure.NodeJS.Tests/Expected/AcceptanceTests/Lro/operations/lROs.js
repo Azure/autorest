@@ -91,24 +91,23 @@ LROs.prototype.put200Succeeded = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -320,24 +319,23 @@ LROs.prototype.put200SucceededNoState = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -550,24 +548,23 @@ LROs.prototype.put202Retry200 = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -782,43 +779,23 @@ LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
-      }
-      // Deserialize Response
-      if (response.statusCode === 201) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError1.request = httpRequest;
-          deserializationError1.response = response;
-          return callback(deserializationError1);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -1053,24 +1030,23 @@ LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -1286,43 +1262,23 @@ LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
-      }
-      // Deserialize Response
-      if (response.statusCode === 201) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError1.request = httpRequest;
-          deserializationError1.response = response;
-          return callback(deserializationError1);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -1557,24 +1513,23 @@ LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback)
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -1789,24 +1744,23 @@ LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -2020,24 +1974,23 @@ LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -2251,24 +2204,23 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) 
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -2482,24 +2434,23 @@ LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -2713,24 +2664,23 @@ LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -2944,24 +2894,23 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 201) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -3171,24 +3120,23 @@ LROs.prototype.putNonResource = function (sku, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Sku'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Sku'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -3394,24 +3342,23 @@ LROs.prototype.putAsyncNonResource = function (sku, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Sku'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Sku'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -3615,24 +3562,23 @@ LROs.prototype.putSubResource = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['SubProduct'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['SubProduct'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -3834,24 +3780,23 @@ LROs.prototype.putAsyncSubResource = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['SubProduct'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['SubProduct'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -4052,43 +3997,23 @@ LROs.prototype.deleteProvisioning202Accepted200Succeeded = function (options, ca
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
-      }
-      // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError1.request = httpRequest;
-          deserializationError1.response = response;
-          return callback(deserializationError1);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -4291,43 +4216,23 @@ LROs.prototype.deleteProvisioning202DeletingFailed200 = function (options, callb
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
-      }
-      // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError1.request = httpRequest;
-          deserializationError1.response = response;
-          return callback(deserializationError1);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -4530,43 +4435,23 @@ LROs.prototype.deleteProvisioning202Deletingcanceled200 = function (options, cal
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
-      }
-      // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError1.request = httpRequest;
-          deserializationError1.response = response;
-          return callback(deserializationError1);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -4767,6 +4652,8 @@ LROs.prototype.delete204Succeeded = function (options, callback) {
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
 
+      // Deserialize Response
+
       return callback(null, result, httpRequest, response);
     });
   });
@@ -4925,24 +4812,23 @@ LROs.prototype.delete202Retry200 = function (options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -5124,24 +5010,23 @@ LROs.prototype.delete202NoRetry204 = function (options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -5324,6 +5209,8 @@ LROs.prototype.deleteNoHeaderInRetry = function (options, callback) {
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
 
+      // Deserialize Response
+
       return callback(null, result, httpRequest, response);
     });
   });
@@ -5484,6 +5371,8 @@ LROs.prototype.deleteAsyncNoHeaderInRetry = function (options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
 
       return callback(null, result, httpRequest, response);
     });
@@ -5646,6 +5535,8 @@ LROs.prototype.deleteAsyncRetrySucceeded = function (options, callback) {
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
 
+      // Deserialize Response
+
       return callback(null, result, httpRequest, response);
     });
   });
@@ -5806,6 +5697,8 @@ LROs.prototype.deleteAsyncNoRetrySucceeded = function (options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
 
       return callback(null, result, httpRequest, response);
     });
@@ -5968,6 +5861,8 @@ LROs.prototype.deleteAsyncRetryFailed = function (options, callback) {
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
 
+      // Deserialize Response
+
       return callback(null, result, httpRequest, response);
     });
   });
@@ -6129,6 +6024,8 @@ LROs.prototype.deleteAsyncRetrycanceled = function (options, callback) {
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
 
+      // Deserialize Response
+
       return callback(null, result, httpRequest, response);
     });
   });
@@ -6289,43 +6186,23 @@ LROs.prototype.post200WithPayload = function (options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Sku'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Sku'](parsedResponse);
         }
-      }
-      // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Sku'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError1.request = httpRequest;
-          deserializationError1.response = response;
-          return callback(deserializationError1);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -6535,6 +6412,8 @@ LROs.prototype.post202Retry200 = function (product, options, callback) {
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
 
+      // Deserialize Response
+
       return callback(null, result, httpRequest, response);
     });
   });
@@ -6726,24 +6605,23 @@ LROs.prototype.post202NoRetry204 = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 202) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -6956,24 +6834,23 @@ LROs.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -7187,24 +7064,23 @@ LROs.prototype.postAsyncNoRetrySucceeded = function (product, options, callback)
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
       // Deserialize Response
-      if (response.statusCode === 200) {
-        var parsedResponse = null;
-        try {
-          parsedResponse = JSON.parse(responseBody);
-          result = parsedResponse;
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result = new client._models['Product'](parsedResponse);
-          }
-          if (parsedResponse !== null && parsedResponse !== undefined) {
-            result.deserialize(parsedResponse);
-          }
-        } catch (error) {
-          var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-          deserializationError.request = httpRequest;
-          deserializationError.response = response;
-          return callback(deserializationError);
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = parsedResponse;
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new client._models['Product'](parsedResponse);
         }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
       }
 
       return callback(null, result, httpRequest, response);
@@ -7419,6 +7295,8 @@ LROs.prototype.postAsyncRetryFailed = function (product, options, callback) {
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
 
+      // Deserialize Response
+
       return callback(null, result, httpRequest, response);
     });
   });
@@ -7611,6 +7489,8 @@ LROs.prototype.postAsyncRetrycanceled = function (product, options, callback) {
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
 
       return callback(null, result, httpRequest, response);
     });
