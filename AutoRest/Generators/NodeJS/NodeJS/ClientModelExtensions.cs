@@ -188,6 +188,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var lowercaseTypeName = primary.Name.ToLower(CultureInfo.InvariantCulture);
             if (primary == PrimaryType.Boolean ||
                 primary == PrimaryType.Double ||
+                primary == PrimaryType.Decimal ||
                 primary == PrimaryType.Int ||
                 primary == PrimaryType.Long ||
                 primary == PrimaryType.Object)

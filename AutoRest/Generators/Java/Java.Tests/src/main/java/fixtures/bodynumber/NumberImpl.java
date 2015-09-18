@@ -168,6 +168,47 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get invalid decimal Number value
+     *
+     * @return the Decimal object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public Decimal getInvalidDecimal() throws ServiceException {
+        try {
+            ServiceResponse<Decimal> response = getInvalidDecimalDelegate(service.getInvalidDecimal(), null);
+            return response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Decimal> response = getInvalidDecimalDelegate(error.getResponse(), error);
+            return response.getBody();
+        }
+    }
+
+    /**
+     * Get invalid decimal Number value
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void getInvalidDecimalAsync(final ServiceCallback<Decimal> serviceCallback) {
+        service.getInvalidDecimalAsync(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getInvalidDecimalDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Decimal> getInvalidDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Decimal>()
+                .register(200, new TypeToken<Decimal>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
+    /**
      * Put big float value 3.402823e+20
      *
      * @param numberBody the double value
@@ -532,6 +573,279 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put big decimal value 2.5976931e+101
+     *
+     * @param numberBody the Decimal value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void putBigDecimal(Decimal numberBody) throws ServiceException {
+        if (numberBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
+        }
+        try {
+            ServiceResponse<Void> response = putBigDecimalDelegate(service.putBigDecimal(numberBody), null);
+            response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Void> response = putBigDecimalDelegate(error.getResponse(), error);
+            response.getBody();
+        }
+    }
+
+    /**
+     * Put big decimal value 2.5976931e+101
+     *
+     * @param numberBody the Decimal value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void putBigDecimalAsync(Decimal numberBody, final ServiceCallback<Void> serviceCallback) {
+        if (numberBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+        }
+        service.putBigDecimalAsync(numberBody, new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putBigDecimalDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putBigDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
+    /**
+     * Get big decimal value 2.5976931e+101
+     *
+     * @return the Decimal object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public Decimal getBigDecimal() throws ServiceException {
+        try {
+            ServiceResponse<Decimal> response = getBigDecimalDelegate(service.getBigDecimal(), null);
+            return response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Decimal> response = getBigDecimalDelegate(error.getResponse(), error);
+            return response.getBody();
+        }
+    }
+
+    /**
+     * Get big decimal value 2.5976931e+101
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void getBigDecimalAsync(final ServiceCallback<Decimal> serviceCallback) {
+        service.getBigDecimalAsync(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBigDecimalDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Decimal> getBigDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Decimal>()
+                .register(200, new TypeToken<Decimal>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
+    /**
+     * Put big decimal value 99999999.99
+     *
+     * @param numberBody the Decimal value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void putBigDecimalPositiveDecimal(Decimal numberBody) throws ServiceException {
+        if (numberBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
+        }
+        try {
+            ServiceResponse<Void> response = putBigDecimalPositiveDecimalDelegate(service.putBigDecimalPositiveDecimal(numberBody), null);
+            response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Void> response = putBigDecimalPositiveDecimalDelegate(error.getResponse(), error);
+            response.getBody();
+        }
+    }
+
+    /**
+     * Put big decimal value 99999999.99
+     *
+     * @param numberBody the Decimal value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void putBigDecimalPositiveDecimalAsync(Decimal numberBody, final ServiceCallback<Void> serviceCallback) {
+        if (numberBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+        }
+        service.putBigDecimalPositiveDecimalAsync(numberBody, new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putBigDecimalPositiveDecimalDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putBigDecimalPositiveDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
+    /**
+     * Get big decimal value 99999999.99
+     *
+     * @return the Decimal object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public Decimal getBigDecimalPositiveDecimal() throws ServiceException {
+        try {
+            ServiceResponse<Decimal> response = getBigDecimalPositiveDecimalDelegate(service.getBigDecimalPositiveDecimal(), null);
+            return response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Decimal> response = getBigDecimalPositiveDecimalDelegate(error.getResponse(), error);
+            return response.getBody();
+        }
+    }
+
+    /**
+     * Get big decimal value 99999999.99
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void getBigDecimalPositiveDecimalAsync(final ServiceCallback<Decimal> serviceCallback) {
+        service.getBigDecimalPositiveDecimalAsync(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBigDecimalPositiveDecimalDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Decimal> getBigDecimalPositiveDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Decimal>()
+                .register(200, new TypeToken<Decimal>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
+    /**
+     * Put big decimal value -99999999.99
+     *
+     * @param numberBody the Decimal value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void putBigDecimalNegativeDecimal(Decimal numberBody) throws ServiceException {
+        if (numberBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
+        }
+        try {
+            ServiceResponse<Void> response = putBigDecimalNegativeDecimalDelegate(service.putBigDecimalNegativeDecimal(numberBody), null);
+            response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Void> response = putBigDecimalNegativeDecimalDelegate(error.getResponse(), error);
+            response.getBody();
+        }
+    }
+
+    /**
+     * Put big decimal value -99999999.99
+     *
+     * @param numberBody the Decimal value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void putBigDecimalNegativeDecimalAsync(Decimal numberBody, final ServiceCallback<Void> serviceCallback) {
+        if (numberBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+        }
+        service.putBigDecimalNegativeDecimalAsync(numberBody, new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putBigDecimalNegativeDecimalDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putBigDecimalNegativeDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
+    /**
+     * Get big decimal value -99999999.99
+     *
+     * @return the Decimal object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public Decimal getBigDecimalNegativeDecimal() throws ServiceException {
+        try {
+            ServiceResponse<Decimal> response = getBigDecimalNegativeDecimalDelegate(service.getBigDecimalNegativeDecimal(), null);
+            return response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Decimal> response = getBigDecimalNegativeDecimalDelegate(error.getResponse(), error);
+            return response.getBody();
+        }
+    }
+
+    /**
+     * Get big decimal value -99999999.99
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void getBigDecimalNegativeDecimalAsync(final ServiceCallback<Decimal> serviceCallback) {
+        service.getBigDecimalNegativeDecimalAsync(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getBigDecimalNegativeDecimalDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Decimal> getBigDecimalNegativeDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Decimal>()
+                .register(200, new TypeToken<Decimal>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
+    /**
      * Put small float value 3.402823e-20
      *
      * @param numberBody the double value
@@ -711,6 +1025,97 @@ public class NumberImpl implements Number {
                 .register(200, new TypeToken<Double>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
+    }
+
+    /**
+     * Put small decimal value 2.5976931e-101
+     *
+     * @param numberBody the Decimal value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void putSmallDecimal(Decimal numberBody) throws ServiceException {
+        if (numberBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
+        }
+        try {
+            ServiceResponse<Void> response = putSmallDecimalDelegate(service.putSmallDecimal(numberBody), null);
+            response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Void> response = putSmallDecimalDelegate(error.getResponse(), error);
+            response.getBody();
+        }
+    }
+
+    /**
+     * Put small decimal value 2.5976931e-101
+     *
+     * @param numberBody the Decimal value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void putSmallDecimalAsync(Decimal numberBody, final ServiceCallback<Void> serviceCallback) {
+        if (numberBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+        }
+        service.putSmallDecimalAsync(numberBody, new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(putSmallDecimalDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> putSmallDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
+    /**
+     * Get small decimal value 2.5976931e-101
+     *
+     * @return the Decimal object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public Decimal getSmallDecimal() throws ServiceException {
+        try {
+            ServiceResponse<Decimal> response = getSmallDecimalDelegate(service.getSmallDecimal(), null);
+            return response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Decimal> response = getSmallDecimalDelegate(error.getResponse(), error);
+            return response.getBody();
+        }
+    }
+
+    /**
+     * Get small decimal value 2.5976931e-101
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void getSmallDecimalAsync(final ServiceCallback<Decimal> serviceCallback) {
+        service.getSmallDecimalAsync(new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(getSmallDecimalDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Decimal> getSmallDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Decimal>()
+                .register(200, new TypeToken<Decimal>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
     }
 
 }
