@@ -62,7 +62,9 @@ Resource.prototype.serialize = function () {
     if (typeof this.provisioningState !== 'string') {
       throw new Error('this.provisioningState must be of type string.');
     }
-    payload.properties = {};
+    if (payload.properties === null || payload.properties === undefined) {
+      payload.properties = {};
+    }
     payload.properties.provisioningState = this.provisioningState;
   }
   

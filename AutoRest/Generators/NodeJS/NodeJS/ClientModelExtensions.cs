@@ -91,6 +91,13 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return pattern.Replace(valueReference, "");
         }
 
+        private static string GetBasePropertyFromUnflattenedProperty(this string property)
+        {
+            string result = null;
+            result = property.Substring(0, property.IndexOf("][") + 1);
+            return result;
+        }
+
         /// <summary>
         /// Simple conversion of the type to string
         /// </summary>
@@ -449,12 +456,14 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{", 
                         objectReference, lowercaseTypeName);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = {1};", valueReference, objectReference).ToString();
                 }
                 builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference)
                          .Indent()
                          .AppendLine("if (typeof {0} !== '{1}') {{", objectReference, lowercaseTypeName);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1};", valueReference, objectReference)
                             .Outdent()
                             .AppendLine("}").ToString();
@@ -467,12 +476,14 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{",
                         objectReference, lowercaseTypeName);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = {1};", valueReference, objectReference).ToString();
                 }
                 builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference)
                          .Indent()
                          .AppendLine("if (typeof {0}.valueOf() !== '{1}') {{", objectReference, lowercaseTypeName);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1};", valueReference, objectReference)
                             .Outdent()
                             .AppendLine("}").ToString();
@@ -483,12 +494,14 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     builder.AppendLine("if (!Buffer.isBuffer({0})) {{", objectReference);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference).ToString();
                 }
                 builder.AppendLine("if ({0}) {{", objectReference)
                          .Indent()
                          .AppendLine("if (!Buffer.isBuffer({0})) {{", objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference)
                             .Outdent()
                             .AppendLine("}").ToString();
@@ -500,6 +513,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     builder.AppendLine("if(!{0} || !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", 
                         objectReference);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", 
                         valueReference, objectReference).ToString();
                 }
@@ -509,6 +523,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{", 
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", valueReference, objectReference)
                                 .Outdent()
                                 .AppendLine("}").ToString();
@@ -519,6 +534,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     builder.AppendLine("if ({0} !== null || {0} !== undefined || typeof {0} !== '{1}') {{", objectReference, lowercaseTypeName);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = JSON.stringify({1});", valueReference, objectReference).ToString();
                 }
 
@@ -529,6 +545,21 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
                     "'{0}' not implemented", valueReference));
             }
+        }
+
+        private static IndentedStringBuilder ConstructBasePropertyCheck(IndentedStringBuilder builder, string valueReference)
+        {
+            string baseProperty = valueReference.GetBasePropertyFromUnflattenedProperty();
+            if (baseProperty != null)
+            {
+                builder.AppendLine("if ({0} === null || {0} === undefined) {{", baseProperty)
+                         .Indent()
+                         .AppendLine("{0} = {{}};", baseProperty)
+                       .Outdent()
+                       .AppendLine("}");
+            }
+
+            return builder;
         }
 
         private static string SerializeEnumType(this EnumType enumType, IScopeProvider scope, string objectReference, string valueReference, bool isRequired)
@@ -553,10 +584,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                     .Indent()
                                     .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", objectReference, allowedValues)
                                 .Outdent()
-                                .AppendLine("}")
-                                .AppendLine("{0} = {1};", valueReference, objectReference)
-                                .Outdent()
                                 .AppendLine("}");
+                        builder = ConstructBasePropertyCheck(builder, valueReference);
+                        builder.AppendLine("{0} = {1};", valueReference, objectReference)
+                              .Outdent()
+                              .AppendLine("}");
             if (isRequired)
             {
                 builder.Append(" else {")
@@ -587,8 +619,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
                                     objectReference,
                                     composite.PolymorphicDiscriminator, modelReference)
-                    .Indent()
-                        .AppendLine("{0} = {1}.serialize();", valueReference, objectReference)
+                    .Indent();
+                builder = ConstructBasePropertyCheck(builder, valueReference);
+                builder.AppendLine("{0} = {1}.serialize();", valueReference, objectReference)
                     .Outdent()
                     .AppendLine("}} else {{", valueReference)
                     .Indent()
@@ -600,6 +633,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else
             {
+                builder = ConstructBasePropertyCheck(builder, valueReference);
                 builder.AppendLine("{0} = {1}.serialize();", valueReference, objectReference);
             }
             builder.Outdent().AppendLine("}");
@@ -774,38 +808,45 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             DictionaryType dictionary = type as DictionaryType;
             PrimaryType primary = type as PrimaryType;
             var builder = new IndentedStringBuilder("  ");
+            string baseProperty = valueReference.GetBasePropertyFromUnflattenedProperty();
+            if (baseProperty != null)
+            {
+                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", baseProperty).Indent();
+            }
             if (enumType != null)
             {
-                return //builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                    //.Indent()
-                          builder.AppendLine("{1} = {0};", valueReference, objectReference).ToString();
-                        //.Outdent()
-                       //.AppendLine("}").ToString();
+                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                         .Indent()
+                         .AppendLine("{1} = {0};", valueReference, objectReference)
+                       .Outdent()
+                       .AppendLine("}");
             }
             else if (primary != null)
             {
                 if (primary == PrimaryType.ByteArray)
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                                    .Indent()
-                                    .AppendLine("{1} = new Buffer({0}, 'base64');", valueReference, objectReference)
-                                  .Outdent()
-                                  .AppendLine("}").ToString();
+                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                             .Indent()
+                             .AppendLine("{1} = new Buffer({0}, 'base64');", valueReference, objectReference)
+                           .Outdent()
+                           .AppendLine("}");
                 }
                 else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                                    .Indent()
-                                    .AppendLine("{1} = new Date({0});", valueReference, objectReference)
-                                  .Outdent()
-                                  .AppendLine("}").ToString();
+                   builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                            .Indent()
+                            .AppendLine("{1} = new Date({0});", valueReference, objectReference)
+                          .Outdent()
+                          .AppendLine("}");
                 }
-                return //builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                    //.Indent()
-                          builder.AppendLine("{1} = {0};", valueReference, objectReference).ToString();
-                        //.Outdent()
-                       //.AppendLine("}").ToString();
-
+                else
+                {
+                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                             .Indent()
+                             .AppendLine("{1} = {0};", valueReference, objectReference)
+                           .Outdent()
+                           .AppendLine("}");
+                }
             }
             else if (composite != null && composite.Properties.Any())
             {
@@ -821,9 +862,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     builder.AppendLine("{3} = new {2}['{1}']().deserialize({0});", valueReference, composite.Name, modelReference, objectReference);
                 }
-                builder.Outdent().AppendLine("}");
 
-                return builder.ToString();
+                builder.Outdent().AppendLine("}");
             }
             else if (sequence != null)
             {
@@ -832,18 +872,18 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     var arrayName = valueReference.ToPascalCase().NormalizeValueReference();
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                                    .Indent()
-                                    .AppendLine("var deserialized{0} = [];", arrayName)
-                                    .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
-                                    .Indent()
-                                      .AppendLine(innerSerialization)
-                                      .AppendLine("deserialized{0}.push({1});", arrayName, elementVar)
-                                    .Outdent()
-                                    .AppendLine("});")
-                                    .AppendLine("{0} = deserialized{1};", objectReference, arrayName)
-                                  .Outdent()
-                                  .AppendLine("}").ToString();
+                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                             .Indent()
+                             .AppendLine("var deserialized{0} = [];", arrayName)
+                             .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
+                             .Indent()
+                                 .AppendLine(innerSerialization)
+                                 .AppendLine("deserialized{0}.push({1});", arrayName, elementVar)
+                             .Outdent()
+                             .AppendLine("});")
+                             .AppendLine("{0} = deserialized{1};", objectReference, arrayName)
+                             .Outdent()
+                             .AppendLine("}");
                 }
             }
             else if (dictionary != null)
@@ -855,20 +895,25 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                                                               modelReference);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                                    .Indent()
-                                    .AppendLine("{0} = {{}};", objectReference)
-                                    .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
-                                      .Indent()
-                                      .AppendLine(innerSerialization)
-                                    .Outdent()
-                                    .AppendLine("}")
-                                  .Outdent()
-                                  .AppendLine("}").ToString();
+                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                             .Indent()
+                             .AppendLine("{0} = {{}};", objectReference)
+                             .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
+                               .Indent()
+                               .AppendLine(innerSerialization)
+                             .Outdent()
+                             .AppendLine("}")
+                           .Outdent()
+                           .AppendLine("}");
                 }
             }
 
-            return null;
+            if (baseProperty != null)
+            {
+                builder.Outdent().AppendLine("}");
+            }
+
+            return builder.ToString();
         }
 
         public static string InitializeType(this IType type, IScopeProvider scope, string objectReference, string valueReference, string modelReference = "models")
