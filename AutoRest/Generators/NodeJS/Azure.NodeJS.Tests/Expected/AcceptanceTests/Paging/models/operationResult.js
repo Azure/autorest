@@ -54,7 +54,9 @@ OperationResult.prototype.serialize = function () {
  */
 OperationResult.prototype.deserialize = function (instance) {
   if (instance) {
-    this['status'] = instance['status'];
+    if (instance['status'] !== null && instance['status'] !== undefined) {
+      this['status'] = instance['status'];
+    }
   }
 
   return this;

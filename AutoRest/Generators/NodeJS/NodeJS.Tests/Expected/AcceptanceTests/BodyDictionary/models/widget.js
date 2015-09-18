@@ -64,9 +64,13 @@ Widget.prototype.serialize = function () {
  */
 Widget.prototype.deserialize = function (instance) {
   if (instance) {
-    this['integer'] = instance['integer'];
+    if (instance['integer'] !== null && instance['integer'] !== undefined) {
+      this['integer'] = instance['integer'];
+    }
 
-    this['string'] = instance['string'];
+    if (instance['string'] !== null && instance['string'] !== undefined) {
+      this['string'] = instance['string'];
+    }
   }
 
   return this;

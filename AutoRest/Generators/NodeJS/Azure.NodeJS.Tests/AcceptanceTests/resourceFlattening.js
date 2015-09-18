@@ -71,7 +71,7 @@ describe('nodejs', function () {
         });
       });
 
-      it('should get and put external resource as a dictionary', function (done) {
+      it('should get external resource as a dictionary', function (done) {
         var expectedResult = {
           Product1: {
             id: '1',

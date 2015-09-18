@@ -52,7 +52,9 @@ IntOptionalWrapper.prototype.serialize = function () {
  */
 IntOptionalWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    this['value'] = instance['value'];
+    if (instance['value'] !== null && instance['value'] !== undefined) {
+      this['value'] = instance['value'];
+    }
   }
 
   return this;

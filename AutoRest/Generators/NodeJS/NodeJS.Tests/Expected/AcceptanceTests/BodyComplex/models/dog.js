@@ -59,7 +59,9 @@ Dog.prototype.serialize = function () {
 Dog.prototype.deserialize = function (instance) {
   Dog['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    this['food'] = instance['food'];
+    if (instance['food'] !== null && instance['food'] !== undefined) {
+      this['food'] = instance['food'];
+    }
   }
 
   return this;

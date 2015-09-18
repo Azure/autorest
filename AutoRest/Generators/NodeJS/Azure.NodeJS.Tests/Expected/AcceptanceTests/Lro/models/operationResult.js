@@ -69,7 +69,9 @@ OperationResult.prototype.serialize = function () {
  */
 OperationResult.prototype.deserialize = function (instance) {
   if (instance) {
-    this['status'] = instance['status'];
+    if (instance['status'] !== null && instance['status'] !== undefined) {
+      this['status'] = instance['status'];
+    }
 
     if (instance['error'] !== null && instance['error'] !== undefined) {
       this['error'] = new models['OperationResultError']().deserialize(instance['error']);

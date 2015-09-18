@@ -94,7 +94,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         private static string GetBasePropertyFromUnflattenedProperty(this string property)
         {
             string result = null;
-            result = property.Substring(0, property.IndexOf("][") + 1);
+            if (property.Contains("]["))
+            {
+                result = property.Substring(0, property.IndexOf("][") + 1);
+            }
+            
             return result;
         }
 

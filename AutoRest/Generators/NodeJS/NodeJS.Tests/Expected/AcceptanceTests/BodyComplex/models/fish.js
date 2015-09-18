@@ -77,6 +77,9 @@ Fish.prototype.serialize = function () {
     for (var i = 0; i < this['siblings'].length; i++) {
       if (this['siblings'][i]) {
         if(this['siblings'][i]['dtype'] !== null && this['siblings'][i]['dtype'] !== undefined && models.discriminators[this['siblings'][i]['dtype']]) {
+          if (payload['siblings'] === null || payload['siblings'] === undefined) {
+            payload['siblings'] = {};
+          }
           payload['siblings'][i] = this['siblings'][i].serialize();
         } else {
           throw new Error('No discriminator field "dtype" was found in parameter "this[\'siblings\'][i]".');
@@ -101,9 +104,13 @@ Fish.prototype.serialize = function () {
  */
 Fish.prototype.deserialize = function (instance) {
   if (instance) {
-    this['species'] = instance['species'];
+    if (instance['species'] !== null && instance['species'] !== undefined) {
+      this['species'] = instance['species'];
+    }
 
-    this['length'] = instance['length'];
+    if (instance['length'] !== null && instance['length'] !== undefined) {
+      this['length'] = instance['length'];
+    }
 
     if (instance['siblings'] !== null && instance['siblings'] !== undefined) {
       var deserializedInstancesiblings = [];
@@ -116,7 +123,9 @@ Fish.prototype.deserialize = function (instance) {
       this['siblings'] = deserializedInstancesiblings;
     }
 
-    this['dtype'] = instance['dtype'];
+    if (instance['dtype'] !== null && instance['dtype'] !== undefined) {
+      this['dtype'] = instance['dtype'];
+    }
   }
 
   return this;

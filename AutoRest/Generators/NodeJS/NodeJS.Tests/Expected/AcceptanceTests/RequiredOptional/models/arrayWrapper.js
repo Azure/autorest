@@ -52,6 +52,9 @@ ArrayWrapper.prototype.serialize = function () {
       if (typeof this['value'][i].valueOf() !== 'string') {
         throw new Error('this[\'value\'][i] must be of type string.');
       }
+      if (payload['value'] === null || payload['value'] === undefined) {
+        payload['value'] = {};
+      }
       payload['value'][i] = this['value'][i];
     }
   }
@@ -70,7 +73,9 @@ ArrayWrapper.prototype.deserialize = function (instance) {
     if (instance['value'] !== null && instance['value'] !== undefined) {
       var deserializedInstancevalue = [];
       instance['value'].forEach(function(element1) {
-        element1 = element1;
+        if (element1 !== null && element1 !== undefined) {
+          element1 = element1;
+        }
         deserializedInstancevalue.push(element1);
       });
       this['value'] = deserializedInstancevalue;

@@ -54,6 +54,9 @@ ProductResult.prototype.serialize = function () {
     payload['values'] = [];
     for (var i = 0; i < this['values'].length; i++) {
       if (this['values'][i]) {
+        if (payload['values'] === null || payload['values'] === undefined) {
+          payload['values'] = {};
+        }
         payload['values'][i] = this['values'][i].serialize();
       }
     }
@@ -88,7 +91,9 @@ ProductResult.prototype.deserialize = function (instance) {
       this['values'] = deserializedInstancevalues;
     }
 
-    this['nextLink'] = instance['nextLink'];
+    if (instance['nextLink'] !== null && instance['nextLink'] !== undefined) {
+      this['nextLink'] = instance['nextLink'];
+    }
   }
 
   return this;

@@ -51,12 +51,18 @@ Product.prototype.serialize = function () {
     if (typeof this['provisioningState'].valueOf() !== 'string') {
       throw new Error('this[\'provisioningState\'] must be of type string.');
     }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['provisioningState'] = this['provisioningState'];
   }
 
   if (this['provisioningStateValues'] !== null && this['provisioningStateValues'] !== undefined) {
     if (typeof this['provisioningStateValues'].valueOf() !== 'string') {
       throw new Error('this[\'provisioningStateValues\'] must be of type string.');
+    }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
     }
     payload['properties']['provisioningStateValues'] = this['provisioningStateValues'];
   }
@@ -73,9 +79,17 @@ Product.prototype.serialize = function () {
 Product.prototype.deserialize = function (instance) {
   Product['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    this['provisioningState'] = instance['properties']['provisioningState'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
+        this['provisioningState'] = instance['properties']['provisioningState'];
+      }
+    }
 
-    this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['provisioningStateValues'] !== null && instance['properties']['provisioningStateValues'] !== undefined) {
+        this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
+      }
+    }
   }
 
   return this;

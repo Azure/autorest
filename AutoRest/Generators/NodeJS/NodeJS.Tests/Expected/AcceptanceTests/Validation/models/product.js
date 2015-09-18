@@ -62,6 +62,9 @@ Product.prototype.serialize = function () {
         if (typeof this['displayNames'][i].valueOf() !== 'string') {
           throw new Error('this[\'displayNames\'][i] must be of type string.');
         }
+        if (payload['display_names'] === null || payload['display_names'] === undefined) {
+          payload['display_names'] = {};
+        }
         payload['display_names'][i] = this['displayNames'][i];
       }
     }
@@ -95,15 +98,21 @@ Product.prototype.deserialize = function (instance) {
     if (instance['display_names'] !== null && instance['display_names'] !== undefined) {
       var deserializedInstancedisplayNames = [];
       instance['display_names'].forEach(function(element1) {
-        element1 = element1;
+        if (element1 !== null && element1 !== undefined) {
+          element1 = element1;
+        }
         deserializedInstancedisplayNames.push(element1);
       });
       this['displayNames'] = deserializedInstancedisplayNames;
     }
 
-    this['capacity'] = instance['capacity'];
+    if (instance['capacity'] !== null && instance['capacity'] !== undefined) {
+      this['capacity'] = instance['capacity'];
+    }
 
-    this['image'] = instance['image'];
+    if (instance['image'] !== null && instance['image'] !== undefined) {
+      this['image'] = instance['image'];
+    }
   }
 
   return this;

@@ -50,6 +50,9 @@ ArrayWrapper.prototype.serialize = function () {
         if (typeof this['array'][i].valueOf() !== 'string') {
           throw new Error('this[\'array\'][i] must be of type string.');
         }
+        if (payload['array'] === null || payload['array'] === undefined) {
+          payload['array'] = {};
+        }
         payload['array'][i] = this['array'][i];
       }
     }
@@ -69,7 +72,9 @@ ArrayWrapper.prototype.deserialize = function (instance) {
     if (instance['array'] !== null && instance['array'] !== undefined) {
       var deserializedInstancearray = [];
       instance['array'].forEach(function(element1) {
-        element1 = element1;
+        if (element1 !== null && element1 !== undefined) {
+          element1 = element1;
+        }
         deserializedInstancearray.push(element1);
       });
       this['array'] = deserializedInstancearray;

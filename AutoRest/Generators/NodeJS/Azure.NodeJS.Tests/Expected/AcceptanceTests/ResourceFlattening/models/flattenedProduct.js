@@ -61,12 +61,18 @@ FlattenedProduct.prototype.serialize = function () {
     if (typeof this['pname'].valueOf() !== 'string') {
       throw new Error('this[\'pname\'] must be of type string.');
     }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['pname'] = this['pname'];
   }
 
   if (this['flattenedProductType'] !== null && this['flattenedProductType'] !== undefined) {
     if (typeof this['flattenedProductType'].valueOf() !== 'string') {
       throw new Error('this[\'flattenedProductType\'] must be of type string.');
+    }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
     }
     payload['properties']['type'] = this['flattenedProductType'];
   }
@@ -75,12 +81,18 @@ FlattenedProduct.prototype.serialize = function () {
     if (typeof this['provisioningStateValues'].valueOf() !== 'string') {
       throw new Error('this[\'provisioningStateValues\'] must be of type string.');
     }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['provisioningStateValues'] = this['provisioningStateValues'];
   }
 
   if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
     if (typeof this['provisioningState'].valueOf() !== 'string') {
       throw new Error('this[\'provisioningState\'] must be of type string.');
+    }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
     }
     payload['properties']['provisioningState'] = this['provisioningState'];
   }
@@ -97,13 +109,29 @@ FlattenedProduct.prototype.serialize = function () {
 FlattenedProduct.prototype.deserialize = function (instance) {
   FlattenedProduct['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    this['pname'] = instance['properties']['pname'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['pname'] !== null && instance['properties']['pname'] !== undefined) {
+        this['pname'] = instance['properties']['pname'];
+      }
+    }
 
-    this['flattenedProductType'] = instance['properties']['type'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['type'] !== null && instance['properties']['type'] !== undefined) {
+        this['flattenedProductType'] = instance['properties']['type'];
+      }
+    }
 
-    this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['provisioningStateValues'] !== null && instance['properties']['provisioningStateValues'] !== undefined) {
+        this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
+      }
+    }
 
-    this['provisioningState'] = instance['properties']['provisioningState'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
+        this['provisioningState'] = instance['properties']['provisioningState'];
+      }
+    }
   }
 
   return this;

@@ -76,11 +76,17 @@ ErrorModel.prototype.serialize = function () {
  */
 ErrorModel.prototype.deserialize = function (instance) {
   if (instance) {
-    this['code'] = instance['code'];
+    if (instance['code'] !== null && instance['code'] !== undefined) {
+      this['code'] = instance['code'];
+    }
 
-    this['message'] = instance['message'];
+    if (instance['message'] !== null && instance['message'] !== undefined) {
+      this['message'] = instance['message'];
+    }
 
-    this['fields'] = instance['fields'];
+    if (instance['fields'] !== null && instance['fields'] !== undefined) {
+      this['fields'] = instance['fields'];
+    }
   }
 
   return this;

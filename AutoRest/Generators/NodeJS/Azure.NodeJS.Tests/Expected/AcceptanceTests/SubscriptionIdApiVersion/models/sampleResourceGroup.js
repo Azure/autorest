@@ -64,9 +64,13 @@ SampleResourceGroup.prototype.serialize = function () {
  */
 SampleResourceGroup.prototype.deserialize = function (instance) {
   if (instance) {
-    this['name'] = instance['name'];
+    if (instance['name'] !== null && instance['name'] !== undefined) {
+      this['name'] = instance['name'];
+    }
 
-    this['location'] = instance['location'];
+    if (instance['location'] !== null && instance['location'] !== undefined) {
+      this['location'] = instance['location'];
+    }
   }
 
   return this;

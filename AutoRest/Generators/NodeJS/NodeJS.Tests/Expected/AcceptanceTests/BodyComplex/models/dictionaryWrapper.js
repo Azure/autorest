@@ -46,6 +46,9 @@ DictionaryWrapper.prototype.serialize = function () {
         if (typeof this['defaultProgram'][valueElement1].valueOf() !== 'string') {
           throw new Error('this[\'defaultProgram\'][valueElement1] must be of type string.');
         }
+        if (payload['defaultProgram'] === null || payload['defaultProgram'] === undefined) {
+          payload['defaultProgram'] = {};
+        }
         payload['defaultProgram'][valueElement1] = this['defaultProgram'][valueElement1];
       }
     }
@@ -65,7 +68,11 @@ DictionaryWrapper.prototype.deserialize = function (instance) {
     if (instance['defaultProgram'] !== null && instance['defaultProgram'] !== undefined) {
       this['defaultProgram'] = {};
       for(var valueElement2 in instance['defaultProgram']) {
-        this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
+        if (instance['defaultProgram'] !== null && instance['defaultProgram'] !== undefined) {
+          if (instance['defaultProgram'][valueElement2] !== null && instance['defaultProgram'][valueElement2] !== undefined) {
+            this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
+          }
+        }
       }
     }
   }

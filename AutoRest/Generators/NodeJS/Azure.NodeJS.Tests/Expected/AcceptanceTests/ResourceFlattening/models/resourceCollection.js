@@ -78,6 +78,9 @@ ResourceCollection.prototype.serialize = function () {
     payload['arrayofresources'] = [];
     for (var i = 0; i < this['arrayofresources'].length; i++) {
       if (this['arrayofresources'][i]) {
+        if (payload['arrayofresources'] === null || payload['arrayofresources'] === undefined) {
+          payload['arrayofresources'] = {};
+        }
         payload['arrayofresources'][i] = this['arrayofresources'][i].serialize();
       }
     }
@@ -87,6 +90,9 @@ ResourceCollection.prototype.serialize = function () {
     payload['dictionaryofresources'] = {};
     for(var valueElement1 in this['dictionaryofresources']) {
       if (this['dictionaryofresources'][valueElement1]) {
+        if (payload['dictionaryofresources'] === null || payload['dictionaryofresources'] === undefined) {
+          payload['dictionaryofresources'] = {};
+        }
         payload['dictionaryofresources'][valueElement1] = this['dictionaryofresources'][valueElement1].serialize();
       }
     }
@@ -121,8 +127,10 @@ ResourceCollection.prototype.deserialize = function (instance) {
     if (instance['dictionaryofresources'] !== null && instance['dictionaryofresources'] !== undefined) {
       this['dictionaryofresources'] = {};
       for(var valueElement2 in instance['dictionaryofresources']) {
-        if (instance['dictionaryofresources'][valueElement2] !== null && instance['dictionaryofresources'][valueElement2] !== undefined) {
-          this['dictionaryofresources'][valueElement2] = new models['FlattenedProduct']().deserialize(instance['dictionaryofresources'][valueElement2]);
+        if (instance['dictionaryofresources'] !== null && instance['dictionaryofresources'] !== undefined) {
+          if (instance['dictionaryofresources'][valueElement2] !== null && instance['dictionaryofresources'][valueElement2] !== undefined) {
+            this['dictionaryofresources'][valueElement2] = new models['FlattenedProduct']().deserialize(instance['dictionaryofresources'][valueElement2]);
+          }
         }
       }
     }

@@ -24,20 +24,16 @@
       </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\azureSpecialProperties.js">
-      <TestFramework>
-      </TestFramework>
+      <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\subscriptionIdApiVersion.js">
-      <TestFramework>
-      </TestFramework>
+      <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\head.js">
-      <TestFramework>
-      </TestFramework>
+      <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\paging.js">
-      <TestFramework>
-      </TestFramework>
+      <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\resourceFlattening.js">
       <TestFramework>Mocha</TestFramework>
@@ -97,8 +93,7 @@
     <Compile Include="unit.js" />
     <Content Include="AcceptanceTests\testlist.txt" />
     <Compile Include="AcceptanceTests\lro.js">
-      <TestFramework>
-      </TestFramework>
+      <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\startServer.js">
       <TestFramework>

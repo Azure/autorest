@@ -71,9 +71,13 @@ Salmon.prototype.serialize = function () {
 Salmon.prototype.deserialize = function (instance) {
   Salmon['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    this['location'] = instance['location'];
+    if (instance['location'] !== null && instance['location'] !== undefined) {
+      this['location'] = instance['location'];
+    }
 
-    this['iswild'] = instance['iswild'];
+    if (instance['iswild'] !== null && instance['iswild'] !== undefined) {
+      this['iswild'] = instance['iswild'];
+    }
   }
 
   return this;

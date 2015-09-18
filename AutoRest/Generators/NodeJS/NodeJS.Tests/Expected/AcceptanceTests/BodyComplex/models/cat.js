@@ -63,6 +63,9 @@ Cat.prototype.serialize = function () {
     payload['hates'] = [];
     for (var i = 0; i < this['hates'].length; i++) {
       if (this['hates'][i]) {
+        if (payload['hates'] === null || payload['hates'] === undefined) {
+          payload['hates'] = {};
+        }
         payload['hates'][i] = this['hates'][i].serialize();
       }
     }
@@ -80,7 +83,9 @@ Cat.prototype.serialize = function () {
 Cat.prototype.deserialize = function (instance) {
   Cat['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    this['color'] = instance['color'];
+    if (instance['color'] !== null && instance['color'] !== undefined) {
+      this['color'] = instance['color'];
+    }
 
     if (instance['hates'] !== null && instance['hates'] !== undefined) {
       var deserializedInstancehates = [];

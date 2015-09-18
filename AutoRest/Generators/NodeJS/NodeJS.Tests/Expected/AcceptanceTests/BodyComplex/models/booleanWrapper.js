@@ -64,9 +64,13 @@ BooleanWrapper.prototype.serialize = function () {
  */
 BooleanWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    this['fieldTrue'] = instance['field_true'];
+    if (instance['field_true'] !== null && instance['field_true'] !== undefined) {
+      this['fieldTrue'] = instance['field_true'];
+    }
 
-    this['fieldFalse'] = instance['field_false'];
+    if (instance['field_false'] !== null && instance['field_false'] !== undefined) {
+      this['fieldFalse'] = instance['field_false'];
+    }
   }
 
   return this;
