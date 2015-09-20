@@ -116,7 +116,7 @@ Dictionary.prototype.getNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -214,7 +214,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -433,7 +433,7 @@ Dictionary.prototype.getNullValue = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -531,7 +531,7 @@ Dictionary.prototype.getNullKey = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -629,7 +629,7 @@ Dictionary.prototype.getEmptyStringKey = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -727,7 +727,7 @@ Dictionary.prototype.getInvalid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -825,7 +825,7 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1044,7 +1044,7 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1142,7 +1142,7 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1240,7 +1240,7 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1459,7 +1459,7 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1557,7 +1557,7 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1655,7 +1655,7 @@ Dictionary.prototype.getLongValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1874,7 +1874,7 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -1972,7 +1972,7 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -2070,7 +2070,7 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -2289,7 +2289,7 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -2387,7 +2387,7 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -2485,7 +2485,7 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -2704,7 +2704,7 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -2802,7 +2802,7 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -2900,7 +2900,7 @@ Dictionary.prototype.getStringValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -3119,7 +3119,7 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -3217,7 +3217,7 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -3316,7 +3316,7 @@ Dictionary.prototype.getDateValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
@@ -3416,7 +3416,7 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
         if (!(arrayBody[valueElement2] instanceof Date || typeof arrayBody[valueElement2].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement2])))) {
           throw new Error('arrayBody[valueElement2] must be of type date.');
         }
-        requestModel[valueElement2] = (arrayBody[valueElement2] instanceof Date) ? arrayBody[valueElement2].toISOString() : arrayBody[valueElement2];
+        requestModel[valueElement2] = (arrayBody[valueElement2] instanceof Date) ? arrayBody[valueElement2].toISOString().substring(0,10) : arrayBody[valueElement2];
       }
     }
     requestContent = JSON.stringify(requestModel);
@@ -3544,7 +3544,7 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
@@ -3649,7 +3649,7 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
@@ -3755,7 +3755,7 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
@@ -3983,7 +3983,7 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
@@ -4088,7 +4088,7 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
@@ -4194,7 +4194,7 @@ Dictionary.prototype.getByteValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
@@ -4422,7 +4422,7 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var property in result) {
             if (result[property] !== null && result[property] !== undefined) {
@@ -4527,7 +4527,7 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for(var valueElement in parsedResponse) {
             if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
@@ -4639,7 +4639,7 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for(var valueElement in parsedResponse) {
             if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
@@ -4752,7 +4752,7 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for(var valueElement in parsedResponse) {
             if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
@@ -4865,7 +4865,7 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for(var valueElement in parsedResponse) {
             if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
@@ -4978,7 +4978,7 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for(var valueElement in parsedResponse) {
             if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
@@ -5204,7 +5204,7 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -5302,7 +5302,7 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -5401,7 +5401,7 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -5500,7 +5500,7 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -5599,7 +5599,7 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -5831,7 +5831,7 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -5929,7 +5929,7 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -6029,7 +6029,7 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -6129,7 +6129,7 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -6229,7 +6229,7 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;

@@ -114,7 +114,7 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -215,7 +215,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -341,7 +341,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -467,7 +467,7 @@ HttpServerFailure.prototype.delete505 = function (booleanValue, options, callbac
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }

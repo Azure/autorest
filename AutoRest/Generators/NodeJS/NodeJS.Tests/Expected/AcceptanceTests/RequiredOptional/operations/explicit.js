@@ -138,7 +138,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -379,7 +379,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -600,7 +600,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -824,7 +824,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -1065,7 +1065,7 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -1286,7 +1286,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -1517,7 +1517,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -1759,7 +1759,7 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -2007,7 +2007,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -2257,7 +2257,7 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
@@ -2483,7 +2483,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
     var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result = parsedResponse;
+      result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         result = new client._models['ErrorModel'](parsedResponse);
       }

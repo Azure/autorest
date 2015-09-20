@@ -116,7 +116,7 @@ BasicOperations.prototype.getValid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Basic'](parsedResponse);
         }
@@ -339,7 +339,7 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Basic'](parsedResponse);
         }
@@ -443,7 +443,7 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Basic'](parsedResponse);
         }
@@ -547,7 +547,7 @@ BasicOperations.prototype.getNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Basic'](parsedResponse);
         }
@@ -651,7 +651,7 @@ BasicOperations.prototype.getNotProvided = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Basic'](parsedResponse);
         }

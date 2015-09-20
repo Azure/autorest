@@ -510,7 +510,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                             .Outdent()
                             .AppendLine("}").ToString();
             }
-            else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
+            else if (primary == PrimaryType.Date)
             {
                 if (isRequired)
                 {
@@ -518,13 +518,35 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         objectReference);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
                     builder = ConstructBasePropertyCheck(builder, valueReference);
-                    return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", 
+                    return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString().substring(0,10) : {1};", 
                         valueReference, objectReference).ToString();
                 }
 
                 builder.AppendLine("if ({0}) {{", objectReference)
                          .Indent()
                          .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{", 
+                         objectReference);
+                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                builder = ConstructBasePropertyCheck(builder, valueReference);
+                return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString().substring(0,10) : {1};", valueReference, objectReference)
+                                .Outdent()
+                                .AppendLine("}").ToString();
+            }
+            else if (primary == PrimaryType.DateTime)
+            {
+                if (isRequired)
+                {
+                    builder.AppendLine("if(!{0} || !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{",
+                        objectReference);
+                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
+                    return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};",
+                        valueReference, objectReference).ToString();
+                }
+
+                builder.AppendLine("if ({0}) {{", objectReference)
+                         .Indent()
+                         .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{",
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 builder = ConstructBasePropertyCheck(builder, valueReference);

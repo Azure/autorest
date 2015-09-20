@@ -95,7 +95,7 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -239,7 +239,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -258,7 +258,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -341,7 +341,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -486,7 +486,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -505,7 +505,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -589,7 +589,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -735,7 +735,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1876,7 +1876,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2021,7 +2021,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2040,7 +2040,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2124,7 +2124,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2270,7 +2270,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2354,7 +2354,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2500,7 +2500,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -3295,7 +3295,7 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -3440,7 +3440,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -3524,7 +3524,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -3670,7 +3670,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -3754,7 +3754,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -3900,7 +3900,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }

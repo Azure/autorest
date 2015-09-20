@@ -72,7 +72,6 @@ else
       response = pollingResult.response;
       var responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
-      @Model.InitializeResponseBody
       @EmptyLine
       // Deserialize Response
       @if (Model.ReturnType != null)

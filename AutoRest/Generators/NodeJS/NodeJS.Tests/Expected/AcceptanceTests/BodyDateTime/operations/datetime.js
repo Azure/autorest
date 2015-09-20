@@ -116,7 +116,7 @@ Datetime.prototype.getNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -217,7 +217,7 @@ Datetime.prototype.getInvalid = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -318,7 +318,7 @@ Datetime.prototype.getOverflow = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -419,7 +419,7 @@ Datetime.prototype.getUnderflow = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -629,7 +629,7 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -730,7 +730,7 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -942,7 +942,7 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -1044,7 +1044,7 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -1256,7 +1256,7 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -1358,7 +1358,7 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -1568,7 +1568,7 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -1778,7 +1778,7 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -1988,7 +1988,7 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }

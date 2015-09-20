@@ -54,8 +54,7 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
   // Create Result
   var result = null;
   if (responseBody === '') responseBody = null;
-  @Model.InitializeResponseBody
-
+  @Model.InitializeResult
   @foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
   {
       <text>

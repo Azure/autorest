@@ -96,7 +96,7 @@ LROs.prototype.put200Succeeded = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -241,7 +241,7 @@ LROs.prototype.beginPut200Succeeded = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -324,7 +324,7 @@ LROs.prototype.put200SucceededNoState = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -469,7 +469,7 @@ LROs.prototype.beginPut200SucceededNoState = function (product, options, callbac
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -553,7 +553,7 @@ LROs.prototype.put202Retry200 = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -699,7 +699,7 @@ LROs.prototype.beginPut202Retry200 = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -784,7 +784,7 @@ LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -931,7 +931,7 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, cal
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -950,7 +950,7 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, cal
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1035,7 +1035,7 @@ LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1182,7 +1182,7 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (product, options, cal
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1267,7 +1267,7 @@ LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1414,7 +1414,7 @@ LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callba
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1433,7 +1433,7 @@ LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callba
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1518,7 +1518,7 @@ LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback)
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1665,7 +1665,7 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (product, options, call
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1749,7 +1749,7 @@ LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1895,7 +1895,7 @@ LROs.prototype.beginPutNoHeaderInRetry = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -1979,7 +1979,7 @@ LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2125,7 +2125,7 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (product, options, callbac
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2209,7 +2209,7 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2355,7 +2355,7 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (product, options, callb
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2439,7 +2439,7 @@ LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2585,7 +2585,7 @@ LROs.prototype.beginPutAsyncRetryFailed = function (product, options, callback) 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2669,7 +2669,7 @@ LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2815,7 +2815,7 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (product, options, callba
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -2899,7 +2899,7 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -3045,7 +3045,7 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, options, callba
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -3125,7 +3125,7 @@ LROs.prototype.putNonResource = function (sku, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Sku'](parsedResponse);
         }
@@ -3267,7 +3267,7 @@ LROs.prototype.beginPutNonResource = function (sku, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Sku'](parsedResponse);
         }
@@ -3347,7 +3347,7 @@ LROs.prototype.putAsyncNonResource = function (sku, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Sku'](parsedResponse);
         }
@@ -3489,7 +3489,7 @@ LROs.prototype.beginPutAsyncNonResource = function (sku, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Sku'](parsedResponse);
         }
@@ -3567,7 +3567,7 @@ LROs.prototype.putSubResource = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['SubProduct'](parsedResponse);
         }
@@ -3707,7 +3707,7 @@ LROs.prototype.beginPutSubResource = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['SubProduct'](parsedResponse);
         }
@@ -3785,7 +3785,7 @@ LROs.prototype.putAsyncSubResource = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['SubProduct'](parsedResponse);
         }
@@ -3925,7 +3925,7 @@ LROs.prototype.beginPutAsyncSubResource = function (product, options, callback) 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['SubProduct'](parsedResponse);
         }
@@ -4002,7 +4002,7 @@ LROs.prototype.deleteProvisioning202Accepted200Succeeded = function (options, ca
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -4125,7 +4125,7 @@ LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -4144,7 +4144,7 @@ LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -4221,7 +4221,7 @@ LROs.prototype.deleteProvisioning202DeletingFailed200 = function (options, callb
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -4344,7 +4344,7 @@ LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -4363,7 +4363,7 @@ LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -4440,7 +4440,7 @@ LROs.prototype.deleteProvisioning202Deletingcanceled200 = function (options, cal
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -4563,7 +4563,7 @@ LROs.prototype.beginDeleteProvisioning202Deletingcanceled200 = function (options
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -4582,7 +4582,7 @@ LROs.prototype.beginDeleteProvisioning202Deletingcanceled200 = function (options
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -4817,7 +4817,7 @@ LROs.prototype.delete202Retry200 = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -4939,7 +4939,7 @@ LROs.prototype.beginDelete202Retry200 = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -5015,7 +5015,7 @@ LROs.prototype.delete202NoRetry204 = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -5137,7 +5137,7 @@ LROs.prototype.beginDelete202NoRetry204 = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -6191,7 +6191,7 @@ LROs.prototype.post200WithPayload = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Sku'](parsedResponse);
         }
@@ -6313,7 +6313,7 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Sku'](parsedResponse);
         }
@@ -6332,7 +6332,7 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Sku'](parsedResponse);
         }
@@ -6610,7 +6610,7 @@ LROs.prototype.post202NoRetry204 = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -6755,7 +6755,7 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -6839,7 +6839,7 @@ LROs.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -6985,7 +6985,7 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -7069,7 +7069,7 @@ LROs.prototype.postAsyncNoRetrySucceeded = function (product, options, callback)
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -7215,7 +7215,7 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }

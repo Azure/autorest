@@ -43,14 +43,14 @@ DateWrapper.prototype.serialize = function () {
     if (!(this['field'] instanceof Date || typeof this['field'].valueOf() === 'string' && !isNaN(Date.parse(this['field'])))) {
       throw new Error('this[\'field\'] must be of type date.');
     }
-    payload['field'] = (this['field'] instanceof Date) ? this['field'].toISOString() : this['field'];
+    payload['field'] = (this['field'] instanceof Date) ? this['field'].toISOString().substring(0,10) : this['field'];
   }
 
   if (this['leap']) {
     if (!(this['leap'] instanceof Date || typeof this['leap'].valueOf() === 'string' && !isNaN(Date.parse(this['leap'])))) {
       throw new Error('this[\'leap\'] must be of type date.');
     }
-    payload['leap'] = (this['leap'] instanceof Date) ? this['leap'].toISOString() : this['leap'];
+    payload['leap'] = (this['leap'] instanceof Date) ? this['leap'].toISOString().substring(0,10) : this['leap'];
   }
 
   return payload;

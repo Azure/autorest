@@ -116,7 +116,7 @@ DateModel.prototype.getNull = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -217,7 +217,7 @@ DateModel.prototype.getInvalidDate = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -318,7 +318,7 @@ DateModel.prototype.getOverflowDate = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -419,7 +419,7 @@ DateModel.prototype.getUnderflowDate = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -503,7 +503,7 @@ DateModel.prototype.putMaxDate = function (dateBody, options, callback) {
     if(!dateBody || !(dateBody instanceof Date || (typeof dateBody.valueOf() === 'string' && !isNaN(Date.parse(dateBody))))) {
       throw new Error('dateBody cannot be null or undefined and it must be of type date.');
     }
-    requestModel = (dateBody instanceof Date) ? dateBody.toISOString() : dateBody;
+    requestModel = (dateBody instanceof Date) ? dateBody.toISOString().substring(0,10) : dateBody;
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -629,7 +629,7 @@ DateModel.prototype.getMaxDate = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }
@@ -713,7 +713,7 @@ DateModel.prototype.putMinDate = function (dateBody, options, callback) {
     if(!dateBody || !(dateBody instanceof Date || (typeof dateBody.valueOf() === 'string' && !isNaN(Date.parse(dateBody))))) {
       throw new Error('dateBody cannot be null or undefined and it must be of type date.');
     }
-    requestModel = (dateBody instanceof Date) ? dateBody.toISOString() : dateBody;
+    requestModel = (dateBody instanceof Date) ? dateBody.toISOString().substring(0,10) : dateBody;
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
@@ -839,7 +839,7 @@ DateModel.prototype.getMinDate = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new Date(result);
         }

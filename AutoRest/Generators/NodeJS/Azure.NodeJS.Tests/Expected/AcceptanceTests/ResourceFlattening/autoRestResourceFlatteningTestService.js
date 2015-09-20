@@ -293,7 +293,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var initializedParsedResponse = [];
           parsedResponse.forEach(function(element) {
@@ -552,7 +552,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for(var valueElement in parsedResponse) {
             if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
@@ -818,7 +818,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ResourceCollection'](parsedResponse);
         }

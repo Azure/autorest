@@ -98,7 +98,7 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -245,7 +245,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -264,7 +264,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -349,7 +349,7 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -496,7 +496,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -573,7 +573,7 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -696,7 +696,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -715,7 +715,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }

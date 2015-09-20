@@ -23,6 +23,5 @@ return client.pipeline(httpRequest, function (err, response) {
 
   // Create Result
   var result = response;
-  @Model.InitializeResponseBody
   return callback(null, result, httpRequest, response);
 });

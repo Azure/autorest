@@ -116,7 +116,7 @@ Primitive.prototype.getInt = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['IntWrapper'](parsedResponse);
         }
@@ -335,7 +335,7 @@ Primitive.prototype.getLong = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['LongWrapper'](parsedResponse);
         }
@@ -554,7 +554,7 @@ Primitive.prototype.getFloat = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['FloatWrapper'](parsedResponse);
         }
@@ -773,7 +773,7 @@ Primitive.prototype.getDouble = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['DoubleWrapper'](parsedResponse);
         }
@@ -994,7 +994,7 @@ Primitive.prototype.getBool = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['BooleanWrapper'](parsedResponse);
         }
@@ -1213,7 +1213,7 @@ Primitive.prototype.getString = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['StringWrapper'](parsedResponse);
         }
@@ -1434,7 +1434,7 @@ Primitive.prototype.getDate = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['DateWrapper'](parsedResponse);
         }
@@ -1653,7 +1653,7 @@ Primitive.prototype.getDateTime = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['DatetimeWrapper'](parsedResponse);
         }
@@ -1873,7 +1873,7 @@ Primitive.prototype.getByte = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ByteWrapper'](parsedResponse);
         }

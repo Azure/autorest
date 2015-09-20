@@ -133,7 +133,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -253,7 +253,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -374,7 +374,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -496,7 +496,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -616,7 +616,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -736,7 +736,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -856,7 +856,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -978,7 +978,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -1100,7 +1100,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -1223,7 +1223,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -1347,7 +1347,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -1469,7 +1469,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -1591,7 +1591,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }
@@ -1713,7 +1713,7 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['ProductResult'](parsedResponse);
         }

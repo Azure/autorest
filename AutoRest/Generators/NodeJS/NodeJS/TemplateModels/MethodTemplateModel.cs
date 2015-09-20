@@ -92,12 +92,23 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <summary>
         /// Gets the expression for response body initialization 
         /// </summary>
-        public virtual string InitializeResponseBody
+        public string InitializeResponseBody(IType type)
         {
-            get
+            var sb = new IndentedStringBuilder("  ");
+            if (ReturnType is CompositeType || ReturnType is DictionaryType)
             {
-                return string.Empty;
+                sb.AppendLine("result = {};");
             }
+            else if (ReturnType is SequenceType)
+            {
+                sb.AppendLine("result = [];");
+            }
+            else
+            {
+                sb.AppendLine("result = null;");
+            }
+
+            return sb.ToString();
         }
 
         /// <summary>
@@ -437,7 +448,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                    .AppendLine("try {")
                    .Indent()
                      .AppendLine("{0} = JSON.parse(responseBody);", responseVariable)
-                     .AppendLine("{0} = {1};", valueReference, responseVariable)
+                     .AppendLine("{0} = JSON.parse(responseBody);", valueReference)
                      .AppendLine(type.InitializeSerializationType(Scope, valueReference, responseVariable, "client._models"));
             var deserializeBody = this.GetDeserializationString(type, valueReference, responseVariable);
             if (!string.IsNullOrWhiteSpace(deserializeBody))
@@ -624,6 +635,14 @@ namespace Microsoft.Rest.Generator.NodeJS
                 }
 
                 return builder.ToString();
+            }
+        }
+
+        public virtual string InitializeResult 
+        { 
+            get 
+            {
+                return string.Empty;
             }
         }
     }

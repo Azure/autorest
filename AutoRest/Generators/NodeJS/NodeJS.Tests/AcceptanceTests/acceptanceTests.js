@@ -742,19 +742,18 @@ describe('nodejs', function () {
             should.not.exist(error);
             assert.deepEqual(result, testArray);
             //TODO, 4213536: Fix date serialization
-            //testClient.arrayModel.putDateValid(testArray, function (error, result) {
-            //  should.not.exist(error);
+            testClient.arrayModel.putDateValid(testArray, function (error, result) {
+              should.not.exist(error);
             testClient.arrayModel.getDateInvalidNull(function (error, result) {
               should.not.exist(error);
               assert.deepEqual(result, [new Date('2012-01-01'), null, new Date('1776-07-04')]);
               testClient.arrayModel.getDateInvalidChars(function (error, result) {
-                //TODO, 4214000: investigate how to deserialize invalid dates
                 should.not.exist(error);
-                //assert.deepEqual(result, [new Date('2011-03-22'), new Date('date')]);
+                JSON.stringify(result).should.equal(JSON.stringify([new Date('2011-03-22'), new Date('date')]));
                 done();
               });
             });
-            //});
+            });
           });
         });
 
@@ -769,9 +768,8 @@ describe('nodejs', function () {
                 should.not.exist(error);
                 assert.deepEqual(result, [new Date('2000-12-01t00:00:01z'), null]);
                 testClient.arrayModel.getDateTimeInvalidChars(function (error, result) {
-                  //TODO, 4214000: investigate how to deserialize invalid dates
                   should.not.exist(error);
-                  //assert.deepEqual(result, [new Date('2011-03-22'), new Date('date')]);
+                  JSON.stringify(result).should.equal(JSON.stringify([new Date('2000-12-01t00:00:01z'), new Date('date-time')]));
                   done();
                 });
               });
@@ -1156,10 +1154,10 @@ describe('nodejs', function () {
           testClient.dictionary.getDateValid(function (error, result) {
             should.not.exist(error);
             assert.deepEqual(result, testDictionary);
-            //testClient.dictionary.putDateValid(testDictionary, function (error, result) {
-            //  should.not.exist(error);
+            testClient.dictionary.putDateValid(testDictionary, function (error, result) {
+              should.not.exist(error);
             done();
-            //});
+            });
           });
         });
 

@@ -99,7 +99,7 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -247,7 +247,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -333,7 +333,7 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -481,7 +481,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }
@@ -500,7 +500,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['Product'](parsedResponse);
         }

@@ -35,10 +35,8 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             return base.HasQueryParameters() || !IsAbsoluteUrl;
         }
 
-        /// <summary>
-        /// Gets the expression for response body initialization 
-        /// </summary>
-        public override string InitializeResponseBody
+
+        public override string InitializeResult
         {
             get
             {
@@ -48,6 +46,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 {
                     sb.AppendLine("result = (statusCode === 204);");
                 }
+
                 return sb.ToString();
             }
         }
