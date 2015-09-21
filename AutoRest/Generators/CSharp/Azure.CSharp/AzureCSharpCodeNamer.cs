@@ -41,6 +41,8 @@ namespace Microsoft.Rest.Generator.CSharp
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
             {
+                string nextLinkString = (string)method.Extensions[AzureCodeGenerator.PageableExtension];
+
                 foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
                 {
                     var compositType = (CompositeType) method.Responses[responseStatus];
@@ -49,7 +51,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     // if the type is a wrapper over page-able response
                     if(sequenceType != null &&
                        compositType.Properties.Count == 2 && 
-                       compositType.Properties.Any(p => p.SerializedName.Equals("nextLink", StringComparison.OrdinalIgnoreCase)))
+                       compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
                     {
                         var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, sequenceType.ElementType.Name);
                         

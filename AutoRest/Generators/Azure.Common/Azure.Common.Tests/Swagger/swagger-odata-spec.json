@@ -25,7 +25,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis": {
       "get": {
         "x-ms-odata": "#/definitions/Product",
-        "x-ms-pageable": true,
+        "x-ms-pageable": "nextLink",
         "operationId": "list",
         "summary": "Product Types",
         "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
