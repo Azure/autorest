@@ -72,6 +72,8 @@ StorageAccountCheckNameAvailabilityParameters.prototype.deserialize = function (
       this['type'] = instance['type'];
     }
   }
+
+  return this;
 };
 
 module.exports = StorageAccountCheckNameAvailabilityParameters;

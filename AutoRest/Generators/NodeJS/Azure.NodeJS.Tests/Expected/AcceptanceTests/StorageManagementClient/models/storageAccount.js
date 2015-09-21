@@ -135,21 +135,32 @@ StorageAccount.prototype.serialize = function () {
   var payload = StorageAccount['super_'].prototype.serialize.call(this);
   if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
     var allowedValues = [ 'Creating', 'ResolvingDNS', 'Succeeded' ];
-    if (!allowedValues.some( function(item) { return item === this['provisioningState']; })) {
+    var thisprovisioningState = this['provisioningState'];
+    if (!allowedValues.some( function(item) { return item === thisprovisioningState; })) {
       throw new Error(this['provisioningState'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
     }
     payload['properties']['provisioningState'] = this['provisioningState'];
   }
 
   if (this['accountType'] !== null && this['accountType'] !== undefined) {
     var allowedValues1 = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    if (!allowedValues1.some( function(item) { return item === this['accountType']; })) {
+    var thisaccountType = this['accountType'];
+    if (!allowedValues1.some( function(item) { return item === thisaccountType; })) {
       throw new Error(this['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues1);
+    }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
     }
     payload['properties']['accountType'] = this['accountType'];
   }
 
   if (this['primaryEndpoints']) {
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['primaryEndpoints'] = this['primaryEndpoints'].serialize();
   }
 
@@ -157,13 +168,20 @@ StorageAccount.prototype.serialize = function () {
     if (typeof this['primaryLocation'].valueOf() !== 'string') {
       throw new Error('this[\'primaryLocation\'] must be of type string.');
     }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['primaryLocation'] = this['primaryLocation'];
   }
 
   if (this['statusOfPrimary'] !== null && this['statusOfPrimary'] !== undefined) {
     var allowedValues2 = [ 'Available', 'Unavailable' ];
-    if (!allowedValues2.some( function(item) { return item === this['statusOfPrimary']; })) {
+    var thisstatusOfPrimary = this['statusOfPrimary'];
+    if (!allowedValues2.some( function(item) { return item === thisstatusOfPrimary; })) {
       throw new Error(this['statusOfPrimary'] + ' is not a valid value. The valid values are: ' + allowedValues2);
+    }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
     }
     payload['properties']['statusOfPrimary'] = this['statusOfPrimary'];
   }
@@ -172,6 +190,9 @@ StorageAccount.prototype.serialize = function () {
     if (!(this['lastGeoFailoverTime'] instanceof Date || typeof this['lastGeoFailoverTime'].valueOf() === 'string' && !isNaN(Date.parse(this['lastGeoFailoverTime'])))) {
       throw new Error('this[\'lastGeoFailoverTime\'] must be of type date.');
     }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['lastGeoFailoverTime'] = (this['lastGeoFailoverTime'] instanceof Date) ? this['lastGeoFailoverTime'].toISOString() : this['lastGeoFailoverTime'];
   }
 
@@ -179,13 +200,20 @@ StorageAccount.prototype.serialize = function () {
     if (typeof this['secondaryLocation'].valueOf() !== 'string') {
       throw new Error('this[\'secondaryLocation\'] must be of type string.');
     }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['secondaryLocation'] = this['secondaryLocation'];
   }
 
   if (this['statusOfSecondary'] !== null && this['statusOfSecondary'] !== undefined) {
     var allowedValues3 = [ 'Available', 'Unavailable' ];
-    if (!allowedValues3.some( function(item) { return item === this['statusOfSecondary']; })) {
+    var thisstatusOfSecondary = this['statusOfSecondary'];
+    if (!allowedValues3.some( function(item) { return item === thisstatusOfSecondary; })) {
       throw new Error(this['statusOfSecondary'] + ' is not a valid value. The valid values are: ' + allowedValues3);
+    }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
     }
     payload['properties']['statusOfSecondary'] = this['statusOfSecondary'];
   }
@@ -194,14 +222,23 @@ StorageAccount.prototype.serialize = function () {
     if (!(this['creationTime'] instanceof Date || typeof this['creationTime'].valueOf() === 'string' && !isNaN(Date.parse(this['creationTime'])))) {
       throw new Error('this[\'creationTime\'] must be of type date.');
     }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['creationTime'] = (this['creationTime'] instanceof Date) ? this['creationTime'].toISOString() : this['creationTime'];
   }
 
   if (this['customDomain']) {
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['customDomain'] = this['customDomain'].serialize();
   }
 
   if (this['secondaryEndpoints']) {
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['secondaryEndpoints'] = this['secondaryEndpoints'].serialize();
   }
 
@@ -217,50 +254,107 @@ StorageAccount.prototype.serialize = function () {
 StorageAccount.prototype.deserialize = function (instance) {
   StorageAccount['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
-      this['provisioningState'] = instance['properties']['provisioningState'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
+        this['provisioningState'] = instance['properties']['provisioningState'];
+      }
+      else {
+        this['provisioningState'] = instance['properties']['provisioningState'];
+      }
     }
 
-    if (instance['properties']['accountType'] !== null && instance['properties']['accountType'] !== undefined) {
-      this['accountType'] = instance['properties']['accountType'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['accountType'] !== null && instance['properties']['accountType'] !== undefined) {
+        this['accountType'] = instance['properties']['accountType'];
+      }
+      else {
+        this['accountType'] = instance['properties']['accountType'];
+      }
     }
 
-    if (instance['properties']['primaryEndpoints'] !== null && instance['properties']['primaryEndpoints'] !== undefined) {
-      this['primaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['primaryEndpoints']);
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['primaryEndpoints'] !== null && instance['properties']['primaryEndpoints'] !== undefined) {
+        this['primaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['primaryEndpoints']);
+      }
+      else {
+        this['primaryEndpoints'] = instance['properties']['primaryEndpoints'];
+      }
     }
 
-    if (instance['properties']['primaryLocation'] !== null && instance['properties']['primaryLocation'] !== undefined) {
-      this['primaryLocation'] = instance['properties']['primaryLocation'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['primaryLocation'] !== null && instance['properties']['primaryLocation'] !== undefined) {
+        this['primaryLocation'] = instance['properties']['primaryLocation'];
+      }
+      else {
+        this['primaryLocation'] = instance['properties']['primaryLocation'];
+      }
     }
 
-    if (instance['properties']['statusOfPrimary'] !== null && instance['properties']['statusOfPrimary'] !== undefined) {
-      this['statusOfPrimary'] = instance['properties']['statusOfPrimary'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['statusOfPrimary'] !== null && instance['properties']['statusOfPrimary'] !== undefined) {
+        this['statusOfPrimary'] = instance['properties']['statusOfPrimary'];
+      }
+      else {
+        this['statusOfPrimary'] = instance['properties']['statusOfPrimary'];
+      }
     }
 
-    if (instance['properties']['lastGeoFailoverTime'] !== null && instance['properties']['lastGeoFailoverTime'] !== undefined) {
-      this['lastGeoFailoverTime'] = new Date(instance['properties']['lastGeoFailoverTime']);
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['lastGeoFailoverTime'] !== null && instance['properties']['lastGeoFailoverTime'] !== undefined) {
+        this['lastGeoFailoverTime'] = new Date(instance['properties']['lastGeoFailoverTime']);
+      }
+      else {
+        this['lastGeoFailoverTime'] = instance['properties']['lastGeoFailoverTime'];
+      }
     }
 
-    if (instance['properties']['secondaryLocation'] !== null && instance['properties']['secondaryLocation'] !== undefined) {
-      this['secondaryLocation'] = instance['properties']['secondaryLocation'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['secondaryLocation'] !== null && instance['properties']['secondaryLocation'] !== undefined) {
+        this['secondaryLocation'] = instance['properties']['secondaryLocation'];
+      }
+      else {
+        this['secondaryLocation'] = instance['properties']['secondaryLocation'];
+      }
     }
 
-    if (instance['properties']['statusOfSecondary'] !== null && instance['properties']['statusOfSecondary'] !== undefined) {
-      this['statusOfSecondary'] = instance['properties']['statusOfSecondary'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['statusOfSecondary'] !== null && instance['properties']['statusOfSecondary'] !== undefined) {
+        this['statusOfSecondary'] = instance['properties']['statusOfSecondary'];
+      }
+      else {
+        this['statusOfSecondary'] = instance['properties']['statusOfSecondary'];
+      }
     }
 
-    if (instance['properties']['creationTime'] !== null && instance['properties']['creationTime'] !== undefined) {
-      this['creationTime'] = new Date(instance['properties']['creationTime']);
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['creationTime'] !== null && instance['properties']['creationTime'] !== undefined) {
+        this['creationTime'] = new Date(instance['properties']['creationTime']);
+      }
+      else {
+        this['creationTime'] = instance['properties']['creationTime'];
+      }
     }
 
-    if (instance['properties']['customDomain'] !== null && instance['properties']['customDomain'] !== undefined) {
-      this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['customDomain'] !== null && instance['properties']['customDomain'] !== undefined) {
+        this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
+      }
+      else {
+        this['customDomain'] = instance['properties']['customDomain'];
+      }
     }
 
-    if (instance['properties']['secondaryEndpoints'] !== null && instance['properties']['secondaryEndpoints'] !== undefined) {
-      this['secondaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['secondaryEndpoints']);
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['secondaryEndpoints'] !== null && instance['properties']['secondaryEndpoints'] !== undefined) {
+        this['secondaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['secondaryEndpoints']);
+      }
+      else {
+        this['secondaryEndpoints'] = instance['properties']['secondaryEndpoints'];
+      }
     }
   }
+
+  return this;
 };
 
 module.exports = StorageAccount;

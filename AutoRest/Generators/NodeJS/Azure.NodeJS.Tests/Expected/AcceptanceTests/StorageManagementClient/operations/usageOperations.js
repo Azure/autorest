@@ -142,7 +142,7 @@ UsageOperations.prototype.list = function (options, callback) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result = parsedResponse;
+        result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result = new client._models['UsageListResult'](parsedResponse);
         }

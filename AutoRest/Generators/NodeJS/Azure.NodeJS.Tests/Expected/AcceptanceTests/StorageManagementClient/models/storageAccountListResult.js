@@ -54,9 +54,12 @@ function StorageAccountListResult(parameters) {
 StorageAccountListResult.prototype.serialize = function () {
   var payload = {};
   if (util.isArray(this['value'])) {
-    payload['value'] = []
+    payload['value'] = [];
     for (var i = 0; i < this['value'].length; i++) {
       if (this['value'][i]) {
+        if (payload['value'] === null || payload['value'] === undefined) {
+          payload['value'] = {};
+        }
         payload['value'][i] = this['value'][i].serialize();
       }
     }
@@ -95,6 +98,8 @@ StorageAccountListResult.prototype.deserialize = function (instance) {
       this['nextLink'] = instance['nextLink'];
     }
   }
+
+  return this;
 };
 
 module.exports = StorageAccountListResult;

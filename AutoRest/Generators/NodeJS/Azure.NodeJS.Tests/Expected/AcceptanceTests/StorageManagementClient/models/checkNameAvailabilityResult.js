@@ -61,7 +61,8 @@ CheckNameAvailabilityResult.prototype.serialize = function () {
 
   if (this['reason'] !== null && this['reason'] !== undefined) {
     var allowedValues = [ 'AccountNameInvalid', 'AlreadyExists' ];
-    if (!allowedValues.some( function(item) { return item === this['reason']; })) {
+    var thisreason = this['reason'];
+    if (!allowedValues.some( function(item) { return item === thisreason; })) {
       throw new Error(this['reason'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
     payload['reason'] = this['reason'];
@@ -97,6 +98,8 @@ CheckNameAvailabilityResult.prototype.deserialize = function (instance) {
       this['message'] = instance['message'];
     }
   }
+
+  return this;
 };
 
 module.exports = CheckNameAvailabilityResult;

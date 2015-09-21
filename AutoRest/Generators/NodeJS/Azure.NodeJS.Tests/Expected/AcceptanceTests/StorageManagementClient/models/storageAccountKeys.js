@@ -73,6 +73,8 @@ StorageAccountKeys.prototype.deserialize = function (instance) {
       this['key2'] = instance['key2'];
     }
   }
+
+  return this;
 };
 
 module.exports = StorageAccountKeys;

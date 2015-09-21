@@ -62,13 +62,20 @@ StorageAccountUpdateParameters.prototype.serialize = function () {
   var payload = StorageAccountUpdateParameters['super_'].prototype.serialize.call(this);
   if (this['accountType'] !== null && this['accountType'] !== undefined) {
     var allowedValues = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    if (!allowedValues.some( function(item) { return item === this['accountType']; })) {
+    var thisaccountType = this['accountType'];
+    if (!allowedValues.some( function(item) { return item === thisaccountType; })) {
       throw new Error(this['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    }
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
     }
     payload['properties']['accountType'] = this['accountType'];
   }
 
   if (this['customDomain']) {
+    if (payload['properties'] === null || payload['properties'] === undefined) {
+      payload['properties'] = {};
+    }
     payload['properties']['customDomain'] = this['customDomain'].serialize();
   }
 
@@ -84,14 +91,26 @@ StorageAccountUpdateParameters.prototype.serialize = function () {
 StorageAccountUpdateParameters.prototype.deserialize = function (instance) {
   StorageAccountUpdateParameters['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['properties']['accountType'] !== null && instance['properties']['accountType'] !== undefined) {
-      this['accountType'] = instance['properties']['accountType'];
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['accountType'] !== null && instance['properties']['accountType'] !== undefined) {
+        this['accountType'] = instance['properties']['accountType'];
+      }
+      else {
+        this['accountType'] = instance['properties']['accountType'];
+      }
     }
 
-    if (instance['properties']['customDomain'] !== null && instance['properties']['customDomain'] !== undefined) {
-      this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
+    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+      if (instance['properties']['customDomain'] !== null && instance['properties']['customDomain'] !== undefined) {
+        this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
+      }
+      else {
+        this['customDomain'] = instance['properties']['customDomain'];
+      }
     }
   }
+
+  return this;
 };
 
 module.exports = StorageAccountUpdateParameters;

@@ -47,9 +47,12 @@ function UsageListResult(parameters) {
 UsageListResult.prototype.serialize = function () {
   var payload = {};
   if (util.isArray(this['value'])) {
-    payload['value'] = []
+    payload['value'] = [];
     for (var i = 0; i < this['value'].length; i++) {
       if (this['value'][i]) {
+        if (payload['value'] === null || payload['value'] === undefined) {
+          payload['value'] = {};
+        }
         payload['value'][i] = this['value'][i].serialize();
       }
     }
@@ -77,6 +80,8 @@ UsageListResult.prototype.deserialize = function (instance) {
       this['value'] = deserializedInstancevalue;
     }
   }
+
+  return this;
 };
 
 module.exports = UsageListResult;

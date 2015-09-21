@@ -63,7 +63,8 @@ Usage.prototype.serialize = function () {
   var payload = {};
   if (this['unit'] !== null && this['unit'] !== undefined) {
     var allowedValues = [ 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond' ];
-    if (!allowedValues.some( function(item) { return item === this['unit']; })) {
+    var thisunit = this['unit'];
+    if (!allowedValues.some( function(item) { return item === thisunit; })) {
       throw new Error(this['unit'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
     payload['unit'] = this['unit'];
@@ -114,6 +115,8 @@ Usage.prototype.deserialize = function (instance) {
       this['name'] = new models['UsageName']().deserialize(instance['name']);
     }
   }
+
+  return this;
 };
 
 module.exports = Usage;

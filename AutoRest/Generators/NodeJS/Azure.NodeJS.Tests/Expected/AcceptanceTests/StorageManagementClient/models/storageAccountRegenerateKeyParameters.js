@@ -37,7 +37,8 @@ StorageAccountRegenerateKeyParameters.prototype.serialize = function () {
   var payload = {};
   if (this['keyName'] !== null && this['keyName'] !== undefined) {
     var allowedValues = [ 'key1', 'key2' ];
-    if (!allowedValues.some( function(item) { return item === this['keyName']; })) {
+    var thiskeyName = this['keyName'];
+    if (!allowedValues.some( function(item) { return item === thiskeyName; })) {
       throw new Error(this['keyName'] + ' is not a valid value. The valid values are: ' + allowedValues);
     }
     payload['keyName'] = this['keyName'];
@@ -58,6 +59,8 @@ StorageAccountRegenerateKeyParameters.prototype.deserialize = function (instance
       this['keyName'] = instance['keyName'];
     }
   }
+
+  return this;
 };
 
 module.exports = StorageAccountRegenerateKeyParameters;
