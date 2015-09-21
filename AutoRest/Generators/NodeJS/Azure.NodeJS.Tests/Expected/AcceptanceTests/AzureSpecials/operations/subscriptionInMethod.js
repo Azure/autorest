@@ -49,7 +49,7 @@ function SubscriptionInMethod(client) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -159,7 +159,7 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -268,7 +268,7 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -377,7 +377,7 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

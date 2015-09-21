@@ -44,7 +44,8 @@ function ArrayModel(client) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ArrayWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -153,7 +154,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -262,7 +263,8 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ArrayWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -370,7 +372,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -480,7 +482,8 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ArrayWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

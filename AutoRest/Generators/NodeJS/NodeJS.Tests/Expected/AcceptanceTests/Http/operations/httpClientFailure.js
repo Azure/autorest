@@ -44,7 +44,8 @@ function HttpClientFailure(client) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -145,7 +146,8 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -248,7 +250,8 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -374,7 +377,8 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -500,7 +504,8 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -626,7 +631,8 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -750,7 +756,8 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -851,7 +858,8 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -952,7 +960,8 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1055,7 +1064,8 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1181,7 +1191,8 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1307,7 +1318,8 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1433,7 +1445,8 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1559,7 +1572,8 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1683,7 +1697,8 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1784,7 +1799,8 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1885,7 +1901,8 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1988,7 +2005,8 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2114,7 +2132,8 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2240,7 +2259,8 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2364,7 +2384,8 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2467,7 +2488,8 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2591,7 +2613,8 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

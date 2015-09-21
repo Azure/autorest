@@ -82,7 +82,8 @@ util.inherits(AutoRestValidationTest, ServiceClient);
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -225,7 +226,8 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

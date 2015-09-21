@@ -1,4 +1,4 @@
-{
+ï»¿{
   "swagger": "2.0",
   "info": {
     "title": "StorageManagementClient",
@@ -64,7 +64,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the userâ€™s subscription."
           },
           {
             "name": "accountName",
@@ -114,7 +114,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the userâ€™s subscription."
           },
           {
             "name": "accountName",
@@ -151,7 +151,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the userâ€™s subscription."
           },
           {
             "name": "accountName",
@@ -188,7 +188,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the userâ€™s subscription."
           },
           {
             "name": "accountName",
@@ -301,7 +301,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the userâ€™s subscription."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -334,7 +334,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "description": "The name of the resource group within the userâ€™s subscription."
           },
           {
             "name": "accountName",

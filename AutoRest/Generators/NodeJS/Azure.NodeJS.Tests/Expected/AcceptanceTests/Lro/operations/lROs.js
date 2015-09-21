@@ -55,7 +55,8 @@ function LROs(client) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -137,7 +138,8 @@ LROs.prototype.put200Succeeded = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -283,7 +285,8 @@ LROs.prototype.beginPut200Succeeded = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -365,7 +368,8 @@ LROs.prototype.put200SucceededNoState = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -512,7 +516,8 @@ LROs.prototype.beginPut200SucceededNoState = function (product, options, callbac
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -595,7 +600,8 @@ LROs.prototype.put202Retry200 = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -743,7 +749,8 @@ LROs.prototype.beginPut202Retry200 = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -827,7 +834,8 @@ LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -994,7 +1002,8 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, cal
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1078,7 +1087,8 @@ LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1226,7 +1236,8 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (product, options, cal
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1310,7 +1321,8 @@ LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1477,7 +1489,8 @@ LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callba
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1561,7 +1574,8 @@ LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1708,7 +1722,8 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (product, options, call
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1791,7 +1806,8 @@ LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1938,7 +1954,8 @@ LROs.prototype.beginPutNoHeaderInRetry = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2021,7 +2038,8 @@ LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2168,7 +2186,8 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (product, options, callbac
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2251,7 +2270,8 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2398,7 +2418,8 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (product, options, callb
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2481,7 +2502,8 @@ LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2628,7 +2650,8 @@ LROs.prototype.beginPutAsyncRetryFailed = function (product, options, callback) 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2711,7 +2734,8 @@ LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2858,7 +2882,8 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (product, options, callba
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2941,7 +2966,8 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3084,7 +3110,8 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, options, callba
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Sku} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3163,7 +3190,8 @@ LROs.prototype.putNonResource = function (sku, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Sku} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3306,7 +3334,8 @@ LROs.prototype.beginPutNonResource = function (sku, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Sku} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3385,7 +3414,8 @@ LROs.prototype.putAsyncNonResource = function (sku, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Sku} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3526,7 +3556,8 @@ LROs.prototype.beginPutAsyncNonResource = function (sku, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link SubProduct} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3603,7 +3634,8 @@ LROs.prototype.putSubResource = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link SubProduct} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3744,7 +3776,8 @@ LROs.prototype.beginPutSubResource = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link SubProduct} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3821,7 +3854,8 @@ LROs.prototype.putAsyncSubResource = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link SubProduct} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3961,7 +3995,8 @@ LROs.prototype.beginPutAsyncSubResource = function (product, options, callback) 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4037,7 +4072,8 @@ LROs.prototype.deleteProvisioning202Accepted200Succeeded = function (options, ca
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4180,7 +4216,8 @@ LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (option
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4256,7 +4293,8 @@ LROs.prototype.deleteProvisioning202DeletingFailed200 = function (options, callb
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4399,7 +4437,8 @@ LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4475,7 +4514,8 @@ LROs.prototype.deleteProvisioning202Deletingcanceled200 = function (options, cal
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4615,7 +4655,7 @@ LROs.prototype.beginDeleteProvisioning202Deletingcanceled200 = function (options
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4672,7 +4712,7 @@ LROs.prototype.delete204Succeeded = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4776,7 +4816,8 @@ LROs.prototype.beginDelete204Succeeded = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4851,7 +4892,8 @@ LROs.prototype.delete202Retry200 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4974,7 +5016,8 @@ LROs.prototype.beginDelete202Retry200 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5049,7 +5092,8 @@ LROs.prototype.delete202NoRetry204 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5172,7 +5216,7 @@ LROs.prototype.beginDelete202NoRetry204 = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5231,7 +5275,7 @@ LROs.prototype.deleteNoHeaderInRetry = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5335,7 +5379,7 @@ LROs.prototype.beginDeleteNoHeaderInRetry = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5394,7 +5438,7 @@ LROs.prototype.deleteAsyncNoHeaderInRetry = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5498,7 +5542,7 @@ LROs.prototype.beginDeleteAsyncNoHeaderInRetry = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5557,7 +5601,7 @@ LROs.prototype.deleteAsyncRetrySucceeded = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5661,7 +5705,7 @@ LROs.prototype.beginDeleteAsyncRetrySucceeded = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5720,7 +5764,7 @@ LROs.prototype.deleteAsyncNoRetrySucceeded = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5824,7 +5868,7 @@ LROs.prototype.beginDeleteAsyncNoRetrySucceeded = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5883,7 +5927,7 @@ LROs.prototype.deleteAsyncRetryFailed = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5987,7 +6031,7 @@ LROs.prototype.beginDeleteAsyncRetryFailed = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6046,7 +6090,7 @@ LROs.prototype.deleteAsyncRetrycanceled = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6150,7 +6194,8 @@ LROs.prototype.beginDeleteAsyncRetrycanceled = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Sku} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6225,7 +6270,8 @@ LROs.prototype.post200WithPayload = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Sku} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6375,7 +6421,7 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6442,7 +6488,7 @@ LROs.prototype.post202Retry200 = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6569,7 +6615,8 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6651,7 +6698,8 @@ LROs.prototype.post202NoRetry204 = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6798,7 +6846,8 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6881,7 +6930,8 @@ LROs.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -7028,7 +7078,8 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -7111,7 +7162,8 @@ LROs.prototype.postAsyncNoRetrySucceeded = function (product, options, callback)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -7258,7 +7310,7 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -7325,7 +7377,7 @@ LROs.prototype.postAsyncRetryFailed = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -7453,7 +7505,7 @@ LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -7520,7 +7572,7 @@ LROs.prototype.postAsyncRetrycanceled = function (product, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

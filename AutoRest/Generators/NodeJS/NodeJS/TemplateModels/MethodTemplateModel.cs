@@ -213,7 +213,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     return ReturnType.Name;
                 }
-                return "void";
+                return "null";
             }
         }
 
@@ -643,6 +643,69 @@ namespace Microsoft.Rest.Generator.NodeJS
             get 
             {
                 return string.Empty;
+            }
+        }
+
+        public string ReturnTypeInfo
+        {
+            get
+            {
+                string result = null;
+                if (ReturnType is EnumType)
+                {
+                    string enumValues = "";
+                    for (var i = 0; i <((EnumType)ReturnType).Values.Count; i++)
+                    {
+                        if (i == ((EnumType)ReturnType).Values.Count - 1)
+                        {
+                            enumValues += ((EnumType)ReturnType).Values[i].SerializedName;
+                        }
+                        else
+                        {
+                            enumValues += ((EnumType)ReturnType).Values[i].SerializedName + ", ";
+                        }
+                    }
+                    result = string.Format(CultureInfo.InvariantCulture,
+                        "Possible values for result are - {0}.", enumValues);
+                }
+                else if (ReturnType is CompositeType)
+                {
+                    result = string.Format(CultureInfo.InvariantCulture,
+                        "See {{@link {0}}} for more information.", ReturnTypeString);
+                }
+
+                return result;
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        public string DocumentReturnTypeString
+        {
+            get
+            {
+                string typeName = "object";
+                if (ReturnType == null)
+                {
+                    typeName = "null";
+                }
+                else if (ReturnType is PrimaryType)
+                {
+                    typeName = ReturnType.Name;
+                }
+                else if (ReturnType is SequenceType)
+                {
+                    typeName = "array";
+                }
+                else if (ReturnType is EnumType)
+                {
+                    typeName = PrimaryType.String.Name;
+                }
+                else if (ReturnType is CompositeType || ReturnType is DictionaryType)
+                {
+                    typeName = PrimaryType.Object.Name;
+                }
+
+                return typeName.ToLower(CultureInfo.InvariantCulture);
             }
         }
     }

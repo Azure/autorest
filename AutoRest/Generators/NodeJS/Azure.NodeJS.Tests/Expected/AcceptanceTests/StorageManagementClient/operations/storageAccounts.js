@@ -53,7 +53,9 @@ function StorageAccounts(client) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link CheckNameAvailabilityResult} for more
+  *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -195,7 +197,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  * subsequent PUT request is issued with exact same set of properties, then
  * HTTP 200 would be returned.
  * @param {string} resourceGroupName The name of the resource group within the
- * userï¿½s subscription.
+ * userâ€™s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -223,7 +225,8 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link StorageAccount} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -290,7 +293,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  * subsequent PUT request is issued with exact same set of properties, then
  * HTTP 200 would be returned.
  * @param {string} resourceGroupName The name of the resource group within the
- * userï¿½s subscription.
+ * userâ€™s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -318,7 +321,8 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -463,7 +467,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
 /**
  * Deletes a storage account in Microsoft Azure.
  * @param {string} resourceGroupName The name of the resource group within the
- * userï¿½s subscription.
+ * userâ€™s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -480,7 +484,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -585,7 +589,7 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  * limited to name, account type, location, and account status. The ListKeys
  * operation should be used to retrieve storage keys.
  * @param {string} resourceGroupName The name of the resource group within the
- * userï¿½s subscription.
+ * userâ€™s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -602,7 +606,8 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -736,7 +741,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  * use the RegenerateKey operation. The location and name of the storage
  * account cannot be changed after creation.
  * @param {string} resourceGroupName The name of the resource group within the
- * userï¿½s subscription.
+ * userâ€™s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -778,7 +783,8 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -940,7 +946,8 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link StorageAccountKeys} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1077,7 +1084,9 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link StorageAccountListResult} for more
+  *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1197,7 +1206,7 @@ StorageAccounts.prototype.list = function (options, callback) {
  * Note that storage keys are not returned; use the ListKeys operation for
  * this.
  * @param {string} resourceGroupName The name of the resource group within the
- * userï¿½s subscription.
+ * userâ€™s subscription.
  * 
  * @param {object} [options]
  *
@@ -1210,7 +1219,9 @@ StorageAccounts.prototype.list = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link StorageAccountListResult} for more
+  *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1332,7 +1343,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
 /**
  * Regenerates the access keys for the specified storage account.
  * @param {string} resourceGroupName The name of the resource group within the
- * userï¿½s subscription.
+ * userâ€™s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -1355,7 +1366,8 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link StorageAccountKeys} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1514,7 +1526,9 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link StorageAccountListResult} for more
+  *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1638,7 +1652,9 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link StorageAccountListResult} for more
+  *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

@@ -58,7 +58,8 @@ function LROsCustomHeader(client) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -143,7 +144,8 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -292,7 +294,8 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -377,7 +380,8 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {object} [result]   - The deserialized result object.
+  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -544,7 +548,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -612,7 +616,7 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -742,7 +746,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -811,7 +815,7 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      {null} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
