@@ -94,6 +94,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string Documentation { get; set; }
 
         /// <summary>
+        /// Gets or sets the content type.
+        /// </summary>
+        public string ContentType { get; set; }
+
+        /// <summary>
         /// Gets vendor extensions dictionary.
         /// </summary>
         public Dictionary<string, object> Extensions { get; private set; }
