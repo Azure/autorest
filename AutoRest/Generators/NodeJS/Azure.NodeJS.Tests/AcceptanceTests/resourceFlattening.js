@@ -112,7 +112,7 @@ describe('nodejs', function () {
         });
       });
 
-      it('should get and put external resource as a complex type', function (done) {
+      it('should get external resource as a complex type', function (done) {
         var expectedResult = {
           dictionaryofresources: {
             Product1: {

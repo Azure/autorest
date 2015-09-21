@@ -83,10 +83,16 @@ SubProduct.prototype.deserialize = function (instance) {
       if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
         this['provisioningState'] = instance['properties']['provisioningState'];
       }
+      else {
+        this['provisioningState'] = instance['properties']['provisioningState'];
+      }
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
       if (instance['properties']['provisioningStateValues'] !== null && instance['properties']['provisioningStateValues'] !== undefined) {
+        this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
+      }
+      else {
         this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
       }
     }

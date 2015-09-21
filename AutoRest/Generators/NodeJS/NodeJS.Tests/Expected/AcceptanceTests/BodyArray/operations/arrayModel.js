@@ -6053,6 +6053,9 @@ ArrayModel.prototype.putDictionaryValid = function (arrayBody, options, callback
             }
             requestModel[i1][valueElement2] = arrayBody[i1][valueElement2];
           }
+          else {
+            requestModel[i1][valueElement2] = arrayBody[i1][valueElement2];
+          }
         }
       }
     }

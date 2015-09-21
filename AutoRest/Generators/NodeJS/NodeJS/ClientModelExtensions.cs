@@ -757,6 +757,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                           .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
                             .Indent()
                               .AppendLine(innerSerialization)
+                              .AppendLine("else {")
+                                .Indent()
+                                .AppendLine("{0} = {1};", valueReference + "[" + valueVar + "]", objectReference + "[" + valueVar + "]")
+                              .Outdent()
+                              .AppendLine("}")
                             .Outdent()
                           .AppendLine("}")
                         .Outdent()
@@ -849,30 +854,22 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (primary != null)
             {
+                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference).Indent();
                 if (primary == PrimaryType.ByteArray)
                 {
-                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                             .Indent()
-                             .AppendLine("{1} = new Buffer({0}, 'base64');", valueReference, objectReference)
-                           .Outdent()
-                           .AppendLine("}");
+                    builder.AppendLine("{1} = new Buffer({0}, 'base64');", valueReference, objectReference);
                 }
                 else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
                 {
-                   builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                            .Indent()
-                            .AppendLine("{1} = new Date({0});", valueReference, objectReference)
-                          .Outdent()
-                          .AppendLine("}");
+                    builder.AppendLine("{1} = new Date({0});", valueReference, objectReference);
                 }
                 else
                 {
-                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                             .Indent()
-                             .AppendLine("{1} = {0};", valueReference, objectReference)
-                           .Outdent()
-                           .AppendLine("}");
+                    builder.AppendLine("{1} = {0};", valueReference, objectReference);
+                           
                 }
+
+                builder.Outdent().AppendLine("}");
             }
             else if (composite != null && composite.Properties.Any())
             {
@@ -936,7 +933,13 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             if (baseProperty != null)
             {
-                builder.Outdent().AppendLine("}");
+                builder.AppendLine("else {")
+                         .Indent()
+                         .AppendLine("{0} = {1};", objectReference, valueReference)
+                       .Outdent()
+                       .AppendLine("}")
+                     .Outdent()
+                     .AppendLine("}");
             }
 
             return builder.ToString();
@@ -1017,6 +1020,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                     .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
                                       .Indent()
                                       .AppendLine(innerInitialization)
+                                      .AppendLine("else {")
+                                        .Indent()
+                                        .AppendLine("{0} = {1};", objectReference + "[" + valueVar + "]", valueReference + "[" + valueVar + "]")
+                                      .Outdent()
+                                      .AppendLine("}")
                                     .Outdent()
                                     .AppendLine("}")
                                   .Outdent()
@@ -1092,6 +1100,11 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                   .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
                                     .Indent()
                                       .AppendLine(innerInitialization)
+                                      .AppendLine("else {")
+                                        .Indent()
+                                        .AppendLine("{0} = {1};", objectReference + "[" + valueVar + "]", valueReference + "[" + valueVar + "]")
+                                      .Outdent()
+                                      .AppendLine("}")
                                     .Outdent()
                                     .AppendLine("}")
                                   .Outdent()

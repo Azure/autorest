@@ -56,6 +56,9 @@ function ResourceCollection(parameters) {
         if (parameters.dictionaryofresources[valueElement] !== null && parameters.dictionaryofresources[valueElement] !== undefined) {
           this.dictionaryofresources[valueElement] = new models['FlattenedProduct'](parameters.dictionaryofresources[valueElement]);
         }
+        else {
+          this.dictionaryofresources[valueElement] = parameters.dictionaryofresources[valueElement];
+        }
       }
     }
   }    
@@ -95,6 +98,9 @@ ResourceCollection.prototype.serialize = function () {
         }
         payload['dictionaryofresources'][valueElement1] = this['dictionaryofresources'][valueElement1].serialize();
       }
+      else {
+        payload['dictionaryofresources'][valueElement1] = this['dictionaryofresources'][valueElement1];
+      }
     }
   }
 
@@ -130,6 +136,9 @@ ResourceCollection.prototype.deserialize = function (instance) {
         if (instance['dictionaryofresources'] !== null && instance['dictionaryofresources'] !== undefined) {
           if (instance['dictionaryofresources'][valueElement2] !== null && instance['dictionaryofresources'][valueElement2] !== undefined) {
             this['dictionaryofresources'][valueElement2] = new models['FlattenedProduct']().deserialize(instance['dictionaryofresources'][valueElement2]);
+          }
+          else {
+            this['dictionaryofresources'][valueElement2] = instance['dictionaryofresources'][valueElement2];
           }
         }
       }

@@ -401,6 +401,9 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
         if (resourceDictionary[valueElement1] !== null && resourceDictionary[valueElement1] !== undefined) {
           resourceDictionary[valueElement1] = new client._models['FlattenedProduct'](resourceDictionary[valueElement1]);
         }
+        else {
+          resourceDictionary[valueElement1] = resourceDictionary[valueElement1];
+        }
       }
     }
     if (resourceDictionary && typeof resourceDictionary === 'object') {
@@ -408,6 +411,9 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
       for(var valueElement2 in resourceDictionary) {
         if (resourceDictionary[valueElement2]) {
           requestModel[valueElement2] = resourceDictionary[valueElement2].serialize();
+        }
+        else {
+          requestModel[valueElement2] = resourceDictionary[valueElement2];
         }
       }
     }
@@ -557,6 +563,9 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
           for(var valueElement in parsedResponse) {
             if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
               result[valueElement] = new client._models['FlattenedProduct'](parsedResponse[valueElement]);
+            }
+            else {
+              result[valueElement] = parsedResponse[valueElement];
             }
           }
         }

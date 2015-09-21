@@ -25,6 +25,9 @@ function DictionaryWrapper(parameters) {
         if (parameters.defaultProgram[valueElement] !== null && parameters.defaultProgram[valueElement] !== undefined) {
           this.defaultProgram[valueElement] = parameters.defaultProgram[valueElement];
         }
+        else {
+          this.defaultProgram[valueElement] = parameters.defaultProgram[valueElement];
+        }
       }
     }
   }    
@@ -51,6 +54,9 @@ DictionaryWrapper.prototype.serialize = function () {
         }
         payload['defaultProgram'][valueElement1] = this['defaultProgram'][valueElement1];
       }
+      else {
+        payload['defaultProgram'][valueElement1] = this['defaultProgram'][valueElement1];
+      }
     }
   }
 
@@ -70,6 +76,9 @@ DictionaryWrapper.prototype.deserialize = function (instance) {
       for(var valueElement2 in instance['defaultProgram']) {
         if (instance['defaultProgram'] !== null && instance['defaultProgram'] !== undefined) {
           if (instance['defaultProgram'][valueElement2] !== null && instance['defaultProgram'][valueElement2] !== undefined) {
+            this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
+          }
+          else {
             this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
           }
         }
