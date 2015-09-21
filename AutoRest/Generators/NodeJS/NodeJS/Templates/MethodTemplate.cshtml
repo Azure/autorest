@@ -90,7 +90,7 @@
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.headers['Content-Type'] = '@(Model.ContentType)';
 
   @if (Model.RequestBody != null)
   {
