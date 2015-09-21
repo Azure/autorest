@@ -54,6 +54,17 @@ namespace Microsoft.Rest.Modeler.Swagger
             };
 
             method.Documentation = _operation.Description;
+            method.ContentType = "application/json";
+            if (this._effectiveProduces != null && this._effectiveProduces.Count > 0)
+            {
+                method.ContentType = this._effectiveProduces[0];
+            }
+
+            if (method.ContentType.IndexOf("charset=", StringComparison.InvariantCultureIgnoreCase) == -1)
+            {
+                // Enable UTF-8 charset
+                method.ContentType += "; charset=utf-8";
+            }
 
             // Service parameters
             if (_operation.Parameters != null)
