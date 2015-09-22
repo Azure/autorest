@@ -45,7 +45,7 @@ function MultipleResponses(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -150,7 +150,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -255,7 +255,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -360,7 +360,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -466,7 +466,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -571,7 +571,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -696,7 +696,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -821,7 +821,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2094,7 +2094,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (o
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2196,7 +2196,7 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2298,7 +2298,7 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2400,7 +2400,7 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2827,7 +2827,7 @@ MultipleResponses.prototype.getDefaultNone400None = function (options, callback)
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2928,7 +2928,7 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3029,7 +3029,7 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3131,7 +3131,7 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3232,7 +3232,7 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3333,7 +3333,7 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3434,7 +3434,7 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link A} for more information.
+ *                      See {@link A} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

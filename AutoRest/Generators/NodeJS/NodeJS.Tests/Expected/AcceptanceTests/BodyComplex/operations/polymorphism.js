@@ -45,7 +45,7 @@ function Polymorphism(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Fish} for more information.
+ *                      See {@link Fish} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

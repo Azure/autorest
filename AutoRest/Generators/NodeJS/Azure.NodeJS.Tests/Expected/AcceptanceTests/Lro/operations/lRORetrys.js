@@ -143,7 +143,7 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -396,7 +396,7 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -614,7 +614,7 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

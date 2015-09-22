@@ -46,8 +46,8 @@ function EnumModel(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {string} [result]   - The deserialized result object.
-  *                      Possible values for result are - red color,
-  *                      green-color, blue_color.
+ *                      Possible values for result are - red color,
+ *                      green-color, blue_color.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

@@ -45,7 +45,7 @@ function Primitive(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link IntWrapper} for more information.
+ *                      See {@link IntWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -265,7 +265,7 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link LongWrapper} for more information.
+ *                      See {@link LongWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -485,7 +485,7 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link FloatWrapper} for more information.
+ *                      See {@link FloatWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -705,7 +705,7 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link DoubleWrapper} for more information.
+ *                      See {@link DoubleWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -927,7 +927,7 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link BooleanWrapper} for more information.
+ *                      See {@link BooleanWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1147,7 +1147,7 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link StringWrapper} for more information.
+ *                      See {@link StringWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1369,7 +1369,7 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link DateWrapper} for more information.
+ *                      See {@link DateWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1589,7 +1589,7 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link DatetimeWrapper} for more information.
+ *                      See {@link DatetimeWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1810,7 +1810,7 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ByteWrapper} for more information.
+ *                      See {@link ByteWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

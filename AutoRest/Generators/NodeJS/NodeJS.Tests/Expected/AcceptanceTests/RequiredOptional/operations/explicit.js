@@ -48,7 +48,7 @@ function Explicit(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -287,7 +287,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -522,7 +522,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -737,7 +737,7 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -976,7 +976,7 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1211,7 +1211,7 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1430,7 +1430,7 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1673,7 +1673,7 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1912,7 +1912,7 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2173,7 +2173,7 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2408,7 +2408,7 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

@@ -47,7 +47,7 @@ function Implicit(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -468,7 +468,7 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -579,7 +579,7 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -694,7 +694,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link ErrorModel} for more information.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

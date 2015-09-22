@@ -48,7 +48,7 @@ function Group(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link SampleResourceGroup} for more information.
+ *                      See {@link SampleResourceGroup} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

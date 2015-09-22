@@ -45,7 +45,7 @@ function Dictionary(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link DictionaryWrapper} for more information.
+ *                      See {@link DictionaryWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -264,7 +264,7 @@ Dictionary.prototype.putValid = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link DictionaryWrapper} for more information.
+ *                      See {@link DictionaryWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -482,7 +482,7 @@ Dictionary.prototype.putEmpty = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link DictionaryWrapper} for more information.
+ *                      See {@link DictionaryWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -588,7 +588,7 @@ Dictionary.prototype.getNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link DictionaryWrapper} for more information.
+ *                      See {@link DictionaryWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

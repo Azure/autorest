@@ -137,7 +137,7 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -386,7 +386,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -637,7 +637,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1925,7 +1925,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2176,7 +2176,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2408,7 +2408,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3350,7 +3350,7 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3582,7 +3582,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3814,7 +3814,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link Product} for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
