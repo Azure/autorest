@@ -1425,6 +1425,7 @@ Paths.prototype.enumNull = function (enumPath, options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri + 
                    '//paths/string/null/{enumPath}';
+  requestUrl = requestUrl.replace('{enumPath}', encodeURIComponent(enumPath));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

@@ -110,6 +110,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -254,6 +255,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -400,6 +402,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -548,6 +551,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -702,6 +706,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -850,6 +855,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -1004,6 +1010,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -1150,6 +1157,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -1296,6 +1304,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -1442,6 +1451,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -1588,6 +1598,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -1734,6 +1745,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -1880,6 +1892,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -2022,6 +2035,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -2164,6 +2178,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -2306,6 +2321,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -2448,6 +2464,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -2587,6 +2604,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -2728,6 +2746,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -2869,6 +2888,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -3004,6 +3024,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -3131,6 +3152,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -3264,6 +3286,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -3397,6 +3420,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -3524,6 +3548,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -3651,6 +3676,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -3778,6 +3804,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -3905,6 +3932,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -4032,6 +4060,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -4159,6 +4188,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -4305,6 +4335,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -4441,6 +4472,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -4585,6 +4617,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -4729,6 +4762,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -4873,6 +4907,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
@@ -5011,6 +5046,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.Client.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))

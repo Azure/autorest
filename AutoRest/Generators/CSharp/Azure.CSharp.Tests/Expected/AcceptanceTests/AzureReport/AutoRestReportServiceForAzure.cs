@@ -225,6 +225,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
             httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            httpRequest.Headers.TryAddWithoutValidation("client-request-id", Guid.NewGuid().ToString());
             if (this.AcceptLanguage != null)
             {
                 if (httpRequest.Headers.Contains("accept-language"))
