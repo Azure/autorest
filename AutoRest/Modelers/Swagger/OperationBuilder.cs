@@ -53,7 +53,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Name = methodName
             };
 
-            method.Documentation = _operation.Description;
+            method.Documentation = _operation.Summary;
 
             // Service parameters
             if (_operation.Parameters != null)
