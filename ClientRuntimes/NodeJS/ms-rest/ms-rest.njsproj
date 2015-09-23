@@ -20,7 +20,6 @@
     <Content Include=".gitignore" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="lib\README.md" />
     <Compile Include="lib\constants.js" />
     <Compile Include="lib\httpOperationResponse.js" />
     <Compile Include="lib\logger.js" />
