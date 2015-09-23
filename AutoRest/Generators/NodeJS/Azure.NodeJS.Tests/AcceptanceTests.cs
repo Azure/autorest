@@ -14,20 +14,11 @@ using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
+namespace Microsoft.Rest.Generator.NodeJS.Azure.Tests
 {
-    [Collection("AutoRest Tests")]
-    [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",
-        "AutoRest.Generator.NodeJS.Tests")]
+    [Collection("AutoRest NodeJS Tests")]
     public class AcceptanceTests
     {
-        private readonly ITestOutputHelper _output;
-        
-        public AcceptanceTests(ITestOutputHelper output)
-        {
-            _output = output;
-        }
-
         private static string ExpectedPath(string file)
         {
             return Path.Combine("Expected", "AcceptanceTests", file);
@@ -39,7 +30,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         }
 
         [Fact]
-        public void SampleTestForGeneratingAzureNodeJS()
+        public static void SampleTestForGeneratingAzureNodeJS()
         {
             SwaggerSpecHelper.RunTests<AzureNodeJSCodeGenerator>(
                 SwaggerPath("storage.json"), ExpectedPath("StorageManagementClient"));
