@@ -18,6 +18,8 @@ using Fixtures.AcceptanceTestsBodyByte;
 using Fixtures.AcceptanceTestsBodyComplex;
 using Fixtures.AcceptanceTestsBodyComplex.Models;
 using Fixtures.AcceptanceTestsBodyDate;
+using Fixtures.AcceptanceTestsBodyFormData;
+using Fixtures.AcceptanceTestsBodyFormData.Models;
 using Fixtures.AcceptanceTestsBodyDateTime;
 using Fixtures.AcceptanceTestsBodyDictionary;
 using Fixtures.AcceptanceTestsBodyDictionary.Models;
@@ -242,6 +244,35 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
                 var emptyStream = client.Files.GetEmptyFile();
                 Assert.Equal(0, emptyStream.Length);
+            }
+        }
+
+        [Fact]
+        public void FormDataTests()
+        {
+            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+                SwaggerPath("body-formdata.json"), ExpectedPath("BodyFormData"));
+            using (var client = new AutoRestSwaggerBATFormDataService(Fixture.Uri))
+            {
+                const string testString = "Upload file test case";
+                byte[] testBytes = new UnicodeEncoding().GetBytes(testString);
+                using (Stream memStream = new MemoryStream(100))
+                {
+                    memStream.Write(testBytes, 0, testBytes.Length);
+                    memStream.Seek(0, SeekOrigin.Begin);
+                    var response = client.Formdata.UploadFile(memStream, "UploadFile.txt");
+                    StringBuilder sb = new StringBuilder();
+                    foreach(int hexChar in response.Buffer.Data)
+                    {
+                        if(hexChar == 0)
+                        {
+                            continue;
+                        }
+                        sb.Append(Convert.ToChar(hexChar));
+                    }
+                    string desearializedJson = sb.ToString();
+                    Assert.Equal(desearializedJson, testString);
+                }
             }
         }
 
