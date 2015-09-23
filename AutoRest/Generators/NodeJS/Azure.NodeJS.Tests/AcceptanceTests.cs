@@ -17,7 +17,7 @@ using Xunit.Abstractions;
 namespace Microsoft.Rest.Generator.NodeJS.Azure.Tests
 {
     [Collection("AutoRest NodeJS Tests")]
-    public class AcceptanceTests
+    public static class AcceptanceTests
     {
         private static string ExpectedPath(string file)
         {
