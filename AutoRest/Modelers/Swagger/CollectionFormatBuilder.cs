@@ -3,12 +3,12 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
-using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {

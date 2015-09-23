@@ -6,7 +6,6 @@ using System.IO;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Extensibility;
 using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Properties;
 using Microsoft.Rest.Generator.Test.Resource;
 using Microsoft.Rest.Generator.Utilities;
 using Xunit;

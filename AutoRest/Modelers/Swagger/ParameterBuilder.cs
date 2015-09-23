@@ -3,12 +3,11 @@
 
 using System;
 using System.Linq;
+using System.Globalization;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
-using System.Globalization;
-using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {

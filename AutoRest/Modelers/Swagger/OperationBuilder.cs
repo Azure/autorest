@@ -3,17 +3,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
 using System.Net;
+using System.Text;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
-using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -53,7 +53,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Name = methodName
             };
 
-            method.Documentation = _operation.Description;
+            method.Documentation = _operation.Summary;
 
             // Service parameters
             if (_operation.Parameters != null)
