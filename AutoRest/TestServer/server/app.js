@@ -15,6 +15,7 @@ var string = require('./routes/string');
 var byte = require('./routes/byte');
 var date = require('./routes/date');
 var datetime = require('./routes/datetime');
+var duration = require('./routes/duration');
 var complex = require('./routes/complex');
 var report = require('./routes/report');
 var dictionary = require('./routes/dictionary');
@@ -330,6 +331,12 @@ var coverage = {
   "getDictionaryDictionaryItemEmpty": 0,
   "getDictionaryDictionaryValid": 0,
   "putDictionaryDictionaryValid": 0,
+  "putDurationNegative": 0,
+  "putDurationPositive": 0,
+  "getDurationNull": 0,
+  "getDurationInvalid": 0,
+  "getDurationPositive": 0,
+  "getDurationNegative": 0,
   "HeaderParameterExistingKey": 0,
   "HeaderResponseExistingKey": 0,
   "HeaderResponseProtectedKey": 0,
@@ -395,6 +402,7 @@ app.use('/string', new string(coverage).router);
 app.use('/byte', new byte(coverage).router);
 app.use('/date', new date(coverage).router);
 app.use('/datetime', new datetime(coverage, optionalCoverage).router);
+app.use('/duration', new duration(coverage, optionalCoverage).router);
 app.use('/array', new array(coverage).router);
 app.use('/complex', new complex(coverage).router);
 app.use('/dictionary', new dictionary(coverage).router);

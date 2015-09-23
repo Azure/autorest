@@ -1,0 +1,51 @@
+var express = require('express');
+var router = express.Router();
+var util = require('util');
+var utils = require('../util/utils')
+
+var duration = function(coverage, optionalCoverage) {
+
+    router.put('/negativeduration', function(req, res, next) {
+        if (req.body === '-P123DT22H14M12.011S') {
+            coverage["putDurationNegative"]++;
+            res.status(200).end();
+        } else {
+            utils.send400(res, next, "Did not like the value provided for negative duration " + util.inspect(req.body));
+        }
+        
+    });
+
+    router.put('/positiveduration', function(req, res, next) {        
+        if (req.body === 'P123DT22H14M12.011S') {
+            coverage["putDurationPositive"]++;
+            res.status(200).end();
+        } else {
+            utils.send400(res, next, "Did not like the value provided for positive duration " + util.inspect(req.body));
+        }
+    });
+    
+    router.get('/:scenario', function(req, res, next) {
+        if (req.params.scenario === 'null') {
+            coverage["getDurationNull"]++;
+            res.status(200).end();
+        } else if (req.params.scenario === 'invalid') {
+            coverage["getDurationInvalid"]++;
+            res.status(200).end('"123ABC"');
+        } else if (req.params.scenario === 'positiveduration') {
+            coverage["getDurationPositive"]++;
+            res.status(200).end('"P3Y6M4DT12H30M5S"');
+        } else if (req.params.scenario === 'negativeduration') {
+            coverage["getDurationNegative"]++;
+            res.status(200).end('"-P3Y6M4DT12H30M5S"');
+        } else {
+            res.status(400).send('Request path must contain a valid scenario: ' +
+                '"null", "invalid", "positiveduration", "negativeduration". Provided value is : ', +
+                util.inspect(req.params.scenario));
+        }
+
+    });
+}
+
+duration.prototype.router = router;
+
+module.exports = duration;

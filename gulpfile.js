@@ -45,6 +45,7 @@ var defaultMappings = {
   'AcceptanceTests/BodyComplex': '../../../TestServer/swagger/body-complex.json',
   'AcceptanceTests/BodyDate': '../../../TestServer/swagger/body-date.json',
   'AcceptanceTests/BodyDateTime': '../../../TestServer/swagger/body-datetime.json',
+  'AcceptanceTests/BodyDuration': '../../../TestServer/swagger/body-duration.json',
   'AcceptanceTests/BodyDictionary': '../../../TestServer/swagger/body-dictionary.json',
   'AcceptanceTests/BodyFile': '../../../TestServer/swagger/body-file.json',
   'AcceptanceTests/BodyInteger': '../../../TestServer/swagger/body-integer.json',

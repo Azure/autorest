@@ -6,7 +6,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace Fixtures.AcceptanceTestsBodyDictionary
+namespace Fixtures.AcceptanceTestsBodyDuration
 {
     using System;
     using System.Linq;
@@ -24,9 +24,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
     using Models;
 
     /// <summary>
-    /// Test Infrastructure for AutoRest Swagger BAT
+    /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial class AutoRestSwaggerBATdictionaryService : ServiceClient<AutoRestSwaggerBATdictionaryService>, IAutoRestSwaggerBATdictionaryService
+    public partial class AutoRestDurationTestService : ServiceClient<AutoRestDurationTestService>, IAutoRestDurationTestService
     {
         /// <summary>
         /// The base URI of the service.
@@ -43,29 +43,29 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
-        public virtual IDictionary Dictionary { get; private set; }
+        public virtual IDuration Duration { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
+        /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
-        public AutoRestSwaggerBATdictionaryService() : base()
+        public AutoRestDurationTestService() : base()
         {
             this.Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
+        /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestSwaggerBATdictionaryService(params DelegatingHandler[] handlers) : base(handlers)
+        public AutoRestDurationTestService(params DelegatingHandler[] handlers) : base(handlers)
         {
             this.Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
+        /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -73,13 +73,13 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestSwaggerBATdictionaryService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        public AutoRestDurationTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
+        /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -87,7 +87,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestSwaggerBATdictionaryService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestDurationTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -102,8 +102,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// </summary>
         private void Initialize()
         {
-            this.Dictionary = new Dictionary(this);
-            this.BaseUri = new Uri("http://localhost");
+            this.Duration = new Duration(this);
+            this.BaseUri = new Uri("https://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

@@ -6,7 +6,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace Fixtures.MirrorPrimitives
+namespace Fixtures.AcceptanceTestsBodyDuration
 {
     using System;
     using System.Linq;
@@ -24,123 +24,40 @@ namespace Fixtures.MirrorPrimitives
     using Models;
 
     /// <summary>
-    /// Some cool documentation.
+    /// Duration operations.
     /// </summary>
-    public partial class SwaggerDataTypesClient : ServiceClient<SwaggerDataTypesClient>, ISwaggerDataTypesClient
+    public partial class Duration : IServiceOperations<AutoRestDurationTestService>, IDuration
     {
         /// <summary>
-        /// The base URI of the service.
+        /// Initializes a new instance of the Duration class.
         /// </summary>
-        public Uri BaseUri { get; set; }
-
-        /// <summary>
-        /// Gets or sets json serialization settings.
-        /// </summary>
-        public JsonSerializerSettings SerializationSettings { get; private set; }
-
-        /// <summary>
-        /// Gets or sets json deserialization settings.
-        /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
-
-        /// <summary>
-        /// Initializes a new instance of the SwaggerDataTypesClient class.
-        /// </summary>
-        public SwaggerDataTypesClient() : base()
+        /// <param name='client'>
+        /// Reference to the service client.
+        /// </param>
+        public Duration(AutoRestDurationTestService client)
         {
-            this.Initialize();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the SwaggerDataTypesClient class.
-        /// </summary>
-        /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
-        /// </param>
-        public SwaggerDataTypesClient(params DelegatingHandler[] handlers) : base(handlers)
-        {
-            this.Initialize();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the SwaggerDataTypesClient class.
-        /// </summary>
-        /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
-        /// </param>
-        /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
-        /// </param>
-        public SwaggerDataTypesClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
-        {
-            this.Initialize();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the SwaggerDataTypesClient class.
-        /// </summary>
-        /// <param name='baseUri'>
-        /// Optional. The base URI of the service.
-        /// </param>
-        /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
-        /// </param>
-        public SwaggerDataTypesClient(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
-        {
-            if (baseUri == null)
+            if (client == null) 
             {
-                throw new ArgumentNullException("baseUri");
+                throw new ArgumentNullException("client");
             }
-            this.Initialize();
-            this.BaseUri = baseUri;
+            this.Client = client;
         }
 
         /// <summary>
-        /// Initializes client properties.
+        /// Gets a reference to the AutoRestDurationTestService
         /// </summary>
-        private void Initialize()
-        {
-            this.BaseUri = new Uri("http://localhost:3000/");
-            SerializationSettings = new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new List<JsonConverter>
-                    {
-                        new Iso8601TimeSpanConverter()
-                    }
-            };
-            DeserializationSettings = new JsonSerializerSettings
-            {
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new List<JsonConverter>
-                    {
-                        new Iso8601TimeSpanConverter()
-                    }
-            };
-        }    
+        public AutoRestDurationTestService Client { get; private set; }
+
         /// <summary>
-        /// Product Types
+        /// Get null duration value
         /// </summary>
-        /// <param name='responseCode'>
-        /// The desired returned status code/// </param>
-        /// <param name='product'>
-        /// The only parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Product>> GetProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<TimeSpan?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -149,26 +66,16 @@ namespace Fixtures.MirrorPrimitives
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("responseCode", responseCode);
-                tracingParameters.Add("product", product);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetProduct", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "datatypes").ToString();
+            var url = new Uri(this.Client.BaseUri, "duration/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
-            if (responseCode != null)
-            {
-                if (httpRequest.Headers.Contains("response-code"))
-                {
-                    httpRequest.Headers.Remove("response-code");
-                }
-                httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
-            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -181,17 +88,13 @@ namespace Fixtures.MirrorPrimitives
                 }
             }
 
-            // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
             if (shouldTrace)
             {
                 ServiceClientTracing.SendRequest(invocationId, httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             if (shouldTrace)
             {
                 ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
@@ -202,7 +105,7 @@ namespace Fixtures.MirrorPrimitives
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
                     ex.Body = errorBody;
@@ -216,14 +119,14 @@ namespace Fixtures.MirrorPrimitives
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<Product>();
+            var result = new HttpOperationResponse<TimeSpan?>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<TimeSpan?>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -233,20 +136,22 @@ namespace Fixtures.MirrorPrimitives
         }
 
         /// <summary>
-        /// Product Types
+        /// Put a positive duration value
         /// </summary>
-        /// <param name='responseCode'>
-        /// The desired returned status code/// </param>
-        /// <param name='product'>
-        /// The only parameter/// </param>
+        /// <param name='durationBody'>
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Product>> PutProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutPositiveDurationWithHttpMessagesAsync(TimeSpan? durationBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (durationBody == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "durationBody");
+            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -254,26 +159,17 @@ namespace Fixtures.MirrorPrimitives
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("responseCode", responseCode);
-                tracingParameters.Add("product", product);
+                tracingParameters.Add("durationBody", durationBody);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PutProduct", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "PutPositiveDuration", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "datatypes").ToString();
+            var url = new Uri(this.Client.BaseUri, "duration/positiveduration").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
-            if (responseCode != null)
-            {
-                if (httpRequest.Headers.Contains("response-code"))
-                {
-                    httpRequest.Headers.Remove("response-code");
-                }
-                httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
-            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -287,7 +183,7 @@ namespace Fixtures.MirrorPrimitives
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.SerializationSettings);
+            string requestContent = JsonConvert.SerializeObject(durationBody, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -296,7 +192,7 @@ namespace Fixtures.MirrorPrimitives
                 ServiceClientTracing.SendRequest(invocationId, httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             if (shouldTrace)
             {
                 ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
@@ -307,7 +203,7 @@ namespace Fixtures.MirrorPrimitives
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
                     ex.Body = errorBody;
@@ -321,14 +217,95 @@ namespace Fixtures.MirrorPrimitives
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<Product>();
+            var result = new HttpOperationResponse();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Get a positive duration value
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<HttpOperationResponse<TimeSpan?>> GetPositiveDurationWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(invocationId, this, "GetPositiveDuration", tracingParameters);
+            }
+            // Construct URL
+            var url = new Uri(this.Client.BaseUri, "duration/positiveduration").ToString();
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = new HttpMethod("GET");
+            httpRequest.RequestUri = new Uri(url);
+            // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                if (errorBody != null)
+                {
+                    ex.Body = errorBody;
+                }
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+            // Create Result
+            var result = new HttpOperationResponse<TimeSpan?>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<TimeSpan?>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -338,20 +315,22 @@ namespace Fixtures.MirrorPrimitives
         }
 
         /// <summary>
-        /// Product Types
+        /// Put a negative duration value
         /// </summary>
-        /// <param name='responseCode'>
-        /// The desired returned status code/// </param>
-        /// <param name='product'>
-        /// The only parameter/// </param>
+        /// <param name='durationBody'>
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Product>> PostProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutNegativeDurationWithHttpMessagesAsync(TimeSpan? durationBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (durationBody == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "durationBody");
+            }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
             string invocationId = null;
@@ -359,26 +338,17 @@ namespace Fixtures.MirrorPrimitives
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("responseCode", responseCode);
-                tracingParameters.Add("product", product);
+                tracingParameters.Add("durationBody", durationBody);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PostProduct", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "PutNegativeDuration", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "datatypes").ToString();
+            var url = new Uri(this.Client.BaseUri, "duration/negativeduration").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("POST");
+            httpRequest.Method = new HttpMethod("PUT");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
-            if (responseCode != null)
-            {
-                if (httpRequest.Headers.Contains("response-code"))
-                {
-                    httpRequest.Headers.Remove("response-code");
-                }
-                httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
-            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -392,7 +362,7 @@ namespace Fixtures.MirrorPrimitives
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.SerializationSettings);
+            string requestContent = JsonConvert.SerializeObject(durationBody, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -401,7 +371,7 @@ namespace Fixtures.MirrorPrimitives
                 ServiceClientTracing.SendRequest(invocationId, httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             if (shouldTrace)
             {
                 ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
@@ -412,7 +382,7 @@ namespace Fixtures.MirrorPrimitives
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
                     ex.Body = errorBody;
@@ -426,14 +396,95 @@ namespace Fixtures.MirrorPrimitives
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<Product>();
+            var result = new HttpOperationResponse();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Get a negative valid duration value
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<HttpOperationResponse<TimeSpan?>> GetNegativeDurationWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(invocationId, this, "GetNegativeDuration", tracingParameters);
+            }
+            // Construct URL
+            var url = new Uri(this.Client.BaseUri, "duration/negativeduration").ToString();
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = new HttpMethod("GET");
+            httpRequest.RequestUri = new Uri(url);
+            // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                if (errorBody != null)
+                {
+                    ex.Body = errorBody;
+                }
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+            // Create Result
+            var result = new HttpOperationResponse<TimeSpan?>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<TimeSpan?>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
@@ -443,19 +494,15 @@ namespace Fixtures.MirrorPrimitives
         }
 
         /// <summary>
-        /// Product Types
+        /// Get an invalid duration value
         /// </summary>
-        /// <param name='responseCode'>
-        /// The desired returned status code/// </param>
-        /// <param name='product'>
-        /// The only parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Product>> PatchProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<TimeSpan?>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -464,26 +511,16 @@ namespace Fixtures.MirrorPrimitives
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("responseCode", responseCode);
-                tracingParameters.Add("product", product);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PatchProduct", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "GetInvalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "datatypes").ToString();
+            var url = new Uri(this.Client.BaseUri, "duration/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("PATCH");
+            httpRequest.Method = new HttpMethod("GET");
             httpRequest.RequestUri = new Uri(url);
             // Set Headers
-            if (responseCode != null)
-            {
-                if (httpRequest.Headers.Contains("response-code"))
-                {
-                    httpRequest.Headers.Remove("response-code");
-                }
-                httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
-            }
             if (customHeaders != null)
             {
                 foreach(var header in customHeaders)
@@ -496,17 +533,13 @@ namespace Fixtures.MirrorPrimitives
                 }
             }
 
-            // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
             if (shouldTrace)
             {
                 ServiceClientTracing.SendRequest(invocationId, httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             if (shouldTrace)
             {
                 ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
@@ -517,7 +550,7 @@ namespace Fixtures.MirrorPrimitives
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
                     ex.Body = errorBody;
@@ -531,14 +564,14 @@ namespace Fixtures.MirrorPrimitives
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<Product>();
+            var result = new HttpOperationResponse<TimeSpan?>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.DeserializationSettings);
+                result.Body = JsonConvert.DeserializeObject<TimeSpan?>(responseContent, this.Client.DeserializationSettings);
             }
             if (shouldTrace)
             {
