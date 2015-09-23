@@ -62,8 +62,13 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfIn
     return callback(new Error(util.format('Unexpected polling status code from long running operation \'%s\'', 
       resultOfInitialRequest.response.statusCode)));
   }
+  var pollingState = null;
+  try {
+    pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
+  } catch (error) {
+    callback(error);
+  }
   
-  var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
   var resourceUrl = resultOfInitialRequest.request.url;
   this._options = options;
   
@@ -142,7 +147,12 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
       resultOfInitialRequest.response.statusCode)));
   }
   
-  var pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
+  var pollingState = null;
+  try {
+    pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
+  } catch (error) {
+    callback(error);
+  }
   this._options = options;
 
   async.whilst(

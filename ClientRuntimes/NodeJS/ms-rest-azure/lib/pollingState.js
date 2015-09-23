@@ -31,11 +31,11 @@ function PollingState(resultOfInitialRequest, retryTimeout) {
       this.resource = resultOfInitialRequest.body;
     } 
   } catch (error) {
-    var deserializationError = new Error(util.format('Error "%s" occurred in parsing the responseBody - "%s"', 
-      error, resultOfInitialRequest.body));
+    var deserializationError = new Error(util.format('Error "%s" occurred in parsing the responseBody ' + 
+      'while creating the PollingState for Long Running Operation- "%s"', error, resultOfInitialRequest.body));
     deserializationError.request = resultOfInitialRequest.request;
     deserializationError.response = resultOfInitialRequest.response;
-    return callback(deserializationError);
+    throw deserializationError;
   }
   
   if (this.resource && this.resource.properties && this.resource.properties.provisioningState) {
