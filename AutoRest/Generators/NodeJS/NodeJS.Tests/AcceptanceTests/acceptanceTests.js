@@ -384,13 +384,13 @@ describe('nodejs', function () {
         });
       });
 
-      it.skip('should put min and max date - skipping as date serialization not supported', function (done) {
+      it('should put min and max date', function (done) {
         testClient.dateModel.putMinDate(new Date('0001-01-01'), function (error, result) {
           should.not.exist(error);
-          should.exist(result);
+          should.not.exist(result);
           testClient.dateModel.putMaxDate(new Date('9999-12-31'), function (error, result) {
             should.not.exist(error);
-            should.exist(result);
+            should.not.exist(result);
             done();
           });
         });
