@@ -22,8 +22,7 @@ function PollingState(resultOfInitialRequest, retryTimeout) {
   this.request = resultOfInitialRequest.request;
   //Parse response.body & assign it as the resource
   try {
-    if (resultOfInitialRequest.body !== null && 
-        resultOfInitialRequest.body !== undefined && 
+    if (resultOfInitialRequest.body && 
         typeof resultOfInitialRequest.body.valueOf() === 'string' &&
         resultOfInitialRequest.body.length > 0) {
       this.resource = JSON.parse(resultOfInitialRequest.body);
@@ -98,7 +97,7 @@ PollingState.prototype.getOperationResponse = function () {
   var result = new msRest.HttpOperationResponse();
   result.request = this.request;
   result.response = this.response;
-  if (this.resource !== null && this.resource !== undefined && typeof this.resource.valueOf() === 'string') {
+  if (this.resource && typeof this.resource.valueOf() === 'string') {
     result.body = this.resource;
   } else {
     result.body = JSON.stringify(this.resource);
