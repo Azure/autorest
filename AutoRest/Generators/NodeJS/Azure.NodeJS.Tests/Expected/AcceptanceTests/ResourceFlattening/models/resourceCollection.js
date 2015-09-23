@@ -37,23 +37,23 @@ var util = require('util');
  */
 function ResourceCollection(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.productresource !== null && parameters.productresource !== undefined) {
+    if (parameters.productresource) {
       this.productresource = new models['FlattenedProduct'](parameters.productresource);
     }
-    if (parameters.arrayofresources !== null && parameters.arrayofresources !== undefined) {
-      var initializedParametersarrayofresources = [];
+    if (parameters.arrayofresources) {
+      var tempParametersarrayofresources = [];
       parameters.arrayofresources.forEach(function(element) {
-        if (element !== null && element !== undefined) {
+        if (element) {
           element = new models['FlattenedProduct'](element);
         }
-        initializedParametersarrayofresources.push(element);
+        tempParametersarrayofresources.push(element);
       });
-      this.arrayofresources = initializedParametersarrayofresources;
+      this.arrayofresources = tempParametersarrayofresources;
     }
-    if (parameters.dictionaryofresources !== null && parameters.dictionaryofresources !== undefined) {
+    if (parameters.dictionaryofresources) {
       this.dictionaryofresources = {};
       for(var valueElement in parameters.dictionaryofresources) {
-        if (parameters.dictionaryofresources[valueElement] !== null && parameters.dictionaryofresources[valueElement] !== undefined) {
+        if (parameters.dictionaryofresources[valueElement]) {
           this.dictionaryofresources[valueElement] = new models['FlattenedProduct'](parameters.dictionaryofresources[valueElement]);
         }
         else {
@@ -115,31 +115,34 @@ ResourceCollection.prototype.serialize = function () {
  */
 ResourceCollection.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['productresource'] !== null && instance['productresource'] !== undefined) {
+    if (instance['productresource']) {
       this['productresource'] = new models['FlattenedProduct']().deserialize(instance['productresource']);
     }
 
-    if (instance['arrayofresources'] !== null && instance['arrayofresources'] !== undefined) {
-      var deserializedInstancearrayofresources = [];
+    if (instance['arrayofresources']) {
+      var tempInstancearrayofresources = [];
       instance['arrayofresources'].forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
+        if (element1) {
           element1 = new models['FlattenedProduct']().deserialize(element1);
         }
-        deserializedInstancearrayofresources.push(element1);
+        tempInstancearrayofresources.push(element1);
       });
-      this['arrayofresources'] = deserializedInstancearrayofresources;
+      this['arrayofresources'] = tempInstancearrayofresources;
     }
 
-    if (instance['dictionaryofresources'] !== null && instance['dictionaryofresources'] !== undefined) {
+    if (instance['dictionaryofresources']) {
       this['dictionaryofresources'] = {};
       for(var valueElement2 in instance['dictionaryofresources']) {
         if (instance['dictionaryofresources'] !== null && instance['dictionaryofresources'] !== undefined) {
-          if (instance['dictionaryofresources'][valueElement2] !== null && instance['dictionaryofresources'][valueElement2] !== undefined) {
+          if (instance['dictionaryofresources'][valueElement2]) {
             this['dictionaryofresources'][valueElement2] = new models['FlattenedProduct']().deserialize(instance['dictionaryofresources'][valueElement2]);
           }
           else {
             this['dictionaryofresources'][valueElement2] = instance['dictionaryofresources'][valueElement2];
           }
+        }
+        else {
+          this['dictionaryofresources'][valueElement2] = instance['dictionaryofresources'][valueElement2];
         }
       }
     }

@@ -149,7 +149,7 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['SampleResourceGroup'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {

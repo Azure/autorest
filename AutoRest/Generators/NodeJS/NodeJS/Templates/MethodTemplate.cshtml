@@ -10,7 +10,7 @@
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @Model.ConstructParameterDocumentation(
+ @MethodTemplateModel.ConstructParameterDocumentation(
                       WrapComment(" * ", "@param {" 
                                         + MethodTemplateModel.GetParameterDocumentationType(parameter)
                                         + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
@@ -44,7 +44,7 @@
   }
   @if (Model.ParameterTemplateModels.Any())
   {
-  var validationBlock = Model.GetValidationString();
+      var validationBlock = Model.ValidationString;
   if (!string.IsNullOrWhiteSpace(validationBlock))
   {
   <text>

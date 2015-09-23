@@ -96,7 +96,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             string result = null;
             if (property.Contains("]["))
             {
-                result = property.Substring(0, property.IndexOf("][") + 1);
+                result = property.Substring(0, property.IndexOf("][", StringComparison.OrdinalIgnoreCase) + 1);
             }
             
             return result;
@@ -179,7 +179,6 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
 
             var builder = new IndentedStringBuilder("  ");
-            var conditionBuilder = new IndentedStringBuilder("  ");
             var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
             var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
             var lowercaseTypeName = primary.Name.ToLower(CultureInfo.InvariantCulture);
@@ -286,7 +285,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return builder.ToString();
         }
 
-        private static string ValidateCompositeType(this CompositeType composite, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        private static string ValidateCompositeType(IScopeProvider scope, string valueReference, bool isRequired)
         {
             if (scope == null)
             {
@@ -295,7 +294,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             var builder = new IndentedStringBuilder("  ");
             var escapedValueReference = valueReference.EscapeSingleQuotes();
-
+            //Only validate whether the composite type is present, if it is required. Detailed validation happens in serialization.
             if (isRequired)
             {
                 builder.AppendLine("if ({0} === null || {0} === undefined) {{", valueReference)
@@ -423,7 +422,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (composite != null && composite.Properties.Any())
             {
-                return composite.ValidateCompositeType(scope, valueReference, isRequired, modelReference);
+                return ValidateCompositeType(scope, valueReference, isRequired);
             }
             else if (sequence != null)
             {
@@ -445,7 +444,6 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
 
             var builder = new IndentedStringBuilder("  ");
-            var conditionBuilder = new IndentedStringBuilder("  ");
             var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
             var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
             var lowercaseTypeName = primary.Name.ToLower(CultureInfo.InvariantCulture);
@@ -846,11 +844,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             if (enumType != null)
             {
-                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                         .Indent()
-                         .AppendLine("{1} = {0};", valueReference, objectReference)
-                       .Outdent()
-                       .AppendLine("}");
+                builder = ProcessBasicType(objectReference, valueReference, builder);
             }
             else if (primary != null)
             {
@@ -873,62 +867,15 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (composite != null && composite.Properties.Any())
             {
-                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference).Indent();
-
-                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
-                {
-                    builder.AppendLine("{3} = new {2}.discriminators[{0}['{1}']]().deserialize({0});",
-                        valueReference,
-                        composite.PolymorphicDiscriminator, modelReference, objectReference).ToString();
-                }
-                else
-                {
-                    builder.AppendLine("{3} = new {2}['{1}']().deserialize({0});", valueReference, composite.Name, modelReference, objectReference);
-                }
-
-                builder.Outdent().AppendLine("}");
+                builder = composite.ProcessCompositeType(objectReference, valueReference, modelReference, builder, "DeserializeType");
             }
             else if (sequence != null)
             {
-                var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar, elementVar, modelReference);
-                if (!string.IsNullOrEmpty(innerSerialization))
-                {
-                    var arrayName = valueReference.ToPascalCase().NormalizeValueReference();
-                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                             .Indent()
-                             .AppendLine("var deserialized{0} = [];", arrayName)
-                             .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
-                             .Indent()
-                                 .AppendLine(innerSerialization)
-                                 .AppendLine("deserialized{0}.push({1});", arrayName, elementVar)
-                             .Outdent()
-                             .AppendLine("});")
-                             .AppendLine("{0} = deserialized{1};", objectReference, arrayName)
-                             .Outdent()
-                             .AppendLine("}");
-                }
+                builder = sequence.ProcessSequenceType(scope, objectReference, valueReference, modelReference, builder, "DeserializeType");
             }
             else if (dictionary != null)
             {
-                var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.DeserializeType(scope,
-                                                                              objectReference + "[" + valueVar + "]",
-                                                                              valueReference + "[" + valueVar + "]",
-                                                                              modelReference);
-                if (!string.IsNullOrEmpty(innerSerialization))
-                {
-                    builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                             .Indent()
-                             .AppendLine("{0} = {{}};", objectReference)
-                             .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
-                               .Indent()
-                               .AppendLine(innerSerialization)
-                             .Outdent()
-                             .AppendLine("}")
-                           .Outdent()
-                           .AppendLine("}");
-                }
+                builder = dictionary.ProcessDictionaryType(scope, objectReference, valueReference, modelReference, builder, "DeserializeType");
             }
 
             if (baseProperty != null)
@@ -960,79 +907,22 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var builder = new IndentedStringBuilder("  ");
             if (enumType != null || primary != null)
             {
-                return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                                .Indent()
-                                .AppendLine("{0} = {1};", objectReference, valueReference)
-                              .Outdent()
-                              .AppendLine("}").ToString();
+                builder = ProcessBasicType(objectReference, valueReference, builder);
             }
             else if (composite != null && composite.Properties.Any())
             {
-                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference).Indent();
-
-                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
-                {
-                    builder.AppendLine("{3} = new {2}.discriminators[{0}['{1}']]({0});",
-                        valueReference,
-                        composite.PolymorphicDiscriminator, modelReference, objectReference).ToString();
-                }
-                else
-                {
-                    builder.AppendLine("{3} = new {2}['{1}']({0});", valueReference, composite.Name, modelReference, objectReference);
-                }
-                builder.Outdent().AppendLine("}");
-
-                return builder.ToString();
+                builder = composite.ProcessCompositeType(objectReference, valueReference, modelReference, builder, "InitializeType");
             }
             else if (sequence != null)
             {
-                var elementVar = scope.GetVariableName("element");
-                var innerInitialization = sequence.ElementType.InitializeType(scope, elementVar, elementVar, modelReference);
-                if (!string.IsNullOrEmpty(innerInitialization))
-                {
-                    var arrayName = valueReference.ToPascalCase().NormalizeValueReference();
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                                    .Indent()
-                                    .AppendLine("var initialized{0} = [];", arrayName)
-                                    .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
-                                    .Indent()
-                                      .AppendLine(innerInitialization)
-                                      .AppendLine("initialized{0}.push({1});", arrayName, elementVar)
-                                    .Outdent()
-                                    .AppendLine("});")
-                                    .AppendLine("{0} = initialized{1};", objectReference, arrayName)
-                                  .Outdent()
-                                  .AppendLine("}").ToString();
-                }
+                builder = sequence.ProcessSequenceType(scope, objectReference, valueReference, modelReference, builder, "InitializeType");
             }
             else if (dictionary != null)
             {
-                var valueVar = scope.GetVariableName("valueElement");
-                var innerInitialization = dictionary.ValueType.InitializeType(scope,
-                                                                              objectReference + "[" + valueVar + "]",
-                                                                              valueReference + "[" + valueVar + "]",
-                                                                              modelReference);
-                if (!string.IsNullOrEmpty(innerInitialization))
-                {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                                    .Indent()
-                                    .AppendLine("{0} = {{}};", objectReference)
-                                    .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
-                                      .Indent()
-                                      .AppendLine(innerInitialization)
-                                      .AppendLine("else {")
-                                        .Indent()
-                                        .AppendLine("{0} = {1};", objectReference + "[" + valueVar + "]", valueReference + "[" + valueVar + "]")
-                                      .Outdent()
-                                      .AppendLine("}")
-                                    .Outdent()
-                                    .AppendLine("}")
-                                  .Outdent()
-                                  .AppendLine("}").ToString();
-                }
+                builder = dictionary.ProcessDictionaryType(scope, objectReference, valueReference, modelReference, builder, "InitializeType");
             }
 
-            return null;
+            return builder.ToString();
         }
 
 
@@ -1049,70 +939,147 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var builder = new IndentedStringBuilder("  ");
             if (composite != null && composite.Properties.Any())
             {
-                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference).Indent();
-
-                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
-                {
-                    builder.AppendLine("{3} = new {2}.discriminators[{0}['{1}']]({0});",
-                       valueReference,
-                       composite.PolymorphicDiscriminator, modelReference, objectReference);
-                }
-                else
-                {
-                    builder.AppendLine("{3} = new {2}['{1}']({0});", valueReference, composite.Name, modelReference, objectReference);
-                }
-                builder.Outdent().AppendLine("}");
-
-                return builder.ToString();
+                builder = composite.ProcessCompositeType(objectReference, valueReference, modelReference, builder, "InitializeSerializationType");
             }
             else if (sequence != null)
             {
-                var elementVar = scope.GetVariableName("element");
-                var innerInitialization = sequence.ElementType.InitializeSerializationType(scope, elementVar, elementVar, modelReference);
-                if (!string.IsNullOrEmpty(innerInitialization))
-                {
-                    var arrayName = valueReference.ToPascalCase().NormalizeValueReference();
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                                    .Indent()
-                                    .AppendLine("var initialized{0} = [];", arrayName)
-                                    .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
-                                      .Indent()
-                                      .AppendLine(innerInitialization)
-                                      .AppendLine("initialized{0}.push({1});", arrayName, elementVar)
-                                    .Outdent()
-                                    .AppendLine("});")
-                                    .AppendLine("{0} = initialized{1};", objectReference, arrayName)
-                                  .Outdent()
-                                  .AppendLine("}").ToString();
-                }
+                builder = sequence.ProcessSequenceType(scope, objectReference, valueReference, modelReference, builder, "InitializeSerializationType");
             }
             else if (dictionary != null)
             {
-                var valueVar = scope.GetVariableName("valueElement");
-                var innerInitialization = dictionary.ValueType.InitializeSerializationType(scope, 
-                                                                                           objectReference + "[" + valueVar + "]",
-                                                                                           valueReference + "[" + valueVar + "]",
-                                                                                           modelReference);
-                if (!string.IsNullOrEmpty(innerInitialization))
-                {
-                    return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
-                                  .Indent()
-                                  .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
-                                    .Indent()
-                                      .AppendLine(innerInitialization)
-                                      .AppendLine("else {")
-                                        .Indent()
-                                        .AppendLine("{0} = {1};", objectReference + "[" + valueVar + "]", valueReference + "[" + valueVar + "]")
-                                      .Outdent()
-                                      .AppendLine("}")
-                                    .Outdent()
-                                    .AppendLine("}")
-                                  .Outdent()
-                                  .AppendLine("}").ToString();
-                }
+                builder = dictionary.ProcessDictionaryType(scope, objectReference, valueReference, modelReference, builder, "InitializeSerializationType");
             }
 
-            return null;
+            return builder.ToString();
+        }
+
+        private static IndentedStringBuilder ProcessBasicType(string objectReference, string valueReference, IndentedStringBuilder builder)
+        {
+            return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+                            .Indent()
+                            .AppendLine("{0} = {1};", objectReference, valueReference)
+                          .Outdent()
+                          .AppendLine("}");
+        }
+
+        private static IndentedStringBuilder ProcessCompositeType(this CompositeType composite, string objectReference,
+            string valueReference, string modelReference, IndentedStringBuilder builder, string processType)
+        {
+            builder.AppendLine("if ({0}) {{", valueReference).Indent();
+            string discriminator = "{3} = new {2}.discriminators[{0}['{1}']]({0});";
+            string objectCreation = "{3} = new {2}['{1}']({0});";
+
+            if (processType == "DeserializeType")
+            {
+                discriminator = "{3} = new {2}.discriminators[{0}['{1}']]().deserialize({0});";
+                objectCreation = "{3} = new {2}['{1}']().deserialize({0});";
+            }
+
+            if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
+            {
+                builder.AppendLine(discriminator, valueReference, composite.PolymorphicDiscriminator, modelReference, objectReference);
+            }
+            else
+            {
+                builder.AppendLine(objectCreation, valueReference, composite.Name, modelReference, objectReference);
+            }
+            builder.Outdent().AppendLine("}");
+
+            return builder;
+        }
+
+        private static IndentedStringBuilder ProcessSequenceType(this SequenceType sequence, IScopeProvider scope, string objectReference, 
+            string valueReference, string modelReference, IndentedStringBuilder builder, string processType)
+        {
+            var elementVar = scope.GetVariableName("element");
+            string innerInitialization = null;
+            if (processType == null)
+            {
+                throw new ArgumentNullException("processType");
+            }
+
+            if (processType == "InitializeType")
+            {
+                innerInitialization = sequence.ElementType.InitializeType(scope, elementVar, elementVar, modelReference);
+            }
+            else if (processType == "DeserializeType")
+            {
+                innerInitialization = sequence.ElementType.DeserializeType(scope, elementVar, elementVar, modelReference);
+            }
+            else if (processType == "InitializeSerializationType")
+            {
+                innerInitialization = sequence.ElementType.InitializeSerializationType(scope, elementVar, elementVar, modelReference);
+            }
+
+            if (!string.IsNullOrEmpty(innerInitialization))
+            {
+                var arrayName = valueReference.ToPascalCase().NormalizeValueReference();
+                builder.AppendLine("if ({0}) {{", valueReference)
+                         .Indent()
+                         .AppendLine("var temp{0} = [];", arrayName)
+                         .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
+                           .Indent()
+                             .AppendLine(innerInitialization)
+                             .AppendLine("temp{0}.push({1});", arrayName, elementVar)
+                           .Outdent()
+                           .AppendLine("});")
+                           .AppendLine("{0} = temp{1};", objectReference, arrayName)
+                         .Outdent()
+                         .AppendLine("}");
+            }
+
+            return builder;
+        }
+
+        private static IndentedStringBuilder ProcessDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string objectReference, 
+            string valueReference, string modelReference, IndentedStringBuilder builder, string processType)
+        {
+            var valueVar = scope.GetVariableName("valueElement");
+            string innerInitialization = null;
+            if (processType == null)
+            {
+                throw new ArgumentNullException("processType");
+            }
+
+            string elementObjectReference = objectReference + "[" + valueVar + "]";
+            string elementValueReference = valueReference + "[" + valueVar + "]";
+
+            if (processType == "InitializeType")
+            {
+                innerInitialization = dictionary.ValueType.InitializeType(scope, elementObjectReference, elementValueReference, modelReference);
+            }
+            else if (processType == "DeserializeType")
+            {
+                innerInitialization = dictionary.ValueType.DeserializeType(scope, elementObjectReference, elementValueReference, modelReference);
+            }
+            else if (processType == "InitializeSerializationType")
+            {
+                innerInitialization = dictionary.ValueType.InitializeSerializationType(scope, elementObjectReference, elementValueReference, modelReference);
+            }
+
+            if (!string.IsNullOrEmpty(innerInitialization))
+            {
+                builder.AppendLine("if ({0}) {{", valueReference).Indent();
+                if (processType == "DeserializeType" || processType == "InitializeType")
+                {
+                    builder.AppendLine("{0} = {{}};", objectReference);
+                }
+                         
+                builder.AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
+                         .Indent()
+                         .AppendLine(innerInitialization)
+                         .AppendLine("else {")
+                           .Indent()
+                           .AppendLine("{0} = {1};", elementObjectReference, elementValueReference)
+                         .Outdent()
+                         .AppendLine("}")
+                       .Outdent()
+                       .AppendLine("}")
+                     .Outdent()
+                     .AppendLine("}");
+            }
+
+            return builder;
         }
 
         /// <summary>

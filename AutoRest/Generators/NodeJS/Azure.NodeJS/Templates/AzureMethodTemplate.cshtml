@@ -20,7 +20,7 @@ else
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @Model.ConstructParameterDocumentation(
+ @MethodTemplateModel.ConstructParameterDocumentation(
                       WrapComment(" * ", "@param {"
                                         + MethodTemplateModel.GetParameterDocumentationType(parameter)
                                         + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
@@ -64,7 +64,7 @@ else
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.@(Model.GetLongRunningOperationMethodNameInRuntime())(initialResult, options, function (err, pollingResult) {
+    client.@(Model.LongRunningOperationMethodNameInRuntime)(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
       @EmptyLine
       // Create Result

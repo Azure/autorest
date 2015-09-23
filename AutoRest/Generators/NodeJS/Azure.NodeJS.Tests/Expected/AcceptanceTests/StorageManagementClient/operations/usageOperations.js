@@ -47,7 +47,7 @@ function UsageOperations(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link UsageListResult} for more information.
+ *                      See {@link UsageListResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -144,7 +144,7 @@ UsageOperations.prototype.list = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['UsageListResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {

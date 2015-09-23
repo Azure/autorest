@@ -25,7 +25,7 @@ var models = require('./index');
  */
 function Product(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.properties !== null && parameters.properties !== undefined) {
+    if (parameters.properties) {
       this.properties = new models['ProductProperties'](parameters.properties);
     }
   }    
@@ -55,7 +55,7 @@ Product.prototype.serialize = function () {
  */
 Product.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
+    if (instance['properties']) {
       this['properties'] = new models['ProductProperties']().deserialize(instance['properties']);
     }
   }

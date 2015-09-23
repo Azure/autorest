@@ -71,6 +71,10 @@
       <Link>AutoRest.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\..\TestServer\swagger\storage.json">
+      <Link>Swagger\storage.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
     <None Include="Expected\**\*.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -81,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Expected\**\*.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AcceptanceTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -88,15 +93,125 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Swagger\storage.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AcceptanceTests\azureSpecialProperties.js" />
+    <Content Include="AcceptanceTests\coverage.js" />
+    <Content Include="AcceptanceTests\head.js" />
+    <Content Include="AcceptanceTests\lro.js" />
+    <Content Include="AcceptanceTests\paging.js" />
+    <Content Include="AcceptanceTests\resourceFlattening.js" />
+    <Content Include="AcceptanceTests\startServer.js" />
+    <Content Include="AcceptanceTests\subscriptionIdApiVersion.js" />
+    <Content Include="AcceptanceTests\testlist.txt" />
+    <Content Include="Expected\AcceptanceTests\AzureReport\autoRestReportServiceForAzure.js" />
+    <Content Include="Expected\AcceptanceTests\AzureReport\models\errorModel.js" />
+    <Content Include="Expected\AcceptanceTests\AzureReport\models\index.js" />
+    <Content Include="Expected\AcceptanceTests\AzureSpecials\autoRestAzureSpecialParametersTestClient.js" />
+    <Content Include="Expected\AcceptanceTests\AzureSpecials\models\errorModel.js" />
+    <Content Include="Expected\AcceptanceTests\AzureSpecials\models\index.js" />
+    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\apiVersionDefault.js" />
+    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\apiVersionLocal.js" />
+    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\index.js" />
+    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\skipUrlEncoding.js" />
+    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\subscriptionInCredentials.js" />
+    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\subscriptionInMethod.js" />
+    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\xMsClientRequestId.js" />
+    <Content Include="Expected\AcceptanceTests\Head\autoRestHeadTestService.js" />
+    <Content Include="Expected\AcceptanceTests\Head\models\index.js" />
+    <Content Include="Expected\AcceptanceTests\Head\operations\httpSuccess.js" />
+    <Content Include="Expected\AcceptanceTests\Head\operations\index.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\autoRestLongRunningOperationTestService.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\models\index.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\models\operationResult.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\models\operationResultError.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\models\product.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\models\sku.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\models\subProduct.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\operations\index.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\operations\lRORetrys.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\operations\lROs.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\operations\lROSADs.js" />
+    <Content Include="Expected\AcceptanceTests\Lro\operations\lROsCustomHeader.js" />
+    <Content Include="Expected\AcceptanceTests\Paging\autoRestPagingTestService.js" />
+    <Content Include="Expected\AcceptanceTests\Paging\models\index.js" />
+    <Content Include="Expected\AcceptanceTests\Paging\models\operationResult.js" />
+    <Content Include="Expected\AcceptanceTests\Paging\models\product.js" />
+    <Content Include="Expected\AcceptanceTests\Paging\models\productProperties.js" />
+    <Content Include="Expected\AcceptanceTests\Paging\models\productResult.js" />
+    <Content Include="Expected\AcceptanceTests\Paging\operations\index.js" />
+    <Content Include="Expected\AcceptanceTests\Paging\operations\paging.js" />
+    <Content Include="Expected\AcceptanceTests\ResourceFlattening\autoRestResourceFlatteningTestService.js" />
+    <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\errorModel.js" />
+    <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\flattenedProduct.js" />
+    <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\index.js" />
+    <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\resourceCollection.js" />
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\checkNameAvailabilityResult.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\customDomain.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\endpoints.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccount.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountCheckNameAvailabilityParameters.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountCreateParameters.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountKeys.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountListResult.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountRegenerateKeyParameters.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountUpdateParameters.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\usage.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\usageListResult.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\usageName.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\operations\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\operations\storageAccounts.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\operations\usageOperations.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\storageManagementClient.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoftAzureTestUrl.js" />
+    <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\errorModel.js" />
+    <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\index.js" />
+    <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\sampleResourceGroup.js" />
+    <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\group.js" />
+    <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\index.js" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

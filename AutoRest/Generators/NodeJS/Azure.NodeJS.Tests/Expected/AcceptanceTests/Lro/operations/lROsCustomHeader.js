@@ -101,7 +101,7 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Product'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -202,7 +202,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
   var requestContent = null;
   var requestModel = null;
   try {
-    if (product !== null && product !== undefined) {
+    if (product) {
       requestModel = new client._models['Product'](product);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -250,7 +250,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Product'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -337,7 +337,7 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Product'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -438,7 +438,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
   var requestContent = null;
   var requestModel = null;
   try {
-    if (product !== null && product !== undefined) {
+    if (product) {
       requestModel = new client._models['Product'](product);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -486,7 +486,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Product'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -505,7 +505,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Product'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -673,7 +673,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
   var requestContent = null;
   var requestModel = null;
   try {
-    if (product !== null && product !== undefined) {
+    if (product) {
       requestModel = new client._models['Product'](product);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -872,7 +872,7 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, opt
   var requestContent = null;
   var requestModel = null;
   try {
-    if (product !== null && product !== undefined) {
+    if (product) {
       requestModel = new client._models['Product'](product);
     }
     if (requestModel !== null && requestModel !== undefined) {

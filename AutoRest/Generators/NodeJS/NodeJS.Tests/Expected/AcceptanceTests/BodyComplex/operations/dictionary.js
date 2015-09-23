@@ -118,7 +118,7 @@ Dictionary.prototype.getValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['DictionaryWrapper'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -203,7 +203,7 @@ Dictionary.prototype.putValid = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (complexBody !== null && complexBody !== undefined) {
+    if (complexBody) {
       requestModel = new client._models['DictionaryWrapper'](complexBody);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -337,7 +337,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['DictionaryWrapper'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -421,7 +421,7 @@ Dictionary.prototype.putEmpty = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (complexBody !== null && complexBody !== undefined) {
+    if (complexBody) {
       requestModel = new client._models['DictionaryWrapper'](complexBody);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -555,7 +555,7 @@ Dictionary.prototype.getNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['DictionaryWrapper'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -661,7 +661,7 @@ Dictionary.prototype.getNotProvided = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['DictionaryWrapper'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {

@@ -134,15 +134,15 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   var requestContent = null;
   var requestModel = null;
   try {
-    if (resourceArray !== null && resourceArray !== undefined) {
-      var initializedResourceArray = [];
+    if (resourceArray) {
+      var tempResourceArray = [];
       resourceArray.forEach(function(element) {
-        if (element !== null && element !== undefined) {
+        if (element) {
           element = new client._models['Resource'](element);
         }
-        initializedResourceArray.push(element);
+        tempResourceArray.push(element);
       });
-      resourceArray = initializedResourceArray;
+      resourceArray = tempResourceArray;
     }
     if (util.isArray(resourceArray)) {
       requestModel = [];
@@ -294,15 +294,15 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          var initializedParsedResponse = [];
+        if (parsedResponse) {
+          var tempParsedResponse = [];
           parsedResponse.forEach(function(element) {
-            if (element !== null && element !== undefined) {
+            if (element) {
               element = new client._models['FlattenedProduct'](element);
             }
-            initializedParsedResponse.push(element);
+            tempParsedResponse.push(element);
           });
-          result = initializedParsedResponse;
+          result = tempParsedResponse;
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
@@ -396,9 +396,9 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
   var requestContent = null;
   var requestModel = null;
   try {
-    if (resourceDictionary !== null && resourceDictionary !== undefined) {
+    if (resourceDictionary) {
       for(var valueElement1 in resourceDictionary) {
-        if (resourceDictionary[valueElement1] !== null && resourceDictionary[valueElement1] !== undefined) {
+        if (resourceDictionary[valueElement1]) {
           resourceDictionary[valueElement1] = new client._models['FlattenedProduct'](resourceDictionary[valueElement1]);
         }
         else {
@@ -559,9 +559,9 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+            if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['FlattenedProduct'](parsedResponse[valueElement]);
             }
             else {
@@ -679,7 +679,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   var requestContent = null;
   var requestModel = null;
   try {
-    if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
+    if (resourceComplexObject) {
       requestModel = new client._models['ResourceCollection'](resourceComplexObject);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -829,7 +829,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ResourceCollection'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {

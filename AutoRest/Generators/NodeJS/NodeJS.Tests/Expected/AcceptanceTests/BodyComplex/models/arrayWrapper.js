@@ -21,15 +21,15 @@ var util = require('util');
  */
 function ArrayWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.array !== null && parameters.array !== undefined) {
-      var initializedParametersarray = [];
+    if (parameters.array) {
+      var tempParametersarray = [];
       parameters.array.forEach(function(element) {
         if (element !== null && element !== undefined) {
           element = element;
         }
-        initializedParametersarray.push(element);
+        tempParametersarray.push(element);
       });
-      this.array = initializedParametersarray;
+      this.array = tempParametersarray;
     }
   }    
 }
@@ -69,15 +69,15 @@ ArrayWrapper.prototype.serialize = function () {
  */
 ArrayWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['array'] !== null && instance['array'] !== undefined) {
-      var deserializedInstancearray = [];
+    if (instance['array']) {
+      var tempInstancearray = [];
       instance['array'].forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
           element1 = element1;
         }
-        deserializedInstancearray.push(element1);
+        tempInstancearray.push(element1);
       });
-      this['array'] = deserializedInstancearray;
+      this['array'] = tempInstancearray;
     }
   }
 

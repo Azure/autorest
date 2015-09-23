@@ -25,7 +25,7 @@ var models = require('./index');
  */
 function ClassWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== null && parameters.value !== undefined) {
+    if (parameters.value) {
       this.value = new models['Product'](parameters.value);
     }
   }    
@@ -57,7 +57,7 @@ ClassWrapper.prototype.serialize = function () {
  */
 ClassWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['value'] !== null && instance['value'] !== undefined) {
+    if (instance['value']) {
       this['value'] = new models['Product']().deserialize(instance['value']);
     }
   }

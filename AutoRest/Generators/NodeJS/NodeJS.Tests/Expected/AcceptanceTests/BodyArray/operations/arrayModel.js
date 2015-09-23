@@ -4232,15 +4232,15 @@ ArrayModel.prototype.getComplexNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          var initializedParsedResponse = [];
+        if (parsedResponse) {
+          var tempParsedResponse = [];
           parsedResponse.forEach(function(element) {
-            if (element !== null && element !== undefined) {
+            if (element) {
               element = new client._models['Product'](element);
             }
-            initializedParsedResponse.push(element);
+            tempParsedResponse.push(element);
           });
-          result = initializedParsedResponse;
+          result = tempParsedResponse;
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
@@ -4347,15 +4347,15 @@ ArrayModel.prototype.getComplexEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          var initializedParsedResponse = [];
+        if (parsedResponse) {
+          var tempParsedResponse = [];
           parsedResponse.forEach(function(element) {
-            if (element !== null && element !== undefined) {
+            if (element) {
               element = new client._models['Product'](element);
             }
-            initializedParsedResponse.push(element);
+            tempParsedResponse.push(element);
           });
-          result = initializedParsedResponse;
+          result = tempParsedResponse;
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
@@ -4463,15 +4463,15 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          var initializedParsedResponse = [];
+        if (parsedResponse) {
+          var tempParsedResponse = [];
           parsedResponse.forEach(function(element) {
-            if (element !== null && element !== undefined) {
+            if (element) {
               element = new client._models['Product'](element);
             }
-            initializedParsedResponse.push(element);
+            tempParsedResponse.push(element);
           });
-          result = initializedParsedResponse;
+          result = tempParsedResponse;
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
@@ -4579,15 +4579,15 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          var initializedParsedResponse = [];
+        if (parsedResponse) {
+          var tempParsedResponse = [];
           parsedResponse.forEach(function(element) {
-            if (element !== null && element !== undefined) {
+            if (element) {
               element = new client._models['Product'](element);
             }
-            initializedParsedResponse.push(element);
+            tempParsedResponse.push(element);
           });
-          result = initializedParsedResponse;
+          result = tempParsedResponse;
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
@@ -4695,15 +4695,15 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          var initializedParsedResponse = [];
+        if (parsedResponse) {
+          var tempParsedResponse = [];
           parsedResponse.forEach(function(element) {
-            if (element !== null && element !== undefined) {
+            if (element) {
               element = new client._models['Product'](element);
             }
-            initializedParsedResponse.push(element);
+            tempParsedResponse.push(element);
           });
-          result = initializedParsedResponse;
+          result = tempParsedResponse;
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           for (var i = 0; i < result.length; i++) {
@@ -4781,15 +4781,15 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
-      var initializedArrayBody = [];
+    if (arrayBody) {
+      var tempArrayBody = [];
       arrayBody.forEach(function(element) {
-        if (element !== null && element !== undefined) {
+        if (element) {
           element = new client._models['Product'](element);
         }
-        initializedArrayBody.push(element);
+        tempArrayBody.push(element);
       });
-      arrayBody = initializedArrayBody;
+      arrayBody = tempArrayBody;
     }
     if (!util.isArray(arrayBody)) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');

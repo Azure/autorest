@@ -118,7 +118,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models.discriminators[parsedResponse['dtype']](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -233,7 +233,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (complexBody !== null && complexBody !== undefined) {
+    if (complexBody) {
       requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -379,7 +379,7 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (complexBody !== null && complexBody !== undefined) {
+    if (complexBody) {
       requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
     }
     if (requestModel !== null && requestModel !== undefined) {

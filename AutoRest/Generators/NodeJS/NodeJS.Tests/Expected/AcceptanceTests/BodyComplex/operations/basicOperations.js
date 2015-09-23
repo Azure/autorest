@@ -118,7 +118,7 @@ BasicOperations.prototype.getValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Basic'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -208,7 +208,7 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (complexBody !== null && complexBody !== undefined) {
+    if (complexBody) {
       requestModel = new client._models['Basic'](complexBody);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -342,7 +342,7 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Basic'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -447,7 +447,7 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Basic'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -552,7 +552,7 @@ BasicOperations.prototype.getNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Basic'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -657,7 +657,7 @@ BasicOperations.prototype.getNotProvided = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Basic'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {

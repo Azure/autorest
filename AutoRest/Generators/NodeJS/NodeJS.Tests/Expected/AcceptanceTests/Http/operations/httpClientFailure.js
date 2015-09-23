@@ -116,7 +116,7 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -218,7 +218,7 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -345,7 +345,7 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -472,7 +472,7 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -599,7 +599,7 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -726,7 +726,7 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -828,7 +828,7 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -930,7 +930,7 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1032,7 +1032,7 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1159,7 +1159,7 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1286,7 +1286,7 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1413,7 +1413,7 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1540,7 +1540,7 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1667,7 +1667,7 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1769,7 +1769,7 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1871,7 +1871,7 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1973,7 +1973,7 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2100,7 +2100,7 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2227,7 +2227,7 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2354,7 +2354,7 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2456,7 +2456,7 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2583,7 +2583,7 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2685,7 +2685,7 @@ HttpClientFailure.prototype.head429 = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {

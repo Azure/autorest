@@ -29,15 +29,15 @@ function Cat(parameters) {
     if (parameters.color !== null && parameters.color !== undefined) {
       this.color = parameters.color;
     }
-    if (parameters.hates !== null && parameters.hates !== undefined) {
-      var initializedParametershates = [];
+    if (parameters.hates) {
+      var tempParametershates = [];
       parameters.hates.forEach(function(element) {
-        if (element !== null && element !== undefined) {
+        if (element) {
           element = new models['Dog'](element);
         }
-        initializedParametershates.push(element);
+        tempParametershates.push(element);
       });
-      this.hates = initializedParametershates;
+      this.hates = tempParametershates;
     }
   }    
 }
@@ -87,15 +87,15 @@ Cat.prototype.deserialize = function (instance) {
       this['color'] = instance['color'];
     }
 
-    if (instance['hates'] !== null && instance['hates'] !== undefined) {
-      var deserializedInstancehates = [];
+    if (instance['hates']) {
+      var tempInstancehates = [];
       instance['hates'].forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
+        if (element1) {
           element1 = new models['Dog']().deserialize(element1);
         }
-        deserializedInstancehates.push(element1);
+        tempInstancehates.push(element1);
       });
-      this['hates'] = deserializedInstancehates;
+      this['hates'] = tempInstancehates;
     }
   }
 

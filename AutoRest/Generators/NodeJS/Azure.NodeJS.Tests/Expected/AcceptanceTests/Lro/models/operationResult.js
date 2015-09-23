@@ -32,7 +32,7 @@ function OperationResult(parameters) {
     if (parameters.status !== null && parameters.status !== undefined) {
       this.status = parameters.status;
     }
-    if (parameters.error !== null && parameters.error !== undefined) {
+    if (parameters.error) {
       this.error = new models['OperationResultError'](parameters.error);
     }
   }    
@@ -73,7 +73,7 @@ OperationResult.prototype.deserialize = function (instance) {
       this['status'] = instance['status'];
     }
 
-    if (instance['error'] !== null && instance['error'] !== undefined) {
+    if (instance['error']) {
       this['error'] = new models['OperationResultError']().deserialize(instance['error']);
     }
   }

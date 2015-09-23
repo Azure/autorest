@@ -127,7 +127,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -548,7 +548,7 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -663,7 +663,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -780,7 +780,7 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {

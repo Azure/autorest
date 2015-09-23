@@ -19,7 +19,7 @@
  */
 function DictionaryWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.defaultProgram !== null && parameters.defaultProgram !== undefined) {
+    if (parameters.defaultProgram) {
       this.defaultProgram = {};
       for(var valueElement in parameters.defaultProgram) {
         if (parameters.defaultProgram[valueElement] !== null && parameters.defaultProgram[valueElement] !== undefined) {
@@ -71,7 +71,7 @@ DictionaryWrapper.prototype.serialize = function () {
  */
 DictionaryWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['defaultProgram'] !== null && instance['defaultProgram'] !== undefined) {
+    if (instance['defaultProgram']) {
       this['defaultProgram'] = {};
       for(var valueElement2 in instance['defaultProgram']) {
         if (instance['defaultProgram'] !== null && instance['defaultProgram'] !== undefined) {
@@ -81,6 +81,9 @@ DictionaryWrapper.prototype.deserialize = function (instance) {
           else {
             this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
           }
+        }
+        else {
+          this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
         }
       }
     }

@@ -54,8 +54,8 @@ function StorageAccounts(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link CheckNameAvailabilityResult} for more
-  *                      information.
+ *                      See {@link CheckNameAvailabilityResult} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -123,7 +123,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (accountName !== null && accountName !== undefined) {
+    if (accountName) {
       requestModel = new client._models['StorageAccountCheckNameAvailabilityParameters'](accountName);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -171,7 +171,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['CheckNameAvailabilityResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -197,7 +197,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  * subsequent PUT request is issued with exact same set of properties, then
  * HTTP 200 would be returned.
  * @param {string} resourceGroupName The name of the resource group within the
- * userâ€™s subscription.
+ * user’s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -268,7 +268,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['StorageAccount'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -293,7 +293,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  * subsequent PUT request is issued with exact same set of properties, then
  * HTTP 200 would be returned.
  * @param {string} resourceGroupName The name of the resource group within the
- * userâ€™s subscription.
+ * user’s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -322,7 +322,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link StorageAccount} for more information.
+ *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -398,7 +398,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
   var requestContent = null;
   var requestModel = null;
   try {
-    if (parameters !== null && parameters !== undefined) {
+    if (parameters) {
       requestModel = new client._models['StorageAccountCreateParameters'](parameters);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -446,7 +446,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['StorageAccount'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -467,7 +467,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
 /**
  * Deletes a storage account in Microsoft Azure.
  * @param {string} resourceGroupName The name of the resource group within the
- * userâ€™s subscription.
+ * user’s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -589,7 +589,7 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  * limited to name, account type, location, and account status. The ListKeys
  * operation should be used to retrieve storage keys.
  * @param {string} resourceGroupName The name of the resource group within the
- * userâ€™s subscription.
+ * user’s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -607,7 +607,7 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link StorageAccount} for more information.
+ *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -712,7 +712,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['StorageAccount'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -741,7 +741,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  * use the RegenerateKey operation. The location and name of the storage
  * account cannot be changed after creation.
  * @param {string} resourceGroupName The name of the resource group within the
- * userâ€™s subscription.
+ * user’s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -784,7 +784,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link StorageAccount} for more information.
+ *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -863,7 +863,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
   var requestContent = null;
   var requestModel = null;
   try {
-    if (parameters !== null && parameters !== undefined) {
+    if (parameters) {
       requestModel = new client._models['StorageAccountUpdateParameters'](parameters);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -911,7 +911,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['StorageAccount'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -947,7 +947,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link StorageAccountKeys} for more information.
+ *                      See {@link StorageAccountKeys} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1052,7 +1052,7 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['StorageAccountKeys'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1085,8 +1085,8 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link StorageAccountListResult} for more
-  *                      information.
+ *                      See {@link StorageAccountListResult} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1183,7 +1183,7 @@ StorageAccounts.prototype.list = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['StorageAccountListResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1206,7 +1206,7 @@ StorageAccounts.prototype.list = function (options, callback) {
  * Note that storage keys are not returned; use the ListKeys operation for
  * this.
  * @param {string} resourceGroupName The name of the resource group within the
- * userâ€™s subscription.
+ * user’s subscription.
  * 
  * @param {object} [options]
  *
@@ -1220,8 +1220,8 @@ StorageAccounts.prototype.list = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link StorageAccountListResult} for more
-  *                      information.
+ *                      See {@link StorageAccountListResult} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1322,7 +1322,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['StorageAccountListResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1343,7 +1343,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
 /**
  * Regenerates the access keys for the specified storage account.
  * @param {string} resourceGroupName The name of the resource group within the
- * userâ€™s subscription.
+ * user’s subscription.
  * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -1367,7 +1367,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link StorageAccountKeys} for more information.
+ *                      See {@link StorageAccountKeys} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1443,7 +1443,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   var requestContent = null;
   var requestModel = null;
   try {
-    if (regenerateKey !== null && regenerateKey !== undefined) {
+    if (regenerateKey) {
       requestModel = new client._models['StorageAccountRegenerateKeyParameters'](regenerateKey);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -1491,7 +1491,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['StorageAccountKeys'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1527,8 +1527,8 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link StorageAccountListResult} for more
-  *                      information.
+ *                      See {@link StorageAccountListResult} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1616,7 +1616,7 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['StorageAccountListResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1653,8 +1653,8 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
-  *                      See {@link StorageAccountListResult} for more
-  *                      information.
+ *                      See {@link StorageAccountListResult} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1742,7 +1742,7 @@ StorageAccounts.prototype.listByResourceGroupNext = function (nextPageLink, opti
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['StorageAccountListResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {

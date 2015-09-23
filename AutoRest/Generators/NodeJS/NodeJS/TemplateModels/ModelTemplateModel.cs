@@ -132,7 +132,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
-        public string ConstructPropertyDocumentation(string propertyDocumentation)
+        public static string ConstructPropertyDocumentation(string propertyDocumentation)
         {
             var builder = new IndentedStringBuilder("  ");
             return builder.AppendLine(propertyDocumentation)
@@ -190,23 +190,6 @@ namespace Microsoft.Rest.Generator.NodeJS
                 "{0}['{1}']", valueName, property.SerializedName.Replace(".", "']['"));
 
             return property.Type.DeserializeType(_scope, propertyName, deserializedPropertyName, "models");
-        }
-
-        private bool isSpecial(IType type)
-        {
-            if (type == PrimaryType.DateTime || type == PrimaryType.Date || type == PrimaryType.ByteArray || type is CompositeType)
-            {
-                return true;
-            }
-            else if (type is SequenceType)
-            {
-                return isSpecial(((SequenceType)type).ElementType);
-            }
-            else if (type is DictionaryType)
-            {
-                return isSpecial(((DictionaryType)type).ValueType);
-            }
-            return false;
         }
 
         /// <summary>

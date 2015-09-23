@@ -181,7 +181,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Product'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -293,7 +293,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (body !== null && body !== undefined) {
+    if (body) {
       requestModel = new client._models['Product'](body);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -341,7 +341,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['Product'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {

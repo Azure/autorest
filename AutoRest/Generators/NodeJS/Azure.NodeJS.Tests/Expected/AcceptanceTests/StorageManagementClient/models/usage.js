@@ -46,7 +46,7 @@ function Usage(parameters) {
     if (parameters.limit !== null && parameters.limit !== undefined) {
       this.limit = parameters.limit;
     }
-    if (parameters.name !== null && parameters.name !== undefined) {
+    if (parameters.name) {
       this.name = new models['UsageName'](parameters.name);
     }
   }    
@@ -111,7 +111,7 @@ Usage.prototype.deserialize = function (instance) {
       this['limit'] = instance['limit'];
     }
 
-    if (instance['name'] !== null && instance['name'] !== undefined) {
+    if (instance['name']) {
       this['name'] = new models['UsageName']().deserialize(instance['name']);
     }
   }

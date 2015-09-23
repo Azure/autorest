@@ -93,7 +93,7 @@ function StorageAccount(parameters) {
     if (parameters.accountType !== null && parameters.accountType !== undefined) {
       this.accountType = parameters.accountType;
     }
-    if (parameters.primaryEndpoints !== null && parameters.primaryEndpoints !== undefined) {
+    if (parameters.primaryEndpoints) {
       this.primaryEndpoints = new models['Endpoints'](parameters.primaryEndpoints);
     }
     if (parameters.primaryLocation !== null && parameters.primaryLocation !== undefined) {
@@ -114,10 +114,10 @@ function StorageAccount(parameters) {
     if (parameters.creationTime !== null && parameters.creationTime !== undefined) {
       this.creationTime = parameters.creationTime;
     }
-    if (parameters.customDomain !== null && parameters.customDomain !== undefined) {
+    if (parameters.customDomain) {
       this.customDomain = new models['CustomDomain'](parameters.customDomain);
     }
-    if (parameters.secondaryEndpoints !== null && parameters.secondaryEndpoints !== undefined) {
+    if (parameters.secondaryEndpoints) {
       this.secondaryEndpoints = new models['Endpoints'](parameters.secondaryEndpoints);
     }
   }    
@@ -273,7 +273,7 @@ StorageAccount.prototype.deserialize = function (instance) {
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['primaryEndpoints'] !== null && instance['properties']['primaryEndpoints'] !== undefined) {
+      if (instance['properties']['primaryEndpoints']) {
         this['primaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['primaryEndpoints']);
       }
       else {
@@ -336,7 +336,7 @@ StorageAccount.prototype.deserialize = function (instance) {
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['customDomain'] !== null && instance['properties']['customDomain'] !== undefined) {
+      if (instance['properties']['customDomain']) {
         this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
       }
       else {
@@ -345,7 +345,7 @@ StorageAccount.prototype.deserialize = function (instance) {
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['secondaryEndpoints'] !== null && instance['properties']['secondaryEndpoints'] !== undefined) {
+      if (instance['properties']['secondaryEndpoints']) {
         this['secondaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['secondaryEndpoints']);
       }
       else {

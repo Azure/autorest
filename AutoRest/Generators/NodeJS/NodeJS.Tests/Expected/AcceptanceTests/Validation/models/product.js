@@ -27,15 +27,15 @@ var util = require('util');
  */
 function Product(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.displayNames !== null && parameters.displayNames !== undefined) {
-      var initializedParametersdisplayNames = [];
+    if (parameters.displayNames) {
+      var tempParametersdisplayNames = [];
       parameters.displayNames.forEach(function(element) {
         if (element !== null && element !== undefined) {
           element = element;
         }
-        initializedParametersdisplayNames.push(element);
+        tempParametersdisplayNames.push(element);
       });
-      this.displayNames = initializedParametersdisplayNames;
+      this.displayNames = tempParametersdisplayNames;
     }
     if (parameters.capacity !== null && parameters.capacity !== undefined) {
       this.capacity = parameters.capacity;
@@ -95,15 +95,15 @@ Product.prototype.serialize = function () {
  */
 Product.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['display_names'] !== null && instance['display_names'] !== undefined) {
-      var deserializedInstancedisplayNames = [];
+    if (instance['display_names']) {
+      var tempInstancedisplayNames = [];
       instance['display_names'].forEach(function(element1) {
         if (element1 !== null && element1 !== undefined) {
           element1 = element1;
         }
-        deserializedInstancedisplayNames.push(element1);
+        tempInstancedisplayNames.push(element1);
       });
-      this['displayNames'] = deserializedInstancedisplayNames;
+      this['displayNames'] = tempInstancedisplayNames;
     }
 
     if (instance['capacity'] !== null && instance['capacity'] !== undefined) {

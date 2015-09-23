@@ -90,28 +90,6 @@ namespace Microsoft.Rest.Generator.NodeJS
         }
 
         /// <summary>
-        /// Gets the expression for response body initialization 
-        /// </summary>
-        public string InitializeResponseBody(IType type)
-        {
-            var sb = new IndentedStringBuilder("  ");
-            if (ReturnType is CompositeType || ReturnType is DictionaryType)
-            {
-                sb.AppendLine("result = {};");
-            }
-            else if (ReturnType is SequenceType)
-            {
-                sb.AppendLine("result = [];");
-            }
-            else
-            {
-                sb.AppendLine("result = null;");
-            }
-
-            return sb.ToString();
-        }
-
-        /// <summary>
         /// Generate the method parameter declarations with callback for a method
         /// </summary>
         public string MethodParameterDeclarationWithCallback
@@ -195,10 +173,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
-        public string ConstructParameterDocumentation(string paramDoc)
+        public static string ConstructParameterDocumentation(string documentation)
         {
             var builder = new IndentedStringBuilder("  ");
-            return builder.AppendLine(paramDoc)
+            return builder.AppendLine(documentation)
                           .AppendLine(" * ").ToString();
         }
         
@@ -385,28 +363,31 @@ namespace Microsoft.Rest.Generator.NodeJS
         }
 
 
-        public string GetValidationString()
+        public string ValidationString
         {
-            var builder = new IndentedStringBuilder("  ");
-            foreach (var parameter in this.ParameterTemplateModels)
+            get 
             {
-                if ((this.HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
+                var builder = new IndentedStringBuilder("  ");
+                foreach (var parameter in ParameterTemplateModels)
                 {
-                    if (parameter.IsRequired)
+                    if ((HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
                     {
-                        builder.AppendLine("if ({0} === null || {0} === undefined) {{", parameter.Name)
-                                 .Indent()
-                                 .AppendLine("throw new Error('{0} cannot be null or undefined.');", parameter.Name)
-                               .Outdent()
-                               .AppendLine("}");
+                        if (parameter.IsRequired)
+                        {
+                            builder.AppendLine("if ({0} === null || {0} === undefined) {{", parameter.Name)
+                                     .Indent()
+                                     .AppendLine("throw new Error('{0} cannot be null or undefined.');", parameter.Name)
+                                   .Outdent()
+                                   .AppendLine("}");
+                        }
+                    }
+
+                    {
+                        builder.AppendLine(parameter.Type.ValidateType(Scope, parameter.Name, parameter.IsRequired));
                     }
                 }
-                
-                {
-                    builder.AppendLine(parameter.Type.ValidateType(this.Scope, parameter.Name, parameter.IsRequired));
-                }
+                return builder.ToString();
             }
-            return builder.ToString();
         }
         /// <summary>
         /// If the element type of a sequenece or value type of a dictionary 

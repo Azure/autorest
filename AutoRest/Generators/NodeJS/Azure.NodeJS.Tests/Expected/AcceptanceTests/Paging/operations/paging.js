@@ -135,7 +135,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -256,7 +256,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -378,7 +378,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -501,7 +501,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -622,7 +622,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -743,7 +743,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -864,7 +864,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -987,7 +987,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1110,7 +1110,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1234,7 +1234,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1359,7 +1359,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1482,7 +1482,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1605,7 +1605,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1728,7 +1728,7 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['ProductResult'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {

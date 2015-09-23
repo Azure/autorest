@@ -25,15 +25,15 @@ var util = require('util');
  */
 function ProductResult(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.values !== null && parameters.values !== undefined) {
-      var initializedParametersvalues = [];
+    if (parameters.values) {
+      var tempParametersvalues = [];
       parameters.values.forEach(function(element) {
-        if (element !== null && element !== undefined) {
+        if (element) {
           element = new models['Product'](element);
         }
-        initializedParametersvalues.push(element);
+        tempParametersvalues.push(element);
       });
-      this.values = initializedParametersvalues;
+      this.values = tempParametersvalues;
     }
     if (parameters.nextLink !== null && parameters.nextLink !== undefined) {
       this.nextLink = parameters.nextLink;
@@ -80,15 +80,15 @@ ProductResult.prototype.serialize = function () {
  */
 ProductResult.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['values'] !== null && instance['values'] !== undefined) {
-      var deserializedInstancevalues = [];
+    if (instance['values']) {
+      var tempInstancevalues = [];
       instance['values'].forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
+        if (element1) {
           element1 = new models['Product']().deserialize(element1);
         }
-        deserializedInstancevalues.push(element1);
+        tempInstancevalues.push(element1);
       });
-      this['values'] = deserializedInstancevalues;
+      this['values'] = tempInstancevalues;
     }
 
     if (instance['nextLink'] !== null && instance['nextLink'] !== undefined) {

@@ -65,21 +65,24 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             }
         }
 
-        public string GetLongRunningOperationMethodNameInRuntime()
+        public string LongRunningOperationMethodNameInRuntime
         {
-            string result = null;
-            if (this.IsLongRunningOperation)
+            get
             {
-                if (this.HttpMethod == HttpMethod.Post || this.HttpMethod == HttpMethod.Delete)
+                string result = null;
+                if (this.IsLongRunningOperation)
                 {
-                    result = "getPostOrDeleteOperationResult";
+                    if (HttpMethod == HttpMethod.Post || HttpMethod == HttpMethod.Delete)
+                    {
+                        result = "getPostOrDeleteOperationResult";
+                    }
+                    else if (HttpMethod == HttpMethod.Put || HttpMethod == HttpMethod.Patch)
+                    {
+                        result = "getPutOrPatchOperationResult";
+                    }
                 }
-                else if (this.HttpMethod == HttpMethod.Put || this.HttpMethod == HttpMethod.Patch)
-                {
-                    result = "getPutOrPatchOperationResult";
-                }
+                return result;
             }
-            return result;
         }
     }
 }

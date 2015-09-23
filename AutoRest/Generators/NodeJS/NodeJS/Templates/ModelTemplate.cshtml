@@ -28,7 +28,7 @@
 @WrapComment(" * ", Model.Documentation)
 @foreach (var property in Model.DocumentationPropertyList)
 {
-    @Model.ConstructPropertyDocumentation(
+    @ModelTemplateModel.ConstructPropertyDocumentation(
               WrapComment(" * ", "@member {" + ModelTemplateModel.GetPropertyDocumentationType(property)
                                              + "} " + ModelTemplateModel.GetPropertyDocumentationName(property)
                                              + " " + property.Documentation))

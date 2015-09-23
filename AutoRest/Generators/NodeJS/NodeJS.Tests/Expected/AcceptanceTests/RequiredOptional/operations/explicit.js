@@ -140,7 +140,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -336,7 +336,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
+    if (bodyParameter) {
       requestModel = new client._models['IntWrapper'](bodyParameter);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -382,7 +382,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -458,7 +458,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
+    if (bodyParameter) {
       requestModel = new client._models['IntOptionalWrapper'](bodyParameter);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -604,7 +604,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -829,7 +829,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1025,7 +1025,7 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
+    if (bodyParameter) {
       requestModel = new client._models['StringWrapper'](bodyParameter);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -1071,7 +1071,7 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1147,7 +1147,7 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
+    if (bodyParameter) {
       requestModel = new client._models['StringOptionalWrapper'](bodyParameter);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -1293,7 +1293,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1479,7 +1479,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
+    if (bodyParameter) {
       requestModel = new client._models['Product'](bodyParameter);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -1525,7 +1525,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1602,7 +1602,7 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
+    if (bodyParameter) {
       requestModel = new client._models['Product'](bodyParameter);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -1722,7 +1722,7 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
+    if (bodyParameter) {
       requestModel = new client._models['ClassWrapper'](bodyParameter);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -1768,7 +1768,7 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1848,7 +1848,7 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
+    if (bodyParameter) {
       requestModel = new client._models['ClassOptionalWrapper'](bodyParameter);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -2017,7 +2017,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2222,7 +2222,7 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
+    if (bodyParameter) {
       requestModel = new client._models['ArrayWrapper'](bodyParameter);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -2268,7 +2268,7 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2344,7 +2344,7 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter !== null && bodyParameter !== undefined) {
+    if (bodyParameter) {
       requestModel = new client._models['ArrayOptionalWrapper'](bodyParameter);
     }
     if (requestModel !== null && requestModel !== undefined) {
@@ -2495,7 +2495,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['ErrorModel'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {

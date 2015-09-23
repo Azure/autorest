@@ -44,7 +44,7 @@ function StorageAccountUpdateParameters(parameters) {
     if (parameters.accountType !== null && parameters.accountType !== undefined) {
       this.accountType = parameters.accountType;
     }
-    if (parameters.customDomain !== null && parameters.customDomain !== undefined) {
+    if (parameters.customDomain) {
       this.customDomain = new models['CustomDomain'](parameters.customDomain);
     }
   }    
@@ -101,7 +101,7 @@ StorageAccountUpdateParameters.prototype.deserialize = function (instance) {
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['customDomain'] !== null && instance['properties']['customDomain'] !== undefined) {
+      if (instance['properties']['customDomain']) {
         this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
       }
       else {

@@ -22,13 +22,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
     public class AcceptanceTests
     {
         private readonly ITestOutputHelper _output;
-
+        
         public AcceptanceTests(ITestOutputHelper output)
         {
             _output = output;
         }
-
-        
 
         private static string ExpectedPath(string file)
         {
@@ -41,7 +39,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         }
 
         [Fact]
-        public void SampleTest()
+        public void SampleTestForGeneratingAzureNodeJS()
         {
             SwaggerSpecHelper.RunTests<AzureNodeJSCodeGenerator>(
                 SwaggerPath("storage.json"), ExpectedPath("StorageManagementClient"));

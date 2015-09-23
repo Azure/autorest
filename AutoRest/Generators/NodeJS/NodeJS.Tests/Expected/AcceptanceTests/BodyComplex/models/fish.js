@@ -35,15 +35,15 @@ function Fish(parameters) {
     if (parameters.length !== null && parameters.length !== undefined) {
       this.length = parameters.length;
     }
-    if (parameters.siblings !== null && parameters.siblings !== undefined) {
-      var initializedParameterssiblings = [];
+    if (parameters.siblings) {
+      var tempParameterssiblings = [];
       parameters.siblings.forEach(function(element) {
-        if (element !== null && element !== undefined) {
+        if (element) {
           element = new models.discriminators[element['dtype']](element);
         }
-        initializedParameterssiblings.push(element);
+        tempParameterssiblings.push(element);
       });
-      this.siblings = initializedParameterssiblings;
+      this.siblings = tempParameterssiblings;
     }
     if (parameters.dtype !== null && parameters.dtype !== undefined) {
       this.dtype = parameters.dtype;
@@ -112,15 +112,15 @@ Fish.prototype.deserialize = function (instance) {
       this['length'] = instance['length'];
     }
 
-    if (instance['siblings'] !== null && instance['siblings'] !== undefined) {
-      var deserializedInstancesiblings = [];
+    if (instance['siblings']) {
+      var tempInstancesiblings = [];
       instance['siblings'].forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
+        if (element1) {
           element1 = new models.discriminators[element1['dtype']]().deserialize(element1);
         }
-        deserializedInstancesiblings.push(element1);
+        tempInstancesiblings.push(element1);
       });
-      this['siblings'] = deserializedInstancesiblings;
+      this['siblings'] = tempInstancesiblings;
     }
 
     if (instance['dtype'] !== null && instance['dtype'] !== undefined) {

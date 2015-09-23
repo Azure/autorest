@@ -118,7 +118,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -223,7 +223,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -328,7 +328,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -433,7 +433,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -539,7 +539,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -644,7 +644,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -663,7 +663,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['B'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -769,7 +769,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -788,7 +788,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['B'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -894,7 +894,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -913,7 +913,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['B'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1017,7 +1017,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1036,7 +1036,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['C'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1055,7 +1055,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['D'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1159,7 +1159,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1178,7 +1178,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['C'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1197,7 +1197,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['D'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1301,7 +1301,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1320,7 +1320,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['C'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1339,7 +1339,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['D'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1444,7 +1444,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1463,7 +1463,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['C'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -1482,7 +1482,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['D'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2165,7 +2165,7 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['A'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2267,7 +2267,7 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['A'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2369,7 +2369,7 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['A'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2471,7 +2471,7 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
     try {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
-      if (parsedResponse !== null && parsedResponse !== undefined) {
+      if (parsedResponse) {
         result = new client._models['A'](parsedResponse);
       }
       if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2896,7 +2896,7 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -2997,7 +2997,7 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -3098,7 +3098,7 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -3200,7 +3200,7 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -3301,7 +3301,7 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -3402,7 +3402,7 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -3503,7 +3503,7 @@ MultipleResponses.prototype.get200ModelA202Valid = function (options, callback) 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           result = new client._models['A'](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {

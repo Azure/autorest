@@ -20,7 +20,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 settings = new Settings
                 {
                     Input = specFile,
-                    OutputDirectory = "D:\\sdk\\AutoRest\\AutoRest\\Generators\\NodeJS\\Azure.NodeJS.Tests\\Expected\\AcceptanceTests\\StorageManagementClient",
+                    OutputDirectory = "X:\\Output",
                     Header = "MICROSOFT_MIT",
                     Modeler = modeler
                 };
@@ -42,7 +42,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 throw new ArgumentNullException("settings");
             }
 
-            settings.FileSystem = new FileSystem();
+            settings.FileSystem = new MemoryFileSystem();
             settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
             settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
             settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
@@ -62,7 +62,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 : settings.Namespace;
 
             AutoRest.Generate(settings);
-            /*Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
+            Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
 
             var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
             var expectedFiles = Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
@@ -73,7 +73,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 var actualFile = actualFiles[i];
                 var expectedFile = expectedFiles[i];
                 EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystem.ReadFileAsText(actualFile));
-            }*/
+            }
         }
 
         private static void EnsureFilesMatch(string expectedFileContent, string actualFileContent)

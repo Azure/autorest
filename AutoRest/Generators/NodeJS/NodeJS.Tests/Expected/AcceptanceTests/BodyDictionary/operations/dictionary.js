@@ -4528,9 +4528,9 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+            if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
             else {
@@ -4643,9 +4643,9 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+            if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
             else {
@@ -4759,9 +4759,9 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+            if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
             else {
@@ -4875,9 +4875,9 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+            if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
             else {
@@ -4991,9 +4991,9 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
+        if (parsedResponse) {
           for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement] !== null && parsedResponse[valueElement] !== undefined) {
+            if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
             else {
@@ -5078,9 +5078,9 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (arrayBody !== null && arrayBody !== undefined) {
+    if (arrayBody) {
       for(var valueElement1 in arrayBody) {
-        if (arrayBody[valueElement1] !== null && arrayBody[valueElement1] !== undefined) {
+        if (arrayBody[valueElement1]) {
           arrayBody[valueElement1] = new client._models['Widget'](arrayBody[valueElement1]);
         }
         else {
