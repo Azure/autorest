@@ -183,7 +183,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             if (primary == PrimaryType.Boolean ||
                 primary == PrimaryType.Double ||
                 primary == PrimaryType.Int ||
-                primary == PrimaryType.Long)
+                primary == PrimaryType.Long ||
+                primary == PrimaryType.Object)
             {
                 if (isRequired)
                 {
@@ -233,16 +234,6 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                            .Indent()
                            .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
-            }
-            else if (primary == PrimaryType.Object)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if ({0} !== null || {0} !== undefined || typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
-                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
-                }
-
-                return builder.ToString();
             }
             else
             {
@@ -449,7 +440,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             if (primary == PrimaryType.Boolean ||
                 primary == PrimaryType.Double ||
                 primary == PrimaryType.Int ||
-                primary == PrimaryType.Long)
+                primary == PrimaryType.Long ||
+                primary == PrimaryType.Object)
             {
                 if (isRequired)
                 {
@@ -549,18 +541,6 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", valueReference, objectReference)
                                 .Outdent()
                                 .AppendLine("}").ToString();
-            }
-            else if (primary == PrimaryType.Object)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if ({0} !== null || {0} !== undefined || typeof {0} !== '{1}') {{", objectReference, lowercaseTypeName);
-                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
-                    builder = ConstructBasePropertyCheck(builder, valueReference);
-                    return builder.AppendLine("{0} = JSON.stringify({1});", valueReference, objectReference).ToString();
-                }
-
-                return builder.ToString();
             }
             else
             {
