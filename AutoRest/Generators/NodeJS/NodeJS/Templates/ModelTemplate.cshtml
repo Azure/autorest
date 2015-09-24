@@ -1,6 +1,7 @@
 ﻿@using System.Linq
 @using System.Collections.Generic
 @using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.NodeJS
 @using Microsoft.Rest.Generator.NodeJS.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ModelTemplateModel>
 /*
@@ -9,12 +10,12 @@
 @EmptyLine
 'use strict';
 @EmptyLine
-@if (Model.ContainsPropertiesInCompositeType())
+@if (Model.ContainsPropertiesInCompositeType() || Model.BaseModelType != null)
 {
 @:var models = require('./index');
 @EmptyLine
 }
-@if (Model.ContainsPropertiesInSequenceType())
+@if (Model.ContainsPropertiesInSequenceType() || Model.BaseModelType != null)
 {
 @:var util = require('util');
 @EmptyLine
@@ -24,8 +25,40 @@
  * @@class
  * Initializes a new instance of the @(Model.Name) class.
  * @@constructor
+@WrapComment(" * ", Model.Documentation)
+@foreach (var property in Model.DocumentationPropertyList)
+{
+    @ModelTemplateModel.ConstructPropertyDocumentation(
+              WrapComment(" * ", "@member {" + ModelTemplateModel.GetPropertyDocumentationType(property)
+                                             + "} " + ModelTemplateModel.GetPropertyDocumentationName(property)
+                                             + " " + property.Documentation))
+}
  */
-function @(Model.Name)() { }
+function @(Model.Name)(parameters) {
+@{
+  if (Model.BaseModelType != null)
+  {
+  @:@(Model.Name)['super_'].call(this, parameters);
+  }
+  var propertyList = new List<Property>(Model.Properties);
+  if (propertyList.Count > 0)
+  {
+  @:if (parameters !== null && parameters !== undefined) {
+    for (int i = 0; i < propertyList.Count; i++) 
+    {
+    @:@(Model.InitializeProperty("this", "parameters", propertyList[i]))
+    }
+  @:}    
+  }
+}
+}
+@EmptyLine
+@{
+if (Model.BaseModelType != null)
+{
+@:util.inherits(@(Model.Name), models['@(Model.BaseModelType.Name)']);
+}
+}
 @EmptyLine
 /**
  * Validate the payload against the @Model.Name schema
@@ -33,20 +66,27 @@ function @(Model.Name)() { }
  * @@param {JSON} payload
  *
  */
-@(Model.Name).prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('@(Model.Name) cannot be null.');
-  }
-  @{
-  var propertyList = new List<Property>(Model.ComposedProperties);
-  for (int i = 0; i < propertyList.Count; i++)
+@(Model.Name).prototype.serialize = function () {
+@{
+  if (Model.BaseModelType != null)
   {
-  @:@(Model.ValidateProperty("payload", propertyList[i]))
-  if (i != propertyList.Count-1)
+  @:var payload = @(Model.Name)['super_'].prototype.serialize.call(this);
+  }
+  else
+  {
+  @:var payload = {};
+  }
+  var serializationPropertyList = new List<Property>(Model.Properties);
+  for (int i = 0; i < serializationPropertyList.Count; i++)
+  {
+  @:@(Model.SerializeProperty("this", "payload", serializationPropertyList[i]))
+  if (i != serializationPropertyList.Count - 1)
   {
   @EmptyLine
   }
   }
+  @EmptyLine
+  @:return payload;
 }
 };
 @EmptyLine
@@ -58,23 +98,28 @@ function @(Model.Name)() { }
  */
 @(Model.Name).prototype.deserialize = function (instance) {
   @{
-  var specialProperties = Model.SpecialProperties;
-  if (specialProperties.Count() > 0)
+  if (Model.BaseModelType != null)
+  {
+  @:@(Model.Name)['super_'].prototype.deserialize.call(this, instance);
+  }
+  var properties = Model.Properties;
+  if (properties.Count > 0)
   {
   @:if (instance) {
-    var specialPropertyList = new List<Property>(Model.SpecialProperties);
-    for (int i = 0; i < specialPropertyList.Count; i++)
+    var propertiesList = new List<Property>(Model.Properties);
+    for (int i = 0; i < propertiesList.Count; i++)
     {
-    @:@(Model.DeserializeProperty("instance", specialPropertyList[i]))
-    if (i != specialPropertyList.Count - 1)
+    @:@(Model.DeserializeProperty("this", "instance", propertiesList[i]))
+    if (i != propertiesList.Count - 1)
     {
     @EmptyLine
     }
     }
   @:}
   }
-  @:return instance;
   }
+  @EmptyLine
+  return this;
 };
 @EmptyLine
-module.exports = new @(Model.Name)();
+module.exports = @(Model.Name);

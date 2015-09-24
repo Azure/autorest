@@ -66,10 +66,11 @@ util.inherits(AutoRestValidationTest, ServiceClient);
 
 /**
  * Validates input parameters on the method. See swagger for details.
+ * @param {string} resourceGroupName Required string between 3 and 10 chars
+ * with pattern [a-zA-Z0-9]+.
+ * 
  * @param {number} id Required int multiple of 10 from 100 to 1000.
- *
- * @param {string} resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -77,7 +78,16 @@ util.inherits(AutoRestValidationTest, ServiceClient);
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 AutoRestValidationTest.prototype.validationOfMethodParameters = function (resourceGroupName, id, options, callback) {
   var client = this;
@@ -152,9 +162,9 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -163,18 +173,19 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -184,24 +195,26 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Validates body parameters on the method. See swagger for details.
- * @param {object} [body] 
- *
- * @param {number} [body.capacity] Non required int betwen 0 and 100 exclusive.
- *
- * @param {array} [body.displayNames] Non required array of unique items from 0 to 6 elements.
- *
- * @param {string} [body.image] Image URL representing the product.
- *
+ * @param {string} resourceGroupName Required string between 3 and 10 chars
+ * with pattern [a-zA-Z0-9]+.
+ * 
  * @param {number} id Required int multiple of 10 from 100 to 1000.
- *
- * @param {string} resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
- *
+ * 
+ * @param {object} [body]
+ * 
+ * @param {array} [body.displayNames] Non required array of unique items from
+ * 0 to 6 elements.
+ * 
+ * @param {number} [body.capacity] Non required int betwen 0 and 100 exclusive.
+ * 
+ * @param {string} [body.image] Image URL representing the product.
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -209,7 +222,16 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName, id, body, options, callback) {
   var client = this;
@@ -230,9 +252,6 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
     }
     if (id === null || id === undefined || typeof id !== 'number') {
       throw new Error('id cannot be null or undefined and it must be of type number.');
-    }
-    if (body) {
-      client._models['Product'].validate(body);
     }
     if (this.apiVersion === null || this.apiVersion === undefined || typeof this.apiVersion.valueOf() !== 'string') {
       throw new Error('this.apiVersion cannot be null or undefined and it must be of type string.');
@@ -272,7 +291,20 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(body));
+  var requestModel = null;
+  try {
+    if (body) {
+      requestModel = new client._models['Product'](body);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -290,9 +322,9 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -301,18 +333,19 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -322,7 +355,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

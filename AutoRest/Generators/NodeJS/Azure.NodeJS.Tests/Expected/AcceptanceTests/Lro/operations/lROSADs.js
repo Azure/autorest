@@ -36,11 +36,13 @@ function LROSADs(client) {
  *
  * Long running put request, service returns a 400 to the initial request
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -48,7 +50,16 @@ function LROSADs(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -56,24 +67,64 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
     callback = options;
     options = null;
   }
+
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
   // Send request
-  this.beginPutNonRetry400(product, options, function (err, result){
+  this.beginPutNonRetry400(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
 /**
  * Long running put request, service returns a 400 to the initial request
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -81,7 +132,16 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -94,9 +154,6 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -135,7 +192,20 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -153,9 +223,9 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -164,19 +234,19 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -187,12 +257,15 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
     }
     // Deserialize Response
     if (statusCode === 201) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -202,7 +275,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -211,11 +284,13 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
  * Long running put request, service returns a Product with
  * 'ProvisioningState' = 'Creating' and 201 response code
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -223,7 +298,16 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callback) {
   var client = this.client;
@@ -231,13 +315,51 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
     callback = options;
     options = null;
   }
+
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
   // Send request
-  this.beginPutNonRetry201Creating400(product, options, function (err, result){
+  this.beginPutNonRetry201Creating400(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -245,11 +367,13 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
  * Long running put request, service returns a Product with
  * 'ProvisioningState' = 'Creating' and 201 response code
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -257,7 +381,16 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, callback) {
   var client = this.client;
@@ -270,9 +403,6 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -311,7 +441,20 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -329,9 +472,9 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -340,19 +483,19 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -363,12 +506,15 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
     }
     // Deserialize Response
     if (statusCode === 201) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -378,7 +524,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -388,11 +534,13 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -400,7 +548,16 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -408,13 +565,51 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
     callback = options;
     options = null;
   }
+
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
   // Send request
-  this.beginPutAsyncRelativeRetry400(product, options, function (err, result){
+  this.beginPutAsyncRelativeRetry400(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -423,11 +618,13 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -435,7 +632,16 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -448,9 +654,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -489,7 +692,20 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -507,9 +723,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -518,19 +734,19 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -540,7 +756,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -554,18 +770,51 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginDeleteNonRetry400(options, function (err, result){
+  this.beginDeleteNonRetry400(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -578,7 +827,15 @@ LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
   var client = this.client;
@@ -644,9 +901,9 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -655,13 +912,10 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -675,18 +929,51 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginDelete202NonRetry400(options, function (err, result){
+  this.beginDelete202NonRetry400(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -699,7 +986,15 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
   var client = this.client;
@@ -765,9 +1060,9 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -776,13 +1071,10 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -798,18 +1090,51 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginDeleteAsyncRelativeRetry400(options, function (err, result){
+  this.beginDeleteAsyncRelativeRetry400(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -824,7 +1149,15 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback) {
   var client = this.client;
@@ -890,9 +1223,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -901,13 +1234,10 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -915,11 +1245,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
  *
  * Long running post request, service returns a 400 with no error body
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -927,29 +1259,64 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginPostNonRetry400(product, options, function (err, result){
+  this.beginPostNonRetry400(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
 /**
  * Long running post request, service returns a 400 with no error body
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -957,7 +1324,15 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -970,9 +1345,6 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -1011,7 +1383,20 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1029,9 +1414,9 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1040,13 +1425,10 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1054,11 +1436,13 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
  *
  * Long running post request, service returns a 202 with a location header
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1066,29 +1450,64 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginPost202NonRetry400(product, options, function (err, result){
+  this.beginPost202NonRetry400(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
 /**
  * Long running post request, service returns a 202 with a location header
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1096,7 +1515,15 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -1109,9 +1536,6 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -1150,7 +1574,20 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1168,9 +1605,9 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1179,13 +1616,10 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1195,11 +1629,13 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1207,18 +1643,51 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginPostAsyncRelativeRetry400(product, options, function (err, result){
+  this.beginPostAsyncRelativeRetry400(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -1227,11 +1696,13 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1239,7 +1710,15 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, callback) {
   var client = this.client;
@@ -1252,9 +1731,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -1293,7 +1769,20 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1311,9 +1800,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1322,13 +1811,10 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1337,11 +1823,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
  * Long running put request, service returns a 201 to the initial request with
  * no payload
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1349,7 +1837,16 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, options, callback) {
   var client = this.client;
@@ -1357,13 +1854,51 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
     callback = options;
     options = null;
   }
+
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
   // Send request
-  this.beginPutError201NoProvisioningStatePayload(product, options, function (err, result){
+  this.beginPutError201NoProvisioningStatePayload(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -1371,11 +1906,13 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
  * Long running put request, service returns a 201 to the initial request with
  * no payload
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1383,7 +1920,16 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product, options, callback) {
   var client = this.client;
@@ -1396,9 +1942,6 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -1437,7 +1980,20 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1455,9 +2011,9 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1466,19 +2022,19 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1489,12 +2045,15 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
     }
     // Deserialize Response
     if (statusCode === 201) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1504,7 +2063,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1514,11 +2073,13 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1526,7 +2087,16 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, callback) {
   var client = this.client;
@@ -1534,13 +2104,51 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
     callback = options;
     options = null;
   }
+
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
   // Send request
-  this.beginPutAsyncRelativeRetryNoStatus(product, options, function (err, result){
+  this.beginPutAsyncRelativeRetryNoStatus(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -1549,11 +2157,13 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1561,7 +2171,16 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, options, callback) {
   var client = this.client;
@@ -1574,9 +2193,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -1615,7 +2231,20 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1633,9 +2262,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1644,19 +2273,19 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1666,7 +2295,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1676,11 +2305,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1688,7 +2319,16 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, options, callback) {
   var client = this.client;
@@ -1696,13 +2336,51 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
     callback = options;
     options = null;
   }
+
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
   // Send request
-  this.beginPutAsyncRelativeRetryNoStatusPayload(product, options, function (err, result){
+  this.beginPutAsyncRelativeRetryNoStatusPayload(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -1711,11 +2389,13 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1723,7 +2403,16 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product, options, callback) {
   var client = this.client;
@@ -1736,9 +2425,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -1777,7 +2463,20 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1795,9 +2494,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1806,19 +2505,19 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1828,7 +2527,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1843,18 +2542,51 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.delete204Succeeded = function (options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginDelete204Succeeded(options, function (err, result){
+  this.beginDelete204Succeeded(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -1868,7 +2600,15 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
   var client = this.client;
@@ -1934,9 +2674,9 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1945,13 +2685,10 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1967,18 +2704,51 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginDeleteAsyncRelativeRetryNoStatus(options, function (err, result){
+  this.beginDeleteAsyncRelativeRetryNoStatus(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -1993,7 +2763,15 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, callback) {
   var client = this.client;
@@ -2059,9 +2837,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2070,13 +2848,10 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2085,11 +2860,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
  * Long running post request, service returns a 202 to the initial request,
  * without a location header.
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2097,18 +2874,51 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.post202NoLocation = function (product, options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginPost202NoLocation(product, options, function (err, result){
+  this.beginPost202NoLocation(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -2116,11 +2926,13 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * without a location header.
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2128,7 +2940,15 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPost202NoLocation = function (product, options, callback) {
   var client = this.client;
@@ -2141,9 +2961,6 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -2182,7 +2999,20 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -2200,9 +3030,9 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2211,13 +3041,10 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2227,11 +3054,13 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2239,18 +3068,51 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginPostAsyncRelativeRetryNoPayload(product, options, function (err, result){
+  this.beginPostAsyncRelativeRetryNoPayload(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -2259,11 +3121,13 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2271,7 +3135,15 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, options, callback) {
   var client = this.client;
@@ -2284,9 +3156,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -2325,7 +3194,20 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -2343,9 +3225,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2354,13 +3236,10 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2369,11 +3248,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that is not a valid json
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2381,7 +3262,16 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
   var client = this.client;
@@ -2389,13 +3279,51 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
     callback = options;
     options = null;
   }
+
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
   // Send request
-  this.beginPut200InvalidJson(product, options, function (err, result){
+  this.beginPut200InvalidJson(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -2403,11 +3331,13 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that is not a valid json
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2415,7 +3345,16 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback) {
   var client = this.client;
@@ -2428,9 +3367,6 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -2469,7 +3405,20 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -2487,9 +3436,9 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2498,19 +3447,19 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2520,7 +3469,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2530,11 +3479,13 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2542,7 +3493,16 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
@@ -2550,13 +3510,51 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
     callback = options;
     options = null;
   }
+
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
   // Send request
-  this.beginPutAsyncRelativeRetryInvalidHeader(product, options, function (err, result){
+  this.beginPutAsyncRelativeRetryInvalidHeader(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -2565,11 +3563,13 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2577,7 +3577,16 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
@@ -2590,9 +3599,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -2631,7 +3637,20 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -2649,9 +3668,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2660,19 +3679,19 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2682,7 +3701,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2692,11 +3711,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2704,7 +3725,16 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information. 
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var client = this.client;
@@ -2712,13 +3742,51 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
     callback = options;
     options = null;
   }
+
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
   // Send request
-  this.beginPutAsyncRelativeRetryInvalidJsonPolling(product, options, function (err, result){
+  this.beginPutAsyncRelativeRetryInvalidJsonPolling(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -2727,11 +3795,13 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2739,7 +3809,16 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var client = this.client;
@@ -2752,9 +3831,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -2793,7 +3869,20 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -2811,9 +3900,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2822,19 +3911,19 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['Product'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Product'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2844,7 +3933,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2859,18 +3948,51 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginDelete202RetryInvalidHeader(options, function (err, result){
+  this.beginDelete202RetryInvalidHeader(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -2884,7 +4006,15 @@ LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback) {
   var client = this.client;
@@ -2950,9 +4080,9 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2961,13 +4091,10 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2982,18 +4109,51 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginDeleteAsyncRelativeRetryInvalidHeader(options, function (err, result){
+  this.beginDeleteAsyncRelativeRetryInvalidHeader(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -3007,7 +4167,15 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options, callback) {
   var client = this.client;
@@ -3073,9 +4241,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -3084,13 +4252,10 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -3106,18 +4271,51 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginDeleteAsyncRelativeRetryInvalidJsonPolling(options, function (err, result){
+  this.beginDeleteAsyncRelativeRetryInvalidJsonPolling(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -3132,7 +4330,15 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (options, callback) {
   var client = this.client;
@@ -3198,9 +4404,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -3209,13 +4415,10 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -3224,11 +4427,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
  * Long running post request, service returns a 202 to the initial request,
  * with invalid 'Location' and 'Retry-After' headers.
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3236,18 +4441,51 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginPost202RetryInvalidHeader(product, options, function (err, result){
+  this.beginPost202RetryInvalidHeader(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -3255,11 +4493,13 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
  * Long running post request, service returns a 202 to the initial request,
  * with invalid 'Location' and 'Retry-After' headers.
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3267,7 +4507,15 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
@@ -3280,9 +4528,6 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -3321,7 +4566,20 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -3339,9 +4597,9 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -3350,13 +4608,10 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -3366,11 +4621,13 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3378,18 +4635,51 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginPostAsyncRelativeRetryInvalidHeader(product, options, function (err, result){
+  this.beginPostAsyncRelativeRetryInvalidHeader(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -3398,11 +4688,13 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3410,7 +4702,15 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, options, callback) {
   var client = this.client;
@@ -3423,9 +4723,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -3464,7 +4761,20 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -3482,9 +4792,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -3493,13 +4803,10 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -3509,11 +4816,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3521,18 +4830,51 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
-  var self = this.client;
+  var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
   // Send request
-  this.beginPostAsyncRelativeRetryInvalidJsonPolling(product, options, function (err, result){
+  this.beginPostAsyncRelativeRetryInvalidJsonPolling(product, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
+
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
 
@@ -3541,11 +4883,13 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
  * @param {object} [product] Product to put
- *
- * @param {object} [product.properties] 
- *
- * @param {string} [product.properties.provisioningState] 
- *
+ * 
+ * @param {string} [product.provisioningState]
+ * 
+ * @param {object} [product.tags]
+ * 
+ * @param {string} [product.location] Resource Location
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3553,7 +4897,15 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (product, options, callback) {
   var client = this.client;
@@ -3566,9 +4918,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (prod
   }
   // Validate
   try {
-    if (product) {
-      client._models['Product'].validate(product);
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -3607,7 +4956,20 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (prod
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(product));
+  var requestModel = null;
+  try {
+    if (product) {
+      requestModel = new client._models['Product'](product);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -3625,9 +4987,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (prod
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -3636,13 +4998,10 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (prod
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

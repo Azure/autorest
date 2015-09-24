@@ -34,8 +34,9 @@ function SkipUrlEncoding(client) {
 
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
- * @param {string} unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
- *
+ * @param {string} unencodedPathParam Unencoded path parameter with value
+ * 'path1/path2/path3'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -43,7 +44,15 @@ function SkipUrlEncoding(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, options, callback) {
   var client = this.client;
@@ -113,9 +122,9 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -124,20 +133,18 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
- * @param {string} unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
- *
+ * @param {string} unencodedPathParam Unencoded path parameter with value
+ * 'path1/path2/path3'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -145,7 +152,15 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, options, callback) {
   var client = this.client;
@@ -215,9 +230,9 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -226,20 +241,19 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
- * @param {string} unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
- *
+ * @param {string} unencodedPathParam An unencoded path parameter with value
+ * 'path1/path2/path3'. Possible values for this parameter include:
+ * 'path1/path2/path3'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -247,7 +261,15 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, options, callback) {
   var client = this.client;
@@ -317,9 +339,9 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -328,21 +350,19 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
- * @param {string} q1 Unencoded query parameter with value 'value1&q2=value2&q3=value3'
- *
+ * @param {string} q1 Unencoded query parameter with value
+ * 'value1&q2=value2&q3=value3'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -350,7 +370,15 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback) {
   var client = this.client;
@@ -420,9 +448,9 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -431,20 +459,17 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get method with unencoded query parameter with value null
  * @param {string} [q1] Unencoded query parameter with value null
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -452,7 +477,15 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) {
   var client = this.client;
@@ -524,9 +557,9 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -535,21 +568,19 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
- * @param {string} q1 Unencoded query parameter with value 'value1&q2=value2&q3=value3'
- *
+ * @param {string} q1 Unencoded query parameter with value
+ * 'value1&q2=value2&q3=value3'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -557,7 +588,15 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
   var client = this.client;
@@ -627,9 +666,9 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -638,21 +677,20 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
- * @param {string} [q1] An unencoded query parameter with value 'value1&q2=value2&q3=value3'. Possible values for this parameter include: 'value1&q2=value2&q3=value3'
- *
+ * @param {string} [q1] An unencoded query parameter with value
+ * 'value1&q2=value2&q3=value3'. Possible values for this parameter include:
+ * 'value1&q2=value2&q3=value3'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -660,7 +698,15 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback) {
   var client = this.client;
@@ -732,9 +778,9 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -743,13 +789,10 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

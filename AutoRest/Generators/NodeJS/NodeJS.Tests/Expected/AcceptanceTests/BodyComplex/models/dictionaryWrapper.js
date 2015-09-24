@@ -14,8 +14,25 @@
  * @class
  * Initializes a new instance of the DictionaryWrapper class.
  * @constructor
+ * @member {object} [defaultProgram]
+ * 
  */
-function DictionaryWrapper() { }
+function DictionaryWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.defaultProgram) {
+      this.defaultProgram = {};
+      for(var valueElement in parameters.defaultProgram) {
+        if (parameters.defaultProgram[valueElement] !== null && parameters.defaultProgram[valueElement] !== undefined) {
+          this.defaultProgram[valueElement] = parameters.defaultProgram[valueElement];
+        }
+        else {
+          this.defaultProgram[valueElement] = parameters.defaultProgram[valueElement];
+        }
+      }
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the DictionaryWrapper schema
@@ -23,17 +40,27 @@ function DictionaryWrapper() { }
  * @param {JSON} payload
  *
  */
-DictionaryWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('DictionaryWrapper cannot be null.');
-  }
-  if (payload['defaultProgram'] && typeof payload['defaultProgram'] === 'object') {
-    for(var valueElement in payload['defaultProgram']) {
-      if (payload['defaultProgram'][valueElement] !== null && payload['defaultProgram'][valueElement] !== undefined && typeof payload['defaultProgram'][valueElement].valueOf() !== 'string') {
-        throw new Error('payload[\'defaultProgram\'][valueElement] must be of type string.');
+DictionaryWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['defaultProgram'] && typeof this['defaultProgram'] === 'object') {
+    payload['defaultProgram'] = {};
+    for(var valueElement1 in this['defaultProgram']) {
+      if (this['defaultProgram'][valueElement1] !== null && this['defaultProgram'][valueElement1] !== undefined) {
+        if (typeof this['defaultProgram'][valueElement1].valueOf() !== 'string') {
+          throw new Error('this[\'defaultProgram\'][valueElement1] must be of type string.');
+        }
+        if (payload['defaultProgram'] === null || payload['defaultProgram'] === undefined) {
+          payload['defaultProgram'] = {};
+        }
+        payload['defaultProgram'][valueElement1] = this['defaultProgram'][valueElement1];
+      }
+      else {
+        payload['defaultProgram'][valueElement1] = this['defaultProgram'][valueElement1];
       }
     }
   }
+
+  return payload;
 };
 
 /**
@@ -43,7 +70,26 @@ DictionaryWrapper.prototype.validate = function (payload) {
  *
  */
 DictionaryWrapper.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['defaultProgram']) {
+      this['defaultProgram'] = {};
+      for(var valueElement2 in instance['defaultProgram']) {
+        if (instance['defaultProgram'] !== null && instance['defaultProgram'] !== undefined) {
+          if (instance['defaultProgram'][valueElement2] !== null && instance['defaultProgram'][valueElement2] !== undefined) {
+            this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
+          }
+          else {
+            this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
+          }
+        }
+        else {
+          this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
+        }
+      }
+    }
+  }
+
+  return this;
 };
 
-module.exports = new DictionaryWrapper();
+module.exports = DictionaryWrapper;

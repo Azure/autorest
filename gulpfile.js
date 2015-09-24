@@ -88,6 +88,10 @@ var defaultAzureMappings = {
   'AcceptanceTests/AzureSpecials': '../../../TestServer/swagger/azure-special-properties.json'
 };
 
+var nodeAzureMappings = {
+  'AcceptanceTests/StorageManagementClient': '../../../TestServer/swagger/storage.json'
+};
+
 var rubyAzureMappings = {
   'head':['../../../TestServer/swagger/head.json', 'HeadModule'],
   'paging':['../../../TestServer/swagger/paging.json', 'PagingModule'],
@@ -125,10 +129,14 @@ gulp.task('regenerate:delete', function(cb){
 });
 
 gulp.task('regenerate:expected:nodeazure', function(cb){
+  for (var p in defaultAzureMappings) {
+    nodeAzureMappings[p] = defaultAzureMappings[p];
+  }
+  
   regenExpected({
     'outputBaseDir': 'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests',
     'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
-    'mappings': defaultAzureMappings,
+    'mappings': nodeAzureMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.NodeJS'
   }, cb);

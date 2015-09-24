@@ -16,8 +16,21 @@ var models = require('./index');
  * @class
  * Initializes a new instance of the Product class.
  * @constructor
+ * @member {object} [properties]
+ * 
+ * @member {number} [properties.id]
+ * 
+ * @member {string} [properties.name]
+ * 
  */
-function Product() { }
+function Product(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.properties) {
+      this.properties = new models['ProductProperties'](parameters.properties);
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the Product schema
@@ -25,13 +38,13 @@ function Product() { }
  * @param {JSON} payload
  *
  */
-Product.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Product cannot be null.');
+Product.prototype.serialize = function () {
+  var payload = {};
+  if (this['properties']) {
+    payload['properties'] = this['properties'].serialize();
   }
-  if (payload['properties']) {
-    models['ProductProperties'].validate(payload['properties']);
-  }
+
+  return payload;
 };
 
 /**
@@ -42,11 +55,12 @@ Product.prototype.validate = function (payload) {
  */
 Product.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.properties !== null && instance.properties !== undefined) {
-      instance.properties = models['ProductProperties'].deserialize(instance.properties);
+    if (instance['properties']) {
+      this['properties'] = new models['ProductProperties']().deserialize(instance['properties']);
     }
   }
-  return instance;
+
+  return this;
 };
 
-module.exports = new Product();
+module.exports = Product;

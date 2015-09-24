@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the Product class.
  * @constructor
+ * @member {number} id
+ * 
+ * @member {string} [name]
+ * 
  */
-function Product() { }
+function Product(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.id !== null && parameters.id !== undefined) {
+      this.id = parameters.id;
+    }
+    if (parameters.name !== null && parameters.name !== undefined) {
+      this.name = parameters.name;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the Product schema
@@ -23,17 +37,21 @@ function Product() { }
  * @param {JSON} payload
  *
  */
-Product.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Product cannot be null.');
+Product.prototype.serialize = function () {
+  var payload = {};
+  if (this['id'] === null || this['id'] === undefined || typeof this['id'] !== 'number') {
+    throw new Error('this[\'id\'] cannot be null or undefined and it must be of type number.');
   }
-  if (payload['id'] === null || payload['id'] === undefined || typeof payload['id'] !== 'number') {
-    throw new Error('payload[\'id\'] cannot be null or undefined and it must be of type number.');
+  payload['id'] = this['id'];
+
+  if (this['name'] !== null && this['name'] !== undefined) {
+    if (typeof this['name'].valueOf() !== 'string') {
+      throw new Error('this[\'name\'] must be of type string.');
+    }
+    payload['name'] = this['name'];
   }
 
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
-  }
+  return payload;
 };
 
 /**
@@ -43,7 +61,17 @@ Product.prototype.validate = function (payload) {
  *
  */
 Product.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['id'] !== null && instance['id'] !== undefined) {
+      this['id'] = instance['id'];
+    }
+
+    if (instance['name'] !== null && instance['name'] !== undefined) {
+      this['name'] = instance['name'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new Product();
+module.exports = Product;

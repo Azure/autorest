@@ -10,16 +10,28 @@
 @WrapComment(" * ", Model.Documentation)
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @:* @@param {@MethodTemplateModel.GetParameterDocumentationType(parameter)} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
- @:*
+ @MethodTemplateModel.ConstructParameterDocumentation(
+                      WrapComment(" * ", "@param {" 
+                                        + MethodTemplateModel.GetParameterDocumentationType(parameter)
+                                        + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
+                                        + " " + parameter.Documentation))
 }
 @WrapComment(" * ", " @param {object} [options]")
  *
 @WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
  *
-@WrapComment(" * ",  " @param {function} callback")
+@WrapComment(" * ", " @param {function} callback")
  *
-@WrapComment(" * ",  " @returns {stream} The Response stream")
+@WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
+@WrapComment(" *                      ", Model.ReturnTypeInfo)
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 @(Model.OperationName).prototype.@(Model.Name.ToCamelCase()) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);
@@ -32,28 +44,18 @@
   }
   @if (Model.ParameterTemplateModels.Any())
   {
-  @:// Validate
-  @:try {
-  @foreach (var parameter in Model.ParameterTemplateModels)
+      var validationBlock = Model.ValidationString;
+  if (!string.IsNullOrWhiteSpace(validationBlock))
   {
-    if ((Model.HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
-    {
-    if (parameter.IsRequired)
-    {
-    @:if (@(parameter.Name) === null || @(parameter.Name) === undefined) {
-    @:throw new Error('\'@(parameter.Name)\' cannot be null');
-    @:}
-    @:
-    }
-    }
-    else
-    {
-    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.IsRequired))
-    }
+  <text>
+  // Validate
+  try {
+    @(validationBlock)
+  } catch (error) {
+    return callback(error);
   }
-  @:} catch (error) {
-    @:return callback(error);
-  @:}
+  </text>
+  }
   }
   @EmptyLine
   // Construct URL
@@ -97,7 +99,29 @@
   <text>
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(@(Model.RequestBody.Name)));
+  var requestModel = null;
+  try {
+    @(Model.InitializeRequestBody)
+  @if (Model.RequestBody.Type is CompositeType)
+  {
+  <text>
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  </text>
+  }
+  else
+  {
+    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired))
+    @:requestContent = JSON.stringify(requestModel);
+  }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
+  
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   </text>

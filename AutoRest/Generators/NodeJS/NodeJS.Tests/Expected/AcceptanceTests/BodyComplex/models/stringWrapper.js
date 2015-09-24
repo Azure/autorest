@@ -14,8 +14,27 @@
  * @class
  * Initializes a new instance of the StringWrapper class.
  * @constructor
+ * @member {string} [field]
+ * 
+ * @member {string} [empty]
+ * 
+ * @member {string} [null]
+ * 
  */
-function StringWrapper() { }
+function StringWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.field !== null && parameters.field !== undefined) {
+      this.field = parameters.field;
+    }
+    if (parameters.empty !== null && parameters.empty !== undefined) {
+      this.empty = parameters.empty;
+    }
+    if (parameters.null !== null && parameters.null !== undefined) {
+      this.null = parameters.null;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the StringWrapper schema
@@ -23,21 +42,30 @@ function StringWrapper() { }
  * @param {JSON} payload
  *
  */
-StringWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('StringWrapper cannot be null.');
-  }
-  if (payload['field'] !== null && payload['field'] !== undefined && typeof payload['field'].valueOf() !== 'string') {
-    throw new Error('payload[\'field\'] must be of type string.');
-  }
-
-  if (payload['empty'] !== null && payload['empty'] !== undefined && typeof payload['empty'].valueOf() !== 'string') {
-    throw new Error('payload[\'empty\'] must be of type string.');
+StringWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['field'] !== null && this['field'] !== undefined) {
+    if (typeof this['field'].valueOf() !== 'string') {
+      throw new Error('this[\'field\'] must be of type string.');
+    }
+    payload['field'] = this['field'];
   }
 
-  if (payload['null'] !== null && payload['null'] !== undefined && typeof payload['null'].valueOf() !== 'string') {
-    throw new Error('payload[\'null\'] must be of type string.');
+  if (this['empty'] !== null && this['empty'] !== undefined) {
+    if (typeof this['empty'].valueOf() !== 'string') {
+      throw new Error('this[\'empty\'] must be of type string.');
+    }
+    payload['empty'] = this['empty'];
   }
+
+  if (this['null'] !== null && this['null'] !== undefined) {
+    if (typeof this['null'].valueOf() !== 'string') {
+      throw new Error('this[\'null\'] must be of type string.');
+    }
+    payload['null'] = this['null'];
+  }
+
+  return payload;
 };
 
 /**
@@ -47,7 +75,21 @@ StringWrapper.prototype.validate = function (payload) {
  *
  */
 StringWrapper.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['field'] !== null && instance['field'] !== undefined) {
+      this['field'] = instance['field'];
+    }
+
+    if (instance['empty'] !== null && instance['empty'] !== undefined) {
+      this['empty'] = instance['empty'];
+    }
+
+    if (instance['null'] !== null && instance['null'] !== undefined) {
+      this['null'] = instance['null'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new StringWrapper();
+module.exports = StringWrapper;

@@ -40,7 +40,16 @@ function Polymorphicrecursive(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Fish} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Polymorphicrecursive.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -90,9 +99,9 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -101,22 +110,19 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          if(result.body['dtype'] !== null && result.body['dtype'] !== undefined && client._models.discriminators[result.body['dtype']]) {
-            result.body = client._models.discriminators[result.body['dtype']].deserialize(result.body);
-          } else {
-            throw new Error('No discriminator field "dtype" was found in response.');
-          }
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models.discriminators[parsedResponse['dtype']](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -126,72 +132,74 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put complex types that are polymorphic and have recursive references
  * @param {object} complexBody Please put a salmon that looks like this:
- {
-     "dtype": "salmon",
-     "species": "king",
-     "length": 1,
-     "age": 1,
-     "location": "alaska",
-     "iswild": true,
-     "siblings": [
-         {
-             "dtype": "shark",
-             "species": "predator",
-             "length": 20,
-             "age": 6,
-             "siblings": [
-                 {
-                     "dtype": "salmon",
-                     "species": "coho",
-                     "length": 2,
-                     "age": 2,
-                     "location": "atlantic",
-                     "iswild": true,
-                     "siblings": [
-                         {
-                             "dtype": "shark",
-                             "species": "predator",
-                             "length": 20,
-                             "age": 6
-                         },
-                         {
-                             "dtype": "sawshark",
-                             "species": "dangerous",
-                             "length": 10,
-                             "age": 105
-                         }
-                     ]
-                 },
-                 {
-                     "dtype": "sawshark",
-                     "species": "dangerous",
-                     "length": 10,
-                     "age": 105
-                 }
-             ]
-         },
-         {
-             "dtype": "sawshark",
-             "species": "dangerous",
-             "length": 10,
-             "age": 105
-         }
-     ]
- }
- *
- * @param {number} [complexBody.length] 
- *
- * @param {array} [complexBody.siblings] 
- *
- * @param {string} [complexBody.species] 
- *
+ * {
+ * "dtype": "salmon",
+ * "species": "king",
+ * "length": 1,
+ * "age": 1,
+ * "location": "alaska",
+ * "iswild": true,
+ * "siblings": [
+ * {
+ * "dtype": "shark",
+ * "species": "predator",
+ * "length": 20,
+ * "age": 6,
+ * "siblings": [
+ * {
+ * "dtype": "salmon",
+ * "species": "coho",
+ * "length": 2,
+ * "age": 2,
+ * "location": "atlantic",
+ * "iswild": true,
+ * "siblings": [
+ * {
+ * "dtype": "shark",
+ * "species": "predator",
+ * "length": 20,
+ * "age": 6
+ * },
+ * {
+ * "dtype": "sawshark",
+ * "species": "dangerous",
+ * "length": 10,
+ * "age": 105
+ * }
+ * ]
+ * },
+ * {
+ * "dtype": "sawshark",
+ * "species": "dangerous",
+ * "length": 10,
+ * "age": 105
+ * }
+ * ]
+ * },
+ * {
+ * "dtype": "sawshark",
+ * "species": "dangerous",
+ * "length": 10,
+ * "age": 105
+ * }
+ * ]
+ * }
+ * 
+ * @param {string} [complexBody.species]
+ * 
+ * @param {number} [complexBody.length]
+ * 
+ * @param {array} [complexBody.siblings]
+ * 
+ * @param {string} [complexBody.dtype] Polymorhpic Discriminator
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -199,7 +207,15 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Polymorphicrecursive.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;
@@ -212,14 +228,8 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
   }
   // Validate
   try {
-    if (complexBody) {
-      if(complexBody['dtype'] !== null && complexBody['dtype'] !== undefined && client._models.discriminators[complexBody['dtype']]) {
-        client._models.discriminators[complexBody['dtype']].validate(complexBody);
-      } else {
-        throw new Error('No discriminator field "dtype" was found in parameter "complexBody".');
-      }
-    }
-     else {  throw new Error('complexBody cannot be null or undefined.');
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
@@ -248,7 +258,20 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(complexBody));
+  var requestModel = null;
+  try {
+    if (complexBody) {
+      requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -266,9 +289,9 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -277,12 +300,10 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

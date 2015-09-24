@@ -14,8 +14,17 @@
  * @class
  * Initializes a new instance of the StringWrapper class.
  * @constructor
+ * @member {string} value
+ * 
  */
-function StringWrapper() { }
+function StringWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.value !== null && parameters.value !== undefined) {
+      this.value = parameters.value;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the StringWrapper schema
@@ -23,13 +32,14 @@ function StringWrapper() { }
  * @param {JSON} payload
  *
  */
-StringWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('StringWrapper cannot be null.');
+StringWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['value'] === null || this['value'] === undefined || typeof this['value'].valueOf() !== 'string') {
+    throw new Error('this[\'value\'] cannot be null or undefined and it must be of type string.');
   }
-  if (payload['value'] === null || payload['value'] === undefined || typeof payload['value'].valueOf() !== 'string') {
-    throw new Error('payload[\'value\'] cannot be null or undefined and it must be of type string.');
-  }
+  payload['value'] = this['value'];
+
+  return payload;
 };
 
 /**
@@ -39,7 +49,13 @@ StringWrapper.prototype.validate = function (payload) {
  *
  */
 StringWrapper.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['value'] !== null && instance['value'] !== undefined) {
+      this['value'] = instance['value'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new StringWrapper();
+module.exports = StringWrapper;

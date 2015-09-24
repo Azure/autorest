@@ -33,8 +33,8 @@ function Implicit(client) {
 
 /**
  * Test implicitly required path parameter
- * @param {string} pathParameter 
- *
+ * @param {string} pathParameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -42,7 +42,16 @@ function Implicit(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Implicit.prototype.getRequiredPath = function (pathParameter, options, callback) {
   var client = this.client;
@@ -101,9 +110,9 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -112,32 +121,33 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test implicitly optional query parameter
- * @param {string} [queryParameter] 
- *
+ * @param {string} [queryParameter]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -145,7 +155,15 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Implicit.prototype.putOptionalQuery = function (queryParameter, options, callback) {
   var client = this.client;
@@ -210,9 +228,9 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -221,19 +239,17 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test implicitly optional header parameter
- * @param {string} [queryParameter] 
- *
+ * @param {string} [queryParameter]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -241,7 +257,15 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Implicit.prototype.putOptionalHeader = function (queryParameter, options, callback) {
   var client = this.client;
@@ -302,9 +326,9 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -313,19 +337,17 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test implicitly optional body parameter
- * @param {string} [bodyParameter] 
- *
+ * @param {string} [bodyParameter]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -333,7 +355,15 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -376,7 +406,19 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      if (typeof bodyParameter.valueOf() !== 'string') {
+        throw new Error('bodyParameter must be of type string.');
+      }
+      requestModel = bodyParameter;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -394,9 +436,9 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -405,12 +447,10 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -423,7 +463,16 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
   var client = this.client;
@@ -482,9 +531,9 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -493,25 +542,26 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -524,7 +574,16 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
   var client = this.client;
@@ -587,9 +646,9 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -598,25 +657,26 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -629,7 +689,16 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
   var client = this.client;
@@ -694,9 +763,9 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -705,25 +774,26 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

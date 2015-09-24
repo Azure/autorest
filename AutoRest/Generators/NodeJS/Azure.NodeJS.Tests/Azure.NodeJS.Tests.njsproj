@@ -20,7 +20,8 @@
     <Content Include=".jshintrc" />
     <Content Include="package.json" />
     <Compile Include="AcceptanceTests\coverage.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\azureSpecialProperties.js">
       <TestFramework>Mocha</TestFramework>
@@ -95,7 +96,8 @@
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\startServer.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Content Include="bin\Net45-Debug\AutoRest.json" />
     <Content Include="bin\Net45-Debug\AutoRest.Core.xml" />

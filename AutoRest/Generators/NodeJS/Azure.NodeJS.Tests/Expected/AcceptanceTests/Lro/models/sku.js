@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the Sku class.
  * @constructor
+ * @member {string} [name]
+ * 
+ * @member {string} [id]
+ * 
  */
-function Sku() { }
+function Sku(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.name !== null && parameters.name !== undefined) {
+      this.name = parameters.name;
+    }
+    if (parameters.id !== null && parameters.id !== undefined) {
+      this.id = parameters.id;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the Sku schema
@@ -23,17 +37,23 @@ function Sku() { }
  * @param {JSON} payload
  *
  */
-Sku.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Sku cannot be null.');
-  }
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
+Sku.prototype.serialize = function () {
+  var payload = {};
+  if (this['name'] !== null && this['name'] !== undefined) {
+    if (typeof this['name'].valueOf() !== 'string') {
+      throw new Error('this[\'name\'] must be of type string.');
+    }
+    payload['name'] = this['name'];
   }
 
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'].valueOf() !== 'string') {
-    throw new Error('payload[\'id\'] must be of type string.');
+  if (this['id'] !== null && this['id'] !== undefined) {
+    if (typeof this['id'].valueOf() !== 'string') {
+      throw new Error('this[\'id\'] must be of type string.');
+    }
+    payload['id'] = this['id'];
   }
+
+  return payload;
 };
 
 /**
@@ -43,7 +63,17 @@ Sku.prototype.validate = function (payload) {
  *
  */
 Sku.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['name'] !== null && instance['name'] !== undefined) {
+      this['name'] = instance['name'];
+    }
+
+    if (instance['id'] !== null && instance['id'] !== undefined) {
+      this['id'] = instance['id'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new Sku();
+module.exports = Sku;

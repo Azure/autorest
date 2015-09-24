@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -18,22 +19,27 @@ namespace Microsoft.Rest.Generator.NodeJS
         
         public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
         {
+            if (!string.IsNullOrEmpty(source.PolymorphicDiscriminator))
+            {
+                if (!source.Properties.Any(p => p.Name == source.PolymorphicDiscriminator))
+                {
+                    var polymorphicProperty = new Property
+                    {
+                        IsRequired = true,
+                        Name = source.PolymorphicDiscriminator,
+                        SerializedName = source.PolymorphicDiscriminator,
+                        Documentation = "Polymorhpic Discriminator",
+                        Type = PrimaryType.String
+                    };
+                    source.Properties.Add(polymorphicProperty);
+                }
+            }
             this.LoadFrom(source);
             ServiceClient = serviceClient;
-            if(source.BaseModelType != null)
+            if (source.BaseModelType != null)
             {
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
             }
-        }
-
-        public string DeserializeProperty(string objectName, Property property)
-        {
-            if (property == null || property.Type == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            return property.Type.DeserializeType(_scope, objectName + "." + property.Name, "models");
         }
 
         public IScopeProvider Scope
@@ -78,6 +84,61 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        public IEnumerable<Property> DocumentationPropertyList
+        {
+            get
+            {
+                var traversalStack = new Stack<Property>();
+                var visitedHash = new Dictionary<string, Property>();
+                var retValue = new Stack<Property>();
+
+                foreach (var property in Properties)
+                {
+                    traversalStack.Push(property);
+                }
+
+                while (traversalStack.Count() != 0)
+                {
+                    var property = traversalStack.Pop();
+                    if (!(property.Type is CompositeType))
+                    {
+                        retValue.Push(property);
+                    }
+
+                    if (property.Type is CompositeType)
+                    {
+                        if (!visitedHash.ContainsKey(property.Name))
+                        {
+                            traversalStack.Push(property);
+                            foreach (var subProperty in ((CompositeType)property.Type).Properties)
+                            {
+                                var individualProperty = new Property();
+                                individualProperty.Type = subProperty.Type;
+                                individualProperty.Name = property.Name + "." + subProperty.Name;
+                                individualProperty.Documentation = subProperty.Documentation;
+                                traversalStack.Push(individualProperty);
+                            }
+
+                            visitedHash.Add(property.Name, property);
+                        }
+                        else
+                        {
+                            retValue.Push(property);
+                        }
+                    }
+                }
+
+                return retValue.ToList();
+            }
+        }
+
+        public static string ConstructPropertyDocumentation(string propertyDocumentation)
+        {
+            var builder = new IndentedStringBuilder("  ");
+            return builder.AppendLine(propertyDocumentation)
+                          .AppendLine(" * ").ToString();
+        }
+
         public bool ContainsPropertiesInSequenceType()
         {
             var sample = ComposedProperties.FirstOrDefault(p => p.Type is SequenceType);
@@ -91,51 +152,95 @@ namespace Microsoft.Rest.Generator.NodeJS
             return sample != null;
         }
 
-        public string ValidateProperty(string objectName, Property property)
+        public string InitializeProperty(string objectName, string valueName, Property property)
         {
-            if (property == null)
+            if (property == null || property.Type == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            return property.Type.InitializeType(_scope, objectName + "." + property.Name, valueName + "." + property.Name);
+        }
+
+        public string SerializeProperty(string objectName, string serializedName, Property property)
+        {
+            if (property == null || property.Type == null)
             {
                 throw new ArgumentNullException("property");
             }
 
             var propertyName = string.Format(CultureInfo.InvariantCulture, 
                 "{0}['{1}']", objectName, property.Name);
+            var serializedPropertyName = string.Format(CultureInfo.InvariantCulture,
+                "{0}['{1}']", serializedName, property.SerializedName.Replace(".", "']['"));
 
-            return property.Type.ValidateType(_scope, propertyName, property.IsRequired, "models");
+            return property.Type.SerializeType(_scope, propertyName, serializedPropertyName, property.IsRequired, "models");
+        }
+
+        public string DeserializeProperty(string objectName, string valueName, Property property)
+        {
+            if (property == null || property.Type == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            var propertyName = string.Format(CultureInfo.InvariantCulture,
+                "{0}['{1}']", objectName, property.Name);
+            var deserializedPropertyName = string.Format(CultureInfo.InvariantCulture,
+                "{0}['{1}']", valueName, property.SerializedName.Replace(".", "']['"));
+
+            return property.Type.DeserializeType(_scope, propertyName, deserializedPropertyName, "models");
         }
 
         /// <summary>
-        /// Returns list of properties that needs to be explicitly deserializes for a model.
+        /// Provides the property name in the correct jsdoc notation depending on 
+        /// whether it is required or optional
         /// </summary>
-        public IEnumerable<Property> SpecialProperties
+        /// <param name="property">Parameter to be documented</param>
+        /// <returns>Parameter name in the correct jsdoc notation</returns>
+        public static string GetPropertyDocumentationName(Property property)
         {
-            get
+            if (property == null)
             {
-                foreach (var property in ComposedProperties)
-                {
-                    if (isSpecial(property.Type))
-                    {
-                        yield return property;
-                    }
-                }
+                throw new ArgumentNullException("property");
+            }
+            if (property.IsRequired)
+            {
+                return property.Name;
+            }
+            else
+            {
+                return string.Format(CultureInfo.InvariantCulture, "[{0}]", property.Name);
             }
         }
 
-        private bool isSpecial(IType type)
+        /// <summary>
+        /// Provides the type of the property
+        /// </summary>
+        /// <param name="property">Parameter to be documented</param>
+        /// <returns>Parameter name in the correct jsdoc notation</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        public static string GetPropertyDocumentationType(Property property)
         {
-            if (type == PrimaryType.DateTime || type == PrimaryType.Date || type == PrimaryType.ByteArray || type is CompositeType)
+            if (property == null)
             {
-                return true;
+                throw new ArgumentNullException("property");
             }
-            else if (type is SequenceType)
+            string typeName = PrimaryType.Object.Name;
+            if (property.Type is PrimaryType)
             {
-                return isSpecial(((SequenceType)type).ElementType);
+                typeName = property.Type.Name;
             }
-            else if (type is DictionaryType)
+            else if (property.Type is SequenceType)
             {
-                return isSpecial(((DictionaryType)type).ValueType);
+                typeName = "array";
             }
-            return false;
+            else if (property.Type is EnumType)
+            {
+                typeName = PrimaryType.String.Name;
+            }
+
+            return typeName.ToLower(CultureInfo.InvariantCulture);
         }
     }
 }

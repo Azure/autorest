@@ -40,7 +40,15 @@ function Files(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Files.prototype.getFile = function (options, callback) {
   var client = this.client;
@@ -92,11 +100,8 @@ Files.prototype.getFile = function (options, callback) {
     }
 
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    result.body = response;
-    return callback(null, result);
+    var result = response;
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -109,7 +114,15 @@ Files.prototype.getFile = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Files.prototype.getEmptyFile = function (options, callback) {
   var client = this.client;
@@ -161,11 +174,8 @@ Files.prototype.getEmptyFile = function (options, callback) {
     }
 
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
-    result.body = response;
-    return callback(null, result);
+    var result = response;
+    return callback(null, result, httpRequest, response);
   });
 };
 

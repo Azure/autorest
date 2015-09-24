@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the Pet class.
  * @constructor
+ * @member {number} [id]
+ * 
+ * @member {string} [name]
+ * 
  */
-function Pet() { }
+function Pet(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.id !== null && parameters.id !== undefined) {
+      this.id = parameters.id;
+    }
+    if (parameters.name !== null && parameters.name !== undefined) {
+      this.name = parameters.name;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the Pet schema
@@ -23,17 +37,23 @@ function Pet() { }
  * @param {JSON} payload
  *
  */
-Pet.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('Pet cannot be null.');
-  }
-  if (payload['id'] !== null && payload['id'] !== undefined && typeof payload['id'] !== 'number') {
-    throw new Error('payload[\'id\'] must be of type number.');
+Pet.prototype.serialize = function () {
+  var payload = {};
+  if (this['id'] !== null && this['id'] !== undefined) {
+    if (typeof this['id'] !== 'number') {
+      throw new Error('this[\'id\'] must be of type number.');
+    }
+    payload['id'] = this['id'];
   }
 
-  if (payload['name'] !== null && payload['name'] !== undefined && typeof payload['name'].valueOf() !== 'string') {
-    throw new Error('payload[\'name\'] must be of type string.');
+  if (this['name'] !== null && this['name'] !== undefined) {
+    if (typeof this['name'].valueOf() !== 'string') {
+      throw new Error('this[\'name\'] must be of type string.');
+    }
+    payload['name'] = this['name'];
   }
+
+  return payload;
 };
 
 /**
@@ -43,7 +63,17 @@ Pet.prototype.validate = function (payload) {
  *
  */
 Pet.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['id'] !== null && instance['id'] !== undefined) {
+      this['id'] = instance['id'];
+    }
+
+    if (instance['name'] !== null && instance['name'] !== undefined) {
+      this['name'] = instance['name'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new Pet();
+module.exports = Pet;

@@ -34,8 +34,8 @@ function Explicit(client) {
 /**
  * Test explicitly required integer. Please put null and the client library
  * should throw before the request is sent.
- * @param {number} bodyParameter 
- *
+ * @param {number} bodyParameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -43,7 +43,16 @@ function Explicit(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -86,7 +95,17 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter === null || bodyParameter === undefined || typeof bodyParameter !== 'number') {
+      throw new Error('bodyParameter cannot be null or undefined and it must be of type number.');
+    }
+    requestModel = bodyParameter;
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -104,9 +123,9 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -115,32 +134,33 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional integer. Please put null.
- * @param {number} [bodyParameter] 
- *
+ * @param {number} [bodyParameter]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -148,7 +168,15 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -191,7 +219,19 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      if (typeof bodyParameter !== 'number') {
+        throw new Error('bodyParameter must be of type number.');
+      }
+      requestModel = bodyParameter;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -209,9 +249,9 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -220,12 +260,10 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -233,10 +271,10 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  * Test explicitly required integer. Please put a valid int-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
- * @param {object} bodyParameter 
- *
- * @param {number} [bodyParameter.value] 
- *
+ * @param {object} bodyParameter
+ * 
+ * @param {number} [bodyParameter.value]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -244,7 +282,16 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -257,10 +304,8 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
   }
   // Validate
   try {
-    if (bodyParameter) {
-      client._models['IntWrapper'].validate(bodyParameter);
-    }
-     else {  throw new Error('bodyParameter cannot be null or undefined.');
+    if (bodyParameter === null || bodyParameter === undefined) {
+      throw new Error('bodyParameter cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
@@ -289,7 +334,20 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter) {
+      requestModel = new client._models['IntWrapper'](bodyParameter);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -307,9 +365,9 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -318,35 +376,36 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional integer. Please put a valid int-wrapper with
  * 'value' = null.
- * @param {object} [bodyParameter] 
- *
- * @param {number} [bodyParameter.value] 
- *
+ * @param {object} [bodyParameter]
+ * 
+ * @param {number} [bodyParameter.value]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -354,7 +413,15 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -364,14 +431,6 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (bodyParameter) {
-      client._models['IntOptionalWrapper'].validate(bodyParameter);
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
@@ -397,7 +456,20 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter) {
+      requestModel = new client._models['IntOptionalWrapper'](bodyParameter);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -415,9 +487,9 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -426,20 +498,18 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly required integer. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
- * @param {number} headerParameter 
- *
+ * @param {number} headerParameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -447,7 +517,16 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -508,9 +587,9 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -519,33 +598,34 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional integer. Please put a header 'headerParameter' =>
  * null.
- * @param {number} [headerParameter] 
- *
+ * @param {number} [headerParameter]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -553,7 +633,15 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -614,9 +702,9 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -625,20 +713,18 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly required string. Please put null and the client library
  * should throw before the request is sent.
- * @param {string} bodyParameter 
- *
+ * @param {string} bodyParameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -646,7 +732,16 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredStringParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -689,7 +784,17 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter === null || bodyParameter === undefined || typeof bodyParameter.valueOf() !== 'string') {
+      throw new Error('bodyParameter cannot be null or undefined and it must be of type string.');
+    }
+    requestModel = bodyParameter;
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -707,9 +812,9 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -718,32 +823,33 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional string. Please put null.
- * @param {string} [bodyParameter] 
- *
+ * @param {string} [bodyParameter]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -751,7 +857,15 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalStringParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -794,7 +908,19 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      if (typeof bodyParameter.valueOf() !== 'string') {
+        throw new Error('bodyParameter must be of type string.');
+      }
+      requestModel = bodyParameter;
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -812,9 +938,9 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -823,12 +949,10 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -836,10 +960,10 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  * Test explicitly required string. Please put a valid string-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
- * @param {object} bodyParameter 
- *
- * @param {string} [bodyParameter.value] 
- *
+ * @param {object} bodyParameter
+ * 
+ * @param {string} [bodyParameter.value]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -847,7 +971,16 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -860,10 +993,8 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
   }
   // Validate
   try {
-    if (bodyParameter) {
-      client._models['StringWrapper'].validate(bodyParameter);
-    }
-     else {  throw new Error('bodyParameter cannot be null or undefined.');
+    if (bodyParameter === null || bodyParameter === undefined) {
+      throw new Error('bodyParameter cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
@@ -892,7 +1023,20 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter) {
+      requestModel = new client._models['StringWrapper'](bodyParameter);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -910,9 +1054,9 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -921,35 +1065,36 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional integer. Please put a valid string-wrapper with
  * 'value' = null.
- * @param {object} [bodyParameter] 
- *
- * @param {string} [bodyParameter.value] 
- *
+ * @param {object} [bodyParameter]
+ * 
+ * @param {string} [bodyParameter.value]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -957,7 +1102,15 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -967,14 +1120,6 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (bodyParameter) {
-      client._models['StringOptionalWrapper'].validate(bodyParameter);
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
@@ -1000,7 +1145,20 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter) {
+      requestModel = new client._models['StringOptionalWrapper'](bodyParameter);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1018,9 +1176,9 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1029,20 +1187,18 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly required string. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
- * @param {string} headerParameter 
- *
+ * @param {string} headerParameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1050,7 +1206,16 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredStringHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -1111,9 +1276,9 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1122,33 +1287,34 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional string. Please put a header 'headerParameter' =>
  * null.
- * @param {string} [bodyParameter] 
- *
+ * @param {string} [bodyParameter]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1156,7 +1322,15 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1217,9 +1391,9 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1228,24 +1402,22 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly required complex object. Please put null and the client
  * library should throw before the request is sent.
- * @param {object} bodyParameter 
- *
- * @param {number} [bodyParameter.id] 
- *
- * @param {string} [bodyParameter.name] 
- *
+ * @param {object} bodyParameter
+ * 
+ * @param {number} [bodyParameter.id]
+ * 
+ * @param {string} [bodyParameter.name]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1253,7 +1425,16 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1266,10 +1447,8 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
   }
   // Validate
   try {
-    if (bodyParameter) {
-      client._models['Product'].validate(bodyParameter);
-    }
-     else {  throw new Error('bodyParameter cannot be null or undefined.');
+    if (bodyParameter === null || bodyParameter === undefined) {
+      throw new Error('bodyParameter cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
@@ -1298,7 +1477,20 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter) {
+      requestModel = new client._models['Product'](bodyParameter);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1316,9 +1508,9 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1327,36 +1519,37 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional complex object. Please put null.
- * @param {object} [bodyParameter] 
- *
- * @param {number} [bodyParameter.id] 
- *
- * @param {string} [bodyParameter.name] 
- *
+ * @param {object} [bodyParameter]
+ * 
+ * @param {number} [bodyParameter.id]
+ * 
+ * @param {string} [bodyParameter.name]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1364,7 +1557,15 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1374,14 +1575,6 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (bodyParameter) {
-      client._models['Product'].validate(bodyParameter);
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
@@ -1407,7 +1600,20 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter) {
+      requestModel = new client._models['Product'](bodyParameter);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1425,9 +1631,9 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1436,12 +1642,10 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1449,14 +1653,14 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  * Test explicitly required complex object. Please put a valid class-wrapper
  * with 'value' = null and the client library should throw before the request
  * is sent.
- * @param {object} bodyParameter 
- *
- * @param {object} [bodyParameter.value] 
- *
- * @param {number} [bodyParameter.value.id] 
- *
- * @param {string} [bodyParameter.value.name] 
- *
+ * @param {object} bodyParameter
+ * 
+ * @param {object} [bodyParameter.value]
+ * 
+ * @param {number} [bodyParameter.value.id]
+ * 
+ * @param {string} [bodyParameter.value.name]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1464,7 +1668,16 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1477,10 +1690,8 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
   }
   // Validate
   try {
-    if (bodyParameter) {
-      client._models['ClassWrapper'].validate(bodyParameter);
-    }
-     else {  throw new Error('bodyParameter cannot be null or undefined.');
+    if (bodyParameter === null || bodyParameter === undefined) {
+      throw new Error('bodyParameter cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
@@ -1509,7 +1720,20 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter) {
+      requestModel = new client._models['ClassWrapper'](bodyParameter);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1527,9 +1751,9 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1538,39 +1762,40 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional complex object. Please put a valid class-wrapper
  * with 'value' = null.
- * @param {object} [bodyParameter] 
- *
- * @param {object} [bodyParameter.value] 
- *
- * @param {number} [bodyParameter.value.id] 
- *
- * @param {string} [bodyParameter.value.name] 
- *
+ * @param {object} [bodyParameter]
+ * 
+ * @param {object} [bodyParameter.value]
+ * 
+ * @param {number} [bodyParameter.value.id]
+ * 
+ * @param {string} [bodyParameter.value.name]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1578,7 +1803,15 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1588,14 +1821,6 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (bodyParameter) {
-      client._models['ClassOptionalWrapper'].validate(bodyParameter);
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
@@ -1621,7 +1846,20 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter) {
+      requestModel = new client._models['ClassOptionalWrapper'](bodyParameter);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1639,9 +1877,9 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1650,20 +1888,18 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly required array. Please put null and the client library
  * should throw before the request is sent.
- * @param {array} bodyParameter 
- *
+ * @param {array} bodyParameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1671,7 +1907,16 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1719,7 +1964,25 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (!util.isArray(bodyParameter)) {
+      throw new Error('bodyParameter cannot be null or undefined and it must be of type array.');
+    }
+    requestModel = [];
+    for (var i1 = 0; i1 < bodyParameter.length; i1++) {
+      if (bodyParameter[i1] !== null && bodyParameter[i1] !== undefined) {
+        if (typeof bodyParameter[i1].valueOf() !== 'string') {
+          throw new Error('bodyParameter[i1] must be of type string.');
+        }
+        requestModel[i1] = bodyParameter[i1];
+      }
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1737,9 +2000,9 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1748,32 +2011,33 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional array. Please put null.
- * @param {array} [bodyParameter] 
- *
+ * @param {array} [bodyParameter]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1781,7 +2045,15 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1828,7 +2100,24 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (util.isArray(bodyParameter)) {
+      requestModel = [];
+      for (var i1 = 0; i1 < bodyParameter.length; i1++) {
+        if (bodyParameter[i1] !== null && bodyParameter[i1] !== undefined) {
+          if (typeof bodyParameter[i1].valueOf() !== 'string') {
+            throw new Error('bodyParameter[i1] must be of type string.');
+          }
+          requestModel[i1] = bodyParameter[i1];
+        }
+      }
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1846,9 +2135,9 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1857,12 +2146,10 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1870,10 +2157,10 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  * Test explicitly required array. Please put a valid array-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
- * @param {object} bodyParameter 
- *
- * @param {array} [bodyParameter.value] 
- *
+ * @param {object} bodyParameter
+ * 
+ * @param {array} [bodyParameter.value]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1881,7 +2168,16 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -1894,10 +2190,8 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
   }
   // Validate
   try {
-    if (bodyParameter) {
-      client._models['ArrayWrapper'].validate(bodyParameter);
-    }
-     else {  throw new Error('bodyParameter cannot be null or undefined.');
+    if (bodyParameter === null || bodyParameter === undefined) {
+      throw new Error('bodyParameter cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
@@ -1926,7 +2220,20 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter) {
+      requestModel = new client._models['ArrayWrapper'](bodyParameter);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1944,9 +2251,9 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1955,35 +2262,36 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional array. Please put a valid array-wrapper with
  * 'value' = null.
- * @param {object} [bodyParameter] 
- *
- * @param {array} [bodyParameter.value] 
- *
+ * @param {object} [bodyParameter]
+ * 
+ * @param {array} [bodyParameter.value]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1991,7 +2299,15 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options, callback) {
   var client = this.client;
@@ -2001,14 +2317,6 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (bodyParameter) {
-      client._models['ArrayOptionalWrapper'].validate(bodyParameter);
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
@@ -2034,7 +2342,20 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(bodyParameter));
+  var requestModel = null;
+  try {
+    if (bodyParameter) {
+      requestModel = new client._models['ArrayOptionalWrapper'](bodyParameter);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -2052,9 +2373,9 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2063,20 +2384,18 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly required array. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
- * @param {array} headerParameter 
- *
+ * @param {array} headerParameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2084,7 +2403,16 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ErrorModel} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -2150,9 +2478,9 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2161,33 +2489,34 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-      var parsedResponse;
+    var parsedResponse = null;
     try {
       parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-      if (result.body !== null && result.body !== undefined) {
-        result.body = client._models['ErrorModel'].deserialize(result.body);
+      result = JSON.parse(responseBody);
+      if (parsedResponse) {
+        result = new client._models['ErrorModel'](parsedResponse);
+      }
+      if (parsedResponse !== null && parsedResponse !== undefined) {
+        result.deserialize(parsedResponse);
       }
     } catch (error) {
-  var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-  deserializationError.request = httpRequest;
-  deserializationError.response = response;
-  return callback(deserializationError);
-  }
+      var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+      deserializationError.request = httpRequest;
+      deserializationError.response = response;
+      return callback(deserializationError);
+    }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Test explicitly optional integer. Please put a header 'headerParameter' =>
  * null.
- * @param {array} [headerParameter] 
- *
+ * @param {array} [headerParameter]
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2195,7 +2524,15 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options, callback) {
   var client = this.client;
@@ -2260,9 +2597,9 @@ Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2271,12 +2608,10 @@ Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options,
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

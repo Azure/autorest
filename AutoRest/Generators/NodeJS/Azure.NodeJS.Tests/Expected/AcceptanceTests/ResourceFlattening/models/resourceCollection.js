@@ -18,8 +18,52 @@ var util = require('util');
  * @class
  * Initializes a new instance of the ResourceCollection class.
  * @constructor
+ * @member {object} [productresource]
+ * 
+ * @member {string} [productresource.pname]
+ * 
+ * @member {string} [productresource.flattenedProductType]
+ * 
+ * @member {string} [productresource.provisioningStateValues] Possible values
+ * for this property include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
+ * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
+ * 
+ * @member {string} [productresource.provisioningState]
+ * 
+ * @member {array} [arrayofresources]
+ * 
+ * @member {object} [dictionaryofresources]
+ * 
  */
-function ResourceCollection() { }
+function ResourceCollection(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.productresource) {
+      this.productresource = new models['FlattenedProduct'](parameters.productresource);
+    }
+    if (parameters.arrayofresources) {
+      var tempParametersarrayofresources = [];
+      parameters.arrayofresources.forEach(function(element) {
+        if (element) {
+          element = new models['FlattenedProduct'](element);
+        }
+        tempParametersarrayofresources.push(element);
+      });
+      this.arrayofresources = tempParametersarrayofresources;
+    }
+    if (parameters.dictionaryofresources) {
+      this.dictionaryofresources = {};
+      for(var valueElement in parameters.dictionaryofresources) {
+        if (parameters.dictionaryofresources[valueElement]) {
+          this.dictionaryofresources[valueElement] = new models['FlattenedProduct'](parameters.dictionaryofresources[valueElement]);
+        }
+        else {
+          this.dictionaryofresources[valueElement] = parameters.dictionaryofresources[valueElement];
+        }
+      }
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the ResourceCollection schema
@@ -27,29 +71,40 @@ function ResourceCollection() { }
  * @param {JSON} payload
  *
  */
-ResourceCollection.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('ResourceCollection cannot be null.');
-  }
-  if (payload['productresource']) {
-    models['FlattenedProduct'].validate(payload['productresource']);
+ResourceCollection.prototype.serialize = function () {
+  var payload = {};
+  if (this['productresource']) {
+    payload['productresource'] = this['productresource'].serialize();
   }
 
-  if (util.isArray(payload['arrayofresources'])) {
-    for (var i = 0; i < payload['arrayofresources'].length; i++) {
-      if (payload['arrayofresources'][i]) {
-        models['FlattenedProduct'].validate(payload['arrayofresources'][i]);
+  if (util.isArray(this['arrayofresources'])) {
+    payload['arrayofresources'] = [];
+    for (var i = 0; i < this['arrayofresources'].length; i++) {
+      if (this['arrayofresources'][i]) {
+        if (payload['arrayofresources'] === null || payload['arrayofresources'] === undefined) {
+          payload['arrayofresources'] = {};
+        }
+        payload['arrayofresources'][i] = this['arrayofresources'][i].serialize();
       }
     }
   }
 
-  if (payload['dictionaryofresources'] && typeof payload['dictionaryofresources'] === 'object') {
-    for(var valueElement in payload['dictionaryofresources']) {
-      if (payload['dictionaryofresources'][valueElement]) {
-        models['FlattenedProduct'].validate(payload['dictionaryofresources'][valueElement]);
+  if (this['dictionaryofresources'] && typeof this['dictionaryofresources'] === 'object') {
+    payload['dictionaryofresources'] = {};
+    for(var valueElement1 in this['dictionaryofresources']) {
+      if (this['dictionaryofresources'][valueElement1]) {
+        if (payload['dictionaryofresources'] === null || payload['dictionaryofresources'] === undefined) {
+          payload['dictionaryofresources'] = {};
+        }
+        payload['dictionaryofresources'][valueElement1] = this['dictionaryofresources'][valueElement1].serialize();
+      }
+      else {
+        payload['dictionaryofresources'][valueElement1] = this['dictionaryofresources'][valueElement1];
       }
     }
   }
+
+  return payload;
 };
 
 /**
@@ -60,30 +115,40 @@ ResourceCollection.prototype.validate = function (payload) {
  */
 ResourceCollection.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.productresource !== null && instance.productresource !== undefined) {
-      instance.productresource = models['FlattenedProduct'].deserialize(instance.productresource);
+    if (instance['productresource']) {
+      this['productresource'] = new models['FlattenedProduct']().deserialize(instance['productresource']);
     }
 
-    if (instance.arrayofresources !== null && instance.arrayofresources !== undefined) {
-      var deserializedArray = [];
-      instance.arrayofresources.forEach(function(element) {
-        if (element !== null && element !== undefined) {
-          element = models['FlattenedProduct'].deserialize(element);
+    if (instance['arrayofresources']) {
+      var tempInstancearrayofresources = [];
+      instance['arrayofresources'].forEach(function(element1) {
+        if (element1) {
+          element1 = new models['FlattenedProduct']().deserialize(element1);
         }
-        deserializedArray.push(element);
+        tempInstancearrayofresources.push(element1);
       });
-      instance.arrayofresources = deserializedArray;
+      this['arrayofresources'] = tempInstancearrayofresources;
     }
 
-    if (instance.dictionaryofresources !== null && instance.dictionaryofresources !== undefined) {
-      for(var valueElement1 in instance.dictionaryofresources) {
-        if (instance.dictionaryofresources[valueElement1] !== null && instance.dictionaryofresources[valueElement1] !== undefined) {
-          instance.dictionaryofresources[valueElement1] = models['FlattenedProduct'].deserialize(instance.dictionaryofresources[valueElement1]);
+    if (instance['dictionaryofresources']) {
+      this['dictionaryofresources'] = {};
+      for(var valueElement2 in instance['dictionaryofresources']) {
+        if (instance['dictionaryofresources'] !== null && instance['dictionaryofresources'] !== undefined) {
+          if (instance['dictionaryofresources'][valueElement2]) {
+            this['dictionaryofresources'][valueElement2] = new models['FlattenedProduct']().deserialize(instance['dictionaryofresources'][valueElement2]);
+          }
+          else {
+            this['dictionaryofresources'][valueElement2] = instance['dictionaryofresources'][valueElement2];
+          }
+        }
+        else {
+          this['dictionaryofresources'][valueElement2] = instance['dictionaryofresources'][valueElement2];
         }
       }
     }
   }
-  return instance;
+
+  return this;
 };
 
-module.exports = new ResourceCollection();
+module.exports = ResourceCollection;

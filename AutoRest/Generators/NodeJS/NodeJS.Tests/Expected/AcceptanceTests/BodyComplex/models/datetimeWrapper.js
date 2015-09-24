@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the DatetimeWrapper class.
  * @constructor
+ * @member {date} [field]
+ * 
+ * @member {date} [now]
+ * 
  */
-function DatetimeWrapper() { }
+function DatetimeWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.field !== null && parameters.field !== undefined) {
+      this.field = parameters.field;
+    }
+    if (parameters.now !== null && parameters.now !== undefined) {
+      this.now = parameters.now;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the DatetimeWrapper schema
@@ -23,19 +37,23 @@ function DatetimeWrapper() { }
  * @param {JSON} payload
  *
  */
-DatetimeWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('DatetimeWrapper cannot be null.');
-  }
-  if (payload['field'] && !(payload['field'] instanceof Date || 
-      (typeof payload['field'].valueOf() === 'string' && !isNaN(Date.parse(payload['field']))))) {
-    throw new Error('payload[\'field\'] must be of type date.');
+DatetimeWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['field']) {
+    if (!(this['field'] instanceof Date || typeof this['field'].valueOf() === 'string' && !isNaN(Date.parse(this['field'])))) {
+      throw new Error('this[\'field\'] must be of type date.');
+    }
+    payload['field'] = (this['field'] instanceof Date) ? this['field'].toISOString() : this['field'];
   }
 
-  if (payload['now'] && !(payload['now'] instanceof Date || 
-      (typeof payload['now'].valueOf() === 'string' && !isNaN(Date.parse(payload['now']))))) {
-    throw new Error('payload[\'now\'] must be of type date.');
+  if (this['now']) {
+    if (!(this['now'] instanceof Date || typeof this['now'].valueOf() === 'string' && !isNaN(Date.parse(this['now'])))) {
+      throw new Error('this[\'now\'] must be of type date.');
+    }
+    payload['now'] = (this['now'] instanceof Date) ? this['now'].toISOString() : this['now'];
   }
+
+  return payload;
 };
 
 /**
@@ -46,15 +64,16 @@ DatetimeWrapper.prototype.validate = function (payload) {
  */
 DatetimeWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.field !== null && instance.field !== undefined) {
-      instance.field = new Date(instance.field);
+    if (instance['field'] !== null && instance['field'] !== undefined) {
+      this['field'] = new Date(instance['field']);
     }
 
-    if (instance.now !== null && instance.now !== undefined) {
-      instance.now = new Date(instance.now);
+    if (instance['now'] !== null && instance['now'] !== undefined) {
+      this['now'] = new Date(instance['now']);
     }
   }
-  return instance;
+
+  return this;
 };
 
-module.exports = new DatetimeWrapper();
+module.exports = DatetimeWrapper;

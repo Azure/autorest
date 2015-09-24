@@ -31,22 +31,18 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             return base.HasQueryParameters() || !IsAbsoluteUrl;
         }
 
-        /// <summary>
-        /// Gets the expression for response body initialization 
-        /// </summary>
-        public override string InitializeResponseBody
+
+        public override string InitializeResult
         {
             get
             {
-                //result.requestId = result.httpRequest.headers['x-ms-request-id'];
                 var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
                     this.ReturnType != null)
                 {
-                    sb.AppendLine("result.body = (statusCode === 204);");
+                    sb.AppendLine("result = (statusCode === 204);");
                 }
-                sb.AppendLine("result.requestId = response.headers['x-ms-request-id'];")
-                    .AppendLine(base.InitializeResponseBody);
+
                 return sb.ToString();
             }
         }
@@ -62,6 +58,26 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 sb.AppendLine("httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();")
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
+            }
+        }
+
+        public string LongRunningOperationMethodNameInRuntime
+        {
+            get
+            {
+                string result = null;
+                if (this.IsLongRunningOperation)
+                {
+                    if (HttpMethod == HttpMethod.Post || HttpMethod == HttpMethod.Delete)
+                    {
+                        result = "getPostOrDeleteOperationResult";
+                    }
+                    else if (HttpMethod == HttpMethod.Put || HttpMethod == HttpMethod.Patch)
+                    {
+                        result = "getPutOrPatchOperationResult";
+                    }
+                }
+                return result;
             }
         }
     }
