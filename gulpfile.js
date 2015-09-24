@@ -69,6 +69,7 @@ var rubyMappings = {
   'dictionary':['../../../TestServer/swagger/body-dictionary.json','DictionaryModule'],
   'date':['../../../TestServer/swagger/body-date.json','DateModule'],
   'datetime':['../../../TestServer/swagger/body-datetime.json','DatetimeModule'],
+  'duration':['../../../TestServer/swagger/body-duration.json','DurationModule'],
   'complex':['../../../TestServer/swagger/body-complex.json','ComplexModule'],
   'url':['../../../TestServer/swagger/url.json','UrlModule'],
   'url_items':['../../../TestServer/swagger/url.json','UrlModule'],

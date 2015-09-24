@@ -195,7 +195,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary == PrimaryType.String)
+            else if (primary == PrimaryType.String || primary == PrimaryType.TimeSpan) //TODO: For now, TimeSpan is a string
             {
                 if (isRequired)
                 {
