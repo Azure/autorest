@@ -358,6 +358,7 @@ var coverage = {
   "HeaderParameterDateTimeValid": 0,
   "HeaderParameterDateTimeMin": 0,
   "HeaderParameterBytesValid": 0,
+  "HeaderParameterDurationValid": 0,
   "HeaderResponseIntegerPositive": 0,
   "HeaderResponseIntegerNegative": 0,
   "HeaderResponseLongPositive": 0,
@@ -379,7 +380,8 @@ var coverage = {
   "HeaderResponseDateMin": 0,
   "HeaderResponseDateTimeValid": 0,
   "HeaderResponseDateTimeMin": 0,
-  "HeaderResponseBytesValid": 0
+  "HeaderResponseBytesValid": 0,
+  "HeaderResponseDurationValid": 0
 };
 
 // view engine setup

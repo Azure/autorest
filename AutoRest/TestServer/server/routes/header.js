@@ -193,6 +193,15 @@ var header = function (coverage, optionalCoverage) {
           }
         }
         utils.send400(res, next, "Did not like datetime scenario \"" + scenario + "\" with value " + value);
+      case "duration":
+        if (scenario === "valid") {
+          if (value === "P123DT22H14M12.011S") {
+            coverage['HeaderParameterDurationValid']++;
+            res.status(200).end();
+            break;
+          }
+        }
+        utils.send400(res, next, "Did not like duration scenario \"" + scenario + "\" with value " + value);
       case "byte":
         var bytes = new Buffer(constants.MULTIBYTE_BUFFER);
         if (scenario === "valid") {
@@ -315,6 +324,13 @@ var header = function (coverage, optionalCoverage) {
           break;
         }
         utils.send400(res, next, "Did not like datetime scenario \"" + scenario + "\" with value " + value);
+      case "duration":
+        if (scenario === "valid") {
+          coverage['HeaderResponseDurationValid']++;
+          res.status(200).set('value', "P123DT22H14M12.011S").end();
+          break;
+        }
+        utils.send400(res, next, "Did not like duration scenario \"" + scenario + "\" with value " + value);
       case "byte":
         var bytes = new Buffer(constants.MULTIBYTE_BUFFER);
         if (scenario === "valid") {

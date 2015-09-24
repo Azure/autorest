@@ -21,6 +21,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
+import java.time.Period;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.Error;
 import com.microsoft.rest.serializer.JacksonHelper;
@@ -1048,7 +1049,120 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
+     * Send a post request with header values "scenario": "valid", "value":
+     * "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void paramDuration(String scenario, Period value) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        if (value == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter value is required and cannot be null."));
+        }
+        try {
+            ServiceResponse<Void> response = paramDurationDelegate(service.paramDuration(scenario, value), null);
+            response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Void> response = paramDurationDelegate(error.getResponse(), error);
+            response.getBody();
+        }
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value":
+     * "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
+        if (value == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter value is required and cannot be null.")));
+        }
+        service.paramDurationAsync(scenario, value, new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(paramDurationDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> paramDurationDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
+    /**
+     * Get a response with header values "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void responseDuration(String scenario) throws ServiceException {
+        if (scenario == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+        }
+        try {
+            ServiceResponse<Void> response = responseDurationDelegate(service.responseDuration(scenario), null);
+            response.getBody();
+        } catch (RetrofitError error) {
+            ServiceResponse<Void> response = responseDurationDelegate(error.getResponse(), error);
+            response.getBody();
+        }
+    }
+
+    /**
+     * Get a response with header values "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public void responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        if (scenario == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+        }
+        service.responseDurationAsync(scenario, new ServiceResponseCallback() {
+            @Override
+            public void response(Response response, RetrofitError error) {
+                try {
+                    serviceCallback.success(responseDurationDelegate(response, error));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+    }
+
+    private ServiceResponse<Void> responseDurationDelegate(Response response, RetrofitError error) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, error);
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value":
+     * "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
