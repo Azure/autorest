@@ -34,6 +34,7 @@ function Group(client) {
 
 /**
  * Provides a resouce group with name 'testgroup101' and location 'West US'.
+ *
  * @param {string} resourceGroupName Resource Group name 'testgroup101'.
  * 
  * @param {object} [options]
@@ -82,7 +83,7 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));

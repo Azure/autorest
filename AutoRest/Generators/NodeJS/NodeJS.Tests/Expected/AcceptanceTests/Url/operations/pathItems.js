@@ -37,6 +37,7 @@ function PathItems(client) {
  * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
  * pathItemStringQuery='pathItemStringQuery',
  * localStringQuery='localStringQuery'
+ *
  * @param {string} localStringPath should contain value 'localStringPath'
  * 
  * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
@@ -98,7 +99,7 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
@@ -175,6 +176,7 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
  * localStringPath='localStringPath', globalStringQuery=null,
  * pathItemStringQuery='pathItemStringQuery',
  * localStringQuery='localStringQuery'
+ *
  * @param {string} localStringPath should contain value 'localStringPath'
  * 
  * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
@@ -236,7 +238,7 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
@@ -312,6 +314,7 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
  * pathItemStringPath='pathItemStringPath',
  * localStringPath='localStringPath', globalStringQuery=null,
  * pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+ *
  * @param {string} localStringPath should contain value 'localStringPath'
  * 
  * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
@@ -373,7 +376,7 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
@@ -449,6 +452,7 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
  * pathItemStringPath='pathItemStringPath',
  * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
  * pathItemStringQuery=null, localStringQuery=null
+ *
  * @param {string} localStringPath should contain value 'localStringPath'
  * 
  * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
@@ -509,7 +513,7 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));

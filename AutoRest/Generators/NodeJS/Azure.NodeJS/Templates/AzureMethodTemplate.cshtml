@@ -1,4 +1,5 @@
-﻿@using Microsoft.Rest.Generator.NodeJS
+@using System
+@using Microsoft.Rest.Generator.NodeJS
 @using Microsoft.Rest.Generator.NodeJS.Templates
 @using Microsoft.Rest.Generator.NodeJS.TemplateModels
 @using Microsoft.Rest.Generator.Azure.NodeJS
@@ -12,12 +13,21 @@
 {
 @:@(Include( new MethodTemplate(), Model as MethodTemplateModel))
 }
-else 
+else
 {
     <text>
 /**
  *
-@WrapComment(" * ", Model.Documentation)
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+ @WrapComment(" * ", "@summary " + Model.Summary)@:
+@: *
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+ @WrapComment(" * ", Model.Description)@:
+@: *
+}
 @foreach (var parameter in Model.DocumentationParameters)
 {
  @MethodTemplateModel.ConstructParameterDocumentation(
@@ -37,7 +47,7 @@ else
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
-@WrapComment(" *                      ", Model.ReturnTypeInfo) 
+@WrapComment(" *                      ", Model.ReturnTypeInfo)
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *

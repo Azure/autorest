@@ -33,6 +33,7 @@ function ArrayModel(client) {
 
 /**
  * Get complex types with array property
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,7 +63,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/array/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -138,6 +139,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types with array property
+ *
  * @param {object} complexBody Please put an array with 4 items: "1, 2, 3, 4",
  * "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
  * 
@@ -179,7 +181,7 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/array/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -252,6 +254,7 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
 
 /**
  * Get complex types with array property which is empty
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -281,7 +284,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/array/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -357,6 +360,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
 
 /**
  * Put complex types with array property which is empty
+ *
  * @param {object} complexBody Please put an empty array
  * 
  * @param {array} [complexBody.array]
@@ -397,7 +401,7 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/array/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -471,6 +475,7 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
 /**
  * Get complex types with array property while server doesn't provide a
  * response payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -500,7 +505,7 @@ ArrayModel.prototype.getNotProvided = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/array/notprovided';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

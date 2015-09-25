@@ -33,6 +33,7 @@ function Polymorphism(client) {
 
 /**
  * Get complex types that are polymorphic
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,7 +63,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/polymorphism/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -138,6 +139,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types that are polymorphic
+ *
  * @param {object} complexBody Please put a salmon that looks like this:
  * {
  * 'dtype':'Salmon',
@@ -209,7 +211,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/polymorphism/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -283,6 +285,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
 /**
  * Put complex types that are polymorphic, attempting to omit required
  * 'birthday' field - the request should not be allowed from the client
+ *
  * @param {object} complexBody Please attempt put a sawshark that looks like
  * this, the client should not allow this data to be sent:
  * {
@@ -355,7 +358,7 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/polymorphism/missingrequired/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

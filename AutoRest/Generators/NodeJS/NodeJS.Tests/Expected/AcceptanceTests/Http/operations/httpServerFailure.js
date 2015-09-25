@@ -33,6 +33,7 @@ function HttpServerFailure(client) {
 
 /**
  * Return 501 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,7 +63,7 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/server/501';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -135,6 +136,7 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
 
 /**
  * Return 501 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -164,7 +166,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/server/501';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -237,6 +239,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
 
 /**
  * Return 505 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -276,7 +279,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/server/505';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -364,6 +367,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
 
 /**
  * Return 505 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -403,7 +407,7 @@ HttpServerFailure.prototype.delete505 = function (booleanValue, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/server/505';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

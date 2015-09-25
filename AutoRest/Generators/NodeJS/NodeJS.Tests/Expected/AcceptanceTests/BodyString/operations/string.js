@@ -33,6 +33,7 @@ function String(client) {
 
 /**
  * Get null string value value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ String.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -131,6 +132,7 @@ String.prototype.getNull = function (options, callback) {
 
 /**
  * Set string value null
+ *
  * @param {string} [stringBody] Possible values for this parameter include: ''
  * 
  * @param {object} [options]
@@ -169,7 +171,7 @@ String.prototype.putNull = function (stringBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -241,6 +243,7 @@ String.prototype.putNull = function (stringBody, options, callback) {
 
 /**
  * Get empty string value value ''
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -269,7 +272,7 @@ String.prototype.getEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -339,6 +342,7 @@ String.prototype.getEmpty = function (options, callback) {
 
 /**
  * Set string value empty ''
+ *
  * @param {string} stringBody Possible values for this parameter include: ''
  * 
  * @param {object} [options]
@@ -377,7 +381,7 @@ String.prototype.putEmpty = function (stringBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -448,6 +452,7 @@ String.prototype.putEmpty = function (stringBody, options, callback) {
 /**
  * Get mbcs string value
  * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -476,7 +481,7 @@ String.prototype.getMbcs = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/mbcs';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -547,6 +552,7 @@ String.prototype.getMbcs = function (options, callback) {
 /**
  * Set string value mbcs
  * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+ *
  * @param {string} stringBody Possible values for this parameter include:
  * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
  * 
@@ -586,7 +592,7 @@ String.prototype.putMbcs = function (stringBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/mbcs';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -658,6 +664,7 @@ String.prototype.putMbcs = function (stringBody, options, callback) {
  * Get string value with leading and trailing whitespace
  * '<tab><space><space>Now is the time for all good men to come to the aid of
  * their country<tab><space><space>'
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -686,7 +693,7 @@ String.prototype.getWhitespace = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/whitespace';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -758,6 +765,7 @@ String.prototype.getWhitespace = function (options, callback) {
  * Set String value with leading and trailing whitespace
  * '<tab><space><space>Now is the time for all good men to come to the aid of
  * their country<tab><space><space>'
+ *
  * @param {string} stringBody Possible values for this parameter include: '
  * Now is the time for all good men to come to the aid of their country
  * '
@@ -798,7 +806,7 @@ String.prototype.putWhitespace = function (stringBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/whitespace';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -868,6 +876,7 @@ String.prototype.putWhitespace = function (stringBody, options, callback) {
 
 /**
  * Get String value when no string value is sent in response payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -896,7 +905,7 @@ String.prototype.getNotProvided = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/notProvided';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

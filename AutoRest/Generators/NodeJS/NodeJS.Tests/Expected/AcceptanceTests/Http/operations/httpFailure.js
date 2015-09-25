@@ -33,6 +33,7 @@ function HttpFailure(client) {
 
 /**
  * Get empty error form server
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ HttpFailure.prototype.getEmptyError = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/emptybody/error';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

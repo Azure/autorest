@@ -34,6 +34,7 @@ function ApiVersionDefault(client) {
 
 /**
  * GET method with api-version modeled in global settings.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -73,7 +74,7 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
@@ -139,6 +140,7 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
 
 /**
  * GET method with api-version modeled in global settings.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -178,7 +180,7 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
@@ -244,6 +246,7 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
 
 /**
  * GET method with api-version modeled in global settings.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -283,7 +286,7 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
@@ -349,6 +352,7 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
 
 /**
  * GET method with api-version modeled in global settings.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -388,7 +392,7 @@ ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));

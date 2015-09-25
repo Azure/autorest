@@ -1,4 +1,5 @@
-﻿@using System.Linq;
+@using System
+@using System.Linq;
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator.NodeJS
@@ -7,11 +8,20 @@
 @inherits Microsoft.Rest.Generator.Template<MethodTemplateModel>
 
 /**
-@WrapComment(" * ", Model.Documentation)
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+  @WrapComment(" * ", "@summary " + Model.Summary)@:
+@: *
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+  @WrapComment(" * ", Model.Description)@:
+@: *
+}
 @foreach (var parameter in Model.DocumentationParameters)
 {
  @MethodTemplateModel.ConstructParameterDocumentation(
-                      WrapComment(" * ", "@param {" 
+                      WrapComment(" * ", "@param {"
                                         + MethodTemplateModel.GetParameterDocumentationType(parameter)
                                         + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
@@ -65,7 +75,7 @@
   }
   else
   {
-  @:var requestUrl = @(Model.ClientReference).baseUri + 
+  @:var requestUrl = @(Model.ClientReference).baseUri +
   @:                 '/@(Model.Url)';
   }
   @(Model.BuildUrl("requestUrl"))
@@ -121,7 +131,7 @@
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
   }
-  
+
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   </text>

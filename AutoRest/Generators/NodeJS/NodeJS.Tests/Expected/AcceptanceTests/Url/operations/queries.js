@@ -33,6 +33,7 @@ function Queries(client) {
 
 /**
  * Get true Boolean value on path
+ *
  * @param {boolean} [boolQuery] true boolean value
  * 
  * @param {object} [options]
@@ -71,7 +72,7 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/bool/true';
   var queryParameters = [];
   if (boolQuery !== null && boolQuery !== undefined) {
@@ -135,6 +136,7 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
 
 /**
  * Get false Boolean value on path
+ *
  * @param {boolean} [boolQuery] false boolean value
  * 
  * @param {object} [options]
@@ -173,7 +175,7 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/bool/false';
   var queryParameters = [];
   if (boolQuery !== null && boolQuery !== undefined) {
@@ -237,6 +239,7 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
 
 /**
  * Get null Boolean value on query (query string should be absent)
+ *
  * @param {boolean} [boolQuery] null boolean value
  * 
  * @param {object} [options]
@@ -275,7 +278,7 @@ Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/bool/null';
   var queryParameters = [];
   if (boolQuery !== null && boolQuery !== undefined) {
@@ -339,6 +342,7 @@ Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
 
 /**
  * Get '1000000' integer value
+ *
  * @param {number} [intQuery] '1000000' integer value
  * 
  * @param {object} [options]
@@ -377,7 +381,7 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/int/1000000';
   var queryParameters = [];
   if (intQuery !== null && intQuery !== undefined) {
@@ -441,6 +445,7 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
 
 /**
  * Get '-1000000' integer value
+ *
  * @param {number} [intQuery] '-1000000' integer value
  * 
  * @param {object} [options]
@@ -479,7 +484,7 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/int/-1000000';
   var queryParameters = [];
   if (intQuery !== null && intQuery !== undefined) {
@@ -543,6 +548,7 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
 
 /**
  * Get null integer value (no query parameter)
+ *
  * @param {number} [intQuery] null integer value
  * 
  * @param {object} [options]
@@ -581,7 +587,7 @@ Queries.prototype.getIntNull = function (intQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/int/null';
   var queryParameters = [];
   if (intQuery !== null && intQuery !== undefined) {
@@ -645,6 +651,7 @@ Queries.prototype.getIntNull = function (intQuery, options, callback) {
 
 /**
  * Get '10000000000' 64 bit integer value
+ *
  * @param {number} [longQuery] '10000000000' 64 bit integer value
  * 
  * @param {object} [options]
@@ -683,7 +690,7 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/long/10000000000';
   var queryParameters = [];
   if (longQuery !== null && longQuery !== undefined) {
@@ -747,6 +754,7 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
 
 /**
  * Get '-10000000000' 64 bit integer value
+ *
  * @param {number} [longQuery] '-10000000000' 64 bit integer value
  * 
  * @param {object} [options]
@@ -785,7 +793,7 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/long/-10000000000';
   var queryParameters = [];
   if (longQuery !== null && longQuery !== undefined) {
@@ -849,6 +857,7 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
 
 /**
  * Get 'null 64 bit integer value (no query param in uri)
+ *
  * @param {number} [longQuery] null 64 bit integer value
  * 
  * @param {object} [options]
@@ -887,7 +896,7 @@ Queries.prototype.getLongNull = function (longQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/long/null';
   var queryParameters = [];
   if (longQuery !== null && longQuery !== undefined) {
@@ -951,6 +960,7 @@ Queries.prototype.getLongNull = function (longQuery, options, callback) {
 
 /**
  * Get '1.034E+20' numeric value
+ *
  * @param {number} [floatQuery] '1.034E+20'numeric value
  * 
  * @param {object} [options]
@@ -989,7 +999,7 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/float/1.034E+20';
   var queryParameters = [];
   if (floatQuery !== null && floatQuery !== undefined) {
@@ -1053,6 +1063,7 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
 
 /**
  * Get '-1.034E-20' numeric value
+ *
  * @param {number} [floatQuery] '-1.034E-20'numeric value
  * 
  * @param {object} [options]
@@ -1091,7 +1102,7 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/float/-1.034E-20';
   var queryParameters = [];
   if (floatQuery !== null && floatQuery !== undefined) {
@@ -1155,6 +1166,7 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
 
 /**
  * Get null numeric value (no query parameter)
+ *
  * @param {number} [floatQuery] null numeric value
  * 
  * @param {object} [options]
@@ -1193,7 +1205,7 @@ Queries.prototype.floatNull = function (floatQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/float/null';
   var queryParameters = [];
   if (floatQuery !== null && floatQuery !== undefined) {
@@ -1257,6 +1269,7 @@ Queries.prototype.floatNull = function (floatQuery, options, callback) {
 
 /**
  * Get '9999999.999' numeric value
+ *
  * @param {number} [doubleQuery] '9999999.999'numeric value
  * 
  * @param {object} [options]
@@ -1295,7 +1308,7 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/double/9999999.999';
   var queryParameters = [];
   if (doubleQuery !== null && doubleQuery !== undefined) {
@@ -1359,6 +1372,7 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
 
 /**
  * Get '-9999999.999' numeric value
+ *
  * @param {number} [doubleQuery] '-9999999.999'numeric value
  * 
  * @param {object} [options]
@@ -1397,7 +1411,7 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/double/-9999999.999';
   var queryParameters = [];
   if (doubleQuery !== null && doubleQuery !== undefined) {
@@ -1461,6 +1475,7 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
 
 /**
  * Get null numeric value (no query parameter)
+ *
  * @param {number} [doubleQuery] null numeric value
  * 
  * @param {object} [options]
@@ -1499,7 +1514,7 @@ Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/double/null';
   var queryParameters = [];
   if (doubleQuery !== null && doubleQuery !== undefined) {
@@ -1563,6 +1578,7 @@ Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
 
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+ *
  * @param {string} [stringQuery] '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
  * values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
  * 
@@ -1602,7 +1618,7 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/string/unicode/';
   var queryParameters = [];
   if (stringQuery !== null && stringQuery !== undefined) {
@@ -1666,6 +1682,7 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
 
 /**
  * Get 'begin!*'();:@ &=+$,/?#[]end
+ *
  * @param {string} [stringQuery] 'begin!*'();:@ &=+$,/?#[]end' url encoded
  * string value. Possible values for this parameter include: 'begin!*'();:@
  * &=+$,/?#[]end'
@@ -1706,7 +1723,7 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend';
   var queryParameters = [];
   if (stringQuery !== null && stringQuery !== undefined) {
@@ -1770,6 +1787,7 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
 
 /**
  * Get ''
+ *
  * @param {string} [stringQuery] '' string value. Possible values for this
  * parameter include: ''
  * 
@@ -1809,7 +1827,7 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/string/empty';
   var queryParameters = [];
   if (stringQuery !== null && stringQuery !== undefined) {
@@ -1873,6 +1891,7 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
 
 /**
  * Get null (no query parameter in url)
+ *
  * @param {string} [stringQuery] null string value
  * 
  * @param {object} [options]
@@ -1911,7 +1930,7 @@ Queries.prototype.stringNull = function (stringQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/string/null';
   var queryParameters = [];
   if (stringQuery !== null && stringQuery !== undefined) {
@@ -1975,6 +1994,7 @@ Queries.prototype.stringNull = function (stringQuery, options, callback) {
 
 /**
  * Get using uri with query parameter 'green color'
+ *
  * @param {string} [enumQuery] 'green color' enum value. Possible values for
  * this parameter include: 'red color', 'green color', 'blue color'
  * 
@@ -2017,7 +2037,7 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/enum/green%20color';
   var queryParameters = [];
   if (enumQuery !== null && enumQuery !== undefined) {
@@ -2081,6 +2101,7 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
 
 /**
  * Get null (no query parameter in url)
+ *
  * @param {string} [enumQuery] null string value. Possible values for this
  * parameter include: 'red color', 'green color', 'blue color'
  * 
@@ -2123,7 +2144,7 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/enum/null';
   var queryParameters = [];
   if (enumQuery !== null && enumQuery !== undefined) {
@@ -2187,6 +2208,7 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
 
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+ *
  * @param {buffer} [byteQuery] '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded
  * byte array
  * 
@@ -2226,7 +2248,7 @@ Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/byte/multibyte';
   var queryParameters = [];
   if (byteQuery !== null && byteQuery !== undefined) {
@@ -2290,6 +2312,7 @@ Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
 
 /**
  * Get '' as byte array
+ *
  * @param {buffer} [byteQuery] '' as byte array
  * 
  * @param {object} [options]
@@ -2328,7 +2351,7 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/byte/empty';
   var queryParameters = [];
   if (byteQuery !== null && byteQuery !== undefined) {
@@ -2392,6 +2415,7 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
 
 /**
  * Get null as byte array (no query parameters in uri)
+ *
  * @param {buffer} [byteQuery] null as byte array (no query parameters in uri)
  * 
  * @param {object} [options]
@@ -2430,7 +2454,7 @@ Queries.prototype.byteNull = function (byteQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/byte/null';
   var queryParameters = [];
   if (byteQuery !== null && byteQuery !== undefined) {
@@ -2494,6 +2518,7 @@ Queries.prototype.byteNull = function (byteQuery, options, callback) {
 
 /**
  * Get '2012-01-01' as date
+ *
  * @param {date} [dateQuery] '2012-01-01' as date
  * 
  * @param {object} [options]
@@ -2533,7 +2558,7 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/date/2012-01-01';
   var queryParameters = [];
   if (dateQuery !== null && dateQuery !== undefined) {
@@ -2597,6 +2622,7 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
 
 /**
  * Get null as date - this should result in no query parameters in uri
+ *
  * @param {date} [dateQuery] null as date (no query parameters in uri)
  * 
  * @param {object} [options]
@@ -2636,7 +2662,7 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/date/null';
   var queryParameters = [];
   if (dateQuery !== null && dateQuery !== undefined) {
@@ -2700,6 +2726,7 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
 
 /**
  * Get '2012-01-01T01:01:01Z' as date-time
+ *
  * @param {date} [dateTimeQuery] '2012-01-01T01:01:01Z' as date-time
  * 
  * @param {object} [options]
@@ -2739,7 +2766,7 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/datetime/2012-01-01T01%3A01%3A01Z';
   var queryParameters = [];
   if (dateTimeQuery !== null && dateTimeQuery !== undefined) {
@@ -2803,6 +2830,7 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
 
 /**
  * Get null as date-time, should result in no query parameters in uri
+ *
  * @param {date} [dateTimeQuery] null as date-time (no query parameters)
  * 
  * @param {object} [options]
@@ -2842,7 +2870,7 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/datetime/null';
   var queryParameters = [];
   if (dateTimeQuery !== null && dateTimeQuery !== undefined) {
@@ -2907,6 +2935,7 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
 /**
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the csv-array format
+ *
  * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
  * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
  * 
@@ -2950,7 +2979,7 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/csv/string/valid';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -3014,6 +3043,7 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback)
 
 /**
  * Get a null array of string using the csv-array format
+ *
  * @param {array} [arrayQuery] a null array of string using the csv-array
  * format
  * 
@@ -3057,7 +3087,7 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/csv/string/null';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -3121,6 +3151,7 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) 
 
 /**
  * Get an empty array [] of string using the csv-array format
+ *
  * @param {array} [arrayQuery] an empty array [] of string using the csv-array
  * format
  * 
@@ -3164,7 +3195,7 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/csv/string/empty';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -3229,6 +3260,7 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback)
 /**
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the ssv-array format
+ *
  * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
  * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format
  * 
@@ -3272,7 +3304,7 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/ssv/string/valid';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -3337,6 +3369,7 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback)
 /**
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the tsv-array format
+ *
  * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
  * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format
  * 
@@ -3380,7 +3413,7 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/tsv/string/valid';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -3445,6 +3478,7 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback)
 /**
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the pipes-array format
+ *
  * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
  * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format
  * 
@@ -3488,7 +3522,7 @@ Queries.prototype.arrayStringPipesValid = function (arrayQuery, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/pipes/string/valid';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {

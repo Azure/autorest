@@ -34,6 +34,7 @@ function StorageAccounts(client) {
 
 /**
  * Checks that account name is valid and is not in use.
+ *
  * @param {object} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
@@ -89,7 +90,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -196,6 +197,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  * the Update Storage Account API. If an account is already created and
  * subsequent PUT request is issued with exact same set of properties, then
  * HTTP 200 would be returned.
+ *
  * @param {string} resourceGroupName The name of the resource group within the
  * user’s subscription.
  * 
@@ -226,7 +228,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link StorageAccount} for more information. 
+ *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -292,6 +294,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  * the Update Storage Account API. If an account is already created and
  * subsequent PUT request is issued with exact same set of properties, then
  * HTTP 200 would be returned.
+ *
  * @param {string} resourceGroupName The name of the resource group within the
  * user’s subscription.
  * 
@@ -362,7 +365,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
@@ -466,6 +469,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
 
 /**
  * Deletes a storage account in Microsoft Azure.
+ *
  * @param {string} resourceGroupName The name of the resource group within the
  * user’s subscription.
  * 
@@ -521,7 +525,7 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
@@ -588,6 +592,7 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  * Returns the properties for the specified storage account including but not
  * limited to name, account type, location, and account status. The ListKeys
  * operation should be used to retrieve storage keys.
+ *
  * @param {string} resourceGroupName The name of the resource group within the
  * user’s subscription.
  * 
@@ -644,7 +649,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
@@ -740,6 +745,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  * storage keys for the account. If you want to change storage account keys,
  * use the RegenerateKey operation. The location and name of the storage
  * account cannot be changed after creation.
+ *
  * @param {string} resourceGroupName The name of the resource group within the
  * user’s subscription.
  * 
@@ -827,7 +833,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
@@ -931,6 +937,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
 
 /**
  * Lists the access keys for the specified storage account.
+ *
  * @param {string} resourceGroupName The name of the resource group.
  * 
  * @param {string} accountName The name of the storage account.
@@ -984,7 +991,7 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
@@ -1073,6 +1080,7 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
 /**
  * Lists all the storage accounts available under the subscription. Note that
  * storage keys are not returned; use the ListKeys operation for this.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1117,7 +1125,7 @@ StorageAccounts.prototype.list = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -1205,6 +1213,7 @@ StorageAccounts.prototype.list = function (options, callback) {
  * Lists all the storage accounts available under the given resource group.
  * Note that storage keys are not returned; use the ListKeys operation for
  * this.
+ *
  * @param {string} resourceGroupName The name of the resource group within the
  * user’s subscription.
  * 
@@ -1255,7 +1264,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
@@ -1342,6 +1351,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
 
 /**
  * Regenerates the access keys for the specified storage account.
+ *
  * @param {string} resourceGroupName The name of the resource group within the
  * user’s subscription.
  * 
@@ -1407,7 +1417,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
@@ -1512,6 +1522,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
 /**
  * Lists all the storage accounts available under the subscription. Note that
  * storage keys are not returned; use the ListKeys operation for this.
+ *
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
@@ -1638,6 +1649,7 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
  * Lists all the storage accounts available under the given resource group.
  * Note that storage keys are not returned; use the ListKeys operation for
  * this.
+ *
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 

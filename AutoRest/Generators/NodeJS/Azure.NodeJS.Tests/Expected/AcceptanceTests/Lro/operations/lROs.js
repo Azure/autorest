@@ -36,6 +36,7 @@ function LROs(client) {
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Succeeded’.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -56,7 +57,7 @@ function LROs(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -119,6 +120,7 @@ LROs.prototype.put200Succeeded = function (product, options, callback) {
 /**
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Succeeded’.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -164,7 +166,7 @@ LROs.prototype.beginPut200Succeeded = function (product, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/put/200/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -266,6 +268,7 @@ LROs.prototype.beginPut200Succeeded = function (product, options, callback) {
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that does not contain ProvisioningState=’Succeeded’.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -286,7 +289,7 @@ LROs.prototype.beginPut200Succeeded = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -349,6 +352,7 @@ LROs.prototype.put200SucceededNoState = function (product, options, callback) {
 /**
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that does not contain ProvisioningState=’Succeeded’.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -394,7 +398,7 @@ LROs.prototype.beginPut200SucceededNoState = function (product, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/put/200/succeeded/nostate';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -497,6 +501,7 @@ LROs.prototype.beginPut200SucceededNoState = function (product, options, callbac
  * Long running put request, service returns a 202 to the initial request,
  * with a location header that points to a polling URL that returns a 200 and
  * an entity that doesn't contains ProvisioningState
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -517,7 +522,7 @@ LROs.prototype.beginPut200SucceededNoState = function (product, options, callbac
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -581,6 +586,7 @@ LROs.prototype.put202Retry200 = function (product, options, callback) {
  * Long running put request, service returns a 202 to the initial request,
  * with a location header that points to a polling URL that returns a 200 and
  * an entity that doesn't contains ProvisioningState
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -626,7 +632,7 @@ LROs.prototype.beginPut202Retry200 = function (product, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/put/202/retry/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -730,6 +736,7 @@ LROs.prototype.beginPut202Retry200 = function (product, options, callback) {
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -750,7 +757,7 @@ LROs.prototype.beginPut202Retry200 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -815,6 +822,7 @@ LROs.prototype.put201CreatingSucceeded200 = function (product, options, callback
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -860,7 +868,7 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, cal
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/put/201/creating/succeeded/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -983,6 +991,7 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, cal
  * with an entity that contains ProvisioningState=’Updating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1003,7 +1012,7 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (product, options, cal
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1068,6 +1077,7 @@ LROs.prototype.put200UpdatingSucceeded204 = function (product, options, callback
  * with an entity that contains ProvisioningState=’Updating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1113,7 +1123,7 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (product, options, cal
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/put/200/updating/succeeded/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1217,6 +1227,7 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (product, options, cal
  * with an entity that contains ProvisioningState=’Created’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Failed’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1237,7 +1248,7 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (product, options, cal
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1302,6 +1313,7 @@ LROs.prototype.put201CreatingFailed200 = function (product, options, callback) {
  * with an entity that contains ProvisioningState=’Created’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Failed’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1347,7 +1359,7 @@ LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/put/201/created/failed/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1470,6 +1482,7 @@ LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callba
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Canceled’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1490,7 +1503,7 @@ LROs.prototype.beginPut201CreatingFailed200 = function (product, options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1555,6 +1568,7 @@ LROs.prototype.put200Acceptedcanceled200 = function (product, options, callback)
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Canceled’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1600,7 +1614,7 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (product, options, call
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/put/200/accepted/canceled/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1703,6 +1717,7 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (product, options, call
  * Long running put request, service returns a 202 to the initial request with
  * location header. Subsequent calls to operation status do not contain
  * location header.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1723,7 +1738,7 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (product, options, call
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1787,6 +1802,7 @@ LROs.prototype.putNoHeaderInRetry = function (product, options, callback) {
  * Long running put request, service returns a 202 to the initial request with
  * location header. Subsequent calls to operation status do not contain
  * location header.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1832,7 +1848,7 @@ LROs.prototype.beginPutNoHeaderInRetry = function (product, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/put/noheader/202/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1935,6 +1951,7 @@ LROs.prototype.beginPutNoHeaderInRetry = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1955,7 +1972,7 @@ LROs.prototype.beginPutNoHeaderInRetry = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2019,6 +2036,7 @@ LROs.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2064,7 +2082,7 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (product, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/putasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -2167,6 +2185,7 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (product, options, callbac
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2187,7 +2206,7 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (product, options, callbac
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2251,6 +2270,7 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (product, options, callback) 
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2296,7 +2316,7 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (product, options, callb
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/putasync/noretry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -2399,6 +2419,7 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (product, options, callb
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2419,7 +2440,7 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (product, options, callb
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2483,6 +2504,7 @@ LROs.prototype.putAsyncRetryFailed = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2528,7 +2550,7 @@ LROs.prototype.beginPutAsyncRetryFailed = function (product, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/putasync/retry/failed';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -2631,6 +2653,7 @@ LROs.prototype.beginPutAsyncRetryFailed = function (product, options, callback) 
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2651,7 +2674,7 @@ LROs.prototype.beginPutAsyncRetryFailed = function (product, options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2715,6 +2738,7 @@ LROs.prototype.putAsyncNoRetrycanceled = function (product, options, callback) {
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2760,7 +2784,7 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (product, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/putasync/noretry/canceled';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -2863,6 +2887,7 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (product, options, callba
  * Long running put request, service returns a 202 to the initial request with
  * Azure-AsyncOperation header. Subsequent calls to operation status do not
  * contain Azure-AsyncOperation header.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2883,7 +2908,7 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (product, options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2947,6 +2972,7 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (product, options, callback) {
  * Long running put request, service returns a 202 to the initial request with
  * Azure-AsyncOperation header. Subsequent calls to operation status do not
  * contain Azure-AsyncOperation header.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2992,7 +3018,7 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/putasync/noheader/201/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -3093,6 +3119,7 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, options, callba
 /**
  *
  * Long running put request with non resource.
+ *
  * @param {object} [sku] sku to put
  * 
  * @param {string} [sku.name]
@@ -3111,7 +3138,7 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (product, options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Sku} for more information. 
+ *                      See {@link Sku} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3173,6 +3200,7 @@ LROs.prototype.putNonResource = function (sku, options, callback) {
 
 /**
  * Long running put request with non resource.
+ *
  * @param {object} [sku] sku to put
  * 
  * @param {string} [sku.name]
@@ -3216,7 +3244,7 @@ LROs.prototype.beginPutNonResource = function (sku, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/putnonresource/202/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -3317,6 +3345,7 @@ LROs.prototype.beginPutNonResource = function (sku, options, callback) {
 /**
  *
  * Long running put request with non resource.
+ *
  * @param {object} [sku] Sku to put
  * 
  * @param {string} [sku.name]
@@ -3335,7 +3364,7 @@ LROs.prototype.beginPutNonResource = function (sku, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Sku} for more information. 
+ *                      See {@link Sku} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3397,6 +3426,7 @@ LROs.prototype.putAsyncNonResource = function (sku, options, callback) {
 
 /**
  * Long running put request with non resource.
+ *
  * @param {object} [sku] Sku to put
  * 
  * @param {string} [sku.name]
@@ -3440,7 +3470,7 @@ LROs.prototype.beginPutAsyncNonResource = function (sku, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/putnonresourceasync/202/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -3541,6 +3571,7 @@ LROs.prototype.beginPutAsyncNonResource = function (sku, options, callback) {
 /**
  *
  * Long running put request with sub resource.
+ *
  * @param {object} [product] Sub Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3557,7 +3588,7 @@ LROs.prototype.beginPutAsyncNonResource = function (sku, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link SubProduct} for more information. 
+ *                      See {@link SubProduct} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3619,6 +3650,7 @@ LROs.prototype.putSubResource = function (product, options, callback) {
 
 /**
  * Long running put request with sub resource.
+ *
  * @param {object} [product] Sub Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3660,7 +3692,7 @@ LROs.prototype.beginPutSubResource = function (product, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/putsubresource/202/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -3761,6 +3793,7 @@ LROs.prototype.beginPutSubResource = function (product, options, callback) {
 /**
  *
  * Long running put request with sub resource.
+ *
  * @param {object} [product] Sub Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3777,7 +3810,7 @@ LROs.prototype.beginPutSubResource = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link SubProduct} for more information. 
+ *                      See {@link SubProduct} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3839,6 +3872,7 @@ LROs.prototype.putAsyncSubResource = function (product, options, callback) {
 
 /**
  * Long running put request with sub resource.
+ *
  * @param {object} [product] Sub Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3880,7 +3914,7 @@ LROs.prototype.beginPutAsyncSubResource = function (product, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/putsubresourceasync/202/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -3984,6 +4018,7 @@ LROs.prototype.beginPutAsyncSubResource = function (product, options, callback) 
  * with an entity that contains ProvisioningState=’Accepted’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3996,7 +4031,7 @@ LROs.prototype.beginPutAsyncSubResource = function (product, options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4061,6 +4096,7 @@ LROs.prototype.deleteProvisioning202Accepted200Succeeded = function (options, ca
  * with an entity that contains ProvisioningState=’Accepted’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4098,7 +4134,7 @@ LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/delete/provisioning/202/accepted/200/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -4205,6 +4241,7 @@ LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (option
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Failed’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4217,7 +4254,7 @@ LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4282,6 +4319,7 @@ LROs.prototype.deleteProvisioning202DeletingFailed200 = function (options, callb
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Failed’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4319,7 +4357,7 @@ LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/delete/provisioning/202/deleting/200/failed';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -4426,6 +4464,7 @@ LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, 
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Canceled’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4438,7 +4477,7 @@ LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4503,6 +4542,7 @@ LROs.prototype.deleteProvisioning202Deletingcanceled200 = function (options, cal
  * with an entity that contains ProvisioningState=’Creating’.  Polls return
  * this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Canceled’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4540,7 +4580,7 @@ LROs.prototype.beginDeleteProvisioning202Deletingcanceled200 = function (options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/delete/provisioning/202/deleting/200/canceled';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -4644,6 +4684,7 @@ LROs.prototype.beginDeleteProvisioning202Deletingcanceled200 = function (options
 /**
  *
  * Long running delete succeeds and returns right away
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4701,6 +4742,7 @@ LROs.prototype.delete204Succeeded = function (options, callback) {
 
 /**
  * Long running delete succeeds and returns right away
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4737,7 +4779,7 @@ LROs.prototype.beginDelete204Succeeded = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/delete/204/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -4805,6 +4847,7 @@ LROs.prototype.beginDelete204Succeeded = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Polls return this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4817,7 +4860,7 @@ LROs.prototype.beginDelete204Succeeded = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4881,6 +4924,7 @@ LROs.prototype.delete202Retry200 = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Polls return this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4918,7 +4962,7 @@ LROs.prototype.beginDelete202Retry200 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/delete/202/retry/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -5005,6 +5049,7 @@ LROs.prototype.beginDelete202Retry200 = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Polls return this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5017,7 +5062,7 @@ LROs.prototype.beginDelete202Retry200 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5081,6 +5126,7 @@ LROs.prototype.delete202NoRetry204 = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Polls return this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5118,7 +5164,7 @@ LROs.prototype.beginDelete202NoRetry204 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/delete/202/noretry/204';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -5205,6 +5251,7 @@ LROs.prototype.beginDelete202NoRetry204 = function (options, callback) {
  * Long running delete request, service returns a location header in the
  * initial request. Subsequent calls to operation status do not contain
  * location header.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5264,6 +5311,7 @@ LROs.prototype.deleteNoHeaderInRetry = function (options, callback) {
  * Long running delete request, service returns a location header in the
  * initial request. Subsequent calls to operation status do not contain
  * location header.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5300,7 +5348,7 @@ LROs.prototype.beginDeleteNoHeaderInRetry = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/delete/noheader';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -5368,6 +5416,7 @@ LROs.prototype.beginDeleteNoHeaderInRetry = function (options, callback) {
  * Long running delete request, service returns an Azure-AsyncOperation header
  * in the initial request. Subsequent calls to operation status do not
  * contain Azure-AsyncOperation header.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5427,6 +5476,7 @@ LROs.prototype.deleteAsyncNoHeaderInRetry = function (options, callback) {
  * Long running delete request, service returns an Azure-AsyncOperation header
  * in the initial request. Subsequent calls to operation status do not
  * contain Azure-AsyncOperation header.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5463,7 +5513,7 @@ LROs.prototype.beginDeleteAsyncNoHeaderInRetry = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/deleteasync/noheader/202/204';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -5531,6 +5581,7 @@ LROs.prototype.beginDeleteAsyncNoHeaderInRetry = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5590,6 +5641,7 @@ LROs.prototype.deleteAsyncRetrySucceeded = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5626,7 +5678,7 @@ LROs.prototype.beginDeleteAsyncRetrySucceeded = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/deleteasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -5694,6 +5746,7 @@ LROs.prototype.beginDeleteAsyncRetrySucceeded = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5753,6 +5806,7 @@ LROs.prototype.deleteAsyncNoRetrySucceeded = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5789,7 +5843,7 @@ LROs.prototype.beginDeleteAsyncNoRetrySucceeded = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/deleteasync/noretry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -5857,6 +5911,7 @@ LROs.prototype.beginDeleteAsyncNoRetrySucceeded = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5916,6 +5971,7 @@ LROs.prototype.deleteAsyncRetryFailed = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5952,7 +6008,7 @@ LROs.prototype.beginDeleteAsyncRetryFailed = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/deleteasync/retry/failed';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -6020,6 +6076,7 @@ LROs.prototype.beginDeleteAsyncRetryFailed = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -6079,6 +6136,7 @@ LROs.prototype.deleteAsyncRetrycanceled = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -6115,7 +6173,7 @@ LROs.prototype.beginDeleteAsyncRetrycanceled = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/deleteasync/retry/canceled';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -6183,6 +6241,7 @@ LROs.prototype.beginDeleteAsyncRetrycanceled = function (options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' header. Poll returns a 200 with a response body after
  * success.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -6195,7 +6254,7 @@ LROs.prototype.beginDeleteAsyncRetrycanceled = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Sku} for more information. 
+ *                      See {@link Sku} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6259,6 +6318,7 @@ LROs.prototype.post200WithPayload = function (options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' header. Poll returns a 200 with a response body after
  * success.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -6296,7 +6356,7 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/post/payload/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -6402,6 +6462,7 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' and 'Retry-After' headers, Polls return a 200 with a
  * response body after success
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -6469,6 +6530,7 @@ LROs.prototype.post202Retry200 = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' and 'Retry-After' headers, Polls return a 200 with a
  * response body after success
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -6513,7 +6575,7 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/post/202/retry/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -6596,6 +6658,7 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
  *
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' header, 204 with noresponse body after success
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -6616,7 +6679,7 @@ LROs.prototype.beginPost202Retry200 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6679,6 +6742,7 @@ LROs.prototype.post202NoRetry204 = function (product, options, callback) {
 /**
  * Long running post request, service returns a 202 to the initial request,
  * with 'Location' header, 204 with noresponse body after success
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -6724,7 +6788,7 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/post/202/noretry/204';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -6827,6 +6891,7 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -6847,7 +6912,7 @@ LROs.prototype.beginPost202NoRetry204 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6911,6 +6976,7 @@ LROs.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -6956,7 +7022,7 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/postasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -7059,6 +7125,7 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -7079,7 +7146,7 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (product, options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -7143,6 +7210,7 @@ LROs.prototype.postAsyncNoRetrySucceeded = function (product, options, callback)
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -7188,7 +7256,7 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/postasync/noretry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -7291,6 +7359,7 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (product, options, call
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -7358,6 +7427,7 @@ LROs.prototype.postAsyncRetryFailed = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -7402,7 +7472,7 @@ LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/postasync/retry/failed';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -7486,6 +7556,7 @@ LROs.prototype.beginPostAsyncRetryFailed = function (product, options, callback)
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -7553,6 +7624,7 @@ LROs.prototype.postAsyncRetrycanceled = function (product, options, callback) {
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -7597,7 +7669,7 @@ LROs.prototype.beginPostAsyncRetrycanceled = function (product, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/postasync/retry/canceled';
   var queryParameters = [];
   if (queryParameters.length > 0) {

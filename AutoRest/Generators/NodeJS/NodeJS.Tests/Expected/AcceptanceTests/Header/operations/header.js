@@ -33,6 +33,7 @@ function Header(client) {
 
 /**
  * Send a post request with header value "User-Agent": "overwrite"
+ *
  * @param {string} userAgent Send a post request with header value
  * "User-Agent": "overwrite"
  * 
@@ -72,7 +73,7 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/existingkey';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -132,6 +133,7 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
 
 /**
  * Get a response with header value "User-Agent": "overwrite"
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -160,7 +162,7 @@ Header.prototype.responseExistingKey = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/existingkey';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -217,6 +219,7 @@ Header.prototype.responseExistingKey = function (options, callback) {
 
 /**
  * Send a post request with header value "Content-Type": "text/html"
+ *
  * @param {string} contentType Send a post request with header value
  * "Content-Type": "text/html"
  * 
@@ -256,7 +259,7 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/protectedkey';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -316,6 +319,7 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
 
 /**
  * Get a response with header value "Content-Type": "text/html"
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -344,7 +348,7 @@ Header.prototype.responseProtectedKey = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/protectedkey';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -402,6 +406,7 @@ Header.prototype.responseProtectedKey = function (options, callback) {
 /**
  * Send a post request with header values "scenario": "positive", "value": 1
  * or "scenario": "negative", "value": -2
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
@@ -446,7 +451,7 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/integer';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -509,6 +514,7 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header value "value": 1 or -2
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
@@ -548,7 +554,7 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/integer';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -609,6 +615,7 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "positive", "value": 105
  * or "scenario": "negative", "value": -2
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
@@ -653,7 +660,7 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/long';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -716,6 +723,7 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header value "value": 105 or -2
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
@@ -755,7 +763,7 @@ Header.prototype.responseLong = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/long';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -816,6 +824,7 @@ Header.prototype.responseLong = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "positive", "value":
  * 0.07 or "scenario": "negative", "value": -3.0
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
@@ -860,7 +869,7 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/float';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -923,6 +932,7 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header value "value": 0.07 or -3.0
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
@@ -962,7 +972,7 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/float';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1023,6 +1033,7 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "positive", "value":
  * 7e120 or "scenario": "negative", "value": -3.0
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
@@ -1067,7 +1078,7 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/double';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1130,6 +1141,7 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header value "value": 7e120 or -3.0
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
@@ -1169,7 +1181,7 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/double';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1230,6 +1242,7 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "true", "value": true or
  * "scenario": "false", "value": false
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "true" or "false"
  * 
@@ -1274,7 +1287,7 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/bool';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1337,6 +1350,7 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header value "value": true or false
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "true" or "false"
  * 
@@ -1376,7 +1390,7 @@ Header.prototype.responseBool = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/bool';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1438,6 +1452,7 @@ Header.prototype.responseBool = function (scenario, options, callback) {
  * Send a post request with header values "scenario": "valid", "value": "The
  * quick brown fox jumps over the lazy dog" or "scenario": "null", "value":
  * null or "scenario": "empty", "value": ""
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "null" or "empty"
  * 
@@ -1483,7 +1498,7 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/string';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1547,6 +1562,7 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
 /**
  * Get a response with header values "The quick brown fox jumps over the lazy
  * dog" or null or ""
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "null" or "empty"
  * 
@@ -1586,7 +1602,7 @@ Header.prototype.responseString = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/string';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1647,6 +1663,7 @@ Header.prototype.responseString = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "valid", "value":
  * "2010-01-01" or "scenario": "min", "value": "0001-01-01"
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "min"
  * 
@@ -1693,7 +1710,7 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/date';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1756,6 +1773,7 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header values "2010-01-01" or "0001-01-01"
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "min"
  * 
@@ -1795,7 +1813,7 @@ Header.prototype.responseDate = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/date';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1857,6 +1875,7 @@ Header.prototype.responseDate = function (scenario, options, callback) {
  * Send a post request with header values "scenario": "valid", "value":
  * "2010-01-01T12:34:56Z" or "scenario": "min", "value":
  * "0001-01-01T00:00:00Z"
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "min"
  * 
@@ -1903,7 +1922,7 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/datetime';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1967,6 +1986,7 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
 /**
  * Get a response with header values "2010-01-01T12:34:56Z" or
  * "0001-01-01T00:00:00Z"
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "min"
  * 
@@ -2006,7 +2026,7 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/datetime';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2067,6 +2087,7 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "valid", "value":
  * "啊齄丂狛狜隣郎隣兀﨩"
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid"
  * 
@@ -2111,7 +2132,7 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/byte';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2174,6 +2195,7 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid"
  * 
@@ -2213,7 +2235,7 @@ Header.prototype.responseByte = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/byte';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2274,6 +2296,7 @@ Header.prototype.responseByte = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "valid", "value": "GREY"
  * or "scenario": "null", "value": null
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "null" or "empty"
  * 
@@ -2322,7 +2345,7 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/enum';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2385,6 +2408,7 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
 
 /**
  * Get a response with header values "GREY" or null
+ *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "null" or "empty"
  * 
@@ -2424,7 +2448,7 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/enum';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2485,6 +2509,7 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
 /**
  * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
  * header of the request
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2513,7 +2538,7 @@ Header.prototype.customRequestId = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
