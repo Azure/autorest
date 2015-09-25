@@ -21,7 +21,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
-import java.time.Period;
+import org.joda.time.Period;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.Error;
 import com.microsoft.rest.serializer.JacksonHelper;

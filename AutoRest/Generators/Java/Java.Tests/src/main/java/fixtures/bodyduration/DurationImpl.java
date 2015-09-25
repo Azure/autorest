@@ -19,7 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import java.time.Period;
+import org.joda.time.Period;
 import fixtures.bodyduration.models.Error;
 
 public class DurationImpl implements Duration {
@@ -157,97 +157,6 @@ public class DurationImpl implements Duration {
     }
 
     private ServiceResponse<Period> getPositiveDurationDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Period>()
-                .register(200, new TypeToken<Period>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    /**
-     * Put a negative duration value
-     *
-     * @param durationBody the Period value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public void putNegativeDuration(Period durationBody) throws ServiceException {
-        if (durationBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
-        }
-        try {
-            ServiceResponse<Void> response = putNegativeDurationDelegate(service.putNegativeDuration(durationBody), null);
-            response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putNegativeDurationDelegate(error.getResponse(), error);
-            response.getBody();
-        }
-    }
-
-    /**
-     * Put a negative duration value
-     *
-     * @param durationBody the Period value
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public void putNegativeDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
-        if (durationBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter durationBody is required and cannot be null.")));
-        }
-        service.putNegativeDurationAsync(durationBody, new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(putNegativeDurationDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Void> putNegativeDurationDelegate(Response response, RetrofitError error) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
-    }
-
-    /**
-     * Get a negative valid duration value
-     *
-     * @return the Period object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public Period getNegativeDuration() throws ServiceException {
-        try {
-            ServiceResponse<Period> response = getNegativeDurationDelegate(service.getNegativeDuration(), null);
-            return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Period> response = getNegativeDurationDelegate(error.getResponse(), error);
-            return response.getBody();
-        }
-    }
-
-    /**
-     * Get a negative valid duration value
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public void getNegativeDurationAsync(final ServiceCallback<Period> serviceCallback) {
-        service.getNegativeDurationAsync(new ServiceResponseCallback() {
-            @Override
-            public void response(Response response, RetrofitError error) {
-                try {
-                    serviceCallback.success(getNegativeDurationDelegate(response, error));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-    }
-
-    private ServiceResponse<Period> getNegativeDurationDelegate(Response response, RetrofitError error) throws ServiceException {
         return new ServiceResponseBuilder<Period>()
                 .register(200, new TypeToken<Period>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

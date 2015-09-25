@@ -83,54 +83,7 @@
           }
         }
       }
-    },
-    "/duration/negativeduration": {
-      "put": {
-        "operationId": "duration_putNegativeDuration",
-        "description": "Put a negative duration value",
-        "parameters": [
-          {
-            "name": "durationBody",
-            "in": "body",
-            "schema": {
-              "type": "string",
-              "format": "duration"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A negative duration value"
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "duration_getNegativeDuration",
-        "description": "Get a negative valid duration value",
-        "responses": {
-          "200": {
-            "description": "The the negative duration value",
-            "schema": {
-              "type": "string",
-              "format": "duration"
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
+    },    
     "/duration/invalid": {
       "get": {
         "operationId": "duration_getInvalid",

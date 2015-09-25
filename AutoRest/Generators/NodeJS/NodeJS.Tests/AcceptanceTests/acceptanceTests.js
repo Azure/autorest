@@ -17,6 +17,7 @@ var numberClient = require('../Expected/AcceptanceTests/BodyNumber/autoRestNumbe
 var byteClient = require('../Expected/AcceptanceTests/BodyByte/autoRestSwaggerBATByteService');
 var dateClient = require('../Expected/AcceptanceTests/BodyDate/autoRestDateTestService');
 var dateTimeClient = require('../Expected/AcceptanceTests/BodyDateTime/autoRestDateTimeTestService');
+var durationClient = require('../Expected/AcceptanceTests/BodyDuration/autoRestDurationTestService');
 var urlClient = require('../Expected/AcceptanceTests/Url/autoRestUrlTestService');
 var fileClient = require('../Expected/AcceptanceTests/BodyFile/autoRestSwaggerBATFileService');
 var arrayClient = require('../Expected/AcceptanceTests/BodyArray/autoRestSwaggerBATArrayService');
@@ -597,6 +598,61 @@ describe('nodejs', function () {
           done();
         });
       });
+    });
+
+    describe('Duration Client', function () {
+      var testClient = new durationClient(baseUri, clientOptions);
+      it('should properly handle null value for Duration', function (done) {
+        testClient.duration.getNull(function (error, result) {
+          should.not.exist(result.body);
+          should.not.exist(error);
+          done();
+        });
+      });
+
+      it('should properly handle invalid value for Duration', function (done) {
+        testClient.duration.getInvalid(function (error, result) {
+          should.exist(result.body);
+          //TODO: There should be an error here, except right now JS is treating all of this as strings so it's not failing to parse invalid ISO8601
+          should.not.exist(error);
+          done();
+        });
+      });
+
+      it('should properly handle positive value for Duration', function (done) {
+        testClient.duration.getPositiveDuration(function (error, result) {
+          should.exist(result.body);
+          should.not.exist(error);
+          should.equal(result.body, 'P3Y6M4DT12H30M5S');
+          done();
+        });
+      });
+      //TODO: It looks like ISO8601 doesn't cover negative durations (so there is no standard)... omitting for now
+      // it('should properly handle negative value for Duration', function (done) {
+        // testClient.duration.getNegativeDuration(function (error, result) {
+          // should.exist(result.body);
+          // should.not.exist(error);
+          // should.equal(result.body, '-P3Y6M4DT12H30M5S');
+          // done();
+        // });
+      // });
+
+      it('should properly put positive value for Duration', function (done) {
+        testClient.duration.putPositiveDuration('P123DT22H14M12.011S', function (error, result) {
+          should.not.exist(result.body);
+          should.not.exist(error);
+          done();
+        });
+      });
+      
+      //TODO: It looks like ISO8601 doesn't cover negative durations (so there is no standard)... omitting for now
+      // it('should properly put negative value for Duration', function (done) {
+        // testClient.duration.putNegativeDuration('-P123DT22H14M12.011S', function (error, result) {
+          // should.not.exist(result.body);
+          // should.not.exist(error);
+          // done();
+        // });
+      // });
     });
 
     describe('Array Client', function () {

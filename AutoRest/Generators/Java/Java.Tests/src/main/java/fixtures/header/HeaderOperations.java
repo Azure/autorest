@@ -16,7 +16,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
-import java.time.Period;
+import org.joda.time.Period;
 import fixtures.header.models.GreyscaleColors;
 import retrofit.http.POST;
 import retrofit.http.Header;

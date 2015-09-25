@@ -100,61 +100,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             }
 
             /// <summary>
-            /// Put a negative duration value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='durationBody'>
-            /// </param>
-            public static void PutNegativeDuration(this IDuration operations, TimeSpan? durationBody)
-            {
-                Task.Factory.StartNew(s => ((IDuration)s).PutNegativeDurationAsync(durationBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Put a negative duration value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='durationBody'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PutNegativeDurationAsync( this IDuration operations, TimeSpan? durationBody, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                await operations.PutNegativeDurationWithHttpMessagesAsync(durationBody, null, cancellationToken).ConfigureAwait(false);
-            }
-
-            /// <summary>
-            /// Get a negative valid duration value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static TimeSpan? GetNegativeDuration(this IDuration operations)
-            {
-                return Task.Factory.StartNew(s => ((IDuration)s).GetNegativeDurationAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get a negative valid duration value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<TimeSpan?> GetNegativeDurationAsync( this IDuration operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                HttpOperationResponse<TimeSpan?> result = await operations.GetNegativeDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
             /// Get an invalid duration value
             /// </summary>
             /// <param name='operations'>

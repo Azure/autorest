@@ -213,6 +213,17 @@ describe('nodejs', function () {
         });
       });
 
+      it('should send and receive duration type headers', function(done) {
+        testClient.header.paramDuration('valid', 'P123DT22H14M12.011S', function(error, result) {
+          should.not.exist(error);
+          testClient.header.responseDuration('valid', function(error, result) {
+            should.not.exist(error);
+            _.isEqual(result.response.headers['value'], 'P123DT22H14M12.011S').should.be.exactly(true);
+            done();
+          });
+        });
+      });
+
       it('should send and receive byte array type headers', function(done) {
         var bytes = new Buffer('啊齄丂狛狜隣郎隣兀﨩');
         testClient.header.paramByte('valid', bytes, function(error, result) {

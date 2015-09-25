@@ -5,15 +5,15 @@ var utils = require('../util/utils')
 
 var duration = function(coverage, optionalCoverage) {
 
-    router.put('/negativeduration', function(req, res, next) {
-        if (req.body === '-P123DT22H14M12.011S') {
-            coverage["putDurationNegative"]++;
-            res.status(200).end();
-        } else {
-            utils.send400(res, next, "Did not like the value provided for negative duration " + util.inspect(req.body));
-        }
-        
-    });
+    //TODO: It looks like ISO8601 doesn't cover negative durations (so there is no standard)... omitting for now
+    // router.put('/negativeduration', function(req, res, next) {
+        // if (req.body === '-P123DT22H14M12.011S') {
+            // coverage["putDurationNegative"]++;
+            // res.status(200).end();
+        // } else {
+            // utils.send400(res, next, "Did not like the value provided for negative duration " + util.inspect(req.body));
+        // }        
+    // });
 
     router.put('/positiveduration', function(req, res, next) {        
         if (req.body === 'P123DT22H14M12.011S') {
@@ -34,9 +34,10 @@ var duration = function(coverage, optionalCoverage) {
         } else if (req.params.scenario === 'positiveduration') {
             coverage["getDurationPositive"]++;
             res.status(200).end('"P3Y6M4DT12H30M5S"');
-        } else if (req.params.scenario === 'negativeduration') {
-            coverage["getDurationNegative"]++;
-            res.status(200).end('"-P3Y6M4DT12H30M5S"');
+        //TODO: It looks like ISO8601 doesn't cover negative durations (so there is no standard)... omitting for now
+        // } else if (req.params.scenario === 'negativeduration') {
+            // coverage["getDurationNegative"]++;
+            // res.status(200).end('"-P3Y6M4DT12H30M5S"');
         } else {
             res.status(400).send('Request path must contain a valid scenario: ' +
                 '"null", "invalid", "positiveduration", "negativeduration". Provided value is : ', +

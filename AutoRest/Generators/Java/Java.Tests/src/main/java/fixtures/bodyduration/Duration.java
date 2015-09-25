@@ -14,7 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
-import java.time.Period;
+import org.joda.time.Period;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
@@ -46,18 +46,6 @@ public interface Duration {
 
         @GET("/duration/positiveduration")
         void getPositiveDurationAsync(ServiceResponseCallback cb);
-
-        @PUT("/duration/negativeduration")
-        Response putNegativeDuration(@Body Period durationBody) throws ServiceException;
-
-        @PUT("/duration/negativeduration")
-        void putNegativeDurationAsync(@Body Period durationBody, ServiceResponseCallback cb);
-
-        @GET("/duration/negativeduration")
-        Response getNegativeDuration() throws ServiceException;
-
-        @GET("/duration/negativeduration")
-        void getNegativeDurationAsync(ServiceResponseCallback cb);
 
         @GET("/duration/invalid")
         Response getInvalid() throws ServiceException;
@@ -111,37 +99,6 @@ public interface Duration {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
-
-    /**
-     * Put a negative duration value
-     *
-     * @param durationBody the Period value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    void putNegativeDuration(Period durationBody) throws ServiceException;
-
-    /**
-     * Put a negative duration value
-     *
-     * @param durationBody the Period value
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    void putNegativeDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Get a negative valid duration value
-     *
-     * @return the Period object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    Period getNegativeDuration() throws ServiceException;
-
-    /**
-     * Get a negative valid duration value
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    void getNegativeDurationAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Get an invalid duration value

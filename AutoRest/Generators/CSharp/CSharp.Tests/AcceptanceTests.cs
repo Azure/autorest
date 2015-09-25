@@ -324,9 +324,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Throws<FormatException>(() => client.Duration.GetInvalid());
 
                 client.Duration.GetPositiveDuration();
-                client.Duration.GetNegativeDuration();
                 client.Duration.PutPositiveDuration(new TimeSpan(123, 22, 14, 12, 11));
-                client.Duration.PutNegativeDuration(new TimeSpan(-123, -22, -14, -12, -11));
             }
         }
 

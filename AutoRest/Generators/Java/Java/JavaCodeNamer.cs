@@ -348,7 +348,7 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType == PrimaryType.TimeSpan ||
                 primaryType.Name == "Period")
             {
-                return "java.time.Period";
+                return "org.joda.time.Period";
             }
             else
             {
