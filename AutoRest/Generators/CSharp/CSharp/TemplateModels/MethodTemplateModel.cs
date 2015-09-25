@@ -67,9 +67,22 @@ namespace Microsoft.Rest.Generator.CSharp
                 List<string> declarations = new List<string>();
                 foreach (var parameter in  LocalParameters)
                 {
-                    string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
+                    string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
+                    string defaultValue = string.Format("default({0})", parameter.DeclarationExpression);
+                    if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
+                    {
+                        PrimaryType type = parameter.Type as PrimaryType;
+                        if (type == PrimaryType.Boolean || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long)
+                        {
+                            defaultValue = parameter.DefaultValue;
+                        }
+                        else if (type == PrimaryType.String)
+                        {
+                            defaultValue = "\"" + parameter.DefaultValue + "\"";
+                        }
+                    }
                     declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                        format, parameter.DeclarationExpression, parameter.Name));
+                        format, parameter.DeclarationExpression, parameter.Name, defaultValue ));
                 }
 
                 return string.Join(", ", declarations);
