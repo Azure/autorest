@@ -24,6 +24,17 @@ namespace Microsoft.Rest.Generator.CSharp
             // Do nothing   
         }
 
+        private string GetNextLinkString(Dictionary<string, object> extensions)
+        {
+            var ext = extensions[AzureCodeGenerator.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+            if (ext == null)
+            {
+                return null;
+            }
+
+            return (string)ext["path"];
+        }
+
         /// <summary>
         /// Changes paginated method signatures to return Page type.
         /// </summary>
@@ -41,6 +52,12 @@ namespace Microsoft.Rest.Generator.CSharp
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
             {
+                string nextLinkString = GetNextLinkString(method.Extensions);
+                if (string.IsNullOrEmpty(nextLinkString))
+                {
+                    continue;
+                }
+
                 foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
                 {
                     var compositType = (CompositeType) method.Responses[responseStatus];
@@ -49,7 +66,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     // if the type is a wrapper over page-able response
                     if(sequenceType != null &&
                        compositType.Properties.Count == 2 && 
-                       compositType.Properties.Any(p => p.SerializedName.Equals("nextLink", StringComparison.OrdinalIgnoreCase)))
+                       compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
                     {
                         var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, sequenceType.ElementType.Name);
                         
