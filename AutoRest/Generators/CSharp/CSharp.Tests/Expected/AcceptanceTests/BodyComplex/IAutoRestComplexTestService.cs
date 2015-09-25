@@ -35,7 +35,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
 
         IBasicOperations BasicOperations { get; }

@@ -119,23 +119,20 @@ namespace Fixtures.MirrorRecursiveTypes
             };
         }    
         /// <summary>
+        /// Products
+        /// </summary>
         /// The Products endpoint returns information about the Uber products offered
         /// at a given location. The response includes the display name and other
         /// details about each product, and lists the products in the proper display
         /// order.
-        /// </summary>
         /// <param name='subscriptionId'>
-        /// Subscription Id.
-        /// </param>
+        /// Subscription Id./// </param>
         /// <param name='resourceGroupName'>
-        /// Resource Group Id.
-        /// </param>
+        /// Resource Group Id./// </param>
         /// <param name='apiVersion'>
-        /// API Id.
-        /// </param>
+        /// API Id./// </param>
         /// <param name='body'>
-        /// API body mody.
-        /// </param>
+        /// API body mody./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

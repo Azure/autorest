@@ -121,14 +121,14 @@ namespace Fixtures.MirrorPolymorphic
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Animal>("dtype"));
         }    
         /// <summary>
+        /// Product Types
+        /// </summary>
         /// The Products endpoint returns information about the Uber products offered
         /// at a given location. The response includes the display name and other
         /// details about each product, and lists the products in the proper display
         /// order.
-        /// </summary>
         /// <param name='animalCreateOrUpdateParameter'>
-        /// An Animal
-        /// </param>
+        /// An Animal/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

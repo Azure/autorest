@@ -119,13 +119,12 @@ namespace Fixtures.MirrorPrimitives
             };
         }    
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
-        /// The desired returned status code
-        /// </param>
+        /// The desired returned status code/// </param>
         /// <param name='product'>
-        /// The only parameter
-        /// </param>
+        /// The only parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -225,13 +224,12 @@ namespace Fixtures.MirrorPrimitives
         }
 
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
-        /// The desired returned status code
-        /// </param>
+        /// The desired returned status code/// </param>
         /// <param name='product'>
-        /// The only parameter
-        /// </param>
+        /// The only parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -331,13 +329,12 @@ namespace Fixtures.MirrorPrimitives
         }
 
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
-        /// The desired returned status code
-        /// </param>
+        /// The desired returned status code/// </param>
         /// <param name='product'>
-        /// The only parameter
-        /// </param>
+        /// The only parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -437,13 +434,12 @@ namespace Fixtures.MirrorPrimitives
         }
 
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
-        /// The desired returned status code
-        /// </param>
+        /// The desired returned status code/// </param>
         /// <param name='product'>
-        /// The only parameter
-        /// </param>
+        /// The only parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

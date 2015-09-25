@@ -123,8 +123,7 @@ namespace Fixtures.MirrorSequences
         /// Creates a new pet in the store.  Duplicates are allowed
         /// </summary>
         /// <param name='pets'>
-        /// Pets to add to the store
-        /// </param>
+        /// Pets to add to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -232,8 +231,7 @@ namespace Fixtures.MirrorSequences
         /// Adds new pet stylesin the store.  Duplicates are allowed
         /// </summary>
         /// <param name='petStyle'>
-        /// Pet style to add to the store
-        /// </param>
+        /// Pet style to add to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -331,8 +329,7 @@ namespace Fixtures.MirrorSequences
         /// Updates new pet stylesin the store.  Duplicates are allowed
         /// </summary>
         /// <param name='petStyle'>
-        /// Pet style to add to the store
-        /// </param>
+        /// Pet style to add to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

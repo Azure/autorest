@@ -19,6 +19,7 @@ namespace Fixtures.PetstoreV2
     public static partial class SwaggerPetstoreV2Extensions
     {
             /// <summary>
+            /// Add a new pet to the store
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -32,6 +33,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Add a new pet to the store
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -49,6 +51,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Update an existing pet
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -62,6 +65,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Update an existing pet
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -78,8 +82,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// Multiple status values can be provided with comma seperated strings
+            /// Finds Pets by status
             /// </summary>
+            /// Multiple status values can be provided with comma seperated strings
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -92,8 +97,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// Multiple status values can be provided with comma seperated strings
+            /// Finds Pets by status
             /// </summary>
+            /// Multiple status values can be provided with comma seperated strings
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -110,9 +116,10 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Finds Pets by tags
+            /// </summary>
             /// Muliple tags can be provided with comma seperated strings. Use tag1, tag2,
             /// tag3 for testing.
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -125,9 +132,10 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Finds Pets by tags
+            /// </summary>
             /// Muliple tags can be provided with comma seperated strings. Use tag1, tag2,
             /// tag3 for testing.
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -144,8 +152,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// Returns a single pet
+            /// Find pet by Id
             /// </summary>
+            /// Returns a single pet
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -158,8 +167,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// Returns a single pet
+            /// Find pet by Id
             /// </summary>
+            /// Returns a single pet
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -176,6 +186,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Updates a pet in the store with form data
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -195,6 +206,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Updates a pet in the store with form data
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -217,6 +229,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Deletes a pet
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -232,6 +245,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Deletes a pet
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -250,8 +264,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// Returns a map of status codes to quantities
+            /// Returns pet inventories by status
             /// </summary>
+            /// Returns a map of status codes to quantities
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -261,8 +276,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// Returns a map of status codes to quantities
+            /// Returns pet inventories by status
             /// </summary>
+            /// Returns a map of status codes to quantities
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -276,6 +292,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Place an order for a pet
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -289,6 +306,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Place an order for a pet
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -306,9 +324,10 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Find purchase order by Id
+            /// </summary>
             /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
             /// values will generated exceptions
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -321,9 +340,10 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Find purchase order by Id
+            /// </summary>
             /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
             /// values will generated exceptions
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -340,9 +360,10 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Delete purchase order by Id
+            /// </summary>
             /// For valid response try integer IDs with value &lt; 1000. Anything above
             /// 1000 or nonintegers will generate API errors
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -355,9 +376,10 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Delete purchase order by Id
+            /// </summary>
             /// For valid response try integer IDs with value &lt; 1000. Anything above
             /// 1000 or nonintegers will generate API errors
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -373,8 +395,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// This can only be done by the logged in user.
+            /// Create user
             /// </summary>
+            /// This can only be done by the logged in user.
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -387,8 +410,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// This can only be done by the logged in user.
+            /// Create user
             /// </summary>
+            /// This can only be done by the logged in user.
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -404,6 +428,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Creates list of users with given input array
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -417,6 +442,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Creates list of users with given input array
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -433,6 +459,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Creates list of users with given input array
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -446,6 +473,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Creates list of users with given input array
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -462,6 +490,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Logs user into the system
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -478,6 +507,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Logs user into the system
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -498,6 +528,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Logs out current logged in user session
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -508,6 +539,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Logs out current logged in user session
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -521,6 +553,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Get user by user name
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -534,6 +567,7 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
+            /// Get user by user name
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -551,8 +585,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// This can only be done by the logged in user.
+            /// Updated user
             /// </summary>
+            /// This can only be done by the logged in user.
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -568,8 +603,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// This can only be done by the logged in user.
+            /// Updated user
             /// </summary>
+            /// This can only be done by the logged in user.
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -588,8 +624,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// This can only be done by the logged in user.
+            /// Delete user
             /// </summary>
+            /// This can only be done by the logged in user.
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -602,8 +639,9 @@ namespace Fixtures.PetstoreV2
             }
 
             /// <summary>
-            /// This can only be done by the logged in user.
+            /// Delete user
             /// </summary>
+            /// This can only be done by the logged in user.
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>

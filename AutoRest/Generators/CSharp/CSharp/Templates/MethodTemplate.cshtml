@@ -1,16 +1,25 @@
-﻿@using System.Linq;
+@using System.Linq;
+@using System
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
-/// <summary>
-@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
-/// </summary>
+
+@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+{
+@:/// <summary>
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+@:/// </summary>
+}
+@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+}
 @foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
-@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
+@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
 @:/// </param>
 }
 /// <param name='customHeaders'>

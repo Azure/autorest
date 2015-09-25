@@ -52,8 +52,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get true Boolean value on path
         /// </summary>
         /// <param name='boolQuery'>
-        /// true boolean value
-        /// </param>
+        /// true boolean value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -146,8 +145,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get false Boolean value on path
         /// </summary>
         /// <param name='boolQuery'>
-        /// false boolean value
-        /// </param>
+        /// false boolean value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -240,8 +238,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null Boolean value on query (query string should be absent)
         /// </summary>
         /// <param name='boolQuery'>
-        /// null boolean value
-        /// </param>
+        /// null boolean value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -334,8 +331,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '1000000' integer value
         /// </summary>
         /// <param name='intQuery'>
-        /// '1000000' integer value
-        /// </param>
+        /// '1000000' integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -428,8 +424,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '-1000000' integer value
         /// </summary>
         /// <param name='intQuery'>
-        /// '-1000000' integer value
-        /// </param>
+        /// '-1000000' integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -522,8 +517,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null integer value (no query parameter)
         /// </summary>
         /// <param name='intQuery'>
-        /// null integer value
-        /// </param>
+        /// null integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -616,8 +610,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '10000000000' 64 bit integer value
         /// </summary>
         /// <param name='longQuery'>
-        /// '10000000000' 64 bit integer value
-        /// </param>
+        /// '10000000000' 64 bit integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -710,8 +703,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '-10000000000' 64 bit integer value
         /// </summary>
         /// <param name='longQuery'>
-        /// '-10000000000' 64 bit integer value
-        /// </param>
+        /// '-10000000000' 64 bit integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -804,8 +796,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get 'null 64 bit integer value (no query param in uri)
         /// </summary>
         /// <param name='longQuery'>
-        /// null 64 bit integer value
-        /// </param>
+        /// null 64 bit integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -898,8 +889,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '1.034E+20' numeric value
         /// </summary>
         /// <param name='floatQuery'>
-        /// '1.034E+20'numeric value
-        /// </param>
+        /// '1.034E+20'numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -992,8 +982,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '-1.034E-20' numeric value
         /// </summary>
         /// <param name='floatQuery'>
-        /// '-1.034E-20'numeric value
-        /// </param>
+        /// '-1.034E-20'numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1086,8 +1075,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null numeric value (no query parameter)
         /// </summary>
         /// <param name='floatQuery'>
-        /// null numeric value
-        /// </param>
+        /// null numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1180,8 +1168,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '9999999.999' numeric value
         /// </summary>
         /// <param name='doubleQuery'>
-        /// '9999999.999'numeric value
-        /// </param>
+        /// '9999999.999'numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1274,8 +1261,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '-9999999.999' numeric value
         /// </summary>
         /// <param name='doubleQuery'>
-        /// '-9999999.999'numeric value
-        /// </param>
+        /// '-9999999.999'numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1368,8 +1354,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null numeric value (no query parameter)
         /// </summary>
         /// <param name='doubleQuery'>
-        /// null numeric value
-        /// </param>
+        /// null numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1463,8 +1448,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='stringQuery'>
         /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
-        /// include: '啊齄丂狛狜隣郎隣兀﨩'
-        /// </param>
+        /// include: '啊齄丂狛狜隣郎隣兀﨩'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1558,8 +1542,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='stringQuery'>
         /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
-        /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
-        /// </param>
+        /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1652,8 +1635,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get ''
         /// </summary>
         /// <param name='stringQuery'>
-        /// '' string value. Possible values for this parameter include: ''
-        /// </param>
+        /// '' string value. Possible values for this parameter include: ''/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1746,8 +1728,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null (no query parameter in url)
         /// </summary>
         /// <param name='stringQuery'>
-        /// null string value
-        /// </param>
+        /// null string value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1841,8 +1822,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='enumQuery'>
         /// 'green color' enum value. Possible values for this parameter include: 'red
-        /// color', 'green color', 'blue color'
-        /// </param>
+        /// color', 'green color', 'blue color'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1936,8 +1916,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='enumQuery'>
         /// null string value. Possible values for this parameter include: 'red
-        /// color', 'green color', 'blue color'
-        /// </param>
+        /// color', 'green color', 'blue color'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2030,8 +2009,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// </summary>
         /// <param name='byteQuery'>
-        /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-        /// </param>
+        /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2124,8 +2102,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '' as byte array
         /// </summary>
         /// <param name='byteQuery'>
-        /// '' as byte array
-        /// </param>
+        /// '' as byte array/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2218,8 +2195,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null as byte array (no query parameters in uri)
         /// </summary>
         /// <param name='byteQuery'>
-        /// null as byte array (no query parameters in uri)
-        /// </param>
+        /// null as byte array (no query parameters in uri)/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2312,8 +2288,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '2012-01-01' as date
         /// </summary>
         /// <param name='dateQuery'>
-        /// '2012-01-01' as date
-        /// </param>
+        /// '2012-01-01' as date/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2406,8 +2381,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null as date - this should result in no query parameters in uri
         /// </summary>
         /// <param name='dateQuery'>
-        /// null as date (no query parameters in uri)
-        /// </param>
+        /// null as date (no query parameters in uri)/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2500,8 +2474,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '2012-01-01T01:01:01Z' as date-time
         /// </summary>
         /// <param name='dateTimeQuery'>
-        /// '2012-01-01T01:01:01Z' as date-time
-        /// </param>
+        /// '2012-01-01T01:01:01Z' as date-time/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2594,8 +2567,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null as date-time, should result in no query parameters in uri
         /// </summary>
         /// <param name='dateTimeQuery'>
-        /// null as date-time (no query parameters)
-        /// </param>
+        /// null as date-time (no query parameters)/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2690,8 +2662,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the csv-array format
-        /// </param>
+        /// null, ''] using the csv-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2784,8 +2755,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get a null array of string using the csv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// a null array of string using the csv-array format
-        /// </param>
+        /// a null array of string using the csv-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2878,8 +2848,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get an empty array [] of string using the csv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an empty array [] of string using the csv-array format
-        /// </param>
+        /// an empty array [] of string using the csv-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2974,8 +2943,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the ssv-array format
-        /// </param>
+        /// null, ''] using the ssv-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -3070,8 +3038,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the tsv-array format
-        /// </param>
+        /// null, ''] using the tsv-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -3166,8 +3133,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the pipes-array format
-        /// </param>
+        /// null, ''] using the pipes-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
