@@ -4533,9 +4533,6 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
-            }
           }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -4647,9 +4644,6 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
           for(var valueElement in parsedResponse) {
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
-            }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
             }
           }
         }
@@ -4764,9 +4758,6 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
-            }
           }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -4879,9 +4870,6 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
           for(var valueElement in parsedResponse) {
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
-            }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
             }
           }
         }
@@ -4996,9 +4984,6 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
-            }
           }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -5082,9 +5067,6 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
       for(var valueElement1 in arrayBody) {
         if (arrayBody[valueElement1]) {
           arrayBody[valueElement1] = new client._models['Widget'](arrayBody[valueElement1]);
-        }
-        else {
-          arrayBody[valueElement1] = arrayBody[valueElement1];
         }
       }
     }

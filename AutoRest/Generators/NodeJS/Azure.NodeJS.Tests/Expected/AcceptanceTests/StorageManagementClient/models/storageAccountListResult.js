@@ -38,7 +38,7 @@ function StorageAccountListResult(parameters) {
       });
       this.value = tempParametersvalue;
     }
-    if (parameters.nextLink !== null && parameters.nextLink !== undefined) {
+    if (parameters.nextLink !== undefined) {
       this.nextLink = parameters.nextLink;
     }
   }    
@@ -94,7 +94,7 @@ StorageAccountListResult.prototype.deserialize = function (instance) {
       this['value'] = tempInstancevalue;
     }
 
-    if (instance['nextLink'] !== null && instance['nextLink'] !== undefined) {
+    if (instance['nextLink'] !== undefined) {
       this['nextLink'] = instance['nextLink'];
     }
   }

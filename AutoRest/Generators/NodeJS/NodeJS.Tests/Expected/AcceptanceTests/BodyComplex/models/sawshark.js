@@ -24,7 +24,7 @@ var util = require('util');
 function Sawshark(parameters) {
   Sawshark['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.picture !== null && parameters.picture !== undefined) {
+    if (parameters.picture !== undefined) {
       this.picture = parameters.picture;
     }
   }    
@@ -59,8 +59,11 @@ Sawshark.prototype.serialize = function () {
 Sawshark.prototype.deserialize = function (instance) {
   Sawshark['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['picture'] !== null && instance['picture'] !== undefined) {
+    if (instance['picture']) {
       this['picture'] = new Buffer(instance['picture'], 'base64');
+    }
+    else if (instance['picture'] !== undefined) {
+      this['picture'] = instance['picture'];
     }
   }
 

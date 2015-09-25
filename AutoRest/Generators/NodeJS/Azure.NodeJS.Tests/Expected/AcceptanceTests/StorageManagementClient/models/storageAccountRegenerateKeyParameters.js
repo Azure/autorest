@@ -20,7 +20,7 @@
  */
 function StorageAccountRegenerateKeyParameters(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.keyName !== null && parameters.keyName !== undefined) {
+    if (parameters.keyName !== undefined) {
       this.keyName = parameters.keyName;
     }
   }    
@@ -55,7 +55,7 @@ StorageAccountRegenerateKeyParameters.prototype.serialize = function () {
  */
 StorageAccountRegenerateKeyParameters.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['keyName'] !== null && instance['keyName'] !== undefined) {
+    if (instance['keyName'] !== undefined) {
       this['keyName'] = instance['keyName'];
     }
   }

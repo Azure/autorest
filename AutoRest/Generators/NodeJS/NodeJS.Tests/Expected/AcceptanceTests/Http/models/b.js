@@ -24,7 +24,7 @@ var util = require('util');
 function B(parameters) {
   B['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.textStatusCode !== null && parameters.textStatusCode !== undefined) {
+    if (parameters.textStatusCode !== undefined) {
       this.textStatusCode = parameters.textStatusCode;
     }
   }    
@@ -59,7 +59,7 @@ B.prototype.serialize = function () {
 B.prototype.deserialize = function (instance) {
   B['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['textStatusCode'] !== null && instance['textStatusCode'] !== undefined) {
+    if (instance['textStatusCode'] !== undefined) {
       this['textStatusCode'] = instance['textStatusCode'];
     }
   }

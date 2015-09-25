@@ -24,13 +24,13 @@
  */
 function Basic(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== null && parameters.id !== undefined) {
+    if (parameters.id !== undefined) {
       this.id = parameters.id;
     }
-    if (parameters.name !== null && parameters.name !== undefined) {
+    if (parameters.name !== undefined) {
       this.name = parameters.name;
     }
-    if (parameters.color !== null && parameters.color !== undefined) {
+    if (parameters.color !== undefined) {
       this.color = parameters.color;
     }
   }    
@@ -79,15 +79,15 @@ Basic.prototype.serialize = function () {
  */
 Basic.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['id'] !== null && instance['id'] !== undefined) {
+    if (instance['id'] !== undefined) {
       this['id'] = instance['id'];
     }
 
-    if (instance['name'] !== null && instance['name'] !== undefined) {
+    if (instance['name'] !== undefined) {
       this['name'] = instance['name'];
     }
 
-    if (instance['color'] !== null && instance['color'] !== undefined) {
+    if (instance['color'] !== undefined) {
       this['color'] = instance['color'];
     }
   }

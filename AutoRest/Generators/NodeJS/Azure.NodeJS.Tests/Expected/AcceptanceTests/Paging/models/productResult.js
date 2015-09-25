@@ -35,7 +35,7 @@ function ProductResult(parameters) {
       });
       this.values = tempParametersvalues;
     }
-    if (parameters.nextLink !== null && parameters.nextLink !== undefined) {
+    if (parameters.nextLink !== undefined) {
       this.nextLink = parameters.nextLink;
     }
   }    
@@ -91,7 +91,7 @@ ProductResult.prototype.deserialize = function (instance) {
       this['values'] = tempInstancevalues;
     }
 
-    if (instance['nextLink'] !== null && instance['nextLink'] !== undefined) {
+    if (instance['nextLink'] !== undefined) {
       this['nextLink'] = instance['nextLink'];
     }
   }

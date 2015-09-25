@@ -37,13 +37,13 @@ var models = require('./index');
  */
 function Usage(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.unit !== null && parameters.unit !== undefined) {
+    if (parameters.unit !== undefined) {
       this.unit = parameters.unit;
     }
-    if (parameters.currentValue !== null && parameters.currentValue !== undefined) {
+    if (parameters.currentValue !== undefined) {
       this.currentValue = parameters.currentValue;
     }
-    if (parameters.limit !== null && parameters.limit !== undefined) {
+    if (parameters.limit !== undefined) {
       this.limit = parameters.limit;
     }
     if (parameters.name) {
@@ -99,15 +99,15 @@ Usage.prototype.serialize = function () {
  */
 Usage.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['unit'] !== null && instance['unit'] !== undefined) {
+    if (instance['unit'] !== undefined) {
       this['unit'] = instance['unit'];
     }
 
-    if (instance['currentValue'] !== null && instance['currentValue'] !== undefined) {
+    if (instance['currentValue'] !== undefined) {
       this['currentValue'] = instance['currentValue'];
     }
 
-    if (instance['limit'] !== null && instance['limit'] !== undefined) {
+    if (instance['limit'] !== undefined) {
       this['limit'] = instance['limit'];
     }
 

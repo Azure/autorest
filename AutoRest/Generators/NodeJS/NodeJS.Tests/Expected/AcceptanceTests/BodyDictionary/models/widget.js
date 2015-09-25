@@ -21,10 +21,10 @@
  */
 function Widget(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.integer !== null && parameters.integer !== undefined) {
+    if (parameters.integer !== undefined) {
       this.integer = parameters.integer;
     }
-    if (parameters.string !== null && parameters.string !== undefined) {
+    if (parameters.string !== undefined) {
       this.string = parameters.string;
     }
   }    
@@ -64,11 +64,11 @@ Widget.prototype.serialize = function () {
  */
 Widget.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['integer'] !== null && instance['integer'] !== undefined) {
+    if (instance['integer'] !== undefined) {
       this['integer'] = instance['integer'];
     }
 
-    if (instance['string'] !== null && instance['string'] !== undefined) {
+    if (instance['string'] !== undefined) {
       this['string'] = instance['string'];
     }
   }

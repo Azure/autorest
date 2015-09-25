@@ -21,10 +21,10 @@
  */
 function Pet(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== null && parameters.id !== undefined) {
+    if (parameters.id !== undefined) {
       this.id = parameters.id;
     }
-    if (parameters.name !== null && parameters.name !== undefined) {
+    if (parameters.name !== undefined) {
       this.name = parameters.name;
     }
   }    
@@ -64,11 +64,11 @@ Pet.prototype.serialize = function () {
  */
 Pet.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['id'] !== null && instance['id'] !== undefined) {
+    if (instance['id'] !== undefined) {
       this['id'] = instance['id'];
     }
 
-    if (instance['name'] !== null && instance['name'] !== undefined) {
+    if (instance['name'] !== undefined) {
       this['name'] = instance['name'];
     }
   }

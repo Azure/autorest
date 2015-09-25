@@ -19,7 +19,7 @@
  */
 function ByteWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== null && parameters.field !== undefined) {
+    if (parameters.field !== undefined) {
       this.field = parameters.field;
     }
   }    
@@ -52,8 +52,11 @@ ByteWrapper.prototype.serialize = function () {
  */
 ByteWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['field'] !== null && instance['field'] !== undefined) {
+    if (instance['field']) {
       this['field'] = new Buffer(instance['field'], 'base64');
+    }
+    else if (instance['field'] !== undefined) {
+      this['field'] = instance['field'];
     }
   }
 

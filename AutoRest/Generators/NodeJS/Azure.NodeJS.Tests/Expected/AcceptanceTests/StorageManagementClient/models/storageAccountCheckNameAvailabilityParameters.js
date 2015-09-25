@@ -21,10 +21,10 @@
  */
 function StorageAccountCheckNameAvailabilityParameters(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== null && parameters.name !== undefined) {
+    if (parameters.name !== undefined) {
       this.name = parameters.name;
     }
-    if (parameters.type !== null && parameters.type !== undefined) {
+    if (parameters.type !== undefined) {
       this.type = parameters.type;
     }
   }    
@@ -64,11 +64,11 @@ StorageAccountCheckNameAvailabilityParameters.prototype.serialize = function () 
  */
 StorageAccountCheckNameAvailabilityParameters.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['name'] !== null && instance['name'] !== undefined) {
+    if (instance['name'] !== undefined) {
       this['name'] = instance['name'];
     }
 
-    if (instance['type'] !== null && instance['type'] !== undefined) {
+    if (instance['type'] !== undefined) {
       this['type'] = instance['type'];
     }
   }

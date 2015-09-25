@@ -21,10 +21,10 @@
  */
 function FloatWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.field1 !== null && parameters.field1 !== undefined) {
+    if (parameters.field1 !== undefined) {
       this.field1 = parameters.field1;
     }
-    if (parameters.field2 !== null && parameters.field2 !== undefined) {
+    if (parameters.field2 !== undefined) {
       this.field2 = parameters.field2;
     }
   }    
@@ -64,11 +64,11 @@ FloatWrapper.prototype.serialize = function () {
  */
 FloatWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['field1'] !== null && instance['field1'] !== undefined) {
+    if (instance['field1'] !== undefined) {
       this['field1'] = instance['field1'];
     }
 
-    if (instance['field2'] !== null && instance['field2'] !== undefined) {
+    if (instance['field2'] !== undefined) {
       this['field2'] = instance['field2'];
     }
   }

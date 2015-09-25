@@ -26,10 +26,10 @@ var util = require('util');
 function Shark(parameters) {
   Shark['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.age !== null && parameters.age !== undefined) {
+    if (parameters.age !== undefined) {
       this.age = parameters.age;
     }
-    if (parameters.birthday !== null && parameters.birthday !== undefined) {
+    if (parameters.birthday !== undefined) {
       this.birthday = parameters.birthday;
     }
   }    
@@ -69,12 +69,15 @@ Shark.prototype.serialize = function () {
 Shark.prototype.deserialize = function (instance) {
   Shark['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['age'] !== null && instance['age'] !== undefined) {
+    if (instance['age'] !== undefined) {
       this['age'] = instance['age'];
     }
 
-    if (instance['birthday'] !== null && instance['birthday'] !== undefined) {
+    if (instance['birthday']) {
       this['birthday'] = new Date(instance['birthday']);
+    }
+    else if (instance['birthday'] !== undefined) {
+      this['birthday'] = instance['birthday'];
     }
   }
 

@@ -19,7 +19,7 @@
  */
 function A(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.statusCode !== null && parameters.statusCode !== undefined) {
+    if (parameters.statusCode !== undefined) {
       this.statusCode = parameters.statusCode;
     }
   }    
@@ -52,7 +52,7 @@ A.prototype.serialize = function () {
  */
 A.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['statusCode'] !== null && instance['statusCode'] !== undefined) {
+    if (instance['statusCode'] !== undefined) {
       this['statusCode'] = instance['statusCode'];
     }
   }

@@ -26,7 +26,7 @@ var util = require('util');
 function Cat(parameters) {
   Cat['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.color !== null && parameters.color !== undefined) {
+    if (parameters.color !== undefined) {
       this.color = parameters.color;
     }
     if (parameters.hates) {
@@ -83,7 +83,7 @@ Cat.prototype.serialize = function () {
 Cat.prototype.deserialize = function (instance) {
   Cat['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['color'] !== null && instance['color'] !== undefined) {
+    if (instance['color'] !== undefined) {
       this['color'] = instance['color'];
     }
 

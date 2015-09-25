@@ -21,10 +21,10 @@
  */
 function ErrorModel(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.code !== null && parameters.code !== undefined) {
+    if (parameters.code !== undefined) {
       this.code = parameters.code;
     }
-    if (parameters.message !== null && parameters.message !== undefined) {
+    if (parameters.message !== undefined) {
       this.message = parameters.message;
     }
   }    
@@ -64,11 +64,11 @@ ErrorModel.prototype.serialize = function () {
  */
 ErrorModel.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['code'] !== null && instance['code'] !== undefined) {
+    if (instance['code'] !== undefined) {
       this['code'] = instance['code'];
     }
 
-    if (instance['message'] !== null && instance['message'] !== undefined) {
+    if (instance['message'] !== undefined) {
       this['message'] = instance['message'];
     }
   }

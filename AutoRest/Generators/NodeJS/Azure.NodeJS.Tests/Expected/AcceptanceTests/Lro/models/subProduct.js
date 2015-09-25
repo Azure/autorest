@@ -28,10 +28,10 @@ var util = require('util');
 function SubProduct(parameters) {
   SubProduct['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.provisioningState !== null && parameters.provisioningState !== undefined) {
+    if (parameters.provisioningState !== undefined) {
       this.provisioningState = parameters.provisioningState;
     }
-    if (parameters.provisioningStateValues !== null && parameters.provisioningStateValues !== undefined) {
+    if (parameters.provisioningStateValues !== undefined) {
       this.provisioningStateValues = parameters.provisioningStateValues;
     }
   }    
@@ -80,19 +80,13 @@ SubProduct.prototype.deserialize = function (instance) {
   SubProduct['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
-        this['provisioningState'] = instance['properties']['provisioningState'];
-      }
-      else {
+      if (instance['properties']['provisioningState'] !== undefined) {
         this['provisioningState'] = instance['properties']['provisioningState'];
       }
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['provisioningStateValues'] !== null && instance['properties']['provisioningStateValues'] !== undefined) {
-        this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
-      }
-      else {
+      if (instance['properties']['provisioningStateValues'] !== undefined) {
         this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
       }
     }

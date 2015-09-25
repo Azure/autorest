@@ -41,7 +41,7 @@ var util = require('util');
 function StorageAccountUpdateParameters(parameters) {
   StorageAccountUpdateParameters['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.accountType !== null && parameters.accountType !== undefined) {
+    if (parameters.accountType !== undefined) {
       this.accountType = parameters.accountType;
     }
     if (parameters.customDomain) {
@@ -92,10 +92,7 @@ StorageAccountUpdateParameters.prototype.deserialize = function (instance) {
   StorageAccountUpdateParameters['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['accountType'] !== null && instance['properties']['accountType'] !== undefined) {
-        this['accountType'] = instance['properties']['accountType'];
-      }
-      else {
+      if (instance['properties']['accountType'] !== undefined) {
         this['accountType'] = instance['properties']['accountType'];
       }
     }
@@ -103,9 +100,6 @@ StorageAccountUpdateParameters.prototype.deserialize = function (instance) {
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
       if (instance['properties']['customDomain']) {
         this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
-      }
-      else {
-        this['customDomain'] = instance['properties']['customDomain'];
       }
     }
   }
