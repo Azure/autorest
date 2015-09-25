@@ -5,7 +5,16 @@
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Ruby.MethodTemplateModel>
 
 #
-@WrapComment("# ", Model.Documentation)
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+  @WrapComment("# ", Model.Summary)@:
+@:#
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+  @WrapComment("# ", Model.Description)@:
+@:#
+}
 @foreach (var parameter in Model.LocalParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))

@@ -1,4 +1,5 @@
-﻿@using Microsoft.Rest.Generator.ClientModel
+@using System
+@using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Ruby
 @using Microsoft.Rest.Generator.Ruby.TemplateModels
 @using Microsoft.Rest.Generator.Ruby.Templates
@@ -12,7 +13,16 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 {
 <text>
 #
-@WrapComment("# ", Model.Documentation)
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+  @WrapComment("# ", Model.Summary)@:
+@:#
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+  @WrapComment("# ", Model.Description)@:
+@:#
+}
 @foreach (var parameter in Model.LocalParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
@@ -44,7 +54,16 @@ else
 {
 <text>
 #
-@WrapComment("# ", Model.Documentation)
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+  @WrapComment("# ", Model.Summary)@:
+@:#
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+  @WrapComment("# ", Model.Description)@:
+@:#
+}
 @foreach (var parameter in Model.Parameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
