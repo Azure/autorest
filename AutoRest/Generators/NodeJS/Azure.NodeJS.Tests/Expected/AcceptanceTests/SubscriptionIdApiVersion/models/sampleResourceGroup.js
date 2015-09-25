@@ -21,10 +21,10 @@
  */
 function SampleResourceGroup(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== null && parameters.name !== undefined) {
+    if (parameters.name !== undefined) {
       this.name = parameters.name;
     }
-    if (parameters.location !== null && parameters.location !== undefined) {
+    if (parameters.location !== undefined) {
       this.location = parameters.location;
     }
   }    
@@ -64,11 +64,11 @@ SampleResourceGroup.prototype.serialize = function () {
  */
 SampleResourceGroup.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['name'] !== null && instance['name'] !== undefined) {
+    if (instance['name'] !== undefined) {
       this['name'] = instance['name'];
     }
 
-    if (instance['location'] !== null && instance['location'] !== undefined) {
+    if (instance['location'] !== undefined) {
       this['location'] = instance['location'];
     }
   }

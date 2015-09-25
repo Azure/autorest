@@ -24,7 +24,7 @@ function ArrayOptionalWrapper(parameters) {
     if (parameters.value) {
       var tempParametersvalue = [];
       parameters.value.forEach(function(element) {
-        if (element !== null && element !== undefined) {
+        if (element !== undefined) {
           element = element;
         }
         tempParametersvalue.push(element);
@@ -72,7 +72,7 @@ ArrayOptionalWrapper.prototype.deserialize = function (instance) {
     if (instance['value']) {
       var tempInstancevalue = [];
       instance['value'].forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
+        if (element1 !== undefined) {
           element1 = element1;
         }
         tempInstancevalue.push(element1);

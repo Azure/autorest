@@ -826,22 +826,39 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (primary != null)
             {
-                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference).Indent();
                 if (primary == PrimaryType.ByteArray)
                 {
-                    builder.AppendLine("{1} = new Buffer({0}, 'base64');", valueReference, objectReference);
+                    builder.AppendLine("if ({0}) {{", valueReference)
+                             .Indent()
+                             .AppendLine("{1} = new Buffer({0}, 'base64');", valueReference, objectReference)
+                           .Outdent().AppendLine("}")
+                           .AppendLine("else if ({0} !== undefined) {{", valueReference)
+                             .Indent()
+                             .AppendLine("{1} = {0};", valueReference, objectReference)
+                           .Outdent()
+                           .AppendLine("}");
                 }
                 else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
                 {
-                    builder.AppendLine("{1} = new Date({0});", valueReference, objectReference);
+                    builder.AppendLine("if ({0}) {{", valueReference)
+                             .Indent()
+                             .AppendLine("{1} = new Date({0});", valueReference, objectReference)
+                           .Outdent()
+                           .AppendLine("}")
+                           .AppendLine("else if ({0} !== undefined) {{", valueReference)
+                             .Indent()
+                             .AppendLine("{1} = {0};", valueReference, objectReference)
+                           .Outdent()
+                           .AppendLine("}");
                 }
                 else
                 {
-                    builder.AppendLine("{1} = {0};", valueReference, objectReference);
-                           
+                    builder.AppendLine("if ({0} !== undefined) {{", valueReference)
+                             .Indent()
+                             .AppendLine("{1} = {0};", valueReference, objectReference)
+                           .Outdent()
+                           .AppendLine("}");
                 }
-
-                builder.Outdent().AppendLine("}");
             }
             else if (composite != null && composite.Properties.Any())
             {
@@ -858,13 +875,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             if (baseProperty != null)
             {
-                builder.AppendLine("else {")
-                         .Indent()
-                         .AppendLine("{0} = {1};", objectReference, valueReference)
-                       .Outdent()
-                       .AppendLine("}")
-                     .Outdent()
-                     .AppendLine("}");
+                builder.Outdent().AppendLine("}");
             }
 
             return builder.ToString();
@@ -933,7 +944,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
         private static IndentedStringBuilder ProcessBasicType(string objectReference, string valueReference, IndentedStringBuilder builder)
         {
-            return builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference)
+            return builder.AppendLine("if ({0} !== undefined) {{", valueReference)
                             .Indent()
                             .AppendLine("{0} = {1};", objectReference, valueReference)
                           .Outdent()
@@ -1046,11 +1057,6 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
                          .Indent()
                          .AppendLine(innerInitialization)
-                         .AppendLine("else {")
-                           .Indent()
-                           .AppendLine("{0} = {1};", elementObjectReference, elementValueReference)
-                         .Outdent()
-                         .AppendLine("}")
                        .Outdent()
                        .AppendLine("}")
                      .Outdent()

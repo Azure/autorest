@@ -25,13 +25,13 @@
  */
 function Endpoints(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.blob !== null && parameters.blob !== undefined) {
+    if (parameters.blob !== undefined) {
       this.blob = parameters.blob;
     }
-    if (parameters.queue !== null && parameters.queue !== undefined) {
+    if (parameters.queue !== undefined) {
       this.queue = parameters.queue;
     }
-    if (parameters.table !== null && parameters.table !== undefined) {
+    if (parameters.table !== undefined) {
       this.table = parameters.table;
     }
   }    
@@ -78,15 +78,15 @@ Endpoints.prototype.serialize = function () {
  */
 Endpoints.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['blob'] !== null && instance['blob'] !== undefined) {
+    if (instance['blob'] !== undefined) {
       this['blob'] = instance['blob'];
     }
 
-    if (instance['queue'] !== null && instance['queue'] !== undefined) {
+    if (instance['queue'] !== undefined) {
       this['queue'] = instance['queue'];
     }
 
-    if (instance['table'] !== null && instance['table'] !== undefined) {
+    if (instance['table'] !== undefined) {
       this['table'] = instance['table'];
     }
   }

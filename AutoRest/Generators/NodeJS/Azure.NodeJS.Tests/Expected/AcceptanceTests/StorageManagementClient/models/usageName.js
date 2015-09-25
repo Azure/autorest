@@ -23,10 +23,10 @@
  */
 function UsageName(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== null && parameters.value !== undefined) {
+    if (parameters.value !== undefined) {
       this.value = parameters.value;
     }
-    if (parameters.localizedValue !== null && parameters.localizedValue !== undefined) {
+    if (parameters.localizedValue !== undefined) {
       this.localizedValue = parameters.localizedValue;
     }
   }    
@@ -66,11 +66,11 @@ UsageName.prototype.serialize = function () {
  */
 UsageName.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['value'] !== null && instance['value'] !== undefined) {
+    if (instance['value'] !== undefined) {
       this['value'] = instance['value'];
     }
 
-    if (instance['localizedValue'] !== null && instance['localizedValue'] !== undefined) {
+    if (instance['localizedValue'] !== undefined) {
       this['localizedValue'] = instance['localizedValue'];
     }
   }

@@ -56,9 +56,6 @@ function ResourceCollection(parameters) {
         if (parameters.dictionaryofresources[valueElement]) {
           this.dictionaryofresources[valueElement] = new models['FlattenedProduct'](parameters.dictionaryofresources[valueElement]);
         }
-        else {
-          this.dictionaryofresources[valueElement] = parameters.dictionaryofresources[valueElement];
-        }
       }
     }
   }    
@@ -137,12 +134,6 @@ ResourceCollection.prototype.deserialize = function (instance) {
           if (instance['dictionaryofresources'][valueElement2]) {
             this['dictionaryofresources'][valueElement2] = new models['FlattenedProduct']().deserialize(instance['dictionaryofresources'][valueElement2]);
           }
-          else {
-            this['dictionaryofresources'][valueElement2] = instance['dictionaryofresources'][valueElement2];
-          }
-        }
-        else {
-          this['dictionaryofresources'][valueElement2] = instance['dictionaryofresources'][valueElement2];
         }
       }
     }

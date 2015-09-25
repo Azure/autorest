@@ -26,10 +26,10 @@
  */
 function CustomDomain(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== null && parameters.name !== undefined) {
+    if (parameters.name !== undefined) {
       this.name = parameters.name;
     }
-    if (parameters.useSubDomain !== null && parameters.useSubDomain !== undefined) {
+    if (parameters.useSubDomain !== undefined) {
       this.useSubDomain = parameters.useSubDomain;
     }
   }    
@@ -69,11 +69,11 @@ CustomDomain.prototype.serialize = function () {
  */
 CustomDomain.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['name'] !== null && instance['name'] !== undefined) {
+    if (instance['name'] !== undefined) {
       this['name'] = instance['name'];
     }
 
-    if (instance['useSubDomain'] !== null && instance['useSubDomain'] !== undefined) {
+    if (instance['useSubDomain'] !== undefined) {
       this['useSubDomain'] = instance['useSubDomain'];
     }
   }

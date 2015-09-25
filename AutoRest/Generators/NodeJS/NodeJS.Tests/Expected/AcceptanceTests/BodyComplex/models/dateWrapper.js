@@ -21,10 +21,10 @@
  */
 function DateWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== null && parameters.field !== undefined) {
+    if (parameters.field !== undefined) {
       this.field = parameters.field;
     }
-    if (parameters.leap !== null && parameters.leap !== undefined) {
+    if (parameters.leap !== undefined) {
       this.leap = parameters.leap;
     }
   }    
@@ -64,12 +64,18 @@ DateWrapper.prototype.serialize = function () {
  */
 DateWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['field'] !== null && instance['field'] !== undefined) {
+    if (instance['field']) {
       this['field'] = new Date(instance['field']);
     }
+    else if (instance['field'] !== undefined) {
+      this['field'] = instance['field'];
+    }
 
-    if (instance['leap'] !== null && instance['leap'] !== undefined) {
+    if (instance['leap']) {
       this['leap'] = new Date(instance['leap']);
+    }
+    else if (instance['leap'] !== undefined) {
+      this['leap'] = instance['leap'];
     }
   }
 

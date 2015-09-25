@@ -22,10 +22,10 @@
  */
 function StorageAccountKeys(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.key1 !== null && parameters.key1 !== undefined) {
+    if (parameters.key1 !== undefined) {
       this.key1 = parameters.key1;
     }
-    if (parameters.key2 !== null && parameters.key2 !== undefined) {
+    if (parameters.key2 !== undefined) {
       this.key2 = parameters.key2;
     }
   }    
@@ -65,11 +65,11 @@ StorageAccountKeys.prototype.serialize = function () {
  */
 StorageAccountKeys.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['key1'] !== null && instance['key1'] !== undefined) {
+    if (instance['key1'] !== undefined) {
       this['key1'] = instance['key1'];
     }
 
-    if (instance['key2'] !== null && instance['key2'] !== undefined) {
+    if (instance['key2'] !== undefined) {
       this['key2'] = instance['key2'];
     }
   }

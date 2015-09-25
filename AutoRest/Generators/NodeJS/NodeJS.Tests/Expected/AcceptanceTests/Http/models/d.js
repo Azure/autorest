@@ -19,7 +19,7 @@
  */
 function D(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.httpStatusCode !== null && parameters.httpStatusCode !== undefined) {
+    if (parameters.httpStatusCode !== undefined) {
       this.httpStatusCode = parameters.httpStatusCode;
     }
   }    
@@ -52,7 +52,7 @@ D.prototype.serialize = function () {
  */
 D.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['httpStatusCode'] !== null && instance['httpStatusCode'] !== undefined) {
+    if (instance['httpStatusCode'] !== undefined) {
       this['httpStatusCode'] = instance['httpStatusCode'];
     }
   }

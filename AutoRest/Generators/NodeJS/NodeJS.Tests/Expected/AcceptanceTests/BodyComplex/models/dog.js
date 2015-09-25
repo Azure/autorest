@@ -24,7 +24,7 @@ var util = require('util');
 function Dog(parameters) {
   Dog['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.food !== null && parameters.food !== undefined) {
+    if (parameters.food !== undefined) {
       this.food = parameters.food;
     }
   }    
@@ -59,7 +59,7 @@ Dog.prototype.serialize = function () {
 Dog.prototype.deserialize = function (instance) {
   Dog['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['food'] !== null && instance['food'] !== undefined) {
+    if (instance['food'] !== undefined) {
       this['food'] = instance['food'];
     }
   }
