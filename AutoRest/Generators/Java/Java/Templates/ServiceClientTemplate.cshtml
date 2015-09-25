@@ -1,4 +1,5 @@
-﻿@using Microsoft.Rest.Generator.Java
+@using System
+@using Microsoft.Rest.Generator.Java
 @using Microsoft.Rest.Generator.Java.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
@@ -48,7 +49,7 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @:        return this.@(property.Name.ToCamelCase());
 @:    }
 if(!property.IsReadOnly)
-{ 
+{
 @EmptyLine
 @:    /**
 @:     * Sets @(property.Documentation)
@@ -132,7 +133,14 @@ if(!property.IsReadOnly)
 @foreach (var method in Model.MethodTemplateModels)
     {
     @:/**
-    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    if (!String.IsNullOrEmpty(method.Summary))
+    {
+    @: * @method.Summary.EscapeXmlComment()
+    }
+    if (!String.IsNullOrEmpty(method.Description))
+    {
+    @: * @method.Description.EscapeXmlComment()
+    }
     @: *
     @foreach (var param in method.LocalParameters)
     {
@@ -155,7 +163,14 @@ if(!property.IsReadOnly)
     @:}
     @EmptyLine
     @:/**
-    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    if (!String.IsNullOrEmpty(method.Summary))
+    {
+    @: * @method.Summary.EscapeXmlComment()
+    }
+    if (!String.IsNullOrEmpty(method.Description))
+    {
+    @: * @method.Description.EscapeXmlComment()
+    }
     @: *
     @foreach (var param in method.LocalParameters)
     {

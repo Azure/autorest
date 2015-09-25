@@ -1214,8 +1214,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1231,8 +1230,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1342,8 +1340,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1359,8 +1356,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1386,8 +1382,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1403,8 +1398,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1430,8 +1424,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1447,8 +1440,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

@@ -219,8 +219,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
-     * Get complex types with array property while server doesn't provide a
-     * response payload
+     * Get complex types with array property while server doesn't provide a response payload
      *
      * @return the ArrayWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -236,8 +235,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
-     * Get complex types with array property while server doesn't provide a
-     * response payload
+     * Get complex types with array property while server doesn't provide a response payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

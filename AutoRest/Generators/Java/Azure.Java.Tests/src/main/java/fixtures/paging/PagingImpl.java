@@ -114,8 +114,7 @@ public class PagingImpl implements Paging {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then
-     * retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -131,8 +130,7 @@ public class PagingImpl implements Paging {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then
-     * retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -157,9 +155,7 @@ public class PagingImpl implements Paging {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which
-     * the 2nd call fails first with 500. The client should retry and finish
-     * all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -175,9 +171,7 @@ public class PagingImpl implements Paging {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which
-     * the 2nd call fails first with 500. The client should retry and finish
-     * all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -427,8 +421,7 @@ public class PagingImpl implements Paging {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then
-     * retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @return the ProductResult object if successful.
@@ -449,8 +442,7 @@ public class PagingImpl implements Paging {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then
-     * retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -480,9 +472,7 @@ public class PagingImpl implements Paging {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which
-     * the 2nd call fails first with 500. The client should retry and finish
-     * all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @return the ProductResult object if successful.
@@ -503,9 +493,7 @@ public class PagingImpl implements Paging {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which
-     * the 2nd call fails first with 500. The client should retry and finish
-     * all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

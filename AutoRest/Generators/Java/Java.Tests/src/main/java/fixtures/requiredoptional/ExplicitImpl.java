@@ -44,8 +44,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required integer. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
      * @return the Error object if successful.
@@ -62,8 +61,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required integer. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -130,9 +128,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
      * @return the Error object if successful.
@@ -154,9 +150,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -186,8 +180,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional integer. Please put a valid int-wrapper with
-     * 'value' = null.
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -203,8 +196,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional integer. Please put a valid int-wrapper with
-     * 'value' = null.
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -230,9 +222,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
      * @return the Error object if successful.
@@ -249,9 +239,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -276,8 +264,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -293,8 +280,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -320,8 +306,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required string. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
      * @return the Error object if successful.
@@ -342,8 +327,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required string. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -414,9 +398,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
      * @return the Error object if successful.
@@ -438,9 +420,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -470,8 +450,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional integer. Please put a valid string-wrapper
-     * with 'value' = null.
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -487,8 +466,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional integer. Please put a valid string-wrapper
-     * with 'value' = null.
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -514,9 +492,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
      * @return the Error object if successful.
@@ -537,9 +513,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -568,8 +542,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional string. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -585,8 +558,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional string. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -612,8 +584,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required complex object. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
      * @return the Error object if successful.
@@ -635,8 +606,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required complex object. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -708,9 +678,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required complex object. Please put a valid
-     * class-wrapper with 'value' = null and the client library should throw
-     * before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
      * @return the Error object if successful.
@@ -732,9 +700,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required complex object. Please put a valid
-     * class-wrapper with 'value' = null and the client library should throw
-     * before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -764,8 +730,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional complex object. Please put a valid
-     * class-wrapper with 'value' = null.
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -781,8 +746,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional complex object. Please put a valid
-     * class-wrapper with 'value' = null.
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -808,8 +772,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required array. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @return the Error object if successful.
@@ -831,8 +794,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required array. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -904,9 +866,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
      * @return the Error object if successful.
@@ -928,9 +888,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -960,8 +918,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional array. Please put a valid array-wrapper with
-     * 'value' = null.
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -977,8 +934,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional array. Please put a valid array-wrapper with
-     * 'value' = null.
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1004,9 +960,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @return the Error object if successful.
@@ -1028,9 +982,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1060,8 +1012,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1077,8 +1028,7 @@ public class ExplicitImpl implements Explicit {
     }
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

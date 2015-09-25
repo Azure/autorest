@@ -685,8 +685,7 @@ public interface Queries {
     void dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -694,8 +693,7 @@ public interface Queries {
     void arrayStringCsvValid(List<String> arrayQuery) throws ServiceException;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -735,8 +733,7 @@ public interface Queries {
     void arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -744,8 +741,7 @@ public interface Queries {
     void arrayStringSsvValid(List<String> arrayQuery) throws ServiceException;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -753,8 +749,7 @@ public interface Queries {
     void arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -762,8 +757,7 @@ public interface Queries {
     void arrayStringTsvValid(List<String> arrayQuery) throws ServiceException;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -771,8 +765,7 @@ public interface Queries {
     void arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -780,8 +773,7 @@ public interface Queries {
     void arrayStringPipesValid(List<String> arrayQuery) throws ServiceException;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

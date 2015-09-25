@@ -335,8 +335,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
      *
      * @return the Map&lt;String, Boolean&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -352,8 +351,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -378,8 +376,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Set dictionary value empty {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -400,8 +397,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Set dictionary value empty {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1389,8 +1385,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
-     * "2": "1492-10-12"}
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1406,8 +1401,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
-     * "2": "1492-10-12"}
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1432,8 +1426,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
-     * "1492-10-12"}
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1454,8 +1447,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
-     * "1492-10-12"}
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1486,8 +1478,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
-     * "1776-07-04"}
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
      *
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1503,8 +1494,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
-     * "1776-07-04"}
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1570,8 +1560,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1587,8 +1576,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1613,8 +1601,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1635,8 +1622,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1708,8 +1694,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "date-time"}
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
      *
      * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1725,8 +1710,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "date-time"}
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1751,8 +1735,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each item encoded in base64
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64
      *
      * @return the Map&lt;String, byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1768,8 +1751,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each item encoded in base64
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1794,8 +1776,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each elementencoded in base 64
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1816,8 +1797,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each elementencoded in base 64
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1848,8 +1828,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
-     * first item base64 encoded
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
      *
      * @return the Map&lt;String, byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1865,8 +1844,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
-     * first item base64 encoded
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1973,8 +1951,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get dictionary of complex type with null item {"0": {"integer": 1,
-     * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
      *
      * @return the Map&lt;String, Widget&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1990,8 +1967,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get dictionary of complex type with null item {"0": {"integer": 1,
-     * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2016,8 +1992,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get dictionary of complex type with empty item {"0": {"integer": 1,
-     * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
      *
      * @return the Map&lt;String, Widget&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2033,8 +2008,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get dictionary of complex type with empty item {"0": {"integer": 1,
-     * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2059,9 +2033,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get dictionary of complex type with {"0": {"integer": 1, "string":
-     * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
-     * "string": "6"}}
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @return the Map&lt;String, Widget&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2077,9 +2049,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get dictionary of complex type with {"0": {"integer": 1, "string":
-     * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
-     * "string": "6"}}
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2104,9 +2074,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Put an dictionary of complex type with values {"0": {"integer": 1,
-     * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
-     * 5, "string": "6"}}
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2127,9 +2095,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Put an dictionary of complex type with values {"0": {"integer": 1,
-     * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
-     * 5, "string": "6"}}
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2242,8 +2208,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
-     * "2": ["7", "8", "9"]}
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
      *
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2259,8 +2224,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
-     * "2": ["7", "8", "9"]}
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2285,8 +2249,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
-     * ["7", "8", "9"]}
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
      *
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2302,8 +2265,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
-     * ["7", "8", "9"]}
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2328,8 +2290,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2345,8 +2306,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2371,8 +2331,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2393,8 +2352,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2466,8 +2424,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2483,8 +2440,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2509,9 +2465,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2527,9 +2481,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2554,9 +2506,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2572,9 +2522,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2599,10 +2547,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2618,10 +2563,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2646,10 +2588,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2670,10 +2609,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
