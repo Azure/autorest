@@ -467,8 +467,7 @@ public interface LROs {
 
     }
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -477,8 +476,7 @@ public interface LROs {
     Product put200Succeeded(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -486,8 +484,7 @@ public interface LROs {
     void put200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -496,8 +493,7 @@ public interface LROs {
     Product beginPut200Succeeded(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -505,8 +501,7 @@ public interface LROs {
     void beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that does not contain ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -515,8 +510,7 @@ public interface LROs {
     Product put200SucceededNoState(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that does not contain ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -524,8 +518,7 @@ public interface LROs {
     void put200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that does not contain ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -534,8 +527,7 @@ public interface LROs {
     Product beginPut200SucceededNoState(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that does not contain ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -543,9 +535,7 @@ public interface LROs {
     void beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 202 to the initial request,
-     * with a location header that points to a polling URL that returns a 200
-     * and an entity that doesn't contains ProvisioningState
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -554,9 +544,7 @@ public interface LROs {
     Product put202Retry200(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 202 to the initial request,
-     * with a location header that points to a polling URL that returns a 200
-     * and an entity that doesn't contains ProvisioningState
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -564,9 +552,7 @@ public interface LROs {
     void put202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 202 to the initial request,
-     * with a location header that points to a polling URL that returns a 200
-     * and an entity that doesn't contains ProvisioningState
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -575,9 +561,7 @@ public interface LROs {
     Product beginPut202Retry200(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 202 to the initial request,
-     * with a location header that points to a polling URL that returns a 200
-     * and an entity that doesn't contains ProvisioningState
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -585,10 +569,7 @@ public interface LROs {
     void beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -597,10 +578,7 @@ public interface LROs {
     Product put201CreatingSucceeded200(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -608,10 +586,7 @@ public interface LROs {
     void put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -620,10 +595,7 @@ public interface LROs {
     Product beginPut201CreatingSucceeded200(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -631,10 +603,7 @@ public interface LROs {
     void beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Updating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -643,10 +612,7 @@ public interface LROs {
     Product put200UpdatingSucceeded204(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Updating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -654,10 +620,7 @@ public interface LROs {
     void put200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Updating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -666,10 +629,7 @@ public interface LROs {
     Product beginPut200UpdatingSucceeded204(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Updating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -677,10 +637,7 @@ public interface LROs {
     void beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Created’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -689,10 +646,7 @@ public interface LROs {
     Product put201CreatingFailed200(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Created’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -700,10 +654,7 @@ public interface LROs {
     void put201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Created’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -712,10 +663,7 @@ public interface LROs {
     Product beginPut201CreatingFailed200(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Created’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -723,10 +671,7 @@ public interface LROs {
     void beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -735,10 +680,7 @@ public interface LROs {
     Product put200Acceptedcanceled200(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -746,10 +688,7 @@ public interface LROs {
     void put200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -758,10 +697,7 @@ public interface LROs {
     Product beginPut200Acceptedcanceled200(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls
-     * return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -769,9 +705,7 @@ public interface LROs {
     void beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 202 to the initial request
-     * with location header. Subsequent calls to operation status do not
-     * contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -780,9 +714,7 @@ public interface LROs {
     Product putNoHeaderInRetry(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 202 to the initial request
-     * with location header. Subsequent calls to operation status do not
-     * contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -790,9 +722,7 @@ public interface LROs {
     void putNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 202 to the initial request
-     * with location header. Subsequent calls to operation status do not
-     * contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -801,9 +731,7 @@ public interface LROs {
     Product beginPutNoHeaderInRetry(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 202 to the initial request
-     * with location header. Subsequent calls to operation status do not
-     * contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -811,10 +739,7 @@ public interface LROs {
     void beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -823,10 +748,7 @@ public interface LROs {
     Product putAsyncRetrySucceeded(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -834,10 +756,7 @@ public interface LROs {
     void putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -846,10 +765,7 @@ public interface LROs {
     Product beginPutAsyncRetrySucceeded(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -857,10 +773,7 @@ public interface LROs {
     void beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -869,10 +782,7 @@ public interface LROs {
     Product putAsyncNoRetrySucceeded(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -880,10 +790,7 @@ public interface LROs {
     void putAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -892,10 +799,7 @@ public interface LROs {
     Product beginPutAsyncNoRetrySucceeded(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -903,10 +807,7 @@ public interface LROs {
     void beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -915,10 +816,7 @@ public interface LROs {
     Product putAsyncRetryFailed(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -926,10 +824,7 @@ public interface LROs {
     void putAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -938,10 +833,7 @@ public interface LROs {
     Product beginPutAsyncRetryFailed(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -949,10 +841,7 @@ public interface LROs {
     void beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -961,10 +850,7 @@ public interface LROs {
     Product putAsyncNoRetrycanceled(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -972,10 +858,7 @@ public interface LROs {
     void putAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -984,10 +867,7 @@ public interface LROs {
     Product beginPutAsyncNoRetrycanceled(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -995,9 +875,7 @@ public interface LROs {
     void beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 202 to the initial request
-     * with Azure-AsyncOperation header. Subsequent calls to operation status
-     * do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1006,9 +884,7 @@ public interface LROs {
     Product putAsyncNoHeaderInRetry(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 202 to the initial request
-     * with Azure-AsyncOperation header. Subsequent calls to operation status
-     * do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1016,9 +892,7 @@ public interface LROs {
     void putAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 202 to the initial request
-     * with Azure-AsyncOperation header. Subsequent calls to operation status
-     * do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1027,9 +901,7 @@ public interface LROs {
     Product beginPutAsyncNoHeaderInRetry(Product product) throws ServiceException;
 
     /**
-     * Long running put request, service returns a 202 to the initial request
-     * with Azure-AsyncOperation header. Subsequent calls to operation status
-     * do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1173,10 +1045,7 @@ public interface LROs {
     void beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Accepted’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1184,20 +1053,14 @@ public interface LROs {
     Product deleteProvisioning202Accepted200Succeeded() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Accepted’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Accepted’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1205,20 +1068,14 @@ public interface LROs {
     Product beginDeleteProvisioning202Accepted200Succeeded() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Accepted’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
      *
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1226,20 +1083,14 @@ public interface LROs {
     Product deleteProvisioning202DeletingFailed200() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void deleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
      *
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1247,20 +1098,14 @@ public interface LROs {
     Product beginDeleteProvisioning202DeletingFailed200() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
      *
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1268,20 +1113,14 @@ public interface LROs {
     Product deleteProvisioning202Deletingcanceled200() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
      *
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1289,10 +1128,7 @@ public interface LROs {
     Product beginDeleteProvisioning202Deletingcanceled200() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1327,9 +1163,7 @@ public interface LROs {
     void beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Polls return this value until the last poll returns a ‘200’
-     * with ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1337,18 +1171,14 @@ public interface LROs {
     Product delete202Retry200() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Polls return this value until the last poll returns a ‘200’
-     * with ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void delete202Retry200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Polls return this value until the last poll returns a ‘200’
-     * with ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1356,18 +1186,14 @@ public interface LROs {
     Product beginDelete202Retry200() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Polls return this value until the last poll returns a ‘200’
-     * with ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Polls return this value until the last poll returns a ‘200’
-     * with ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1375,18 +1201,14 @@ public interface LROs {
     Product delete202NoRetry204() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Polls return this value until the last poll returns a ‘200’
-     * with ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void delete202NoRetry204Async(final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Polls return this value until the last poll returns a ‘200’
-     * with ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1394,234 +1216,182 @@ public interface LROs {
     Product beginDelete202NoRetry204() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Polls return this value until the last poll returns a ‘200’
-     * with ProvisioningState=’Succeeded’
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running delete request, service returns a location header in the
-     * initial request. Subsequent calls to operation status do not contain
-     * location header.
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void deleteNoHeaderInRetry() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a location header in the
-     * initial request. Subsequent calls to operation status do not contain
-     * location header.
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a location header in the
-     * initial request. Subsequent calls to operation status do not contain
-     * location header.
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void beginDeleteNoHeaderInRetry() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a location header in the
-     * initial request. Subsequent calls to operation status do not contain
-     * location header.
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns an Azure-AsyncOperation
-     * header in the initial request. Subsequent calls to operation status do
-     * not contain Azure-AsyncOperation header.
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void deleteAsyncNoHeaderInRetry() throws ServiceException;
 
     /**
-     * Long running delete request, service returns an Azure-AsyncOperation
-     * header in the initial request. Subsequent calls to operation status do
-     * not contain Azure-AsyncOperation header.
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns an Azure-AsyncOperation
-     * header in the initial request. Subsequent calls to operation status do
-     * not contain Azure-AsyncOperation header.
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void beginDeleteAsyncNoHeaderInRetry() throws ServiceException;
 
     /**
-     * Long running delete request, service returns an Azure-AsyncOperation
-     * header in the initial request. Subsequent calls to operation status do
-     * not contain Azure-AsyncOperation header.
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void deleteAsyncRetrySucceeded() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void beginDeleteAsyncRetrySucceeded() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void deleteAsyncNoRetrySucceeded() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void beginDeleteAsyncNoRetrySucceeded() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void deleteAsyncRetryFailed() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void beginDeleteAsyncRetryFailed() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void deleteAsyncRetrycanceled() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void beginDeleteAsyncRetrycanceled() throws ServiceException;
 
     /**
-     * Long running delete request, service returns a 202 to the initial
-     * request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' header. Poll returns a 200 with a response
-     * body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
      * @return the Sku object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1629,18 +1399,14 @@ public interface LROs {
     Sku post200WithPayload() throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' header. Poll returns a 200 with a response
-     * body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void post200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' header. Poll returns a 200 with a response
-     * body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
      * @return the Sku object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1648,18 +1414,14 @@ public interface LROs {
     Sku beginPost200WithPayload() throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' header. Poll returns a 200 with a response
-     * body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' and 'Retry-After' headers, Polls return a 200
-     * with a response body after success
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1667,9 +1429,7 @@ public interface LROs {
     void post202Retry200(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' and 'Retry-After' headers, Polls return a 200
-     * with a response body after success
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1677,9 +1437,7 @@ public interface LROs {
     void post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' and 'Retry-After' headers, Polls return a 200
-     * with a response body after success
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1687,9 +1445,7 @@ public interface LROs {
     void beginPost202Retry200(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' and 'Retry-After' headers, Polls return a 200
-     * with a response body after success
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1697,8 +1453,7 @@ public interface LROs {
     void beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' header, 204 with noresponse body after success
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1707,8 +1462,7 @@ public interface LROs {
     Product post202NoRetry204(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' header, 204 with noresponse body after success
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1716,8 +1470,7 @@ public interface LROs {
     void post202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' header, 204 with noresponse body after success
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1726,8 +1479,7 @@ public interface LROs {
     Product beginPost202NoRetry204(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with 'Location' header, 204 with noresponse body after success
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1735,10 +1487,7 @@ public interface LROs {
     void beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1747,10 +1496,7 @@ public interface LROs {
     Product postAsyncRetrySucceeded(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1758,10 +1504,7 @@ public interface LROs {
     void postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1770,10 +1513,7 @@ public interface LROs {
     Product beginPostAsyncRetrySucceeded(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1781,10 +1521,7 @@ public interface LROs {
     void beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1793,10 +1530,7 @@ public interface LROs {
     Product postAsyncNoRetrySucceeded(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1804,10 +1538,7 @@ public interface LROs {
     void postAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1816,10 +1547,7 @@ public interface LROs {
     Product beginPostAsyncNoRetrySucceeded(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1827,10 +1555,7 @@ public interface LROs {
     void beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1838,10 +1563,7 @@ public interface LROs {
     void postAsyncRetryFailed(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1849,10 +1571,7 @@ public interface LROs {
     void postAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1860,10 +1579,7 @@ public interface LROs {
     void beginPostAsyncRetryFailed(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1871,10 +1587,7 @@ public interface LROs {
     void beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1882,10 +1595,7 @@ public interface LROs {
     void postAsyncRetrycanceled(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1893,10 +1603,7 @@ public interface LROs {
     void postAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1904,10 +1611,7 @@ public interface LROs {
     void beginPostAsyncRetrycanceled(Product product) throws ServiceException;
 
     /**
-     * Long running post request, service returns a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

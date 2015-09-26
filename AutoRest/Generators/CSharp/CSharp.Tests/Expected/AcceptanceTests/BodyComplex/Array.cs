@@ -140,8 +140,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </summary>
         /// <param name='complexBody'>
         /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y",
-        /// "The quick brown fox jumps over the lazy dog"
-        /// </param>
+        /// "The quick brown fox jumps over the lazy dog"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -320,8 +319,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Put complex types with array property which is empty
         /// </summary>
         /// <param name='complexBody'>
-        /// Please put an empty array
-        /// </param>
+        /// Please put an empty array/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

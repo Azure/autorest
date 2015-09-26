@@ -490,8 +490,7 @@ public interface Paths {
     void dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null as date - this should throw or be unusable on the client side,
-     * depending on date representation
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation
      *
      * @param datePath null as date (should throw)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -499,8 +498,7 @@ public interface Paths {
     void dateNull(LocalDate datePath) throws ServiceException;
 
     /**
-     * Get null as date - this should throw or be unusable on the client side,
-     * depending on date representation
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation
      *
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -524,8 +522,7 @@ public interface Paths {
     void dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null as date-time, should be disallowed or throw depending on
-     * representation of date-time
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time
      *
      * @param dateTimePath null as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -533,8 +530,7 @@ public interface Paths {
     void dateTimeNull(DateTime dateTimePath) throws ServiceException;
 
     /**
-     * Get null as date-time, should be disallowed or throw depending on
-     * representation of date-time
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time
      *
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

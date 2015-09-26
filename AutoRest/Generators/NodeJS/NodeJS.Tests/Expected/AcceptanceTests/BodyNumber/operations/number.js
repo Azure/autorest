@@ -33,6 +33,7 @@ function Number(client) {
 
 /**
  * Get null Number value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ Number.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -131,6 +132,7 @@ Number.prototype.getNull = function (options, callback) {
 
 /**
  * Get invalid float Number value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -159,7 +161,7 @@ Number.prototype.getInvalidFloat = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/invalidfloat';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -229,6 +231,7 @@ Number.prototype.getInvalidFloat = function (options, callback) {
 
 /**
  * Get invalid double Number value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -257,7 +260,7 @@ Number.prototype.getInvalidDouble = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/invaliddouble';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -327,6 +330,7 @@ Number.prototype.getInvalidDouble = function (options, callback) {
 
 /**
  * Put big float value 3.402823e+20
+ *
  * @param {number} numberBody
  * 
  * @param {object} [options]
@@ -365,7 +369,7 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/big/float/3.402823e+20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -435,6 +439,7 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
 
 /**
  * Get big float value 3.402823e+20
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -463,7 +468,7 @@ Number.prototype.getBigFloat = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/big/float/3.402823e+20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -533,6 +538,7 @@ Number.prototype.getBigFloat = function (options, callback) {
 
 /**
  * Put big double value 2.5976931e+101
+ *
  * @param {number} numberBody
  * 
  * @param {object} [options]
@@ -571,7 +577,7 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/big/double/2.5976931e+101';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -641,6 +647,7 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
 
 /**
  * Get big double value 2.5976931e+101
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -669,7 +676,7 @@ Number.prototype.getBigDouble = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/big/double/2.5976931e+101';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -739,6 +746,7 @@ Number.prototype.getBigDouble = function (options, callback) {
 
 /**
  * Put big double value 99999999.99
+ *
  * @param {number} numberBody
  * 
  * @param {object} [options]
@@ -777,7 +785,7 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/big/double/99999999.99';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -847,6 +855,7 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
 
 /**
  * Get big double value 99999999.99
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -875,7 +884,7 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/big/double/99999999.99';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -945,6 +954,7 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
 
 /**
  * Put big double value -99999999.99
+ *
  * @param {number} numberBody
  * 
  * @param {object} [options]
@@ -983,7 +993,7 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/big/double/-99999999.99';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1053,6 +1063,7 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
 
 /**
  * Get big double value -99999999.99
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1081,7 +1092,7 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/big/double/-99999999.99';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1151,6 +1162,7 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
 
 /**
  * Put small float value 3.402823e-20
+ *
  * @param {number} numberBody
  * 
  * @param {object} [options]
@@ -1189,7 +1201,7 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/small/float/3.402823e-20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1259,6 +1271,7 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
 
 /**
  * Get big double value 3.402823e-20
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1287,7 +1300,7 @@ Number.prototype.getSmallFloat = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/small/float/3.402823e-20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1357,6 +1370,7 @@ Number.prototype.getSmallFloat = function (options, callback) {
 
 /**
  * Put small double value 2.5976931e-101
+ *
  * @param {number} numberBody
  * 
  * @param {object} [options]
@@ -1395,7 +1409,7 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/small/double/2.5976931e-101';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1465,6 +1479,7 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
 
 /**
  * Get big double value 2.5976931e-101
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1493,7 +1508,7 @@ Number.prototype.getSmallDouble = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//number/small/double/2.5976931e-101';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

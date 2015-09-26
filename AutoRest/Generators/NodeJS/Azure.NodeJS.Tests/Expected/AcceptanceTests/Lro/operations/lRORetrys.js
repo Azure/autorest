@@ -38,6 +38,7 @@ function LRORetrys(client) {
  * request, with an entity that contains ProvisioningState=’Creating’.  Polls
  * return this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -58,7 +59,7 @@ function LRORetrys(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -123,6 +124,7 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
  * request, with an entity that contains ProvisioningState=’Creating’.  Polls
  * return this value until the last poll returns a ‘200’ with
  * ProvisioningState=’Succeeded’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -168,7 +170,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/retryerror/put/201/creating/succeeded/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -291,6 +293,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
  * request, with an entity that contains ProvisioningState=’Creating’. Poll
  * the endpoint indicated in the Azure-AsyncOperation header for operation
  * status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -311,7 +314,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -376,6 +379,7 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
  * request, with an entity that contains ProvisioningState=’Creating’. Poll
  * the endpoint indicated in the Azure-AsyncOperation header for operation
  * status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -421,7 +425,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/retryerror/putasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -525,6 +529,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
  * initial request, with an entity that contains
  * ProvisioningState=’Accepted’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -537,7 +542,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -602,6 +607,7 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
  * initial request, with an entity that contains
  * ProvisioningState=’Accepted’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -639,7 +645,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/retryerror/delete/provisioning/202/accepted/200/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -745,6 +751,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
  * Long running delete request, service returns a 500, then a 202 to the
  * initial request. Polls return this value until the last poll returns a
  * ‘200’ with ProvisioningState=’Succeeded’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -804,6 +811,7 @@ LRORetrys.prototype.delete202Retry200 = function (options, callback) {
  * Long running delete request, service returns a 500, then a 202 to the
  * initial request. Polls return this value until the last poll returns a
  * ‘200’ with ProvisioningState=’Succeeded’
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -840,7 +848,7 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/retryerror/delete/202/retry/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -908,6 +916,7 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
  * Long running delete request, service returns a 500, then a 202 to the
  * initial request. Poll the endpoint indicated in the Azure-AsyncOperation
  * header for operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -967,6 +976,7 @@ LRORetrys.prototype.deleteAsyncRelativeRetrySucceeded = function (options, callb
  * Long running delete request, service returns a 500, then a 202 to the
  * initial request. Poll the endpoint indicated in the Azure-AsyncOperation
  * header for operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1003,7 +1013,7 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/retryerror/deleteasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1071,6 +1081,7 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
  * Long running post request, service returns a 500, then a 202 to the initial
  * request, with 'Location' and 'Retry-After' headers, Polls return a 200
  * with a response body after success
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1138,6 +1149,7 @@ LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
  * Long running post request, service returns a 500, then a 202 to the initial
  * request, with 'Location' and 'Retry-After' headers, Polls return a 200
  * with a response body after success
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1182,7 +1194,7 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/retryerror/post/202/retry/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1267,6 +1279,7 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
  * request, with an entity that contains ProvisioningState=’Creating’. Poll
  * the endpoint indicated in the Azure-AsyncOperation header for operation
  * status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1335,6 +1348,7 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options
  * request, with an entity that contains ProvisioningState=’Creating’. Poll
  * the endpoint indicated in the Azure-AsyncOperation header for operation
  * status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1379,7 +1393,7 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (product, op
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/retryerror/postasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {

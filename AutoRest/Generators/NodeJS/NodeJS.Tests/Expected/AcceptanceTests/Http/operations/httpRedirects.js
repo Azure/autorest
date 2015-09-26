@@ -33,6 +33,7 @@ function HttpRedirects(client) {
 
 /**
  * Return 300 status code and redirect to /http/success/200
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ HttpRedirects.prototype.head300 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/300';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -118,6 +119,7 @@ HttpRedirects.prototype.head300 = function (options, callback) {
 
 /**
  * Return 300 status code and redirect to /http/success/200
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -146,7 +148,7 @@ HttpRedirects.prototype.get300 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/300';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -216,6 +218,7 @@ HttpRedirects.prototype.get300 = function (options, callback) {
 
 /**
  * Return 301 status code and redirect to /http/success/200
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -244,7 +247,7 @@ HttpRedirects.prototype.head301 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/301';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -301,6 +304,7 @@ HttpRedirects.prototype.head301 = function (options, callback) {
 
 /**
  * Return 301 status code and redirect to /http/success/200
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -329,7 +333,7 @@ HttpRedirects.prototype.get301 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/301';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -388,6 +392,7 @@ HttpRedirects.prototype.get301 = function (options, callback) {
  * Put true Boolean value in request returns 301.  This request should not be
  * automatically redirected, but should return the received 301 to the caller
  * for evaluation
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -426,7 +431,7 @@ HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/301';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -498,6 +503,7 @@ HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
 
 /**
  * Return 302 status code and redirect to /http/success/200
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -526,7 +532,7 @@ HttpRedirects.prototype.head302 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/302';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -583,6 +589,7 @@ HttpRedirects.prototype.head302 = function (options, callback) {
 
 /**
  * Return 302 status code and redirect to /http/success/200
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -611,7 +618,7 @@ HttpRedirects.prototype.get302 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/302';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -670,6 +677,7 @@ HttpRedirects.prototype.get302 = function (options, callback) {
  * Patch true Boolean value in request returns 302.  This request should not
  * be automatically redirected, but should return the received 302 to the
  * caller for evaluation
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -708,7 +716,7 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/302';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -782,6 +790,7 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
  * Post true Boolean value in request returns 303.  This request should be
  * automatically redirected usign a get, ultimately returning a 200 status
  * code
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -820,7 +829,7 @@ HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/303';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -892,6 +901,7 @@ HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
 
 /**
  * Redirect with 307, resulting in a 200 success
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -920,7 +930,7 @@ HttpRedirects.prototype.head307 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/307';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -977,6 +987,7 @@ HttpRedirects.prototype.head307 = function (options, callback) {
 
 /**
  * Redirect get with 307, resulting in a 200 success
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1005,7 +1016,7 @@ HttpRedirects.prototype.get307 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/307';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1062,6 +1073,7 @@ HttpRedirects.prototype.get307 = function (options, callback) {
 
 /**
  * Put redirected with 307, resulting in a 200 after redirect
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1100,7 +1112,7 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/307';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1172,6 +1184,7 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
 
 /**
  * Patch redirected with 307, resulting in a 200 after redirect
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1210,7 +1223,7 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/307';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1282,6 +1295,7 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
 
 /**
  * Post redirected with 307, resulting in a 200 after redirect
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1320,7 +1334,7 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/307';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1392,6 +1406,7 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
 
 /**
  * Delete redirected with 307, resulting in a 200 after redirect
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1430,7 +1445,7 @@ HttpRedirects.prototype.delete307 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/redirect/307';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

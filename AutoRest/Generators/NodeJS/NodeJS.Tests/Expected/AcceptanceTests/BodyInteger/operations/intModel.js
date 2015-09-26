@@ -33,6 +33,7 @@ function IntModel(client) {
 
 /**
  * Get null Int value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ IntModel.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//int/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -131,6 +132,7 @@ IntModel.prototype.getNull = function (options, callback) {
 
 /**
  * Get invalid Int value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -159,7 +161,7 @@ IntModel.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//int/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -229,6 +231,7 @@ IntModel.prototype.getInvalid = function (options, callback) {
 
 /**
  * Get overflow Int32 value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -257,7 +260,7 @@ IntModel.prototype.getOverflowInt32 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//int/overflowint32';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -327,6 +330,7 @@ IntModel.prototype.getOverflowInt32 = function (options, callback) {
 
 /**
  * Get underflow Int32 value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -355,7 +359,7 @@ IntModel.prototype.getUnderflowInt32 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//int/underflowint32';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -425,6 +429,7 @@ IntModel.prototype.getUnderflowInt32 = function (options, callback) {
 
 /**
  * Get overflow Int64 value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -453,7 +458,7 @@ IntModel.prototype.getOverflowInt64 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//int/overflowint64';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -523,6 +528,7 @@ IntModel.prototype.getOverflowInt64 = function (options, callback) {
 
 /**
  * Get underflow Int64 value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -551,7 +557,7 @@ IntModel.prototype.getUnderflowInt64 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//int/underflowint64';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -621,6 +627,7 @@ IntModel.prototype.getUnderflowInt64 = function (options, callback) {
 
 /**
  * Put max int32 value
+ *
  * @param {number} intBody
  * 
  * @param {object} [options]
@@ -659,7 +666,7 @@ IntModel.prototype.putMax32 = function (intBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//int/max/32';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -729,6 +736,7 @@ IntModel.prototype.putMax32 = function (intBody, options, callback) {
 
 /**
  * Put max int64 value
+ *
  * @param {number} intBody
  * 
  * @param {object} [options]
@@ -767,7 +775,7 @@ IntModel.prototype.putMax64 = function (intBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//int/max/64';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -837,6 +845,7 @@ IntModel.prototype.putMax64 = function (intBody, options, callback) {
 
 /**
  * Put min int32 value
+ *
  * @param {number} intBody
  * 
  * @param {object} [options]
@@ -875,7 +884,7 @@ IntModel.prototype.putMin32 = function (intBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//int/min/32';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -945,6 +954,7 @@ IntModel.prototype.putMin32 = function (intBody, options, callback) {
 
 /**
  * Put min int64 value
+ *
  * @param {number} intBody
  * 
  * @param {object} [options]
@@ -983,7 +993,7 @@ IntModel.prototype.putMin64 = function (intBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//int/min/64';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

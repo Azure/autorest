@@ -220,8 +220,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Put boolean value true returning 200 success
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -309,8 +308,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Patch true Boolean value in request returning 200
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -398,8 +396,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Post bollean value true in request that returns a 200
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -487,8 +484,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Delete simple boolean value true returns 200
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -576,8 +572,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Put true Boolean value in request returns 201
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -665,8 +660,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Post true Boolean value in request returns 201 (Created)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -754,8 +748,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Put true Boolean value in request returns 202 (Accepted)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -843,8 +836,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Patch true Boolean value in request returns 202
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -932,8 +924,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Post true Boolean value in request returns 202 (Accepted)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1021,8 +1012,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Delete true Boolean value in request returns 202 (accepted)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1191,8 +1181,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Put true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1280,8 +1269,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Patch true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1369,8 +1357,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Post true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1458,8 +1445,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Delete true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

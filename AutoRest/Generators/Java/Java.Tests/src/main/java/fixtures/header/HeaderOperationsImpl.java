@@ -216,8 +216,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value":
-     * 1 or "scenario": "negative", "value": -2
+     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
@@ -238,8 +237,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value":
-     * 1 or "scenario": "negative", "value": -2
+     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
@@ -320,8 +318,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value":
-     * 105 or "scenario": "negative", "value": -2
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
@@ -342,8 +339,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value":
-     * 105 or "scenario": "negative", "value": -2
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
@@ -424,8 +420,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value":
-     * 0.07 or "scenario": "negative", "value": -3.0
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
@@ -446,8 +441,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value":
-     * 0.07 or "scenario": "negative", "value": -3.0
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
@@ -528,8 +522,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value":
-     * 7e120 or "scenario": "negative", "value": -3.0
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
@@ -550,8 +543,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value":
-     * 7e120 or "scenario": "negative", "value": -3.0
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
@@ -632,8 +624,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "true", "value":
-     * true or "scenario": "false", "value": false
+     * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
@@ -654,8 +645,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "true", "value":
-     * true or "scenario": "false", "value": false
+     * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
@@ -736,9 +726,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "The quick brown fox jumps over the lazy dog" or "scenario": "null",
-     * "value": null or "scenario": "empty", "value": ""
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": ""
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
@@ -759,9 +747,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "The quick brown fox jumps over the lazy dog" or "scenario": "null",
-     * "value": null or "scenario": "empty", "value": ""
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": ""
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
@@ -792,8 +778,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Get a response with header values "The quick brown fox jumps over the
-     * lazy dog" or null or ""
+     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -813,8 +798,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Get a response with header values "The quick brown fox jumps over the
-     * lazy dog" or null or ""
+     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -844,8 +828,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "2010-01-01" or "scenario": "min", "value": "0001-01-01"
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
@@ -870,8 +853,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "2010-01-01" or "scenario": "min", "value": "0001-01-01"
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
@@ -956,9 +938,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "2010-01-01T12:34:56Z" or "scenario": "min", "value":
-     * "0001-01-01T00:00:00Z"
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
@@ -983,9 +963,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "2010-01-01T12:34:56Z" or "scenario": "min", "value":
-     * "0001-01-01T00:00:00Z"
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
@@ -1020,8 +998,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Get a response with header values "2010-01-01T12:34:56Z" or
-     * "0001-01-01T00:00:00Z"
+     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1041,8 +1018,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Get a response with header values "2010-01-01T12:34:56Z" or
-     * "0001-01-01T00:00:00Z"
+     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1072,8 +1048,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "啊齄丂狛狜隣郎隣兀﨩"
+     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
@@ -1098,8 +1073,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "啊齄丂狛狜隣郎隣兀﨩"
+     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
@@ -1184,8 +1158,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "GREY" or "scenario": "null", "value": null
+     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
@@ -1206,8 +1179,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "GREY" or "scenario": "null", "value": null
+     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
@@ -1288,8 +1260,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in
-     * the header of the request
+     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1304,8 +1275,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in
-     * the header of the request
+     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

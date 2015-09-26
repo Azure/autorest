@@ -21,10 +21,10 @@ namespace Microsoft.Rest.Generator.CSharp
         protected override void ResolveMethodGroupNameCollision(ServiceClient serviceClient,
             Dictionary<string, string> exclusionDictionary)
         {
-            // Do nothing   
+            // Do nothing
         }
 
-        private string GetNextLinkString(Dictionary<string, object> extensions)
+        private static string GetNextLinkString(Dictionary<string, object> extensions)
         {
             var ext = extensions[AzureCodeGenerator.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
             if (ext == null)
@@ -65,11 +65,11 @@ namespace Microsoft.Rest.Generator.CSharp
 
                     // if the type is a wrapper over page-able response
                     if(sequenceType != null &&
-                       compositType.Properties.Count == 2 && 
+                       compositType.Properties.Count == 2 &&
                        compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
                     {
                         var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, sequenceType.ElementType.Name);
-                        
+
                         CompositeType pagedResult = new CompositeType
                         {
                             Name = pagableTypeName

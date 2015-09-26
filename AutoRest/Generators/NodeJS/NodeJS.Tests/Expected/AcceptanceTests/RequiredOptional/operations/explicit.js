@@ -34,6 +34,7 @@ function Explicit(client) {
 /**
  * Test explicitly required integer. Please put null and the client library
  * should throw before the request is sent.
+ *
  * @param {number} bodyParameter
  * 
  * @param {object} [options]
@@ -73,7 +74,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/integer/parameter';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -159,6 +160,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
 
 /**
  * Test explicitly optional integer. Please put null.
+ *
  * @param {number} [bodyParameter]
  * 
  * @param {object} [options]
@@ -197,7 +199,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/integer/parameter';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -271,6 +273,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  * Test explicitly required integer. Please put a valid int-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
+ *
  * @param {object} bodyParameter
  * 
  * @param {number} [bodyParameter.value]
@@ -312,7 +315,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/integer/property';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -402,6 +405,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
 /**
  * Test explicitly optional integer. Please put a valid int-wrapper with
  * 'value' = null.
+ *
  * @param {object} [bodyParameter]
  * 
  * @param {number} [bodyParameter.value]
@@ -434,7 +438,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/integer/property';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -508,6 +512,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
 /**
  * Test explicitly required integer. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
+ *
  * @param {number} headerParameter
  * 
  * @param {object} [options]
@@ -547,7 +552,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/integer/header';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -624,6 +629,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
 /**
  * Test explicitly optional integer. Please put a header 'headerParameter' =>
  * null.
+ *
  * @param {number} [headerParameter]
  * 
  * @param {object} [options]
@@ -662,7 +668,7 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/integer/header';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -723,6 +729,7 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
 /**
  * Test explicitly required string. Please put null and the client library
  * should throw before the request is sent.
+ *
  * @param {string} bodyParameter
  * 
  * @param {object} [options]
@@ -762,7 +769,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/string/parameter';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -848,6 +855,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
 
 /**
  * Test explicitly optional string. Please put null.
+ *
  * @param {string} [bodyParameter]
  * 
  * @param {object} [options]
@@ -886,7 +894,7 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/string/parameter';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -960,6 +968,7 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  * Test explicitly required string. Please put a valid string-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
+ *
  * @param {object} bodyParameter
  * 
  * @param {string} [bodyParameter.value]
@@ -1001,7 +1010,7 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/string/property';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1091,6 +1100,7 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
 /**
  * Test explicitly optional integer. Please put a valid string-wrapper with
  * 'value' = null.
+ *
  * @param {object} [bodyParameter]
  * 
  * @param {string} [bodyParameter.value]
@@ -1123,7 +1133,7 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/string/property';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1197,6 +1207,7 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
 /**
  * Test explicitly required string. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
+ *
  * @param {string} headerParameter
  * 
  * @param {object} [options]
@@ -1236,7 +1247,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/string/header';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1313,6 +1324,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
 /**
  * Test explicitly optional string. Please put a header 'headerParameter' =>
  * null.
+ *
  * @param {string} [bodyParameter]
  * 
  * @param {object} [options]
@@ -1351,7 +1363,7 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/string/header';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1412,6 +1424,7 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
 /**
  * Test explicitly required complex object. Please put null and the client
  * library should throw before the request is sent.
+ *
  * @param {object} bodyParameter
  * 
  * @param {number} [bodyParameter.id]
@@ -1455,7 +1468,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/class/parameter';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1544,6 +1557,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
 
 /**
  * Test explicitly optional complex object. Please put null.
+ *
  * @param {object} [bodyParameter]
  * 
  * @param {number} [bodyParameter.id]
@@ -1578,7 +1592,7 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/class/parameter';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1653,6 +1667,7 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  * Test explicitly required complex object. Please put a valid class-wrapper
  * with 'value' = null and the client library should throw before the request
  * is sent.
+ *
  * @param {object} bodyParameter
  * 
  * @param {object} [bodyParameter.value]
@@ -1698,7 +1713,7 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/class/property';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1788,6 +1803,7 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
 /**
  * Test explicitly optional complex object. Please put a valid class-wrapper
  * with 'value' = null.
+ *
  * @param {object} [bodyParameter]
  * 
  * @param {object} [bodyParameter.value]
@@ -1824,7 +1840,7 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/class/property';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1898,6 +1914,7 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
 /**
  * Test explicitly required array. Please put null and the client library
  * should throw before the request is sent.
+ *
  * @param {array} bodyParameter
  * 
  * @param {object} [options]
@@ -1942,7 +1959,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/array/parameter';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2036,6 +2053,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
 
 /**
  * Test explicitly optional array. Please put null.
+ *
  * @param {array} [bodyParameter]
  * 
  * @param {object} [options]
@@ -2078,7 +2096,7 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/array/parameter';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2157,6 +2175,7 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  * Test explicitly required array. Please put a valid array-wrapper with
  * 'value' = null and the client library should throw before the request is
  * sent.
+ *
  * @param {object} bodyParameter
  * 
  * @param {array} [bodyParameter.value]
@@ -2198,7 +2217,7 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/array/property';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2288,6 +2307,7 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
 /**
  * Test explicitly optional array. Please put a valid array-wrapper with
  * 'value' = null.
+ *
  * @param {object} [bodyParameter]
  * 
  * @param {array} [bodyParameter.value]
@@ -2320,7 +2340,7 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/array/property';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2394,6 +2414,7 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
 /**
  * Test explicitly required array. Please put a header 'headerParameter' =>
  * null and the client library should throw before the request is sent.
+ *
  * @param {array} headerParameter
  * 
  * @param {object} [options]
@@ -2438,7 +2459,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/requied/array/header';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2515,6 +2536,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
 /**
  * Test explicitly optional integer. Please put a header 'headerParameter' =>
  * null.
+ *
  * @param {array} [headerParameter]
  * 
  * @param {object} [options]
@@ -2557,7 +2579,7 @@ Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/optional/array/header';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

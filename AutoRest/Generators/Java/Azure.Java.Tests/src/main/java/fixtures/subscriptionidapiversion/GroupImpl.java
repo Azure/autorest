@@ -32,8 +32,7 @@ public class GroupImpl implements Group {
     }
 
     /**
-     * Provides a resouce group with name 'testgroup101' and location 'West
-     * US'.
+     * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @return the SampleResourceGroup object if successful.
@@ -62,8 +61,7 @@ public class GroupImpl implements Group {
     }
 
     /**
-     * Provides a resouce group with name 'testgroup101' and location 'West
-     * US'.
+     * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

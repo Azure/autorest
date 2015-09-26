@@ -35,7 +35,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
 
         IDate Date { get; }

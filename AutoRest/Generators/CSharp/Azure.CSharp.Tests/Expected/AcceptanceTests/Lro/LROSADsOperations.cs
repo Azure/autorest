@@ -53,10 +53,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -65,8 +65,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutNonRetry400WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -74,8 +74,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Long running put request, service returns a 400 to the initial request
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -202,10 +201,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -214,8 +213,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutNonRetry201Creating400WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -224,8 +223,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// 'ProvisioningState' = 'Creating' and 201 response code
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -353,10 +351,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -365,8 +363,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -376,8 +374,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -870,7 +867,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -889,8 +886,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Long running post request, service returns a 400 with no error body
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1004,7 +1000,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -1023,8 +1019,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Long running post request, service returns a 202 with a location header
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1140,7 +1135,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -1161,8 +1156,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1277,10 +1271,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -1289,8 +1283,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutError201NoProvisioningStatePayloadWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -1299,8 +1293,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// with no payload
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1428,10 +1421,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -1440,8 +1433,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -1451,8 +1444,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1574,10 +1566,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -1586,8 +1578,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -1597,8 +1589,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1971,7 +1962,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -1991,8 +1982,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// without a location header.
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2108,7 +2098,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -2129,8 +2119,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2245,10 +2234,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -2257,8 +2246,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200InvalidJsonWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -2267,8 +2256,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// with an entity that is not a valid json
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2390,10 +2378,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -2402,8 +2390,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -2413,8 +2401,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// indicated in the Azure-AsyncOperation header is invalid.
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2536,10 +2523,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -2548,8 +2535,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -2559,8 +2546,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -3058,7 +3044,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -3078,8 +3064,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// with invalid 'Location' and 'Retry-After' headers.
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -3195,7 +3180,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -3216,8 +3201,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// indicated in the Azure-AsyncOperation header is invalid.
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -3333,7 +3317,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -3354,8 +3338,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

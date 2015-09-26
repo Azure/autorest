@@ -293,8 +293,7 @@ public interface MultipleResponses {
     void get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback);
 
     /**
-     * Send a 400 response with valid error payload: {'status': 400,
-     * 'message': 'client error'}
+     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -302,8 +301,7 @@ public interface MultipleResponses {
     A get200Model204NoModelDefaultError400Valid() throws ServiceException;
 
     /**
-     * Send a 400 response with valid error payload: {'status': 400,
-     * 'message': 'client error'}
+     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -325,8 +323,7 @@ public interface MultipleResponses {
     void get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
-     * Send a 201 response with valid payload: {'statusCode': '201',
-     * 'textStatusCode': 'Created'}
+     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -334,16 +331,14 @@ public interface MultipleResponses {
     A get200Model201ModelDefaultError201Valid() throws ServiceException;
 
     /**
-     * Send a 201 response with valid payload: {'statusCode': '201',
-     * 'textStatusCode': 'Created'}
+     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -351,8 +346,7 @@ public interface MultipleResponses {
     A get200Model201ModelDefaultError400Valid() throws ServiceException;
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -404,8 +398,7 @@ public interface MultipleResponses {
     void get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback);
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @return the Object object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -413,8 +406,7 @@ public interface MultipleResponses {
     Object get200ModelA201ModelC404ModelDDefaultError400Valid() throws ServiceException;
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -449,16 +441,14 @@ public interface MultipleResponses {
     void get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void get202None204NoneDefaultError400Valid() throws ServiceException;
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -637,8 +627,7 @@ public interface MultipleResponses {
     void getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Send a 200 response with no payload, when a payload is expected -
-     * client should return a null object of thde type for model A
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -646,8 +635,7 @@ public interface MultipleResponses {
     A get200ModelA200None() throws ServiceException;
 
     /**
-     * Send a 200 response with no payload, when a payload is expected -
-     * client should return a null object of thde type for model A
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -684,8 +672,7 @@ public interface MultipleResponses {
     void get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
-     * Send a 400 response with no payload client should treat as an http
-     * error with no error model
+     * Send a 400 response with no payload client should treat as an http error with no error model
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -693,8 +680,7 @@ public interface MultipleResponses {
     A get200ModelA400None() throws ServiceException;
 
     /**
-     * Send a 400 response with no payload client should treat as an http
-     * error with no error model
+     * Send a 400 response with no payload client should treat as an http error with no error model
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

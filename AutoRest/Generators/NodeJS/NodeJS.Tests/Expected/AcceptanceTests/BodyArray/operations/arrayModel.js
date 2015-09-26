@@ -33,6 +33,7 @@ function ArrayModel(client) {
 
 /**
  * Get null array value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ ArrayModel.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -131,6 +132,7 @@ ArrayModel.prototype.getNull = function (options, callback) {
 
 /**
  * Get invalid array [1, 2, 3
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -159,7 +161,7 @@ ArrayModel.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -229,6 +231,7 @@ ArrayModel.prototype.getInvalid = function (options, callback) {
 
 /**
  * Get empty array value []
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -257,7 +260,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -327,6 +330,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
 
 /**
  * Set array value empty []
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -370,7 +374,7 @@ ArrayModel.prototype.putEmpty = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -448,6 +452,7 @@ ArrayModel.prototype.putEmpty = function (arrayBody, options, callback) {
 
 /**
  * Get boolean array value [true, false, false, true]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -476,7 +481,7 @@ ArrayModel.prototype.getBooleanTfft = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/boolean/tfft';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -546,6 +551,7 @@ ArrayModel.prototype.getBooleanTfft = function (options, callback) {
 
 /**
  * Set array value empty [true, false, false, true]
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -589,7 +595,7 @@ ArrayModel.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/boolean/tfft';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -667,6 +673,7 @@ ArrayModel.prototype.putBooleanTfft = function (arrayBody, options, callback) {
 
 /**
  * Get boolean array value [true, null, false]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -695,7 +702,7 @@ ArrayModel.prototype.getBooleanInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/boolean/true.null.false';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -765,6 +772,7 @@ ArrayModel.prototype.getBooleanInvalidNull = function (options, callback) {
 
 /**
  * Get boolean array value [true, 'boolean', false]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -793,7 +801,7 @@ ArrayModel.prototype.getBooleanInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/boolean/true.boolean.false';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -863,6 +871,7 @@ ArrayModel.prototype.getBooleanInvalidString = function (options, callback) {
 
 /**
  * Get integer array value [1, -1, 3, 300]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -891,7 +900,7 @@ ArrayModel.prototype.getIntegerValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/integer/1.-1.3.300';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -961,6 +970,7 @@ ArrayModel.prototype.getIntegerValid = function (options, callback) {
 
 /**
  * Set array value empty [1, -1, 3, 300]
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -1004,7 +1014,7 @@ ArrayModel.prototype.putIntegerValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/integer/1.-1.3.300';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1082,6 +1092,7 @@ ArrayModel.prototype.putIntegerValid = function (arrayBody, options, callback) {
 
 /**
  * Get integer array value [1, null, 0]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1110,7 +1121,7 @@ ArrayModel.prototype.getIntInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/integer/1.null.zero';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1180,6 +1191,7 @@ ArrayModel.prototype.getIntInvalidNull = function (options, callback) {
 
 /**
  * Get integer array value [1, 'integer', 0]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1208,7 +1220,7 @@ ArrayModel.prototype.getIntInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/integer/1.integer.0';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1278,6 +1290,7 @@ ArrayModel.prototype.getIntInvalidString = function (options, callback) {
 
 /**
  * Get integer array value [1, -1, 3, 300]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1306,7 +1319,7 @@ ArrayModel.prototype.getLongValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/long/1.-1.3.300';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1376,6 +1389,7 @@ ArrayModel.prototype.getLongValid = function (options, callback) {
 
 /**
  * Set array value empty [1, -1, 3, 300]
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -1419,7 +1433,7 @@ ArrayModel.prototype.putLongValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/long/1.-1.3.300';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1497,6 +1511,7 @@ ArrayModel.prototype.putLongValid = function (arrayBody, options, callback) {
 
 /**
  * Get long array value [1, null, 0]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1525,7 +1540,7 @@ ArrayModel.prototype.getLongInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/long/1.null.zero';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1595,6 +1610,7 @@ ArrayModel.prototype.getLongInvalidNull = function (options, callback) {
 
 /**
  * Get long array value [1, 'integer', 0]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1623,7 +1639,7 @@ ArrayModel.prototype.getLongInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/long/1.integer.0';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1693,6 +1709,7 @@ ArrayModel.prototype.getLongInvalidString = function (options, callback) {
 
 /**
  * Get float array value [0, -0.01, 1.2e20]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1721,7 +1738,7 @@ ArrayModel.prototype.getFloatValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/float/0--0.01-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1791,6 +1808,7 @@ ArrayModel.prototype.getFloatValid = function (options, callback) {
 
 /**
  * Set array value [0, -0.01, 1.2e20]
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -1834,7 +1852,7 @@ ArrayModel.prototype.putFloatValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/float/0--0.01-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1912,6 +1930,7 @@ ArrayModel.prototype.putFloatValid = function (arrayBody, options, callback) {
 
 /**
  * Get float array value [0.0, null, -1.2e20]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1940,7 +1959,7 @@ ArrayModel.prototype.getFloatInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/float/0.0-null-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2010,6 +2029,7 @@ ArrayModel.prototype.getFloatInvalidNull = function (options, callback) {
 
 /**
  * Get boolean array value [1.0, 'number', 0.0]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2038,7 +2058,7 @@ ArrayModel.prototype.getFloatInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/float/1.number.0';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2108,6 +2128,7 @@ ArrayModel.prototype.getFloatInvalidString = function (options, callback) {
 
 /**
  * Get float array value [0, -0.01, 1.2e20]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2136,7 +2157,7 @@ ArrayModel.prototype.getDoubleValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/double/0--0.01-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2206,6 +2227,7 @@ ArrayModel.prototype.getDoubleValid = function (options, callback) {
 
 /**
  * Set array value [0, -0.01, 1.2e20]
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -2249,7 +2271,7 @@ ArrayModel.prototype.putDoubleValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/double/0--0.01-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2327,6 +2349,7 @@ ArrayModel.prototype.putDoubleValid = function (arrayBody, options, callback) {
 
 /**
  * Get float array value [0.0, null, -1.2e20]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2355,7 +2378,7 @@ ArrayModel.prototype.getDoubleInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/double/0.0-null-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2425,6 +2448,7 @@ ArrayModel.prototype.getDoubleInvalidNull = function (options, callback) {
 
 /**
  * Get boolean array value [1.0, 'number', 0.0]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2453,7 +2477,7 @@ ArrayModel.prototype.getDoubleInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/double/1.number.0';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2523,6 +2547,7 @@ ArrayModel.prototype.getDoubleInvalidString = function (options, callback) {
 
 /**
  * Get string array value ['foo1', 'foo2', 'foo3']
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2551,7 +2576,7 @@ ArrayModel.prototype.getStringValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/string/foo1.foo2.foo3';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2621,6 +2646,7 @@ ArrayModel.prototype.getStringValid = function (options, callback) {
 
 /**
  * Set array value ['foo1', 'foo2', 'foo3']
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -2664,7 +2690,7 @@ ArrayModel.prototype.putStringValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/string/foo1.foo2.foo3';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2742,6 +2768,7 @@ ArrayModel.prototype.putStringValid = function (arrayBody, options, callback) {
 
 /**
  * Get string array value ['foo', null, 'foo2']
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2770,7 +2797,7 @@ ArrayModel.prototype.getStringWithNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/string/foo.null.foo2';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2840,6 +2867,7 @@ ArrayModel.prototype.getStringWithNull = function (options, callback) {
 
 /**
  * Get string array value ['foo', 123, 'foo2']
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2868,7 +2896,7 @@ ArrayModel.prototype.getStringWithInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/string/foo.123.foo2';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2938,6 +2966,7 @@ ArrayModel.prototype.getStringWithInvalid = function (options, callback) {
 
 /**
  * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2966,7 +2995,7 @@ ArrayModel.prototype.getDateValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/date/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3043,6 +3072,7 @@ ArrayModel.prototype.getDateValid = function (options, callback) {
 
 /**
  * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -3087,7 +3117,7 @@ ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/date/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3165,6 +3195,7 @@ ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
 
 /**
  * Get date array value ['2012-01-01', null, '1776-07-04']
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3193,7 +3224,7 @@ ArrayModel.prototype.getDateInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/date/invalidnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3270,6 +3301,7 @@ ArrayModel.prototype.getDateInvalidNull = function (options, callback) {
 
 /**
  * Get date array value ['2011-03-22', 'date']
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3298,7 +3330,7 @@ ArrayModel.prototype.getDateInvalidChars = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/date/invalidchars';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3376,6 +3408,7 @@ ArrayModel.prototype.getDateInvalidChars = function (options, callback) {
 /**
  * Get date-time array value ['2000-12-01t00:00:01z',
  * '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3404,7 +3437,7 @@ ArrayModel.prototype.getDateTimeValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/date-time/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3482,6 +3515,7 @@ ArrayModel.prototype.getDateTimeValid = function (options, callback) {
 /**
  * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
  * '1492-10-12T10:15:01-08:00']
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -3526,7 +3560,7 @@ ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/date-time/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3604,6 +3638,7 @@ ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) 
 
 /**
  * Get date array value ['2000-12-01t00:00:01z', null]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3632,7 +3667,7 @@ ArrayModel.prototype.getDateTimeInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/date-time/invalidnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3709,6 +3744,7 @@ ArrayModel.prototype.getDateTimeInvalidNull = function (options, callback) {
 
 /**
  * Get date array value ['2000-12-01t00:00:01z', 'date-time']
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3737,7 +3773,7 @@ ArrayModel.prototype.getDateTimeInvalidChars = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/date-time/invalidchars';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3815,6 +3851,7 @@ ArrayModel.prototype.getDateTimeInvalidChars = function (options, callback) {
 /**
  * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
  * with each item encoded in base64
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3843,7 +3880,7 @@ ArrayModel.prototype.getByteValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/byte/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3921,6 +3958,7 @@ ArrayModel.prototype.getByteValid = function (options, callback) {
 /**
  * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
  * with each elementencoded in base 64
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -3964,7 +4002,7 @@ ArrayModel.prototype.putByteValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/byte/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4043,6 +4081,7 @@ ArrayModel.prototype.putByteValid = function (arrayBody, options, callback) {
 /**
  * Get byte array value [hex(AB, AC, AD), null] with the first item base64
  * encoded
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4071,7 +4110,7 @@ ArrayModel.prototype.getByteInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/prim/byte/invalidnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4148,6 +4187,7 @@ ArrayModel.prototype.getByteInvalidNull = function (options, callback) {
 
 /**
  * Get array of complex type null value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4176,7 +4216,7 @@ ArrayModel.prototype.getComplexNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/complex/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4263,6 +4303,7 @@ ArrayModel.prototype.getComplexNull = function (options, callback) {
 
 /**
  * Get empty array of complex type []
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4291,7 +4332,7 @@ ArrayModel.prototype.getComplexEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/complex/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4379,6 +4420,7 @@ ArrayModel.prototype.getComplexEmpty = function (options, callback) {
 /**
  * Get array of complex type with null item [{'integer': 1 'string': '2'},
  * null, {'integer': 5, 'string': '6'}]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4407,7 +4449,7 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/complex/itemnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4495,6 +4537,7 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
 /**
  * Get array of complex type with empty item [{'integer': 1 'string': '2'},
  * {}, {'integer': 5, 'string': '6'}]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4523,7 +4566,7 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/complex/itemempty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4611,6 +4654,7 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
 /**
  * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer':
  * 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4639,7 +4683,7 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/complex/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4727,6 +4771,7 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
 /**
  * Put an array of complex type with values [{'integer': 1 'string': '2'},
  * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -4757,7 +4802,7 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/complex/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4842,6 +4887,7 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
 
 /**
  * Get a null array
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4870,7 +4916,7 @@ ArrayModel.prototype.getArrayNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/array/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4940,6 +4986,7 @@ ArrayModel.prototype.getArrayNull = function (options, callback) {
 
 /**
  * Get an empty array []
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4968,7 +5015,7 @@ ArrayModel.prototype.getArrayEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/array/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5038,6 +5085,7 @@ ArrayModel.prototype.getArrayEmpty = function (options, callback) {
 
 /**
  * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5066,7 +5114,7 @@ ArrayModel.prototype.getArrayItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/array/itemnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5136,6 +5184,7 @@ ArrayModel.prototype.getArrayItemNull = function (options, callback) {
 
 /**
  * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5164,7 +5213,7 @@ ArrayModel.prototype.getArrayItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/array/itemempty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5235,6 +5284,7 @@ ArrayModel.prototype.getArrayItemEmpty = function (options, callback) {
 /**
  * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
  * '8', '9']]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5263,7 +5313,7 @@ ArrayModel.prototype.getArrayValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/array/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5334,6 +5384,7 @@ ArrayModel.prototype.getArrayValid = function (options, callback) {
 /**
  * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7',
  * '8', '9']]
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -5381,7 +5432,7 @@ ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/array/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5467,6 +5518,7 @@ ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
 
 /**
  * Get an array of Dictionaries with value null
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5495,7 +5547,7 @@ ArrayModel.prototype.getDictionaryNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/dictionary/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5565,6 +5617,7 @@ ArrayModel.prototype.getDictionaryNull = function (options, callback) {
 
 /**
  * Get an array of Dictionaries of type <string, string> with value []
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5593,7 +5646,7 @@ ArrayModel.prototype.getDictionaryEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/dictionary/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5665,6 +5718,7 @@ ArrayModel.prototype.getDictionaryEmpty = function (options, callback) {
  * Get an array of Dictionaries of type <string, string> with value [{'1':
  * 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9':
  * 'nine'}]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5693,7 +5747,7 @@ ArrayModel.prototype.getDictionaryItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/dictionary/itemnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5765,6 +5819,7 @@ ArrayModel.prototype.getDictionaryItemNull = function (options, callback) {
  * Get an array of Dictionaries of type <string, string> with value [{'1':
  * 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9':
  * 'nine'}]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5793,7 +5848,7 @@ ArrayModel.prototype.getDictionaryItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/dictionary/itemempty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5865,6 +5920,7 @@ ArrayModel.prototype.getDictionaryItemEmpty = function (options, callback) {
  * Get an array of Dictionaries of type <string, string> with value [{'1':
  * 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'},
  * {'7': 'seven', '8': 'eight', '9': 'nine'}]
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5893,7 +5949,7 @@ ArrayModel.prototype.getDictionaryValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/dictionary/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5965,6 +6021,7 @@ ArrayModel.prototype.getDictionaryValid = function (options, callback) {
  * Get an array of Dictionaries of type <string, string> with value [{'1':
  * 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'},
  * {'7': 'seven', '8': 'eight', '9': 'nine'}]
+ *
  * @param {array} arrayBody
  * 
  * @param {object} [options]
@@ -6012,7 +6069,7 @@ ArrayModel.prototype.putDictionaryValid = function (arrayBody, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//array/dictionary/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

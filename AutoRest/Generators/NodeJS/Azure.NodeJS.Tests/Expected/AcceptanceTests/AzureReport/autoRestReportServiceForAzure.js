@@ -64,6 +64,7 @@ util.inherits(AutoRestReportServiceForAzure, ServiceClient);
 
 /**
  * Get test coverage report
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -100,7 +101,7 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//report/azure';
   var queryParameters = [];
   if (queryParameters.length > 0) {

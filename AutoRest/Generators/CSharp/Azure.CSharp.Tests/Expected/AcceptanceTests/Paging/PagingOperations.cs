@@ -839,8 +839,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that finishes on the first call without a nextlink
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -960,8 +959,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that includes a nextLink that has 10 pages
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1082,8 +1080,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// and then get a response including a nextLink that has 10 pages
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1205,8 +1202,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// 10 pages eventually.
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1326,8 +1322,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that receives a 400 on the first call
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1447,8 +1442,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that receives a 400 on the second call
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1568,8 +1562,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that receives an invalid nextLink
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

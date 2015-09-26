@@ -133,11 +133,9 @@ namespace Fixtures.AcceptanceTestsValidation
         /// Validates input parameters on the method. See swagger for details.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
-        /// </param>
+        /// Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+./// </param>
         /// <param name='id'>
-        /// Required int multiple of 10 from 100 to 1000.
-        /// </param>
+        /// Required int multiple of 10 from 100 to 1000./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -293,11 +291,9 @@ namespace Fixtures.AcceptanceTestsValidation
         /// Validates body parameters on the method. See swagger for details.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
-        /// </param>
+        /// Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+./// </param>
         /// <param name='id'>
-        /// Required int multiple of 10 from 100 to 1000.
-        /// </param>
+        /// Required int multiple of 10 from 100 to 1000./// </param>
         /// <param name='body'>
         /// </param>
         /// <param name='customHeaders'>

@@ -501,8 +501,7 @@ public interface Dictionary {
     void getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
-     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
      *
      * @return the Map&lt;String, Boolean&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -510,16 +509,14 @@ public interface Dictionary {
     Map<String, Boolean> getBooleanTfft() throws ServiceException;
 
     /**
-     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
 
     /**
-     * Set dictionary value empty {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -527,8 +524,7 @@ public interface Dictionary {
     void putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException;
 
     /**
-     * Set dictionary value empty {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -871,8 +867,7 @@ public interface Dictionary {
     void getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
-     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
-     * "2": "1492-10-12"}
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -880,16 +875,14 @@ public interface Dictionary {
     Map<String, LocalDate> getDateValid() throws ServiceException;
 
     /**
-     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
-     * "2": "1492-10-12"}
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
-     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
-     * "1492-10-12"}
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -897,8 +890,7 @@ public interface Dictionary {
     void putDateValid(Map<String, LocalDate> arrayBody) throws ServiceException;
 
     /**
-     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
-     * "1492-10-12"}
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -906,8 +898,7 @@ public interface Dictionary {
     void putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
-     * "1776-07-04"}
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
      *
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -915,8 +906,7 @@ public interface Dictionary {
     Map<String, LocalDate> getDateInvalidNull() throws ServiceException;
 
     /**
-     * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
-     * "1776-07-04"}
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -938,8 +928,7 @@ public interface Dictionary {
     void getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
-     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -947,16 +936,14 @@ public interface Dictionary {
     Map<String, DateTime> getDateTimeValid() throws ServiceException;
 
     /**
-     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
-     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -964,8 +951,7 @@ public interface Dictionary {
     void putDateTimeValid(Map<String, DateTime> arrayBody) throws ServiceException;
 
     /**
-     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -988,8 +974,7 @@ public interface Dictionary {
     void getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
-     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "date-time"}
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
      *
      * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -997,16 +982,14 @@ public interface Dictionary {
     Map<String, DateTime> getDateTimeInvalidChars() throws ServiceException;
 
     /**
-     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "date-time"}
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each item encoded in base64
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64
      *
      * @return the Map&lt;String, byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1014,16 +997,14 @@ public interface Dictionary {
     Map<String, byte[]> getByteValid() throws ServiceException;
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each item encoded in base64
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback);
 
     /**
-     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each elementencoded in base 64
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1031,8 +1012,7 @@ public interface Dictionary {
     void putByteValid(Map<String, byte[]> arrayBody) throws ServiceException;
 
     /**
-     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each elementencoded in base 64
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1040,8 +1020,7 @@ public interface Dictionary {
     void putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
-     * first item base64 encoded
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
      *
      * @return the Map&lt;String, byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1049,8 +1028,7 @@ public interface Dictionary {
     Map<String, byte[]> getByteInvalidNull() throws ServiceException;
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
-     * first item base64 encoded
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1087,8 +1065,7 @@ public interface Dictionary {
     void getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
-     * Get dictionary of complex type with null item {"0": {"integer": 1,
-     * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
      *
      * @return the Map&lt;String, Widget&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1096,16 +1073,14 @@ public interface Dictionary {
     Map<String, Widget> getComplexItemNull() throws ServiceException;
 
     /**
-     * Get dictionary of complex type with null item {"0": {"integer": 1,
-     * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
-     * Get dictionary of complex type with empty item {"0": {"integer": 1,
-     * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
      *
      * @return the Map&lt;String, Widget&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1113,17 +1088,14 @@ public interface Dictionary {
     Map<String, Widget> getComplexItemEmpty() throws ServiceException;
 
     /**
-     * Get dictionary of complex type with empty item {"0": {"integer": 1,
-     * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
-     * Get dictionary of complex type with {"0": {"integer": 1, "string":
-     * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
-     * "string": "6"}}
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @return the Map&lt;String, Widget&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1131,18 +1103,14 @@ public interface Dictionary {
     Map<String, Widget> getComplexValid() throws ServiceException;
 
     /**
-     * Get dictionary of complex type with {"0": {"integer": 1, "string":
-     * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
-     * "string": "6"}}
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
-     * Put an dictionary of complex type with values {"0": {"integer": 1,
-     * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
-     * 5, "string": "6"}}
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1150,9 +1118,7 @@ public interface Dictionary {
     void putComplexValid(Map<String, Widget> arrayBody) throws ServiceException;
 
     /**
-     * Put an dictionary of complex type with values {"0": {"integer": 1,
-     * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
-     * 5, "string": "6"}}
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1190,8 +1156,7 @@ public interface Dictionary {
     void getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
-     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
-     * "2": ["7", "8", "9"]}
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
      *
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1199,16 +1164,14 @@ public interface Dictionary {
     Map<String, List<String>> getArrayItemNull() throws ServiceException;
 
     /**
-     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
-     * "2": ["7", "8", "9"]}
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
-     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
-     * ["7", "8", "9"]}
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
      *
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1216,16 +1179,14 @@ public interface Dictionary {
     Map<String, List<String>> getArrayItemEmpty() throws ServiceException;
 
     /**
-     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
-     * ["7", "8", "9"]}
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
-     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1233,16 +1194,14 @@ public interface Dictionary {
     Map<String, List<String>> getArrayValid() throws ServiceException;
 
     /**
-     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
-     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1250,8 +1209,7 @@ public interface Dictionary {
     void putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException;
 
     /**
-     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1274,8 +1232,7 @@ public interface Dictionary {
     void getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1283,17 +1240,14 @@ public interface Dictionary {
     Map<String, Map<String, String>> getDictionaryEmpty() throws ServiceException;
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1301,18 +1255,14 @@ public interface Dictionary {
     Map<String, Map<String, String>> getDictionaryItemNull() throws ServiceException;
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1320,19 +1270,14 @@ public interface Dictionary {
     Map<String, Map<String, String>> getDictionaryItemEmpty() throws ServiceException;
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1340,20 +1285,14 @@ public interface Dictionary {
     Map<String, Map<String, String>> getDictionaryValid() throws ServiceException;
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1361,10 +1300,7 @@ public interface Dictionary {
     void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException;
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

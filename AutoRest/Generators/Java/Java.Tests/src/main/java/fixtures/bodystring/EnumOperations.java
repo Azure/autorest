@@ -43,8 +43,7 @@ public interface EnumOperations {
 
     }
     /**
-     * Get enum value 'red color' from enumeration of 'red color',
-     * 'green-color', 'blue_color'.
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @return the Colors object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -52,16 +51,14 @@ public interface EnumOperations {
     Colors getNotExpandable() throws ServiceException;
 
     /**
-     * Get enum value 'red color' from enumeration of 'red color',
-     * 'green-color', 'blue_color'.
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
 
     /**
-     * Sends value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
      *
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -69,8 +66,7 @@ public interface EnumOperations {
     void putNotExpandable(Colors stringBody) throws ServiceException;
 
     /**
-     * Sends value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
      *
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

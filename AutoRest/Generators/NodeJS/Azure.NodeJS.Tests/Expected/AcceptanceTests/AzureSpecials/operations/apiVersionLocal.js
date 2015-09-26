@@ -35,6 +35,7 @@ function ApiVersionLocal(client) {
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
+ *
  * @param {string} apiVersion This should appear as a method parameter, use
  * value '2.0'. Possible values for this parameter include: '2.0'
  * 
@@ -77,7 +78,7 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/method/string/none/query/local/2.0';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
@@ -144,6 +145,7 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * null to succeed
+ *
  * @param {string} [apiVersion] This should appear as a method parameter, use
  * value null, this should result in no serialized parameter
  * 
@@ -186,7 +188,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/method/string/none/query/local/null';
   var queryParameters = [];
   if (apiVersion !== null && apiVersion !== undefined) {
@@ -255,6 +257,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
+ *
  * @param {string} apiVersion This should appear as a method parameter, use
  * value '2.0'. Possible values for this parameter include: '2.0'
  * 
@@ -297,7 +300,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/path/string/none/query/local/2.0';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
@@ -364,6 +367,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
+ *
  * @param {string} apiVersion The api version, which appears in the query, the
  * value is always '2.0'. Possible values for this parameter include: '2.0'
  * 
@@ -406,7 +410,7 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/swagger/string/none/query/local/2.0';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));

@@ -195,8 +195,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// Put External Resource as an Array
         /// </summary>
         /// <param name='resourceArray'>
-        /// External Resource as an Array to put
-        /// </param>
+        /// External Resource as an Array to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -419,8 +418,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// Put External Resource as a Dictionary
         /// </summary>
         /// <param name='resourceDictionary'>
-        /// External Resource as a Dictionary to put
-        /// </param>
+        /// External Resource as a Dictionary to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -643,8 +641,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// Put External Resource as a ResourceCollection
         /// </summary>
         /// <param name='resourceComplexObject'>
-        /// External Resource as a ResourceCollection to put
-        /// </param>
+        /// External Resource as a ResourceCollection to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

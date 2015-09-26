@@ -33,6 +33,7 @@ function Dictionary(client) {
 
 /**
  * Get complex types with dictionary property
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,7 +63,7 @@ Dictionary.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/dictionary/typed/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -138,6 +139,7 @@ Dictionary.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types with dictionary property
+ *
  * @param {object} complexBody Please put a dictionary with 5 key-value pairs:
  * "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
  * 
@@ -179,7 +181,7 @@ Dictionary.prototype.putValid = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/dictionary/typed/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -252,6 +254,7 @@ Dictionary.prototype.putValid = function (complexBody, options, callback) {
 
 /**
  * Get complex types with dictionary property which is empty
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -281,7 +284,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/dictionary/typed/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -357,6 +360,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
 
 /**
  * Put complex types with dictionary property which is empty
+ *
  * @param {object} complexBody Please put an empty dictionary
  * 
  * @param {object} [complexBody.defaultProgram]
@@ -397,7 +401,7 @@ Dictionary.prototype.putEmpty = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/dictionary/typed/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -470,6 +474,7 @@ Dictionary.prototype.putEmpty = function (complexBody, options, callback) {
 
 /**
  * Get complex types with dictionary property which is null
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -499,7 +504,7 @@ Dictionary.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/dictionary/typed/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -576,6 +581,7 @@ Dictionary.prototype.getNull = function (options, callback) {
 /**
  * Get complex types with dictionary property while server doesn't provide a
  * response payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -605,7 +611,7 @@ Dictionary.prototype.getNotProvided = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/dictionary/typed/notprovided';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

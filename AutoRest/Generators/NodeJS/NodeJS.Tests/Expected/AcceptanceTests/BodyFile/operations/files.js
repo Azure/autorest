@@ -33,6 +33,7 @@ function Files(client) {
 
 /**
  * Get file
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ Files.prototype.getFile = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//files/stream/nonempty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -107,6 +108,7 @@ Files.prototype.getFile = function (options, callback) {
 
 /**
  * Get empty file
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -135,7 +137,7 @@ Files.prototype.getEmptyFile = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//files/stream/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

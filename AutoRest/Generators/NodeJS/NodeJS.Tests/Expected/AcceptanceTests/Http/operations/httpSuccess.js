@@ -33,6 +33,7 @@ function HttpSuccess(client) {
 
 /**
  * Return 200 status code if successful
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ HttpSuccess.prototype.head200 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/200';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -118,6 +119,7 @@ HttpSuccess.prototype.head200 = function (options, callback) {
 
 /**
  * Get 200 success
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -146,7 +148,7 @@ HttpSuccess.prototype.get200 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/200';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -216,6 +218,7 @@ HttpSuccess.prototype.get200 = function (options, callback) {
 
 /**
  * Put boolean value true returning 200 success
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -254,7 +257,7 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/200';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -326,6 +329,7 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
 
 /**
  * Patch true Boolean value in request returning 200
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -364,7 +368,7 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/200';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -436,6 +440,7 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
 
 /**
  * Post bollean value true in request that returns a 200
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -474,7 +479,7 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/200';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -546,6 +551,7 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
 
 /**
  * Delete simple boolean value true returns 200
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -584,7 +590,7 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/200';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -656,6 +662,7 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
 
 /**
  * Put true Boolean value in request returns 201
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -694,7 +701,7 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/201';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -766,6 +773,7 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
 
 /**
  * Post true Boolean value in request returns 201 (Created)
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -804,7 +812,7 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/201';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -876,6 +884,7 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
 
 /**
  * Put true Boolean value in request returns 202 (Accepted)
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -914,7 +923,7 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/202';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -986,6 +995,7 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
 
 /**
  * Patch true Boolean value in request returns 202
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1024,7 +1034,7 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/202';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1096,6 +1106,7 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
 
 /**
  * Post true Boolean value in request returns 202 (Accepted)
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1134,7 +1145,7 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/202';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1206,6 +1217,7 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
 
 /**
  * Delete true Boolean value in request returns 202 (accepted)
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1244,7 +1256,7 @@ HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/202';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1316,6 +1328,7 @@ HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
 
 /**
  * Return 204 status code if successful
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1344,7 +1357,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/204';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1401,6 +1414,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
 
 /**
  * Put true Boolean value in request returns 204 (no content)
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1439,7 +1453,7 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/204';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1511,6 +1525,7 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
 
 /**
  * Patch true Boolean value in request returns 204 (no content)
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1549,7 +1564,7 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/204';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1621,6 +1636,7 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
 
 /**
  * Post true Boolean value in request returns 204 (no content)
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1659,7 +1675,7 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/204';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1731,6 +1747,7 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
 
 /**
  * Delete true Boolean value in request returns 204 (no content)
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1769,7 +1786,7 @@ HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/204';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1841,6 +1858,7 @@ HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
 
 /**
  * Return 404 status code
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1869,7 +1887,7 @@ HttpSuccess.prototype.head404 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/404';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

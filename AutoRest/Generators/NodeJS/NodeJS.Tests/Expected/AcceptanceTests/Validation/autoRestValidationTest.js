@@ -66,6 +66,7 @@ util.inherits(AutoRestValidationTest, ServiceClient);
 
 /**
  * Validates input parameters on the method. See swagger for details.
+ *
  * @param {string} resourceGroupName Required string between 3 and 10 chars
  * with pattern [a-zA-Z0-9]+.
  * 
@@ -117,7 +118,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
@@ -201,6 +202,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
 
 /**
  * Validates body parameters on the method. See swagger for details.
+ *
  * @param {string} resourceGroupName Required string between 3 and 10 chars
  * with pattern [a-zA-Z0-9]+.
  * 
@@ -261,7 +263,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));

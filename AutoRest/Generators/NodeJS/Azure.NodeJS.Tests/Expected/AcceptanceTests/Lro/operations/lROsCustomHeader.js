@@ -39,6 +39,7 @@ function LROsCustomHeader(client) {
  * a 200 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -59,7 +60,7 @@ function LROsCustomHeader(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -125,6 +126,7 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
  * a 200 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -170,7 +172,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/customheader/putasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -275,6 +277,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
  * a 201 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -295,7 +298,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -361,6 +364,7 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
  * a 201 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -406,7 +410,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/customheader/put/201/creating/succeeded/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -529,6 +533,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
  * message header for all requests. Long running post request, service
  * returns a 202 to the initial request, with 'Location' and 'Retry-After'
  * headers, Polls return a 200 with a response body after success
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -597,6 +602,7 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
  * message header for all requests. Long running post request, service
  * returns a 202 to the initial request, with 'Location' and 'Retry-After'
  * headers, Polls return a 200 with a response body after success
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -641,7 +647,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/customheader/post/202/retry/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -727,6 +733,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
  * returns a 202 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -796,6 +803,7 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
  * returns a 202 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -840,7 +848,7 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, opt
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/customheader/postasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {

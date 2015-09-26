@@ -52,8 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
         /// <param name='unencodedPathParam'>
-        /// Unencoded path parameter with value 'path1/path2/path3'
-        /// </param>
+        /// Unencoded path parameter with value 'path1/path2/path3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -166,8 +165,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
         /// <param name='unencodedPathParam'>
-        /// Unencoded path parameter with value 'path1/path2/path3'
-        /// </param>
+        /// Unencoded path parameter with value 'path1/path2/path3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -281,8 +279,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='unencodedPathParam'>
         /// An unencoded path parameter with value 'path1/path2/path3'. Possible
-        /// values for this parameter include: 'path1/path2/path3'
-        /// </param>
+        /// values for this parameter include: 'path1/path2/path3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -396,8 +393,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
-        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-        /// </param>
+        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -513,8 +509,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Get method with unencoded query parameter with value null
         /// </summary>
         /// <param name='q1'>
-        /// Unencoded query parameter with value null
-        /// </param>
+        /// Unencoded query parameter with value null/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -627,8 +622,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
-        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-        /// </param>
+        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -747,8 +741,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <param name='q1'>
         /// An unencoded query parameter with value
         /// 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter
-        /// include: 'value1&amp;q2=value2&amp;q3=value3'
-        /// </param>
+        /// include: 'value1&amp;q2=value2&amp;q3=value3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

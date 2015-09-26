@@ -328,8 +328,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Put max datetime value with positive numoffset
-     * 9999-12-31t23:59:59.9999999+14:00
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -349,8 +348,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Put max datetime value with positive numoffset
-     * 9999-12-31t23:59:59.9999999+14:00
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -380,8 +378,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31t23:59:59.9999999+14:00
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -397,8 +394,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31t23:59:59.9999999+14:00
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -423,8 +419,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31T23:59:59.9999999+14:00
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -440,8 +435,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31T23:59:59.9999999+14:00
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -466,8 +460,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Put max datetime value with positive numoffset
-     * 9999-12-31t23:59:59.9999999-14:00
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -487,8 +480,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Put max datetime value with positive numoffset
-     * 9999-12-31t23:59:59.9999999-14:00
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -518,8 +510,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31T23:59:59.9999999-14:00
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -535,8 +526,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31T23:59:59.9999999-14:00
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -561,8 +551,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31t23:59:59.9999999-14:00
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -578,8 +567,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31t23:59:59.9999999-14:00
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

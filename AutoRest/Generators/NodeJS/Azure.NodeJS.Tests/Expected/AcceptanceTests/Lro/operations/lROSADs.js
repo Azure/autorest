@@ -35,6 +35,7 @@ function LROSADs(client) {
 /**
  *
  * Long running put request, service returns a 400 to the initial request
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -55,7 +56,7 @@ function LROSADs(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -117,6 +118,7 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
 
 /**
  * Long running put request, service returns a 400 to the initial request
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -162,7 +164,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/put/400';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -283,6 +285,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
  *
  * Long running put request, service returns a Product with
  * 'ProvisioningState' = 'Creating' and 201 response code
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -303,7 +306,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -366,6 +369,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
 /**
  * Long running put request, service returns a Product with
  * 'ProvisioningState' = 'Creating' and 201 response code
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -411,7 +415,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/put/201/creating/400';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -533,6 +537,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
  * Long running put request, service returns a 200 with
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -553,7 +558,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -617,6 +622,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
  * Long running put request, service returns a 200 with
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -662,7 +668,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/putasync/retry/400';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -763,6 +769,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
 /**
  *
  * Long running delete request, service returns a 400 with an error body
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -820,6 +827,7 @@ LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
 
 /**
  * Long running delete request, service returns a 400 with an error body
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -856,7 +864,7 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/delete/400';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -922,6 +930,7 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
 /**
  *
  * Long running delete request, service returns a 202 with a location header
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -979,6 +988,7 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
 
 /**
  * Long running delete request, service returns a 202 with a location header
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1015,7 +1025,7 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/delete/202/retry/400';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1083,6 +1093,7 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1142,6 +1153,7 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1178,7 +1190,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/deleteasync/retry/400';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1244,6 +1256,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
 /**
  *
  * Long running post request, service returns a 400 with no error body
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1309,6 +1322,7 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
 
 /**
  * Long running post request, service returns a 400 with no error body
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1353,7 +1367,7 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/post/400';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1435,6 +1449,7 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
 /**
  *
  * Long running post request, service returns a 202 with a location header
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1500,6 +1515,7 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
 
 /**
  * Long running post request, service returns a 202 with a location header
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1544,7 +1560,7 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/post/202/retry/400';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1628,6 +1644,7 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
  * Long running post request, service returns a 202 to the initial request
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1695,6 +1712,7 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
  * Long running post request, service returns a 202 to the initial request
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1739,7 +1757,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/postasync/retry/400';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -1822,6 +1840,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
  *
  * Long running put request, service returns a 201 to the initial request with
  * no payload
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1842,7 +1861,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1905,6 +1924,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
 /**
  * Long running put request, service returns a 201 to the initial request with
  * no payload
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -1950,7 +1970,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/put/201/noprovisioningstatepayload';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -2072,6 +2092,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2092,7 +2113,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2156,6 +2177,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2201,7 +2223,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/putasync/retry/nostatus';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -2304,6 +2326,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2324,7 +2347,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2388,6 +2411,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2433,7 +2457,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/putasync/retry/nostatuspayload';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -2535,6 +2559,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
  *
  * Long running delete request, service returns a 204 to the initial request,
  * indicating success.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2593,6 +2618,7 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
 /**
  * Long running delete request, service returns a 204 to the initial request,
  * indicating success.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2629,7 +2655,7 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/delete/204/nolocation';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -2697,6 +2723,7 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2756,6 +2783,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2792,7 +2820,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/deleteasync/retry/nostatus';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -2859,6 +2887,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
  *
  * Long running post request, service returns a 202 to the initial request,
  * without a location header.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2925,6 +2954,7 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
 /**
  * Long running post request, service returns a 202 to the initial request,
  * without a location header.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -2969,7 +2999,7 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/post/202/nolocation';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -3053,6 +3083,7 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3120,6 +3151,7 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3164,7 +3196,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/postasync/retry/nopayload';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -3247,6 +3279,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
  *
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that is not a valid json
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3267,7 +3300,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3330,6 +3363,7 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
 /**
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that is not a valid json
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3375,7 +3409,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/put/200/invalidjson';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -3478,6 +3512,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3498,7 +3533,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3562,6 +3597,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3607,7 +3643,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/putasync/retry/invalidheader';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -3710,6 +3746,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3730,7 +3767,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information. 
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3794,6 +3831,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
  * Long running put request, service returns a 200 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -3839,7 +3877,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/putasync/retry/invalidjsonpolling';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -3941,6 +3979,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
  *
  * Long running delete request, service returns a 202 to the initial request
  * receing a reponse with an invalid 'Location' and 'Retry-After' headers
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3999,6 +4038,7 @@ LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
 /**
  * Long running delete request, service returns a 202 to the initial request
  * receing a reponse with an invalid 'Location' and 'Retry-After' headers
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4035,7 +4075,7 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/delete/202/retry/invalidheader';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -4102,6 +4142,7 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
  *
  * Long running delete request, service returns a 202 to the initial request.
  * The endpoint indicated in the Azure-AsyncOperation header is invalid
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4160,6 +4201,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
 /**
  * Long running delete request, service returns a 202 to the initial request.
  * The endpoint indicated in the Azure-AsyncOperation header is invalid
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4196,7 +4238,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/deleteasync/retry/invalidheader';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -4264,6 +4306,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4323,6 +4366,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options
  * Long running delete request, service returns a 202 to the initial request.
  * Poll the endpoint indicated in the Azure-AsyncOperation header for
  * operation status
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4359,7 +4403,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/deleteasync/retry/invalidjsonpolling';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -4426,6 +4470,7 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
  *
  * Long running post request, service returns a 202 to the initial request,
  * with invalid 'Location' and 'Retry-After' headers.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -4492,6 +4537,7 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
 /**
  * Long running post request, service returns a 202 to the initial request,
  * with invalid 'Location' and 'Retry-After' headers.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -4536,7 +4582,7 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/post/202/retry/invalidheader';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -4620,6 +4666,7 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -4687,6 +4734,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. The endpoint
  * indicated in the Azure-AsyncOperation header is invalid.
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -4731,7 +4779,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/postasync/retry/invalidheader';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -4815,6 +4863,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -4882,6 +4931,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
  * Long running post request, service returns a 202 to the initial request,
  * with an entity that contains ProvisioningState=’Creating’. Poll the
  * endpoint indicated in the Azure-AsyncOperation header for operation status
+ *
  * @param {object} [product] Product to put
  * 
  * @param {string} [product.provisioningState]
@@ -4926,7 +4976,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (prod
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//lro/error/postasync/retry/invalidjsonpolling';
   var queryParameters = [];
   if (queryParameters.length > 0) {

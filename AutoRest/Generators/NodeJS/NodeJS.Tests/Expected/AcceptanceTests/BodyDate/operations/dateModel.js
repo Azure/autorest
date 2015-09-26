@@ -33,6 +33,7 @@ function DateModel(client) {
 
 /**
  * Get null date value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ DateModel.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//date/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -134,6 +135,7 @@ DateModel.prototype.getNull = function (options, callback) {
 
 /**
  * Get invalid date value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -162,7 +164,7 @@ DateModel.prototype.getInvalidDate = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//date/invaliddate';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -235,6 +237,7 @@ DateModel.prototype.getInvalidDate = function (options, callback) {
 
 /**
  * Get overflow date value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -263,7 +266,7 @@ DateModel.prototype.getOverflowDate = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//date/overflowdate';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -336,6 +339,7 @@ DateModel.prototype.getOverflowDate = function (options, callback) {
 
 /**
  * Get underflow date value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -364,7 +368,7 @@ DateModel.prototype.getUnderflowDate = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//date/underflowdate';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -437,6 +441,7 @@ DateModel.prototype.getUnderflowDate = function (options, callback) {
 
 /**
  * Put max date value 9999-12-31
+ *
  * @param {date} dateBody
  * 
  * @param {object} [options]
@@ -476,7 +481,7 @@ DateModel.prototype.putMaxDate = function (dateBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//date/max';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -546,6 +551,7 @@ DateModel.prototype.putMaxDate = function (dateBody, options, callback) {
 
 /**
  * Get max date value 9999-12-31
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -574,7 +580,7 @@ DateModel.prototype.getMaxDate = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//date/max';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -647,6 +653,7 @@ DateModel.prototype.getMaxDate = function (options, callback) {
 
 /**
  * Put min date value 0000-01-01
+ *
  * @param {date} dateBody
  * 
  * @param {object} [options]
@@ -686,7 +693,7 @@ DateModel.prototype.putMinDate = function (dateBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//date/min';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -756,6 +763,7 @@ DateModel.prototype.putMinDate = function (dateBody, options, callback) {
 
 /**
  * Get min date value 0000-01-01
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -784,7 +792,7 @@ DateModel.prototype.getMinDate = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//date/min';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

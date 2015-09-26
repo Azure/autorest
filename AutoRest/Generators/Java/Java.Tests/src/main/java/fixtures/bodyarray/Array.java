@@ -865,8 +865,7 @@ public interface Array {
     void getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
-     * Get date-time array value ['2000-12-01t00:00:01z',
-     * '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -874,16 +873,14 @@ public interface Array {
     List<DateTime> getDateTimeValid() throws ServiceException;
 
     /**
-     * Get date-time array value ['2000-12-01t00:00:01z',
-     * '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
-     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
-     * '1492-10-12T10:15:01-08:00']
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -891,8 +888,7 @@ public interface Array {
     void putDateTimeValid(List<DateTime> arrayBody) throws ServiceException;
 
     /**
-     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
-     * '1492-10-12T10:15:01-08:00']
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -930,8 +926,7 @@ public interface Array {
     void getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
-     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
-     * 43)] with each item encoded in base64
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
      *
      * @return the List&lt;byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -939,16 +934,14 @@ public interface Array {
     List<byte[]> getByteValid() throws ServiceException;
 
     /**
-     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
-     * 43)] with each item encoded in base64
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
-     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
-     * with each elementencoded in base 64
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -956,8 +949,7 @@ public interface Array {
     void putByteValid(List<byte[]> arrayBody) throws ServiceException;
 
     /**
-     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
-     * with each elementencoded in base 64
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -965,8 +957,7 @@ public interface Array {
     void putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get byte array value [hex(AB, AC, AD), null] with the first item base64
-     * encoded
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
      *
      * @return the List&lt;byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -974,8 +965,7 @@ public interface Array {
     List<byte[]> getByteInvalidNull() throws ServiceException;
 
     /**
-     * Get byte array value [hex(AB, AC, AD), null] with the first item base64
-     * encoded
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1012,8 +1002,7 @@ public interface Array {
     void getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
-     * Get array of complex type with null item [{'integer': 1 'string': '2'},
-     * null, {'integer': 5, 'string': '6'}]
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1021,16 +1010,14 @@ public interface Array {
     List<Product> getComplexItemNull() throws ServiceException;
 
     /**
-     * Get array of complex type with null item [{'integer': 1 'string': '2'},
-     * null, {'integer': 5, 'string': '6'}]
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
-     * Get array of complex type with empty item [{'integer': 1 'string':
-     * '2'}, {}, {'integer': 5, 'string': '6'}]
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1038,16 +1025,14 @@ public interface Array {
     List<Product> getComplexItemEmpty() throws ServiceException;
 
     /**
-     * Get array of complex type with empty item [{'integer': 1 'string':
-     * '2'}, {}, {'integer': 5, 'string': '6'}]
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
-     * Get array of complex type with [{'integer': 1 'string': '2'},
-     * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1055,16 +1040,14 @@ public interface Array {
     List<Product> getComplexValid() throws ServiceException;
 
     /**
-     * Get array of complex type with [{'integer': 1 'string': '2'},
-     * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
-     * Put an array of complex type with values [{'integer': 1 'string': '2'},
-     * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1072,8 +1055,7 @@ public interface Array {
     void putComplexValid(List<Product> arrayBody) throws ServiceException;
 
     /**
-     * Put an array of complex type with values [{'integer': 1 'string': '2'},
-     * {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1111,8 +1093,7 @@ public interface Array {
     void getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
-     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8',
-     * '9']]
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1120,8 +1101,7 @@ public interface Array {
     List<List<String>> getArrayItemNull() throws ServiceException;
 
     /**
-     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8',
-     * '9']]
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1143,8 +1123,7 @@ public interface Array {
     void getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
-     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'],
-     * ['7', '8', '9']]
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1152,16 +1131,14 @@ public interface Array {
     List<List<String>> getArrayValid() throws ServiceException;
 
     /**
-     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'],
-     * ['7', '8', '9']]
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
-     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'],
-     * ['7', '8', '9']]
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1169,8 +1146,7 @@ public interface Array {
     void putArrayValid(List<List<String>> arrayBody) throws ServiceException;
 
     /**
-     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'],
-     * ['7', '8', '9']]
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1193,8 +1169,7 @@ public interface Array {
     void getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value
-     * []
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value []
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1202,17 +1177,14 @@ public interface Array {
     List<Map<String, String>> getDictionaryEmpty() throws ServiceException;
 
     /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value
-     * []
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value []
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value
-     * [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
-     * 'eight', '9': 'nine'}]
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1220,18 +1192,14 @@ public interface Array {
     List<Map<String, String>> getDictionaryItemNull() throws ServiceException;
 
     /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value
-     * [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
-     * 'eight', '9': 'nine'}]
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value
-     * [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8':
-     * 'eight', '9': 'nine'}]
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1239,18 +1207,14 @@ public interface Array {
     List<Map<String, String>> getDictionaryItemEmpty() throws ServiceException;
 
     /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value
-     * [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8':
-     * 'eight', '9': 'nine'}]
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value
-     * [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
-     * '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1258,18 +1222,14 @@ public interface Array {
     List<Map<String, String>> getDictionaryValid() throws ServiceException;
 
     /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value
-     * [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
-     * '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value
-     * [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
-     * '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1277,9 +1237,7 @@ public interface Array {
     void putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException;
 
     /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value
-     * [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
-     * '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

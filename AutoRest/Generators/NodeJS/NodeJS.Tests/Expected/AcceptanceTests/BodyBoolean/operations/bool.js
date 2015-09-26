@@ -33,6 +33,7 @@ function Bool(client) {
 
 /**
  * Get true Boolean value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ Bool.prototype.getTrue = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//bool/true';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -131,6 +132,7 @@ Bool.prototype.getTrue = function (options, callback) {
 
 /**
  * Set Boolean value true
+ *
  * @param {boolean} boolBody
  * 
  * @param {object} [options]
@@ -169,7 +171,7 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//bool/true';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -239,6 +241,7 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
 
 /**
  * Get false Boolean value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -267,7 +270,7 @@ Bool.prototype.getFalse = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//bool/false';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -337,6 +340,7 @@ Bool.prototype.getFalse = function (options, callback) {
 
 /**
  * Set Boolean value false
+ *
  * @param {boolean} boolBody
  * 
  * @param {object} [options]
@@ -375,7 +379,7 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//bool/false';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -445,6 +449,7 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
 
 /**
  * Get null Boolean value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -473,7 +478,7 @@ Bool.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//bool/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -543,6 +548,7 @@ Bool.prototype.getNull = function (options, callback) {
 
 /**
  * Get invalid Boolean value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -571,7 +577,7 @@ Bool.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//bool/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

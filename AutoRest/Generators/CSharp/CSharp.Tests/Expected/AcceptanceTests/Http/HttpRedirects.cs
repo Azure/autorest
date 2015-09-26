@@ -384,8 +384,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// caller for evaluation
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -637,8 +636,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// caller for evaluation
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -728,8 +726,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// code
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -979,8 +976,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Put redirected with 307, resulting in a 200 after redirect
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1068,8 +1064,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Patch redirected with 307, resulting in a 200 after redirect
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1157,8 +1152,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Post redirected with 307, resulting in a 200 after redirect
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1246,8 +1240,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Delete redirected with 307, resulting in a 200 after redirect
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
