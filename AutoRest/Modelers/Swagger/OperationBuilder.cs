@@ -334,7 +334,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         private bool SwaggerOperationProducesJson()
         {
             return _effectiveProduces != null &&
-                   _effectiveProduces.Any(s => s.StartsWith("application/json", StringComparison.InvariantCultureIgnoreCase));
+                   _effectiveProduces.Any(s => s.StartsWith("application/json", StringComparison.OrdinalIgnoreCase));
         }
 
         private bool SwaggerOperationProducesNotEmpty()
