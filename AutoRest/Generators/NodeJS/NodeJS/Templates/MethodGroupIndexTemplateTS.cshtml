@@ -1,0 +1,18 @@
+﻿@using Microsoft.Rest.Generator.NodeJS
+@using Microsoft.Rest.Generator.NodeJS.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ServiceClientTemplateModel>
+/*
+@Header(" * ")
+*/
+@EmptyLine
+import { RequestOptions, HttpOperationResponse } from "../node_modules/ms-rest/lib";
+@if (Model.ModelTypes.Any()) {
+@:import * as models from "../models";
+}
+@EmptyLine
+@foreach (var methodGroup in Model.MethodGroupModels) {
+@EmptyLine
+@:@(Include(new MethodGroupTemplateTS(), methodGroup))
+}

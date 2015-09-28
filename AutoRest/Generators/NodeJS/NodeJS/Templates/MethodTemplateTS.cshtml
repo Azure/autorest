@@ -1,0 +1,44 @@
+﻿@using System;
+@using System.Linq;
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.NodeJS
+@using Microsoft.Rest.Generator.NodeJS.TemplateModels
+@using Microsoft.Rest.Generator.NodeJS.Templates
+@inherits Microsoft.Rest.Generator.Template<MethodTemplateModel>
+
+/**
+@if (!String.IsNullOrEmpty(Model.Summary)) {
+    @WrapComment(" * ", "@summary " + Model.Summary)@:
+    @: *
+}
+@if (!String.IsNullOrEmpty(Model.Description)) {
+    @WrapComment(" * ", Model.Description)@:
+    @: *
+}
+@foreach (var parameter in Model.DocumentationParameters) {
+    @MethodTemplateModel.ConstructParameterDocumentation(
+                      WrapComment(" * ", "@param {"
+                                        + MethodTemplateModel.GetParameterDocumentationType(parameter)
+                                        + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
+                                        + " " + parameter.Documentation))
+}
+@WrapComment(" * ", " @param {object} [options]")
+ *
+@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
+ *
+@WrapComment(" * ", " @param {function} callback")
+ *
+@WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
+@WrapComment(" *                      ", Model.ReturnTypeInfo)
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallbackTS)): void;
+ 
