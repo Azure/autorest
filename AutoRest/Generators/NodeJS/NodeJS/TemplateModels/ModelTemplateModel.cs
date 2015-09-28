@@ -152,6 +152,24 @@ namespace Microsoft.Rest.Generator.NodeJS
             return sample != null;
         }
 
+        /// <summary>
+        /// Returns the TypeScript string to define the specified property, including its type and whether it's optional or not
+        /// </summary>
+        /// <param name="property">Model property to query</param>
+        /// <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
+        /// <returns>TypeScript property definition</returns>
+        public string PropertyTS(Property property, bool inModelsModule) {
+            if (property == null) {
+                throw new ArgumentNullException("property");
+            }
+
+            string typeString = property.Type.TSType(inModelsModule);
+
+            if (! property.IsRequired)
+                return property.Name + "?: " + typeString;
+            else return property.Name + ": " + typeString;
+        }
+
         public string InitializeProperty(string objectName, string valueName, Property property)
         {
             if (property == null || property.Type == null)
