@@ -23,7 +23,7 @@
   "dependencies": {
     "underscore": "1.4.x",
     "tunnel": "~0.0.2",
-    "request": "2.45.0",
+    "request": "2.52.0",
     "validator": "~3.1.0",
     "duplexer": "~0.1.1",
     "through": "~2.3.4",

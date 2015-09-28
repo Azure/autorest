@@ -14,8 +14,17 @@
  * @class
  * Initializes a new instance of the C class.
  * @constructor
+ * @member {string} [httpCode]
+ * 
  */
-function C() { }
+function C(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.httpCode !== undefined) {
+      this.httpCode = parameters.httpCode;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the C schema
@@ -23,13 +32,16 @@ function C() { }
  * @param {JSON} payload
  *
  */
-C.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('C cannot be null.');
+C.prototype.serialize = function () {
+  var payload = {};
+  if (this['httpCode'] !== null && this['httpCode'] !== undefined) {
+    if (typeof this['httpCode'].valueOf() !== 'string') {
+      throw new Error('this[\'httpCode\'] must be of type string.');
+    }
+    payload['httpCode'] = this['httpCode'];
   }
-  if (payload['httpCode'] !== null && payload['httpCode'] !== undefined && typeof payload['httpCode'].valueOf() !== 'string') {
-    throw new Error('payload[\'httpCode\'] must be of type string.');
-  }
+
+  return payload;
 };
 
 /**
@@ -39,7 +51,13 @@ C.prototype.validate = function (payload) {
  *
  */
 C.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['httpCode'] !== undefined) {
+      this['httpCode'] = instance['httpCode'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new C();
+module.exports = C;

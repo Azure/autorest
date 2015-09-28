@@ -12,7 +12,7 @@ describe('AutoRest NuGet Package Node JS code generator smoke test', function ()
    var testClient = new numberClient('http://localhost:3000', {});
    testClient.number.getBigFloat(function (error, result) {
       should.not.exist(error);
-      result.body.should.equal(3.402823e+20);
+      result.should.equal(3.402823e+20);
       done();
     });
   });

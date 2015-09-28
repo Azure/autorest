@@ -33,7 +33,7 @@ describe('nodejs', function () {
       it('should return true for 204 status code', function (done) {
         testClient.httpSuccess.head204(function (error, result) {
           should.not.exist(error);
-          result.body.should.be.exactly(true);
+          result.should.be.exactly(true);
           done();
         });
       });
@@ -41,7 +41,7 @@ describe('nodejs', function () {
       it('should return false for 404 status code', function (done) {
         testClient.httpSuccess.head404(function (error, result) {
           should.not.exist(error);
-          result.body.should.be.exactly(false);
+          result.should.be.exactly(false);
           done();
         });
       });

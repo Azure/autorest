@@ -16,8 +16,21 @@ var models = require('./index');
  * @class
  * Initializes a new instance of the ClassOptionalWrapper class.
  * @constructor
+ * @member {object} [value]
+ * 
+ * @member {number} [value.id]
+ * 
+ * @member {string} [value.name]
+ * 
  */
-function ClassOptionalWrapper() { }
+function ClassOptionalWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.value) {
+      this.value = new models['Product'](parameters.value);
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the ClassOptionalWrapper schema
@@ -25,13 +38,13 @@ function ClassOptionalWrapper() { }
  * @param {JSON} payload
  *
  */
-ClassOptionalWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('ClassOptionalWrapper cannot be null.');
+ClassOptionalWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['value']) {
+    payload['value'] = this['value'].serialize();
   }
-  if (payload['value']) {
-    models['Product'].validate(payload['value']);
-  }
+
+  return payload;
 };
 
 /**
@@ -42,11 +55,12 @@ ClassOptionalWrapper.prototype.validate = function (payload) {
  */
 ClassOptionalWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.value !== null && instance.value !== undefined) {
-      instance.value = models['Product'].deserialize(instance.value);
+    if (instance['value']) {
+      this['value'] = new models['Product']().deserialize(instance['value']);
     }
   }
-  return instance;
+
+  return this;
 };
 
-module.exports = new ClassOptionalWrapper();
+module.exports = ClassOptionalWrapper;

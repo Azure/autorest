@@ -88,6 +88,10 @@ var defaultAzureMappings = {
   'AcceptanceTests/AzureSpecials': '../../../TestServer/swagger/azure-special-properties.json'
 };
 
+var nodeAzureMappings = {
+  'AcceptanceTests/StorageManagementClient': '../../../TestServer/swagger/storage.json'
+};
+
 var rubyAzureMappings = {
   'head':['../../../TestServer/swagger/head.json', 'HeadModule'],
   'paging':['../../../TestServer/swagger/paging.json', 'PagingModule'],
@@ -125,10 +129,14 @@ gulp.task('regenerate:delete', function(cb){
 });
 
 gulp.task('regenerate:expected:nodeazure', function(cb){
+  for (var p in defaultAzureMappings) {
+    nodeAzureMappings[p] = defaultAzureMappings[p];
+  }
+
   regenExpected({
     'outputBaseDir': 'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests',
     'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
-    'mappings': defaultAzureMappings,
+    'mappings': nodeAzureMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.NodeJS'
   }, cb);
@@ -236,7 +244,11 @@ var msbuildDefaults = {
   toolsVersion: 12.0
 };
 
-gulp.task('clean:build', function (cb) {
+gulp.task('clean:node_modules', function(cb) {
+  del(['./AutoRest/**/node_modules', './ClientRuntimes/**/node_modules'], cb)
+})
+
+gulp.task('clean:build', ['clean:node_modules'], function (cb) {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['clean']
   })));
@@ -325,7 +337,7 @@ gulp.task('test:clientruntime:java', shell.task('gradle build uploadArchives', {
 gulp.task('test:clientruntime:javaazure', shell.task('gradle build uploadArchives', { cwd: './ClientRuntimes/Java/azure-client-runtime/', verbosity: 3 }));
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
-    'test:clientruntime:ruby', 'test:clientruntime:rubyazure', 
+    'test:clientruntime:ruby', 'test:clientruntime:rubyazure',
     'test:clientruntime:java', 'test:clientruntime:javaazure', cb);
 });
 
@@ -340,10 +352,10 @@ gulp.task('test:java:azure', shell.task('gradle build', {cwd: './AutoRest/Genera
 
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
+  'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Modeler.Swagger.Tests.dll',
   'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
   'AutoRest/Generators/CSharp/Azure.CSharp.Tests/bin/Net45-Debug/Azure.CSharp.Tests.dll',
   'AutoRest/Generators/CSharp/CSharp.Tests/bin/Net45-Debug/CSharp.Tests.dll',
-  'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Swagger.Tests.dll',
   'ClientRuntimes/CSharp/ClientRuntime.Azure.Tests/bin/Net45-Debug/ClientRuntime.Azure.Tests.dll',
   'ClientRuntimes/CSharp/ClientRuntime.Tests/bin/Net45-Debug/ClientRuntime.Tests.dll',
 ];

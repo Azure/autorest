@@ -140,8 +140,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </summary>
         /// <param name='complexBody'>
         /// Please put a dictionary with 5 key-value pairs: "txt":"notepad",
-        /// "bmp":"mspaint", "xls":"excel", "exe":"", "":null
-        /// </param>
+        /// "bmp":"mspaint", "xls":"excel", "exe":"", "":null/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -320,8 +319,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Put complex types with dictionary property which is empty
         /// </summary>
         /// <param name='complexBody'>
-        /// Please put an empty dictionary
-        /// </param>
+        /// Please put an empty dictionary/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

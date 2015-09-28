@@ -128,8 +128,7 @@ public interface Polymorphism {
     void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required
-     * 'birthday' field - the request should not be allowed from the client
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
  {
@@ -162,8 +161,7 @@ public interface Polymorphism {
     void putValidMissingRequired(Fish complexBody) throws ServiceException;
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required
-     * 'birthday' field - the request should not be allowed from the client
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
  {

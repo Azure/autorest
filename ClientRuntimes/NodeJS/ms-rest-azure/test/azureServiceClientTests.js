@@ -105,7 +105,7 @@ describe('AzureServiceClient', function () {
         resultOfInitialRequest.response.headers['location'] = '';
         client.getPutOrPatchOperationResult(resultOfInitialRequest, function (err, result) {
           should.not.exist(err);
-          result.body.name.should.equal(testResourceName);
+          JSON.parse(result.body).name.should.equal(testResourceName);
           done();
         });
       });
@@ -120,7 +120,7 @@ describe('AzureServiceClient', function () {
         };
         client.getPutOrPatchOperationResult(resultOfInitialRequest, options, function (err, result) {
           should.not.exist(err);
-          result.body.name.should.equal(testResourceName);
+          JSON.parse(result.body).name.should.equal(testResourceName);
           result.response.testCustomField.should.equal(testCustomFieldValue);
           done();
         });
@@ -131,7 +131,7 @@ describe('AzureServiceClient', function () {
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
         client.getPutOrPatchOperationResult(resultOfInitialRequest, function (err, result) {
           should.not.exist(err);
-          result.body.name.should.equal(testResourceName);
+          JSON.parse(result.body).name.should.equal(testResourceName);
           should.exist(result.response.randomFieldFromPollLocationHeader);
           done();
         });
@@ -182,7 +182,7 @@ describe('AzureServiceClient', function () {
         client.getPostOrDeleteOperationResult(resultOfInitialRequest, function (err, result) {
           should.not.exist(err);
           should.exist(result.response.randomFieldFromPollLocationHeader);
-          result.body.name.should.equal(testResourceName);
+          JSON.parse(result.body).name.should.equal(testResourceName);
           done();
         });
       });

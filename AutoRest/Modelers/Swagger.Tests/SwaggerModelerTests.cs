@@ -25,6 +25,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             });
             var clientModel = modeler.Build();
 
+            var description = "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.";
+            var summary = "Product Types";
+
             Assert.NotNull(clientModel);
             Assert.Equal(2, clientModel.Properties.Count);
             Assert.True(clientModel.Properties.Any(p => p.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)));
@@ -35,7 +38,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(0, clientModel.Methods.Count(m => m.Group != null));
             Assert.Equal(2, clientModel.Methods.Count);
             Assert.Equal("list", clientModel.Methods[0].Name);
-            Assert.NotEmpty(clientModel.Methods[0].Documentation);
+            Assert.NotEmpty(clientModel.Methods[0].Description);
+            Assert.Equal(description, clientModel.Methods[0].Description);
+            Assert.NotEmpty(clientModel.Methods[0].Summary);
+            Assert.Equal(summary, clientModel.Methods[0].Summary);
             Assert.Equal(HttpMethod.Get, clientModel.Methods[0].HttpMethod);
             Assert.Equal(3, clientModel.Methods[0].Parameters.Count);
             Assert.Equal("subscriptionId", clientModel.Methods[0].Parameters[0].Name);

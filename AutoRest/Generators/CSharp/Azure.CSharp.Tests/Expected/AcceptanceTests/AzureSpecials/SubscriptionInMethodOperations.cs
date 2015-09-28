@@ -53,8 +53,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// subscription id = '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='subscriptionId'>
-        /// This should appear as a method parameter, use value '1234-5678-9012-3456'
-        /// </param>
+        /// This should appear as a method parameter, use value '1234-5678-9012-3456'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -171,8 +170,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='subscriptionId'>
         /// This should appear as a method parameter, use value null, client-side
-        /// validation should prvenet the call
-        /// </param>
+        /// validation should prvenet the call/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -287,8 +285,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// subscription id = '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='subscriptionId'>
-        /// Should appear as a method parameter -use value '1234-5678-9012-3456'
-        /// </param>
+        /// Should appear as a method parameter -use value '1234-5678-9012-3456'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -404,8 +401,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscriptionId, which appears in the path, the value is always
-        /// '1234-5678-9012-3456'
-        /// </param>
+        /// '1234-5678-9012-3456'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

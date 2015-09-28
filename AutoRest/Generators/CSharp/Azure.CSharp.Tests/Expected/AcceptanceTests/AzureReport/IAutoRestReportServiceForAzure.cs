@@ -36,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// The management credentials for Azure.
@@ -54,12 +54,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         int? LongRunningOperationRetryTimeout { get; set; }
 
 
-        /// <summary>
+            /// <summary>
         /// Get test coverage report
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>

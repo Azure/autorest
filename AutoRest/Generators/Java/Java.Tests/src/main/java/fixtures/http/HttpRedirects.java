@@ -182,9 +182,7 @@ public interface HttpRedirects {
     void get301Async(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Put true Boolean value in request returns 301.  This request should not
-     * be automatically redirected, but should return the received 301 to the
-     * caller for evaluation
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -192,9 +190,7 @@ public interface HttpRedirects {
     void put301(Boolean booleanValue) throws ServiceException;
 
     /**
-     * Put true Boolean value in request returns 301.  This request should not
-     * be automatically redirected, but should return the received 301 to the
-     * caller for evaluation
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -230,9 +226,7 @@ public interface HttpRedirects {
     void get302Async(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Patch true Boolean value in request returns 302.  This request should
-     * not be automatically redirected, but should return the received 302 to
-     * the caller for evaluation
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -240,9 +234,7 @@ public interface HttpRedirects {
     void patch302(Boolean booleanValue) throws ServiceException;
 
     /**
-     * Patch true Boolean value in request returns 302.  This request should
-     * not be automatically redirected, but should return the received 302 to
-     * the caller for evaluation
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -250,9 +242,7 @@ public interface HttpRedirects {
     void patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Post true Boolean value in request returns 303.  This request should be
-     * automatically redirected usign a get, ultimately returning a 200
-     * status code
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -260,9 +250,7 @@ public interface HttpRedirects {
     void post303(Boolean booleanValue) throws ServiceException;
 
     /**
-     * Post true Boolean value in request returns 303.  This request should be
-     * automatically redirected usign a get, ultimately returning a 200
-     * status code
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

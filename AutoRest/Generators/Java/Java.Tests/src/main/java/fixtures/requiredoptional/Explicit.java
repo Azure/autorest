@@ -173,8 +173,7 @@ public interface Explicit {
 
     }
     /**
-     * Test explicitly required integer. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
      * @return the Error object if successful.
@@ -183,8 +182,7 @@ public interface Explicit {
     Error postRequiredIntegerParameter(int bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly required integer. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -208,9 +206,7 @@ public interface Explicit {
     void postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
      * @return the Error object if successful.
@@ -219,9 +215,7 @@ public interface Explicit {
     Error postRequiredIntegerProperty(IntWrapper bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -229,8 +223,7 @@ public interface Explicit {
     void postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
-     * Test explicitly optional integer. Please put a valid int-wrapper with
-     * 'value' = null.
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -238,8 +231,7 @@ public interface Explicit {
     void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly optional integer. Please put a valid int-wrapper with
-     * 'value' = null.
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -247,9 +239,7 @@ public interface Explicit {
     void postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
      * @return the Error object if successful.
@@ -258,9 +248,7 @@ public interface Explicit {
     Error postRequiredIntegerHeader(int headerParameter) throws ServiceException;
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -268,8 +256,7 @@ public interface Explicit {
     void postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -277,8 +264,7 @@ public interface Explicit {
     void postOptionalIntegerHeader(Integer headerParameter) throws ServiceException;
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -286,8 +272,7 @@ public interface Explicit {
     void postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Test explicitly required string. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
      * @return the Error object if successful.
@@ -296,8 +281,7 @@ public interface Explicit {
     Error postRequiredStringParameter(String bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly required string. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -321,9 +305,7 @@ public interface Explicit {
     void postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
      * @return the Error object if successful.
@@ -332,9 +314,7 @@ public interface Explicit {
     Error postRequiredStringProperty(StringWrapper bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -342,8 +322,7 @@ public interface Explicit {
     void postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
-     * Test explicitly optional integer. Please put a valid string-wrapper
-     * with 'value' = null.
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -351,8 +330,7 @@ public interface Explicit {
     void postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly optional integer. Please put a valid string-wrapper
-     * with 'value' = null.
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -360,9 +338,7 @@ public interface Explicit {
     void postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
      * @return the Error object if successful.
@@ -371,9 +347,7 @@ public interface Explicit {
     Error postRequiredStringHeader(String headerParameter) throws ServiceException;
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -381,8 +355,7 @@ public interface Explicit {
     void postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
-     * Test explicitly optional string. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -390,8 +363,7 @@ public interface Explicit {
     void postOptionalStringHeader(String bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly optional string. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -399,8 +371,7 @@ public interface Explicit {
     void postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Test explicitly required complex object. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
      * @return the Error object if successful.
@@ -409,8 +380,7 @@ public interface Explicit {
     Error postRequiredClassParameter(Product bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly required complex object. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -434,9 +404,7 @@ public interface Explicit {
     void postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Test explicitly required complex object. Please put a valid
-     * class-wrapper with 'value' = null and the client library should throw
-     * before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
      * @return the Error object if successful.
@@ -445,9 +413,7 @@ public interface Explicit {
     Error postRequiredClassProperty(ClassWrapper bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly required complex object. Please put a valid
-     * class-wrapper with 'value' = null and the client library should throw
-     * before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -455,8 +421,7 @@ public interface Explicit {
     void postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
-     * Test explicitly optional complex object. Please put a valid
-     * class-wrapper with 'value' = null.
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -464,8 +429,7 @@ public interface Explicit {
     void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly optional complex object. Please put a valid
-     * class-wrapper with 'value' = null.
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -473,8 +437,7 @@ public interface Explicit {
     void postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Test explicitly required array. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @return the Error object if successful.
@@ -483,8 +446,7 @@ public interface Explicit {
     Error postRequiredArrayParameter(List<String> bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly required array. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -508,9 +470,7 @@ public interface Explicit {
     void postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
      * @return the Error object if successful.
@@ -519,9 +479,7 @@ public interface Explicit {
     Error postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -529,8 +487,7 @@ public interface Explicit {
     void postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
-     * Test explicitly optional array. Please put a valid array-wrapper with
-     * 'value' = null.
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -538,8 +495,7 @@ public interface Explicit {
     void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException;
 
     /**
-     * Test explicitly optional array. Please put a valid array-wrapper with
-     * 'value' = null.
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -547,9 +503,7 @@ public interface Explicit {
     void postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @return the Error object if successful.
@@ -558,9 +512,7 @@ public interface Explicit {
     Error postRequiredArrayHeader(List<String> headerParameter) throws ServiceException;
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -568,8 +520,7 @@ public interface Explicit {
     void postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -577,8 +528,7 @@ public interface Explicit {
     void postOptionalArrayHeader(List<String> headerParameter) throws ServiceException;
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

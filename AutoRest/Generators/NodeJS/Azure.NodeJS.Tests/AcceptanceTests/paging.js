@@ -32,7 +32,7 @@ describe('nodejs', function () {
       it('should get single pages', function (done) {
         testClient.paging.getSinglePages(function (error, result) {
           should.not.exist(error);
-          should.not.exist(result.body.nextLink);
+          should.not.exist(result.nextLink);
           done();
         });
       });
@@ -43,7 +43,7 @@ describe('nodejs', function () {
             if (nextLink !== null && nextLink !== undefined) {
               testClient.paging.getMultiplePagesNext(nextLink, function (err, res) {
                 should.not.exist(err);
-                loop(res.body.nextLink, count + 1);
+                loop(res.nextLink, count + 1);
               });
             } else {
               count.should.be.exactly(10);
@@ -52,8 +52,8 @@ describe('nodejs', function () {
           };
 
           should.not.exist(error);
-          should.exist(result.body.nextLink);
-          loop(result.body.nextLink, 1);
+          should.exist(result.nextLink);
+          loop(result.nextLink, 1);
         });
       });
 
@@ -63,7 +63,7 @@ describe('nodejs', function () {
             if (nextLink !== null && nextLink !== undefined) {
               testClient.paging.getMultiplePagesRetryFirstNext(nextLink, function (err, res) {
                 should.not.exist(err);
-                loop(res.body.nextLink, count + 1);
+                loop(res.nextLink, count + 1);
               });
             } else {
               count.should.be.exactly(10);
@@ -72,8 +72,8 @@ describe('nodejs', function () {
           };
 
           should.not.exist(error);
-          should.exist(result.body.nextLink);
-          loop(result.body.nextLink, 1);
+          should.exist(result.nextLink);
+          loop(result.nextLink, 1);
         });
       });
 
@@ -83,7 +83,7 @@ describe('nodejs', function () {
             if (nextLink !== null && nextLink !== undefined) {
               testClient.paging.getMultiplePagesRetrySecondNext(nextLink, function (err, res) {
                 should.not.exist(err);
-                loop(res.body.nextLink, count + 1);
+                loop(res.nextLink, count + 1);
               });
             } else {
               count.should.be.exactly(10);
@@ -92,8 +92,8 @@ describe('nodejs', function () {
           };
 
           should.not.exist(error);
-          should.exist(result.body.nextLink);
-          loop(result.body.nextLink, 1);
+          should.exist(result.nextLink);
+          loop(result.nextLink, 1);
         });
       });
 
@@ -108,7 +108,7 @@ describe('nodejs', function () {
       it('should fail on 400 multiple pages', function (done) {
         testClient.paging.getMultiplePagesFailure(function (error, result) {
           should.not.exist(error);
-          testClient.paging.getMultiplePagesFailureNext(result.body.nextLink, function (error, result) {
+          testClient.paging.getMultiplePagesFailureNext(result.nextLink, function (error, result) {
             should.exist(error);
             error.message.should.containEql('Expected');
             done();
@@ -119,7 +119,7 @@ describe('nodejs', function () {
       it('should fail on invalid next link URL in multiple pages', function (done) {
         testClient.paging.getMultiplePagesFailureUri(function (error, result) {
           should.not.exist(error);
-          testClient.paging.getMultiplePagesFailureUriNext(result.body.nextLink, function (error, result) {
+          testClient.paging.getMultiplePagesFailureUriNext(result.nextLink, function (error, result) {
             should.exist(error);
             error.message.should.containEql('Invalid URI');
             done();

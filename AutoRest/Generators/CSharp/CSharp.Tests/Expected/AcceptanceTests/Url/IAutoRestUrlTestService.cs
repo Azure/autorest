@@ -35,7 +35,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// A string value 'globalItemStringPath' that appears in the path

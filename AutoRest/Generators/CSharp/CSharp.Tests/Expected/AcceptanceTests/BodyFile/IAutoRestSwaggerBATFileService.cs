@@ -35,7 +35,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
 
         IFiles Files { get; }

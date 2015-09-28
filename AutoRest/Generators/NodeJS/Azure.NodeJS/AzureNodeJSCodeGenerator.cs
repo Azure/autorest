@@ -60,6 +60,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             Settings.AddCredentials = true;
             AzureCodeGenerator.UpdateHeadMethods(serviceClient);
             AzureCodeGenerator.ParseODataExtension(serviceClient);
+            AzureCodeGenerator.FlattenResourceProperties(serviceClient);
             AzureCodeGenerator.AddPageableMethod(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);

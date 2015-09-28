@@ -52,8 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Provides a resouce group with name 'testgroup101' and location 'West US'.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// Resource Group name 'testgroup101'.
-        /// </param>
+        /// Resource Group name 'testgroup101'./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

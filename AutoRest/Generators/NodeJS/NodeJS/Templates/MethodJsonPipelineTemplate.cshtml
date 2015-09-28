@@ -18,13 +18,28 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
     var parsedErrorResponse;
     try {
       parsedErrorResponse = JSON.parse(responseBody);
-      error.body = parsedErrorResponse;
   @if (Model.DefaultResponse != null)
   {
-      var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse, "error.body");
+      if (Model.DefaultResponse is CompositeType)
+      {
+          if (!string.IsNullOrEmpty(((CompositeType)Model.DefaultResponse).PolymorphicDiscriminator))
+          {
+      @:error.body = new client._models.discriminators[parsedErrorResponse['@(((CompositeType)Model.DefaultResponse).PolymorphicDiscriminator)']]();
+          }
+          else
+          {
+      @:error.body = new client._models['@(Model.DefaultResponse.Name)']();
+          }
+      }
+      else
+      {
+      @:error.body = parsedErrorResponse;
+      }
+      
+      var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse, "error.body", "parsedErrorResponse");
       if (!string.IsNullOrWhiteSpace(deserializeErrorBody))
       {
-@:      if (error.body !== null && error.body !== undefined) {
+@:      if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
 @:        @(deserializeErrorBody)
 @:      }
       }
@@ -37,54 +52,23 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
   }
 
   // Create Result
-  var result = new msRest.HttpOperationResponse();
-  result.request = httpRequest;
-  result.response = response;
+  var result = null;
   if (responseBody === '') responseBody = null;
-  @Model.InitializeResponseBody
-
+  @Model.InitializeResult
   @foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
   {
       <text>
   // Deserialize Response
   if (statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
-    var parsedResponse;
-    try {
-      parsedResponse = JSON.parse(responseBody);
-      result.body = parsedResponse;
-  @{
-      var deserializeBody = Model.GetDeserializationString(Model.ReturnType);
-      if (!string.IsNullOrWhiteSpace(deserializeBody))
-      {
-@:      if (result.body !== null && result.body !== undefined) {
-@:        @(deserializeBody)
-@:      }
-      }
-          }
-    } catch (error) {
-      @(Model.DeserializationError)
-    }
+    @(Model.DeserializeResponse(responsePair.Value))
   }
       </text>
   }
   @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
   {
-@:  var parsedResponse;
-@:  try {
-@:    parsedResponse = JSON.parse(responseBody);
-@:    result.body = parsedResponse;
-    var deserializeBody = Model.GetDeserializationString(Model.DefaultResponse);
-    if (!string.IsNullOrWhiteSpace(deserializeBody))
-    {
-@:    if (result.body !== null && result.body !== undefined) {
-@:      @(deserializeBody)
-@:    }
-    }
-@:  } catch (error) {
-@:@(Model.DeserializationError)
-@:}
+    @(Model.DeserializeResponse(Model.DefaultResponse))
   }
   @EmptyLine
 
-  return callback(null, result);
+  return callback(null, result, httpRequest, response);
 });

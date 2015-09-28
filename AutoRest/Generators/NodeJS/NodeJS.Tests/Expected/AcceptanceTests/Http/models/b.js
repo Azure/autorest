@@ -10,12 +10,27 @@
 
 'use strict';
 
+var models = require('./index');
+
+var util = require('util');
+
 /**
  * @class
  * Initializes a new instance of the B class.
  * @constructor
+ * @member {string} [textStatusCode]
+ * 
  */
-function B() { }
+function B(parameters) {
+  B['super_'].call(this, parameters);
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.textStatusCode !== undefined) {
+      this.textStatusCode = parameters.textStatusCode;
+    }
+  }    
+}
+
+util.inherits(B, models['A']);
 
 /**
  * Validate the payload against the B schema
@@ -23,17 +38,16 @@ function B() { }
  * @param {JSON} payload
  *
  */
-B.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('B cannot be null.');
-  }
-  if (payload['statusCode'] !== null && payload['statusCode'] !== undefined && typeof payload['statusCode'].valueOf() !== 'string') {
-    throw new Error('payload[\'statusCode\'] must be of type string.');
+B.prototype.serialize = function () {
+  var payload = B['super_'].prototype.serialize.call(this);
+  if (this['textStatusCode'] !== null && this['textStatusCode'] !== undefined) {
+    if (typeof this['textStatusCode'].valueOf() !== 'string') {
+      throw new Error('this[\'textStatusCode\'] must be of type string.');
+    }
+    payload['textStatusCode'] = this['textStatusCode'];
   }
 
-  if (payload['textStatusCode'] !== null && payload['textStatusCode'] !== undefined && typeof payload['textStatusCode'].valueOf() !== 'string') {
-    throw new Error('payload[\'textStatusCode\'] must be of type string.');
-  }
+  return payload;
 };
 
 /**
@@ -43,7 +57,14 @@ B.prototype.validate = function (payload) {
  *
  */
 B.prototype.deserialize = function (instance) {
-  return instance;
+  B['super_'].prototype.deserialize.call(this, instance);
+  if (instance) {
+    if (instance['textStatusCode'] !== undefined) {
+      this['textStatusCode'] = instance['textStatusCode'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new B();
+module.exports = B;

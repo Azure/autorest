@@ -35,6 +35,7 @@ function XMsClientRequestId(client) {
 /**
  * Get method that overwrites x-ms-client-request header with value
  * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -42,7 +43,15 @@ function XMsClientRequestId(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 XMsClientRequestId.prototype.get = function (options, callback) {
   var client = this.client;
@@ -63,7 +72,7 @@ XMsClientRequestId.prototype.get = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/overwrite/x-ms-client-request-id/method/';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -109,9 +118,9 @@ XMsClientRequestId.prototype.get = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -120,21 +129,20 @@ XMsClientRequestId.prototype.get = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get method that overwrites x-ms-client-request header with value
  * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
- * @param {string} xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
  *
+ * @param {string} xMsClientRequestId This should appear as a method
+ * parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -142,7 +150,15 @@ XMsClientRequestId.prototype.get = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, callback) {
   var client = this.client;
@@ -166,7 +182,7 @@ XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/overwrite/x-ms-client-request-id/via-param/method/';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -215,9 +231,9 @@ XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, c
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -226,13 +242,10 @@ XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, c
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

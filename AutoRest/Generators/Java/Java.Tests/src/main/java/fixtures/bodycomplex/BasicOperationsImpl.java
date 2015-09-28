@@ -249,8 +249,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
-     * Get a basic complex type while the server doesn't provide a response
-     * payload
+     * Get a basic complex type while the server doesn't provide a response payload
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -266,8 +265,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
-     * Get a basic complex type while the server doesn't provide a response
-     * payload
+     * Get a basic complex type while the server doesn't provide a response payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

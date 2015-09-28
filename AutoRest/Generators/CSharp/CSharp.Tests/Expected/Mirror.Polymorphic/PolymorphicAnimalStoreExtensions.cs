@@ -19,11 +19,12 @@ namespace Fixtures.MirrorPolymorphic
     public static partial class PolymorphicAnimalStoreExtensions
     {
             /// <summary>
+            /// Product Types
+            /// </summary>
             /// The Products endpoint returns information about the Uber products offered
             /// at a given location. The response includes the display name and other
             /// details about each product, and lists the products in the proper display
             /// order.
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -36,11 +37,12 @@ namespace Fixtures.MirrorPolymorphic
             }
 
             /// <summary>
+            /// Product Types
+            /// </summary>
             /// The Products endpoint returns information about the Uber products offered
             /// at a given location. The response includes the display name and other
             /// details about each product, and lists the products in the proper display
             /// order.
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>

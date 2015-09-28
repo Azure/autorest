@@ -260,8 +260,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get complex types with dictionary property while server doesn't provide
-     * a response payload
+     * Get complex types with dictionary property while server doesn't provide a response payload
      *
      * @return the DictionaryWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -277,8 +276,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
-     * Get complex types with dictionary property while server doesn't provide
-     * a response payload
+     * Get complex types with dictionary property while server doesn't provide a response payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

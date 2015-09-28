@@ -1,4 +1,5 @@
-﻿@using Microsoft.Rest.Generator.NodeJS
+@using System
+@using Microsoft.Rest.Generator.NodeJS
 @using Microsoft.Rest.Generator.NodeJS.Templates
 @using Microsoft.Rest.Generator.NodeJS.TemplateModels
 @using Microsoft.Rest.Generator.Azure.NodeJS
@@ -12,16 +13,28 @@
 {
 @:@(Include( new MethodTemplate(), Model as MethodTemplateModel))
 }
-else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
+else
 {
-<text>
+    <text>
 /**
  *
-@WrapComment(" * ", Model.Documentation)
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+ @WrapComment(" * ", "@summary " + Model.Summary)@:
+@: *
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+ @WrapComment(" * ", Model.Description)@:
+@: *
+}
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @:* @@param {@MethodTemplateModel.GetParameterDocumentationType(parameter)} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
- @:*
+ @MethodTemplateModel.ConstructParameterDocumentation(
+                      WrapComment(" * ", "@param {"
+                                        + MethodTemplateModel.GetParameterDocumentationType(parameter)
+                                        + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
+                                        + " " + parameter.Documentation))
 }
 @WrapComment(" * ", " @param {object} [options]")
  *
@@ -29,40 +42,16 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
  *
 @WrapComment(" * ", " @param {function} callback")
  *
-@WrapComment(" * ", " @returns {stream} The Response stream")
- */
-@(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
-  var self = @(Model.ClientReference);
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  // Send request
-  this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
-    if (err) return callback(err);
-    self.getPostOrDeleteOperationResult(result, options, callback);
-  });
-};
-</text>
-}
-else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
-{
-<text>
-/**
+@WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
  *
-@WrapComment(" * ", Model.Documentation)
-@foreach (var parameter in Model.DocumentationParameters)
-{
- @:* @@param {@MethodTemplateModel.GetParameterDocumentationType(parameter)} @MethodTemplateModel.GetParameterDocumentationName(parameter) @parameter.Documentation
- @:*
-}
-@WrapComment(" * ", " @param {object} [options]")
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
-@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
+ *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
+@WrapComment(" *                      ", Model.ReturnTypeInfo)
  *
-@WrapComment(" * ", " @param {function} callback")
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
-@WrapComment(" * ", " @returns {stream} The Response stream")
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 @(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);
@@ -70,14 +59,45 @@ else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Pa
     callback = options;
     options = null;
   }
+  @EmptyLine
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  @EmptyLine
   // Send request
-  this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, result){
+  this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-    client.getPutOrPatchOperationResult(result, options, callback);
+    @EmptyLine
+    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
+    @EmptyLine
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.@(Model.LongRunningOperationMethodNameInRuntime)(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+      @EmptyLine
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+      @EmptyLine
+      // Deserialize Response
+      @if (Model.ReturnType != null)
+      {
+      @:@(Model.DeserializeResponse(Model.ReturnType))
+      }
+
+      @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
+      {
+      @:@(Model.DeserializeResponse(Model.DefaultResponse))
+      }
+      @EmptyLine
+      return callback(null, result, httpRequest, response);
+    });
   });
 };
-</text>
+    </text>
 }
