@@ -54,9 +54,10 @@ namespace Microsoft.Rest.Modeler.Swagger
             };
 
             method.ContentType = "application/json";
-            if (this._effectiveProduces != null && this._effectiveProduces.Count > 0)
+            string produce = _effectiveProduces.FirstOrDefault(s => s.StartsWith("application/json", StringComparison.OrdinalIgnoreCase));
+            if (!string.IsNullOrEmpty(produce))
             {
-                method.ContentType = this._effectiveProduces[0];
+                method.ContentType = produce;
             }
 
             if (method.ContentType.IndexOf("charset=", StringComparison.InvariantCultureIgnoreCase) == -1)
