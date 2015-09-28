@@ -15,6 +15,7 @@ namespace Microsoft.Rest.Generator.NodeJS
     public class NodeJSCodeGenerator : CodeGenerator
     {
         private const string ClientRuntimePackage = "ms-rest version 1.1.0";
+        private static readonly bool DisableTypeScriptGeneration = false;    // Change to true if you want to no longer generate the 3 d.ts files, for some reason
 
         public NodeJsCodeNamer Namer { get; private set; }
 
@@ -74,11 +75,14 @@ namespace Microsoft.Rest.Generator.NodeJS
             };
             await Write(serviceClientTemplate, serviceClient.Name.ToCamelCase() + ".js");
 
-            var serviceClientTemplateTS = new ServiceClientTemplateTS
+            if (!DisableTypeScriptGeneration)
             {
-                Model = serviceClientTemplateModel,
-            };
-            await Write(serviceClientTemplateTS, serviceClient.Name.ToCamelCase() + ".d.ts");
+                var serviceClientTemplateTS = new ServiceClientTemplateTS
+                {
+                    Model = serviceClientTemplateModel,
+                };
+                await Write(serviceClientTemplateTS, serviceClient.Name.ToCamelCase() + ".d.ts");
+            }
 
             //Models
             if (serviceClient.ModelTypes.Any())
@@ -88,11 +92,15 @@ namespace Microsoft.Rest.Generator.NodeJS
                     Model = serviceClientTemplateModel
                 };
                 await Write(modelIndexTemplate, Path.Combine("models", "index.js"));
-                var modelIndexTemplateTS = new ModelIndexTemplateTS {
-                    Model = serviceClientTemplateModel
-                };
-                await Write(modelIndexTemplateTS, Path.Combine("models", "index.d.ts"));
-                
+                if (!DisableTypeScriptGeneration)
+                {
+                    var modelIndexTemplateTS = new ModelIndexTemplateTS
+                    {
+                        Model = serviceClientTemplateModel
+                    };
+                    await Write(modelIndexTemplateTS, Path.Combine("models", "index.d.ts"));
+                }
+
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
                     var modelTemplate = new ModelTemplate
@@ -100,14 +108,6 @@ namespace Microsoft.Rest.Generator.NodeJS
                         Model = modelType
                     };
                     await Write(modelTemplate, Path.Combine("models", modelType.Name.ToCamelCase() + ".js"));
-
-                    /*
-                    var modelTemplateTS = new ModelTemplateTS
-                    {
-                        Model = modelType
-                    };
-                    await Write(modelTemplateTS, Path.Combine("models", modelType.Name.ToCamelCase() + ".d.ts"));
-                    */
                 }
             }
 
@@ -120,10 +120,14 @@ namespace Microsoft.Rest.Generator.NodeJS
                 };
                 await Write(methodGroupIndexTemplate, Path.Combine("operations", "index.js"));
 
-                var methodGroupIndexTemplateTS = new MethodGroupIndexTemplateTS {
-                    Model = serviceClientTemplateModel
-                };
-                await Write(methodGroupIndexTemplateTS, Path.Combine("operations", "index.d.ts"));
+                if (!DisableTypeScriptGeneration)
+                {
+                    var methodGroupIndexTemplateTS = new MethodGroupIndexTemplateTS
+                    {
+                        Model = serviceClientTemplateModel
+                    };
+                    await Write(methodGroupIndexTemplateTS, Path.Combine("operations", "index.d.ts"));
+                }
 
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
@@ -132,14 +136,6 @@ namespace Microsoft.Rest.Generator.NodeJS
                         Model = methodGroupModel
                     };
                     await Write(methodGroupTemplate, Path.Combine("operations", methodGroupModel.MethodGroupType.ToCamelCase() + ".js"));
-
-                    /*
-                    var methodGroupTemplateTS = new MethodGroupTemplateTS
-                    {
-                        Model = methodGroupModel
-                    };
-                    await Write(methodGroupTemplateTS, Path.Combine("operations", methodGroupModel.MethodGroupType.ToCamelCase() + ".d.ts"));
-                    */
                 }
             }
         }
