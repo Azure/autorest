@@ -96,6 +96,7 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -207,6 +208,7 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -317,6 +319,7 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -427,6 +430,7 @@ SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId,
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }

@@ -189,6 +189,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -427,6 +428,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -664,6 +666,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -865,6 +868,7 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, opt
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }

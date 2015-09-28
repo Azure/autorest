@@ -195,6 +195,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 IndentedStringBuilder sb = new IndentedStringBuilder();
                 sb.AppendLine("request_headers['x-ms-client-request-id'] = SecureRandom.uuid")
+                  .AppendLine("request_headers['client-request-id'] = SecureRandom.uuid")
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
             }

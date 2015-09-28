@@ -120,6 +120,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -249,6 +250,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -384,6 +386,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -513,6 +516,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -663,6 +667,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -782,6 +787,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }

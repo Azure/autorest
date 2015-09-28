@@ -56,6 +56,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             {
                 var sb = new IndentedStringBuilder();
                 sb.AppendLine("httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();")
+                  .AppendLine("httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();")
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
             }

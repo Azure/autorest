@@ -95,6 +95,7 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -204,6 +205,7 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -314,6 +316,7 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -424,6 +427,7 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -534,6 +538,7 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -644,6 +649,7 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -757,6 +763,7 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  httpRequest.headers['client-request-id'] = msRestAzure.generateUuid();
   if (this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }

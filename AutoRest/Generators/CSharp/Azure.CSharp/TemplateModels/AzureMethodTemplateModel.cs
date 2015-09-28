@@ -139,6 +139,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 var sb= new IndentedStringBuilder();
                 sb.AppendLine("httpRequest.Headers.TryAddWithoutValidation(\"x-ms-client-request-id\", Guid.NewGuid().ToString());")
+                  .AppendLine("httpRequest.Headers.TryAddWithoutValidation(\"client-request-id\", Guid.NewGuid().ToString());")
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
             }
