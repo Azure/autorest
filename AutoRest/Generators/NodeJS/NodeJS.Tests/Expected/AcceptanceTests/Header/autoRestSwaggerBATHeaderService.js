@@ -21,6 +21,7 @@ var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
+var moment = require('moment');    
 
 /**
  * @class

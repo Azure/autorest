@@ -321,6 +321,10 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     builder.AppendLine("{0} = new Buffer({0}, 'base64');", valueReference);
                 }
+                else if (primary == PrimaryType.TimeSpan)
+                {
+                    builder.AppendLine("{0} = moment.duration({0});", valueReference);
+                }
             }
             else if (IsSpecialProcessingRequired(sequence))
             {

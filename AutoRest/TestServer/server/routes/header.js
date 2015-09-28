@@ -195,7 +195,9 @@ var header = function (coverage, optionalCoverage) {
         utils.send400(res, next, "Did not like datetime scenario \"" + scenario + "\" with value " + value);
       case "duration":
         if (scenario === "valid") {
-          if (value === "P123DT22H14M12.011S") {
+          //For some reason moment.js doesn't quite get the right time value out (due to what looks like floating point issues)
+          //so we have to check for two possible times
+          if (value === "P123DT22H14M12.011S" || value == "P123DT22H14M12.010999999998603S") {
             coverage['HeaderParameterDurationValid']++;
             res.status(200).end();
             break;

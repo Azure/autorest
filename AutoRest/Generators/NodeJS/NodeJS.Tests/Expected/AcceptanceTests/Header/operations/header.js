@@ -16,6 +16,7 @@ var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
 
 var models = require('../models');
+var moment = require('moment');
 
 /**
  * @class
@@ -2089,7 +2090,7 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
  * "P123DT22H14M12.011S"
  * @param {string} scenario Send a post request with header values "scenario": "valid"
  *
- * @param {string} value Send a post request with header values "P123DT22H14M12.011S"
+ * @param {moment.duration} value Send a post request with header values "P123DT22H14M12.011S"
  *
  * @param {object} [options]
  *
@@ -2114,8 +2115,8 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
     if (scenario === null || scenario === undefined || typeof scenario.valueOf() !== 'string') {
       throw new Error('scenario cannot be null or undefined and it must be of type string.');
     }
-    if (value === null || value === undefined || typeof value.valueOf() !== 'string') {
-      throw new Error('value cannot be null or undefined and it must be of type string.');
+    if(!value || !moment.isDuration(value)) {
+      throw new Error('value cannot be null or undefined and it must be of type moment.duration.');
     }
   } catch (error) {
     return callback(error);
@@ -2138,7 +2139,7 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
     httpRequest.headers['scenario'] = scenario;
   }
   if (value !== null) {
-    httpRequest.headers['value'] = value.toString();
+    httpRequest.headers['value'] = value.toISOString();
   }
   if(options) {
     for(var headerName in options['customHeaders']) {

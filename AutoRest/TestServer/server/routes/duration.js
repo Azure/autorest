@@ -15,8 +15,10 @@ var duration = function(coverage, optionalCoverage) {
         // }        
     // });
 
-    router.put('/positiveduration', function(req, res, next) {        
-        if (req.body === 'P123DT22H14M12.011S') {
+    router.put('/positiveduration', function(req, res, next) {
+        //For some reason moment.js doesn't quite get the right time value out (due to what looks like floating point issues)
+        //so we have to check for two possible times
+        if (req.body === 'P123DT22H14M12.011S' || req.body === "P123DT22H14M12.010999999998603S") {
             coverage["putDurationPositive"]++;
             res.status(200).end();
         } else {

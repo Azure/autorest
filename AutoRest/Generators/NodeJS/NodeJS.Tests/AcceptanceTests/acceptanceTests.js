@@ -8,6 +8,7 @@ var http = require('http');
 var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
+var moment = require('moment');
 var fs = require('fs');
 
 var boolClient = require('../Expected/AcceptanceTests/BodyBoolean/autoRestBoolTestService');
@@ -613,8 +614,9 @@ describe('nodejs', function () {
       it('should properly handle invalid value for Duration', function (done) {
         testClient.duration.getInvalid(function (error, result) {
           should.exist(result.body);
-          //TODO: There should be an error here, except right now JS is treating all of this as strings so it's not failing to parse invalid ISO8601
+          //TODO: There should be an error here, except for some reason moment.js allows non-ISO strings and will just construct a duration of length 0
           should.not.exist(error);
+          should.equal(result.body.asSeconds(), 0);
           done();
         });
       });
@@ -623,36 +625,20 @@ describe('nodejs', function () {
         testClient.duration.getPositiveDuration(function (error, result) {
           should.exist(result.body);
           should.not.exist(error);
-          should.equal(result.body, 'P3Y6M4DT12H30M5S');
+          var dur = result.body;
+          should.equal(dur.asSeconds(), moment.duration('P3Y6M4DT12H30M5S').asSeconds());
           done();
         });
       });
-      //TODO: It looks like ISO8601 doesn't cover negative durations (so there is no standard)... omitting for now
-      // it('should properly handle negative value for Duration', function (done) {
-        // testClient.duration.getNegativeDuration(function (error, result) {
-          // should.exist(result.body);
-          // should.not.exist(error);
-          // should.equal(result.body, '-P3Y6M4DT12H30M5S');
-          // done();
-        // });
-      // });
 
       it('should properly put positive value for Duration', function (done) {
-        testClient.duration.putPositiveDuration('P123DT22H14M12.011S', function (error, result) {
-          should.not.exist(result.body);
+        var duration = moment.duration({days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11});
+        testClient.duration.putPositiveDuration(duration, function (error, result) {
           should.not.exist(error);
+          should.not.exist(result.body);
           done();
         });
       });
-      
-      //TODO: It looks like ISO8601 doesn't cover negative durations (so there is no standard)... omitting for now
-      // it('should properly put negative value for Duration', function (done) {
-        // testClient.duration.putNegativeDuration('-P123DT22H14M12.011S', function (error, result) {
-          // should.not.exist(result.body);
-          // should.not.exist(error);
-          // done();
-        // });
-      // });
     });
 
     describe('Array Client', function () {

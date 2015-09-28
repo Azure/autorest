@@ -260,8 +260,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else if (primaryType == PrimaryType.TimeSpan)
             {
-                //TODO: Need 3rd party library support for timespan, so for now allow it to map to String
-                primaryType.Name = "String"; 
+                primaryType.Name = "moment.duration"; 
             }
             else if (primaryType == PrimaryType.Object)
             {

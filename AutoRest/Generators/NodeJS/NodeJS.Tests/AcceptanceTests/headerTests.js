@@ -8,6 +8,7 @@ var http = require('http');
 var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
+var moment = require('moment');
 var _ = require('underscore')
 
 var headerClient = require('../Expected/AcceptanceTests/Header/autoRestSwaggerBATHeaderService');
@@ -213,8 +214,9 @@ describe('nodejs', function () {
         });
       });
 
-      it('should send and receive duration type headers', function(done) {
-        testClient.header.paramDuration('valid', 'P123DT22H14M12.011S', function(error, result) {
+      it('should send and receive duration type headers', function (done) {
+        var duration = moment.duration({ days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11 });
+        testClient.header.paramDuration('valid', duration, function(error, result) {
           should.not.exist(error);
           testClient.header.responseDuration('valid', function(error, result) {
             should.not.exist(error);

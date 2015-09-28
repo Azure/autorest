@@ -128,6 +128,12 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     "msRest.serializeObject({0})", reference);
             }
 
+            if (known == PrimaryType.TimeSpan)
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    "{0}.toISOString()", reference);
+            }
+
             return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
         }
 
@@ -195,7 +201,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary == PrimaryType.String || primary == PrimaryType.TimeSpan) //TODO: For now, TimeSpan is a string
+            else if (primary == PrimaryType.String)
             {
                 if (isRequired)
                 {
@@ -222,17 +228,28 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 if (isRequired)
                 {
-                    builder.AppendLine("if(!{0} || !({0} instanceof Date || ", valueReference)
-                              .Indent()
-                                .Indent()
-                                .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
+                    builder.AppendLine("if(!{0} || !({0} instanceof Date || ")
+                                                  .Indent()
+                                                  .Indent()
+                                                  .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{");
                     return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
                 }
 
-                builder.AppendLine("if ({0} && !({0} instanceof Date || ", valueReference)
-                         .Indent()
-                           .Indent()
-                           .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
+                builder = builder.AppendLine("if ({0} && !({0} instanceof Date || ")
+                                              .Indent()
+                                              .Indent()
+                                              .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{");
+                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+            }
+            else if (primary == PrimaryType.TimeSpan)
+            {
+                if (isRequired)
+                {
+                    builder.AppendLine("if(!{0} || !moment.isDuration({0})) {{");
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                }
+
+                builder.AppendLine("if({0} && !moment.isDuration({0})) {{");
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else

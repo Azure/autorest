@@ -16,6 +16,7 @@ var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
 
 var models = require('../models');
+var moment = require('moment');
 
 /**
  * @class
@@ -111,6 +112,9 @@ Duration.prototype.getNull = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
+        if (result.body !== null && result.body !== undefined) {
+          result.body = moment.duration(result.body);
+        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -125,7 +129,7 @@ Duration.prototype.getNull = function (options, callback) {
 
 /**
  * Put a positive duration value
- * @param {string} durationBody 
+ * @param {moment.duration} durationBody 
  *
  * @param {object} [options]
  *
@@ -147,8 +151,8 @@ Duration.prototype.putPositiveDuration = function (durationBody, options, callba
   }
   // Validate
   try {
-    if (durationBody === null || durationBody === undefined || typeof durationBody.valueOf() !== 'string') {
-      throw new Error('durationBody cannot be null or undefined and it must be of type string.');
+    if(!durationBody || !moment.isDuration(durationBody)) {
+      throw new Error('durationBody cannot be null or undefined and it must be of type moment.duration.');
     }
   } catch (error) {
     return callback(error);
@@ -295,6 +299,9 @@ Duration.prototype.getPositiveDuration = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
+        if (result.body !== null && result.body !== undefined) {
+          result.body = moment.duration(result.body);
+        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -387,6 +394,9 @@ Duration.prototype.getInvalid = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result.body = parsedResponse;
+        if (result.body !== null && result.body !== undefined) {
+          result.body = moment.duration(result.body);
+        }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
