@@ -134,7 +134,8 @@ namespace Microsoft.Rest.Generator.Test
             source.Name = "Foo";
             source.Methods.Add(new Method
             {
-                Documentation = "Create or update a cache.",
+                Description = "Create or update a cache.",
+                Summary = "Some summary",
                 Name = "CreateOrUpdate",
                 Url = "/subscription/{subscriptionId}/start/{startDate}"
             });

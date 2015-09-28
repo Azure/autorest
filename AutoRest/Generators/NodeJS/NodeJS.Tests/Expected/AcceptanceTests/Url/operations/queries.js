@@ -33,8 +33,9 @@ function Queries(client) {
 
 /**
  * Get true Boolean value on path
- * @param {boolean} [boolQuery] true boolean value
  *
+ * @param {boolean} [boolQuery] true boolean value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -42,7 +43,15 @@ function Queries(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
   var client = this.client;
@@ -63,7 +72,7 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/bool/true';
   var queryParameters = [];
   if (boolQuery !== null && boolQuery !== undefined) {
@@ -107,9 +116,9 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -118,19 +127,18 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get false Boolean value on path
- * @param {boolean} [boolQuery] false boolean value
  *
+ * @param {boolean} [boolQuery] false boolean value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -138,7 +146,15 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
   var client = this.client;
@@ -159,7 +175,7 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/bool/false';
   var queryParameters = [];
   if (boolQuery !== null && boolQuery !== undefined) {
@@ -203,9 +219,9 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -214,19 +230,18 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get null Boolean value on query (query string should be absent)
- * @param {boolean} [boolQuery] null boolean value
  *
+ * @param {boolean} [boolQuery] null boolean value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -234,7 +249,15 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
   var client = this.client;
@@ -255,7 +278,7 @@ Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/bool/null';
   var queryParameters = [];
   if (boolQuery !== null && boolQuery !== undefined) {
@@ -299,9 +322,9 @@ Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -310,19 +333,18 @@ Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '1000000' integer value
- * @param {number} [intQuery] '1000000' integer value
  *
+ * @param {number} [intQuery] '1000000' integer value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -330,7 +352,15 @@ Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
   var client = this.client;
@@ -351,7 +381,7 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/int/1000000';
   var queryParameters = [];
   if (intQuery !== null && intQuery !== undefined) {
@@ -395,9 +425,9 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -406,19 +436,18 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '-1000000' integer value
- * @param {number} [intQuery] '-1000000' integer value
  *
+ * @param {number} [intQuery] '-1000000' integer value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -426,7 +455,15 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callback) {
   var client = this.client;
@@ -447,7 +484,7 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/int/-1000000';
   var queryParameters = [];
   if (intQuery !== null && intQuery !== undefined) {
@@ -491,9 +528,9 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -502,19 +539,18 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get null integer value (no query parameter)
- * @param {number} [intQuery] null integer value
  *
+ * @param {number} [intQuery] null integer value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -522,7 +558,15 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.getIntNull = function (intQuery, options, callback) {
   var client = this.client;
@@ -543,7 +587,7 @@ Queries.prototype.getIntNull = function (intQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/int/null';
   var queryParameters = [];
   if (intQuery !== null && intQuery !== undefined) {
@@ -587,9 +631,9 @@ Queries.prototype.getIntNull = function (intQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -598,19 +642,18 @@ Queries.prototype.getIntNull = function (intQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '10000000000' 64 bit integer value
- * @param {number} [longQuery] '10000000000' 64 bit integer value
  *
+ * @param {number} [longQuery] '10000000000' 64 bit integer value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -618,7 +661,15 @@ Queries.prototype.getIntNull = function (intQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.getTenBillion = function (longQuery, options, callback) {
   var client = this.client;
@@ -639,7 +690,7 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/long/10000000000';
   var queryParameters = [];
   if (longQuery !== null && longQuery !== undefined) {
@@ -683,9 +734,9 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -694,19 +745,18 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '-10000000000' 64 bit integer value
- * @param {number} [longQuery] '-10000000000' 64 bit integer value
  *
+ * @param {number} [longQuery] '-10000000000' 64 bit integer value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -714,7 +764,15 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback) {
   var client = this.client;
@@ -735,7 +793,7 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/long/-10000000000';
   var queryParameters = [];
   if (longQuery !== null && longQuery !== undefined) {
@@ -779,9 +837,9 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -790,19 +848,18 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get 'null 64 bit integer value (no query param in uri)
- * @param {number} [longQuery] null 64 bit integer value
  *
+ * @param {number} [longQuery] null 64 bit integer value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -810,7 +867,15 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.getLongNull = function (longQuery, options, callback) {
   var client = this.client;
@@ -831,7 +896,7 @@ Queries.prototype.getLongNull = function (longQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/long/null';
   var queryParameters = [];
   if (longQuery !== null && longQuery !== undefined) {
@@ -875,9 +940,9 @@ Queries.prototype.getLongNull = function (longQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -886,19 +951,18 @@ Queries.prototype.getLongNull = function (longQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '1.034E+20' numeric value
- * @param {number} [floatQuery] '1.034E+20'numeric value
  *
+ * @param {number} [floatQuery] '1.034E+20'numeric value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -906,7 +970,15 @@ Queries.prototype.getLongNull = function (longQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.floatScientificPositive = function (floatQuery, options, callback) {
   var client = this.client;
@@ -927,7 +999,7 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/float/1.034E+20';
   var queryParameters = [];
   if (floatQuery !== null && floatQuery !== undefined) {
@@ -971,9 +1043,9 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -982,19 +1054,18 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '-1.034E-20' numeric value
- * @param {number} [floatQuery] '-1.034E-20'numeric value
  *
+ * @param {number} [floatQuery] '-1.034E-20'numeric value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1002,7 +1073,15 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.floatScientificNegative = function (floatQuery, options, callback) {
   var client = this.client;
@@ -1023,7 +1102,7 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/float/-1.034E-20';
   var queryParameters = [];
   if (floatQuery !== null && floatQuery !== undefined) {
@@ -1067,9 +1146,9 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1078,19 +1157,18 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get null numeric value (no query parameter)
- * @param {number} [floatQuery] null numeric value
  *
+ * @param {number} [floatQuery] null numeric value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1098,7 +1176,15 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.floatNull = function (floatQuery, options, callback) {
   var client = this.client;
@@ -1119,7 +1205,7 @@ Queries.prototype.floatNull = function (floatQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/float/null';
   var queryParameters = [];
   if (floatQuery !== null && floatQuery !== undefined) {
@@ -1163,9 +1249,9 @@ Queries.prototype.floatNull = function (floatQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1174,19 +1260,18 @@ Queries.prototype.floatNull = function (floatQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '9999999.999' numeric value
- * @param {number} [doubleQuery] '9999999.999'numeric value
  *
+ * @param {number} [doubleQuery] '9999999.999'numeric value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1194,7 +1279,15 @@ Queries.prototype.floatNull = function (floatQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callback) {
   var client = this.client;
@@ -1215,7 +1308,7 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/double/9999999.999';
   var queryParameters = [];
   if (doubleQuery !== null && doubleQuery !== undefined) {
@@ -1259,9 +1352,9 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1270,19 +1363,18 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '-9999999.999' numeric value
- * @param {number} [doubleQuery] '-9999999.999'numeric value
  *
+ * @param {number} [doubleQuery] '-9999999.999'numeric value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1290,7 +1382,15 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callback) {
   var client = this.client;
@@ -1311,7 +1411,7 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/double/-9999999.999';
   var queryParameters = [];
   if (doubleQuery !== null && doubleQuery !== undefined) {
@@ -1355,9 +1455,9 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1366,19 +1466,18 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get null numeric value (no query parameter)
- * @param {number} [doubleQuery] null numeric value
  *
+ * @param {number} [doubleQuery] null numeric value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1386,7 +1485,15 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
   var client = this.client;
@@ -1407,7 +1514,7 @@ Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/double/null';
   var queryParameters = [];
   if (doubleQuery !== null && doubleQuery !== undefined) {
@@ -1451,9 +1558,9 @@ Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1462,19 +1569,19 @@ Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
- * @param {string} [stringQuery] '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
  *
+ * @param {string} [stringQuery] '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
+ * values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1482,7 +1589,15 @@ Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
   var client = this.client;
@@ -1503,7 +1618,7 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/string/unicode/';
   var queryParameters = [];
   if (stringQuery !== null && stringQuery !== undefined) {
@@ -1547,9 +1662,9 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1558,19 +1673,20 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get 'begin!*'();:@ &=+$,/?#[]end
- * @param {string} [stringQuery] 'begin!*'();:@ &=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &=+$,/?#[]end'
  *
+ * @param {string} [stringQuery] 'begin!*'();:@ &=+$,/?#[]end' url encoded
+ * string value. Possible values for this parameter include: 'begin!*'();:@
+ * &=+$,/?#[]end'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1578,7 +1694,15 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
   var client = this.client;
@@ -1599,7 +1723,7 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend';
   var queryParameters = [];
   if (stringQuery !== null && stringQuery !== undefined) {
@@ -1643,9 +1767,9 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1654,19 +1778,19 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get ''
- * @param {string} [stringQuery] '' string value. Possible values for this parameter include: ''
  *
+ * @param {string} [stringQuery] '' string value. Possible values for this
+ * parameter include: ''
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1674,7 +1798,15 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
   var client = this.client;
@@ -1695,7 +1827,7 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/string/empty';
   var queryParameters = [];
   if (stringQuery !== null && stringQuery !== undefined) {
@@ -1739,9 +1871,9 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1750,19 +1882,18 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get null (no query parameter in url)
- * @param {string} [stringQuery] null string value
  *
+ * @param {string} [stringQuery] null string value
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1770,7 +1901,15 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.stringNull = function (stringQuery, options, callback) {
   var client = this.client;
@@ -1791,7 +1930,7 @@ Queries.prototype.stringNull = function (stringQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/string/null';
   var queryParameters = [];
   if (stringQuery !== null && stringQuery !== undefined) {
@@ -1835,9 +1974,9 @@ Queries.prototype.stringNull = function (stringQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1846,19 +1985,19 @@ Queries.prototype.stringNull = function (stringQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get using uri with query parameter 'green color'
- * @param {string} [enumQuery] 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
  *
+ * @param {string} [enumQuery] 'green color' enum value. Possible values for
+ * this parameter include: 'red color', 'green color', 'blue color'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1866,7 +2005,15 @@ Queries.prototype.stringNull = function (stringQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.enumValid = function (enumQuery, options, callback) {
   var client = this.client;
@@ -1890,7 +2037,7 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/enum/green%20color';
   var queryParameters = [];
   if (enumQuery !== null && enumQuery !== undefined) {
@@ -1934,9 +2081,9 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1945,19 +2092,19 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get null (no query parameter in url)
- * @param {string} [enumQuery] null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
  *
+ * @param {string} [enumQuery] null string value. Possible values for this
+ * parameter include: 'red color', 'green color', 'blue color'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1965,7 +2112,15 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.enumNull = function (enumQuery, options, callback) {
   var client = this.client;
@@ -1989,7 +2144,7 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/enum/null';
   var queryParameters = [];
   if (enumQuery !== null && enumQuery !== undefined) {
@@ -2033,9 +2188,9 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2044,19 +2199,19 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
- * @param {buffer} [byteQuery] '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
  *
+ * @param {buffer} [byteQuery] '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded
+ * byte array
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2064,7 +2219,15 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
   var client = this.client;
@@ -2085,7 +2248,7 @@ Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/byte/multibyte';
   var queryParameters = [];
   if (byteQuery !== null && byteQuery !== undefined) {
@@ -2129,9 +2292,9 @@ Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2140,19 +2303,18 @@ Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '' as byte array
- * @param {buffer} [byteQuery] '' as byte array
  *
+ * @param {buffer} [byteQuery] '' as byte array
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2160,7 +2322,15 @@ Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
   var client = this.client;
@@ -2181,7 +2351,7 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/byte/empty';
   var queryParameters = [];
   if (byteQuery !== null && byteQuery !== undefined) {
@@ -2225,9 +2395,9 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2236,19 +2406,18 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get null as byte array (no query parameters in uri)
- * @param {buffer} [byteQuery] null as byte array (no query parameters in uri)
  *
+ * @param {buffer} [byteQuery] null as byte array (no query parameters in uri)
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2256,7 +2425,15 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.byteNull = function (byteQuery, options, callback) {
   var client = this.client;
@@ -2277,7 +2454,7 @@ Queries.prototype.byteNull = function (byteQuery, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/byte/null';
   var queryParameters = [];
   if (byteQuery !== null && byteQuery !== undefined) {
@@ -2321,9 +2498,9 @@ Queries.prototype.byteNull = function (byteQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2332,19 +2509,18 @@ Queries.prototype.byteNull = function (byteQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '2012-01-01' as date
- * @param {date} [dateQuery] '2012-01-01' as date
  *
+ * @param {date} [dateQuery] '2012-01-01' as date
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2352,7 +2528,15 @@ Queries.prototype.byteNull = function (byteQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.dateValid = function (dateQuery, options, callback) {
   var client = this.client;
@@ -2367,14 +2551,14 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
   try {
     if (dateQuery && !(dateQuery instanceof Date || 
         (typeof dateQuery.valueOf() === 'string' && !isNaN(Date.parse(dateQuery))))) {
-      throw new Error('dateQuery must be of type date.');
-    }
+          throw new Error('dateQuery must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/date/2012-01-01';
   var queryParameters = [];
   if (dateQuery !== null && dateQuery !== undefined) {
@@ -2418,9 +2602,9 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2429,19 +2613,18 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get null as date - this should result in no query parameters in uri
- * @param {date} [dateQuery] null as date (no query parameters in uri)
  *
+ * @param {date} [dateQuery] null as date (no query parameters in uri)
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2449,7 +2632,15 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.dateNull = function (dateQuery, options, callback) {
   var client = this.client;
@@ -2464,14 +2655,14 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
   try {
     if (dateQuery && !(dateQuery instanceof Date || 
         (typeof dateQuery.valueOf() === 'string' && !isNaN(Date.parse(dateQuery))))) {
-      throw new Error('dateQuery must be of type date.');
-    }
+          throw new Error('dateQuery must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/date/null';
   var queryParameters = [];
   if (dateQuery !== null && dateQuery !== undefined) {
@@ -2515,9 +2706,9 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2526,19 +2717,18 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get '2012-01-01T01:01:01Z' as date-time
- * @param {date} [dateTimeQuery] '2012-01-01T01:01:01Z' as date-time
  *
+ * @param {date} [dateTimeQuery] '2012-01-01T01:01:01Z' as date-time
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2546,7 +2736,15 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
   var client = this.client;
@@ -2561,14 +2759,14 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
   try {
     if (dateTimeQuery && !(dateTimeQuery instanceof Date || 
         (typeof dateTimeQuery.valueOf() === 'string' && !isNaN(Date.parse(dateTimeQuery))))) {
-      throw new Error('dateTimeQuery must be of type date.');
-    }
+          throw new Error('dateTimeQuery must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/datetime/2012-01-01T01%3A01%3A01Z';
   var queryParameters = [];
   if (dateTimeQuery !== null && dateTimeQuery !== undefined) {
@@ -2612,9 +2810,9 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2623,19 +2821,18 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get null as date-time, should result in no query parameters in uri
- * @param {date} [dateTimeQuery] null as date-time (no query parameters)
  *
+ * @param {date} [dateTimeQuery] null as date-time (no query parameters)
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2643,7 +2840,15 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
   var client = this.client;
@@ -2658,14 +2863,14 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
   try {
     if (dateTimeQuery && !(dateTimeQuery instanceof Date || 
         (typeof dateTimeQuery.valueOf() === 'string' && !isNaN(Date.parse(dateTimeQuery))))) {
-      throw new Error('dateTimeQuery must be of type date.');
-    }
+          throw new Error('dateTimeQuery must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/datetime/null';
   var queryParameters = [];
   if (dateTimeQuery !== null && dateTimeQuery !== undefined) {
@@ -2709,9 +2914,9 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2720,20 +2925,20 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the csv-array format
- * @param {array} [arrayQuery] an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
  *
+ * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+ * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2741,7 +2946,15 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -2766,7 +2979,7 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/csv/string/valid';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -2810,9 +3023,9 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2821,19 +3034,19 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a null array of string using the csv-array format
- * @param {array} [arrayQuery] a null array of string using the csv-array format
  *
+ * @param {array} [arrayQuery] a null array of string using the csv-array
+ * format
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2841,7 +3054,15 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -2866,7 +3087,7 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/csv/string/null';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -2910,9 +3131,9 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2921,19 +3142,19 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get an empty array [] of string using the csv-array format
- * @param {array} [arrayQuery] an empty array [] of string using the csv-array format
  *
+ * @param {array} [arrayQuery] an empty array [] of string using the csv-array
+ * format
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2941,7 +3162,15 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -2966,7 +3195,7 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/csv/string/empty';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -3010,9 +3239,9 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -3021,20 +3250,20 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the ssv-array format
- * @param {array} [arrayQuery] an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format
  *
+ * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+ * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3042,7 +3271,15 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -3067,7 +3304,7 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/ssv/string/valid';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -3111,9 +3348,9 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -3122,20 +3359,20 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the tsv-array format
- * @param {array} [arrayQuery] an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format
  *
+ * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+ * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3143,7 +3380,15 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -3168,7 +3413,7 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/tsv/string/valid';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -3212,9 +3457,9 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -3223,20 +3468,20 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the pipes-array format
- * @param {array} [arrayQuery] an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format
  *
+ * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+ * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3244,7 +3489,15 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Queries.prototype.arrayStringPipesValid = function (arrayQuery, options, callback) {
   var client = this.client;
@@ -3269,7 +3522,7 @@ Queries.prototype.arrayStringPipesValid = function (arrayQuery, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//queries/array/pipes/string/valid';
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
@@ -3313,9 +3566,9 @@ Queries.prototype.arrayStringPipesValid = function (arrayQuery, options, callbac
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -3324,12 +3577,10 @@ Queries.prototype.arrayStringPipesValid = function (arrayQuery, options, callbac
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

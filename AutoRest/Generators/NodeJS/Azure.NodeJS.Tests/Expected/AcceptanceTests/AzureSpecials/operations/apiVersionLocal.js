@@ -35,8 +35,10 @@ function ApiVersionLocal(client) {
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
- * @param {string} apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
  *
+ * @param {string} apiVersion This should appear as a method parameter, use
+ * value '2.0'. Possible values for this parameter include: '2.0'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -44,7 +46,15 @@ function ApiVersionLocal(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, callback) {
   var client = this.client;
@@ -68,7 +78,7 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/method/string/none/query/local/2.0';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
@@ -114,9 +124,9 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -125,21 +135,20 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * null to succeed
- * @param {string} [apiVersion] This should appear as a method parameter, use value null, this should result in no serialized parameter
  *
+ * @param {string} [apiVersion] This should appear as a method parameter, use
+ * value null, this should result in no serialized parameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -147,7 +156,15 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, callback) {
   var client = this.client;
@@ -171,7 +188,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/method/string/none/query/local/null';
   var queryParameters = [];
   if (apiVersion !== null && apiVersion !== undefined) {
@@ -219,9 +236,9 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -230,21 +247,20 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
- * @param {string} apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
  *
+ * @param {string} apiVersion This should appear as a method parameter, use
+ * value '2.0'. Possible values for this parameter include: '2.0'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -252,7 +268,15 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, callback) {
   var client = this.client;
@@ -276,7 +300,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/path/string/none/query/local/2.0';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
@@ -322,9 +346,9 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -333,21 +357,20 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
- * @param {string} apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
  *
+ * @param {string} apiVersion The api version, which appears in the query, the
+ * value is always '2.0'. Possible values for this parameter include: '2.0'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -355,7 +378,15 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, callback) {
   var client = this.client;
@@ -379,7 +410,7 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/swagger/string/none/query/local/2.0';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
@@ -425,9 +456,9 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -436,13 +467,10 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

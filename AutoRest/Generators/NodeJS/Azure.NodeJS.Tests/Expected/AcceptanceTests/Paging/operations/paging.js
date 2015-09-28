@@ -34,6 +34,7 @@ function Paging(client) {
 
 /**
  * A paging operation that finishes on the first call without a nextlink
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -41,7 +42,16 @@ function Paging(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getSinglePages = function (options, callback) {
   var client = this.client;
@@ -62,7 +72,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/single';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -107,9 +117,9 @@ Paging.prototype.getSinglePages = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -118,19 +128,19 @@ Paging.prototype.getSinglePages = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -140,12 +150,13 @@ Paging.prototype.getSinglePages = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that includes a nextLink that has 10 pages
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -153,7 +164,16 @@ Paging.prototype.getSinglePages = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getMultiplePages = function (options, callback) {
   var client = this.client;
@@ -174,7 +194,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/multiple';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -219,9 +239,9 @@ Paging.prototype.getMultiplePages = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -230,19 +250,19 @@ Paging.prototype.getMultiplePages = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -252,13 +272,14 @@ Paging.prototype.getMultiplePages = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that fails on the first call with 500 and then retries
  * and then get a response including a nextLink that has 10 pages
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -266,7 +287,16 @@ Paging.prototype.getMultiplePages = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
   var client = this.client;
@@ -287,7 +317,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/multiple/retryfirst';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -332,9 +362,9 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -343,19 +373,19 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -365,7 +395,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -373,6 +403,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
  * A paging operation that includes a nextLink that has 10 pages, of which the
  * 2nd call fails first with 500. The client should retry and finish all 10
  * pages eventually.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -380,7 +411,16 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
   var client = this.client;
@@ -401,7 +441,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/multiple/retrysecond';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -446,9 +486,9 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -457,19 +497,19 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -479,12 +519,13 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that receives a 400 on the first call
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -492,7 +533,16 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getSinglePagesFailure = function (options, callback) {
   var client = this.client;
@@ -513,7 +563,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/single/failure';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -558,9 +608,9 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -569,19 +619,19 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -591,12 +641,13 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that receives a 400 on the second call
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -604,7 +655,16 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getMultiplePagesFailure = function (options, callback) {
   var client = this.client;
@@ -625,7 +685,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/multiple/failure';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -670,9 +730,9 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -681,19 +741,19 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -703,12 +763,13 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that receives an invalid nextLink
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -716,7 +777,16 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
   var client = this.client;
@@ -737,7 +807,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/multiple/failureuri';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -782,9 +852,9 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -793,19 +863,19 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -815,14 +885,16 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that finishes on the first call without a nextlink
- * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
+ * @param {string} nextPageLink The NextLink from the previous successful call
+ * to List operation.
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -830,7 +902,16 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -895,9 +976,9 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -906,19 +987,19 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -928,14 +1009,16 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that includes a nextLink that has 10 pages
- * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
+ * @param {string} nextPageLink The NextLink from the previous successful call
+ * to List operation.
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -943,7 +1026,16 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1008,9 +1100,9 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1019,19 +1111,19 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1041,15 +1133,17 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that fails on the first call with 500 and then retries
  * and then get a response including a nextLink that has 10 pages
- * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
+ * @param {string} nextPageLink The NextLink from the previous successful call
+ * to List operation.
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1057,7 +1151,16 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1122,9 +1225,9 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1133,19 +1236,19 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1155,7 +1258,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1163,8 +1266,10 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
  * A paging operation that includes a nextLink that has 10 pages, of which the
  * 2nd call fails first with 500. The client should retry and finish all 10
  * pages eventually.
- * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
+ * @param {string} nextPageLink The NextLink from the previous successful call
+ * to List operation.
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1172,7 +1277,16 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1237,9 +1351,9 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1248,19 +1362,19 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1270,14 +1384,16 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that receives a 400 on the first call
- * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
+ * @param {string} nextPageLink The NextLink from the previous successful call
+ * to List operation.
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1285,7 +1401,16 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1350,9 +1475,9 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1361,19 +1486,19 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1383,14 +1508,16 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that receives a 400 on the second call
- * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
+ * @param {string} nextPageLink The NextLink from the previous successful call
+ * to List operation.
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1398,7 +1525,16 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1463,9 +1599,9 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1474,19 +1610,19 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1496,14 +1632,16 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * A paging operation that receives an invalid nextLink
- * @param {string} nextPageLink The NextLink from the previous successful call to List operation.
  *
+ * @param {string} nextPageLink The NextLink from the previous successful call
+ * to List operation.
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1511,7 +1649,16 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link ProductResult} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, options, callback) {
   var client = this.client;
@@ -1576,9 +1723,9 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1587,19 +1734,19 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = client._models['ProductResult'].deserialize(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['ProductResult'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1609,7 +1756,7 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

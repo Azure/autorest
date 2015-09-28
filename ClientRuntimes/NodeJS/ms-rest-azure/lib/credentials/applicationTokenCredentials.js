@@ -22,15 +22,15 @@ var AzureEnvironment = require('../azureEnvironment');
 * @param {object} [options.tokenCache] The token cache. Default value is null.
 */
 function ApplicationTokenCredentials(clientId, domain, secret, options) {
-  if (!Boolean(clientId) || typeof clientId !== 'string') {
+  if (!Boolean(clientId) || typeof clientId.valueOf() !== 'string') {
     throw new Error('clientId must be a non empty string.');
   }
   
-  if (!Boolean(domain) || typeof domain !== 'string') {
+  if (!Boolean(domain) || typeof domain.valueOf() !== 'string') {
     throw new Error('domain must be a non empty string.');
   }
   
-  if (!Boolean(secret) || typeof username !== 'string') {
+  if (!Boolean(secret) || typeof secret.valueOf() !== 'string') {
     throw new Error('secret must be a non empty string.');
   }
   
@@ -54,7 +54,6 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
   this.clientId = clientId;
   this.domain = domain;
   this.secret = secret;
-  this.clientRedirectUri = clientRedirectUri;
 }
 
 /**

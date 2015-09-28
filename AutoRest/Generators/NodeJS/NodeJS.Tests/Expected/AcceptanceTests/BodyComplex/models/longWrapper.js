@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the LongWrapper class.
  * @constructor
+ * @member {number} [field1]
+ * 
+ * @member {number} [field2]
+ * 
  */
-function LongWrapper() { }
+function LongWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.field1 !== undefined) {
+      this.field1 = parameters.field1;
+    }
+    if (parameters.field2 !== undefined) {
+      this.field2 = parameters.field2;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the LongWrapper schema
@@ -23,17 +37,23 @@ function LongWrapper() { }
  * @param {JSON} payload
  *
  */
-LongWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('LongWrapper cannot be null.');
-  }
-  if (payload['field1'] !== null && payload['field1'] !== undefined && typeof payload['field1'] !== 'number') {
-    throw new Error('payload[\'field1\'] must be of type number.');
+LongWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['field1'] !== null && this['field1'] !== undefined) {
+    if (typeof this['field1'] !== 'number') {
+      throw new Error('this[\'field1\'] must be of type number.');
+    }
+    payload['field1'] = this['field1'];
   }
 
-  if (payload['field2'] !== null && payload['field2'] !== undefined && typeof payload['field2'] !== 'number') {
-    throw new Error('payload[\'field2\'] must be of type number.');
+  if (this['field2'] !== null && this['field2'] !== undefined) {
+    if (typeof this['field2'] !== 'number') {
+      throw new Error('this[\'field2\'] must be of type number.');
+    }
+    payload['field2'] = this['field2'];
   }
+
+  return payload;
 };
 
 /**
@@ -43,7 +63,17 @@ LongWrapper.prototype.validate = function (payload) {
  *
  */
 LongWrapper.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['field1'] !== undefined) {
+      this['field1'] = instance['field1'];
+    }
+
+    if (instance['field2'] !== undefined) {
+      this['field2'] = instance['field2'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new LongWrapper();
+module.exports = LongWrapper;

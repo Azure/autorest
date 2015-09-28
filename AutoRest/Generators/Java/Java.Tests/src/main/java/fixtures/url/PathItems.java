@@ -54,12 +54,7 @@ public interface PathItems {
 
     }
     /**
-     * send globalStringPath='globalStringPath',
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath',
-     * globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
@@ -70,12 +65,7 @@ public interface PathItems {
     void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
 
     /**
-     * send globalStringPath='globalStringPath',
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath',
-     * globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
@@ -86,11 +76,7 @@ public interface PathItems {
     void getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * send globalStringPath='globalStringPath',
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null,
-     * pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
@@ -101,11 +87,7 @@ public interface PathItems {
     void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
 
     /**
-     * send globalStringPath='globalStringPath',
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null,
-     * pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
@@ -116,10 +98,7 @@ public interface PathItems {
     void getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * send globalStringPath=globalStringPath,
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null,
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
@@ -130,10 +109,7 @@ public interface PathItems {
     void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
 
     /**
-     * send globalStringPath=globalStringPath,
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null,
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
@@ -144,11 +120,7 @@ public interface PathItems {
     void getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * send globalStringPath='globalStringPath',
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath',
-     * globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
@@ -159,11 +131,7 @@ public interface PathItems {
     void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
 
     /**
-     * send globalStringPath='globalStringPath',
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath',
-     * globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path

@@ -160,8 +160,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='xMsClientRequestId'>
         /// This should appear as a method parameter, use value
-        /// '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
-        /// </param>
+        /// '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

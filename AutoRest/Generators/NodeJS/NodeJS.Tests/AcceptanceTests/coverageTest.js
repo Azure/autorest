@@ -26,19 +26,19 @@ describe('nodejs', function () {
       testClient.getReport(function (error, result) {
         should.not.exist(error);
         // TODO, 4213536: Fix date serialization
-        result.body['putDateMax'] = 1;
-        result.body['putDateMin'] = 1;
-        result.body['putDateTimeMaxLocalPositiveOffset'] = 1;
-        result.body['putComplexPrimitiveDate'] = 1;
-        result.body['UrlPathsDateValid'] = 1;
-        result.body['putDictionaryDateValid'] = 1;
-        result.body['putArrayDateValid'] = 1;
-        result.body['UrlQueriesDateValid'] = 1;
+        result['putDateMax'] = 1;
+        result['putDateMin'] = 1;
+        result['putDateTimeMaxLocalPositiveOffset'] = 1;
+        result['putComplexPrimitiveDate'] = 1;
+        result['UrlPathsDateValid'] = 1;
+        result['putDictionaryDateValid'] = 1;
+        result['putArrayDateValid'] = 1;
+        result['UrlQueriesDateValid'] = 1;
 
-        var total = _.keys(result.body).length;
+        var total = _.keys(result).length;
         var passed = 0;
-        _.keys(result.body).forEach(function(item) {
-          if (result.body[item] > 0) {
+        _.keys(result).forEach(function(item) {
+          if (result[item] > 0) {
             passed++;
           } else {
             console.log('No coverage for scenario: ' + item + '\n');

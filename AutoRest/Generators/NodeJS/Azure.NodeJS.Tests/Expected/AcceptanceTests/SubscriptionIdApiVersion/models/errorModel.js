@@ -14,8 +14,22 @@
  * @class
  * Initializes a new instance of the ErrorModel class.
  * @constructor
+ * @member {number} [code]
+ * 
+ * @member {string} [message]
+ * 
  */
-function ErrorModel() { }
+function ErrorModel(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.code !== undefined) {
+      this.code = parameters.code;
+    }
+    if (parameters.message !== undefined) {
+      this.message = parameters.message;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the ErrorModel schema
@@ -23,17 +37,23 @@ function ErrorModel() { }
  * @param {JSON} payload
  *
  */
-ErrorModel.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('ErrorModel cannot be null.');
-  }
-  if (payload['code'] !== null && payload['code'] !== undefined && typeof payload['code'] !== 'number') {
-    throw new Error('payload[\'code\'] must be of type number.');
+ErrorModel.prototype.serialize = function () {
+  var payload = {};
+  if (this['code'] !== null && this['code'] !== undefined) {
+    if (typeof this['code'] !== 'number') {
+      throw new Error('this[\'code\'] must be of type number.');
+    }
+    payload['code'] = this['code'];
   }
 
-  if (payload['message'] !== null && payload['message'] !== undefined && typeof payload['message'].valueOf() !== 'string') {
-    throw new Error('payload[\'message\'] must be of type string.');
+  if (this['message'] !== null && this['message'] !== undefined) {
+    if (typeof this['message'].valueOf() !== 'string') {
+      throw new Error('this[\'message\'] must be of type string.');
+    }
+    payload['message'] = this['message'];
   }
+
+  return payload;
 };
 
 /**
@@ -43,7 +63,17 @@ ErrorModel.prototype.validate = function (payload) {
  *
  */
 ErrorModel.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['code'] !== undefined) {
+      this['code'] = instance['code'];
+    }
+
+    if (instance['message'] !== undefined) {
+      this['message'] = instance['message'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new ErrorModel();
+module.exports = ErrorModel;

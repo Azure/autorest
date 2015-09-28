@@ -14,8 +14,17 @@
  * @class
  * Initializes a new instance of the D class.
  * @constructor
+ * @member {string} [httpStatusCode]
+ * 
  */
-function D() { }
+function D(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.httpStatusCode !== undefined) {
+      this.httpStatusCode = parameters.httpStatusCode;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the D schema
@@ -23,13 +32,16 @@ function D() { }
  * @param {JSON} payload
  *
  */
-D.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('D cannot be null.');
+D.prototype.serialize = function () {
+  var payload = {};
+  if (this['httpStatusCode'] !== null && this['httpStatusCode'] !== undefined) {
+    if (typeof this['httpStatusCode'].valueOf() !== 'string') {
+      throw new Error('this[\'httpStatusCode\'] must be of type string.');
+    }
+    payload['httpStatusCode'] = this['httpStatusCode'];
   }
-  if (payload['httpStatusCode'] !== null && payload['httpStatusCode'] !== undefined && typeof payload['httpStatusCode'].valueOf() !== 'string') {
-    throw new Error('payload[\'httpStatusCode\'] must be of type string.');
-  }
+
+  return payload;
 };
 
 /**
@@ -39,7 +51,13 @@ D.prototype.validate = function (payload) {
  *
  */
 D.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['httpStatusCode'] !== undefined) {
+      this['httpStatusCode'] = instance['httpStatusCode'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new D();
+module.exports = D;

@@ -29,18 +29,18 @@ namespace Microsoft.Rest.Generator.Azure
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
 
-        private static IEnumerable<string> ResourcePropertyNames;
+        private static IEnumerable<string> ResourcePropertyNames =  
+            new List<string>
+            { 
+                "Id",
+                "Name",
+                "Type",
+                "Location",
+                "Tags"
+            }.OrderBy(s=> s);
 
         protected AzureCodeGenerator(Settings settings) : base(settings)
         {
-            ResourcePropertyNames = new List<string>
-                                        { 
-                                            "Id",
-                                            "Name",
-                                            "Type",
-                                            "Location",
-                                            "Tags"
-                                        }.OrderBy(s=> s);
         }
 
         /// <summary>

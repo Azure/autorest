@@ -34,6 +34,7 @@ function ApiVersionDefault(client) {
 
 /**
  * GET method with api-version modeled in global settings.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -41,7 +42,15 @@ function ApiVersionDefault(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) {
   var client = this.client;
@@ -65,7 +74,7 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
@@ -111,9 +120,9 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -122,18 +131,16 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * GET method with api-version modeled in global settings.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -141,7 +148,15 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options, callback) {
   var client = this.client;
@@ -165,7 +180,7 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
@@ -211,9 +226,9 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -222,18 +237,16 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * GET method with api-version modeled in global settings.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -241,7 +254,15 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
   var client = this.client;
@@ -265,7 +286,7 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
@@ -311,9 +332,9 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -322,18 +343,16 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * GET method with api-version modeled in global settings.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -341,7 +360,15 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback) {
   var client = this.client;
@@ -365,7 +392,7 @@ ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
@@ -411,9 +438,9 @@ ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -422,13 +449,10 @@ ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

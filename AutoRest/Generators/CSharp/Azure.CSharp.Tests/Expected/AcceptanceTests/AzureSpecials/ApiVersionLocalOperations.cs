@@ -54,8 +54,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='apiVersion'>
         /// This should appear as a method parameter, use value '2.0'. Possible values
-        /// for this parameter include: '2.0'
-        /// </param>
+        /// for this parameter include: '2.0'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -173,8 +172,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='apiVersion'>
         /// This should appear as a method parameter, use value null, this should
-        /// result in no serialized parameter
-        /// </param>
+        /// result in no serialized parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -288,8 +286,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='apiVersion'>
         /// This should appear as a method parameter, use value '2.0'. Possible values
-        /// for this parameter include: '2.0'
-        /// </param>
+        /// for this parameter include: '2.0'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -407,8 +404,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='apiVersion'>
         /// The api version, which appears in the query, the value is always '2.0'.
-        /// Possible values for this parameter include: '2.0'
-        /// </param>
+        /// Possible values for this parameter include: '2.0'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

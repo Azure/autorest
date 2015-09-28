@@ -33,8 +33,10 @@ function Header(client) {
 
 /**
  * Send a post request with header value "User-Agent": "overwrite"
- * @param {string} userAgent Send a post request with header value "User-Agent": "overwrite"
  *
+ * @param {string} userAgent Send a post request with header value
+ * "User-Agent": "overwrite"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -42,7 +44,15 @@ function Header(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramExistingKey = function (userAgent, options, callback) {
   var client = this.client;
@@ -63,7 +73,7 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/existingkey';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -103,9 +113,9 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -114,17 +124,16 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header value "User-Agent": "overwrite"
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -132,7 +141,15 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseExistingKey = function (options, callback) {
   var client = this.client;
@@ -145,7 +162,7 @@ Header.prototype.responseExistingKey = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/existingkey';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -182,9 +199,9 @@ Header.prototype.responseExistingKey = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -193,19 +210,19 @@ Header.prototype.responseExistingKey = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Send a post request with header value "Content-Type": "text/html"
- * @param {string} contentType Send a post request with header value "Content-Type": "text/html"
  *
+ * @param {string} contentType Send a post request with header value
+ * "Content-Type": "text/html"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -213,7 +230,15 @@ Header.prototype.responseExistingKey = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramProtectedKey = function (contentType, options, callback) {
   var client = this.client;
@@ -234,7 +259,7 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/protectedkey';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -274,9 +299,9 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -285,17 +310,16 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header value "Content-Type": "text/html"
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -303,7 +327,15 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseProtectedKey = function (options, callback) {
   var client = this.client;
@@ -316,7 +348,7 @@ Header.prototype.responseProtectedKey = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/protectedkey';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -353,9 +385,9 @@ Header.prototype.responseProtectedKey = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -364,22 +396,22 @@ Header.prototype.responseProtectedKey = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Send a post request with header values "scenario": "positive", "value": 1
  * or "scenario": "negative", "value": -2
- * @param {string} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "positive" or "negative"
+ * 
  * @param {number} value Send a post request with header values 1 or -2
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -387,7 +419,15 @@ Header.prototype.responseProtectedKey = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramInteger = function (scenario, value, options, callback) {
   var client = this.client;
@@ -411,7 +451,7 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/integer';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -454,9 +494,9 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -465,19 +505,19 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header value "value": 1 or -2
- * @param {string} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "positive" or "negative"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -485,7 +525,15 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseInteger = function (scenario, options, callback) {
   var client = this.client;
@@ -506,7 +554,7 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/integer';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -546,9 +594,9 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -557,22 +605,22 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Send a post request with header values "scenario": "positive", "value": 105
  * or "scenario": "negative", "value": -2
- * @param {string} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "positive" or "negative"
+ * 
  * @param {number} value Send a post request with header values 105 or -2
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -580,7 +628,15 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramLong = function (scenario, value, options, callback) {
   var client = this.client;
@@ -604,7 +660,7 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/long';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -647,9 +703,9 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -658,19 +714,19 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header value "value": 105 or -2
- * @param {string} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "positive" or "negative"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -678,7 +734,15 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseLong = function (scenario, options, callback) {
   var client = this.client;
@@ -699,7 +763,7 @@ Header.prototype.responseLong = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/long';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -739,9 +803,9 @@ Header.prototype.responseLong = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -750,22 +814,22 @@ Header.prototype.responseLong = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Send a post request with header values "scenario": "positive", "value":
  * 0.07 or "scenario": "negative", "value": -3.0
- * @param {string} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "positive" or "negative"
+ * 
  * @param {number} value Send a post request with header values 0.07 or -3.0
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -773,7 +837,15 @@ Header.prototype.responseLong = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramFloat = function (scenario, value, options, callback) {
   var client = this.client;
@@ -797,7 +869,7 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/float';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -840,9 +912,9 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -851,19 +923,19 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header value "value": 0.07 or -3.0
- * @param {string} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "positive" or "negative"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -871,7 +943,15 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseFloat = function (scenario, options, callback) {
   var client = this.client;
@@ -892,7 +972,7 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/float';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -932,9 +1012,9 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -943,22 +1023,22 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Send a post request with header values "scenario": "positive", "value":
  * 7e120 or "scenario": "negative", "value": -3.0
- * @param {string} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "positive" or "negative"
+ * 
  * @param {number} value Send a post request with header values 7e120 or -3.0
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -966,7 +1046,15 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramDouble = function (scenario, value, options, callback) {
   var client = this.client;
@@ -990,7 +1078,7 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/double';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1033,9 +1121,9 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1044,19 +1132,19 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header value "value": 7e120 or -3.0
- * @param {string} scenario Send a post request with header values "scenario": "positive" or "negative"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "positive" or "negative"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1064,7 +1152,15 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseDouble = function (scenario, options, callback) {
   var client = this.client;
@@ -1085,7 +1181,7 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/double';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1125,9 +1221,9 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1136,22 +1232,22 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Send a post request with header values "scenario": "true", "value": true or
  * "scenario": "false", "value": false
- * @param {string} scenario Send a post request with header values "scenario": "true" or "false"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "true" or "false"
+ * 
  * @param {boolean} value Send a post request with header values true or false
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1159,7 +1255,15 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramBool = function (scenario, value, options, callback) {
   var client = this.client;
@@ -1183,7 +1287,7 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/bool';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1226,9 +1330,9 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1237,19 +1341,19 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header value "value": true or false
- * @param {string} scenario Send a post request with header values "scenario": "true" or "false"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "true" or "false"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1257,7 +1361,15 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseBool = function (scenario, options, callback) {
   var client = this.client;
@@ -1278,7 +1390,7 @@ Header.prototype.responseBool = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/bool';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1318,9 +1430,9 @@ Header.prototype.responseBool = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1329,12 +1441,10 @@ Header.prototype.responseBool = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1342,10 +1452,13 @@ Header.prototype.responseBool = function (scenario, options, callback) {
  * Send a post request with header values "scenario": "valid", "value": "The
  * quick brown fox jumps over the lazy dog" or "scenario": "null", "value":
  * null or "scenario": "empty", "value": ""
- * @param {string} scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
  *
- * @param {string} [value] Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
- *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid" or "null" or "empty"
+ * 
+ * @param {string} [value] Send a post request with header values "The quick
+ * brown fox jumps over the lazy dog" or null or ""
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1353,7 +1466,15 @@ Header.prototype.responseBool = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramString = function (scenario, value, options, callback) {
   var client = this.client;
@@ -1377,7 +1498,7 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/string';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1420,9 +1541,9 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1431,20 +1552,20 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header values "The quick brown fox jumps over the lazy
  * dog" or null or ""
- * @param {string} scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid" or "null" or "empty"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1452,7 +1573,15 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseString = function (scenario, options, callback) {
   var client = this.client;
@@ -1473,7 +1602,7 @@ Header.prototype.responseString = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/string';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1513,9 +1642,9 @@ Header.prototype.responseString = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1524,22 +1653,23 @@ Header.prototype.responseString = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Send a post request with header values "scenario": "valid", "value":
  * "2010-01-01" or "scenario": "min", "value": "0001-01-01"
- * @param {string} scenario Send a post request with header values "scenario": "valid" or "min"
  *
- * @param {date} value Send a post request with header values "2010-01-01" or "0001-01-01"
- *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid" or "min"
+ * 
+ * @param {date} value Send a post request with header values "2010-01-01" or
+ * "0001-01-01"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1547,7 +1677,15 @@ Header.prototype.responseString = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramDate = function (scenario, value, options, callback) {
   var client = this.client;
@@ -1565,14 +1703,14 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
     }
     if(!value || !(value instanceof Date || 
         (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
-      throw new Error('value cannot be null or undefined and it must be of type date.');
-    }
+          throw new Error('value cannot be null or undefined and it must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/date';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1615,9 +1753,9 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1626,19 +1764,19 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header values "2010-01-01" or "0001-01-01"
- * @param {string} scenario Send a post request with header values "scenario": "valid" or "min"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid" or "min"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1646,7 +1784,15 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseDate = function (scenario, options, callback) {
   var client = this.client;
@@ -1667,7 +1813,7 @@ Header.prototype.responseDate = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/date';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1707,9 +1853,9 @@ Header.prototype.responseDate = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1718,12 +1864,10 @@ Header.prototype.responseDate = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1731,10 +1875,13 @@ Header.prototype.responseDate = function (scenario, options, callback) {
  * Send a post request with header values "scenario": "valid", "value":
  * "2010-01-01T12:34:56Z" or "scenario": "min", "value":
  * "0001-01-01T00:00:00Z"
- * @param {string} scenario Send a post request with header values "scenario": "valid" or "min"
  *
- * @param {date} value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
- *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid" or "min"
+ * 
+ * @param {date} value Send a post request with header values
+ * "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1742,7 +1889,15 @@ Header.prototype.responseDate = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramDatetime = function (scenario, value, options, callback) {
   var client = this.client;
@@ -1760,14 +1915,14 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
     }
     if(!value || !(value instanceof Date || 
         (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
-      throw new Error('value cannot be null or undefined and it must be of type date.');
-    }
+          throw new Error('value cannot be null or undefined and it must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/datetime';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1810,9 +1965,9 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1821,20 +1976,20 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header values "2010-01-01T12:34:56Z" or
  * "0001-01-01T00:00:00Z"
- * @param {string} scenario Send a post request with header values "scenario": "valid" or "min"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid" or "min"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1842,7 +1997,15 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseDatetime = function (scenario, options, callback) {
   var client = this.client;
@@ -1863,7 +2026,7 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/datetime';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1903,9 +2066,9 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1914,22 +2077,22 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Send a post request with header values "scenario": "valid", "value":
  * "啊齄丂狛狜隣郎隣兀﨩"
- * @param {string} scenario Send a post request with header values "scenario": "valid"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid"
+ * 
  * @param {buffer} value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1937,7 +2100,15 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramByte = function (scenario, value, options, callback) {
   var client = this.client;
@@ -1961,7 +2132,7 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/byte';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2004,9 +2175,9 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2015,19 +2186,19 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
- * @param {string} scenario Send a post request with header values "scenario": "valid"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2035,7 +2206,15 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseByte = function (scenario, options, callback) {
   var client = this.client;
@@ -2056,7 +2235,7 @@ Header.prototype.responseByte = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/byte';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2096,9 +2275,9 @@ Header.prototype.responseByte = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2107,22 +2286,23 @@ Header.prototype.responseByte = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Send a post request with header values "scenario": "valid", "value": "GREY"
  * or "scenario": "null", "value": null
- * @param {string} scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
  *
- * @param {string} [value] Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
- *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid" or "null" or "empty"
+ * 
+ * @param {string} [value] Send a post request with header values 'GREY' .
+ * Possible values for this parameter include: 'White', 'black', 'GREY'
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2130,7 +2310,15 @@ Header.prototype.responseByte = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramEnum = function (scenario, value, options, callback) {
   var client = this.client;
@@ -2157,7 +2345,7 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/enum';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2200,9 +2388,9 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2211,19 +2399,19 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header values "GREY" or null
- * @param {string} scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid" or "null" or "empty"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2231,7 +2419,15 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseEnum = function (scenario, options, callback) {
   var client = this.client;
@@ -2252,7 +2448,7 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/enum';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2292,9 +2488,9 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2303,18 +2499,17 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
  * header of the request
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2322,7 +2517,15 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.customRequestId = function (options, callback) {
   var client = this.client;
@@ -2335,7 +2538,7 @@ Header.prototype.customRequestId = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2372,9 +2575,9 @@ Header.prototype.customRequestId = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2383,12 +2586,10 @@ Header.prototype.customRequestId = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

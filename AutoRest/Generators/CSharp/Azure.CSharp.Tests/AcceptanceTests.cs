@@ -432,14 +432,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     {
                         {"tag1", "value1"},
                         {"tag2", "value3"}
-                    },
-                    Pname = "Product1",
-                    FlattenedProductType = "Flat"
+                    }
                 });
                 resourceArray.Add(new FlattenedProduct
                 {
-                    Location = "Building 44",
-                    Pname = "Product2"
+                    Location = "Building 44"
                 });
 
                 client.PutArray(resourceArray);

@@ -251,8 +251,7 @@ public interface DatetimeOperations {
     void getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
-     * Put max datetime value with positive numoffset
-     * 9999-12-31t23:59:59.9999999+14:00
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -260,8 +259,7 @@ public interface DatetimeOperations {
     void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException;
 
     /**
-     * Put max datetime value with positive numoffset
-     * 9999-12-31t23:59:59.9999999+14:00
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -269,8 +267,7 @@ public interface DatetimeOperations {
     void putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31t23:59:59.9999999+14:00
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -278,16 +275,14 @@ public interface DatetimeOperations {
     DateTime getLocalPositiveOffsetLowercaseMaxDateTime() throws ServiceException;
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31t23:59:59.9999999+14:00
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31T23:59:59.9999999+14:00
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -295,16 +290,14 @@ public interface DatetimeOperations {
     DateTime getLocalPositiveOffsetUppercaseMaxDateTime() throws ServiceException;
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31T23:59:59.9999999+14:00
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
-     * Put max datetime value with positive numoffset
-     * 9999-12-31t23:59:59.9999999-14:00
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -312,8 +305,7 @@ public interface DatetimeOperations {
     void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException;
 
     /**
-     * Put max datetime value with positive numoffset
-     * 9999-12-31t23:59:59.9999999-14:00
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -321,8 +313,7 @@ public interface DatetimeOperations {
     void putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31T23:59:59.9999999-14:00
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -330,16 +321,14 @@ public interface DatetimeOperations {
     DateTime getLocalNegativeOffsetUppercaseMaxDateTime() throws ServiceException;
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31T23:59:59.9999999-14:00
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31t23:59:59.9999999-14:00
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -347,8 +336,7 @@ public interface DatetimeOperations {
     DateTime getLocalNegativeOffsetLowercaseMaxDateTime() throws ServiceException;
 
     /**
-     * Get max datetime value with positive num offset
-     * 9999-12-31t23:59:59.9999999-14:00
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

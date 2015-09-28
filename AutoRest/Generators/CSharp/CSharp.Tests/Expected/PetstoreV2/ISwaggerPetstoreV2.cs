@@ -39,79 +39,85 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
 
-        /// <summary>
+            /// <summary>
+        /// Add a new pet to the store
         /// </summary>
         /// <param name='body'>
         /// Pet object that needs to be added to the store
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Pet>> AddPetWithHttpMessagesAsync(Pet body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Update an existing pet
         /// </summary>
         /// <param name='body'>
         /// Pet object that needs to be added to the store
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> UpdatePetWithHttpMessagesAsync(Pet body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Multiple status values can be provided with comma seperated strings
+        /// Finds Pets by status
         /// </summary>
+        /// Multiple status values can be provided with comma seperated strings
         /// <param name='status'>
         /// Status values that need to be considered for filter
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<IList<Pet>>> FindPetsByStatusWithHttpMessagesAsync(IList<string> status, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Finds Pets by tags
+        /// </summary>
         /// Muliple tags can be provided with comma seperated strings. Use
         /// tag1, tag2, tag3 for testing.
-        /// </summary>
         /// <param name='tags'>
         /// Tags to filter by
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<IList<Pet>>> FindPetsByTagsWithHttpMessagesAsync(IList<string> tags, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Returns a single pet
+        /// Find pet by Id
         /// </summary>
+        /// Returns a single pet
         /// <param name='petId'>
         /// Id of pet to return
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Pet>> GetPetByIdWithHttpMessagesAsync(long? petId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Updates a pet in the store with form data
         /// </summary>
         /// <param name='petId'>
         /// Id of pet that needs to be updated
@@ -124,13 +130,14 @@ namespace Fixtures.PetstoreV2
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> UpdatePetWithFormWithHttpMessagesAsync(long? petId, string name = default(string), string status = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Deletes a pet
         /// </summary>
         /// <param name='petId'>
         /// Pet id to delete
@@ -139,107 +146,115 @@ namespace Fixtures.PetstoreV2
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DeletePetWithHttpMessagesAsync(long? petId, string apiKey = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Returns a map of status codes to quantities
+        /// Returns pet inventories by status
         /// </summary>
+        /// Returns a map of status codes to quantities
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<IDictionary<string, int?>>> GetInventoryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Place an order for a pet
         /// </summary>
         /// <param name='body'>
         /// order placed for purchasing the pet
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Order>> PlaceOrderWithHttpMessagesAsync(Order body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Find purchase order by Id
+        /// </summary>
         /// For valid response try integer IDs with value &lt;= 5 or &gt; 10.
         /// Other values will generated exceptions
-        /// </summary>
         /// <param name='orderId'>
         /// Id of pet that needs to be fetched
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Order>> GetOrderByIdWithHttpMessagesAsync(string orderId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Delete purchase order by Id
+        /// </summary>
         /// For valid response try integer IDs with value &lt; 1000. Anything
         /// above 1000 or nonintegers will generate API errors
-        /// </summary>
         /// <param name='orderId'>
         /// Id of the order that needs to be deleted
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DeleteOrderWithHttpMessagesAsync(string orderId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// This can only be done by the logged in user.
+        /// Create user
         /// </summary>
+        /// This can only be done by the logged in user.
         /// <param name='body'>
         /// Created user object
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> CreateUserWithHttpMessagesAsync(User body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Creates list of users with given input array
         /// </summary>
         /// <param name='body'>
         /// List of user object
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> CreateUsersWithArrayInputWithHttpMessagesAsync(IList<User> body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Creates list of users with given input array
         /// </summary>
         /// <param name='body'>
         /// List of user object
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> CreateUsersWithListInputWithHttpMessagesAsync(IList<User> body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Logs user into the system
         /// </summary>
         /// <param name='username'>
         /// The user name for login
@@ -249,38 +264,41 @@ namespace Fixtures.PetstoreV2
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<string>> LoginUserWithHttpMessagesAsync(string username, string password, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Logs out current logged in user session
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> LogoutUserWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Get user by user name
         /// </summary>
         /// <param name='username'>
         /// The name that needs to be fetched. Use user1 for testing.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<User>> GetUserByNameWithHttpMessagesAsync(string username, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// This can only be done by the logged in user.
+        /// Updated user
         /// </summary>
+        /// This can only be done by the logged in user.
         /// <param name='username'>
         /// name that need to be deleted
         /// </param>
@@ -289,21 +307,22 @@ namespace Fixtures.PetstoreV2
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> UpdateUserWithHttpMessagesAsync(string username, User body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// This can only be done by the logged in user.
+        /// Delete user
         /// </summary>
+        /// This can only be done by the logged in user.
         /// <param name='username'>
         /// The name that needs to be deleted
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>

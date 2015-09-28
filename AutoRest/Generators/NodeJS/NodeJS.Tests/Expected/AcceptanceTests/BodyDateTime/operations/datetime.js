@@ -33,6 +33,7 @@ function Datetime(client) {
 
 /**
  * Get null datetime value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -40,7 +41,15 @@ function Datetime(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getNull = function (options, callback) {
   var client = this.client;
@@ -53,7 +62,7 @@ Datetime.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -90,9 +99,9 @@ Datetime.prototype.getNull = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -101,18 +110,16 @@ Datetime.prototype.getNull = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -122,12 +129,13 @@ Datetime.prototype.getNull = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get invalid datetime value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -135,7 +143,15 @@ Datetime.prototype.getNull = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getInvalid = function (options, callback) {
   var client = this.client;
@@ -148,7 +164,7 @@ Datetime.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -185,9 +201,9 @@ Datetime.prototype.getInvalid = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -196,18 +212,16 @@ Datetime.prototype.getInvalid = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -217,12 +231,13 @@ Datetime.prototype.getInvalid = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get overflow datetime value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -230,7 +245,15 @@ Datetime.prototype.getInvalid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getOverflow = function (options, callback) {
   var client = this.client;
@@ -243,7 +266,7 @@ Datetime.prototype.getOverflow = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/overflow';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -280,9 +303,9 @@ Datetime.prototype.getOverflow = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -291,18 +314,16 @@ Datetime.prototype.getOverflow = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -312,12 +333,13 @@ Datetime.prototype.getOverflow = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get underflow datetime value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -325,7 +347,15 @@ Datetime.prototype.getOverflow = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getUnderflow = function (options, callback) {
   var client = this.client;
@@ -338,7 +368,7 @@ Datetime.prototype.getUnderflow = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/underflow';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -375,9 +405,9 @@ Datetime.prototype.getUnderflow = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -386,18 +416,16 @@ Datetime.prototype.getUnderflow = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -407,14 +435,15 @@ Datetime.prototype.getUnderflow = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put max datetime value 9999-12-31T23:59:59.9999999Z
- * @param {date} datetimeBody 
  *
+ * @param {date} datetimeBody
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -422,7 +451,15 @@ Datetime.prototype.getUnderflow = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -437,14 +474,14 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
   try {
     if(!datetimeBody || !(datetimeBody instanceof Date || 
         (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
-    }
+          throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/utc';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -466,7 +503,17 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  var requestModel = null;
+  try {
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    }
+    requestModel = (datetimeBody instanceof Date) ? datetimeBody.toISOString() : datetimeBody;
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -484,9 +531,9 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -495,17 +542,16 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get max datetime value 9999-12-31t23:59:59.9999999z
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -513,7 +559,15 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -526,7 +580,7 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/utc/lowercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -563,9 +617,9 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -574,18 +628,16 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -595,12 +647,13 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get max datetime value 9999-12-31T23:59:59.9999999Z
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -608,7 +661,15 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -621,7 +682,7 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/utc/uppercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -658,9 +719,9 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -669,18 +730,16 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -690,15 +749,16 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put max datetime value with positive numoffset
  * 9999-12-31t23:59:59.9999999+14:00
- * @param {date} datetimeBody 
  *
+ * @param {date} datetimeBody
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -706,7 +766,15 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -721,14 +789,14 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
   try {
     if(!datetimeBody || !(datetimeBody instanceof Date || 
         (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
-    }
+          throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localpositiveoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -750,7 +818,17 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  var requestModel = null;
+  try {
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    }
+    requestModel = (datetimeBody instanceof Date) ? datetimeBody.toISOString() : datetimeBody;
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -768,9 +846,9 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -779,18 +857,17 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31t23:59:59.9999999+14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -798,7 +875,15 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -811,7 +896,7 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localpositiveoffset/lowercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -848,9 +933,9 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -859,18 +944,16 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -880,13 +963,14 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31T23:59:59.9999999+14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -894,7 +978,15 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -907,7 +999,7 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localpositiveoffset/uppercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -944,9 +1036,9 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -955,18 +1047,16 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -976,15 +1066,16 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put max datetime value with positive numoffset
  * 9999-12-31t23:59:59.9999999-14:00
- * @param {date} datetimeBody 
  *
+ * @param {date} datetimeBody
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -992,7 +1083,15 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -1007,14 +1106,14 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
   try {
     if(!datetimeBody || !(datetimeBody instanceof Date || 
         (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
-    }
+          throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localnegativeoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1036,7 +1135,17 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  var requestModel = null;
+  try {
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    }
+    requestModel = (datetimeBody instanceof Date) ? datetimeBody.toISOString() : datetimeBody;
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1054,9 +1163,9 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1065,18 +1174,17 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31T23:59:59.9999999-14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1084,7 +1192,15 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -1097,7 +1213,7 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localnegativeoffset/uppercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1134,9 +1250,9 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1145,18 +1261,16 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1166,13 +1280,14 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31t23:59:59.9999999-14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1180,7 +1295,15 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (options, callback) {
   var client = this.client;
@@ -1193,7 +1316,7 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localnegativeoffset/lowercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1230,9 +1353,9 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1241,18 +1364,16 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1262,14 +1383,15 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put min datetime value 0001-01-01T00:00:00Z
- * @param {date} datetimeBody 
  *
+ * @param {date} datetimeBody
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1277,7 +1399,15 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -1292,14 +1422,14 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
   try {
     if(!datetimeBody || !(datetimeBody instanceof Date || 
         (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
-    }
+          throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/utc';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1321,7 +1451,17 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  var requestModel = null;
+  try {
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    }
+    requestModel = (datetimeBody instanceof Date) ? datetimeBody.toISOString() : datetimeBody;
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1339,9 +1479,9 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1350,17 +1490,16 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get min datetime value 0001-01-01T00:00:00Z
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1368,7 +1507,15 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getUtcMinDateTime = function (options, callback) {
   var client = this.client;
@@ -1381,7 +1528,7 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/utc';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1418,9 +1565,9 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1429,18 +1576,16 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1450,14 +1595,15 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put min datetime value 0001-01-01T00:00:00+14:00
- * @param {date} datetimeBody 
  *
+ * @param {date} datetimeBody
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1465,7 +1611,15 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -1480,14 +1634,14 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
   try {
     if(!datetimeBody || !(datetimeBody instanceof Date || 
         (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
-    }
+          throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/localpositiveoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1509,7 +1663,17 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  var requestModel = null;
+  try {
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    }
+    requestModel = (datetimeBody instanceof Date) ? datetimeBody.toISOString() : datetimeBody;
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1527,9 +1691,9 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1538,17 +1702,16 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get min datetime value 0001-01-01T00:00:00+14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1556,7 +1719,15 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callback) {
   var client = this.client;
@@ -1569,7 +1740,7 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/localpositiveoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1606,9 +1777,9 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1617,18 +1788,16 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1638,14 +1807,15 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put min datetime value 0001-01-01T00:00:00-14:00
- * @param {date} datetimeBody 
  *
+ * @param {date} datetimeBody
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1653,7 +1823,15 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, options, callback) {
   var client = this.client;
@@ -1668,14 +1846,14 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
   try {
     if(!datetimeBody || !(datetimeBody instanceof Date || 
         (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
-      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
-    }
+          throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/localnegativeoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1697,7 +1875,17 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(datetimeBody));
+  var requestModel = null;
+  try {
+    if(!datetimeBody || !(datetimeBody instanceof Date || (typeof datetimeBody.valueOf() === 'string' && !isNaN(Date.parse(datetimeBody))))) {
+      throw new Error('datetimeBody cannot be null or undefined and it must be of type date.');
+    }
+    requestModel = (datetimeBody instanceof Date) ? datetimeBody.toISOString() : datetimeBody;
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -1715,9 +1903,9 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1726,17 +1914,16 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get min datetime value 0001-01-01T00:00:00-14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1744,7 +1931,15 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {date} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callback) {
   var client = this.client;
@@ -1757,7 +1952,7 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/localnegativeoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1794,9 +1989,9 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -1805,18 +2000,16 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          result.body = new Date(result.body);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result = new Date(result);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1826,7 +2019,7 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

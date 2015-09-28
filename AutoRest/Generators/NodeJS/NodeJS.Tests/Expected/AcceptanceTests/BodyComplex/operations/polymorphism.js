@@ -33,6 +33,7 @@ function Polymorphism(client) {
 
 /**
  * Get complex types that are polymorphic
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -40,7 +41,16 @@ function Polymorphism(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Fish} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Polymorphism.prototype.getValid = function (options, callback) {
   var client = this.client;
@@ -53,7 +63,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/polymorphism/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -90,9 +100,9 @@ Polymorphism.prototype.getValid = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -101,22 +111,19 @@ Polymorphism.prototype.getValid = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
-        if (result.body !== null && result.body !== undefined) {
-          if(result.body['dtype'] !== null && result.body['dtype'] !== undefined && client._models.discriminators[result.body['dtype']]) {
-            result.body = client._models.discriminators[result.body['dtype']].deserialize(result.body);
-          } else {
-            throw new Error('No discriminator field "dtype" was found in response.');
-          }
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models.discriminators[parsedResponse['dtype']](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -126,44 +133,48 @@ Polymorphism.prototype.getValid = function (options, callback) {
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put complex types that are polymorphic
+ *
  * @param {object} complexBody Please put a salmon that looks like this:
- {
-         'dtype':'Salmon',
-         'location':'alaska',
-         'iswild':true,
-         'species':'king',
-         'length':1.0,
-         'siblings':[
-           {
-             'dtype':'Shark',
-             'age':6,
-             'birthday': '2012-01-05T01:00:00Z',
-             'length':20.0,
-             'species':'predator',
-           },
-           {
-             'dtype':'Sawshark',
-             'age':105,
-             'birthday': '1900-01-05T01:00:00Z',
-             'length':10.0,
-             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-             'species':'dangerous',
-           }
-         ]
-       };
- *
- * @param {number} [complexBody.length] 
- *
- * @param {array} [complexBody.siblings] 
- *
- * @param {string} [complexBody.species] 
- *
+ * {
+ * 'dtype':'Salmon',
+ * 'location':'alaska',
+ * 'iswild':true,
+ * 'species':'king',
+ * 'length':1.0,
+ * 'siblings':[
+ * {
+ * 'dtype':'Shark',
+ * 'age':6,
+ * 'birthday': '2012-01-05T01:00:00Z',
+ * 'length':20.0,
+ * 'species':'predator',
+ * },
+ * {
+ * 'dtype':'Sawshark',
+ * 'age':105,
+ * 'birthday': '1900-01-05T01:00:00Z',
+ * 'length':10.0,
+ * 'picture': new Buffer([255, 255, 255, 255,
+ * 254]).toString('base64'),
+ * 'species':'dangerous',
+ * }
+ * ]
+ * };
+ * 
+ * @param {string} [complexBody.species]
+ * 
+ * @param {number} [complexBody.length]
+ * 
+ * @param {array} [complexBody.siblings]
+ * 
+ * @param {string} [complexBody.dtype] Polymorhpic Discriminator
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -171,7 +182,15 @@ Polymorphism.prototype.getValid = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   var client = this.client;
@@ -184,21 +203,15 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   }
   // Validate
   try {
-    if (complexBody) {
-      if(complexBody['dtype'] !== null && complexBody['dtype'] !== undefined && client._models.discriminators[complexBody['dtype']]) {
-        client._models.discriminators[complexBody['dtype']].validate(complexBody);
-      } else {
-        throw new Error('No discriminator field "dtype" was found in parameter "complexBody".');
-      }
-    }
-     else {  throw new Error('complexBody cannot be null or undefined.');
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/polymorphism/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -220,7 +233,20 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(complexBody));
+  var requestModel = null;
+  try {
+    if (complexBody) {
+      requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -238,9 +264,9 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -249,51 +275,53 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Put complex types that are polymorphic, attempting to omit required
  * 'birthday' field - the request should not be allowed from the client
- * @param {object} complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
- {
-     "dtype": "sawshark",
-     "species": "snaggle toothed",
-     "length": 18.5,
-     "age": 2,
-     "birthday": "2013-06-01T01:00:00Z",
-     "location": "alaska",
-     "picture": base64(FF FF FF FF FE),
-     "siblings": [
-         {
-             "dtype": "shark",
-             "species": "predator",
-             "birthday": "2012-01-05T01:00:00Z",
-             "length": 20,
-             "age": 6
-         },
-         {
-             "dtype": "sawshark",
-             "species": "dangerous",
-             "picture": base64(FF FF FF FF FE),
-             "length": 10,
-             "age": 105
-         }
-     ]
- }
  *
- * @param {number} [complexBody.length] 
- *
- * @param {array} [complexBody.siblings] 
- *
- * @param {string} [complexBody.species] 
- *
+ * @param {object} complexBody Please attempt put a sawshark that looks like
+ * this, the client should not allow this data to be sent:
+ * {
+ * "dtype": "sawshark",
+ * "species": "snaggle toothed",
+ * "length": 18.5,
+ * "age": 2,
+ * "birthday": "2013-06-01T01:00:00Z",
+ * "location": "alaska",
+ * "picture": base64(FF FF FF FF FE),
+ * "siblings": [
+ * {
+ * "dtype": "shark",
+ * "species": "predator",
+ * "birthday": "2012-01-05T01:00:00Z",
+ * "length": 20,
+ * "age": 6
+ * },
+ * {
+ * "dtype": "sawshark",
+ * "species": "dangerous",
+ * "picture": base64(FF FF FF FF FE),
+ * "length": 10,
+ * "age": 105
+ * }
+ * ]
+ * }
+ * 
+ * @param {string} [complexBody.species]
+ * 
+ * @param {number} [complexBody.length]
+ * 
+ * @param {array} [complexBody.siblings]
+ * 
+ * @param {string} [complexBody.dtype] Polymorhpic Discriminator
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -301,7 +329,15 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Polymorphism.prototype.putValidMissingRequired = function (complexBody, options, callback) {
   var client = this.client;
@@ -314,21 +350,15 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
   }
   // Validate
   try {
-    if (complexBody) {
-      if(complexBody['dtype'] !== null && complexBody['dtype'] !== undefined && client._models.discriminators[complexBody['dtype']]) {
-        client._models.discriminators[complexBody['dtype']].validate(complexBody);
-      } else {
-        throw new Error('No discriminator field "dtype" was found in parameter "complexBody".');
-      }
-    }
-     else {  throw new Error('complexBody cannot be null or undefined.');
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/polymorphism/missingrequired/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -350,7 +380,20 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   var requestContent = null;
-  requestContent = JSON.stringify(msRest.serializeObject(complexBody));
+  var requestModel = null;
+  try {
+    if (complexBody) {
+      requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
@@ -368,9 +411,9 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -379,12 +422,10 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

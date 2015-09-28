@@ -53,7 +53,6 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Name = methodName
             };
 
-            method.Documentation = _operation.Description;
             method.ContentType = "application/json";
             if (this._effectiveProduces != null && this._effectiveProduces.Count > 0)
             {
@@ -65,6 +64,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                 // Enable UTF-8 charset
                 method.ContentType += "; charset=utf-8";
             }
+            method.Description = _operation.Description;
+            method.Summary = _operation.Summary;
 
             // Service parameters
             if (_operation.Parameters != null)
@@ -344,7 +345,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         private bool SwaggerOperationProducesJson()
         {
             return _effectiveProduces != null &&
-                   _effectiveProduces.Contains("application/json", StringComparer.OrdinalIgnoreCase);
+                   _effectiveProduces.Any(s => s.StartsWith("application/json", StringComparison.OrdinalIgnoreCase));
         }
 
         private bool SwaggerOperationProducesNotEmpty()

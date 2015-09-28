@@ -26,9 +26,9 @@ describe('nodejs', function () {
       it('should get and put valid basic type properties', function (done) {
         testClient.basicOperations.getValid(function (error, result) {
           should.not.exist(error);
-          result.body.id.should.equal(2);
-          result.body.name.should.equal('abc');
-          result.body.color.should.equal('YELLOW');
+          result.id.should.equal(2);
+          result.name.should.equal('abc');
+          result.color.should.equal('YELLOW');
           testClient.basicOperations.putValid({ 'id': 2, 'name': 'abc', color: 'Magenta' }, function (error, result) {
             should.not.exist(error);
             done();
@@ -47,8 +47,8 @@ describe('nodejs', function () {
       it('should get null basic type properties', function (done) {
         testClient.basicOperations.getNull(function (error, result) {
           should.not.exist(error);
-          assert.equal(null, result.body.id);
-          assert.equal(null, result.body.name);
+          assert.equal(null, result.id);
+          assert.equal(null, result.name);
           done();
         });
       });
@@ -56,8 +56,8 @@ describe('nodejs', function () {
       it('should get empty basic type properties', function (done) {
         testClient.basicOperations.getEmpty(function (error, result) {
           should.not.exist(error);
-          should.not.exist(result.body.id);
-          should.not.exist(result.body.name);
+          should.not.exist(result.id);
+          should.not.exist(result.name);
           done();
         });
       });
@@ -65,7 +65,7 @@ describe('nodejs', function () {
       it('should get basic type properties when the payload is empty', function (done) {
         testClient.basicOperations.getNotProvided(function (error, result) {
           should.not.exist(error);
-          should.not.exist(result.body);
+          should.not.exist(result);
           done();
         });
       });
@@ -73,7 +73,7 @@ describe('nodejs', function () {
       it('should deserialize invalid basic types without throwing', function (done) {
         testClient.basicOperations.getInvalid(function (error, result) {
           should.not.exist(error);
-          should.exist(result.body);
+          should.exist(result);
           done();
         });
       });
@@ -85,8 +85,8 @@ describe('nodejs', function () {
       it('should get and put valid int properties', function (done) {
         testClient.primitive.getInt(function (error, result) {
           should.not.exist(error);
-          result.body.field1.should.equal(-1);
-          result.body.field2.should.equal(2);
+          result.field1.should.equal(-1);
+          result.field2.should.equal(2);
           testClient.primitive.putInt({ 'field1': -1, 'field2': 2 }, function (error, result) {
             should.not.exist(error);
             done();
@@ -97,8 +97,8 @@ describe('nodejs', function () {
       it('should get and put valid long properties', function (done) {
         testClient.primitive.getLong(function (error, result) {
           should.not.exist(error);
-          result.body.field1.should.equal(1099511627775);
-          result.body.field2.should.equal(-999511627788);
+          result.field1.should.equal(1099511627775);
+          result.field2.should.equal(-999511627788);
           testClient.primitive.putLong({ 'field1': 1099511627775, 'field2': -999511627788 }, function (error, result) {
             should.not.exist(error);
             done();
@@ -109,8 +109,8 @@ describe('nodejs', function () {
       it('should get and put valid float properties', function (done) {
         testClient.primitive.getFloat(function (error, result) {
           should.not.exist(error);
-          result.body.field1.should.equal(1.05);
-          result.body.field2.should.equal(-0.003);
+          result.field1.should.equal(1.05);
+          result.field2.should.equal(-0.003);
           testClient.primitive.putFloat({ 'field1': 1.05, 'field2': -0.003 }, function (error, result) {
             should.not.exist(error);
             done();
@@ -121,9 +121,9 @@ describe('nodejs', function () {
       it('should get and put valid double properties', function (done) {
         testClient.primitive.getDouble(function (error, result) {
           should.not.exist(error);
-          result.body.field1.should.equal(3e-100);
-          result.body.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose.should.equal(-0.000000000000000000000000000000000000000000000000000000005);
-          testClient.primitive.putDouble({ 'field1': 3e-100, 'field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose': -0.000000000000000000000000000000000000000000000000000000005 }, function (error, result) {
+          result.field1.should.equal(3e-100);
+          result.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.should.equal(-0.000000000000000000000000000000000000000000000000000000005);
+          testClient.primitive.putDouble({ 'field1': 3e-100, 'field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose': -0.000000000000000000000000000000000000000000000000000000005 }, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -133,9 +133,9 @@ describe('nodejs', function () {
       it('should get and put valid bool properties', function (done) {
         testClient.primitive.getBool(function (error, result) {
           should.not.exist(error);
-          result.body.field_true.should.equal(true);
-          result.body.field_false.should.equal(false);
-          testClient.primitive.putBool({ 'field_true': true, 'field_false': false }, function (error, result) {
+          result.fieldTrue.should.equal(true);
+          result.fieldFalse.should.equal(false);
+          testClient.primitive.putBool({ 'fieldTrue': true, 'fieldFalse': false }, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -145,9 +145,9 @@ describe('nodejs', function () {
       it('should get and put valid string properties', function (done) {
         testClient.primitive.getString(function (error, result) {
           should.not.exist(error);
-          result.body.field.should.equal('goodrequest');
-          result.body.empty.should.equal('');
-          should.not.exist(result.body['null']);
+          result.field.should.equal('goodrequest');
+          result.empty.should.equal('');
+          should.not.exist(result['null']);
           testClient.primitive.putString({ 'field': 'goodrequest', 'empty': '' }, function (error, result) {
             should.not.exist(error);
             done();
@@ -158,8 +158,8 @@ describe('nodejs', function () {
       it('should get and put valid date properties', function (done) {
         testClient.primitive.getDate(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body.field, new Date('0001-01-01'));
-          assert.deepEqual(result.body.leap, new Date('2016-02-29'));
+          assert.deepEqual(result.field, new Date('0001-01-01'));
+          assert.deepEqual(result.leap, new Date('2016-02-29'));
           //testClient.primitive.putDate({ 'field': 'goodrequest', 'empty': '' }, function (error, result) {
           //  should.not.exist(error);
           done();
@@ -169,8 +169,8 @@ describe('nodejs', function () {
       it('should get and put valid date-time properties', function (done) {
         testClient.primitive.getDateTime(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body.field, new Date('0001-01-01T00:00:00Z'));
-          assert.deepEqual(result.body.now, new Date('2015-05-18T18:38:00Z'));
+          assert.deepEqual(result.field, new Date('0001-01-01T00:00:00Z'));
+          assert.deepEqual(result.now, new Date('2015-05-18T18:38:00Z'));
           testClient.primitive.putDateTime({ 'field': new Date('0001-01-01T00:00:00Z'), 'now': new Date('2015-05-18T18:38:00Z') }, function (error, result) {
             should.not.exist(error);
             done();
@@ -181,7 +181,7 @@ describe('nodejs', function () {
         var byteBuffer = new Buffer([255, 254, 253, 252, 0, 250, 249, 248, 247, 246]);
         testClient.primitive.getByte(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body.field, byteBuffer);
+          assert.deepEqual(result.field, byteBuffer);
           testClient.primitive.putByte({ 'field': byteBuffer }, function (error, result) {
             should.not.exist(error);
             done();
@@ -197,7 +197,7 @@ describe('nodejs', function () {
         var testArray = ['1, 2, 3, 4', '', null, '&S#$(*Y', 'The quick brown fox jumps over the lazy dog'];
         testClient.arrayModel.getValid(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body.array, testArray);
+          assert.deepEqual(result.array, testArray);
           testClient.arrayModel.putValid({ 'array': testArray }, function (error, result) {
             should.not.exist(error);
             done();
@@ -209,7 +209,7 @@ describe('nodejs', function () {
       it('should get and put empty array type properties', function (done) {
         testClient.arrayModel.getEmpty(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body.array, []);
+          assert.deepEqual(result.array, []);
           testClient.arrayModel.putEmpty({ 'array': [] }, function (error, result) {
             should.not.exist(error);
             done();
@@ -220,7 +220,7 @@ describe('nodejs', function () {
       it('should get array type properties when the payload is empty', function (done) {
         testClient.arrayModel.getNotProvided(function (error, result) {
           should.not.exist(error);
-          should.not.exist(result.body.array);
+          should.not.exist(result.array);
           done();
         });
       });
@@ -229,11 +229,11 @@ describe('nodejs', function () {
 
     describe('Dictionary Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
-      it('should get valid dictionary type properties', function (done) {
+      it('should get and put valid dictionary type properties', function (done) {
         var testDictionary = { 'txt': 'notepad', 'bmp': 'mspaint', 'xls': 'excel', 'exe': '', '': null };
         testClient.dictionary.getValid(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body.defaultProgram, testDictionary);
+          assert.deepEqual(result.defaultProgram, testDictionary);
           testClient.dictionary.putValid({ 'defaultProgram': testDictionary }, function (error, result) {
             should.not.exist(error);
             done();
@@ -244,7 +244,7 @@ describe('nodejs', function () {
       it('should get and put empty dictionary type properties', function (done) {
         testClient.dictionary.getEmpty(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body.defaultProgram, {});
+          assert.deepEqual(result.defaultProgram, {});
           testClient.dictionary.putEmpty({ 'defaultProgram': {} }, function (error, result) {
             should.not.exist(error);
             done();
@@ -255,7 +255,7 @@ describe('nodejs', function () {
       it('should get null dictionary type properties', function (done) {
         testClient.dictionary.getNull(function (error, result) {
           should.not.exist(error);
-          should.not.exist(result.body.defaultProgram);
+          should.not.exist(result.defaultProgram);
           done();
         });
       });
@@ -263,7 +263,7 @@ describe('nodejs', function () {
       it('should get dictionary type properties when the payload is empty', function (done) {
         testClient.dictionary.getNotProvided(function (error, result) {
           should.not.exist(error);
-          should.not.exist(result.body.defaultProgram);
+          should.not.exist(result.defaultProgram);
           done();
         });
       });
@@ -276,7 +276,7 @@ describe('nodejs', function () {
       it('should get valid basic type properties', function (done) {
         testClient.inheritance.getValid(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body, siamese);
+          assert.deepEqual(result, siamese);
           testClient.inheritance.putValid(siamese, function (error, result) {
             should.not.exist(error);
             done();
@@ -315,7 +315,7 @@ describe('nodejs', function () {
       it('should get valid polymorphic properties', function (done) {
         testClient.polymorphism.getValid(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body, fish);
+          assert.deepEqual(result, fish);
           testClient.polymorphism.putValid(fish, function (error, result) {
             should.not.exist(error);
             done();
@@ -422,7 +422,7 @@ describe('nodejs', function () {
       it('should get and put valid basic type properties', function (done) {
         testClient.polymorphicrecursive.getValid(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body, bigfish);
+          assert.deepEqual(result, bigfish);
           testClient.polymorphicrecursive.putValid(bigfish, function (error, result) {
             should.not.exist(error);
             done();

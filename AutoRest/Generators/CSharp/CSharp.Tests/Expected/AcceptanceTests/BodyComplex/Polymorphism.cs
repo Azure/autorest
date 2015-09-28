@@ -164,8 +164,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// 'species':'dangerous',
         /// }
         /// ]
-        /// };
-        /// </param>
+        /// };/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -288,8 +287,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// "age": 105
         /// }
         /// ]
-        /// }
-        /// </param>
+        /// }/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

@@ -25,6 +25,7 @@
     <Compile Include="lib\msRestAzure.js" />
     <Compile Include="lib\pollingState.js" />
     <Compile Include="lib\resource.js" />
+    <Compile Include="lib\subResource.js" />
     <Compile Include="lib\utils.js" />
     <Content Include="test\testlist.txt" />
     <Content Include="test\package.json" />

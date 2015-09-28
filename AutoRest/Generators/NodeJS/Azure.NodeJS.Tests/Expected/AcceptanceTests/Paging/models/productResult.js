@@ -18,8 +18,29 @@ var util = require('util');
  * @class
  * Initializes a new instance of the ProductResult class.
  * @constructor
+ * @member {array} [values]
+ * 
+ * @member {string} [nextLink]
+ * 
  */
-function ProductResult() { }
+function ProductResult(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.values) {
+      var tempParametersvalues = [];
+      parameters.values.forEach(function(element) {
+        if (element) {
+          element = new models['Product'](element);
+        }
+        tempParametersvalues.push(element);
+      });
+      this.values = tempParametersvalues;
+    }
+    if (parameters.nextLink !== undefined) {
+      this.nextLink = parameters.nextLink;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the ProductResult schema
@@ -27,21 +48,28 @@ function ProductResult() { }
  * @param {JSON} payload
  *
  */
-ProductResult.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('ProductResult cannot be null.');
-  }
-  if (util.isArray(payload['values'])) {
-    for (var i = 0; i < payload['values'].length; i++) {
-      if (payload['values'][i]) {
-        models['Product'].validate(payload['values'][i]);
+ProductResult.prototype.serialize = function () {
+  var payload = {};
+  if (util.isArray(this['values'])) {
+    payload['values'] = [];
+    for (var i = 0; i < this['values'].length; i++) {
+      if (this['values'][i]) {
+        if (payload['values'] === null || payload['values'] === undefined) {
+          payload['values'] = {};
+        }
+        payload['values'][i] = this['values'][i].serialize();
       }
     }
   }
 
-  if (payload['nextLink'] !== null && payload['nextLink'] !== undefined && typeof payload['nextLink'].valueOf() !== 'string') {
-    throw new Error('payload[\'nextLink\'] must be of type string.');
+  if (this['nextLink'] !== null && this['nextLink'] !== undefined) {
+    if (typeof this['nextLink'].valueOf() !== 'string') {
+      throw new Error('this[\'nextLink\'] must be of type string.');
+    }
+    payload['nextLink'] = this['nextLink'];
   }
+
+  return payload;
 };
 
 /**
@@ -52,18 +80,23 @@ ProductResult.prototype.validate = function (payload) {
  */
 ProductResult.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.values !== null && instance.values !== undefined) {
-      var deserializedArray = [];
-      instance.values.forEach(function(element) {
-        if (element !== null && element !== undefined) {
-          element = models['Product'].deserialize(element);
+    if (instance['values']) {
+      var tempInstancevalues = [];
+      instance['values'].forEach(function(element1) {
+        if (element1) {
+          element1 = new models['Product']().deserialize(element1);
         }
-        deserializedArray.push(element);
+        tempInstancevalues.push(element1);
       });
-      instance.values = deserializedArray;
+      this['values'] = tempInstancevalues;
+    }
+
+    if (instance['nextLink'] !== undefined) {
+      this['nextLink'] = instance['nextLink'];
     }
   }
-  return instance;
+
+  return this;
 };
 
-module.exports = new ProductResult();
+module.exports = ProductResult;

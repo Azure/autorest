@@ -52,8 +52,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Send a post request with header value "User-Agent": "overwrite"
         /// </summary>
         /// <param name='userAgent'>
-        /// Send a post request with header value "User-Agent": "overwrite"
-        /// </param>
+        /// Send a post request with header value "User-Agent": "overwrite"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -230,8 +229,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Send a post request with header value "Content-Type": "text/html"
         /// </summary>
         /// <param name='contentType'>
-        /// Send a post request with header value "Content-Type": "text/html"
-        /// </param>
+        /// Send a post request with header value "Content-Type": "text/html"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -409,11 +407,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// or "scenario": "negative", "value": -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values 1 or -2
-        /// </param>
+        /// Send a post request with header values 1 or -2/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -522,8 +518,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header value "value": 1 or -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -620,11 +615,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// 105 or "scenario": "negative", "value": -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values 105 or -2
-        /// </param>
+        /// Send a post request with header values 105 or -2/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -733,8 +726,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header value "value": 105 or -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -831,11 +823,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// 0.07 or "scenario": "negative", "value": -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values 0.07 or -3.0
-        /// </param>
+        /// Send a post request with header values 0.07 or -3.0/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -944,8 +934,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header value "value": 0.07 or -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1042,11 +1031,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// 7e120 or "scenario": "negative", "value": -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values 7e120 or -3.0
-        /// </param>
+        /// Send a post request with header values 7e120 or -3.0/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1155,8 +1142,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header value "value": 7e120 or -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1253,11 +1239,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// or "scenario": "false", "value": false
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "true" or "false"
-        /// </param>
+        /// Send a post request with header values "scenario": "true" or "false"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values true or false
-        /// </param>
+        /// Send a post request with header values true or false/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1366,8 +1350,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header value "value": true or false
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "true" or "false"
-        /// </param>
+        /// Send a post request with header values "scenario": "true" or "false"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1466,12 +1449,10 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         /// <param name='scenario'>
         /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
-        /// </param>
+        /// "empty"/// </param>
         /// <param name='value'>
         /// Send a post request with header values "The quick brown fox jumps over the
-        /// lazy dog" or null or ""
-        /// </param>
+        /// lazy dog" or null or ""/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1578,8 +1559,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         /// <param name='scenario'>
         /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
-        /// </param>
+        /// "empty"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1676,11 +1656,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// "2010-01-01" or "scenario": "min", "value": "0001-01-01"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values "2010-01-01" or "0001-01-01"
-        /// </param>
+        /// Send a post request with header values "2010-01-01" or "0001-01-01"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1789,8 +1767,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header values "2010-01-01" or "0001-01-01"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1888,12 +1865,10 @@ namespace Fixtures.AcceptanceTestsHeader
         /// "0001-01-01T00:00:00Z"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
         /// <param name='value'>
         /// Send a post request with header values "2010-01-01T12:34:56Z" or
-        /// "0001-01-01T00:00:00Z"
-        /// </param>
+        /// "0001-01-01T00:00:00Z"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2003,8 +1978,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// "0001-01-01T00:00:00Z"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2101,11 +2075,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// "啊齄丂狛狜隣郎隣兀﨩"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
-        /// </param>
+        /// Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2214,8 +2186,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2313,12 +2284,10 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         /// <param name='scenario'>
         /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
-        /// </param>
+        /// "empty"/// </param>
         /// <param name='value'>
         /// Send a post request with header values 'GREY' . Possible values for this
-        /// parameter include: 'White', 'black', 'GREY'
-        /// </param>
+        /// parameter include: 'White', 'black', 'GREY'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2424,8 +2393,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         /// <param name='scenario'>
         /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
-        /// </param>
+        /// "empty"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

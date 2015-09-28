@@ -37,14 +37,17 @@ function PathItems(client) {
  * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
  * pathItemStringQuery='pathItemStringQuery',
  * localStringQuery='localStringQuery'
+ *
  * @param {string} localStringPath should contain value 'localStringPath'
- *
+ * 
+ * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
+ * appears in the path
+ * 
  * @param {string} [localStringQuery] should contain value 'localStringQuery'
- *
- * @param {string} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
- *
- * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
- *
+ * 
+ * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery'
+ * that appears as a query parameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -52,7 +55,15 @@ function PathItems(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 PathItems.prototype.getAllWithValues = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
   var client = this.client;
@@ -88,7 +99,7 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
@@ -141,9 +152,9 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -152,12 +163,10 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -167,14 +176,17 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
  * localStringPath='localStringPath', globalStringQuery=null,
  * pathItemStringQuery='pathItemStringQuery',
  * localStringQuery='localStringQuery'
+ *
  * @param {string} localStringPath should contain value 'localStringPath'
- *
+ * 
+ * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
+ * appears in the path
+ * 
  * @param {string} [localStringQuery] should contain value 'localStringQuery'
- *
- * @param {string} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
- *
- * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
- *
+ * 
+ * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery'
+ * that appears as a query parameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -182,7 +194,15 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
   var client = this.client;
@@ -218,7 +238,7 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
@@ -271,9 +291,9 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -282,12 +302,10 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -296,14 +314,17 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
  * pathItemStringPath='pathItemStringPath',
  * localStringPath='localStringPath', globalStringQuery=null,
  * pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+ *
  * @param {string} localStringPath should contain value 'localStringPath'
- *
+ * 
+ * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
+ * appears in the path
+ * 
  * @param {string} [localStringQuery] should contain null value
- *
- * @param {string} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
- *
- * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery' that appears as a query parameter
- *
+ * 
+ * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery'
+ * that appears as a query parameter
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -311,7 +332,15 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
   var client = this.client;
@@ -347,7 +376,7 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
@@ -400,9 +429,9 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -411,12 +440,10 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -425,14 +452,16 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
  * pathItemStringPath='pathItemStringPath',
  * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
  * pathItemStringQuery=null, localStringQuery=null
+ *
  * @param {string} localStringPath should contain value 'localStringPath'
- *
+ * 
+ * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
+ * appears in the path
+ * 
  * @param {string} [localStringQuery] should contain value null
- *
- * @param {string} pathItemStringPath A string value 'pathItemStringPath' that appears in the path
- *
+ * 
  * @param {string} [pathItemStringQuery] should contain value null
- *
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -440,7 +469,15 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
   var client = this.client;
@@ -476,7 +513,7 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
@@ -529,9 +566,9 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -540,12 +577,10 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Core", "AutoRest\AutoRest.Core\AutoRest.Core.csproj", "{C876085F-9DC3-41F0-B7B4-17022CD84684}"
 EndProject
@@ -78,6 +78,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gulp", "gulp", "{9750C692-C
 		Tools\gulp\gulp-regenerate-expected.js = Tools\gulp\gulp-regenerate-expected.js
 		Tools\gulp\gulp-runtime-version-sync.js = Tools\gulp\gulp-runtime-version-sync.js
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.Azure.NodeJS.Tests", "AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\AutoRest.Generator.Azure.NodeJS.Tests.csproj", "{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Java", "Java", "{A9C01442-1E93-4C2D-9182-B61C9F53C3FF}"
 EndProject
@@ -299,6 +301,16 @@ Global
 		{31931998-7543-41DA-9E58-D9670D810352}.Portable-Release|Any CPU.Build.0 = Portable-Release|Any CPU
 		{31931998-7543-41DA-9E58-D9670D810352}.Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
 		{31931998-7543-41DA-9E58-D9670D810352}.Release|Any CPU.Build.0 = Portable-Release|Any CPU
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}.Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}.Portable-Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}.Portable-Debug|Any CPU.Build.0 = Portable-Debug|Any CPU
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}.Portable-Release|Any CPU.Build.0 = Portable-Release|Any CPU
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}.Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
 		{34B82690-0083-4F4C-8ABF-2D2A09304915}.Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
 		{34B82690-0083-4F4C-8ABF-2D2A09304915}.Debug|Any CPU.Build.0 = Portable-Debug|Any CPU
 		{34B82690-0083-4F4C-8ABF-2D2A09304915}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
@@ -348,6 +360,7 @@ Global
 		{31931998-7543-41DA-9E58-D9670D810352} = {DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}
 		{5989E210-AE15-4DF4-8CEE-DEE609740FD2} = {04E8E124-852C-4B5D-83EB-0B8ADDE825CB}
 		{9750C692-C2D0-4D0F-9F73-D45DB9E906CE} = {5989E210-AE15-4DF4-8CEE-DEE609740FD2}
+		{313D65A7-5A0C-48AA-AF93-8A11364FC5D5} = {9B87B0F7-B02C-4498-BB03-B6E282F86557}
 		{A9C01442-1E93-4C2D-9182-B61C9F53C3FF} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
 		{34B82690-0083-4F4C-8ABF-2D2A09304915} = {A9C01442-1E93-4C2D-9182-B61C9F53C3FF}
 		{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C} = {A9C01442-1E93-4C2D-9182-B61C9F53C3FF}

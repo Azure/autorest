@@ -121,8 +121,7 @@ public interface SkipUrlEncoding {
     void getSwaggerPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -130,8 +129,7 @@ public interface SkipUrlEncoding {
     void getMethodQueryValid(String q1) throws ServiceException;
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -155,8 +153,7 @@ public interface SkipUrlEncoding {
     void getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -164,8 +161,7 @@ public interface SkipUrlEncoding {
     void getPathQueryValid(String q1) throws ServiceException;
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -173,8 +169,7 @@ public interface SkipUrlEncoding {
     void getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -182,8 +177,7 @@ public interface SkipUrlEncoding {
     void getSwaggerQueryValid(String q1) throws ServiceException;
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

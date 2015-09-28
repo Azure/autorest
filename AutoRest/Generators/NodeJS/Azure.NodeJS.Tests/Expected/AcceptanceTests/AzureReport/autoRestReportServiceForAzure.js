@@ -64,6 +64,7 @@ util.inherits(AutoRestReportServiceForAzure, ServiceClient);
 
 /**
  * Get test coverage report
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -71,7 +72,15 @@ util.inherits(AutoRestReportServiceForAzure, ServiceClient);
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 AutoRestReportServiceForAzure.prototype.getReport = function (options, callback) {
   var client = this;
@@ -92,7 +101,7 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//report/azure';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -137,9 +146,9 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -148,17 +157,14 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.requestId = response.headers['x-ms-request-id'];
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse;
+      var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
-        result.body = parsedResponse;
+        result = JSON.parse(responseBody);
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
         deserializationError.request = httpRequest;
@@ -167,7 +173,7 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
       }
     }
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

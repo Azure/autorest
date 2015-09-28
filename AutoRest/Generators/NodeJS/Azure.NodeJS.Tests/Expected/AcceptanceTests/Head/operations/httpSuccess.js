@@ -34,6 +34,7 @@ function HttpSuccess(client) {
 
 /**
  * Return 204 status code if successful
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -41,7 +42,15 @@ function HttpSuccess(client) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {boolean} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.head204 = function (options, callback) {
   var client = this.client;
@@ -62,7 +71,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/204';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -107,9 +116,9 @@ HttpSuccess.prototype.head204 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -118,19 +127,17 @@ HttpSuccess.prototype.head204 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.body = (statusCode === 204);
-    result.requestId = response.headers['x-ms-request-id'];
+    result = (statusCode === 204);
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Return 404 status code if successful
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -138,7 +145,15 @@ HttpSuccess.prototype.head204 = function (options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {boolean} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 HttpSuccess.prototype.head404 = function (options, callback) {
   var client = this.client;
@@ -159,7 +174,7 @@ HttpSuccess.prototype.head404 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/404';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -204,9 +219,9 @@ HttpSuccess.prototype.head404 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['CloudError'].deserialize(error.body);
+        error.body = new client._models['CloudError']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -215,14 +230,11 @@ HttpSuccess.prototype.head404 = function (options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
-    result.body = (statusCode === 204);
-    result.requestId = response.headers['x-ms-request-id'];
+    result = (statusCode === 204);
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

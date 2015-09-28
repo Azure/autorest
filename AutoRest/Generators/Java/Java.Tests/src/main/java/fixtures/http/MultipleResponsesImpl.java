@@ -203,8 +203,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 400 response with valid error payload: {'status': 400,
-     * 'message': 'client error'}
+     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -220,8 +219,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 400 response with valid error payload: {'status': 400,
-     * 'message': 'client error'}
+     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -289,8 +287,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 201 response with valid payload: {'statusCode': '201',
-     * 'textStatusCode': 'Created'}
+     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -306,8 +303,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 201 response with valid payload: {'statusCode': '201',
-     * 'textStatusCode': 'Created'}
+     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -333,8 +329,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -350,8 +345,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -506,8 +500,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @return the Object object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -523,8 +516,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -633,8 +625,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -649,8 +640,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 400 response with valid payload: {'code': '400', 'message':
-     * 'client error'}
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1148,8 +1138,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 200 response with no payload, when a payload is expected -
-     * client should return a null object of thde type for model A
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1165,8 +1154,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 200 response with no payload, when a payload is expected -
-     * client should return a null object of thde type for model A
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1270,8 +1258,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 400 response with no payload client should treat as an http
-     * error with no error model
+     * Send a 400 response with no payload client should treat as an http error with no error model
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1287,8 +1274,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
-     * Send a 400 response with no payload client should treat as an http
-     * error with no error model
+     * Send a 400 response with no payload client should treat as an http error with no error model
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

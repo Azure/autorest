@@ -18,7 +18,7 @@
   "paths": {
     "/paging/single": {
       "get": {
-        "x-ms-pageable": true,
+        "x-ms-pageable": { "path": "nextLink" },
         "operationId": "Paging_getSinglePage",
         "description": "A paging operation that finishes on the first call without a nextlink",
         "responses": {
@@ -34,7 +34,7 @@
         }
       },
       "put": {
-        "x-ms-pageable": true,
+        "x-ms-pageable": { "path": "nextLink" },
         "operationId": "Paging_putSinglePage",
         "description": "A paging operation that finishes on the first call without a nextlink",
         "responses": {
@@ -56,7 +56,7 @@
         }
       },
       "post": {
-        "x-ms-pageable": true,
+        "x-ms-pageable": { "path": "nextLink" },
         "operationId": "Paging_postSinglePage",
         "description": "A paging operation that finishes on the first call without a nextlink",
         "responses": {
@@ -78,7 +78,7 @@
         }
       },
       "delete": {
-        "x-ms-pageable": true,
+        "x-ms-pageable": { "path": "nextLink" },
         "operationId": "Paging_deleteSinglePage",
         "description": "A paging operation that finishes on the first call without a nextlink",
         "responses": {

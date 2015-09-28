@@ -36,12 +36,10 @@ describe('nodejs', function () {
             id: '1',
             location: 'Building 44',
             name: 'Resource1',
-            properties: {
-              provisioningState: 'Succeeded',
-              provisioningStateValues: 'OK',
-              pname: 'Product1',
-              type: 'Flat'
-            },
+            provisioningState: 'Succeeded',
+            provisioningStateValues: 'OK',
+            pname: 'Product1',
+            flattenedProductType: 'Flat',
             tags: { tag1: 'value1', tag2: 'value3' },
             type: 'Microsoft.Web/sites'
           },
@@ -57,15 +55,15 @@ describe('nodejs', function () {
         ];
         testClient.getArray(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body, expectedResult);
+          assert.deepEqual(result, expectedResult);
           done();
         });
       });
 
       it('should put external resource as an array', function (done) {
         var resourceBody = [
-          { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } },
-          { "location": "Building 44", "properties": { "pname": "Product2" } }
+          { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
+          { "location": "Building 44", "pname": "Product2" }
         ];
         testClient.putArray(resourceBody, function (error, result) {
           should.not.exist(error);
@@ -73,18 +71,16 @@ describe('nodejs', function () {
         });
       });
 
-      it('should get and put external resource as a dictionary', function (done) {
+      it('should get external resource as a dictionary', function (done) {
         var expectedResult = {
           Product1: {
             id: '1',
             location: 'Building 44',
             name: 'Resource1',
-            properties: {
-              provisioningState: 'Succeeded',
-              provisioningStateValues: 'OK',
-              pname: 'Product1',
-              type: 'Flat'
-            },
+            provisioningState: 'Succeeded',
+            provisioningStateValues: 'OK',
+            pname: 'Product1',
+            flattenedProductType: 'Flat',
             tags: { tag1: 'value1', tag2: 'value3' },
             type: 'Microsoft.Web/sites'
           },
@@ -100,15 +96,15 @@ describe('nodejs', function () {
         };
         testClient.getDictionary(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body, expectedResult);
+          assert.deepEqual(result, expectedResult);
           done();
         });
       });
 
       it('should put external resource as a dictionary', function (done) {
         var resourceBody = {
-          "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } },
-          "Resource2": { "location": "Building 44", "properties": { "pname": "Product2", "type": "Flat" } }
+          "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
+          "Resource2": { "location": "Building 44", "pname": "Product2", "flattenedProductType": "Flat" }
         };
         testClient.putDictionary(resourceBody, function (error, result) {
           should.not.exist(error);
@@ -116,19 +112,17 @@ describe('nodejs', function () {
         });
       });
 
-      it('should get and put external resource as a complex type', function (done) {
+      it('should get external resource as a complex type', function (done) {
         var expectedResult = {
           dictionaryofresources: {
             Product1: {
               id: '1',
               location: 'Building 44',
               name: 'Resource1',
-              properties: {
-                provisioningState: 'Succeeded',
-                provisioningStateValues: 'OK',
-                pname: 'Product1',
-                type: 'Flat'
-              },
+              provisioningState: 'Succeeded',
+              provisioningStateValues: 'OK',
+              pname: 'Product1',
+              flattenedProductType: 'Flat',
               tags: { tag1: 'value1', tag2: 'value3' },
               type: 'Microsoft.Web/sites'
             },
@@ -147,12 +141,10 @@ describe('nodejs', function () {
               id: '4',
               location: 'Building 44',
               name: 'Resource4',
-              properties: {
-                provisioningState: 'Succeeded',
-                provisioningStateValues: 'OK',
-                pname: 'Product4',
-                type: 'Flat'
-              },
+              provisioningState: 'Succeeded',
+              provisioningStateValues: 'OK',
+              pname: 'Product4',
+              flattenedProductType: 'Flat',
               tags: { tag1: 'value1', tag2: 'value3' },
               type: 'Microsoft.Web/sites'
             },
@@ -174,7 +166,7 @@ describe('nodejs', function () {
         };
         testClient.getResourceCollection(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body, expectedResult);
+          assert.deepEqual(result, expectedResult);
           done();
         });
       });
@@ -182,14 +174,14 @@ describe('nodejs', function () {
       it('should put external resource as a complex type', function (done) {
         var resourceBody = {
           "arrayofresources": [
-            {"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "properties":{"pname":"Product1", "type": "Flat" } },
-            { "location": "East US", "properties": { "pname": "Product2", "type": "Flat" } }
+            {"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "pname":"Product1", "flattenedProductType": "Flat" },
+            { "location": "East US", "pname": "Product2", "flattenedProductType": "Flat" }
           ],
           "dictionaryofresources": {
-            "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "properties": { "pname": "Product1", "type": "Flat" } },
-            "Resource2": { "location": "Building 44", "properties": { "pname": "Product2", "type": "Flat" } }
+            "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
+            "Resource2": { "location": "Building 44", "pname": "Product2", "flattenedProductType": "Flat" }
           },
-          "productresource": { "location": "India", "properties": { "pname": "Azure", "type": "Flat" } }
+          "productresource": { "location": "India", "pname": "Azure", "flattenedProductType": "Flat" }
         };
         testClient.putResourceCollection(resourceBody, function (error, result) {
           should.not.exist(error);

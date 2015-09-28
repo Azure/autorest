@@ -14,8 +14,17 @@
  * @class
  * Initializes a new instance of the IntOptionalWrapper class.
  * @constructor
+ * @member {number} [value]
+ * 
  */
-function IntOptionalWrapper() { }
+function IntOptionalWrapper(parameters) {
+  if (parameters !== null && parameters !== undefined) {
+    if (parameters.value !== undefined) {
+      this.value = parameters.value;
+    }
+  }    
+}
+
 
 /**
  * Validate the payload against the IntOptionalWrapper schema
@@ -23,13 +32,16 @@ function IntOptionalWrapper() { }
  * @param {JSON} payload
  *
  */
-IntOptionalWrapper.prototype.validate = function (payload) {
-  if (!payload) {
-    throw new Error('IntOptionalWrapper cannot be null.');
+IntOptionalWrapper.prototype.serialize = function () {
+  var payload = {};
+  if (this['value'] !== null && this['value'] !== undefined) {
+    if (typeof this['value'] !== 'number') {
+      throw new Error('this[\'value\'] must be of type number.');
+    }
+    payload['value'] = this['value'];
   }
-  if (payload['value'] !== null && payload['value'] !== undefined && typeof payload['value'] !== 'number') {
-    throw new Error('payload[\'value\'] must be of type number.');
-  }
+
+  return payload;
 };
 
 /**
@@ -39,7 +51,13 @@ IntOptionalWrapper.prototype.validate = function (payload) {
  *
  */
 IntOptionalWrapper.prototype.deserialize = function (instance) {
-  return instance;
+  if (instance) {
+    if (instance['value'] !== undefined) {
+      this['value'] = instance['value'];
+    }
+  }
+
+  return this;
 };
 
-module.exports = new IntOptionalWrapper();
+module.exports = IntOptionalWrapper;
