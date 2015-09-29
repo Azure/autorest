@@ -218,9 +218,9 @@ describe('nodejs', function () {
         var duration = moment.duration({ days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11 });
         testClient.header.paramDuration('valid', duration, function(error, result) {
           should.not.exist(error);
-          testClient.header.responseDuration('valid', function(error, result) {
+          testClient.header.responseDuration('valid', function (error, result, request, response) {
             should.not.exist(error);
-            _.isEqual(result.response.headers['value'], 'P123DT22H14M12.011S').should.be.exactly(true);
+            _.isEqual(response.headers['value'], 'P123DT22H14M12.011S').should.be.exactly(true);
             done();
           });
         });

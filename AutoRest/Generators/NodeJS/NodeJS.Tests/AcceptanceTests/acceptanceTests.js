@@ -605,7 +605,7 @@ describe('nodejs', function () {
       var testClient = new durationClient(baseUri, clientOptions);
       it('should properly handle null value for Duration', function (done) {
         testClient.duration.getNull(function (error, result) {
-          should.not.exist(result.body);
+          should.not.exist(result);
           should.not.exist(error);
           done();
         });
@@ -613,20 +613,18 @@ describe('nodejs', function () {
 
       it('should properly handle invalid value for Duration', function (done) {
         testClient.duration.getInvalid(function (error, result) {
-          should.exist(result.body);
           //TODO: There should be an error here, except for some reason moment.js allows non-ISO strings and will just construct a duration of length 0
           should.not.exist(error);
-          should.equal(result.body.asSeconds(), 0);
+          should.equal(result.asSeconds(), 0);
           done();
         });
       });
 
       it('should properly handle positive value for Duration', function (done) {
         testClient.duration.getPositiveDuration(function (error, result) {
-          should.exist(result.body);
+          should.exist(result);
           should.not.exist(error);
-          var dur = result.body;
-          should.equal(dur.asSeconds(), moment.duration('P3Y6M4DT12H30M5S').asSeconds());
+          should.equal(result.asSeconds(), moment.duration('P3Y6M4DT12H30M5S').asSeconds());
           done();
         });
       });
@@ -635,7 +633,7 @@ describe('nodejs', function () {
         var duration = moment.duration({days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11});
         testClient.duration.putPositiveDuration(duration, function (error, result) {
           should.not.exist(error);
-          should.not.exist(result.body);
+          should.not.exist(result);
           done();
         });
       });

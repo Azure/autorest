@@ -2088,10 +2088,13 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
 /**
  * Send a post request with header values "scenario": "valid", "value":
  * "P123DT22H14M12.011S"
- * @param {string} scenario Send a post request with header values "scenario": "valid"
  *
- * @param {moment.duration} value Send a post request with header values "P123DT22H14M12.011S"
- *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid"
+ * 
+ * @param {moment.duration} value Send a post request with header values
+ * "P123DT22H14M12.011S"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2099,7 +2102,15 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.paramDuration = function (scenario, value, options, callback) {
   var client = this.client;
@@ -2123,7 +2134,7 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/param/prim/duration';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2166,9 +2177,9 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2177,19 +2188,19 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 
 /**
  * Get a response with header values "P123DT22H14M12.011S"
- * @param {string} scenario Send a post request with header values "scenario": "valid"
  *
+ * @param {string} scenario Send a post request with header values "scenario":
+ * "valid"
+ * 
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2197,7 +2208,15 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
  *
  * @param {function} callback
  *
- * @returns {stream} The Response stream
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
 Header.prototype.responseDuration = function (scenario, options, callback) {
   var client = this.client;
@@ -2218,7 +2237,7 @@ Header.prototype.responseDuration = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//header/response/prim/duration';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2258,9 +2277,9 @@ Header.prototype.responseDuration = function (scenario, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = parsedErrorResponse;
-        if (error.body !== null && error.body !== undefined) {
-          error.body = client._models['ErrorModel'].deserialize(error.body);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
@@ -2269,12 +2288,10 @@ Header.prototype.responseDuration = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msRest.HttpOperationResponse();
-    result.request = httpRequest;
-    result.response = response;
+    var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result);
+    return callback(null, result, httpRequest, response);
   });
 };
 

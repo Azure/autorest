@@ -2075,11 +2075,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// "P123DT22H14M12.011S"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values "P123DT22H14M12.011S"
-        /// </param>
+        /// Send a post request with header values "P123DT22H14M12.011S"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2188,8 +2186,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header values "P123DT22H14M12.011S"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

@@ -1049,8 +1049,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "P123DT22H14M12.011S"
+     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
@@ -1075,8 +1074,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "P123DT22H14M12.011S"
+     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
@@ -1161,8 +1159,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "啊齄丂狛狜隣郎隣兀﨩"
+     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"

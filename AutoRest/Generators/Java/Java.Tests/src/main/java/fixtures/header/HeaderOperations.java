@@ -527,8 +527,7 @@ public interface HeaderOperations {
     void responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "P123DT22H14M12.011S"
+     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
@@ -537,8 +536,7 @@ public interface HeaderOperations {
     void paramDuration(String scenario, Period value) throws ServiceException;
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "P123DT22H14M12.011S"
+     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
@@ -563,8 +561,7 @@ public interface HeaderOperations {
     void responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Send a post request with header values "scenario": "valid", "value":
-     * "啊齄丂狛狜隣郎隣兀﨩"
+     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"

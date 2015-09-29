@@ -228,28 +228,28 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 if (isRequired)
                 {
-                    builder.AppendLine("if(!{0} || !({0} instanceof Date || ")
+                    builder.AppendLine("if(!{0} || !({0} instanceof Date || ", valueReference)
                                                   .Indent()
                                                   .Indent()
-                                                  .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{");
+                                                  .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
                     return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
                 }
 
-                builder = builder.AppendLine("if ({0} && !({0} instanceof Date || ")
+                builder = builder.AppendLine("if ({0} && !({0} instanceof Date || ", valueReference)
                                               .Indent()
                                               .Indent()
-                                              .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{");
+                                              .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else if (primary == PrimaryType.TimeSpan)
             {
                 if (isRequired)
                 {
-                    builder.AppendLine("if(!{0} || !moment.isDuration({0})) {{");
+                    builder.AppendLine("if(!{0} || !moment.isDuration({0})) {{", valueReference);
                     return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
                 }
 
-                builder.AppendLine("if({0} && !moment.isDuration({0})) {{");
+                builder.AppendLine("if({0} && !moment.isDuration({0})) {{", valueReference);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else
@@ -624,6 +624,26 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", valueReference, objectReference)
+                                .Outdent()
+                                .AppendLine("}").ToString();
+            }
+            else if (primary == PrimaryType.TimeSpan)
+            {
+                if (isRequired)
+                {
+                    builder.AppendLine("if(!{0} || !moment.isDuration({0})) {{", objectReference);
+                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
+                    return builder.AppendLine("{0} = {1}.toISOString();", valueReference, objectReference).ToString();
+                }
+
+                builder.AppendLine("if ({0}) {{", objectReference)
+                         .Indent()
+                         .AppendLine("if !(moment.isDuration({0})) {{",
+                         objectReference);
+                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                builder = ConstructBasePropertyCheck(builder, valueReference);
+                return builder.AppendLine("{0} = {1}.toISOString();", valueReference, objectReference)
                                 .Outdent()
                                 .AppendLine("}").ToString();
             }
