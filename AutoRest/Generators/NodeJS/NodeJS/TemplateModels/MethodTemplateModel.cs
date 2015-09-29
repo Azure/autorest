@@ -139,7 +139,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 var parameters = MethodParameterDeclarationTS;
                 var returnTypeTSString = ReturnType == null ? "void" : ReturnType.TSType(false);
-                parameters += ", callback: (err: Error, result: HttpOperationResponse<" + returnTypeTSString + ">) => void";
+                parameters += ", callback: (err: Error, result: " + returnTypeTSString + ", request: WebResource, response: stream.Readable) => void";
                 return parameters;
             }
         }
