@@ -216,7 +216,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2
+     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2 
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
@@ -237,7 +237,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2
+     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2 
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
@@ -318,7 +318,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2 
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
@@ -339,7 +339,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2 
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2

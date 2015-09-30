@@ -20,3 +20,4 @@ exports.SubscriptionInMethod = require('./subscriptionInMethod');
 exports.ApiVersionDefault = require('./apiVersionDefault');
 exports.ApiVersionLocal = require('./apiVersionLocal');
 exports.SkipUrlEncoding = require('./skipUrlEncoding');
+exports.Header = require('./header');

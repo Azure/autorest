@@ -114,4 +114,10 @@ public interface AutoRestAzureSpecialParametersTestClient {
      */
     SkipUrlEncoding getSkipUrlEncoding();
 
+    /**
+     * Gets the HeaderOperations object to access its operations.
+     * @return the headerOperations value.
+     */
+    HeaderOperations getHeaderOperations();
+
 }
