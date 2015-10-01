@@ -257,7 +257,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             else if (primary == PrimaryType.Date || primary == PrimaryType.DateTime)
                 return "Date";
             else if (primary == PrimaryType.Object)
-                return "Object";   // TODO: test this
+                return "any";   // TODO: test this
             else {
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
                     "Type '{0}' not implemented", primary));
