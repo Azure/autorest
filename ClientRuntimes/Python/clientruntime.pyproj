@@ -13,7 +13,7 @@
     <OutputPath>.</OutputPath>
     <Name>clientruntime</Name>
     <RootNamespace>client_runtime</RootNamespace>
-    <InterpreterId>{48d85c47-7987-4391-906e-d7b3fdb224c0}</InterpreterId>
+    <InterpreterId>{5cdbe86c-f1f4-45a4-ad13-453be6b2cc3e}</InterpreterId>
     <InterpreterVersion>2.7</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -58,6 +58,9 @@
     <Compile Include="msrest\service_client.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="msrest\test\unittest_serialization.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="msrest\test\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -73,8 +76,8 @@
     <Folder Include="msrest\test\" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="Python27-64-ENV\">
-      <Id>{48d85c47-7987-4391-906e-d7b3fdb224c0}</Id>
+    <Interpreter Include="..\..\..\PythonEnv\Python27-64-ENV\">
+      <Id>{5cdbe86c-f1f4-45a4-ad13-453be6b2cc3e}</Id>
       <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
       <Version>2.7</Version>
       <Description>Python27-64-ENV (Python 64-bit 2.7)</Description>

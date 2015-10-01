@@ -27,43 +27,67 @@
 from response import HTTPResponse
 import json
 
+from .exceptions import SerializationError
+
 class Serialized(object):
+
+    basic_types = ['str', 'int', 'bool', 'float']
+
     def __init__(self, request_obj):
         self.request = request_obj
 
         self.serialize_type = {
             'datetime':self.serialize_time,
             'duration':self.serialize_duration,
-            'complex':self.serialize_object,
             '[]':self.serialize_iter,
             '{}':self.serialize_dict
             # etc
             }
 
     def __getattr__(self, attr):
-        orig_attr = self.request.__getattribute__(attr)
-        attr_type = self.request.attribute_map[attr]['type']
 
-        if orig_attr is None or attr_type in ['str', 'int']:
-            return orig_attr
+        try:
+            orig_attr = getattr(self.request, attr)
+            attr_type = self.request.attribute_map[attr]['type']
 
-        if attr_type in self.serialize_type:
-            return self.serialize_type[attr_type](orig_attr)
+            return self._serialize_data(orig_attr, attr_type)
 
-        iter_type = attr_type[0] + attr_type[-1]
-        if iter_type in self.serialize_type:
-            return self.serialize_type[iter_type](orig_attr, attr_type[1,-1])
-
-        return self.serialize_object(orig_attr)
+        except (AttributeError, KeyError, TypeError) as err:
+            raise SerializationError("Object cannot be serialized: {0}".format(err))
 
     def __call__(self):
         serialized = {}
-        for attr in self.request.attribute_map:
-            serialized[self.request.attribute_map[attr]['key']] = self.attr
+
+        try:
+            for attr in self.request.attribute_map:
+                serialized[self.request.attribute_map[attr]['key']] = getattr(self, attr)
+
+        except (AttributeError, KeyError, TypeError) as err:
+            raise SerializationError("Object cannot be serialized: {0}".format(err))
 
         return serialized
 
-    def serilize_object(self, cmplx_obj):
+    def _serialize_data(self, data, data_type):
+
+        if data is None:
+            return data
+
+        if data_type in self.basic_types:
+            try:
+                return eval(data_type)(data)
+            except ValueError as err:
+                raise SerializationError("Unable to serialize value: '{0}' as type: {1}".format(data, data_type))
+
+        if data_type in self.serialize_type:
+            return self.serialize_type[data_type](data)
+
+        iter_type = data_type[0] + data_type[-1]
+        if iter_type in self.serialize_type:
+            return self.serialize_type[iter_type](data, data_type[1:-1])
+
+        return self.serialize_object(data)
+
+    def serialize_object(self, cmplx_obj):
 
         serialized = Serialized(cmplx_obj)
         return serialized()
@@ -72,25 +96,16 @@ class Serialized(object):
         return str(attr)
 
     def serialize_iter(self, attr, iter_type):
-
-        if iter_type in ['str','int']:
-            return attr
-
-        if iter_type in self.serialize_type:
-            return [self.serialize_type[iter_type](i) for i in attr]
-
-        return [self.serilize_object(i) for i in attr]
+        return [self._serialize_data(i, iter_type) for i in attr]
 
     def serialize_dict(self, attr, dict_type):
+        return {str(x):self._serialize_data(attr[x], dict_type) for x in attr}
 
-        if dict_type in ['str','int']:
-            parse = eval(dict_type)
-            return {str(x):parse(attr[x]) for x in attr}
+    def serialize_duration(self, attr):
+        pass
 
-        if dict_type in self.serialize_type:
-            return {str(x):self.serialize_type[dict_type](attr[x]) for x in attr}
-
-        return {str(x):self.serilize_object(attr[x]) for x in attr} 
+    def serialize_time(self, attr):
+        pass
 
 
 class Deserialized(object):
@@ -99,9 +114,8 @@ class Deserialized(object):
         self.response = self.unpack_response(response_obj)
 
         self.deserialize_type = {
-            'str':self.deserialize_str,
             'datetime':self.deserialize_datetime,
-            'duration':self.deserialize_int,
+            'duration':self.deserialize_duration,
             'time':self.deserialize_time,
             '[]':self.deserialize_iter,
             '{}':self.deserialize_dict
@@ -122,7 +136,7 @@ class Deserialized(object):
 
         return response_obj
 
-    def deserialize_data(attr, data, data_type):
+    def _deserialize_data(attr, data, data_type):
         if data is None or data_type in ['str','int','bool']:
             return data
 
@@ -152,7 +166,7 @@ class Deserialized(object):
             attr_type = response.headers_map[attr]['type']
             raw_value = raw_data.headers.get(response.attributes_map[attr]['name'])
 
-            value = self.deserialize_data(attr, raw_value, attr_type) 
+            value = self._deserialize_data(attr, raw_value, attr_type) 
             setattr(response, attr, value)
 
         return response

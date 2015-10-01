@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -23,3 +23,9 @@
 # THE SOFTWARE.
 #
 #--------------------------------------------------------------------------
+
+class RuntimeException(Exception):
+    pass
+
+class SerializationError(RuntimeException):
+    pass

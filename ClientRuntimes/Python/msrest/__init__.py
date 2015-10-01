@@ -24,4 +24,4 @@
 #
 #--------------------------------------------------------------------------
 
-from .serialization import Serializer
+from .serialization import Serialized
