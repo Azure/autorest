@@ -88,12 +88,8 @@ class Serialized(object):
         return self.serialize_object(data)
 
     def serialize_object(self, cmplx_obj):
-
         serialized = Serialized(cmplx_obj)
         return serialized()
-
-    def serialize_time(self, attr):
-        return str(attr)
 
     def serialize_iter(self, attr, iter_type):
         return [self._serialize_data(i, iter_type) for i in attr]
