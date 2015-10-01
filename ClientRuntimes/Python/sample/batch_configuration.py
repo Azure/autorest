@@ -1,0 +1,5 @@
+
+
+class BatchConfiguration(Configuration):
+
+    pass
