@@ -7,10 +7,10 @@ class BatchOperationResponse(HTTPResponse):
         super(BatchOperationResponse, self).__init__()
 
         self.headers_map.update({
-            'client_request_id': {'name': 'client-request-id', 'type':'str'},
-            'data_service_id': {'name': 'dataserviceid', 'type':'str'},
-            'e_tag': {'name': 'etag', 'type':'str'},
-            'last_modified': {'name': 'last-modified', 'type':'datetime'}
+            'client_request_id': {'key': 'client-request-id', 'type':'str'},
+            'data_service_id': {'key': 'dataserviceid', 'type':'str'},
+            'e_tag': {'key': 'etag', 'type':'str'},
+            'last_modified': {'key': 'last-modified', 'type':'datetime'}
         })
 
         self.client_request_id = None
