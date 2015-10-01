@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -23,3 +23,21 @@
 # THE SOFTWARE.
 #
 #--------------------------------------------------------------------------
+
+class ClientException(Exception):
+    pass
+
+class SerializationError(ClientException):
+    pass
+
+class DeserializationError(ClientException):
+    pass
+
+class InvalidOperationError(ClientException):
+    pass
+
+class InvalidHookError(ClientException):
+    pass
+
+class ResponseStatusError(ClientException):
+    pass

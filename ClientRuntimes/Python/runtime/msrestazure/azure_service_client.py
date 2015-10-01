@@ -24,22 +24,36 @@
 #
 #--------------------------------------------------------------------------
 
-class HTTPResponse(object):
-    
-    def __init__(self):
+from ..msrest import ServiceClient
+from .azure_configuration import AzureConfiguration
 
-        self.headers_map = {}
-        self.attributes_map = {
-            'status_code': {'name':'status_code', 'type':'str'}
-        }
-        self.body_map = {}
+class AzureServiceClient(ServiceClient):
 
-        self._status_code
+    def __init__(self, creds, config):
+        """
+        Create service client.
 
-    @property
-    def status_code(self):
-        return self._status_code
+        :Args:
+            - config (`.Configuration`): Service configuration.
+            - creds (`.Authentication`): Authenticated credentials.
 
-    @status_code.setter
-    def status_code(self, value):
-        self._status_code = value
+        """
+        if not config:
+            config = AzureConfiguration()
+
+        if not isinstance(config, AzureConfiguration):
+            raise TypeError("AzureServiceClient must use AzureConfiguration")
+
+        
+
+        super(AzureServiceClient, self).__init__(creds, config)
+
+
+class AzureChinaServiceClient(AzureServiceClient):
+
+    def __init__(self, creds, config):
+
+        super(AzureChinaServiceClient, self).__init__(creds, config)
+
+        self.config.auth_endpoint = "login.chinacloudapi.cn/"
+        self.resource = "https://management.core.chinacloudapi.cn/"

@@ -24,31 +24,23 @@
 #
 #--------------------------------------------------------------------------
 
-import requests
+class ClientPipelineHook(object):
+    
+    def __init__(self, overwrite=False):
+        self.precalls = []
+        self.postcalls = []
+        self.overwrite_call = overwrite
 
-"""
-Wrappers for Resuests unprepared request objects
-"""
+    def __call__(self, func, *args, **kwargs):
+        result = None
 
-def get():
-    pass
+        for call in self.precalls:
+            result = call(result=result, *args, **kwargs)
 
-def put():
-    pass
+        if not self.overwrite_call:
+            result = func(*args, **kwargs)
 
-def post():
-    pass
+        for call in self.postcalls:
+            result = call(result=result, *args, **kwargs)
 
-def head():
-    pass
-
-def delete():
-    pass
-
-def patch():
-    pass
-
-def merge():
-    pass
-
-
+        return result

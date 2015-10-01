@@ -1,5 +1,10 @@
+﻿
+from runtime.msrestazure import AzureConfiguration
+from runtime.msrestazure.aad import (
+    UserPassCredentials,
+    InteractiveCredentials,
+    ServicePrincipalCredentials,
+    SharedKeyCredentials)
 
-from clientruntime.msrestazure.configuration import Configuration
-from clientruntime.msrestazure.aad import UserPassCredentials
-
-from batch_client import BatchClient
+from .batch_client import BatchClient
+from .batch_exception import BatchException

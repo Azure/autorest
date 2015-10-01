@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -23,3 +23,7 @@
 # THE SOFTWARE.
 #
 #--------------------------------------------------------------------------
+
+
+from .azure_configuration import AzureConfiguration
+from .azure_service_client import AzureServiceClient

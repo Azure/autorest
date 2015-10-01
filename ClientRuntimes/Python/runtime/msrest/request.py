@@ -24,21 +24,33 @@
 #
 #--------------------------------------------------------------------------
 
-class ServiceClient(object):
+import requests
+import json
 
-    def __init__(self, config, creds):
-        """
-        Create service client.
+"""
+Wrappers for Resuests unprepared request objects
+"""
 
-        :Args:
-            - config (`.Configuration`): Service configuration.
-            - creds (`.Authentication`): Authenticated credentials.
+class ClientRequest(requests.Request):
 
-        """
-        pass
+    def __init__(self, config):
 
-    def add_hook(self, event, hook):
-        pass
+        super(ClientRequest, self).__init__()
+
+        self.timeout = config.timeout
+        self.allow_redirects = config.allow_redirects
+        self.verify = config.verify
+        self.cert = config.cert
 
     def add_header(self, header, value):
-        pass
+        self.headers[header] = value
+
+    def add_headers(self, headers):
+        for key, value in headers.items():
+            self.add_header(key, value)
+
+    def add_content(self, data):
+        self.data = json.dumps(data())
+        self.headers['Content-Length'] = len(self.data)
+
+

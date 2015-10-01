@@ -24,12 +24,35 @@
 #
 #--------------------------------------------------------------------------
 
+from requests.packages.urllib3 import Retry
 
-class Authentication(object):
+class ClientRetryPolicy(object):
+
+    def __init__(self):
+        self.policy = Retry()
+        self.policy.total = 10
+        self.policy.connect = 3
+        self.policy.backoff_factor = 0.8
+        self.policy.BACKOFF_MAX = 90
+
+    @property
+    def max_retries(self):
+        return self.policy.total
+
+    @max_retries.setter
+    def max_retries(self, value):
+        self.policy.total = value
+
+    @property
+    def connect_retries(self):
+        return self.policy.connect
+
+    @max_retries.setter
+    def connect_retries(self, value):
+        self.policy.connect = value
+
+class ClientProxyManager(object):
     pass
 
-class BasicAuthentication(Authentication):
-    pass
-
-class TokenAuthentication(Authentication):
+class ClientRedirectHandler(object):
     pass
