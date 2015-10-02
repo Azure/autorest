@@ -1,7 +1,3 @@
-/// <reference path="../typings/tsd.d.ts" />
-// TODO: Ask Dan how to best handle the reference above (and whether to just check tsd.json).   It doesn't quite seem to work.
-// But shouldn't we really just get rid of the Node stream dependency completley, to make the generated code universal (work on client too)?
-
 /**
  * REST request options
  *  
