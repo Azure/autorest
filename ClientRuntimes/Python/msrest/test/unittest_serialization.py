@@ -25,6 +25,7 @@
 #--------------------------------------------------------------------------
 
 import sys
+import json
 
 try:
     import unittest2 as unittest
@@ -420,3 +421,124 @@ class TestRuntimeDeerialized(unittest.TestCase):
 
         self.assertFalse(hasattr(response, 'attr_a'))
         self.assertIsInstance(response, self.TestObj)
+
+    def test_attr_int(self):
+        """
+        Test deserializing an object with Int attributes.
+        """
+        response_data = mock.create_autospec(Response)
+        response_data.status_code = 200
+        response_data.headers = {'client-request-id':"123", 'etag':456.3}
+
+        deserializer = Deserialized(self.TestObj, response_data)
+        response = deserializer(None)
+
+        self.assertEqual(response.status_code, "200")
+        self.assertEqual(response.client_request_id, "123")
+        self.assertEqual(response.e_tag, "456.3")
+
+        response = deserializer(json.dumps({'AttrB':'1234'}))
+        self.assertTrue(hasattr(response, 'attr_b'))
+        self.assertEqual(response.attr_b, 1234)
+
+        with self.assertRaises(DeserializationError):
+            response = deserializer(json.dumps({'AttrB':'NotANumber'}))
+
+    def test_attr_str(self):
+        """
+        Test deserializing an object with Str attributes.
+        """
+        response_data = mock.create_autospec(Response)
+        response_data.status_code = 200
+        response_data.headers = {'client-request-id': 'a', 'etag': 'b'}
+
+        deserializer = Deserialized(self.TestObj, response_data)
+        response = deserializer(json.dumps({'id':'InterestingValue'}))
+
+        self.assertTrue(hasattr(response, 'attr_a'))
+        self.assertEqual(response.attr_a, 'InterestingValue')
+
+        response = deserializer(json.dumps({'id':1234}))
+        self.assertEqual(response.attr_a, '1234')
+
+        response = deserializer(json.dumps({'id':list()}))
+        self.assertEqual(response.attr_a, '[]')
+
+        response = deserializer(json.dumps({'id':None}))
+        self.assertEqual(response.attr_a, None)
+
+    def test_attr_bool(self):
+        """
+        Test deserializing an object with bool attributes.
+        """
+        response_data = mock.create_autospec(Response)
+        response_data.status_code = 200
+        response_data.headers = {'client-request-id': 'a', 'etag': 'b'}
+
+        deserializer = Deserialized(self.TestObj, response_data)
+        response = deserializer(json.dumps({'Key_C':True}))
+
+        self.assertTrue(hasattr(response, 'attr_c'))
+        self.assertEqual(response.attr_c, True)
+
+        response = deserializer(json.dumps({'Key_C':[]}))
+        self.assertEqual(response.attr_c, False)
+
+        response = deserializer(json.dumps({'Key_C':0}))
+        self.assertEqual(response.attr_c, False)
+
+        response = deserializer(json.dumps({'Key_C':"Value"}))
+        self.assertEqual(response.attr_c, True)
+
+    def test_attr_list_simple(self):
+        """
+        Test deserializing an object with simple-typed list attributes
+        """
+        response_data = mock.create_autospec(Response)
+        response_data.status_code = 200
+        response_data.headers = {'client-request-id': 'a', 'etag': 'b'}
+
+        deserializer = Deserialized(self.TestObj, response_data)
+        data = {'AttrD': []}
+        response = deserializer(json.dumps(data))
+        self.assertEqual(response.attr_d, [])
+
+        data['AttrD'] = [1,2,3]
+        response = deserializer(json.dumps(data))
+        self.assertEqual(response.attr_d, [1,2,3])
+
+        data['AttrD'] = ["1","2","3"]
+        response = deserializer(json.dumps(data))
+        self.assertEqual(response.attr_d, [1,2,3])
+
+        data['AttrD'] = ["test","test2","test3"]
+        with self.assertRaises(DeserializationError):
+            response = deserializer(json.dumps(data))
+        
+        data['AttrD'] = "NotAList"
+        with self.assertRaises(DeserializationError):
+            response = deserializer(json.dumps(data))
+
+    def test_attr_list_complex(self):
+        """
+        Test deserializing an object with a list of complex objects as an attribute.
+        """
+        class ListObj(object):
+            attribute_map = {"abc":{"key":"ABC", "type":"int"}}
+
+        class CmplxTestObj(object):
+
+            def __init__(self):
+                self.body_map = {'attr_a': {'key':'id', 'type':'[ListObj]'}}
+
+        response_data = mock.create_autospec(Response)
+        response_data.status_code = 200
+        response_data.headers = {'client-request-id': 'a', 'etag': 'b'}
+
+        deserializer = Deserialized(CmplxTestObj)
+        data = {"id":[{"ABC": "123"}]}
+
+        deserializer.dependencies['ListObj'] = ListObj
+        response = deserializer(json.dumps(data))
+        self.assertIsInstance(response.attr_a[0], ListObj)
+        self.assertEqual(response.attr_a[0].abc, 123)

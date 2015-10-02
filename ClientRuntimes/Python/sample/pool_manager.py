@@ -119,7 +119,7 @@ class PoolManager(object):
             response = self._ops.delete(**rest_params)
 
             deserialize = Deserialized(BatchPoolDeleteResponse, response)
-            deserialized = deserialize(None)
+            deserialized = deserialize()
             
         except:
             raise #TODO: exception handling
@@ -136,7 +136,7 @@ class PoolManager(object):
             response = self._ops.disable_auto_scale(**rest_params)
 
             deserialize = Deserialized(BatchPoolDisableAutoScaleResponse, response)
-            dersialized = deserialize(None)
+            dersialized = deserialize()
             
         except:
             raise #TODO: exception handling
@@ -162,7 +162,7 @@ class PoolManager(object):
             response = self._ops.enable_auto_scale(content, **rest_params)
 
             deserialize = Deserialized(BatchPoolEnableAutoScaleResponse, response)
-            dersialized = deserialize(None)
+            dersialized = deserialize()
             
         except:
             raise #TODO: exception handling
@@ -188,7 +188,7 @@ class PoolManager(object):
             response = self._ops.evaluate_auto_scale(content, **rest_params)
 
             deserialize = Deserialized(BatchPoolEvaluateAutoScaleResponse, response)
-            dersialized = deserialize(None)
+            dersialized = deserialize()
             
         except:
             raise #TODO: exception handling
@@ -307,7 +307,7 @@ class PoolManager(object):
             response = self._ops.patch(content, **rest_params)
 
             deserialize = Deserialized(BatchPoolPatchResponse, response)
-            dersialized = deserialize(None)
+            dersialized = deserialize()
 
         except:
             raise #TODO: exception handling
@@ -330,7 +330,7 @@ class PoolManager(object):
             response = self._ops.resize(content, **rest_params)
 
             deserialize = Deserialized(BatchPoolResizeResponse, response)
-            dersialized = deserialize(None)
+            dersialized = deserialize()
 
         except:
             raise #TODO: exception handling
@@ -348,7 +348,7 @@ class PoolManager(object):
             response = self._ops.stop_resize(**rest_params)
 
             deserialize = Deserialized(BatchPoolStopResizeResponse, response)
-            dersialized = deserialize(None)
+            dersialized = deserialize()
 
         except:
             raise #TODO: exception handling
@@ -416,7 +416,7 @@ class PoolManager(object):
             response = self._ops.update_properties(content, **rest_params)
 
             deserialize = Deserialized(BatchPoolUpdatePropertiesResponse, response)
-            dersialized = deserialize(None)
+            dersialized = deserialize()
 
         except:
             raise #TODO: exception handling
@@ -442,7 +442,7 @@ class PoolManager(object):
             response = self._ops.upgrade_os(content, **rest_params)
 
             deserialize = Deserialized(BatchPoolUpgradeOSResponse, response)
-            dersialized = deserialize(None)
+            dersialized = deserialize()
 
         except:
             raise #TODO: exception handling
