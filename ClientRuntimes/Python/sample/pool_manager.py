@@ -100,7 +100,7 @@ class PoolManager(object):
         try:
             response = self._ops.add(content)
        
-            deserialize = Deserialized(BatchPoolAddResponse)
+            deserialize = Deserialized(BatchPoolAddResponse, response)
             deserialized = deserialize(response.content)
             
         except:
@@ -118,7 +118,7 @@ class PoolManager(object):
         try:
             response = self._ops.delete(**rest_params)
 
-            deserialize = Deserialized(BatchPoolDeleteResponse)
+            deserialize = Deserialized(BatchPoolDeleteResponse, response)
             deserialized = deserialize(None)
             
         except:
@@ -135,7 +135,7 @@ class PoolManager(object):
         try:
             response = self._ops.disable_auto_scale(**rest_params)
 
-            deserialize = Deserialized(BatchPoolDisableAutoScaleResponse)
+            deserialize = Deserialized(BatchPoolDisableAutoScaleResponse, response)
             dersialized = deserialize(None)
             
         except:
@@ -161,7 +161,7 @@ class PoolManager(object):
         try:
             response = self._ops.enable_auto_scale(content, **rest_params)
 
-            deserialize = Deserialized(BatchPoolEnableAutoScaleResponse)
+            deserialize = Deserialized(BatchPoolEnableAutoScaleResponse, response)
             dersialized = deserialize(None)
             
         except:
@@ -187,7 +187,7 @@ class PoolManager(object):
         try:
             response = self._ops.evaluate_auto_scale(content, **rest_params)
 
-            deserialize = Deserialized(BatchPoolEvaluateAutoScaleResponse)
+            deserialize = Deserialized(BatchPoolEvaluateAutoScaleResponse, response)
             dersialized = deserialize(None)
             
         except:
@@ -205,7 +205,7 @@ class PoolManager(object):
         try:
             response = self._ops.get(**rest_params)
 
-            deserialize = Deserialized(BatchPoolGetResponse)
+            deserialize = Deserialized(BatchPoolGetResponse, response)
             dersialized = deserialize(response.content)
             
         except:
@@ -219,7 +219,7 @@ class PoolManager(object):
         try:
             response = self._ops.list(**rest_params)
 
-            deserialize = Deserialized(BatchPoolListResponse)
+            deserialize = Deserialized(BatchPoolListResponse, response)
             dersialized = deserialize(response.content)
             
         except:
@@ -237,7 +237,7 @@ class PoolManager(object):
         try:
             response = self._ops.list_next(**rest_params)
 
-            deserialize = Deserialized(BatchPoolListResponse)
+            deserialize = Deserialized(BatchPoolListResponse, response)
             dersialized = deserialize(response.content)
 
         except:
@@ -306,7 +306,7 @@ class PoolManager(object):
         try:
             response = self._ops.patch(content, **rest_params)
 
-            deserialize = Deserialized(BatchPoolPatchResponse)
+            deserialize = Deserialized(BatchPoolPatchResponse, response)
             dersialized = deserialize(None)
 
         except:
@@ -329,7 +329,7 @@ class PoolManager(object):
         try:
             response = self._ops.resize(content, **rest_params)
 
-            deserialize = Deserialized(BatchPoolResizeResponse)
+            deserialize = Deserialized(BatchPoolResizeResponse, response)
             dersialized = deserialize(None)
 
         except:
@@ -347,7 +347,7 @@ class PoolManager(object):
         try:
             response = self._ops.stop_resize(**rest_params)
 
-            deserialize = Deserialized(BatchPoolStopResizeResponse)
+            deserialize = Deserialized(BatchPoolStopResizeResponse, response)
             dersialized = deserialize(None)
 
         except:
@@ -415,7 +415,7 @@ class PoolManager(object):
         try:
             response = self._ops.update_properties(content, **rest_params)
 
-            deserialize = Deserialized(BatchPoolUpdatePropertiesResponse)
+            deserialize = Deserialized(BatchPoolUpdatePropertiesResponse, response)
             dersialized = deserialize(None)
 
         except:
@@ -441,7 +441,7 @@ class PoolManager(object):
         try:
             response = self._ops.upgrade_os(content, **rest_params)
 
-            deserialize = Deserialized(BatchPoolUpgradeOSResponse)
+            deserialize = Deserialized(BatchPoolUpgradeOSResponse, response)
             dersialized = deserialize(None)
 
         except:

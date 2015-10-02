@@ -29,3 +29,6 @@ class RuntimeException(Exception):
 
 class SerializationError(RuntimeException):
     pass
+
+class DeserializationError(RuntimeException):
+    pass

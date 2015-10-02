@@ -36,8 +36,10 @@ try:
 except ImportError:
     import mock
 
-from msrest import Serialized
-from msrest.exceptions import SerializationError
+from msrest import Serialized, Deserialized
+from msrest.exceptions import SerializationError, DeserializationError
+
+from requests import Response
 
 class TestRuntimeSerialized(unittest.TestCase):
 
@@ -312,3 +314,109 @@ class TestRuntimeSerialized(unittest.TestCase):
 
         with self.assertRaises(SerializationError):
             serialized.attr_e
+
+
+class TestRuntimeDeerialized(unittest.TestCase):
+
+    class TestObj(object):
+
+        def __init__(self):
+
+            self.body_map = {
+                'attr_a': {'key':'id', 'type':'str'},
+                'attr_b': {'key':'AttrB', 'type':'int'},
+                'attr_c': {'key':'Key_C', 'type': 'bool'},
+                'attr_d': {'key':'AttrD', 'type':'[int]'},
+                'attr_e': {'key':'AttrE', 'type': '{float}'}
+                #TODO: Add more here as more types are defined in serialized
+                }
+
+            self.headers_map = {
+                'client_request_id': {'key': 'client-request-id', 'type':'str'},
+                'e_tag': {'key': 'etag', 'type':'str'},
+                }
+
+            self.attributes_map = {
+                'status_code': {'key':'status_code', 'type':'str'}
+                }
+
+    def test_obj_with_no_attr(self):
+        """
+        Test deserializing an object with no attributes.
+        """
+        class EmptyResponse(object):
+            pass
+
+        response_data = mock.create_autospec(Response)
+
+        with self.assertRaises(DeserializationError):
+            deserializer = Deserialized(EmptyResponse, response_data)
+
+        class BetterEmptyResponse(object):
+            attributes_map = {}
+            headers_map = {}
+            body_map = {}
+
+        deserializer = Deserialized(BetterEmptyResponse, response_data)
+        derserialized = deserializer(None)
+
+        self.assertIsInstance(derserialized, BetterEmptyResponse)
+
+    def test_obj_with_malformed_map(self):
+        """
+        Test deserializing an object with a malformed attributes_map.
+        """
+        response_data = mock.create_autospec(Response)
+
+        class BadResponse(object):
+            attributes_map = None
+
+        with self.assertRaises(DeserializationError):
+            deserializer = Deserialized(BadResponse, response_data)
+
+        class BadResponse(object):
+            attributes_map = {"attr":"val"}
+
+        with self.assertRaises(DeserializationError):
+            deserializer = Deserialized(BadResponse, response_data)
+
+        class BadResponse(object):
+            attributes_map = {"attr":{"val":1}}
+
+        with self.assertRaises(DeserializationError):
+            deserializer = Deserialized(BadResponse, response_data)
+
+    def test_obj_with_mismatched_map(self):
+        """
+        Test deserializing an object with mismatching attributes and map.
+        """
+        response_data = mock.create_autospec(Response)
+
+        class BadResponse(object):
+            attributes_map =  {"abc":{"key":"ABC", "type":"str"}}
+
+        with self.assertRaises(DeserializationError):
+            deserializer = Deserialized(BadResponse, response_data)
+
+    def test_attr_none(self):
+        """
+        Test serializing an object with None attributes.
+        """
+        response_data = mock.create_autospec(Response)
+
+        with self.assertRaises(DeserializationError):
+            deserializer = Deserialized(self.TestObj, response_data)
+            self.assertIsNone(deserializer.attr_a)
+
+        response_data.status_code = None
+        response_data.headers = {'client-request-id':None, 'etag':None}
+
+        deserializer = Deserialized(self.TestObj, response_data)
+        response = deserializer(None)
+
+        self.assertIsNone(response.status_code)
+        self.assertIsNone(response.client_request_id)
+        self.assertIsNone(response.e_tag)
+
+        self.assertFalse(hasattr(response, 'attr_a'))
+        self.assertIsInstance(response, self.TestObj)

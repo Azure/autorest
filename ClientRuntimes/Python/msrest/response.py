@@ -30,7 +30,7 @@ class HTTPResponse(object):
 
         self.headers_map = {}
         self.attributes_map = {
-            'status_code': {'name':'status_code', 'type':'str'}
+            'status_code': {'key':'status_code', 'type':'str'}
         }
         self.body_map = {}
 

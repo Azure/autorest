@@ -27,7 +27,7 @@
 from response import HTTPResponse
 import json
 
-from .exceptions import SerializationError
+from .exceptions import SerializationError, DeserializationError
 
 class Serialized(object):
 
@@ -106,8 +106,15 @@ class Serialized(object):
 
 class Deserialized(object):
 
-    def __init__(self, response_obj):
-        self.response = self.unpack_response(response_obj)
+    basic_types = ['str', 'int', 'bool', 'float']
+
+    def __init__(self, response_obj, response_data):
+
+        try:
+            self.response = self.unpack_response(response_obj, response_data)
+
+        except (AttributeError, TypeError, KeyError) as err:
+            raise DeserializationError("Unable to deserialize to type: '{0}' because: '{1}'.".format(response_obj, err))
 
         self.deserialize_type = {
             'datetime':self.deserialize_datetime,
@@ -123,17 +130,17 @@ class Deserialized(object):
         if raw and self.response.body_map:
             body = json.loads(raw)
 
-        for attr in self.response.body_map:
-            attr_type = self.response.body_map[attr]['type']
-            raw_value = body.get(self.response.body_map[attr]['name'])
+            for attr in self.response.body_map:
+                attr_type = self.response.body_map[attr]['type']
+                raw_value = body.get(self.response.body_map[attr]['key'])
 
-            value = self.deserialize_data(attr, raw_value, attr_type) 
-            setattr(self.response, attr, value)
+                value = self.deserialize_data(attr, raw_value, attr_type) 
+                setattr(self.response, attr, value)
 
-        return response_obj
+        return self.response
 
-    def _deserialize_data(attr, data, data_type):
-        if data is None or data_type in ['str','int','bool']:
+    def _deserialize_data(self, attr, data, data_type):
+        if data is None or data_type in self.basic_types:
             return data
 
         if data_type in self.deserialize_type:
@@ -148,23 +155,50 @@ class Deserialized(object):
             deserialize_obj = Deserialized(eval(data_type))
             return deserialize_obj(raw_data)
 
-    def unpack_response(response_type, raw_data):
+    def unpack_response(self, response_type, raw_data):
         response = response_type()
 
         for attr in response.attributes_map:
             attr_type = response.attributes_map[attr]['type']
-            raw_value = getattr(raw_data, response.attributes_map[attr]['name'])
+            attr_name = response.attributes_map[attr]['key']
 
-            value = self.deserialize_data(attr, raw_value, attr_type) 
-            setattr(response, attr, value)
+            try:
+                raw_value = getattr(raw_data, attr_name)
 
-        for attr in self.headers_map:
+                value = self._deserialize_data(attr, raw_value, attr_type) 
+                setattr(response, attr, value)
+
+            except AttributeError as err:
+                raise DeserializationError("Unable to deserialize response data: {0}".format(err))
+
+        for attr in response.headers_map:
             attr_type = response.headers_map[attr]['type']
-            raw_value = raw_data.headers.get(response.attributes_map[attr]['name'])
+            attr_name = response.headers_map[attr]['key']
 
-            value = self._deserialize_data(attr, raw_value, attr_type) 
-            setattr(response, attr, value)
+            try:
+                raw_value = raw_data.headers[attr_name]
+
+                value = self._deserialize_data(attr, raw_value, attr_type) 
+                setattr(response, attr, value)
+
+            except KeyError as err:
+                raise DeserializationError("Unable to deserialize response data: {0}".format(err))
 
         return response
+
+    def deserialize_iter(self, attr, iter_type):
+        return [self._deserialize_data(i, iter_type) for i in attr]
+
+    def deserialize_dict(self, attr, dict_type):
+        return {str(x):self._deserialize_data(attr[x], dict_type) for x in attr}
+
+    def deserialize_duration(self, attr):
+        pass
+
+    def deserialize_time(self, attr):
+        pass
+
+    def deserialize_datetime(self, attr):
+        pass
 
 
