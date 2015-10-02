@@ -7,8 +7,8 @@
 @Header(" * ")
 */
 @EmptyLine
-/// <reference path="../typings/tsd.d.ts" />
 import { RequestOptions, WebResource } from "../node_modules/ms-rest/lib";
+import * as stream from "stream";
 @if (Model.ModelTypes.Any()) {
 @:import * as models from "../models";
 }

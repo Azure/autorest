@@ -9,12 +9,12 @@
 
 /**
 @if (!String.IsNullOrEmpty(Model.Summary)) {
-    @WrapComment(" * ", "@summary " + Model.Summary)@:
-    @: *
+@WrapComment(" * ", "@summary " + Model.Summary)@:
+@: *
 }
 @if (!String.IsNullOrEmpty(Model.Description)) {
-    @WrapComment(" * ", Model.Description)@:
-    @: *
+@WrapComment(" * ", Model.Description)@:
+@: *
 }
 @foreach (var parameter in Model.DocumentationParameters) {
     @MethodTemplateModel.ConstructParameterDocumentation(

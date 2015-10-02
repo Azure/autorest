@@ -7,12 +7,11 @@
 @Header(" * ")
  */
 @EmptyLine
-/// <reference path="./typings/tsd.d.ts" />
 import { ServiceClientOptions, RequestOptions, WebResource } from "./node_modules/ms-rest/lib";
-@if (Model.ModelTypes.Any())
+@if (Model.MethodTemplateModels.Any())
 {
-@EmptyLine
 @:import * as models from "./models";
+@:import * as stream from "stream";
 }
 @if (Model.MethodGroups.Any()) {
 @:import * as operations from "./operations";
@@ -51,5 +50,9 @@ export default class @(Model.Name) {
     {
     @:@(methodGroup.MethodGroupName): operations.@(methodGroup.MethodGroupType);
     }
+    }
+    @foreach (var method in Model.MethodTemplateModels) {
+    @EmptyLine
+    @:@(Include(new MethodTemplateTS(), method))
     }
 }
