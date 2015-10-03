@@ -20,6 +20,19 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class ArrayWrapper
     {
         /// <summary>
+        /// Initializes a new instance of the ArrayWrapper class.
+        /// </summary>
+        public ArrayWrapper() { }
+
+        /// <summary>
+        /// Initializes a new instance of the ArrayWrapper class.
+        /// </summary>
+        public ArrayWrapper(IList<string> array = default(IList<string>))
+        {
+            Array = array;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "array")]
         public IList<string> Array { get; set; }

@@ -20,6 +20,19 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class Siamese : Cat
     {
         /// <summary>
+        /// Initializes a new instance of the Siamese class.
+        /// </summary>
+        public Siamese() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Siamese class.
+        /// </summary>
+        public Siamese(string breed = default(string))
+        {
+            Breed = breed;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "breed")]
         public string Breed { get; set; }

@@ -21,6 +21,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     public partial class OperationResultError
     {
         /// <summary>
+        /// Initializes a new instance of the OperationResultError class.
+        /// </summary>
+        public OperationResultError() { }
+
+        /// <summary>
+        /// Initializes a new instance of the OperationResultError class.
+        /// </summary>
+        public OperationResultError(int? code = default(int?), string message = default(string))
+        {
+            Code = code;
+            Message = message;
+        }
+
+        /// <summary>
         /// The error code for an operation failure
         /// </summary>
         [JsonProperty(PropertyName = "code")]

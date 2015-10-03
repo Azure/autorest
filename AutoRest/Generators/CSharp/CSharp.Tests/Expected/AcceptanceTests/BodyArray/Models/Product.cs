@@ -20,6 +20,20 @@ namespace Fixtures.AcceptanceTestsBodyArray.Models
     public partial class Product
     {
         /// <summary>
+        /// Initializes a new instance of the Product class.
+        /// </summary>
+        public Product() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Product class.
+        /// </summary>
+        public Product(int? integer = default(int?), string stringProperty = default(string))
+        {
+            Integer = integer;
+            StringProperty = stringProperty;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "integer")]
         public int? Integer { get; set; }

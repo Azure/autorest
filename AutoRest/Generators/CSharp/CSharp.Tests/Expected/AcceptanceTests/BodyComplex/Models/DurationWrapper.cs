@@ -20,6 +20,19 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class DurationWrapper
     {
         /// <summary>
+        /// Initializes a new instance of the DurationWrapper class.
+        /// </summary>
+        public DurationWrapper() { }
+
+        /// <summary>
+        /// Initializes a new instance of the DurationWrapper class.
+        /// </summary>
+        public DurationWrapper(TimeSpan? field = default(TimeSpan?))
+        {
+            Field = field;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "field")]
         public TimeSpan? Field { get; set; }

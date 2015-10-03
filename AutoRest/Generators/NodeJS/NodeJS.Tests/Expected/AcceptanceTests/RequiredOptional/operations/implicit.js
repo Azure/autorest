@@ -301,7 +301,7 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (queryParameter !== null) {
+  if (queryParameter !== undefined && queryParameter !== null) {
     httpRequest.headers['queryParameter'] = queryParameter;
   }
   if(options) {

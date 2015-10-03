@@ -20,6 +20,19 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     public partial class D
     {
         /// <summary>
+        /// Initializes a new instance of the D class.
+        /// </summary>
+        public D() { }
+
+        /// <summary>
+        /// Initializes a new instance of the D class.
+        /// </summary>
+        public D(string httpStatusCode = default(string))
+        {
+            HttpStatusCode = httpStatusCode;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "httpStatusCode")]
         public string HttpStatusCode { get; set; }

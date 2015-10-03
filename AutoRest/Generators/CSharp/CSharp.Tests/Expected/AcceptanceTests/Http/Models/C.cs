@@ -20,6 +20,19 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     public partial class C
     {
         /// <summary>
+        /// Initializes a new instance of the C class.
+        /// </summary>
+        public C() { }
+
+        /// <summary>
+        /// Initializes a new instance of the C class.
+        /// </summary>
+        public C(string httpCode = default(string))
+        {
+            HttpCode = httpCode;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "httpCode")]
         public string HttpCode { get; set; }

@@ -21,6 +21,19 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class Sawshark : Shark
     {
         /// <summary>
+        /// Initializes a new instance of the Sawshark class.
+        /// </summary>
+        public Sawshark() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Sawshark class.
+        /// </summary>
+        public Sawshark(byte[] picture = default(byte[]))
+        {
+            Picture = picture;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "picture")]
         public byte[] Picture { get; set; }

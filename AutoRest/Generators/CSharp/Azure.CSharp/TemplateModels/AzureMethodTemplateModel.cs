@@ -24,8 +24,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             }
 
             ParameterTemplateModels.Clear();
+            LogicalParameterTemplateModels.Clear();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
-
+            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
             if (MethodGroupName != ServiceClient.Name)
             {
                 MethodGroupName = MethodGroupName + "Operations";
@@ -188,9 +189,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         private void AddQueryParametersToUri(string variableName, IndentedStringBuilder builder)
         {
             builder.AppendLine("List<string> queryParameters = new List<string>();");
-            if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
+            if (LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
             {
-                foreach (var queryParameter in ParameterTemplateModels
+                foreach (var queryParameter in LogicalParameters
                     .Where(p => p.Location == ParameterLocation.Query))
                 {
                     string queryParametersAddString =
@@ -225,7 +226,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
         private void ReplacePathParametersInUri(string variableName, IndentedStringBuilder builder)
         {
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
             {
                 string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));";
                 if (pathParameter.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))

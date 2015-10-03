@@ -86,6 +86,7 @@ var defaultAzureMappings = {
   'AcceptanceTests/Lro': '../../../TestServer/swagger/lro.json',
   'AcceptanceTests/Paging': '../../../TestServer/swagger/paging.json',
   'AcceptanceTests/AzureReport': '../../../TestServer/swagger/azure-report.json',
+  'AcceptanceTests/AzureParameterGrouping': '../../../TestServer/swagger/azure-parameter-grouping.json',
   'AcceptanceTests/ResourceFlattening': '../../../TestServer/swagger/resource-flattening.json',
   'AcceptanceTests/Head': '../../../TestServer/swagger/head.json',
   'AcceptanceTests/SubscriptionIdApiVersion': '../../../TestServer/swagger/subscriptionId-apiVersion.json',

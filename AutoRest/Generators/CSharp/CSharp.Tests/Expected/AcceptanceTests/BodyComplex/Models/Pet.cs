@@ -20,6 +20,20 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class Pet
     {
         /// <summary>
+        /// Initializes a new instance of the Pet class.
+        /// </summary>
+        public Pet() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Pet class.
+        /// </summary>
+        public Pet(int? id = default(int?), string name = default(string))
+        {
+            Id = id;
+            Name = name;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public int? Id { get; set; }

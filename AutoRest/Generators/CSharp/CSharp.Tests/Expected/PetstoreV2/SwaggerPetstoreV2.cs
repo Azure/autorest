@@ -734,8 +734,8 @@ namespace Fixtures.PetstoreV2
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("petId", petId);
                 tracingParameters.Add("apiKey", apiKey);
+                tracingParameters.Add("petId", petId);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "DeletePet", tracingParameters);
             }

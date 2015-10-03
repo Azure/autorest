@@ -20,6 +20,20 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class Datetimerfc1123Wrapper
     {
         /// <summary>
+        /// Initializes a new instance of the Datetimerfc1123Wrapper class.
+        /// </summary>
+        public Datetimerfc1123Wrapper() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Datetimerfc1123Wrapper class.
+        /// </summary>
+        public Datetimerfc1123Wrapper(DateTime? field = default(DateTime?), DateTime? now = default(DateTime?))
+        {
+            Field = field;
+            Now = now;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
         [JsonProperty(PropertyName = "field")]

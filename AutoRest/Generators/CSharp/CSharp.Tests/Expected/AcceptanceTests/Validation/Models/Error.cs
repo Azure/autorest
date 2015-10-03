@@ -20,6 +20,21 @@ namespace Fixtures.AcceptanceTestsValidation.Models
     public partial class Error
     {
         /// <summary>
+        /// Initializes a new instance of the Error class.
+        /// </summary>
+        public Error() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Error class.
+        /// </summary>
+        public Error(int? code = default(int?), string message = default(string), string fields = default(string))
+        {
+            Code = code;
+            Message = message;
+            Fields = fields;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "code")]
         public int? Code { get; set; }

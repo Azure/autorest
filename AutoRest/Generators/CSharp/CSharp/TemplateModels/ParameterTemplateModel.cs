@@ -31,5 +31,6 @@ namespace Microsoft.Rest.Generator.CSharp
                 return true;
             }
         }
+        
     }
 }

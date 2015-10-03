@@ -95,8 +95,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("localStringPath", localStringPath);
-                tracingParameters.Add("pathItemStringPath", pathItemStringPath);
                 tracingParameters.Add("localStringQuery", localStringQuery);
+                tracingParameters.Add("pathItemStringPath", pathItemStringPath);
                 tracingParameters.Add("pathItemStringQuery", pathItemStringQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetAllWithValues", tracingParameters);
@@ -229,8 +229,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("localStringPath", localStringPath);
-                tracingParameters.Add("pathItemStringPath", pathItemStringPath);
                 tracingParameters.Add("localStringQuery", localStringQuery);
+                tracingParameters.Add("pathItemStringPath", pathItemStringPath);
                 tracingParameters.Add("pathItemStringQuery", pathItemStringQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetGlobalQueryNull", tracingParameters);
@@ -362,8 +362,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("localStringPath", localStringPath);
-                tracingParameters.Add("pathItemStringPath", pathItemStringPath);
                 tracingParameters.Add("localStringQuery", localStringQuery);
+                tracingParameters.Add("pathItemStringPath", pathItemStringPath);
                 tracingParameters.Add("pathItemStringQuery", pathItemStringQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetGlobalAndLocalQueryNull", tracingParameters);
@@ -495,8 +495,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("localStringPath", localStringPath);
-                tracingParameters.Add("pathItemStringPath", pathItemStringPath);
                 tracingParameters.Add("localStringQuery", localStringQuery);
+                tracingParameters.Add("pathItemStringPath", pathItemStringPath);
                 tracingParameters.Add("pathItemStringQuery", pathItemStringQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetLocalPathItemQueryNull", tracingParameters);

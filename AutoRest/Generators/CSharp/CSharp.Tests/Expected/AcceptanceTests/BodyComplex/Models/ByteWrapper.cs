@@ -20,6 +20,19 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class ByteWrapper
     {
         /// <summary>
+        /// Initializes a new instance of the ByteWrapper class.
+        /// </summary>
+        public ByteWrapper() { }
+
+        /// <summary>
+        /// Initializes a new instance of the ByteWrapper class.
+        /// </summary>
+        public ByteWrapper(byte[] field = default(byte[]))
+        {
+            Field = field;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "field")]
         public byte[] Field { get; set; }

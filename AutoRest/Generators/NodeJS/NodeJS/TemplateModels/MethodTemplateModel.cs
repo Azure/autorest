@@ -22,7 +22,9 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             this.LoadFrom(source);
             ParameterTemplateModels = new List<ParameterTemplateModel>();
+            GroupedParameterTemplateModels = new List<ParameterTemplateModel>();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+
             ServiceClient = serviceClient;
             if (source.Group != null)
             {
@@ -38,7 +40,9 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public ServiceClient ServiceClient { get; set; }
 
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        protected List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+
+        protected List<ParameterTemplateModel> GroupedParameterTemplateModels { get; private set; }
 
         public IScopeProvider Scope
         {
@@ -424,7 +428,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             get 
             {
                 var builder = new IndentedStringBuilder("  ");
-                foreach (var parameter in ParameterTemplateModels)
+                foreach (var parameter in LogicalParameters)
                 {
                     if ((HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
                     {
@@ -511,7 +515,10 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// </summary>
         public ParameterTemplateModel RequestBody
         {
-            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
+            get
+            {
+                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;
+            }
         }
 
         /// <summary>
@@ -564,7 +571,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <returns>True if a query string is possible given the method parameters, otherwise false</returns>
         protected virtual bool HasQueryParameters()
         {
-            return ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query);
+            return LogicalParameters.Any(p => p.Location == ParameterLocation.Query);
         }
 
         /// <summary>
@@ -580,7 +587,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
 
             builder.AppendLine("var queryParameters = [];");
-            foreach (var queryParameter in ParameterTemplateModels
+            foreach (var queryParameter in LogicalParameters
                 .Where(p => p.Location == ParameterLocation.Query))
             {
                 var queryAddFormat = "queryParameters.push('{0}=' + encodeURIComponent({1}));";
@@ -616,7 +623,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 throw new ArgumentNullException("builder");
             }
 
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
             {
                 var pathReplaceFormat = "{0} = {0}.replace('{{{1}}}', encodeURIComponent({2}));";
                 if (pathParameter.SkipUrlEncoding())

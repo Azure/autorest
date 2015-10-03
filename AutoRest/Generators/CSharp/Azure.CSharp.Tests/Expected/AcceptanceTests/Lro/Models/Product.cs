@@ -21,6 +21,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     public partial class Product : Resource
     {
         /// <summary>
+        /// Initializes a new instance of the Product class.
+        /// </summary>
+        public Product() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Product class.
+        /// </summary>
+        public Product(string provisioningState = default(string), string provisioningStateValues = default(string))
+        {
+            ProvisioningState = provisioningState;
+            ProvisioningStateValues = provisioningStateValues;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "properties.provisioningState")]
         public string ProvisioningState { get; set; }

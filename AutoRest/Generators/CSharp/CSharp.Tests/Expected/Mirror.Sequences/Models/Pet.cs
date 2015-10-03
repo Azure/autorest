@@ -20,6 +20,22 @@ namespace Fixtures.MirrorSequences.Models
     public partial class Pet
     {
         /// <summary>
+        /// Initializes a new instance of the Pet class.
+        /// </summary>
+        public Pet() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Pet class.
+        /// </summary>
+        public Pet(long? id, string name, IList<PetStyle> styles = default(IList<PetStyle>), string tag = default(string))
+        {
+            Id = id;
+            Name = name;
+            Styles = styles;
+            Tag = tag;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public long? Id { get; set; }

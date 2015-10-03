@@ -20,6 +20,21 @@ namespace Fixtures.MirrorPolymorphic.Models
     public partial class Error2
     {
         /// <summary>
+        /// Initializes a new instance of the Error2 class.
+        /// </summary>
+        public Error2() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Error2 class.
+        /// </summary>
+        public Error2(int? code = default(int?), string message = default(string), string fields = default(string))
+        {
+            Code = code;
+            Message = message;
+            Fields = fields;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "code")]
         public int? Code { get; set; }

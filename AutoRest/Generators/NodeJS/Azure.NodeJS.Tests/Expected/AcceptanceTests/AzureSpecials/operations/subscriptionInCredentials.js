@@ -93,7 +93,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
@@ -201,7 +201,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
@@ -312,7 +312,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
@@ -419,7 +419,7 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
@@ -526,7 +526,7 @@ SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (options, 
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {

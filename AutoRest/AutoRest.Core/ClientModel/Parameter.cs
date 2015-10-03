@@ -70,8 +70,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets or sets the documentation.
         /// </summary>
         public string Documentation { get; set; }
-
-
+        
         /// <summary>
         /// Gets vendor extensions dictionary.
         /// </summary>
