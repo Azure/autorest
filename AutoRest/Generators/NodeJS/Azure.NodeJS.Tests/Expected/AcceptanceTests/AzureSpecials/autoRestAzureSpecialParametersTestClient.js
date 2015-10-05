@@ -73,6 +73,7 @@ function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, b
   this.apiVersionDefault = new operations.ApiVersionDefault(this);
   this.apiVersionLocal = new operations.ApiVersionLocal(this);
   this.skipUrlEncoding = new operations.SkipUrlEncoding(this);
+  this.header = new operations.Header(this);
   this._models = models;
 }
 

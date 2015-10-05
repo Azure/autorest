@@ -78,5 +78,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 
         ISkipUrlEncodingOperations SkipUrlEncoding { get; }
 
+        IHeaderOperations Header { get; }
+
     }
 }
