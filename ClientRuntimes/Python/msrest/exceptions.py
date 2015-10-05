@@ -24,11 +24,14 @@
 #
 #--------------------------------------------------------------------------
 
-class RuntimeException(Exception):
+class ClientException(Exception):
     pass
 
-class SerializationError(RuntimeException):
+class SerializationError(ClientException):
     pass
 
-class DeserializationError(RuntimeException):
+class DeserializationError(ClientException):
+    pass
+
+class InvalidOperationError(ClientException):
     pass
