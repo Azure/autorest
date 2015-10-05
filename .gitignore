@@ -231,6 +231,11 @@ docs/_build/
 # PyBuilder
 target/
 
+ClientRuntimes/Python/Python35-64-ENV/pip-selfcheck.json
+ClientRuntimes/Python/Python35-64-ENV/pyvenv.cfg
+ClientRuntimes/Python/Python35-64-ENV/Scripts/activate.bat
+ClientRuntimes/Python/Python35-64-ENV/Scripts/Activate.ps1
+ClientRuntimes/Python/Python35-64-ENV/Scripts/deactivate.bat
 
 #dnx installation
 dnx-clr-win-x86*/
