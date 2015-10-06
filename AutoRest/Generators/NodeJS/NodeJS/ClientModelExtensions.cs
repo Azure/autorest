@@ -260,6 +260,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 return "any";   // TODO: test this
             else if (primary == PrimaryType.ByteArray)
                 return "Buffer";
+            else if (primary == PrimaryType.Stream)
+                return "stream.Readable";
             else {
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
                     "Type '{0}' not implemented", primary));
