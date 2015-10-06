@@ -108,7 +108,11 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public bool ContainsTimeSpan
         {
-            get { return this.Methods.FirstOrDefault(m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.TimeSpan) != null) != null; }
+            get
+            {
+                return this.Methods.FirstOrDefault(
+                    m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.TimeSpan) != null) != null;
+            }
         }
     }
 }
