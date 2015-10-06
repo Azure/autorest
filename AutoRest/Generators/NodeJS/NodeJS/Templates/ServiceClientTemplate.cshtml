@@ -27,10 +27,6 @@ var WebResource = msRest.WebResource;
 {
 @:var operations = require('./operations');
 }
-@if (Model.ContainsTimeSpan)
-{
-@:var moment = require('moment');    
-}
 @EmptyLine
 @{var parameters = Model.Properties.Where(p => p.IsRequired);}
 /**
