@@ -613,7 +613,8 @@ describe('nodejs', function () {
 
       it('should properly handle invalid value for Duration', function (done) {
         testClient.duration.getInvalid(function (error, result) {
-          //TODO: There should be an error here, except for some reason moment.js allows non-ISO strings and will just construct a duration of length 0
+          //For some reason moment.js allows non-ISO strings and will just construct a duration of length 0, so we don't expect an error here, but the result
+          //should be duration of length 0
           should.not.exist(error);
           should.equal(result.asSeconds(), 0);
           done();
