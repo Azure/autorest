@@ -14,7 +14,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 

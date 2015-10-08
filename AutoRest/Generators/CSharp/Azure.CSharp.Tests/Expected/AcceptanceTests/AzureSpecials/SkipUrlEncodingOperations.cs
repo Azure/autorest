@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -19,7 +20,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using Newtonsoft.Json;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -52,8 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
         /// <param name='unencodedPathParam'>
-        /// Unencoded path parameter with value 'path1/path2/path3'
-        /// </param>
+        /// Unencoded path parameter with value 'path1/path2/path3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -78,7 +77,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodPathValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}").ToString();
             url = url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
@@ -166,8 +165,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
         /// <param name='unencodedPathParam'>
-        /// Unencoded path parameter with value 'path1/path2/path3'
-        /// </param>
+        /// Unencoded path parameter with value 'path1/path2/path3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -192,7 +190,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetPathPathValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}").ToString();
             url = url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
@@ -281,8 +279,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='unencodedPathParam'>
         /// An unencoded path parameter with value 'path1/path2/path3'. Possible
-        /// values for this parameter include: 'path1/path2/path3'
-        /// </param>
+        /// values for this parameter include: 'path1/path2/path3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -307,7 +304,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetSwaggerPathValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}").ToString();
             url = url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
@@ -396,8 +393,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
-        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-        /// </param>
+        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -422,7 +418,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodQueryValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/method/query/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/method/query/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -513,8 +509,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Get method with unencoded query parameter with value null
         /// </summary>
         /// <param name='q1'>
-        /// Unencoded query parameter with value null
-        /// </param>
+        /// Unencoded query parameter with value null/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -535,7 +530,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodQueryNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/method/query/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/method/query/null").ToString();
             List<string> queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -627,8 +622,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='q1'>
-        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-        /// </param>
+        /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -653,7 +647,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetPathQueryValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/path/query/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/path/query/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -747,8 +741,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <param name='q1'>
         /// An unencoded query parameter with value
         /// 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter
-        /// include: 'value1&amp;q2=value2&amp;q3=value3'
-        /// </param>
+        /// include: 'value1&amp;q2=value2&amp;q3=value3'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -769,7 +762,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetSwaggerQueryValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/skipUrlEncoding/swagger/query/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/skipUrlEncoding/swagger/query/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (q1 != null)
             {

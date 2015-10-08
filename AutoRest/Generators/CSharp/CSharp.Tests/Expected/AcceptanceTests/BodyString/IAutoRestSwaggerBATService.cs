@@ -35,7 +35,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
 
         IStringModel StringModel { get; }

@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.Rest.Generator.ClientModel;
 using System;
-using Microsoft.Rest.Generator.Azure;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using Microsoft.Rest.Generator.Azure;
+using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -21,7 +21,18 @@ namespace Microsoft.Rest.Generator.CSharp
         protected override void ResolveMethodGroupNameCollision(ServiceClient serviceClient,
             Dictionary<string, string> exclusionDictionary)
         {
-            // Do nothing   
+            // Do nothing
+        }
+
+        private static string GetNextLinkString(Dictionary<string, object> extensions)
+        {
+            var ext = extensions[AzureCodeGenerator.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+            if (ext == null)
+            {
+                return null;
+            }
+
+            return (string)ext["path"];
         }
 
         /// <summary>
@@ -41,6 +52,12 @@ namespace Microsoft.Rest.Generator.CSharp
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
             {
+                string nextLinkString = GetNextLinkString(method.Extensions);
+                if (string.IsNullOrEmpty(nextLinkString))
+                {
+                    continue;
+                }
+
                 foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
                 {
                     var compositType = (CompositeType) method.Responses[responseStatus];
@@ -48,11 +65,11 @@ namespace Microsoft.Rest.Generator.CSharp
 
                     // if the type is a wrapper over page-able response
                     if(sequenceType != null &&
-                       compositType.Properties.Count == 2 && 
-                       compositType.Properties.Any(p => p.SerializedName.Equals("nextLink", StringComparison.OrdinalIgnoreCase)))
+                       compositType.Properties.Count == 2 &&
+                       compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
                     {
                         var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, sequenceType.ElementType.Name);
-                        
+
                         CompositeType pagedResult = new CompositeType
                         {
                             Name = pagableTypeName

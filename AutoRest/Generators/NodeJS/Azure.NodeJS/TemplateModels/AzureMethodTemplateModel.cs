@@ -1,13 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.NodeJS;
-using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
+using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
@@ -16,7 +12,13 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
+            this.ClientRequestIdString = AzureCodeGenerator.GetClientRequestIdString(source);
+            this.RequestIdString = AzureCodeGenerator.GetRequestIdString(source);
         }
+        
+        public string ClientRequestIdString { get; private set; }
+
+        public string RequestIdString { get; private set; }
 
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
@@ -35,40 +37,18 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             return base.HasQueryParameters() || !IsAbsoluteUrl;
         }
 
-        /// <summary>
-        /// Long running put request poller method
-        /// </summary>
-        public AzureMethodTemplateModel GetMethod
-        {
-            get
-            {
-                var getMethod = ServiceClient.Methods.FirstOrDefault(m => m.Url == Url
-                                                                          && m.HttpMethod == HttpMethod.Get &&
-                                                                          m.Group == Group);
-                if (getMethod == null)
-                {
-                    throw new InvalidOperationException(Resources.InvalidLongRunningOperationForCreateOrUpdate);
-                }
-                return new AzureMethodTemplateModel(getMethod, ServiceClient);
-            }
-        }
 
-        /// <summary>
-        /// Gets the expression for response body initialization 
-        /// </summary>
-        public override string InitializeResponseBody
+        public override string InitializeResult
         {
             get
             {
-                //result.requestId = result.httpRequest.headers['x-ms-request-id'];
                 var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
                     this.ReturnType != null)
                 {
-                    sb.AppendLine("result.body = (statusCode === 204);");
+                    sb.AppendLine("result = (statusCode === 204);");
                 }
-                sb.AppendLine("result.requestId = response.headers['x-ms-request-id'];")
-                    .AppendLine(base.InitializeResponseBody);
+
                 return sb.ToString();
             }
         }
@@ -81,9 +61,29 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             get
             {
                 var sb = new IndentedStringBuilder();
-                sb.AppendLine("httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();")
+                sb.AppendLine("httpRequest.headers['{0}'] = msRestAzure.generateUuid();", this.ClientRequestIdString)
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
+            }
+        }
+
+        public string LongRunningOperationMethodNameInRuntime
+        {
+            get
+            {
+                string result = null;
+                if (this.IsLongRunningOperation)
+                {
+                    if (HttpMethod == HttpMethod.Post || HttpMethod == HttpMethod.Delete)
+                    {
+                        result = "getPostOrDeleteOperationResult";
+                    }
+                    else if (HttpMethod == HttpMethod.Put || HttpMethod == HttpMethod.Patch)
+                    {
+                        result = "getPutOrPatchOperationResult";
+                    }
+                }
+                return result;
             }
         }
     }

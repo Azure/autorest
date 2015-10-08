@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsBodyString
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -70,7 +71,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "GetNotExpandable", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/enum/notExpandable").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/enum/notExpandable").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -141,8 +142,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// </summary>
         /// <param name='stringBody'>
         /// Possible values for this parameter include: 'red color', 'green-color',
-        /// 'blue_color'
-        /// </param>
+        /// 'blue_color'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -167,7 +167,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "PutNotExpandable", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/enum/notExpandable").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/enum/notExpandable").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

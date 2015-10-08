@@ -1,0 +1,17 @@
+language: csharp
+mono:
+  - alpha
+before_script:
+  - npm install -g npm@'>=1.4.3'
+  - npm install
+  - rvm use 2.2.1 --install --binary --fuzzy
+  - gem install bundler
+  - bundle install
+  - wget https://services.gradle.org/distributions/gradle-2.6-bin.zip
+  - unzip gradle-2.6-bin.zip
+  - PATH=$PATH:$(pwd)/gradle-2.6/bin
+script:
+  - gulp
+notifications:
+  slack:
+    secure: d0PFVLcyqcMxNtmZ8JaEpIBzXbUbZCgKs8QtBB5qEIXDnxflSR3AhczlILNhTBKtMEBlwVzsz65yP09XcmvB6xpAfJbHqSRzk2frKa5viPcAD8Wr/NYamt9/UiTCsnql8MqzjVy0tLdMscXKRmsUey4YF570zl0b7gAbq7XTqxM=

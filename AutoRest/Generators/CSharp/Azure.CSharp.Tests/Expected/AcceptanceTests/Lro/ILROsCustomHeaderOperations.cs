@@ -14,7 +14,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -62,21 +61,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
         /// required message header for all requests. Long running put
-        /// request, service returns a 200 to the initial request, with an
-        /// entity that contains ProvisioningState=’Creating’. Poll the
-        /// endpoint indicated in the Azure-AsyncOperation header for
-        /// operation status
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> GetAsyncRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
-        /// required message header for all requests. Long running put
         /// request, service returns a 201 to the initial request, with an
         /// entity that contains ProvisioningState=’Creating’.  Polls return
         /// this value until the last poll returns a ‘200’ with
@@ -110,19 +94,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPut201CreatingSucceeded200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
-        /// required message header for all requests. Long running put
-        /// request poller, service returns a ‘200’ with
-        /// ProvisioningState=’Succeeded’
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse<Product>> Get201CreatingSucceeded200PollingWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
         /// required message header for all requests. Long running post

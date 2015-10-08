@@ -16,7 +16,7 @@ before(function (done) {
   var started = false;
   var out = fs.openSync('./server.log', 'w');
   fs.writeSync(out, 'Test run started at ' + new Date().toISOString() + '\n');
-  child = child_process.spawn(nodeCmd, [__dirname + '/../../../AcceptanceTests/server/startup/www']);
+  child = child_process.spawn(nodeCmd, [__dirname + '/../../../../TestServer/server/startup/www']);
 
   child.stdout.on('data', function (data) {
     fs.writeSync(out, data.toString('UTF-8'));

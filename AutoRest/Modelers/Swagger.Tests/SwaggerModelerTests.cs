@@ -25,6 +25,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             });
             var clientModel = modeler.Build();
 
+            var description = "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.";
+            var summary = "Product Types";
+
             Assert.NotNull(clientModel);
             Assert.Equal(2, clientModel.Properties.Count);
             Assert.True(clientModel.Properties.Any(p => p.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)));
@@ -35,7 +38,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(0, clientModel.Methods.Count(m => m.Group != null));
             Assert.Equal(2, clientModel.Methods.Count);
             Assert.Equal("list", clientModel.Methods[0].Name);
-            Assert.NotEmpty(clientModel.Methods[0].Documentation);
+            Assert.NotEmpty(clientModel.Methods[0].Description);
+            Assert.Equal(description, clientModel.Methods[0].Description);
+            Assert.NotEmpty(clientModel.Methods[0].Summary);
+            Assert.Equal(summary, clientModel.Methods[0].Summary);
             Assert.Equal(HttpMethod.Get, clientModel.Methods[0].HttpMethod);
             Assert.Equal(3, clientModel.Methods[0].Parameters.Count);
             Assert.Equal("subscriptionId", clientModel.Methods[0].Parameters[0].Name);
@@ -338,7 +344,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 clientModel.Methods.First(m => m.Name == "list" && m.Group == null).Parameters.First(p => p.Name == "color" && p.Location == ParameterLocation.Path).Type as EnumType;
             Assert.NotNull(variableEnumInPath);
             Assert.Equal(variableEnumInPath.Values,
-                new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue"}, new EnumValue { Name = "green"} }.ToList());
+                new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" } }.ToList());
             Assert.True(variableEnumInPath.IsExpandable);
             Assert.Empty(variableEnumInPath.Name);
 
@@ -388,6 +394,47 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
 
             Assert.Equal(1, clientModel.EnumTypes.Count);
             Assert.Equal("Colors", clientModel.EnumTypes[0].Name);
+        }
+
+        [Fact]
+        public void TestClientWithValidation()
+        {
+            var modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = @"Swagger\swagger-validation.json"
+            });
+            var clientModel = modeler.Build();
+
+            Assert.Equal("resourceGroupName", clientModel.Methods[0].Parameters[1].Name);
+            Assert.Equal(true, clientModel.Methods[0].Parameters[1].IsRequired);
+            Assert.Equal(3, clientModel.Methods[0].Parameters[1].Constraints.Count);
+            Assert.Equal("10", clientModel.Methods[0].Parameters[1].Constraints[Constraint.MaxLength]);
+            Assert.Equal("3", clientModel.Methods[0].Parameters[1].Constraints[Constraint.MinLength]);
+            Assert.Equal("[a-zA-Z0-9]+", clientModel.Methods[0].Parameters[1].Constraints[Constraint.Pattern]);
+
+            Assert.Equal("id", clientModel.Methods[0].Parameters[2].Name);
+            Assert.Equal(3, clientModel.Methods[0].Parameters[2].Constraints.Count);
+            Assert.Equal("10", clientModel.Methods[0].Parameters[2].Constraints[Constraint.MultipleOf]);
+            Assert.Equal("100", clientModel.Methods[0].Parameters[2].Constraints[Constraint.InclusiveMinimum]);
+            Assert.Equal("1000", clientModel.Methods[0].Parameters[2].Constraints[Constraint.InclusiveMaximum]);
+
+            Assert.Equal("apiVersion", clientModel.Methods[0].Parameters[3].Name);
+            Assert.NotNull(clientModel.Methods[0].Parameters[3].ClientProperty);
+            Assert.Equal(1, clientModel.Methods[0].Parameters[3].Constraints.Count);
+            Assert.Equal("\\d{2}-\\d{2}-\\d{4}", clientModel.Methods[0].Parameters[3].Constraints[Constraint.Pattern]);
+
+            Assert.Equal("Product", clientModel.ModelTypes[0].Name);
+            Assert.Equal("display_names", clientModel.ModelTypes[0].Properties[2].Name);
+            Assert.Equal(3, clientModel.ModelTypes[0].Properties[2].Constraints.Count);
+            Assert.Equal("6", clientModel.ModelTypes[0].Properties[2].Constraints[Constraint.MaxItems]);
+            Assert.Equal("0", clientModel.ModelTypes[0].Properties[2].Constraints[Constraint.MinItems]);
+            Assert.Equal("true", clientModel.ModelTypes[0].Properties[2].Constraints[Constraint.UniqueItems]);
+
+            Assert.Equal("capacity", clientModel.ModelTypes[0].Properties[3].Name);
+            Assert.Equal(2, clientModel.ModelTypes[0].Properties[3].Constraints.Count);
+            Assert.Equal("100", clientModel.ModelTypes[0].Properties[3].Constraints[Constraint.ExclusiveMaximum]);
+            Assert.Equal("0", clientModel.ModelTypes[0].Properties[3].Constraints[Constraint.ExclusiveMinimum]);
         }
     }
 }

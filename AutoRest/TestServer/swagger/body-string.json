@@ -1,0 +1,318 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Swagger BAT Service",
+    "description": "Test Infrastructure for AutoRest Swagger BAT",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/string/null": {
+      "get": {
+        "operationId": "string_getNull",
+        "description": "Get null string value value",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The null String value",
+            "schema": {
+              "type": "string",
+              "enum": [ null ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "string_putNull",
+        "description": "Set string value null",
+        "parameters": [
+          {
+            "name": "stringBody",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "enum": [ null ]
+            }
+          }
+        ],
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/string/empty": {
+      "get": {
+        "operationId": "string_getEmpty",
+        "description": "Get empty string value value ''",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The empty String value",
+            "schema": {
+              "type": "string",
+              "enum": [ "" ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "string_putEmpty",
+        "description": "Set string value empty ''",
+        "parameters": [
+          {
+            "name": "stringBody",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "enum": [ "" ]
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/string/mbcs": {
+      "get": {
+        "operationId": "string_getMbcs",
+        "description": "Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The mbcs String value",
+            "schema": {
+              "type": "string",
+              "enum": [ "啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ " ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "string_putMbcs",
+        "description": "Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '",
+        "parameters": [
+          {
+            "name": "stringBody",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "enum": [ "啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ " ]
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/string/whitespace": {
+      "get": {
+        "operationId": "string_getWhitespace",
+        "description": "Get string value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'",
+            "schema": {
+              "type": "string",
+              "enum": [ "    Now is the time for all good men to come to the aid of their country    " ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "string_putWhitespace",
+        "description": "Set String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'",
+        "parameters": [
+          {
+            "name": "stringBody",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "enum": [ "    Now is the time for all good men to come to the aid of their country    " ]
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/string/enum/notExpandable": {
+      "get": {
+        "operationId": "enum_getNotExpandable",
+        "description": "Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The String value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'",
+            "schema": {
+              "x-ms-enum": "Colors",
+              "type": "string",
+              "enum": [ "red color", "green-color", "blue_color" ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "enum_putNotExpandable",
+        "description": "Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'",
+        "parameters": [
+          {
+            "name": "stringBody",
+            "in": "body",
+            "schema": {
+              "x-ms-enum": "Colors",
+              "type": "string",
+              "enum": [ "red color", "green-color", "blue_color" ]
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/string/notProvided": {
+      "get": {
+        "operationId": "string_getNotProvided",
+        "description": "Get String value when no string value is sent in response payload",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The not provided string value",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

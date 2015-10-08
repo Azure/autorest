@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8e7b23e3-7e9f-478b-8f69-ab0b531647ab}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>
     </StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
@@ -20,7 +20,8 @@
     <Content Include=".jshintrc" />
     <Content Include="package.json" />
     <Compile Include="AcceptanceTests\coverage.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\azureSpecialProperties.js">
       <TestFramework>Mocha</TestFramework>
@@ -83,6 +84,24 @@
     <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\flattenedProductProperties.js" />
     <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\index.js" />
     <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\resourceCollection.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\checkNameAvailabilityResult.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\customDomain.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\endpoints.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\index.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccount.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountCheckNameAvailabilityParameters.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountCreateParameters.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountKeys.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountListResult.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountRegenerateKeyParameters.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountUpdateParameters.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\usage.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\usageListResult.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\usageName.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\operations\index.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\operations\storageAccounts.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\operations\usageOperations.js" />
+    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\storageManagementClient.js" />
     <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoftAzureTestUrl.js" />
     <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\errorModel.js" />
     <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\index.js" />
@@ -95,7 +114,8 @@
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\startServer.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Content Include="bin\Net45-Debug\AutoRest.json" />
     <Content Include="bin\Net45-Debug\AutoRest.Core.xml" />
@@ -120,7 +140,6 @@
     <Content Include="bin\Net45-Debug\Swagger\swagger-simple-spec.json" />
     <Content Include="bin\Net45-Debug\Swagger\swagger-streaming.json" />
     <Content Include="packages.config" />
-    <Content Include="RegenerateExpectedClasses.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AcceptanceTests" />
@@ -147,6 +166,9 @@
     <Folder Include="Expected\AcceptanceTests\Report\models\" />
     <Folder Include="Expected\AcceptanceTests\ResourceFlattening\" />
     <Folder Include="Expected\AcceptanceTests\ResourceFlattening\models\" />
+    <Folder Include="Expected\AcceptanceTests\StorageManagementClient\" />
+    <Folder Include="Expected\AcceptanceTests\StorageManagementClient\models\" />
+    <Folder Include="Expected\AcceptanceTests\StorageManagementClient\operations\" />
     <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\" />
     <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\" />
     <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\" />

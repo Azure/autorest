@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsPaging
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -19,7 +20,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using Newtonsoft.Json;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -70,7 +70,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetSinglePages", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/single").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/single").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -182,7 +182,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetMultiplePages", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/multiple").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/multiple").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -295,7 +295,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetMultiplePagesRetryFirst", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/multiple/retryfirst").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/multiple/retryfirst").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -409,7 +409,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetMultiplePagesRetrySecond", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/multiple/retrysecond").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/multiple/retrysecond").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -521,7 +521,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetSinglePagesFailure", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/single/failure").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/single/failure").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -633,7 +633,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetMultiplePagesFailure", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/multiple/failure").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/multiple/failure").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -745,7 +745,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 ServiceClientTracing.Enter(invocationId, this, "GetMultiplePagesFailureUri", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/paging/multiple/failureuri").ToString();
+            var url = new Uri(this.Client.BaseUri, "paging/multiple/failureuri").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -839,8 +839,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that finishes on the first call without a nextlink
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -960,8 +959,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that includes a nextLink that has 10 pages
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1082,8 +1080,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// and then get a response including a nextLink that has 10 pages
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1205,8 +1202,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// 10 pages eventually.
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1326,8 +1322,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that receives a 400 on the first call
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1447,8 +1442,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that receives a 400 on the second call
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1568,8 +1562,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that receives an invalid nextLink
         /// </summary>
         /// <param name='nextPageLink'>
-        /// The NextLink from the previous successful call to List operation.
-        /// </param>
+        /// The NextLink from the previous successful call to List operation./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

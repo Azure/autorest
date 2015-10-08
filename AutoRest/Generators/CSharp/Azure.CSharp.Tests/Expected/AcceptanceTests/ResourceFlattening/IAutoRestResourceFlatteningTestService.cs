@@ -15,7 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Microsoft.Rest;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -37,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// The management credentials for Azure.
@@ -55,7 +54,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         int? LongRunningOperationRetryTimeout { get; set; }
 
 
-        /// <summary>
+            /// <summary>
         /// Put External Resource as an Array
         /// </summary>
         /// <param name='resourceArray'>
@@ -63,7 +62,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -74,7 +73,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -88,7 +87,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -99,7 +98,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -113,7 +112,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -124,7 +123,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>

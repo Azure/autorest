@@ -3,14 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.Azure.Properties;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
-using System.Globalization;
-using System.Collections;
 
 namespace Microsoft.Rest.Generator.Azure
 {
@@ -24,24 +23,29 @@ namespace Microsoft.Rest.Generator.Azure
         public const string PageableExtension = "x-ms-pageable";
         public const string ExternalExtension = "x-ms-external";
         public const string ODataExtension = "x-ms-odata";
+        public const string ClientRequestIdExtension = "x-ms-client-request-id";
+        
+        //TODO: Ideally this would be the same extension as the ClientRequestIdExtension and have it specified on the response headers,
+        //TODO: But the response headers aren't currently used at all so we put an extension on the operation for now
+        public const string RequestIdExtension = "x-ms-request-id";
         public const string ApiVersion = "api-version";
         public const string AcceptLanguage = "accept-language";
         private const string ResourceType = "Resource";
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
 
-        private static IEnumerable<string> ResourcePropertyNames;
+        private static IEnumerable<string> ResourcePropertyNames =  
+            new List<string>
+            { 
+                "Id",
+                "Name",
+                "Type",
+                "Location",
+                "Tags"
+            }.OrderBy(s=> s);
 
         protected AzureCodeGenerator(Settings settings) : base(settings)
         {
-            ResourcePropertyNames = new List<string>
-                                        { 
-                                            "Id",
-                                            "Name",
-                                            "Type",
-                                            "Location",
-                                            "Tags"
-                                        }.OrderBy(s=> s);
         }
 
         /// <summary>
@@ -453,6 +457,55 @@ namespace Microsoft.Rest.Generator.Azure
                     serviceClient.Methods.Add(newMethod);
                 }
             }
+        }
+
+        public static string GetClientRequestIdString(Method method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+            
+            string clientRequestIdName = "x-ms-client-request-id";
+            foreach (Parameter parameter in method.Parameters)
+            {
+                if (parameter.Extensions.ContainsKey(ClientRequestIdExtension))
+                {
+                    Newtonsoft.Json.Linq.JContainer extensionObject = parameter.Extensions[ClientRequestIdExtension] as Newtonsoft.Json.Linq.JContainer;
+                    if (extensionObject != null)
+                    {
+                        bool useParamAsClientRequestId = (bool)extensionObject["value"];
+                        if (useParamAsClientRequestId)
+                        {
+                            //TODO: Need to do something if they specify two ClientRequestIdExtensions for the same method...?
+                            clientRequestIdName = parameter.SerializedName;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            return clientRequestIdName;
+        }
+
+        public static string GetRequestIdString(Method method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            string requestIdName = "x-ms-request-id";
+            if (method.Extensions.ContainsKey(RequestIdExtension))
+            {
+                Newtonsoft.Json.Linq.JContainer extensionObject = method.Extensions[RequestIdExtension] as Newtonsoft.Json.Linq.JContainer;
+                if (extensionObject != null)
+                {
+                    requestIdName = extensionObject["value"].ToString();
+                }
+            }
+            
+            return requestIdName;
         }
 
         private static void CheckExternalResourceProperties(CompositeType compositeType)

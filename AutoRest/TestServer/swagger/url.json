@@ -1,0 +1,1955 @@
+﻿{
+    "swagger": "2.0",
+    "info": {
+        "title": "AutoRest Url Test Service",
+        "description": "Test Infrastructure for AutoRest",
+        "version": "1.0.0"
+    },
+    "host": "localhost",
+    "schemes": [
+        "http"
+    ],
+    "produces": [ "application/json" ],
+    "consumes": [ "application/json" ],
+    "paths": {
+        "/paths/bool/true/{boolPath}": {
+            "get": {
+                "operationId": "paths_getBooleanTrue",
+                "description": "Get true Boolean value on path",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "boolPath",
+                        "in": "path",
+                        "description": "true boolean value",
+                        "type": "boolean",
+                        "enum": [ true ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received the true boolean value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/bool/false/{boolPath}": {
+            "get": {
+                "operationId": "paths_getBooleanFalse",
+                "description": "Get false Boolean value on path",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "boolPath",
+                        "in": "path",
+                        "description": "false boolean value",
+                        "type": "boolean",
+                        "enum": [ false ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received the false Boolean value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/int/1000000/{intPath}": {
+            "get": {
+                "operationId": "paths_getIntOneMillion",
+                "description": "Get '1000000' integer value",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "intPath",
+                        "in": "path",
+                        "description": "'1000000' integer value",
+                        "type": "integer",
+                        "enum": [ 1000000 ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '1000000' integer value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/int/-1000000/{intPath}": {
+            "get": {
+                "operationId": "paths_getIntNegativeOneMillion",
+                "description": "Get '-1000000' integer value",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "intPath",
+                        "in": "path",
+                        "description": "'-1000000' integer value",
+                        "type": "integer",
+                        "enum": [ -1000000 ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '-1000000' integer value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/long/10000000000/{longPath}": {
+            "get": {
+                "operationId": "paths_getTenBillion",
+                "description": "Get '10000000000' 64 bit integer value",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "longPath",
+                        "in": "path",
+                        "description": "'10000000000' 64 bit integer value",
+                        "type": "integer",
+                        "format": "int64",
+                        "enum": [ 10000000000 ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '10000000000' integer value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/long/-10000000000/{longPath}": {
+            "get": {
+                "operationId": "paths_getNegativeTenBillion",
+                "description": "Get '-10000000000' 64 bit integer value",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "longPath",
+                        "in": "path",
+                        "description": "'-10000000000' 64 bit integer value",
+                        "type": "integer",
+                        "format": "int64",
+                        "enum": [ -10000000000 ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '-10000000000' integer value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/float/1.034E+20/{floatPath}": {
+            "get": {
+                "operationId": "paths_floatScientificPositive",
+                "description": "Get '1.034E+20' numeric value",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "floatPath",
+                        "in": "path",
+                        "description": "'1.034E+20'numeric value",
+                        "type": "number",
+                        "enum": [ 1.034E+20 ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '1.034E+20' numeric value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/float/-1.034E-20/{floatPath}": {
+            "get": {
+                "operationId": "paths_floatScientificNegative",
+                "description": "Get '-1.034E-20' numeric value",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "floatPath",
+                        "in": "path",
+                        "description": "'-1.034E-20'numeric value",
+                        "type": "number",
+                        "enum": [ -1.034E-20 ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '-1.034E-20' numeric value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/double/9999999.999/{doublePath}": {
+            "get": {
+                "operationId": "paths_doubleDecimalPositive",
+                "description": "Get '9999999.999' numeric value",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "doublePath",
+                        "in": "path",
+                        "description": "'9999999.999'numeric value",
+                        "type": "number",
+                        "format": "double",
+                        "enum": [ 9999999.999 ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '9999999.999' numeric value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/double/-9999999.999/{doublePath}": {
+            "get": {
+                "operationId": "paths_doubleDecimalNegative",
+                "description": "Get '-9999999.999' numeric value",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "doublePath",
+                        "in": "path",
+                        "description": "'-9999999.999'numeric value",
+                        "type": "number",
+                        "format": "double",
+                        "enum": [ -9999999.999 ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '-9999999.999' numeric value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/string/unicode/{stringPath}": {
+            "get": {
+                "operationId": "paths_stringUnicode",
+                "description": "Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "stringPath",
+                        "in": "path",
+                        "description": "'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value",
+                        "type": "string",
+                        "enum": [ "啊齄丂狛狜隣郎隣兀﨩" ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}": {
+            "get": {
+                "operationId": "paths_stringUrlEncoded",
+                "description": "Get 'begin!*'();:@ &=+$,/?#[]end",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "stringPath",
+                        "in": "path",
+                        "description": "'begin!*'();:@ &=+$,/?#[]end' url encoded string value",
+                        "type": "string",
+                        "enum": [ "begin!*'();:@ &=+$,/?#[]end" ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received 'begin!*'();:@ &=+$,/?#[]end' url encoded string value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/string/empty/{stringPath}": {
+            "get": {
+                "operationId": "paths_stringEmpty",
+                "description": "Get ''",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "stringPath",
+                        "in": "path",
+                        "description": "'' string value",
+                        "type": "string",
+                        "enum": [ "" ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '' string value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/string/null/{stringPath}": {
+        "get": {
+          "operationId": "paths_stringNull",
+          "description": "Get null (should throw)",
+          "tags": [
+            "Path Operations"
+          ],
+          "parameters": [
+            {
+              "name": "stringPath",
+              "in": "path",
+              "description": "null string value",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "You should not reach this, null should throw"
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+        "/paths/enum/green%20color/{enumPath}": {
+        "get": {
+          "operationId": "paths_enumValid",
+          "description": "Get using uri with 'green color' in path parameter",
+          "tags": [
+            "Path Operations"
+          ],
+          "parameters": [
+            {
+              "name": "enumPath",
+              "in": "path",
+              "description": "send the value green",
+              "type": "string",
+              "enum": [ "red color", "green color", "blue color" ],
+              "x-ms-enum": "UriColor",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully Received 'green color' in url encoded enum value"
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+        "/paths/string/null/{enumPath}": {
+        "get": {
+          "operationId": "paths_enumNull",
+          "description": "Get null (should throw on the client before the request is sent on wire)",
+          "tags": [
+            "Path Operations"
+          ],
+          "parameters": [
+            {
+              "name": "enumPath",
+              "in": "path",
+              "type": "string",
+              "description": "send null should throw",
+              "enum": [ "red color", "green color", "blue color" ],
+              "x-ms-enum": "UriColor",
+              "required": true
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "You should not reach this, null should throw"
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+        "/paths/byte/multibyte/{bytePath}": {
+            "get": {
+                "operationId": "paths_byteMultiByte",
+                "description": "Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "bytePath",
+                        "in": "path",
+                        "description": "'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array",
+                        "type": "string",
+                        "format": "byte",
+                        "enum": [ "啊齄丂狛狜隣郎隣兀﨩" ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/byte/empty/{bytePath}": {
+            "get": {
+                "operationId": "paths_byteEmpty",
+                "description": "Get '' as byte array",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "bytePath",
+                        "in": "path",
+                        "description": "'' as byte array",
+                        "type": "string",
+                        "format": "byte",
+                        "enum": [ "" ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '' as byte array"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/byte/null/{bytePath}": {
+            "get": {
+                "operationId": "paths_byteNull",
+                "description": "Get null as byte array (should throw)",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "bytePath",
+                        "in": "path",
+                        "description": "null as byte array (should throw)",
+                        "type": "string",
+                        "format": "byte"
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Failure - client-side code should throw at null path parameter"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/date/2012-01-01/{datePath}": {
+            "get": {
+                "operationId": "paths_DateValid",
+                "description": "Get '2012-01-01' as date",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "datePath",
+                        "in": "path",
+                        "description": "'2012-01-01' as date",
+                        "type": "string",
+                        "format": "date",
+                        "enum": [ "2012-01-01" ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '2012-01-01' as date"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/date/null/{datePath}": {
+            "get": {
+                "operationId": "paths_DateNull",
+                "description": "Get null as date - this should throw or be unusable on the client side, depending on date representation",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "datePath",
+                        "in": "path",
+                        "description": "null as date (should throw)",
+                        "type": "string",
+                        "format": "date",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "This should never happen - client code should not accept this"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}": {
+            "get": {
+                "operationId": "paths_DateTimeValid",
+                "description": "Get '2012-01-01T01:01:01Z' as date-time",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "dateTimePath",
+                        "in": "path",
+                        "description": "'2012-01-01T01:01:01Z' as date-time",
+                        "type": "string",
+                        "format": "date-time",
+                        "enum": [ "2012-01-01T01:01:01Z" ],
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '2012-01-01T01:01:01Z' as date-time"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/paths/datetime/null/{dateTimePath}": {
+            "get": {
+                "operationId": "paths_DateTimeNull",
+                "description": "Get null as date-time, should be disallowed or throw depending on representation of date-time",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "dateTimePath",
+                        "in": "path",
+                        "description": "null as date-time",
+                        "type": "string",
+                        "format": "date-time",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "This should not occur: the test fails if you contact the server"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/bool/true": {
+            "get": {
+                "operationId": "queries_getBooleanTrue",
+                "description": "Get true Boolean value on path",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "boolQuery",
+                        "in": "query",
+                        "description": "true boolean value",
+                        "type": "boolean",
+                        "enum": [ true ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received the true boolean value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/bool/false": {
+            "get": {
+                "operationId": "queries_getBooleanFalse",
+                "description": "Get false Boolean value on path",
+                "tags": [
+                    "Path Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "boolQuery",
+                        "in": "query",
+                        "description": "false boolean value",
+                        "type": "boolean",
+                        "enum": [ true ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received the false Boolean value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/bool/null": {
+            "get": {
+                "operationId": "queries_getBooleanNull",
+                "description": "Get null Boolean value on query (query string should be absent)",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "boolQuery",
+                        "in": "query",
+                        "description": "null boolean value",
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received the null Boolean value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/int/1000000": {
+            "get": {
+                "operationId": "queries_getIntOneMillion",
+                "description": "Get '1000000' integer value",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "intQuery",
+                        "in": "query",
+                        "description": "'1000000' integer value",
+                        "type": "integer",
+                        "enum": [ 1000000 ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '1000000' integer value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/int/-1000000": {
+            "get": {
+                "operationId": "queries_getIntNegativeOneMillion",
+                "description": "Get '-1000000' integer value",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "intQuery",
+                        "in": "query",
+                        "description": "'-1000000' integer value",
+                        "type": "integer",
+                        "enum": [ -1000000 ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '-1000000' integer value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/int/null": {
+            "get": {
+                "operationId": "queries_getIntNull",
+                "description": "Get null integer value (no query parameter)",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "intQuery",
+                        "in": "query",
+                        "description": "null integer value",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received null integer value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/long/10000000000": {
+            "get": {
+                "operationId": "queries_getTenBillion",
+                "description": "Get '10000000000' 64 bit integer value",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "longQuery",
+                        "in": "query",
+                        "description": "'10000000000' 64 bit integer value",
+                        "type": "integer",
+                        "format": "int64",
+                        "enum": [ 10000000000 ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '10000000000' integer value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/long/-10000000000": {
+            "get": {
+                "operationId": "queries_getNegativeTenBillion",
+                "description": "Get '-10000000000' 64 bit integer value",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "longQuery",
+                        "in": "query",
+                        "description": "'-10000000000' 64 bit integer value",
+                        "type": "integer",
+                        "format": "int64",
+                        "enum": [ -10000000000 ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '-10000000000' integer value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/long/null": {
+            "get": {
+                "operationId": "queries_getLongNull",
+                "description": "Get 'null 64 bit integer value (no query param in uri)",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "longQuery",
+                        "in": "query",
+                        "description": "null 64 bit integer value",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received null 64-bit integer value (no param in uri)"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/float/1.034E+20": {
+            "get": {
+                "operationId": "queries_floatScientificPositive",
+                "description": "Get '1.034E+20' numeric value",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "floatQuery",
+                        "in": "query",
+                        "description": "'1.034E+20'numeric value",
+                        "type": "number",
+                        "enum": [ 1.034E+20 ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '1.034E+20' numeric value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/float/-1.034E-20": {
+            "get": {
+                "operationId": "queries_floatScientificNegative",
+                "description": "Get '-1.034E-20' numeric value",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "floatQuery",
+                        "in": "query",
+                        "description": "'-1.034E-20'numeric value",
+                        "type": "number",
+                        "enum": [ -1.034E-20 ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '-1.034E-20' numeric value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/float/null": {
+            "get": {
+                "operationId": "queries_floatNull",
+                "description": "Get null numeric value (no query parameter)",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "floatQuery",
+                        "in": "query",
+                        "description": "null numeric value",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received null numeric value (no query parameter)"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/double/9999999.999": {
+            "get": {
+                "operationId": "queries_doubleDecimalPositive",
+                "description": "Get '9999999.999' numeric value",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "doubleQuery",
+                        "in": "query",
+                        "description": "'9999999.999'numeric value",
+                        "type": "number",
+                        "format": "double",
+                        "enum": [ 9999999.999 ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '9999999.999' numeric value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/double/-9999999.999": {
+            "get": {
+                "operationId": "queries_doubleDecimalNegative",
+                "description": "Get '-9999999.999' numeric value",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "doubleQuery",
+                        "in": "query",
+                        "description": "'-9999999.999'numeric value",
+                        "type": "number",
+                        "format": "double",
+                        "enum": [ -9999999.999 ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '-9999999.999' numeric value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/double/null": {
+            "get": {
+                "operationId": "queries_doubleNull",
+                "description": "Get null numeric value (no query parameter)",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "doubleQuery",
+                        "in": "query",
+                        "description": "null numeric value",
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received null numeric value (no query parameter)"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/string/unicode/": {
+            "get": {
+                "operationId": "queries_stringUnicode",
+                "description": "Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "stringQuery",
+                        "in": "query",
+                        "description": "'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value",
+                        "type": "string",
+                        "enum": [ "啊齄丂狛狜隣郎隣兀﨩" ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend": {
+            "get": {
+                "operationId": "queries_stringUrlEncoded",
+                "description": "Get 'begin!*'();:@ &=+$,/?#[]end",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "stringQuery",
+                        "in": "query",
+                        "description": "'begin!*'();:@ &=+$,/?#[]end' url encoded string value",
+                        "type": "string",
+                        "enum": [ "begin!*'();:@ &=+$,/?#[]end" ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received 'begin!*'();:@ &=+$,/?#[]end' url encoded string value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/string/empty": {
+            "get": {
+                "operationId": "queries_stringEmpty",
+                "description": "Get ''",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "stringQuery",
+                        "in": "query",
+                        "description": "'' string value",
+                        "type": "string",
+                        "enum": [ "" ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '' string value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/string/null": {
+        "get": {
+          "operationId": "queries_stringNull",
+          "description": "Get null (no query parameter in url)",
+          "tags": [
+            "query Operations"
+          ],
+          "parameters": [
+            {
+              "name": "stringQuery",
+              "in": "query",
+              "description": "null string value",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully received null parameter (no query string in url)"
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+        "/queries/enum/green%20color": {
+            "get": {
+                "operationId": "queries_enumValid",
+                "description": "Get using uri with query parameter 'green color'",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "enumQuery",
+                        "in": "query",
+                        "description": "'green color' enum value",
+                        "type": "string",
+                        "enum": [ "red color", "green color", "blue color" ],
+                        "x-ms-enum": "UriColor"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received 'green color' string value"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/enum/null": {
+            "get": {
+                "operationId": "queries_enumNull",
+                "description": "Get null (no query parameter in url)",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "enumQuery",
+                        "in": "query",
+                        "description": "null string value",
+                        "type": "string",
+                        "enum": [ "red color", "green color", "blue color" ],
+                        "x-ms-enum": "UriColor"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received null parameter (no query string in url)"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/byte/multibyte": {
+            "get": {
+                "operationId": "queries_byteMultiByte",
+                "description": "Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "byteQuery",
+                        "in": "query",
+                        "description": "'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array",
+                        "type": "string",
+                        "format": "byte",
+                        "enum": [ "啊齄丂狛狜隣郎隣兀﨩" ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/byte/empty": {
+            "get": {
+                "operationId": "queries_byteEmpty",
+                "description": "Get '' as byte array",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "byteQuery",
+                        "in": "query",
+                        "description": "'' as byte array",
+                        "type": "string",
+                        "format": "byte",
+                        "enum": [ "" ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '' as byte array"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/byte/null": {
+            "get": {
+                "operationId": "queries_byteNull",
+                "description": "Get null as byte array (no query parameters in uri)",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "byteQuery",
+                        "in": "query",
+                        "description": "null as byte array (no query parameters in uri)",
+                        "type": "string",
+                        "format": "byte"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received no query parameters in uri"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/date/2012-01-01": {
+            "get": {
+                "operationId": "queries_DateValid",
+                "description": "Get '2012-01-01' as date",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "dateQuery",
+                        "in": "query",
+                        "description": "'2012-01-01' as date",
+                        "type": "string",
+                        "format": "date",
+                        "enum": [ "2012-01-01" ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '2012-01-01' as date"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/date/null": {
+            "get": {
+                "operationId": "queries_DateNull",
+                "description": "Get null as date - this should result in no query parameters in uri",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "dateQuery",
+                        "in": "query",
+                        "description": "null as date (no query parameters in uri)",
+                        "type": "string",
+                        "format": "date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received no query parameters in uri"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/datetime/2012-01-01T01%3A01%3A01Z": {
+            "get": {
+                "operationId": "queries_DateTimeValid",
+                "description": "Get '2012-01-01T01:01:01Z' as date-time",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "dateTimeQuery",
+                        "in": "query",
+                        "description": "'2012-01-01T01:01:01Z' as date-time",
+                        "type": "string",
+                        "format": "date-time",
+                        "enum": [ "2012-01-01T01:01:01Z" ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully Received '2012-01-01T01:01:01Z' as date-time"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/datetime/null": {
+            "get": {
+                "operationId": "queries_DateTimeNull",
+                "description": "Get null as date-time, should result in no query parameters in uri",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "dateTimeQuery",
+                        "in": "query",
+                        "description": "null as date-time (no query parameters)",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received no query parameters in uri"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/array/csv/string/valid": {
+            "get": {
+                "operationId": "queries_ArrayStringCsvValid",
+                "description": "Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "arrayQuery",
+                        "in": "query",
+                        "description": "an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format",
+                        "type": "array",
+                        "items":  {
+                            "type":  "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received ?arrayQuery=ArrayQuery1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/array/csv/string/null": {
+            "get": {
+                "operationId": "queries_ArrayStringCsvNull",
+                "description": "Get a null array of string using the csv-array format",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "arrayQuery",
+                        "in": "query",
+                        "description": "a null array of string using the csv-array format",
+                        "type": "array",
+                        "items":  {
+                            "type":  "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received no query parameters"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/array/csv/string/empty": {
+            "get": {
+                "operationId": "queries_ArrayStringCsvEmpty",
+                "description": "Get an empty array [] of string using the csv-array format",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "arrayQuery",
+                        "in": "query",
+                        "description": "an empty array [] of string using the csv-array format",
+                        "type": "array",
+                        "items":  {
+                            "type":  "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received no query parameters"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/array/ssv/string/valid": {
+            "get": {
+                "operationId": "queries_ArrayStringSsvValid",
+                "description": "Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "arrayQuery",
+                        "in": "query",
+                        "description": "an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format",
+                        "type": "array",
+                        "items":  {
+                            "type":  "string"
+                        },
+                        "collectionFormat": "ssv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received ?arrayQuery=ArrayQuery1%20begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%20%20"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/array/tsv/string/valid": {
+            "get": {
+                "operationId": "queries_ArrayStringTsvValid",
+                "description": "Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "arrayQuery",
+                        "in": "query",
+                        "description": "an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format",
+                        "type": "array",
+                        "items":  {
+                            "type":  "string"
+                        },
+                        "collectionFormat": "tsv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received ?arrayQuery=ArrayQuery1\tbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend\t\t"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/queries/array/pipes/string/valid": {
+            "get": {
+                "operationId": "queries_ArrayStringPipesValid",
+                "description": "Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "arrayQuery",
+                        "in": "query",
+                        "description": "an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format",
+                        "type": "array",
+                        "items":  {
+                            "type":  "string"
+                        },
+                        "collectionFormat": "pipes"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received ?arrayQuery=ArrayQuery1%|begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend||"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+       "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery": {
+            "parameters": [
+                {
+                    "name": "pathItemStringPath",
+                    "in": "path",
+                    "description": "A string value 'pathItemStringPath' that appears in the path",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "name": "pathItemStringQuery",
+                    "in": "query",
+                    "description": "A string value 'pathItemStringQuery' that appears as a query parameter",
+                    "type": "string"
+                },
+                { "$ref": "#/parameters/globalStringPath" },
+                { "$ref": "#/parameters/globalStringQuery" }
+            ],
+            "get": {
+                "operationId": "pathItems_getAllWithValues",
+                "description": "send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "localStringPath",
+                        "in": "path",
+                        "description": "should contain value 'localStringPath'",
+                        "type": "string"
+                    },
+                    {
+                        "name": "localStringQuery",
+                        "in": "query",
+                        "description": "should contain value 'localStringQuery'",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received all query parameters in uri"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery": {
+            "parameters": [
+                {
+                    "name": "pathItemStringPath",
+                    "in": "path",
+                    "description": "A string value 'pathItemStringPath' that appears in the path",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "name": "pathItemStringQuery",
+                    "in": "query",
+                    "description": "A string value 'pathItemStringQuery' that appears as a query parameter",
+                    "type": "string"
+                },
+                { "$ref": "#/parameters/globalStringPath" },
+                { "$ref": "#/parameters/globalStringQuery" }
+            ],
+            "get": {
+                "operationId": "pathItems_getGlobalQueryNull",
+                "description": "send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "localStringPath",
+                        "in": "path",
+                        "description": "should contain value 'localStringPath'",
+                        "type": "string"
+                    },
+                    {
+                        "name": "localStringQuery",
+                        "in": "query",
+                        "description": "should contain value 'localStringQuery'",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received all query parameters but global"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null": {
+            "parameters": [
+                {
+                    "name": "pathItemStringPath",
+                    "in": "path",
+                    "description": "A string value 'pathItemStringPath' that appears in the path",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "name": "pathItemStringQuery",
+                    "in": "query",
+                    "description": "A string value 'pathItemStringQuery' that appears as a query parameter",
+                    "type": "string"
+                },
+                { "$ref": "#/parameters/globalStringPath" },
+                { "$ref": "#/parameters/globalStringQuery" }
+            ],
+            "get": {
+                "operationId": "pathItems_getGlobalAndLocalQueryNull",
+                "description": "send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "localStringPath",
+                        "in": "path",
+                        "description": "should contain value 'localStringPath'",
+                        "type": "string"
+                    },
+                    {
+                        "name": "localStringQuery",
+                        "in": "query",
+                        "description": "should contain null value",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received only the pathItemQuery query parameter"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null": {
+            "parameters": [
+                {
+                    "name": "pathItemStringPath",
+                    "in": "path",
+                    "description": "A string value 'pathItemStringPath' that appears in the path",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "name": "pathItemStringQuery",
+                    "in": "query",
+                    "description": "should contain value null",
+                    "type": "string"
+                },
+                { "$ref": "#/parameters/globalStringPath" },
+                { "$ref": "#/parameters/globalStringQuery" }
+            ],
+            "get": {
+                "operationId": "pathItems_getLocalPathItemQueryNull",
+                "description": "send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null",
+                "tags": [
+                    "query Operations"
+                ],
+                "parameters": [
+                    {
+                        "name": "localStringPath",
+                        "in": "path",
+                        "description": "should contain value 'localStringPath'",
+                        "type": "string"
+                    },
+                    {
+                        "name": "localStringQuery",
+                        "in": "query",
+                        "description": "should contain value null",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully received only global query parameter"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "globalStringPath": {
+            "name": "globalStringPath",
+            "in": "path",
+            "description": "A string value 'globalItemStringPath' that appears in the path",
+            "type": "string",
+            "required": true
+        },
+        "globalStringQuery": {
+            "name": "globalStringQuery",
+            "in": "query",
+            "description": "should contain value null",
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "Error": {
+            "properties": {
+                "status": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

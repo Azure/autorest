@@ -9,6 +9,7 @@
 namespace Fixtures.MirrorPolymorphic
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -120,14 +121,14 @@ namespace Fixtures.MirrorPolymorphic
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Animal>("dtype"));
         }    
         /// <summary>
+        /// Product Types
+        /// </summary>
         /// The Products endpoint returns information about the Uber products offered
         /// at a given location. The response includes the display name and other
         /// details about each product, and lists the products in the proper display
         /// order.
-        /// </summary>
         /// <param name='animalCreateOrUpdateParameter'>
-        /// An Animal
-        /// </param>
+        /// An Animal/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -148,7 +149,7 @@ namespace Fixtures.MirrorPolymorphic
                 ServiceClientTracing.Enter(invocationId, this, "CreateOrUpdatePolymorphicAnimals", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/getpolymorphicAnimals").ToString();
+            var url = new Uri(this.BaseUri, "getpolymorphicAnimals").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

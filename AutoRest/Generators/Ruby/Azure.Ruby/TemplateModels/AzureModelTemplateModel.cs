@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
 
@@ -15,8 +16,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// Initializes a new instance of the AzureModelTemplateModel class.
         /// </summary>
         /// <param name="source">The object to create model from.</param>
-        /// <param name="serviceClient">The service client.</param>
-        public AzureModelTemplateModel(CompositeType source, ServiceClient serviceClient) : base(source, serviceClient)
+        public AzureModelTemplateModel(CompositeType source)
+            : base(source)
         {
         }
 
@@ -39,6 +40,31 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Gets the list of modules/classes which need to be included.
+        /// </summary>
+        public override List<string> Includes
+        {
+            get
+            {
+                return new List<string>
+				{
+					"MsRestAzure"
+				};
+            }
+        }
+
+        public override List<string> ClassNamespaces
+        {
+            get
+            {
+                return new List<string>
+				{
+					"MsRestAzure"
+				};
+            }
         }
     }
 }

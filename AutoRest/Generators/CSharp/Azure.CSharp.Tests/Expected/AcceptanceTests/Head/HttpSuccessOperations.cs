@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsHead
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -19,7 +20,6 @@ namespace Fixtures.Azure.AcceptanceTestsHead
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using Newtonsoft.Json;
-    using System.Linq;
     using Microsoft.Rest.Azure;
 
     /// <summary>
@@ -69,7 +69,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 ServiceClientTracing.Enter(invocationId, this, "Head204", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/success/204").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/success/204").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -176,7 +176,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 ServiceClientTracing.Enter(invocationId, this, "Head404", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/success/404").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/success/404").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

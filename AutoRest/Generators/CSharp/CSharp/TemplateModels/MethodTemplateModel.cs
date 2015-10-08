@@ -1,15 +1,13 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -49,7 +47,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     List<string> predicates = new List<string>();
                     foreach (var responseStatus in Responses.Keys)
                     {
-                        predicates.Add(string.Format(CultureInfo.InvariantCulture, 
+                        predicates.Add(string.Format(CultureInfo.InvariantCulture,
                             "statusCode == {0}", GetStatusCodeReference(responseStatus)));
                     }
 
@@ -70,7 +68,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 foreach (var parameter in  LocalParameters)
                 {
                     string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture, 
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture,
                         format, parameter.DeclarationExpression, parameter.Name));
                 }
 
@@ -95,7 +93,7 @@ namespace Microsoft.Rest.Generator.CSharp
         public virtual string GetAsyncMethodParameterDeclaration(bool addCustomHeaderParameters)
         {
             var declarations = this.SyncMethodParameterDeclaration;
-            
+
             if (!string.IsNullOrEmpty(declarations))
             {
                 declarations += ", ";
@@ -158,7 +156,7 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 if (ReturnType != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, 
+                    return string.Format(CultureInfo.InvariantCulture,
                         "HttpOperationResponse<{0}>", ReturnType.Name);
                 }
                 return "HttpOperationResponse";
@@ -174,7 +172,7 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 if (ReturnType != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, 
+                    return string.Format(CultureInfo.InvariantCulture,
                         "Task<{0}>", ReturnType.Name);
                 }
                 return "Task";
@@ -215,7 +213,7 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Gets the expression for default header setting. 
+        /// Gets the expression for default header setting.
         /// </summary>
         public virtual string SetDefaultHeaders
         {
@@ -265,7 +263,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             SequenceType sequenceType = serializationType as SequenceType;
             DictionaryType dictionaryType = serializationType as DictionaryType;
-            if (serializationType == PrimaryType.Date || 
+            if (serializationType == PrimaryType.Date ||
                 (sequenceType != null && sequenceType.ElementType == PrimaryType.Date) ||
                 (dictionaryType != null && dictionaryType.ValueType == PrimaryType.Date))
             {
@@ -305,7 +303,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public static string GetStatusCodeReference(HttpStatusCode code)
         {
-            return string.Format(CultureInfo.InvariantCulture, 
+            return string.Format(CultureInfo.InvariantCulture,
                 "(HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), \"{0}\")", code);
         }
 

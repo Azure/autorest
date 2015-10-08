@@ -4,9 +4,11 @@
 @using Microsoft.Rest.Generator.CSharp.Azure.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.Azure.AzureMethodGroupTemplateModel>
 @Header("// ")
+@EmptyLine
 namespace @Settings.Namespace
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;

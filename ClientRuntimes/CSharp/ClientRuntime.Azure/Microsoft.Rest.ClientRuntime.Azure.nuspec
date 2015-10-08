@@ -36,9 +36,6 @@
       <group>
         <dependency id="Microsoft.Rest.ClientRuntime" version="[__VERSION_Microsoft.Rest.ClientRuntime__,2)"/>
       </group>
-      <group targetFramework="net45">
-        <dependency id="Microsoft.Rest.ClientRuntime.Azure.Authentication" version="__VERSION_Microsoft.Rest.ClientRuntime.Azure.Authentication__"/>
-      </group>
     </dependencies>
   </metadata>
   <files>

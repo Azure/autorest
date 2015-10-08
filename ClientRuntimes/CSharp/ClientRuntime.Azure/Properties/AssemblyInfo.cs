@@ -4,13 +4,12 @@
 using System;
 using System.Reflection;
 using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Microsoft Rest Azure Client Runtime")]
 [assembly: AssemblyDescription("Client infrastructure for Azure client libraries.")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.20.0")]
+[assembly: AssemblyFileVersion("1.0.21.0")]
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft Corporation")]

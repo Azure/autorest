@@ -1,0 +1,3054 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Long-running Operation Test Service",
+    "description": "Long-running Operation for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/lro/put/200/succeeded": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_put200Succeeded",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "204": {
+            "description": "Final response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/put/200/succeeded/nostate": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_put200SucceededNoState",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response without ProvisioningState",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/put/202/retry/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_put202Retry200",
+        "description": "Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/put/201/creating/succeeded/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_put201CreatingSucceeded200",
+        "description": "Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "201": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/put/200/updating/succeeded/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_put200UpdatingSucceeded204",
+        "description": "Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/put/201/created/failed/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_put201CreatingFailed200",
+        "description": "Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Failed'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "201": {
+            "description": "Initial response, with ProvisioningState = 'Created'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/put/200/accepted/canceled/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_put200Acceptedcanceled200",
+        "description": "Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/put/noheader/202/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putNoHeaderInRetry",
+        "description": "Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "headers": {
+              "location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/noheader/202/200/operationResults",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putasync/retry/succeeded": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putAsyncRetrySucceeded",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putasync/noretry/succeeded": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putAsyncNoRetrySucceeded",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/noretry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/noretry/succeeded/operationResults/200",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putasync/retry/failed": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putAsyncRetryFailed",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putasync/noretry/canceled": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putAsyncNoRetrycanceled",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putasync/noheader/201/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putAsyncNoHeaderInRetry",
+        "description": "Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putnonresource/202/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putNonResource",
+        "description": "Long running put request with non resource.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "sku",
+            "description": "sku to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putnonresourceasync/202/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putAsyncNonResource",
+        "description": "Long running put request with non resource.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "sku",
+            "description": "Sku to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putsubresource/202/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putSubResource",
+        "description": "Long running put request with sub resource.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Sub Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SubProduct"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "schema": {
+              "$ref": "#/definitions/SubProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/putsubresourceasync/202/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_putAsyncSubResource",
+        "description": "Long running put request with sub resource.",
+        "tags": [
+          "LROs Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Sub Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SubProduct"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Accepted'",
+            "schema": {
+              "$ref": "#/definitions/SubProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/delete/provisioning/202/accepted/200/succeeded": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteProvisioning202Accepted200Succeeded",
+        "description": "Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Deleting'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/delete/provisioning/202/accepted/200/succeeded",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/delete/provisioning/202/deleting/200/failed": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteProvisioning202DeletingFailed200",
+        "description": "Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "202": {
+            "description": "Inital response",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/delete/provisioning/202/deleting/200/failed",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/delete/provisioning/202/deleting/200/canceled": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteProvisioning202Deletingcanceled200",
+        "description": "Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "202": {
+            "description": "Inital response",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/delete/provisioning/202/deleting/200/canceled",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/delete/204/succeeded": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_delete204Succeeded",
+        "description": "Long running delete succeeds and returns right away",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "204": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/delete/202/retry/200": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_delete202Retry200",
+        "description": "Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "202": {
+            "description": "Initial response, with no entity body",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/delete/202/retry/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/delete/202/noretry/204": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_delete202NoRetry204",
+        "description": "Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "202": {
+            "description": "Initial response, with no entity body",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/delete/202/noretry/204",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/delete/noheader": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteNoHeaderInRetry",
+        "description": "Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "204": {
+            "description": "Response after completion"
+          },
+          "202": {
+            "description": "Initial response, with no entity body",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/put/noheader/202/204/operationresults",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/deleteasync/noheader/202/204": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteAsyncNoHeaderInRetry",
+        "description": "Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "204": {
+            "description": "Response after completion"
+          },
+          "202": {
+            "description": "Initial response, with no entity body",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/put/noheader/202/204/operationresults",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/deleteasync/retry/succeeded": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteAsyncRetrySucceeded",
+        "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/deleteasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/deleteasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/deleteasync/noretry/succeeded": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteAsyncNoRetrySucceeded",
+        "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/deleteasync/noretry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/deleteasync/noretry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/deleteasync/retry/failed": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteAsyncRetryFailed",
+        "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/deleteasync/retry/failed/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/deleteasync/retry/failed/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/deleteasync/retry/canceled": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_deleteAsyncRetrycanceled",
+        "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/deleteasync/retry/canceled/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/deleteasync/retry/canceled/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/post/payload/200": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_post200WithPayload",
+        "description": "Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          "200": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/post/202/retry/200": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_post202Retry200",
+        "description": "Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/post/202/retry/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/post/202/noretry/204": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_post202NoRetry204",
+        "description": "Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/post/202/noretry/204",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/postasync/retry/succeeded": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_postAsyncRetrySucceeded",
+        "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "200": {
+            "description": "Response after completion.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/postasync/noretry/succeeded": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_postAsyncNoRetrySucceeded",
+        "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "200": {
+            "description": "Response after completion.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/postasync/retry/failed": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_postAsyncRetryFailed",
+        "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/postasync/retry/canceled": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROs_postAsyncRetrycanceled",
+        "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/canceled/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/canceled/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/retryerror/put/201/creating/succeeded/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LRORetrys_put201CreatingSucceeded200",
+        "description": "Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRORetry Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "201": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/retryerror/putasync/retry/succeeded": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LRORetrys_putAsyncRelativeRetrySucceeded",
+        "description": "Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRORetry Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/retryerror/delete/provisioning/202/accepted/200/succeeded": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LRORetrys_deleteProvisioning202Accepted200Succeeded",
+        "description": "Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRORetry Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Deleting'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/delete/provisioning/202/accepted/200/succeeded",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/retryerror/delete/202/retry/200": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LRORetrys_delete202Retry200",
+        "description": "Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRORetry Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with no entity body",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/delete/202/retry/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/retryerror/deleteasync/retry/succeeded": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LRORetrys_deleteAsyncRelativeRetrySucceeded",
+        "description": "Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRORetry Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/deleteasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/deleteasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/retryerror/post/202/retry/200": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LRORetrys_post202Retry200",
+        "description": "Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success",
+        "tags": [
+          "LRORetry Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/retryerror/postasync/retry/succeeded": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LRORetrys_postAsyncRelativeRetrySucceeded",
+        "description": "Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRORetry Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/nonretryerror/put/400": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_putNonRetry400",
+        "description": "Long running put request, service returns a 400 to the initial request",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "201": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/nonretryerror/put/201/creating/400": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_putNonRetry201Creating400",
+        "description": "Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "201": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/nonretryerror/putasync/retry/400": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_putAsyncRelativeRetry400",
+        "description": "Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/nonretryerror/putasync/retry/operationResults/400",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/nonretryerror/putasync/retry/operationResults/400",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/nonretryerror/delete/400": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_deleteNonRetry400",
+        "description": "Long running delete request, service returns a 400 with an error body",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with no entity body",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/delete/202/retry/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/nonretryerror/delete/202/retry/400": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_delete202NonRetry400",
+        "description": "Long running delete request, service returns a 202 with a location header",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with no entity body",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/delete/202/retry/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/nonretryerror/deleteasync/retry/400": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_deleteAsyncRelativeRetry400",
+        "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "For completion only will not return",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/nonretryerror/deleteasync/retry/operationResults/400",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/nonretryerror/deleteasync/retry/operationResults/400",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/nonretryerror/post/400": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_postNonRetry400",
+        "description": "Long running post request, service returns a 400 with no error body",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/nonretryerror/post/202/retry/400": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_post202NonRetry400",
+        "description": "Long running post request, service returns a 202 with a location header",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/nonretryerror/postasync/retry/400": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_postAsyncRelativeRetry400",
+        "description": "Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/nonretryerror/putasync/retry/operationResults/400",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/nonretryerror/putasync/retry/operationResults/400",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/put/201/noprovisioningstatepayload": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_putError201NoProvisioningStatePayload",
+        "description": "Long running put request, service returns a 201 to the initial request with no payload",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "for completion only will not return",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "201": {
+            "description": "Initial response, with ProvisioningState missing",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/putasync/retry/nostatus": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_putAsyncRelativeRetryNoStatus",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/putasync/retry/nostatuspayload": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_putAsyncRelativeRetryNoStatusPayload",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/delete/204/nolocation": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_delete204Succeeded",
+        "description": "Long running delete request, service returns a 204 to the initial request, indicating success.",
+        "tags": [
+          "LRO Operations"
+        ],
+        "responses": {
+          "204": {
+            "description": "Final response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/deleteasync/retry/nostatus": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_deleteAsyncRelativeRetryNoStatus",
+        "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/deleteasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/deleteasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/post/202/nolocation": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_post202NoLocation",
+        "description": "Long running post request, service returns a 202 to the initial request, without a location header.",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will not be set",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/postasync/retry/nopayload": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_postAsyncRelativeRetryNoPayload",
+        "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/error/putasync/retry/failed/operationResults/nopayload",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/error/putasync/retry/failed/operationResults/nopayload",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/put/200/invalidjson": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_put200InvalidJson",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "204": {
+            "description": "Final response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/putasync/retry/invalidheader": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_putAsyncRelativeRetryInvalidHeader",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/putasync/retry/invalidjsonpolling": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_putAsyncRelativeRetryInvalidJsonPolling",
+        "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/delete/202/retry/invalidheader": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_delete202RetryInvalidHeader",
+        "description": "Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with no entity body",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /foo",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to /bar",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/deleteasync/retry/invalidheader": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_deleteAsyncRelativeRetryInvalidHeader",
+        "description": "Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /foo",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /foo",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to /bar",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/deleteasync/retry/invalidjsonpolling": {
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_deleteAsyncRelativeRetryInvalidJsonPolling",
+        "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/post/202/retry/invalidheader": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_post202RetryInvalidHeader",
+        "description": "Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /foo",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to /bar",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/postasync/retry/invalidheader": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_postAsyncRelativeRetryInvalidHeader",
+        "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to foo",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to foo",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to /bar",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/error/postasync/retry/invalidjsonpolling": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_postAsyncRelativeRetryInvalidJsonPolling",
+        "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/error/postasync/retry/failed/operationResults/invalidjsonpolling",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/error/postasync/retry/failed/operationResults/invalidjsonpolling",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/customheader/putasync/retry/succeeded": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROsCustomHeader_putAsyncRetrySucceeded",
+        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/customheader/put/201/creating/succeeded/200": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROsCustomHeader_put201CreatingSucceeded200",
+        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "201": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/customheader/post/202/retry/200": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROsCustomHeader_post202Retry200",
+        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "headers": {
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/post/202/retry/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/lro/customheader/postasync/retry/succeeded": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROsCustomHeader_postAsyncRetrySucceeded",
+        "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
+        "tags": [
+          "LRO Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Initial response with ProvisioningState='Updating'",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Number of milliseconds until the next poll should be sent, will be set to zero",
+                "type": "integer",
+                "format": "Int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "x-ms-external": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource Type",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name",
+          "readOnly": true
+        }
+      }
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "Product": {
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "provisioningState" : {
+              "type": "string"
+            },
+            "provisioningStateValues": {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "canceled",
+                "Accepted",
+                "Creating",
+                "Created",
+                "Updating",
+                "Updated",
+                "Deleting",
+                "Deleted",
+                "OK"
+              ],
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "SubProduct": {
+      "allOf": [
+        {
+          "$ref": "SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "provisioningState" : {
+                "type": "string"
+            },
+            "provisioningStateValues": {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "canceled",
+                "Accepted",
+                "Creating",
+                "Created",
+                "Updating",
+                "Updated",
+                "Deleting",
+                "Deleted",
+                "OK"
+              ],
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "SubResource": {
+      "x-ms-external": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Sub Resource Id",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationResult": {
+      "properties": {
+        "status": {
+          "description": "The status of the request",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "canceled",
+            "Accepted",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "OK"
+          ]
+        },
+        "error": {
+          "properties": {
+            "code": {
+              "description": "The error code for an operation failure",
+              "type": "integer"
+            },
+            "message": {
+              "description": "The detailed arror message",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  }

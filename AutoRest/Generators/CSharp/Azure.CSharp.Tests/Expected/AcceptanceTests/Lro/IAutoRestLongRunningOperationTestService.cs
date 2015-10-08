@@ -15,7 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Microsoft.Rest;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -37,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// The management credentials for Azure.
@@ -56,8 +55,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
 
         ILROsOperations LROs { get; }
-
-        IDONOTCALLsOperations DONOTCALLs { get; }
 
         ILRORetrysOperations LRORetrys { get; }
 

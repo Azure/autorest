@@ -15,7 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsHead
     using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Microsoft.Rest;
-    using System.Linq;
     using Microsoft.Rest.Azure;
 
     /// <summary>
@@ -36,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// The management credentials for Azure.

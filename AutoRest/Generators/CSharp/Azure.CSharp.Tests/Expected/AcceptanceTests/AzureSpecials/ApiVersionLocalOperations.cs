@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -19,7 +20,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using Newtonsoft.Json;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -54,8 +54,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='apiVersion'>
         /// This should appear as a method parameter, use value '2.0'. Possible values
-        /// for this parameter include: '2.0'
-        /// </param>
+        /// for this parameter include: '2.0'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -80,7 +79,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodLocalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/apiVersion/method/string/none/query/local/2.0").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/method/string/none/query/local/2.0").ToString();
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -173,8 +172,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='apiVersion'>
         /// This should appear as a method parameter, use value null, this should
-        /// result in no serialized parameter
-        /// </param>
+        /// result in no serialized parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -195,7 +193,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodLocalNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/apiVersion/method/string/none/query/local/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/method/string/none/query/local/null").ToString();
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -288,8 +286,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='apiVersion'>
         /// This should appear as a method parameter, use value '2.0'. Possible values
-        /// for this parameter include: '2.0'
-        /// </param>
+        /// for this parameter include: '2.0'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -314,7 +311,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetPathLocalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/apiVersion/path/string/none/query/local/2.0").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/path/string/none/query/local/2.0").ToString();
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -407,8 +404,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='apiVersion'>
         /// The api version, which appears in the query, the value is always '2.0'.
-        /// Possible values for this parameter include: '2.0'
-        /// </param>
+        /// Possible values for this parameter include: '2.0'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -433,7 +429,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetSwaggerLocalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/apiVersion/swagger/string/none/query/local/2.0").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/swagger/string/none/query/local/2.0").ToString();
             List<string> queryParameters = new List<string>();
             if (apiVersion != null)
             {

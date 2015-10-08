@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsLro
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Net;
@@ -21,7 +22,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -61,8 +61,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         public int? LongRunningOperationRetryTimeout { get; set; }
 
         public virtual ILROsOperations LROs { get; private set; }
-
-        public virtual IDONOTCALLsOperations DONOTCALLs { get; private set; }
 
         public virtual ILRORetrysOperations LRORetrys { get; private set; }
 
@@ -176,7 +174,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         private void Initialize()
         {
             this.LROs = new LROsOperations(this);
-            this.DONOTCALLs = new DONOTCALLsOperations(this);
             this.LRORetrys = new LRORetrysOperations(this);
             this.LROSADs = new LROSADsOperations(this);
             this.LROsCustomHeader = new LROsCustomHeaderOperations(this);

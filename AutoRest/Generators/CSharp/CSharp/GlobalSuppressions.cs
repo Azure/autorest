@@ -56,6 +56,14 @@
     Target = "Microsoft.Rest.Generator.CSharp.TemplateModels.ClientModelExtensions.#ValidateType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.CSharp.IScopeProvider,System.String)",
     Justification = "The string is generated code, it is much more readable and maintainable if this is a literal rather than a string resource, " +
     "and there are no globalization concerns for source code.")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", 
+    MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", 
+    Scope = "member", 
+    Target = "Microsoft.Rest.Generator.CSharp.TemplateModels.ClientModelExtensions.#ValidateType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.CSharp.IScopeProvider,System.String,System.Collections.Generic.Dictionary`2<Microsoft.Rest.Generator.ClientModel.Constraint,System.String>)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", 
+    MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", 
+    Scope = "member", 
+    Target = "Microsoft.Rest.Generator.CSharp.TemplateModels.ClientModelExtensions.#AppendConstraintValidations(System.String,System.Collections.Generic.Dictionary`2<Microsoft.Rest.Generator.ClientModel.Constraint,System.String>,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.Method,Microsoft.Rest.Generator.ClientModel.ServiceClient)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.Method,Microsoft.Rest.Generator.ClientModel.ServiceClient)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.ModelTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.CompositeType)")]

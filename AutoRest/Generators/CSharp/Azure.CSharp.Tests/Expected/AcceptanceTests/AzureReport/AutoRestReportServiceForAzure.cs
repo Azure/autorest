@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsAzureReport
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Net;
@@ -21,7 +22,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -213,7 +213,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
                 ServiceClientTracing.Enter(invocationId, this, "GetReport", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/report/azure").ToString();
+            var url = new Uri(this.BaseUri, "report/azure").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

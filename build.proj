@@ -54,13 +54,15 @@
 
   <PropertyGroup>
     <ClientRuntimeSolution>ClientRuntime.sln</ClientRuntimeSolution>
+    <ClientRuntimeWindowsSolution>ClientRuntimeWindows.sln</ClientRuntimeWindowsSolution>
     <CodeGeneratorSolution>AutoRest.sln</CodeGeneratorSolution>
     <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
     <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
     <LibraryToolsFolder>$(LibraryRoot)Tools</LibraryToolsFolder>
     <BinariesFolder>$(LibraryRoot)binaries</BinariesFolder>
+    <TestResultsFolder>$(LibraryRoot)TestResults</TestResultsFolder>
     <PackageOutputDir>$(BinariesFolder)\packages</PackageOutputDir>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition="'$(Configuration)' == '' ">Debug</Configuration>
     <CodeSign Condition=" '$(CodeSign)' == '' ">false</CodeSign>
     <!-- Only set set this to true for testing the code sign workflow locally. -->
     <DelaySign Condition =" '$(DelaySign)' == '' ">false</DelaySign>
@@ -76,12 +78,12 @@
 
   <PropertyGroup>
     <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
-    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
+    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(LibraryToolsFolder)\NuGet.exe&quot;</NuGetCommand>
    </PropertyGroup>
 
-  <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="ValidateStrongNameSignatureTask" />
-  <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="RegexReplaceTask" />
-  <UsingTask AssemblyFile="tools\AutoRest.Build.Tasks.dll" TaskName="SetEnvVar" />
+  <UsingTask AssemblyFile="Tools\AutoRest.Build.Tasks.dll" TaskName="ValidateStrongNameSignatureTask" />
+  <UsingTask AssemblyFile="Tools\AutoRest.Build.Tasks.dll" TaskName="RegexReplaceTask" />
+  <UsingTask AssemblyFile="Tools\AutoRest.Build.Tasks.dll" TaskName="SetEnvVar" />
 
   <!-- CI build related. -->
   <PropertyGroup>
@@ -110,6 +112,10 @@
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
              Targets="Build"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <MSBuild Projects="$(ClientRuntimeWindowsSolution)"
+            Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
+            Targets="Build"
+            Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' == 'Windows_NT'" />
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
 
@@ -124,7 +130,12 @@
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU"
              Targets="Clean"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <MSBuild Projects="$(ClientRuntimeWindowsSolution)"
+           Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
+           Targets="Clean"
+           Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' == 'Windows_NT'" />
     <RemoveDir Directories="$(BinariesFolder)" />
+    <RemoveDir Directories="$(TestResultsFolder)" />
   </Target>
 
   <Target Name="CodeAnalysis" DependsOnTargets="RestoreNugetPackages">
@@ -138,74 +149,15 @@
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <MSBuild Projects="$(ClientRuntimeWindowsSolution)"
+          Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
+          Targets="Rebuild"
+          Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' == 'Windows_NT'" />
   </Target>
 
   <!-- Run tests. -->
-  <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="packages\xunit.runner.msbuild.2.1.0-beta4-build3050\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.runner.msbuild.dll" />
   <Target Name="Test" DependsOnTargets="RestoreNugetPackages">
-    <CallTarget Targets="TestClientRuntime" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
-    <CallTarget Targets="TestCodeGenerator" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
-    <CallTarget Targets="TestNuGetPackages" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
-  </Target>
-
-  <Target Name="TestClientRuntime">
-    <ItemGroup>
-      <TestDlls Include="$(LibraryRoot)\ClientRuntimes\CSharp\*.Tests\bin\*\*Tests.dll" />
-    </ItemGroup>
-
-    <Message Text="@(TestDlls)" />
-    <MakeDir Directories="$(LibraryRoot)TestResults"/>
-    <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.clientruntime.html" ContinueOnError="false" />
-    <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ms-rest\" Command="npm test"/>
-    <Exec WorkingDirectory=".\ClientRuntimes\NodeJS\ms-rest-azure\" Command="npm test"/>
-  </Target>
-
-  <Target Name="TestCodeGenerator">
-    <ItemGroup>
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Azure.Common\Azure.Common.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Common.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\CSharp\CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.CSharp.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\CSharp\Azure.CSharp.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.CSharp.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\AutoRest.Core.Tests\bin\Net45-$(Configuration)\AutoRest.Core.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Modelers\Swagger.Tests\bin\Net45-$(Configuration)\AutoRest.Modeler.Swagger.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Ruby.Tests.dll" />
-      <TestDlls Include="$(LibraryRoot)\AutoRest\Generators\Ruby\Azure.Ruby.Tests\bin\Net45-$(Configuration)\AutoRest.Generator.Azure.Ruby.Tests.dll" />
-    </ItemGroup>
-
-    <Message Text="@(TestDlls)" />
-    <MakeDir Directories="$(LibraryRoot)TestResults"/>
-    <!-- <Exec WorkingDirectory=".\ClientRuntimes\Ruby\" Command="UpdateRuntime"/> -->
-    <xunit Assemblies="@(TestDlls)" Html="$(MSBuildProjectDirectory)\TestResults\xunit.codegen.html" ContinueOnError="false" />
-    <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\NodeJS.Tests\" Command="npm test"/>
-    <Exec WorkingDirectory="$(LibraryRoot)\AutoRest\Generators\NodeJS\Azure.NodeJS.Tests\" Command="npm test"/>
-  </Target>
-
-  <Target Name="TestNuGetPackages">
-    <PropertyGroup>
-      <TestProjectDir>$(LibraryRoot)AutoRest\Generators\AcceptanceTests\NugetPackageTest</TestProjectDir>
-    </PropertyGroup>
-
-    <!--install autorest and client runtime packages-->
-    <Exec Command="$(NuGetCommand) restore $(TestProjectDir)\NugetPackageTest.sln -source &quot;$(PackageOutputDir)&quot;"/>
-    <ItemGroup>
-      <AutoRestExeFiles Include="$(TestProjectDir)\packages\autorest.*\tools\AutoRest.exe" />
-    </ItemGroup>
-    <PropertyGroup>
-      <AutoRestExe Condition=" '$(OS)' == 'Windows_NT'">@(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
-      <AutoRestExe Condition=" '$(OS)' != 'Windows_NT'">mono @(AutoRestExeFiles->'%(FullPath)')</AutoRestExe>
-    </PropertyGroup>
-
-    <RemoveDir Directories="$(TestProjectDir)\Generated\" />
-    <!--Invoke code-gen-->
-    <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator CSharp -OutputDirectory $(TestProjectDir)\Generated\CSharp -Namespace &quot;Fixtures.Bodynumber&quot; -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
-    <Exec WorkingDirectory="$(TestProjectDir)" Command="$(AutoRestExe) -Modeler Swagger -CodeGenerator NodeJS -OutputDirectory $(TestProjectDir)\Generated\NodeJS -Input &quot;$(LibraryRoot)\AutoRest\Generators\AcceptanceTests\swagger\body-number.json&quot; -Header NONE"/>
-
-    <!--Build and run tests-->
-    <MSBuild Projects="$(TestProjectDir)\NugetPackageCsharpTest.csproj" Targets="rebuild" />
-    <ItemGroup>
-      <NuGetPackageCSharpTestDlls Include="$(TestProjectDir)\bin\$(Configuration)\NuGetPackageCSharpTest.dll" />
-    </ItemGroup>
-    <xunit Assemblies="@(NuGetPackageCSharpTestDlls)" />
-    <Exec WorkingDirectory="$(TestProjectDir)" Command="npm test"/>
+    <Exec Command="gulp test"/>
   </Target>
 
   <PropertyGroup>
@@ -281,6 +233,7 @@
   <Target Name="RestoreNugetPackages">
     <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <Exec Command="$(NuGetCommand) restore $(ClientRuntimeWindowsSolution)" ContinueOnError="false" Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' != 'Unix'" />
   </Target>
 
   <!-- Official releases require tools only available on corp network. -->
@@ -304,6 +257,6 @@
     <Message Text="Source folder           : $(LibrarySourceFolder)" />
   </Target>
 
-  <Import Project="$(LibraryToolsFolder)\nuget.targets"/>
+  <Import Project="tools\NuGet.targets"/>
 
 </Project>

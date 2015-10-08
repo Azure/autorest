@@ -3,13 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Properties;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
 {
@@ -30,7 +30,14 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 MethodGroupName = MethodGroupName + "Operations";
             }
+
+            this.ClientRequestIdString = AzureCodeGenerator.GetClientRequestIdString(source);
+            this.RequestIdString = AzureCodeGenerator.GetRequestIdString(source);
         }
+
+        public string ClientRequestIdString { get; private set; }
+
+        public string RequestIdString { get; private set; }
 
         public AzureMethodTemplateModel GetMethod
         {
@@ -121,9 +128,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 {
                      sb.AppendLine("result.Body = (statusCode == HttpStatusCode.NoContent);");
                 }
-                sb.AppendLine("if (httpResponse.Headers.Contains(\"x-ms-request-id\"))")
+                sb.AppendLine("if (httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)
                     .AppendLine("{").Indent()
-                        .AppendLine("result.RequestId = httpResponse.Headers.GetValues(\"x-ms-request-id\").FirstOrDefault();").Outdent()
+                        .AppendLine("result.RequestId = httpResponse.Headers.GetValues(\"{0}\").FirstOrDefault();", this.RequestIdString).Outdent()
                     .AppendLine("}")
                     .AppendLine(base.InitializeResponseBody);
                 return sb.ToString();
@@ -138,7 +145,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             get
             {
                 var sb= new IndentedStringBuilder();
-                sb.AppendLine("httpRequest.Headers.TryAddWithoutValidation(\"x-ms-client-request-id\", Guid.NewGuid().ToString());")
+                sb.AppendLine("httpRequest.Headers.TryAddWithoutValidation(\"{0}\", Guid.NewGuid().ToString());", this.ClientRequestIdString)
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
             }

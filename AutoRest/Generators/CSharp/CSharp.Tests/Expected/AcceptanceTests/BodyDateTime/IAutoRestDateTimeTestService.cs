@@ -35,7 +35,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
 
         IDatetime Datetime { get; }

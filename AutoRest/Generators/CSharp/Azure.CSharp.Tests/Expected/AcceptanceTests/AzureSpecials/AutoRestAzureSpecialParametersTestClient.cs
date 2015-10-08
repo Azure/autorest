@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Net;
@@ -21,7 +22,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -83,6 +83,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         public virtual IApiVersionLocalOperations ApiVersionLocal { get; private set; }
 
         public virtual ISkipUrlEncodingOperations SkipUrlEncoding { get; private set; }
+
+        public virtual IHeaderOperations Header { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
@@ -195,6 +197,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             this.ApiVersionDefault = new ApiVersionDefaultOperations(this);
             this.ApiVersionLocal = new ApiVersionLocalOperations(this);
             this.SkipUrlEncoding = new SkipUrlEncodingOperations(this);
+            this.Header = new HeaderOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.ApiVersion = "2015-07-01-preview";
             this.AcceptLanguage = "en-US";

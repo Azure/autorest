@@ -3,11 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -60,19 +59,19 @@ namespace Microsoft.Rest.Generator.CSharp
                     if (parameter.ClientProperty != null)
                     {
                         parameter.Name = string.Format(CultureInfo.InvariantCulture,
-                            "{0}.{1}", 
-                            method.Group == null ? "this" : "this.Client", 
+                            "{0}.{1}",
+                            method.Group == null ? "this" : "this.Client",
                             parameter.ClientProperty.Name);
                     }
                     else
                     {
-                        parameter.Name = scope.GetVariableName(parameter.Name);   
+                        parameter.Name = scope.GetVariableName(parameter.Name);
                     }
                 }
             }
         }
 
-        protected override IType NormalizeType(IType type)
+        public override IType NormalizeType(IType type)
         {
             if (type == null)
             {
@@ -106,7 +105,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 return NormalizeEnumType(type as EnumType);
             }
 
-            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                 "Type {0} is not supported.", type.GetType()));
         }
 

@@ -32,6 +32,7 @@
       <Word>FirstOrDefault</Word>
       <Word>requestId</Word>
       <Word>Login</Word>
+      <Word>Impl</Word>
     </Recognized>
   </Words>
 </Dictionary>

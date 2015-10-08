@@ -10,6 +10,7 @@
   "tags": ["node", "microsoft", "autorest", "clientruntime"],
   "keywords": ["node", "microsoft", "autorest", "clientruntime"],
   "main": "./lib/msRest.js",
+  "typings": "./lib/index.d.ts",
   "engines": {
     "node": ">= 0.6.15"
   },
@@ -22,7 +23,7 @@
   "dependencies": {
     "underscore": "1.4.x",
     "tunnel": "~0.0.2",
-    "request": "2.45.0",
+    "request": "2.52.0",
     "validator": "~3.1.0",
     "duplexer": "~0.1.1",
     "through": "~2.3.4",

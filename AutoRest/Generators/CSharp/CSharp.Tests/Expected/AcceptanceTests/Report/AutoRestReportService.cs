@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsReport
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -139,7 +140,7 @@ namespace Fixtures.AcceptanceTestsReport
                 ServiceClientTracing.Enter(invocationId, this, "GetReport", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/report").ToString();
+            var url = new Uri(this.BaseUri, "report").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

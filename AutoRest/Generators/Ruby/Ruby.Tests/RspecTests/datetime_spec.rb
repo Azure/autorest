@@ -1,7 +1,12 @@
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/datetime'
+
 require 'rspec'
-require_relative 'DateTime/sdk_requirements'
+require 'body_datetime'
 require_relative './helper'
-include MyNamespace
+
+include DatetimeModule
 
 describe Date do
 
@@ -12,7 +17,7 @@ describe Date do
 	@credentials = MsRest::TokenCredentials.new(dummyToken)
 
     client = AutoRestDateTimeTestService.new(@credentials, @base_url)
-    @date_client = MyNamespace::Datetime.new(client)
+    @date_client = Datetime.new(client)
   end
 
   it 'should create test service' do
@@ -21,7 +26,7 @@ describe Date do
 
   it 'should get null' do
     result = @date_client.get_null().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(nil)
   end
 
@@ -31,43 +36,43 @@ describe Date do
 
   it 'should get overflow' do
     result = @date_client.get_overflow().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_equal_datetimes(DateTime.new(9999, 12, 31, 23, 59, 59, '-14'))
   end
 
   it 'should get utc lowercase max date time' do
     result = @date_client.get_utc_lowercase_max_date_time().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_equal_datetimes(DateTime.new(9999, 12, 31, 23, 59, 59, 'Z'))
   end
 
   it 'should get utc uppercase max date time' do
     result = @date_client.get_utc_uppercase_max_date_time().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_equal_datetimes(DateTime.new(9999, 12, 31, 23, 59, 59, 'Z'))
   end
 
   it 'should get local positive offset lowercase max date time' do
     result = @date_client.get_local_positive_offset_lowercase_max_date_time().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_equal_datetimes(DateTime.new(9999, 12, 31, 23, 59, 59, '+14'))
   end
 
   it 'should get local positive offset uppercase max date time' do
     result = @date_client.get_local_positive_offset_uppercase_max_date_time().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_equal_datetimes(DateTime.new(9999, 12, 31, 23, 59, 59, '+14'))
   end
 
   it 'should get local negative offset lowercase max date time' do
     result = @date_client.get_local_negative_offset_lowercase_max_date_time().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_equal_datetimes(DateTime.new(9999, 12, 31, 23, 59, 59, '-14:00'))
   end
 
   it 'should get local negative offset uppercase max date time' do
     result = @date_client.get_local_negative_offset_uppercase_max_date_time().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to be_equal_datetimes(DateTime.new(9999, 12, 31, 23, 59, 59, '-14:00'))
   end
 
@@ -76,54 +81,51 @@ describe Date do
   end
 
   it 'should put utc max date' do
-    pending('proper working with datetime isnt implemented yet')
     result = @date_client.put_utc_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999)).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should put utc min date' do
     result = @date_client.put_utc_min_date_time(DateTime.new(0001, 01, 01, 00, 00, 00)).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should put local positive offset min date time' do
-    pending('proper working with datetime isnt implemented yet')
     result = @date_client.put_local_positive_offset_min_date_time(DateTime.new(0001, 01, 01, 00, 00, 00, '+14')).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should put local negative offset min date time' do
     result = @date_client.put_local_negative_offset_min_date_time(DateTime.new(0001, 01, 01, 00, 00, 00, '-14')).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should put local positive offset max date time' do
-    pending('proper working with datetime isnt implemented yet')
     result = @date_client.put_local_positive_offset_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999, '+14:00')).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should put local negative offset max date time' do
     pending('proper working with datetime isnt implemented yet')
     result = @date_client.put_local_negative_offset_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59.9999999, '-14:00')).value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
   end
 
   it 'should get utc min date time' do
     result = @date_client.get_utc_min_date_time().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(DateTime.new(0001, 01, 01, 00, 00, 00, 'Z'))
   end
 
   it 'should get local positive offset min date time' do
     result = @date_client.get_local_positive_offset_min_date_time().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(DateTime.new(0001, 01, 01, 00, 00, 00, '+14'))
   end
 
   it 'should get local negative offset min date time' do
     result = @date_client.get_local_negative_offset_min_date_time().value!
-    expect(result.response).to be_an_instance_of(Net::HTTPOK)
+    expect(result.response.status).to eq(200)
     expect(result.body).to eq(DateTime.new(0001, 01, 01, 00, 00, 00, '-14'))
   end
 

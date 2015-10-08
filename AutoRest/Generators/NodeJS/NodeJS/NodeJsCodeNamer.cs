@@ -3,11 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -20,7 +19,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// </summary>
         public NodeJsCodeNamer()
         {
-            // List retrieved from 
+            // List retrieved from
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords
             new HashSet<string>
             {
@@ -158,7 +157,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
-        protected override IType NormalizeType(IType type)
+        public override IType NormalizeType(IType type)
         {
             if (type == null)
             {
@@ -199,7 +198,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
 
 
-            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                 "Type {0} is not supported.", type.GetType()));
         }
 

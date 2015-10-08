@@ -2,9 +2,11 @@
 @using Microsoft.Rest.Generator.CSharp.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel>
 @Header("// ")
+@EmptyLine
 namespace @Settings.Namespace
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;

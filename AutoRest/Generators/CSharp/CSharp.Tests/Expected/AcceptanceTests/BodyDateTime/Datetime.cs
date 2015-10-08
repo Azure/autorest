@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsBodyDateTime
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -69,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -156,7 +157,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetInvalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/invalid").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -243,7 +244,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetOverflow", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/overflow").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/overflow").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -330,7 +331,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetUnderflow", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/underflow").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/underflow").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -424,7 +425,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "PutUtcMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/max/utc").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/max/utc").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -509,7 +510,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetUtcLowercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/max/utc/lowercase").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/max/utc/lowercase").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -596,7 +597,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetUtcUppercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/max/utc/uppercase").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/max/utc/uppercase").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -691,7 +692,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "PutLocalPositiveOffsetMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/max/localpositiveoffset").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/max/localpositiveoffset").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -777,7 +778,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetLocalPositiveOffsetLowercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/max/localpositiveoffset/lowercase").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/max/localpositiveoffset/lowercase").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -865,7 +866,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetLocalPositiveOffsetUppercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/max/localpositiveoffset/uppercase").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/max/localpositiveoffset/uppercase").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -960,7 +961,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "PutLocalNegativeOffsetMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/max/localnegativeoffset").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/max/localnegativeoffset").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1046,7 +1047,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetLocalNegativeOffsetUppercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/max/localnegativeoffset/uppercase").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/max/localnegativeoffset/uppercase").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1134,7 +1135,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetLocalNegativeOffsetLowercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/max/localnegativeoffset/lowercase").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/max/localnegativeoffset/lowercase").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1228,7 +1229,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "PutUtcMinDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/min/utc").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/min/utc").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1313,7 +1314,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetUtcMinDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/min/utc").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/min/utc").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1407,7 +1408,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "PutLocalPositiveOffsetMinDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/min/localpositiveoffset").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/min/localpositiveoffset").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1492,7 +1493,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetLocalPositiveOffsetMinDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/min/localpositiveoffset").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/min/localpositiveoffset").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1586,7 +1587,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "PutLocalNegativeOffsetMinDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/min/localnegativeoffset").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/min/localnegativeoffset").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1671,7 +1672,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 ServiceClientTracing.Enter(invocationId, this, "GetLocalNegativeOffsetMinDateTime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/datetime/min/localnegativeoffset").ToString();
+            var url = new Uri(this.Client.BaseUri, "datetime/min/localnegativeoffset").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

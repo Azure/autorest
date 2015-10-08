@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -19,7 +20,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using Newtonsoft.Json;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -71,7 +71,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "Get", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/overwrite/x-ms-client-request-id/method/").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/overwrite/x-ms-client-request-id/method").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -160,8 +160,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='xMsClientRequestId'>
         /// This should appear as a method parameter, use value
-        /// '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
-        /// </param>
+        /// '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -186,7 +185,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "ParamGet", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/azurespecials/overwrite/x-ms-client-request-id/via-param/method/").ToString();
+            var url = new Uri(this.Client.BaseUri, "azurespecials/overwrite/x-ms-client-request-id/via-param/method").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

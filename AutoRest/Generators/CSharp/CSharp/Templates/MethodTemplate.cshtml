@@ -1,16 +1,25 @@
-﻿@using System.Linq;
+@using System.Linq;
+@using System
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
-/// <summary>
-@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
-/// </summary>
+
+@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+{
+@:/// <summary>
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+@:/// </summary>
+}
+@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+}
 @foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
-@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
+@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
 @:/// </param>
 }
 /// <param name='customHeaders'>
@@ -31,10 +40,9 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @:}
 @:
         }
-        if(parameter.Location != ParameterLocation.Query &&
-            (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+        if(Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body)
         {
-    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
+    @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.Constraints))
         }
     }
     // Tracing
@@ -59,7 +67,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     }
     else
     {
-    @:var url = new Uri(@(Model.ClientReference).BaseUri, "@(Model.Url)").ToString();
+    @:var url = new Uri(@(Model.ClientReference).BaseUri, "@(Model.Url.Trim('/'))").ToString();
     }
     @(Model.BuildUrl("url"))
     // Create HTTP transport objects

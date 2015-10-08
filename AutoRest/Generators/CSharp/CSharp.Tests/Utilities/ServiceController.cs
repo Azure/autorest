@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
@@ -20,6 +20,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         private ProcessOutputListener _listener;
 
+        private object _sync = new object();
         public ServiceController()
         {
             Port = GetRandomPortNumber();
@@ -31,7 +32,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         /// </summary>
         private static string AcceptanceTestsPath
         {
-            get { return @"..\..\..\..\AcceptanceTests\server"; }
+            get
+            {
+                var serverPath = Environment.GetEnvironmentVariable("AUTOREST_TEST_SERVER_PATH") ??
+                    @"..\..\..\..\..\..\AutoRest\TestServer";
+                return Path.Combine(serverPath, "server");
+            }
         }
 
         /// <summary>
@@ -69,10 +75,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         /// </summary>
         public void EnsureService()
         {
-            // TODO: not thread safe. Add a lock.
-            if (ServiceProcess == null)
+            lock (_sync)
             {
-                StartServiceProcess();
+                if (ServiceProcess == null)
+                {
+                    StartServiceProcess();
+                }
             }
         }
 

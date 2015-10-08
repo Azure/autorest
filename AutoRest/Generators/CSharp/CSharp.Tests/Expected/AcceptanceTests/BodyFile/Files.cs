@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsBodyFile
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -69,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
                 ServiceClientTracing.Enter(invocationId, this, "GetFile", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/files/stream/nonempty").ToString();
+            var url = new Uri(this.Client.BaseUri, "files/stream/nonempty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -155,7 +156,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
                 ServiceClientTracing.Enter(invocationId, this, "GetEmptyFile", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/files/stream/empty").ToString();
+            var url = new Uri(this.Client.BaseUri, "files/stream/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

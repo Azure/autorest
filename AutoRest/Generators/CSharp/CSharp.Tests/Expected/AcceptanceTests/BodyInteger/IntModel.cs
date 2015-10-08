@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsBodyInteger
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -69,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/int/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "int/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -156,7 +157,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 ServiceClientTracing.Enter(invocationId, this, "GetInvalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/int/invalid").ToString();
+            var url = new Uri(this.Client.BaseUri, "int/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -243,7 +244,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 ServiceClientTracing.Enter(invocationId, this, "GetOverflowInt32", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/int/overflowint32").ToString();
+            var url = new Uri(this.Client.BaseUri, "int/overflowint32").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -330,7 +331,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 ServiceClientTracing.Enter(invocationId, this, "GetUnderflowInt32", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/int/underflowint32").ToString();
+            var url = new Uri(this.Client.BaseUri, "int/underflowint32").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -417,7 +418,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 ServiceClientTracing.Enter(invocationId, this, "GetOverflowInt64", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/int/overflowint64").ToString();
+            var url = new Uri(this.Client.BaseUri, "int/overflowint64").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -504,7 +505,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 ServiceClientTracing.Enter(invocationId, this, "GetUnderflowInt64", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/int/underflowint64").ToString();
+            var url = new Uri(this.Client.BaseUri, "int/underflowint64").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -598,7 +599,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 ServiceClientTracing.Enter(invocationId, this, "PutMax32", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/int/max/32").ToString();
+            var url = new Uri(this.Client.BaseUri, "int/max/32").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -690,7 +691,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 ServiceClientTracing.Enter(invocationId, this, "PutMax64", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/int/max/64").ToString();
+            var url = new Uri(this.Client.BaseUri, "int/max/64").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -782,7 +783,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 ServiceClientTracing.Enter(invocationId, this, "PutMin32", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/int/min/32").ToString();
+            var url = new Uri(this.Client.BaseUri, "int/min/32").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -874,7 +875,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 ServiceClientTracing.Enter(invocationId, this, "PutMin64", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/int/min/64").ToString();
+            var url = new Uri(this.Client.BaseUri, "int/min/64").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

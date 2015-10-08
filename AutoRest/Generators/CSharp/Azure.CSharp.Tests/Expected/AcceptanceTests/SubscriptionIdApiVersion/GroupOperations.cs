@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -19,7 +20,6 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using Newtonsoft.Json;
-    using System.Linq;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -52,8 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Provides a resouce group with name 'testgroup101' and location 'West US'.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// Resource Group name 'testgroup101'.
-        /// </param>
+        /// Resource Group name 'testgroup101'./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -86,7 +85,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
                 ServiceClientTracing.Enter(invocationId, this, "GetSampleResourceGroup", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}").ToString();
+            var url = new Uri(this.Client.BaseUri, "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(this.Client.SubscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             List<string> queryParameters = new List<string>();

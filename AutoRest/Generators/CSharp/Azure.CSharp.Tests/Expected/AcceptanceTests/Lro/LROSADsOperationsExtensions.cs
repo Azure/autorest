@@ -84,32 +84,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             /// <summary>
-            /// DO NOT CALL THIS METHOD. For completion only
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product GetNonRetry400(this ILROSADsOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).GetNonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// DO NOT CALL THIS METHOD. For completion only
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetNonRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetNonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
             /// Long running put request, service returns a Product with
             /// 'ProvisioningState' = 'Creating' and 201 response code
             /// </summary>
@@ -174,32 +148,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async Task<Product> BeginPutNonRetry201Creating400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 AzureOperationResponse<Product> result = await operations.BeginPutNonRetry201Creating400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
-            /// Long running opeartion polling returns a 400 with no error body
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product GetNonRetry201Creating400(this ILROSADsOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).GetNonRetry201Creating400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running opeartion polling returns a 400 with no error body
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetNonRetry201Creating400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetNonRetry201Creating400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -272,32 +220,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async Task<Product> BeginPutAsyncRelativeRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 AzureOperationResponse<Product> result = await operations.BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
-            /// DO NOT CALL THIS METHOD. For completion only
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product GetAsyncRelativeRetry400(this ILROSADsOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).GetAsyncRelativeRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// DO NOT CALL THIS METHOD. For completion only
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetAsyncRelativeRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetAsyncRelativeRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -722,32 +644,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             /// <summary>
-            /// DO NOT CALL THIS METHOD. For completion only
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product GetError201NoProvisioningStatePayload(this ILROSADsOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).GetError201NoProvisioningStatePayloadAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// DO NOT CALL THIS METHOD. For completion only
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetError201NoProvisioningStatePayloadAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetError201NoProvisioningStatePayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
             /// Long running put request, service returns a 200 to the initial request,
             /// with an entity that contains ProvisioningState=’Creating’. Poll the
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -827,36 +723,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static Product GetAsyncRelativeRetryNoStatus(this ILROSADsOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).GetAsyncRelativeRetryNoStatusAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetAsyncRelativeRetryNoStatusAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetAsyncRelativeRetryNoStatusWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
             /// <param name='product'>
             /// Product to put
             /// </param>
@@ -918,36 +784,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async Task<Product> BeginPutAsyncRelativeRetryNoStatusPayloadAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 AzureOperationResponse<Product> result = await operations.BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product GetAsyncRelativeRetryNoStatusPayload(this ILROSADsOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).GetAsyncRelativeRetryNoStatusPayloadAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetAsyncRelativeRetryNoStatusPayloadAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1268,32 +1104,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             /// <summary>
-            /// SHOUD NOT BE CALLED
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product Get200Succeeded(this ILROSADsOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Get200SucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// SHOUD NOT BE CALLED
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> Get200SucceededAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.Get200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
             /// Long running put request, service returns a 200 to the initial request,
             /// with an entity that contains ProvisioningState=’Creating’. The endpoint
             /// indicated in the Azure-AsyncOperation header is invalid.
@@ -1366,32 +1176,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             /// <summary>
-            /// SHOULD NOT BE CALLED
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product GetAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).GetAsyncRelativeRetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// SHOULD NOT BE CALLED
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
             /// Long running put request, service returns a 200 to the initial request,
             /// with an entity that contains ProvisioningState=’Creating’. Poll the
             /// endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1460,36 +1244,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async Task<Product> BeginPutAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 AzureOperationResponse<Product> result = await operations.BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product GetAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations)
-            {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).GetAsyncRelativeRetryInvalidJsonPollingAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Product> GetAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                AzureOperationResponse<Product> result = await operations.GetAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

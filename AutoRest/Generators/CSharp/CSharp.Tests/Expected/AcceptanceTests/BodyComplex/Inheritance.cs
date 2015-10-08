@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsBodyComplex
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -69,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "GetValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/inheritance/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/inheritance/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -141,8 +142,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Please put a siamese with id=2, name="Siameee", color=green,
         /// breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1
         /// and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-        /// food="french fries".
-        /// </param>
+        /// food="french fries"./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -167,7 +167,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "PutValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/inheritance/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/inheritance/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

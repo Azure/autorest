@@ -3,7 +3,9 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ServiceClientTemplateModel>
-@Header("// ")
+/*
+@Header(" * ")
+ */
 @EmptyLine
 /* jshint latedef:false */
 /* jshint forin:false */
@@ -14,6 +16,7 @@
 var msRestAzure = require('ms-rest-azure');
 @EmptyLine
 exports.Resource = msRestAzure.Resource;
+exports.SubResource = msRestAzure.SubResource;
 exports.CloudError = msRestAzure.CloudError;
 @foreach (var model in Model.ModelTemplateModels)
 {

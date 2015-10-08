@@ -12,7 +12,7 @@ var _ = require('underscore')
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 
-var reportClient = require('../Expected/AcceptanceTests/AzureReport/AutoRestReportServiceForAzure');
+var reportClient = require('../Expected/AcceptanceTests/AzureReport/autoRestReportServiceForAzure');
 
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';
@@ -28,11 +28,11 @@ describe('nodejs', function () {
     it('should have 100% coverage for Azure', function (done) {
       testClient.getReport(function (error, result) {
         should.not.exist(error);
-        //console.log('The test coverage for azure is ' + util.inspect(result.body));
-        var total = _.keys(result.body).length;
+        //console.log('The test coverage for azure is ' + util.inspect(result));
+        var total = _.keys(result).length;
         var passed = 0;
-        _.keys(result.body).forEach(function(item) {
-          if (result.body[item] > 0) {
+        _.keys(result).forEach(function(item) {
+          if (result[item] > 0) {
             passed++;
           } else {
             console.log('No coverage for scenario: ' + item + '\n');

@@ -3,17 +3,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
 using System.Net;
+using System.Text;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
-using System.Globalization;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -53,7 +53,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Name = methodName
             };
 
-            method.Documentation = _operation.Description;
+            method.Description = _operation.Description;
+            method.Summary = _operation.Summary;
 
             // Service parameters
             if (_operation.Parameters != null)
@@ -69,7 +70,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                     if (swaggerParameter.In == ParameterLocation.Header)
                     {
-                        method.RequestHeaders[swaggerParameter.Name] = 
+                        method.RequestHeaders[swaggerParameter.Name] =
                             string.Format(CultureInfo.InvariantCulture, "{{{0}}}", parameterName);
                     }
                 }
@@ -93,9 +94,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                               typesList)))
                     {
                         throw new InvalidOperationException(
-                            string.Format(CultureInfo.InvariantCulture, 
-                            Resources.UnsupportedMimeTypeForResponseBody, 
-                            methodName, 
+                            string.Format(CultureInfo.InvariantCulture,
+                            Resources.UnsupportedMimeTypeForResponseBody,
+                            methodName,
                             response.Key));
                     }
                 }
@@ -132,7 +133,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                         }
                         s.Name = newName;
                     }
-                    // if parameter with same name exists in Query and Path, make Query one required 
+                    // if parameter with same name exists in Query and Path, make Query one required
                     if (s.In == ParameterLocation.Query &&
                         parameters.Any(t => t.In == ParameterLocation.Path &&
                                             string.Equals(t.Name, s.Name, StringComparison.OrdinalIgnoreCase)))
@@ -183,7 +184,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
             });
 
-            // Eliminate commonly shared base classes 
+            // Eliminate commonly shared base classes
             while (!types.First().IsNullOrEmpty())
             {
                 IType currentType = types.First().Peek();
@@ -197,6 +198,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
                 baseType = currentType;
             }
+
             return baseType;
         }
 
@@ -332,12 +334,12 @@ namespace Microsoft.Rest.Modeler.Swagger
         private bool SwaggerOperationProducesJson()
         {
             return _effectiveProduces != null &&
-                   _effectiveProduces.Contains("application/json", StringComparer.OrdinalIgnoreCase);
+                   _effectiveProduces.Any(s => s.StartsWith("application/json", StringComparison.OrdinalIgnoreCase));
         }
 
         private bool SwaggerOperationProducesNotEmpty()
         {
-            return _effectiveProduces != null 
+            return _effectiveProduces != null
                 && _effectiveProduces.Any();
         }
 
@@ -351,7 +353,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             if (_swaggerModeler.ServiceClient.Methods.Any(m => m.Group == methodGroup && m.Name == methodName))
             {
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, 
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture,
                     Resources.DuplicateOperationIdException,
                     serviceOperationPrefix + methodName));
             }
@@ -359,13 +361,13 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         private static string GenerateResponseObjectName(string methodName, HttpStatusCode responseStatusCode)
         {
-            return string.Format(CultureInfo.InvariantCulture, 
+            return string.Format(CultureInfo.InvariantCulture,
                 "{0}{1}Response", methodName, responseStatusCode);
         }
 
         private static string GenerateErrorModelName(string methodName)
         {
-            return string.Format(CultureInfo.InvariantCulture, 
+            return string.Format(CultureInfo.InvariantCulture,
                 "{0}ErrorModel", methodName);
         }
     }

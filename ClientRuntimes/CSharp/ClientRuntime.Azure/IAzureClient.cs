@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Net.Http;
-using Microsoft.Rest;
 using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Azure

@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsBodyString
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -69,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -138,8 +139,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// Set string value null
         /// </summary>
         /// <param name='stringBody'>
-        /// Possible values for this parameter include: ''
-        /// </param>
+        /// Possible values for this parameter include: ''/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -160,7 +160,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "PutNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/null").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -245,7 +245,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "GetEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/empty").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -314,8 +314,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// Set string value empty ''
         /// </summary>
         /// <param name='stringBody'>
-        /// Possible values for this parameter include: ''
-        /// </param>
+        /// Possible values for this parameter include: ''/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -340,7 +339,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "PutEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/empty").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -426,7 +425,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "GetMbcs", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/mbcs").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/mbcs").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -497,8 +496,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// </summary>
         /// <param name='stringBody'>
         /// Possible values for this parameter include:
-        /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
-        /// </param>
+        /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -523,7 +521,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "PutMbcs", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/mbcs").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/mbcs").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -610,7 +608,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "GetWhitespace", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/whitespace").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/whitespace").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -682,8 +680,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// </summary>
         /// <param name='stringBody'>
         /// Possible values for this parameter include: '    Now is the time for all
-        /// good men to come to the aid of their country    '
-        /// </param>
+        /// good men to come to the aid of their country    '/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -708,7 +705,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "PutWhitespace", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/whitespace").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/whitespace").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -793,7 +790,7 @@ namespace Fixtures.AcceptanceTestsBodyString
                 ServiceClientTracing.Enter(invocationId, this, "GetNotProvided", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/string/notProvided").ToString();
+            var url = new Uri(this.Client.BaseUri, "string/notProvided").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using Newtonsoft.Json;
     using Microsoft.Rest;
@@ -16,7 +17,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     /// <summary>
     /// </summary>
-    [JsonObject("shark")]    
+    [JsonObject("shark")]
     public partial class Shark : Fish
     {
         /// <summary>

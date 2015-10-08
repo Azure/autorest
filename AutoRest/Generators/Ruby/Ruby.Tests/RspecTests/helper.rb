@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 RSpec::Matchers.define :be_equal_datetimes do |expected|
   match do |actual|
       (expected == nil && actual == nil) ||
@@ -48,12 +50,12 @@ RSpec::Matchers.define :be_equal_dict do |expected|
   end
 end
 
-RSpec::Matchers.define :raise_exception_with_code do |exception_class|
+RSpec::Matchers.define :raise_exception_with_code do |http_error_code|
   match do |block|
     begin
       block.call
-    rescue MsRest::HttpOperationException => exception
-      exception.response.is_a?(exception_class)
+    rescue MsRest::HttpOperationError => exception
+      exception.response.status == http_error_code
     end
   end
   def supports_block_expectations?

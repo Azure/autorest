@@ -9,6 +9,7 @@
 namespace Fixtures.MirrorSequences
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -122,8 +123,7 @@ namespace Fixtures.MirrorSequences
         /// Creates a new pet in the store.  Duplicates are allowed
         /// </summary>
         /// <param name='pets'>
-        /// Pets to add to the store
-        /// </param>
+        /// Pets to add to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -158,7 +158,7 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "AddPet", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/pets").ToString();
+            var url = new Uri(this.BaseUri, "pets").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -231,8 +231,7 @@ namespace Fixtures.MirrorSequences
         /// Adds new pet stylesin the store.  Duplicates are allowed
         /// </summary>
         /// <param name='petStyle'>
-        /// Pet style to add to the store
-        /// </param>
+        /// Pet style to add to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -257,7 +256,7 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "AddPetStyles", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/primitives").ToString();
+            var url = new Uri(this.BaseUri, "primitives").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -330,8 +329,7 @@ namespace Fixtures.MirrorSequences
         /// Updates new pet stylesin the store.  Duplicates are allowed
         /// </summary>
         /// <param name='petStyle'>
-        /// Pet style to add to the store
-        /// </param>
+        /// Pet style to add to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -356,7 +354,7 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "UpdatePetStyles", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/primitives").ToString();
+            var url = new Uri(this.BaseUri, "primitives").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

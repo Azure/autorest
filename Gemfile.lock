@@ -4,8 +4,20 @@ GEM
     concurrent-ruby (0.9.0)
     concurrent-ruby-ext (0.9.0)
       concurrent-ruby (~> 0.9.0)
+    concurrent-ruby-ext (0.9.0-x86-mingw32)
+      concurrent-ruby (~> 0.9.0)
     diff-lcs (1.2.5)
+    domain_name (0.5.24)
+      unf (>= 0.0.5, < 1.0.0)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
+    faraday-cookie_jar (0.0.6)
+      faraday (>= 0.7.4)
+      http-cookie (~> 1.0.0)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     json (1.8.3)
+    multipart-post (2.0.0)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -19,16 +31,18 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
-    timeliness (0.3.7)
+    unf (0.2.0.beta2)
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   concurrent-ruby-ext
+  faraday
+  faraday-cookie_jar
   json
   rspec
-  timeliness
 
 BUNDLED WITH
-   1.10.5
+   1.10.6

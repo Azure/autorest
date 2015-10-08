@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
@@ -16,15 +17,17 @@ module MsRestAzure
     # @return [String] the type of the resource.
     attr_accessor :type
 
-    # @return [String] the state which denotes whether resource is ready to use or not.
-    attr_accessor :provisioning_state
-
     # @return [String] the location of the resource (required).
     attr_accessor :location
 
-    # @return [Hash{String => String}}] the tags attached to resources (optional)
+    # @return [Hash{String => String}] the tags attached to resources (optional).
     attr_accessor :tags
 
+    #
+    # Serializes given resource object into hash.
+    # @param object [Resource] resource object to serialize.
+    #
+    # @return [Hash] hash representation of resource.
     def self.serialize_object(object)
       object.validate
       output_object = {}
@@ -38,9 +41,6 @@ module MsRestAzure
       serialized_property = object.type
       output_object['type'] = serialized_property unless serialized_property.nil?
 
-      serialized_property = object.provisioning_state
-      output_object['provisioning_state'] = serialized_property unless serialized_property.nil?
-
       serialized_property = object.location
       output_object['location'] = serialized_property unless serialized_property.nil?
 
@@ -50,9 +50,14 @@ module MsRestAzure
       output_object
     end
 
+    #
+    # Deserializes given hash object into resource.
+    # @param object [Hash] resource in hash representation to deserialize.
+    #
+    # @return [Resource] deserialized resource.
     def self.deserialize_object(object)
       return if object.nil?
-      output_object = FlattenedProductProperties.new
+      output_object = Resource.new
 
       deserialized_property = object['id']
       output_object.id = deserialized_property
@@ -63,9 +68,6 @@ module MsRestAzure
       deserialized_property = object['type']
       output_object.type = deserialized_property
 
-      deserialized_property = object['provisioning_state']
-      output_object.provisioning_state = deserialized_property
-
       deserialized_property = object['location']
       output_object.location = deserialized_property
 
@@ -75,5 +77,13 @@ module MsRestAzure
       output_object.validate
       output_object
     end
+
+    #
+    # Validates the resource. Throws error if there is any property is incorrect.
+    #
+    def validate
+      fail MsRest::ValidationError, 'Location cannot be nil in the Resource object' if @location.nil?
+    end
+
   end
 end

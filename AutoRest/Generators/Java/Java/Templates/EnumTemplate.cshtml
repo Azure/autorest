@@ -1,0 +1,52 @@
+﻿@using System.Linq
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Java.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.EnumTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower()).models;
+@EmptyLine
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+@EmptyLine
+
+/**
+ * Defines values for @(Model.Name).
+ */
+public enum @(Model.Name) {
+@for (int i = 0; i < Model.Values.Count - 1; i++)
+{
+@:    @(Model.Values[i].Name)("@(Model.Values[i].SerializedName)"),
+@EmptyLine
+}
+    @(Model.Values.Last().Name)("@(Model.Values.Last().SerializedName)");
+    @EmptyLine
+
+    private String value;
+    @EmptyLine
+
+    private @(Model.Name)(String value) {
+        this.value = value;
+    }
+    @EmptyLine
+
+    @@JsonValue
+    public String toValue() {
+        return this.value;
+    }
+    @EmptyLine
+
+    @@JsonCreator
+    public static @Model.Name fromValue(String value) {
+        @(Model.Name)[] items = @(Model.Name).values();
+        for (@(Model.Name) item : items) {
+            if (item.toValue().equals(value)) {
+                return item;
+            }
+        }
+        return null;
+    }
+}

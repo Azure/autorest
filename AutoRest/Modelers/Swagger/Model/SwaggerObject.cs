@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.Rest.Generator.ClientModel;
 using System.Globalization;
+using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
@@ -50,11 +50,27 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// </summary>
         public virtual string Default { get; set; }
 
+        public virtual string MultipleOf { get; set; }
+
         public virtual string Maximum { get; set; }
+
+        public virtual bool ExclusiveMaximum { get; set; }
 
         public virtual string Minimum { get; set; }
 
+        public virtual bool ExclusiveMinimum { get; set; }
+
+        public virtual string MaxLength { get; set; }
+
+        public virtual string MinLength { get; set; }
+
         public virtual string Pattern { get; set; }
+
+        public virtual string MaxItems { get; set; }
+
+        public virtual string MinItems { get; set; }
+
+        public virtual bool UniqueItems { get; set; }
 
         public virtual IList<string> Enum { get; set; }
 

@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsBodyComplex
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -69,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "GetValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/polymorphism/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/polymorphism/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -163,8 +164,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// 'species':'dangerous',
         /// }
         /// ]
-        /// };
-        /// </param>
+        /// };/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -193,7 +193,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "PutValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/polymorphism/valid").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/polymorphism/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -287,8 +287,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// "age": 105
         /// }
         /// ]
-        /// }
-        /// </param>
+        /// }/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -317,7 +316,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 ServiceClientTracing.Enter(invocationId, this, "PutValidMissingRequired", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/complex/polymorphism/missingrequired/invalid").ToString();
+            var url = new Uri(this.Client.BaseUri, "complex/polymorphism/missingrequired/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

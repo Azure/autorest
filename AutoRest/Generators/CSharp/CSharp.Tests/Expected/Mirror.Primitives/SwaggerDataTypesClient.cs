@@ -9,6 +9,7 @@
 namespace Fixtures.MirrorPrimitives
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -118,13 +119,12 @@ namespace Fixtures.MirrorPrimitives
             };
         }    
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
-        /// The desired returned status code
-        /// </param>
+        /// The desired returned status code/// </param>
         /// <param name='product'>
-        /// The only parameter
-        /// </param>
+        /// The only parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -146,7 +146,7 @@ namespace Fixtures.MirrorPrimitives
                 ServiceClientTracing.Enter(invocationId, this, "GetProduct", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/datatypes").ToString();
+            var url = new Uri(this.BaseUri, "datatypes").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -224,13 +224,12 @@ namespace Fixtures.MirrorPrimitives
         }
 
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
-        /// The desired returned status code
-        /// </param>
+        /// The desired returned status code/// </param>
         /// <param name='product'>
-        /// The only parameter
-        /// </param>
+        /// The only parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -252,7 +251,7 @@ namespace Fixtures.MirrorPrimitives
                 ServiceClientTracing.Enter(invocationId, this, "PutProduct", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/datatypes").ToString();
+            var url = new Uri(this.BaseUri, "datatypes").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -330,13 +329,12 @@ namespace Fixtures.MirrorPrimitives
         }
 
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
-        /// The desired returned status code
-        /// </param>
+        /// The desired returned status code/// </param>
         /// <param name='product'>
-        /// The only parameter
-        /// </param>
+        /// The only parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -358,7 +356,7 @@ namespace Fixtures.MirrorPrimitives
                 ServiceClientTracing.Enter(invocationId, this, "PostProduct", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/datatypes").ToString();
+            var url = new Uri(this.BaseUri, "datatypes").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -436,13 +434,12 @@ namespace Fixtures.MirrorPrimitives
         }
 
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
-        /// The desired returned status code
-        /// </param>
+        /// The desired returned status code/// </param>
         /// <param name='product'>
-        /// The only parameter
-        /// </param>
+        /// The only parameter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -464,7 +461,7 @@ namespace Fixtures.MirrorPrimitives
                 ServiceClientTracing.Enter(invocationId, this, "PatchProduct", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "/datatypes").ToString();
+            var url = new Uri(this.BaseUri, "datatypes").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PATCH");

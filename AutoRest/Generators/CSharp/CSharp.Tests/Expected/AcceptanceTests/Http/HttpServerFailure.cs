@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsHttp
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -69,7 +70,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Head501", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/failure/server/501").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/failure/server/501").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("HEAD");
@@ -152,7 +153,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get501", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/failure/server/501").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/failure/server/501").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -217,8 +218,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 505 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -239,7 +239,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Post505", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/failure/server/505").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/failure/server/505").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -308,8 +308,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 505 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -330,7 +329,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Delete505", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "/http/failure/server/505").ToString();
+            var url = new Uri(this.Client.BaseUri, "http/failure/server/505").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("DELETE");

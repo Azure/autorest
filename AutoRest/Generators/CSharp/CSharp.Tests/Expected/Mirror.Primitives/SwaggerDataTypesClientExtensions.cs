@@ -19,6 +19,7 @@ namespace Fixtures.MirrorPrimitives
     public static partial class SwaggerDataTypesClientExtensions
     {
             /// <summary>
+            /// Product Types
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -35,6 +36,7 @@ namespace Fixtures.MirrorPrimitives
             }
 
             /// <summary>
+            /// Product Types
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -55,6 +57,7 @@ namespace Fixtures.MirrorPrimitives
             }
 
             /// <summary>
+            /// Product Types
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -71,6 +74,7 @@ namespace Fixtures.MirrorPrimitives
             }
 
             /// <summary>
+            /// Product Types
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -91,6 +95,7 @@ namespace Fixtures.MirrorPrimitives
             }
 
             /// <summary>
+            /// Product Types
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -107,6 +112,7 @@ namespace Fixtures.MirrorPrimitives
             }
 
             /// <summary>
+            /// Product Types
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -127,6 +133,7 @@ namespace Fixtures.MirrorPrimitives
             }
 
             /// <summary>
+            /// Product Types
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -143,6 +150,7 @@ namespace Fixtures.MirrorPrimitives
             }
 
             /// <summary>
+            /// Product Types
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
