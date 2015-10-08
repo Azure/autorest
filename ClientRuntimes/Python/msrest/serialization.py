@@ -113,6 +113,7 @@ class Deserialized(object):
     def __init__(self, response_obj, response_data=None):
 
         self.response = response_obj()
+        self.dependencies = {}
 
         if response_data:
             try:
@@ -130,9 +131,9 @@ class Deserialized(object):
             # etc
             }
 
-        self.dependencies = {}
-
-    def __call__(self, raw=None):
+    def __call__(self, raw=None, classes={}):
+        
+        self.dependencies = dict(classes)
 
         if raw:
             map = 'attribute_map'
@@ -170,8 +171,8 @@ class Deserialized(object):
         except (ValueError, TypeError) as err:
             raise DeserializationError("Unable to deserialize response data: {0}".format(err))
 
-        deserialize_obj = Deserialized(self.dependencies[data_type])#eval(data_type))
-        return deserialize_obj(data)
+        deserialize_obj = Deserialized(self.dependencies[data_type])
+        return deserialize_obj(data, self.dependencies)
 
     def unpack_response(self, raw_data):
 

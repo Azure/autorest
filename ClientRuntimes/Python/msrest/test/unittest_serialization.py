@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -317,7 +317,7 @@ class TestRuntimeSerialized(unittest.TestCase):
             serialized.attr_e
 
 
-class TestRuntimeDeerialized(unittest.TestCase):
+class TestRuntimeDeserialized(unittest.TestCase):
 
     class TestObj(object):
 
@@ -340,6 +340,7 @@ class TestRuntimeDeerialized(unittest.TestCase):
             self.attributes_map = {
                 'status_code': {'key':'status_code', 'type':'str'}
                 }
+            self.status_code = None
 
     def test_obj_with_no_attr(self):
         """
@@ -529,7 +530,10 @@ class TestRuntimeDeerialized(unittest.TestCase):
         class CmplxTestObj(object):
 
             def __init__(self):
+                self.attributes_map = {}
+                self.headers_map = {}
                 self.body_map = {'attr_a': {'key':'id', 'type':'[ListObj]'}}
+
 
         response_data = mock.create_autospec(Response)
         response_data.status_code = 200
@@ -538,7 +542,6 @@ class TestRuntimeDeerialized(unittest.TestCase):
         deserializer = Deserialized(CmplxTestObj)
         data = {"id":[{"ABC": "123"}]}
 
-        deserializer.dependencies['ListObj'] = ListObj
-        response = deserializer(json.dumps(data))
+        response = deserializer(json.dumps(data), {'ListObj':ListObj})
         self.assertIsInstance(response.attr_a[0], ListObj)
         self.assertEqual(response.attr_a[0].abc, 123)
