@@ -30,25 +30,46 @@ import requests
 Wrappers for Resuests unprepared request objects
 """
 
-def get():
-    pass
+def get(config):
+    request = requests.Request()
+    #TODO: Other defaults to set here
+    request.method = 'GET'
+    return request
 
-def put():
-    pass
+def put(config):
+    request = requests.Request()
+    #TODO: Other defaults to set here
+    request.method = 'PUT'
+    return request
 
-def post():
-    pass
+def post(config):
+    request = requests.Request()
+    #TODO: Other defaults to set here
+    request.method = 'POST'
+    return request
 
-def head():
-    pass
+def head(config):
+    request = requests.Request()
+    #TODO: Other defaults to set here
+    request.method = 'HEAD'
+    return request
 
-def delete():
-    pass
+def delete(config):
+    request = requests.Request()
+    #TODO: Other defaults to set here
+    request.method = 'DELETE'
+    return request
 
-def patch():
-    pass
+def patch(config):
+    request = requests.Request()
+    #TODO: Other defaults to set here
+    request.method = 'PATCH'
+    return request
 
-def merge():
-    pass
+def merge(config):
+    request = requests.Request()
+    #TODO: Other defaults to set here
+    request.method = 'MERGE'
+    return request
 
 

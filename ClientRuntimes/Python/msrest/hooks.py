@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -23,3 +23,24 @@
 # THE SOFTWARE.
 #
 #--------------------------------------------------------------------------
+
+class ClientPipelineHook(object):
+    
+    def __init__(self, overwrite=False):
+        self.precalls = []
+        self.postcalls = []
+        self.overwrite_call = overwrite
+
+    def __call__(self, func, *args, **kwargs):
+        result = None
+
+        for call in self.precalls:
+            result = call(result=result, *args, **kwargs)
+
+        if not self.overwrite_call:
+            result = func(*args, **kwargs)
+
+        for call in self.postcalls:
+            result = call(result=result, *args, **kwargs)
+
+        return result
