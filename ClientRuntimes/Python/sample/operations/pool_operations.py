@@ -31,15 +31,10 @@ class PoolOperations(object):
         
 
         http_request.data = json.dumps(content())
-        http_request.add_header('Content-Length', len(request_content))
+        http_request.add_header('Content-Length', len(http_request.data))
         
         # Send Request
         response = self.client.post(http_request)
-
-        if (response.status_code != 201):
-            error = AzureException(body)
-            error.status_code = response.status_code
-            raise error
         
         return response
     
@@ -83,11 +78,6 @@ class PoolOperations(object):
         # Send Request
         response = self.client.delete(http_request)
         
-        if (response.status_code != 202):
-            error = AzureException(response.content)
-            error.status_code = response.status_code
-            raise error
-        
         return response
     
     def disable_auto_scale(self, **parameters):
@@ -130,11 +120,6 @@ class PoolOperations(object):
         
         # Send Request
         response = self.client.post(http_request)
-        
-        if (response.status_code != 202):
-            error = AzureException(response.content)
-            error.status_code = response.status_code
-            raise error
         
         return response
     
@@ -184,11 +169,6 @@ class PoolOperations(object):
         
         # Send Request
         response = self.client.post(http_request)
-
-        if (response.status_code != 201):
-            error = AzureException(body)
-            error.status_code = response.status_code
-            raise error
         
         return response
     
@@ -226,11 +206,6 @@ class PoolOperations(object):
         
         # Send Request
         response = self.client.post(http_request)
-
-        if (response.status_code != 201):
-            error = AzureException(body)
-            error.status_code = response.status_code
-            raise error
         
         return response
     
@@ -284,11 +259,6 @@ class PoolOperations(object):
         # Send Request
         response = self.client.get(http_request)
         
-        if (response.status_code != 200):
-            error = AzureException(response.content)
-            error.status_code = response.status_code
-            raise error
-        
         return response
     
     def list(self, **parameters):
@@ -335,11 +305,6 @@ class PoolOperations(object):
         # Send Request
         response = self.client.get(http_request)
         
-        if (response.status_code != 200):
-            error = AzureException(response.content)
-            error.status_code = response.status_code
-            raise error
-        
         return response
     
     def list_next(self, **parameters):
@@ -359,11 +324,6 @@ class PoolOperations(object):
         
         # Send Request
         response = self.client.get(http_request)
-        
-        if (response.status_code != 200):
-            error = AzureException(response.content)
-            error.status_code = response.status_code
-            raise error
         
         return response
     
@@ -412,11 +372,6 @@ class PoolOperations(object):
         
         # Send Request
         response = self.client.patch(http_request)
-
-        if (response.status_code != 200):
-            error = AzureException(body)
-            error.status_code = response.status_code
-            raise error
         
         return response
     
@@ -466,11 +421,6 @@ class PoolOperations(object):
         
         # Send Request
         response = self.client.post(http_request)
-
-        if (response.status_code != 202):
-            error = AzureException(body)
-            error.status_code = response.status_code
-            raise error
         
         return response
     
@@ -516,11 +466,6 @@ class PoolOperations(object):
 
         # Send Request
         response = self.client.post(http_request)
-
-        if (response.status_code != 202):
-            error = AzureException(body)
-            error.status_code = response.status_code
-            raise error
         
         return response
     
@@ -570,11 +515,6 @@ class PoolOperations(object):
         
         # Send Request
         response = self.client.post(http_request)
-
-        if (response.status_code != 204):
-            error = AzureException(body)
-            error.status_code = response.status_code
-            raise error
         
         return response
     
@@ -624,11 +564,6 @@ class PoolOperations(object):
         
         # Send Request
         response = self.client.post(http_request)
-        
-        if (response.status_code != 202):
-            error = AzureException(body)
-            error.status_code = response.status_code
-            raise error
         
         return response
         

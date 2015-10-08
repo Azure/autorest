@@ -1,27 +1,28 @@
 ﻿from exceptions import InvalidOperationError
 
 class BatchPoolAddResponse(BatchOperationResponse):
-    pass
+    accept_status = [201]
 
 
 class BatchPoolDeleteResponse(BatchOperationResponse):
-    pass
+    accept_status = [202]
 
 
 class BatchPoolDisableAutoScaleResponse(BatchOperationResponse):
-    pass
+    accept_status = [202]
 
 
 class BatchPoolEnableAutoScaleResponse(BatchOperationResponse):
-    pass
+    accept_status = [202]
 
 
 class BatchPoolEvaluateAutoScaleResponse(BatchOperationResponse):
-    pass
+    accept_status = [202]
 
 
 class BatchPoolGetResponse(BatchOperationResponse):
-    
+    accept_status = [200]
+
     def __init__(self):
 
         super(BatchPoolGetResponse, self).__init__()
@@ -34,7 +35,8 @@ class BatchPoolGetResponse(BatchOperationResponse):
 
 
 class BatchPoolListResponse(BatchOperationResponse):
-    
+    accept_status = [200]
+
     def __init__(self):
 
         super(BatchPoolListResponse, self).__init__()
@@ -49,23 +51,23 @@ class BatchPoolListResponse(BatchOperationResponse):
 
 
 class BatchPoolPatchResponse(BatchOperationResponse):
-    pass
+    accept_status = [200]
 
 
 class BatchPoolResizeResponse(BatchOperationResponse):
-    pass
+    accept_status = [202]
 
 
 class BatchPoolStopResizeResponse(BatchOperationResponse):
-    pass
+    accept_status = [202]
 
 
 class BatchPoolUpdatePropertiesResponse(BatchOperationResponse):
-    pass
+    accept_status = [204]
 
 
 class BatchPoolUpgradeOSResponse(BatchOperationResponse):
-    pass
+    accept_status = [202]
 
 
 class DetailLevel(object):
@@ -78,7 +80,7 @@ class DetailLevel(object):
 
 class PoolSpec(object):
     
-    def __init__(self, manager, access_condition=None):
+    def __init__(self, manager):
 
         self._manager = manager
         self.attribute_map = {
@@ -122,9 +124,9 @@ class PoolSpec(object):
 
 class Pool(PoolSpec):
     
-    def __init__(self, manager, access_condition=None):
+    def __init__(self, manager):
 
-        super(BatchPoolGetResponse, self).__init__(manager, access_condition)
+        super(BatchPoolGetResponse, self).__init__(manager)
 
         self.attribute_map.update({
             'url': {'key':'url', 'type':'str'},
@@ -164,11 +166,11 @@ class Pool(PoolSpec):
         raise InvalidOperationError("This pool has already been added.")
 
     def update(self):
-        response = self._manager.get(self.name, self.access_condition)
+        response = self._manager.get(self.name)
         self._update(response.pool)
 
     def delete(self):
-        response = self._manager.delete(self.name, self.access_condition)
+        response = self._manager.delete(self.name)
 
     def disable_auto_scale(self):
         response = self._manager.disable_auto_scale(self.name)
@@ -221,6 +223,7 @@ class PoolAutoScale(object):
 
     self.auto_scale_formula
 
+
 class PoolProperties(object):
     
     def __init__(self):
@@ -249,7 +252,6 @@ class PoolResize(object):
         self.target_dedicated = None
         self.resize_timeout = None
         self.tvm_deallocation_option = None
-
 
 
 class PoolOS(object):
