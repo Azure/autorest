@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -23,3 +23,114 @@
 # THE SOFTWARE.
 #
 #--------------------------------------------------------------------------
+
+import os
+import shutil
+import logging
+
+LOGGER = None
+
+def invalid_directory(dirname):
+    try:
+        if not os.path.isdir(dirname):
+            os.mkdir(dirname)
+
+        with open(os.path.join(dirname, "ms_test"), 'w') as test_file:
+            test_file.write("All good to go!")
+
+        os.remove(os.path.join(dirname, "ms_test"))
+        return False
+
+    except (IOError, OSError, EnvironmentError) as exp:
+        return str(exp)
+
+def set_stream_handler(logger, format_str):
+
+    current_handlers = [h for h in logger.handlers if isinstance(h, logging.StreamHandler)]
+    for handler in current_handlers:
+        logger.removeHandler(handler)
+
+    if format_str:
+        format_str = str(format_str)
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter(str(format_str))
+
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+
+    return format_str
+
+def set_file_handler(logger, file_dir, format_str):
+
+    check = invalid_directory(file_dir)
+    if file_dir is not None and check:
+        raise ValueError("Log directory '{0}' cannot be accessed: {1}".format(file_dir, check))
+
+    current_handlers = [h for h in logger.handlers if isinstance(h, logging.FileHandler)]
+    for handler in current_handlers:
+        logger.removeHandler(handler)
+
+    if not format_str or not file_dir:
+        return
+
+    
+    logfile = os.path.join(file_dir, logger.name + '.log')
+
+    if os.path.isfile(logfile) and os.path.getsize(logfile) > 10485760:
+        split_log = os.path.splitext(logfile)
+        timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")
+
+        shutil.move(logfile, "{root}-{date}{ext}".format(
+            root=split_log[0],
+            date=timestamp,
+            ext=split_log[1]))
+
+        handler = logging.FileHandler(logfile)
+        handler.setFormatter(format_str)
+        logger.addHandler(handler)
+
+def set_log_level(logger, level):
+    levels = {'debug': 10,
+              'info': 20,
+              'warning': 30,
+              'error': 40,
+              'critical': 50}
+
+    if isinstance(level, str) and level.lower() in levels:
+            level = levels[level.lower()]
+
+    try:
+        logger.setLevel(level)
+
+    except ValueError:
+        raise
+
+    return logger.level
+
+def setup_logger(config):
+    global LOGGER
+
+    if LOGGER and LOGGER.name == config.log_name:
+        return LOGGER
+
+    logger = logging.getLogger(config.logger_name)
+
+    if config.stream_log:
+        set_stream_handler(logger, config.stream_log)
+
+    if config.file_log:
+        set_file_handler(logger, config.directory, config.file_log)
+
+    set_log_level(logger, config.log_level)
+
+    LOGGER = logger
+    return logger
+
+
+def log_request(request, **kwargs):
+    #TODO: Proper log formatting
+    LOGGER.debug(str(request))
+
+def log_response(request, response):
+    #TODO: Proper log formatting
+    LOGGER.debug(str(response))

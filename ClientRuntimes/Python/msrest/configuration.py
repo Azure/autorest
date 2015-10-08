@@ -28,5 +28,68 @@
 Configuration of ServiceClient and session.
 """
 
+import os
+import tempfile
+
+from .logger import *
+
 class Configuration(object):
-    pass
+    
+    def __init__(self):
+
+        # Logging configuration
+        self._log_name = "ms-client-runtime"
+        self._log_dir = tempfile.tempdir
+        self._stream_logging =  "%(asctime)-15s [%(levelname)s] %(module)s: %(message)s"
+        self._file_logging =  "%(asctime)-15s [%(levelname)s] %(module)s: %(message)s"
+        self._level = 30
+
+        self._log = logger.setup_logger(self)
+
+        # Communication configuration
+        self.protocols = ['https://']
+
+    @property
+    def log_level(self):
+        return self.level
+
+    @log_level.setter
+    def log_level(self, value):
+        val = logger.set_log_level(self._log, value)
+        self.level = val
+
+    @property
+    def stream_log(self):
+        return self._stream_logging
+
+    @stream_log.setter
+    def stream_log(self, value):
+        val = logger.set_stream_handler(self._log, value)
+        self._stream_logging = val
+
+    @property
+    def file_log(self):
+        return self._file_logging
+
+    @file_log.setter
+    def file_log(self, value):
+        val = logger.set_file_handler(self._log, self._log_dir, value)
+        self._file_logging = val
+
+    @property
+    def log_dir(self):
+        return self._log_dir
+
+    @log_dir.setter
+    def log_dir(self, value):
+        logger.set_file_handler(self._log, value, self._file_logging)
+        self._log_dir = value
+
+    @property
+    def log_name(self):
+        return self._log_name
+
+    @log_name.setter
+    def log_name(self, value):
+        self._log = setup_logger(self)
+        self._log_name = value
