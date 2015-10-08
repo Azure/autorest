@@ -38,3 +38,6 @@ class InvalidOperationError(ClientException):
 
 class InvalidHookError(ClientException):
     pass
+
+class ResponseStatusError(ClientException):
+    pass

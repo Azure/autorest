@@ -2,6 +2,7 @@
 
 
 from clientruntime.msrest.serialization import Serialized, Deserialized
+from clientruntime.msrest.exceptions import ResponseStatusError
 
 from pool_operations import PoolOperations
 from pool_models import *
@@ -134,6 +135,9 @@ class PoolManager(object):
             deserialize = Deserialized(BatchPoolAddResponse, response)
             deserialized = deserialize(response.content, self._classes)
             
+        except ResponseStatusError:
+            raise AzureException(response)
+
         except:
             raise #TODO: exception handling
 
@@ -152,6 +156,9 @@ class PoolManager(object):
             deserialize = Deserialized(BatchPoolDeleteResponse, response)
             deserialized = deserialize()
             
+        except ResponseStatusError:
+            raise AzureException(response)
+
         except:
             raise #TODO: exception handling
 
@@ -168,7 +175,10 @@ class PoolManager(object):
 
             deserialize = Deserialized(BatchPoolDisableAutoScaleResponse, response)
             dersialized = deserialize()
-            
+           
+        except ResponseStatusError:
+            raise AzureException(response)
+
         except:
             raise #TODO: exception handling
 
@@ -194,7 +204,10 @@ class PoolManager(object):
 
             deserialize = Deserialized(BatchPoolEnableAutoScaleResponse, response)
             dersialized = deserialize()
-            
+           
+        except ResponseStatusError:
+            raise AzureException(response)
+
         except:
             raise #TODO: exception handling
 
@@ -220,7 +233,10 @@ class PoolManager(object):
 
             deserialize = Deserialized(BatchPoolEvaluateAutoScaleResponse, response)
             dersialized = deserialize()
-            
+           
+        except ResponseStatusError:
+            raise AzureException(response)
+
         except:
             raise #TODO: exception handling
 
@@ -239,6 +255,9 @@ class PoolManager(object):
             deserialize = Deserialized(BatchPoolGetResponse, response)
             dersialized = deserialize(response.content, self._classes)
             
+        except ResponseStatusError:
+            raise AzureException(response)
+
         except:
             raise #TODO: exception handling
 
@@ -253,6 +272,9 @@ class PoolManager(object):
             deserialize = Deserialized(BatchPoolListResponse, response)
             dersialized = deserialize(response.content, self._classes)
             
+        except ResponseStatusError:
+            raise AzureException(response)
+
         except:
             raise #TODO: exception handling
 
@@ -270,6 +292,9 @@ class PoolManager(object):
 
             deserialize = Deserialized(BatchPoolListResponse, response)
             dersialized = deserialize(response.content, self._classes)
+
+        except ResponseStatusError:
+            raise AzureException(response)
 
         except:
             raise #TODO: exception handling
@@ -340,6 +365,9 @@ class PoolManager(object):
             deserialize = Deserialized(BatchPoolPatchResponse, response)
             dersialized = deserialize()
 
+        except ResponseStatusError:
+            raise AzureException(response)
+
         except:
             raise #TODO: exception handling
 
@@ -363,6 +391,9 @@ class PoolManager(object):
             deserialize = Deserialized(BatchPoolResizeResponse, response)
             dersialized = deserialize()
 
+        except ResponseStatusError:
+            raise AzureException(response)
+
         except:
             raise #TODO: exception handling
 
@@ -380,6 +411,9 @@ class PoolManager(object):
 
             deserialize = Deserialized(BatchPoolStopResizeResponse, response)
             dersialized = deserialize()
+
+        except ResponseStatusError:
+            raise AzureException(response)
 
         except:
             raise #TODO: exception handling
@@ -449,6 +483,9 @@ class PoolManager(object):
             deserialize = Deserialized(BatchPoolUpdatePropertiesResponse, response)
             dersialized = deserialize()
 
+        except ResponseStatusError:
+            raise AzureException(response)
+
         except:
             raise #TODO: exception handling
 
@@ -474,6 +511,9 @@ class PoolManager(object):
 
             deserialize = Deserialized(BatchPoolUpgradeOSResponse, response)
             dersialized = deserialize()
+
+        except ResponseStatusError:
+            raise AzureException(response)
 
         except:
             raise #TODO: exception handling

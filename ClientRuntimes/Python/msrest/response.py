@@ -24,7 +24,11 @@
 #
 #--------------------------------------------------------------------------
 
+from exceptions import ResponseStatusError
+
 class HTTPResponse(object):
+
+    accept_status = [200]
     
     def __init__(self):
 
@@ -42,4 +46,6 @@ class HTTPResponse(object):
 
     @status_code.setter
     def status_code(self, value):
+        if value not in self.accept_status:
+            raise ResponseStatusError()
         self._status_code = value
