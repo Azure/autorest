@@ -24,12 +24,46 @@
 #
 #--------------------------------------------------------------------------
 
+from base64 import b64encode
+import requests
+import requests_oauthlib as oauth
+
+
 
 class Authentication(object):
-    pass
+    
+    header = "Authorization"
+
+    def signed_session(self):
+        session = requests.Session()
+        return session
 
 class BasicAuthentication(Authentication):
-    pass
+    
+    def __init__(self, username, passw):
+        self.scheme = 'Basic'
+        self.username = username
+        self.password = passw
+
+    def signed_session(self):
+        session = super(BasicAuthentication, self).signed_session()
+
+        credentials = "{0}:{1}".format(self.username, self.password)
+        encoded = "{0} {1}".format(self.scheme, b64encode(credentials))
+        session.headers[self.header] = encoded
+
+        return session
 
 class TokenAuthentication(Authentication):
-    pass
+    
+    def __init__(self, client_id, token):
+        self.scheme = 'Bearer'
+        self.id = client_id
+        self.token = token
+
+    def construct_auth(self):
+        return "{0} {1}".format(self.scheme, self.token)
+
+    def signed_session(self):
+        session = oauth.OAuth2Session(self.id, token=self.token)
+        return session
