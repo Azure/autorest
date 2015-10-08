@@ -113,7 +113,19 @@ namespace Microsoft.Rest.Generator.NodeJS
                             foreach (var subProperty in ((CompositeType)property.Type).Properties)
                             {
                                 var individualProperty = new Property();
-                                individualProperty.Type = subProperty.Type;
+                                if (subProperty.Type.Name == property.Type.Name)
+                                {
+                                    //don't document this recursive property while documenting the model itself. 
+                                    if (subProperty.Type.Name == this.Name)
+                                    {
+                                        continue;
+                                    }
+                                    individualProperty.Type = PrimaryType.Object;
+                                }
+                                else
+                                {
+                                    individualProperty.Type = subProperty.Type;
+                                }
                                 individualProperty.Name = property.Name + "." + subProperty.Name;
                                 individualProperty.Documentation = subProperty.Documentation;
                                 traversalStack.Push(individualProperty);

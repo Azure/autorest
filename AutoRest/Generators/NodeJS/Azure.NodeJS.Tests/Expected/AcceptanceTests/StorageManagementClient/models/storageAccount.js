@@ -37,6 +37,8 @@ var util = require('util');
  * 
  * @member {string} [primaryEndpoints.table] Gets the table endpoint.
  * 
+ * @member {object} [primaryEndpoints.dummyEndPoint] Dummy EndPoint
+ * 
  * @member {string} [primaryLocation] Gets the location of the primary for the
  * storage account.
  * 
@@ -82,6 +84,8 @@ var util = require('util');
  * @member {string} [secondaryEndpoints.queue] Gets the queue endpoint.
  * 
  * @member {string} [secondaryEndpoints.table] Gets the table endpoint.
+ * 
+ * @member {object} [secondaryEndpoints.dummyEndPoint] Dummy EndPoint
  * 
  */
 function StorageAccount(parameters) {
