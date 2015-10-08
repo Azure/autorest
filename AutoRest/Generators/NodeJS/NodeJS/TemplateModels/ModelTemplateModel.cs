@@ -158,7 +158,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <param name="property">Model property to query</param>
         /// <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
         /// <returns>TypeScript property definition</returns>
-        public string PropertyTS(Property property, bool inModelsModule) {
+        public static string PropertyTS(Property property, bool inModelsModule) {
             if (property == null) {
                 throw new ArgumentNullException("property");
             }
