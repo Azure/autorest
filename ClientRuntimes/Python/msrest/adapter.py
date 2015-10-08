@@ -28,12 +28,56 @@
 Define custom HTTP Adapter
 """
 import requests
+from .hooks import ClientPipelineHook
+from .exceptions import InvalidHookError
+
 
 class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
     
 
     def __init__(self, retry, headers, hooks):
+        
+        self._client_headers = {}
+        self._client_hooks = {
+            'request':ClientPipelineHook(),
+            'reponse':ClientPipelineHook()}
+
+        super(ClientHTTPAdapter, self).__init__()
+
+    @staticmethod
+    def event_hook(event):
+        def event_wrapper(func):
+            def execute_hook(self, *args, **kwargs):
+                return self._client_hooks[event](func, self, *args, **kwargs)
+            return execute_hook
+        return event_wrapper
+
+    def retry_handler(self, config):
         pass
+
+    def proxy_handler(self, config):
+        pass
+
+    def redirect_handler(self, config):
+        pass
+
+    def add_hook(self, event, callback, precall=True, overwrite=False):
+        if event not in self._client_hooks:
+            raise InvalidHookError("Event: '{0}' is not able to be hooked.")
+
+        if precall:
+            self._client_hooks[event].precalls.append(callback)
+        else:
+            self._client_hooks[event].postcalls.append(callback)
+        self._client_hooks[event].overwrite_call = overwrite
+
+    @event_hook("response")
+    def build_response(self, req, resp):
+        return super(ClientHTTPAdapter, self).build_response(req, resp)
+
+    @event_hook("request")
+    def send(self, request, stream = False, timeout = None, verify = True, cert = None, proxies = None):
+        return super(ClientHTTPAdapter, self).send(request, stream, timeout, verify, cert, proxies)
 
 
         

@@ -35,3 +35,6 @@ class DeserializationError(ClientException):
 
 class InvalidOperationError(ClientException):
     pass
+
+class InvalidHookError(ClientException):
+    pass

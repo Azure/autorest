@@ -24,6 +24,10 @@
 #
 #--------------------------------------------------------------------------
 
+from . import request
+from .adapter import ClientHTTPAdapter
+from .logger import log_request, log_response
+
 class ServiceClient(object):
 
     def __init__(self, config, creds):
@@ -35,10 +39,56 @@ class ServiceClient(object):
             - creds (`.Authentication`): Authenticated credentials.
 
         """
-        pass
+        self.config = config
+        self.creds = creds
 
-    def add_hook(self, event, hook):
-        pass
+        self._adapter = ClientHTTPAdapter()
+        self._adapter.retry_handler(config)
+
+        self._adapter.add_hook("request", log_request)
+        self._adapter.add_hook("response", log_response)
+
+    def add_hook(self, hook):
+        self.adapter.add_hook(event, hook)
 
     def add_header(self, header, value):
-        pass
+        self._adapter.client_headers[header] = value
+
+    def send(self, request, **kwargs):
+        session = self.creds.signed_session()
+
+        for protocol in self.config.protocols:
+            self.session.mount(protocol, self._adapter)
+
+        request.prepare()
+        return self.session.send(request)
+
+    def get(self, url):
+        req = request.get(self.config)
+        req.url = url
+        return reg
+
+    def put(self, url):
+        req = request.put(self.config)
+        req.url = url
+        return reg
+
+    def post(self, url):
+        req = request.post(self.config)
+        req.url = url
+        return reg
+
+    def patch(self, url):
+        req = request.patch(self.config)
+        req.url = url
+        return reg
+
+    def delete(self, url):
+        req = request.delete(self.config)
+        req.url = url
+        return reg
+
+    def merge(self, url):
+        req = request.merge(self.config)
+        req.url = url
+        return reg
