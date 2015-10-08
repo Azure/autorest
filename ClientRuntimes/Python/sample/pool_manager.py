@@ -6,11 +6,16 @@ from clientruntime.msrest.serialization import Serialized, Deserialized
 from pool_operations import PoolOperations
 from pool_models import *
 
+import sys
+import inspect
+
 class PoolManager(object):
 
     def __init__(self, client):
 
         self._ops = PoolOperations(client)
+        self._classes = inspect.getmembers(sys.modules[__name__])
+
         self.access_condition = None
         self.max_results = None
         self.filter = None
@@ -127,7 +132,7 @@ class PoolManager(object):
             response = self._ops.add(content)
        
             deserialize = Deserialized(BatchPoolAddResponse, response)
-            deserialized = deserialize(response.content)
+            deserialized = deserialize(response.content, self._classes)
             
         except:
             raise #TODO: exception handling
@@ -232,7 +237,7 @@ class PoolManager(object):
             response = self._ops.get(detail_level=self.filter, access_condition=self.access_condition, **rest_params)
 
             deserialize = Deserialized(BatchPoolGetResponse, response)
-            dersialized = deserialize(response.content)
+            dersialized = deserialize(response.content, self._classes)
             
         except:
             raise #TODO: exception handling
@@ -246,7 +251,7 @@ class PoolManager(object):
             response = self._ops.list(max_results=self.max_results, detail_level=self.filter, **rest_params)
 
             deserialize = Deserialized(BatchPoolListResponse, response)
-            dersialized = deserialize(response.content)
+            dersialized = deserialize(response.content, self._classes)
             
         except:
             raise #TODO: exception handling
@@ -264,7 +269,7 @@ class PoolManager(object):
             response = self._ops.list_next(**rest_params)
 
             deserialize = Deserialized(BatchPoolListResponse, response)
-            dersialized = deserialize(response.content)
+            dersialized = deserialize(response.content, self._classes)
 
         except:
             raise #TODO: exception handling
