@@ -130,14 +130,13 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     private void initialize() {
         if (this.credentials != null)
         {
-            this.credentials.applyCredentialsFilter(this);
+            this.credentials.applyCredentialsFilter(this.client);
         }
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
         service = restAdapter.create(AutoRestResourceFlatteningTestServiceService.class);
     }
 
     /**
-     * Put External Resource as an Array
      *
      * @param resourceArray External Resource as an Array to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -153,7 +152,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as an Array
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -179,7 +177,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Get External Resource as an Array
      *
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -195,7 +192,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Get External Resource as an Array
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -220,7 +216,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as a Dictionary
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -236,7 +231,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as a Dictionary
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -262,7 +256,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Get External Resource as a Dictionary
      *
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -278,7 +271,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Get External Resource as a Dictionary
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -303,7 +295,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as a ResourceCollection
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -319,7 +310,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as a ResourceCollection
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -345,7 +335,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Get External Resource as a ResourceCollection
      *
      * @return the ResourceCollection object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -361,7 +350,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Get External Resource as a ResourceCollection
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

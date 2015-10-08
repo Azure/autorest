@@ -124,7 +124,7 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
     private void initialize() {
         if (this.credentials != null)
         {
-            this.credentials.applyCredentialsFilter(this);
+            this.credentials.applyCredentialsFilter(this.client);
         }
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
         this.paging = new PagingImpl(restAdapter, this);

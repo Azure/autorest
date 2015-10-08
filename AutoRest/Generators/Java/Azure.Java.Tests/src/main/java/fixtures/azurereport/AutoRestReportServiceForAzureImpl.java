@@ -125,14 +125,13 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
     private void initialize() {
         if (this.credentials != null)
         {
-            this.credentials.applyCredentialsFilter(this);
+            this.credentials.applyCredentialsFilter(this.client);
         }
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
         service = restAdapter.create(AutoRestReportServiceForAzureService.class);
     }
 
     /**
-     * Get test coverage report
      *
      * @return the Map&lt;String, Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -148,7 +147,6 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
     }
 
     /**
-     * Get test coverage report
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

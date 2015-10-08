@@ -38,4 +38,24 @@ public class AzureAsyncOperation {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    private CloudError error;
+
+    public CloudError getError() {
+        return this.error;
+    }
+
+    public void setError(CloudError error) {
+        this.error = error;
+    }
+
+    private int retryAfter;
+
+    public int getRetryAfter() {
+        return this.retryAfter;
+    }
+
+    public void setRetryAfter(int retryAfter) {
+        this.retryAfter = retryAfter;
+    }
 }

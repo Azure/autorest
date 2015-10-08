@@ -108,7 +108,6 @@ public interface AutoRestResourceFlatteningTestService {
 
     }
     /**
-     * Put External Resource as an Array
      *
      * @param resourceArray External Resource as an Array to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -116,14 +115,12 @@ public interface AutoRestResourceFlatteningTestService {
     void putArray(List<Resource> resourceArray) throws ServiceException;
 
     /**
-     * Put External Resource as an Array
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
     /**
-     * Get External Resource as an Array
      *
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -131,13 +128,11 @@ public interface AutoRestResourceFlatteningTestService {
     List<FlattenedProduct> getArray() throws ServiceException;
 
     /**
-     * Get External Resource as an Array
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
     /**
-     * Put External Resource as a Dictionary
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -145,14 +140,12 @@ public interface AutoRestResourceFlatteningTestService {
     void putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException;
 
     /**
-     * Put External Resource as a Dictionary
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
     /**
-     * Get External Resource as a Dictionary
      *
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -160,13 +153,11 @@ public interface AutoRestResourceFlatteningTestService {
     Map<String, FlattenedProduct> getDictionary() throws ServiceException;
 
     /**
-     * Get External Resource as a Dictionary
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
     /**
-     * Put External Resource as a ResourceCollection
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -174,14 +165,12 @@ public interface AutoRestResourceFlatteningTestService {
     void putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException;
 
     /**
-     * Put External Resource as a ResourceCollection
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
     /**
-     * Get External Resource as a ResourceCollection
      *
      * @return the ResourceCollection object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -189,7 +178,6 @@ public interface AutoRestResourceFlatteningTestService {
     ResourceCollection getResourceCollection() throws ServiceException;
 
     /**
-     * Get External Resource as a ResourceCollection
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
     {
         private readonly AzureJavaCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "com.microsoft.rest.azure-client-runtime 0.0.1-SNAPSHOT";
+        private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:0.0.1-SNAPSHOT";
 
         public AzureJavaCodeGenerator(Settings settings) : base(settings)
         {

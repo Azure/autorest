@@ -38,8 +38,6 @@ public interface Group {
 
     }
     /**
-     * Provides a resouce group with name 'testgroup101' and location 'West
-     * US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @return the SampleResourceGroup object if successful.
@@ -48,8 +46,6 @@ public interface Group {
     SampleResourceGroup getSampleResourceGroup(String resourceGroupName) throws ServiceException;
 
     /**
-     * Provides a resouce group with name 'testgroup101' and location 'West
-     * US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

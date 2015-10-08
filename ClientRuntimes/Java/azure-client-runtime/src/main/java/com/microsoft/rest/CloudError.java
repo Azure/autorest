@@ -7,8 +7,6 @@
 
 package com.microsoft.rest;
 
-import com.microsoft.rest.credentials.ServiceClientCredentials;
-
 import java.util.ArrayList;
 import java.util.List;
 

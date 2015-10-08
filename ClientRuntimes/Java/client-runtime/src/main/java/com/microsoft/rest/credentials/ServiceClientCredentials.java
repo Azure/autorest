@@ -7,7 +7,7 @@
 
 package com.microsoft.rest.credentials;
 
-import com.microsoft.rest.ServiceClient;
+import com.squareup.okhttp.OkHttpClient;
 
 /**
  * ServiceClientCredentials is the abstraction for credentials used by
@@ -19,5 +19,5 @@ public interface ServiceClientCredentials {
      *
      * @param client the ServiceClient instance
      */
-    void applyCredentialsFilter(ServiceClient client);
+    void applyCredentialsFilter(OkHttpClient client);
 }

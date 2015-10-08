@@ -61,82 +61,60 @@ public interface SubscriptionInCredentials {
 
     }
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void postMethodGlobalValid() throws ServiceException;
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to null, and client-side validation should
-     * prevent you from making this call
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void postMethodGlobalNull() throws ServiceException;
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to null, and client-side validation should
-     * prevent you from making this call
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void postMethodGlobalNotProvidedValid() throws ServiceException;
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void postPathGlobalValid() throws ServiceException;
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void postSwaggerGlobalValid() throws ServiceException;
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

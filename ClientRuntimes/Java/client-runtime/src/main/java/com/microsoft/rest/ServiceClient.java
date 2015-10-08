@@ -31,6 +31,16 @@ public abstract class ServiceClient {
      */
     protected ServiceClient() {
         this(new OkHttpClient(), new RestAdapter.Builder());
+
+        CookieManager cookieManager = new CookieManager();
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+        this.client.setCookieHandler(cookieManager);
+
+        Executor executor = Executors.newCachedThreadPool();
+        this.restAdapterBuilder = this.restAdapterBuilder
+                .setLogLevel(RestAdapter.LogLevel.BASIC)
+                .setConverter(JacksonHelper.getConverter())
+                .setExecutors(executor, executor);
     }
 
     /**
@@ -51,18 +61,10 @@ public abstract class ServiceClient {
         this.client = client;
         this.client.interceptors().add(new RetryHandler());
         this.client.interceptors().add(new UserAgentInterceptor());
-        CookieManager cookieManager = new CookieManager();
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        this.client.setCookieHandler(cookieManager);
         OkClient okClient = new OkClient(client);
 
         // Set up rest adapter builder
-        Executor executor = Executors.newCachedThreadPool();
-        this.restAdapterBuilder = restAdapterBuilder
-                .setClient(okClient)
-                .setLogLevel(RestAdapter.LogLevel.BASIC)
-                .setConverter(JacksonHelper.getConverter())
-                .setExecutors(executor, executor);
+        this.restAdapterBuilder = restAdapterBuilder.setClient(okClient);
     }
 
     /**

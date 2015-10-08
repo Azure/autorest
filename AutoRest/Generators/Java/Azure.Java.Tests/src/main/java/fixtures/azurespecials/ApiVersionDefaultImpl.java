@@ -31,7 +31,6 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
     }
 
     /**
-     * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -50,7 +49,6 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
     }
 
     /**
-     * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -79,7 +77,6 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
     }
 
     /**
-     * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -98,7 +95,6 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
     }
 
     /**
-     * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -127,7 +123,6 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
     }
 
     /**
-     * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -146,7 +141,6 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
     }
 
     /**
-     * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -175,7 +169,6 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
     }
 
     /**
-     * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -194,7 +187,6 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
     }
 
     /**
-     * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

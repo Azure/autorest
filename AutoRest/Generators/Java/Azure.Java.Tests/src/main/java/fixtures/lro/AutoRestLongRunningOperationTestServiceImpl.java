@@ -154,7 +154,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
     private void initialize() {
         if (this.credentials != null)
         {
-            this.credentials.applyCredentialsFilter(this);
+            this.credentials.applyCredentialsFilter(this.client);
         }
         RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
         this.lROs = new LROsImpl(restAdapter, this);

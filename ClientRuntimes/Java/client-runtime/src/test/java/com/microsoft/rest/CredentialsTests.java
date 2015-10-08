@@ -22,7 +22,7 @@ public class CredentialsTests {
     public void BasicCredentialsTest() throws Exception {
         ServiceClient serviceClient = new ServiceClient() {};
         BasicAuthenticationCredentials credentials = new BasicAuthenticationCredentials("user", "pass");
-        credentials.applyCredentialsFilter(serviceClient);
+        credentials.applyCredentialsFilter(serviceClient.client);
         serviceClient.getClientInterceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -41,7 +41,7 @@ public class CredentialsTests {
     public void TokenCredentialsTest() throws Exception {
         ServiceClient serviceClient = new ServiceClient() {};
         TokenCredentials credentials = new TokenCredentials(null, "this_is_a_token");
-        credentials.applyCredentialsFilter(serviceClient);
+        credentials.applyCredentialsFilter(serviceClient.client);
         serviceClient.getClientInterceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {

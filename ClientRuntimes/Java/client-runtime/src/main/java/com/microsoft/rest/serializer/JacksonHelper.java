@@ -13,9 +13,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import retrofit.converter.JacksonConverter;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -116,9 +119,24 @@ public class JacksonHelper {
      */
     @SuppressWarnings("unchecked")
     public static <T> T deserialize(String value) {
-        if (value == null) return null;
+        if (value == null || value.isEmpty()) return null;
         try {
             return (T)getObjectMapper().readValue(value, new TypeToken<T>(){}.getRawType());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Deserializes an input stream into a {@link T} object using the current {@link ObjectMapper}.
+     * @param input the input stream to deserialize.
+     * @param <T> the type of the deserialized object.
+     * @return the deserialized object.
+     */
+    public static <T> T deserialize(InputStream input) {
+        if (input == null) return null;
+        try {
+            return deserialize(IOUtils.toString(input));
         } catch (Exception e) {
             return null;
         }
