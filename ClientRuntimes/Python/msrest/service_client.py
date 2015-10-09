@@ -24,7 +24,7 @@
 #
 #--------------------------------------------------------------------------
 
-from . import request
+from .request import ClientRequest
 from .adapter import ClientHTTPAdapter
 from .logger import log_request, log_response
 
@@ -48,8 +48,18 @@ class ServiceClient(object):
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response)
 
+    def _send(self, request, **kwargs):
+        session = self.creds.signed_session()
+        session.proxies = self.config.proxies
+
+        for protocol in self.config.protocols:
+            self.session.mount(protocol, self._adapter)
+
+        return self.session.send(request)
+
     def _format_url(self, url, params):
 
+        # Manual building necessary for value-less action parameters.
         if params:
             query  = [p+'='+v if v else p for p,v in params.items()]
             url = url + '?' + '&'.join(query)
@@ -58,47 +68,37 @@ class ServiceClient(object):
         url = urlparse.urljoin(self.config.base_uri, url)
         return url
 
+    def request(self, url, params={}):
+        request = ClientRequest(self.config)
+        request.url = self._format_url(url, params)
+        return request
+
     def add_hook(self, hook):
         self.adapter.add_hook(event, hook)
 
     def add_header(self, header, value):
         self._adapter.client_headers[header] = value
 
-    def send(self, request, **kwargs):
-        session = self.creds.signed_session()
+    def get(self, request):
+        request.method = 'GET'
+        return self._send(request.prepare())
 
-        for protocol in self.config.protocols:
-            self.session.mount(protocol, self._adapter)
+    def put(self, request):
+        request.method = 'PUT'
+        return self._send(request.prepare())
 
-        request.prepare()
-        return self.session.send(request)
+    def post(self, request):
+        request.method = 'POST'
+        return self._send(request.prepare())
 
-    def get(self, url, params={}):
-        req = request.get(self.config)
-        req.url = self._format_url(url, params)
-        return reg
+    def patch(self, request):
+        request.method = 'PATCH'
+        return self._send(request.prepare())
 
-    def put(self, url, params={}):
-        req = request.put(self.config)
-        req.url = self._format_url(url, params)
-        return reg
+    def delete(self, request):
+        request.method = 'DELETE'
+        return self._send(request.prepare())
 
-    def post(self, url, params={}):
-        req = request.post(self.config)
-        req.url = self._format_url(url, params)
-        return reg
-
-    def patch(self, url, params={}):
-        req = request.patch(self.config)
-        req.url = self._format_url(url, params)
-        return reg
-
-    def delete(self, url, params={}):
-        req = request.delete(self.config)
-        req.url = self._format_url(url, params)
-        return reg
-
-    def merge(self, url, params={}):
-        req = request.merge(self.config)
-        req.url = self._format_url(url, params)
-        return reg
+    def merge(self, request):
+        request.method = 'MERGE'
+        return self._send(request.prepare())
