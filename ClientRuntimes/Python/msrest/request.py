@@ -25,51 +25,28 @@
 #--------------------------------------------------------------------------
 
 import requests
+import json
 
 """
 Wrappers for Resuests unprepared request objects
 """
 
-def get(config):
-    request = requests.Request()
-    #TODO: Other defaults to set here
-    request.method = 'GET'
-    return request
+class ClientRequest(requests.Request):
 
-def put(config):
-    request = requests.Request()
-    #TODO: Other defaults to set here
-    request.method = 'PUT'
-    return request
+    def __init__(self, config):
 
-def post(config):
-    request = requests.Request()
-    #TODO: Other defaults to set here
-    request.method = 'POST'
-    return request
+        super(ClientRequest, self).__init__()
 
-def head(config):
-    request = requests.Request()
-    #TODO: Other defaults to set here
-    request.method = 'HEAD'
-    return request
+        self.timeout = config.timeout
+        self.allow_redirects = config.allow_redirects
+        self.verify = config.verify
+        self.cert = config.cert
 
-def delete(config):
-    request = requests.Request()
-    #TODO: Other defaults to set here
-    request.method = 'DELETE'
-    return request
+    def add_header(self, header, value):
+        self.headers[header] = value
 
-def patch(config):
-    request = requests.Request()
-    #TODO: Other defaults to set here
-    request.method = 'PATCH'
-    return request
-
-def merge(config):
-    request = requests.Request()
-    #TODO: Other defaults to set here
-    request.method = 'MERGE'
-    return request
+    def add_content(self, data):
+        self.data = json.dumps(data())
+        self.headers['Content-Length'] = len(http_request.data)
 
 

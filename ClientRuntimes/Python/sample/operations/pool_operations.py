@@ -16,18 +16,17 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.post(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
-
-        http_request.data = json.dumps(content())
-        http_request.add_header('Content-Length', len(http_request.data))
+        # Serialize Request
+        http_request.add_content(content)
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.post(http_request)
         
         return response
     
@@ -42,7 +41,7 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.delete(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
 
         access_condition = parameters.get('access_condition')
         
@@ -63,7 +62,7 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.delete(http_request)
         
         return response
     
@@ -79,7 +78,7 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.post(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
 
         access_condition = parameters.get('access_condition')
         
@@ -100,7 +99,7 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.post(http_request)
         
         return response
     
@@ -116,7 +115,7 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.post(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -139,11 +138,10 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Serialize Request
-        http_request.data = json.dumps(content())
-        http_request.add_header('Content-Length', len(request_content))
+        http_request.add_content(content)
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.post(http_request)
         
         return response
     
@@ -159,7 +157,7 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.post(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
         
         # Set Headers
         # Set Headers
@@ -167,14 +165,10 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Serialize Request
-        http_request.data = json.dumps(content())
-        http_request.add_header('Content-Length', len(request_content))
-        
-        # Set Credentials
-        self.client.credentials.process_request(http_request)
+        http_request.add_content(content)
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.post(http_request)
         
         return response
     
@@ -199,7 +193,7 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.get(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
 
         access_condition = parameters.get('access_condition')
         
@@ -220,7 +214,7 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.get(http_request)
         
         return response
     
@@ -254,13 +248,13 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.get(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
         
         # Set Headers
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.get(http_request)
         
         return response
     
@@ -271,7 +265,7 @@ class PoolOperations(object):
         url = urllib.quote(url)
         
         # Create HTTP transport objects
-        http_request = self.client.get(url)
+        http_request = self.client.request(url)
         
         # Set Headers
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
@@ -280,7 +274,7 @@ class PoolOperations(object):
         self.client.credentials.process_request(http_request)
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.get(http_request)
         
         return response
     
@@ -295,7 +289,7 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.patch(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -318,11 +312,10 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Serialize Request
-        http_request.data = json.dumps(content())
-        http_request.add_header('Content-Length', len(request_content))
+        http_request.add_content(content)
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.patch(http_request)
         
         return response
     
@@ -338,7 +331,7 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.post(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -361,11 +354,10 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Serialize Request
-        http_request.data = json.dumps(content())
-        http_request.add_header('Content-Length', len(request_content))
+        http_request.add_content(content)
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.post(http_request)
         
         return response
     
@@ -381,7 +373,7 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.post(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -404,7 +396,7 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
 
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.post(http_request)
         
         return response
     
@@ -420,7 +412,7 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.post(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -443,11 +435,10 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Serialize Request
-        http_request.data = json.dumps(content())
-        http_request.add_header('Content-Length', len(request_content))
+        http_request.add_content(content)
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.post(http_request)
         
         return response
     
@@ -463,7 +454,7 @@ class PoolOperations(object):
         query_parameters['timeout'] = '30'
         
         # Create HTTP transport objects
-        http_request = self.client.post(url, query_parameters)
+        http_request = self.client.request(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -486,11 +477,10 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Serialize Request
-        http_request.data = json.dumps(content())
-        http_request.add_header('Content-Length', len(request_content))
+        http_request.add_content(content)
         
         # Send Request
-        response = self.client.send(http_request)
+        response = self.client.post(http_request)
         
         return response
         
