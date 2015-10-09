@@ -48,6 +48,16 @@ class ServiceClient(object):
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response)
 
+    def _format_url(self, url, params):
+
+        if params:
+            query  = [p+'='+v if v else p for p,v in params.items()]
+            url = url + '?' + '&'.join(query)
+        
+        url = urllib.quote(url)
+        url = urlparse.urljoin(self.config.base_uri, url)
+        return url
+
     def add_hook(self, hook):
         self.adapter.add_hook(event, hook)
 
@@ -63,32 +73,32 @@ class ServiceClient(object):
         request.prepare()
         return self.session.send(request)
 
-    def get(self, url):
+    def get(self, url, params={}):
         req = request.get(self.config)
-        req.url = url
+        req.url = self._format_url(url, params)
         return reg
 
-    def put(self, url):
+    def put(self, url, params={}):
         req = request.put(self.config)
-        req.url = url
+        req.url = self._format_url(url, params)
         return reg
 
-    def post(self, url):
+    def post(self, url, params={}):
         req = request.post(self.config)
-        req.url = url
+        req.url = self._format_url(url, params)
         return reg
 
-    def patch(self, url):
+    def patch(self, url, params={}):
         req = request.patch(self.config)
-        req.url = url
+        req.url = self._format_url(url, params)
         return reg
 
-    def delete(self, url):
+    def delete(self, url, params={}):
         req = request.delete(self.config)
-        req.url = url
+        req.url = self._format_url(url, params)
         return reg
 
-    def merge(self, url):
+    def merge(self, url, params={}):
         req = request.merge(self.config)
-        req.url = url
+        req.url = self._format_url(url, params)
         return reg

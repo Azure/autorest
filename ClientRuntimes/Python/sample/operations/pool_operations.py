@@ -14,16 +14,9 @@ class PoolOperations(object):
         query_parameters = {}
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
-
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.post(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -34,7 +27,7 @@ class PoolOperations(object):
         http_request.add_header('Content-Length', len(http_request.data))
         
         # Send Request
-        response = self.client.post(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -47,15 +40,9 @@ class PoolOperations(object):
         query_parameters = {}
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.delete(url, query_parameters)
 
         access_condition = parameters.get('access_condition')
         
@@ -76,7 +63,7 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Send Request
-        response = self.client.delete(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -87,18 +74,12 @@ class PoolOperations(object):
         url = url + parameters.get(pool_name)
 
         query_parameters = {}
-        query_parameters['disableautoscale'] = "" #TODO: No value?
+        query_parameters['disableautoscale'] = None
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.post(url, query_parameters)
 
         access_condition = parameters.get('access_condition')
         
@@ -119,7 +100,7 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Send Request
-        response = self.client.post(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -130,18 +111,12 @@ class PoolOperations(object):
         url = url + parameters.get(pool_name)
 
         query_parameters = {}
-        query_parameters['enableautoscale'] = "" #TODO: No value?
+        query_parameters['enableautoscale'] = None
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.post(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -168,7 +143,7 @@ class PoolOperations(object):
         http_request.add_header('Content-Length', len(request_content))
         
         # Send Request
-        response = self.client.post(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -179,18 +154,12 @@ class PoolOperations(object):
         url = url + parameters.get(pool_name)
 
         query_parameters = {}
-        query_parameters['evaluateautoscale'] = "" #TODO: No value?
+        query_parameters['evaluateautoscale'] = None
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.post(url, query_parameters)
         
         # Set Headers
         # Set Headers
@@ -205,7 +174,7 @@ class PoolOperations(object):
         self.client.credentials.process_request(http_request)
         
         # Send Request
-        response = self.client.post(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -228,15 +197,9 @@ class PoolOperations(object):
         
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.get(url, query_parameters)
 
         access_condition = parameters.get('access_condition')
         
@@ -257,7 +220,7 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Send Request
-        response = self.client.get(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -289,21 +252,15 @@ class PoolOperations(object):
         
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.get(url, query_parameters)
         
         # Set Headers
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
         
         # Send Request
-        response = self.client.get(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -314,7 +271,7 @@ class PoolOperations(object):
         url = urllib.quote(url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.get(url)
         
         # Set Headers
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
@@ -323,7 +280,7 @@ class PoolOperations(object):
         self.client.credentials.process_request(http_request)
         
         # Send Request
-        response = self.client.get(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -336,15 +293,9 @@ class PoolOperations(object):
         query_parameters = {}
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.patch(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -371,7 +322,7 @@ class PoolOperations(object):
         http_request.add_header('Content-Length', len(request_content))
         
         # Send Request
-        response = self.client.patch(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -382,18 +333,12 @@ class PoolOperations(object):
         url = url + parameters.get(pool_name)
 
         query_parameters = {}
-        query_parameters['resize'] = "" #TODO: No value?
+        query_parameters['resize'] = None
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.post(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -420,7 +365,7 @@ class PoolOperations(object):
         http_request.add_header('Content-Length', len(request_content))
         
         # Send Request
-        response = self.client.post(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -431,18 +376,12 @@ class PoolOperations(object):
         url = url + parameters.get(pool_name)
 
         query_parameters = {}
-        query_parameters['stopresize'] = "" #TODO: No value?
+        query_parameters['stopresize'] = None
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.post(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -465,7 +404,7 @@ class PoolOperations(object):
         http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
 
         # Send Request
-        response = self.client.post(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -476,18 +415,12 @@ class PoolOperations(object):
         url = url + parameters.get(pool_name)
 
         query_parameters = {}
-        query_parameters['updateproperties'] = "" #TODO: No value?
+        query_parameters['updateproperties'] = None
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.post(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -514,7 +447,7 @@ class PoolOperations(object):
         http_request.add_header('Content-Length', len(request_content))
         
         # Send Request
-        response = self.client.post(http_request)
+        response = self.client.send(http_request)
         
         return response
     
@@ -525,18 +458,12 @@ class PoolOperations(object):
         url = url + parameters.get(pool_name)
 
         query_parameters = {}
-        query_parameters['upgradeos'] = "" #TODO: No value?
+        query_parameters['upgradeos'] = None
         query_parameters['api-version'] = '2014-10-01.1.0'
         query_parameters['timeout'] = '30'
-
-        if query_parameters:
-            url = url + '?' + urllib.urlencode(query_parameters)
-        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(elf.client.base_uri, url)
         
         # Create HTTP transport objects
-        http_request = self.client.request(url)
+        http_request = self.client.post(url, query_parameters)
         
         # Set Headers
         http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
@@ -563,7 +490,7 @@ class PoolOperations(object):
         http_request.add_header('Content-Length', len(request_content))
         
         # Send Request
-        response = self.client.post(http_request)
+        response = self.client.send(http_request)
         
         return response
         
