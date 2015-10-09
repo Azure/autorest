@@ -986,6 +986,65 @@ namespace Fixtures.AcceptanceTestsBodyArray
             }
 
             /// <summary>
+            /// Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan
+            /// 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IList<DateTime?> GetDateTimeRfc1123Valid(this IArray operations)
+            {
+                return Task.Factory.StartNew(s => ((IArray)s).GetDateTimeRfc1123ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan
+            /// 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<DateTime?>> GetDateTimeRfc1123ValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                HttpOperationResponse<IList<DateTime?>> result = await operations.GetDateTimeRfc1123ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980
+            /// 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            public static void PutDateTimeRfc1123Valid(this IArray operations, IList<DateTime?> arrayBody)
+            {
+                Task.Factory.StartNew(s => ((IArray)s).PutDateTimeRfc1123ValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980
+            /// 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutDateTimeRfc1123ValidAsync( this IArray operations, IList<DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.PutDateTimeRfc1123ValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
             /// Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
             /// with each item encoded in base64
             /// </summary>

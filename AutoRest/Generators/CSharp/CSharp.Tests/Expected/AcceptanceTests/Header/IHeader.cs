@@ -328,6 +328,39 @@ namespace Fixtures.AcceptanceTestsHeader
         Task<HttpOperationResponse> ResponseDatetimeWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "valid",
+        /// "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min",
+        /// "value": "Mon, 01 Jan 0001 00:00:00 GMT"
+        /// </summary>
+        /// <param name='scenario'>
+        /// Send a post request with header values "scenario": "valid" or "min"
+        /// </param>
+        /// <param name='value'>
+        /// Send a post request with header values "Wed, 01 Jan 2010 12:34:56
+        /// GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> ParamDatetimeRfc1123WithHttpMessagesAsync(string scenario, DateTime? value = default(DateTime?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT"
+        /// or "Mon, 01 Jan 0001 00:00:00 GMT"
+        /// </summary>
+        /// <param name='scenario'>
+        /// Send a post request with header values "scenario": "valid" or "min"
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> ResponseDatetimeRfc1123WithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Send a post request with header values "scenario": "valid",
         /// "value": "P123DT22H14M12.011S"
         /// </summary>
         /// <param name='scenario'>

@@ -39,7 +39,8 @@ public class Validator {
                 parameterType.isEnum() ||
                 ClassUtils.isAssignable(parameterType, LocalDate.class) ||
                 ClassUtils.isAssignable(parameterType, DateTime.class) ||
-                ClassUtils.isAssignable(parameterType, String.class)) {
+                ClassUtils.isAssignable(parameterType, String.class) || 
+                ClassUtils.isAssignable(parameterType, DateTimeRfc1123.class)) {
             return;
         }
 

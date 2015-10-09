@@ -238,6 +238,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 primaryType.Name = "DateTime";
             }
+            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            {
+                primaryType.Name = "DateTimeRfc1123";
+            }
             else if (primaryType == PrimaryType.Double)
             {
                 primaryType.Name = "double";
@@ -339,6 +343,11 @@ namespace Microsoft.Rest.Generator.Java
                 primaryType.Name == "DateTime")
             {
                 return "org.joda.time.DateTime";
+            }
+            else if (primaryType == PrimaryType.DateTimeRfc1123 ||
+               primaryType.Name == "DateTimeRfc1123")
+            {
+                return "com.microsoft.rest.DateTimeRfc1123";
             }
             else if (primaryType == PrimaryType.Stream ||
                 primaryType.Name == "InputStream")

@@ -48,7 +48,8 @@ public class JacksonHelper {
                     .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                     .registerModule(new JodaModule())
                     .registerModule(ByteArraySerializer.getModule())
-                    .registerModule(DateTimeSerializer.getModule());
+                    .registerModule(DateTimeSerializer.getModule())
+                    .registerModule(DateTimeRfc1123Serializer.getModule());
         }
         return objectMapper;
     }

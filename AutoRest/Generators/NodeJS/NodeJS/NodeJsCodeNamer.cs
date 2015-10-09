@@ -238,6 +238,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 primaryType.Name = "Date";
             }
+            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            {
+                primaryType.Name = "Date";
+            }
             else if (primaryType == PrimaryType.Double)
             {
                 primaryType.Name = "Number";

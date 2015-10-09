@@ -190,11 +190,19 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             {
                 return reference;
             }
-
-            var serializationSettings = (type == PrimaryType.Date) ?
-                "new DateJsonConverter()"
-                : string.Format(CultureInfo.InvariantCulture, 
-                "{0}.SerializationSettings", clientReference);
+            string serializationSettings;
+            if (type == PrimaryType.Date)
+            {
+                serializationSettings = "new DateJsonConverter()";
+            }
+            else if (type == PrimaryType.DateTimeRfc1123)
+            {
+                serializationSettings = "new DateTimeRfc1123JsonConverter()";
+            }
+            else
+            {
+                serializationSettings = string.Format(CultureInfo.InvariantCulture, "{0}.SerializationSettings", clientReference);
+            }
 
             return string.Format(CultureInfo.InvariantCulture,
                     "JsonConvert.SerializeObject({0}, {1}).Trim('\"')",
@@ -211,7 +219,7 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         {
             return type == PrimaryType.Boolean || type == PrimaryType.DateTime || type == PrimaryType.Date
                 || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long 
-                || type == PrimaryType.TimeSpan;
+                || type == PrimaryType.TimeSpan || type == PrimaryType.DateTimeRfc1123;
         }
 
         public static string CheckNull(string valueReference, string executionBlock)

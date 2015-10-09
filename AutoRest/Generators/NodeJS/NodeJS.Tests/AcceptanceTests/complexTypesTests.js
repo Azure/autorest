@@ -8,7 +8,7 @@ var http = require('http');
 var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
-
+var moment = require('moment');
 var complexClient = require('../Expected/AcceptanceTests/BodyComplex/autoRestComplexTestService');
 
 var dummyToken = 'dummy12321343423';
@@ -172,6 +172,23 @@ describe('nodejs', function () {
           assert.deepEqual(result.field, new Date('0001-01-01T00:00:00Z'));
           assert.deepEqual(result.now, new Date('2015-05-18T18:38:00Z'));
           testClient.primitive.putDateTime({ 'field': new Date('0001-01-01T00:00:00Z'), 'now': new Date('2015-05-18T18:38:00Z') }, function (error, result) {
+            should.not.exist(error);
+            done();
+          });
+        });
+      });
+      it('should get and put valid date-time-rfc1123 properties', function (done) {
+        var timeStringOne = 'Mon, 01 Jan 0001 00:00:00 GMT';
+        var timeStringTwo = 'Mon, 18 May 2015 11:38:00 GMT';
+        testClient.primitive.getDateTimeRfc1123(function (error, result) {
+          should.not.exist(error);
+          assert.deepEqual(result.field, new Date(timeStringOne));
+          assert.deepEqual(result.now, new Date(timeStringTwo));
+          var dateFormat = 'ddd, DD MMM YYYY HH:mm:ss';
+
+          //Have to use moment.js to construct the date object because NodeJS default Date constructor doesn't parse "old" RFC dates right
+          var fieldDate = moment.utc(timeStringOne, dateFormat).toDate(); 
+          testClient.primitive.putDateTimeRfc1123({ 'field': fieldDate, 'now': new Date(timeStringTwo) }, function (error, result) {
             should.not.exist(error);
             done();
           });

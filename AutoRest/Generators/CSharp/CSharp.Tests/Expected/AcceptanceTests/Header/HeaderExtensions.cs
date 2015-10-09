@@ -707,6 +707,82 @@ namespace Fixtures.AcceptanceTestsHeader
             }
 
             /// <summary>
+            /// Send a post request with header values "scenario": "valid", "value": "Wed,
+            /// 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan
+            /// 0001 00:00:00 GMT"
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='scenario'>
+            /// Send a post request with header values "scenario": "valid" or "min"
+            /// </param>
+            /// <param name='value'>
+            /// Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or
+            /// "Mon, 01 Jan 0001 00:00:00 GMT"
+            /// </param>
+            public static void ParamDatetimeRfc1123(this IHeader operations, string scenario, DateTime? value = default(DateTime?))
+            {
+                Task.Factory.StartNew(s => ((IHeader)s).ParamDatetimeRfc1123Async(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Send a post request with header values "scenario": "valid", "value": "Wed,
+            /// 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan
+            /// 0001 00:00:00 GMT"
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='scenario'>
+            /// Send a post request with header values "scenario": "valid" or "min"
+            /// </param>
+            /// <param name='value'>
+            /// Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or
+            /// "Mon, 01 Jan 0001 00:00:00 GMT"
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task ParamDatetimeRfc1123Async( this IHeader operations, string scenario, DateTime? value = default(DateTime?), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.ParamDatetimeRfc1123WithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
+            /// Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon,
+            /// 01 Jan 0001 00:00:00 GMT"
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='scenario'>
+            /// Send a post request with header values "scenario": "valid" or "min"
+            /// </param>
+            public static void ResponseDatetimeRfc1123(this IHeader operations, string scenario)
+            {
+                Task.Factory.StartNew(s => ((IHeader)s).ResponseDatetimeRfc1123Async(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon,
+            /// 01 Jan 0001 00:00:00 GMT"
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='scenario'>
+            /// Send a post request with header values "scenario": "valid" or "min"
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task ResponseDatetimeRfc1123Async( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.ResponseDatetimeRfc1123WithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
             /// Send a post request with header values "scenario": "valid", "value":
             /// "P123DT22H14M12.011S"
             /// </summary>

@@ -29,6 +29,7 @@ import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import fixtures.bodycomplex.models.DateWrapper;
 import fixtures.bodycomplex.models.DatetimeWrapper;
+import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Error;
 import com.microsoft.rest.Validator;
@@ -844,6 +845,107 @@ public class PrimitiveImpl implements Primitive {
     }
 
     private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, retrofit);
+    }
+
+    /**
+     * Get complex types with datetimeRfc1123 properties
+     *
+     * @return the Datetimerfc1123Wrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public Datetimerfc1123Wrapper getDateTimeRfc1123() throws ServiceException {
+        try {
+            Call<ResponseBody> call = service.getDateTimeRfc1123();
+            ServiceResponse<Datetimerfc1123Wrapper> response = getDateTimeRfc1123Delegate(call.execute(), null);
+            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Get complex types with datetimeRfc1123 properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<ResponseBody> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getDateTimeRfc1123();
+        call.enqueue(new ServiceResponseCallback<Datetimerfc1123Wrapper>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(getDateTimeRfc1123Delegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<Datetimerfc1123Wrapper>()
+                .register(200, new TypeToken<Datetimerfc1123Wrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, retrofit);
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
+        try {
+            Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
+            ServiceResponse<Void> response = putDateTimeRfc1123Delegate(call.execute(), null);
+            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<ResponseBody> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
+        Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(putDateTimeRfc1123Delegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

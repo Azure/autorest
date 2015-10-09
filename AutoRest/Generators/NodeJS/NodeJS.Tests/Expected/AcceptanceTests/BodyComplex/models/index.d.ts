@@ -290,6 +290,20 @@ export interface DatetimeWrapper {
 
 /**
  * @class
+ * Initializes a new instance of the Datetimerfc1123Wrapper class.
+ * @constructor
+ * @member {date} [field]
+ * 
+ * @member {date} [now]
+ * 
+*/
+export interface Datetimerfc1123Wrapper {
+    field?: Date;
+    now?: Date;
+}
+
+/**
+ * @class
  * Initializes a new instance of the ByteWrapper class.
  * @constructor
  * @member {buffer} [field]
