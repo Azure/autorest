@@ -33,7 +33,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             ParameterTemplateModels.Clear();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
+
+            this.ClientRequestIdString = AzureCodeGenerator.GetClientRequestIdString(source);
+            this.RequestIdString = AzureCodeGenerator.GetRequestIdString(source);
         }
+
+        public string ClientRequestIdString { get; private set; }
+
+        public string RequestIdString { get; private set; }
 
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
@@ -163,7 +170,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 }
 
                 sb.AppendLine(
-                    "result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?");
+                    "result.request_id = http_response['{0}'] unless http_response['{0}'].nil?", this.RequestIdString);
 
                 sb.AppendLine(base.InitializeResponseBody);
 
@@ -194,7 +201,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             get
             {
                 IndentedStringBuilder sb = new IndentedStringBuilder();
-                sb.AppendLine("request_headers['x-ms-client-request-id'] = SecureRandom.uuid")
+                sb.AppendLine("request_headers['{0}'] = SecureRandom.uuid", this.ClientRequestIdString)
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
             }

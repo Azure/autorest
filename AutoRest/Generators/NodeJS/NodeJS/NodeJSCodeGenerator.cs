@@ -15,6 +15,7 @@ namespace Microsoft.Rest.Generator.NodeJS
     public class NodeJSCodeGenerator : CodeGenerator
     {
         private const string ClientRuntimePackage = "ms-rest version 1.1.0";
+        private const bool DisableTypeScriptGeneration = false;    // Change to true if you want to no longer generate the 3 d.ts files, for some reason
 
         public NodeJsCodeNamer Namer { get; private set; }
 
@@ -74,6 +75,15 @@ namespace Microsoft.Rest.Generator.NodeJS
             };
             await Write(serviceClientTemplate, serviceClient.Name.ToCamelCase() + ".js");
 
+            if (!DisableTypeScriptGeneration)
+            {
+                var serviceClientTemplateTS = new ServiceClientTemplateTS
+                {
+                    Model = serviceClientTemplateModel,
+                };
+                await Write(serviceClientTemplateTS, serviceClient.Name.ToCamelCase() + ".d.ts");
+            }
+
             //Models
             if (serviceClient.ModelTypes.Any())
             {
@@ -82,6 +92,15 @@ namespace Microsoft.Rest.Generator.NodeJS
                     Model = serviceClientTemplateModel
                 };
                 await Write(modelIndexTemplate, Path.Combine("models", "index.js"));
+                if (!DisableTypeScriptGeneration)
+                {
+                    var modelIndexTemplateTS = new ModelIndexTemplateTS
+                    {
+                        Model = serviceClientTemplateModel
+                    };
+                    await Write(modelIndexTemplateTS, Path.Combine("models", "index.d.ts"));
+                }
+
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
                     var modelTemplate = new ModelTemplate
@@ -100,6 +119,16 @@ namespace Microsoft.Rest.Generator.NodeJS
                     Model = serviceClientTemplateModel
                 };
                 await Write(methodGroupIndexTemplate, Path.Combine("operations", "index.js"));
+
+                if (!DisableTypeScriptGeneration)
+                {
+                    var methodGroupIndexTemplateTS = new MethodGroupIndexTemplateTS
+                    {
+                        Model = serviceClientTemplateModel
+                    };
+                    await Write(methodGroupIndexTemplateTS, Path.Combine("operations", "index.d.ts"));
+                }
+
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
                     var methodGroupTemplate = new MethodGroupTemplate

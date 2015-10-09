@@ -10,6 +10,8 @@
 
 'use strict';
 
+var models = require('./index');
+
 /**
  * @class
  * Initializes a new instance of the Endpoints class.
@@ -22,6 +24,14 @@
  * 
  * @member {string} [table] Gets the table endpoint.
  * 
+ * @member {object} [dummyEndPoint] Dummy EndPoint
+ * 
+ * @member {string} [dummyEndPoint.blob] Gets the blob endpoint.
+ * 
+ * @member {string} [dummyEndPoint.queue] Gets the queue endpoint.
+ * 
+ * @member {string} [dummyEndPoint.table] Gets the table endpoint.
+ * 
  */
 function Endpoints(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -33,6 +43,9 @@ function Endpoints(parameters) {
     }
     if (parameters.table !== undefined) {
       this.table = parameters.table;
+    }
+    if (parameters.dummyEndPoint) {
+      this.dummyEndPoint = new models['Endpoints'](parameters.dummyEndPoint);
     }
   }    
 }
@@ -67,6 +80,10 @@ Endpoints.prototype.serialize = function () {
     payload['table'] = this['table'];
   }
 
+  if (this['dummyEndPoint']) {
+    payload['dummyEndPoint'] = this['dummyEndPoint'].serialize();
+  }
+
   return payload;
 };
 
@@ -88,6 +105,10 @@ Endpoints.prototype.deserialize = function (instance) {
 
     if (instance['table'] !== undefined) {
       this['table'] = instance['table'];
+    }
+
+    if (instance['dummyEndPoint']) {
+      this['dummyEndPoint'] = new models['Endpoints']().deserialize(instance['dummyEndPoint']);
     }
   }
 

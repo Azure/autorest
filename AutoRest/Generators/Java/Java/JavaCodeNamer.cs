@@ -35,7 +35,7 @@ namespace Microsoft.Rest.Generator.Java
                 "strictfp", "super",    "switch",   "synchronized","this",
                 "throw",    "throws",   "transient","true",     "try",
                 "void",     "volatile", "while",    "date",     "datetime",
-                "period",   "stream",   "string",   "object"
+                "period",   "stream",   "string",   "object", "header"
             }.ForEach(s => ReservedWords.Add(s));
 
             _normalizedTypes = new HashSet<IType>();

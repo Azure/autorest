@@ -113,7 +113,19 @@ namespace Microsoft.Rest.Generator.NodeJS
                             foreach (var subProperty in ((CompositeType)property.Type).Properties)
                             {
                                 var individualProperty = new Property();
-                                individualProperty.Type = subProperty.Type;
+                                if (subProperty.Type.Name == property.Type.Name)
+                                {
+                                    //don't document this recursive property while documenting the model itself. 
+                                    if (subProperty.Type.Name == this.Name)
+                                    {
+                                        continue;
+                                    }
+                                    individualProperty.Type = PrimaryType.Object;
+                                }
+                                else
+                                {
+                                    individualProperty.Type = subProperty.Type;
+                                }
                                 individualProperty.Name = property.Name + "." + subProperty.Name;
                                 individualProperty.Documentation = subProperty.Documentation;
                                 traversalStack.Push(individualProperty);
@@ -150,6 +162,24 @@ namespace Microsoft.Rest.Generator.NodeJS
             var sample = ComposedProperties.FirstOrDefault(p => 
                 p.Type is CompositeType || p.Type is SequenceType && (p.Type as SequenceType).ElementType is CompositeType);
             return sample != null;
+        }
+
+        /// <summary>
+        /// Returns the TypeScript string to define the specified property, including its type and whether it's optional or not
+        /// </summary>
+        /// <param name="property">Model property to query</param>
+        /// <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
+        /// <returns>TypeScript property definition</returns>
+        public static string PropertyTS(Property property, bool inModelsModule) {
+            if (property == null) {
+                throw new ArgumentNullException("property");
+            }
+
+            string typeString = property.Type.TSType(inModelsModule);
+
+            if (! property.IsRequired)
+                return property.Name + "?: " + typeString;
+            else return property.Name + ": " + typeString;
         }
 
         public string InitializeProperty(string objectName, string valueName, Property property)

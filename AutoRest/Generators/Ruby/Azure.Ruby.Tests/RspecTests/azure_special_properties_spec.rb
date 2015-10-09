@@ -161,5 +161,11 @@ describe 'Azure Special properties behaviour' do
     expect(result.response.status).to eq(200)
     expect(result.request_id).to eq("123")
   end
+  
+  it 'should allow custom-named request-id headers to be used' do
+    result = @client.header.custom_named_request_id(@validClientId).value!
+    expect(result.response.status).to eq(200)
+    expect(result.request_id).to eq("123")
+  end
 
 end
