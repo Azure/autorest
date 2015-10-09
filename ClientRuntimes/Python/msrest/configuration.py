@@ -46,8 +46,12 @@ class Configuration(object):
 
         self._log = logger.setup_logger(self)
 
-        # Communication configuration
+        # Communication configuration - TODO: Populate
         self.protocols = ['https://']
+        self.timeout = None
+        self.allow_redirects = None
+        self.verify = None
+        self.cert = None
 
     @property
     def log_level(self):

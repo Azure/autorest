@@ -58,6 +58,7 @@ class ServiceClient(object):
 
     def _format_url(self, url, params):
 
+        # Manual building necessary for value-less action parameters.
         if params:
             query  = [p+'='+v if v else p for p,v in params.items()]
             url = url + '?' + '&'.join(query)

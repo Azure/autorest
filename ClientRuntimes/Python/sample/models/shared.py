@@ -13,4 +13,14 @@
         self.password = None
         self.public_data = None
         self.delete_certificate_error = None
+
+class AccessCondition(object):
+    
+    def __init__(self):
+        self.if_modified_since_time = None
+        self.if_not_modified_since_time = None
+        self.if_match_e_tag = None
+        self.if_none_match_e_tag = None
+   
+
     
