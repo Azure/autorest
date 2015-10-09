@@ -548,6 +548,60 @@ export interface Header {
 
     /**
      * Send a post request with header values "scenario": "valid", "value":
+     * "P123DT22H14M12.011S"
+     *
+     * @param {string} scenario Send a post request with header values "scenario":
+     * "valid"
+     * 
+     * @param {moment.duration} value Send a post request with header values
+     * "P123DT22H14M12.011S"
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    paramDuration(scenario: string, value: moment.Duration, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+
+    /**
+     * Get a response with header values "P123DT22H14M12.011S"
+     *
+     * @param {string} scenario Send a post request with header values "scenario":
+     * "valid"
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    responseDuration(scenario: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value":
      * "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param {string} scenario Send a post request with header values "scenario":

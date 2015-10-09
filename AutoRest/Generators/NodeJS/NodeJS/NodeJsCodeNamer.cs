@@ -260,7 +260,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else if (primaryType == PrimaryType.TimeSpan)
             {
-                primaryType.Name = "TimeSpan";
+                primaryType.Name = "moment.duration"; 
             }
             else if (primaryType == PrimaryType.Object)
             {

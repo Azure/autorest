@@ -104,6 +104,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         return PrimaryType.ByteArray;
                     }
+                    if (string.Equals("duration", Format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return PrimaryType.TimeSpan;
+                    }
                     return PrimaryType.String;
                 case DataType.Number:
                     return PrimaryType.Double;
