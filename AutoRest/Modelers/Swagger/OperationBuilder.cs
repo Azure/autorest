@@ -25,6 +25,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         private IList<string> _effectiveProduces;
         private SwaggerModeler _swaggerModeler;
         private Operation _operation;
+        private const string APP_JSON_MIME = "application/json";
 
         public OperationBuilder(Operation operation, SwaggerModeler swaggerModeler)
         {
@@ -53,6 +54,18 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Name = methodName
             };
 
+            method.ContentType = APP_JSON_MIME;
+            string produce = _effectiveProduces.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
+            if (!string.IsNullOrEmpty(produce))
+            {
+                method.ContentType = produce;
+            }
+
+            if (method.ContentType.IndexOf("charset=", StringComparison.InvariantCultureIgnoreCase) == -1)
+            {
+                // Enable UTF-8 charset
+                method.ContentType += "; charset=utf-8";
+            }
             method.Description = _operation.Description;
             method.Summary = _operation.Summary;
 
@@ -334,7 +347,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         private bool SwaggerOperationProducesJson()
         {
             return _effectiveProduces != null &&
-                   _effectiveProduces.Any(s => s.StartsWith("application/json", StringComparison.OrdinalIgnoreCase));
+                   _effectiveProduces.Any(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
         }
 
         private bool SwaggerOperationProducesNotEmpty()
