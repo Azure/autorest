@@ -42,6 +42,7 @@
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureModelTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureParameterTemplateModel.cs" />
+    <Compile Include="TemplateModels\PageTemplateModel.cs" />
     <Compile Include="Templates\AzureMethodGroupTemplate.cs">
       <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
     </Compile>
@@ -50,6 +51,9 @@
     </Compile>
     <Compile Include="Templates\AzureServiceClientTemplate.cs">
       <DependentUpon>AzureServiceClientTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\PageTemplate.cs">
+      <DependentUpon>PageTemplate.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +80,7 @@
     <None Include="Templates\AzureMethodGroupTemplate.cshtml" />
     <None Include="Templates\AzureMethodTemplate.cshtml" />
     <None Include="Templates\AzureServiceClientTemplate.cshtml" />
+    <None Include="Templates\PageTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">

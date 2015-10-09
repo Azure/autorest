@@ -24,6 +24,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             Methods = new List<Method>();
             ModelTypes = new List<CompositeType>();
             EnumTypes = new List<EnumType>();
+            PageClasses = new Dictionary<KeyValuePair<string, string>, string>();
         }
 
         /// <summary>
@@ -91,6 +92,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets vendor extensions dictionary.
         /// </summary>
         public Dictionary<string, object> Extensions { get; private set; }
+
+        /// <summary>
+        /// Gets page extensions dictionary.
+        /// </summary>
+        public Dictionary<KeyValuePair<string, string>, string> PageClasses { get; private set; }
 
         /// <summary>
         /// Returns a string representation of the ServiceClient object.

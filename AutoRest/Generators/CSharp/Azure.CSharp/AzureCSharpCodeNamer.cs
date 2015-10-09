@@ -24,15 +24,31 @@ namespace Microsoft.Rest.Generator.CSharp
             // Do nothing
         }
 
-        private static string GetNextLinkString(Dictionary<string, object> extensions)
+        private static string GetPagingSetting(ServiceClient serviceClient, Dictionary<string, object> extensions, out string nextLinkName)
         {
+            // default value
+            nextLinkName = null;
             var ext = extensions[AzureCodeGenerator.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
             if (ext == null)
             {
                 return null;
             }
 
-            return (string)ext["path"];
+            nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
+            string itemName = (string)ext["itemName"] ?? "value";
+            var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
+            if (!serviceClient.PageClasses.ContainsKey(keypair))
+            {
+                if (serviceClient.PageClasses.Count > 0)
+                {
+                    serviceClient.PageClasses.Add(keypair, String.Format(CultureInfo.InvariantCulture, "Page{0}", serviceClient.PageClasses.Count));
+                }
+                else 
+                {
+                    serviceClient.PageClasses.Add(keypair, "Page");
+                }
+            }
+            return serviceClient.PageClasses[keypair];
         }
 
         /// <summary>
@@ -46,17 +62,17 @@ namespace Microsoft.Rest.Generator.CSharp
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var pageTypeFormat = "Page<{0}>";
-
             var convertedTypes = new Dictionary<IType, CompositeType>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
             {
-                string nextLinkString = GetNextLinkString(method.Extensions);
-                if (string.IsNullOrEmpty(nextLinkString))
+                string nextLinkString;
+                string pageClassName = GetPagingSetting(serviceClient, method.Extensions, out nextLinkString);
+                if (string.IsNullOrEmpty(pageClassName))
                 {
                     continue;
                 }
+                var pageTypeFormat = "{0}<{1}>";
 
                 foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
                 {
@@ -68,7 +84,7 @@ namespace Microsoft.Rest.Generator.CSharp
                        compositType.Properties.Count == 2 &&
                        compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
                     {
-                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, sequenceType.ElementType.Name);
+                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName, sequenceType.ElementType.Name);
 
                         CompositeType pagedResult = new CompositeType
                         {

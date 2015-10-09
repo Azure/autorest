@@ -3,6 +3,7 @@
 
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
@@ -129,7 +130,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 await Write(modelTemplate, Path.Combine("Models", model.Name + ".cs"));
             }
 
-
             // Enums
             foreach (var enumType in serviceClient.EnumTypes)
             {
@@ -138,6 +138,16 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                     Model = new EnumTemplateModel(enumType),
                 };
                 await Write(enumTemplate, Path.Combine("Models", enumTemplate.Model.TypeDefinitionName + ".cs"));
+            }
+
+            // Page class
+            foreach (var pageClass in serviceClient.PageClasses)
+            {
+                var pageTemplate = new PageTemplate
+                {
+                    Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
+                };
+                await Write(pageTemplate, Path.Combine("Models", pageTemplate.Model.TypeDefinitionName + ".cs"));
             }
         }
     }

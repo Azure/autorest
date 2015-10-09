@@ -285,7 +285,7 @@
             }
           }
         },
-        "x-ms-pageable": { "path": "nextLink" }      
+        "x-ms-pageable": { "nextLinkName": "nextLink" }      
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts": {
@@ -318,7 +318,7 @@
             }
           }
         },
-        "x-ms-pageable": { "path": "nextLink" }
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
