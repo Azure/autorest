@@ -84,59 +84,69 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        private class PropertyWrapper
+        {
+            public string FullTypeName { get; set; }
+            public Property Property { get; set; }
+        }
+
         public IEnumerable<Property> DocumentationPropertyList
         {
             get
             {
-                var traversalStack = new Stack<Property>();
-                var visitedHash = new Dictionary<string, Property>();
+                var traversalStack = new Stack<PropertyWrapper>();
+                var visitedHash = new Dictionary<string, PropertyWrapper>();
                 var retValue = new Stack<Property>();
 
                 foreach (var property in Properties)
                 {
-                    traversalStack.Push(property);
+                    traversalStack.Push(
+                        new PropertyWrapper() 
+                        { 
+                            FullTypeName = property.Type.Name,//string.Format("{0}.{1}",Name, property.Type.Name), 
+                            Property = property 
+                        });
                 }
 
                 while (traversalStack.Count() != 0)
                 {
-                    var property = traversalStack.Pop();
-                    if (!(property.Type is CompositeType))
+                    var wrapper = traversalStack.Pop();
+                    if (wrapper.Property.Type is CompositeType)
                     {
-                        retValue.Push(property);
-                    }
-
-                    if (property.Type is CompositeType)
-                    {
-                        if (!visitedHash.ContainsKey(property.Name))
+                        if (!visitedHash.ContainsKey(wrapper.Property.Name))
                         {
-                            traversalStack.Push(property);
-                            foreach (var subProperty in ((CompositeType)property.Type).Properties)
+                            if (wrapper.FullTypeName.Contains(Name) || wrapper.FullTypeName.Contains(wrapper.Property.Type.Name))
                             {
-                                var individualProperty = new Property();
-                                if (subProperty.Type.Name == property.Type.Name)
+                                retValue.Push(wrapper.Property);
+                            }
+                            else
+                            {
+                                traversalStack.Push(new PropertyWrapper() { FullTypeName = wrapper.Property.Type.Name, Property = wrapper.Property });
+                                foreach (var subProperty in ((CompositeType)wrapper.Property.Type).Properties)
                                 {
-                                    //don't document this recursive property while documenting the model itself. 
-                                    if (subProperty.Type.Name == this.Name)
-                                    {
-                                        continue;
-                                    }
-                                    individualProperty.Type = PrimaryType.Object;
-                                }
-                                else
-                                {
+                                    var individualProperty = new Property();
+                                    individualProperty.Name = wrapper.Property.Name + "." + subProperty.Name;
                                     individualProperty.Type = subProperty.Type;
+                                    individualProperty.Documentation = subProperty.Documentation;
+                                    traversalStack.Push(new PropertyWrapper()
+                                    {
+                                        FullTypeName = string.Format("{0}.{1}", wrapper.Property.Type.Name, subProperty.Type.Name),
+                                        Property = individualProperty
+                                    });
                                 }
-                                individualProperty.Name = property.Name + "." + subProperty.Name;
-                                individualProperty.Documentation = subProperty.Documentation;
-                                traversalStack.Push(individualProperty);
                             }
 
-                            visitedHash.Add(property.Name, property);
+                            visitedHash.Add(wrapper.Property.Name, wrapper);
                         }
                         else
                         {
-                            retValue.Push(property);
+                            retValue.Push(wrapper.Property);
                         }
+                        
+                    }
+                    else
+                    {
+                        retValue.Push(wrapper.Property);
                     }
                 }
 

@@ -32,6 +32,42 @@ var models = require('./index');
  * 
  * @member {string} [dummyEndPoint.table] Gets the table endpoint.
  * 
+ * @member {object} [dummyEndPoint.fooPoint] Foo point
+ * 
+ * @member {object} [dummyEndPoint.fooPoint.barPoint] Bar point
+ * 
+ * @member {object} [dummyEndPoint.fooPoint.barPoint.recursivePoint] Recursive
+ * Endpoints
+ * 
+ * @member {string} [dummyEndPoint.fooPoint.barPoint.recursivePoint.blob] Gets
+ * the blob endpoint.
+ * 
+ * @member {string} [dummyEndPoint.fooPoint.barPoint.recursivePoint.queue]
+ * Gets the queue endpoint.
+ * 
+ * @member {string} [dummyEndPoint.fooPoint.barPoint.recursivePoint.table]
+ * Gets the table endpoint.
+ * 
+ * @member {object} [dummyEndPoint.fooPoint.barPoint.recursivePoint.fooPoint]
+ * Foo point
+ * 
+ * @member {object} [fooPoint] Foo point
+ * 
+ * @member {object} [fooPoint.barPoint] Bar point
+ * 
+ * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
+ * 
+ * @member {string} [fooPoint.barPoint.recursivePoint.blob] Gets the blob
+ * endpoint.
+ * 
+ * @member {string} [fooPoint.barPoint.recursivePoint.queue] Gets the queue
+ * endpoint.
+ * 
+ * @member {string} [fooPoint.barPoint.recursivePoint.table] Gets the table
+ * endpoint.
+ * 
+ * @member {object} [fooPoint.barPoint.recursivePoint.fooPoint] Foo point
+ * 
  */
 function Endpoints(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -46,6 +82,9 @@ function Endpoints(parameters) {
     }
     if (parameters.dummyEndPoint) {
       this.dummyEndPoint = new models['Endpoints'](parameters.dummyEndPoint);
+    }
+    if (parameters.fooPoint) {
+      this.fooPoint = new models['Foo'](parameters.fooPoint);
     }
   }    
 }
@@ -84,6 +123,10 @@ Endpoints.prototype.serialize = function () {
     payload['dummyEndPoint'] = this['dummyEndPoint'].serialize();
   }
 
+  if (this['fooPoint']) {
+    payload['FooPoint'] = this['fooPoint'].serialize();
+  }
+
   return payload;
 };
 
@@ -109,6 +152,10 @@ Endpoints.prototype.deserialize = function (instance) {
 
     if (instance['dummyEndPoint']) {
       this['dummyEndPoint'] = new models['Endpoints']().deserialize(instance['dummyEndPoint']);
+    }
+
+    if (instance['FooPoint']) {
+      this['fooPoint'] = new models['Foo']().deserialize(instance['FooPoint']);
     }
   }
 

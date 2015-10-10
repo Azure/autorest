@@ -39,6 +39,29 @@ var util = require('util');
  * 
  * @member {object} [primaryEndpoints.dummyEndPoint] Dummy EndPoint
  * 
+ * @member {object} [primaryEndpoints.fooPoint] Foo point
+ * 
+ * @member {object} [primaryEndpoints.fooPoint.barPoint] Bar point
+ * 
+ * @member {object} [primaryEndpoints.fooPoint.barPoint.recursivePoint]
+ * Recursive Endpoints
+ * 
+ * @member {string} [primaryEndpoints.fooPoint.barPoint.recursivePoint.blob]
+ * Gets the blob endpoint.
+ * 
+ * @member {string} [primaryEndpoints.fooPoint.barPoint.recursivePoint.queue]
+ * Gets the queue endpoint.
+ * 
+ * @member {string} [primaryEndpoints.fooPoint.barPoint.recursivePoint.table]
+ * Gets the table endpoint.
+ * 
+ * @member {object}
+ * [primaryEndpoints.fooPoint.barPoint.recursivePoint.dummyEndPoint] Dummy
+ * EndPoint
+ * 
+ * @member {object}
+ * [primaryEndpoints.fooPoint.barPoint.recursivePoint.fooPoint] Foo point
+ * 
  * @member {string} [primaryLocation] Gets the location of the primary for the
  * storage account.
  * 
@@ -86,6 +109,31 @@ var util = require('util');
  * @member {string} [secondaryEndpoints.table] Gets the table endpoint.
  * 
  * @member {object} [secondaryEndpoints.dummyEndPoint] Dummy EndPoint
+ * 
+ * @member {object} [secondaryEndpoints.fooPoint] Foo point
+ * 
+ * @member {object} [secondaryEndpoints.fooPoint.barPoint] Bar point
+ * 
+ * @member {object} [secondaryEndpoints.fooPoint.barPoint.recursivePoint]
+ * Recursive Endpoints
+ * 
+ * @member {string} [secondaryEndpoints.fooPoint.barPoint.recursivePoint.blob]
+ * Gets the blob endpoint.
+ * 
+ * @member {string}
+ * [secondaryEndpoints.fooPoint.barPoint.recursivePoint.queue] Gets the queue
+ * endpoint.
+ * 
+ * @member {string}
+ * [secondaryEndpoints.fooPoint.barPoint.recursivePoint.table] Gets the table
+ * endpoint.
+ * 
+ * @member {object}
+ * [secondaryEndpoints.fooPoint.barPoint.recursivePoint.dummyEndPoint] Dummy
+ * EndPoint
+ * 
+ * @member {object}
+ * [secondaryEndpoints.fooPoint.barPoint.recursivePoint.fooPoint] Foo point
  * 
  */
 function StorageAccount(parameters) {

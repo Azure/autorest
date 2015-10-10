@@ -471,9 +471,31 @@
                     "type": "string",
                     "description": "Gets the table endpoint."
                 },
-                "dummyEndPoint": { 
+                "dummyEndPoint": {
                     "$ref": "#/definitions/Endpoints",
                     "description": "Dummy EndPoint"
+                },
+                "FooPoint": {
+                    "$ref": "#/definitions/Foo",
+                    "description": "Foo point"
+                }
+            },
+            "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
+        },
+        "Foo": {
+            "properties": {
+                "BarPoint": {
+                    "$ref": "#/definitions/Bar",
+                    "description": "Bar point"
+                }
+            },
+            "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
+        },
+        "Bar": {
+            "properties": {
+                "RecursivePoint": { 
+                    "$ref": "#/definitions/Endpoints",
+                    "description": "Recursive Endpoints"
                 }
             },
             "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
