@@ -61,7 +61,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 method.ContentType = produce;
             }
 
-            if (method.ContentType.IndexOf("charset=", StringComparison.InvariantCultureIgnoreCase) == -1)
+            if (method.ContentType.IndexOf("charset=", StringComparison.OrdinalIgnoreCase) == -1)
             {
                 // Enable UTF-8 charset
                 method.ContentType += "; charset=utf-8";
