@@ -1,0 +1,122 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Duration Test Service",
+    "description": "Test Infrastructure for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/duration/null": {
+      "get": {
+        "operationId": "duration_getNull",
+        "description": "Get null duration value",
+        "responses": {
+          "200": {
+            "description": "The null duration value",
+            "schema": {
+              "type": "string",
+              "format": "duration"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/duration/positiveduration": {
+      "put": {
+        "operationId": "duration_putPositiveDuration",
+        "description": "Put a positive duration value",
+        "parameters": [
+          {
+            "name": "durationBody",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "format": "duration"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A positive duration value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "duration_getPositiveDuration",
+        "description": "Get a positive duration value",
+        "responses": {
+          "200": {
+            "description": "The positive duration value",
+            "schema": {
+              "type": "string",
+              "format": "duration"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },    
+    "/duration/invalid": {
+      "get": {
+        "operationId": "duration_getInvalid",
+        "description": "Get an invalid duration value",
+        "responses": {
+          "200": {
+            "description": "The invalid duration value",
+            "schema": {
+              "type": "string",
+              "format": "duration"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

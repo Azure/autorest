@@ -210,7 +210,8 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         public static bool IsValueType(this PrimaryType type)
         {
             return type == PrimaryType.Boolean || type == PrimaryType.DateTime || type == PrimaryType.Date
-                || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long;
+                || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long 
+                || type == PrimaryType.TimeSpan;
         }
 
         public static string CheckNull(string valueReference, string executionBlock)

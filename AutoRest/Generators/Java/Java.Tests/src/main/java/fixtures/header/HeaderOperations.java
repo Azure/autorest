@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import retrofit.client.Response;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
+import org.joda.time.Period;
 import fixtures.header.models.GreyscaleColors;
 import retrofit.http.POST;
 import retrofit.http.Header;
@@ -149,6 +150,18 @@ public interface HeaderOperations {
 
         @POST("/header/response/prim/datetime")
         void responseDatetimeAsync(@Header("scenario") String scenario, ServiceResponseCallback cb);
+
+        @POST("/header/param/prim/duration")
+        Response paramDuration(@Header("scenario") String scenario, @Header("value") Period value) throws ServiceException;
+
+        @POST("/header/param/prim/duration")
+        void paramDurationAsync(@Header("scenario") String scenario, @Header("value") Period value, ServiceResponseCallback cb);
+
+        @POST("/header/response/prim/duration")
+        Response responseDuration(@Header("scenario") String scenario) throws ServiceException;
+
+        @POST("/header/response/prim/duration")
+        void responseDurationAsync(@Header("scenario") String scenario, ServiceResponseCallback cb);
 
         @POST("/header/param/prim/byte")
         Response paramByte(@Header("scenario") String scenario, @Header("value") String value) throws ServiceException;
@@ -512,6 +525,40 @@ public interface HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     void responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    void paramDuration(String scenario, Period value) throws ServiceException;
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    void paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get a response with header values "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    void responseDuration(String scenario) throws ServiceException;
+
+    /**
+     * Get a response with header values "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    void responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"

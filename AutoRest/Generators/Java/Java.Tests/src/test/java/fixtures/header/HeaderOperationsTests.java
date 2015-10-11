@@ -8,6 +8,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.Period;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -456,6 +457,36 @@ public class HeaderOperationsTests {
                 for (Header header : headers) {
                     if (header.getName().equals("value")) {
                         Assert.assertEquals("0001-01-01", header.getValue());
+                        lock.countDown();
+                        break;
+                    }
+                }
+            }
+        });
+        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+    }
+
+    @Test
+    public void paramDuration() throws Exception {
+        client.getHeaderOperations().paramDuration("valid", new Period(0, 0, 0, 123, 22, 14, 12, 11));
+    }
+
+    @Test
+    public void responseDuration() throws Exception {
+        lock = new CountDownLatch(1);
+        client.getHeaderOperations().responseDurationAsync("valid", new ServiceCallback<Void>() {
+            @Override
+            public void failure(ServiceException exception) {
+                fail();
+            }
+
+            @Override
+            public void success(ServiceResponse<Void> response) {
+                List<Header> headers = response.getResponse().getHeaders();
+                for (Header header : headers) {
+                    if (header.getName().equals("value")) {
+                        //TODO: It's not really a great experience to have this as a string (rather it be a Period)
+                        Assert.assertEquals("P123DT22H14M12.011S", header.getValue());
                         lock.countDown();
                         break;
                     }

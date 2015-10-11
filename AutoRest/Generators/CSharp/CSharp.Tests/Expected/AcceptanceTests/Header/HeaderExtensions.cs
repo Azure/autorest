@@ -708,6 +708,76 @@ namespace Fixtures.AcceptanceTestsHeader
 
             /// <summary>
             /// Send a post request with header values "scenario": "valid", "value":
+            /// "P123DT22H14M12.011S"
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='scenario'>
+            /// Send a post request with header values "scenario": "valid"
+            /// </param>
+            /// <param name='value'>
+            /// Send a post request with header values "P123DT22H14M12.011S"
+            /// </param>
+            public static void ParamDuration(this IHeader operations, string scenario, TimeSpan? value)
+            {
+                Task.Factory.StartNew(s => ((IHeader)s).ParamDurationAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Send a post request with header values "scenario": "valid", "value":
+            /// "P123DT22H14M12.011S"
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='scenario'>
+            /// Send a post request with header values "scenario": "valid"
+            /// </param>
+            /// <param name='value'>
+            /// Send a post request with header values "P123DT22H14M12.011S"
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task ParamDurationAsync( this IHeader operations, string scenario, TimeSpan? value, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.ParamDurationWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
+            /// Get a response with header values "P123DT22H14M12.011S"
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='scenario'>
+            /// Send a post request with header values "scenario": "valid"
+            /// </param>
+            public static void ResponseDuration(this IHeader operations, string scenario)
+            {
+                Task.Factory.StartNew(s => ((IHeader)s).ResponseDurationAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get a response with header values "P123DT22H14M12.011S"
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='scenario'>
+            /// Send a post request with header values "scenario": "valid"
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task ResponseDurationAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.ResponseDurationWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
+            /// Send a post request with header values "scenario": "valid", "value":
             /// "啊齄丂狛狜隣郎隣兀﨩"
             /// </summary>
             /// <param name='operations'>
