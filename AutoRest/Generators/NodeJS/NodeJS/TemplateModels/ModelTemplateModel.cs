@@ -86,8 +86,10 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         private class PropertyWrapper
         {
-            public string FullTypeName { get; set; }
             public Property Property { get; set; }
+            public List<string> RecursiveTypes { get; set; }
+
+            public PropertyWrapper() { RecursiveTypes = new List<string>(); }
         }
 
         public IEnumerable<Property> DocumentationPropertyList
@@ -100,12 +102,12 @@ namespace Microsoft.Rest.Generator.NodeJS
 
                 foreach (var property in Properties)
                 {
-                    traversalStack.Push(
-                        new PropertyWrapper() 
-                        { 
-                            FullTypeName = property.Type.Name,//string.Format("{0}.{1}",Name, property.Type.Name), 
-                            Property = property 
-                        });
+                    var tempWrapper = new PropertyWrapper()
+                    {
+                        Property = property,
+                        RecursiveTypes = new List<string> () { Name }
+                    };
+                    traversalStack.Push(tempWrapper);
                 }
 
                 while (traversalStack.Count() != 0)
@@ -115,24 +117,33 @@ namespace Microsoft.Rest.Generator.NodeJS
                     {
                         if (!visitedHash.ContainsKey(wrapper.Property.Name))
                         {
-                            if (wrapper.FullTypeName.Contains(Name) || wrapper.FullTypeName.Contains(wrapper.Property.Type.Name))
+                            if (wrapper.RecursiveTypes.Contains(wrapper.Property.Type.Name))
                             {
                                 retValue.Push(wrapper.Property);
                             }
                             else
                             {
-                                traversalStack.Push(new PropertyWrapper() { FullTypeName = wrapper.Property.Type.Name, Property = wrapper.Property });
+                                traversalStack.Push(wrapper);
                                 foreach (var subProperty in ((CompositeType)wrapper.Property.Type).Properties)
                                 {
                                     var individualProperty = new Property();
                                     individualProperty.Name = wrapper.Property.Name + "." + subProperty.Name;
                                     individualProperty.Type = subProperty.Type;
                                     individualProperty.Documentation = subProperty.Documentation;
-                                    traversalStack.Push(new PropertyWrapper()
+                                    //Adding the parent type to recursive list
+                                    var recursiveList = new List<string>() { wrapper.Property.Type.Name };
+                                    if (subProperty.Type is CompositeType)
                                     {
-                                        FullTypeName = string.Format("{0}.{1}", wrapper.Property.Type.Name, subProperty.Type.Name),
-                                        Property = individualProperty
-                                    });
+                                        //Adding parent's recursive types to the list as well
+                                        recursiveList.AddRange(wrapper.RecursiveTypes);
+                                    }
+                                    var subPropertyWrapper = new PropertyWrapper()
+                                    {
+                                        Property = individualProperty,
+                                        RecursiveTypes = recursiveList
+                                    };
+                                    
+                                    traversalStack.Push(subPropertyWrapper);
                                 }
                             }
 
@@ -142,7 +153,6 @@ namespace Microsoft.Rest.Generator.NodeJS
                         {
                             retValue.Push(wrapper.Property);
                         }
-                        
                     }
                     else
                     {

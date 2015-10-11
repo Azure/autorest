@@ -32,8 +32,6 @@ var models = require('./index');
  * 
  * @member {object} [barPoint.recursivePoint.fooPoint] Foo point
  * 
- * @member {object} [barPoint.recursivePoint.fooPoint.barPoint] Bar point
- * 
  */
 function Foo(parameters) {
   if (parameters !== null && parameters !== undefined) {

@@ -26,47 +26,11 @@ var models = require('./index');
  * 
  * @member {object} [dummyEndPoint] Dummy EndPoint
  * 
- * @member {string} [dummyEndPoint.blob] Gets the blob endpoint.
- * 
- * @member {string} [dummyEndPoint.queue] Gets the queue endpoint.
- * 
- * @member {string} [dummyEndPoint.table] Gets the table endpoint.
- * 
- * @member {object} [dummyEndPoint.fooPoint] Foo point
- * 
- * @member {object} [dummyEndPoint.fooPoint.barPoint] Bar point
- * 
- * @member {object} [dummyEndPoint.fooPoint.barPoint.recursivePoint] Recursive
- * Endpoints
- * 
- * @member {string} [dummyEndPoint.fooPoint.barPoint.recursivePoint.blob] Gets
- * the blob endpoint.
- * 
- * @member {string} [dummyEndPoint.fooPoint.barPoint.recursivePoint.queue]
- * Gets the queue endpoint.
- * 
- * @member {string} [dummyEndPoint.fooPoint.barPoint.recursivePoint.table]
- * Gets the table endpoint.
- * 
- * @member {object} [dummyEndPoint.fooPoint.barPoint.recursivePoint.fooPoint]
- * Foo point
- * 
  * @member {object} [fooPoint] Foo point
  * 
  * @member {object} [fooPoint.barPoint] Bar point
  * 
  * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
- * 
- * @member {string} [fooPoint.barPoint.recursivePoint.blob] Gets the blob
- * endpoint.
- * 
- * @member {string} [fooPoint.barPoint.recursivePoint.queue] Gets the queue
- * endpoint.
- * 
- * @member {string} [fooPoint.barPoint.recursivePoint.table] Gets the table
- * endpoint.
- * 
- * @member {object} [fooPoint.barPoint.recursivePoint.fooPoint] Foo point
  * 
  */
 function Endpoints(parameters) {

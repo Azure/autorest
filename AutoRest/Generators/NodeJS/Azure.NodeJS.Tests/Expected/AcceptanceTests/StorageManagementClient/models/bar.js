@@ -32,9 +32,6 @@ var models = require('./index');
  * 
  * @member {object} [recursivePoint.fooPoint.barPoint] Bar point
  * 
- * @member {object} [recursivePoint.fooPoint.barPoint.recursivePoint]
- * Recursive Endpoints
- * 
  */
 function Bar(parameters) {
   if (parameters !== null && parameters !== undefined) {
