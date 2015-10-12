@@ -151,6 +151,9 @@
     <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\flattenedProduct.js" />
     <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\index.js" />
     <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\resourceCollection.js" />
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\bar.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\checkNameAvailabilityResult.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -158,6 +161,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\endpoints.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\foo.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\index.js">

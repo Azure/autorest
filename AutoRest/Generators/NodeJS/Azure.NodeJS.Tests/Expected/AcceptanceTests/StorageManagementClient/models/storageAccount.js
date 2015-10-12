@@ -39,6 +39,13 @@ var util = require('util');
  * 
  * @member {object} [primaryEndpoints.dummyEndPoint] Dummy EndPoint
  * 
+ * @member {object} [primaryEndpoints.fooPoint] Foo point
+ * 
+ * @member {object} [primaryEndpoints.fooPoint.barPoint] Bar point
+ * 
+ * @member {object} [primaryEndpoints.fooPoint.barPoint.recursivePoint]
+ * Recursive Endpoints
+ * 
  * @member {string} [primaryLocation] Gets the location of the primary for the
  * storage account.
  * 
@@ -86,6 +93,13 @@ var util = require('util');
  * @member {string} [secondaryEndpoints.table] Gets the table endpoint.
  * 
  * @member {object} [secondaryEndpoints.dummyEndPoint] Dummy EndPoint
+ * 
+ * @member {object} [secondaryEndpoints.fooPoint] Foo point
+ * 
+ * @member {object} [secondaryEndpoints.fooPoint.barPoint] Bar point
+ * 
+ * @member {object} [secondaryEndpoints.fooPoint.barPoint.recursivePoint]
+ * Recursive Endpoints
  * 
  */
 function StorageAccount(parameters) {
