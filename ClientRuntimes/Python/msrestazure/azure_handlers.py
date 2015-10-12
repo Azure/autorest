@@ -23,4 +23,10 @@
 # THE SOFTWARE.
 #
 #--------------------------------------------------------------------------
-    
+
+class PageHandler(object):
+    pass
+
+class PollingTask(object):
+    pass
+

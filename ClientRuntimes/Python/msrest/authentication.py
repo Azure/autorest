@@ -25,6 +25,7 @@
 #--------------------------------------------------------------------------
 
 from base64 import b64encode
+import time
 import requests
 import requests_oauthlib as oauth
 
@@ -65,5 +66,12 @@ class TokenAuthentication(Authentication):
         return "{0} {1}".format(self.scheme, self.token)
 
     def signed_session(self):
+
+        expiry = self.token.get('expires_at')
+
+        if expiry:
+            countdown = float(expiry) - time.time()
+            self.token['expires_in'] = countdown
+
         session = oauth.OAuth2Session(self.id, token=self.token)
         return session
