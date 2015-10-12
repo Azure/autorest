@@ -35,7 +35,7 @@ from .exceptions import InvalidHookError
 class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
     
 
-    def __init__(self, retry, headers, hooks):
+    def __init__(self):
         
         self._client_headers = {}
         self._client_hooks = {
@@ -62,6 +62,10 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
         pass
 
     def add_hook(self, event, callback, precall=True, overwrite=False):
+
+        if not callable(callback):
+            raise InvalidHookError("Callback must be callable.")
+
         if event not in self._client_hooks:
             raise InvalidHookError("Event: '{0}' is not able to be hooked.")
 

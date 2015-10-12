@@ -50,6 +50,7 @@ class ServiceClient(object):
 
     def _send(self, request, **kwargs):
         session = self.creds.signed_session()
+        session.proxies = self.config.proxies
 
         for protocol in self.config.protocols:
             self.session.mount(protocol, self._adapter)
