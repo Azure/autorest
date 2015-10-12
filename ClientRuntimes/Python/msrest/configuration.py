@@ -31,15 +31,21 @@ Configuration of ServiceClient and session.
 import os
 import tempfile
 
+try:
+    import configparser
+
+except ImportError:
+    import ConfigParser as configparser
+
 from .logger import *
 
 class Configuration(object):
     
-    def __init__(self):
+    def __init__(self, filepath):
 
         # Logging configuration
         self._log_name = "ms-client-runtime"
-        self._log_dir = tempfile.tempdir
+        self._log_dir = None
         self._stream_logging =  "%(asctime)-15s [%(levelname)s] %(module)s: %(message)s"
         self._file_logging =  "%(asctime)-15s [%(levelname)s] %(module)s: %(message)s"
         self._level = 30
@@ -48,10 +54,17 @@ class Configuration(object):
 
         # Communication configuration - TODO: Populate
         self.protocols = ['https://']
+        self.proxies = {}
         self.timeout = None
-        self.allow_redirects = None
-        self.verify = None
+        self.allow_redirects = True
+        self.verify = True
         self.cert = None
+
+        self._config = configparser.RawConfigParser()
+        self._config.optionxform = str
+
+        if filepath:
+            self.load(filepath)
 
     @property
     def log_level(self):
@@ -97,3 +110,44 @@ class Configuration(object):
     def log_name(self, value):
         self._log = setup_logger(self)
         self._log_name = value
+
+    def save(self, filepath):
+        
+        _config = configparser.RawConfigParser()
+        _config.add_section("Logging")
+        _config.add_section("HTTP")
+
+        _config.set("Logging", "log_name", self._log_name)
+        _config.set("Logging", "log_dir", self._log_dir)
+        _config.set("Logging", "stream_format", self._stream_logging)
+        _config.set("Logging", "file_format", self._file_logging)
+        _config.set("Logging", "level", self._level)
+
+        _config.set("HTTP", "protocols", self.protocols)
+        _config.set("HTTP", "timeout", self.timeout)
+        _config.set("HTTP", "allow_redirects", self.allow_redirects)
+        _config.set("HTTP", "verify", self.verify)
+        _config.set("HTTP", "cert", self.cert)
+
+        with open(filepath, 'w') as configfile:
+            self._config.write(configfile)
+
+    def load(self, filepath):
+        
+        _config = configparser.RawConfigParser()
+        _config.read(filepath)
+
+        self._log_name = _config.get("Logging", "log_name")
+        self._log_dir = _config.get("Logging", "log_dir")
+        self._stream_logging = _config.get("Logging", "stream_format")
+        self._file_logging = _config.get("Logging", "file_format")
+        self._level = _config.getint("Logging", "level")
+
+        self.protocols = _config.get("HTTP", "protocols")
+        self.timeout = _config.get("HTTP", "timeout")
+        self.allow_redirects = _config.get("HTTP", "allow_redirects")
+        self.verify = _config.get("HTTP", "verify")
+        self.cert = _config.get("HTTP", "cert")
+
+        self._log = logger.setup_logger(self)
+

@@ -31,6 +31,7 @@ import logging
 LOGGER = None
 
 def invalid_directory(dirname):
+
     try:
         if not os.path.isdir(dirname):
             os.mkdir(dirname)
@@ -62,16 +63,16 @@ def set_stream_handler(logger, format_str):
 
 def set_file_handler(logger, file_dir, format_str):
 
-    check = invalid_directory(file_dir)
-    if file_dir is not None and check:
-        raise ValueError("Log directory '{0}' cannot be accessed: {1}".format(file_dir, check))
-
     current_handlers = [h for h in logger.handlers if isinstance(h, logging.FileHandler)]
     for handler in current_handlers:
         logger.removeHandler(handler)
 
     if not format_str or not file_dir:
-        return
+        return format_str
+
+    check = invalid_directory(file_dir)
+    if check:
+        raise ValueError("Log directory '{0}' cannot be accessed: {1}".format(file_dir, check))
 
     
     logfile = os.path.join(file_dir, logger.name + '.log')
@@ -85,9 +86,10 @@ def set_file_handler(logger, file_dir, format_str):
             date=timestamp,
             ext=split_log[1]))
 
-        handler = logging.FileHandler(logfile)
-        handler.setFormatter(format_str)
-        logger.addHandler(handler)
+    handler = logging.FileHandler(logfile)
+    handler.setFormatter(format_str)
+    logger.addHandler(handler)
+    return format_str
 
 def set_log_level(logger, level):
     levels = {'debug': 10,
