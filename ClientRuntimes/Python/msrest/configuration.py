@@ -41,7 +41,10 @@ from .logger import *
 
 class Configuration(object):
     
-    def __init__(self, filepath):
+    def __init__(self, filepath=None):
+
+        # Service
+        self.base_url = None
 
         # Logging configuration
         self._log_name = "ms-client-runtime"
