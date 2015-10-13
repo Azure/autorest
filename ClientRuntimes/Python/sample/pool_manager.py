@@ -29,17 +29,10 @@ class PoolManager(object):
         raise InvalidOperationError("Pool cannot be overwritten.")
 
     def __iter__(self):
-        response = self.list(self.max_results)
-        self.next = response.next_link
-        for p in response.pools:
+        pools = self.list(self.max_results)
+        
+        for p in pools:
             yield p
-
-        while self.next is not None:
-            response = self.list_next(self.next)
-            self.next = response.next_link
-
-            for p in response.pools:
-                yield p
 
     def pool(self):
         return PoolRequest(self)
@@ -271,27 +264,14 @@ class PoolManager(object):
 
             deserialize = Deserialized(BatchPoolListResponse, response)
             dersialized = deserialize(response.content, self._classes)
-            
-        except ResponseStatusError:
-            raise AzureException(response)
 
-        except:
-            raise #TODO: exception handling
+            def next_page(next_link):
+                response = self._ops.list_next(next_link) 
+                deserialize = Deserialized(BatchPoolListResponse, response)
+                dersialized = deserialize(response.content, self._classes)   
+                return deserialized.pools, deserialized.next_link        
 
-        return dersialized
-
-    def list_next(self, next_link=None):
-        rest_params = locals()
-
-        # Validate
-        if (next_link is None):
-            raise ValueError('next_link cannot be None.')
-
-        try:
-            response = self._ops.list_next(**rest_params)
-
-            deserialize = Deserialized(BatchPoolListResponse, response)
-            dersialized = deserialize(response.content, self._classes)
+            pager = Paged(deserialized.pools, deserialized.next_link, next_page)
 
         except ResponseStatusError:
             raise AzureException(response)
@@ -299,7 +279,7 @@ class PoolManager(object):
         except:
             raise #TODO: exception handling
 
-        return dersialized
+        return pager
 
     def patch(self, parameters, pool_name=None):
         rest_params = locals()

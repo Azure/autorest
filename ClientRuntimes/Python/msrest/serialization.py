@@ -106,6 +106,21 @@ class Serialized(object):
         pass
 
 
+class DeserializedGenerator(object):
+    
+
+    def __init__(self, deserialize, resp_lst, resp_type):
+
+        self._command = deserialize
+        self._type = resp_type
+        self._list = resp_lst
+
+    def __iter__(self):
+
+        for resp in self._list:
+            yield self._command(resp, self._type)
+
+
 class Deserialized(object):
 
     basic_types = ['str', 'int', 'bool', 'float']
@@ -157,6 +172,9 @@ class Deserialized(object):
             return data
 
         try:
+            if data_type is None:
+                return data
+
             if data_type in self.basic_types:
                 return eval(data_type)(data)
 
@@ -203,7 +221,7 @@ class Deserialized(object):
                 raise DeserializationError("Unable to deserialize response data: {0}".format(err))
 
     def deserialize_iter(self, attr, iter_type):
-        return [self._deserialize_data(i, iter_type) for i in attr]
+        return DeserializedGenerator(self._deserialize_data, attr, iter_type)
 
     def deserialize_dict(self, attr, dict_type):
         return {str(x):self._deserialize_data(attr[x], dict_type) for x in attr}

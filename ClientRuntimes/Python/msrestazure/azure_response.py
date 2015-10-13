@@ -24,31 +24,3 @@
 #
 #--------------------------------------------------------------------------
 
-class Paged(object):
-
-    def __init__(self, items, url, command):
-
-        self.items = items
-        self.url = url
-        self.command = command
-
-    def __iter__(self):
-        for i in self.items:
-            yield i
-
-        while self.url is not None:
-            self.items, self.url = self.command(self.url)
-
-            for i in self.items:
-                yield i
-
-    def __len__(self):
-        return len(self.items)
-
-    def __getitem__(self, index):
-        return self.items[index]
-
-
-class PollingStatus(object):
-    pass
-

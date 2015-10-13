@@ -38,7 +38,7 @@ class HTTPResponse(object):
         }
         self.body_map = {}
 
-        self._status_code
+        self.status_code
 
     @property
     def status_code(self):
