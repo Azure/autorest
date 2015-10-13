@@ -502,23 +502,28 @@ class TestRuntimeDeserialized(unittest.TestCase):
         deserializer = Deserialized(self.TestObj, response_data)
         data = {'AttrD': []}
         response = deserializer(json.dumps(data))
-        self.assertEqual(response.attr_d, [])
+        deserialized_list = [d for d in response.attr_d]
+        self.assertEqual(deserialized_list, [])
 
         data['AttrD'] = [1,2,3]
         response = deserializer(json.dumps(data))
-        self.assertEqual(response.attr_d, [1,2,3])
+        deserialized_list = [d for d in response.attr_d]
+        self.assertEqual(deserialized_list, [1,2,3])
 
         data['AttrD'] = ["1","2","3"]
         response = deserializer(json.dumps(data))
-        self.assertEqual(response.attr_d, [1,2,3])
+        deserialized_list = [d for d in response.attr_d]
+        self.assertEqual(deserialized_list, [1,2,3])
 
         data['AttrD'] = ["test","test2","test3"]
         with self.assertRaises(DeserializationError):
             response = deserializer(json.dumps(data))
+            deserialized_list = [d for d in response.attr_d]
         
         data['AttrD'] = "NotAList"
         with self.assertRaises(DeserializationError):
             response = deserializer(json.dumps(data))
+            deserialized_list = [d for d in response.attr_d]
 
     def test_attr_list_complex(self):
         """
@@ -543,5 +548,6 @@ class TestRuntimeDeserialized(unittest.TestCase):
         data = {"id":[{"ABC": "123"}]}
 
         response = deserializer(json.dumps(data), {'ListObj':ListObj})
-        self.assertIsInstance(response.attr_a[0], ListObj)
-        self.assertEqual(response.attr_a[0].abc, 123)
+        deserialized_list = [a for a in response.attr_a]
+        self.assertIsInstance(deserialized_list[0], ListObj)
+        self.assertEqual(deserialized_list[0].abc, 123)
