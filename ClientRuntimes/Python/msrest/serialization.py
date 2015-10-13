@@ -211,14 +211,14 @@ class Deserialized(object):
             attr_type = self.response.headers_map[attr]['type']
             attr_name = self.response.headers_map[attr]['key']
 
-            try:
-                raw_value = raw_data.headers[attr_name]
+            #try:
+            raw_value = raw_data.headers.get(attr_name)
 
-                value = self._deserialize_data(raw_value, attr_type) 
-                setattr(self.response, attr, value)
+            value = self._deserialize_data(raw_value, attr_type) 
+            setattr(self.response, attr, value)
 
-            except KeyError as err:
-                raise DeserializationError("Unable to deserialize response data: {0}".format(err))
+            #except KeyError as err:
+            #    raise DeserializationError("Unable to deserialize response data: {0}".format(err))
 
     def deserialize_iter(self, attr, iter_type):
         return DeserializedGenerator(self._deserialize_data, attr, iter_type)

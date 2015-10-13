@@ -127,6 +127,13 @@ class PoolManager(object):
        
             deserialize = Deserialized(BatchPoolAddResponse, response)
             deserialized = deserialize(response.content, self._classes)
+
+            def get_status(status_link):
+                response = self._ops.get_status(status_link=status_link)
+                deserialize = Deserialized(BatchPoolAddResponse, response)
+                deserialized = deserialize(response.content, self._classes)
+
+            polling = Polled(deserialized, get_status)
             
         except ResponseStatusError:
             raise AzureException(response)
@@ -134,7 +141,7 @@ class PoolManager(object):
         except:
             raise #TODO: exception handling
 
-        return deserialized
+        return polling
 
     def delete(self, pool_name=None):
         rest_params = locals()
@@ -266,10 +273,10 @@ class PoolManager(object):
             dersialized = deserialize(response.content, self._classes)
 
             def next_page(next_link):
-                response = self._ops.list_next(next_link) 
+                response = self._ops.list_next(next_link=next_link) 
                 deserialize = Deserialized(BatchPoolListResponse, response)
                 dersialized = deserialize(response.content, self._classes)   
-                return deserialized.pools, deserialized.next_link        
+                return deserialized    
 
             pager = Paged(deserialized.pools, deserialized.next_link, next_page)
 

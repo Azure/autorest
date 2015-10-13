@@ -24,6 +24,10 @@
 #
 #--------------------------------------------------------------------------
 
+from multiprocessing import Process, Queue, Value, Lock
+import time
+import pickle
+
 class Paged(object):
 
     def __init__(self, items, url, command):
@@ -49,6 +53,59 @@ class Paged(object):
         return self.items[index]
 
 
-class PollingStatus(object):
-    pass
+class Polled(object):
 
+    def __init__(self, response, command):
+
+        self._lock = Lock()
+        kwargs = {}
+        url = self._extract_url(response)
+
+        setattr(Poller, "command", staticmethod(command))
+
+        for attr,value in Poller._extract_attributes(response).items():
+            attr_name = '_' + attr
+            attr_val = Value('c_char_p', False)
+            attr_val.value = pickle.dumps(value)
+
+            setattr(self, attr_name, attr_val)
+
+            def get_attr(s):
+                with s._lock:
+                    return pickle.loads(getattr(s, attr_name).value)
+
+            setattr(Poller, attr, property(get_attr))
+            kwargs[attr] = attr_val
+            
+
+        self.p = Process(target=Poller.poll, args=(self._lock, url, kwargs))
+        self.p.start()
+
+    def _extract_attributes(self, response):
+        attrs = response.__dict__
+        attrs.pop('attributes_map')
+        attrs.pop('headers_map')
+        attrs.pop('body_map')
+        return attrs
+
+    def _extract_url(self, response):
+        if response.asyncoperation:
+            return response.asyncoperation
+
+        elif response.location:
+            status_link = response.location
+
+    @staticmethod
+    def poll(lock, url, kwargs):
+
+        while True:
+            response = Poller.command()
+
+            with lock:
+                for attr in kwargs:
+                    kwargs[attr].value = pickle.dumps(getattr(response, attr))
+
+            if response.status_code in ['x','y','z']:
+                break
+
+            time.sleep(POLLING_DELAY)

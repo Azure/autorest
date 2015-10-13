@@ -24,3 +24,15 @@
 #
 #--------------------------------------------------------------------------
 
+class AzureResponse(HTTPResponse):
+
+    def __init__(self):
+
+        super(AzureResponse, self).__init__()
+
+        self.headers_map.update(
+            {'asyncoperation':{'key':'azure-asyncoperation','type':'str'},
+             'location':{'key':'location','type':'str'}})
+
+        self.asyncoperation = None
+        self.location = None
