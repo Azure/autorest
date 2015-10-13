@@ -126,7 +126,7 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        RestAdapter restAdapter = retrofitBuilder.setEndpoint(baseUri).build();
         this.paging = new PagingImpl(restAdapter, this);
     }
 }

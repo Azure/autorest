@@ -12,7 +12,7 @@ package fixtures.url;
 
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestUrlTestService class.
@@ -121,18 +121,18 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestUrlTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestUrlTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
     private void initialize() {
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.paths = new PathsImpl(restAdapter, this);
-        this.queries = new QueriesImpl(restAdapter, this);
-        this.pathItems = new PathItemsImpl(restAdapter, this);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.paths = new PathsImpl(retrofit, this);
+        this.queries = new QueriesImpl(retrofit, this);
+        this.pathItems = new PathItemsImpl(retrofit, this);
     }
 }

@@ -207,7 +207,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        RestAdapter restAdapter = retrofitBuilder.setEndpoint(baseUri).build();
         this.xMsClientRequestId = new XMsClientRequestIdImpl(restAdapter, this);
         this.subscriptionInCredentials = new SubscriptionInCredentialsImpl(restAdapter, this);
         this.subscriptionInMethod = new SubscriptionInMethodImpl(restAdapter, this);

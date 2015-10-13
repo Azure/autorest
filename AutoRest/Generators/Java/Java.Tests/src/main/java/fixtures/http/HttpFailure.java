@@ -12,8 +12,8 @@ package fixtures.http;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import retrofit.http.GET;
 
 /**
@@ -27,14 +27,10 @@ public interface HttpFailure {
      */
     interface HttpFailureService {
         @GET("/http/failure/emptybody/error")
-        Response getEmptyError() throws ServiceException;
-
-        @GET("/http/failure/emptybody/error")
-        void getEmptyErrorAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getEmptyError();
 
     }
     /**
-     * Get empty error form server
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -42,10 +38,9 @@ public interface HttpFailure {
     Boolean getEmptyError() throws ServiceException;
 
     /**
-     * Get empty error form server
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback);
+    Call<ResponseBody> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback);
 
 }

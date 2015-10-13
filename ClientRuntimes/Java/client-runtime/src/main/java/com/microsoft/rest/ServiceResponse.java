@@ -7,7 +7,7 @@
 
 package com.microsoft.rest;
 
-import retrofit.client.Response;
+import retrofit.Response;
 
 /**
  * An instance of this class holds a response object and a raw REST response.

@@ -10,151 +10,157 @@
 
 package fixtures.bodybyte;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.bodybyte.models.Error;
 
 public class ByteOperationsImpl implements ByteOperations {
     private ByteService service;
     AutoRestSwaggerBATByteService client;
 
-    public ByteOperationsImpl(RestAdapter restAdapter, AutoRestSwaggerBATByteService client) {
-        this.service = restAdapter.create(ByteService.class);
+    public ByteOperationsImpl(Retrofit retrofit, AutoRestSwaggerBATByteService client) {
+        this.service = retrofit.create(ByteService.class);
         this.client = client;
     }
 
     /**
-     * Get null byte value
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public byte[] getNull() throws ServiceException {
         try {
-            ServiceResponse<byte[]> response = getNullDelegate(service.getNull(), null);
+            Call<ResponseBody> call = service.getNull();
+            ServiceResponse<byte[]> response = getNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<byte[]> response = getNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get null byte value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
+        Call<ResponseBody> call = service.getNull();
+        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, error));
+                    serviceCallback.success(getNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<byte[]> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<byte[]>()
                 .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get empty byte value ''
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public byte[] getEmpty() throws ServiceException {
         try {
-            ServiceResponse<byte[]> response = getEmptyDelegate(service.getEmpty(), null);
+            Call<ResponseBody> call = service.getEmpty();
+            ServiceResponse<byte[]> response = getEmptyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<byte[]> response = getEmptyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get empty byte value ''
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
-        service.getEmptyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
+        Call<ResponseBody> call = service.getEmpty();
+        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response, error));
+                    serviceCallback.success(getEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<byte[]> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<byte[]>()
                 .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public byte[] getNonAscii() throws ServiceException {
         try {
-            ServiceResponse<byte[]> response = getNonAsciiDelegate(service.getNonAscii(), null);
+            Call<ResponseBody> call = service.getNonAscii();
+            ServiceResponse<byte[]> response = getNonAsciiDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<byte[]> response = getNonAsciiDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
-        service.getNonAsciiAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
+        Call<ResponseBody> call = service.getNonAscii();
+        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNonAsciiDelegate(response, error));
+                    serviceCallback.success(getNonAsciiDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<byte[]> getNonAsciiDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<byte[]>()
                 .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -165,83 +171,88 @@ public class ByteOperationsImpl implements ByteOperations {
                 new IllegalArgumentException("Parameter byteBody is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = putNonAsciiDelegate(service.putNonAscii(byteBody), null);
+            Call<ResponseBody> call = service.putNonAscii(byteBody);
+            ServiceResponse<Void> response = putNonAsciiDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putNonAsciiDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
         if (byteBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter byteBody is required and cannot be null.")));
         }
-        service.putNonAsciiAsync(byteBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putNonAscii(byteBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putNonAsciiDelegate(response, error));
+                    serviceCallback.success(putNonAsciiDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putNonAsciiDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get invalid byte value ':::SWAGGER::::'
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public byte[] getInvalid() throws ServiceException {
         try {
-            ServiceResponse<byte[]> response = getInvalidDelegate(service.getInvalid(), null);
+            Call<ResponseBody> call = service.getInvalid();
+            ServiceResponse<byte[]> response = getInvalidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<byte[]> response = getInvalidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get invalid byte value ':::SWAGGER::::'
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
-        service.getInvalidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
+        Call<ResponseBody> call = service.getInvalid();
+        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getInvalidDelegate(response, error));
+                    serviceCallback.success(getInvalidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<byte[]> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<byte[]>()
                 .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

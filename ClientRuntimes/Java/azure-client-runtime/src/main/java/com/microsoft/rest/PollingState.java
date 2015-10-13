@@ -9,8 +9,7 @@ package com.microsoft.rest;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.microsoft.rest.serializer.JacksonHelper;
-import retrofit.client.Header;
-import retrofit.client.Response;
+import retrofit.Response;
 
 import java.io.IOException;
 
@@ -34,12 +33,12 @@ public class PollingState<T> {
         this.resource = response.getBody();
 
         try {
-            JsonNode resource = JacksonHelper.getObjectMapper().readTree(this.response.getBody().in());
+            JsonNode resource = JacksonHelper.getObjectMapper().readTree(this.response.raw().body().byteStream());
             if (resource != null && resource.get("properties") != null &&
                     resource.get("properties").get("provisioningState") != null) {
                 setStatus(resource.get("properties").get("provisioningState").asText());
             } else {
-                switch (this.response.getStatus()) {
+                switch (this.response.code()) {
                     case 202:
                         setStatus(AzureAsyncOperation.inProgressStatus);
                         break;
@@ -62,11 +61,7 @@ public class PollingState<T> {
             return this.retryTimeout * 1000;
         }
         if (this.response != null) {
-            for (Header header: this.response.getHeaders()) {
-                if (header.getName().equals("Retry-After")) {
-                    return Integer.parseInt(header.getValue()) * 1000;
-                }
-            }
+            return Integer.parseInt(response.headers().get("Retry-After"));
         }
         return AzureAsyncOperation.defaultDelay * 1000;
     }
@@ -89,14 +84,8 @@ public class PollingState<T> {
     public void setResponse(Response response) {
         this.response = response;
         if (response != null) {
-            for (Header header: response.getHeaders()) {
-                if (header.getName().equals("Azure-AsyncOperation")) {
-                    this.azureAsyncOperationHeaderLink = header.getValue();
-                }
-                if (header.getName().equals("Location")) {
-                    this.locationHeaderLink = header.getValue();
-                }
-            }
+            this.azureAsyncOperationHeaderLink = response.headers().get("Azure-AsyncOperation");
+            this.locationHeaderLink = response.headers().get("Location");
         }
     }
 

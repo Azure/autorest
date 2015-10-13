@@ -67,14 +67,11 @@ if(!property.IsReadOnly)
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-    @:    Response @(method.Name)(@method.MethodParameterApiDeclaration) throws ServiceException;
-    @EmptyLine
-    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-    @:    void @(method.Name)Async(@method.MethodParameterApiDeclarationWithCallback);
-    }
+    @:    Call<ResponseBody> @(method.Name)(@method.MethodParameterApiDeclaration);
     @EmptyLine
     }
-
+    }
+    @EmptyLine
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:/**
@@ -101,7 +98,7 @@ if(!property.IsReadOnly)
     }
     @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
     @: */
-    @:void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
+    @:Call<ResponseBody> @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
     }
     @EmptyLine
 </text>

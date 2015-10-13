@@ -126,7 +126,7 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        RestAdapter restAdapter = retrofitBuilder.setEndpoint(baseUri).build();
         this.httpSuccess = new HttpSuccessImpl(restAdapter, this);
     }
 }

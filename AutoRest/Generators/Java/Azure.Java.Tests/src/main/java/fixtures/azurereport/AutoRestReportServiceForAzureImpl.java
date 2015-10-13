@@ -127,7 +127,7 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        RestAdapter restAdapter = retrofitBuilder.setEndpoint(baseUri).build();
         service = restAdapter.create(AutoRestReportServiceForAzureService.class);
     }
 

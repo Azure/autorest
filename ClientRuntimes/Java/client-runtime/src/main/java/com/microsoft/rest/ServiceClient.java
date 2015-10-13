@@ -11,8 +11,8 @@ import com.microsoft.rest.retry.RetryHandler;
 import com.microsoft.rest.serializer.JacksonHelper;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
-import retrofit.client.OkClient;
+import retrofit.JacksonConverterFactory;
+import retrofit.Retrofit;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -25,46 +25,44 @@ import java.util.concurrent.Executors;
  */
 public abstract class ServiceClient {
     protected OkHttpClient client;
-    protected RestAdapter.Builder restAdapterBuilder;
+    protected Retrofit.Builder retrofitBuilder;
     /**
      * Initializes a new instance of the ServiceClient class.
      */
     protected ServiceClient() {
-        this(new OkHttpClient(), new RestAdapter.Builder());
+        this(new OkHttpClient(), new Retrofit.Builder());
 
         CookieManager cookieManager = new CookieManager();
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
         this.client.setCookieHandler(cookieManager);
 
         Executor executor = Executors.newCachedThreadPool();
-        this.restAdapterBuilder = this.restAdapterBuilder
-                .setLogLevel(RestAdapter.LogLevel.BASIC)
-                .setConverter(JacksonHelper.getConverter())
-                .setExecutors(executor, executor);
+        this.retrofitBuilder = this.retrofitBuilder
+                .addConverterFactory(JacksonConverterFactory.create(JacksonHelper.getObjectMapper()))
+                .callbackExecutor(executor);
     }
 
     /**
      * Initializes a new instance of the ServiceClient class.
      *
      * @param client the OkHttpClient instance to use
-     * @param restAdapterBuilder the builder to build up a rest adapter
+     * @param retrofitBuilder the builder to build up a rest adapter
      */
-    protected ServiceClient(OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
+    protected ServiceClient(OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         if (client == null) {
             throw new IllegalArgumentException("client == null");
         }
-        if (restAdapterBuilder == null) {
-            throw new IllegalArgumentException("restAdapterBuilder == null");
+        if (retrofitBuilder == null) {
+            throw new IllegalArgumentException("retrofitBuilder == null");
         }
 
         // Set up OkHttp client
         this.client = client;
         this.client.interceptors().add(new RetryHandler());
         this.client.interceptors().add(new UserAgentInterceptor());
-        OkClient okClient = new OkClient(client);
 
         // Set up rest adapter builder
-        this.restAdapterBuilder = restAdapterBuilder.setClient(okClient);
+        this.retrofitBuilder = retrofitBuilder.client(this.client);
     }
 
     /**

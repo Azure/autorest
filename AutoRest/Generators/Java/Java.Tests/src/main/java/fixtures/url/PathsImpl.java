@@ -10,15 +10,16 @@
 
 package fixtures.url;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.url.models.UriColor;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
@@ -30,433 +31,452 @@ public class PathsImpl implements Paths {
     private PathsService service;
     AutoRestUrlTestService client;
 
-    public PathsImpl(RestAdapter restAdapter, AutoRestUrlTestService client) {
-        this.service = restAdapter.create(PathsService.class);
+    public PathsImpl(Retrofit retrofit, AutoRestUrlTestService client) {
+        this.service = retrofit.create(PathsService.class);
         this.client = client;
     }
 
     /**
-     * Get true Boolean value on path
      *
      * @param boolPath true boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getBooleanTrue(boolean boolPath) throws ServiceException {
         try {
-            ServiceResponse<Void> response = getBooleanTrueDelegate(service.getBooleanTrue(boolPath), null);
+            Call<ResponseBody> call = service.getBooleanTrue(boolPath);
+            ServiceResponse<Void> response = getBooleanTrueDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getBooleanTrueDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get true Boolean value on path
      *
      * @param boolPath true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
-        service.getBooleanTrueAsync(boolPath, new ServiceResponseCallback() {
+    public Call<ResponseBody> getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.getBooleanTrue(boolPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getBooleanTrueDelegate(response, error));
+                    serviceCallback.success(getBooleanTrueDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getBooleanTrueDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get false Boolean value on path
      *
      * @param boolPath false boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getBooleanFalse(boolean boolPath) throws ServiceException {
         try {
-            ServiceResponse<Void> response = getBooleanFalseDelegate(service.getBooleanFalse(boolPath), null);
+            Call<ResponseBody> call = service.getBooleanFalse(boolPath);
+            ServiceResponse<Void> response = getBooleanFalseDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getBooleanFalseDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get false Boolean value on path
      *
      * @param boolPath false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
-        service.getBooleanFalseAsync(boolPath, new ServiceResponseCallback() {
+    public Call<ResponseBody> getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.getBooleanFalse(boolPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getBooleanFalseDelegate(response, error));
+                    serviceCallback.success(getBooleanFalseDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getBooleanFalseDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '1000000' integer value
      *
      * @param intPath '1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getIntOneMillion(int intPath) throws ServiceException {
         try {
-            ServiceResponse<Void> response = getIntOneMillionDelegate(service.getIntOneMillion(intPath), null);
+            Call<ResponseBody> call = service.getIntOneMillion(intPath);
+            ServiceResponse<Void> response = getIntOneMillionDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getIntOneMillionDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '1000000' integer value
      *
      * @param intPath '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
-        service.getIntOneMillionAsync(intPath, new ServiceResponseCallback() {
+    public Call<ResponseBody> getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.getIntOneMillion(intPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getIntOneMillionDelegate(response, error));
+                    serviceCallback.success(getIntOneMillionDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getIntOneMillionDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '-1000000' integer value
      *
      * @param intPath '-1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getIntNegativeOneMillion(int intPath) throws ServiceException {
         try {
-            ServiceResponse<Void> response = getIntNegativeOneMillionDelegate(service.getIntNegativeOneMillion(intPath), null);
+            Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
+            ServiceResponse<Void> response = getIntNegativeOneMillionDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getIntNegativeOneMillionDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '-1000000' integer value
      *
      * @param intPath '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
-        service.getIntNegativeOneMillionAsync(intPath, new ServiceResponseCallback() {
+    public Call<ResponseBody> getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getIntNegativeOneMillionDelegate(response, error));
+                    serviceCallback.success(getIntNegativeOneMillionDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '10000000000' 64 bit integer value
      *
      * @param longPath '10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getTenBillion(long longPath) throws ServiceException {
         try {
-            ServiceResponse<Void> response = getTenBillionDelegate(service.getTenBillion(longPath), null);
+            Call<ResponseBody> call = service.getTenBillion(longPath);
+            ServiceResponse<Void> response = getTenBillionDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getTenBillionDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '10000000000' 64 bit integer value
      *
      * @param longPath '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
-        service.getTenBillionAsync(longPath, new ServiceResponseCallback() {
+    public Call<ResponseBody> getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.getTenBillion(longPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getTenBillionDelegate(response, error));
+                    serviceCallback.success(getTenBillionDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getTenBillionDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '-10000000000' 64 bit integer value
      *
      * @param longPath '-10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getNegativeTenBillion(long longPath) throws ServiceException {
         try {
-            ServiceResponse<Void> response = getNegativeTenBillionDelegate(service.getNegativeTenBillion(longPath), null);
+            Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
+            ServiceResponse<Void> response = getNegativeTenBillionDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getNegativeTenBillionDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '-10000000000' 64 bit integer value
      *
      * @param longPath '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
-        service.getNegativeTenBillionAsync(longPath, new ServiceResponseCallback() {
+    public Call<ResponseBody> getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNegativeTenBillionDelegate(response, error));
+                    serviceCallback.success(getNegativeTenBillionDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '1.034E+20' numeric value
      *
      * @param floatPath '1.034E+20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void floatScientificPositive(double floatPath) throws ServiceException {
         try {
-            ServiceResponse<Void> response = floatScientificPositiveDelegate(service.floatScientificPositive(floatPath), null);
+            Call<ResponseBody> call = service.floatScientificPositive(floatPath);
+            ServiceResponse<Void> response = floatScientificPositiveDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = floatScientificPositiveDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '1.034E+20' numeric value
      *
      * @param floatPath '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
-        service.floatScientificPositiveAsync(floatPath, new ServiceResponseCallback() {
+    public Call<ResponseBody> floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.floatScientificPositive(floatPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(floatScientificPositiveDelegate(response, error));
+                    serviceCallback.success(floatScientificPositiveDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> floatScientificPositiveDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '-1.034E-20' numeric value
      *
      * @param floatPath '-1.034E-20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void floatScientificNegative(double floatPath) throws ServiceException {
         try {
-            ServiceResponse<Void> response = floatScientificNegativeDelegate(service.floatScientificNegative(floatPath), null);
+            Call<ResponseBody> call = service.floatScientificNegative(floatPath);
+            ServiceResponse<Void> response = floatScientificNegativeDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = floatScientificNegativeDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '-1.034E-20' numeric value
      *
      * @param floatPath '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
-        service.floatScientificNegativeAsync(floatPath, new ServiceResponseCallback() {
+    public Call<ResponseBody> floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.floatScientificNegative(floatPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(floatScientificNegativeDelegate(response, error));
+                    serviceCallback.success(floatScientificNegativeDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> floatScientificNegativeDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '9999999.999' numeric value
      *
      * @param doublePath '9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void doubleDecimalPositive(double doublePath) throws ServiceException {
         try {
-            ServiceResponse<Void> response = doubleDecimalPositiveDelegate(service.doubleDecimalPositive(doublePath), null);
+            Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
+            ServiceResponse<Void> response = doubleDecimalPositiveDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = doubleDecimalPositiveDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '9999999.999' numeric value
      *
      * @param doublePath '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
-        service.doubleDecimalPositiveAsync(doublePath, new ServiceResponseCallback() {
+    public Call<ResponseBody> doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(doubleDecimalPositiveDelegate(response, error));
+                    serviceCallback.success(doubleDecimalPositiveDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '-9999999.999' numeric value
      *
      * @param doublePath '-9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void doubleDecimalNegative(double doublePath) throws ServiceException {
         try {
-            ServiceResponse<Void> response = doubleDecimalNegativeDelegate(service.doubleDecimalNegative(doublePath), null);
+            Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
+            ServiceResponse<Void> response = doubleDecimalNegativeDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = doubleDecimalNegativeDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '-9999999.999' numeric value
      *
      * @param doublePath '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
-        service.doubleDecimalNegativeAsync(doublePath, new ServiceResponseCallback() {
+    public Call<ResponseBody> doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(doubleDecimalNegativeDelegate(response, error));
+                    serviceCallback.success(doubleDecimalNegativeDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
      *
      * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -467,46 +487,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = stringUnicodeDelegate(service.stringUnicode(stringPath), null);
+            Call<ResponseBody> call = service.stringUnicode(stringPath);
+            ServiceResponse<Void> response = stringUnicodeDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = stringUnicodeDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
      *
      * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         if (stringPath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null.")));
         }
-        service.stringUnicodeAsync(stringPath, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.stringUnicode(stringPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(stringUnicodeDelegate(response, error));
+                    serviceCallback.success(stringUnicodeDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> stringUnicodeDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end
      *
      * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -517,46 +539,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = stringUrlEncodedDelegate(service.stringUrlEncoded(stringPath), null);
+            Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
+            ServiceResponse<Void> response = stringUrlEncodedDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = stringUrlEncodedDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end
      *
      * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         if (stringPath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null.")));
         }
-        service.stringUrlEncodedAsync(stringPath, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(stringUrlEncodedDelegate(response, error));
+                    serviceCallback.success(stringUrlEncodedDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> stringUrlEncodedDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get ''
      *
      * @param stringPath '' string value. Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -567,46 +591,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = stringEmptyDelegate(service.stringEmpty(stringPath), null);
+            Call<ResponseBody> call = service.stringEmpty(stringPath);
+            ServiceResponse<Void> response = stringEmptyDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = stringEmptyDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get ''
      *
      * @param stringPath '' string value. Possible values for this parameter include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         if (stringPath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null.")));
         }
-        service.stringEmptyAsync(stringPath, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.stringEmpty(stringPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(stringEmptyDelegate(response, error));
+                    serviceCallback.success(stringEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> stringEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get null (should throw)
      *
      * @param stringPath null string value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -617,46 +643,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = stringNullDelegate(service.stringNull(stringPath), null);
+            Call<ResponseBody> call = service.stringNull(stringPath);
+            ServiceResponse<Void> response = stringNullDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = stringNullDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get null (should throw)
      *
      * @param stringPath null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         if (stringPath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null.")));
         }
-        service.stringNullAsync(stringPath, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.stringNull(stringPath);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(stringNullDelegate(response, error));
+                    serviceCallback.success(stringNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> stringNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(400, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get using uri with 'green color' in path parameter
      *
      * @param enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -667,46 +695,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = enumValidDelegate(service.enumValid(JacksonHelper.serializeRaw(enumPath)), null);
+            Call<ResponseBody> call = service.enumValid(JacksonHelper.serializeRaw(enumPath));
+            ServiceResponse<Void> response = enumValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = enumValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get using uri with 'green color' in path parameter
      *
      * @param enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
         if (enumPath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
         }
-        service.enumValidAsync(JacksonHelper.serializeRaw(enumPath), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.enumValid(JacksonHelper.serializeRaw(enumPath));
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(enumValidDelegate(response, error));
+                    serviceCallback.success(enumValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> enumValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get null (should throw on the client before the request is sent on wire)
      *
      * @param enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -717,46 +747,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = enumNullDelegate(service.enumNull(JacksonHelper.serializeRaw(enumPath)), null);
+            Call<ResponseBody> call = service.enumNull(JacksonHelper.serializeRaw(enumPath));
+            ServiceResponse<Void> response = enumNullDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = enumNullDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get null (should throw on the client before the request is sent on wire)
      *
      * @param enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
         if (enumPath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
         }
-        service.enumNullAsync(JacksonHelper.serializeRaw(enumPath), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.enumNull(JacksonHelper.serializeRaw(enumPath));
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(enumNullDelegate(response, error));
+                    serviceCallback.success(enumNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> enumNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(400, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -767,46 +799,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = byteMultiByteDelegate(service.byteMultiByte(Base64.encodeBase64String(bytePath)), null);
+            Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(bytePath));
+            ServiceResponse<Void> response = byteMultiByteDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = byteMultiByteDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         if (bytePath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bytePath is required and cannot be null.")));
         }
-        service.byteMultiByteAsync(Base64.encodeBase64String(bytePath), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(bytePath));
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(byteMultiByteDelegate(response, error));
+                    serviceCallback.success(byteMultiByteDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> byteMultiByteDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '' as byte array
      *
      * @param bytePath '' as byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -817,46 +851,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = byteEmptyDelegate(service.byteEmpty(Base64.encodeBase64String(bytePath)), null);
+            Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
+            ServiceResponse<Void> response = byteEmptyDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = byteEmptyDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '' as byte array
      *
      * @param bytePath '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         if (bytePath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bytePath is required and cannot be null.")));
         }
-        service.byteEmptyAsync(Base64.encodeBase64String(bytePath), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(byteEmptyDelegate(response, error));
+                    serviceCallback.success(byteEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> byteEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get null as byte array (should throw)
      *
      * @param bytePath null as byte array (should throw)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -867,46 +903,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = byteNullDelegate(service.byteNull(Base64.encodeBase64String(bytePath)), null);
+            Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(bytePath));
+            ServiceResponse<Void> response = byteNullDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = byteNullDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get null as byte array (should throw)
      *
      * @param bytePath null as byte array (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         if (bytePath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bytePath is required and cannot be null.")));
         }
-        service.byteNullAsync(Base64.encodeBase64String(bytePath), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(bytePath));
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(byteNullDelegate(response, error));
+                    serviceCallback.success(byteNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> byteNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(400, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '2012-01-01' as date
      *
      * @param datePath '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -917,47 +955,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter datePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = dateValidDelegate(service.dateValid(JacksonHelper.serializeRaw(datePath)), null);
+            Call<ResponseBody> call = service.dateValid(JacksonHelper.serializeRaw(datePath));
+            ServiceResponse<Void> response = dateValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = dateValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '2012-01-01' as date
      *
      * @param datePath '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
         if (datePath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datePath is required and cannot be null.")));
         }
-        service.dateValidAsync(JacksonHelper.serializeRaw(datePath), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.dateValid(JacksonHelper.serializeRaw(datePath));
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(dateValidDelegate(response, error));
+                    serviceCallback.success(dateValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> dateValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get null as date - this should throw or be unusable on the client side,
-     * depending on date representation
      *
      * @param datePath null as date (should throw)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -968,47 +1007,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter datePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = dateNullDelegate(service.dateNull(JacksonHelper.serializeRaw(datePath)), null);
+            Call<ResponseBody> call = service.dateNull(JacksonHelper.serializeRaw(datePath));
+            ServiceResponse<Void> response = dateNullDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = dateNullDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get null as date - this should throw or be unusable on the client side,
-     * depending on date representation
      *
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
         if (datePath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datePath is required and cannot be null.")));
         }
-        service.dateNullAsync(JacksonHelper.serializeRaw(datePath), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.dateNull(JacksonHelper.serializeRaw(datePath));
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(dateNullDelegate(response, error));
+                    serviceCallback.success(dateNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> dateNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(400, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get '2012-01-01T01:01:01Z' as date-time
      *
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1019,47 +1059,48 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = dateTimeValidDelegate(service.dateTimeValid(JacksonHelper.serializeRaw(dateTimePath)), null);
+            Call<ResponseBody> call = service.dateTimeValid(JacksonHelper.serializeRaw(dateTimePath));
+            ServiceResponse<Void> response = dateTimeValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = dateTimeValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get '2012-01-01T01:01:01Z' as date-time
      *
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
         if (dateTimePath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.")));
         }
-        service.dateTimeValidAsync(JacksonHelper.serializeRaw(dateTimePath), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.dateTimeValid(JacksonHelper.serializeRaw(dateTimePath));
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(dateTimeValidDelegate(response, error));
+                    serviceCallback.success(dateTimeValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> dateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get null as date-time, should be disallowed or throw depending on
-     * representation of date-time
      *
      * @param dateTimePath null as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1070,43 +1111,45 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = dateTimeNullDelegate(service.dateTimeNull(JacksonHelper.serializeRaw(dateTimePath)), null);
+            Call<ResponseBody> call = service.dateTimeNull(JacksonHelper.serializeRaw(dateTimePath));
+            ServiceResponse<Void> response = dateTimeNullDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = dateTimeNullDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get null as date-time, should be disallowed or throw depending on
-     * representation of date-time
      *
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
         if (dateTimePath == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.")));
         }
-        service.dateTimeNullAsync(JacksonHelper.serializeRaw(dateTimePath), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.dateTimeNull(JacksonHelper.serializeRaw(dateTimePath));
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(dateTimeNullDelegate(response, error));
+                    serviceCallback.success(dateTimeNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> dateTimeNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(400, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

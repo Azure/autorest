@@ -21,7 +21,7 @@ public class HttpFailureTests {
             client.getHttpFailure().getEmptyError();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 }

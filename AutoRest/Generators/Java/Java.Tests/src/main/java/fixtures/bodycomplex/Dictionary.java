@@ -12,8 +12,8 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -30,44 +30,25 @@ public interface Dictionary {
      */
     interface DictionaryService {
         @GET("/complex/dictionary/typed/valid")
-        Response getValid() throws ServiceException;
-
-        @GET("/complex/dictionary/typed/valid")
-        void getValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getValid();
 
         @PUT("/complex/dictionary/typed/valid")
-        Response putValid(@Body DictionaryWrapper complexBody) throws ServiceException;
-
-        @PUT("/complex/dictionary/typed/valid")
-        void putValidAsync(@Body DictionaryWrapper complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putValid(@Body DictionaryWrapper complexBody);
 
         @GET("/complex/dictionary/typed/empty")
-        Response getEmpty() throws ServiceException;
-
-        @GET("/complex/dictionary/typed/empty")
-        void getEmptyAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getEmpty();
 
         @PUT("/complex/dictionary/typed/empty")
-        Response putEmpty(@Body DictionaryWrapper complexBody) throws ServiceException;
-
-        @PUT("/complex/dictionary/typed/empty")
-        void putEmptyAsync(@Body DictionaryWrapper complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putEmpty(@Body DictionaryWrapper complexBody);
 
         @GET("/complex/dictionary/typed/null")
-        Response getNull() throws ServiceException;
-
-        @GET("/complex/dictionary/typed/null")
-        void getNullAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getNull();
 
         @GET("/complex/dictionary/typed/notprovided")
-        Response getNotProvided() throws ServiceException;
-
-        @GET("/complex/dictionary/typed/notprovided")
-        void getNotProvidedAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getNotProvided();
 
     }
     /**
-     * Get complex types with dictionary property
      *
      * @return the DictionaryWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -75,14 +56,12 @@ public interface Dictionary {
     DictionaryWrapper getValid() throws ServiceException;
 
     /**
-     * Get complex types with dictionary property
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    Call<ResponseBody> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
-     * Put complex types with dictionary property
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -90,15 +69,13 @@ public interface Dictionary {
     void putValid(DictionaryWrapper complexBody) throws ServiceException;
 
     /**
-     * Put complex types with dictionary property
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get complex types with dictionary property which is empty
      *
      * @return the DictionaryWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -106,14 +83,12 @@ public interface Dictionary {
     DictionaryWrapper getEmpty() throws ServiceException;
 
     /**
-     * Get complex types with dictionary property which is empty
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    Call<ResponseBody> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
-     * Put complex types with dictionary property which is empty
      *
      * @param complexBody Please put an empty dictionary
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -121,15 +96,13 @@ public interface Dictionary {
     void putEmpty(DictionaryWrapper complexBody) throws ServiceException;
 
     /**
-     * Put complex types with dictionary property which is empty
      *
      * @param complexBody Please put an empty dictionary
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get complex types with dictionary property which is null
      *
      * @return the DictionaryWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -137,15 +110,12 @@ public interface Dictionary {
     DictionaryWrapper getNull() throws ServiceException;
 
     /**
-     * Get complex types with dictionary property which is null
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    Call<ResponseBody> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
-     * Get complex types with dictionary property while server doesn't provide
-     * a response payload
      *
      * @return the DictionaryWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -153,11 +123,9 @@ public interface Dictionary {
     DictionaryWrapper getNotProvided() throws ServiceException;
 
     /**
-     * Get complex types with dictionary property while server doesn't provide
-     * a response payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
 }

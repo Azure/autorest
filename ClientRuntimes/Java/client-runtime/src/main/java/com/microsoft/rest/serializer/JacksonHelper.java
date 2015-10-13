@@ -8,14 +8,17 @@
 package com.microsoft.rest.serializer;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import retrofit.converter.JacksonConverter;
+import retrofit.Converter;
+import retrofit.JacksonConverterFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,11 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A serialization helper class wrapped around {@link JacksonConverter} and {@link ObjectMapper}.
+ * A serialization helper class wrapped around {@link JacksonConverterFactory} and {@link ObjectMapper}.
  */
 public class JacksonHelper {
     private static ObjectMapper objectMapper;
-    private static JacksonConverter converter;
+    private static JacksonConverterFactory converterFactory;
 
     private JacksonHelper() {}
 
@@ -51,15 +54,15 @@ public class JacksonHelper {
     }
 
     /**
-     * Gets a static instance of {@link JacksonConverter}.
+     * Gets a static instance of {@link Converter.Factory}.
      *
-     * @return an instance of {@link JacksonConverter}.
+     * @return an instance of {@link Converter.Factory}.
      */
-    public static JacksonConverter getConverter() {
-        if (converter == null) {
-            converter = new JacksonConverter(getObjectMapper());
+    public static JacksonConverterFactory getConverterFactory() {
+        if (converterFactory == null) {
+            converterFactory = JacksonConverterFactory.create(getObjectMapper());
         }
-        return converter;
+        return converterFactory;
     }
 
     /**
@@ -118,13 +121,9 @@ public class JacksonHelper {
      * @return the deserialized object.
      */
     @SuppressWarnings("unchecked")
-    public static <T> T deserialize(String value) {
+    public static <T> T deserialize(String value, TypeReference<?> type) throws IOException {
         if (value == null || value.isEmpty()) return null;
-        try {
-            return (T)getObjectMapper().readValue(value, new TypeToken<T>(){}.getRawType());
-        } catch (Exception e) {
-            return null;
-        }
+        return (T)getObjectMapper().readValue(value, type);
     }
 
     /**
@@ -133,12 +132,8 @@ public class JacksonHelper {
      * @param <T> the type of the deserialized object.
      * @return the deserialized object.
      */
-    public static <T> T deserialize(InputStream input) {
+    public static <T> T deserialize(InputStream input, TypeReference<?> type) throws IOException {
         if (input == null) return null;
-        try {
-            return deserialize(IOUtils.toString(input));
-        } catch (Exception e) {
-            return null;
-        }
+        return deserialize(IOUtils.toString(input), type);
     }
 }

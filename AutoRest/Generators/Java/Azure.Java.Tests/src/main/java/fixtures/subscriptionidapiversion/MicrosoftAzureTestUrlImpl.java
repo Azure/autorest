@@ -157,7 +157,7 @@ public class MicrosoftAzureTestUrlImpl extends ServiceClient implements Microsof
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        RestAdapter restAdapter = retrofitBuilder.setEndpoint(baseUri).build();
         this.group = new GroupImpl(restAdapter, this);
     }
 }

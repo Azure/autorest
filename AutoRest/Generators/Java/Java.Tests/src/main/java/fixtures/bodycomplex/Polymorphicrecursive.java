@@ -12,8 +12,8 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Fish;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -30,20 +30,13 @@ public interface Polymorphicrecursive {
      */
     interface PolymorphicrecursiveService {
         @GET("/complex/polymorphicrecursive/valid")
-        Response getValid() throws ServiceException;
-
-        @GET("/complex/polymorphicrecursive/valid")
-        void getValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getValid();
 
         @PUT("/complex/polymorphicrecursive/valid")
-        Response putValid(@Body Fish complexBody) throws ServiceException;
-
-        @PUT("/complex/polymorphicrecursive/valid")
-        void putValidAsync(@Body Fish complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putValid(@Body Fish complexBody);
 
     }
     /**
-     * Get complex types that are polymorphic and have recursive references
      *
      * @return the Fish object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -51,14 +44,12 @@ public interface Polymorphicrecursive {
     Fish getValid() throws ServiceException;
 
     /**
-     * Get complex types that are polymorphic and have recursive references
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getValidAsync(final ServiceCallback<Fish> serviceCallback);
+    Call<ResponseBody> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
-     * Put complex types that are polymorphic and have recursive references
      *
      * @param complexBody Please put a salmon that looks like this:
  {
@@ -118,7 +109,6 @@ public interface Polymorphicrecursive {
     void putValid(Fish complexBody) throws ServiceException;
 
     /**
-     * Put complex types that are polymorphic and have recursive references
      *
      * @param complexBody Please put a salmon that looks like this:
  {
@@ -175,6 +165,6 @@ public interface Polymorphicrecursive {
  }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
 }

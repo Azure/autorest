@@ -132,7 +132,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        RestAdapter restAdapter = retrofitBuilder.setEndpoint(baseUri).build();
         service = restAdapter.create(AutoRestResourceFlatteningTestServiceService.class);
     }
 

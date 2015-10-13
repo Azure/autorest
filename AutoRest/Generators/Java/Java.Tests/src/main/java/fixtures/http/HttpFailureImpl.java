@@ -10,65 +10,68 @@
 
 package fixtures.http;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.http.models.Error;
 
 public class HttpFailureImpl implements HttpFailure {
     private HttpFailureService service;
     AutoRestHttpInfrastructureTestService client;
 
-    public HttpFailureImpl(RestAdapter restAdapter, AutoRestHttpInfrastructureTestService client) {
-        this.service = restAdapter.create(HttpFailureService.class);
+    public HttpFailureImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestService client) {
+        this.service = retrofit.create(HttpFailureService.class);
         this.client = client;
     }
 
     /**
-     * Get empty error form server
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Boolean getEmptyError() throws ServiceException {
         try {
-            ServiceResponse<Boolean> response = getEmptyErrorDelegate(service.getEmptyError(), null);
+            Call<ResponseBody> call = service.getEmptyError();
+            ServiceResponse<Boolean> response = getEmptyErrorDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Boolean> response = getEmptyErrorDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get empty error form server
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        service.getEmptyErrorAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+        Call<ResponseBody> call = service.getEmptyError();
+        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getEmptyErrorDelegate(response, error));
+                    serviceCallback.success(getEmptyErrorDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Boolean> getEmptyErrorDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Boolean>()
                 .register(200, new TypeToken<Boolean>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

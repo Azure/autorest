@@ -7,17 +7,15 @@
 
 package com.microsoft.rest;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonHelper;
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.client.Response;
-import retrofit.converter.ConversionException;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
+import retrofit.Response;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -28,8 +26,6 @@ public abstract class AzureClient extends ServiceClient{
 
     public abstract int getLongRunningOperationRetryTimeout();
 
-    private RestAdapter asyncService;
-
     /**
      * Handles an initial response from a PUT or PATCH operation response by polling
      * the status of the operation until the long running operation terminates.
@@ -38,22 +34,20 @@ public abstract class AzureClient extends ServiceClient{
      * @param <T>       the generic type of the resource
      * @return          the terminal response for the operation.
      * @throws ServiceException
-     * @throws MalformedURLException
-     * @throws ConversionException
      * @throws InterruptedException
      */
-    public <T> AzureResponse<T> GetPutOrPatchResult(AzureResponse<T> response) throws ServiceException, IOException, ConversionException, InterruptedException {
+    public <T> AzureResponse<T> GetPutOrPatchResult(AzureResponse<T> response) throws ServiceException, InterruptedException {
         if (response == null || response.getResponse() == null) {
             throw new ServiceException("response is null.");
         }
 
-        int statusCode = response.getResponse().getStatus();
+        int statusCode = response.getResponse().code();
         if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
             throw new ServiceException(statusCode + " is not a valid polling status code");
         }
 
         PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout());
-        String url = response.getResponse().getUrl();
+        String url = response.getResponse().raw().request().urlString();
 
         // Check provisioning state
         while (AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
@@ -81,12 +75,12 @@ public abstract class AzureClient extends ServiceClient{
         return new AzureResponse<T>(pollingState.getResource(), pollingState.getResponse());
     }
 
-    private <T> void updateStateFromLocationHeaderOnPut(PollingState<T> pollingState) throws IOException, ConversionException, ServiceException {
+    private <T> void updateStateFromLocationHeaderOnPut(PollingState<T> pollingState) throws ServiceException {
         AzureResponse<PollingResource> response = getAsync(pollingState.getLocationHeaderLink());
 
         pollingState.setResponse(response.getResponse());
 
-        int statusCode = response.getResponse().getStatus();
+        int statusCode = response.getResponse().code();
         if (statusCode == 202) {
             pollingState.setStatus(AzureAsyncOperation.inProgressStatus);
         } else if (statusCode == 200 || statusCode == 201) {
@@ -105,12 +99,15 @@ public abstract class AzureClient extends ServiceClient{
             pollingState.setError(error);
             error.setCode(pollingState.getStatus());
             error.setMessage("Long running operation failed");
-
-            pollingState.setResource(JacksonHelper.<T>deserialize(response.getResponse().getBody().in()));
+            try {
+                pollingState.setResource(JacksonHelper.<T>deserialize(response.getResponse().raw().body().string()));
+            } catch (Exception ex) {
+                throw new ServiceException("Cannot deserialize response", ex);
+            }
         }
     }
 
-    private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws IOException, ConversionException, ServiceException {
+    private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws ServiceException {
         AzureResponse<PollingResource> response = getAsync(url);
 
         if (response.getBody() == null) {
@@ -130,10 +127,14 @@ public abstract class AzureClient extends ServiceClient{
         error.setMessage("Long running operation failed");
 
         pollingState.setResponse(response.getResponse());
-        pollingState.setResource(JacksonHelper.<T>deserialize(response.getResponse().getBody().in()));
+        try {
+            pollingState.setResource(JacksonHelper.<T>deserialize(response.getResponse().raw().body().string()));
+        } catch (Exception ex) {
+            throw new ServiceException("Cannot deserialize response", ex);
+        }
     }
 
-    private <T> void updateStateFromAzureAsyncOperationHeader(PollingState<T> pollingState) throws IOException, ConversionException, ServiceException {
+    private <T> void updateStateFromAzureAsyncOperationHeader(PollingState<T> pollingState) throws ServiceException {
         AzureResponse<AzureAsyncOperation> response = getAsync(pollingState.getLocationHeaderLink());
 
         if (response.getBody() == null || response.getBody().getStatus() == null) {
@@ -145,45 +146,44 @@ public abstract class AzureClient extends ServiceClient{
         pollingState.setResource(null);
     }
 
-    private <T> AzureResponse<T> getAsync(String url) throws IOException, ConversionException {
-        // TODO: Check url
-        URL endpoint = new URL(url);
-        AsyncService service = this.restAdapterBuilder
-                .setEndpoint(endpoint.getHost()).build().create(AsyncService.class);
-        Response response = service.get(endpoint.getPath());
-        return new AzureResponse<T>(
-                JacksonHelper.<T>deserialize(response.getBody().in()),
-                response);
+    private <T> AzureResponse<T> getAsync(String url) throws ServiceException {
+        URL endpoint = null;
+        try {
+            endpoint = new URL(url);
+        } catch (Exception ex) {
+            throw new ServiceException("Invalid url " + url, ex);
+        }
+        AsyncService service = this.retrofitBuilder
+                .baseUrl(endpoint.getHost()).build().create(AsyncService.class);
+        try {
+            Response<ResponseBody> response = service.get(endpoint.getPath()).execute();
+            return new AzureResponse<T>(
+                    JacksonHelper.<T>deserialize(response.raw().body().string()),
+                    response);
+        } catch (Exception ex) {
+            throw new ServiceException("Cannot deserialize response", ex);
+        }
     }
 
     private interface AsyncService {
         @GET("/{url}")
-        Response get(@Path("url") String url);
-
-        @GET("/{url}")
-        void getAync(@Path("url") String url, Callback callback);
+        Call<ResponseBody> get(@Path("url") String url);
     }
 
     private class PollingResource {
+        @JsonProperty
         private Properties properties;
 
         public Properties getProperties() {
             return properties;
         }
 
-        public void setProperties(Properties properties) {
-            this.properties = properties;
-        }
-
         private class Properties {
+            @JsonProperty
             private String provisioningState;
 
             public String getProvisioningState() {
                 return provisioningState;
-            }
-
-            public void setProvisioningState(String provisioningState) {
-                this.provisioningState = provisioningState;
             }
         }
     }

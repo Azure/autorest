@@ -7,7 +7,7 @@
 
 package com.microsoft.rest;
 
-import retrofit.client.Response;
+import retrofit.Response;
 
 public class AzureResponse<T> extends ServiceResponse<T> {
     /**

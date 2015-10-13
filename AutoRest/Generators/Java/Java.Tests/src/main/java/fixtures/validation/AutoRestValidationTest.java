@@ -13,7 +13,8 @@ package fixtures.validation;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
 import fixtures.validation.models.Product;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -65,19 +66,14 @@ public interface AutoRestValidationTest {
      */
     interface AutoRestValidationTestService {
         @GET("/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}")
-        Response validationOfMethodParameters(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Query("apiVersion") String apiVersion) throws ServiceException;
-
-        @GET("/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}")
-        void validationOfMethodParametersAsync(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Query("apiVersion") String apiVersion, ServiceResponseCallback cb);
-        @PUT("/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}")
-        Response validationOfBody(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Body Product body, @Query("apiVersion") String apiVersion) throws ServiceException;
+        Call<ResponseBody> validationOfMethodParameters(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Query("apiVersion") String apiVersion);
 
         @PUT("/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}")
-        void validationOfBodyAsync(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Body Product body, @Query("apiVersion") String apiVersion, ServiceResponseCallback cb);
+        Call<ResponseBody> validationOfBody(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Body Product body, @Query("apiVersion") String apiVersion);
 
     }
+
     /**
-     * Validates input parameters on the method. See swagger for details.
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
@@ -87,15 +83,13 @@ public interface AutoRestValidationTest {
     Product validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException;
 
     /**
-     * Validates input parameters on the method. See swagger for details.
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
     /**
-     * Validates body parameters on the method. See swagger for details.
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
@@ -106,13 +100,12 @@ public interface AutoRestValidationTest {
     Product validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException;
 
     /**
-     * Validates body parameters on the method. See swagger for details.
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
 
 }

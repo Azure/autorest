@@ -65,7 +65,7 @@ namespace Microsoft.Rest.Generator.Java
                 classes.AddRange(new[]{
                         "com.microsoft.rest.ServiceClient",
                         "com.squareup.okhttp.OkHttpClient",
-                        "retrofit.RestAdapter" 
+                        "retrofit.Retrofit" 
                     });
                 
                 if (this.MethodTemplateModels.IsNullOrEmpty())
@@ -74,14 +74,16 @@ namespace Microsoft.Rest.Generator.Java
                 }
 
                 classes.AddRange(new[]{
-                    "com.google.gson.reflect.TypeToken",
+                    "com.google.common.reflect.TypeToken",
                     "com.microsoft.rest.ServiceCallback",
                     "com.microsoft.rest.ServiceException",
                     "com.microsoft.rest.ServiceResponse",
                     "com.microsoft.rest.ServiceResponseBuilder",
                     "com.microsoft.rest.ServiceResponseCallback",
-                    "retrofit.RetrofitError",
-                    "retrofit.client.Response"
+                    "com.squareup.okhttp.ResponseBody",
+                    "retrofit.Call",
+                    "retrofit.Retrofit",
+                    "retrofit.Response"
                 });
 
                 IList<IType> types = this.MethodTemplateModels
@@ -119,7 +121,8 @@ namespace Microsoft.Rest.Generator.Java
                     "com.microsoft.rest.ServiceCallback",
                     "com.microsoft.rest.ServiceException",
                     "com.microsoft.rest.ServiceResponseCallback",
-                    "retrofit.client.Response"
+                    "com.squareup.okhttp.ResponseBody",
+                    "retrofit.Call"
                 });
 
                 IList<IType> types = this.MethodTemplateModels

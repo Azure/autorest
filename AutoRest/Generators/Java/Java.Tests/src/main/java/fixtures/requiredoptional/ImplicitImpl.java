@@ -10,28 +10,28 @@
 
 package fixtures.requiredoptional;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.requiredoptional.models.Error;
 
 public class ImplicitImpl implements Implicit {
     private ImplicitService service;
     AutoRestRequiredOptionalTestService client;
 
-    public ImplicitImpl(RestAdapter restAdapter, AutoRestRequiredOptionalTestService client) {
-        this.service = restAdapter.create(ImplicitService.class);
+    public ImplicitImpl(Retrofit retrofit, AutoRestRequiredOptionalTestService client) {
+        this.service = retrofit.create(ImplicitService.class);
         this.client = client;
     }
 
     /**
-     * Test implicitly required path parameter
      *
      * @param pathParameter the String value
      * @return the Error object if successful.
@@ -43,171 +43,179 @@ public class ImplicitImpl implements Implicit {
                 new IllegalArgumentException("Parameter pathParameter is required and cannot be null."));
         }
         try {
-            ServiceResponse<Error> response = getRequiredPathDelegate(service.getRequiredPath(pathParameter), null);
+            Call<ResponseBody> call = service.getRequiredPath(pathParameter);
+            ServiceResponse<Error> response = getRequiredPathDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = getRequiredPathDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test implicitly required path parameter
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
         if (pathParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter pathParameter is required and cannot be null.")));
         }
-        service.getRequiredPathAsync(pathParameter, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getRequiredPath(pathParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getRequiredPathDelegate(response, error));
+                    serviceCallback.success(getRequiredPathDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> getRequiredPathDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test implicitly optional query parameter
      *
      * @param queryParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putOptionalQuery(String queryParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = putOptionalQueryDelegate(service.putOptionalQuery(queryParameter), null);
+            Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
+            ServiceResponse<Void> response = putOptionalQueryDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putOptionalQueryDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test implicitly optional query parameter
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
-        service.putOptionalQueryAsync(queryParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putOptionalQueryDelegate(response, error));
+                    serviceCallback.success(putOptionalQueryDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putOptionalQueryDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putOptionalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test implicitly optional header parameter
      *
      * @param queryParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putOptionalHeader(String queryParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = putOptionalHeaderDelegate(service.putOptionalHeader(queryParameter), null);
+            Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
+            ServiceResponse<Void> response = putOptionalHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putOptionalHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test implicitly optional header parameter
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
-        service.putOptionalHeaderAsync(queryParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putOptionalHeaderDelegate(response, error));
+                    serviceCallback.success(putOptionalHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putOptionalHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putOptionalHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test implicitly optional body parameter
      *
      * @param bodyParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void putOptionalBody(String bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = putOptionalBodyDelegate(service.putOptionalBody(bodyParameter), null);
+            Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
+            ServiceResponse<Void> response = putOptionalBodyDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putOptionalBodyDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test implicitly optional body parameter
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.putOptionalBodyAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putOptionalBodyDelegate(response, error));
+                    serviceCallback.success(putOptionalBodyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putOptionalBodyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putOptionalBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test implicitly required path parameter
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -218,44 +226,46 @@ public class ImplicitImpl implements Implicit {
                 new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Error> response = getRequiredGlobalPathDelegate(service.getRequiredGlobalPath(this.client.getRequiredGlobalPath()), null);
+            Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
+            ServiceResponse<Error> response = getRequiredGlobalPathDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = getRequiredGlobalPathDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test implicitly required path parameter
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
         if (this.client.getRequiredGlobalPath() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null.")));
         }
-        service.getRequiredGlobalPathAsync(this.client.getRequiredGlobalPath(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getRequiredGlobalPathDelegate(response, error));
+                    serviceCallback.success(getRequiredGlobalPathDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test implicitly required query parameter
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -266,80 +276,85 @@ public class ImplicitImpl implements Implicit {
                 new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Error> response = getRequiredGlobalQueryDelegate(service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery()), null);
+            Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
+            ServiceResponse<Error> response = getRequiredGlobalQueryDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = getRequiredGlobalQueryDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test implicitly required query parameter
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         if (this.client.getRequiredGlobalQuery() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null.")));
         }
-        service.getRequiredGlobalQueryAsync(this.client.getRequiredGlobalQuery(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getRequiredGlobalQueryDelegate(response, error));
+                    serviceCallback.success(getRequiredGlobalQueryDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test implicitly optional query parameter
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Error getOptionalGlobalQuery() throws ServiceException {
         try {
-            ServiceResponse<Error> response = getOptionalGlobalQueryDelegate(service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery()), null);
+            Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery());
+            ServiceResponse<Error> response = getOptionalGlobalQueryDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = getOptionalGlobalQueryDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test implicitly optional query parameter
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        service.getOptionalGlobalQueryAsync(this.client.getOptionalGlobalQuery(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+        Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery());
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getOptionalGlobalQueryDelegate(response, error));
+                    serviceCallback.success(getOptionalGlobalQueryDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> getOptionalGlobalQueryDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> getOptionalGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

@@ -12,8 +12,8 @@ package fixtures.bodyboolean;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
@@ -29,44 +29,25 @@ public interface Bool {
      */
     interface BoolService {
         @GET("/bool/true")
-        Response getTrue() throws ServiceException;
-
-        @GET("/bool/true")
-        void getTrueAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getTrue();
 
         @PUT("/bool/true")
-        Response putTrue(@Body boolean boolBody) throws ServiceException;
-
-        @PUT("/bool/true")
-        void putTrueAsync(@Body boolean boolBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putTrue(@Body boolean boolBody);
 
         @GET("/bool/false")
-        Response getFalse() throws ServiceException;
-
-        @GET("/bool/false")
-        void getFalseAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getFalse();
 
         @PUT("/bool/false")
-        Response putFalse(@Body boolean boolBody) throws ServiceException;
-
-        @PUT("/bool/false")
-        void putFalseAsync(@Body boolean boolBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putFalse(@Body boolean boolBody);
 
         @GET("/bool/null")
-        Response getNull() throws ServiceException;
-
-        @GET("/bool/null")
-        void getNullAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getNull();
 
         @GET("/bool/invalid")
-        Response getInvalid() throws ServiceException;
-
-        @GET("/bool/invalid")
-        void getInvalidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getInvalid();
 
     }
     /**
-     * Get true Boolean value
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -74,14 +55,12 @@ public interface Bool {
     Boolean getTrue() throws ServiceException;
 
     /**
-     * Get true Boolean value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
+    Call<ResponseBody> getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
-     * Set Boolean value true
      *
      * @param boolBody the boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -89,15 +68,13 @@ public interface Bool {
     void putTrue(boolean boolBody) throws ServiceException;
 
     /**
-     * Set Boolean value true
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get false Boolean value
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -105,14 +82,12 @@ public interface Bool {
     Boolean getFalse() throws ServiceException;
 
     /**
-     * Get false Boolean value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
+    Call<ResponseBody> getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
-     * Set Boolean value false
      *
      * @param boolBody the boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -120,15 +95,13 @@ public interface Bool {
     void putFalse(boolean boolBody) throws ServiceException;
 
     /**
-     * Set Boolean value false
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null Boolean value
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -136,14 +109,12 @@ public interface Bool {
     Boolean getNull() throws ServiceException;
 
     /**
-     * Get null Boolean value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getNullAsync(final ServiceCallback<Boolean> serviceCallback);
+    Call<ResponseBody> getNullAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
-     * Get invalid Boolean value
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -151,10 +122,9 @@ public interface Bool {
     Boolean getInvalid() throws ServiceException;
 
     /**
-     * Get invalid Boolean value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
+    Call<ResponseBody> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
 
 }

@@ -12,8 +12,8 @@ package fixtures.bodyfile;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import java.io.InputStream;
 import retrofit.http.GET;
 
@@ -28,20 +28,13 @@ public interface Files {
      */
     interface FilesService {
         @GET("/files/stream/nonempty")
-        Response getFile() throws ServiceException;
-
-        @GET("/files/stream/nonempty")
-        void getFileAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getFile();
 
         @GET("/files/stream/empty")
-        Response getEmptyFile() throws ServiceException;
-
-        @GET("/files/stream/empty")
-        void getEmptyFileAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getEmptyFile();
 
     }
     /**
-     * Get file
      *
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -49,14 +42,12 @@ public interface Files {
     InputStream getFile() throws ServiceException;
 
     /**
-     * Get file
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    Call<ResponseBody> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
-     * Get empty file
      *
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -64,10 +55,9 @@ public interface Files {
     InputStream getEmptyFile() throws ServiceException;
 
     /**
-     * Get empty file
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    Call<ResponseBody> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
 }

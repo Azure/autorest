@@ -12,8 +12,8 @@ package fixtures.url;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.url.models.UriColor;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
@@ -32,212 +32,109 @@ public interface Queries {
      */
     interface QueriesService {
         @GET("/queries/bool/true")
-        Response getBooleanTrue(@Query("boolQuery") Boolean boolQuery) throws ServiceException;
-
-        @GET("/queries/bool/true")
-        void getBooleanTrueAsync(@Query("boolQuery") Boolean boolQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getBooleanTrue(@Query("boolQuery") Boolean boolQuery);
 
         @GET("/queries/bool/false")
-        Response getBooleanFalse(@Query("boolQuery") Boolean boolQuery) throws ServiceException;
-
-        @GET("/queries/bool/false")
-        void getBooleanFalseAsync(@Query("boolQuery") Boolean boolQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getBooleanFalse(@Query("boolQuery") Boolean boolQuery);
 
         @GET("/queries/bool/null")
-        Response getBooleanNull(@Query("boolQuery") Boolean boolQuery) throws ServiceException;
-
-        @GET("/queries/bool/null")
-        void getBooleanNullAsync(@Query("boolQuery") Boolean boolQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getBooleanNull(@Query("boolQuery") Boolean boolQuery);
 
         @GET("/queries/int/1000000")
-        Response getIntOneMillion(@Query("intQuery") Integer intQuery) throws ServiceException;
-
-        @GET("/queries/int/1000000")
-        void getIntOneMillionAsync(@Query("intQuery") Integer intQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getIntOneMillion(@Query("intQuery") Integer intQuery);
 
         @GET("/queries/int/-1000000")
-        Response getIntNegativeOneMillion(@Query("intQuery") Integer intQuery) throws ServiceException;
-
-        @GET("/queries/int/-1000000")
-        void getIntNegativeOneMillionAsync(@Query("intQuery") Integer intQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getIntNegativeOneMillion(@Query("intQuery") Integer intQuery);
 
         @GET("/queries/int/null")
-        Response getIntNull(@Query("intQuery") Integer intQuery) throws ServiceException;
-
-        @GET("/queries/int/null")
-        void getIntNullAsync(@Query("intQuery") Integer intQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getIntNull(@Query("intQuery") Integer intQuery);
 
         @GET("/queries/long/10000000000")
-        Response getTenBillion(@Query("longQuery") Long longQuery) throws ServiceException;
-
-        @GET("/queries/long/10000000000")
-        void getTenBillionAsync(@Query("longQuery") Long longQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getTenBillion(@Query("longQuery") Long longQuery);
 
         @GET("/queries/long/-10000000000")
-        Response getNegativeTenBillion(@Query("longQuery") Long longQuery) throws ServiceException;
-
-        @GET("/queries/long/-10000000000")
-        void getNegativeTenBillionAsync(@Query("longQuery") Long longQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getNegativeTenBillion(@Query("longQuery") Long longQuery);
 
         @GET("/queries/long/null")
-        Response getLongNull(@Query("longQuery") Long longQuery) throws ServiceException;
-
-        @GET("/queries/long/null")
-        void getLongNullAsync(@Query("longQuery") Long longQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getLongNull(@Query("longQuery") Long longQuery);
 
         @GET("/queries/float/1.034E+20")
-        Response floatScientificPositive(@Query("floatQuery") Double floatQuery) throws ServiceException;
-
-        @GET("/queries/float/1.034E+20")
-        void floatScientificPositiveAsync(@Query("floatQuery") Double floatQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> floatScientificPositive(@Query("floatQuery") Double floatQuery);
 
         @GET("/queries/float/-1.034E-20")
-        Response floatScientificNegative(@Query("floatQuery") Double floatQuery) throws ServiceException;
-
-        @GET("/queries/float/-1.034E-20")
-        void floatScientificNegativeAsync(@Query("floatQuery") Double floatQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> floatScientificNegative(@Query("floatQuery") Double floatQuery);
 
         @GET("/queries/float/null")
-        Response floatNull(@Query("floatQuery") Double floatQuery) throws ServiceException;
-
-        @GET("/queries/float/null")
-        void floatNullAsync(@Query("floatQuery") Double floatQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> floatNull(@Query("floatQuery") Double floatQuery);
 
         @GET("/queries/double/9999999.999")
-        Response doubleDecimalPositive(@Query("doubleQuery") Double doubleQuery) throws ServiceException;
-
-        @GET("/queries/double/9999999.999")
-        void doubleDecimalPositiveAsync(@Query("doubleQuery") Double doubleQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> doubleDecimalPositive(@Query("doubleQuery") Double doubleQuery);
 
         @GET("/queries/double/-9999999.999")
-        Response doubleDecimalNegative(@Query("doubleQuery") Double doubleQuery) throws ServiceException;
-
-        @GET("/queries/double/-9999999.999")
-        void doubleDecimalNegativeAsync(@Query("doubleQuery") Double doubleQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> doubleDecimalNegative(@Query("doubleQuery") Double doubleQuery);
 
         @GET("/queries/double/null")
-        Response doubleNull(@Query("doubleQuery") Double doubleQuery) throws ServiceException;
-
-        @GET("/queries/double/null")
-        void doubleNullAsync(@Query("doubleQuery") Double doubleQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> doubleNull(@Query("doubleQuery") Double doubleQuery);
 
         @GET("/queries/string/unicode/")
-        Response stringUnicode(@Query("stringQuery") String stringQuery) throws ServiceException;
-
-        @GET("/queries/string/unicode/")
-        void stringUnicodeAsync(@Query("stringQuery") String stringQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> stringUnicode(@Query("stringQuery") String stringQuery);
 
         @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-        Response stringUrlEncoded(@Query("stringQuery") String stringQuery) throws ServiceException;
-
-        @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-        void stringUrlEncodedAsync(@Query("stringQuery") String stringQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> stringUrlEncoded(@Query("stringQuery") String stringQuery);
 
         @GET("/queries/string/empty")
-        Response stringEmpty(@Query("stringQuery") String stringQuery) throws ServiceException;
-
-        @GET("/queries/string/empty")
-        void stringEmptyAsync(@Query("stringQuery") String stringQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> stringEmpty(@Query("stringQuery") String stringQuery);
 
         @GET("/queries/string/null")
-        Response stringNull(@Query("stringQuery") String stringQuery) throws ServiceException;
-
-        @GET("/queries/string/null")
-        void stringNullAsync(@Query("stringQuery") String stringQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> stringNull(@Query("stringQuery") String stringQuery);
 
         @GET("/queries/enum/green%20color")
-        Response enumValid(@Query("enumQuery") String enumQuery) throws ServiceException;
-
-        @GET("/queries/enum/green%20color")
-        void enumValidAsync(@Query("enumQuery") String enumQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> enumValid(@Query("enumQuery") String enumQuery);
 
         @GET("/queries/enum/null")
-        Response enumNull(@Query("enumQuery") String enumQuery) throws ServiceException;
-
-        @GET("/queries/enum/null")
-        void enumNullAsync(@Query("enumQuery") String enumQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> enumNull(@Query("enumQuery") String enumQuery);
 
         @GET("/queries/byte/multibyte")
-        Response byteMultiByte(@Query("byteQuery") String byteQuery) throws ServiceException;
-
-        @GET("/queries/byte/multibyte")
-        void byteMultiByteAsync(@Query("byteQuery") String byteQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> byteMultiByte(@Query("byteQuery") String byteQuery);
 
         @GET("/queries/byte/empty")
-        Response byteEmpty(@Query("byteQuery") String byteQuery) throws ServiceException;
-
-        @GET("/queries/byte/empty")
-        void byteEmptyAsync(@Query("byteQuery") String byteQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> byteEmpty(@Query("byteQuery") String byteQuery);
 
         @GET("/queries/byte/null")
-        Response byteNull(@Query("byteQuery") String byteQuery) throws ServiceException;
-
-        @GET("/queries/byte/null")
-        void byteNullAsync(@Query("byteQuery") String byteQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> byteNull(@Query("byteQuery") String byteQuery);
 
         @GET("/queries/date/2012-01-01")
-        Response dateValid(@Query("dateQuery") String dateQuery) throws ServiceException;
-
-        @GET("/queries/date/2012-01-01")
-        void dateValidAsync(@Query("dateQuery") String dateQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> dateValid(@Query("dateQuery") String dateQuery);
 
         @GET("/queries/date/null")
-        Response dateNull(@Query("dateQuery") String dateQuery) throws ServiceException;
-
-        @GET("/queries/date/null")
-        void dateNullAsync(@Query("dateQuery") String dateQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> dateNull(@Query("dateQuery") String dateQuery);
 
         @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-        Response dateTimeValid(@Query("dateTimeQuery") String dateTimeQuery) throws ServiceException;
-
-        @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-        void dateTimeValidAsync(@Query("dateTimeQuery") String dateTimeQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> dateTimeValid(@Query("dateTimeQuery") String dateTimeQuery);
 
         @GET("/queries/datetime/null")
-        Response dateTimeNull(@Query("dateTimeQuery") String dateTimeQuery) throws ServiceException;
-
-        @GET("/queries/datetime/null")
-        void dateTimeNullAsync(@Query("dateTimeQuery") String dateTimeQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> dateTimeNull(@Query("dateTimeQuery") String dateTimeQuery);
 
         @GET("/queries/array/csv/string/valid")
-        Response arrayStringCsvValid(@Query("arrayQuery") String arrayQuery) throws ServiceException;
-
-        @GET("/queries/array/csv/string/valid")
-        void arrayStringCsvValidAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> arrayStringCsvValid(@Query("arrayQuery") String arrayQuery);
 
         @GET("/queries/array/csv/string/null")
-        Response arrayStringCsvNull(@Query("arrayQuery") String arrayQuery) throws ServiceException;
-
-        @GET("/queries/array/csv/string/null")
-        void arrayStringCsvNullAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> arrayStringCsvNull(@Query("arrayQuery") String arrayQuery);
 
         @GET("/queries/array/csv/string/empty")
-        Response arrayStringCsvEmpty(@Query("arrayQuery") String arrayQuery) throws ServiceException;
-
-        @GET("/queries/array/csv/string/empty")
-        void arrayStringCsvEmptyAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> arrayStringCsvEmpty(@Query("arrayQuery") String arrayQuery);
 
         @GET("/queries/array/ssv/string/valid")
-        Response arrayStringSsvValid(@Query("arrayQuery") String arrayQuery) throws ServiceException;
-
-        @GET("/queries/array/ssv/string/valid")
-        void arrayStringSsvValidAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> arrayStringSsvValid(@Query("arrayQuery") String arrayQuery);
 
         @GET("/queries/array/tsv/string/valid")
-        Response arrayStringTsvValid(@Query("arrayQuery") String arrayQuery) throws ServiceException;
-
-        @GET("/queries/array/tsv/string/valid")
-        void arrayStringTsvValidAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> arrayStringTsvValid(@Query("arrayQuery") String arrayQuery);
 
         @GET("/queries/array/pipes/string/valid")
-        Response arrayStringPipesValid(@Query("arrayQuery") String arrayQuery) throws ServiceException;
-
-        @GET("/queries/array/pipes/string/valid")
-        void arrayStringPipesValidAsync(@Query("arrayQuery") String arrayQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> arrayStringPipesValid(@Query("arrayQuery") String arrayQuery);
 
     }
     /**
-     * Get true Boolean value on path
      *
      * @param boolQuery true boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -245,15 +142,13 @@ public interface Queries {
     void getBooleanTrue(Boolean boolQuery) throws ServiceException;
 
     /**
-     * Get true Boolean value on path
      *
      * @param boolQuery true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getBooleanTrueAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getBooleanTrueAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get false Boolean value on path
      *
      * @param boolQuery false boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -261,15 +156,13 @@ public interface Queries {
     void getBooleanFalse(Boolean boolQuery) throws ServiceException;
 
     /**
-     * Get false Boolean value on path
      *
      * @param boolQuery false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getBooleanFalseAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getBooleanFalseAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null Boolean value on query (query string should be absent)
      *
      * @param boolQuery null boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -277,15 +170,13 @@ public interface Queries {
     void getBooleanNull(Boolean boolQuery) throws ServiceException;
 
     /**
-     * Get null Boolean value on query (query string should be absent)
      *
      * @param boolQuery null boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '1000000' integer value
      *
      * @param intQuery '1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -293,15 +184,13 @@ public interface Queries {
     void getIntOneMillion(Integer intQuery) throws ServiceException;
 
     /**
-     * Get '1000000' integer value
      *
      * @param intQuery '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getIntOneMillionAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getIntOneMillionAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '-1000000' integer value
      *
      * @param intQuery '-1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -309,15 +198,13 @@ public interface Queries {
     void getIntNegativeOneMillion(Integer intQuery) throws ServiceException;
 
     /**
-     * Get '-1000000' integer value
      *
      * @param intQuery '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getIntNegativeOneMillionAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getIntNegativeOneMillionAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null integer value (no query parameter)
      *
      * @param intQuery null integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -325,15 +212,13 @@ public interface Queries {
     void getIntNull(Integer intQuery) throws ServiceException;
 
     /**
-     * Get null integer value (no query parameter)
      *
      * @param intQuery null integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '10000000000' 64 bit integer value
      *
      * @param longQuery '10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -341,15 +226,13 @@ public interface Queries {
     void getTenBillion(Long longQuery) throws ServiceException;
 
     /**
-     * Get '10000000000' 64 bit integer value
      *
      * @param longQuery '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getTenBillionAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getTenBillionAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '-10000000000' 64 bit integer value
      *
      * @param longQuery '-10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -357,15 +240,13 @@ public interface Queries {
     void getNegativeTenBillion(Long longQuery) throws ServiceException;
 
     /**
-     * Get '-10000000000' 64 bit integer value
      *
      * @param longQuery '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getNegativeTenBillionAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getNegativeTenBillionAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get 'null 64 bit integer value (no query param in uri)
      *
      * @param longQuery null 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -373,15 +254,13 @@ public interface Queries {
     void getLongNull(Long longQuery) throws ServiceException;
 
     /**
-     * Get 'null 64 bit integer value (no query param in uri)
      *
      * @param longQuery null 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '1.034E+20' numeric value
      *
      * @param floatQuery '1.034E+20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -389,15 +268,13 @@ public interface Queries {
     void floatScientificPositive(Double floatQuery) throws ServiceException;
 
     /**
-     * Get '1.034E+20' numeric value
      *
      * @param floatQuery '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void floatScientificPositiveAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> floatScientificPositiveAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '-1.034E-20' numeric value
      *
      * @param floatQuery '-1.034E-20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -405,15 +282,13 @@ public interface Queries {
     void floatScientificNegative(Double floatQuery) throws ServiceException;
 
     /**
-     * Get '-1.034E-20' numeric value
      *
      * @param floatQuery '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void floatScientificNegativeAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> floatScientificNegativeAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null numeric value (no query parameter)
      *
      * @param floatQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -421,15 +296,13 @@ public interface Queries {
     void floatNull(Double floatQuery) throws ServiceException;
 
     /**
-     * Get null numeric value (no query parameter)
      *
      * @param floatQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '9999999.999' numeric value
      *
      * @param doubleQuery '9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -437,15 +310,13 @@ public interface Queries {
     void doubleDecimalPositive(Double doubleQuery) throws ServiceException;
 
     /**
-     * Get '9999999.999' numeric value
      *
      * @param doubleQuery '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void doubleDecimalPositiveAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> doubleDecimalPositiveAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '-9999999.999' numeric value
      *
      * @param doubleQuery '-9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -453,15 +324,13 @@ public interface Queries {
     void doubleDecimalNegative(Double doubleQuery) throws ServiceException;
 
     /**
-     * Get '-9999999.999' numeric value
      *
      * @param doubleQuery '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void doubleDecimalNegativeAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> doubleDecimalNegativeAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null numeric value (no query parameter)
      *
      * @param doubleQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -469,15 +338,13 @@ public interface Queries {
     void doubleNull(Double doubleQuery) throws ServiceException;
 
     /**
-     * Get null numeric value (no query parameter)
      *
      * @param doubleQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
      *
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -485,15 +352,13 @@ public interface Queries {
     void stringUnicode(String stringQuery) throws ServiceException;
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
      *
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void stringUnicodeAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> stringUnicodeAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end
      *
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -501,15 +366,13 @@ public interface Queries {
     void stringUrlEncoded(String stringQuery) throws ServiceException;
 
     /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end
      *
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void stringUrlEncodedAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> stringUrlEncodedAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get ''
      *
      * @param stringQuery '' string value. Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -517,15 +380,13 @@ public interface Queries {
     void stringEmpty(String stringQuery) throws ServiceException;
 
     /**
-     * Get ''
      *
      * @param stringQuery '' string value. Possible values for this parameter include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void stringEmptyAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> stringEmptyAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null (no query parameter in url)
      *
      * @param stringQuery null string value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -533,15 +394,13 @@ public interface Queries {
     void stringNull(String stringQuery) throws ServiceException;
 
     /**
-     * Get null (no query parameter in url)
      *
      * @param stringQuery null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get using uri with query parameter 'green color'
      *
      * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -549,15 +408,13 @@ public interface Queries {
     void enumValid(UriColor enumQuery) throws ServiceException;
 
     /**
-     * Get using uri with query parameter 'green color'
      *
      * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null (no query parameter in url)
      *
      * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -565,15 +422,13 @@ public interface Queries {
     void enumNull(UriColor enumQuery) throws ServiceException;
 
     /**
-     * Get null (no query parameter in url)
      *
      * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -581,15 +436,13 @@ public interface Queries {
     void byteMultiByte(byte[] byteQuery) throws ServiceException;
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '' as byte array
      *
      * @param byteQuery '' as byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -597,15 +450,13 @@ public interface Queries {
     void byteEmpty(byte[] byteQuery) throws ServiceException;
 
     /**
-     * Get '' as byte array
      *
      * @param byteQuery '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void byteEmptyAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> byteEmptyAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null as byte array (no query parameters in uri)
      *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -613,15 +464,13 @@ public interface Queries {
     void byteNull(byte[] byteQuery) throws ServiceException;
 
     /**
-     * Get null as byte array (no query parameters in uri)
      *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '2012-01-01' as date
      *
      * @param dateQuery '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -629,15 +478,13 @@ public interface Queries {
     void dateValid(LocalDate dateQuery) throws ServiceException;
 
     /**
-     * Get '2012-01-01' as date
      *
      * @param dateQuery '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null as date - this should result in no query parameters in uri
      *
      * @param dateQuery null as date (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -645,15 +492,13 @@ public interface Queries {
     void dateNull(LocalDate dateQuery) throws ServiceException;
 
     /**
-     * Get null as date - this should result in no query parameters in uri
      *
      * @param dateQuery null as date (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get '2012-01-01T01:01:01Z' as date-time
      *
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -661,15 +506,13 @@ public interface Queries {
     void dateTimeValid(DateTime dateTimeQuery) throws ServiceException;
 
     /**
-     * Get '2012-01-01T01:01:01Z' as date-time
      *
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get null as date-time, should result in no query parameters in uri
      *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -677,16 +520,13 @@ public interface Queries {
     void dateTimeNull(DateTime dateTimeQuery) throws ServiceException;
 
     /**
-     * Get null as date-time, should result in no query parameters in uri
      *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -694,16 +534,13 @@ public interface Queries {
     void arrayStringCsvValid(List<String> arrayQuery) throws ServiceException;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get a null array of string using the csv-array format
      *
      * @param arrayQuery a null array of string using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -711,15 +548,13 @@ public interface Queries {
     void arrayStringCsvNull(List<String> arrayQuery) throws ServiceException;
 
     /**
-     * Get a null array of string using the csv-array format
      *
      * @param arrayQuery a null array of string using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get an empty array [] of string using the csv-array format
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -727,16 +562,13 @@ public interface Queries {
     void arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException;
 
     /**
-     * Get an empty array [] of string using the csv-array format
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -744,17 +576,13 @@ public interface Queries {
     void arrayStringSsvValid(List<String> arrayQuery) throws ServiceException;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -762,17 +590,13 @@ public interface Queries {
     void arrayStringTsvValid(List<String> arrayQuery) throws ServiceException;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -780,12 +604,10 @@ public interface Queries {
     void arrayStringPipesValid(List<String> arrayQuery) throws ServiceException;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@
-     * &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
 }

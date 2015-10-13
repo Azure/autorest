@@ -10,15 +10,16 @@
 
 package fixtures.bodycomplex;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.Error;
 import com.microsoft.rest.Validator;
@@ -27,54 +28,55 @@ public class BasicOperationsImpl implements BasicOperations {
     private BasicService service;
     AutoRestComplexTestService client;
 
-    public BasicOperationsImpl(RestAdapter restAdapter, AutoRestComplexTestService client) {
-        this.service = restAdapter.create(BasicService.class);
+    public BasicOperationsImpl(Retrofit retrofit, AutoRestComplexTestService client) {
+        this.service = retrofit.create(BasicService.class);
         this.client = client;
     }
 
     /**
-     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Basic getValid() throws ServiceException {
         try {
-            ServiceResponse<Basic> response = getValidDelegate(service.getValid(), null);
+            Call<ResponseBody> call = service.getValid();
+            ServiceResponse<Basic> response = getValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Basic> response = getValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getValidAsync(final ServiceCallback<Basic> serviceCallback) {
-        service.getValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
+        Call<ResponseBody> call = service.getValid();
+        call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getValidDelegate(response, error));
+                    serviceCallback.success(getValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Basic> getValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Basic> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Basic>()
                 .register(200, new TypeToken<Basic>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Please put {id: 2, name: 'abc', color: 'Magenta'}
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -86,209 +88,218 @@ public class BasicOperationsImpl implements BasicOperations {
         }
         Validator.validate(complexBody);
         try {
-            ServiceResponse<Void> response = putValidDelegate(service.putValid(complexBody), null);
+            Call<ResponseBody> call = service.putValid(complexBody);
+            ServiceResponse<Void> response = putValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Please put {id: 2, name: 'abc', color: 'Magenta'}
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
-        service.putValidAsync(complexBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putValid(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putValidDelegate(response, error));
+                    serviceCallback.success(putValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get a basic complex type that is invalid for the local strong type
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Basic getInvalid() throws ServiceException {
         try {
-            ServiceResponse<Basic> response = getInvalidDelegate(service.getInvalid(), null);
+            Call<ResponseBody> call = service.getInvalid();
+            ServiceResponse<Basic> response = getInvalidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Basic> response = getInvalidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get a basic complex type that is invalid for the local strong type
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
-        service.getInvalidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
+        Call<ResponseBody> call = service.getInvalid();
+        call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getInvalidDelegate(response, error));
+                    serviceCallback.success(getInvalidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Basic> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Basic> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Basic>()
                 .register(200, new TypeToken<Basic>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get a basic complex type that is empty
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Basic getEmpty() throws ServiceException {
         try {
-            ServiceResponse<Basic> response = getEmptyDelegate(service.getEmpty(), null);
+            Call<ResponseBody> call = service.getEmpty();
+            ServiceResponse<Basic> response = getEmptyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Basic> response = getEmptyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get a basic complex type that is empty
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
-        service.getEmptyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
+        Call<ResponseBody> call = service.getEmpty();
+        call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response, error));
+                    serviceCallback.success(getEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Basic> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Basic> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Basic>()
                 .register(200, new TypeToken<Basic>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get a basic complex type whose properties are null
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Basic getNull() throws ServiceException {
         try {
-            ServiceResponse<Basic> response = getNullDelegate(service.getNull(), null);
+            Call<ResponseBody> call = service.getNull();
+            ServiceResponse<Basic> response = getNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Basic> response = getNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get a basic complex type whose properties are null
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNullAsync(final ServiceCallback<Basic> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
+        Call<ResponseBody> call = service.getNull();
+        call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, error));
+                    serviceCallback.success(getNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Basic> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Basic> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Basic>()
                 .register(200, new TypeToken<Basic>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get a basic complex type while the server doesn't provide a response
-     * payload
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Basic getNotProvided() throws ServiceException {
         try {
-            ServiceResponse<Basic> response = getNotProvidedDelegate(service.getNotProvided(), null);
+            Call<ResponseBody> call = service.getNotProvided();
+            ServiceResponse<Basic> response = getNotProvidedDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Basic> response = getNotProvidedDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get a basic complex type while the server doesn't provide a response
-     * payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
-        service.getNotProvidedAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
+        Call<ResponseBody> call = service.getNotProvided();
+        call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNotProvidedDelegate(response, error));
+                    serviceCallback.success(getNotProvidedDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Basic> getNotProvidedDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Basic> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Basic>()
                 .register(200, new TypeToken<Basic>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

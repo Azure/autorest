@@ -156,7 +156,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
+        RestAdapter restAdapter = retrofitBuilder.setEndpoint(baseUri).build();
         this.lROs = new LROsImpl(restAdapter, this);
         this.lRORetrys = new LRORetrysImpl(restAdapter, this);
         this.lROSADs = new LROSADsImpl(restAdapter, this);

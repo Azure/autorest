@@ -12,8 +12,8 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Fish;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -30,26 +30,16 @@ public interface Polymorphism {
      */
     interface PolymorphismService {
         @GET("/complex/polymorphism/valid")
-        Response getValid() throws ServiceException;
-
-        @GET("/complex/polymorphism/valid")
-        void getValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getValid();
 
         @PUT("/complex/polymorphism/valid")
-        Response putValid(@Body Fish complexBody) throws ServiceException;
-
-        @PUT("/complex/polymorphism/valid")
-        void putValidAsync(@Body Fish complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putValid(@Body Fish complexBody);
 
         @PUT("/complex/polymorphism/missingrequired/invalid")
-        Response putValidMissingRequired(@Body Fish complexBody) throws ServiceException;
-
-        @PUT("/complex/polymorphism/missingrequired/invalid")
-        void putValidMissingRequiredAsync(@Body Fish complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putValidMissingRequired(@Body Fish complexBody);
 
     }
     /**
-     * Get complex types that are polymorphic
      *
      * @return the Fish object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -57,14 +47,12 @@ public interface Polymorphism {
     Fish getValid() throws ServiceException;
 
     /**
-     * Get complex types that are polymorphic
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void getValidAsync(final ServiceCallback<Fish> serviceCallback);
+    Call<ResponseBody> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
-     * Put complex types that are polymorphic
      *
      * @param complexBody Please put a salmon that looks like this:
  {
@@ -96,7 +84,6 @@ public interface Polymorphism {
     void putValid(Fish complexBody) throws ServiceException;
 
     /**
-     * Put complex types that are polymorphic
      *
      * @param complexBody Please put a salmon that looks like this:
  {
@@ -125,11 +112,9 @@ public interface Polymorphism {
        };
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required
-     * 'birthday' field - the request should not be allowed from the client
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
  {
@@ -162,8 +147,6 @@ public interface Polymorphism {
     void putValidMissingRequired(Fish complexBody) throws ServiceException;
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required
-     * 'birthday' field - the request should not be allowed from the client
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
  {
@@ -193,6 +176,6 @@ public interface Polymorphism {
  }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
 }
