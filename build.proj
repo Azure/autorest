@@ -116,6 +116,8 @@
             Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
             Targets="Build"
             Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' == 'Windows_NT'" />
+    <Exec Command="DnxBuild" WorkingDirectory="$(LibraryToolsFolder)"
+            Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime')"/>
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
 
@@ -234,6 +236,8 @@
     <Exec Command="$(NuGetCommand) restore $(ClientRuntimeSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <Exec Command="$(NuGetCommand) restore $(ClientRuntimeWindowsSolution)" ContinueOnError="false" Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' != 'Unix'" />
+    <Exec Command="$(NuGetCommand) install dnx-clr-win-x86 -Version 1.0.0-beta7 -Prerelease -OutputDirectory $(LibraryToolsFolder)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
+    <Exec Command="$(NuGetCommand) install dnx-coreclr-win-x86 -Version 1.0.0-beta7 -Prerelease -OutputDirectory $(LibraryToolsFolder)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
   </Target>
 
   <!-- Official releases require tools only available on corp network. -->
