@@ -217,6 +217,20 @@ class PoolOperations(object):
         response = self.client.get(http_request)
         
         return response
+
+    def get_status(self, **parameters):
+        
+        # Construct URL
+        url = parameters.get('status_link')
+        url = urllib.quote(url)
+        
+        # Create HTTP transport objects
+        http_request = self.client.request(url)
+        
+        # Send Request
+        response = self.client.get(http_request)
+        
+        return response
     
     def list(self, **parameters):
         
