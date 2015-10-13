@@ -117,7 +117,7 @@
             Targets="Build"
             Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' == 'Windows_NT'" />
     <Exec Command="DnxBuild" WorkingDirectory="$(LibraryToolsFolder)"
-            Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime')"/>
+            Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' == 'Windows_NT'"/>
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
 
