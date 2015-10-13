@@ -167,7 +167,8 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "AddPet", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "pets").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pets").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -265,7 +266,8 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "AddPetStyles", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "primitives").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "primitives").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -363,7 +365,8 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "UpdatePetStyles", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "primitives").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "primitives").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
