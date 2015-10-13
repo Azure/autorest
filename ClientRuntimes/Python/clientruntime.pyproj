@@ -37,6 +37,12 @@
     <Compile Include="msrestazure\azure_handlers.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="msrestazure\azure_resource.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="msrestazure\azure_response.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="msrestazure\azure_service_client.py">
       <SubType>Code</SubType>
     </Compile>
