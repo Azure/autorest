@@ -69,10 +69,6 @@
       <Project>{2efd6648-39b4-476a-b302-8bc236f5f1b8}</Project>
       <Name>ClientRuntime.Log4Net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ClientRuntime\ClientRuntime.csproj">
-      <Project>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</Project>
-      <Name>ClientRuntime</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
