@@ -393,10 +393,12 @@ gulp.task('test:xunit', function () {
 var nugetPath = path.resolve('Tools/NuGet.exe');
 var nugetTestProjDir = path.resolve('AutoRest/NugetPackageTest');
 var packagesDir = path.resolve('binaries/packages');
+var cachedClientRuntimePackages = path.join(process.env.HOME || (process.env.HOMEDRIVE + process.env.HOMEPATH),
+    'AppData', 'Local', 'NuGet', 'Cache', "Microsoft.Rest.ClientRuntime.*.nupkg");
 gulp.task('test:nugetPackages:restore', ['test:nugetPackages:clean'], clrTask(nugetPath + ' restore ' + path.join(nugetTestProjDir, '/NugetPackageTest.sln') + ' -source ' + path.resolve(packagesDir)));
-
-gulp.task('test:nugetPackages:clean', function(){
-  return del([path.join(nugetTestProjDir, 'Generated')]);
+gulp.task('test:nugetPackages:clean', function () {
+  //turn on 'force' so we can remove files outside of repo folder.
+  return del([path.join(nugetTestProjDir, 'Generated'), cachedClientRuntimePackages], {'force' : true});
 });
 
 var toolsDir = 'packages/autorest.0.11.0/tools';
