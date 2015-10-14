@@ -78,7 +78,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "PostMethodLocalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
@@ -194,7 +195,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "PostMethodLocalNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
@@ -308,7 +310,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "PostPathLocalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
@@ -423,7 +426,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "PostSwaggerLocalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)

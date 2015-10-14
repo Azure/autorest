@@ -78,7 +78,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "CustomNamedRequestId", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/customNamedRequestId").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/customNamedRequestId").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

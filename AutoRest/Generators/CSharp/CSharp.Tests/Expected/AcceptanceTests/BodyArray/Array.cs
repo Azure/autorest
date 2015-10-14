@@ -70,7 +70,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -157,7 +158,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetInvalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/invalid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -244,7 +246,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/empty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -338,7 +341,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/empty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -423,7 +427,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetBooleanTfft", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/boolean/tfft").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/boolean/tfft").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -517,7 +522,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutBooleanTfft", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/boolean/tfft").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/boolean/tfft").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -602,7 +608,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetBooleanInvalidNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/boolean/true.null.false").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/boolean/true.null.false").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -689,7 +696,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetBooleanInvalidString", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/boolean/true.boolean.false").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/boolean/true.boolean.false").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -776,7 +784,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetIntegerValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/integer/1.-1.3.300").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/integer/1.-1.3.300").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -870,7 +879,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutIntegerValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/integer/1.-1.3.300").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/integer/1.-1.3.300").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -955,7 +965,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetIntInvalidNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/integer/1.null.zero").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/integer/1.null.zero").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1042,7 +1053,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetIntInvalidString", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/integer/1.integer.0").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/integer/1.integer.0").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1129,7 +1141,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetLongValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/long/1.-1.3.300").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/long/1.-1.3.300").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1223,7 +1236,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutLongValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/long/1.-1.3.300").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/long/1.-1.3.300").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1308,7 +1322,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetLongInvalidNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/long/1.null.zero").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/long/1.null.zero").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1395,7 +1410,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetLongInvalidString", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/long/1.integer.0").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/long/1.integer.0").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1482,7 +1498,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetFloatValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/float/0--0.01-1.2e20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/float/0--0.01-1.2e20").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1576,7 +1593,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutFloatValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/float/0--0.01-1.2e20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/float/0--0.01-1.2e20").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1661,7 +1679,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetFloatInvalidNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/float/0.0-null-1.2e20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/float/0.0-null-1.2e20").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1748,7 +1767,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetFloatInvalidString", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/float/1.number.0").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/float/1.number.0").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1835,7 +1855,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDoubleValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/double/0--0.01-1.2e20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/double/0--0.01-1.2e20").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1929,7 +1950,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutDoubleValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/double/0--0.01-1.2e20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/double/0--0.01-1.2e20").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -2014,7 +2036,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDoubleInvalidNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/double/0.0-null-1.2e20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/double/0.0-null-1.2e20").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2101,7 +2124,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDoubleInvalidString", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/double/1.number.0").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/double/1.number.0").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2188,7 +2212,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetStringValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/string/foo1.foo2.foo3").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/string/foo1.foo2.foo3").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2282,7 +2307,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutStringValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/string/foo1.foo2.foo3").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/string/foo1.foo2.foo3").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -2367,7 +2393,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetStringWithNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/string/foo.null.foo2").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/string/foo.null.foo2").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2454,7 +2481,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetStringWithInvalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/string/foo.123.foo2").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/string/foo.123.foo2").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2541,7 +2569,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDateValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/date/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/date/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2635,7 +2664,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutDateValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/date/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/date/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -2720,7 +2750,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDateInvalidNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/date/invalidnull").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/date/invalidnull").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2807,7 +2838,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDateInvalidChars", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/date/invalidchars").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/date/invalidchars").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2895,7 +2927,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDateTimeValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/date-time/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/date-time/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2990,7 +3023,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutDateTimeValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/date-time/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/date-time/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -3075,7 +3109,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDateTimeInvalidNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/date-time/invalidnull").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/date-time/invalidnull").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -3162,7 +3197,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDateTimeInvalidChars", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/date-time/invalidchars").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/date-time/invalidchars").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -3250,7 +3286,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetByteValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/byte/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/byte/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -3345,7 +3382,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutByteValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/byte/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/byte/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -3431,7 +3469,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetByteInvalidNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/prim/byte/invalidnull").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/prim/byte/invalidnull").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -3518,7 +3557,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetComplexNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/complex/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/complex/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -3605,7 +3645,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetComplexEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/complex/empty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/complex/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -3693,7 +3734,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetComplexItemNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/complex/itemnull").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/complex/itemnull").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -3781,7 +3823,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetComplexItemEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/complex/itemempty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/complex/itemempty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -3869,7 +3912,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetComplexValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/complex/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/complex/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -3964,7 +4008,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutComplexValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/complex/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/complex/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -4049,7 +4094,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetArrayNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/array/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/array/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -4136,7 +4182,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetArrayEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/array/empty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/array/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -4223,7 +4270,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetArrayItemNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/array/itemnull").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/array/itemnull").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -4310,7 +4358,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetArrayItemEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/array/itemempty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/array/itemempty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -4398,7 +4447,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetArrayValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/array/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/array/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -4493,7 +4543,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutArrayValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/array/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/array/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -4578,7 +4629,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDictionaryNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/dictionary/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/dictionary/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -4665,7 +4717,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDictionaryEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/dictionary/empty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/dictionary/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -4754,7 +4807,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDictionaryItemNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/dictionary/itemnull").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/dictionary/itemnull").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -4843,7 +4897,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDictionaryItemEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/dictionary/itemempty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/dictionary/itemempty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -4932,7 +4987,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "GetDictionaryValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/dictionary/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/dictionary/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -5028,7 +5084,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 ServiceClientTracing.Enter(invocationId, this, "PutDictionaryValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "array/dictionary/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "array/dictionary/valid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

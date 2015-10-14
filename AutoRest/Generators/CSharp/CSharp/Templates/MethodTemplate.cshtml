@@ -67,7 +67,8 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     }
     else
     {
-    @:var url = new Uri(@(Model.ClientReference).BaseUri, "@(Model.Url.Trim('/'))").ToString();
+    @:var baseUrl = @(Model.ClientReference).BaseUri.AbsoluteUri;
+    @:var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "@(Model.Url.Trim('/'))").ToString();
     }
     @(Model.BuildUrl("url"))
     // Create HTTP transport objects

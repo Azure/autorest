@@ -70,7 +70,8 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                 ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "duration/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "duration/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -164,7 +165,8 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                 ServiceClientTracing.Enter(invocationId, this, "PutPositiveDuration", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "duration/positiveduration").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "duration/positiveduration").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -249,7 +251,8 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                 ServiceClientTracing.Enter(invocationId, this, "GetPositiveDuration", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "duration/positiveduration").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "duration/positiveduration").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -336,7 +339,8 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                 ServiceClientTracing.Enter(invocationId, this, "GetInvalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "duration/invalid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "duration/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

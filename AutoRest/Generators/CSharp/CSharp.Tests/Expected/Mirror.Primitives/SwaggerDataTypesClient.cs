@@ -155,7 +155,8 @@ namespace Fixtures.MirrorPrimitives
                 ServiceClientTracing.Enter(invocationId, this, "GetProduct", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "datatypes").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datatypes").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -260,7 +261,8 @@ namespace Fixtures.MirrorPrimitives
                 ServiceClientTracing.Enter(invocationId, this, "PutProduct", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "datatypes").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datatypes").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -365,7 +367,8 @@ namespace Fixtures.MirrorPrimitives
                 ServiceClientTracing.Enter(invocationId, this, "PostProduct", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "datatypes").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datatypes").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -470,7 +473,8 @@ namespace Fixtures.MirrorPrimitives
                 ServiceClientTracing.Enter(invocationId, this, "PatchProduct", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "datatypes").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datatypes").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PATCH");

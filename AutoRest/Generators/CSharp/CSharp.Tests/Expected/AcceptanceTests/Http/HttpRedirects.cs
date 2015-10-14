@@ -70,7 +70,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Head300", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/300").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/300").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("HEAD");
@@ -151,7 +152,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get300", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/300").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/300").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -238,7 +240,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Head301", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/301").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/301").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("HEAD");
@@ -319,7 +322,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get301", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/301").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/301").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -405,7 +409,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Put301", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/301").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/301").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -490,7 +495,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Head302", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/302").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/302").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("HEAD");
@@ -571,7 +577,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get302", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/302").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/302").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -657,7 +664,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Patch302", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/302").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/302").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PATCH");
@@ -747,7 +755,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Post303", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/303").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/303").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -832,7 +841,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Head307", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/307").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/307").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("HEAD");
@@ -913,7 +923,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get307", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/307").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/307").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -997,7 +1008,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Put307", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/307").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/307").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1085,7 +1097,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Patch307", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/307").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/307").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PATCH");
@@ -1173,7 +1186,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Post307", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/307").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/307").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1261,7 +1275,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Delete307", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/redirect/307").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/redirect/307").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("DELETE");
