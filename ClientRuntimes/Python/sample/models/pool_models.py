@@ -1,4 +1,7 @@
 ﻿from exceptions import InvalidOperationError
+from constants import *
+from shared import *
+
 
 class BatchPoolAddResponse(BatchOperationResponse):
     accept_status = [201]
@@ -217,11 +220,12 @@ class Pool(PoolSpec):
 
 class PoolAutoScale(object):
 
-    self.attribute_map = {
-            'auto_scale_formula': {'key':'autoScaleFormula', 'type':'str'}
-            }
+    def __init__(self):
+        self.attribute_map = {
+                'auto_scale_formula': {'key':'autoScaleFormula', 'type':'str'}
+                }
 
-    self.auto_scale_formula
+        self.auto_scale_formula = None
 
 
 class PoolProperties(object):

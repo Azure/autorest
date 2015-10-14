@@ -5,17 +5,19 @@ from clientruntime.msrest.serialization import Serialized, Deserialized
 from clientruntime.msrest.exceptions import ResponseStatusError
 
 from pool_operations import PoolOperations
+
+import pool_models
 from pool_models import *
 
 import sys
-import inspect
+
 
 class PoolManager(object):
 
     def __init__(self, client):
 
         self._ops = PoolOperations(client)
-        self._classes = inspect.getmembers(sys.modules[__name__])
+        self._classes = {k:v for k,v in pool_models.__dict__.items() if isinstance(v, type)}
 
         self.access_condition = None
         self.max_results = None
@@ -38,7 +40,6 @@ class PoolManager(object):
         return PoolRequest(self)
 
     def add(self, pool):
-        rest_params = locals()
 
         # Validate
         if pool:
@@ -120,7 +121,7 @@ class PoolManager(object):
                         if not i.file_path:
                             raise ValueError('pool.start_task.resource_files.file_path cannot be None.')
         
-        content = Serialized(rest_params.pop('pool'))
+        content = Serialized(pool)
 
         try:
             response = self._ops.add(content)
@@ -144,14 +145,13 @@ class PoolManager(object):
         return polling
 
     def delete(self, pool_name=None):
-        rest_params = locals()
 
         # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
         try:
-            response = self._ops.delete(access_condition=self.access_condition, **rest_params)
+            response = self._ops.delete(pool_name=pool_name, access_condition=self.access_condition)
 
             deserialize = Deserialized(BatchPoolDeleteResponse, response)
             deserialized = deserialize()
@@ -165,13 +165,12 @@ class PoolManager(object):
         return deserialized
 
     def disable_auto_scale(self, pool_name=None):
-        rest_params = locals()
 
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
         try:
-            response = self._ops.disable_auto_scale(access_condition=self.access_condition, **rest_params)
+            response = self._ops.disable_auto_scale(pool_name=pool_name, access_condition=self.access_condition)
 
             deserialize = Deserialized(BatchPoolDisableAutoScaleResponse, response)
             dersialized = deserialize()
@@ -185,7 +184,6 @@ class PoolManager(object):
         return dersialized
 
     def enable_auto_scale(self, parameters, pool_name=None):
-        rest_params = locals()
 
         # Validate
         if not pool_name:
@@ -197,10 +195,10 @@ class PoolManager(object):
         if not parameters.auto_scale_formula:
             raise ValueError('parameters.auto_scale_formula cannot be None.')
 
-        content = Serialized(rest_params.pop('parameters'))
+        content = Serialized(parameters)
 
         try:
-            response = self._ops.enable_auto_scale(content, access_condition=self.access_condition, **rest_params)
+            response = self._ops.enable_auto_scale(content, pool_name=pool_name, access_condition=self.access_condition)
 
             deserialize = Deserialized(BatchPoolEnableAutoScaleResponse, response)
             dersialized = deserialize()
@@ -214,7 +212,6 @@ class PoolManager(object):
         return dersialized
 
     def evaluate_auto_scale(self, parameters, pool_name=None):
-        rest_params = locals()
 
         # Validate
         if (pool_name is None):
@@ -226,10 +223,10 @@ class PoolManager(object):
         if (parameters.auto_scale_formula is None):
             raise ValueError('parameters.auto_scale_formula cannot be None.')
 
-        content = Serialized(rest_params.pop('parameters'))
+        content = Serialized(parameters)
 
         try:
-            response = self._ops.evaluate_auto_scale(content, **rest_params)
+            response = self._ops.evaluate_auto_scale(content, pool_name=pool_name)
 
             deserialize = Deserialized(BatchPoolEvaluateAutoScaleResponse, response)
             dersialized = deserialize()
@@ -243,14 +240,13 @@ class PoolManager(object):
         return dersialized
 
     def get(self, pool_name=None):
-        rest_params = locals()
 
         # Validate
         if (pool_name is None):
             raise ValueError('pool_name cannot be None.')
 
         try:
-            response = self._ops.get(detail_level=self.filter, access_condition=self.access_condition, **rest_params)
+            response = self._ops.get(pool_name=pool_name, detail_level=self.filter, access_condition=self.access_condition)
 
             deserialize = Deserialized(BatchPoolGetResponse, response)
             dersialized = deserialize(response.content, self._classes)
@@ -264,10 +260,9 @@ class PoolManager(object):
         return dersialized
 
     def list(self):
-        rest_params = locals()
 
         try:
-            response = self._ops.list(max_results=self.max_results, detail_level=self.filter, **rest_params)
+            response = self._ops.list(max_results=self.max_results, detail_level=self.filter)
 
             deserialize = Deserialized(BatchPoolListResponse, response)
             dersialized = deserialize(response.content, self._classes)
@@ -289,7 +284,6 @@ class PoolManager(object):
         return pager
 
     def patch(self, parameters, pool_name=None):
-        rest_params = locals()
 
         # Validate
         if not pool_name:
@@ -344,10 +338,10 @@ class PoolManager(object):
                     if not i.file_path:
                         raise ValueError('parameters.start_task.resource_files.file_path cannot be None.')
 
-        content = Serialized(rest_params.pop('parameters'))
+        content = Serialized(parameters)
 
         try:
-            response = self._ops.patch(content, access_condition=self.access_condition, **rest_params)
+            response = self._ops.patch(content, pool_name=pool_name, access_condition=self.access_condition)
 
             deserialize = Deserialized(BatchPoolPatchResponse, response)
             dersialized = deserialize()
@@ -361,7 +355,6 @@ class PoolManager(object):
         return dersialized
 
     def resize(self, parameters, pool_name=None):
-        rest_params = locals()
 
         # Validate
         if not pool_name:
@@ -370,10 +363,10 @@ class PoolManager(object):
         if not parameters:
             raise ValueError('parameters cannot be None.')
 
-        content = Serialized(rest_params.pop('parameters'))
+        content = Serialized(parameters)
 
         try:
-            response = self._ops.resize(content, access_condition=self.access_condition, **rest_params)
+            response = self._ops.resize(content, pool_name=pool_name, access_condition=self.access_condition)
 
             deserialize = Deserialized(BatchPoolResizeResponse, response)
             dersialized = deserialize()
@@ -387,14 +380,13 @@ class PoolManager(object):
         return dersialized
 
     def stop_resize(self, pool_name=None):
-        rest_params = locals()
 
         # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
         try:
-            response = self._ops.stop_resize(access_condition=self.access_condition, **rest_params)
+            response = self._ops.stop_resize(pool_name=pool_name, access_condition=self.access_condition)
 
             deserialize = Deserialized(BatchPoolStopResizeResponse, response)
             dersialized = deserialize()
@@ -408,7 +400,6 @@ class PoolManager(object):
         return dersialized
 
     def update_properties(self, properties, pool_name=None):
-        rest_params = locals()
 
         # Validate
         if not pool_name:
@@ -462,10 +453,10 @@ class PoolManager(object):
                     if not i.file_path:
                         raise ValueError('parameters.start_task.resource_files.file_path cannot be None.')
                     
-        content = Serialized(rest_params.pop('properties'))
+        content = Serialized(properties)
 
         try:
-            response = self._ops.update_properties(content, access_condition=self.access_condition, **rest_params)
+            response = self._ops.update_properties(content, pool_name=pool_name, access_condition=self.access_condition)
 
             deserialize = Deserialized(BatchPoolUpdatePropertiesResponse, response)
             dersialized = deserialize()
@@ -479,7 +470,6 @@ class PoolManager(object):
         return dersialized
 
     def upgrade_os(self, parameters, pool_name=None):
-        rest_params = locals()
 
         # Validate
         if not pool_name:
@@ -491,10 +481,10 @@ class PoolManager(object):
         if not parameters.target_os_version:
             raise ValueError('parameters.target_os_version cannot be None.')
 
-        content = Serialized(rest_params.pop('parameters'))
+        content = Serialized(parameters)
 
         try:
-            response = self._ops.upgrade_os(content, access_condition=self.access_condition, **rest_params)
+            response = self._ops.upgrade_os(content, pool_name=pool_name, access_condition=self.access_condition)
 
             deserialize = Deserialized(BatchPoolUpgradeOSResponse, response)
             dersialized = deserialize()
