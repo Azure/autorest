@@ -1,14 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.Properties;
 using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.Utilities;
+using System;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -55,9 +56,34 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            PopulateAdditionalProperties(serviceClient);
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
+        }
+
+        private void PopulateAdditionalProperties(ServiceClient serviceClient)
+        {
+            if (Settings.AddCredentials)
+            {
+                if (serviceClient.Properties.FirstOrDefault(
+                    p => p.Name.Equals("Credentials", StringComparison.OrdinalIgnoreCase) &&
+                         p.SerializedName.Equals("credentials", StringComparison.OrdinalIgnoreCase)) == null)
+                {
+                    serviceClient.Properties.Add(new Property
+                    {
+                        Name = "credentials",
+                        SerializedName = "credentials",
+                        Type = new CompositeType
+                        {
+                            Name = "ServiceClientCredentials"
+                        },
+                        IsRequired = true,
+                        Documentation = "Subscription credentials which uniquely identify client subscription."
+                    });
+                }
+                
+            }
         }
 
         /// <summary>
