@@ -61,9 +61,9 @@ class Polled(object):
         kwargs = {}
         url = self._extract_url(response)
 
-        setattr(Poller, "command", staticmethod(command))
+        setattr(Polled, "command", staticmethod(command))
 
-        for attr,value in Poller._extract_attributes(response).items():
+        for attr, value in self._extract_attributes(response).items():
             attr_name = '_' + attr
             attr_val = Value('c_char_p', False)
             attr_val.value = pickle.dumps(value)
@@ -74,11 +74,11 @@ class Polled(object):
                 with s._lock:
                     return pickle.loads(getattr(s, attr_name).value)
 
-            setattr(Poller, attr, property(get_attr))
+            setattr(Polled, attr, property(get_attr))
             kwargs[attr] = attr_val
             
 
-        self.p = Process(target=Poller.poll, args=(self._lock, url, kwargs))
+        self.p = Process(target=Polled.poll, args=(self._lock, url, kwargs))
         self.p.start()
 
     def _extract_attributes(self, response):
