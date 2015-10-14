@@ -1,7 +1,8 @@
 language: csharp
 mono:
   - alpha
-before_script:
+install:
+  - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | sh && source ~/.dnx/dnvm/dnvm.sh && dnvm upgrade
   - npm install -g npm@'>=1.4.3'
   - npm install
   - rvm use 2.2.1 --install --binary --fuzzy
@@ -11,6 +12,8 @@ before_script:
   - unzip gradle-2.6-bin.zip
   - PATH=$PATH:$(pwd)/gradle-2.6/bin
 script:
+  - dnvm install 1.0.0-beta7
+  - dnvm use 1.0.0-beta7 -persistent
   - gulp
 notifications:
   slack:
