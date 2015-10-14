@@ -276,5 +276,20 @@ namespace Microsoft.Rest.Generator.Java
                 return sb.ToString();
             }
         }
+
+        public string CallType
+        {
+            get
+            {
+                if (this.HttpMethod == HttpMethod.Head)
+                {
+                    return "Void";
+                }
+                else
+                {
+                    return "ResponseBody";
+                }
+            }
+        }
     }
 }

@@ -124,6 +124,18 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Product validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException {
+        if (this.getSubscriptionId() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (this.getApiVersion() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
+        }
         try {
             Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
             ServiceResponse<Product> response = validationOfMethodParametersDelegate(call.execute(), null);
@@ -184,6 +196,18 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Product validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException {
+        if (this.getSubscriptionId() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (this.getApiVersion() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
+        }
         try {
             Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
             ServiceResponse<Product> response = validationOfBodyDelegate(call.execute(), null);

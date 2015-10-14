@@ -77,6 +77,12 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        private void NormalizeHeadMethods(ServiceClient serviceClient)
+        {
+            serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
+                .ForEach(m => m.ReturnType = null);
+        }
+
         /// <summary>
         /// Generate Java client code for given ServiceClient.
         /// </summary>

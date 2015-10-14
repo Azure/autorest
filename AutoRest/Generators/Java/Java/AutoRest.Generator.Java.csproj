@@ -48,6 +48,9 @@
     <Compile Include="Templates\MethodGroupTemplate.cs">
       <DependentUpon>MethodGroupTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\MethodTemplate.cs">
+      <DependentUpon>MethodTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ModelTemplate.cs">
       <DependentUpon>ModelTemplate.cshtml</DependentUpon>
     </Compile>
@@ -60,6 +63,7 @@
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupInterfaceTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
+    <None Include="Templates\MethodTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
     <None Include="Templates\ServiceClientInterfaceTemplate.cshtml" />
     <None Include="Templates\ServiceClientTemplate.cshtml" />
