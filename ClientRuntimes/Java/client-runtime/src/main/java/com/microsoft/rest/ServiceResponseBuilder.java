@@ -10,11 +10,10 @@ package com.microsoft.rest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.rest.serializer.JacksonHelper;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.JacksonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-import java.io.InputStream;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -109,43 +108,26 @@ public class ServiceResponseBuilder<T> {
             throw new ServiceException("no response");
         }
 
-        ServiceResponse<T> result;
         try {
             int statusCode = response.code();
-            if (responseTypes.containsKey(statusCode) ||
-                    (response.isSuccess() && responseTypes.size() == 1 && responseTypes.containsKey(0))) {
-                // Pre-defined successful status code
-                ResponseBody responseBody = null;
-                if (response.isSuccess()) {
-                    responseBody = response.body();
-                } else {
-                    responseBody = response.errorBody();
-                }
-                T body = null;
-                TypeReference<?> type = responseTypes.get(statusCode);
-                if (type.getType() == new TypeReference<InputStream>(){}.getType() && responseBody != null) {
-                    body = (T) responseBody.byteStream();
-                }
-                else if (type.getType() != new TypeReference<Void>(){}.getType() && responseBody != null) {
-                    String responseContent = responseBody.string();
-                    body = JacksonHelper.deserialize(responseContent, type);
-                }
-                result = new ServiceResponse<T>(body, response);
-            } else if (response.isSuccess() && responseTypes.isEmpty()) {
-                // no pre-defined successful status code, use retrofit default
-                result = new ServiceResponse<T>(null, response);
+            ResponseBody responseBody;
+            if (response.isSuccess()) {
+                responseBody = response.body();
             } else {
-                // not in pre-defined successful status code list or
-                // standard HTTP error codes
-                ResponseBody errorBody = response.errorBody();
+                responseBody = response.errorBody();
+            }
+
+            if (responseTypes.containsKey(statusCode)) {
+                return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
+            } else if (response.isSuccess() &&
+                    (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
+                return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
+            } else {
                 ServiceException exception = new ServiceException();
                 exception.setResponse(response);
-                if (responseTypes.containsKey(0) && errorBody != null) {
-                    exception.setErrorModel(JacksonHelper.deserialize(errorBody.byteStream(), responseTypes.get(0)));
-                }
+                exception.setErrorModel(buildBody(statusCode, responseBody));
                 throw exception;
             }
-            return result;
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -154,4 +136,23 @@ public class ServiceResponseBuilder<T> {
             throw exception;
         }
     }
+
+    private T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
+        if (responseBody == null) {
+            return null;
+        }
+        String responseContent = responseBody.string();
+        if (responseContent.length() <= 0) {
+            return null;
+        }
+
+        if (responseTypes.containsKey(statusCode)) {
+            return JacksonHelper.deserialize(responseContent, responseTypes.get(statusCode));
+        } else if (responseTypes.containsKey(0)) {
+            return JacksonHelper.deserialize(responseContent, responseTypes.get(0));
+        } else {
+            return JacksonHelper.deserialize(responseContent, new TypeReference<T>() {});
+        }
+    }
+
 }
