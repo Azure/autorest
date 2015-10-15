@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// 'YELLOW', 'blacK'.
         /// </summary>
         [JsonProperty(PropertyName = "color")]
-        public CMYKColors? Color { get; set; }
+        public string Color { get; set; }
 
     }
 }

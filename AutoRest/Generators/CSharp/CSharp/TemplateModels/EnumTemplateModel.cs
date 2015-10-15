@@ -20,6 +20,10 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
+                if(this.IsExpandable)
+                {
+                    return this.SerializedName.TrimEnd('?');
+                }
                 return this.Name.TrimEnd('?');
             }
         }

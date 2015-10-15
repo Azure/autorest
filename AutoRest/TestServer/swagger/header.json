@@ -873,7 +873,7 @@
             "in": "header",
             "type": "string",
             "enum": [ "White", "black", "GREY" ],
-            "x-ms-enum":  "GreyscaleColors",
+            "x-ms-enum": { "name": "GreyscaleColors", "expandable": false},
             "required": false
           }
         ],
@@ -914,7 +914,7 @@
                 "description": "response with header values \"GREY\" or null",
                 "type": "string",
                 "enum": [ "White", "black", "GREY" ],
-                "x-ms-enum":  "GreyscaleColors"
+                "x-ms-enum": { "name": "GreyscaleColors", "expandable": false}
               }
             }
           },
@@ -937,7 +937,7 @@
         "responses": {
           "200": {
             "description": "Empty Response indicates that x-ms-client-request-id was successfuly received"
-            },
+          },
           "default": {
             "description": "Unexpected error",
             "schema": {

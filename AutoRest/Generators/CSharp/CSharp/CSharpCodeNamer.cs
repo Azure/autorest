@@ -126,7 +126,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             if (enumType.IsExpandable)
             {
-                enumType.SerializedName = "string";
+                // We will keep SerializedName to use for the constant wrapper class name 
                 enumType.Name = "string";
             }
             else
