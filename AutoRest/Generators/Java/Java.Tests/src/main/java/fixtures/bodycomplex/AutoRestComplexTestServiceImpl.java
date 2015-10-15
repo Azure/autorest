@@ -12,7 +12,7 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestComplexTestService class.
@@ -121,22 +121,22 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestComplexTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestComplexTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
     private void initialize() {
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.basicOperations = new BasicOperationsImpl(restAdapter, this);
-        this.primitive = new PrimitiveImpl(restAdapter, this);
-        this.array = new ArrayImpl(restAdapter, this);
-        this.dictionary = new DictionaryImpl(restAdapter, this);
-        this.inheritance = new InheritanceImpl(restAdapter, this);
-        this.polymorphism = new PolymorphismImpl(restAdapter, this);
-        this.polymorphicrecursive = new PolymorphicrecursiveImpl(restAdapter, this);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.basicOperations = new BasicOperationsImpl(retrofit, this);
+        this.primitive = new PrimitiveImpl(retrofit, this);
+        this.array = new ArrayImpl(retrofit, this);
+        this.dictionary = new DictionaryImpl(retrofit, this);
+        this.inheritance = new InheritanceImpl(retrofit, this);
+        this.polymorphism = new PolymorphismImpl(retrofit, this);
+        this.polymorphicrecursive = new PolymorphicrecursiveImpl(retrofit, this);
     }
 }

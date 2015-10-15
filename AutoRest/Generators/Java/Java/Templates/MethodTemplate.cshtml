@@ -1,0 +1,110 @@
+﻿@using System.Linq;
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.TemplateModels
+@using Microsoft.Rest.Generator.Utilities
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodTemplateModel>
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment()
+}
+ *
+@foreach (var param in Model.LocalParameters)
+{
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+}
+@if (Model.ReturnType != null)
+{
+@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object if successful.
+}
+ * @@throws ServiceException the exception wrapped in ServiceException if failed.
+ */
+public @Model.ReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws ServiceException {
+@foreach (var param in Model.RequiredNullableParameters)
+{
+@:    if (@param.Name == null) {
+@:        throw new ServiceException(
+@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
+@:    }
+}
+@foreach (var param in Model.ParametersToValidate)
+{
+@:    Validator.validate(@(param.Name));
+}
+    try {
+        Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
+        ServiceResponse<@Model.GenericReturnTypeString> response = @(Model.Name)Delegate(call.execute(), null);
+        @Model.ReturnStatement
+    } catch (ServiceException ex) {
+        throw ex;
+    } catch (Exception ex) {
+        throw new ServiceException(ex);
+    }
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment()
+}
+ *
+@foreach (var param in Model.LocalParameters)
+{
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+}
+ * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+ */
+public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+@foreach (var param in Model.RequiredNullableParameters)
+{
+@:    if (@param.Name == null) {
+@:        serviceCallback.failure(new ServiceException(
+@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+@:    }
+}
+@foreach (var param in Model.ParametersToValidate)
+{
+@:    Validator.validate(@(param.Name), serviceCallback);
+}
+    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
+    call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType).Name)>(serviceCallback) {
+        @@Override
+        public void onResponse(Response<@Model.CallType> response, Retrofit retrofit) {
+            try {
+                serviceCallback.success(@(Model.Name)Delegate(response, retrofit));
+            } catch (ServiceException exception) {
+                serviceCallback.failure(exception);
+            }
+        }
+    });
+    return call;
+}
+@EmptyLine
+private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws ServiceException {
+    return new ServiceResponseBuilder<@Model.GenericReturnTypeString>()
+@foreach (var response in Model.Responses)
+{
+            @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value).Name>(){}.getType())
+}
+@if (Model.DefaultResponse != null)
+{
+            @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse).Name)>(){}.getType())
+}
+@if (Model.CallType == "Void")
+{
+            @:.buildEmpty(response, retrofit);
+}
+else
+{
+            @:.build(response, retrofit);
+}
+}

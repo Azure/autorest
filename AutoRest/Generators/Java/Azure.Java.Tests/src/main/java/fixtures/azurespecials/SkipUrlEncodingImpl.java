@@ -10,23 +10,25 @@
 
 package fixtures.azurespecials;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.azurespecials.models.Error;
 
 public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     private SkipUrlEncodingService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public SkipUrlEncodingImpl(RestAdapter restAdapter, AutoRestAzureSpecialParametersTestClient client) {
-        this.service = restAdapter.create(SkipUrlEncodingService.class);
+    public SkipUrlEncodingImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+        this.service = retrofit.create(SkipUrlEncodingService.class);
         this.client = client;
     }
 
@@ -42,11 +44,13 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getMethodPathValidDelegate(service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getMethodPathValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getMethodPathValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -56,28 +60,30 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
         }
-        service.getMethodPathValidAsync(unencodedPathParam, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMethodPathValidDelegate(response, error));
+                    serviceCallback.success(getMethodPathValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getMethodPathValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getMethodPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -92,11 +98,13 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getPathPathValidDelegate(service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getPathPathValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getPathPathValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -106,28 +114,30 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
         }
-        service.getPathPathValidAsync(unencodedPathParam, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getPathPathValidDelegate(response, error));
+                    serviceCallback.success(getPathPathValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getPathPathValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getPathPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -142,11 +152,13 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getSwaggerPathValidDelegate(service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getSwaggerPathValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getSwaggerPathValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -156,28 +168,30 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSwaggerPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getSwaggerPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
         }
-        service.getSwaggerPathValidAsync(unencodedPathParam, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSwaggerPathValidDelegate(response, error));
+                    serviceCallback.success(getSwaggerPathValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getSwaggerPathValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -192,11 +206,13 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
                 new IllegalArgumentException("Parameter q1 is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getMethodQueryValidDelegate(service.getMethodQueryValid(q1, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getMethodQueryValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getMethodQueryValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -206,28 +222,30 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         if (q1 == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter q1 is required and cannot be null.")));
         }
-        service.getMethodQueryValidAsync(q1, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMethodQueryValidDelegate(response, error));
+                    serviceCallback.success(getMethodQueryValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getMethodQueryValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getMethodQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -238,11 +256,13 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      */
     public void getMethodQueryNull(String q1) throws ServiceException {
         try {
-            ServiceResponse<Void> response = getMethodQueryNullDelegate(service.getMethodQueryNull(q1, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getMethodQueryNullDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getMethodQueryNullDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -252,24 +272,26 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param q1 Unencoded query parameter with value null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        service.getMethodQueryNullAsync(q1, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMethodQueryNullDelegate(response, error));
+                    serviceCallback.success(getMethodQueryNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getMethodQueryNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getMethodQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -284,11 +306,13 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
                 new IllegalArgumentException("Parameter q1 is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getPathQueryValidDelegate(service.getPathQueryValid(q1, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getPathQueryValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getPathQueryValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -298,28 +322,30 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         if (q1 == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter q1 is required and cannot be null.")));
         }
-        service.getPathQueryValidAsync(q1, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getPathQueryValidDelegate(response, error));
+                    serviceCallback.success(getPathQueryValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getPathQueryValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getPathQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -330,11 +356,13 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      */
     public void getSwaggerQueryValid(String q1) throws ServiceException {
         try {
-            ServiceResponse<Void> response = getSwaggerQueryValidDelegate(service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getSwaggerQueryValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getSwaggerQueryValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -344,24 +372,26 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSwaggerQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        service.getSwaggerQueryValidAsync(q1, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getSwaggerQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSwaggerQueryValidDelegate(response, error));
+                    serviceCallback.success(getSwaggerQueryValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

@@ -31,7 +31,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -48,7 +48,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Boolean> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -65,7 +65,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -82,7 +82,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -99,7 +99,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -116,7 +116,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -133,7 +133,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(201, response.getResponse().getStatus());
+                Assert.assertEquals(201, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -150,7 +150,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(201, response.getResponse().getStatus());
+                Assert.assertEquals(201, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -167,7 +167,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(202, response.getResponse().getStatus());
+                Assert.assertEquals(202, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -184,7 +184,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(202, response.getResponse().getStatus());
+                Assert.assertEquals(202, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -201,7 +201,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(202, response.getResponse().getStatus());
+                Assert.assertEquals(202, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -218,7 +218,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(202, response.getResponse().getStatus());
+                Assert.assertEquals(202, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -235,7 +235,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(204, response.getResponse().getStatus());
+                Assert.assertEquals(204, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -252,7 +252,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(204, response.getResponse().getStatus());
+                Assert.assertEquals(204, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -269,7 +269,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(204, response.getResponse().getStatus());
+                Assert.assertEquals(204, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -286,7 +286,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(204, response.getResponse().getStatus());
+                Assert.assertEquals(204, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -303,7 +303,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(204, response.getResponse().getStatus());
+                Assert.assertEquals(204, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -320,7 +320,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(404, response.getResponse().getStatus());
+                Assert.assertEquals(404, response.getResponse().code());
                 lock.countDown();
             }
         });

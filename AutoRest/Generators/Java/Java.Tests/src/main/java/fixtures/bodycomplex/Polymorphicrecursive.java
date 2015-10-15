@@ -12,8 +12,8 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Fish;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -30,16 +30,10 @@ public interface Polymorphicrecursive {
      */
     interface PolymorphicrecursiveService {
         @GET("/complex/polymorphicrecursive/valid")
-        Response getValid() throws ServiceException;
-
-        @GET("/complex/polymorphicrecursive/valid")
-        void getValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getValid();
 
         @PUT("/complex/polymorphicrecursive/valid")
-        Response putValid(@Body Fish complexBody) throws ServiceException;
-
-        @PUT("/complex/polymorphicrecursive/valid")
-        void putValidAsync(@Body Fish complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putValid(@Body Fish complexBody);
 
     }
     /**
@@ -54,8 +48,9 @@ public interface Polymorphicrecursive {
      * Get complex types that are polymorphic and have recursive references
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getValidAsync(final ServiceCallback<Fish> serviceCallback);
+    Call<ResponseBody> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
      * Put complex types that are polymorphic and have recursive references
@@ -174,7 +169,8 @@ public interface Polymorphicrecursive {
      ]
  }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
 }

@@ -12,8 +12,8 @@ package fixtures.requiredoptional;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.requiredoptional.models.Error;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -33,46 +33,25 @@ public interface Implicit {
      */
     interface ImplicitService {
         @GET("/reqopt/implicit/required/path/{pathParameter}")
-        Response getRequiredPath(@Path("pathParameter") String pathParameter) throws ServiceException;
-
-        @GET("/reqopt/implicit/required/path/{pathParameter}")
-        void getRequiredPathAsync(@Path("pathParameter") String pathParameter, ServiceResponseCallback cb);
+        Call<ResponseBody> getRequiredPath(@Path("pathParameter") String pathParameter);
 
         @PUT("/reqopt/implicit/optional/query")
-        Response putOptionalQuery(@Query("queryParameter") String queryParameter) throws ServiceException;
-
-        @PUT("/reqopt/implicit/optional/query")
-        void putOptionalQueryAsync(@Query("queryParameter") String queryParameter, ServiceResponseCallback cb);
+        Call<ResponseBody> putOptionalQuery(@Query("queryParameter") String queryParameter);
 
         @PUT("/reqopt/implicit/optional/header")
-        Response putOptionalHeader(@Header("queryParameter") String queryParameter) throws ServiceException;
-
-        @PUT("/reqopt/implicit/optional/header")
-        void putOptionalHeaderAsync(@Header("queryParameter") String queryParameter, ServiceResponseCallback cb);
+        Call<ResponseBody> putOptionalHeader(@Header("queryParameter") String queryParameter);
 
         @PUT("/reqopt/implicit/optional/body")
-        Response putOptionalBody(@Body String bodyParameter) throws ServiceException;
-
-        @PUT("/reqopt/implicit/optional/body")
-        void putOptionalBodyAsync(@Body String bodyParameter, ServiceResponseCallback cb);
+        Call<ResponseBody> putOptionalBody(@Body String bodyParameter);
 
         @GET("/reqopt/global/required/path/{required-global-path}")
-        Response getRequiredGlobalPath(@Path("required-global-path") String requiredGlobalPath) throws ServiceException;
-
-        @GET("/reqopt/global/required/path/{required-global-path}")
-        void getRequiredGlobalPathAsync(@Path("required-global-path") String requiredGlobalPath, ServiceResponseCallback cb);
+        Call<ResponseBody> getRequiredGlobalPath(@Path("required-global-path") String requiredGlobalPath);
 
         @GET("/reqopt/global/required/query")
-        Response getRequiredGlobalQuery(@Query("required-global-query") String requiredGlobalQuery) throws ServiceException;
-
-        @GET("/reqopt/global/required/query")
-        void getRequiredGlobalQueryAsync(@Query("required-global-query") String requiredGlobalQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getRequiredGlobalQuery(@Query("required-global-query") String requiredGlobalQuery);
 
         @GET("/reqopt/global/optional/query")
-        Response getOptionalGlobalQuery(@Query("optional-global-query") Integer optionalGlobalQuery) throws ServiceException;
-
-        @GET("/reqopt/global/optional/query")
-        void getOptionalGlobalQueryAsync(@Query("optional-global-query") Integer optionalGlobalQuery, ServiceResponseCallback cb);
+        Call<ResponseBody> getOptionalGlobalQuery(@Query("optional-global-query") Integer optionalGlobalQuery);
 
     }
     /**
@@ -89,8 +68,9 @@ public interface Implicit {
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback);
+    Call<ResponseBody> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly optional query parameter
@@ -105,8 +85,9 @@ public interface Implicit {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional header parameter
@@ -121,8 +102,9 @@ public interface Implicit {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional body parameter
@@ -137,8 +119,9 @@ public interface Implicit {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly required path parameter
@@ -152,8 +135,9 @@ public interface Implicit {
      * Test implicitly required path parameter
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback);
+    Call<ResponseBody> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required query parameter
@@ -167,8 +151,9 @@ public interface Implicit {
      * Test implicitly required query parameter
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
+    Call<ResponseBody> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly optional query parameter
@@ -182,7 +167,8 @@ public interface Implicit {
      * Test implicitly optional query parameter
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
+    Call<ResponseBody> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 
 }

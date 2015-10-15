@@ -10,23 +10,25 @@
 
 package fixtures.bodynumber;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.bodynumber.models.Error;
 
 public class NumberImpl implements Number {
     private NumberService service;
     AutoRestNumberTestService client;
 
-    public NumberImpl(RestAdapter restAdapter, AutoRestNumberTestService client) {
-        this.service = restAdapter.create(NumberService.class);
+    public NumberImpl(Retrofit retrofit, AutoRestNumberTestService client) {
+        this.service = retrofit.create(NumberService.class);
         this.client = client;
     }
 
@@ -38,11 +40,13 @@ public class NumberImpl implements Number {
      */
     public Double getNull() throws ServiceException {
         try {
-            ServiceResponse<Double> response = getNullDelegate(service.getNull(), null);
+            Call<ResponseBody> call = service.getNull();
+            ServiceResponse<Double> response = getNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Double> response = getNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -51,24 +55,26 @@ public class NumberImpl implements Number {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNullAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNullAsync(final ServiceCallback<Double> serviceCallback) {
+        Call<ResponseBody> call = service.getNull();
+        call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, error));
+                    serviceCallback.success(getNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Double> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Double> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
                 .register(200, new TypeToken<Double>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -79,11 +85,13 @@ public class NumberImpl implements Number {
      */
     public Double getInvalidFloat() throws ServiceException {
         try {
-            ServiceResponse<Double> response = getInvalidFloatDelegate(service.getInvalidFloat(), null);
+            Call<ResponseBody> call = service.getInvalidFloat();
+            ServiceResponse<Double> response = getInvalidFloatDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Double> response = getInvalidFloatDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -92,24 +100,26 @@ public class NumberImpl implements Number {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getInvalidFloatAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) {
+        Call<ResponseBody> call = service.getInvalidFloat();
+        call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getInvalidFloatDelegate(response, error));
+                    serviceCallback.success(getInvalidFloatDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Double> getInvalidFloatDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Double> getInvalidFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
                 .register(200, new TypeToken<Double>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -120,11 +130,13 @@ public class NumberImpl implements Number {
      */
     public Double getInvalidDouble() throws ServiceException {
         try {
-            ServiceResponse<Double> response = getInvalidDoubleDelegate(service.getInvalidDouble(), null);
+            Call<ResponseBody> call = service.getInvalidDouble();
+            ServiceResponse<Double> response = getInvalidDoubleDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Double> response = getInvalidDoubleDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -133,24 +145,26 @@ public class NumberImpl implements Number {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getInvalidDoubleAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) {
+        Call<ResponseBody> call = service.getInvalidDouble();
+        call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getInvalidDoubleDelegate(response, error));
+                    serviceCallback.success(getInvalidDoubleDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Double> getInvalidDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Double> getInvalidDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
                 .register(200, new TypeToken<Double>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -161,11 +175,13 @@ public class NumberImpl implements Number {
      */
     public void putBigFloat(double numberBody) throws ServiceException {
         try {
-            ServiceResponse<Void> response = putBigFloatDelegate(service.putBigFloat(numberBody), null);
+            Call<ResponseBody> call = service.putBigFloat(numberBody);
+            ServiceResponse<Void> response = putBigFloatDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putBigFloatDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -175,24 +191,26 @@ public class NumberImpl implements Number {
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBigFloatAsync(numberBody, new ServiceResponseCallback() {
+    public Call<ResponseBody> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.putBigFloat(numberBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putBigFloatDelegate(response, error));
+                    serviceCallback.success(putBigFloatDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putBigFloatDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putBigFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -203,11 +221,13 @@ public class NumberImpl implements Number {
      */
     public Double getBigFloat() throws ServiceException {
         try {
-            ServiceResponse<Double> response = getBigFloatDelegate(service.getBigFloat(), null);
+            Call<ResponseBody> call = service.getBigFloat();
+            ServiceResponse<Double> response = getBigFloatDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Double> response = getBigFloatDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -216,24 +236,26 @@ public class NumberImpl implements Number {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBigFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getBigFloatAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getBigFloatAsync(final ServiceCallback<Double> serviceCallback) {
+        Call<ResponseBody> call = service.getBigFloat();
+        call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getBigFloatDelegate(response, error));
+                    serviceCallback.success(getBigFloatDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Double> getBigFloatDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Double> getBigFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
                 .register(200, new TypeToken<Double>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -244,11 +266,13 @@ public class NumberImpl implements Number {
      */
     public void putBigDouble(double numberBody) throws ServiceException {
         try {
-            ServiceResponse<Void> response = putBigDoubleDelegate(service.putBigDouble(numberBody), null);
+            Call<ResponseBody> call = service.putBigDouble(numberBody);
+            ServiceResponse<Void> response = putBigDoubleDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putBigDoubleDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -258,24 +282,26 @@ public class NumberImpl implements Number {
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBigDoubleAsync(numberBody, new ServiceResponseCallback() {
+    public Call<ResponseBody> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.putBigDouble(numberBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putBigDoubleDelegate(response, error));
+                    serviceCallback.success(putBigDoubleDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putBigDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putBigDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -286,11 +312,13 @@ public class NumberImpl implements Number {
      */
     public Double getBigDouble() throws ServiceException {
         try {
-            ServiceResponse<Double> response = getBigDoubleDelegate(service.getBigDouble(), null);
+            Call<ResponseBody> call = service.getBigDouble();
+            ServiceResponse<Double> response = getBigDoubleDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Double> response = getBigDoubleDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -299,24 +327,26 @@ public class NumberImpl implements Number {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getBigDoubleAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) {
+        Call<ResponseBody> call = service.getBigDouble();
+        call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getBigDoubleDelegate(response, error));
+                    serviceCallback.success(getBigDoubleDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Double> getBigDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Double> getBigDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
                 .register(200, new TypeToken<Double>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -327,11 +357,13 @@ public class NumberImpl implements Number {
      */
     public void putBigDoublePositiveDecimal(double numberBody) throws ServiceException {
         try {
-            ServiceResponse<Void> response = putBigDoublePositiveDecimalDelegate(service.putBigDoublePositiveDecimal(numberBody), null);
+            Call<ResponseBody> call = service.putBigDoublePositiveDecimal(numberBody);
+            ServiceResponse<Void> response = putBigDoublePositiveDecimalDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putBigDoublePositiveDecimalDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -341,24 +373,26 @@ public class NumberImpl implements Number {
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBigDoublePositiveDecimalAsync(numberBody, new ServiceResponseCallback() {
+    public Call<ResponseBody> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.putBigDoublePositiveDecimal(numberBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putBigDoublePositiveDecimalDelegate(response, error));
+                    serviceCallback.success(putBigDoublePositiveDecimalDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putBigDoublePositiveDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putBigDoublePositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -369,11 +403,13 @@ public class NumberImpl implements Number {
      */
     public Double getBigDoublePositiveDecimal() throws ServiceException {
         try {
-            ServiceResponse<Double> response = getBigDoublePositiveDecimalDelegate(service.getBigDoublePositiveDecimal(), null);
+            Call<ResponseBody> call = service.getBigDoublePositiveDecimal();
+            ServiceResponse<Double> response = getBigDoublePositiveDecimalDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Double> response = getBigDoublePositiveDecimalDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -382,24 +418,26 @@ public class NumberImpl implements Number {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getBigDoublePositiveDecimalAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) {
+        Call<ResponseBody> call = service.getBigDoublePositiveDecimal();
+        call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getBigDoublePositiveDecimalDelegate(response, error));
+                    serviceCallback.success(getBigDoublePositiveDecimalDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Double> getBigDoublePositiveDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Double> getBigDoublePositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
                 .register(200, new TypeToken<Double>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -410,11 +448,13 @@ public class NumberImpl implements Number {
      */
     public void putBigDoubleNegativeDecimal(double numberBody) throws ServiceException {
         try {
-            ServiceResponse<Void> response = putBigDoubleNegativeDecimalDelegate(service.putBigDoubleNegativeDecimal(numberBody), null);
+            Call<ResponseBody> call = service.putBigDoubleNegativeDecimal(numberBody);
+            ServiceResponse<Void> response = putBigDoubleNegativeDecimalDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putBigDoubleNegativeDecimalDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -424,24 +464,26 @@ public class NumberImpl implements Number {
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putBigDoubleNegativeDecimalAsync(numberBody, new ServiceResponseCallback() {
+    public Call<ResponseBody> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.putBigDoubleNegativeDecimal(numberBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putBigDoubleNegativeDecimalDelegate(response, error));
+                    serviceCallback.success(putBigDoubleNegativeDecimalDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putBigDoubleNegativeDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -452,11 +494,13 @@ public class NumberImpl implements Number {
      */
     public Double getBigDoubleNegativeDecimal() throws ServiceException {
         try {
-            ServiceResponse<Double> response = getBigDoubleNegativeDecimalDelegate(service.getBigDoubleNegativeDecimal(), null);
+            Call<ResponseBody> call = service.getBigDoubleNegativeDecimal();
+            ServiceResponse<Double> response = getBigDoubleNegativeDecimalDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Double> response = getBigDoubleNegativeDecimalDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -465,24 +509,26 @@ public class NumberImpl implements Number {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getBigDoubleNegativeDecimalAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) {
+        Call<ResponseBody> call = service.getBigDoubleNegativeDecimal();
+        call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getBigDoubleNegativeDecimalDelegate(response, error));
+                    serviceCallback.success(getBigDoubleNegativeDecimalDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Double> getBigDoubleNegativeDecimalDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Double> getBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
                 .register(200, new TypeToken<Double>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -493,11 +539,13 @@ public class NumberImpl implements Number {
      */
     public void putSmallFloat(double numberBody) throws ServiceException {
         try {
-            ServiceResponse<Void> response = putSmallFloatDelegate(service.putSmallFloat(numberBody), null);
+            Call<ResponseBody> call = service.putSmallFloat(numberBody);
+            ServiceResponse<Void> response = putSmallFloatDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putSmallFloatDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -507,24 +555,26 @@ public class NumberImpl implements Number {
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putSmallFloatAsync(numberBody, new ServiceResponseCallback() {
+    public Call<ResponseBody> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.putSmallFloat(numberBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putSmallFloatDelegate(response, error));
+                    serviceCallback.success(putSmallFloatDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putSmallFloatDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putSmallFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -535,11 +585,13 @@ public class NumberImpl implements Number {
      */
     public Double getSmallFloat() throws ServiceException {
         try {
-            ServiceResponse<Double> response = getSmallFloatDelegate(service.getSmallFloat(), null);
+            Call<ResponseBody> call = service.getSmallFloat();
+            ServiceResponse<Double> response = getSmallFloatDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Double> response = getSmallFloatDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -548,24 +600,26 @@ public class NumberImpl implements Number {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getSmallFloatAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) {
+        Call<ResponseBody> call = service.getSmallFloat();
+        call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSmallFloatDelegate(response, error));
+                    serviceCallback.success(getSmallFloatDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Double> getSmallFloatDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Double> getSmallFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
                 .register(200, new TypeToken<Double>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -576,11 +630,13 @@ public class NumberImpl implements Number {
      */
     public void putSmallDouble(double numberBody) throws ServiceException {
         try {
-            ServiceResponse<Void> response = putSmallDoubleDelegate(service.putSmallDouble(numberBody), null);
+            Call<ResponseBody> call = service.putSmallDouble(numberBody);
+            ServiceResponse<Void> response = putSmallDoubleDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putSmallDoubleDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -590,24 +646,26 @@ public class NumberImpl implements Number {
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        service.putSmallDoubleAsync(numberBody, new ServiceResponseCallback() {
+    public Call<ResponseBody> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.putSmallDouble(numberBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putSmallDoubleDelegate(response, error));
+                    serviceCallback.success(putSmallDoubleDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putSmallDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putSmallDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -618,11 +676,13 @@ public class NumberImpl implements Number {
      */
     public Double getSmallDouble() throws ServiceException {
         try {
-            ServiceResponse<Double> response = getSmallDoubleDelegate(service.getSmallDouble(), null);
+            Call<ResponseBody> call = service.getSmallDouble();
+            ServiceResponse<Double> response = getSmallDoubleDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Double> response = getSmallDoubleDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -631,24 +691,26 @@ public class NumberImpl implements Number {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        service.getSmallDoubleAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) {
+        Call<ResponseBody> call = service.getSmallDouble();
+        call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSmallDoubleDelegate(response, error));
+                    serviceCallback.success(getSmallDoubleDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Double> getSmallDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Double> getSmallDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Double>()
                 .register(200, new TypeToken<Double>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

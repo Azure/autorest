@@ -14,7 +14,8 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
 import java.util.Map;
 import retrofit.http.GET;
 import retrofit.http.Header;
@@ -70,12 +71,10 @@ public interface AutoRestReportServiceForAzure {
      */
     interface AutoRestReportServiceForAzureService {
         @GET("/report/azure")
-        Response getReport(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/report/azure")
-        void getReportAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getReport(@Header("accept-language") String acceptLanguage);
 
     }
+
     /**
      * Get test coverage report
      *
@@ -88,7 +87,8 @@ public interface AutoRestReportServiceForAzure {
      * Get test coverage report
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
 }

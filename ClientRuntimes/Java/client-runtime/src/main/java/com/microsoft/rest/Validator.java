@@ -12,7 +12,6 @@ import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import retrofit.RetrofitError;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -95,7 +94,7 @@ public class Validator {
     /**
      * Validates a user provided required parameter to be not null. Returns if
      * the parameter passes the validation. A {@link ServiceException} is passed
-     * to the {@link ServiceCallback#failure(RetrofitError)} if a property fails the validation.
+     * to the {@link ServiceCallback#failure(ServiceException)} if a property fails the validation.
      *
      * @param parameter the parameter to validate
      * @param serviceCallback the callback to call with the failure

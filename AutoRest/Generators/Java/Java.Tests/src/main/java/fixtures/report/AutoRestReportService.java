@@ -13,7 +13,8 @@ package fixtures.report;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
 import java.util.Map;
 import retrofit.http.GET;
 
@@ -33,12 +34,10 @@ public interface AutoRestReportService {
      */
     interface AutoRestReportServiceService {
         @GET("/report")
-        Response getReport() throws ServiceException;
-
-        @GET("/report")
-        void getReportAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getReport();
 
     }
+
     /**
      * Get test coverage report
      *
@@ -51,7 +50,8 @@ public interface AutoRestReportService {
      * Get test coverage report
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
 }

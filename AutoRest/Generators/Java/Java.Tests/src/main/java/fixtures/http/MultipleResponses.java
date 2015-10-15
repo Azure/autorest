@@ -12,8 +12,8 @@ package fixtures.http;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.A;
 import retrofit.http.GET;
 
@@ -28,208 +28,106 @@ public interface MultipleResponses {
      */
     interface MultipleResponsesService {
         @GET("/http/payloads/200/A/204/none/default/Error/response/200/valid")
-        Response get200Model204NoModelDefaultError200Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/204/none/default/Error/response/200/valid")
-        void get200Model204NoModelDefaultError200ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200Model204NoModelDefaultError200Valid();
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/204/none")
-        Response get200Model204NoModelDefaultError204Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/204/none/default/Error/response/204/none")
-        void get200Model204NoModelDefaultError204ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200Model204NoModelDefaultError204Valid();
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/201/valid")
-        Response get200Model204NoModelDefaultError201Invalid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/204/none/default/Error/response/201/valid")
-        void get200Model204NoModelDefaultError201InvalidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200Model204NoModelDefaultError201Invalid();
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/202/none")
-        Response get200Model204NoModelDefaultError202None() throws ServiceException;
-
-        @GET("/http/payloads/200/A/204/none/default/Error/response/202/none")
-        void get200Model204NoModelDefaultError202NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200Model204NoModelDefaultError202None();
 
         @GET("/http/payloads/200/A/204/none/default/Error/response/400/valid")
-        Response get200Model204NoModelDefaultError400Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/204/none/default/Error/response/400/valid")
-        void get200Model204NoModelDefaultError400ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200Model204NoModelDefaultError400Valid();
 
         @GET("/http/payloads/200/A/201/B/default/Error/response/200/valid")
-        Response get200Model201ModelDefaultError200Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/201/B/default/Error/response/200/valid")
-        void get200Model201ModelDefaultError200ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200Model201ModelDefaultError200Valid();
 
         @GET("/http/payloads/200/A/201/B/default/Error/response/201/valid")
-        Response get200Model201ModelDefaultError201Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/201/B/default/Error/response/201/valid")
-        void get200Model201ModelDefaultError201ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200Model201ModelDefaultError201Valid();
 
         @GET("/http/payloads/200/A/201/B/default/Error/response/400/valid")
-        Response get200Model201ModelDefaultError400Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/201/B/default/Error/response/400/valid")
-        void get200Model201ModelDefaultError400ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200Model201ModelDefaultError400Valid();
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
-        Response get200ModelA201ModelC404ModelDDefaultError200Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
-        void get200ModelA201ModelC404ModelDDefaultError200ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError200Valid();
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
-        Response get200ModelA201ModelC404ModelDDefaultError201Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
-        void get200ModelA201ModelC404ModelDDefaultError201ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError201Valid();
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
-        Response get200ModelA201ModelC404ModelDDefaultError404Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
-        void get200ModelA201ModelC404ModelDDefaultError404ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError404Valid();
 
         @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
-        Response get200ModelA201ModelC404ModelDDefaultError400Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
-        void get200ModelA201ModelC404ModelDDefaultError400ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError400Valid();
 
         @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
-        Response get202None204NoneDefaultError202None() throws ServiceException;
-
-        @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
-        void get202None204NoneDefaultError202NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get202None204NoneDefaultError202None();
 
         @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
-        Response get202None204NoneDefaultError204None() throws ServiceException;
-
-        @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
-        void get202None204NoneDefaultError204NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get202None204NoneDefaultError204None();
 
         @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
-        Response get202None204NoneDefaultError400Valid() throws ServiceException;
-
-        @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
-        void get202None204NoneDefaultError400ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get202None204NoneDefaultError400Valid();
 
         @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
-        Response get202None204NoneDefaultNone202Invalid() throws ServiceException;
-
-        @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
-        void get202None204NoneDefaultNone202InvalidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get202None204NoneDefaultNone202Invalid();
 
         @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
-        Response get202None204NoneDefaultNone204None() throws ServiceException;
-
-        @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
-        void get202None204NoneDefaultNone204NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get202None204NoneDefaultNone204None();
 
         @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
-        Response get202None204NoneDefaultNone400None() throws ServiceException;
-
-        @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
-        void get202None204NoneDefaultNone400NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get202None204NoneDefaultNone400None();
 
         @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
-        Response get202None204NoneDefaultNone400Invalid() throws ServiceException;
-
-        @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
-        void get202None204NoneDefaultNone400InvalidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get202None204NoneDefaultNone400Invalid();
 
         @GET("/http/payloads/default/A/response/200/valid")
-        Response getDefaultModelA200Valid() throws ServiceException;
-
-        @GET("/http/payloads/default/A/response/200/valid")
-        void getDefaultModelA200ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDefaultModelA200Valid();
 
         @GET("/http/payloads/default/A/response/200/none")
-        Response getDefaultModelA200None() throws ServiceException;
-
-        @GET("/http/payloads/default/A/response/200/none")
-        void getDefaultModelA200NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDefaultModelA200None();
 
         @GET("/http/payloads/default/A/response/400/valid")
-        Response getDefaultModelA400Valid() throws ServiceException;
-
-        @GET("/http/payloads/default/A/response/400/valid")
-        void getDefaultModelA400ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDefaultModelA400Valid();
 
         @GET("/http/payloads/default/A/response/400/none")
-        Response getDefaultModelA400None() throws ServiceException;
-
-        @GET("/http/payloads/default/A/response/400/none")
-        void getDefaultModelA400NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDefaultModelA400None();
 
         @GET("/http/payloads/default/none/response/200/invalid")
-        Response getDefaultNone200Invalid() throws ServiceException;
-
-        @GET("/http/payloads/default/none/response/200/invalid")
-        void getDefaultNone200InvalidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDefaultNone200Invalid();
 
         @GET("/http/payloads/default/none/response/200/none")
-        Response getDefaultNone200None() throws ServiceException;
-
-        @GET("/http/payloads/default/none/response/200/none")
-        void getDefaultNone200NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDefaultNone200None();
 
         @GET("/http/payloads/default/none/response/400/invalid")
-        Response getDefaultNone400Invalid() throws ServiceException;
-
-        @GET("/http/payloads/default/none/response/400/invalid")
-        void getDefaultNone400InvalidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDefaultNone400Invalid();
 
         @GET("/http/payloads/default/none/response/400/none")
-        Response getDefaultNone400None() throws ServiceException;
-
-        @GET("/http/payloads/default/none/response/400/none")
-        void getDefaultNone400NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDefaultNone400None();
 
         @GET("/http/payloads/200/A/response/200/none")
-        Response get200ModelA200None() throws ServiceException;
-
-        @GET("/http/payloads/200/A/response/200/none")
-        void get200ModelA200NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA200None();
 
         @GET("/http/payloads/200/A/response/200/valid")
-        Response get200ModelA200Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/response/200/valid")
-        void get200ModelA200ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA200Valid();
 
         @GET("/http/payloads/200/A/response/200/invalid")
-        Response get200ModelA200Invalid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/response/200/invalid")
-        void get200ModelA200InvalidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA200Invalid();
 
         @GET("/http/payloads/200/A/response/400/none")
-        Response get200ModelA400None() throws ServiceException;
-
-        @GET("/http/payloads/200/A/response/400/none")
-        void get200ModelA400NoneAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA400None();
 
         @GET("/http/payloads/200/A/response/400/valid")
-        Response get200ModelA400Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/response/400/valid")
-        void get200ModelA400ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA400Valid();
 
         @GET("/http/payloads/200/A/response/400/invalid")
-        Response get200ModelA400Invalid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/response/400/invalid")
-        void get200ModelA400InvalidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA400Invalid();
 
         @GET("/http/payloads/200/A/response/202/valid")
-        Response get200ModelA202Valid() throws ServiceException;
-
-        @GET("/http/payloads/200/A/response/202/valid")
-        void get200ModelA202ValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> get200ModelA202Valid();
 
     }
     /**
@@ -244,8 +142,9 @@ public interface MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 204 response with no payload
@@ -259,8 +158,9 @@ public interface MultipleResponses {
      * Send a 204 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}
@@ -274,8 +174,9 @@ public interface MultipleResponses {
      * Send a 201 response with valid payload: {'statusCode': '201'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 202 response with no payload:
@@ -289,8 +190,9 @@ public interface MultipleResponses {
      * Send a 202 response with no payload:
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
@@ -304,8 +206,9 @@ public interface MultipleResponses {
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
@@ -319,8 +222,9 @@ public interface MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
@@ -334,8 +238,9 @@ public interface MultipleResponses {
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
@@ -349,8 +254,9 @@ public interface MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
@@ -364,8 +270,9 @@ public interface MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback);
+    Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}
@@ -379,8 +286,9 @@ public interface MultipleResponses {
      * Send a 200 response with valid payload: {'httpCode': '201'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback);
+    Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}
@@ -394,8 +302,9 @@ public interface MultipleResponses {
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback);
+    Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
@@ -409,8 +318,9 @@ public interface MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback);
+    Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback);
 
     /**
      * Send a 202 response with no payload
@@ -423,8 +333,9 @@ public interface MultipleResponses {
      * Send a 202 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 204 response with no payload
@@ -437,8 +348,9 @@ public interface MultipleResponses {
      * Send a 204 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
@@ -451,8 +363,9 @@ public interface MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}
@@ -465,8 +378,9 @@ public interface MultipleResponses {
      * Send a 202 response with an unexpected payload {'property': 'value'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 204 response with no payload
@@ -479,8 +393,9 @@ public interface MultipleResponses {
      * Send a 204 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with no payload
@@ -493,8 +408,9 @@ public interface MultipleResponses {
      * Send a 400 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}
@@ -507,8 +423,9 @@ public interface MultipleResponses {
      * Send a 400 response with an unexpected payload {'property': 'value'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
@@ -522,8 +439,9 @@ public interface MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with no payload
@@ -537,8 +455,9 @@ public interface MultipleResponses {
      * Send a 200 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
@@ -552,8 +471,9 @@ public interface MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with no payload
@@ -567,8 +487,9 @@ public interface MultipleResponses {
      * Send a 400 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}
@@ -581,8 +502,9 @@ public interface MultipleResponses {
      * Send a 200 response with invalid payload: {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 200 response with no payload
@@ -595,8 +517,9 @@ public interface MultipleResponses {
      * Send a 200 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
@@ -609,8 +532,9 @@ public interface MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 400 response with no payload
@@ -623,8 +547,9 @@ public interface MultipleResponses {
      * Send a 400 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
@@ -638,8 +563,9 @@ public interface MultipleResponses {
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}
@@ -653,8 +579,9 @@ public interface MultipleResponses {
      * Send a 200 response with payload {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
@@ -668,8 +595,9 @@ public interface MultipleResponses {
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model
@@ -683,8 +611,9 @@ public interface MultipleResponses {
      * Send a 400 response with no payload client should treat as an http error with no error model
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}
@@ -698,8 +627,9 @@ public interface MultipleResponses {
      * Send a 200 response with payload {'statusCode': '400'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
@@ -713,8 +643,9 @@ public interface MultipleResponses {
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}
@@ -728,7 +659,8 @@ public interface MultipleResponses {
      * Send a 202 response with payload {'statusCode': '202'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback);
+    Call<ResponseBody> get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback);
 
 }

@@ -12,8 +12,8 @@ package fixtures.bodyduration;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import org.joda.time.Period;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -30,28 +30,16 @@ public interface Duration {
      */
     interface DurationService {
         @GET("/duration/null")
-        Response getNull() throws ServiceException;
-
-        @GET("/duration/null")
-        void getNullAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getNull();
 
         @PUT("/duration/positiveduration")
-        Response putPositiveDuration(@Body Period durationBody) throws ServiceException;
-
-        @PUT("/duration/positiveduration")
-        void putPositiveDurationAsync(@Body Period durationBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putPositiveDuration(@Body Period durationBody);
 
         @GET("/duration/positiveduration")
-        Response getPositiveDuration() throws ServiceException;
-
-        @GET("/duration/positiveduration")
-        void getPositiveDurationAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getPositiveDuration();
 
         @GET("/duration/invalid")
-        Response getInvalid() throws ServiceException;
-
-        @GET("/duration/invalid")
-        void getInvalidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getInvalid();
 
     }
     /**
@@ -66,8 +54,9 @@ public interface Duration {
      * Get null duration value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getNullAsync(final ServiceCallback<Period> serviceCallback);
+    Call<ResponseBody> getNullAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Put a positive duration value
@@ -82,8 +71,9 @@ public interface Duration {
      *
      * @param durationBody the Period value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a positive duration value
@@ -97,8 +87,9 @@ public interface Duration {
      * Get a positive duration value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
+    Call<ResponseBody> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Get an invalid duration value
@@ -112,7 +103,8 @@ public interface Duration {
      * Get an invalid duration value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getInvalidAsync(final ServiceCallback<Period> serviceCallback);
+    Call<ResponseBody> getInvalidAsync(final ServiceCallback<Period> serviceCallback);
 
 }
