@@ -14,6 +14,7 @@ import retrofit.Response;
 import retrofit.Retrofit;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -150,21 +151,36 @@ public class ServiceResponseBuilder<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
         if (responseBody == null) {
             return null;
         }
-        String responseContent = responseBody.string();
-        if (responseContent.length() <= 0) {
-            return null;
+
+        TypeReference<?> type = null;
+        if (responseTypes.containsKey(statusCode)) {
+            type = responseTypes.get(statusCode);
+        } else if (responseTypes.containsKey(0)) {
+            type = responseTypes.get(0);
+        } else {
+            type = new TypeReference<T>() {};
         }
 
-        if (responseTypes.containsKey(statusCode)) {
-            return JacksonHelper.deserialize(responseContent, responseTypes.get(statusCode));
-        } else if (responseTypes.containsKey(0)) {
-            return JacksonHelper.deserialize(responseContent, responseTypes.get(0));
-        } else {
-            return JacksonHelper.deserialize(responseContent, new TypeReference<T>() {});
+        // Void response
+        if (type.getType() == new TypeReference<Void>(){}.getType()) {
+            return null;
+        }
+        // Return raw response if InputStream is the target type
+        else if (type.getType() == new TypeReference<InputStream>(){}.getType()) {
+            return (T)responseBody.byteStream();
+        }
+        // Deserialize
+        else {
+            String responseContent = responseBody.string();
+            if (responseContent.length() <= 0) {
+                return null;
+            }
+            return JacksonHelper.deserialize(responseContent, type);
         }
     }
 
