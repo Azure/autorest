@@ -8,6 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonHelper;
 import com.squareup.okhttp.ResponseBody;
@@ -100,7 +101,7 @@ public abstract class AzureClient extends ServiceClient{
             error.setCode(pollingState.getStatus());
             error.setMessage("Long running operation failed");
             try {
-                pollingState.setResource(JacksonHelper.<T>deserialize(response.getResponse().raw().body().string()));
+                pollingState.setResource(JacksonHelper.<T>deserialize(response.getResponse().raw().body().string(), new TypeReference<T>() {}));
             } catch (Exception ex) {
                 throw new ServiceException("Cannot deserialize response", ex);
             }
@@ -128,7 +129,7 @@ public abstract class AzureClient extends ServiceClient{
 
         pollingState.setResponse(response.getResponse());
         try {
-            pollingState.setResource(JacksonHelper.<T>deserialize(response.getResponse().raw().body().string()));
+            pollingState.setResource(JacksonHelper.<T>deserialize(response.getResponse().raw().body().string(), new TypeReference<T>(){}));
         } catch (Exception ex) {
             throw new ServiceException("Cannot deserialize response", ex);
         }
@@ -158,7 +159,7 @@ public abstract class AzureClient extends ServiceClient{
         try {
             Response<ResponseBody> response = service.get(endpoint.getPath()).execute();
             return new AzureResponse<T>(
-                    JacksonHelper.<T>deserialize(response.raw().body().string()),
+                    JacksonHelper.<T>deserialize(response.raw().body().string(), new TypeReference<T>() {}),
                     response);
         } catch (Exception ex) {
             throw new ServiceException("Cannot deserialize response", ex);

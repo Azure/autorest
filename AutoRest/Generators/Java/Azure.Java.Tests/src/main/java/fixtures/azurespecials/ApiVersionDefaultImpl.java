@@ -10,23 +10,25 @@
 
 package fixtures.azurespecials;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.azurespecials.models.Error;
 
 public class ApiVersionDefaultImpl implements ApiVersionDefault {
     private ApiVersionDefaultService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public ApiVersionDefaultImpl(RestAdapter restAdapter, AutoRestAzureSpecialParametersTestClient client) {
-        this.service = restAdapter.create(ApiVersionDefaultService.class);
+    public ApiVersionDefaultImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+        this.service = retrofit.create(ApiVersionDefaultService.class);
         this.client = client;
     }
 
@@ -40,11 +42,13 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getMethodGlobalValidDelegate(service.getMethodGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMethodGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getMethodGlobalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getMethodGlobalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -52,28 +56,30 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getApiVersion() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.")));
         }
-        service.getMethodGlobalValidAsync(this.client.getApiVersion(), this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getMethodGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMethodGlobalValidDelegate(response, error));
+                    serviceCallback.success(getMethodGlobalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getMethodGlobalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getMethodGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -86,11 +92,13 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getMethodGlobalNotProvidedValidDelegate(service.getMethodGlobalNotProvidedValid(this.client.getApiVersion(), this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMethodGlobalNotProvidedValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getMethodGlobalNotProvidedValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getMethodGlobalNotProvidedValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -98,28 +106,30 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getApiVersion() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.")));
         }
-        service.getMethodGlobalNotProvidedValidAsync(this.client.getApiVersion(), this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getMethodGlobalNotProvidedValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMethodGlobalNotProvidedValidDelegate(response, error));
+                    serviceCallback.success(getMethodGlobalNotProvidedValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getMethodGlobalNotProvidedValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -132,11 +142,13 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getPathGlobalValidDelegate(service.getPathGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getPathGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getPathGlobalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getPathGlobalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -144,28 +156,30 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getApiVersion() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.")));
         }
-        service.getPathGlobalValidAsync(this.client.getApiVersion(), this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getPathGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getPathGlobalValidDelegate(response, error));
+                    serviceCallback.success(getPathGlobalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getPathGlobalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getPathGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -178,11 +192,13 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getSwaggerGlobalValidDelegate(service.getSwaggerGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getSwaggerGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getSwaggerGlobalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getSwaggerGlobalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -190,28 +206,30 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getApiVersion() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.")));
         }
-        service.getSwaggerGlobalValidAsync(this.client.getApiVersion(), this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getSwaggerGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSwaggerGlobalValidDelegate(response, error));
+                    serviceCallback.success(getSwaggerGlobalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getSwaggerGlobalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getSwaggerGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

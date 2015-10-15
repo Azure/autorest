@@ -12,15 +12,15 @@ package fixtures.lro;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 import retrofit.http.Header;
-import com.microsoft.rest.DELETE;
+import retrofit.http.HTTP;
 import retrofit.http.POST;
 
 /**
@@ -34,436 +34,220 @@ public interface LROs {
      */
     interface LROsService {
         @PUT("/lro/put/200/succeeded")
-        Response put200Succeeded(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> put200Succeeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/200/succeeded")
-        void put200SucceededAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/put/200/succeeded")
-        Response beginPut200Succeeded(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/put/200/succeeded")
-        void beginPut200SucceededAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPut200Succeeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/200/succeeded/nostate")
-        Response put200SucceededNoState(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> put200SucceededNoState(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/200/succeeded/nostate")
-        void put200SucceededNoStateAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/put/200/succeeded/nostate")
-        Response beginPut200SucceededNoState(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/put/200/succeeded/nostate")
-        void beginPut200SucceededNoStateAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPut200SucceededNoState(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/202/retry/200")
-        Response put202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> put202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/202/retry/200")
-        void put202Retry200Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/put/202/retry/200")
-        Response beginPut202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/put/202/retry/200")
-        void beginPut202Retry200Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPut202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/201/creating/succeeded/200")
-        Response put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/201/creating/succeeded/200")
-        void put201CreatingSucceeded200Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/put/201/creating/succeeded/200")
-        Response beginPut201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/put/201/creating/succeeded/200")
-        void beginPut201CreatingSucceeded200Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPut201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/200/updating/succeeded/200")
-        Response put200UpdatingSucceeded204(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> put200UpdatingSucceeded204(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/200/updating/succeeded/200")
-        void put200UpdatingSucceeded204Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/put/200/updating/succeeded/200")
-        Response beginPut200UpdatingSucceeded204(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/put/200/updating/succeeded/200")
-        void beginPut200UpdatingSucceeded204Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPut200UpdatingSucceeded204(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/201/created/failed/200")
-        Response put201CreatingFailed200(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> put201CreatingFailed200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/201/created/failed/200")
-        void put201CreatingFailed200Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/put/201/created/failed/200")
-        Response beginPut201CreatingFailed200(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/put/201/created/failed/200")
-        void beginPut201CreatingFailed200Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPut201CreatingFailed200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/200/accepted/canceled/200")
-        Response put200Acceptedcanceled200(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> put200Acceptedcanceled200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/200/accepted/canceled/200")
-        void put200Acceptedcanceled200Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/put/200/accepted/canceled/200")
-        Response beginPut200Acceptedcanceled200(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/put/200/accepted/canceled/200")
-        void beginPut200Acceptedcanceled200Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPut200Acceptedcanceled200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/noheader/202/200")
-        Response putNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/put/noheader/202/200")
-        void putNoHeaderInRetryAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/put/noheader/202/200")
-        Response beginPutNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/put/noheader/202/200")
-        void beginPutNoHeaderInRetryAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPutNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putasync/retry/succeeded")
-        Response putAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putasync/retry/succeeded")
-        void putAsyncRetrySucceededAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/putasync/retry/succeeded")
-        Response beginPutAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/putasync/retry/succeeded")
-        void beginPutAsyncRetrySucceededAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPutAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putasync/noretry/succeeded")
-        Response putAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putasync/noretry/succeeded")
-        void putAsyncNoRetrySucceededAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/putasync/noretry/succeeded")
-        Response beginPutAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/putasync/noretry/succeeded")
-        void beginPutAsyncNoRetrySucceededAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPutAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putasync/retry/failed")
-        Response putAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putasync/retry/failed")
-        void putAsyncRetryFailedAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/putasync/retry/failed")
-        Response beginPutAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/putasync/retry/failed")
-        void beginPutAsyncRetryFailedAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPutAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putasync/noretry/canceled")
-        Response putAsyncNoRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putAsyncNoRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putasync/noretry/canceled")
-        void putAsyncNoRetrycanceledAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/putasync/noretry/canceled")
-        Response beginPutAsyncNoRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/putasync/noretry/canceled")
-        void beginPutAsyncNoRetrycanceledAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPutAsyncNoRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putasync/noheader/201/200")
-        Response putAsyncNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putAsyncNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putasync/noheader/201/200")
-        void putAsyncNoHeaderInRetryAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/putasync/noheader/201/200")
-        Response beginPutAsyncNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/putasync/noheader/201/200")
-        void beginPutAsyncNoHeaderInRetryAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPutAsyncNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putnonresource/202/200")
-        Response putNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putnonresource/202/200")
-        void putNonResourceAsync(@Body Sku sku, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/putnonresource/202/200")
-        Response beginPutNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/putnonresource/202/200")
-        void beginPutNonResourceAsync(@Body Sku sku, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPutNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putnonresourceasync/202/200")
-        Response putAsyncNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putAsyncNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putnonresourceasync/202/200")
-        void putAsyncNonResourceAsync(@Body Sku sku, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/putnonresourceasync/202/200")
-        Response beginPutAsyncNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/putnonresourceasync/202/200")
-        void beginPutAsyncNonResourceAsync(@Body Sku sku, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPutAsyncNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putsubresource/202/200")
-        Response putSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putsubresource/202/200")
-        void putSubResourceAsync(@Body SubProduct product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @PUT("/lro/putsubresource/202/200")
-        Response beginPutSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/lro/putsubresource/202/200")
-        void beginPutSubResourceAsync(@Body SubProduct product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPutSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putsubresourceasync/202/200")
-        Response putAsyncSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putAsyncSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/putsubresourceasync/202/200")
-        void putAsyncSubResourceAsync(@Body SubProduct product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPutAsyncSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/putsubresourceasync/202/200")
-        Response beginPutAsyncSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/putsubresourceasync/202/200")
-        void beginPutAsyncSubResourceAsync(@Body SubProduct product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/accepted/200/succeeded")
-        Response deleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/delete/provisioning/202/deleting/200/failed", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteProvisioning202DeletingFailed200(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/accepted/200/succeeded")
-        void deleteProvisioning202Accepted200SucceededAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/delete/provisioning/202/deleting/200/failed", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteProvisioning202DeletingFailed200(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/accepted/200/succeeded")
-        Response beginDeleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/delete/provisioning/202/deleting/200/canceled", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteProvisioning202Deletingcanceled200(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/accepted/200/succeeded")
-        void beginDeleteProvisioning202Accepted200SucceededAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/delete/provisioning/202/deleting/200/canceled", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteProvisioning202Deletingcanceled200(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/deleting/200/failed")
-        Response deleteProvisioning202DeletingFailed200(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/delete/204/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete204Succeeded(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/deleting/200/failed")
-        void deleteProvisioning202DeletingFailed200Async(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/delete/204/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDelete204Succeeded(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/deleting/200/failed")
-        Response beginDeleteProvisioning202DeletingFailed200(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/delete/202/retry/200", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete202Retry200(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/deleting/200/failed")
-        void beginDeleteProvisioning202DeletingFailed200Async(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/delete/202/retry/200", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDelete202Retry200(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/deleting/200/canceled")
-        Response deleteProvisioning202Deletingcanceled200(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/delete/202/noretry/204", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete202NoRetry204(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/deleting/200/canceled")
-        void deleteProvisioning202Deletingcanceled200Async(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/delete/202/noretry/204", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDelete202NoRetry204(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/deleting/200/canceled")
-        Response beginDeleteProvisioning202Deletingcanceled200(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/delete/noheader", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteNoHeaderInRetry(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/provisioning/202/deleting/200/canceled")
-        void beginDeleteProvisioning202Deletingcanceled200Async(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/delete/noheader", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteNoHeaderInRetry(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/204/succeeded")
-        Response delete204Succeeded(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/deleteasync/noheader/202/204", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteAsyncNoHeaderInRetry(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/204/succeeded")
-        void delete204SucceededAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/deleteasync/noheader/202/204", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteAsyncNoHeaderInRetry(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/204/succeeded")
-        Response beginDelete204Succeeded(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteAsyncRetrySucceeded(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/204/succeeded")
-        void beginDelete204SucceededAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteAsyncRetrySucceeded(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/202/retry/200")
-        Response delete202Retry200(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/deleteasync/noretry/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteAsyncNoRetrySucceeded(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/202/retry/200")
-        void delete202Retry200Async(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/deleteasync/noretry/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteAsyncNoRetrySucceeded(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/202/retry/200")
-        Response beginDelete202Retry200(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/deleteasync/retry/failed", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteAsyncRetryFailed(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/202/retry/200")
-        void beginDelete202Retry200Async(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/deleteasync/retry/failed", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteAsyncRetryFailed(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/202/noretry/204")
-        Response delete202NoRetry204(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        @HTTP(path = "/lro/deleteasync/retry/canceled", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteAsyncRetrycanceled(@Header("accept-language") String acceptLanguage);
 
-        @DELETE("/lro/delete/202/noretry/204")
-        void delete202NoRetry204Async(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/delete/202/noretry/204")
-        Response beginDelete202NoRetry204(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/delete/202/noretry/204")
-        void beginDelete202NoRetry204Async(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/delete/noheader")
-        Response deleteNoHeaderInRetry(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/delete/noheader")
-        void deleteNoHeaderInRetryAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/delete/noheader")
-        Response beginDeleteNoHeaderInRetry(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/delete/noheader")
-        void beginDeleteNoHeaderInRetryAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/deleteasync/noheader/202/204")
-        Response deleteAsyncNoHeaderInRetry(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/deleteasync/noheader/202/204")
-        void deleteAsyncNoHeaderInRetryAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/deleteasync/noheader/202/204")
-        Response beginDeleteAsyncNoHeaderInRetry(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/deleteasync/noheader/202/204")
-        void beginDeleteAsyncNoHeaderInRetryAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/deleteasync/retry/succeeded")
-        Response deleteAsyncRetrySucceeded(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/deleteasync/retry/succeeded")
-        void deleteAsyncRetrySucceededAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/deleteasync/retry/succeeded")
-        Response beginDeleteAsyncRetrySucceeded(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/deleteasync/retry/succeeded")
-        void beginDeleteAsyncRetrySucceededAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/deleteasync/noretry/succeeded")
-        Response deleteAsyncNoRetrySucceeded(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/deleteasync/noretry/succeeded")
-        void deleteAsyncNoRetrySucceededAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/deleteasync/noretry/succeeded")
-        Response beginDeleteAsyncNoRetrySucceeded(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/deleteasync/noretry/succeeded")
-        void beginDeleteAsyncNoRetrySucceededAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/deleteasync/retry/failed")
-        Response deleteAsyncRetryFailed(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/deleteasync/retry/failed")
-        void deleteAsyncRetryFailedAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/deleteasync/retry/failed")
-        Response beginDeleteAsyncRetryFailed(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/deleteasync/retry/failed")
-        void beginDeleteAsyncRetryFailedAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/deleteasync/retry/canceled")
-        Response deleteAsyncRetrycanceled(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/deleteasync/retry/canceled")
-        void deleteAsyncRetrycanceledAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @DELETE("/lro/deleteasync/retry/canceled")
-        Response beginDeleteAsyncRetrycanceled(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @DELETE("/lro/deleteasync/retry/canceled")
-        void beginDeleteAsyncRetrycanceledAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        @HTTP(path = "/lro/deleteasync/retry/canceled", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteAsyncRetrycanceled(@Header("accept-language") String acceptLanguage);
 
         @POST("/lro/post/payload/200")
-        Response post200WithPayload(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> post200WithPayload(@Header("accept-language") String acceptLanguage);
 
         @POST("/lro/post/payload/200")
-        void post200WithPayloadAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @POST("/lro/post/payload/200")
-        Response beginPost200WithPayload(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/lro/post/payload/200")
-        void beginPost200WithPayloadAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPost200WithPayload(@Header("accept-language") String acceptLanguage);
 
         @POST("/lro/post/202/retry/200")
-        Response post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/post/202/retry/200")
-        void post202Retry200Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @POST("/lro/post/202/retry/200")
-        Response beginPost202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/lro/post/202/retry/200")
-        void beginPost202Retry200Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPost202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/post/202/noretry/204")
-        Response post202NoRetry204(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> post202NoRetry204(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/post/202/noretry/204")
-        void post202NoRetry204Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @POST("/lro/post/202/noretry/204")
-        Response beginPost202NoRetry204(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/lro/post/202/noretry/204")
-        void beginPost202NoRetry204Async(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPost202NoRetry204(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/postasync/retry/succeeded")
-        Response postAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> postAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/postasync/retry/succeeded")
-        void postAsyncRetrySucceededAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @POST("/lro/postasync/retry/succeeded")
-        Response beginPostAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/lro/postasync/retry/succeeded")
-        void beginPostAsyncRetrySucceededAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPostAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/postasync/noretry/succeeded")
-        Response postAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> postAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/postasync/noretry/succeeded")
-        void postAsyncNoRetrySucceededAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @POST("/lro/postasync/noretry/succeeded")
-        Response beginPostAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/lro/postasync/noretry/succeeded")
-        void beginPostAsyncNoRetrySucceededAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPostAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/postasync/retry/failed")
-        Response postAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> postAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/postasync/retry/failed")
-        void postAsyncRetryFailedAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @POST("/lro/postasync/retry/failed")
-        Response beginPostAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/lro/postasync/retry/failed")
-        void beginPostAsyncRetryFailedAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPostAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/postasync/retry/canceled")
-        Response postAsyncRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> postAsyncRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/postasync/retry/canceled")
-        void postAsyncRetrycanceledAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @POST("/lro/postasync/retry/canceled")
-        Response beginPostAsyncRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/lro/postasync/retry/canceled")
-        void beginPostAsyncRetrycanceledAsync(@Body Product product, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> beginPostAsyncRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage);
 
     }
     /**
@@ -479,7 +263,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> put200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -494,7 +278,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -509,7 +293,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> put200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -524,7 +308,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -539,7 +323,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> put202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -554,7 +338,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -569,7 +353,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -584,7 +368,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -599,7 +383,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> put200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -614,7 +398,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -629,7 +413,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> put201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -644,7 +428,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -659,7 +443,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void put200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> put200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -674,7 +458,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -689,7 +473,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> putNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -704,7 +488,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -719,7 +503,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -734,7 +518,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -749,7 +533,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> putAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -764,7 +548,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -779,7 +563,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> putAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -794,7 +578,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -809,7 +593,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> putAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -824,7 +608,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -839,7 +623,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> putAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -854,7 +638,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -869,7 +653,7 @@ public interface LROs {
      * @param sku sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
+    Call<ResponseBody> putNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
 
     /**
      *
@@ -884,7 +668,7 @@ public interface LROs {
      * @param sku sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
+    Call<ResponseBody> beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
 
     /**
      *
@@ -899,7 +683,7 @@ public interface LROs {
      * @param sku Sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
+    Call<ResponseBody> putAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
 
     /**
      *
@@ -914,7 +698,7 @@ public interface LROs {
      * @param sku Sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
+    Call<ResponseBody> beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
 
     /**
      *
@@ -929,7 +713,7 @@ public interface LROs {
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
+    Call<ResponseBody> putSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
 
     /**
      *
@@ -944,7 +728,7 @@ public interface LROs {
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
+    Call<ResponseBody> beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
 
     /**
      *
@@ -959,7 +743,7 @@ public interface LROs {
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void putAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
+    Call<ResponseBody> putAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
 
     /**
      *
@@ -974,7 +758,7 @@ public interface LROs {
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
+    Call<ResponseBody> beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
 
     /**
      *
@@ -987,7 +771,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1000,7 +784,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1013,7 +797,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void deleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> deleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1026,7 +810,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1039,7 +823,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1052,7 +836,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1064,7 +848,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void delete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1076,7 +860,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1089,7 +873,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void delete202Retry200Async(final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> delete202Retry200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1102,7 +886,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1115,7 +899,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void delete202NoRetry204Async(final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> delete202NoRetry204Async(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1128,7 +912,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1140,7 +924,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1152,7 +936,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1164,7 +948,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1176,7 +960,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1188,7 +972,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1200,7 +984,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1212,7 +996,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1224,7 +1008,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1236,7 +1020,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1248,7 +1032,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1260,7 +1044,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1272,7 +1056,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1285,7 +1069,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void post200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback);
+    Call<ResponseBody> post200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback);
 
     /**
      *
@@ -1298,7 +1082,7 @@ public interface LROs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback);
+    Call<ResponseBody> beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback);
 
     /**
      *
@@ -1312,7 +1096,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1326,7 +1110,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1341,7 +1125,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void post202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> post202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1356,7 +1140,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1371,7 +1155,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1386,7 +1170,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1401,7 +1185,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void postAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> postAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1416,7 +1200,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    Call<ResponseBody> beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -1430,7 +1214,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void postAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1444,7 +1228,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1458,7 +1242,7 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void postAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -1472,6 +1256,6 @@ public interface LROs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
 }

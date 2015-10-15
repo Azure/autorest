@@ -13,7 +13,7 @@ package fixtures.azurespecials;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
@@ -194,10 +194,10 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestAzureSpecialParametersTestClientImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
@@ -207,12 +207,12 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = retrofitBuilder.setEndpoint(baseUri).build();
-        this.xMsClientRequestId = new XMsClientRequestIdImpl(restAdapter, this);
-        this.subscriptionInCredentials = new SubscriptionInCredentialsImpl(restAdapter, this);
-        this.subscriptionInMethod = new SubscriptionInMethodImpl(restAdapter, this);
-        this.apiVersionDefault = new ApiVersionDefaultImpl(restAdapter, this);
-        this.apiVersionLocal = new ApiVersionLocalImpl(restAdapter, this);
-        this.skipUrlEncoding = new SkipUrlEncodingImpl(restAdapter, this);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.xMsClientRequestId = new XMsClientRequestIdImpl(retrofit, this);
+        this.subscriptionInCredentials = new SubscriptionInCredentialsImpl(retrofit, this);
+        this.subscriptionInMethod = new SubscriptionInMethodImpl(retrofit, this);
+        this.apiVersionDefault = new ApiVersionDefaultImpl(retrofit, this);
+        this.apiVersionLocal = new ApiVersionLocalImpl(retrofit, this);
+        this.skipUrlEncoding = new SkipUrlEncodingImpl(retrofit, this);
     }
 }

@@ -10,15 +10,17 @@
 
 package fixtures.lro;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.CloudError;
 
@@ -26,8 +28,8 @@ public class LROSADsImpl implements LROSADs {
     private LROSADsService service;
     AutoRestLongRunningOperationTestService client;
 
-    public LROSADsImpl(RestAdapter restAdapter, AutoRestLongRunningOperationTestService client) {
-        this.service = restAdapter.create(LROSADsService.class);
+    public LROSADsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
+        this.service = retrofit.create(LROSADsService.class);
         this.client = client;
     }
 
@@ -39,11 +41,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product putNonRetry400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = putNonRetry400Delegate(service.putNonRetry400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.putNonRetry400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = putNonRetry400Delegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = putNonRetry400Delegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -52,25 +56,27 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.putNonRetry400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> putNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.putNonRetry400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putNonRetry400Delegate(response, error));
+                    serviceCallback.success(putNonRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> putNonRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> putNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .register(201, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -81,11 +87,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product beginPutNonRetry400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = beginPutNonRetry400Delegate(service.beginPutNonRetry400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = beginPutNonRetry400Delegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = beginPutNonRetry400Delegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -94,25 +102,27 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPutNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.beginPutNonRetry400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPutNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPutNonRetry400Delegate(response, error));
+                    serviceCallback.success(beginPutNonRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> beginPutNonRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> beginPutNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .register(201, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -123,11 +133,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product putNonRetry201Creating400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = putNonRetry201Creating400Delegate(service.putNonRetry201Creating400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = putNonRetry201Creating400Delegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = putNonRetry201Creating400Delegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -136,25 +148,27 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.putNonRetry201Creating400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> putNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putNonRetry201Creating400Delegate(response, error));
+                    serviceCallback.success(putNonRetry201Creating400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> putNonRetry201Creating400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> putNonRetry201Creating400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .register(201, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -165,11 +179,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product beginPutNonRetry201Creating400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = beginPutNonRetry201Creating400Delegate(service.beginPutNonRetry201Creating400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = beginPutNonRetry201Creating400Delegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = beginPutNonRetry201Creating400Delegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -178,25 +194,27 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.beginPutNonRetry201Creating400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPutNonRetry201Creating400Delegate(response, error));
+                    serviceCallback.success(beginPutNonRetry201Creating400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> beginPutNonRetry201Creating400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> beginPutNonRetry201Creating400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .register(201, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -207,11 +225,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product putAsyncRelativeRetry400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = putAsyncRelativeRetry400Delegate(service.putAsyncRelativeRetry400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = putAsyncRelativeRetry400Delegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = putAsyncRelativeRetry400Delegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -220,24 +240,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.putAsyncRelativeRetry400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> putAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putAsyncRelativeRetry400Delegate(response, error));
+                    serviceCallback.success(putAsyncRelativeRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> putAsyncRelativeRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> putAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -248,11 +270,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product beginPutAsyncRelativeRetry400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetry400Delegate(service.beginPutAsyncRelativeRetry400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = beginPutAsyncRelativeRetry400Delegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetry400Delegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -261,24 +285,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPutAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.beginPutAsyncRelativeRetry400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPutAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetry400Delegate(response, error));
+                    serviceCallback.success(beginPutAsyncRelativeRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> beginPutAsyncRelativeRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> beginPutAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -287,11 +313,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void deleteNonRetry400() throws ServiceException {
         try {
-            ServiceResponse<Void> response = deleteNonRetry400Delegate(service.deleteNonRetry400(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.deleteNonRetry400(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = deleteNonRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = deleteNonRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -299,24 +327,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        service.deleteNonRetry400Async(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.deleteNonRetry400(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(deleteNonRetry400Delegate(response, error));
+                    serviceCallback.success(deleteNonRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> deleteNonRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> deleteNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -325,11 +355,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginDeleteNonRetry400() throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginDeleteNonRetry400Delegate(service.beginDeleteNonRetry400(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginDeleteNonRetry400(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginDeleteNonRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginDeleteNonRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -337,24 +369,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        service.beginDeleteNonRetry400Async(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginDeleteNonRetry400(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginDeleteNonRetry400Delegate(response, error));
+                    serviceCallback.success(beginDeleteNonRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginDeleteNonRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginDeleteNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -363,11 +397,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void delete202NonRetry400() throws ServiceException {
         try {
-            ServiceResponse<Void> response = delete202NonRetry400Delegate(service.delete202NonRetry400(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.delete202NonRetry400(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = delete202NonRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = delete202NonRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -375,24 +411,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        service.delete202NonRetry400Async(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.delete202NonRetry400(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(delete202NonRetry400Delegate(response, error));
+                    serviceCallback.success(delete202NonRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> delete202NonRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> delete202NonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -401,11 +439,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginDelete202NonRetry400() throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginDelete202NonRetry400Delegate(service.beginDelete202NonRetry400(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginDelete202NonRetry400(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginDelete202NonRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginDelete202NonRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -413,24 +453,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        service.beginDelete202NonRetry400Async(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginDelete202NonRetry400(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginDelete202NonRetry400Delegate(response, error));
+                    serviceCallback.success(beginDelete202NonRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginDelete202NonRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginDelete202NonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -439,11 +481,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void deleteAsyncRelativeRetry400() throws ServiceException {
         try {
-            ServiceResponse<Void> response = deleteAsyncRelativeRetry400Delegate(service.deleteAsyncRelativeRetry400(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.deleteAsyncRelativeRetry400(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = deleteAsyncRelativeRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = deleteAsyncRelativeRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -451,24 +495,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        service.deleteAsyncRelativeRetry400Async(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.deleteAsyncRelativeRetry400(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(deleteAsyncRelativeRetry400Delegate(response, error));
+                    serviceCallback.success(deleteAsyncRelativeRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> deleteAsyncRelativeRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> deleteAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -477,11 +523,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginDeleteAsyncRelativeRetry400() throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetry400Delegate(service.beginDeleteAsyncRelativeRetry400(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetry400(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -489,24 +537,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        service.beginDeleteAsyncRelativeRetry400Async(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetry400(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetry400Delegate(response, error));
+                    serviceCallback.success(beginDeleteAsyncRelativeRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginDeleteAsyncRelativeRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginDeleteAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -516,11 +566,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void postNonRetry400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postNonRetry400Delegate(service.postNonRetry400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postNonRetry400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postNonRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postNonRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -529,24 +581,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.postNonRetry400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> postNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postNonRetry400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postNonRetry400Delegate(response, error));
+                    serviceCallback.success(postNonRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postNonRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -556,11 +610,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginPostNonRetry400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginPostNonRetry400Delegate(service.beginPostNonRetry400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginPostNonRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginPostNonRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -569,24 +625,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPostNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.beginPostNonRetry400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPostNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPostNonRetry400Delegate(response, error));
+                    serviceCallback.success(beginPostNonRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginPostNonRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginPostNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -596,11 +654,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void post202NonRetry400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = post202NonRetry400Delegate(service.post202NonRetry400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.post202NonRetry400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = post202NonRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = post202NonRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -609,24 +669,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.post202NonRetry400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> post202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.post202NonRetry400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(post202NonRetry400Delegate(response, error));
+                    serviceCallback.success(post202NonRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> post202NonRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> post202NonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -636,11 +698,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginPost202NonRetry400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginPost202NonRetry400Delegate(service.beginPost202NonRetry400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginPost202NonRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginPost202NonRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -649,24 +713,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPost202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.beginPost202NonRetry400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPost202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPost202NonRetry400Delegate(response, error));
+                    serviceCallback.success(beginPost202NonRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginPost202NonRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginPost202NonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -676,11 +742,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void postAsyncRelativeRetry400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postAsyncRelativeRetry400Delegate(service.postAsyncRelativeRetry400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postAsyncRelativeRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postAsyncRelativeRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -689,24 +757,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.postAsyncRelativeRetry400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> postAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postAsyncRelativeRetry400Delegate(response, error));
+                    serviceCallback.success(postAsyncRelativeRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postAsyncRelativeRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -716,11 +786,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginPostAsyncRelativeRetry400(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetry400Delegate(service.beginPostAsyncRelativeRetry400(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginPostAsyncRelativeRetry400Delegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetry400Delegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -729,24 +801,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPostAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.beginPostAsyncRelativeRetry400Async(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPostAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetry400Delegate(response, error));
+                    serviceCallback.success(beginPostAsyncRelativeRetry400Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginPostAsyncRelativeRetry400Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginPostAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -757,11 +831,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product putError201NoProvisioningStatePayload(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = putError201NoProvisioningStatePayloadDelegate(service.putError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = putError201NoProvisioningStatePayloadDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = putError201NoProvisioningStatePayloadDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -770,25 +846,27 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.putError201NoProvisioningStatePayloadAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> putError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putError201NoProvisioningStatePayloadDelegate(response, error));
+                    serviceCallback.success(putError201NoProvisioningStatePayloadDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> putError201NoProvisioningStatePayloadDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> putError201NoProvisioningStatePayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .register(201, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -799,11 +877,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product beginPutError201NoProvisioningStatePayload(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = beginPutError201NoProvisioningStatePayloadDelegate(service.beginPutError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = beginPutError201NoProvisioningStatePayloadDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = beginPutError201NoProvisioningStatePayloadDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -812,25 +892,27 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPutError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.beginPutError201NoProvisioningStatePayloadAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPutError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPutError201NoProvisioningStatePayloadDelegate(response, error));
+                    serviceCallback.success(beginPutError201NoProvisioningStatePayloadDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> beginPutError201NoProvisioningStatePayloadDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> beginPutError201NoProvisioningStatePayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .register(201, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -841,11 +923,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product putAsyncRelativeRetryNoStatus(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = putAsyncRelativeRetryNoStatusDelegate(service.putAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = putAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = putAsyncRelativeRetryNoStatusDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -854,24 +938,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.putAsyncRelativeRetryNoStatusAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> putAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putAsyncRelativeRetryNoStatusDelegate(response, error));
+                    serviceCallback.success(putAsyncRelativeRetryNoStatusDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> putAsyncRelativeRetryNoStatusDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> putAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -882,11 +968,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product beginPutAsyncRelativeRetryNoStatus(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryNoStatusDelegate(service.beginPutAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = beginPutAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryNoStatusDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -895,24 +983,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPutAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.beginPutAsyncRelativeRetryNoStatusAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPutAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryNoStatusDelegate(response, error));
+                    serviceCallback.success(beginPutAsyncRelativeRetryNoStatusDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatusDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -923,11 +1013,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product putAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = putAsyncRelativeRetryNoStatusPayloadDelegate(service.putAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = putAsyncRelativeRetryNoStatusPayloadDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = putAsyncRelativeRetryNoStatusPayloadDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -936,24 +1028,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.putAsyncRelativeRetryNoStatusPayloadAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> putAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putAsyncRelativeRetryNoStatusPayloadDelegate(response, error));
+                    serviceCallback.success(putAsyncRelativeRetryNoStatusPayloadDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> putAsyncRelativeRetryNoStatusPayloadDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> putAsyncRelativeRetryNoStatusPayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -964,11 +1058,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product beginPutAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryNoStatusPayloadDelegate(service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = beginPutAsyncRelativeRetryNoStatusPayloadDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryNoStatusPayloadDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -977,24 +1073,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.beginPutAsyncRelativeRetryNoStatusPayloadAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryNoStatusPayloadDelegate(response, error));
+                    serviceCallback.success(beginPutAsyncRelativeRetryNoStatusPayloadDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatusPayloadDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatusPayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1003,11 +1101,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void delete204Succeeded() throws ServiceException {
         try {
-            ServiceResponse<Void> response = delete204SucceededDelegate(service.delete204Succeeded(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.delete204Succeeded(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = delete204SucceededDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = delete204SucceededDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1015,24 +1115,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        service.delete204SucceededAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.delete204Succeeded(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(delete204SucceededDelegate(response, error));
+                    serviceCallback.success(delete204SucceededDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> delete204SucceededDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> delete204SucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(204, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1041,11 +1143,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginDelete204Succeeded() throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginDelete204SucceededDelegate(service.beginDelete204Succeeded(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginDelete204SucceededDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginDelete204SucceededDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1053,24 +1157,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        service.beginDelete204SucceededAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginDelete204SucceededDelegate(response, error));
+                    serviceCallback.success(beginDelete204SucceededDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginDelete204SucceededDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginDelete204SucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(204, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1079,11 +1185,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void deleteAsyncRelativeRetryNoStatus() throws ServiceException {
         try {
-            ServiceResponse<Void> response = deleteAsyncRelativeRetryNoStatusDelegate(service.deleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.deleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = deleteAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = deleteAsyncRelativeRetryNoStatusDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1091,24 +1199,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
-        service.deleteAsyncRelativeRetryNoStatusAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.deleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(deleteAsyncRelativeRetryNoStatusDelegate(response, error));
+                    serviceCallback.success(deleteAsyncRelativeRetryNoStatusDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> deleteAsyncRelativeRetryNoStatusDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> deleteAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1117,11 +1227,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginDeleteAsyncRelativeRetryNoStatus() throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryNoStatusDelegate(service.beginDeleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryNoStatusDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1129,24 +1241,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
-        service.beginDeleteAsyncRelativeRetryNoStatusAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetryNoStatusDelegate(response, error));
+                    serviceCallback.success(beginDeleteAsyncRelativeRetryNoStatusDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginDeleteAsyncRelativeRetryNoStatusDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginDeleteAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1156,11 +1270,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void post202NoLocation(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = post202NoLocationDelegate(service.post202NoLocation(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.post202NoLocation(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = post202NoLocationDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = post202NoLocationDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1169,24 +1285,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.post202NoLocationAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> post202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.post202NoLocation(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(post202NoLocationDelegate(response, error));
+                    serviceCallback.success(post202NoLocationDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> post202NoLocationDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> post202NoLocationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1196,11 +1314,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginPost202NoLocation(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginPost202NoLocationDelegate(service.beginPost202NoLocation(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginPost202NoLocationDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginPost202NoLocationDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1209,24 +1329,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPost202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.beginPost202NoLocationAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPost202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPost202NoLocationDelegate(response, error));
+                    serviceCallback.success(beginPost202NoLocationDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginPost202NoLocationDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginPost202NoLocationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1236,11 +1358,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void postAsyncRelativeRetryNoPayload(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postAsyncRelativeRetryNoPayloadDelegate(service.postAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postAsyncRelativeRetryNoPayloadDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postAsyncRelativeRetryNoPayloadDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1249,24 +1373,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.postAsyncRelativeRetryNoPayloadAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> postAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postAsyncRelativeRetryNoPayloadDelegate(response, error));
+                    serviceCallback.success(postAsyncRelativeRetryNoPayloadDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postAsyncRelativeRetryNoPayloadDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postAsyncRelativeRetryNoPayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1276,11 +1402,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginPostAsyncRelativeRetryNoPayload(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetryNoPayloadDelegate(service.beginPostAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginPostAsyncRelativeRetryNoPayloadDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetryNoPayloadDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1289,24 +1417,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPostAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.beginPostAsyncRelativeRetryNoPayloadAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPostAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryNoPayloadDelegate(response, error));
+                    serviceCallback.success(beginPostAsyncRelativeRetryNoPayloadDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginPostAsyncRelativeRetryNoPayloadDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginPostAsyncRelativeRetryNoPayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1317,11 +1447,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product put200InvalidJson(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = put200InvalidJsonDelegate(service.put200InvalidJson(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.put200InvalidJson(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = put200InvalidJsonDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = put200InvalidJsonDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1330,25 +1462,27 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void put200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.put200InvalidJsonAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> put200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.put200InvalidJson(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(put200InvalidJsonDelegate(response, error));
+                    serviceCallback.success(put200InvalidJsonDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> put200InvalidJsonDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> put200InvalidJsonDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1359,11 +1493,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product beginPut200InvalidJson(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = beginPut200InvalidJsonDelegate(service.beginPut200InvalidJson(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = beginPut200InvalidJsonDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = beginPut200InvalidJsonDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1372,25 +1508,27 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPut200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.beginPut200InvalidJsonAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPut200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPut200InvalidJsonDelegate(response, error));
+                    serviceCallback.success(beginPut200InvalidJsonDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> beginPut200InvalidJsonDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> beginPut200InvalidJsonDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1401,11 +1539,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product putAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = putAsyncRelativeRetryInvalidHeaderDelegate(service.putAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = putAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = putAsyncRelativeRetryInvalidHeaderDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1414,24 +1554,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.putAsyncRelativeRetryInvalidHeaderAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> putAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putAsyncRelativeRetryInvalidHeaderDelegate(response, error));
+                    serviceCallback.success(putAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> putAsyncRelativeRetryInvalidHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> putAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1442,11 +1584,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product beginPutAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryInvalidHeaderDelegate(service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = beginPutAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryInvalidHeaderDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1455,24 +1599,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.beginPutAsyncRelativeRetryInvalidHeaderAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryInvalidHeaderDelegate(response, error));
+                    serviceCallback.success(beginPutAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1483,11 +1629,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product putAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = putAsyncRelativeRetryInvalidJsonPollingDelegate(service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = putAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = putAsyncRelativeRetryInvalidJsonPollingDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1496,24 +1644,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.putAsyncRelativeRetryInvalidJsonPollingAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putAsyncRelativeRetryInvalidJsonPollingDelegate(response, error));
+                    serviceCallback.success(putAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> putAsyncRelativeRetryInvalidJsonPollingDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> putAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1524,11 +1674,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public Product beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
         try {
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+            ServiceResponse<Product> response = beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1537,24 +1689,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        service.beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(response, error));
+                    serviceCallback.success(beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1563,11 +1717,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void delete202RetryInvalidHeader() throws ServiceException {
         try {
-            ServiceResponse<Void> response = delete202RetryInvalidHeaderDelegate(service.delete202RetryInvalidHeader(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.delete202RetryInvalidHeader(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = delete202RetryInvalidHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = delete202RetryInvalidHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1575,24 +1731,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        service.delete202RetryInvalidHeaderAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.delete202RetryInvalidHeader(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(delete202RetryInvalidHeaderDelegate(response, error));
+                    serviceCallback.success(delete202RetryInvalidHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> delete202RetryInvalidHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> delete202RetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1601,11 +1759,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginDelete202RetryInvalidHeader() throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginDelete202RetryInvalidHeaderDelegate(service.beginDelete202RetryInvalidHeader(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginDelete202RetryInvalidHeader(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginDelete202RetryInvalidHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginDelete202RetryInvalidHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1613,24 +1773,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        service.beginDelete202RetryInvalidHeaderAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginDelete202RetryInvalidHeader(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginDelete202RetryInvalidHeaderDelegate(response, error));
+                    serviceCallback.success(beginDelete202RetryInvalidHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginDelete202RetryInvalidHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginDelete202RetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1639,11 +1801,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void deleteAsyncRelativeRetryInvalidHeader() throws ServiceException {
         try {
-            ServiceResponse<Void> response = deleteAsyncRelativeRetryInvalidHeaderDelegate(service.deleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = deleteAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = deleteAsyncRelativeRetryInvalidHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1651,24 +1815,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        service.deleteAsyncRelativeRetryInvalidHeaderAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(deleteAsyncRelativeRetryInvalidHeaderDelegate(response, error));
+                    serviceCallback.success(deleteAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> deleteAsyncRelativeRetryInvalidHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> deleteAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1677,11 +1843,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginDeleteAsyncRelativeRetryInvalidHeader() throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1689,24 +1857,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        service.beginDeleteAsyncRelativeRetryInvalidHeaderAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(response, error));
+                    serviceCallback.success(beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1715,11 +1885,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void deleteAsyncRelativeRetryInvalidJsonPolling() throws ServiceException {
         try {
-            ServiceResponse<Void> response = deleteAsyncRelativeRetryInvalidJsonPollingDelegate(service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = deleteAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = deleteAsyncRelativeRetryInvalidJsonPollingDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1727,24 +1899,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        service.deleteAsyncRelativeRetryInvalidJsonPollingAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(deleteAsyncRelativeRetryInvalidJsonPollingDelegate(response, error));
+                    serviceCallback.success(deleteAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> deleteAsyncRelativeRetryInvalidJsonPollingDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> deleteAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1753,11 +1927,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginDeleteAsyncRelativeRetryInvalidJsonPolling() throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1765,24 +1941,26 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        service.beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(response, error));
+                    serviceCallback.success(beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1792,11 +1970,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void post202RetryInvalidHeader(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = post202RetryInvalidHeaderDelegate(service.post202RetryInvalidHeader(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = post202RetryInvalidHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = post202RetryInvalidHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1805,24 +1985,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void post202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.post202RetryInvalidHeaderAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> post202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(post202RetryInvalidHeaderDelegate(response, error));
+                    serviceCallback.success(post202RetryInvalidHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> post202RetryInvalidHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> post202RetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1832,11 +2014,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginPost202RetryInvalidHeader(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginPost202RetryInvalidHeaderDelegate(service.beginPost202RetryInvalidHeader(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginPost202RetryInvalidHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginPost202RetryInvalidHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1845,24 +2029,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPost202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.beginPost202RetryInvalidHeaderAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPost202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPost202RetryInvalidHeaderDelegate(response, error));
+                    serviceCallback.success(beginPost202RetryInvalidHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginPost202RetryInvalidHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginPost202RetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1872,11 +2058,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void postAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postAsyncRelativeRetryInvalidHeaderDelegate(service.postAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postAsyncRelativeRetryInvalidHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1885,24 +2073,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.postAsyncRelativeRetryInvalidHeaderAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> postAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postAsyncRelativeRetryInvalidHeaderDelegate(response, error));
+                    serviceCallback.success(postAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postAsyncRelativeRetryInvalidHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1912,11 +2102,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginPostAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetryInvalidHeaderDelegate(service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginPostAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetryInvalidHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1925,24 +2117,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.beginPostAsyncRelativeRetryInvalidHeaderAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryInvalidHeaderDelegate(response, error));
+                    serviceCallback.success(beginPostAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1952,11 +2146,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void postAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postAsyncRelativeRetryInvalidJsonPollingDelegate(service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postAsyncRelativeRetryInvalidJsonPollingDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1965,24 +2161,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.postAsyncRelativeRetryInvalidJsonPollingAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postAsyncRelativeRetryInvalidJsonPollingDelegate(response, error));
+                    serviceCallback.success(postAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postAsyncRelativeRetryInvalidJsonPollingDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1992,11 +2190,13 @@ public class LROSADsImpl implements LROSADs {
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
         try {
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -2005,24 +2205,26 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        service.beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(response, error));
+                    serviceCallback.success(beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

@@ -10,15 +10,17 @@
 
 package fixtures.subscriptionidapiversion;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import fixtures.subscriptionidapiversion.models.Error;
 
@@ -26,8 +28,8 @@ public class GroupImpl implements Group {
     private GroupService service;
     MicrosoftAzureTestUrl client;
 
-    public GroupImpl(RestAdapter restAdapter, MicrosoftAzureTestUrl client) {
-        this.service = restAdapter.create(GroupService.class);
+    public GroupImpl(Retrofit retrofit, MicrosoftAzureTestUrl client) {
+        this.service = retrofit.create(GroupService.class);
         this.client = client;
     }
 
@@ -51,11 +53,13 @@ public class GroupImpl implements Group {
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
         }
         try {
-            ServiceResponse<SampleResourceGroup> response = getSampleResourceGroupDelegate(service.getSampleResourceGroup(this.client.getSubscriptionId(), resourceGroupName, this.client.getApiVersion(), this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getSampleResourceGroup(this.client.getSubscriptionId(), resourceGroupName, this.client.getApiVersion(), this.client.getAcceptLanguage());
+            ServiceResponse<SampleResourceGroup> response = getSampleResourceGroupDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<SampleResourceGroup> response = getSampleResourceGroupDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -64,7 +68,7 @@ public class GroupImpl implements Group {
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) {
+    public Call<ResponseBody> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
@@ -77,23 +81,25 @@ public class GroupImpl implements Group {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.")));
         }
-        service.getSampleResourceGroupAsync(this.client.getSubscriptionId(), resourceGroupName, this.client.getApiVersion(), this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getSampleResourceGroup(this.client.getSubscriptionId(), resourceGroupName, this.client.getApiVersion(), this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<SampleResourceGroup>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSampleResourceGroupDelegate(response, error));
+                    serviceCallback.success(getSampleResourceGroupDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<SampleResourceGroup>()
                 .register(200, new TypeToken<SampleResourceGroup>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

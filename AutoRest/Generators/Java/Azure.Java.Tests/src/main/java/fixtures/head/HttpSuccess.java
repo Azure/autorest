@@ -12,8 +12,8 @@ package fixtures.head;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import retrofit.http.HEAD;
 import retrofit.http.Header;
 
@@ -28,16 +28,10 @@ public interface HttpSuccess {
      */
     interface HttpSuccessService {
         @HEAD("/http/success/204")
-        Response head204(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @HEAD("/http/success/204")
-        void head204Async(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<Void> head204(@Header("accept-language") String acceptLanguage);
 
         @HEAD("/http/success/404")
-        Response head404(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @HEAD("/http/success/404")
-        void head404Async(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<Void> head404(@Header("accept-language") String acceptLanguage);
 
     }
     /**
@@ -51,7 +45,7 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void head204Async(final ServiceCallback<Boolean> serviceCallback);
+    Call<Void> head204Async(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      *
@@ -64,6 +58,6 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    void head404Async(final ServiceCallback<Boolean> serviceCallback);
+    Call<Void> head404Async(final ServiceCallback<Boolean> serviceCallback);
 
 }

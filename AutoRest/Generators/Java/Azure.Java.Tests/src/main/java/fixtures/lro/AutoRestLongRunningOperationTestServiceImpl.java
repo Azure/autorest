@@ -13,7 +13,7 @@ package fixtures.lro;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestService class.
@@ -143,10 +143,10 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestLongRunningOperationTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestLongRunningOperationTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
@@ -156,10 +156,10 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = retrofitBuilder.setEndpoint(baseUri).build();
-        this.lROs = new LROsImpl(restAdapter, this);
-        this.lRORetrys = new LRORetrysImpl(restAdapter, this);
-        this.lROSADs = new LROSADsImpl(restAdapter, this);
-        this.lROsCustomHeader = new LROsCustomHeaderImpl(restAdapter, this);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.lROs = new LROsImpl(retrofit, this);
+        this.lRORetrys = new LRORetrysImpl(retrofit, this);
+        this.lROSADs = new LROSADsImpl(retrofit, this);
+        this.lROsCustomHeader = new LROsCustomHeaderImpl(retrofit, this);
     }
 }

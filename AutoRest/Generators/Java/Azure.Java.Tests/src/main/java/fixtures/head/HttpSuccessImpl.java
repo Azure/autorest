@@ -10,23 +10,25 @@
 
 package fixtures.head;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.head.models.CloudError;
 
 public class HttpSuccessImpl implements HttpSuccess {
     private HttpSuccessService service;
     AutoRestHeadTestService client;
 
-    public HttpSuccessImpl(RestAdapter restAdapter, AutoRestHeadTestService client) {
-        this.service = restAdapter.create(HttpSuccessService.class);
+    public HttpSuccessImpl(Retrofit retrofit, AutoRestHeadTestService client) {
+        this.service = retrofit.create(HttpSuccessService.class);
         this.client = client;
     }
 
@@ -37,11 +39,13 @@ public class HttpSuccessImpl implements HttpSuccess {
      */
     public Boolean head204() throws ServiceException {
         try {
-            ServiceResponse<Boolean> response = head204Delegate(service.head204(this.client.getAcceptLanguage()), null);
+            Call<Void> call = service.head204(this.client.getAcceptLanguage());
+            ServiceResponse<Boolean> response = head204Delegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Boolean> response = head204Delegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -49,25 +53,27 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void head204Async(final ServiceCallback<Boolean> serviceCallback) {
-        service.head204Async(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<Void> head204Async(final ServiceCallback<Boolean> serviceCallback) {
+        Call<Void> call = service.head204(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(head204Delegate(response, error));
+                    serviceCallback.success(head204Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Boolean> head204Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Boolean> head204Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Boolean>()
                 .register(204, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .buildEmpty(response, retrofit);
     }
 
     /**
@@ -77,11 +83,13 @@ public class HttpSuccessImpl implements HttpSuccess {
      */
     public Boolean head404() throws ServiceException {
         try {
-            ServiceResponse<Boolean> response = head404Delegate(service.head404(this.client.getAcceptLanguage()), null);
+            Call<Void> call = service.head404(this.client.getAcceptLanguage());
+            ServiceResponse<Boolean> response = head404Delegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Boolean> response = head404Delegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -89,25 +97,27 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void head404Async(final ServiceCallback<Boolean> serviceCallback) {
-        service.head404Async(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<Void> head404Async(final ServiceCallback<Boolean> serviceCallback) {
+        Call<Void> call = service.head404(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(head404Delegate(response, error));
+                    serviceCallback.success(head404Delegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Boolean> head404Delegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Boolean> head404Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Boolean>()
                 .register(204, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .buildEmpty(response, retrofit);
     }
 
 }
