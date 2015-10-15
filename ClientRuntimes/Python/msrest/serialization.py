@@ -24,7 +24,7 @@
 #
 #--------------------------------------------------------------------------
 
-from response import HTTPResponse
+from .response import HTTPResponse
 import json
 
 from .exceptions import SerializationError, DeserializationError
@@ -76,7 +76,6 @@ class Serialized(object):
             if data_type in self.basic_types:
                 return eval(data_type)(data)
             
-
             if data_type in self.serialize_type:
                 return self.serialize_type[data_type](data)
 

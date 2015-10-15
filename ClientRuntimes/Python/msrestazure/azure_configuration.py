@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -38,4 +38,5 @@ class AzureConfiguration(Configration):
         self.token_uri = "/oauth2/token"
         self.auth_uri = "/oauth2/authorize"
         self.tenant = "common"
+        self.resource = 'https://management.core.windows.net/'
         self.keyring = "AzureAAD"

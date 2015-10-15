@@ -13,8 +13,8 @@
     <OutputPath>.</OutputPath>
     <Name>clientruntime</Name>
     <RootNamespace>client_runtime</RootNamespace>
-    <InterpreterId>{5cdbe86c-f1f4-45a4-ad13-453be6b2cc3e}</InterpreterId>
-    <InterpreterVersion>2.7</InterpreterVersion>
+    <InterpreterId>{12c1f77c-3a20-4e2d-8df2-6f587311ea06}</InterpreterId>
+    <InterpreterVersion>3.5</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>

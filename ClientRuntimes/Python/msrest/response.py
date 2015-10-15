@@ -24,7 +24,7 @@
 #
 #--------------------------------------------------------------------------
 
-from exceptions import ResponseStatusError
+from .exceptions import ResponseStatusError
 
 class HTTPResponse(object):
 
