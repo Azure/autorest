@@ -46,6 +46,7 @@ public interface EnumOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
 
@@ -60,6 +61,7 @@ public interface EnumOperations {
      *
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
 

@@ -54,6 +54,7 @@ public interface SubscriptionInCredentials {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -66,6 +67,7 @@ public interface SubscriptionInCredentials {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -78,6 +80,7 @@ public interface SubscriptionInCredentials {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -90,6 +93,7 @@ public interface SubscriptionInCredentials {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -102,6 +106,7 @@ public interface SubscriptionInCredentials {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 

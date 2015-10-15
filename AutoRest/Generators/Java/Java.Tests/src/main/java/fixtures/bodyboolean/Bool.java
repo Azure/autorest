@@ -57,6 +57,7 @@ public interface Bool {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
 
@@ -71,6 +72,7 @@ public interface Bool {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
@@ -84,6 +86,7 @@ public interface Bool {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
 
@@ -98,6 +101,7 @@ public interface Bool {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
@@ -111,6 +115,7 @@ public interface Bool {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNullAsync(final ServiceCallback<Boolean> serviceCallback);
 
@@ -124,6 +129,7 @@ public interface Bool {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
 

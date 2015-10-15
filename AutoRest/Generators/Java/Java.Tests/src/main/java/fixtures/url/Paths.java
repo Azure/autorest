@@ -111,6 +111,7 @@ public interface Paths {
      *
      * @param boolPath true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback);
 
@@ -125,6 +126,7 @@ public interface Paths {
      *
      * @param boolPath false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback);
 
@@ -139,6 +141,7 @@ public interface Paths {
      *
      * @param intPath '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback);
 
@@ -153,6 +156,7 @@ public interface Paths {
      *
      * @param intPath '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback);
 
@@ -167,6 +171,7 @@ public interface Paths {
      *
      * @param longPath '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback);
 
@@ -181,6 +186,7 @@ public interface Paths {
      *
      * @param longPath '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback);
 
@@ -195,6 +201,7 @@ public interface Paths {
      *
      * @param floatPath '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback);
 
@@ -209,6 +216,7 @@ public interface Paths {
      *
      * @param floatPath '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback);
 
@@ -223,6 +231,7 @@ public interface Paths {
      *
      * @param doublePath '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback);
 
@@ -237,6 +246,7 @@ public interface Paths {
      *
      * @param doublePath '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback);
 
@@ -251,6 +261,7 @@ public interface Paths {
      *
      * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback);
 
@@ -265,6 +276,7 @@ public interface Paths {
      *
      * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback);
 
@@ -279,6 +291,7 @@ public interface Paths {
      *
      * @param stringPath '' string value. Possible values for this parameter include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback);
 
@@ -293,6 +306,7 @@ public interface Paths {
      *
      * @param stringPath null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback);
 
@@ -307,6 +321,7 @@ public interface Paths {
      *
      * @param enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback);
 
@@ -321,6 +336,7 @@ public interface Paths {
      *
      * @param enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback);
 
@@ -335,6 +351,7 @@ public interface Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback);
 
@@ -349,6 +366,7 @@ public interface Paths {
      *
      * @param bytePath '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback);
 
@@ -363,6 +381,7 @@ public interface Paths {
      *
      * @param bytePath null as byte array (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback);
 
@@ -377,6 +396,7 @@ public interface Paths {
      *
      * @param datePath '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback);
 
@@ -391,6 +411,7 @@ public interface Paths {
      *
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback);
 
@@ -405,6 +426,7 @@ public interface Paths {
      *
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback);
 
@@ -419,6 +441,7 @@ public interface Paths {
      *
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback);
 

@@ -48,6 +48,7 @@ public interface AutoRestReportService {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 

@@ -66,6 +66,7 @@ public interface StringOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNullAsync(final ServiceCallback<String> serviceCallback);
 
@@ -80,6 +81,7 @@ public interface StringOperations {
      *
      * @param stringBody Possible values for this parameter include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
@@ -93,6 +95,7 @@ public interface StringOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getEmptyAsync(final ServiceCallback<String> serviceCallback);
 
@@ -107,6 +110,7 @@ public interface StringOperations {
      *
      * @param stringBody Possible values for this parameter include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
@@ -120,6 +124,7 @@ public interface StringOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMbcsAsync(final ServiceCallback<String> serviceCallback);
 
@@ -134,6 +139,7 @@ public interface StringOperations {
      *
      * @param stringBody Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
@@ -147,6 +153,7 @@ public interface StringOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getWhitespaceAsync(final ServiceCallback<String> serviceCallback);
 
@@ -161,6 +168,7 @@ public interface StringOperations {
      *
      * @param stringBody Possible values for this parameter include: '    Now is the time for all good men to come to the aid of their country    '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
@@ -174,6 +182,7 @@ public interface StringOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<String> serviceCallback);
 

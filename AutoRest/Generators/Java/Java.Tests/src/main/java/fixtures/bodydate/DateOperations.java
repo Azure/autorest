@@ -64,6 +64,7 @@ public interface DateOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -77,6 +78,7 @@ public interface DateOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -90,6 +92,7 @@ public interface DateOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -103,6 +106,7 @@ public interface DateOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -117,6 +121,7 @@ public interface DateOperations {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
@@ -130,6 +135,7 @@ public interface DateOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -144,6 +150,7 @@ public interface DateOperations {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
@@ -157,6 +164,7 @@ public interface DateOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 

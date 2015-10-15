@@ -58,6 +58,7 @@ public interface BasicOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getValidAsync(final ServiceCallback<Basic> serviceCallback);
 
@@ -72,6 +73,7 @@ public interface BasicOperations {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -85,6 +87,7 @@ public interface BasicOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getInvalidAsync(final ServiceCallback<Basic> serviceCallback);
 
@@ -98,6 +101,7 @@ public interface BasicOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getEmptyAsync(final ServiceCallback<Basic> serviceCallback);
 
@@ -111,6 +115,7 @@ public interface BasicOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNullAsync(final ServiceCallback<Basic> serviceCallback);
 
@@ -124,6 +129,7 @@ public interface BasicOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback);
 

@@ -70,6 +70,7 @@ public interface @Model.MethodGroupType {
     @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
     }
     @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+    @: * @@return the {@@link Call} object
     @: */
     @:Call<@method.CallType> @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
     @EmptyLine

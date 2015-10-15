@@ -107,6 +107,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
     /**
@@ -119,6 +120,7 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
     /**
@@ -132,6 +134,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
     /**
@@ -144,6 +147,7 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
     /**
@@ -157,6 +161,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
     /**
@@ -169,6 +174,7 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
 

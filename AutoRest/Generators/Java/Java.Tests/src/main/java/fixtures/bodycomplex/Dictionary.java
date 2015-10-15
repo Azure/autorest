@@ -58,6 +58,7 @@ public interface Dictionary {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
@@ -72,6 +73,7 @@ public interface Dictionary {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -85,6 +87,7 @@ public interface Dictionary {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
@@ -99,6 +102,7 @@ public interface Dictionary {
      *
      * @param complexBody Please put an empty dictionary
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -112,6 +116,7 @@ public interface Dictionary {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
@@ -125,6 +130,7 @@ public interface Dictionary {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 

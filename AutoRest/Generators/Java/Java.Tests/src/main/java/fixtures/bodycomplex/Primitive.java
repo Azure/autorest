@@ -102,6 +102,7 @@ public interface Primitive {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback);
 
@@ -116,6 +117,7 @@ public interface Primitive {
      *
      * @param complexBody Please put -1 and 2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -129,6 +131,7 @@ public interface Primitive {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback);
 
@@ -143,6 +146,7 @@ public interface Primitive {
      *
      * @param complexBody Please put 1099511627775 and -999511627788
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -156,6 +160,7 @@ public interface Primitive {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback);
 
@@ -170,6 +175,7 @@ public interface Primitive {
      *
      * @param complexBody Please put 1.05 and -0.003
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -183,6 +189,7 @@ public interface Primitive {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback);
 
@@ -197,6 +204,7 @@ public interface Primitive {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -210,6 +218,7 @@ public interface Primitive {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback);
 
@@ -224,6 +233,7 @@ public interface Primitive {
      *
      * @param complexBody Please put true and false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -237,6 +247,7 @@ public interface Primitive {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback);
 
@@ -251,6 +262,7 @@ public interface Primitive {
      *
      * @param complexBody Please put 'goodrequest', '', and null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -264,6 +276,7 @@ public interface Primitive {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback);
 
@@ -278,6 +291,7 @@ public interface Primitive {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -291,6 +305,7 @@ public interface Primitive {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback);
 
@@ -305,6 +320,7 @@ public interface Primitive {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -318,6 +334,7 @@ public interface Primitive {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback);
 
@@ -332,6 +349,7 @@ public interface Primitive {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 

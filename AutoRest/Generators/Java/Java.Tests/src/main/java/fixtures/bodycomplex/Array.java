@@ -55,6 +55,7 @@ public interface Array {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
 
@@ -69,6 +70,7 @@ public interface Array {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -82,6 +84,7 @@ public interface Array {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
 
@@ -96,6 +99,7 @@ public interface Array {
      *
      * @param complexBody Please put an empty array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -109,6 +113,7 @@ public interface Array {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
 

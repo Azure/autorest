@@ -96,6 +96,7 @@ public interface HttpSuccess {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head200Async(final ServiceCallback<Void> serviceCallback);
 
@@ -109,6 +110,7 @@ public interface HttpSuccess {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200Async(final ServiceCallback<Boolean> serviceCallback);
 
@@ -123,6 +125,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -137,6 +140,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -151,6 +155,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -165,6 +170,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -179,6 +185,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -193,6 +200,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -207,6 +215,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -221,6 +230,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -235,6 +245,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -249,6 +260,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -261,6 +273,7 @@ public interface HttpSuccess {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head204Async(final ServiceCallback<Void> serviceCallback);
 
@@ -275,6 +288,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -289,6 +303,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -303,6 +318,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -317,6 +333,7 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -329,6 +346,7 @@ public interface HttpSuccess {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head404Async(final ServiceCallback<Void> serviceCallback);
 

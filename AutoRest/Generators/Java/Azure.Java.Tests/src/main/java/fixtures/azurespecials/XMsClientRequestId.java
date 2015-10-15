@@ -43,6 +43,7 @@ public interface XMsClientRequestId {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -57,6 +58,7 @@ public interface XMsClientRequestId {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback);
 

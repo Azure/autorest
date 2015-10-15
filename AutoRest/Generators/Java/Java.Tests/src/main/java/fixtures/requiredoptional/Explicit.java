@@ -118,6 +118,7 @@ public interface Explicit {
      *
      * @param bodyParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -132,6 +133,7 @@ public interface Explicit {
      *
      * @param bodyParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -147,6 +149,7 @@ public interface Explicit {
      *
      * @param bodyParameter the IntWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -161,6 +164,7 @@ public interface Explicit {
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -176,6 +180,7 @@ public interface Explicit {
      *
      * @param headerParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -190,6 +195,7 @@ public interface Explicit {
      *
      * @param headerParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -205,6 +211,7 @@ public interface Explicit {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -219,6 +226,7 @@ public interface Explicit {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -234,6 +242,7 @@ public interface Explicit {
      *
      * @param bodyParameter the StringWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -248,6 +257,7 @@ public interface Explicit {
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -263,6 +273,7 @@ public interface Explicit {
      *
      * @param headerParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -277,6 +288,7 @@ public interface Explicit {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -292,6 +304,7 @@ public interface Explicit {
      *
      * @param bodyParameter the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -306,6 +319,7 @@ public interface Explicit {
      *
      * @param bodyParameter the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -321,6 +335,7 @@ public interface Explicit {
      *
      * @param bodyParameter the ClassWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -335,6 +350,7 @@ public interface Explicit {
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -350,6 +366,7 @@ public interface Explicit {
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -364,6 +381,7 @@ public interface Explicit {
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -379,6 +397,7 @@ public interface Explicit {
      *
      * @param bodyParameter the ArrayWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -393,6 +412,7 @@ public interface Explicit {
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -408,6 +428,7 @@ public interface Explicit {
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -422,6 +443,7 @@ public interface Explicit {
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback);
 

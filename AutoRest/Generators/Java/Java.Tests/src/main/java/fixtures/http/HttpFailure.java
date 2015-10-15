@@ -40,6 +40,7 @@ public interface HttpFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback);
 

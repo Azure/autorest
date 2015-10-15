@@ -46,6 +46,7 @@ public interface Inheritance {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getValidAsync(final ServiceCallback<Siamese> serviceCallback);
 
@@ -60,6 +61,7 @@ public interface Inheritance {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback);
 

@@ -86,6 +86,7 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -101,6 +102,7 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -116,6 +118,7 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -131,6 +134,7 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -144,6 +148,7 @@ public interface LRORetrys {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
 
@@ -157,6 +162,7 @@ public interface LRORetrys {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
 
@@ -169,6 +175,7 @@ public interface LRORetrys {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete202Retry200Async(final ServiceCallback<Void> serviceCallback);
 
@@ -181,6 +188,7 @@ public interface LRORetrys {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback);
 
@@ -193,6 +201,7 @@ public interface LRORetrys {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -205,6 +214,7 @@ public interface LRORetrys {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -219,6 +229,7 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -233,6 +244,7 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -247,6 +259,7 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -261,6 +274,7 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
 

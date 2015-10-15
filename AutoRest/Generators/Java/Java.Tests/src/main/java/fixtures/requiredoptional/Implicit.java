@@ -66,6 +66,7 @@ public interface Implicit {
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback);
 
@@ -80,6 +81,7 @@ public interface Implicit {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -94,6 +96,7 @@ public interface Implicit {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -108,6 +111,7 @@ public interface Implicit {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
@@ -121,6 +125,7 @@ public interface Implicit {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback);
 
@@ -134,6 +139,7 @@ public interface Implicit {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 
@@ -147,6 +153,7 @@ public interface Implicit {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 

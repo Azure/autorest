@@ -58,6 +58,7 @@ public interface PathItems {
      * @param localStringQuery should contain value 'localStringQuery'
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
 
@@ -78,6 +79,7 @@ public interface PathItems {
      * @param localStringQuery should contain value 'localStringQuery'
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
 
@@ -98,6 +100,7 @@ public interface PathItems {
      * @param localStringQuery should contain null value
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
 
@@ -118,6 +121,7 @@ public interface PathItems {
      * @param localStringQuery should contain value null
      * @param pathItemStringQuery should contain value null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
 

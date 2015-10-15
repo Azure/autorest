@@ -52,6 +52,7 @@ public interface SubscriptionInMethod {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 
@@ -66,6 +67,7 @@ public interface SubscriptionInMethod {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 
@@ -80,6 +82,7 @@ public interface SubscriptionInMethod {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 
@@ -94,6 +97,7 @@ public interface SubscriptionInMethod {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 

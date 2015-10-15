@@ -87,6 +87,7 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
     /**
@@ -105,6 +106,7 @@ public interface AutoRestValidationTest {
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
 

@@ -88,6 +88,7 @@ public interface HttpRedirects {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head300Async(final ServiceCallback<Void> serviceCallback);
 
@@ -101,6 +102,7 @@ public interface HttpRedirects {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get300Async(final ServiceCallback<List<String>> serviceCallback);
 
@@ -113,6 +115,7 @@ public interface HttpRedirects {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head301Async(final ServiceCallback<Void> serviceCallback);
 
@@ -125,6 +128,7 @@ public interface HttpRedirects {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get301Async(final ServiceCallback<Void> serviceCallback);
 
@@ -139,6 +143,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -151,6 +156,7 @@ public interface HttpRedirects {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head302Async(final ServiceCallback<Void> serviceCallback);
 
@@ -163,6 +169,7 @@ public interface HttpRedirects {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get302Async(final ServiceCallback<Void> serviceCallback);
 
@@ -177,6 +184,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -191,6 +199,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -203,6 +212,7 @@ public interface HttpRedirects {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head307Async(final ServiceCallback<Void> serviceCallback);
 
@@ -215,6 +225,7 @@ public interface HttpRedirects {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get307Async(final ServiceCallback<Void> serviceCallback);
 
@@ -229,6 +240,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -243,6 +255,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -257,6 +270,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -271,6 +285,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 

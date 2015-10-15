@@ -34,8 +34,8 @@ public abstract class AzureClient extends ServiceClient{
      * @param response  the initial response from the PUT or PATCH operation.
      * @param <T>       the generic type of the resource
      * @return          the terminal response for the operation.
-     * @throws ServiceException
-     * @throws InterruptedException
+     * @throws ServiceException service exception
+     * @throws InterruptedException interrupted exception
      */
     public <T> AzureResponse<T> GetPutOrPatchResult(AzureResponse<T> response) throws ServiceException, InterruptedException {
         if (response == null || response.getResponse() == null) {

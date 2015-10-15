@@ -46,6 +46,7 @@ public class ServiceResponseBuilder<T> {
      *
      * @param statusCode the status code.
      * @param <V> the response destination type.
+     * @param type the type to deserialize.
      * @return the same builder instance.
      */
     public <V> ServiceResponseBuilder<T> register(int statusCode, final Type type) {
@@ -62,6 +63,7 @@ public class ServiceResponseBuilder<T> {
      * Register a destination type for errors with models.
      *
      * @param <V> the error model type.
+     * @param type the type to deserialize.
      * @return the same builder instance.
      */
     public <V> ServiceResponseBuilder<T> registerError(final Type type) {

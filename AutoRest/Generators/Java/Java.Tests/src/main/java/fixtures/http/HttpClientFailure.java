@@ -113,6 +113,7 @@ public interface HttpClientFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head400Async(final ServiceCallback<Error> serviceCallback);
 
@@ -126,6 +127,7 @@ public interface HttpClientFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get400Async(final ServiceCallback<Error> serviceCallback);
 
@@ -141,6 +143,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -156,6 +159,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -171,6 +175,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -186,6 +191,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -199,6 +205,7 @@ public interface HttpClientFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head401Async(final ServiceCallback<Error> serviceCallback);
 
@@ -212,6 +219,7 @@ public interface HttpClientFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get402Async(final ServiceCallback<Error> serviceCallback);
 
@@ -225,6 +233,7 @@ public interface HttpClientFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get403Async(final ServiceCallback<Error> serviceCallback);
 
@@ -240,6 +249,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -255,6 +265,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -270,6 +281,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -285,6 +297,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -300,6 +313,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -313,6 +327,7 @@ public interface HttpClientFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head410Async(final ServiceCallback<Error> serviceCallback);
 
@@ -326,6 +341,7 @@ public interface HttpClientFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get411Async(final ServiceCallback<Error> serviceCallback);
 
@@ -339,6 +355,7 @@ public interface HttpClientFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get412Async(final ServiceCallback<Error> serviceCallback);
 
@@ -354,6 +371,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -369,6 +387,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -384,6 +403,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -397,6 +417,7 @@ public interface HttpClientFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get416Async(final ServiceCallback<Error> serviceCallback);
 
@@ -412,6 +433,7 @@ public interface HttpClientFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -425,6 +447,7 @@ public interface HttpClientFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head429Async(final ServiceCallback<Error> serviceCallback);
 

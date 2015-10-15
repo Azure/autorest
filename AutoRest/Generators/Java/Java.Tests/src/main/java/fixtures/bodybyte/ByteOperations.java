@@ -54,6 +54,7 @@ public interface ByteOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNullAsync(final ServiceCallback<byte[]> serviceCallback);
 
@@ -67,6 +68,7 @@ public interface ByteOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback);
 
@@ -80,6 +82,7 @@ public interface ByteOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback);
 
@@ -94,6 +97,7 @@ public interface ByteOperations {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback);
 
@@ -107,6 +111,7 @@ public interface ByteOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback);
 

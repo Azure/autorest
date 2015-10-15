@@ -140,6 +140,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -153,6 +154,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -166,6 +168,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -179,6 +182,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback);
 
@@ -192,6 +196,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -205,6 +210,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -218,6 +224,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -231,6 +238,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -244,6 +252,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback);
 
@@ -257,6 +266,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback);
 
@@ -270,6 +280,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback);
 
@@ -283,6 +294,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback);
 
@@ -295,6 +307,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -307,6 +320,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -319,6 +333,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -331,6 +346,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -343,6 +359,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -355,6 +372,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -367,6 +385,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -380,6 +399,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -393,6 +413,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback);
 
@@ -406,6 +427,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -419,6 +441,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback);
 
@@ -431,6 +454,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -443,6 +467,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -455,6 +480,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -467,6 +493,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -480,6 +507,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback);
 
@@ -493,6 +521,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -506,6 +535,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -519,6 +549,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback);
 
@@ -532,6 +563,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -545,6 +577,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback);
 
@@ -558,6 +591,7 @@ public interface MultipleResponses {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback);
 

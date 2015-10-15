@@ -44,6 +44,7 @@ public interface HttpSuccess {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head204Async(final ServiceCallback<Boolean> serviceCallback);
 
@@ -57,6 +58,7 @@ public interface HttpSuccess {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head404Async(final ServiceCallback<Boolean> serviceCallback);
 

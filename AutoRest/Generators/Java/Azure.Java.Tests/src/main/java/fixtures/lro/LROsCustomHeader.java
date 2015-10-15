@@ -67,6 +67,7 @@ public interface LROsCustomHeader {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -82,6 +83,7 @@ public interface LROsCustomHeader {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -97,6 +99,7 @@ public interface LROsCustomHeader {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -112,6 +115,7 @@ public interface LROsCustomHeader {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -126,6 +130,7 @@ public interface LROsCustomHeader {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -140,6 +145,7 @@ public interface LROsCustomHeader {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -154,6 +160,7 @@ public interface LROsCustomHeader {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -168,6 +175,7 @@ public interface LROsCustomHeader {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
 

@@ -82,6 +82,7 @@ public interface Paging {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getSinglePagesAsync(final ServiceCallback<ProductResult> serviceCallback);
 
@@ -95,6 +96,7 @@ public interface Paging {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMultiplePagesAsync(final ServiceCallback<ProductResult> serviceCallback);
 
@@ -108,6 +110,7 @@ public interface Paging {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMultiplePagesRetryFirstAsync(final ServiceCallback<ProductResult> serviceCallback);
 
@@ -121,6 +124,7 @@ public interface Paging {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMultiplePagesRetrySecondAsync(final ServiceCallback<ProductResult> serviceCallback);
 
@@ -134,6 +138,7 @@ public interface Paging {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getSinglePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback);
 
@@ -147,6 +152,7 @@ public interface Paging {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMultiplePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback);
 
@@ -160,6 +166,7 @@ public interface Paging {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMultiplePagesFailureUriAsync(final ServiceCallback<ProductResult> serviceCallback);
 
@@ -175,6 +182,7 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getSinglePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
@@ -190,6 +198,7 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
@@ -205,6 +214,7 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMultiplePagesRetryFirstNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
@@ -220,6 +230,7 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMultiplePagesRetrySecondNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
@@ -235,6 +246,7 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getSinglePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
@@ -250,6 +262,7 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMultiplePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
@@ -265,6 +278,7 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMultiplePagesFailureUriNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 

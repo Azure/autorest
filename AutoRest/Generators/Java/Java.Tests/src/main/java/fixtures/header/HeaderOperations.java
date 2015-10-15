@@ -117,6 +117,7 @@ public interface HeaderOperations {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback);
 
@@ -129,6 +130,7 @@ public interface HeaderOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -143,6 +145,7 @@ public interface HeaderOperations {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback);
 
@@ -155,6 +158,7 @@ public interface HeaderOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -171,6 +175,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback);
 
@@ -185,6 +190,7 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
@@ -201,6 +207,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback);
 
@@ -215,6 +222,7 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
@@ -231,6 +239,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback);
 
@@ -245,6 +254,7 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
@@ -261,6 +271,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback);
 
@@ -275,6 +286,7 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
@@ -291,6 +303,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback);
 
@@ -305,6 +318,7 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
@@ -321,6 +335,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback);
 
@@ -335,6 +350,7 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
@@ -351,6 +367,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback);
 
@@ -365,6 +382,7 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
@@ -381,6 +399,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback);
 
@@ -395,6 +414,7 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
@@ -411,6 +431,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback);
 
@@ -425,6 +446,7 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
@@ -441,6 +463,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback);
 
@@ -455,6 +478,7 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
@@ -467,6 +491,7 @@ public interface HeaderOperations {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> customRequestIdAsync(final ServiceCallback<Void> serviceCallback);
 

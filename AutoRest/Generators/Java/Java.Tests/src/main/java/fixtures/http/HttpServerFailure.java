@@ -54,6 +54,7 @@ public interface HttpServerFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<Void> head501Async(final ServiceCallback<Error> serviceCallback);
 
@@ -67,6 +68,7 @@ public interface HttpServerFailure {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> get501Async(final ServiceCallback<Error> serviceCallback);
 
@@ -82,6 +84,7 @@ public interface HttpServerFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -97,6 +100,7 @@ public interface HttpServerFailure {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 

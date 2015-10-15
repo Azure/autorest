@@ -84,6 +84,7 @@ public interface Number {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getNullAsync(final ServiceCallback<Double> serviceCallback);
 
@@ -97,6 +98,7 @@ public interface Number {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback);
 
@@ -110,6 +112,7 @@ public interface Number {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback);
 
@@ -124,6 +127,7 @@ public interface Number {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
@@ -137,6 +141,7 @@ public interface Number {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getBigFloatAsync(final ServiceCallback<Double> serviceCallback);
 
@@ -151,6 +156,7 @@ public interface Number {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
@@ -164,6 +170,7 @@ public interface Number {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback);
 
@@ -178,6 +185,7 @@ public interface Number {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
@@ -191,6 +199,7 @@ public interface Number {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback);
 
@@ -205,6 +214,7 @@ public interface Number {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
@@ -218,6 +228,7 @@ public interface Number {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback);
 
@@ -232,6 +243,7 @@ public interface Number {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
@@ -245,6 +257,7 @@ public interface Number {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback);
 
@@ -259,6 +272,7 @@ public interface Number {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
@@ -272,6 +286,7 @@ public interface Number {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback);
 

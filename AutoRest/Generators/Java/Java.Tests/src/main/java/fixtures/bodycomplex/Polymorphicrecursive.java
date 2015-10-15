@@ -46,6 +46,7 @@ public interface Polymorphicrecursive {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
@@ -164,6 +165,7 @@ public interface Polymorphicrecursive {
      ]
  }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 

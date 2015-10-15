@@ -52,6 +52,7 @@ public interface ApiVersionLocal {
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMethodLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
@@ -66,6 +67,7 @@ public interface ApiVersionLocal {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
@@ -80,6 +82,7 @@ public interface ApiVersionLocal {
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getPathLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
@@ -94,6 +97,7 @@ public interface ApiVersionLocal {
      *
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getSwaggerLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 

@@ -194,6 +194,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -209,6 +210,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -224,6 +226,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -239,6 +242,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -254,6 +258,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -269,6 +274,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -281,6 +287,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback);
 
@@ -293,6 +300,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback);
 
@@ -305,6 +313,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback);
 
@@ -317,6 +326,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback);
 
@@ -329,6 +339,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback);
 
@@ -341,6 +352,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback);
 
@@ -355,6 +367,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -369,6 +382,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -383,6 +397,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -397,6 +412,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPost202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -411,6 +427,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -425,6 +442,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -440,6 +458,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -455,6 +474,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -470,6 +490,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -485,6 +506,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -500,6 +522,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -515,6 +538,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -527,6 +551,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -539,6 +564,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -551,6 +577,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -563,6 +590,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -577,6 +605,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -591,6 +620,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPost202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -605,6 +635,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -619,6 +650,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -634,6 +666,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -649,6 +682,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPut200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -664,6 +698,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -679,6 +714,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -694,6 +730,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -709,6 +746,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -721,6 +759,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -733,6 +772,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -745,6 +785,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -757,6 +798,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -769,6 +811,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -781,6 +824,7 @@ public interface LROSADs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -795,6 +839,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -809,6 +854,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPost202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -823,6 +869,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -837,6 +884,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -851,6 +899,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -865,6 +914,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback);
 

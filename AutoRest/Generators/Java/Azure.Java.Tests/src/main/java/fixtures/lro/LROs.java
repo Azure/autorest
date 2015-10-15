@@ -262,6 +262,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -277,6 +278,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -292,6 +294,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -307,6 +310,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -322,6 +326,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -337,6 +342,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -352,6 +358,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -367,6 +374,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -382,6 +390,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -397,6 +406,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -412,6 +422,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -427,6 +438,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -442,6 +454,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> put200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -457,6 +470,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -472,6 +486,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -487,6 +502,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -502,6 +518,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -517,6 +534,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -532,6 +550,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -547,6 +566,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -562,6 +582,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -577,6 +598,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -592,6 +614,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -607,6 +630,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -622,6 +646,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -637,6 +662,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -652,6 +678,7 @@ public interface LROs {
      *
      * @param sku sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
 
@@ -667,6 +694,7 @@ public interface LROs {
      *
      * @param sku sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
 
@@ -682,6 +710,7 @@ public interface LROs {
      *
      * @param sku Sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
 
@@ -697,6 +726,7 @@ public interface LROs {
      *
      * @param sku Sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
 
@@ -712,6 +742,7 @@ public interface LROs {
      *
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
 
@@ -727,6 +758,7 @@ public interface LROs {
      *
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
 
@@ -742,6 +774,7 @@ public interface LROs {
      *
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
 
@@ -757,6 +790,7 @@ public interface LROs {
      *
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
 
@@ -770,6 +804,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
 
@@ -783,6 +818,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
 
@@ -796,6 +832,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback);
 
@@ -809,6 +846,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback);
 
@@ -822,6 +860,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback);
 
@@ -835,6 +874,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback);
 
@@ -847,6 +887,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -859,6 +900,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -872,6 +914,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete202Retry200Async(final ServiceCallback<Product> serviceCallback);
 
@@ -885,6 +928,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback);
 
@@ -898,6 +942,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> delete202NoRetry204Async(final ServiceCallback<Product> serviceCallback);
 
@@ -911,6 +956,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback);
 
@@ -923,6 +969,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -935,6 +982,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -947,6 +995,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -959,6 +1008,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -971,6 +1021,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -983,6 +1034,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -995,6 +1047,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -1007,6 +1060,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -1019,6 +1073,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -1031,6 +1086,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -1043,6 +1099,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -1055,6 +1112,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -1068,6 +1126,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback);
 
@@ -1081,6 +1140,7 @@ public interface LROs {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback);
 
@@ -1095,6 +1155,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -1109,6 +1170,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -1124,6 +1186,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> post202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -1139,6 +1202,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -1154,6 +1218,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -1169,6 +1234,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -1184,6 +1250,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -1199,6 +1266,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
@@ -1213,6 +1281,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -1227,6 +1296,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -1241,6 +1311,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
@@ -1255,6 +1326,7 @@ public interface LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback);
 

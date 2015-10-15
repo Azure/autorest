@@ -119,7 +119,9 @@ public class JacksonHelper {
      *
      * @param value the string value to deserialize.
      * @param <T> the type of the deserialized object.
+     * @param type the type to deserialize.
      * @return the deserialized object.
+     * @throws IOException exception in deserialization
      */
     @SuppressWarnings("unchecked")
     public static <T> T deserialize(String value, TypeReference<?> type) throws IOException {
@@ -131,7 +133,9 @@ public class JacksonHelper {
      * Deserializes an input stream into a {@link T} object using the current {@link ObjectMapper}.
      * @param input the input stream to deserialize.
      * @param <T> the type of the deserialized object.
+     * @param type the type to deserialize.
      * @return the deserialized object.
+     * @throws IOException exception in deserialization
      */
     public static <T> T deserialize(InputStream input, TypeReference<?> type) throws IOException {
         if (input == null) return null;

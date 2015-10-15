@@ -50,6 +50,7 @@ public interface ApiVersionDefault {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -62,6 +63,7 @@ public interface ApiVersionDefault {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -74,6 +76,7 @@ public interface ApiVersionDefault {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -86,6 +89,7 @@ public interface ApiVersionDefault {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 

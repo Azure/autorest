@@ -44,6 +44,7 @@ public interface Files {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
@@ -57,6 +58,7 @@ public interface Files {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     Call<ResponseBody> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
