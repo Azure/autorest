@@ -24,7 +24,7 @@
 #
 #--------------------------------------------------------------------------
 
-from multiprocessing import Process, Queue, Value, Lock
+from threading import Thread, Event
 import time
 import pickle
 
@@ -57,55 +57,61 @@ class Polled(object):
 
     def __init__(self, response, command):
 
-        self._lock = Lock()
-        kwargs = {}
-        url = self._extract_url(response)
+        self._response = response
+        self._url = self._extract_url()
+        self._callbacks = []
+        self._done = Event()
 
         setattr(Polled, "command", staticmethod(command))
 
-        for attr, value in self._extract_attributes(response).items():
-            attr_name = '_' + attr
-            attr_val = Value('c_char_p', False)
-            attr_val.value = pickle.dumps(value)
+        self._thread = Thread(target=self._poll)
+        self._thread.start()
 
-            setattr(self, attr_name, attr_val)
+    def _extract_url(self):
+        if self._response.asyncoperation:
+            return self._response.asyncoperation
 
-            def get_attr(s):
-                with s._lock:
-                    return pickle.loads(getattr(s, attr_name).value)
+        elif self._response.location:
+            return self._response.location
 
-            setattr(Polled, attr, property(get_attr))
-            kwargs[attr] = attr_val
-            
-
-        self.p = Process(target=Polled.poll, args=(self._lock, url, kwargs))
-        self.p.start()
-
-    def _extract_attributes(self, response):
-        attrs = response.__dict__
-        attrs.pop('attributes_map')
-        attrs.pop('headers_map')
-        attrs.pop('body_map')
-        return attrs
-
-    def _extract_url(self, response):
-        if response.asyncoperation:
-            return response.asyncoperation
-
-        elif response.location:
-            status_link = response.location
-
-    @staticmethod
-    def poll(lock, url, kwargs):
-
+    def _poll(self):
         while True:
-            response = Poller.command()
+            time.sleep(POLLING_DELAY)
+            self._response = Poller.command(self._url)
 
-            with lock:
-                for attr in kwargs:
-                    kwargs[attr].value = pickle.dumps(getattr(response, attr))
-
-            if response.status_code in ['x','y','z']:
+            if self._response.status_code in []:
+                self._done.set()
                 break
 
-            time.sleep(POLLING_DELAY)
+        callbacks = list(self._callbacks)
+        for call in callbacks:
+            call(self._response)
+
+        if len(callbacks) != len(self._callbacks):
+            more_calls = [c for c in self._callbacks if c not in callbacks]
+            for call in more_calls:
+                call(self._response)
+
+    def result(timeout=None):
+        self.wait(timeout)
+        return self._response
+
+    def wait(timeout=None):
+        self._thread.join(timeout=timeout)
+
+    def done(self):
+        return not self._thread.isAlive()
+
+    def add_done_callback(func):
+
+        if self._done.is_set():
+            raise Exception("Process is complete.")
+        
+        self._callbacks.append(func)
+
+    def remove_done_callback(func):
+
+        if self._done.is_set():
+            raise Exception("Process is complete")
+        
+        self._callbacks = [c for c in self._callbacks if c != func]

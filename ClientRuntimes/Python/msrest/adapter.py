@@ -44,7 +44,6 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
 
         super(ClientHTTPAdapter, self).__init__()
 
-    @staticmethod
     def event_hook(event):
         def event_wrapper(func):
             def execute_hook(self, *args, **kwargs):

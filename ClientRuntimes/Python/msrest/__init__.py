@@ -24,4 +24,6 @@
 #
 #--------------------------------------------------------------------------
 
+from .service_client import ServiceClient
 from .serialization import Serialized, Deserialized
+from .configuration import Configuration
