@@ -40,6 +40,7 @@ public interface Polymorphism {
 
     }
     /**
+     * Get complex types that are polymorphic
      *
      * @return the Fish object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -47,6 +48,7 @@ public interface Polymorphism {
     Fish getValid() throws ServiceException;
 
     /**
+     * Get complex types that are polymorphic
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -54,6 +56,7 @@ public interface Polymorphism {
     Call<ResponseBody> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
+     * Put complex types that are polymorphic
      *
      * @param complexBody Please put a salmon that looks like this:
  {
@@ -85,6 +88,7 @@ public interface Polymorphism {
     void putValid(Fish complexBody) throws ServiceException;
 
     /**
+     * Put complex types that are polymorphic
      *
      * @param complexBody Please put a salmon that looks like this:
  {
@@ -117,6 +121,7 @@ public interface Polymorphism {
     Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
  {
@@ -149,6 +154,7 @@ public interface Polymorphism {
     void putValidMissingRequired(Fish complexBody) throws ServiceException;
 
     /**
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
  {

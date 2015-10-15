@@ -88,6 +88,7 @@ public interface DatetimeOperations {
 
     }
     /**
+     * Get null datetime value
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -95,6 +96,7 @@ public interface DatetimeOperations {
     DateTime getNull() throws ServiceException;
 
     /**
+     * Get null datetime value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -102,6 +104,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getNullAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Get invalid datetime value
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -109,6 +112,7 @@ public interface DatetimeOperations {
     DateTime getInvalid() throws ServiceException;
 
     /**
+     * Get invalid datetime value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -116,6 +120,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Get overflow datetime value
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -123,6 +128,7 @@ public interface DatetimeOperations {
     DateTime getOverflow() throws ServiceException;
 
     /**
+     * Get overflow datetime value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -130,6 +136,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Get underflow datetime value
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -137,6 +144,7 @@ public interface DatetimeOperations {
     DateTime getUnderflow() throws ServiceException;
 
     /**
+     * Get underflow datetime value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -144,6 +152,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -151,6 +160,7 @@ public interface DatetimeOperations {
     void putUtcMaxDateTime(DateTime datetimeBody) throws ServiceException;
 
     /**
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -159,6 +169,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get max datetime value 9999-12-31t23:59:59.9999999z
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -166,6 +177,7 @@ public interface DatetimeOperations {
     DateTime getUtcLowercaseMaxDateTime() throws ServiceException;
 
     /**
+     * Get max datetime value 9999-12-31t23:59:59.9999999z
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -173,6 +185,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -180,6 +193,7 @@ public interface DatetimeOperations {
     DateTime getUtcUppercaseMaxDateTime() throws ServiceException;
 
     /**
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -187,6 +201,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -194,6 +209,7 @@ public interface DatetimeOperations {
     void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException;
 
     /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -202,6 +218,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -209,6 +226,7 @@ public interface DatetimeOperations {
     DateTime getLocalPositiveOffsetLowercaseMaxDateTime() throws ServiceException;
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -216,6 +234,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -223,6 +242,7 @@ public interface DatetimeOperations {
     DateTime getLocalPositiveOffsetUppercaseMaxDateTime() throws ServiceException;
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -230,6 +250,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -237,6 +258,7 @@ public interface DatetimeOperations {
     void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException;
 
     /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -245,6 +267,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -252,6 +275,7 @@ public interface DatetimeOperations {
     DateTime getLocalNegativeOffsetUppercaseMaxDateTime() throws ServiceException;
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -259,6 +283,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -266,6 +291,7 @@ public interface DatetimeOperations {
     DateTime getLocalNegativeOffsetLowercaseMaxDateTime() throws ServiceException;
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -273,6 +299,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00Z
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -280,6 +307,7 @@ public interface DatetimeOperations {
     void putUtcMinDateTime(DateTime datetimeBody) throws ServiceException;
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00Z
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -288,6 +316,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00Z
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -295,6 +324,7 @@ public interface DatetimeOperations {
     DateTime getUtcMinDateTime() throws ServiceException;
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00Z
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -302,6 +332,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00+14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -309,6 +340,7 @@ public interface DatetimeOperations {
     void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ServiceException;
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00+14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -317,6 +349,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00+14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -324,6 +357,7 @@ public interface DatetimeOperations {
     DateTime getLocalPositiveOffsetMinDateTime() throws ServiceException;
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00+14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -331,6 +365,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00-14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -338,6 +373,7 @@ public interface DatetimeOperations {
     void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ServiceException;
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00-14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -346,6 +382,7 @@ public interface DatetimeOperations {
     Call<ResponseBody> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00-14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -353,6 +390,7 @@ public interface DatetimeOperations {
     DateTime getLocalNegativeOffsetMinDateTime() throws ServiceException;
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00-14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

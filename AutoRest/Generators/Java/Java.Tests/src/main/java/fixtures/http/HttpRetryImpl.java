@@ -33,6 +33,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 408 status code, then 200 after retry
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -49,6 +50,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 408 status code, then 200 after retry
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -75,6 +77,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -92,6 +95,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -119,6 +123,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -136,6 +141,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -163,6 +169,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 502 status code, then 200 after retry
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -179,6 +186,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 502 status code, then 200 after retry
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -205,6 +213,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -222,6 +231,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -249,6 +259,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -266,6 +277,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -293,6 +305,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -310,6 +323,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -337,6 +351,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -354,6 +369,7 @@ public class HttpRetryImpl implements HttpRetry {
     }
 
     /**
+     * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

@@ -16,6 +16,7 @@ import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
+import org.joda.time.Period;
 import fixtures.header.models.GreyscaleColors;
 import retrofit.http.POST;
 import retrofit.http.Header;
@@ -90,6 +91,12 @@ public interface HeaderOperations {
         @POST("/header/response/prim/datetime")
         Call<ResponseBody> responseDatetime(@Header("scenario") String scenario);
 
+        @POST("/header/param/prim/duration")
+        Call<ResponseBody> paramDuration(@Header("scenario") String scenario, @Header("value") Period value);
+
+        @POST("/header/response/prim/duration")
+        Call<ResponseBody> responseDuration(@Header("scenario") String scenario);
+
         @POST("/header/param/prim/byte")
         Call<ResponseBody> paramByte(@Header("scenario") String scenario, @Header("value") String value);
 
@@ -107,6 +114,7 @@ public interface HeaderOperations {
 
     }
     /**
+     * Send a post request with header value "User-Agent": "overwrite"
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -114,6 +122,7 @@ public interface HeaderOperations {
     void paramExistingKey(String userAgent) throws ServiceException;
 
     /**
+     * Send a post request with header value "User-Agent": "overwrite"
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -122,12 +131,14 @@ public interface HeaderOperations {
     Call<ResponseBody> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header value "User-Agent": "overwrite"
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void responseExistingKey() throws ServiceException;
 
     /**
+     * Get a response with header value "User-Agent": "overwrite"
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -135,6 +146,7 @@ public interface HeaderOperations {
     Call<ResponseBody> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header value "Content-Type": "text/html"
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -142,6 +154,7 @@ public interface HeaderOperations {
     void paramProtectedKey(String contentType) throws ServiceException;
 
     /**
+     * Send a post request with header value "Content-Type": "text/html"
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -150,12 +163,14 @@ public interface HeaderOperations {
     Call<ResponseBody> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header value "Content-Type": "text/html"
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void responseProtectedKey() throws ServiceException;
 
     /**
+     * Get a response with header value "Content-Type": "text/html"
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -163,6 +178,7 @@ public interface HeaderOperations {
     Call<ResponseBody> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2 
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
@@ -171,6 +187,7 @@ public interface HeaderOperations {
     void paramInteger(String scenario, int value) throws ServiceException;
 
     /**
+     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2 
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
@@ -180,6 +197,7 @@ public interface HeaderOperations {
     Call<ResponseBody> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header value "value": 1 or -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -187,6 +205,7 @@ public interface HeaderOperations {
     void responseInteger(String scenario) throws ServiceException;
 
     /**
+     * Get a response with header value "value": 1 or -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -195,6 +214,7 @@ public interface HeaderOperations {
     Call<ResponseBody> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2 
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
@@ -203,6 +223,7 @@ public interface HeaderOperations {
     void paramLong(String scenario, long value) throws ServiceException;
 
     /**
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2 
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
@@ -212,6 +233,7 @@ public interface HeaderOperations {
     Call<ResponseBody> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header value "value": 105 or -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -219,6 +241,7 @@ public interface HeaderOperations {
     void responseLong(String scenario) throws ServiceException;
 
     /**
+     * Get a response with header value "value": 105 or -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -227,6 +250,7 @@ public interface HeaderOperations {
     Call<ResponseBody> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
@@ -235,6 +259,7 @@ public interface HeaderOperations {
     void paramFloat(String scenario, double value) throws ServiceException;
 
     /**
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
@@ -244,6 +269,7 @@ public interface HeaderOperations {
     Call<ResponseBody> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header value "value": 0.07 or -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -251,6 +277,7 @@ public interface HeaderOperations {
     void responseFloat(String scenario) throws ServiceException;
 
     /**
+     * Get a response with header value "value": 0.07 or -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -259,6 +286,7 @@ public interface HeaderOperations {
     Call<ResponseBody> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
@@ -267,6 +295,7 @@ public interface HeaderOperations {
     void paramDouble(String scenario, double value) throws ServiceException;
 
     /**
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
@@ -276,6 +305,7 @@ public interface HeaderOperations {
     Call<ResponseBody> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header value "value": 7e120 or -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -283,6 +313,7 @@ public interface HeaderOperations {
     void responseDouble(String scenario) throws ServiceException;
 
     /**
+     * Get a response with header value "value": 7e120 or -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -291,6 +322,7 @@ public interface HeaderOperations {
     Call<ResponseBody> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
@@ -299,6 +331,7 @@ public interface HeaderOperations {
     void paramBool(String scenario, boolean value) throws ServiceException;
 
     /**
+     * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
@@ -308,6 +341,7 @@ public interface HeaderOperations {
     Call<ResponseBody> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header value "value": true or false
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -315,6 +349,7 @@ public interface HeaderOperations {
     void responseBool(String scenario) throws ServiceException;
 
     /**
+     * Get a response with header value "value": true or false
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -323,6 +358,7 @@ public interface HeaderOperations {
     Call<ResponseBody> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": ""
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
@@ -331,6 +367,7 @@ public interface HeaderOperations {
     void paramString(String scenario, String value) throws ServiceException;
 
     /**
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": ""
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
@@ -340,6 +377,7 @@ public interface HeaderOperations {
     Call<ResponseBody> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -347,6 +385,7 @@ public interface HeaderOperations {
     void responseString(String scenario) throws ServiceException;
 
     /**
+     * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -355,6 +394,7 @@ public interface HeaderOperations {
     Call<ResponseBody> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
@@ -363,6 +403,7 @@ public interface HeaderOperations {
     void paramDate(String scenario, LocalDate value) throws ServiceException;
 
     /**
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
@@ -372,6 +413,7 @@ public interface HeaderOperations {
     Call<ResponseBody> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header values "2010-01-01" or "0001-01-01"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -379,6 +421,7 @@ public interface HeaderOperations {
     void responseDate(String scenario) throws ServiceException;
 
     /**
+     * Get a response with header values "2010-01-01" or "0001-01-01"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -387,6 +430,7 @@ public interface HeaderOperations {
     Call<ResponseBody> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
@@ -395,6 +439,7 @@ public interface HeaderOperations {
     void paramDatetime(String scenario, DateTime value) throws ServiceException;
 
     /**
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
@@ -404,6 +449,7 @@ public interface HeaderOperations {
     Call<ResponseBody> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -411,6 +457,7 @@ public interface HeaderOperations {
     void responseDatetime(String scenario) throws ServiceException;
 
     /**
+     * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -419,6 +466,43 @@ public interface HeaderOperations {
     Call<ResponseBody> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    void paramDuration(String scenario, Period value) throws ServiceException;
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get a response with header values "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    void responseDuration(String scenario) throws ServiceException;
+
+    /**
+     * Get a response with header values "P123DT22H14M12.011S"
+     *
+     * @param scenario Send a post request with header values "scenario": "valid"
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
@@ -427,6 +511,7 @@ public interface HeaderOperations {
     void paramByte(String scenario, byte[] value) throws ServiceException;
 
     /**
+     * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
@@ -436,6 +521,7 @@ public interface HeaderOperations {
     Call<ResponseBody> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -443,6 +529,7 @@ public interface HeaderOperations {
     void responseByte(String scenario) throws ServiceException;
 
     /**
+     * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -451,6 +538,7 @@ public interface HeaderOperations {
     Call<ResponseBody> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
@@ -459,6 +547,7 @@ public interface HeaderOperations {
     void paramEnum(String scenario, GreyscaleColors value) throws ServiceException;
 
     /**
+     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
@@ -468,6 +557,7 @@ public interface HeaderOperations {
     Call<ResponseBody> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a response with header values "GREY" or null
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -475,6 +565,7 @@ public interface HeaderOperations {
     void responseEnum(String scenario) throws ServiceException;
 
     /**
+     * Get a response with header values "GREY" or null
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -483,12 +574,14 @@ public interface HeaderOperations {
     Call<ResponseBody> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void customRequestId() throws ServiceException;
 
     /**
+     * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

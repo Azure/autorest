@@ -34,6 +34,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 400 to the initial request
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -52,6 +53,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 400 to the initial request
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -80,6 +82,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 400 to the initial request
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -98,6 +101,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 400 to the initial request
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -126,6 +130,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -144,6 +149,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -172,6 +178,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -190,6 +197,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -218,6 +226,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -236,6 +245,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -263,6 +273,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -281,6 +292,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -308,6 +320,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 400 with an error body
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -324,6 +337,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 400 with an error body
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -350,6 +364,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 400 with an error body
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -366,6 +381,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 400 with an error body
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -392,6 +408,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 with a location header
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -408,6 +425,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 with a location header
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -434,6 +452,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 with a location header
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -450,6 +469,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 with a location header
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -476,6 +496,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -492,6 +513,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -518,6 +540,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -534,6 +557,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -560,6 +584,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 400 with no error body
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -577,6 +602,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 400 with no error body
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -604,6 +630,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 400 with no error body
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -621,6 +648,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 400 with no error body
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -648,6 +676,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 with a location header
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -665,6 +694,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 with a location header
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -692,6 +722,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 with a location header
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -709,6 +740,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 with a location header
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -736,6 +768,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -753,6 +786,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -780,6 +814,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -797,6 +832,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -824,6 +860,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 201 to the initial request with no payload
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -842,6 +879,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 201 to the initial request with no payload
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -870,6 +908,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 201 to the initial request with no payload
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -888,6 +927,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 201 to the initial request with no payload
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -916,6 +956,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -934,6 +975,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -961,6 +1003,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -979,6 +1022,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1006,6 +1050,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1024,6 +1069,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1051,6 +1097,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1069,6 +1116,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1096,6 +1144,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1112,6 +1161,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1138,6 +1188,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1154,6 +1205,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1180,6 +1232,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1196,6 +1249,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1222,6 +1276,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1238,6 +1293,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1264,6 +1320,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1281,6 +1338,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1308,6 +1366,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1325,6 +1384,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1352,6 +1412,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1369,6 +1430,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1396,6 +1458,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1413,6 +1476,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1440,6 +1504,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1458,6 +1523,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1486,6 +1552,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1504,6 +1571,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1532,6 +1600,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1550,6 +1619,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1577,6 +1647,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1595,6 +1666,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1622,6 +1694,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1640,6 +1713,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1667,6 +1741,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @return the Product object if successful.
@@ -1685,6 +1760,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1712,6 +1788,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1728,6 +1805,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1754,6 +1832,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1770,6 +1849,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1796,6 +1876,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1812,6 +1893,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1838,6 +1920,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1854,6 +1937,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1880,6 +1964,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1896,6 +1981,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1922,6 +2008,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1938,6 +2025,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1964,6 +2052,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1981,6 +2070,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2008,6 +2098,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2025,6 +2116,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2052,6 +2144,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2069,6 +2162,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2096,6 +2190,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2113,6 +2208,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2140,6 +2236,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2157,6 +2254,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2184,6 +2282,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2201,6 +2300,7 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

@@ -60,6 +60,7 @@ public interface IntOperations {
 
     }
     /**
+     * Get null Int value
      *
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -67,6 +68,7 @@ public interface IntOperations {
     Integer getNull() throws ServiceException;
 
     /**
+     * Get null Int value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -74,6 +76,7 @@ public interface IntOperations {
     Call<ResponseBody> getNullAsync(final ServiceCallback<Integer> serviceCallback);
 
     /**
+     * Get invalid Int value
      *
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -81,6 +84,7 @@ public interface IntOperations {
     Integer getInvalid() throws ServiceException;
 
     /**
+     * Get invalid Int value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -88,6 +92,7 @@ public interface IntOperations {
     Call<ResponseBody> getInvalidAsync(final ServiceCallback<Integer> serviceCallback);
 
     /**
+     * Get overflow Int32 value
      *
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -95,6 +100,7 @@ public interface IntOperations {
     Integer getOverflowInt32() throws ServiceException;
 
     /**
+     * Get overflow Int32 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -102,6 +108,7 @@ public interface IntOperations {
     Call<ResponseBody> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback);
 
     /**
+     * Get underflow Int32 value
      *
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -109,6 +116,7 @@ public interface IntOperations {
     Integer getUnderflowInt32() throws ServiceException;
 
     /**
+     * Get underflow Int32 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -116,6 +124,7 @@ public interface IntOperations {
     Call<ResponseBody> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback);
 
     /**
+     * Get overflow Int64 value
      *
      * @return the Long object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -123,6 +132,7 @@ public interface IntOperations {
     Long getOverflowInt64() throws ServiceException;
 
     /**
+     * Get overflow Int64 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -130,6 +140,7 @@ public interface IntOperations {
     Call<ResponseBody> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback);
 
     /**
+     * Get underflow Int64 value
      *
      * @return the Long object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -137,6 +148,7 @@ public interface IntOperations {
     Long getUnderflowInt64() throws ServiceException;
 
     /**
+     * Get underflow Int64 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -144,6 +156,7 @@ public interface IntOperations {
     Call<ResponseBody> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback);
 
     /**
+     * Put max int32 value
      *
      * @param intBody the int value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -151,6 +164,7 @@ public interface IntOperations {
     void putMax32(int intBody) throws ServiceException;
 
     /**
+     * Put max int32 value
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -159,6 +173,7 @@ public interface IntOperations {
     Call<ResponseBody> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put max int64 value
      *
      * @param intBody the long value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -166,6 +181,7 @@ public interface IntOperations {
     void putMax64(long intBody) throws ServiceException;
 
     /**
+     * Put max int64 value
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -174,6 +190,7 @@ public interface IntOperations {
     Call<ResponseBody> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put min int32 value
      *
      * @param intBody the int value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -181,6 +198,7 @@ public interface IntOperations {
     void putMin32(int intBody) throws ServiceException;
 
     /**
+     * Put min int32 value
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -189,6 +207,7 @@ public interface IntOperations {
     Call<ResponseBody> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put min int64 value
      *
      * @param intBody the long value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -196,6 +215,7 @@ public interface IntOperations {
     void putMin64(long intBody) throws ServiceException;
 
     /**
+     * Put min int64 value
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

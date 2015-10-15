@@ -45,6 +45,7 @@ public interface ByteOperations {
 
     }
     /**
+     * Get null byte value
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -52,6 +53,7 @@ public interface ByteOperations {
     byte[] getNull() throws ServiceException;
 
     /**
+     * Get null byte value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -59,6 +61,7 @@ public interface ByteOperations {
     Call<ResponseBody> getNullAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
+     * Get empty byte value ''
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -66,6 +69,7 @@ public interface ByteOperations {
     byte[] getEmpty() throws ServiceException;
 
     /**
+     * Get empty byte value ''
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -73,6 +77,7 @@ public interface ByteOperations {
     Call<ResponseBody> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -80,6 +85,7 @@ public interface ByteOperations {
     byte[] getNonAscii() throws ServiceException;
 
     /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -87,6 +93,7 @@ public interface ByteOperations {
     Call<ResponseBody> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -94,6 +101,7 @@ public interface ByteOperations {
     void putNonAscii(byte[] byteBody) throws ServiceException;
 
     /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -102,6 +110,7 @@ public interface ByteOperations {
     Call<ResponseBody> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get invalid byte value ':::SWAGGER::::'
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -109,6 +118,7 @@ public interface ByteOperations {
     byte[] getInvalid() throws ServiceException;
 
     /**
+     * Get invalid byte value ':::SWAGGER::::'
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

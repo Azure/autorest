@@ -112,21 +112,30 @@ namespace Fixtures.PetstoreV2
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
         }    
         /// <summary>
+        /// Add a new pet to the store
         /// </summary>
         /// <param name='body'>
-        /// Pet object that needs to be added to the store
-        /// </param>
+        /// Pet object that needs to be added to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -155,7 +164,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "AddPet", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "pet").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pet").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -219,10 +229,10 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Update an existing pet
         /// </summary>
         /// <param name='body'>
-        /// Pet object that needs to be added to the store
-        /// </param>
+        /// Pet object that needs to be added to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -251,7 +261,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "UpdatePet", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "pet").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pet").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -309,11 +320,11 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
-        /// Multiple status values can be provided with comma seperated strings
+        /// Finds Pets by status
         /// </summary>
+        /// Multiple status values can be provided with comma seperated strings
         /// <param name='status'>
-        /// Status values that need to be considered for filter
-        /// </param>
+        /// Status values that need to be considered for filter/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -338,7 +349,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "FindPetsByStatus", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "pet/findByStatus").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pet/findByStatus").ToString();
             List<string> queryParameters = new List<string>();
             if (status != null)
             {
@@ -407,12 +419,12 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Finds Pets by tags
+        /// </summary>
         /// Muliple tags can be provided with comma seperated strings. Use tag1, tag2,
         /// tag3 for testing.
-        /// </summary>
         /// <param name='tags'>
-        /// Tags to filter by
-        /// </param>
+        /// Tags to filter by/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -437,7 +449,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "FindPetsByTags", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "pet/findByTags").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pet/findByTags").ToString();
             List<string> queryParameters = new List<string>();
             if (tags != null)
             {
@@ -506,11 +519,11 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
-        /// Returns a single pet
+        /// Find pet by Id
         /// </summary>
+        /// Returns a single pet
         /// <param name='petId'>
-        /// Id of pet to return
-        /// </param>
+        /// Id of pet to return/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -535,7 +548,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "GetPetById", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "pet/{petId}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
             url = url.Replace("{petId}", Uri.EscapeDataString(JsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
@@ -596,16 +610,14 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Updates a pet in the store with form data
         /// </summary>
         /// <param name='petId'>
-        /// Id of pet that needs to be updated
-        /// </param>
+        /// Id of pet that needs to be updated/// </param>
         /// <param name='name'>
-        /// Updated name of the pet
-        /// </param>
+        /// Updated name of the pet/// </param>
         /// <param name='status'>
-        /// Updated status of the pet
-        /// </param>
+        /// Updated status of the pet/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -632,7 +644,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "UpdatePetWithForm", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "pet/{petId}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
             url = url.Replace("{petId}", Uri.EscapeDataString(JsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
@@ -687,10 +700,10 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Deletes a pet
         /// </summary>
         /// <param name='petId'>
-        /// Pet id to delete
-        /// </param>
+        /// Pet id to delete/// </param>
         /// <param name='apiKey'>
         /// </param>
         /// <param name='customHeaders'>
@@ -718,7 +731,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "DeletePet", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "pet/{petId}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
             url = url.Replace("{petId}", Uri.EscapeDataString(JsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
@@ -781,8 +795,9 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
-        /// Returns a map of status codes to quantities
+        /// Returns pet inventories by status
         /// </summary>
+        /// Returns a map of status codes to quantities
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -802,7 +817,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "GetInventory", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "store/inventory").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "store/inventory").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -862,10 +878,10 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Place an order for a pet
         /// </summary>
         /// <param name='body'>
-        /// order placed for purchasing the pet
-        /// </param>
+        /// order placed for purchasing the pet/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -890,7 +906,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "PlaceOrder", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "store/order").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "store/order").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -954,12 +971,12 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Find purchase order by Id
+        /// </summary>
         /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
         /// values will generated exceptions
-        /// </summary>
         /// <param name='orderId'>
-        /// Id of pet that needs to be fetched
-        /// </param>
+        /// Id of pet that needs to be fetched/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -995,7 +1012,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "GetOrderById", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "store/order/{orderId}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "store/order/{orderId}").ToString();
             url = url.Replace("{orderId}", Uri.EscapeDataString(orderId));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
@@ -1056,12 +1074,12 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Delete purchase order by Id
+        /// </summary>
         /// For valid response try integer IDs with value &lt; 1000. Anything above
         /// 1000 or nonintegers will generate API errors
-        /// </summary>
         /// <param name='orderId'>
-        /// Id of the order that needs to be deleted
-        /// </param>
+        /// Id of the order that needs to be deleted/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1093,7 +1111,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "DeleteOrder", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "store/order/{orderId}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "store/order/{orderId}").ToString();
             url = url.Replace("{orderId}", Uri.EscapeDataString(orderId));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
@@ -1148,11 +1167,11 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
-        /// This can only be done by the logged in user.
+        /// Create user
         /// </summary>
+        /// This can only be done by the logged in user.
         /// <param name='body'>
-        /// Created user object
-        /// </param>
+        /// Created user object/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1177,7 +1196,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "CreateUser", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "user").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "user").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1235,10 +1255,10 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Creates list of users with given input array
         /// </summary>
         /// <param name='body'>
-        /// List of user object
-        /// </param>
+        /// List of user object/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1263,7 +1283,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "CreateUsersWithArrayInput", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "user/createWithArray").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "user/createWithArray").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1321,10 +1342,10 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Creates list of users with given input array
         /// </summary>
         /// <param name='body'>
-        /// List of user object
-        /// </param>
+        /// List of user object/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1349,7 +1370,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "CreateUsersWithListInput", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "user/createWithList").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "user/createWithList").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1407,13 +1429,12 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Logs user into the system
         /// </summary>
         /// <param name='username'>
-        /// The user name for login
-        /// </param>
+        /// The user name for login/// </param>
         /// <param name='password'>
-        /// The password for login in clear text
-        /// </param>
+        /// The password for login in clear text/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1443,7 +1464,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "LoginUser", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "user/login").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "user/login").ToString();
             List<string> queryParameters = new List<string>();
             if (username != null)
             {
@@ -1516,6 +1538,7 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Logs out current logged in user session
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1536,7 +1559,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "LogoutUser", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "user/logout").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "user/logout").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1590,10 +1614,10 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// Get user by user name
         /// </summary>
         /// <param name='username'>
-        /// The name that needs to be fetched. Use user1 for testing.
-        /// </param>
+        /// The name that needs to be fetched. Use user1 for testing./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1618,7 +1642,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "GetUserByName", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "user/{username}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "user/{username}").ToString();
             url = url.Replace("{username}", Uri.EscapeDataString(username));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
@@ -1679,14 +1704,13 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
-        /// This can only be done by the logged in user.
+        /// Updated user
         /// </summary>
+        /// This can only be done by the logged in user.
         /// <param name='username'>
-        /// name that need to be deleted
-        /// </param>
+        /// name that need to be deleted/// </param>
         /// <param name='body'>
-        /// Updated user object
-        /// </param>
+        /// Updated user object/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1716,7 +1740,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "UpdateUser", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "user/{username}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "user/{username}").ToString();
             url = url.Replace("{username}", Uri.EscapeDataString(username));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
@@ -1775,11 +1800,11 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
-        /// This can only be done by the logged in user.
+        /// Delete user
         /// </summary>
+        /// This can only be done by the logged in user.
         /// <param name='username'>
-        /// The name that needs to be deleted
-        /// </param>
+        /// The name that needs to be deleted/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1804,7 +1829,8 @@ namespace Fixtures.PetstoreV2
                 ServiceClientTracing.Enter(invocationId, this, "DeleteUser", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "user/{username}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "user/{username}").ToString();
             url = url.Replace("{username}", Uri.EscapeDataString(username));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();

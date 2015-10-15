@@ -52,8 +52,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get true Boolean value on path
         /// </summary>
         /// <param name='boolQuery'>
-        /// true boolean value
-        /// </param>
+        /// true boolean value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -74,7 +73,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetBooleanTrue", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/bool/true").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/true").ToString();
             List<string> queryParameters = new List<string>();
             if (boolQuery != null)
             {
@@ -146,8 +146,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get false Boolean value on path
         /// </summary>
         /// <param name='boolQuery'>
-        /// false boolean value
-        /// </param>
+        /// false boolean value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -168,7 +167,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetBooleanFalse", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/bool/false").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/false").ToString();
             List<string> queryParameters = new List<string>();
             if (boolQuery != null)
             {
@@ -240,8 +240,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null Boolean value on query (query string should be absent)
         /// </summary>
         /// <param name='boolQuery'>
-        /// null boolean value
-        /// </param>
+        /// null boolean value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -262,7 +261,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetBooleanNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/bool/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/null").ToString();
             List<string> queryParameters = new List<string>();
             if (boolQuery != null)
             {
@@ -334,8 +334,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '1000000' integer value
         /// </summary>
         /// <param name='intQuery'>
-        /// '1000000' integer value
-        /// </param>
+        /// '1000000' integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -356,7 +355,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetIntOneMillion", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/int/1000000").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/int/1000000").ToString();
             List<string> queryParameters = new List<string>();
             if (intQuery != null)
             {
@@ -428,8 +428,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '-1000000' integer value
         /// </summary>
         /// <param name='intQuery'>
-        /// '-1000000' integer value
-        /// </param>
+        /// '-1000000' integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -450,7 +449,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetIntNegativeOneMillion", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/int/-1000000").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/int/-1000000").ToString();
             List<string> queryParameters = new List<string>();
             if (intQuery != null)
             {
@@ -522,8 +522,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null integer value (no query parameter)
         /// </summary>
         /// <param name='intQuery'>
-        /// null integer value
-        /// </param>
+        /// null integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -544,7 +543,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetIntNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/int/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/int/null").ToString();
             List<string> queryParameters = new List<string>();
             if (intQuery != null)
             {
@@ -616,8 +616,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '10000000000' 64 bit integer value
         /// </summary>
         /// <param name='longQuery'>
-        /// '10000000000' 64 bit integer value
-        /// </param>
+        /// '10000000000' 64 bit integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -638,7 +637,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetTenBillion", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/long/10000000000").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/long/10000000000").ToString();
             List<string> queryParameters = new List<string>();
             if (longQuery != null)
             {
@@ -710,8 +710,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '-10000000000' 64 bit integer value
         /// </summary>
         /// <param name='longQuery'>
-        /// '-10000000000' 64 bit integer value
-        /// </param>
+        /// '-10000000000' 64 bit integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -732,7 +731,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetNegativeTenBillion", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/long/-10000000000").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/long/-10000000000").ToString();
             List<string> queryParameters = new List<string>();
             if (longQuery != null)
             {
@@ -804,8 +804,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get 'null 64 bit integer value (no query param in uri)
         /// </summary>
         /// <param name='longQuery'>
-        /// null 64 bit integer value
-        /// </param>
+        /// null 64 bit integer value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -826,7 +825,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "GetLongNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/long/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/long/null").ToString();
             List<string> queryParameters = new List<string>();
             if (longQuery != null)
             {
@@ -898,8 +898,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '1.034E+20' numeric value
         /// </summary>
         /// <param name='floatQuery'>
-        /// '1.034E+20'numeric value
-        /// </param>
+        /// '1.034E+20'numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -920,7 +919,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "FloatScientificPositive", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/float/1.034E+20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/float/1.034E+20").ToString();
             List<string> queryParameters = new List<string>();
             if (floatQuery != null)
             {
@@ -992,8 +992,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '-1.034E-20' numeric value
         /// </summary>
         /// <param name='floatQuery'>
-        /// '-1.034E-20'numeric value
-        /// </param>
+        /// '-1.034E-20'numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1014,7 +1013,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "FloatScientificNegative", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/float/-1.034E-20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/float/-1.034E-20").ToString();
             List<string> queryParameters = new List<string>();
             if (floatQuery != null)
             {
@@ -1086,8 +1086,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null numeric value (no query parameter)
         /// </summary>
         /// <param name='floatQuery'>
-        /// null numeric value
-        /// </param>
+        /// null numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1108,7 +1107,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "FloatNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/float/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/float/null").ToString();
             List<string> queryParameters = new List<string>();
             if (floatQuery != null)
             {
@@ -1180,8 +1180,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '9999999.999' numeric value
         /// </summary>
         /// <param name='doubleQuery'>
-        /// '9999999.999'numeric value
-        /// </param>
+        /// '9999999.999'numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1202,7 +1201,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DoubleDecimalPositive", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/double/9999999.999").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/double/9999999.999").ToString();
             List<string> queryParameters = new List<string>();
             if (doubleQuery != null)
             {
@@ -1274,8 +1274,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '-9999999.999' numeric value
         /// </summary>
         /// <param name='doubleQuery'>
-        /// '-9999999.999'numeric value
-        /// </param>
+        /// '-9999999.999'numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1296,7 +1295,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DoubleDecimalNegative", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/double/-9999999.999").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/double/-9999999.999").ToString();
             List<string> queryParameters = new List<string>();
             if (doubleQuery != null)
             {
@@ -1368,8 +1368,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null numeric value (no query parameter)
         /// </summary>
         /// <param name='doubleQuery'>
-        /// null numeric value
-        /// </param>
+        /// null numeric value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1390,7 +1389,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DoubleNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/double/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/double/null").ToString();
             List<string> queryParameters = new List<string>();
             if (doubleQuery != null)
             {
@@ -1463,8 +1463,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='stringQuery'>
         /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
-        /// include: '啊齄丂狛狜隣郎隣兀﨩'
-        /// </param>
+        /// include: '啊齄丂狛狜隣郎隣兀﨩'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1485,7 +1484,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "StringUnicode", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/string/unicode").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/string/unicode").ToString();
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1558,8 +1558,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='stringQuery'>
         /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
-        /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
-        /// </param>
+        /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1580,7 +1579,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "StringUrlEncoded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend").ToString();
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1652,8 +1652,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get ''
         /// </summary>
         /// <param name='stringQuery'>
-        /// '' string value. Possible values for this parameter include: ''
-        /// </param>
+        /// '' string value. Possible values for this parameter include: ''/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1674,7 +1673,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "StringEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/string/empty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/string/empty").ToString();
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1746,8 +1746,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null (no query parameter in url)
         /// </summary>
         /// <param name='stringQuery'>
-        /// null string value
-        /// </param>
+        /// null string value/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1768,7 +1767,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "StringNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/string/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/string/null").ToString();
             List<string> queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1841,8 +1841,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='enumQuery'>
         /// 'green color' enum value. Possible values for this parameter include: 'red
-        /// color', 'green color', 'blue color'
-        /// </param>
+        /// color', 'green color', 'blue color'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1863,7 +1862,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "EnumValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/enum/green%20color").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/enum/green%20color").ToString();
             List<string> queryParameters = new List<string>();
             if (enumQuery != null)
             {
@@ -1936,8 +1936,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='enumQuery'>
         /// null string value. Possible values for this parameter include: 'red
-        /// color', 'green color', 'blue color'
-        /// </param>
+        /// color', 'green color', 'blue color'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1958,7 +1957,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "EnumNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/enum/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/enum/null").ToString();
             List<string> queryParameters = new List<string>();
             if (enumQuery != null)
             {
@@ -2030,8 +2030,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         /// </summary>
         /// <param name='byteQuery'>
-        /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-        /// </param>
+        /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2052,7 +2051,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ByteMultiByte", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/byte/multibyte").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/byte/multibyte").ToString();
             List<string> queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2124,8 +2124,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '' as byte array
         /// </summary>
         /// <param name='byteQuery'>
-        /// '' as byte array
-        /// </param>
+        /// '' as byte array/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2146,7 +2145,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ByteEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/byte/empty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/byte/empty").ToString();
             List<string> queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2218,8 +2218,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null as byte array (no query parameters in uri)
         /// </summary>
         /// <param name='byteQuery'>
-        /// null as byte array (no query parameters in uri)
-        /// </param>
+        /// null as byte array (no query parameters in uri)/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2240,7 +2239,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ByteNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/byte/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/byte/null").ToString();
             List<string> queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2312,8 +2312,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '2012-01-01' as date
         /// </summary>
         /// <param name='dateQuery'>
-        /// '2012-01-01' as date
-        /// </param>
+        /// '2012-01-01' as date/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2334,7 +2333,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DateValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/date/2012-01-01").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/date/2012-01-01").ToString();
             List<string> queryParameters = new List<string>();
             if (dateQuery != null)
             {
@@ -2406,8 +2406,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null as date - this should result in no query parameters in uri
         /// </summary>
         /// <param name='dateQuery'>
-        /// null as date (no query parameters in uri)
-        /// </param>
+        /// null as date (no query parameters in uri)/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2428,7 +2427,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DateNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/date/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/date/null").ToString();
             List<string> queryParameters = new List<string>();
             if (dateQuery != null)
             {
@@ -2500,8 +2500,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get '2012-01-01T01:01:01Z' as date-time
         /// </summary>
         /// <param name='dateTimeQuery'>
-        /// '2012-01-01T01:01:01Z' as date-time
-        /// </param>
+        /// '2012-01-01T01:01:01Z' as date-time/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2522,7 +2521,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DateTimeValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/datetime/2012-01-01T01%3A01%3A01Z").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/datetime/2012-01-01T01%3A01%3A01Z").ToString();
             List<string> queryParameters = new List<string>();
             if (dateTimeQuery != null)
             {
@@ -2594,8 +2594,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get null as date-time, should result in no query parameters in uri
         /// </summary>
         /// <param name='dateTimeQuery'>
-        /// null as date-time (no query parameters)
-        /// </param>
+        /// null as date-time (no query parameters)/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2616,7 +2615,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "DateTimeNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/datetime/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/datetime/null").ToString();
             List<string> queryParameters = new List<string>();
             if (dateTimeQuery != null)
             {
@@ -2690,8 +2690,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the csv-array format
-        /// </param>
+        /// null, ''] using the csv-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2712,7 +2711,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringCsvValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/array/csv/string/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/array/csv/string/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -2784,8 +2784,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get a null array of string using the csv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// a null array of string using the csv-array format
-        /// </param>
+        /// a null array of string using the csv-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2806,7 +2805,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringCsvNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/array/csv/string/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/array/csv/string/null").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -2878,8 +2878,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// Get an empty array [] of string using the csv-array format
         /// </summary>
         /// <param name='arrayQuery'>
-        /// an empty array [] of string using the csv-array format
-        /// </param>
+        /// an empty array [] of string using the csv-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2900,7 +2899,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringCsvEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/array/csv/string/empty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/array/csv/string/empty").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -2974,8 +2974,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the ssv-array format
-        /// </param>
+        /// null, ''] using the ssv-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2996,7 +2995,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringSsvValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/array/ssv/string/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/array/ssv/string/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3070,8 +3070,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the tsv-array format
-        /// </param>
+        /// null, ''] using the tsv-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -3092,7 +3091,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringTsvValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/array/tsv/string/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/array/tsv/string/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3166,8 +3166,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </summary>
         /// <param name='arrayQuery'>
         /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the pipes-array format
-        /// </param>
+        /// null, ''] using the pipes-array format/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -3188,7 +3187,8 @@ namespace Fixtures.AcceptanceTestsUrl
                 ServiceClientTracing.Enter(invocationId, this, "ArrayStringPipesValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "queries/array/pipes/string/valid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "queries/array/pipes/string/valid").ToString();
             List<string> queryParameters = new List<string>();
             if (arrayQuery != null)
             {

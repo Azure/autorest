@@ -33,6 +33,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     }
 
     /**
+     * Return 501 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -50,6 +51,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     }
 
     /**
+     * Return 501 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -75,6 +77,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     }
 
     /**
+     * Return 501 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -92,6 +95,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     }
 
     /**
+     * Return 501 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -117,6 +121,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     }
 
     /**
+     * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -135,6 +140,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     }
 
     /**
+     * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -161,6 +167,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     }
 
     /**
+     * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -179,6 +186,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     }
 
     /**
+     * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

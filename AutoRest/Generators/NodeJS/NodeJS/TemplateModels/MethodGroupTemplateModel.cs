@@ -26,5 +26,10 @@ namespace Microsoft.Rest.Generator.NodeJS
         public string MethodGroupName { get; set; }
 
         public string MethodGroupType { get; set; }
+
+        public bool ContainsTimeSpan
+        {
+            get { return this.Methods.FirstOrDefault(m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.TimeSpan) != null) != null; }
+        }
     }
 }

@@ -56,10 +56,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -68,8 +68,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut201CreatingSucceeded200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -80,8 +80,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -102,7 +101,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPut201CreatingSucceeded200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/retryerror/put/201/creating/succeeded/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/put/201/creating/succeeded/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -210,10 +210,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>    
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -222,8 +222,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response, 
-                customHeaders, 
+            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+                customHeaders,
                 cancellationToken);
         }
 
@@ -234,8 +234,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// status
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -256,7 +255,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutAsyncRelativeRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/retryerror/putasync/retry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/putasync/retry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -395,7 +395,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteProvisioning202Accepted200Succeeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/retryerror/delete/provisioning/202/accepted/200/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/delete/provisioning/202/accepted/200/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -534,7 +535,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDelete202Retry200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/retryerror/delete/202/retry/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/delete/202/retry/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -661,7 +663,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteAsyncRelativeRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/retryerror/deleteasync/retry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/deleteasync/retry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -752,7 +755,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -773,8 +776,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// a 200 with a response body after success
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -795,7 +797,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPost202Retry200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/retryerror/post/202/retry/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/post/202/retry/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -891,7 +894,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         /// <param name='product'>
         /// Product to put
-        /// </param>    
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -913,8 +916,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put
-        /// </param>
+        /// Product to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -935,7 +937,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPostAsyncRelativeRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/retryerror/postasync/retry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/postasync/retry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

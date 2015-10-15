@@ -5,7 +5,14 @@
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodTemplateModel>
 /**
-@WrapComment(" * ", Model.Documentation.EscapeXmlComment())
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment()
+}
  *
 @foreach (var param in Model.LocalParameters)
 {
@@ -41,7 +48,14 @@ public @Model.ReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) 
 }
 @EmptyLine
 /**
-@WrapComment(" * ", Model.Documentation.EscapeXmlComment())
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment()
+}
  *
 @foreach (var param in Model.LocalParameters)
 {

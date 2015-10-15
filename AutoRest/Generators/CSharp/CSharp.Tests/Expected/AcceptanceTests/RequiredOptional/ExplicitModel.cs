@@ -78,7 +78,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredIntegerParameter", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/integer/parameter").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/integer/parameter").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -168,7 +169,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalIntegerParameter", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/integer/parameter").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/integer/parameter").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -266,7 +268,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredIntegerProperty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/integer/property").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/integer/property").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -357,7 +360,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalIntegerProperty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/integer/property").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/integer/property").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -450,7 +454,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredIntegerHeader", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/integer/header").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/integer/header").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -545,7 +550,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalIntegerHeader", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/integer/header").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/integer/header").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -642,7 +648,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredStringParameter", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/string/parameter").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/string/parameter").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -732,7 +739,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalStringParameter", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/string/parameter").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/string/parameter").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -830,7 +838,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredStringProperty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/string/property").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/string/property").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -921,7 +930,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalStringProperty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/string/property").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/string/property").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1014,7 +1024,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredStringHeader", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/string/header").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/string/header").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1109,7 +1120,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalStringHeader", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/string/header").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/string/header").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1210,7 +1222,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredClassParameter", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/class/parameter").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/class/parameter").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1304,7 +1317,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalClassParameter", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/class/parameter").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/class/parameter").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1402,7 +1416,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredClassProperty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/class/property").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/class/property").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1497,7 +1512,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalClassProperty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/class/property").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/class/property").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1590,7 +1606,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredArrayParameter", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/array/parameter").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/array/parameter").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1680,7 +1697,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalArrayParameter", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/array/parameter").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/array/parameter").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1778,7 +1796,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredArrayProperty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/array/property").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/array/property").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1869,7 +1888,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalArrayProperty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/array/property").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/array/property").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1962,7 +1982,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostRequiredArrayHeader", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/requied/array/header").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/requied/array/header").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -2057,7 +2078,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PostOptionalArrayHeader", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/optional/array/header").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/optional/array/header").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");

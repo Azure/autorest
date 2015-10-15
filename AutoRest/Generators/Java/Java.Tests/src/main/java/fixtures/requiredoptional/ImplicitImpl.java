@@ -33,6 +33,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly required path parameter
      *
      * @param pathParameter the String value
      * @return the Error object if successful.
@@ -55,6 +56,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly required path parameter
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -85,6 +87,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly optional query parameter
      *
      * @param queryParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -102,6 +105,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly optional query parameter
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -129,6 +133,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly optional header parameter
      *
      * @param queryParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -146,6 +151,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly optional header parameter
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -173,6 +179,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly optional body parameter
      *
      * @param bodyParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -190,6 +197,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly optional body parameter
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -217,6 +225,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly required path parameter
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -238,6 +247,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly required path parameter
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -267,6 +277,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly required query parameter
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -288,6 +299,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly required query parameter
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -317,6 +329,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly optional query parameter
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -334,6 +347,7 @@ public class ImplicitImpl implements Implicit {
     }
 
     /**
+     * Test implicitly optional query parameter
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

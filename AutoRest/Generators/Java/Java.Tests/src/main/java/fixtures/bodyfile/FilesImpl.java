@@ -34,6 +34,7 @@ public class FilesImpl implements Files {
     }
 
     /**
+     * Get file
      *
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -51,6 +52,7 @@ public class FilesImpl implements Files {
     }
 
     /**
+     * Get file
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -77,6 +79,7 @@ public class FilesImpl implements Files {
     }
 
     /**
+     * Get empty file
      *
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -94,6 +97,7 @@ public class FilesImpl implements Files {
     }
 
     /**
+     * Get empty file
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

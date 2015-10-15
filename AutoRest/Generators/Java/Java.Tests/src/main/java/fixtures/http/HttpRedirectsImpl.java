@@ -34,6 +34,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 300 status code and redirect to /http/success/200
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -50,6 +51,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 300 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -77,6 +79,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 300 status code and redirect to /http/success/200
      *
      * @return the List&lt;String&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -94,6 +97,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 300 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -121,6 +125,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 301 status code and redirect to /http/success/200
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -137,6 +142,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 301 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -164,6 +170,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 301 status code and redirect to /http/success/200
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -180,6 +187,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 301 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -207,6 +215,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -224,6 +233,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -251,6 +261,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 302 status code and redirect to /http/success/200
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -267,6 +278,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 302 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -294,6 +306,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 302 status code and redirect to /http/success/200
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -310,6 +323,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Return 302 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -337,6 +351,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -354,6 +369,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -381,6 +397,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -398,6 +415,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -426,6 +444,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Redirect with 307, resulting in a 200 success
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -442,6 +461,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Redirect with 307, resulting in a 200 success
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -469,6 +489,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Redirect get with 307, resulting in a 200 success
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -485,6 +506,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Redirect get with 307, resulting in a 200 success
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -512,6 +534,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Put redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -529,6 +552,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Put redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -557,6 +581,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Patch redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -574,6 +599,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Patch redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -602,6 +628,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Post redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -619,6 +646,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Post redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -647,6 +675,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Delete redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -664,6 +693,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
+     * Delete redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

@@ -171,6 +171,16 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         return this.skipUrlEncoding;
     }
 
+    private HeaderOperations headerOperations;
+
+    /**
+     * Gets the HeaderOperations object to access its operations.
+     * @return the headerOperations value.
+     */
+    public HeaderOperations getHeaderOperations() {
+        return this.headerOperations;
+    }
+
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      */
@@ -214,5 +224,6 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         this.apiVersionDefault = new ApiVersionDefaultImpl(retrofit, this);
         this.apiVersionLocal = new ApiVersionLocalImpl(retrofit, this);
         this.skipUrlEncoding = new SkipUrlEncodingImpl(retrofit, this);
+        this.headerOperations = new HeaderOperationsImpl(retrofit, this);
     }
 }

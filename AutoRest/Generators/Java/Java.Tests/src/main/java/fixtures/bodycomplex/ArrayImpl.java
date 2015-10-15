@@ -35,6 +35,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get complex types with array property
      *
      * @return the ArrayWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -52,6 +53,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get complex types with array property
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -78,6 +80,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Put complex types with array property
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -100,6 +103,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Put complex types with array property
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -132,6 +136,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get complex types with array property which is empty
      *
      * @return the ArrayWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -149,6 +154,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get complex types with array property which is empty
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -175,6 +181,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Put complex types with array property which is empty
      *
      * @param complexBody Please put an empty array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -197,6 +204,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Put complex types with array property which is empty
      *
      * @param complexBody Please put an empty array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -229,6 +237,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get complex types with array property while server doesn't provide a response payload
      *
      * @return the ArrayWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -246,6 +255,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get complex types with array property while server doesn't provide a response payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

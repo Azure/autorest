@@ -35,6 +35,7 @@ public interface HttpSuccess {
 
     }
     /**
+     * Return 204 status code if successful
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -42,6 +43,7 @@ public interface HttpSuccess {
     Boolean head204() throws ServiceException;
 
     /**
+     * Return 204 status code if successful
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -49,6 +51,7 @@ public interface HttpSuccess {
     Call<Void> head204Async(final ServiceCallback<Boolean> serviceCallback);
 
     /**
+     * Return 404 status code if successful
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -56,6 +59,7 @@ public interface HttpSuccess {
     Boolean head404() throws ServiceException;
 
     /**
+     * Return 404 status code if successful
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

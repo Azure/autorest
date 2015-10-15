@@ -1,4 +1,5 @@
-﻿@using Microsoft.Rest.Generator.Java
+@using System
+@using Microsoft.Rest.Generator.Java
 @using Microsoft.Rest.Generator.Java.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq;
@@ -48,7 +49,14 @@ public interface @Model.MethodGroupType {
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:/**
-    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    if (!String.IsNullOrEmpty(method.Summary))
+    {
+    @: * @method.Summary.EscapeXmlComment()
+    }
+    if (!String.IsNullOrEmpty(method.Description))
+    {
+    @: * @method.Description.EscapeXmlComment()
+    }
     @: *
     foreach (var param in method.LocalParameters)
     {
@@ -63,7 +71,14 @@ public interface @Model.MethodGroupType {
     @:@method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
     @EmptyLine
     @:/**
-    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    if (!String.IsNullOrEmpty(method.Summary))
+    {
+    @: * @method.Summary.EscapeXmlComment()
+    }
+    if (!String.IsNullOrEmpty(method.Description))
+    {
+    @: * @method.Description.EscapeXmlComment()
+    }
     @: *
     foreach (var param in method.LocalParameters)
     {
@@ -76,4 +91,3 @@ public interface @Model.MethodGroupType {
     @EmptyLine
     }
 }
-

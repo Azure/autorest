@@ -1,14 +1,21 @@
-﻿@using System.Text
+@using System.Text
+@using System
 @using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.Templates
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
-
 @{
+@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+{
 @:/// <summary>
-@:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
 @:/// </summary>
+}
+@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+}
 @:/// <param name='operations'>
 @:/// The operations group for this extension method.
 @:/// </param>
@@ -30,9 +37,16 @@ foreach (var parameter in Model.LocalParameters)
     }
 @:}
 @EmptyLine
+@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+{
 @:/// <summary>
-@:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
 @:/// </summary>
+}
+@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+}
 @:/// <param name='operations'>
 @:/// The operations group for this extension method.
 @:/// </param>

@@ -34,6 +34,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get null datetime value
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -51,6 +52,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get null datetime value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -77,6 +79,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get invalid datetime value
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -94,6 +97,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get invalid datetime value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -120,6 +124,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get overflow datetime value
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -137,6 +142,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get overflow datetime value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -163,6 +169,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get underflow datetime value
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -180,6 +187,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get underflow datetime value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -206,6 +214,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -227,6 +236,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -258,6 +268,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value 9999-12-31t23:59:59.9999999z
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -275,6 +286,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value 9999-12-31t23:59:59.9999999z
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -301,6 +313,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -318,6 +331,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -344,6 +358,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -365,6 +380,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -396,6 +412,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -413,6 +430,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -439,6 +457,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -456,6 +475,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -482,6 +502,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -503,6 +524,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -534,6 +556,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -551,6 +574,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -577,6 +601,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -594,6 +619,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -620,6 +646,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00Z
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -641,6 +668,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00Z
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -672,6 +700,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00Z
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -689,6 +718,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00Z
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -715,6 +745,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00+14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -736,6 +767,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00+14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -767,6 +799,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00+14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -784,6 +817,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00+14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -810,6 +844,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00-14:00
      *
      * @param datetimeBody the DateTime value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -831,6 +866,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Put min datetime value 0001-01-01T00:00:00-14:00
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -862,6 +898,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00-14:00
      *
      * @return the DateTime object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -879,6 +916,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     }
 
     /**
+     * Get min datetime value 0001-01-01T00:00:00-14:00
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

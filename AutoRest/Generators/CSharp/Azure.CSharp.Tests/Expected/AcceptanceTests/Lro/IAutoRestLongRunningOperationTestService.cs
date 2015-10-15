@@ -36,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// The management credentials for Azure.

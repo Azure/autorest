@@ -104,6 +104,7 @@ public interface HttpClientFailure {
 
     }
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -111,6 +112,7 @@ public interface HttpClientFailure {
     Error head400() throws ServiceException;
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -118,6 +120,7 @@ public interface HttpClientFailure {
     Call<Void> head400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -125,6 +128,7 @@ public interface HttpClientFailure {
     Error get400() throws ServiceException;
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -132,6 +136,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> get400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -140,6 +145,7 @@ public interface HttpClientFailure {
     Error put400(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -148,6 +154,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -156,6 +163,7 @@ public interface HttpClientFailure {
     Error patch400(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -164,6 +172,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -172,6 +181,7 @@ public interface HttpClientFailure {
     Error post400(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -180,6 +190,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -188,6 +199,7 @@ public interface HttpClientFailure {
     Error delete400(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -196,6 +208,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 401 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -203,6 +216,7 @@ public interface HttpClientFailure {
     Error head401() throws ServiceException;
 
     /**
+     * Return 401 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -210,6 +224,7 @@ public interface HttpClientFailure {
     Call<Void> head401Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 402 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -217,6 +232,7 @@ public interface HttpClientFailure {
     Error get402() throws ServiceException;
 
     /**
+     * Return 402 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -224,6 +240,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> get402Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 403 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -231,6 +248,7 @@ public interface HttpClientFailure {
     Error get403() throws ServiceException;
 
     /**
+     * Return 403 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -238,6 +256,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> get403Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 404 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -246,6 +265,7 @@ public interface HttpClientFailure {
     Error put404(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 404 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -254,6 +274,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 405 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -262,6 +283,7 @@ public interface HttpClientFailure {
     Error patch405(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 405 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -270,6 +292,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 406 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -278,6 +301,7 @@ public interface HttpClientFailure {
     Error post406(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 406 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -286,6 +310,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 407 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -294,6 +319,7 @@ public interface HttpClientFailure {
     Error delete407(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 407 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -302,6 +328,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 409 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -310,6 +337,7 @@ public interface HttpClientFailure {
     Error put409(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 409 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -318,6 +346,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 410 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -325,6 +354,7 @@ public interface HttpClientFailure {
     Error head410() throws ServiceException;
 
     /**
+     * Return 410 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -332,6 +362,7 @@ public interface HttpClientFailure {
     Call<Void> head410Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 411 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -339,6 +370,7 @@ public interface HttpClientFailure {
     Error get411() throws ServiceException;
 
     /**
+     * Return 411 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -346,6 +378,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> get411Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 412 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -353,6 +386,7 @@ public interface HttpClientFailure {
     Error get412() throws ServiceException;
 
     /**
+     * Return 412 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -360,6 +394,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> get412Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 413 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -368,6 +403,7 @@ public interface HttpClientFailure {
     Error put413(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 413 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -376,6 +412,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 414 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -384,6 +421,7 @@ public interface HttpClientFailure {
     Error patch414(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 414 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -392,6 +430,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 415 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -400,6 +439,7 @@ public interface HttpClientFailure {
     Error post415(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 415 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -408,6 +448,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 416 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -415,6 +456,7 @@ public interface HttpClientFailure {
     Error get416() throws ServiceException;
 
     /**
+     * Return 416 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -422,6 +464,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> get416Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 417 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -430,6 +473,7 @@ public interface HttpClientFailure {
     Error delete417(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 417 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -438,6 +482,7 @@ public interface HttpClientFailure {
     Call<ResponseBody> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 429 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -445,6 +490,7 @@ public interface HttpClientFailure {
     Error head429() throws ServiceException;
 
     /**
+     * Return 429 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

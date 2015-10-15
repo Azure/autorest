@@ -80,12 +80,14 @@ public interface HttpRedirects {
 
     }
     /**
+     * Return 300 status code and redirect to /http/success/200
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void head300() throws ServiceException;
 
     /**
+     * Return 300 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -93,6 +95,7 @@ public interface HttpRedirects {
     Call<Void> head300Async(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Return 300 status code and redirect to /http/success/200
      *
      * @return the List&lt;String&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -100,6 +103,7 @@ public interface HttpRedirects {
     List<String> get300() throws ServiceException;
 
     /**
+     * Return 300 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -107,12 +111,14 @@ public interface HttpRedirects {
     Call<ResponseBody> get300Async(final ServiceCallback<List<String>> serviceCallback);
 
     /**
+     * Return 301 status code and redirect to /http/success/200
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void head301() throws ServiceException;
 
     /**
+     * Return 301 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -120,12 +126,14 @@ public interface HttpRedirects {
     Call<Void> head301Async(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Return 301 status code and redirect to /http/success/200
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void get301() throws ServiceException;
 
     /**
+     * Return 301 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -133,6 +141,7 @@ public interface HttpRedirects {
     Call<ResponseBody> get301Async(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -140,6 +149,7 @@ public interface HttpRedirects {
     void put301(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -148,12 +158,14 @@ public interface HttpRedirects {
     Call<ResponseBody> put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Return 302 status code and redirect to /http/success/200
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void head302() throws ServiceException;
 
     /**
+     * Return 302 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -161,12 +173,14 @@ public interface HttpRedirects {
     Call<Void> head302Async(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Return 302 status code and redirect to /http/success/200
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void get302() throws ServiceException;
 
     /**
+     * Return 302 status code and redirect to /http/success/200
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -174,6 +188,7 @@ public interface HttpRedirects {
     Call<ResponseBody> get302Async(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -181,6 +196,7 @@ public interface HttpRedirects {
     void patch302(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -189,6 +205,7 @@ public interface HttpRedirects {
     Call<ResponseBody> patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -196,6 +213,7 @@ public interface HttpRedirects {
     void post303(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -204,12 +222,14 @@ public interface HttpRedirects {
     Call<ResponseBody> post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Redirect with 307, resulting in a 200 success
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void head307() throws ServiceException;
 
     /**
+     * Redirect with 307, resulting in a 200 success
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -217,12 +237,14 @@ public interface HttpRedirects {
     Call<Void> head307Async(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Redirect get with 307, resulting in a 200 success
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void get307() throws ServiceException;
 
     /**
+     * Redirect get with 307, resulting in a 200 success
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -230,6 +252,7 @@ public interface HttpRedirects {
     Call<ResponseBody> get307Async(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -237,6 +260,7 @@ public interface HttpRedirects {
     void put307(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Put redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -245,6 +269,7 @@ public interface HttpRedirects {
     Call<ResponseBody> put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Patch redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -252,6 +277,7 @@ public interface HttpRedirects {
     void patch307(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Patch redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -260,6 +286,7 @@ public interface HttpRedirects {
     Call<ResponseBody> patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Post redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -267,6 +294,7 @@ public interface HttpRedirects {
     void post307(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Post redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -275,6 +303,7 @@ public interface HttpRedirects {
     Call<ResponseBody> post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Delete redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -282,6 +311,7 @@ public interface HttpRedirects {
     void delete307(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Delete redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

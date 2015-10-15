@@ -33,6 +33,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 204 status code if successful
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -50,6 +51,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 204 status code if successful
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -77,6 +79,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 404 status code if successful
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -94,6 +97,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 404 status code if successful
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

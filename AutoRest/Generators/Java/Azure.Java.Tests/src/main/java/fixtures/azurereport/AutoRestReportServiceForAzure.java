@@ -76,6 +76,7 @@ public interface AutoRestReportServiceForAzure {
     }
 
     /**
+     * Get test coverage report
      *
      * @return the Map&lt;String, Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -83,6 +84,7 @@ public interface AutoRestReportServiceForAzure {
     Map<String, Integer> getReport() throws ServiceException;
 
     /**
+     * Get test coverage report
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

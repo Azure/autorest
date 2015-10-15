@@ -33,6 +33,7 @@ function Polymorphicrecursive(client) {
 
 /**
  * Get complex types that are polymorphic and have recursive references
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,7 +63,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/polymorphicrecursive/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -138,6 +139,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types that are polymorphic and have recursive references
+ *
  * @param {object} complexBody Please put a salmon that looks like this:
  * {
  * "dtype": "salmon",
@@ -236,7 +238,7 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/polymorphicrecursive/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

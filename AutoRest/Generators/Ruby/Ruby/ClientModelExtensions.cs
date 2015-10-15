@@ -86,6 +86,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 return "Array<Integer>";
             }
 
+            if (type == PrimaryType.TimeSpan)
+            {
+                return "Duration"; //TODO: Is this a real Ruby type...?
+            }
+
             if (compositeType != null)
             {
                 return compositeType.Name;

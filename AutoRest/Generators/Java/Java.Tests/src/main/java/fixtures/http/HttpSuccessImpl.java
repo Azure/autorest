@@ -33,6 +33,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 200 status code if successful
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -49,6 +50,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 200 status code if successful
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -75,6 +77,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Get 200 success
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -92,6 +95,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Get 200 success
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -118,6 +122,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Put boolean value true returning 200 success
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -135,6 +140,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Put boolean value true returning 200 success
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -162,6 +168,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Patch true Boolean value in request returning 200
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -179,6 +186,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Patch true Boolean value in request returning 200
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -206,6 +214,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Post bollean value true in request that returns a 200
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -223,6 +232,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Post bollean value true in request that returns a 200
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -250,6 +260,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Delete simple boolean value true returns 200
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -267,6 +278,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Delete simple boolean value true returns 200
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -294,6 +306,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Put true Boolean value in request returns 201
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -311,6 +324,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Put true Boolean value in request returns 201
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -338,6 +352,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Post true Boolean value in request returns 201 (Created)
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -355,6 +370,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Post true Boolean value in request returns 201 (Created)
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -382,6 +398,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Put true Boolean value in request returns 202 (Accepted)
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -399,6 +416,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Put true Boolean value in request returns 202 (Accepted)
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -426,6 +444,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Patch true Boolean value in request returns 202
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -443,6 +462,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Patch true Boolean value in request returns 202
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -470,6 +490,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Post true Boolean value in request returns 202 (Accepted)
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -487,6 +508,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Post true Boolean value in request returns 202 (Accepted)
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -514,6 +536,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Delete true Boolean value in request returns 202 (accepted)
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -531,6 +554,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Delete true Boolean value in request returns 202 (accepted)
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -558,6 +582,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 204 status code if successful
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -574,6 +599,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 204 status code if successful
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -600,6 +626,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Put true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -617,6 +644,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Put true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -644,6 +672,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Patch true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -661,6 +690,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Patch true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -688,6 +718,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Post true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -705,6 +736,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Post true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -732,6 +764,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Delete true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -749,6 +782,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Delete true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -776,6 +810,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 404 status code
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -792,6 +827,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 404 status code
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

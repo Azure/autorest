@@ -42,6 +42,7 @@ public interface SubscriptionInMethod {
 
     }
     /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -49,6 +50,7 @@ public interface SubscriptionInMethod {
     void postMethodLocalValid(String subscriptionId) throws ServiceException;
 
     /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -57,6 +59,7 @@ public interface SubscriptionInMethod {
     Call<ResponseBody> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -64,6 +67,7 @@ public interface SubscriptionInMethod {
     void postMethodLocalNull(String subscriptionId) throws ServiceException;
 
     /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -72,6 +76,7 @@ public interface SubscriptionInMethod {
     Call<ResponseBody> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -79,6 +84,7 @@ public interface SubscriptionInMethod {
     void postPathLocalValid(String subscriptionId) throws ServiceException;
 
     /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -87,6 +93,7 @@ public interface SubscriptionInMethod {
     Call<ResponseBody> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -94,6 +101,7 @@ public interface SubscriptionInMethod {
     void postSwaggerLocalValid(String subscriptionId) throws ServiceException;
 
     /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

@@ -213,7 +213,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
                 ServiceClientTracing.Enter(invocationId, this, "GetReport", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "report/azure").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "report/azure").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

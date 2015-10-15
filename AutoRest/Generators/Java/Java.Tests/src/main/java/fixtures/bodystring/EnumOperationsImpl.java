@@ -34,6 +34,7 @@ public class EnumOperationsImpl implements EnumOperations {
     }
 
     /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @return the Colors object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -51,6 +52,7 @@ public class EnumOperationsImpl implements EnumOperations {
     }
 
     /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -77,6 +79,7 @@ public class EnumOperationsImpl implements EnumOperations {
     }
 
     /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
      *
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -98,6 +101,7 @@ public class EnumOperationsImpl implements EnumOperations {
     }
 
     /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
      *
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

@@ -33,6 +33,7 @@ function Implicit(client) {
 
 /**
  * Test implicitly required path parameter
+ *
  * @param {string} pathParameter
  * 
  * @param {object} [options]
@@ -72,7 +73,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/implicit/required/path/{pathParameter}';
   requestUrl = requestUrl.replace('{pathParameter}', encodeURIComponent(pathParameter));
   // trim all duplicate forward slashes in the url
@@ -146,6 +147,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
 
 /**
  * Test implicitly optional query parameter
+ *
  * @param {string} [queryParameter]
  * 
  * @param {object} [options]
@@ -184,7 +186,7 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/implicit/optional/query';
   var queryParameters = [];
   if (queryParameter !== null && queryParameter !== undefined) {
@@ -248,6 +250,7 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
 
 /**
  * Test implicitly optional header parameter
+ *
  * @param {string} [queryParameter]
  * 
  * @param {object} [options]
@@ -286,7 +289,7 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/implicit/optional/header';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -346,6 +349,7 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
 
 /**
  * Test implicitly optional body parameter
+ *
  * @param {string} [bodyParameter]
  * 
  * @param {object} [options]
@@ -384,7 +388,7 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/implicit/optional/body';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -456,6 +460,7 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
 
 /**
  * Test implicitly required path parameter
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -493,7 +498,7 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/global/required/path/{required-global-path}';
   requestUrl = requestUrl.replace('{required-global-path}', encodeURIComponent(this.client.requiredGlobalPath));
   // trim all duplicate forward slashes in the url
@@ -567,6 +572,7 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
 
 /**
  * Test implicitly required query parameter
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -604,7 +610,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/global/required/query';
   var queryParameters = [];
   queryParameters.push('required-global-query=' + encodeURIComponent(this.client.requiredGlobalQuery));
@@ -682,6 +688,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
 
 /**
  * Test implicitly optional query parameter
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -719,7 +726,7 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//reqopt/global/optional/query';
   var queryParameters = [];
   if (this.client.optionalGlobalQuery !== null && this.client.optionalGlobalQuery !== undefined) {

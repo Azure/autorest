@@ -49,6 +49,7 @@ public interface BasicOperations {
 
     }
     /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -56,6 +57,7 @@ public interface BasicOperations {
     Basic getValid() throws ServiceException;
 
     /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -63,6 +65,7 @@ public interface BasicOperations {
     Call<ResponseBody> getValidAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -70,6 +73,7 @@ public interface BasicOperations {
     void putValid(Basic complexBody) throws ServiceException;
 
     /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -78,6 +82,7 @@ public interface BasicOperations {
     Call<ResponseBody> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a basic complex type that is invalid for the local strong type
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -85,6 +90,7 @@ public interface BasicOperations {
     Basic getInvalid() throws ServiceException;
 
     /**
+     * Get a basic complex type that is invalid for the local strong type
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -92,6 +98,7 @@ public interface BasicOperations {
     Call<ResponseBody> getInvalidAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
+     * Get a basic complex type that is empty
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -99,6 +106,7 @@ public interface BasicOperations {
     Basic getEmpty() throws ServiceException;
 
     /**
+     * Get a basic complex type that is empty
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -106,6 +114,7 @@ public interface BasicOperations {
     Call<ResponseBody> getEmptyAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
+     * Get a basic complex type whose properties are null
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -113,6 +122,7 @@ public interface BasicOperations {
     Basic getNull() throws ServiceException;
 
     /**
+     * Get a basic complex type whose properties are null
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -120,6 +130,7 @@ public interface BasicOperations {
     Call<ResponseBody> getNullAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
+     * Get a basic complex type while the server doesn't provide a response payload
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -127,6 +138,7 @@ public interface BasicOperations {
     Basic getNotProvided() throws ServiceException;
 
     /**
+     * Get a basic complex type while the server doesn't provide a response payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

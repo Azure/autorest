@@ -74,7 +74,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodGlobalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview").ToString();
             List<string> queryParameters = new List<string>();
             if (this.Client.ApiVersion != null)
             {
@@ -187,7 +188,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetMethodGlobalNotProvidedValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview").ToString();
             List<string> queryParameters = new List<string>();
             if (this.Client.ApiVersion != null)
             {
@@ -300,7 +302,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetPathGlobalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview").ToString();
             List<string> queryParameters = new List<string>();
             if (this.Client.ApiVersion != null)
             {
@@ -413,7 +416,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "GetSwaggerGlobalValid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview").ToString();
             List<string> queryParameters = new List<string>();
             if (this.Client.ApiVersion != null)
             {

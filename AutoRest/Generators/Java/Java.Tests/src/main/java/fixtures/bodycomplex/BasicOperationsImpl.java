@@ -35,6 +35,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -52,6 +53,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -78,6 +80,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -100,6 +103,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -132,6 +136,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Get a basic complex type that is invalid for the local strong type
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -149,6 +154,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Get a basic complex type that is invalid for the local strong type
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -175,6 +181,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Get a basic complex type that is empty
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -192,6 +199,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Get a basic complex type that is empty
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -218,6 +226,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Get a basic complex type whose properties are null
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -235,6 +244,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Get a basic complex type whose properties are null
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -261,6 +271,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Get a basic complex type while the server doesn't provide a response payload
      *
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -278,6 +289,7 @@ public class BasicOperationsImpl implements BasicOperations {
     }
 
     /**
+     * Get a basic complex type while the server doesn't provide a response payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

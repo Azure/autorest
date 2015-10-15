@@ -33,6 +33,7 @@ function BasicOperations(client) {
 
 /**
  * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,7 +63,7 @@ BasicOperations.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/basic/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -138,6 +139,7 @@ BasicOperations.prototype.getValid = function (options, callback) {
 
 /**
  * Please put {id: 2, name: 'abc', color: 'Magenta'}
+ *
  * @param {object} complexBody Please put {id: 2, name: 'abc', color:
  * 'Magenta'}
  * 
@@ -184,7 +186,7 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/basic/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -257,6 +259,7 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
 
 /**
  * Get a basic complex type that is invalid for the local strong type
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -286,7 +289,7 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/basic/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -362,6 +365,7 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
 
 /**
  * Get a basic complex type that is empty
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -391,7 +395,7 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/basic/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -467,6 +471,7 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
 
 /**
  * Get a basic complex type whose properties are null
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -496,7 +501,7 @@ BasicOperations.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/basic/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -572,6 +577,7 @@ BasicOperations.prototype.getNull = function (options, callback) {
 
 /**
  * Get a basic complex type while the server doesn't provide a response payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -601,7 +607,7 @@ BasicOperations.prototype.getNotProvided = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/basic/notprovided';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

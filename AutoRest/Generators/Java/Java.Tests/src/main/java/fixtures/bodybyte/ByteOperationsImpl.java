@@ -33,6 +33,7 @@ public class ByteOperationsImpl implements ByteOperations {
     }
 
     /**
+     * Get null byte value
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -50,6 +51,7 @@ public class ByteOperationsImpl implements ByteOperations {
     }
 
     /**
+     * Get null byte value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -76,6 +78,7 @@ public class ByteOperationsImpl implements ByteOperations {
     }
 
     /**
+     * Get empty byte value ''
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -93,6 +96,7 @@ public class ByteOperationsImpl implements ByteOperations {
     }
 
     /**
+     * Get empty byte value ''
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -119,6 +123,7 @@ public class ByteOperationsImpl implements ByteOperations {
     }
 
     /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -136,6 +141,7 @@ public class ByteOperationsImpl implements ByteOperations {
     }
 
     /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -162,6 +168,7 @@ public class ByteOperationsImpl implements ByteOperations {
     }
 
     /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -183,6 +190,7 @@ public class ByteOperationsImpl implements ByteOperations {
     }
 
     /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -214,6 +222,7 @@ public class ByteOperationsImpl implements ByteOperations {
     }
 
     /**
+     * Get invalid byte value ':::SWAGGER::::'
      *
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -231,6 +240,7 @@ public class ByteOperationsImpl implements ByteOperations {
     }
 
     /**
+     * Get invalid byte value ':::SWAGGER::::'
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

@@ -31,6 +31,7 @@ public interface HttpFailure {
 
     }
     /**
+     * Get empty error form server
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -38,6 +39,7 @@ public interface HttpFailure {
     Boolean getEmptyError() throws ServiceException;
 
     /**
+     * Get empty error form server
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

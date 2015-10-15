@@ -328,6 +328,36 @@ namespace Fixtures.AcceptanceTestsHeader
         Task<HttpOperationResponse> ResponseDatetimeWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Send a post request with header values "scenario": "valid",
+        /// "value": "P123DT22H14M12.011S"
+        /// </summary>
+        /// <param name='scenario'>
+        /// Send a post request with header values "scenario": "valid"
+        /// </param>
+        /// <param name='value'>
+        /// Send a post request with header values "P123DT22H14M12.011S"
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> ParamDurationWithHttpMessagesAsync(string scenario, TimeSpan? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get a response with header values "P123DT22H14M12.011S"
+        /// </summary>
+        /// <param name='scenario'>
+        /// Send a post request with header values "scenario": "valid"
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> ResponseDurationWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Send a post request with header values "scenario": "valid",
         /// "value": "啊齄丂狛狜隣郎隣兀﨩"
         /// </summary>
         /// <param name='scenario'>

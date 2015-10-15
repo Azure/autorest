@@ -37,6 +37,7 @@ public interface Polymorphicrecursive {
 
     }
     /**
+     * Get complex types that are polymorphic and have recursive references
      *
      * @return the Fish object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -44,6 +45,7 @@ public interface Polymorphicrecursive {
     Fish getValid() throws ServiceException;
 
     /**
+     * Get complex types that are polymorphic and have recursive references
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -51,6 +53,7 @@ public interface Polymorphicrecursive {
     Call<ResponseBody> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
+     * Put complex types that are polymorphic and have recursive references
      *
      * @param complexBody Please put a salmon that looks like this:
  {
@@ -110,6 +113,7 @@ public interface Polymorphicrecursive {
     void putValid(Fish complexBody) throws ServiceException;
 
     /**
+     * Put complex types that are polymorphic and have recursive references
      *
      * @param complexBody Please put a salmon that looks like this:
  {

@@ -34,6 +34,7 @@ function Paging(client) {
 
 /**
  * A paging operation that finishes on the first call without a nextlink
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -71,7 +72,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/single';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -155,6 +156,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
 
 /**
  * A paging operation that includes a nextLink that has 10 pages
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -192,7 +194,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/multiple';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -277,6 +279,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
 /**
  * A paging operation that fails on the first call with 500 and then retries
  * and then get a response including a nextLink that has 10 pages
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -314,7 +317,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/multiple/retryfirst';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -400,6 +403,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
  * A paging operation that includes a nextLink that has 10 pages, of which the
  * 2nd call fails first with 500. The client should retry and finish all 10
  * pages eventually.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -437,7 +441,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/multiple/retrysecond';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -521,6 +525,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
 
 /**
  * A paging operation that receives a 400 on the first call
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -558,7 +563,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/single/failure';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -642,6 +647,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
 
 /**
  * A paging operation that receives a 400 on the second call
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -679,7 +685,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/multiple/failure';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -763,6 +769,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
 
 /**
  * A paging operation that receives an invalid nextLink
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -800,7 +807,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//paging/multiple/failureuri';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -884,6 +891,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
 
 /**
  * A paging operation that finishes on the first call without a nextlink
+ *
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
@@ -1007,6 +1015,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
 
 /**
  * A paging operation that includes a nextLink that has 10 pages
+ *
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
@@ -1131,6 +1140,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
 /**
  * A paging operation that fails on the first call with 500 and then retries
  * and then get a response including a nextLink that has 10 pages
+ *
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
@@ -1256,6 +1266,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
  * A paging operation that includes a nextLink that has 10 pages, of which the
  * 2nd call fails first with 500. The client should retry and finish all 10
  * pages eventually.
+ *
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
@@ -1379,6 +1390,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
 
 /**
  * A paging operation that receives a 400 on the first call
+ *
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
@@ -1502,6 +1514,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
 
 /**
  * A paging operation that receives a 400 on the second call
+ *
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
@@ -1625,6 +1638,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
 
 /**
  * A paging operation that receives an invalid nextLink
+ *
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 

@@ -35,15 +35,16 @@ namespace Fixtures.MirrorRecursiveTypes
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
 
-        /// <summary>
+            /// <summary>
+        /// Products
+        /// </summary>
         /// The Products endpoint returns information about the Uber products
         /// offered at a given location. The response includes the display
         /// name and other details about each product, and lists the products
         /// in the proper display order.
-        /// </summary>
         /// <param name='subscriptionId'>
         /// Subscription Id.
         /// </param>
@@ -58,7 +59,7 @@ namespace Fixtures.MirrorRecursiveTypes
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>

@@ -21,6 +21,7 @@ using Fixtures.AcceptanceTestsBodyDate;
 using Fixtures.AcceptanceTestsBodyDateTime;
 using Fixtures.AcceptanceTestsBodyDictionary;
 using Fixtures.AcceptanceTestsBodyDictionary.Models;
+using Fixtures.AcceptanceTestsBodyDuration;
 using Fixtures.AcceptanceTestsBodyFile;
 using Fixtures.AcceptanceTestsBodyInteger;
 using Fixtures.AcceptanceTestsBodyNumber;
@@ -41,8 +42,12 @@ using Newtonsoft.Json;
 using Xunit;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 
+
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
+    using Serialization;
+
+
     [Collection("AutoRest Tests")]
     [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",
         "AutoRest.Generator.CSharp.Tests")]
@@ -305,6 +310,21 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                         client.Datetime.PutLocalNegativeOffsetMaxDateTime(
                             DateTime.Parse("9999-12-31T23:59:59.9999999-14:00",
                                 CultureInfo.InvariantCulture)));
+            }
+        }
+
+        [Fact]
+        public void DurationTests()
+        {
+            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+                SwaggerPath("body-duration.json"), ExpectedPath("BodyDuration"));
+            using (var client = new AutoRestDurationTestService(Fixture.Uri))
+            {
+                Assert.Null(client.Duration.GetNull());
+                Assert.Throws<FormatException>(() => client.Duration.GetInvalid());
+
+                client.Duration.GetPositiveDuration();
+                client.Duration.PutPositiveDuration(new TimeSpan(123, 22, 14, 12, 11));
             }
         }
 
@@ -1210,6 +1230,14 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(DateTimeOffset.MinValue,
                     JsonConvert.DeserializeObject<DateTimeOffset>(
                         "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                // POST param/prim/duration
+                client.Header.ParamDuration("valid", new TimeSpan(123, 22, 14, 12, 11));
+                // POST response/prim/duration
+                response = client.Header.ResponseDurationWithHttpMessagesAsync("valid").Result;
+                Assert.Equal(new TimeSpan(123, 22, 14, 12, 11),
+                    JsonConvert.DeserializeObject<TimeSpan?>(
+                    "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\"", 
+                    new Iso8601TimeSpanConverter()));
                 // POST param/prim/string
                 client.Header.ParamByte("valid", Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"));
                 // POST response/prim/string

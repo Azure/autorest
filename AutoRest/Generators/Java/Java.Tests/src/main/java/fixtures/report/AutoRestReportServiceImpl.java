@@ -78,6 +78,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     }
 
     /**
+     * Get test coverage report
      *
      * @return the Map&lt;String, Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -95,6 +96,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     }
 
     /**
+     * Get test coverage report
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

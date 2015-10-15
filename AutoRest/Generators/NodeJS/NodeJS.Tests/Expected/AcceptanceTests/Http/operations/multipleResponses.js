@@ -33,6 +33,7 @@ function MultipleResponses(client) {
 
 /**
  * Send a 200 response with valid payload: {'statusCode': '200'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,7 +63,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/204/none/default/Error/response/200/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -138,6 +139,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
 
 /**
  * Send a 204 response with no payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -167,7 +169,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/204/none/default/Error/response/204/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -243,6 +245,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
 
 /**
  * Send a 201 response with valid payload: {'statusCode': '201'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -272,7 +275,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/204/none/default/Error/response/201/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -348,6 +351,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
 
 /**
  * Send a 202 response with no payload:
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -377,7 +381,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/204/none/default/Error/response/202/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -454,6 +458,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
 /**
  * Send a 400 response with valid error payload: {'status': 400, 'message':
  * 'client error'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -483,7 +488,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/204/none/default/Error/response/400/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -559,6 +564,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
 
 /**
  * Send a 200 response with valid payload: {'statusCode': '200'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -588,7 +594,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/201/B/default/Error/response/200/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -684,6 +690,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
 /**
  * Send a 201 response with valid payload: {'statusCode': '201',
  * 'textStatusCode': 'Created'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -713,7 +720,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/201/B/default/Error/response/201/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -809,6 +816,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
 /**
  * Send a 400 response with valid payload: {'code': '400', 'message': 'client
  * error'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -838,7 +846,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/201/B/default/Error/response/400/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -933,6 +941,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
 
 /**
  * Send a 200 response with valid payload: {'statusCode': '200'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -961,7 +970,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/201/C/404/D/default/Error/response/200/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1075,6 +1084,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
 
 /**
  * Send a 200 response with valid payload: {'httpCode': '201'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1103,7 +1113,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/201/C/404/D/default/Error/response/201/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1217,6 +1227,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
 
 /**
  * Send a 200 response with valid payload: {'httpStatusCode': '404'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1245,7 +1256,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/201/C/404/D/default/Error/response/404/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1360,6 +1371,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
 /**
  * Send a 400 response with valid payload: {'code': '400', 'message': 'client
  * error'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1388,7 +1400,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/201/C/404/D/default/Error/response/400/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1502,6 +1514,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
 
 /**
  * Send a 202 response with no payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1530,7 +1543,7 @@ MultipleResponses.prototype.get202None204NoneDefaultError202None = function (opt
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/202/none/204/none/default/Error/response/202/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1587,6 +1600,7 @@ MultipleResponses.prototype.get202None204NoneDefaultError202None = function (opt
 
 /**
  * Send a 204 response with no payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1615,7 +1629,7 @@ MultipleResponses.prototype.get202None204NoneDefaultError204None = function (opt
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/202/none/204/none/default/Error/response/204/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1673,6 +1687,7 @@ MultipleResponses.prototype.get202None204NoneDefaultError204None = function (opt
 /**
  * Send a 400 response with valid payload: {'code': '400', 'message': 'client
  * error'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1701,7 +1716,7 @@ MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (op
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/202/none/204/none/default/Error/response/400/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1758,6 +1773,7 @@ MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (op
 
 /**
  * Send a 202 response with an unexpected payload {'property': 'value'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1786,7 +1802,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/202/none/204/none/default/none/response/202/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1839,6 +1855,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (o
 
 /**
  * Send a 204 response with no payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1867,7 +1884,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (opti
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/202/none/204/none/default/none/response/204/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1920,6 +1937,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (opti
 
 /**
  * Send a 400 response with no payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1948,7 +1966,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (opti
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/202/none/204/none/default/none/response/400/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2001,6 +2019,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (opti
 
 /**
  * Send a 400 response with an unexpected payload {'property': 'value'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2029,7 +2048,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/202/none/204/none/default/none/response/400/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2082,6 +2101,7 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (o
 
 /**
  * Send a 200 response with valid payload: {'statusCode': '200'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2111,7 +2131,7 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/default/A/response/200/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2184,6 +2204,7 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
 
 /**
  * Send a 200 response with no payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2213,7 +2234,7 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/default/A/response/200/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2286,6 +2307,7 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
 
 /**
  * Send a 400 response with valid payload: {'statusCode': '400'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2315,7 +2337,7 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/default/A/response/400/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2388,6 +2410,7 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
 
 /**
  * Send a 400 response with no payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2417,7 +2440,7 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/default/A/response/400/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2490,6 +2513,7 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
 
 /**
  * Send a 200 response with invalid payload: {'statusCode': '200'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2518,7 +2542,7 @@ MultipleResponses.prototype.getDefaultNone200Invalid = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/default/none/response/200/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2571,6 +2595,7 @@ MultipleResponses.prototype.getDefaultNone200Invalid = function (options, callba
 
 /**
  * Send a 200 response with no payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2599,7 +2624,7 @@ MultipleResponses.prototype.getDefaultNone200None = function (options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/default/none/response/200/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2652,6 +2677,7 @@ MultipleResponses.prototype.getDefaultNone200None = function (options, callback)
 
 /**
  * Send a 400 response with valid payload: {'statusCode': '400'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2680,7 +2706,7 @@ MultipleResponses.prototype.getDefaultNone400Invalid = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/default/none/response/400/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2733,6 +2759,7 @@ MultipleResponses.prototype.getDefaultNone400Invalid = function (options, callba
 
 /**
  * Send a 400 response with no payload
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2761,7 +2788,7 @@ MultipleResponses.prototype.getDefaultNone400None = function (options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/default/none/response/400/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2815,6 +2842,7 @@ MultipleResponses.prototype.getDefaultNone400None = function (options, callback)
 /**
  * Send a 200 response with no payload, when a payload is expected - client
  * should return a null object of thde type for model A
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2844,7 +2872,7 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/response/200/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2916,6 +2944,7 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
 
 /**
  * Send a 200 response with payload {'statusCode': '200'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2945,7 +2974,7 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/response/200/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3017,6 +3046,7 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
 
 /**
  * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3046,7 +3076,7 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/response/200/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3119,6 +3149,7 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
 /**
  * Send a 400 response with no payload client should treat as an http error
  * with no error model
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3148,7 +3179,7 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/response/400/none';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3220,6 +3251,7 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
 
 /**
  * Send a 200 response with payload {'statusCode': '400'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3249,7 +3281,7 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/response/400/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3321,6 +3353,7 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
 
 /**
  * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3350,7 +3383,7 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/response/400/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3422,6 +3455,7 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
 
 /**
  * Send a 202 response with payload {'statusCode': '202'}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3451,7 +3485,7 @@ MultipleResponses.prototype.get200ModelA202Valid = function (options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/payloads/200/A/response/202/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

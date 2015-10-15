@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// Subscription ID.
@@ -49,7 +49,7 @@ namespace Fixtures.AcceptanceTestsValidation
         string ApiVersion { get; set; }
 
 
-        /// <summary>
+            /// <summary>
         /// Validates input parameters on the method. See swagger for details.
         /// </summary>
         /// <param name='resourceGroupName'>
@@ -60,7 +60,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
@@ -79,7 +79,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>

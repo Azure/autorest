@@ -10,6 +10,8 @@
 
 'use strict';
 
+var models = require('./index');
+
 /**
  * @class
  * Initializes a new instance of the Endpoints class.
@@ -22,6 +24,14 @@
  * 
  * @member {string} [table] Gets the table endpoint.
  * 
+ * @member {object} [dummyEndPoint] Dummy EndPoint
+ * 
+ * @member {object} [fooPoint] Foo point
+ * 
+ * @member {object} [fooPoint.barPoint] Bar point
+ * 
+ * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
+ * 
  */
 function Endpoints(parameters) {
   if (parameters !== null && parameters !== undefined) {
@@ -33,6 +43,12 @@ function Endpoints(parameters) {
     }
     if (parameters.table !== undefined) {
       this.table = parameters.table;
+    }
+    if (parameters.dummyEndPoint) {
+      this.dummyEndPoint = new models['Endpoints'](parameters.dummyEndPoint);
+    }
+    if (parameters.fooPoint) {
+      this.fooPoint = new models['Foo'](parameters.fooPoint);
     }
   }    
 }
@@ -67,6 +83,14 @@ Endpoints.prototype.serialize = function () {
     payload['table'] = this['table'];
   }
 
+  if (this['dummyEndPoint']) {
+    payload['dummyEndPoint'] = this['dummyEndPoint'].serialize();
+  }
+
+  if (this['fooPoint']) {
+    payload['FooPoint'] = this['fooPoint'].serialize();
+  }
+
   return payload;
 };
 
@@ -88,6 +112,14 @@ Endpoints.prototype.deserialize = function (instance) {
 
     if (instance['table'] !== undefined) {
       this['table'] = instance['table'];
+    }
+
+    if (instance['dummyEndPoint']) {
+      this['dummyEndPoint'] = new models['Endpoints']().deserialize(instance['dummyEndPoint']);
+    }
+
+    if (instance['FooPoint']) {
+      this['fooPoint'] = new models['Foo']().deserialize(instance['FooPoint']);
     }
   }
 

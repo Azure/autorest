@@ -35,6 +35,7 @@ function UsageOperations(client) {
 /**
  * Gets the current usage count and the limit for the resources under the
  * subscription.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -78,7 +79,7 @@ UsageOperations.prototype.list = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];

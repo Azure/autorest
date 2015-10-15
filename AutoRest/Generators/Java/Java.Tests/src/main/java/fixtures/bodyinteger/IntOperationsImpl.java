@@ -33,6 +33,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get null Int value
      *
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -50,6 +51,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get null Int value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -76,6 +78,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get invalid Int value
      *
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -93,6 +96,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get invalid Int value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -119,6 +123,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get overflow Int32 value
      *
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -136,6 +141,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get overflow Int32 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -162,6 +168,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get underflow Int32 value
      *
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -179,6 +186,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get underflow Int32 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -205,6 +213,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get overflow Int64 value
      *
      * @return the Long object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -222,6 +231,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get overflow Int64 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -248,6 +258,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get underflow Int64 value
      *
      * @return the Long object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -265,6 +276,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Get underflow Int64 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -291,6 +303,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Put max int32 value
      *
      * @param intBody the int value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -308,6 +321,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Put max int32 value
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -335,6 +349,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Put max int64 value
      *
      * @param intBody the long value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -352,6 +367,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Put max int64 value
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -379,6 +395,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Put min int32 value
      *
      * @param intBody the int value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -396,6 +413,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Put min int32 value
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -423,6 +441,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Put min int64 value
      *
      * @param intBody the long value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -440,6 +459,7 @@ public class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * Put min int64 value
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

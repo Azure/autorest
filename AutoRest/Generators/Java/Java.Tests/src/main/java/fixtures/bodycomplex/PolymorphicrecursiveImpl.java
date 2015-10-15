@@ -35,6 +35,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
     }
 
     /**
+     * Get complex types that are polymorphic and have recursive references
      *
      * @return the Fish object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -52,6 +53,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
     }
 
     /**
+     * Get complex types that are polymorphic and have recursive references
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -78,6 +80,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
     }
 
     /**
+     * Put complex types that are polymorphic and have recursive references
      *
      * @param complexBody Please put a salmon that looks like this:
      {
@@ -152,6 +155,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
     }
 
     /**
+     * Put complex types that are polymorphic and have recursive references
      *
      * @param complexBody Please put a salmon that looks like this:
      {

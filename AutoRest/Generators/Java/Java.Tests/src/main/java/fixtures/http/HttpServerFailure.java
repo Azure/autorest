@@ -45,6 +45,7 @@ public interface HttpServerFailure {
 
     }
     /**
+     * Return 501 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -52,6 +53,7 @@ public interface HttpServerFailure {
     Error head501() throws ServiceException;
 
     /**
+     * Return 501 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -59,6 +61,7 @@ public interface HttpServerFailure {
     Call<Void> head501Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 501 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -66,6 +69,7 @@ public interface HttpServerFailure {
     Error get501() throws ServiceException;
 
     /**
+     * Return 501 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -73,6 +77,7 @@ public interface HttpServerFailure {
     Call<ResponseBody> get501Async(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -81,6 +86,7 @@ public interface HttpServerFailure {
     Error post505(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -89,6 +95,7 @@ public interface HttpServerFailure {
     Call<ResponseBody> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -97,6 +104,7 @@ public interface HttpServerFailure {
     Error delete505(Boolean booleanValue) throws ServiceException;
 
     /**
+     * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

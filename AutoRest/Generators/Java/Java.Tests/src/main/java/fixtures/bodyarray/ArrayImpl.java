@@ -39,6 +39,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get null array value
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -56,6 +57,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get null array value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -82,6 +84,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get invalid array [1, 2, 3
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -99,6 +102,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get invalid array [1, 2, 3
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -125,6 +129,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get empty array value []
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -142,6 +147,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get empty array value []
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -168,6 +174,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value empty []
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -190,6 +197,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value empty []
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -222,6 +230,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get boolean array value [true, false, false, true]
      *
      * @return the List&lt;Boolean&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -239,6 +248,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get boolean array value [true, false, false, true]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -265,6 +275,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value empty [true, false, false, true]
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -287,6 +298,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value empty [true, false, false, true]
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -319,6 +331,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get boolean array value [true, null, false]
      *
      * @return the List&lt;Boolean&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -336,6 +349,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get boolean array value [true, null, false]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -362,6 +376,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get boolean array value [true, 'boolean', false]
      *
      * @return the List&lt;Boolean&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -379,6 +394,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get boolean array value [true, 'boolean', false]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -405,6 +421,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get integer array value [1, -1, 3, 300]
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -422,6 +439,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get integer array value [1, -1, 3, 300]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -448,6 +466,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -470,6 +489,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -502,6 +522,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get integer array value [1, null, 0]
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -519,6 +540,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get integer array value [1, null, 0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -545,6 +567,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get integer array value [1, 'integer', 0]
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -562,6 +585,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get integer array value [1, 'integer', 0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -588,6 +612,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get integer array value [1, -1, 3, 300]
      *
      * @return the List&lt;Long&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -605,6 +630,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get integer array value [1, -1, 3, 300]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -631,6 +657,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -653,6 +680,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -685,6 +713,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get long array value [1, null, 0]
      *
      * @return the List&lt;Long&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -702,6 +731,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get long array value [1, null, 0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -728,6 +758,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get long array value [1, 'integer', 0]
      *
      * @return the List&lt;Long&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -745,6 +776,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get long array value [1, 'integer', 0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -771,6 +803,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get float array value [0, -0.01, 1.2e20]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -788,6 +821,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get float array value [0, -0.01, 1.2e20]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -814,6 +848,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -836,6 +871,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -868,6 +904,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get float array value [0.0, null, -1.2e20]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -885,6 +922,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get float array value [0.0, null, -1.2e20]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -911,6 +949,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get boolean array value [1.0, 'number', 0.0]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -928,6 +967,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get boolean array value [1.0, 'number', 0.0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -954,6 +994,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get float array value [0, -0.01, 1.2e20]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -971,6 +1012,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get float array value [0, -0.01, 1.2e20]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -997,6 +1039,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1019,6 +1062,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1051,6 +1095,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get float array value [0.0, null, -1.2e20]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1068,6 +1113,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get float array value [0.0, null, -1.2e20]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1094,6 +1140,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get boolean array value [1.0, 'number', 0.0]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1111,6 +1158,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get boolean array value [1.0, 'number', 0.0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1137,6 +1185,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get string array value ['foo1', 'foo2', 'foo3']
      *
      * @return the List&lt;String&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1154,6 +1203,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get string array value ['foo1', 'foo2', 'foo3']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1180,6 +1230,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value ['foo1', 'foo2', 'foo3']
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1202,6 +1253,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value ['foo1', 'foo2', 'foo3']
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1234,6 +1286,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get string array value ['foo', null, 'foo2']
      *
      * @return the List&lt;String&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1251,6 +1304,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get string array value ['foo', null, 'foo2']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1277,6 +1331,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get string array value ['foo', 123, 'foo2']
      *
      * @return the List&lt;String&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1294,6 +1349,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get string array value ['foo', 123, 'foo2']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1320,6 +1376,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1337,6 +1394,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1363,6 +1421,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1385,6 +1444,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1417,6 +1477,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get date array value ['2012-01-01', null, '1776-07-04']
      *
      * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1434,6 +1495,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get date array value ['2012-01-01', null, '1776-07-04']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1460,6 +1522,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get date array value ['2011-03-22', 'date']
      *
      * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1477,6 +1540,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get date array value ['2011-03-22', 'date']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1503,6 +1567,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1520,6 +1585,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1546,6 +1612,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1568,6 +1635,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1600,6 +1668,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get date array value ['2000-12-01t00:00:01z', null]
      *
      * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1617,6 +1686,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get date array value ['2000-12-01t00:00:01z', null]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1643,6 +1713,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time']
      *
      * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1660,6 +1731,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1686,6 +1758,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
      *
      * @return the List&lt;byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1703,6 +1776,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1729,6 +1803,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1751,6 +1826,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1783,6 +1859,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
      *
      * @return the List&lt;byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1800,6 +1877,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1826,6 +1904,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get array of complex type null value
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1843,6 +1922,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get array of complex type null value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1869,6 +1949,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get empty array of complex type []
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1886,6 +1967,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get empty array of complex type []
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1912,6 +1994,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1929,6 +2012,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1955,6 +2039,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1972,6 +2057,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1998,6 +2084,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2015,6 +2102,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2041,6 +2129,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2063,6 +2152,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2095,6 +2185,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get a null array
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2112,6 +2203,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get a null array
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2138,6 +2230,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an empty array []
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2155,6 +2248,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an empty array []
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2181,6 +2275,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2198,6 +2293,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2224,6 +2320,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2241,6 +2338,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2267,6 +2365,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2284,6 +2383,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2310,6 +2410,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2332,6 +2433,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -2364,6 +2466,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries with value null
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2381,6 +2484,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries with value null
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2407,6 +2511,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value []
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2424,6 +2529,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value []
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2450,6 +2556,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2467,6 +2574,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2493,6 +2601,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2510,6 +2619,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2536,6 +2646,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2553,6 +2664,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -2579,6 +2691,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2601,6 +2714,7 @@ public class ArrayImpl implements Array {
     }
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

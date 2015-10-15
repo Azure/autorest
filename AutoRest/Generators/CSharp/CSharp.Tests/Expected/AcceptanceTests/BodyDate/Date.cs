@@ -70,7 +70,8 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "date/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "date/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -157,7 +158,8 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 ServiceClientTracing.Enter(invocationId, this, "GetInvalidDate", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "date/invaliddate").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "date/invaliddate").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -244,7 +246,8 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 ServiceClientTracing.Enter(invocationId, this, "GetOverflowDate", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "date/overflowdate").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "date/overflowdate").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -331,7 +334,8 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 ServiceClientTracing.Enter(invocationId, this, "GetUnderflowDate", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "date/underflowdate").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "date/underflowdate").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -425,7 +429,8 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 ServiceClientTracing.Enter(invocationId, this, "PutMaxDate", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "date/max").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "date/max").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -510,7 +515,8 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 ServiceClientTracing.Enter(invocationId, this, "GetMaxDate", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "date/max").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "date/max").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -604,7 +610,8 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 ServiceClientTracing.Enter(invocationId, this, "PutMinDate", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "date/min").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "date/min").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -689,7 +696,8 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 ServiceClientTracing.Enter(invocationId, this, "GetMinDate", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "date/min").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "date/min").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

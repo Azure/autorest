@@ -33,6 +33,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -53,6 +54,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -83,6 +85,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -103,6 +106,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -133,6 +137,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -157,6 +162,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -191,6 +197,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -211,6 +218,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -241,6 +249,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -261,6 +270,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

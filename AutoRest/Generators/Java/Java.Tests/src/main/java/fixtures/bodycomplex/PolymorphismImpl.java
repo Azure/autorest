@@ -35,6 +35,7 @@ public class PolymorphismImpl implements Polymorphism {
     }
 
     /**
+     * Get complex types that are polymorphic
      *
      * @return the Fish object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -52,6 +53,7 @@ public class PolymorphismImpl implements Polymorphism {
     }
 
     /**
+     * Get complex types that are polymorphic
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -78,6 +80,7 @@ public class PolymorphismImpl implements Polymorphism {
     }
 
     /**
+     * Put complex types that are polymorphic
      *
      * @param complexBody Please put a salmon that looks like this:
      {
@@ -124,6 +127,7 @@ public class PolymorphismImpl implements Polymorphism {
     }
 
     /**
+     * Put complex types that are polymorphic
      *
      * @param complexBody Please put a salmon that looks like this:
      {
@@ -180,6 +184,7 @@ public class PolymorphismImpl implements Polymorphism {
     }
 
     /**
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
      {
@@ -227,6 +232,7 @@ public class PolymorphismImpl implements Polymorphism {
     }
 
     /**
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
      {

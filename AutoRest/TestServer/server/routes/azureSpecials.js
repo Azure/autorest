@@ -31,7 +31,7 @@ var specials = function (coverage) {
   coverage['AzureMethodQueryUrlEncodingNull'] = 0;
   coverage['AzureXmsRequestClientOverwrite'] = 0;
   coverage['AzureXmsRequestClientOverwriteViaParameter'] = 0;
-
+  coverage['AzureXmsCustomNamedRequestId'] = 0;
 
   router.post('/subscriptionId/:location/string/none/path/:scope/:scenario/:subscription', function (req, res, next) {
     var location = req.params.location;
@@ -192,6 +192,18 @@ var specials = function (coverage) {
           utils.send400(res, next, "Header x-ms-client-request-id must be set to 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.");
         } else {
           coverage['AzureXmsRequestClientOverwriteViaParameter']++;
+          res.set(headers).status(200).end();
+        }
+  });
+  
+  router.post('/customNamedRequestId', function (req, res, next) {
+        var headers = {
+          'foo-request-id': '123'
+        };
+        if (req.get("foo-client-request-id") !== '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0') {
+          utils.send400(res, next, "Header foo-client-request-id must be set to 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.");
+        } else {
+          coverage['AzureXmsCustomNamedRequestId']++;
           res.set(headers).status(200).end();
         }
   });

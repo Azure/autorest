@@ -1,4 +1,5 @@
-﻿@using Microsoft.Rest.Generator.Utilities
+@using System
+@using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodGroupTemplateModel>
 @Header("// ")
 @EmptyLine
@@ -21,9 +22,16 @@ namespace @Settings.Namespace
     {
     @foreach(var method in Model.MethodTemplateModels)
     {
+        if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
+        {
         @:/// <summary>
-        @:@WrapComment("/// ", method.Documentation.EscapeXmlComment())
+        @:@WrapComment("/// ", String.IsNullOrEmpty(method.Summary) ? method.Description.EscapeXmlComment() : method.Summary.EscapeXmlComment())
         @:/// </summary>
+        }
+        if (!String.IsNullOrEmpty(method.Description) && !String.IsNullOrEmpty(method.Summary))
+        {
+        @:@WrapComment("/// ", method.Description.EscapeXmlComment())
+        }
         foreach (var parameter in method.LocalParameters)
         {
         @:/// <param name='@parameter.Name'>

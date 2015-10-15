@@ -75,6 +75,7 @@ public interface Number {
 
     }
     /**
+     * Get null Number value
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -82,6 +83,7 @@ public interface Number {
     Double getNull() throws ServiceException;
 
     /**
+     * Get null Number value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -89,6 +91,7 @@ public interface Number {
     Call<ResponseBody> getNullAsync(final ServiceCallback<Double> serviceCallback);
 
     /**
+     * Get invalid float Number value
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -96,6 +99,7 @@ public interface Number {
     Double getInvalidFloat() throws ServiceException;
 
     /**
+     * Get invalid float Number value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -103,6 +107,7 @@ public interface Number {
     Call<ResponseBody> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback);
 
     /**
+     * Get invalid double Number value
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -110,6 +115,7 @@ public interface Number {
     Double getInvalidDouble() throws ServiceException;
 
     /**
+     * Get invalid double Number value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -117,6 +123,7 @@ public interface Number {
     Call<ResponseBody> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback);
 
     /**
+     * Put big float value 3.402823e+20
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -124,6 +131,7 @@ public interface Number {
     void putBigFloat(double numberBody) throws ServiceException;
 
     /**
+     * Put big float value 3.402823e+20
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -132,6 +140,7 @@ public interface Number {
     Call<ResponseBody> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get big float value 3.402823e+20
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -139,6 +148,7 @@ public interface Number {
     Double getBigFloat() throws ServiceException;
 
     /**
+     * Get big float value 3.402823e+20
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -146,6 +156,7 @@ public interface Number {
     Call<ResponseBody> getBigFloatAsync(final ServiceCallback<Double> serviceCallback);
 
     /**
+     * Put big double value 2.5976931e+101
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -153,6 +164,7 @@ public interface Number {
     void putBigDouble(double numberBody) throws ServiceException;
 
     /**
+     * Put big double value 2.5976931e+101
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -161,6 +173,7 @@ public interface Number {
     Call<ResponseBody> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get big double value 2.5976931e+101
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -168,6 +181,7 @@ public interface Number {
     Double getBigDouble() throws ServiceException;
 
     /**
+     * Get big double value 2.5976931e+101
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -175,6 +189,7 @@ public interface Number {
     Call<ResponseBody> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback);
 
     /**
+     * Put big double value 99999999.99
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -182,6 +197,7 @@ public interface Number {
     void putBigDoublePositiveDecimal(double numberBody) throws ServiceException;
 
     /**
+     * Put big double value 99999999.99
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -190,6 +206,7 @@ public interface Number {
     Call<ResponseBody> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get big double value 99999999.99
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -197,6 +214,7 @@ public interface Number {
     Double getBigDoublePositiveDecimal() throws ServiceException;
 
     /**
+     * Get big double value 99999999.99
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -204,6 +222,7 @@ public interface Number {
     Call<ResponseBody> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback);
 
     /**
+     * Put big double value -99999999.99
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -211,6 +230,7 @@ public interface Number {
     void putBigDoubleNegativeDecimal(double numberBody) throws ServiceException;
 
     /**
+     * Put big double value -99999999.99
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -219,6 +239,7 @@ public interface Number {
     Call<ResponseBody> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get big double value -99999999.99
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -226,6 +247,7 @@ public interface Number {
     Double getBigDoubleNegativeDecimal() throws ServiceException;
 
     /**
+     * Get big double value -99999999.99
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -233,6 +255,7 @@ public interface Number {
     Call<ResponseBody> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback);
 
     /**
+     * Put small float value 3.402823e-20
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -240,6 +263,7 @@ public interface Number {
     void putSmallFloat(double numberBody) throws ServiceException;
 
     /**
+     * Put small float value 3.402823e-20
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -248,6 +272,7 @@ public interface Number {
     Call<ResponseBody> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get big double value 3.402823e-20
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -255,6 +280,7 @@ public interface Number {
     Double getSmallFloat() throws ServiceException;
 
     /**
+     * Get big double value 3.402823e-20
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -262,6 +288,7 @@ public interface Number {
     Call<ResponseBody> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback);
 
     /**
+     * Put small double value 2.5976931e-101
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -269,6 +296,7 @@ public interface Number {
     void putSmallDouble(double numberBody) throws ServiceException;
 
     /**
+     * Put small double value 2.5976931e-101
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -277,6 +305,7 @@ public interface Number {
     Call<ResponseBody> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get big double value 2.5976931e-101
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -284,6 +313,7 @@ public interface Number {
     Double getSmallDouble() throws ServiceException;
 
     /**
+     * Get big double value 2.5976931e-101
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

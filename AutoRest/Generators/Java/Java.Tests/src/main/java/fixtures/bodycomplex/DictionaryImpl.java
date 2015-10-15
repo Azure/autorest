@@ -35,6 +35,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Get complex types with dictionary property
      *
      * @return the DictionaryWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -52,6 +53,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Get complex types with dictionary property
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -78,6 +80,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Put complex types with dictionary property
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -100,6 +103,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Put complex types with dictionary property
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -132,6 +136,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Get complex types with dictionary property which is empty
      *
      * @return the DictionaryWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -149,6 +154,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Get complex types with dictionary property which is empty
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -175,6 +181,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Put complex types with dictionary property which is empty
      *
      * @param complexBody Please put an empty dictionary
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -197,6 +204,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Put complex types with dictionary property which is empty
      *
      * @param complexBody Please put an empty dictionary
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -229,6 +237,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Get complex types with dictionary property which is null
      *
      * @return the DictionaryWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -246,6 +255,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Get complex types with dictionary property which is null
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -272,6 +282,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Get complex types with dictionary property while server doesn't provide a response payload
      *
      * @return the DictionaryWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -289,6 +300,7 @@ public class DictionaryImpl implements Dictionary {
     }
 
     /**
+     * Get complex types with dictionary property while server doesn't provide a response payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

@@ -33,6 +33,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -50,6 +51,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -75,6 +77,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -92,6 +95,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -117,6 +121,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -135,6 +140,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -161,6 +167,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -179,6 +186,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -205,6 +213,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -223,6 +232,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -249,6 +259,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -267,6 +278,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -293,6 +305,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 401 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -310,6 +323,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 401 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -335,6 +349,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 402 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -352,6 +367,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 402 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -377,6 +393,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 403 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -394,6 +411,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 403 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -419,6 +437,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 404 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -437,6 +456,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 404 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -463,6 +483,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 405 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -481,6 +502,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 405 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -507,6 +529,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 406 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -525,6 +548,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 406 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -551,6 +575,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 407 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -569,6 +594,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 407 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -595,6 +621,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 409 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -613,6 +640,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 409 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -639,6 +667,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 410 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -656,6 +685,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 410 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -681,6 +711,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 411 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -698,6 +729,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 411 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -723,6 +755,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 412 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -740,6 +773,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 412 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -765,6 +799,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 413 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -783,6 +818,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 413 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -809,6 +845,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 414 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -827,6 +864,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 414 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -853,6 +891,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 415 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -871,6 +910,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 415 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -897,6 +937,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 416 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -914,6 +955,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 416 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -939,6 +981,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 417 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @return the Error object if successful.
@@ -957,6 +1000,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 417 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -983,6 +1027,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 429 status code - should be represented in the client as an error
      *
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1000,6 +1045,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     }
 
     /**
+     * Return 429 status code - should be represented in the client as an error
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

@@ -34,6 +34,7 @@ function EnumModel(client) {
 /**
  * Get enum value 'red color' from enumeration of 'red color', 'green-color',
  * 'blue_color'.
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -64,7 +65,7 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/enum/notExpandable';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -135,6 +136,7 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
 /**
  * Sends value 'red color' from enumeration of 'red color', 'green-color',
  * 'blue_color'
+ *
  * @param {string} stringBody Possible values for this parameter include: 'red
  * color', 'green-color', 'blue_color'
  * 
@@ -179,7 +181,7 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//string/enum/notExpandable';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

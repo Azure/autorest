@@ -40,6 +40,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get true Boolean value on path
      *
      * @param boolQuery true boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -57,6 +58,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get true Boolean value on path
      *
      * @param boolQuery true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -84,6 +86,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get false Boolean value on path
      *
      * @param boolQuery false boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -101,6 +104,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get false Boolean value on path
      *
      * @param boolQuery false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -128,6 +132,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null Boolean value on query (query string should be absent)
      *
      * @param boolQuery null boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -145,6 +150,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null Boolean value on query (query string should be absent)
      *
      * @param boolQuery null boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -172,6 +178,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '1000000' integer value
      *
      * @param intQuery '1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -189,6 +196,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '1000000' integer value
      *
      * @param intQuery '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -216,6 +224,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '-1000000' integer value
      *
      * @param intQuery '-1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -233,6 +242,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '-1000000' integer value
      *
      * @param intQuery '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -260,6 +270,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null integer value (no query parameter)
      *
      * @param intQuery null integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -277,6 +288,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null integer value (no query parameter)
      *
      * @param intQuery null integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -304,6 +316,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '10000000000' 64 bit integer value
      *
      * @param longQuery '10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -321,6 +334,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '10000000000' 64 bit integer value
      *
      * @param longQuery '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -348,6 +362,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '-10000000000' 64 bit integer value
      *
      * @param longQuery '-10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -365,6 +380,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '-10000000000' 64 bit integer value
      *
      * @param longQuery '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -392,6 +408,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get 'null 64 bit integer value (no query param in uri)
      *
      * @param longQuery null 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -409,6 +426,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get 'null 64 bit integer value (no query param in uri)
      *
      * @param longQuery null 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -436,6 +454,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '1.034E+20' numeric value
      *
      * @param floatQuery '1.034E+20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -453,6 +472,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '1.034E+20' numeric value
      *
      * @param floatQuery '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -480,6 +500,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '-1.034E-20' numeric value
      *
      * @param floatQuery '-1.034E-20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -497,6 +518,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '-1.034E-20' numeric value
      *
      * @param floatQuery '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -524,6 +546,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null numeric value (no query parameter)
      *
      * @param floatQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -541,6 +564,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null numeric value (no query parameter)
      *
      * @param floatQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -568,6 +592,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '9999999.999' numeric value
      *
      * @param doubleQuery '9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -585,6 +610,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '9999999.999' numeric value
      *
      * @param doubleQuery '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -612,6 +638,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '-9999999.999' numeric value
      *
      * @param doubleQuery '-9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -629,6 +656,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '-9999999.999' numeric value
      *
      * @param doubleQuery '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -656,6 +684,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null numeric value (no query parameter)
      *
      * @param doubleQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -673,6 +702,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null numeric value (no query parameter)
      *
      * @param doubleQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -700,6 +730,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
      *
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -717,6 +748,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
      *
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -744,6 +776,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end
      *
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -761,6 +794,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end
      *
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -788,6 +822,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get ''
      *
      * @param stringQuery '' string value. Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -805,6 +840,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get ''
      *
      * @param stringQuery '' string value. Possible values for this parameter include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -832,6 +868,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null (no query parameter in url)
      *
      * @param stringQuery null string value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -849,6 +886,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null (no query parameter in url)
      *
      * @param stringQuery null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -876,6 +914,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get using uri with query parameter 'green color'
      *
      * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -893,6 +932,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get using uri with query parameter 'green color'
      *
      * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -920,6 +960,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null (no query parameter in url)
      *
      * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -937,6 +978,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null (no query parameter in url)
      *
      * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -964,6 +1006,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -981,6 +1024,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1008,6 +1052,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '' as byte array
      *
      * @param byteQuery '' as byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1025,6 +1070,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '' as byte array
      *
      * @param byteQuery '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1052,6 +1098,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null as byte array (no query parameters in uri)
      *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1069,6 +1116,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null as byte array (no query parameters in uri)
      *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1096,6 +1144,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '2012-01-01' as date
      *
      * @param dateQuery '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1113,6 +1162,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '2012-01-01' as date
      *
      * @param dateQuery '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1140,6 +1190,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null as date - this should result in no query parameters in uri
      *
      * @param dateQuery null as date (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1157,6 +1208,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null as date - this should result in no query parameters in uri
      *
      * @param dateQuery null as date (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1184,6 +1236,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '2012-01-01T01:01:01Z' as date-time
      *
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1201,6 +1254,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get '2012-01-01T01:01:01Z' as date-time
      *
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1228,6 +1282,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null as date-time, should result in no query parameters in uri
      *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1245,6 +1300,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get null as date-time, should result in no query parameters in uri
      *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1272,6 +1328,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1289,6 +1346,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1316,6 +1374,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get a null array of string using the csv-array format
      *
      * @param arrayQuery a null array of string using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1333,6 +1392,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get a null array of string using the csv-array format
      *
      * @param arrayQuery a null array of string using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1360,6 +1420,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get an empty array [] of string using the csv-array format
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1377,6 +1438,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get an empty array [] of string using the csv-array format
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1404,6 +1466,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1421,6 +1484,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1448,6 +1512,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1465,6 +1530,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1492,6 +1558,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1509,6 +1576,7 @@ public class QueriesImpl implements Queries {
     }
 
     /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

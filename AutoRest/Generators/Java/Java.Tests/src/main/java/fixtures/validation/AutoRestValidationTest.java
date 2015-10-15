@@ -74,6 +74,7 @@ public interface AutoRestValidationTest {
     }
 
     /**
+     * Validates input parameters on the method. See swagger for details.
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
@@ -83,6 +84,7 @@ public interface AutoRestValidationTest {
     Product validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException;
 
     /**
+     * Validates input parameters on the method. See swagger for details.
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
@@ -91,6 +93,7 @@ public interface AutoRestValidationTest {
      */
     Call<ResponseBody> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
     /**
+     * Validates body parameters on the method. See swagger for details.
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
@@ -101,6 +104,7 @@ public interface AutoRestValidationTest {
     Product validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException;
 
     /**
+     * Validates body parameters on the method. See swagger for details.
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.

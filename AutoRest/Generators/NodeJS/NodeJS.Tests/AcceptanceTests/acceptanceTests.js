@@ -8,6 +8,7 @@ var http = require('http');
 var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
+var moment = require('moment');
 var fs = require('fs');
 
 var boolClient = require('../Expected/AcceptanceTests/BodyBoolean/autoRestBoolTestService');
@@ -17,6 +18,7 @@ var numberClient = require('../Expected/AcceptanceTests/BodyNumber/autoRestNumbe
 var byteClient = require('../Expected/AcceptanceTests/BodyByte/autoRestSwaggerBATByteService');
 var dateClient = require('../Expected/AcceptanceTests/BodyDate/autoRestDateTestService');
 var dateTimeClient = require('../Expected/AcceptanceTests/BodyDateTime/autoRestDateTimeTestService');
+var durationClient = require('../Expected/AcceptanceTests/BodyDuration/autoRestDurationTestService');
 var urlClient = require('../Expected/AcceptanceTests/Url/autoRestUrlTestService');
 var fileClient = require('../Expected/AcceptanceTests/BodyFile/autoRestSwaggerBATFileService');
 var arrayClient = require('../Expected/AcceptanceTests/BodyArray/autoRestSwaggerBATArrayService');
@@ -592,6 +594,45 @@ describe('nodejs', function () {
 
       it('should put local negative offset max DateTime', function (done) {
         testClient.datetime.putLocalNegativeOffsetMaxDateTime('9999-12-31T23:59:59.9999999-14:00', function (error, result) {
+          should.not.exist(error);
+          should.not.exist(result);
+          done();
+        });
+      });
+    });
+
+    describe('Duration Client', function () {
+      var testClient = new durationClient(baseUri, clientOptions);
+      it('should properly handle null value for Duration', function (done) {
+        testClient.duration.getNull(function (error, result) {
+          should.not.exist(result);
+          should.not.exist(error);
+          done();
+        });
+      });
+
+      it('should properly handle invalid value for Duration', function (done) {
+        testClient.duration.getInvalid(function (error, result) {
+          //For some reason moment.js allows non-ISO strings and will just construct a duration of length 0, so we don't expect an error here, but the result
+          //should be duration of length 0
+          should.not.exist(error);
+          should.equal(result.asSeconds(), 0);
+          done();
+        });
+      });
+
+      it('should properly handle positive value for Duration', function (done) {
+        testClient.duration.getPositiveDuration(function (error, result) {
+          should.exist(result);
+          should.not.exist(error);
+          should.equal(result.asSeconds(), moment.duration('P3Y6M4DT12H30M5S').asSeconds());
+          done();
+        });
+      });
+
+      it('should properly put positive value for Duration', function (done) {
+        var duration = moment.duration({days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11});
+        testClient.duration.putPositiveDuration(duration, function (error, result) {
           should.not.exist(error);
           should.not.exist(result);
           done();

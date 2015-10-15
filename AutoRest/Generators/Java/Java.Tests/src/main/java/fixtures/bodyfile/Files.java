@@ -35,6 +35,7 @@ public interface Files {
 
     }
     /**
+     * Get file
      *
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -42,6 +43,7 @@ public interface Files {
     InputStream getFile() throws ServiceException;
 
     /**
+     * Get file
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -49,6 +51,7 @@ public interface Files {
     Call<ResponseBody> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
+     * Get empty file
      *
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -56,6 +59,7 @@ public interface Files {
     InputStream getEmptyFile() throws ServiceException;
 
     /**
+     * Get empty file
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

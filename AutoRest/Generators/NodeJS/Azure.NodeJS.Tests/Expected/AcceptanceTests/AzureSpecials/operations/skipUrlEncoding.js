@@ -34,6 +34,7 @@ function SkipUrlEncoding(client) {
 
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
+ *
  * @param {string} unencodedPathParam Unencoded path parameter with value
  * 'path1/path2/path3'
  * 
@@ -76,7 +77,7 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
@@ -142,6 +143,7 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
 
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
+ *
  * @param {string} unencodedPathParam Unencoded path parameter with value
  * 'path1/path2/path3'
  * 
@@ -184,7 +186,7 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
@@ -250,6 +252,7 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
 
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
+ *
  * @param {string} unencodedPathParam An unencoded path parameter with value
  * 'path1/path2/path3'. Possible values for this parameter include:
  * 'path1/path2/path3'
@@ -293,7 +296,7 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
@@ -360,6 +363,7 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
 /**
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
+ *
  * @param {string} q1 Unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
  * 
@@ -402,7 +406,7 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/method/query/valid';
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
@@ -468,6 +472,7 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
 
 /**
  * Get method with unencoded query parameter with value null
+ *
  * @param {string} [q1] Unencoded query parameter with value null
  * 
  * @param {object} [options]
@@ -509,7 +514,7 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/method/query/null';
   var queryParameters = [];
   if (q1 !== null && q1 !== undefined) {
@@ -578,6 +583,7 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (q1, options, callback) 
 /**
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
+ *
  * @param {string} q1 Unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
  * 
@@ -620,7 +626,7 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/path/query/valid';
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
@@ -687,6 +693,7 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
 /**
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
+ *
  * @param {string} [q1] An unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'. Possible values for this parameter include:
  * 'value1&q2=value2&q3=value3'
@@ -730,7 +737,7 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/swagger/query/valid';
   var queryParameters = [];
   if (q1 !== null && q1 !== undefined) {

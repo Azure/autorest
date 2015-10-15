@@ -34,6 +34,7 @@ function HttpSuccess(client) {
 
 /**
  * Return 204 status code if successful
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -70,7 +71,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/204';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -136,6 +137,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
 
 /**
  * Return 404 status code if successful
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -172,7 +174,7 @@ HttpSuccess.prototype.head404 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/success/404';
   var queryParameters = [];
   if (queryParameters.length > 0) {

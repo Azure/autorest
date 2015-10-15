@@ -206,6 +206,7 @@ public interface Array {
 
     }
     /**
+     * Get null array value
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -213,6 +214,7 @@ public interface Array {
     List<Integer> getNull() throws ServiceException;
 
     /**
+     * Get null array value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -220,6 +222,7 @@ public interface Array {
     Call<ResponseBody> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
+     * Get invalid array [1, 2, 3
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -227,6 +230,7 @@ public interface Array {
     List<Integer> getInvalid() throws ServiceException;
 
     /**
+     * Get invalid array [1, 2, 3
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -234,6 +238,7 @@ public interface Array {
     Call<ResponseBody> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
+     * Get empty array value []
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -241,6 +246,7 @@ public interface Array {
     List<Integer> getEmpty() throws ServiceException;
 
     /**
+     * Get empty array value []
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -248,6 +254,7 @@ public interface Array {
     Call<ResponseBody> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
+     * Set array value empty []
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -255,6 +262,7 @@ public interface Array {
     void putEmpty(List<String> arrayBody) throws ServiceException;
 
     /**
+     * Set array value empty []
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -263,6 +271,7 @@ public interface Array {
     Call<ResponseBody> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get boolean array value [true, false, false, true]
      *
      * @return the List&lt;Boolean&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -270,6 +279,7 @@ public interface Array {
     List<Boolean> getBooleanTfft() throws ServiceException;
 
     /**
+     * Get boolean array value [true, false, false, true]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -277,6 +287,7 @@ public interface Array {
     Call<ResponseBody> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
+     * Set array value empty [true, false, false, true]
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -284,6 +295,7 @@ public interface Array {
     void putBooleanTfft(List<Boolean> arrayBody) throws ServiceException;
 
     /**
+     * Set array value empty [true, false, false, true]
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -292,6 +304,7 @@ public interface Array {
     Call<ResponseBody> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get boolean array value [true, null, false]
      *
      * @return the List&lt;Boolean&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -299,6 +312,7 @@ public interface Array {
     List<Boolean> getBooleanInvalidNull() throws ServiceException;
 
     /**
+     * Get boolean array value [true, null, false]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -306,6 +320,7 @@ public interface Array {
     Call<ResponseBody> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
+     * Get boolean array value [true, 'boolean', false]
      *
      * @return the List&lt;Boolean&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -313,6 +328,7 @@ public interface Array {
     List<Boolean> getBooleanInvalidString() throws ServiceException;
 
     /**
+     * Get boolean array value [true, 'boolean', false]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -320,6 +336,7 @@ public interface Array {
     Call<ResponseBody> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
+     * Get integer array value [1, -1, 3, 300]
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -327,6 +344,7 @@ public interface Array {
     List<Integer> getIntegerValid() throws ServiceException;
 
     /**
+     * Get integer array value [1, -1, 3, 300]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -334,6 +352,7 @@ public interface Array {
     Call<ResponseBody> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
+     * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -341,6 +360,7 @@ public interface Array {
     void putIntegerValid(List<Integer> arrayBody) throws ServiceException;
 
     /**
+     * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -349,6 +369,7 @@ public interface Array {
     Call<ResponseBody> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get integer array value [1, null, 0]
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -356,6 +377,7 @@ public interface Array {
     List<Integer> getIntInvalidNull() throws ServiceException;
 
     /**
+     * Get integer array value [1, null, 0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -363,6 +385,7 @@ public interface Array {
     Call<ResponseBody> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
+     * Get integer array value [1, 'integer', 0]
      *
      * @return the List&lt;Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -370,6 +393,7 @@ public interface Array {
     List<Integer> getIntInvalidString() throws ServiceException;
 
     /**
+     * Get integer array value [1, 'integer', 0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -377,6 +401,7 @@ public interface Array {
     Call<ResponseBody> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
+     * Get integer array value [1, -1, 3, 300]
      *
      * @return the List&lt;Long&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -384,6 +409,7 @@ public interface Array {
     List<Long> getLongValid() throws ServiceException;
 
     /**
+     * Get integer array value [1, -1, 3, 300]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -391,6 +417,7 @@ public interface Array {
     Call<ResponseBody> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback);
 
     /**
+     * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -398,6 +425,7 @@ public interface Array {
     void putLongValid(List<Long> arrayBody) throws ServiceException;
 
     /**
+     * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -406,6 +434,7 @@ public interface Array {
     Call<ResponseBody> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get long array value [1, null, 0]
      *
      * @return the List&lt;Long&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -413,6 +442,7 @@ public interface Array {
     List<Long> getLongInvalidNull() throws ServiceException;
 
     /**
+     * Get long array value [1, null, 0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -420,6 +450,7 @@ public interface Array {
     Call<ResponseBody> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback);
 
     /**
+     * Get long array value [1, 'integer', 0]
      *
      * @return the List&lt;Long&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -427,6 +458,7 @@ public interface Array {
     List<Long> getLongInvalidString() throws ServiceException;
 
     /**
+     * Get long array value [1, 'integer', 0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -434,6 +466,7 @@ public interface Array {
     Call<ResponseBody> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback);
 
     /**
+     * Get float array value [0, -0.01, 1.2e20]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -441,6 +474,7 @@ public interface Array {
     List<Double> getFloatValid() throws ServiceException;
 
     /**
+     * Get float array value [0, -0.01, 1.2e20]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -448,6 +482,7 @@ public interface Array {
     Call<ResponseBody> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
+     * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -455,6 +490,7 @@ public interface Array {
     void putFloatValid(List<Double> arrayBody) throws ServiceException;
 
     /**
+     * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -463,6 +499,7 @@ public interface Array {
     Call<ResponseBody> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get float array value [0.0, null, -1.2e20]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -470,6 +507,7 @@ public interface Array {
     List<Double> getFloatInvalidNull() throws ServiceException;
 
     /**
+     * Get float array value [0.0, null, -1.2e20]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -477,6 +515,7 @@ public interface Array {
     Call<ResponseBody> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
+     * Get boolean array value [1.0, 'number', 0.0]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -484,6 +523,7 @@ public interface Array {
     List<Double> getFloatInvalidString() throws ServiceException;
 
     /**
+     * Get boolean array value [1.0, 'number', 0.0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -491,6 +531,7 @@ public interface Array {
     Call<ResponseBody> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
+     * Get float array value [0, -0.01, 1.2e20]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -498,6 +539,7 @@ public interface Array {
     List<Double> getDoubleValid() throws ServiceException;
 
     /**
+     * Get float array value [0, -0.01, 1.2e20]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -505,6 +547,7 @@ public interface Array {
     Call<ResponseBody> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
+     * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -512,6 +555,7 @@ public interface Array {
     void putDoubleValid(List<Double> arrayBody) throws ServiceException;
 
     /**
+     * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -520,6 +564,7 @@ public interface Array {
     Call<ResponseBody> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get float array value [0.0, null, -1.2e20]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -527,6 +572,7 @@ public interface Array {
     List<Double> getDoubleInvalidNull() throws ServiceException;
 
     /**
+     * Get float array value [0.0, null, -1.2e20]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -534,6 +580,7 @@ public interface Array {
     Call<ResponseBody> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
+     * Get boolean array value [1.0, 'number', 0.0]
      *
      * @return the List&lt;Double&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -541,6 +588,7 @@ public interface Array {
     List<Double> getDoubleInvalidString() throws ServiceException;
 
     /**
+     * Get boolean array value [1.0, 'number', 0.0]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -548,6 +596,7 @@ public interface Array {
     Call<ResponseBody> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
+     * Get string array value ['foo1', 'foo2', 'foo3']
      *
      * @return the List&lt;String&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -555,6 +604,7 @@ public interface Array {
     List<String> getStringValid() throws ServiceException;
 
     /**
+     * Get string array value ['foo1', 'foo2', 'foo3']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -562,6 +612,7 @@ public interface Array {
     Call<ResponseBody> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback);
 
     /**
+     * Set array value ['foo1', 'foo2', 'foo3']
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -569,6 +620,7 @@ public interface Array {
     void putStringValid(List<String> arrayBody) throws ServiceException;
 
     /**
+     * Set array value ['foo1', 'foo2', 'foo3']
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -577,6 +629,7 @@ public interface Array {
     Call<ResponseBody> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get string array value ['foo', null, 'foo2']
      *
      * @return the List&lt;String&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -584,6 +637,7 @@ public interface Array {
     List<String> getStringWithNull() throws ServiceException;
 
     /**
+     * Get string array value ['foo', null, 'foo2']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -591,6 +645,7 @@ public interface Array {
     Call<ResponseBody> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback);
 
     /**
+     * Get string array value ['foo', 123, 'foo2']
      *
      * @return the List&lt;String&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -598,6 +653,7 @@ public interface Array {
     List<String> getStringWithInvalid() throws ServiceException;
 
     /**
+     * Get string array value ['foo', 123, 'foo2']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -605,6 +661,7 @@ public interface Array {
     Call<ResponseBody> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback);
 
     /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -612,6 +669,7 @@ public interface Array {
     List<LocalDate> getDateValid() throws ServiceException;
 
     /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -619,6 +677,7 @@ public interface Array {
     Call<ResponseBody> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
+     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -626,6 +685,7 @@ public interface Array {
     void putDateValid(List<LocalDate> arrayBody) throws ServiceException;
 
     /**
+     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -634,6 +694,7 @@ public interface Array {
     Call<ResponseBody> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get date array value ['2012-01-01', null, '1776-07-04']
      *
      * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -641,6 +702,7 @@ public interface Array {
     List<LocalDate> getDateInvalidNull() throws ServiceException;
 
     /**
+     * Get date array value ['2012-01-01', null, '1776-07-04']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -648,6 +710,7 @@ public interface Array {
     Call<ResponseBody> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
+     * Get date array value ['2011-03-22', 'date']
      *
      * @return the List&lt;LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -655,6 +718,7 @@ public interface Array {
     List<LocalDate> getDateInvalidChars() throws ServiceException;
 
     /**
+     * Get date array value ['2011-03-22', 'date']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -662,6 +726,7 @@ public interface Array {
     Call<ResponseBody> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -669,6 +734,7 @@ public interface Array {
     List<DateTime> getDateTimeValid() throws ServiceException;
 
     /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -676,6 +742,7 @@ public interface Array {
     Call<ResponseBody> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -683,6 +750,7 @@ public interface Array {
     void putDateTimeValid(List<DateTime> arrayBody) throws ServiceException;
 
     /**
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -691,6 +759,7 @@ public interface Array {
     Call<ResponseBody> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get date array value ['2000-12-01t00:00:01z', null]
      *
      * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -698,6 +767,7 @@ public interface Array {
     List<DateTime> getDateTimeInvalidNull() throws ServiceException;
 
     /**
+     * Get date array value ['2000-12-01t00:00:01z', null]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -705,6 +775,7 @@ public interface Array {
     Call<ResponseBody> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time']
      *
      * @return the List&lt;DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -712,6 +783,7 @@ public interface Array {
     List<DateTime> getDateTimeInvalidChars() throws ServiceException;
 
     /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time']
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -719,6 +791,7 @@ public interface Array {
     Call<ResponseBody> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
      *
      * @return the List&lt;byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -726,6 +799,7 @@ public interface Array {
     List<byte[]> getByteValid() throws ServiceException;
 
     /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -733,6 +807,7 @@ public interface Array {
     Call<ResponseBody> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -740,6 +815,7 @@ public interface Array {
     void putByteValid(List<byte[]> arrayBody) throws ServiceException;
 
     /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -748,6 +824,7 @@ public interface Array {
     Call<ResponseBody> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
      *
      * @return the List&lt;byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -755,6 +832,7 @@ public interface Array {
     List<byte[]> getByteInvalidNull() throws ServiceException;
 
     /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -762,6 +840,7 @@ public interface Array {
     Call<ResponseBody> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
+     * Get array of complex type null value
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -769,6 +848,7 @@ public interface Array {
     List<Product> getComplexNull() throws ServiceException;
 
     /**
+     * Get array of complex type null value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -776,6 +856,7 @@ public interface Array {
     Call<ResponseBody> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
+     * Get empty array of complex type []
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -783,6 +864,7 @@ public interface Array {
     List<Product> getComplexEmpty() throws ServiceException;
 
     /**
+     * Get empty array of complex type []
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -790,6 +872,7 @@ public interface Array {
     Call<ResponseBody> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -797,6 +880,7 @@ public interface Array {
     List<Product> getComplexItemNull() throws ServiceException;
 
     /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -804,6 +888,7 @@ public interface Array {
     Call<ResponseBody> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -811,6 +896,7 @@ public interface Array {
     List<Product> getComplexItemEmpty() throws ServiceException;
 
     /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -818,6 +904,7 @@ public interface Array {
     Call<ResponseBody> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @return the List&lt;Product&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -825,6 +912,7 @@ public interface Array {
     List<Product> getComplexValid() throws ServiceException;
 
     /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -832,6 +920,7 @@ public interface Array {
     Call<ResponseBody> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -839,6 +928,7 @@ public interface Array {
     void putComplexValid(List<Product> arrayBody) throws ServiceException;
 
     /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -847,6 +937,7 @@ public interface Array {
     Call<ResponseBody> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get a null array
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -854,6 +945,7 @@ public interface Array {
     List<List<String>> getArrayNull() throws ServiceException;
 
     /**
+     * Get a null array
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -861,6 +953,7 @@ public interface Array {
     Call<ResponseBody> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
+     * Get an empty array []
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -868,6 +961,7 @@ public interface Array {
     List<List<String>> getArrayEmpty() throws ServiceException;
 
     /**
+     * Get an empty array []
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -875,6 +969,7 @@ public interface Array {
     Call<ResponseBody> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -882,6 +977,7 @@ public interface Array {
     List<List<String>> getArrayItemNull() throws ServiceException;
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -889,6 +985,7 @@ public interface Array {
     Call<ResponseBody> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -896,6 +993,7 @@ public interface Array {
     List<List<String>> getArrayItemEmpty() throws ServiceException;
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -903,6 +1001,7 @@ public interface Array {
     Call<ResponseBody> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -910,6 +1009,7 @@ public interface Array {
     List<List<String>> getArrayValid() throws ServiceException;
 
     /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -917,6 +1017,7 @@ public interface Array {
     Call<ResponseBody> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -924,6 +1025,7 @@ public interface Array {
     void putArrayValid(List<List<String>> arrayBody) throws ServiceException;
 
     /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -932,6 +1034,7 @@ public interface Array {
     Call<ResponseBody> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get an array of Dictionaries with value null
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -939,6 +1042,7 @@ public interface Array {
     List<Map<String, String>> getDictionaryNull() throws ServiceException;
 
     /**
+     * Get an array of Dictionaries with value null
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -946,6 +1050,7 @@ public interface Array {
     Call<ResponseBody> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value []
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -953,6 +1058,7 @@ public interface Array {
     List<Map<String, String>> getDictionaryEmpty() throws ServiceException;
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value []
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -960,6 +1066,7 @@ public interface Array {
     Call<ResponseBody> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -967,6 +1074,7 @@ public interface Array {
     List<Map<String, String>> getDictionaryItemNull() throws ServiceException;
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -974,6 +1082,7 @@ public interface Array {
     Call<ResponseBody> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -981,6 +1090,7 @@ public interface Array {
     List<Map<String, String>> getDictionaryItemEmpty() throws ServiceException;
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -988,6 +1098,7 @@ public interface Array {
     Call<ResponseBody> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -995,6 +1106,7 @@ public interface Array {
     List<Map<String, String>> getDictionaryValid() throws ServiceException;
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -1002,6 +1114,7 @@ public interface Array {
     Call<ResponseBody> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1009,6 +1122,7 @@ public interface Array {
     void putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException;
 
     /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

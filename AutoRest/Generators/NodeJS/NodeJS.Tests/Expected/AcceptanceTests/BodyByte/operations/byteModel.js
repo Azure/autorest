@@ -33,6 +33,7 @@ function ByteModel(client) {
 
 /**
  * Get null byte value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ ByteModel.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//byte/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -134,6 +135,7 @@ ByteModel.prototype.getNull = function (options, callback) {
 
 /**
  * Get empty byte value ''
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -162,7 +164,7 @@ ByteModel.prototype.getEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//byte/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -235,6 +237,7 @@ ByteModel.prototype.getEmpty = function (options, callback) {
 
 /**
  * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -263,7 +266,7 @@ ByteModel.prototype.getNonAscii = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//byte/nonAscii';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -336,6 +339,7 @@ ByteModel.prototype.getNonAscii = function (options, callback) {
 
 /**
  * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+ *
  * @param {buffer} byteBody Base64-encoded non-ascii byte string hex(FF FE FD
  * FC FB FA F9 F8 F7 F6)
  * 
@@ -375,7 +379,7 @@ ByteModel.prototype.putNonAscii = function (byteBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//byte/nonAscii';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -445,6 +449,7 @@ ByteModel.prototype.putNonAscii = function (byteBody, options, callback) {
 
 /**
  * Get invalid byte value ':::SWAGGER::::'
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -473,7 +478,7 @@ ByteModel.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//byte/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

@@ -37,6 +37,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -54,6 +55,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -81,6 +83,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 204 response with no payload
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -98,6 +101,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 204 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -125,6 +129,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 201 response with valid payload: {'statusCode': '201'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -142,6 +147,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 201 response with valid payload: {'statusCode': '201'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -169,6 +175,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 202 response with no payload:
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -186,6 +193,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 202 response with no payload:
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -213,6 +221,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -230,6 +239,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -257,6 +267,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -274,6 +285,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -301,6 +313,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -318,6 +331,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -345,6 +359,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -362,6 +377,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -389,6 +405,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @return the Object object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -406,6 +423,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -434,6 +452,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'httpCode': '201'}
      *
      * @return the Object object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -451,6 +470,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'httpCode': '201'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -479,6 +499,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'httpStatusCode': '404'}
      *
      * @return the Object object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -496,6 +517,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'httpStatusCode': '404'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -524,6 +546,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @return the Object object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -541,6 +564,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -569,6 +593,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 202 response with no payload
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -585,6 +610,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 202 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -612,6 +638,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 204 response with no payload
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -628,6 +655,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 204 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -655,6 +683,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -671,6 +700,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -698,6 +728,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 202 response with an unexpected payload {'property': 'value'}
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -714,6 +745,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 202 response with an unexpected payload {'property': 'value'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -740,6 +772,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 204 response with no payload
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -756,6 +789,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 204 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -782,6 +816,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with no payload
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -798,6 +833,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -824,6 +860,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with an unexpected payload {'property': 'value'}
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -840,6 +877,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with an unexpected payload {'property': 'value'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -866,6 +904,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -883,6 +922,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -908,6 +948,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with no payload
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -925,6 +966,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -950,6 +992,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -967,6 +1010,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -992,6 +1036,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with no payload
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1009,6 +1054,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1034,6 +1080,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with invalid payload: {'statusCode': '200'}
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1050,6 +1097,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with invalid payload: {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1074,6 +1122,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with no payload
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1090,6 +1139,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1114,6 +1164,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1130,6 +1181,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1154,6 +1206,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with no payload
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
@@ -1170,6 +1223,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with no payload
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1194,6 +1248,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1211,6 +1266,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1236,6 +1292,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with payload {'statusCode': '200'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1253,6 +1310,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with payload {'statusCode': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1278,6 +1336,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1295,6 +1354,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1320,6 +1380,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with no payload client should treat as an http error with no error model
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1337,6 +1398,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 400 response with no payload client should treat as an http error with no error model
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1362,6 +1424,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with payload {'statusCode': '400'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1379,6 +1442,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with payload {'statusCode': '400'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1404,6 +1468,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1421,6 +1486,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -1446,6 +1512,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 202 response with payload {'statusCode': '202'}
      *
      * @return the A object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1463,6 +1530,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
     }
 
     /**
+     * Send a 202 response with payload {'statusCode': '202'}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

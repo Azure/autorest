@@ -33,6 +33,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Get true Boolean value
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -50,6 +51,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Get true Boolean value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -76,6 +78,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Set Boolean value true
      *
      * @param boolBody the boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -93,6 +96,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Set Boolean value true
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -120,6 +124,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Get false Boolean value
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -137,6 +142,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Get false Boolean value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -163,6 +169,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Set Boolean value false
      *
      * @param boolBody the boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -180,6 +187,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Set Boolean value false
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -207,6 +215,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Get null Boolean value
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -224,6 +233,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Get null Boolean value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -250,6 +260,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Get invalid Boolean value
      *
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -267,6 +278,7 @@ public class BoolImpl implements Bool {
     }
 
     /**
+     * Get invalid Boolean value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

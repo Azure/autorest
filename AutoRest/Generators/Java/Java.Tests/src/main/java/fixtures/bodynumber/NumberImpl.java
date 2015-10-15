@@ -33,6 +33,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get null Number value
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -50,6 +51,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get null Number value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -76,6 +78,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get invalid float Number value
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -93,6 +96,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get invalid float Number value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -119,6 +123,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get invalid double Number value
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -136,6 +141,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get invalid double Number value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -162,6 +168,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put big float value 3.402823e+20
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -179,6 +186,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put big float value 3.402823e+20
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -206,6 +214,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big float value 3.402823e+20
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -223,6 +232,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big float value 3.402823e+20
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -249,6 +259,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put big double value 2.5976931e+101
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -266,6 +277,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put big double value 2.5976931e+101
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -293,6 +305,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big double value 2.5976931e+101
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -310,6 +323,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big double value 2.5976931e+101
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -336,6 +350,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put big double value 99999999.99
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -353,6 +368,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put big double value 99999999.99
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -380,6 +396,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big double value 99999999.99
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -397,6 +414,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big double value 99999999.99
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -423,6 +441,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put big double value -99999999.99
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -440,6 +459,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put big double value -99999999.99
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -467,6 +487,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big double value -99999999.99
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -484,6 +505,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big double value -99999999.99
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -510,6 +532,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put small float value 3.402823e-20
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -527,6 +550,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put small float value 3.402823e-20
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -554,6 +578,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big double value 3.402823e-20
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -571,6 +596,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big double value 3.402823e-20
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
@@ -597,6 +623,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put small double value 2.5976931e-101
      *
      * @param numberBody the double value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -614,6 +641,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Put small double value 2.5976931e-101
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -641,6 +669,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big double value 2.5976931e-101
      *
      * @return the Double object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -658,6 +687,7 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Get big double value 2.5976931e-101
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */

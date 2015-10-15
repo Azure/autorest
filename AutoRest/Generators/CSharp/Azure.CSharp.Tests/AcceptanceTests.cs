@@ -667,5 +667,23 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("123", result2.RequestId);
             }
         }
+
+        [Fact]
+        public void CustomNamedRequestIdTest()
+        {
+            SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
+                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"));
+            
+            const string validSubscription = "1234-5678-9012-3456";
+            const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
+
+            using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
+            {
+                AzureOperationResponse response = client.Header.CustomNamedRequestIdWithHttpMessagesAsync(expectedRequestId).Result;
+
+                Assert.Equal("123", response.RequestId);
+            }
+        }
     }
 }

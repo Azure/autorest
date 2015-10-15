@@ -42,12 +42,14 @@ public interface ApiVersionDefault {
 
     }
     /**
+     * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void getMethodGlobalValid() throws ServiceException;
 
     /**
+     * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -55,12 +57,14 @@ public interface ApiVersionDefault {
     Call<ResponseBody> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void getMethodGlobalNotProvidedValid() throws ServiceException;
 
     /**
+     * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -68,12 +72,14 @@ public interface ApiVersionDefault {
     Call<ResponseBody> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void getPathGlobalValid() throws ServiceException;
 
     /**
+     * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -81,12 +87,14 @@ public interface ApiVersionDefault {
     Call<ResponseBody> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void getSwaggerGlobalValid() throws ServiceException;
 
     /**
+     * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
