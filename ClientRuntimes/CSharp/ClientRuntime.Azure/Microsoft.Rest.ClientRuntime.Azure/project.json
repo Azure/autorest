@@ -7,6 +7,7 @@
     "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
 
     "dependencies": {
+        "Microsoft.Rest.ClientRuntime": "",
     },
 
     "commands": {
@@ -15,7 +16,12 @@
     "frameworks": {
         "dnxcore50": {
             "dependencies": {
-                "Microsoft.Rest.ClientRuntime": "2.0.0-preview"
+                "System.Diagnostics.Tools": "4.0.1-beta-23225",
+                "System.Net.Http": "4.0.1-beta-23225",
+                "System.Threading.Tasks": "4.0.11-beta-23225",
+                "Microsoft.CSharp": "4.0.1-beta-23225",
+                "Newtonsoft.Json": "6.0.8",
+                "System.Xml.ReaderWriter": "4.0.10"
             }
         }
     },
