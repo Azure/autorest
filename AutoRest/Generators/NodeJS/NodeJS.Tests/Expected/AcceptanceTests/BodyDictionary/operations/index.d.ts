@@ -951,6 +951,53 @@ export interface Dictionary {
     putDateTimeRfc1123Valid(arrayBody: { [propertyName: string]: Date }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
 
     /**
+     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
+     * "P5DT1H0M0S"}
+     *
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {object} [result]   - The deserialized result object.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDurationValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: moment.Duration }, request: WebResource, response: stream.Readable) => void): void;
+
+    /**
+     * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+     *
+     * @param {object} arrayBody
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putDurationValid(arrayBody: { [propertyName: string]: moment.Duration }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+
+    /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
      * hex (25, 29, 43)} with each item encoded in base64
      *

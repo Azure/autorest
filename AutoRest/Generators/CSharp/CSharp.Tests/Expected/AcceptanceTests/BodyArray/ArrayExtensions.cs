@@ -1045,6 +1045,61 @@ namespace Fixtures.AcceptanceTestsBodyArray
             }
 
             /// <summary>
+            /// Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IList<TimeSpan?> GetDurationValid(this IArray operations)
+            {
+                return Task.Factory.StartNew(s => ((IArray)s).GetDurationValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<TimeSpan?>> GetDurationValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                HttpOperationResponse<IList<TimeSpan?>> result = await operations.GetDurationValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            public static void PutDurationValid(this IArray operations, IList<TimeSpan?> arrayBody)
+            {
+                Task.Factory.StartNew(s => ((IArray)s).PutDurationValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutDurationValidAsync( this IArray operations, IList<TimeSpan?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.PutDurationValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
             /// Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
             /// with each item encoded in base64
             /// </summary>

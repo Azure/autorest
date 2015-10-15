@@ -26,6 +26,7 @@ import fixtures.bodyarray.models.Error;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import com.microsoft.rest.DateTimeRfc1123;
+import org.joda.time.Period;
 import fixtures.bodyarray.models.Product;
 import java.util.Map;
 import com.microsoft.rest.Validator;
@@ -1853,6 +1854,107 @@ public class ArrayImpl implements Array {
     }
 
     private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, retrofit);
+    }
+
+    /**
+     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+     *
+     * @return the List&lt;Period&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public List<Period> getDurationValid() throws ServiceException {
+        try {
+            Call<ResponseBody> call = service.getDurationValid();
+            ServiceResponse<List<Period>> response = getDurationValidDelegate(call.execute(), null);
+            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<ResponseBody> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) {
+        Call<ResponseBody> call = service.getDurationValid();
+        call.enqueue(new ServiceResponseCallback<List<Period>>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(getDurationValidDelegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<List<Period>> getDurationValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<List<Period>>()
+                .register(200, new TypeToken<List<Period>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, retrofit);
+    }
+
+    /**
+     * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+     *
+     * @param arrayBody the List&lt;Period&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void putDurationValid(List<Period> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
+        try {
+            Call<ResponseBody> call = service.putDurationValid(arrayBody);
+            ServiceResponse<Void> response = putDurationValidDelegate(call.execute(), null);
+            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+     *
+     * @param arrayBody the List&lt;Period&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<ResponseBody> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
+        Call<ResponseBody> call = service.putDurationValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(putDurationValidDelegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<Void> putDurationValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

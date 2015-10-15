@@ -304,6 +304,17 @@ export interface Datetimerfc1123Wrapper {
 
 /**
  * @class
+ * Initializes a new instance of the DurationWrapper class.
+ * @constructor
+ * @member {moment.duration} [field]
+ * 
+*/
+export interface DurationWrapper {
+    field?: moment.Duration;
+}
+
+/**
+ * @class
  * Initializes a new instance of the ByteWrapper class.
  * @constructor
  * @member {buffer} [field]

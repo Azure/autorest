@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -29,7 +30,16 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public bool ContainsTimeSpan
         {
-            get { return this.Methods.FirstOrDefault(m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.TimeSpan) != null) != null; }
+            get
+            {
+                Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
+                    p.Type == PrimaryType.TimeSpan ||
+                    (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.TimeSpan) ||
+                    (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.TimeSpan) ||
+                    (p.Type is CompositeType && (p.Type as CompositeType).ContainsTimeSpan())) != null);
+                
+                return  method != null;
+            }
         }
     }
 }

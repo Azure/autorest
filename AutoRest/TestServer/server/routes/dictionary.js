@@ -153,7 +153,14 @@ var dictionary = function(coverage) {
                 res.status(200).end('{"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}');
             } else {
                 res.status(400).send('Request scenario for date-time-rfc1123 primitive type must contain valid');
-            }        
+            }
+        } else if (req.params.type == 'duration') {
+            if (req.params.scenario === 'valid') {
+                coverage['getDictionaryDurationValid']++;
+                res.status(200).end('{"0": "P123DT22H14M12.011S", "1": "P5DT1H"}');
+            } else {
+                res.status(400).send('Request scenario for duration primitive type must contain valid');
+            }            
         } else if (req.params.type == 'byte') {
             if (req.params.scenario === 'valid') {
                 var bytes1 = new Buffer([255, 255, 255, 250]);
@@ -274,6 +281,17 @@ var dictionary = function(coverage) {
             }
         } else {
             res.status(400).send('Request scenario for date-time-rfc1123 primitive type must contain valid');
+        }
+    } else if (req.params.type == 'duration') {
+        if (req.params.scenario === 'valid') {
+            if (_.isEqual(req.body, {'0': 'P123DT22H14M12.011S', '1': 'P5DT1H'}) || _.isEqual(req.body, {'0': 'P123DT22H14M12.010999999998603S', '1': 'P5DT1H'})) {
+                coverage['putDictionaryDurationValid']++;
+                res.status(200).end();
+            } else {
+              utils.send400(res, next, "Did not like duration dictionary req '" + util.inspect(req.body) + "'");
+            }
+        } else {
+            res.status(400).send('Request scenario for duration primitive type must contain valid');
         }
 	} else if (req.params.type == 'byte') {
             if (req.params.scenario === 'valid') {

@@ -8,6 +8,7 @@ import fixtures.bodydictionary.models.Widget;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.Period;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -382,6 +383,23 @@ public class DictionaryTests {
         testdata.put("1", new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)));
         testdata.put("2", new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC)));
         client.getDictionary().putDateTimeRfc1123Valid(testdata);
+    }
+
+    @Test
+    public void getDurationValid() throws Exception {
+        Map<String, Period> result = client.getDictionary().getDurationValid();
+        Map<String, Period> expected = new HashMap<String, Period>();
+        expected.put("0", new Period(0, 0, 0, 123, 22, 14, 12, 11));
+        expected.put("1", new Period(0, 0, 0, 5, 1, 0, 0, 0));
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void putDurationValid() throws Exception {
+        Map<String, Period> testdata = new HashMap<String, Period>();
+        testdata.put("0", new Period(0, 0, 0, 123, 22, 14, 12, 11));
+        testdata.put("1", new Period(0, 0, 0, 5, 1, 0, 0, 0));
+        client.getDictionary().putDurationValid(testdata);
     }
 
     @Test

@@ -644,6 +644,55 @@ export interface Primitive {
     putDateTimeRfc1123(complexBody: models.Datetimerfc1123Wrapper, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
 
     /**
+     * Get complex types with duration properties
+     *
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {object} [result]   - The deserialized result object.
+     *                      See {@link DurationWrapper} for more information.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDuration(options: RequestOptions, callback: (err: Error, result: models.DurationWrapper, request: WebResource, response: stream.Readable) => void): void;
+
+    /**
+     * Put complex types with duration properties
+     *
+     * @param {object} complexBody Please put 'P123DT22H14M12.011S'
+     * 
+     * @param {moment.duration} [complexBody.field]
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putDuration(complexBody: models.DurationWrapper, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+
+    /**
      * Get complex types with byte properties
      *
      * @param {object} [options]

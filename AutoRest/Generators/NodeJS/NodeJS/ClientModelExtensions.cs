@@ -669,7 +669,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 builder.AppendLine("if ({0}) {{", objectReference)
                          .Indent()
-                         .AppendLine("if !(moment.isDuration({0})) {{",
+                         .AppendLine("if (!moment.isDuration({0})) {{",
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 builder = ConstructBasePropertyCheck(builder, valueReference);
@@ -986,6 +986,19 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                            .Outdent()
                            .AppendLine("}");
                 }
+                else if (primary == PrimaryType.TimeSpan)
+                {
+                    builder.AppendLine("if ({0}) {{", valueReference)
+                             .Indent()
+                             .AppendLine("{1} = moment.duration({0});", valueReference, objectReference)
+                           .Outdent()
+                           .AppendLine("}")
+                           .AppendLine("else if ({0} !== undefined) {{", valueReference)
+                             .Indent()
+                             .AppendLine("{1} = {0};", valueReference, objectReference)
+                           .Outdent()
+                           .AppendLine("}");
+                }
                 else
                 {
                     builder.AppendLine("if ({0} !== undefined) {{", valueReference)
@@ -1215,6 +1228,21 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             return parameter.Extensions.ContainsKey(CodeGenerator.SkipUrlEncodingExtension) &&
                    (bool)parameter.Extensions[CodeGenerator.SkipUrlEncodingExtension];
+        }
+
+        public static bool ContainsTimeSpan(this CompositeType type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            Property prop = type.Properties.FirstOrDefault(p =>
+                p.Type == PrimaryType.TimeSpan ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.TimeSpan) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.TimeSpan));
+
+            return prop != null;
         }
     }
 }

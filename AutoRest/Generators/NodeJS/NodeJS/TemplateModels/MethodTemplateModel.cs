@@ -348,7 +348,10 @@ namespace Microsoft.Rest.Generator.NodeJS
                     {
                         builder.AppendLine("{0}[i] = new Buffer({0}[i], 'base64');", valueReference);
                     }
-
+                    else if (sequence.ElementType == PrimaryType.TimeSpan)
+                    {
+                        builder.AppendLine("{0}[i] = moment.duration({0}[i]);", valueReference);
+                    }
                 }
                 else if (sequence.ElementType is CompositeType)
                 {
@@ -381,6 +384,10 @@ namespace Microsoft.Rest.Generator.NodeJS
                     else if (dictionary.ValueType == PrimaryType.ByteArray)
                     {
                         builder.AppendLine("{0}[property] = new Buffer({0}[property], 'base64');", valueReference);
+                    }
+                    else if (dictionary.ValueType == PrimaryType.TimeSpan)
+                    {
+                        builder.AppendLine("{0}[property] = moment.duration({0}[property]);", valueReference);
                     }
                 }
                 else if (dictionary.ValueType is CompositeType)
@@ -448,7 +455,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <returns>True if special deserialization is required. False, otherwise.</returns>
         private static bool IsSpecialProcessingRequired(IType type)
         {
-            PrimaryType[] validTypes = new PrimaryType[] { PrimaryType.DateTime, PrimaryType.Date, PrimaryType.DateTimeRfc1123, PrimaryType.ByteArray };
+            PrimaryType[] validTypes = new PrimaryType[] { PrimaryType.DateTime, PrimaryType.Date, PrimaryType.DateTimeRfc1123, PrimaryType.ByteArray, PrimaryType.TimeSpan };
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
             bool result = false;
