@@ -34,13 +34,13 @@ public interface HttpRedirects {
      */
     interface HttpRedirectsService {
         @HEAD("/http/redirect/300")
-        Call<ResponseBody> head300();
+        Call<Void> head300();
 
         @GET("/http/redirect/300")
         Call<ResponseBody> get300();
 
         @HEAD("/http/redirect/301")
-        Call<ResponseBody> head301();
+        Call<Void> head301();
 
         @GET("/http/redirect/301")
         Call<ResponseBody> get301();
@@ -49,7 +49,7 @@ public interface HttpRedirects {
         Call<ResponseBody> put301(@Body Boolean booleanValue);
 
         @HEAD("/http/redirect/302")
-        Call<ResponseBody> head302();
+        Call<Void> head302();
 
         @GET("/http/redirect/302")
         Call<ResponseBody> get302();
@@ -61,7 +61,7 @@ public interface HttpRedirects {
         Call<ResponseBody> post303(@Body Boolean booleanValue);
 
         @HEAD("/http/redirect/307")
-        Call<ResponseBody> head307();
+        Call<Void> head307();
 
         @GET("/http/redirect/307")
         Call<ResponseBody> get307();
@@ -89,7 +89,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head300Async(final ServiceCallback<Void> serviceCallback);
+    Call<Void> head300Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -114,7 +114,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head301Async(final ServiceCallback<Void> serviceCallback);
+    Call<Void> head301Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -152,7 +152,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head302Async(final ServiceCallback<Void> serviceCallback);
+    Call<Void> head302Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -204,7 +204,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head307Async(final ServiceCallback<Void> serviceCallback);
+    Call<Void> head307Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      *

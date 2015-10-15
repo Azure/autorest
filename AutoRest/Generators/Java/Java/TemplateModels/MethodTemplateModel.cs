@@ -19,7 +19,8 @@ namespace Microsoft.Rest.Generator.Java
         {
             this.LoadFrom(source);
             ParameterTemplateModels = new List<ParameterTemplateModel>();
-            source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+            source.Parameters.Where(p => p.Location == ParameterLocation.Path).ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+            source.Parameters.Where(p => p.Location != ParameterLocation.Path).ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
             ServiceClient = serviceClient;
             if (source.Group != null)
             {
@@ -288,6 +289,21 @@ namespace Microsoft.Rest.Generator.Java
                 else
                 {
                     return "ResponseBody";
+                }
+            }
+        }
+
+        public string InternalCallback
+        {
+            get
+            {
+                if (this.HttpMethod == HttpMethod.Head)
+                {
+                    return "ServiceResponseEmptyCallback";
+                }
+                else
+                {
+                    return "ServiceResponseCallback";
                 }
             }
         }

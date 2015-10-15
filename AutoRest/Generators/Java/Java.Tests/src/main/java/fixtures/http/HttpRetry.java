@@ -33,7 +33,7 @@ public interface HttpRetry {
      */
     interface HttpRetryService {
         @HEAD("/http/retry/408")
-        Call<ResponseBody> head408();
+        Call<Void> head408();
 
         @PUT("/http/retry/500")
         Call<ResponseBody> put500(@Body Boolean booleanValue);
@@ -67,7 +67,7 @@ public interface HttpRetry {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head408Async(final ServiceCallback<Void> serviceCallback);
+    Call<Void> head408Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      *

@@ -29,16 +29,16 @@ public interface PathItems {
      */
     interface PathItemsService {
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
-        Call<ResponseBody> getAllWithValues(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery);
+        Call<ResponseBody> getAllWithValues(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Path("globalStringPath") String globalStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, @Query("globalStringQuery") String globalStringQuery);
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
-        Call<ResponseBody> getGlobalQueryNull(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery);
+        Call<ResponseBody> getGlobalQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Path("globalStringPath") String globalStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, @Query("globalStringQuery") String globalStringQuery);
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
-        Call<ResponseBody> getGlobalAndLocalQueryNull(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery);
+        Call<ResponseBody> getGlobalAndLocalQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Path("globalStringPath") String globalStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, @Query("globalStringQuery") String globalStringQuery);
 
         @GET("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
-        Call<ResponseBody> getLocalPathItemQueryNull(@Path("localStringPath") String localStringPath, @Query("localStringQuery") String localStringQuery, @Path("pathItemStringPath") String pathItemStringPath, @Query("pathItemStringQuery") String pathItemStringQuery, @Path("globalStringPath") String globalStringPath, @Query("globalStringQuery") String globalStringQuery);
+        Call<ResponseBody> getLocalPathItemQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Path("globalStringPath") String globalStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, @Query("globalStringQuery") String globalStringQuery);
 
     }
     /**

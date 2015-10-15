@@ -80,6 +80,7 @@ namespace Microsoft.Rest.Generator.Java
                     "com.microsoft.rest.ServiceResponse",
                     "com.microsoft.rest.ServiceResponseBuilder",
                     "com.microsoft.rest.ServiceResponseCallback",
+                    "com.microsoft.rest.ServiceResponseEmptyCallback",
                     "com.squareup.okhttp.ResponseBody",
                     "retrofit.Call",
                     "retrofit.Retrofit",

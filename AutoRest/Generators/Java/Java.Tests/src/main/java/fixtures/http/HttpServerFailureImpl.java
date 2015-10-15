@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
@@ -38,7 +39,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      */
     public Error head501() throws ServiceException {
         try {
-            Call<ResponseBody> call = service.head501();
+            Call<Void> call = service.head501();
             ServiceResponse<Error> response = head501Delegate(call.execute(), null);
             return response.getBody();
         } catch (ServiceException ex) {
@@ -52,11 +53,11 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public Call<ResponseBody> head501Async(final ServiceCallback<Error> serviceCallback) {
-        Call<ResponseBody> call = service.head501();
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+    public Call<Void> head501Async(final ServiceCallback<Error> serviceCallback) {
+        Call<Void> call = service.head501();
+        call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head501Delegate(response, retrofit));
                 } catch (ServiceException exception) {
@@ -67,10 +68,10 @@ public class HttpServerFailureImpl implements HttpServerFailure {
         return call;
     }
 
-    private ServiceResponse<Error> head501Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> head501Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, retrofit);
+                .buildEmpty(response, retrofit);
     }
 
     /**

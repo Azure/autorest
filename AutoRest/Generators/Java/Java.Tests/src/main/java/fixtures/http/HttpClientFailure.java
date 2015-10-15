@@ -34,7 +34,7 @@ public interface HttpClientFailure {
      */
     interface HttpClientFailureService {
         @HEAD("/http/failure/client/400")
-        Call<ResponseBody> head400();
+        Call<Void> head400();
 
         @GET("/http/failure/client/400")
         Call<ResponseBody> get400();
@@ -52,7 +52,7 @@ public interface HttpClientFailure {
         Call<ResponseBody> delete400(@Body Boolean booleanValue);
 
         @HEAD("/http/failure/client/401")
-        Call<ResponseBody> head401();
+        Call<Void> head401();
 
         @GET("/http/failure/client/402")
         Call<ResponseBody> get402();
@@ -76,7 +76,7 @@ public interface HttpClientFailure {
         Call<ResponseBody> put409(@Body Boolean booleanValue);
 
         @HEAD("/http/failure/client/410")
-        Call<ResponseBody> head410();
+        Call<Void> head410();
 
         @GET("/http/failure/client/411")
         Call<ResponseBody> get411();
@@ -100,7 +100,7 @@ public interface HttpClientFailure {
         Call<ResponseBody> delete417(@Body Boolean booleanValue);
 
         @HEAD("/http/failure/client/429")
-        Call<ResponseBody> head429();
+        Call<Void> head429();
 
     }
     /**
@@ -114,7 +114,7 @@ public interface HttpClientFailure {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head400Async(final ServiceCallback<Error> serviceCallback);
+    Call<Void> head400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      *
@@ -200,7 +200,7 @@ public interface HttpClientFailure {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head401Async(final ServiceCallback<Error> serviceCallback);
+    Call<Void> head401Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      *
@@ -314,7 +314,7 @@ public interface HttpClientFailure {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head410Async(final ServiceCallback<Error> serviceCallback);
+    Call<Void> head410Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      *
@@ -426,6 +426,6 @@ public interface HttpClientFailure {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head429Async(final ServiceCallback<Error> serviceCallback);
+    Call<Void> head429Async(final ServiceCallback<Error> serviceCallback);
 
 }

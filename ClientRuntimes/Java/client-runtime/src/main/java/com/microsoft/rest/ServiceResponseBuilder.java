@@ -102,7 +102,6 @@ public class ServiceResponseBuilder<T> {
      * @return a ServiceResponse instance of generic type {@link T}
      * @throws ServiceException all exceptions will be wrapped in ServiceException
      */
-    @SuppressWarnings("unchecked")
     public ServiceResponse<T> build(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         if (response == null) {
             throw new ServiceException("no response");
@@ -132,6 +131,20 @@ public class ServiceResponseBuilder<T> {
             throw ex;
         } catch (Exception ex) {
             ServiceException exception = new ServiceException(ex);
+            exception.setResponse(response);
+            throw exception;
+        }
+    }
+
+    public ServiceResponse<T> buildEmpty(Response<Void> response, Retrofit retrofit) throws ServiceException {
+        int statusCode = response.code();
+        if (responseTypes.containsKey(statusCode)) {
+            return new ServiceResponse<T>(null, response);
+        } else if (response.isSuccess() &&
+                (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
+            return new ServiceResponse<T>(null, response);
+        } else {
+            ServiceException exception = new ServiceException();
             exception.setResponse(response);
             throw exception;
         }

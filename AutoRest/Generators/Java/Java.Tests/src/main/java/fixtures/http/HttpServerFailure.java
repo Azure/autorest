@@ -32,7 +32,7 @@ public interface HttpServerFailure {
      */
     interface HttpServerFailureService {
         @HEAD("/http/failure/server/501")
-        Call<ResponseBody> head501();
+        Call<Void> head501();
 
         @GET("/http/failure/server/501")
         Call<ResponseBody> get501();
@@ -55,7 +55,7 @@ public interface HttpServerFailure {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head501Async(final ServiceCallback<Error> serviceCallback);
+    Call<Void> head501Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      *

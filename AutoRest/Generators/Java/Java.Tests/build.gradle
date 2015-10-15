@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     compile 'commons-codec:commons-codec:1.10'
-    compile 'com.squareup.okhttp:okhttp:2.3.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.microsoft.rest:client-runtime:0.0.1-SNAPSHOT'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'joda-time:joda-time:2.8.2'

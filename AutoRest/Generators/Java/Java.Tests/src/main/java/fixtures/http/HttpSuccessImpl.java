@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
@@ -37,7 +38,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      */
     public void head200() throws ServiceException {
         try {
-            Call<ResponseBody> call = service.head200();
+            Call<Void> call = service.head200();
             ServiceResponse<Void> response = head200Delegate(call.execute(), null);
             response.getBody();
         } catch (ServiceException ex) {
@@ -51,11 +52,11 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public Call<ResponseBody> head200Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.head200();
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+    public Call<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
+        Call<Void> call = service.head200();
+        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head200Delegate(response, retrofit));
                 } catch (ServiceException exception) {
@@ -66,11 +67,11 @@ public class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> head200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head200Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, retrofit);
+                .buildEmpty(response, retrofit);
     }
 
     /**
@@ -562,7 +563,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      */
     public void head204() throws ServiceException {
         try {
-            Call<ResponseBody> call = service.head204();
+            Call<Void> call = service.head204();
             ServiceResponse<Void> response = head204Delegate(call.execute(), null);
             response.getBody();
         } catch (ServiceException ex) {
@@ -576,11 +577,11 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public Call<ResponseBody> head204Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.head204();
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+    public Call<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
+        Call<Void> call = service.head204();
+        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head204Delegate(response, retrofit));
                 } catch (ServiceException exception) {
@@ -591,11 +592,11 @@ public class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> head204Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head204Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(204, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, retrofit);
+                .buildEmpty(response, retrofit);
     }
 
     /**
@@ -780,7 +781,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      */
     public void head404() throws ServiceException {
         try {
-            Call<ResponseBody> call = service.head404();
+            Call<Void> call = service.head404();
             ServiceResponse<Void> response = head404Delegate(call.execute(), null);
             response.getBody();
         } catch (ServiceException ex) {
@@ -794,11 +795,11 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public Call<ResponseBody> head404Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.head404();
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+    public Call<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
+        Call<Void> call = service.head404();
+        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head404Delegate(response, retrofit));
                 } catch (ServiceException exception) {
@@ -809,12 +810,12 @@ public class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> head404Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head404Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(204, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, retrofit);
+                .buildEmpty(response, retrofit);
     }
 
 }

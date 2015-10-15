@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
@@ -38,7 +39,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public void head300() throws ServiceException {
         try {
-            Call<ResponseBody> call = service.head300();
+            Call<Void> call = service.head300();
             ServiceResponse<Void> response = head300Delegate(call.execute(), null);
             response.getBody();
         } catch (ServiceException ex) {
@@ -52,11 +53,11 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public Call<ResponseBody> head300Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.head300();
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+    public Call<Void> head300Async(final ServiceCallback<Void> serviceCallback) {
+        Call<Void> call = service.head300();
+        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head300Delegate(response, retrofit));
                 } catch (ServiceException exception) {
@@ -67,12 +68,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> head300Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head300Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(300, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, retrofit);
+                .buildEmpty(response, retrofit);
     }
 
     /**
@@ -125,7 +126,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public void head301() throws ServiceException {
         try {
-            Call<ResponseBody> call = service.head301();
+            Call<Void> call = service.head301();
             ServiceResponse<Void> response = head301Delegate(call.execute(), null);
             response.getBody();
         } catch (ServiceException ex) {
@@ -139,11 +140,11 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public Call<ResponseBody> head301Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.head301();
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+    public Call<Void> head301Async(final ServiceCallback<Void> serviceCallback) {
+        Call<Void> call = service.head301();
+        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head301Delegate(response, retrofit));
                 } catch (ServiceException exception) {
@@ -154,12 +155,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> head301Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head301Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(301, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, retrofit);
+                .buildEmpty(response, retrofit);
     }
 
     /**
@@ -255,7 +256,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public void head302() throws ServiceException {
         try {
-            Call<ResponseBody> call = service.head302();
+            Call<Void> call = service.head302();
             ServiceResponse<Void> response = head302Delegate(call.execute(), null);
             response.getBody();
         } catch (ServiceException ex) {
@@ -269,11 +270,11 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public Call<ResponseBody> head302Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.head302();
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+    public Call<Void> head302Async(final ServiceCallback<Void> serviceCallback) {
+        Call<Void> call = service.head302();
+        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head302Delegate(response, retrofit));
                 } catch (ServiceException exception) {
@@ -284,12 +285,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> head302Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head302Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(302, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, retrofit);
+                .buildEmpty(response, retrofit);
     }
 
     /**
@@ -430,7 +431,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public void head307() throws ServiceException {
         try {
-            Call<ResponseBody> call = service.head307();
+            Call<Void> call = service.head307();
             ServiceResponse<Void> response = head307Delegate(call.execute(), null);
             response.getBody();
         } catch (ServiceException ex) {
@@ -444,11 +445,11 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public Call<ResponseBody> head307Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.head307();
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+    public Call<Void> head307Async(final ServiceCallback<Void> serviceCallback) {
+        Call<Void> call = service.head307();
+        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head307Delegate(response, retrofit));
                 } catch (ServiceException exception) {
@@ -459,12 +460,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> head307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head307Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(307, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, retrofit);
+                .buildEmpty(response, retrofit);
     }
 
     /**

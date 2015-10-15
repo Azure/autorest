@@ -30,7 +30,7 @@ public @Model.ReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) 
 @:    Validator.validate(@(param.Name));
 }
     try {
-        Call<ResponseBody> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
+        Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
         ServiceResponse<@Model.GenericReturnTypeString> response = @(Model.Name)Delegate(call.execute(), null);
         @Model.ReturnStatement
     } catch (ServiceException ex) {
@@ -49,7 +49,7 @@ public @Model.ReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) 
 }
  * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
  */
-public Call<ResponseBody> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -61,10 +61,10 @@ public Call<ResponseBody> @(Model.Name)Async(@Model.MethodParameterDeclarationWi
 {
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
-    Call<ResponseBody> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
-    call.enqueue(new ServiceResponseCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType).Name)>(serviceCallback) {
+    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
+    call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType).Name)>(serviceCallback) {
         @@Override
-        public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+        public void onResponse(Response<@Model.CallType> response, Retrofit retrofit) {
             try {
                 serviceCallback.success(@(Model.Name)Delegate(response, retrofit));
             } catch (ServiceException exception) {
@@ -75,7 +75,7 @@ public Call<ResponseBody> @(Model.Name)Async(@Model.MethodParameterDeclarationWi
     return call;
 }
 @EmptyLine
-private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws ServiceException {
     return new ServiceResponseBuilder<@Model.GenericReturnTypeString>()
 @foreach (var response in Model.Responses)
 {
@@ -85,5 +85,12 @@ private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Re
 {
             @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse).Name)>(){}.getType())
 }
-            .build(response, retrofit);
+@if (Model.CallType == "Void")
+{
+            @:.buildEmpty(response, retrofit);
+}
+else
+{
+            @:.build(response, retrofit);
+}
 }

@@ -33,7 +33,7 @@ public interface HttpSuccess {
      */
     interface HttpSuccessService {
         @HEAD("/http/success/200")
-        Call<ResponseBody> head200();
+        Call<Void> head200();
 
         @GET("/http/success/200")
         Call<ResponseBody> get200();
@@ -69,7 +69,7 @@ public interface HttpSuccess {
         Call<ResponseBody> delete202(@Body Boolean booleanValue);
 
         @HEAD("/http/success/204")
-        Call<ResponseBody> head204();
+        Call<Void> head204();
 
         @PUT("/http/success/204")
         Call<ResponseBody> put204(@Body Boolean booleanValue);
@@ -84,7 +84,7 @@ public interface HttpSuccess {
         Call<ResponseBody> delete204(@Body Boolean booleanValue);
 
         @HEAD("/http/success/404")
-        Call<ResponseBody> head404();
+        Call<Void> head404();
 
     }
     /**
@@ -97,7 +97,7 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head200Async(final ServiceCallback<Void> serviceCallback);
+    Call<Void> head200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -262,7 +262,7 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head204Async(final ServiceCallback<Void> serviceCallback);
+    Call<Void> head204Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -330,6 +330,6 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    Call<ResponseBody> head404Async(final ServiceCallback<Void> serviceCallback);
+    Call<Void> head404Async(final ServiceCallback<Void> serviceCallback);
 
 }
