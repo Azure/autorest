@@ -45,7 +45,6 @@ public class JacksonHelper {
             objectMapper = new ObjectMapper()
                     .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                     .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
-                    //.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                     .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                     .registerModule(new JodaModule())
                     .registerModule(ByteArraySerializer.getModule())
