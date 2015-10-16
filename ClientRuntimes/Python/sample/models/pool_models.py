@@ -82,11 +82,10 @@ class DetailLevel(object):
 
 
 class PoolSpec(object):
-    
-    def __init__(self, manager):
 
-        self._manager = manager
-        self.attribute_map = {
+    _required = ['name']
+
+    _attribute_map = {
             'id':{'key':'id', 'type':'str'},
             'certificate_references': {'key':'certificateReferences', 'type':'[Certificate]'},
             'metadata': {'key':'metadata', 'type':'{str}'},
@@ -103,7 +102,11 @@ class PoolSpec(object):
             'os_family': {'key':'osFamily', 'type':'str'},
             'target_os_version': {'key':'targetOSVersion', 'type':'str'},
         }
+    
+    def __init__(self, manager, **kwargs):
 
+        self._manager = manager
+        
         self.id = None
         self.certificate_references = []
         self.metadata = {}
@@ -120,18 +123,36 @@ class PoolSpec(object):
         self.os_family = None
         self.target_os_version = None
 
+        for k in kwargs:
+            if hasattr(self, k):
+                setattr(self, k, kwargs[k])
+
+
     def add(self):
         response = self._manager.add(self)
         return None
 
 
-class Pool(PoolSpec):
-    
-    def __init__(self, manager):
+class Pool(object):
 
-        super(BatchPoolGetResponse, self).__init__(manager)
+    _required = ['name'] # Not sure what else needs to be here
 
-        self.attribute_map.update({
+    _attribute_map = {
+            'id':{'key':'id', 'type':'str'},
+            'certificate_references': {'key':'certificateReferences', 'type':'[Certificate]'},
+            'metadata': {'key':'metadata', 'type':'{str}'},
+            'name': {'key':'displayName', 'type':'str'},
+            'vm_size': {'key':'vmSize', 'type':'str'},
+            'resize_timeout': {'key':'resizeTimeout', 'type':'time'},
+            'target_dedicated': {'key':'targetDedicated', 'type':'int'},
+            'enable_auto_scale': {'key':'enableAutoScale', 'type':'bool'},
+            'auto_scale_formula': {'key':'autoScaleFormula', 'type':'str'},
+            'communication': {'key':'enableInterNodeCommunication', 'type':'str'},
+            'start_task': {'key':'startTask', 'type':'StartTask'},
+            'max_tasks_per_node': {'key':'maxTasksPerNode', 'type':'int'},
+            'scheduling_policy': {'key':'taskSchedulingPolicy', 'type':'TaskSchedulePolicy'},
+            'os_family': {'key':'osFamily', 'type':'str'},
+            'target_os_version': {'key':'targetOSVersion', 'type':'str'},
             'url': {'key':'url', 'type':'str'},
             'e_tag': {'key':'eTag', 'type':'str'},
             'last_modified': {'key':'lastModifed', 'type':'datetime'},
@@ -145,8 +166,27 @@ class Pool(PoolSpec):
             'auto_scale_run': {'key':'autoScaleRun', 'type':'AutoScaleRun'},
             'stats': {'key':'stats', 'type':'ResourceStats'},
             'current_os_version': {'key':'currentOSVersion', 'type':'str'},
-        })
+        }
 
+    def __init__(self, manager, **kwargs):
+
+        self._manager = manager
+        
+        self.id = None
+        self.certificate_references = []
+        self.metadata = {}
+        self.name = None
+        self.tvm_size = None
+        self.resize_timeout = None
+        self.target_dedicated = None
+        self.enable_auto_scale = None
+        self.auto_scale_formula = None
+        self.communication = None
+        self.start_task = None
+        self.max_tasks_per_tvm = None
+        self.scheduling_policy = None
+        self.os_family = None
+        self.target_os_version = None
         self.url = None
         self.e_tag = None
         self.last_modified = None
@@ -161,12 +201,13 @@ class Pool(PoolSpec):
         self.stats = None
         self.current_os_version = None
 
+        for k in kwargs:
+            if hasattr(self, k):
+                setattr(self, k, kwargs[k])
+
     def _update(self, new_pool):
         for attr in self.attribute_map:
             setattr(self, attr, getattr(new_pool, attr))
-
-    def add(self):
-        raise InvalidOperationError("This pool has already been added.")
 
     def update(self):
         response = self._manager.get(self.name)
@@ -220,50 +261,75 @@ class Pool(PoolSpec):
 
 class PoolAutoScale(object):
 
-    def __init__(self):
-        self.attribute_map = {
+    _required = ['auto_scale_formula']
+
+    _attribute_map = {
                 'auto_scale_formula': {'key':'autoScaleFormula', 'type':'str'}
                 }
 
+    def __init__(self, **kwargs):
+
         self.auto_scale_formula = None
+        for k in kwargs:
+            if hasattr(self, k):
+                setattr(self, k, kwargs[k])
 
 
 class PoolProperties(object):
-    
-    def __init__(self):
 
-        self.attribute_map = {
+    _required = []
+
+    _attribute_map = {
             'certificate_references': {'key':'certificate_references', 'type':'[Certificate]'},
             'metadata': {'key':'metadata', 'type':'{str}'},
             'start_task': {'key':'StartTask', 'type':'StartTask'}
         }
+    
+    def __init__(self, **kwargs):
 
         self.certificate_references = []
         self.metadata = []
         self.start_task = None
 
+        for k in kwargs:
+            if hasattr(self, k):
+                setattr(self, k, kwargs[k])
+
 
 class PoolResize(object):
-    
-    def __init__(self):
 
-        self.attribute_map = {
+    _required = []
+
+    _attribute_map = {
             'resize_timeout': {'key':'resizeTimeout', 'type':'time'},
             'target_dedicated': {'key':'targetDedicated', 'type':'int'},
             'tvm_deallocation_option': {'key':'tvmDeallocationOption', 'type':'str'}
         }
+    
+    def __init__(self, **kwargs):
 
         self.target_dedicated = None
         self.resize_timeout = None
         self.tvm_deallocation_option = None
 
+        for k in kwargs:
+            if hasattr(self, k):
+                setattr(self, k, kwargs[k])
+
 
 class PoolOS(object):
-    
-    def __init__(self):
 
-        self.attribute_map = {
+    _required = ['target_os_version']
+
+    _attribute_map = {
             'target_os_version': {'key':'targetOSVersion', 'type':'str'}
         }
+    
+    def __init__(self, **kwargs):
+
         self.target_os_version = None
+
+        for k in kwargs:
+            if hasattr(self, k):
+                setattr(self, k, kwargs[k])
  
