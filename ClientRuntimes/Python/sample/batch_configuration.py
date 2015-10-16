@@ -1,5 +1,6 @@
+﻿
+from runtime.msrestazure import AzureConfiguration
 
-
-class BatchConfiguration(Configuration):
+class BatchConfiguration(AzureConfiguration):
 
     pass

@@ -1,3 +1,5 @@
+﻿
+from ..batch_response import BatchOperationResponse
 
 class BatchPoolAddResponse(BatchOperationResponse):
     accept_status = [201]
@@ -22,12 +24,12 @@ class BatchPoolEvaluateAutoScaleResponse(BatchOperationResponse):
 class BatchPoolGetResponse(BatchOperationResponse):
     accept_status = [200]
 
-    def __init__(self):
+    def __init__(self, **kwargs):
 
         super(BatchPoolGetResponse, self).__init__()
 
         self.body_map.update({
-            'pool': {'key':'value', 'type':'Pool'},
+            'pool': {'key':'.', 'type':'Pool'},
         })
 
         self.pool = None
@@ -36,13 +38,13 @@ class BatchPoolGetResponse(BatchOperationResponse):
 class BatchPoolListResponse(BatchOperationResponse):
     accept_status = [200]
 
-    def __init__(self):
+    def __init__(self, **kwargs):
 
         super(BatchPoolListResponse, self).__init__()
 
         self.body_map.update({
             'pools': {'key':'value', 'type':'[Pool]'},
-            'next_link': {'key':'', 'type':'str'},
+            'next_link': {'key':'odata.nextLink', 'type':'str'},
         })
 
         self.pools = []

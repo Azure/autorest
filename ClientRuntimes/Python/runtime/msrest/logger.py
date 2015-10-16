@@ -52,7 +52,6 @@ def set_stream_handler(logger, format_str):
         logger.removeHandler(handler)
 
     if format_str:
-        format_str = str(format_str)
         handler = logging.StreamHandler()
         formatter = logging.Formatter(str(format_str))
 
@@ -87,7 +86,8 @@ def set_file_handler(logger, file_dir, format_str):
             ext=split_log[1]))
 
     handler = logging.FileHandler(logfile)
-    handler.setFormatter(format_str)
+    formatter = logging.Formatter(str(format_str))
+    handler.setFormatter(formatter)
     logger.addHandler(handler)
     return format_str
 
@@ -115,13 +115,13 @@ def setup_logger(config):
     if LOGGER and LOGGER.name == config.log_name:
         return LOGGER
 
-    logger = logging.getLogger(config.logger_name)
+    logger = logging.getLogger(config.log_name)
 
     if config.stream_log:
         set_stream_handler(logger, config.stream_log)
 
     if config.file_log:
-        set_file_handler(logger, config.directory, config.file_log)
+        set_file_handler(logger, config.log_dir, config.file_log)
 
     set_log_level(logger, config.log_level)
 
@@ -129,10 +129,18 @@ def setup_logger(config):
     return logger
 
 
-def log_request(request, **kwargs):
+def log_request(adapter, request, *args, **kwargs):
     #TODO: Proper log formatting
-    LOGGER.debug(str(request))
+    LOGGER.debug(str(request.headers))
+    LOGGER.debug(str(request.body))
+    LOGGER.debug(request.url)
 
-def log_response(request, response):
+    return request
+
+def log_response(adapter, request, response, *args, **kwargs):
     #TODO: Proper log formatting
-    LOGGER.debug(str(response))
+    resp = kwargs.get('result')
+    LOGGER.debug(resp.status_code)
+    LOGGER.debug(resp.content)
+
+    return resp

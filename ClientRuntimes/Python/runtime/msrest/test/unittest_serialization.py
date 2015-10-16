@@ -117,11 +117,9 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj = self.TestObj()
         serialized = Serialized(test_obj)
 
-        self.assertIsNone(serialized.attr_a)
-
         message = serialized()
         self.assertIsInstance(message, dict)
-        self.assertIsNone(message['id'])
+        self.assertFalse('id' in message)
 
     def test_attr_int(self):
         """
@@ -134,7 +132,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            self.assertIsNone(serialized.attr_b)
+            serialized()
 
         test_obj.attr_b = 25
 
@@ -156,7 +154,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized.attr_b
+            serialized()
 
     def test_attr_str(self):
         """
@@ -172,31 +170,29 @@ class TestRuntimeSerialized(unittest.TestCase):
 
         test_obj._required = []
         serialized = Serialized(test_obj)
-        self.assertIsNone(serialized.attr_a)
 
         test_obj.attr_a = "TestString"
 
         serialized = Serialized(test_obj)
-        self.assertEqual(serialized.attr_a, "TestString")
-
         message = serialized()
         self.assertEqual(message['id'], "TestString")
 
         test_obj.attr_a = 1234
 
         serialized = Serialized(test_obj)
-        self.assertEqual(serialized.attr_a, "1234")
-
         message = serialized()
         self.assertEqual(message['id'], "1234")
 
         test_obj.attr_a = list()
 
         serialized = Serialized(test_obj)
-        self.assertEqual(serialized.attr_a, "[]")
-
         message = serialized()
-        self.assertEqual(message['id'], "[]")
+        self.assertFalse('id' in message)
+
+        test_obj.attr_a = [1]
+        serialized = Serialized(test_obj)
+        message = serialized()
+        self.assertEqual(message['id'], "[1]")
 
     def test_attr_bool(self):
         """
@@ -214,18 +210,15 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.attr_c = ""
 
         serialized = Serialized(test_obj)
-        self.assertIs(serialized.attr_c, False)
 
         message = serialized()
-        self.assertEqual(message['Key_C'], False)
+        self.assertFalse('Key_C' in message)
 
         test_obj.attr_c = None
 
         serialized = Serialized(test_obj)
-        self.assertIs(serialized.attr_c, None)
-
         message = serialized()
-        self.assertEqual(message['Key_C'], None) #TODO: Is this incorrect behaviour?
+        self.assertFalse('Key_C' in message)
 
         test_obj.attr_c = "NotEmpty"
 
@@ -243,10 +236,8 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.attr_d = []
 
         serialized = Serialized(test_obj)
-        self.assertEqual(serialized.attr_d, [])
-
         message = serialized()
-        self.assertEqual(message['AttrD'], [])
+        self.assertFalse('AttrD' in message)
 
         test_obj.attr_d = [1,2,3]
 
@@ -268,13 +259,13 @@ class TestRuntimeSerialized(unittest.TestCase):
         serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized.attr_d
+            serialized()
 
         test_obj.attr_d = "NotAList"
         serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized.attr_d
+            serialized()
 
     def test_attr_list_complex(self):
         """
@@ -346,7 +337,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
 
     class TestObj(object):
 
-        def __init__(self):
+        def __init__(self, **kwargs):
 
             self.body_map = {
                 'attr_a': {'key':'id', 'type':'str'},
@@ -372,7 +363,9 @@ class TestRuntimeDeserialized(unittest.TestCase):
         Test deserializing an object with no attributes.
         """
         class EmptyResponse(object):
-            pass
+            
+            def __init__(*args, **kwargs):
+                pass
 
         response_data = mock.create_autospec(Response)
 
@@ -383,6 +376,9 @@ class TestRuntimeDeserialized(unittest.TestCase):
             attributes_map = {}
             headers_map = {}
             body_map = {}
+
+            def __init__(*args, **kwargs):
+                pass
 
         deserializer = Deserialized(BetterEmptyResponse, response_data)
         derserialized = deserializer(None)
@@ -398,17 +394,26 @@ class TestRuntimeDeserialized(unittest.TestCase):
         class BadResponse(object):
             attributes_map = None
 
+            def __init__(*args, **kwargs):
+                pass
+
         with self.assertRaises(DeserializationError):
             deserializer = Deserialized(BadResponse, response_data)
 
         class BadResponse(object):
             attributes_map = {"attr":"val"}
 
+            def __init__(*args, **kwargs):
+                pass
+
         with self.assertRaises(DeserializationError):
             deserializer = Deserialized(BadResponse, response_data)
 
         class BadResponse(object):
             attributes_map = {"attr":{"val":1}}
+
+            def __init__(*args, **kwargs):
+                pass
 
         with self.assertRaises(DeserializationError):
             deserializer = Deserialized(BadResponse, response_data)
@@ -421,6 +426,9 @@ class TestRuntimeDeserialized(unittest.TestCase):
 
         class BadResponse(object):
             attributes_map =  {"abc":{"key":"ABC", "type":"str"}}
+
+            def __init__(*args, **kwargs):
+                pass
 
         with self.assertRaises(DeserializationError):
             deserializer = Deserialized(BadResponse, response_data)
@@ -555,11 +563,14 @@ class TestRuntimeDeserialized(unittest.TestCase):
         Test deserializing an object with a list of complex objects as an attribute.
         """
         class ListObj(object):
-            attribute_map = {"abc":{"key":"ABC", "type":"int"}}
+            _attribute_map = {"abc":{"key":"ABC", "type":"int"}}
+
+            def __init__(*args, **kwargs):
+                pass
 
         class CmplxTestObj(object):
 
-            def __init__(self):
+            def __init__(self, **kwargs):
                 self.attributes_map = {}
                 self.headers_map = {}
                 self.body_map = {'attr_a': {'key':'id', 'type':'[ListObj]'}}

@@ -37,14 +37,14 @@ try:
 except ImportError:
     import ConfigParser as configparser
 
-from .logger import *
+from . import logger
 
 class Configuration(object):
     
-    def __init__(self, filepath=None):
+    def __init__(self, base_url=None, filepath=None):
 
         # Service
-        self.base_url = None
+        self.base_url = base_url
 
         # Logging configuration
         self._log_name = "ms-client-runtime"
@@ -71,12 +71,12 @@ class Configuration(object):
 
     @property
     def log_level(self):
-        return self.level
+        return self._level
 
     @log_level.setter
     def log_level(self, value):
         val = logger.set_log_level(self._log, value)
-        self.level = val
+        self._level = val
 
     @property
     def stream_log(self):

@@ -6,7 +6,7 @@
     <ProjectGuid>8523ba22-21d4-4f69-a73e-958b617c9d37</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>__init__.py</StartupFile>
+    <StartupFile>runtime/__init__.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,81 +25,82 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="msrestazure\aad.py">
+    <Compile Include="runtime\msrestazure\aad.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrestazure\azure_configuration.py">
+    <Compile Include="runtime\msrestazure\azure_configuration.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrestazure\azure_exceptions.py">
+    <Compile Include="runtime\msrestazure\azure_exceptions.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrestazure\azure_handlers.py">
+    <Compile Include="runtime\msrestazure\azure_handlers.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrestazure\azure_resource.py">
+    <Compile Include="runtime\msrestazure\azure_resource.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrestazure\azure_response.py">
+    <Compile Include="runtime\msrestazure\azure_response.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrestazure\azure_service_client.py">
+    <Compile Include="runtime\msrestazure\azure_service_client.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrestazure\__init__.py">
+    <Compile Include="runtime\msrestazure\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\adapter.py">
+    <Compile Include="runtime\msrest\adapter.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\authentication.py">
+    <Compile Include="runtime\msrest\authentication.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\configuration.py">
+    <Compile Include="runtime\msrest\configuration.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\exceptions.py">
+    <Compile Include="runtime\msrest\exceptions.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\hooks.py">
+    <Compile Include="runtime\msrest\hooks.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\handlers.py">
+    <Compile Include="runtime\msrest\handlers.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\logger.py">
+    <Compile Include="runtime\msrest\logger.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\request.py">
+    <Compile Include="runtime\msrest\request.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\response.py">
+    <Compile Include="runtime\msrest\response.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\serialization.py">
+    <Compile Include="runtime\msrest\serialization.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\service_client.py">
+    <Compile Include="runtime\msrest\service_client.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\test\unittest_serialization.py">
+    <Compile Include="runtime\msrest\test\unittest_serialization.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\test\__init__.py">
+    <Compile Include="runtime\msrest\test\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\utils.py">
+    <Compile Include="runtime\msrest\utils.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="msrest\__init__.py">
+    <Compile Include="runtime\msrest\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="__init__.py" />
+    <Compile Include="runtime\__init__.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="msrest\" />
-    <Folder Include="msrestazure\" />
-    <Folder Include="msrest\test\" />
+    <Folder Include="runtime\" />
+    <Folder Include="runtime\msrest\" />
+    <Folder Include="runtime\msrestazure\" />
+    <Folder Include="runtime\msrest\test\" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="..\..\..\PythonEnv\Python27-64-ENV\">

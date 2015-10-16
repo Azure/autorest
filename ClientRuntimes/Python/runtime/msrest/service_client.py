@@ -24,13 +24,20 @@
 #
 #--------------------------------------------------------------------------
 
+try:
+    from urlparse import urljoin
+    from urllib import quote
+
+except ImportError:
+    from urllib.parse import urljoin, quote
+
 from .request import ClientRequest
 from .adapter import ClientHTTPAdapter
 from .logger import log_request, log_response
 
 class ServiceClient(object):
 
-    def __init__(self, config, creds):
+    def __init__(self, creds, config):
         """
         Create service client.
 
@@ -46,27 +53,33 @@ class ServiceClient(object):
         self._adapter.retry_handler(config)
 
         self._adapter.add_hook("request", log_request)
-        self._adapter.add_hook("response", log_response)
+        self._adapter.add_hook("response", log_response, precall=False)
 
     def _send(self, request, **kwargs):
         session = self.creds.signed_session()
         session.proxies = self.config.proxies
 
         for protocol in self.config.protocols:
-            self.session.mount(protocol, self._adapter)
+            session.mount(protocol, self._adapter)
 
-        return self.session.send(request)
+        prepped = session.prepare_request(request)
+        return session.send(prepped)
 
     def _format_url(self, url):
        
-        url = urllib.quote(url)
-        url = urlparse.urljoin(self.config.base_uri, url)
+        url = quote(url)
+        url = urljoin(self.config.base_url, url)
         return url
 
-    def request(self, url, params={}):
+    def request(self, url=None, params={}):
         request = ClientRequest(self.config)
-        request.url = self._format_url(url)
-        request.params = params
+
+        if url:
+            request.url = self._format_url(url)
+
+        if params:
+            request.params = params
+
         return request
 
     def add_hook(self, hook):
@@ -77,24 +90,24 @@ class ServiceClient(object):
 
     def get(self, request):
         request.method = 'GET'
-        return self._send(request.prepare())
+        return self._send(request)
 
     def put(self, request):
         request.method = 'PUT'
-        return self._send(request.prepare())
+        return self._send(request)
 
     def post(self, request):
         request.method = 'POST'
-        return self._send(request.prepare())
+        return self._send(request)
 
     def patch(self, request):
         request.method = 'PATCH'
-        return self._send(request.prepare())
+        return self._send(request)
 
     def delete(self, request):
         request.method = 'DELETE'
-        return self._send(request.prepare())
+        return self._send(request)
 
     def merge(self, request):
         request.method = 'MERGE'
-        return self._send(request.prepare())
+        return self._send(request)

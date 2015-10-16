@@ -1,8 +1,8 @@
-﻿from clientruntime.msrest import HTTPResponse
+﻿from runtime.msrest.response import HTTPResponse
 
 class BatchOperationResponse(HTTPResponse):
     
-    def __init__(self):
+    def __init__(self, **kwargs):
 
         super(BatchOperationResponse, self).__init__()
 

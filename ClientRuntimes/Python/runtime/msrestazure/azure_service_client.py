@@ -24,29 +24,36 @@
 #
 #--------------------------------------------------------------------------
 
-import requests
-import json
+from ..msrest import ServiceClient
+from .azure_configuration import AzureConfiguration
 
-"""
-Wrappers for Resuests unprepared request objects
-"""
+class AzureServiceClient(ServiceClient):
 
-class ClientRequest(requests.Request):
+    def __init__(self, creds, config):
+        """
+        Create service client.
 
-    def __init__(self, config):
+        :Args:
+            - config (`.Configuration`): Service configuration.
+            - creds (`.Authentication`): Authenticated credentials.
 
-        super(ClientRequest, self).__init__()
+        """
+        if not config:
+            config = AzureConfiguration()
 
-        self.timeout = config.timeout
-        self.allow_redirects = config.allow_redirects
-        self.verify = config.verify
-        self.cert = config.cert
+        if not isinstance(config, AzureConfiguration):
+            raise TypeError("AzureServiceClient must use AzureConfiguration")
 
-    def add_header(self, header, value):
-        self.headers[header] = value
+        
 
-    def add_content(self, data):
-        self.data = json.dumps(data())
-        self.headers['Content-Length'] = len(http_request.data)
+        super(AzureServiceClient, self).__init__(creds, config)
 
 
+class AzureChinaServiceClient(AzureServiceClient):
+
+    def __init__(self, creds, config):
+
+        super(AzureChinaServiceClient, self).__init__(creds, config)
+
+        self.config.auth_endpoint = "login.chinacloudapi.cn/"
+        self.resource = "https://management.core.chinacloudapi.cn/"

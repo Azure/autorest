@@ -1,7 +1,11 @@
 ﻿
+class ContentTypes(object):
+
+    json = 'application/json;odata=minimalmetadata'
 
 
 class PoolState(object):
+
     invalid = "Invalid"
     active = "Active"
     deleting = "Deleting"
@@ -9,6 +13,7 @@ class PoolState(object):
     unmapped = "Unmapped"
 
 class AllocationState(object):
+
     invalid = "Invalid"
     steady = "Steady"
     resizing = "Resizing"
@@ -16,6 +21,7 @@ class AllocationState(object):
     unmapped = "Unmapped"
 
 class CertificateState(object):
+
     invalid = "Invalid"
     active = "Active"
     deleting = "Deleting"
@@ -23,6 +29,7 @@ class CertificateState(object):
     unmapped = "Unmapped"
 
 class CertificateFormat(object):
+
     pfx = "Pfx"
     cer = "Cer"
     unmapped = "Unmapped"

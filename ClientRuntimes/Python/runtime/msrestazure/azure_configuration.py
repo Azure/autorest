@@ -24,54 +24,19 @@
 #
 #--------------------------------------------------------------------------
 
-from base64 import b64encode
-import time
-import requests
-import requests_oauthlib as oauth
 
+from ..msrest import Configuration
 
+class AzureConfiguration(Configuration):
 
-class Authentication(object):
-    
-    header = "Authorization"
+    def __init__(self, base_url=None, filepath=None):
 
-    def signed_session(self):
-        session = requests.Session()
-        return session
+        super(AzureConfiguration, self).__init__(base_url, filepath)
 
-class BasicAuthentication(Authentication):
-    
-    def __init__(self, username, passw):
-        self.scheme = 'Basic'
-        self.username = username
-        self.password = passw
-
-    def signed_session(self):
-        session = super(BasicAuthentication, self).signed_session()
-
-        credentials = "{0}:{1}".format(self.username, self.password)
-        encoded = "{0} {1}".format(self.scheme, b64encode(credentials))
-        session.headers[self.header] = encoded
-
-        return session
-
-class TokenAuthentication(Authentication):
-    
-    def __init__(self, client_id, token):
-        self.scheme = 'Bearer'
-        self.id = client_id
-        self.token = token
-
-    def construct_auth(self):
-        return "{0} {1}".format(self.scheme, self.token)
-
-    def signed_session(self):
-
-        expiry = self.token.get('expires_at')
-
-        if expiry:
-            countdown = float(expiry) - time.time()
-            self.token['expires_in'] = countdown
-
-        session = oauth.OAuth2Session(self.id, token=self.token)
-        return session
+        # Authentication
+        self.auth_endpoint = "login.windows.net/"
+        self.token_uri = "/oauth2/token"
+        self.auth_uri = "/oauth2/authorize"
+        self.tenant = "common"
+        self.resource = 'https://management.core.windows.net/'
+        self.keyring = "AzureAAD"

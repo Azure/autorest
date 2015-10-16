@@ -24,28 +24,33 @@
 #
 #--------------------------------------------------------------------------
 
-from .exceptions import ResponseStatusError
+import requests
+import json
 
-class HTTPResponse(object):
+"""
+Wrappers for Resuests unprepared request objects
+"""
 
-    accept_status = [200]
-    
-    def __init__(self):
+class ClientRequest(requests.Request):
 
-        self.headers_map = {}
-        self.attributes_map = {
-            'status_code': {'key':'status_code', 'type':'str'}
-        }
-        self.body_map = {}
+    def __init__(self, config):
 
-        self.status_code
+        super(ClientRequest, self).__init__()
 
-    @property
-    def status_code(self):
-        return self._status_code
+        self.timeout = config.timeout
+        self.allow_redirects = config.allow_redirects
+        self.verify = config.verify
+        self.cert = config.cert
 
-    @status_code.setter
-    def status_code(self, value):
-        if value not in self.accept_status:
-            raise ResponseStatusError()
-        self._status_code = value
+    def add_header(self, header, value):
+        self.headers[header] = value
+
+    def add_headers(self, headers):
+        for key, value in headers.items():
+            self.add_header(key, value)
+
+    def add_content(self, data):
+        self.data = json.dumps(data())
+        self.headers['Content-Length'] = len(self.data)
+
+

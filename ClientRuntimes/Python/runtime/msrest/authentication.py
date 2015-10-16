@@ -23,4 +23,53 @@
 # THE SOFTWARE.
 #
 #--------------------------------------------------------------------------
+
+from base64 import b64encode
+import time
+import requests
+import requests_oauthlib as oauth
+from requests.auth import HTTPBasicAuth
+
+
+
+class Authentication(object):
     
+    header = "Authorization"
+
+    def signed_session(self):
+        session = requests.Session()
+        return session
+
+class BasicAuthentication(Authentication):
+    
+    def __init__(self, username, passw):
+        self.scheme = 'Basic'
+        self.username = username
+        self.password = passw
+
+    def signed_session(self):
+        session = super(BasicAuthentication, self).signed_session()
+        session.auth = HTTPBasicAuth(self.username, self.password)
+
+        return session
+
+class TokenAuthentication(Authentication):
+    
+    def __init__(self, client_id, token):
+        self.scheme = 'Bearer'
+        self.id = client_id
+        self.token = token
+
+    def construct_auth(self):
+        return "{0} {1}".format(self.scheme, self.token)
+
+    def signed_session(self):
+
+        expiry = self.token.get('expires_at')
+
+        if expiry:
+            countdown = float(expiry) - time.time()
+            self.token['expires_in'] = countdown
+
+        session = oauth.OAuth2Session(self.id, token=self.token)
+        return session
