@@ -48,28 +48,37 @@ class Serialized(object):
 
         try:
             orig_attr = getattr(self.request, attr)
-            attr_type = self.request.attribute_map[attr]['type']
+            attr_type = self.request._attribute_map[attr]['type']
 
-            return self._serialize_data(orig_attr, attr_type)
+            return self._serialize_data(orig_attr, attr_type, attr in self.request._required)
 
         except (AttributeError, KeyError, TypeError) as err:
-            raise SerializationError("Object cannot be serialized: {0}".format(err))
+            raise SerializationError(
+                "Attribute {0} cannot be serialized: {1}".format(attr, err))
 
     def __call__(self):
         serialized = {}
+        attr_name = None
 
         try:
-            for attr in self.request.attribute_map:
-                serialized[self.request.attribute_map[attr]['key']] = getattr(self, attr)
+            for attr, map in self.request._attribute_map.items():
+                attr_name = attr
+                serialized[map['key']] = getattr(self, attr)
 
         except (AttributeError, KeyError, TypeError) as err:
-            raise SerializationError("Object cannot be serialized: {0}".format(err))
+            raise SerializationError(
+                "Attribute {0} cannot be serialized: {1}".format(attr_name, err))
 
         return serialized
 
-    def _serialize_data(self, data, data_type):
+    def _serialize_data(self, data, data_type, required):
 
-        if data is None:
+        if data is None and required:
+            class_name = self.request.__class__.__name__
+            raise AttributeError(
+                "Object '{}' missing required attribute".format(class_name))
+
+        if data is None or data_type is None:
             return data
 
         try:
@@ -81,7 +90,7 @@ class Serialized(object):
 
             iter_type = data_type[0] + data_type[-1]
             if iter_type in self.serialize_type:
-                return self.serialize_type[iter_type](data, data_type[1:-1])
+                return self.serialize_type[iter_type](data, data_type[1:-1], required)
 
         except (ValueError, TypeError) as err:
             raise SerializationError("Unable to serialize value: '{0}' as type: {1}".format(data, data_type))
@@ -92,11 +101,11 @@ class Serialized(object):
         serialized = Serialized(cmplx_obj)
         return serialized()
 
-    def serialize_iter(self, attr, iter_type):
-        return [self._serialize_data(i, iter_type) for i in attr]
+    def serialize_iter(self, data, iter_type, required):
+        return [self._serialize_data(i, iter_type, required) for i in data]
 
-    def serialize_dict(self, attr, dict_type):
-        return {str(x):self._serialize_data(attr[x], dict_type) for x in attr}
+    def serialize_dict(self, attr, dict_type, required):
+        return {str(x):self._serialize_data(attr[x], dict_type, required) for x in attr}
 
     def serialize_duration(self, attr):
         pass

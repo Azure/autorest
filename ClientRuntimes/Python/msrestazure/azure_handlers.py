@@ -55,16 +55,14 @@ class Paged(object):
 
 class Polled(object):
 
-    def __init__(self, response, command):
+    def __init__(self, response, update_cmd):
 
         self._response = response
         self._url = self._extract_url()
         self._callbacks = []
+
         self._done = Event()
-
-        setattr(Polled, "command", staticmethod(command))
-
-        self._thread = Thread(target=self._poll)
+        self._thread = Thread(target=self._poll, args=(update_cmd,))
         self._thread.start()
 
     def _extract_url(self):
@@ -74,10 +72,10 @@ class Polled(object):
         elif self._response.location:
             return self._response.location
 
-    def _poll(self):
+    def _poll(self, update):
         while True:
             time.sleep(POLLING_DELAY)
-            self._response = Poller.command(self._url)
+            self._response = update(self._url)
 
             if self._response.status_code in []:
                 self._done.set()
