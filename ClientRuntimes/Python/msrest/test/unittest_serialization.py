@@ -48,7 +48,8 @@ class TestRuntimeSerialized(unittest.TestCase):
 
         def __init__(self):
 
-            self.attribute_map = {
+            self._required = []
+            self._attribute_map = {
                 'attr_a': {'key':'id', 'type':'str'},
                 'attr_b': {'key':'AttrB', 'type':'int'},
                 'attr_c': {'key':'Key_C', 'type': 'bool'},
@@ -127,6 +128,14 @@ class TestRuntimeSerialized(unittest.TestCase):
         Test serializing an object with Int attributes.
         """
         test_obj = self.TestObj()
+        test_obj._required = ['attr_b']
+        test_obj.attr_b = None
+
+        serialized = Serialized(test_obj)
+
+        with self.assertRaises(SerializationError):
+            self.assertIsNone(serialized.attr_b)
+
         test_obj.attr_b = 25
 
         serialized = Serialized(test_obj)
@@ -154,6 +163,17 @@ class TestRuntimeSerialized(unittest.TestCase):
         Test serializing an object with Str attributes.
         """
         test_obj = self.TestObj()
+        test_obj._required = ['attr_a']
+        test_obj.attr_a = None
+
+        serialized = Serialized(test_obj)
+        with self.assertRaises(SerializationError):
+            self.assertIsNone(serialized.attr_a)
+
+        test_obj._required = []
+        serialized = Serialized(test_obj)
+        self.assertIsNone(serialized.attr_a)
+
         test_obj.attr_a = "TestString"
 
         serialized = Serialized(test_obj)
@@ -260,12 +280,17 @@ class TestRuntimeSerialized(unittest.TestCase):
         """
         Test serializing an object with a list of complex objects as an attribute.
         """
-        list_obj = type("ListObj", (), {"attribute_map":None, "abc":None})
-        list_obj.attribute_map = {"abc":{"key":"ABC", "type":"int"}}
+        list_obj = type("ListObj", (), {"_attribute_map":None,
+                                        "_required":[],
+                                        "abc":None})
+        list_obj._attribute_map = {"abc":{"key":"ABC", "type":"int"}}
         list_obj.abc = "123"
 
-        test_obj = type("CmplxTestObj", (), {"attribute_map":None, "test_list":None})
-        test_obj.attribute_map = {"test_list":{"key":"_list", "type":"[ListObj]"}}
+        test_obj = type("CmplxTestObj", (), {"_attribute_map":None,
+                                             "_required":[],
+                                             "test_list":None})
+
+        test_obj._attribute_map = {"test_list":{"key":"_list", "type":"[ListObj]"}}
         test_obj.test_list = [list_obj]
 
         serialized = Serialized(test_obj)
