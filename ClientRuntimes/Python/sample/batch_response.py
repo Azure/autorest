@@ -1,4 +1,4 @@
-﻿from clientruntime.msrest import HTTPResponse
+﻿from runtime.msrest.response import HTTPResponse
 
 class BatchOperationResponse(HTTPResponse):
     

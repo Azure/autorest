@@ -1,4 +1,5 @@
-﻿from exceptions import InvalidOperationError
+﻿
+from runtime.msrest.exceptions import InvalidOperationError
 from constants import *
 from shared import *
 

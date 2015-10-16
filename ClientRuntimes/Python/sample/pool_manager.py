@@ -1,8 +1,8 @@
 ﻿
 import sys
 
-from clientruntime.msrest.serialization import Serialized, Deserialized
-from clientruntime.msrest.exceptions import ResponseStatusError
+from runtime.msrest.serialization import Serialized, Deserialized
+from runtime.msrest.exceptions import ResponseStatusError
 
 from pool_operations import PoolOperations
 
@@ -35,8 +35,8 @@ class PoolManager(object):
         for p in pools:
             yield p
 
-    def pool(self):
-        return PoolRequest(self)
+    def pool(self, **kwargs):
+        return PoolSpec(self, **kwargs)
 
     def add(self, pool):
 
