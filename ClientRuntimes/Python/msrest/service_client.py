@@ -57,20 +57,16 @@ class ServiceClient(object):
 
         return self.session.send(request)
 
-    def _format_url(self, url, params):
-
-        # Manual building necessary for value-less action parameters.
-        if params:
-            query  = [p+'='+v if v else p for p,v in params.items()]
-            url = url + '?' + '&'.join(query)
-        
+    def _format_url(self, url):
+       
         url = urllib.quote(url)
         url = urlparse.urljoin(self.config.base_uri, url)
         return url
 
     def request(self, url, params={}):
         request = ClientRequest(self.config)
-        request.url = self._format_url(url, params)
+        request.url = self._format_url(url)
+        request.params = params
         return request
 
     def add_hook(self, hook):
