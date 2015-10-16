@@ -11,8 +11,6 @@ from pool_models import *
 from pool_responses import *
 
 
-
-
 class PoolManager(object):
 
     def __init__(self, client):
