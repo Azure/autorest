@@ -1,5 +1,5 @@
 ﻿
-
+import sys
 
 from clientruntime.msrest.serialization import Serialized, Deserialized
 from clientruntime.msrest.exceptions import ResponseStatusError
@@ -8,8 +8,9 @@ from pool_operations import PoolOperations
 
 import pool_models
 from pool_models import *
+from pool_responses import *
 
-import sys
+
 
 
 class PoolManager(object):
