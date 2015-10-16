@@ -24,32 +24,19 @@
 #
 #--------------------------------------------------------------------------
 
-class AzureServiceClient(ServiceClient):
 
-    def __init__(self, config, creds):
-        """
-        Create service client.
+from ..msrest import Configuration
 
-        :Args:
-            - config (`.Configuration`): Service configuration.
-            - creds (`.Authentication`): Authenticated credentials.
+class AzureConfiguration(Configuration):
 
-        """
+    def __init__(self, filepath=None):
 
-        if not isinstance(self.config, AzureConfiguration):
-            raise TypeError("AzureServiceClient must use AzureConfiguration")
+        super(AzureConfiguration, self).__init__(filepath)
 
-        if not config:
-            config = AzureConfiguration()
-
-        super(AzureServiceClient, self).__init__(config, creds)
-
-
-class AzureChinaServiceClient(AzureServiceClient):
-
-    def __init__(self, config, creds):
-
-        super(AzureChinaServiceClient, self).__init__(config, creds)
-
-        self.config.auth_endpoint = "login.chinacloudapi.cn/"
-        self.resource = "https://management.core.chinacloudapi.cn/"
+        # Authentication
+        self.auth_endpoint = "login.windows.net/"
+        self.token_uri = "/oauth2/token"
+        self.auth_uri = "/oauth2/authorize"
+        self.tenant = "common"
+        self.resource = 'https://management.core.windows.net/'
+        self.keyring = "AzureAAD"

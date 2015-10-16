@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -25,7 +25,7 @@
 #--------------------------------------------------------------------------
 
 
-from msrest.authentication import TokenAuthentication
+from ..msrest.authentication import TokenAuthentication
 from .azure_configuration import AzureConfiguration
 import requests_oauthlib as oauth
 from oauthlib.oauth2 import BackendApplicationClient, LegacyApplicationClient

@@ -1,5 +1,8 @@
-
-from clientruntime.msrestazure.configuration import Configuration
-from clientruntime.msrestazure.aad import UserPassCredentials
+﻿
+from runtime.msrestazure import AzureConfiguration
+from runtime.msrestazure.aad import (
+    HeadlessAuth,
+    InteractiveAuth,
+    ServicePrincipalAuth)
 
 from batch_client import BatchClient

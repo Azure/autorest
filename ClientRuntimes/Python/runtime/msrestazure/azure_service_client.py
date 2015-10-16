@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -23,3 +23,35 @@
 # THE SOFTWARE.
 #
 #--------------------------------------------------------------------------
+
+from ..msrest import ServiceClient
+
+class AzureServiceClient(ServiceClient):
+
+    def __init__(self, config, creds):
+        """
+        Create service client.
+
+        :Args:
+            - config (`.Configuration`): Service configuration.
+            - creds (`.Authentication`): Authenticated credentials.
+
+        """
+
+        if not isinstance(self.config, AzureConfiguration):
+            raise TypeError("AzureServiceClient must use AzureConfiguration")
+
+        if not config:
+            config = AzureConfiguration()
+
+        super(AzureServiceClient, self).__init__(config, creds)
+
+
+class AzureChinaServiceClient(AzureServiceClient):
+
+    def __init__(self, config, creds):
+
+        super(AzureChinaServiceClient, self).__init__(config, creds)
+
+        self.config.auth_endpoint = "login.chinacloudapi.cn/"
+        self.resource = "https://management.core.chinacloudapi.cn/"
