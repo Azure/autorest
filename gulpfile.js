@@ -356,8 +356,8 @@ var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
   'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Modeler.Swagger.Tests.dll',
   'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
-  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/bin/Net45-Debug/Azure.CSharp.Tests.dll',
-  'AutoRest/Generators/CSharp/CSharp.Tests/bin/Net45-Debug/CSharp.Tests.dll',
+  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.CSharp.Tests.dll',
+  'AutoRest/Generators/CSharp/CSharp.Tests/bin/Net45-Debug/AutoRest.Generator.CSharp.Tests.dll',
   'ClientRuntimes/CSharp/ClientRuntime.Azure.Tests/bin/Net45-Debug/ClientRuntime.Azure.Tests.dll',
   'ClientRuntimes/CSharp/ClientRuntime.Tests/bin/Net45-Debug/ClientRuntime.Tests.dll',
 ];
