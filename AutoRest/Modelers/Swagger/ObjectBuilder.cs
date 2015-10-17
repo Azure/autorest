@@ -52,9 +52,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                     if (enumObject != null)
                     {
                         enumType.Name= enumObject["name"].ToString();
-                        if (enumObject["expandable"] != null)
+                        if (enumObject["modelAsString"] != null)
                         {
-                            enumType.IsExpandable = bool.Parse(enumObject["expandable"].ToString());
+                            enumType.ModelAsString = bool.Parse(enumObject["modelAsString"].ToString());
                         }
                     }
                     enumType.SerializedName = enumType.Name;
@@ -86,7 +86,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
                 else
                 {
-                    enumType.IsExpandable = true;
+                    enumType.ModelAsString = true;
                     enumType.Name = string.Empty;
                     enumType.SerializedName = string.Empty;
                 }

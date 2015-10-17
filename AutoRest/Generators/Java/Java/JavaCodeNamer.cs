@@ -147,7 +147,7 @@ namespace Microsoft.Rest.Generator.Java
                 return null;
             }
             var enumType = type as EnumType;
-            if (enumType != null && enumType.IsExpandable)
+            if (enumType != null && enumType.ModelAsString)
             {
                 type = PrimaryType.String;
             }
@@ -187,7 +187,7 @@ namespace Microsoft.Rest.Generator.Java
 
         private IType NormalizeEnumType(EnumType enumType)
         {
-            if (enumType.IsExpandable)
+            if (enumType.ModelAsString)
             {
                 enumType.SerializedName = "string";
                 enumType.Name = "string";

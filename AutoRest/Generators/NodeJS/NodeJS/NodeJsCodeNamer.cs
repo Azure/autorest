@@ -164,7 +164,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 return null;
             }
             var enumType = type as EnumType;
-            if (enumType != null && enumType.IsExpandable)
+            if (enumType != null && enumType.ModelAsString)
             {
                 type = PrimaryType.String;
             }

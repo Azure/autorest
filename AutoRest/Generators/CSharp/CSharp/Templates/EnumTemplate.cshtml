@@ -13,7 +13,7 @@ namespace @(Settings.Namespace).Models
     /// <summary>
     @WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName + ".")
     /// </summary>
-    @if (!Model.IsExpandable)
+    @if (!Model.ModelAsString)
     {
     @:[JsonConverter(typeof(StringEnumConverter))]
     @:public enum @Model.TypeDefinitionName
