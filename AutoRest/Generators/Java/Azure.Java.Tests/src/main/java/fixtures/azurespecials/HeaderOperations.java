@@ -12,8 +12,8 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import retrofit.http.POST;
 import retrofit.http.Header;
 
@@ -28,10 +28,7 @@ public interface HeaderOperations {
      */
     interface HeaderService {
         @POST("/azurespecials/customNamedRequestId")
-        Response customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/azurespecials/customNamedRequestId")
-        void customNamedRequestIdAsync(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage);
 
     }
     /**
@@ -47,7 +44,8 @@ public interface HeaderOperations {
      *
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback);
 
 }

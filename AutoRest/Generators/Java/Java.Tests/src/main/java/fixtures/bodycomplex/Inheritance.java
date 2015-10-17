@@ -12,8 +12,8 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Siamese;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -30,16 +30,10 @@ public interface Inheritance {
      */
     interface InheritanceService {
         @GET("/complex/inheritance/valid")
-        Response getValid() throws ServiceException;
-
-        @GET("/complex/inheritance/valid")
-        void getValidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getValid();
 
         @PUT("/complex/inheritance/valid")
-        Response putValid(@Body Siamese complexBody) throws ServiceException;
-
-        @PUT("/complex/inheritance/valid")
-        void putValidAsync(@Body Siamese complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putValid(@Body Siamese complexBody);
 
     }
     /**
@@ -54,8 +48,9 @@ public interface Inheritance {
      * Get complex types that extend others
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getValidAsync(final ServiceCallback<Siamese> serviceCallback);
+    Call<ResponseBody> getValidAsync(final ServiceCallback<Siamese> serviceCallback);
 
     /**
      * Put complex types that extend others
@@ -70,7 +65,8 @@ public interface Inheritance {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback);
 
 }

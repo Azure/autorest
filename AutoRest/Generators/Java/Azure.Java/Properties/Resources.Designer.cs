@@ -61,7 +61,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} maven package is required to compile and run the generated code..
+        ///   Looks up a localized string similar to The {0} maven dependency is required to compile and run the generated code..
         /// </summary>
         internal static string UsageInformation {
             get {

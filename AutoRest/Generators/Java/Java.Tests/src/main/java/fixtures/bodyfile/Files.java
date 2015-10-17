@@ -12,8 +12,8 @@ package fixtures.bodyfile;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import java.io.InputStream;
 import retrofit.http.GET;
 
@@ -28,16 +28,10 @@ public interface Files {
      */
     interface FilesService {
         @GET("/files/stream/nonempty")
-        Response getFile() throws ServiceException;
-
-        @GET("/files/stream/nonempty")
-        void getFileAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getFile();
 
         @GET("/files/stream/empty")
-        Response getEmptyFile() throws ServiceException;
-
-        @GET("/files/stream/empty")
-        void getEmptyFileAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getEmptyFile();
 
     }
     /**
@@ -52,8 +46,9 @@ public interface Files {
      * Get file
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    Call<ResponseBody> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get empty file
@@ -67,7 +62,8 @@ public interface Files {
      * Get empty file
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    Call<ResponseBody> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
 }

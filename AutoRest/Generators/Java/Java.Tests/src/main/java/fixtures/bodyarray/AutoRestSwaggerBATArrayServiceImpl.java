@@ -12,7 +12,7 @@ package fixtures.bodyarray;
 
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATArrayService class.
@@ -61,16 +61,16 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestSwaggerBATArrayServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestSwaggerBATArrayServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
     private void initialize() {
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.array = new ArrayImpl(restAdapter, this);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.array = new ArrayImpl(retrofit, this);
     }
 }

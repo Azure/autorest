@@ -105,7 +105,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     if (method.HttpMethod == HttpMethod.Delete)
                     {
-                        classes.Add("com.microsoft.rest.DELETE");
+                        classes.Add("retrofit.http.HTTP");
                     }
                     else
                     {

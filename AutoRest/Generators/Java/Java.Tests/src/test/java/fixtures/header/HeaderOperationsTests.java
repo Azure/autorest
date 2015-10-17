@@ -3,6 +3,7 @@ package fixtures.header;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
+import com.squareup.okhttp.Headers;
 import fixtures.header.models.GreyscaleColors;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
@@ -13,12 +14,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import retrofit.client.Header;
 
 import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -49,13 +46,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("User-Agent")) {
-                        Assert.assertEquals("overwrite", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("User-Agent") != null) {
+                    Assert.assertEquals("overwrite", headers.get("User-Agent"));
+                    lock.countDown();
                 }
             }
         });
@@ -82,13 +76,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("Content-Type")) {
-                        Assert.assertTrue(header.getValue().contains("text/html"));
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("Content-Type") != null) {
+                    Assert.assertTrue(headers.get("Content-Type").contains("text/html"));
+                    lock.countDown();
                 }
             }
         });
@@ -112,13 +103,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("1", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("1", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -132,13 +120,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("-2", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("-2", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -162,13 +147,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("105", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("105", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -182,13 +164,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("-2", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("-2", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -212,13 +191,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("0.07", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("0.07", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -232,13 +208,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("-3", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("-3", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -262,13 +235,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("7e+120", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("7e+120", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -282,13 +252,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("-3", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("-3", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -312,13 +279,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("true", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("true", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -332,13 +296,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("false", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("false", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -363,13 +324,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("The quick brown fox jumps over the lazy dog", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("The quick brown fox jumps over the lazy dog", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -383,13 +341,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("null", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("null", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -403,13 +358,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -433,13 +385,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("2010-01-01", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("2010-01-01", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -453,13 +402,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("0001-01-01", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("0001-01-01", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -482,14 +428,11 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        //TODO: It's not really a great experience to have this as a string (rather it be a Period)
-                        Assert.assertEquals("P123DT22H14M12.011S", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    //TODO: It's not really a great experience to have this as a string (rather it be a Period)
+                    Assert.assertEquals("P123DT22H14M12.011S", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -513,13 +456,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("2010-01-01T12:34:56Z", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -533,13 +473,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("0001-01-01T00:00:00Z", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("0001-01-01T00:00:00Z", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -562,15 +499,12 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        byte[] value = Base64.decodeBase64(header.getValue());
-                        String actual = new String(value, Charset.forName("UTF-8"));
-                        Assert.assertEquals("啊齄丂狛狜隣郎隣兀﨩", actual);
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    byte[] value = Base64.decodeBase64(headers.get("value"));
+                    String actual = new String(value, Charset.forName("UTF-8"));
+                    Assert.assertEquals("啊齄丂狛狜隣郎隣兀﨩", actual);
+                    lock.countDown();
                 }
             }
         });
@@ -594,13 +528,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("GREY", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("GREY", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });
@@ -614,13 +545,10 @@ public class HeaderOperationsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                List<Header> headers = response.getResponse().getHeaders();
-                for (Header header : headers) {
-                    if (header.getName().equals("value")) {
-                        Assert.assertEquals("null", header.getValue());
-                        lock.countDown();
-                        break;
-                    }
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("null", headers.get("value"));
+                    lock.countDown();
                 }
             }
         });

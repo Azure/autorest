@@ -27,7 +27,7 @@ public class ArrayTests {
     @Test
     public void getInvalid() throws Exception {
         try {
-            client.getArray().getInvalid();
+            List<Integer> result = client.getArray().getInvalid();
             Assert.assertTrue(false);
         } catch (ServiceException exception) {
             // expected

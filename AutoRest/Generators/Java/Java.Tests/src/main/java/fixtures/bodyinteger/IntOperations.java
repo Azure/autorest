@@ -12,8 +12,8 @@ package fixtures.bodyinteger;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
@@ -29,64 +29,34 @@ public interface IntOperations {
      */
     interface IntService {
         @GET("/int/null")
-        Response getNull() throws ServiceException;
-
-        @GET("/int/null")
-        void getNullAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getNull();
 
         @GET("/int/invalid")
-        Response getInvalid() throws ServiceException;
-
-        @GET("/int/invalid")
-        void getInvalidAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getInvalid();
 
         @GET("/int/overflowint32")
-        Response getOverflowInt32() throws ServiceException;
-
-        @GET("/int/overflowint32")
-        void getOverflowInt32Async(ServiceResponseCallback cb);
+        Call<ResponseBody> getOverflowInt32();
 
         @GET("/int/underflowint32")
-        Response getUnderflowInt32() throws ServiceException;
-
-        @GET("/int/underflowint32")
-        void getUnderflowInt32Async(ServiceResponseCallback cb);
+        Call<ResponseBody> getUnderflowInt32();
 
         @GET("/int/overflowint64")
-        Response getOverflowInt64() throws ServiceException;
-
-        @GET("/int/overflowint64")
-        void getOverflowInt64Async(ServiceResponseCallback cb);
+        Call<ResponseBody> getOverflowInt64();
 
         @GET("/int/underflowint64")
-        Response getUnderflowInt64() throws ServiceException;
-
-        @GET("/int/underflowint64")
-        void getUnderflowInt64Async(ServiceResponseCallback cb);
+        Call<ResponseBody> getUnderflowInt64();
 
         @PUT("/int/max/32")
-        Response putMax32(@Body int intBody) throws ServiceException;
-
-        @PUT("/int/max/32")
-        void putMax32Async(@Body int intBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putMax32(@Body int intBody);
 
         @PUT("/int/max/64")
-        Response putMax64(@Body long intBody) throws ServiceException;
-
-        @PUT("/int/max/64")
-        void putMax64Async(@Body long intBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putMax64(@Body long intBody);
 
         @PUT("/int/min/32")
-        Response putMin32(@Body int intBody) throws ServiceException;
-
-        @PUT("/int/min/32")
-        void putMin32Async(@Body int intBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putMin32(@Body int intBody);
 
         @PUT("/int/min/64")
-        Response putMin64(@Body long intBody) throws ServiceException;
-
-        @PUT("/int/min/64")
-        void putMin64Async(@Body long intBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putMin64(@Body long intBody);
 
     }
     /**
@@ -101,8 +71,9 @@ public interface IntOperations {
      * Get null Int value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getNullAsync(final ServiceCallback<Integer> serviceCallback);
+    Call<ResponseBody> getNullAsync(final ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get invalid Int value
@@ -116,8 +87,9 @@ public interface IntOperations {
      * Get invalid Int value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getInvalidAsync(final ServiceCallback<Integer> serviceCallback);
+    Call<ResponseBody> getInvalidAsync(final ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get overflow Int32 value
@@ -131,8 +103,9 @@ public interface IntOperations {
      * Get overflow Int32 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback);
+    Call<ResponseBody> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get underflow Int32 value
@@ -146,8 +119,9 @@ public interface IntOperations {
      * Get underflow Int32 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback);
+    Call<ResponseBody> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get overflow Int64 value
@@ -161,8 +135,9 @@ public interface IntOperations {
      * Get overflow Int64 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getOverflowInt64Async(final ServiceCallback<Long> serviceCallback);
+    Call<ResponseBody> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback);
 
     /**
      * Get underflow Int64 value
@@ -176,8 +151,9 @@ public interface IntOperations {
      * Get underflow Int64 value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback);
+    Call<ResponseBody> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback);
 
     /**
      * Put max int32 value
@@ -192,8 +168,9 @@ public interface IntOperations {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max int64 value
@@ -208,8 +185,9 @@ public interface IntOperations {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min int32 value
@@ -224,8 +202,9 @@ public interface IntOperations {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min int64 value
@@ -240,7 +219,8 @@ public interface IntOperations {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback);
 
 }

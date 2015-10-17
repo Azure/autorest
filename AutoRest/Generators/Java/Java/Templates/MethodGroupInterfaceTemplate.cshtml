@@ -13,8 +13,8 @@ package @(Settings.Namespace.ToLower());
 @EmptyLine
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 @foreach (var importClass in Model.InterfaceImports)
 {
 @:import @importClass;
@@ -33,11 +33,15 @@ public interface @Model.MethodGroupType {
     interface @Model.MethodGroupServiceType {
     @foreach (var method in Model.MethodTemplateModels)
     {
+    if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
+    {
+    @:    @@HTTP(path = "@(method.Url)", method = "DELETE", hasBody = true)
+    }
+    else
+    {
     @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-    @:    Response @(method.Name)(@method.MethodParameterApiDeclaration) throws ServiceException;
-    @EmptyLine
-    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-    @:    void @(method.Name)Async(@method.MethodParameterApiDeclarationWithCallback);
+    }
+    @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
     @EmptyLine
     }
     }
@@ -81,8 +85,9 @@ public interface @Model.MethodGroupType {
     @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
     }
     @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+    @: * @@return the {@@link Call} object
     @: */
-    @:void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
+    @:Call<@method.CallType> @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
     @EmptyLine
     }
 }

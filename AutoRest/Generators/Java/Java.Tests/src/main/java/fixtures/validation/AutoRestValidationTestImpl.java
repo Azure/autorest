@@ -12,15 +12,17 @@ package fixtures.validation;
 
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
-import com.google.gson.reflect.TypeToken;
+import retrofit.Retrofit;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.validation.models.Product;
 import fixtures.validation.models.Error;
 
@@ -102,17 +104,17 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestValidationTestImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestValidationTestImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
     private void initialize() {
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        service = restAdapter.create(AutoRestValidationTestService.class);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        service = retrofit.create(AutoRestValidationTestService.class);
     }
 
     /**
@@ -124,12 +126,26 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Product validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException {
+        if (this.getSubscriptionId() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (this.getApiVersion() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
+        }
         try {
-            ServiceResponse<Product> response = validationOfMethodParametersDelegate(service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion()), null);
+            Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
+            ServiceResponse<Product> response = validationOfMethodParametersDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = validationOfMethodParametersDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -140,24 +156,38 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
-        service.validationOfMethodParametersAsync(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion(), new ServiceResponseCallback() {
+    public Call<ResponseBody> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+        if (this.getSubscriptionId() == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.")));
+        }
+        if (resourceGroupName == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.")));
+        }
+        if (this.getApiVersion() == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.")));
+        }
+        Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(validationOfMethodParametersDelegate(response, error));
+                    serviceCallback.success(validationOfMethodParametersDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> validationOfMethodParametersDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -170,12 +200,26 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Product validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException {
+        if (this.getSubscriptionId() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (this.getApiVersion() == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
+        }
         try {
-            ServiceResponse<Product> response = validationOfBodyDelegate(service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion()), null);
+            Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
+            ServiceResponse<Product> response = validationOfBodyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Product> response = validationOfBodyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -187,24 +231,38 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
-        service.validationOfBodyAsync(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion(), new ServiceResponseCallback() {
+    public Call<ResponseBody> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
+        if (this.getSubscriptionId() == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.")));
+        }
+        if (resourceGroupName == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.")));
+        }
+        if (this.getApiVersion() == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.")));
+        }
+        Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(validationOfBodyDelegate(response, error));
+                    serviceCallback.success(validationOfBodyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Product> validationOfBodyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

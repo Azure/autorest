@@ -10,15 +10,17 @@
 
 package fixtures.bodyduration;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import org.joda.time.Period;
 import fixtures.bodyduration.models.Error;
 
@@ -26,8 +28,8 @@ public class DurationImpl implements Duration {
     private DurationService service;
     AutoRestDurationTestService client;
 
-    public DurationImpl(RestAdapter restAdapter, AutoRestDurationTestService client) {
-        this.service = restAdapter.create(DurationService.class);
+    public DurationImpl(Retrofit retrofit, AutoRestDurationTestService client) {
+        this.service = retrofit.create(DurationService.class);
         this.client = client;
     }
 
@@ -39,11 +41,13 @@ public class DurationImpl implements Duration {
      */
     public Period getNull() throws ServiceException {
         try {
-            ServiceResponse<Period> response = getNullDelegate(service.getNull(), null);
+            Call<ResponseBody> call = service.getNull();
+            ServiceResponse<Period> response = getNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Period> response = getNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -52,24 +56,26 @@ public class DurationImpl implements Duration {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNullAsync(final ServiceCallback<Period> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNullAsync(final ServiceCallback<Period> serviceCallback) {
+        Call<ResponseBody> call = service.getNull();
+        call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, error));
+                    serviceCallback.success(getNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Period> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Period> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Period>()
                 .register(200, new TypeToken<Period>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -84,11 +90,13 @@ public class DurationImpl implements Duration {
                 new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = putPositiveDurationDelegate(service.putPositiveDuration(durationBody), null);
+            Call<ResponseBody> call = service.putPositiveDuration(durationBody);
+            ServiceResponse<Void> response = putPositiveDurationDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putPositiveDurationDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -98,28 +106,30 @@ public class DurationImpl implements Duration {
      * @param durationBody the Period value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
         if (durationBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter durationBody is required and cannot be null.")));
         }
-        service.putPositiveDurationAsync(durationBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putPositiveDuration(durationBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putPositiveDurationDelegate(response, error));
+                    serviceCallback.success(putPositiveDurationDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putPositiveDurationDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putPositiveDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -130,11 +140,13 @@ public class DurationImpl implements Duration {
      */
     public Period getPositiveDuration() throws ServiceException {
         try {
-            ServiceResponse<Period> response = getPositiveDurationDelegate(service.getPositiveDuration(), null);
+            Call<ResponseBody> call = service.getPositiveDuration();
+            ServiceResponse<Period> response = getPositiveDurationDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Period> response = getPositiveDurationDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -143,24 +155,26 @@ public class DurationImpl implements Duration {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
-        service.getPositiveDurationAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
+        Call<ResponseBody> call = service.getPositiveDuration();
+        call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getPositiveDurationDelegate(response, error));
+                    serviceCallback.success(getPositiveDurationDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Period> getPositiveDurationDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Period> getPositiveDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Period>()
                 .register(200, new TypeToken<Period>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -171,11 +185,13 @@ public class DurationImpl implements Duration {
      */
     public Period getInvalid() throws ServiceException {
         try {
-            ServiceResponse<Period> response = getInvalidDelegate(service.getInvalid(), null);
+            Call<ResponseBody> call = service.getInvalid();
+            ServiceResponse<Period> response = getInvalidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Period> response = getInvalidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -184,24 +200,26 @@ public class DurationImpl implements Duration {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
-        service.getInvalidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
+        Call<ResponseBody> call = service.getInvalid();
+        call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getInvalidDelegate(response, error));
+                    serviceCallback.success(getInvalidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Period> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Period> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Period>()
                 .register(200, new TypeToken<Period>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

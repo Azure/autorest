@@ -10,23 +10,25 @@
 
 package fixtures.azurespecials;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.azurespecials.models.Error;
 
 public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
     private SubscriptionInCredentialsService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public SubscriptionInCredentialsImpl(RestAdapter restAdapter, AutoRestAzureSpecialParametersTestClient client) {
-        this.service = restAdapter.create(SubscriptionInCredentialsService.class);
+    public SubscriptionInCredentialsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+        this.service = retrofit.create(SubscriptionInCredentialsService.class);
         this.client = client;
     }
 
@@ -41,11 +43,13 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = postMethodGlobalValidDelegate(service.postMethodGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postMethodGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postMethodGlobalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postMethodGlobalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -54,28 +58,30 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
         }
-        service.postMethodGlobalValidAsync(this.client.getSubscriptionId(), this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postMethodGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postMethodGlobalValidDelegate(response, error));
+                    serviceCallback.success(postMethodGlobalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postMethodGlobalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postMethodGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -89,11 +95,13 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = postMethodGlobalNullDelegate(service.postMethodGlobalNull(this.client.getSubscriptionId(), this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postMethodGlobalNull(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postMethodGlobalNullDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postMethodGlobalNullDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -102,28 +110,30 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
         }
-        service.postMethodGlobalNullAsync(this.client.getSubscriptionId(), this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postMethodGlobalNull(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postMethodGlobalNullDelegate(response, error));
+                    serviceCallback.success(postMethodGlobalNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postMethodGlobalNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postMethodGlobalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -141,11 +151,13 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = postMethodGlobalNotProvidedValidDelegate(service.postMethodGlobalNotProvidedValid(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postMethodGlobalNotProvidedValid(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postMethodGlobalNotProvidedValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postMethodGlobalNotProvidedValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -154,7 +166,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
@@ -163,23 +175,25 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.")));
         }
-        service.postMethodGlobalNotProvidedValidAsync(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postMethodGlobalNotProvidedValid(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postMethodGlobalNotProvidedValidDelegate(response, error));
+                    serviceCallback.success(postMethodGlobalNotProvidedValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postMethodGlobalNotProvidedValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -193,11 +207,13 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = postPathGlobalValidDelegate(service.postPathGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postPathGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postPathGlobalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postPathGlobalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -206,28 +222,30 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
         }
-        service.postPathGlobalValidAsync(this.client.getSubscriptionId(), this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postPathGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postPathGlobalValidDelegate(response, error));
+                    serviceCallback.success(postPathGlobalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postPathGlobalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postPathGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -241,11 +259,13 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = postSwaggerGlobalValidDelegate(service.postSwaggerGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postSwaggerGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postSwaggerGlobalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postSwaggerGlobalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -254,28 +274,30 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
         }
-        service.postSwaggerGlobalValidAsync(this.client.getSubscriptionId(), this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postSwaggerGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postSwaggerGlobalValidDelegate(response, error));
+                    serviceCallback.success(postSwaggerGlobalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postSwaggerGlobalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postSwaggerGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

@@ -10,23 +10,25 @@
 
 package fixtures.azurespecials;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.azurespecials.models.Error;
 
 public class HeaderOperationsImpl implements HeaderOperations {
     private HeaderService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public HeaderOperationsImpl(RestAdapter restAdapter, AutoRestAzureSpecialParametersTestClient client) {
-        this.service = restAdapter.create(HeaderService.class);
+    public HeaderOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+        this.service = retrofit.create(HeaderService.class);
         this.client = client;
     }
 
@@ -42,11 +44,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = customNamedRequestIdDelegate(service.customNamedRequestId(fooClientRequestId, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = customNamedRequestIdDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = customNamedRequestIdDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -56,28 +60,30 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
         if (fooClientRequestId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.")));
         }
-        service.customNamedRequestIdAsync(fooClientRequestId, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(customNamedRequestIdDelegate(response, error));
+                    serviceCallback.success(customNamedRequestIdDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> customNamedRequestIdDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> customNamedRequestIdDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

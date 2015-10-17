@@ -31,7 +31,7 @@ public class HttpRetryTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -48,7 +48,7 @@ public class HttpRetryTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -65,7 +65,7 @@ public class HttpRetryTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -82,7 +82,7 @@ public class HttpRetryTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -99,7 +99,7 @@ public class HttpRetryTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -116,7 +116,7 @@ public class HttpRetryTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -133,7 +133,7 @@ public class HttpRetryTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -150,7 +150,7 @@ public class HttpRetryTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });

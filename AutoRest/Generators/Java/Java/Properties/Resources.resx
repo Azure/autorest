@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="UsageInformation" xml:space="preserve">
-    <value>The {0} npm package is required to execute the generated code.</value>
+    <value>The {0} maven dependency is required to execute the generated code.</value>
   </data>
 </root>

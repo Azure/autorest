@@ -7,8 +7,7 @@
 
 package com.microsoft.rest;
 
-import retrofit.client.Request;
-import retrofit.client.Response;
+import retrofit.Response;
 
 /**
  * Exception thrown for an invalid response with custom error information.

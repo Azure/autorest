@@ -14,7 +14,8 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
 import java.util.List;
 import java.util.Map;
 import fixtures.resourceflattening.models.ResourceCollection;
@@ -76,37 +77,25 @@ public interface AutoRestResourceFlatteningTestService {
      */
     interface AutoRestResourceFlatteningTestServiceService {
         @PUT("/azure/resource-flatten/array")
-        Response putArray(@Body List<Resource> resourceArray, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @PUT("/azure/resource-flatten/array")
-        void putArrayAsync(@Body List<Resource> resourceArray, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-        @GET("/azure/resource-flatten/array")
-        Response getArray(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putArray(@Body List<Resource> resourceArray, @Header("accept-language") String acceptLanguage);
 
         @GET("/azure/resource-flatten/array")
-        void getArrayAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-        @PUT("/azure/resource-flatten/dictionary")
-        Response putDictionary(@Body Map<String, FlattenedProduct> resourceDictionary, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> getArray(@Header("accept-language") String acceptLanguage);
 
         @PUT("/azure/resource-flatten/dictionary")
-        void putDictionaryAsync(@Body Map<String, FlattenedProduct> resourceDictionary, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-        @GET("/azure/resource-flatten/dictionary")
-        Response getDictionary(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putDictionary(@Body Map<String, FlattenedProduct> resourceDictionary, @Header("accept-language") String acceptLanguage);
 
         @GET("/azure/resource-flatten/dictionary")
-        void getDictionaryAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-        @PUT("/azure/resource-flatten/resourcecollection")
-        Response putResourceCollection(@Body ResourceCollection resourceComplexObject, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> getDictionary(@Header("accept-language") String acceptLanguage);
 
         @PUT("/azure/resource-flatten/resourcecollection")
-        void putResourceCollectionAsync(@Body ResourceCollection resourceComplexObject, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-        @GET("/azure/resource-flatten/resourcecollection")
-        Response getResourceCollection(@Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> putResourceCollection(@Body ResourceCollection resourceComplexObject, @Header("accept-language") String acceptLanguage);
 
         @GET("/azure/resource-flatten/resourcecollection")
-        void getResourceCollectionAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getResourceCollection(@Header("accept-language") String acceptLanguage);
 
     }
+
     /**
      * Put External Resource as an Array
      *
@@ -120,8 +109,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
     /**
      * Get External Resource as an Array
      *
@@ -134,8 +124,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as an Array
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
+    Call<ResponseBody> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
     /**
      * Put External Resource as a Dictionary
      *
@@ -149,8 +140,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
     /**
      * Get External Resource as a Dictionary
      *
@@ -163,8 +155,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a Dictionary
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
+    Call<ResponseBody> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
     /**
      * Put External Resource as a ResourceCollection
      *
@@ -178,8 +171,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
     /**
      * Get External Resource as a ResourceCollection
      *
@@ -192,7 +186,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a ResourceCollection
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
+    Call<ResponseBody> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
 
 }

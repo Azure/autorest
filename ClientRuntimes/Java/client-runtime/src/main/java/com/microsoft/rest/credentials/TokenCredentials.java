@@ -7,7 +7,7 @@
 
 package com.microsoft.rest.credentials;
 
-import com.microsoft.rest.ServiceClient;
+import com.squareup.okhttp.OkHttpClient;
 
 /**
  * Token based credentials for use with a REST Service Client.
@@ -53,7 +53,7 @@ public class TokenCredentials implements ServiceClientCredentials {
         return scheme;
     }
 
-    public void applyCredentialsFilter(ServiceClient client) {
-        client.getClientInterceptors().add(new TokenCredentialsInterceptor(this));
+    public void applyCredentialsFilter(OkHttpClient client) {
+        client.interceptors().add(new TokenCredentialsInterceptor(this));
     }
 }

@@ -61,7 +61,7 @@ namespace Microsoft.Rest.Generator.Java.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} npm package is required to execute the generated code..
+        ///   Looks up a localized string similar to The {0} maven dependency is required to execute the generated code..
         /// </summary>
         internal static string UsageInformation {
             get {
