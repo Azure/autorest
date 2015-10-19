@@ -1070,6 +1070,67 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             }
 
             /// <summary>
+            /// Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
+            /// GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492
+            /// 10:15:01 GMT"}
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IDictionary<string, DateTime?> GetDateTimeRfc1123Valid(this IDictionary operations)
+            {
+                return Task.Factory.StartNew(s => ((IDictionary)s).GetDateTimeRfc1123ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
+            /// GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492
+            /// 10:15:01 GMT"}
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IDictionary<string, DateTime?>> GetDateTimeRfc1123ValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                HttpOperationResponse<IDictionary<string, DateTime?>> result = await operations.GetDateTimeRfc1123ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
+            /// "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            public static void PutDateTimeRfc1123Valid(this IDictionary operations, IDictionary<string, DateTime?> arrayBody)
+            {
+                Task.Factory.StartNew(s => ((IDictionary)s).PutDateTimeRfc1123ValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
+            /// "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutDateTimeRfc1123ValidAsync( this IDictionary operations, IDictionary<string, DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.PutDateTimeRfc1123ValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
             /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
             /// hex (25, 29, 43)} with each item encoded in base64
             /// </summary>

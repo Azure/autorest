@@ -17,6 +17,7 @@ import com.squareup.okhttp.ResponseBody;
 import java.util.Map;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
+import com.microsoft.rest.DateTimeRfc1123;
 import fixtures.bodydictionary.models.Widget;
 import java.util.List;
 import retrofit.http.GET;
@@ -149,6 +150,12 @@ public interface Dictionary {
 
         @GET("/dictionary/prim/date-time/invalidchars")
         Call<ResponseBody> getDateTimeInvalidChars();
+
+        @GET("/dictionary/prim/date-time-rfc1123/valid")
+        Call<ResponseBody> getDateTimeRfc1123Valid();
+
+        @PUT("/dictionary/prim/date-time-rfc1123/valid")
+        Call<ResponseBody> putDateTimeRfc1123Valid(@Body Map<String, DateTimeRfc1123> arrayBody);
 
         @GET("/dictionary/prim/byte/valid")
         Call<ResponseBody> getByteValid();
@@ -846,6 +853,39 @@ public interface Dictionary {
      * @return the {@link Call} object
      */
     Call<ResponseBody> getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
+
+    /**
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+     *
+     * @return the Map&lt;String, DateTimeRfc1123&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    Map<String, DateTimeRfc1123> getDateTimeRfc1123Valid() throws ServiceException;
+
+    /**
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTimeRfc1123>> serviceCallback);
+
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+     *
+     * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    void putDateTimeRfc1123Valid(Map<String, DateTimeRfc1123> arrayBody) throws ServiceException;
+
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+     *
+     * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64

@@ -213,6 +213,24 @@ describe('nodejs', function () {
           });
         });
       });
+      
+      it('should send and receive datetimerfc1123 type headers', function(done) {
+        testClient.header.paramDatetimeRfc1123('valid', new Date('2010-01-01T12:34:56Z'), function(error, result) {
+          should.not.exist(error);
+          testClient.header.paramDatetimeRfc1123('min', new Date('0001-01-01T00:00:00Z'), function (error, result) {
+            should.not.exist(error);
+            testClient.header.responseDatetimeRfc1123('valid', function (error, result, request, response) {
+              should.not.exist(error);
+              _.isEqual(new Date(response.headers['value']), new Date('Fri, 01 Jan 2010 12:34:56 GMT')).should.be.exactly(true);
+              testClient.header.responseDatetimeRfc1123('min', function (error, result, request, response) {
+                should.not.exist(error);
+                _.isEqual(new Date(response.headers['value']), new Date('Mon, 01 Jan 0001 00:00:00 GMT')).should.be.exactly(true);
+                done();
+              });
+            });
+          });
+        });
+      });
 
       it('should send and receive duration type headers', function (done) {
         var duration = moment.duration({ days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11 });

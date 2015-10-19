@@ -834,6 +834,54 @@ export interface ArrayModel {
     getDateTimeInvalidChars(options: RequestOptions, callback: (err: Error, result: Date[], request: WebResource, response: stream.Readable) => void): void;
 
     /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan
+     * 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+     *
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {array} [result]   - The deserialized result object.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDateTimeRfc1123Valid(options: RequestOptions, callback: (err: Error, result: Date[], request: WebResource, response: stream.Readable) => void): void;
+
+    /**
+     * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980
+     * 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+     *
+     * @param {array} arrayBody
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putDateTimeRfc1123Valid(arrayBody: Date[], options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+
+    /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
      * with each item encoded in base64
      *

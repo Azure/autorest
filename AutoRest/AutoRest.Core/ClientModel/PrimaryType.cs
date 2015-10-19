@@ -88,6 +88,11 @@ namespace Microsoft.Rest.Generator.ClientModel
             get { return KnownTypes[SupportedPrimaryType.DateTime]; }
         }
 
+        public static PrimaryType DateTimeRfc1123
+        {
+            get { return KnownTypes[SupportedPrimaryType.DateTimeRfc1123]; }
+        }
+
         public static PrimaryType TimeSpan
         {
             get { return KnownTypes[SupportedPrimaryType.TimeSpan]; }
@@ -157,6 +162,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             ByteArray,
             Date,
             DateTime,
+            DateTimeRfc1123,
             TimeSpan,
             Boolean
         }

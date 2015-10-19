@@ -1,6 +1,7 @@
 package fixtures.bodydictionary;
 
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.DateTimeRfc1123;
 import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryService;
 import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryServiceImpl;
 import fixtures.bodydictionary.models.Widget;
@@ -362,6 +363,25 @@ public class DictionaryTests {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
         }
+    }
+
+    @Test
+    public void getDateTimeRfc1123Valid() throws Exception {
+        Map<String, DateTimeRfc1123> result = client.getDictionary().getDateTimeRfc1123Valid();
+        Map<String, DateTimeRfc1123> expected = new HashMap<String, DateTimeRfc1123>();
+        expected.put("0", new DateTimeRfc1123(new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC)));
+        expected.put("1", new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)));
+        expected.put("2", new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC)));
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void putDateTimeRfc1123Valid() throws Exception {
+        Map<String, DateTimeRfc1123> testdata = new HashMap<String, DateTimeRfc1123>();
+        testdata.put("0", new DateTimeRfc1123(new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC)));
+        testdata.put("1", new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)));
+        testdata.put("2", new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC)));
+        client.getDictionary().putDateTimeRfc1123Valid(testdata);
     }
 
     @Test

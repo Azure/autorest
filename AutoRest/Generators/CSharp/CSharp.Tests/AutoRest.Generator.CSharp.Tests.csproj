@@ -98,6 +98,10 @@
       <Link>Swagger\body-datetime.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\..\TestServer\swagger\body-datetime-rfc1123.json">
+      <Link>Swagger\body-datetime-rfc1123.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\..\..\TestServer\swagger\body-duration.json">
       <Link>Swagger\body-duration.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -17,6 +17,7 @@ import com.squareup.okhttp.ResponseBody;
 import java.util.List;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
+import com.microsoft.rest.DateTimeRfc1123;
 import fixtures.bodyarray.models.Product;
 import java.util.Map;
 import retrofit.http.GET;
@@ -140,6 +141,12 @@ public interface Array {
 
         @GET("/array/prim/date-time/invalidchars")
         Call<ResponseBody> getDateTimeInvalidChars();
+
+        @GET("/array/prim/date-time-rfc1123/valid")
+        Call<ResponseBody> getDateTimeRfc1123Valid();
+
+        @PUT("/array/prim/date-time-rfc1123/valid")
+        Call<ResponseBody> putDateTimeRfc1123Valid(@Body List<DateTimeRfc1123> arrayBody);
 
         @GET("/array/prim/byte/valid")
         Call<ResponseBody> getByteValid();
@@ -789,6 +796,39 @@ public interface Array {
      * @return the {@link Call} object
      */
     Call<ResponseBody> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+     *
+     * @return the List&lt;DateTimeRfc1123&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    List<DateTimeRfc1123> getDateTimeRfc1123Valid() throws ServiceException;
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback);
+
+    /**
+     * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+     *
+     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    void putDateTimeRfc1123Valid(List<DateTimeRfc1123> arrayBody) throws ServiceException;
+
+    /**
+     * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+     *
+     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64

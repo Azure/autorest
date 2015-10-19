@@ -22,6 +22,7 @@ import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import fixtures.bodycomplex.models.DateWrapper;
 import fixtures.bodycomplex.models.DatetimeWrapper;
+import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -84,6 +85,12 @@ public interface Primitive {
 
         @PUT("/complex/primitive/datetime")
         Call<ResponseBody> putDateTime(@Body DatetimeWrapper complexBody);
+
+        @GET("/complex/primitive/datetimerfc1123")
+        Call<ResponseBody> getDateTimeRfc1123();
+
+        @PUT("/complex/primitive/datetimerfc1123")
+        Call<ResponseBody> putDateTimeRfc1123(@Body Datetimerfc1123Wrapper complexBody);
 
         @GET("/complex/primitive/byte")
         Call<ResponseBody> getByte();
@@ -355,6 +362,39 @@ public interface Primitive {
      * @return the {@link Call} object
      */
     Call<ResponseBody> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get complex types with datetimeRfc1123 properties
+     *
+     * @return the Datetimerfc1123Wrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    Datetimerfc1123Wrapper getDateTimeRfc1123() throws ServiceException;
+
+    /**
+     * Get complex types with datetimeRfc1123 properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback);
+
+    /**
+     * Put complex types with datetimeRfc1123 properties
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException;
+
+    /**
+     * Put complex types with datetimeRfc1123 properties
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with byte properties

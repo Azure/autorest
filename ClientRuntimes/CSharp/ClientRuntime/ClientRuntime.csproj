@@ -25,6 +25,7 @@
     <Compile Include="HttpExtensions.cs" />
     <Compile Include="ITokenProvider.cs" />
     <Compile Include="RestException.cs" />
+    <Compile Include="Serialization\DateTimeRfc1123JsonConverter.cs" />
     <Compile Include="Serialization\Iso8601TimeSpanConverter.cs" />
     <Compile Include="Serialization\PolymorphicDeserializeJsonConverter.cs" />
     <Compile Include="Serialization\DateJsonConverter.cs" />

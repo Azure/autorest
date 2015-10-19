@@ -1,5 +1,6 @@
 package fixtures.header;
 
+import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -434,6 +435,52 @@ public class HeaderOperationsTests {
                     Assert.assertEquals("P123DT22H14M12.011S", headers.get("value"));
                     lock.countDown();
                 }
+            }
+        });
+        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+    }
+
+    @Test
+    public void paramDatetimeRfc1123() throws Exception {
+        client.getHeaderOperations().paramDatetimeRfc1123("valid", new DateTimeRfc1123(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeZone.UTC)));
+        client.getHeaderOperations().paramDatetimeRfc1123("min", new DateTimeRfc1123(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC)));
+    }
+
+    @Test
+    public void responseDatetimeRfc1123() throws Exception {
+        lock = new CountDownLatch(1);
+        client.getHeaderOperations().responseDatetimeRfc1123Async("valid", new ServiceCallback<Void>() {
+            @Override
+            public void failure(ServiceException exception) {
+                fail();
+            }
+
+            @Override
+            public void success(ServiceResponse<Void> response) {
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
+                    lock.countDown();
+                }
+            }
+        });
+        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        lock = new CountDownLatch(1);
+        client.getHeaderOperations().responseDatetimeRfc1123Async("min", new ServiceCallback<Void>() {
+            @Override
+            public void failure(ServiceException exception) {
+                fail();
+            }
+
+            @Override
+            public void success(ServiceResponse<Void> response) {
+                Headers headers = response.getResponse().headers();
+                if (headers.get("value") != null) {
+                    Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", headers.get("value"));
+                    lock.countDown();
+
+                }
+
             }
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));

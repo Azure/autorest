@@ -35,6 +35,10 @@ namespace @(Settings.Namespace).Models
             {
         @:[JsonConverter(typeof(DateJsonConverter))]
             }
+            if (property.Type == PrimaryType.DateTimeRfc1123)
+            {
+        @:[JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
+            }
         @:[JsonProperty(PropertyName = "@property.SerializedName")]
         @:public @property.Type.Name @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine

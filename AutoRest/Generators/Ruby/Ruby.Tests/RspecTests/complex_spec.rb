@@ -410,7 +410,7 @@ describe 'Complex' do
     expect(result.body.field).to eq(DateTime.new(1, 1, 1, 0, 0, 0))
     expect(result.body.now).to eq(DateTime.new(2015, 5, 18, 18, 38, 0))
   end
-
+  
   # Test fails because of Azure's issue with server's expectations
   it 'should put dateTime' do
     date_time_wrapper = ComplexModule::DatetimeWrapper.new
@@ -420,6 +420,24 @@ describe 'Complex' do
     expect(result.response.status).to eq(200)
   end
 
+  it 'should put dateTimeRfc1123' do
+    pending("DateTime.new(1, 1, 1, 0, 0, 0, 'Z') is interpreted as Sat, 01 Jan 0001 00:00:00 GMT, but other languages interpret it as Mon, 01 Jan 0001...")
+    date_time_rfc1123_wrapper = ComplexModule::Datetimerfc1123Wrapper.new    
+    date_time_rfc1123_wrapper.field = DateTime.new(1, 1, 1, 0, 0, 0, 'Z')
+    date_time_rfc1123_wrapper.now = DateTime.new(2015, 5, 18, 11, 38, 0, 'Z')
+    expect(date_time_rfc1123_wrapper.field.new_offset(0).strftime('%a, %d %b %Y %H:%M:%S GMT')).to eq(nil)
+    result = @client.primitive.put_date_time_rfc1123(date_time_rfc1123_wrapper).value!
+    expect(result.response.status).to eq(200)
+  end
+  
+  it 'should get dateTimeRfc1123' do
+    result = @client.primitive.get_date_time_rfc1123().value!
+    expect(result.response.status).to eq(200)
+    expect(result.body).to be_an_instance_of(ComplexModule::Models::Datetimerfc1123Wrapper)
+    expect(result.body.field).to eq(DateTime.new(1, 1, 1, 0, 0, 0, 'Z'))
+    expect(result.body.now).to eq(DateTime.new(2015, 5, 18, 11, 38, 0, 'Z'))
+  end
+  
   it 'should get byte' do
     result = @client.primitive.get_byte().value!
     expect(result.response.status).to eq(200)

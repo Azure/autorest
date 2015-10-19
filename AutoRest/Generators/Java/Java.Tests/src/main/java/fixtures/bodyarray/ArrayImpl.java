@@ -25,6 +25,7 @@ import java.util.List;
 import fixtures.bodyarray.models.Error;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
+import com.microsoft.rest.DateTimeRfc1123;
 import fixtures.bodyarray.models.Product;
 import java.util.Map;
 import com.microsoft.rest.Validator;
@@ -1753,6 +1754,107 @@ public class ArrayImpl implements Array {
     private ServiceResponse<List<DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<List<DateTime>>()
                 .register(200, new TypeToken<List<DateTime>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, retrofit);
+    }
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+     *
+     * @return the List&lt;DateTimeRfc1123&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public List<DateTimeRfc1123> getDateTimeRfc1123Valid() throws ServiceException {
+        try {
+            Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
+            ServiceResponse<List<DateTimeRfc1123>> response = getDateTimeRfc1123ValidDelegate(call.execute(), null);
+            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<ResponseBody> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback) {
+        Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
+        call.enqueue(new ServiceResponseCallback<List<DateTimeRfc1123>>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(getDateTimeRfc1123ValidDelegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<List<DateTimeRfc1123>>()
+                .register(200, new TypeToken<List<DateTimeRfc1123>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, retrofit);
+    }
+
+    /**
+     * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+     *
+     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void putDateTimeRfc1123Valid(List<DateTimeRfc1123> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
+        try {
+            Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+            ServiceResponse<Void> response = putDateTimeRfc1123ValidDelegate(call.execute(), null);
+            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+     *
+     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<ResponseBody> putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
+        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(putDateTimeRfc1123ValidDelegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
     }

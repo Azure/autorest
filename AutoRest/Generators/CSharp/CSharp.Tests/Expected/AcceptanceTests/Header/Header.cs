@@ -2091,6 +2091,215 @@ namespace Fixtures.AcceptanceTestsHeader
         }
 
         /// <summary>
+        /// Send a post request with header values "scenario": "valid", "value": "Wed,
+        /// 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan
+        /// 0001 00:00:00 GMT"
+        /// </summary>
+        /// <param name='scenario'>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
+        /// <param name='value'>
+        /// Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or
+        /// "Mon, 01 Jan 0001 00:00:00 GMT"/// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<HttpOperationResponse> ParamDatetimeRfc1123WithHttpMessagesAsync(string scenario, DateTime? value = default(DateTime?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (scenario == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+            }
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("scenario", scenario);
+                tracingParameters.Add("value", value);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(invocationId, this, "ParamDatetimeRfc1123", tracingParameters);
+            }
+            // Construct URL
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/datetimerfc1123").ToString();
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = new HttpMethod("POST");
+            httpRequest.RequestUri = new Uri(url);
+            // Set Headers
+            if (scenario != null)
+            {
+                if (httpRequest.Headers.Contains("scenario"))
+                {
+                    httpRequest.Headers.Remove("scenario");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
+            }
+            if (value != null)
+            {
+                if (httpRequest.Headers.Contains("value"))
+                {
+                    httpRequest.Headers.Remove("value");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
+            }
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                if (errorBody != null)
+                {
+                    ex.Body = errorBody;
+                }
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+            // Create Result
+            var result = new HttpOperationResponse();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon,
+        /// 01 Jan 0001 00:00:00 GMT"
+        /// </summary>
+        /// <param name='scenario'>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<HttpOperationResponse> ResponseDatetimeRfc1123WithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (scenario == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+            }
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("scenario", scenario);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(invocationId, this, "ResponseDatetimeRfc1123", tracingParameters);
+            }
+            // Construct URL
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/datetimerfc1123").ToString();
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = new HttpMethod("POST");
+            httpRequest.RequestUri = new Uri(url);
+            // Set Headers
+            if (scenario != null)
+            {
+                if (httpRequest.Headers.Contains("scenario"))
+                {
+                    httpRequest.Headers.Remove("scenario");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
+            }
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                if (errorBody != null)
+                {
+                    ex.Body = errorBody;
+                }
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+            // Create Result
+            var result = new HttpOperationResponse();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
+        }
+
+        /// <summary>
         /// Send a post request with header values "scenario": "valid", "value":
         /// "P123DT22H14M12.011S"
         /// </summary>
