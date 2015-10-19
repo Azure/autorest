@@ -16,15 +16,14 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
-import retrofit.Call;
-import retrofit.Response;
+import fixtures.lro.models.CloudError;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
-import fixtures.lro.models.CloudError;
+import retrofit.Call;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class LROsImpl implements LROs {
     private LROsService service;
@@ -43,7 +42,7 @@ public class LROsImpl implements LROs {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Product put200Succeeded(Product product) throws ServiceException {
-        this.beginPut200Succeeded(product);
+        return this.beginPut200Succeeded(product);
     }
 
     /**
@@ -53,7 +52,7 @@ public class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> put200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        this.beginPut200SucceededAsync(product, new ServiceCallback<Product>() {
+        return this.beginPut200SucceededAsync(product, new ServiceCallback<Product>() {
             @Override
             public void failure(ServiceException exception) {
                 serviceCallback.failure(exception);

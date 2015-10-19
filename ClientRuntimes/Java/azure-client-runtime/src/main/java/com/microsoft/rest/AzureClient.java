@@ -20,6 +20,8 @@ import retrofit.http.GET;
 import retrofit.http.Path;
 
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * The base class for all REST clients for accessing Azure resources.
@@ -85,8 +87,38 @@ public class AzureClient extends ServiceClient {
         return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
     }
 
+    // A lot of duplication with the previous method - should simplify
     public <T> ServiceResponse<T> getPutOrPatchResultAsync(ServiceResponse<T> response, ServiceCallback<T> callback) {
+        if (response == null || response.getResponse() == null) {
+            callback.failure(new ServiceException("response is null."));
+        }
 
+        int statusCode = response.getResponse().code();
+        if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
+            callback.failure(new ServiceException(statusCode + " is not a valid polling status code"));
+        }
+
+        try {
+            PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout());
+            String url = response.getResponse().raw().request().urlString();
+
+            // Check provisioning state
+            while (AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
+
+                if (pollingState.getAzureAsyncOperationHeaderLink() != null &&
+                        !pollingState.getAzureAsyncOperationHeaderLink().isEmpty()) {
+                    updateStateFromAzureAsyncOperationHeader(pollingState);
+                } else if (pollingState.getLocationHeaderLink() != null &&
+                        !pollingState.getLocationHeaderLink().isEmpty()) {
+                    updateStateFromLocationHeaderOnPut(pollingState);
+                } else {
+                    updateStateFromGetResourceOperation(pollingState, url);
+                }
+            }
+        } catch (ServiceException ex) {
+            callback.failure(ex);
+        }
+        return null;
     }
 
     private <T> void updateStateFromLocationHeaderOnPut(PollingState<T> pollingState) throws ServiceException {
