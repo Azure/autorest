@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.1.1.0";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.1.1.1";
 
         public AzureCSharpCodeGenerator(Settings settings) : base(settings)
         {

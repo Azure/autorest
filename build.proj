@@ -121,16 +121,11 @@
   </Target>
   
   <Target Name="BuildDnx">
+    <!-- Verify that DNX packages build -->
     <Exec Command="dnu restore &quot;$(LibraryRoot)ClientRuntimes\CSharp\ClientRuntime\Microsoft.Rest.ClientRuntime&quot;"/>
     <Exec Command="dnu build &quot;$(LibraryRoot)ClientRuntimes\CSharp\ClientRuntime\Microsoft.Rest.ClientRuntime&quot; --configuration $(Configuration) --out $(LibraryRoot)dnx"/>
     <Exec Command="dnu restore &quot;$(LibraryRoot)ClientRuntimes\CSharp\ClientRuntime.Azure\Microsoft.Rest.ClientRuntime.Azure&quot;"/>
     <Exec Command="dnu build &quot;$(LibraryRoot)ClientRuntimes\CSharp\ClientRuntime.Azure\Microsoft.Rest.ClientRuntime.Azure&quot; --configuration $(Configuration) --out $(LibraryRoot)dnx"/>
-    <MakeDir Directories="$(BinariesFolder)\dnxcore50"/>
-    <ItemGroup>
-      <DnxBinaries Include="$(LibraryRoot)dnx\$(Configuration)\dnxcore50\*.*" />
-    </ItemGroup>
-    <Copy SourceFiles="@(DnxBinaries)" 
-      DestinationFolder="$(BinariesFolder)\dnxcore50" />
   </Target>
 
   <!-- Project files import some targets coming from nuget packages, so need to restore them first to avoid errors

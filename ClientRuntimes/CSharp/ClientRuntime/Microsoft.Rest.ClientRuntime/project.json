@@ -20,14 +20,10 @@
                 "System.Threading.Tasks": "4.0.10",
                 "System.Xml.ReaderWriter": "4.0.10",
                 "Microsoft.CSharp": "4.0.0",
-                "Newtonsoft.Json": "6.0.8"
+                "Newtonsoft.Json": "6.0.4"
             }
         }
     },
-    "compile": [
-      "../*.cs",
-      "../Serialization/*.cs",
-      "../TransientFaultHandling/*.cs",
-      "../Properties/*.cs"
-    ]
+    "compile": ["../**/*.cs"],
+    "resource": ["../Properties/*.resx"]
 }
