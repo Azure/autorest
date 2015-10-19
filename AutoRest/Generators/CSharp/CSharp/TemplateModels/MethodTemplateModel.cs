@@ -68,7 +68,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 foreach (var parameter in  LocalParameters)
                 {
                     string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
-                    string defaultValue = string.Format("default({0})", parameter.DeclarationExpression);
+                    string defaultValue = string.Format(CultureInfo.InvariantCulture, "default({0})", parameter.DeclarationExpression);
                     if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
                     {
                         PrimaryType type = parameter.Type as PrimaryType;
