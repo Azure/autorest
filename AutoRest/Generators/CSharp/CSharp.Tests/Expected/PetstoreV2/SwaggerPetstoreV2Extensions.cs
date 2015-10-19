@@ -239,7 +239,7 @@ namespace Fixtures.PetstoreV2
             /// </param>
             /// <param name='apiKey'>
             /// </param>
-            public static void DeletePet(this ISwaggerPetstoreV2 operations, long? petId, string apiKey = default(string))
+            public static void DeletePet(this ISwaggerPetstoreV2 operations, long? petId, string apiKey = "")
             {
                 Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).DeletePetAsync(petId, apiKey), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -258,7 +258,7 @@ namespace Fixtures.PetstoreV2
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeletePetAsync( this ISwaggerPetstoreV2 operations, long? petId, string apiKey = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeletePetAsync( this ISwaggerPetstoreV2 operations, long? petId, string apiKey = "", CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DeletePetWithHttpMessagesAsync(petId, apiKey, null, cancellationToken).ConfigureAwait(false);
             }
