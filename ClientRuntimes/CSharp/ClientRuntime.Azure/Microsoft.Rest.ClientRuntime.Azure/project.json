@@ -25,6 +25,10 @@
             }
         }
     },
-    "compile": ["../**/*.cs"],
+     "compile": [
+        "../*.cs",
+        "../OData/*.cs",
+        "../Properties/*.cs"
+    ],
     "resource": ["../Properties/*.resx"]
 }

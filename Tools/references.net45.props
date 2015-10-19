@@ -16,7 +16,7 @@
     <Reference Include="System.Xml.Linq" />
 
     <Reference Include="Newtonsoft.Json">
-      <HintPath>$(CommonNugetPackageFolder)\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(CommonNugetPackageFolder)\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

@@ -24,6 +24,11 @@
             }
         }
     },
-    "compile": ["../**/*.cs"],
+    "compile": [
+        "../*.cs",
+        "../Serialization/*.cs",
+        "../TransientFaultHandling/*.cs",
+        "../Properties/*.cs"
+    ],
     "resource": ["../Properties/*.resx"]
 }
