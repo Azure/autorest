@@ -10,12 +10,15 @@
 
 package fixtures.lro;
 
+import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 
 /**
  * The interface for AutoRestLongRunningOperationTestService class.
  */
 public interface AutoRestLongRunningOperationTestService {
+    AzureClient getAzureClient();
+
     /**
      * Gets the URI used as the base for all cloud service requests.
      * @return The BaseUri value.

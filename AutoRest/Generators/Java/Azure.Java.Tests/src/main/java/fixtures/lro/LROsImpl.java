@@ -43,15 +43,7 @@ public class LROsImpl implements LROs {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Product put200Succeeded(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put200Succeeded(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = put200SucceededDelegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        this.beginPut200Succeeded(product);
     }
 
     /**
@@ -61,18 +53,17 @@ public class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> put200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.put200Succeeded(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        this.beginPut200SucceededAsync(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(put200SucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(ServiceException exception) {
+                serviceCallback.failure(exception);
+            }
+
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
     }
 
     private ServiceResponse<Product> put200SucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {

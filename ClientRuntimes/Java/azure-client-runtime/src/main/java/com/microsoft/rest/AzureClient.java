@@ -11,9 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonHelper;
+import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Call;
 import retrofit.Response;
+import retrofit.Retrofit;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
@@ -22,10 +24,17 @@ import java.net.URL;
 /**
  * The base class for all REST clients for accessing Azure resources.
  */
-public abstract class AzureClient extends ServiceClient{
-    public abstract ServiceClientCredentials getCredentials();
+public class AzureClient extends ServiceClient {
+    private int longRunningOperationRetryTimeout;
+    private ServiceClientCredentials credentials;
 
-    public abstract int getLongRunningOperationRetryTimeout();
+    public AzureClient() {
+        super();
+    }
+
+    public AzureClient(OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
+    }
 
     /**
      * Handles an initial response from a PUT or PATCH operation response by polling
@@ -37,7 +46,7 @@ public abstract class AzureClient extends ServiceClient{
      * @throws ServiceException service exception
      * @throws InterruptedException interrupted exception
      */
-    public <T> AzureResponse<T> GetPutOrPatchResult(AzureResponse<T> response) throws ServiceException, InterruptedException {
+    public <T> ServiceResponse<T> getPutOrPatchResult(ServiceResponse<T> response) throws ServiceException, InterruptedException {
         if (response == null || response.getResponse() == null) {
             throw new ServiceException("response is null.");
         }
@@ -73,11 +82,15 @@ public abstract class AzureClient extends ServiceClient{
             throw new ServiceException("Async operation failed");
         }
 
-        return new AzureResponse<T>(pollingState.getResource(), pollingState.getResponse());
+        return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
+    }
+
+    public <T> ServiceResponse<T> getPutOrPatchResultAsync(ServiceResponse<T> response, ServiceCallback<T> callback) {
+
     }
 
     private <T> void updateStateFromLocationHeaderOnPut(PollingState<T> pollingState) throws ServiceException {
-        AzureResponse<PollingResource> response = getAsync(pollingState.getLocationHeaderLink());
+        ServiceResponse<PollingResource> response = getAsync(pollingState.getLocationHeaderLink());
 
         pollingState.setResponse(response.getResponse());
 
@@ -109,7 +122,7 @@ public abstract class AzureClient extends ServiceClient{
     }
 
     private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws ServiceException {
-        AzureResponse<PollingResource> response = getAsync(url);
+        ServiceResponse<PollingResource> response = getAsync(url);
 
         if (response.getBody() == null) {
             throw new ServiceException("no body");
@@ -136,7 +149,7 @@ public abstract class AzureClient extends ServiceClient{
     }
 
     private <T> void updateStateFromAzureAsyncOperationHeader(PollingState<T> pollingState) throws ServiceException {
-        AzureResponse<AzureAsyncOperation> response = getAsync(pollingState.getLocationHeaderLink());
+        ServiceResponse<AzureAsyncOperation> response = getAsync(pollingState.getLocationHeaderLink());
 
         if (response.getBody() == null || response.getBody().getStatus() == null) {
             throw new ServiceException("no body");
@@ -147,7 +160,7 @@ public abstract class AzureClient extends ServiceClient{
         pollingState.setResource(null);
     }
 
-    private <T> AzureResponse<T> getAsync(String url) throws ServiceException {
+    private <T> ServiceResponse<T> getAsync(String url) throws ServiceException {
         URL endpoint = null;
         try {
             endpoint = new URL(url);
@@ -158,12 +171,28 @@ public abstract class AzureClient extends ServiceClient{
                 .baseUrl(endpoint.getHost()).build().create(AsyncService.class);
         try {
             Response<ResponseBody> response = service.get(endpoint.getPath()).execute();
-            return new AzureResponse<T>(
+            return new ServiceResponse<T>(
                     JacksonHelper.<T>deserialize(response.raw().body().string(), new TypeReference<T>() {}),
                     response);
         } catch (Exception ex) {
             throw new ServiceException("Cannot deserialize response", ex);
         }
+    }
+
+    public int getLongRunningOperationRetryTimeout() {
+        return longRunningOperationRetryTimeout;
+    }
+
+    public void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+        this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
+    }
+
+    public ServiceClientCredentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(ServiceClientCredentials credentials) {
+        this.credentials = credentials;
     }
 
     private interface AsyncService {
