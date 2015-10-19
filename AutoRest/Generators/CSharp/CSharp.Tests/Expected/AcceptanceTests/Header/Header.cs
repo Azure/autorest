@@ -52,8 +52,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Send a post request with header value "User-Agent": "overwrite"
         /// </summary>
         /// <param name='userAgent'>
-        /// Send a post request with header value "User-Agent": "overwrite"
-        /// </param>
+        /// Send a post request with header value "User-Agent": "overwrite"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -78,7 +77,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamExistingKey", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/existingkey").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/existingkey").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -167,7 +167,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseExistingKey", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/existingkey").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/existingkey").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -230,8 +231,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Send a post request with header value "Content-Type": "text/html"
         /// </summary>
         /// <param name='contentType'>
-        /// Send a post request with header value "Content-Type": "text/html"
-        /// </param>
+        /// Send a post request with header value "Content-Type": "text/html"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -256,7 +256,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamProtectedKey", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/protectedkey").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/protectedkey").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -345,7 +346,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseProtectedKey", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/protectedkey").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/protectedkey").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -409,11 +411,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// or "scenario": "negative", "value": -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values 1 or -2
-        /// </param>
+        /// Send a post request with header values 1 or -2/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -443,7 +443,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamInteger", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/prim/integer").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/integer").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -522,8 +523,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header value "value": 1 or -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -548,7 +548,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseInteger", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/prim/integer").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/integer").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -620,11 +621,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// 105 or "scenario": "negative", "value": -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values 105 or -2
-        /// </param>
+        /// Send a post request with header values 105 or -2/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -654,7 +653,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamLong", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/prim/long").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/long").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -733,8 +733,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header value "value": 105 or -2
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -759,7 +758,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseLong", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/prim/long").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/long").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -831,11 +831,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// 0.07 or "scenario": "negative", "value": -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values 0.07 or -3.0
-        /// </param>
+        /// Send a post request with header values 0.07 or -3.0/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -865,7 +863,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamFloat", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/prim/float").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/float").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -944,8 +943,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header value "value": 0.07 or -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -970,7 +968,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseFloat", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/prim/float").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/float").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1042,11 +1041,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// 7e120 or "scenario": "negative", "value": -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values 7e120 or -3.0
-        /// </param>
+        /// Send a post request with header values 7e120 or -3.0/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1076,7 +1073,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamDouble", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/prim/double").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/double").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1155,8 +1153,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header value "value": 7e120 or -3.0
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "positive" or "negative"
-        /// </param>
+        /// Send a post request with header values "scenario": "positive" or "negative"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1181,7 +1178,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseDouble", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/prim/double").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/double").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1253,11 +1251,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// or "scenario": "false", "value": false
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "true" or "false"
-        /// </param>
+        /// Send a post request with header values "scenario": "true" or "false"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values true or false
-        /// </param>
+        /// Send a post request with header values true or false/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1287,7 +1283,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamBool", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/prim/bool").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/bool").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1366,8 +1363,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header value "value": true or false
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "true" or "false"
-        /// </param>
+        /// Send a post request with header values "scenario": "true" or "false"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1392,7 +1388,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseBool", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/prim/bool").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/bool").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1466,12 +1463,10 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         /// <param name='scenario'>
         /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
-        /// </param>
+        /// "empty"/// </param>
         /// <param name='value'>
         /// Send a post request with header values "The quick brown fox jumps over the
-        /// lazy dog" or null or ""
-        /// </param>
+        /// lazy dog" or null or ""/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1497,7 +1492,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamString", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/prim/string").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/string").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1578,8 +1574,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         /// <param name='scenario'>
         /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
-        /// </param>
+        /// "empty"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1604,7 +1599,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseString", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/prim/string").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/string").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1676,11 +1672,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// "2010-01-01" or "scenario": "min", "value": "0001-01-01"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values "2010-01-01" or "0001-01-01"
-        /// </param>
+        /// Send a post request with header values "2010-01-01" or "0001-01-01"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1710,7 +1704,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamDate", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/prim/date").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/date").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1789,8 +1784,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header values "2010-01-01" or "0001-01-01"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1815,7 +1809,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseDate", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/prim/date").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/date").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1888,12 +1883,10 @@ namespace Fixtures.AcceptanceTestsHeader
         /// "0001-01-01T00:00:00Z"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
         /// <param name='value'>
         /// Send a post request with header values "2010-01-01T12:34:56Z" or
-        /// "0001-01-01T00:00:00Z"
-        /// </param>
+        /// "0001-01-01T00:00:00Z"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1923,7 +1916,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamDatetime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/prim/datetime").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/datetime").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -2003,8 +1997,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// "0001-01-01T00:00:00Z"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid" or "min"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2029,7 +2022,427 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseDatetime", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/prim/datetime").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/datetime").ToString();
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = new HttpMethod("POST");
+            httpRequest.RequestUri = new Uri(url);
+            // Set Headers
+            if (scenario != null)
+            {
+                if (httpRequest.Headers.Contains("scenario"))
+                {
+                    httpRequest.Headers.Remove("scenario");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
+            }
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                if (errorBody != null)
+                {
+                    ex.Body = errorBody;
+                }
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+            // Create Result
+            var result = new HttpOperationResponse();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Send a post request with header values "scenario": "valid", "value": "Wed,
+        /// 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan
+        /// 0001 00:00:00 GMT"
+        /// </summary>
+        /// <param name='scenario'>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
+        /// <param name='value'>
+        /// Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or
+        /// "Mon, 01 Jan 0001 00:00:00 GMT"/// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<HttpOperationResponse> ParamDatetimeRfc1123WithHttpMessagesAsync(string scenario, DateTime? value = default(DateTime?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (scenario == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+            }
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("scenario", scenario);
+                tracingParameters.Add("value", value);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(invocationId, this, "ParamDatetimeRfc1123", tracingParameters);
+            }
+            // Construct URL
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/datetimerfc1123").ToString();
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = new HttpMethod("POST");
+            httpRequest.RequestUri = new Uri(url);
+            // Set Headers
+            if (scenario != null)
+            {
+                if (httpRequest.Headers.Contains("scenario"))
+                {
+                    httpRequest.Headers.Remove("scenario");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
+            }
+            if (value != null)
+            {
+                if (httpRequest.Headers.Contains("value"))
+                {
+                    httpRequest.Headers.Remove("value");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
+            }
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                if (errorBody != null)
+                {
+                    ex.Body = errorBody;
+                }
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+            // Create Result
+            var result = new HttpOperationResponse();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon,
+        /// 01 Jan 0001 00:00:00 GMT"
+        /// </summary>
+        /// <param name='scenario'>
+        /// Send a post request with header values "scenario": "valid" or "min"/// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<HttpOperationResponse> ResponseDatetimeRfc1123WithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (scenario == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+            }
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("scenario", scenario);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(invocationId, this, "ResponseDatetimeRfc1123", tracingParameters);
+            }
+            // Construct URL
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/datetimerfc1123").ToString();
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = new HttpMethod("POST");
+            httpRequest.RequestUri = new Uri(url);
+            // Set Headers
+            if (scenario != null)
+            {
+                if (httpRequest.Headers.Contains("scenario"))
+                {
+                    httpRequest.Headers.Remove("scenario");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
+            }
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                if (errorBody != null)
+                {
+                    ex.Body = errorBody;
+                }
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+            // Create Result
+            var result = new HttpOperationResponse();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Send a post request with header values "scenario": "valid", "value":
+        /// "P123DT22H14M12.011S"
+        /// </summary>
+        /// <param name='scenario'>
+        /// Send a post request with header values "scenario": "valid"/// </param>
+        /// <param name='value'>
+        /// Send a post request with header values "P123DT22H14M12.011S"/// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<HttpOperationResponse> ParamDurationWithHttpMessagesAsync(string scenario, TimeSpan? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (scenario == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+            }
+            if (value == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "value");
+            }
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("scenario", scenario);
+                tracingParameters.Add("value", value);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(invocationId, this, "ParamDuration", tracingParameters);
+            }
+            // Construct URL
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/duration").ToString();
+            // Create HTTP transport objects
+            HttpRequestMessage httpRequest = new HttpRequestMessage();
+            httpRequest.Method = new HttpMethod("POST");
+            httpRequest.RequestUri = new Uri(url);
+            // Set Headers
+            if (scenario != null)
+            {
+                if (httpRequest.Headers.Contains("scenario"))
+                {
+                    httpRequest.Headers.Remove("scenario");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
+            }
+            if (value != null)
+            {
+                if (httpRequest.Headers.Contains("value"))
+                {
+                    httpRequest.Headers.Remove("value");
+                }
+                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+            }
+            if (customHeaders != null)
+            {
+                foreach(var header in customHeaders)
+                {
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+
+            // Send Request
+            if (shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+            if (shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+            }
+            HttpStatusCode statusCode = httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                if (errorBody != null)
+                {
+                    ex.Body = errorBody;
+                }
+                ex.Request = httpRequest;
+                ex.Response = httpResponse;
+                if (shouldTrace)
+                {
+                    ServiceClientTracing.Error(invocationId, ex);
+                }
+                throw ex;
+            }
+            // Create Result
+            var result = new HttpOperationResponse();
+            result.Request = httpRequest;
+            result.Response = httpResponse;
+            if (shouldTrace)
+            {
+                ServiceClientTracing.Exit(invocationId, result);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Get a response with header values "P123DT22H14M12.011S"
+        /// </summary>
+        /// <param name='scenario'>
+        /// Send a post request with header values "scenario": "valid"/// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<HttpOperationResponse> ResponseDurationWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (scenario == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
+            }
+            // Tracing
+            bool shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("scenario", scenario);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(invocationId, this, "ResponseDuration", tracingParameters);
+            }
+            // Construct URL
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/duration").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -2101,11 +2514,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// "啊齄丂狛狜隣郎隣兀﨩"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid"/// </param>
         /// <param name='value'>
-        /// Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
-        /// </param>
+        /// Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2135,7 +2546,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamByte", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/prim/byte").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/byte").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -2214,8 +2626,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
         /// </summary>
         /// <param name='scenario'>
-        /// Send a post request with header values "scenario": "valid"
-        /// </param>
+        /// Send a post request with header values "scenario": "valid"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2240,7 +2651,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseByte", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/prim/byte").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/byte").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -2313,12 +2725,10 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         /// <param name='scenario'>
         /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
-        /// </param>
+        /// "empty"/// </param>
         /// <param name='value'>
         /// Send a post request with header values 'GREY' . Possible values for this
-        /// parameter include: 'White', 'black', 'GREY'
-        /// </param>
+        /// parameter include: 'White', 'black', 'GREY'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2344,7 +2754,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ParamEnum", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/param/prim/enum").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/enum").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -2424,8 +2835,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         /// <param name='scenario'>
         /// Send a post request with header values "scenario": "valid" or "null" or
-        /// "empty"
-        /// </param>
+        /// "empty"/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2450,7 +2860,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "ResponseEnum", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/response/prim/enum").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/enum").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -2540,7 +2951,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 ServiceClientTracing.Enter(invocationId, this, "CustomRequestId", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");

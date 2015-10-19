@@ -109,22 +109,30 @@ namespace Fixtures.MirrorSequences
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
         }    
         /// <summary>
         /// Creates a new pet in the store.  Duplicates are allowed
         /// </summary>
         /// <param name='pets'>
-        /// Pets to add to the store
-        /// </param>
+        /// Pets to add to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -159,7 +167,8 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "AddPet", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "pets").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pets").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -232,8 +241,7 @@ namespace Fixtures.MirrorSequences
         /// Adds new pet stylesin the store.  Duplicates are allowed
         /// </summary>
         /// <param name='petStyle'>
-        /// Pet style to add to the store
-        /// </param>
+        /// Pet style to add to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -258,7 +266,8 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "AddPetStyles", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "primitives").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "primitives").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -331,8 +340,7 @@ namespace Fixtures.MirrorSequences
         /// Updates new pet stylesin the store.  Duplicates are allowed
         /// </summary>
         /// <param name='petStyle'>
-        /// Pet style to add to the store
-        /// </param>
+        /// Pet style to add to the store/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -357,7 +365,8 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "UpdatePetStyles", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "primitives").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "primitives").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

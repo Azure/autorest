@@ -12,8 +12,8 @@ package fixtures.paging;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.paging.models.ProductResult;
 import retrofit.http.GET;
 import retrofit.http.Header;
@@ -30,88 +30,46 @@ public interface Paging {
      */
     interface PagingService {
         @GET("/paging/single")
-        Response getSinglePages(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/paging/single")
-        void getSinglePagesAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getSinglePages(@Header("accept-language") String acceptLanguage);
 
         @GET("/paging/multiple")
-        Response getMultiplePages(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/paging/multiple")
-        void getMultiplePagesAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMultiplePages(@Header("accept-language") String acceptLanguage);
 
         @GET("/paging/multiple/retryfirst")
-        Response getMultiplePagesRetryFirst(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/paging/multiple/retryfirst")
-        void getMultiplePagesRetryFirstAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMultiplePagesRetryFirst(@Header("accept-language") String acceptLanguage);
 
         @GET("/paging/multiple/retrysecond")
-        Response getMultiplePagesRetrySecond(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/paging/multiple/retrysecond")
-        void getMultiplePagesRetrySecondAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMultiplePagesRetrySecond(@Header("accept-language") String acceptLanguage);
 
         @GET("/paging/single/failure")
-        Response getSinglePagesFailure(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/paging/single/failure")
-        void getSinglePagesFailureAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getSinglePagesFailure(@Header("accept-language") String acceptLanguage);
 
         @GET("/paging/multiple/failure")
-        Response getMultiplePagesFailure(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/paging/multiple/failure")
-        void getMultiplePagesFailureAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMultiplePagesFailure(@Header("accept-language") String acceptLanguage);
 
         @GET("/paging/multiple/failureuri")
-        Response getMultiplePagesFailureUri(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/paging/multiple/failureuri")
-        void getMultiplePagesFailureUriAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMultiplePagesFailureUri(@Header("accept-language") String acceptLanguage);
 
         @GET("{nextLink}")
-        Response getSinglePagesNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> getSinglePagesNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
 
         @GET("{nextLink}")
-        void getSinglePagesNextAsync(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMultiplePagesNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
 
         @GET("{nextLink}")
-        Response getMultiplePagesNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> getMultiplePagesRetryFirstNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
 
         @GET("{nextLink}")
-        void getMultiplePagesNextAsync(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMultiplePagesRetrySecondNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
 
         @GET("{nextLink}")
-        Response getMultiplePagesRetryFirstNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage) throws ServiceException;
+        Call<ResponseBody> getSinglePagesFailureNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
 
         @GET("{nextLink}")
-        void getMultiplePagesRetryFirstNextAsync(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMultiplePagesFailureNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
 
         @GET("{nextLink}")
-        Response getMultiplePagesRetrySecondNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("{nextLink}")
-        void getMultiplePagesRetrySecondNextAsync(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @GET("{nextLink}")
-        Response getSinglePagesFailureNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("{nextLink}")
-        void getSinglePagesFailureNextAsync(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @GET("{nextLink}")
-        Response getMultiplePagesFailureNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("{nextLink}")
-        void getMultiplePagesFailureNextAsync(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
-
-        @GET("{nextLink}")
-        Response getMultiplePagesFailureUriNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("{nextLink}")
-        void getMultiplePagesFailureUriNextAsync(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMultiplePagesFailureUriNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
 
     }
     /**
@@ -126,8 +84,9 @@ public interface Paging {
      * A paging operation that finishes on the first call without a nextlink
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getSinglePagesAsync(final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getSinglePagesAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
@@ -141,12 +100,12 @@ public interface Paging {
      * A paging operation that includes a nextLink that has 10 pages
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMultiplePagesAsync(final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getMultiplePagesAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
-     * A paging operation that fails on the first call with 500 and then
-     * retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -154,17 +113,15 @@ public interface Paging {
     ProductResult getMultiplePagesRetryFirst() throws ServiceException;
 
     /**
-     * A paging operation that fails on the first call with 500 and then
-     * retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMultiplePagesRetryFirstAsync(final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getMultiplePagesRetryFirstAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which
-     * the 2nd call fails first with 500. The client should retry and finish
-     * all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -172,13 +129,12 @@ public interface Paging {
     ProductResult getMultiplePagesRetrySecond() throws ServiceException;
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which
-     * the 2nd call fails first with 500. The client should retry and finish
-     * all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMultiplePagesRetrySecondAsync(final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getMultiplePagesRetrySecondAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the first call
@@ -192,8 +148,9 @@ public interface Paging {
      * A paging operation that receives a 400 on the first call
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getSinglePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getSinglePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the second call
@@ -207,8 +164,9 @@ public interface Paging {
      * A paging operation that receives a 400 on the second call
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMultiplePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getMultiplePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives an invalid nextLink
@@ -222,8 +180,9 @@ public interface Paging {
      * A paging operation that receives an invalid nextLink
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMultiplePagesFailureUriAsync(final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getMultiplePagesFailureUriAsync(final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that finishes on the first call without a nextlink
@@ -239,8 +198,9 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getSinglePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getSinglePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
@@ -256,12 +216,12 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMultiplePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
-     * A paging operation that fails on the first call with 500 and then
-     * retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @return the ProductResult object if successful.
@@ -270,18 +230,16 @@ public interface Paging {
     ProductResult getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException;
 
     /**
-     * A paging operation that fails on the first call with 500 and then
-     * retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMultiplePagesRetryFirstNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getMultiplePagesRetryFirstNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which
-     * the 2nd call fails first with 500. The client should retry and finish
-     * all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @return the ProductResult object if successful.
@@ -290,14 +248,13 @@ public interface Paging {
     ProductResult getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException;
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which
-     * the 2nd call fails first with 500. The client should retry and finish
-     * all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMultiplePagesRetrySecondNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getMultiplePagesRetrySecondNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the first call
@@ -313,8 +270,9 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getSinglePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getSinglePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the second call
@@ -330,8 +288,9 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMultiplePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getMultiplePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
     /**
      * A paging operation that receives an invalid nextLink
@@ -347,7 +306,8 @@ public interface Paging {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMultiplePagesFailureUriNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
+    Call<ResponseBody> getMultiplePagesFailureUriNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback);
 
 }

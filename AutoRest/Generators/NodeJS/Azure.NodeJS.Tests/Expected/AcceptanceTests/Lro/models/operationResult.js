@@ -29,7 +29,7 @@ var models = require('./index');
  */
 function OperationResult(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.status !== null && parameters.status !== undefined) {
+    if (parameters.status !== undefined) {
       this.status = parameters.status;
     }
     if (parameters.error) {
@@ -69,7 +69,7 @@ OperationResult.prototype.serialize = function () {
  */
 OperationResult.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['status'] !== null && instance['status'] !== undefined) {
+    if (instance['status'] !== undefined) {
       this['status'] = instance['status'];
     }
 

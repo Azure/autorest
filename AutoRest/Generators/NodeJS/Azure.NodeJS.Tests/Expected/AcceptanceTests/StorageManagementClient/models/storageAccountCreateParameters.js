@@ -27,7 +27,7 @@ var util = require('util');
 function StorageAccountCreateParameters(parameters) {
   StorageAccountCreateParameters['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.accountType !== null && parameters.accountType !== undefined) {
+    if (parameters.accountType !== undefined) {
       this.accountType = parameters.accountType;
     }
   }    
@@ -68,10 +68,7 @@ StorageAccountCreateParameters.prototype.deserialize = function (instance) {
   StorageAccountCreateParameters['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['accountType'] !== null && instance['properties']['accountType'] !== undefined) {
-        this['accountType'] = instance['properties']['accountType'];
-      }
-      else {
+      if (instance['properties']['accountType'] !== undefined) {
         this['accountType'] = instance['properties']['accountType'];
       }
     }

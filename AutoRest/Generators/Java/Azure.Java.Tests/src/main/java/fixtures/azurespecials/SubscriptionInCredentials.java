@@ -12,8 +12,8 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Header;
@@ -30,116 +30,94 @@ public interface SubscriptionInCredentials {
      */
     interface SubscriptionInCredentialsService {
         @POST("/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
-        Response postMethodGlobalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
-        void postMethodGlobalValidAsync(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> postMethodGlobalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
 
         @POST("/azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}")
-        Response postMethodGlobalNull(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}")
-        void postMethodGlobalNullAsync(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> postMethodGlobalNull(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
 
         @POST("/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}")
-        Response postMethodGlobalNotProvidedValid(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}")
-        void postMethodGlobalNotProvidedValidAsync(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> postMethodGlobalNotProvidedValid(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
         @POST("/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
-        Response postPathGlobalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
-        void postPathGlobalValidAsync(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> postPathGlobalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
 
         @POST("/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
-        Response postSwaggerGlobalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @POST("/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
-        void postSwaggerGlobalValidAsync(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> postSwaggerGlobalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
 
     }
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void postMethodGlobalValid() throws ServiceException;
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to null, and client-side validation should
-     * prevent you from making this call
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void postMethodGlobalNull() throws ServiceException;
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to null, and client-side validation should
-     * prevent you from making this call
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void postMethodGlobalNotProvidedValid() throws ServiceException;
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void postPathGlobalValid() throws ServiceException;
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void postSwaggerGlobalValid() throws ServiceException;
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the
-     * credential subscriptionId to '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
 }

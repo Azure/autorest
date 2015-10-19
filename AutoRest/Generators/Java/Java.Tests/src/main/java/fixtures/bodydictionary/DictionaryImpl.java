@@ -10,19 +10,22 @@
 
 package fixtures.bodydictionary;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import java.util.Map;
 import fixtures.bodydictionary.models.Error;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
+import com.microsoft.rest.DateTimeRfc1123;
 import fixtures.bodydictionary.models.Widget;
 import java.util.List;
 import com.microsoft.rest.Validator;
@@ -31,8 +34,8 @@ public class DictionaryImpl implements Dictionary {
     private DictionaryService service;
     AutoRestSwaggerBATdictionaryService client;
 
-    public DictionaryImpl(RestAdapter restAdapter, AutoRestSwaggerBATdictionaryService client) {
-        this.service = restAdapter.create(DictionaryService.class);
+    public DictionaryImpl(Retrofit retrofit, AutoRestSwaggerBATdictionaryService client) {
+        this.service = retrofit.create(DictionaryService.class);
         this.client = client;
     }
 
@@ -44,11 +47,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Integer> getNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Integer>> response = getNullDelegate(service.getNull(), null);
+            Call<ResponseBody> call = service.getNull();
+            ServiceResponse<Map<String, Integer>> response = getNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Integer>> response = getNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -57,24 +62,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        Call<ResponseBody> call = service.getNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, error));
+                    serviceCallback.success(getNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -85,11 +92,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Integer> getEmpty() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Integer>> response = getEmptyDelegate(service.getEmpty(), null);
+            Call<ResponseBody> call = service.getEmpty();
+            ServiceResponse<Map<String, Integer>> response = getEmptyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Integer>> response = getEmptyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -98,24 +107,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        service.getEmptyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        Call<ResponseBody> call = service.getEmpty();
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response, error));
+                    serviceCallback.success(getEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -131,11 +142,13 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(arrayBody), null);
+            Call<ResponseBody> call = service.putEmpty(arrayBody);
+            ServiceResponse<Void> response = putEmptyDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putEmptyDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -145,29 +158,31 @@ public class DictionaryImpl implements Dictionary {
      * @param arrayBody the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putEmptyAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putEmpty(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putEmptyDelegate(response, error));
+                    serviceCallback.success(putEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -178,11 +193,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, String> getNullValue() throws ServiceException {
         try {
-            ServiceResponse<Map<String, String>> response = getNullValueDelegate(service.getNullValue(), null);
+            Call<ResponseBody> call = service.getNullValue();
+            ServiceResponse<Map<String, String>> response = getNullValueDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, String>> response = getNullValueDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -191,24 +208,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getNullValueAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+        Call<ResponseBody> call = service.getNullValue();
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNullValueDelegate(response, error));
+                    serviceCallback.success(getNullValueDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, String>> getNullValueDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getNullValueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -219,11 +238,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, String> getNullKey() throws ServiceException {
         try {
-            ServiceResponse<Map<String, String>> response = getNullKeyDelegate(service.getNullKey(), null);
+            Call<ResponseBody> call = service.getNullKey();
+            ServiceResponse<Map<String, String>> response = getNullKeyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, String>> response = getNullKeyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -232,24 +253,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getNullKeyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+        Call<ResponseBody> call = service.getNullKey();
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNullKeyDelegate(response, error));
+                    serviceCallback.success(getNullKeyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, String>> getNullKeyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getNullKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -260,11 +283,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, String> getEmptyStringKey() throws ServiceException {
         try {
-            ServiceResponse<Map<String, String>> response = getEmptyStringKeyDelegate(service.getEmptyStringKey(), null);
+            Call<ResponseBody> call = service.getEmptyStringKey();
+            ServiceResponse<Map<String, String>> response = getEmptyStringKeyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, String>> response = getEmptyStringKeyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -273,24 +298,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getEmptyStringKeyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+        Call<ResponseBody> call = service.getEmptyStringKey();
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getEmptyStringKeyDelegate(response, error));
+                    serviceCallback.success(getEmptyStringKeyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, String>> getEmptyStringKeyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getEmptyStringKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -301,11 +328,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, String> getInvalid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, String>> response = getInvalidDelegate(service.getInvalid(), null);
+            Call<ResponseBody> call = service.getInvalid();
+            ServiceResponse<Map<String, String>> response = getInvalidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, String>> response = getInvalidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -314,72 +343,75 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getInvalidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+        Call<ResponseBody> call = service.getInvalid();
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getInvalidDelegate(response, error));
+                    serviceCallback.success(getInvalidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, String>> getInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
      *
      * @return the Map&lt;String, Boolean&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, Boolean> getBooleanTfft() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Boolean>> response = getBooleanTfftDelegate(service.getBooleanTfft(), null);
+            Call<ResponseBody> call = service.getBooleanTfft();
+            ServiceResponse<Map<String, Boolean>> response = getBooleanTfftDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Boolean>> response = getBooleanTfftDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        service.getBooleanTfftAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
+        Call<ResponseBody> call = service.getBooleanTfft();
+        call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getBooleanTfftDelegate(response, error));
+                    serviceCallback.success(getBooleanTfftDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Boolean>> getBooleanTfftDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Boolean>> getBooleanTfftDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Boolean>>()
                 .register(200, new TypeToken<Map<String, Boolean>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Set dictionary value empty {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -391,44 +423,47 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putBooleanTfftDelegate(service.putBooleanTfft(arrayBody), null);
+            Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
+            ServiceResponse<Void> response = putBooleanTfftDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putBooleanTfftDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Set dictionary value empty {"0": true, "1": false, "2": false, "3":
-     * true }
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putBooleanTfftAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putBooleanTfftDelegate(response, error));
+                    serviceCallback.success(putBooleanTfftDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putBooleanTfftDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putBooleanTfftDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -439,11 +474,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Boolean> getBooleanInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Boolean>> response = getBooleanInvalidNullDelegate(service.getBooleanInvalidNull(), null);
+            Call<ResponseBody> call = service.getBooleanInvalidNull();
+            ServiceResponse<Map<String, Boolean>> response = getBooleanInvalidNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Boolean>> response = getBooleanInvalidNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -452,24 +489,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        service.getBooleanInvalidNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
+        Call<ResponseBody> call = service.getBooleanInvalidNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getBooleanInvalidNullDelegate(response, error));
+                    serviceCallback.success(getBooleanInvalidNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Boolean>>()
                 .register(200, new TypeToken<Map<String, Boolean>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -480,11 +519,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Boolean> getBooleanInvalidString() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Boolean>> response = getBooleanInvalidStringDelegate(service.getBooleanInvalidString(), null);
+            Call<ResponseBody> call = service.getBooleanInvalidString();
+            ServiceResponse<Map<String, Boolean>> response = getBooleanInvalidStringDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Boolean>> response = getBooleanInvalidStringDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -493,24 +534,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        service.getBooleanInvalidStringAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
+        Call<ResponseBody> call = service.getBooleanInvalidString();
+        call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getBooleanInvalidStringDelegate(response, error));
+                    serviceCallback.success(getBooleanInvalidStringDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Boolean>>()
                 .register(200, new TypeToken<Map<String, Boolean>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -521,11 +564,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Integer> getIntegerValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Integer>> response = getIntegerValidDelegate(service.getIntegerValid(), null);
+            Call<ResponseBody> call = service.getIntegerValid();
+            ServiceResponse<Map<String, Integer>> response = getIntegerValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Integer>> response = getIntegerValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -534,24 +579,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        service.getIntegerValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        Call<ResponseBody> call = service.getIntegerValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getIntegerValidDelegate(response, error));
+                    serviceCallback.success(getIntegerValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getIntegerValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getIntegerValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -567,11 +614,13 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putIntegerValidDelegate(service.putIntegerValid(arrayBody), null);
+            Call<ResponseBody> call = service.putIntegerValid(arrayBody);
+            ServiceResponse<Void> response = putIntegerValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putIntegerValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -581,29 +630,31 @@ public class DictionaryImpl implements Dictionary {
      * @param arrayBody the Map&lt;String, Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putIntegerValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putIntegerValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putIntegerValidDelegate(response, error));
+                    serviceCallback.success(putIntegerValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putIntegerValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putIntegerValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -614,11 +665,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Integer> getIntInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Integer>> response = getIntInvalidNullDelegate(service.getIntInvalidNull(), null);
+            Call<ResponseBody> call = service.getIntInvalidNull();
+            ServiceResponse<Map<String, Integer>> response = getIntInvalidNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Integer>> response = getIntInvalidNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -627,24 +680,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        service.getIntInvalidNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        Call<ResponseBody> call = service.getIntInvalidNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getIntInvalidNullDelegate(response, error));
+                    serviceCallback.success(getIntInvalidNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getIntInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getIntInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -655,11 +710,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Integer> getIntInvalidString() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Integer>> response = getIntInvalidStringDelegate(service.getIntInvalidString(), null);
+            Call<ResponseBody> call = service.getIntInvalidString();
+            ServiceResponse<Map<String, Integer>> response = getIntInvalidStringDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Integer>> response = getIntInvalidStringDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -668,24 +725,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        service.getIntInvalidStringAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        Call<ResponseBody> call = service.getIntInvalidString();
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getIntInvalidStringDelegate(response, error));
+                    serviceCallback.success(getIntInvalidStringDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getIntInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getIntInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -696,11 +755,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Long> getLongValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Long>> response = getLongValidDelegate(service.getLongValid(), null);
+            Call<ResponseBody> call = service.getLongValid();
+            ServiceResponse<Map<String, Long>> response = getLongValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Long>> response = getLongValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -709,24 +770,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        service.getLongValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
+        Call<ResponseBody> call = service.getLongValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getLongValidDelegate(response, error));
+                    serviceCallback.success(getLongValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Long>> getLongValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Long>> getLongValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Long>>()
                 .register(200, new TypeToken<Map<String, Long>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -742,11 +805,13 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putLongValidDelegate(service.putLongValid(arrayBody), null);
+            Call<ResponseBody> call = service.putLongValid(arrayBody);
+            ServiceResponse<Void> response = putLongValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putLongValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -756,29 +821,31 @@ public class DictionaryImpl implements Dictionary {
      * @param arrayBody the Map&lt;String, Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putLongValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putLongValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putLongValidDelegate(response, error));
+                    serviceCallback.success(putLongValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putLongValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putLongValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -789,11 +856,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Long> getLongInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Long>> response = getLongInvalidNullDelegate(service.getLongInvalidNull(), null);
+            Call<ResponseBody> call = service.getLongInvalidNull();
+            ServiceResponse<Map<String, Long>> response = getLongInvalidNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Long>> response = getLongInvalidNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -802,24 +871,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        service.getLongInvalidNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
+        Call<ResponseBody> call = service.getLongInvalidNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getLongInvalidNullDelegate(response, error));
+                    serviceCallback.success(getLongInvalidNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Long>> getLongInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Long>> getLongInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Long>>()
                 .register(200, new TypeToken<Map<String, Long>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -830,11 +901,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Long> getLongInvalidString() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Long>> response = getLongInvalidStringDelegate(service.getLongInvalidString(), null);
+            Call<ResponseBody> call = service.getLongInvalidString();
+            ServiceResponse<Map<String, Long>> response = getLongInvalidStringDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Long>> response = getLongInvalidStringDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -843,24 +916,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        service.getLongInvalidStringAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
+        Call<ResponseBody> call = service.getLongInvalidString();
+        call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getLongInvalidStringDelegate(response, error));
+                    serviceCallback.success(getLongInvalidStringDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Long>> getLongInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Long>> getLongInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Long>>()
                 .register(200, new TypeToken<Map<String, Long>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -871,11 +946,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Double> getFloatValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Double>> response = getFloatValidDelegate(service.getFloatValid(), null);
+            Call<ResponseBody> call = service.getFloatValid();
+            ServiceResponse<Map<String, Double>> response = getFloatValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Double>> response = getFloatValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -884,24 +961,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getFloatValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+        Call<ResponseBody> call = service.getFloatValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getFloatValidDelegate(response, error));
+                    serviceCallback.success(getFloatValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getFloatValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getFloatValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -917,11 +996,13 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putFloatValidDelegate(service.putFloatValid(arrayBody), null);
+            Call<ResponseBody> call = service.putFloatValid(arrayBody);
+            ServiceResponse<Void> response = putFloatValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putFloatValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -931,29 +1012,31 @@ public class DictionaryImpl implements Dictionary {
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putFloatValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putFloatValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putFloatValidDelegate(response, error));
+                    serviceCallback.success(putFloatValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putFloatValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putFloatValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -964,11 +1047,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Double> getFloatInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Double>> response = getFloatInvalidNullDelegate(service.getFloatInvalidNull(), null);
+            Call<ResponseBody> call = service.getFloatInvalidNull();
+            ServiceResponse<Map<String, Double>> response = getFloatInvalidNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Double>> response = getFloatInvalidNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -977,24 +1062,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getFloatInvalidNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+        Call<ResponseBody> call = service.getFloatInvalidNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getFloatInvalidNullDelegate(response, error));
+                    serviceCallback.success(getFloatInvalidNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getFloatInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getFloatInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1005,11 +1092,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Double> getFloatInvalidString() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Double>> response = getFloatInvalidStringDelegate(service.getFloatInvalidString(), null);
+            Call<ResponseBody> call = service.getFloatInvalidString();
+            ServiceResponse<Map<String, Double>> response = getFloatInvalidStringDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Double>> response = getFloatInvalidStringDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1018,24 +1107,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getFloatInvalidStringAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+        Call<ResponseBody> call = service.getFloatInvalidString();
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getFloatInvalidStringDelegate(response, error));
+                    serviceCallback.success(getFloatInvalidStringDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getFloatInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getFloatInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1046,11 +1137,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Double> getDoubleValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Double>> response = getDoubleValidDelegate(service.getDoubleValid(), null);
+            Call<ResponseBody> call = service.getDoubleValid();
+            ServiceResponse<Map<String, Double>> response = getDoubleValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Double>> response = getDoubleValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1059,24 +1152,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getDoubleValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+        Call<ResponseBody> call = service.getDoubleValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDoubleValidDelegate(response, error));
+                    serviceCallback.success(getDoubleValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getDoubleValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getDoubleValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1092,11 +1187,13 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putDoubleValidDelegate(service.putDoubleValid(arrayBody), null);
+            Call<ResponseBody> call = service.putDoubleValid(arrayBody);
+            ServiceResponse<Void> response = putDoubleValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putDoubleValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1106,29 +1203,31 @@ public class DictionaryImpl implements Dictionary {
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putDoubleValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putDoubleValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putDoubleValidDelegate(response, error));
+                    serviceCallback.success(putDoubleValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putDoubleValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putDoubleValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1139,11 +1238,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Double> getDoubleInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Double>> response = getDoubleInvalidNullDelegate(service.getDoubleInvalidNull(), null);
+            Call<ResponseBody> call = service.getDoubleInvalidNull();
+            ServiceResponse<Map<String, Double>> response = getDoubleInvalidNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Double>> response = getDoubleInvalidNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1152,24 +1253,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getDoubleInvalidNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+        Call<ResponseBody> call = service.getDoubleInvalidNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDoubleInvalidNullDelegate(response, error));
+                    serviceCallback.success(getDoubleInvalidNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getDoubleInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getDoubleInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1180,11 +1283,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Double> getDoubleInvalidString() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Double>> response = getDoubleInvalidStringDelegate(service.getDoubleInvalidString(), null);
+            Call<ResponseBody> call = service.getDoubleInvalidString();
+            ServiceResponse<Map<String, Double>> response = getDoubleInvalidStringDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Double>> response = getDoubleInvalidStringDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1193,24 +1298,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        service.getDoubleInvalidStringAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+        Call<ResponseBody> call = service.getDoubleInvalidString();
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDoubleInvalidStringDelegate(response, error));
+                    serviceCallback.success(getDoubleInvalidStringDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getDoubleInvalidStringDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getDoubleInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1221,11 +1328,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, String> getStringValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, String>> response = getStringValidDelegate(service.getStringValid(), null);
+            Call<ResponseBody> call = service.getStringValid();
+            ServiceResponse<Map<String, String>> response = getStringValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, String>> response = getStringValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1234,24 +1343,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getStringValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+        Call<ResponseBody> call = service.getStringValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getStringValidDelegate(response, error));
+                    serviceCallback.success(getStringValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, String>> getStringValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getStringValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1267,11 +1378,13 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putStringValidDelegate(service.putStringValid(arrayBody), null);
+            Call<ResponseBody> call = service.putStringValid(arrayBody);
+            ServiceResponse<Void> response = putStringValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putStringValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1281,29 +1394,31 @@ public class DictionaryImpl implements Dictionary {
      * @param arrayBody the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putStringValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putStringValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putStringValidDelegate(response, error));
+                    serviceCallback.success(putStringValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putStringValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putStringValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1314,11 +1429,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, String> getStringWithNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, String>> response = getStringWithNullDelegate(service.getStringWithNull(), null);
+            Call<ResponseBody> call = service.getStringWithNull();
+            ServiceResponse<Map<String, String>> response = getStringWithNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, String>> response = getStringWithNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1327,24 +1444,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getStringWithNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+        Call<ResponseBody> call = service.getStringWithNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getStringWithNullDelegate(response, error));
+                    serviceCallback.success(getStringWithNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, String>> getStringWithNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getStringWithNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1355,11 +1474,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, String> getStringWithInvalid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, String>> response = getStringWithInvalidDelegate(service.getStringWithInvalid(), null);
+            Call<ResponseBody> call = service.getStringWithInvalid();
+            ServiceResponse<Map<String, String>> response = getStringWithInvalidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, String>> response = getStringWithInvalidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1368,72 +1489,75 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        service.getStringWithInvalidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+        Call<ResponseBody> call = service.getStringWithInvalid();
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getStringWithInvalidDelegate(response, error));
+                    serviceCallback.success(getStringWithInvalidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, String>> getStringWithInvalidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getStringWithInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
-     * "2": "1492-10-12"}
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, LocalDate> getDateValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, LocalDate>> response = getDateValidDelegate(service.getDateValid(), null);
+            Call<ResponseBody> call = service.getDateValid();
+            ServiceResponse<Map<String, LocalDate>> response = getDateValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, LocalDate>> response = getDateValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
-     * "2": "1492-10-12"}
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        service.getDateValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
+        Call<ResponseBody> call = service.getDateValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDateValidDelegate(response, error));
+                    serviceCallback.success(getDateValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, LocalDate>> getDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, LocalDate>> getDateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, LocalDate>>()
                 .register(200, new TypeToken<Map<String, LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
-     * "1492-10-12"}
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1445,87 +1569,92 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putDateValidDelegate(service.putDateValid(arrayBody), null);
+            Call<ResponseBody> call = service.putDateValid(arrayBody);
+            ServiceResponse<Void> response = putDateValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putDateValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
-     * "1492-10-12"}
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putDateValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putDateValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putDateValidDelegate(response, error));
+                    serviceCallback.success(putDateValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putDateValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putDateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
-     * "1776-07-04"}
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
      *
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, LocalDate> getDateInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, LocalDate>> response = getDateInvalidNullDelegate(service.getDateInvalidNull(), null);
+            Call<ResponseBody> call = service.getDateInvalidNull();
+            ServiceResponse<Map<String, LocalDate>> response = getDateInvalidNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, LocalDate>> response = getDateInvalidNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get date dictionary value {"0": "2012-01-01", "1": null, "2":
-     * "1776-07-04"}
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        service.getDateInvalidNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
+        Call<ResponseBody> call = service.getDateInvalidNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDateInvalidNullDelegate(response, error));
+                    serviceCallback.success(getDateInvalidNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, LocalDate>> getDateInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, LocalDate>> getDateInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, LocalDate>>()
                 .register(200, new TypeToken<Map<String, LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1536,11 +1665,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, LocalDate> getDateInvalidChars() throws ServiceException {
         try {
-            ServiceResponse<Map<String, LocalDate>> response = getDateInvalidCharsDelegate(service.getDateInvalidChars(), null);
+            Call<ResponseBody> call = service.getDateInvalidChars();
+            ServiceResponse<Map<String, LocalDate>> response = getDateInvalidCharsDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, LocalDate>> response = getDateInvalidCharsDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1549,72 +1680,75 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        service.getDateInvalidCharsAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
+        Call<ResponseBody> call = service.getDateInvalidChars();
+        call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDateInvalidCharsDelegate(response, error));
+                    serviceCallback.success(getDateInvalidCharsDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, LocalDate>> getDateInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, LocalDate>> getDateInvalidCharsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, LocalDate>>()
                 .register(200, new TypeToken<Map<String, LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, DateTime> getDateTimeValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, DateTime>> response = getDateTimeValidDelegate(service.getDateTimeValid(), null);
+            Call<ResponseBody> call = service.getDateTimeValid();
+            ServiceResponse<Map<String, DateTime>> response = getDateTimeValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, DateTime>> response = getDateTimeValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        service.getDateTimeValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
+        Call<ResponseBody> call = service.getDateTimeValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDateTimeValidDelegate(response, error));
+                    serviceCallback.success(getDateTimeValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, DateTime>> getDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, DateTime>> getDateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, DateTime>>()
                 .register(200, new TypeToken<Map<String, DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1626,44 +1760,47 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putDateTimeValidDelegate(service.putDateTimeValid(arrayBody), null);
+            Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
+            ServiceResponse<Void> response = putDateTimeValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putDateTimeValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
-     * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putDateTimeValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putDateTimeValidDelegate(response, error));
+                    serviceCallback.success(putDateTimeValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putDateTimeValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putDateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1674,11 +1811,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, DateTime> getDateTimeInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, DateTime>> response = getDateTimeInvalidNullDelegate(service.getDateTimeInvalidNull(), null);
+            Call<ResponseBody> call = service.getDateTimeInvalidNull();
+            ServiceResponse<Map<String, DateTime>> response = getDateTimeInvalidNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, DateTime>> response = getDateTimeInvalidNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1687,115 +1826,221 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        service.getDateTimeInvalidNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
+        Call<ResponseBody> call = service.getDateTimeInvalidNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDateTimeInvalidNullDelegate(response, error));
+                    serviceCallback.success(getDateTimeInvalidNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, DateTime>>()
                 .register(200, new TypeToken<Map<String, DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "date-time"}
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
      *
      * @return the Map&lt;String, DateTime&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, DateTime> getDateTimeInvalidChars() throws ServiceException {
         try {
-            ServiceResponse<Map<String, DateTime>> response = getDateTimeInvalidCharsDelegate(service.getDateTimeInvalidChars(), null);
+            Call<ResponseBody> call = service.getDateTimeInvalidChars();
+            ServiceResponse<Map<String, DateTime>> response = getDateTimeInvalidCharsDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, DateTime>> response = getDateTimeInvalidCharsDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
-     * "date-time"}
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        service.getDateTimeInvalidCharsAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
+        Call<ResponseBody> call = service.getDateTimeInvalidChars();
+        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDateTimeInvalidCharsDelegate(response, error));
+                    serviceCallback.success(getDateTimeInvalidCharsDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidCharsDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, DateTime>>()
                 .register(200, new TypeToken<Map<String, DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each item encoded in base64
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+     *
+     * @return the Map&lt;String, DateTimeRfc1123&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public Map<String, DateTimeRfc1123> getDateTimeRfc1123Valid() throws ServiceException {
+        try {
+            Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
+            ServiceResponse<Map<String, DateTimeRfc1123>> response = getDateTimeRfc1123ValidDelegate(call.execute(), null);
+            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<ResponseBody> getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTimeRfc1123>> serviceCallback) {
+        Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
+        call.enqueue(new ServiceResponseCallback<Map<String, DateTimeRfc1123>>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(getDateTimeRfc1123ValidDelegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<Map<String, DateTimeRfc1123>>()
+                .register(200, new TypeToken<Map<String, DateTimeRfc1123>>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, retrofit);
+    }
+
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+     *
+     * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void putDateTimeRfc1123Valid(Map<String, DateTimeRfc1123> arrayBody) throws ServiceException {
+        if (arrayBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+        }
+        Validator.validate(arrayBody);
+        try {
+            Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+            ServiceResponse<Void> response = putDateTimeRfc1123ValidDelegate(call.execute(), null);
+            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+     *
+     * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<ResponseBody> putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) {
+        if (arrayBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+        }
+        Validator.validate(arrayBody, serviceCallback);
+        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(putDateTimeRfc1123ValidDelegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, retrofit);
+    }
+
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64
      *
      * @return the Map&lt;String, byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, byte[]> getByteValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, byte[]>> response = getByteValidDelegate(service.getByteValid(), null);
+            Call<ResponseBody> call = service.getByteValid();
+            ServiceResponse<Map<String, byte[]>> response = getByteValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, byte[]>> response = getByteValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each item encoded in base64
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        service.getByteValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
+        Call<ResponseBody> call = service.getByteValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getByteValidDelegate(response, error));
+                    serviceCallback.success(getByteValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, byte[]>> getByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, byte[]>> getByteValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, byte[]>>()
                 .register(200, new TypeToken<Map<String, byte[]>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each elementencoded in base 64
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1807,87 +2052,92 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putByteValidDelegate(service.putByteValid(arrayBody), null);
+            Call<ResponseBody> call = service.putByteValid(arrayBody);
+            ServiceResponse<Void> response = putByteValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putByteValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-     * "2": hex (25, 29, 43)} with each elementencoded in base 64
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putByteValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putByteValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putByteValidDelegate(response, error));
+                    serviceCallback.success(putByteValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putByteValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putByteValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
-     * first item base64 encoded
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
      *
      * @return the Map&lt;String, byte[]&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, byte[]> getByteInvalidNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, byte[]>> response = getByteInvalidNullDelegate(service.getByteInvalidNull(), null);
+            Call<ResponseBody> call = service.getByteInvalidNull();
+            ServiceResponse<Map<String, byte[]>> response = getByteInvalidNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, byte[]>> response = getByteInvalidNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
-     * first item base64 encoded
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        service.getByteInvalidNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
+        Call<ResponseBody> call = service.getByteInvalidNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getByteInvalidNullDelegate(response, error));
+                    serviceCallback.success(getByteInvalidNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, byte[]>> getByteInvalidNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, byte[]>>()
                 .register(200, new TypeToken<Map<String, byte[]>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1898,11 +2148,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Widget> getComplexNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Widget>> response = getComplexNullDelegate(service.getComplexNull(), null);
+            Call<ResponseBody> call = service.getComplexNull();
+            ServiceResponse<Map<String, Widget>> response = getComplexNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Widget>> response = getComplexNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1911,24 +2163,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        service.getComplexNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
+        Call<ResponseBody> call = service.getComplexNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getComplexNullDelegate(response, error));
+                    serviceCallback.success(getComplexNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Widget>> getComplexNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Widget>> getComplexNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Widget>>()
                 .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -1939,11 +2193,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Widget> getComplexEmpty() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Widget>> response = getComplexEmptyDelegate(service.getComplexEmpty(), null);
+            Call<ResponseBody> call = service.getComplexEmpty();
+            ServiceResponse<Map<String, Widget>> response = getComplexEmptyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Widget>> response = getComplexEmptyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -1952,161 +2208,165 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        service.getComplexEmptyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
+        Call<ResponseBody> call = service.getComplexEmpty();
+        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getComplexEmptyDelegate(response, error));
+                    serviceCallback.success(getComplexEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Widget>> getComplexEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Widget>> getComplexEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Widget>>()
                 .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get dictionary of complex type with null item {"0": {"integer": 1,
-     * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
      *
      * @return the Map&lt;String, Widget&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, Widget> getComplexItemNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Widget>> response = getComplexItemNullDelegate(service.getComplexItemNull(), null);
+            Call<ResponseBody> call = service.getComplexItemNull();
+            ServiceResponse<Map<String, Widget>> response = getComplexItemNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Widget>> response = getComplexItemNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get dictionary of complex type with null item {"0": {"integer": 1,
-     * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        service.getComplexItemNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
+        Call<ResponseBody> call = service.getComplexItemNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getComplexItemNullDelegate(response, error));
+                    serviceCallback.success(getComplexItemNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Widget>> getComplexItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Widget>> getComplexItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Widget>>()
                 .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get dictionary of complex type with empty item {"0": {"integer": 1,
-     * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
      *
      * @return the Map&lt;String, Widget&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, Widget> getComplexItemEmpty() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Widget>> response = getComplexItemEmptyDelegate(service.getComplexItemEmpty(), null);
+            Call<ResponseBody> call = service.getComplexItemEmpty();
+            ServiceResponse<Map<String, Widget>> response = getComplexItemEmptyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Widget>> response = getComplexItemEmptyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get dictionary of complex type with empty item {"0": {"integer": 1,
-     * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        service.getComplexItemEmptyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
+        Call<ResponseBody> call = service.getComplexItemEmpty();
+        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getComplexItemEmptyDelegate(response, error));
+                    serviceCallback.success(getComplexItemEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Widget>> getComplexItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Widget>> getComplexItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Widget>>()
                 .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get dictionary of complex type with {"0": {"integer": 1, "string":
-     * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
-     * "string": "6"}}
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @return the Map&lt;String, Widget&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, Widget> getComplexValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Widget>> response = getComplexValidDelegate(service.getComplexValid(), null);
+            Call<ResponseBody> call = service.getComplexValid();
+            ServiceResponse<Map<String, Widget>> response = getComplexValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Widget>> response = getComplexValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get dictionary of complex type with {"0": {"integer": 1, "string":
-     * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
-     * "string": "6"}}
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        service.getComplexValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
+        Call<ResponseBody> call = service.getComplexValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getComplexValidDelegate(response, error));
+                    serviceCallback.success(getComplexValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Widget>> getComplexValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Widget>> getComplexValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Widget>>()
                 .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Put an dictionary of complex type with values {"0": {"integer": 1,
-     * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
-     * 5, "string": "6"}}
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2118,45 +2378,47 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putComplexValidDelegate(service.putComplexValid(arrayBody), null);
+            Call<ResponseBody> call = service.putComplexValid(arrayBody);
+            ServiceResponse<Void> response = putComplexValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putComplexValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Put an dictionary of complex type with values {"0": {"integer": 1,
-     * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
-     * 5, "string": "6"}}
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putComplexValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putComplexValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putComplexValidDelegate(response, error));
+                    serviceCallback.success(putComplexValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putComplexValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putComplexValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -2167,11 +2429,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, List<String>> getArrayNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, List<String>>> response = getArrayNullDelegate(service.getArrayNull(), null);
+            Call<ResponseBody> call = service.getArrayNull();
+            ServiceResponse<Map<String, List<String>>> response = getArrayNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, List<String>>> response = getArrayNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -2180,24 +2444,26 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        service.getArrayNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
+        Call<ResponseBody> call = service.getArrayNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getArrayNullDelegate(response, error));
+                    serviceCallback.success(getArrayNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, List<String>>> getArrayNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, List<String>>> getArrayNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, List<String>>>()
                 .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -2208,11 +2474,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, List<String>> getArrayEmpty() throws ServiceException {
         try {
-            ServiceResponse<Map<String, List<String>>> response = getArrayEmptyDelegate(service.getArrayEmpty(), null);
+            Call<ResponseBody> call = service.getArrayEmpty();
+            ServiceResponse<Map<String, List<String>>> response = getArrayEmptyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, List<String>>> response = getArrayEmptyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -2221,158 +2489,165 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        service.getArrayEmptyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
+        Call<ResponseBody> call = service.getArrayEmpty();
+        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getArrayEmptyDelegate(response, error));
+                    serviceCallback.success(getArrayEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, List<String>>> getArrayEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, List<String>>> getArrayEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, List<String>>>()
                 .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
-     * "2": ["7", "8", "9"]}
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
      *
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, List<String>> getArrayItemNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, List<String>>> response = getArrayItemNullDelegate(service.getArrayItemNull(), null);
+            Call<ResponseBody> call = service.getArrayItemNull();
+            ServiceResponse<Map<String, List<String>>> response = getArrayItemNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, List<String>>> response = getArrayItemNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
-     * "2": ["7", "8", "9"]}
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        service.getArrayItemNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
+        Call<ResponseBody> call = service.getArrayItemNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getArrayItemNullDelegate(response, error));
+                    serviceCallback.success(getArrayItemNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, List<String>>> getArrayItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, List<String>>> getArrayItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, List<String>>>()
                 .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
-     * ["7", "8", "9"]}
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
      *
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, List<String>> getArrayItemEmpty() throws ServiceException {
         try {
-            ServiceResponse<Map<String, List<String>>> response = getArrayItemEmptyDelegate(service.getArrayItemEmpty(), null);
+            Call<ResponseBody> call = service.getArrayItemEmpty();
+            ServiceResponse<Map<String, List<String>>> response = getArrayItemEmptyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, List<String>>> response = getArrayItemEmptyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
-     * ["7", "8", "9"]}
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        service.getArrayItemEmptyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
+        Call<ResponseBody> call = service.getArrayItemEmpty();
+        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getArrayItemEmptyDelegate(response, error));
+                    serviceCallback.success(getArrayItemEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, List<String>>> getArrayItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, List<String>>> getArrayItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, List<String>>>()
                 .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, List<String>> getArrayValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, List<String>>> response = getArrayValidDelegate(service.getArrayValid(), null);
+            Call<ResponseBody> call = service.getArrayValid();
+            ServiceResponse<Map<String, List<String>>> response = getArrayValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, List<String>>> response = getArrayValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        service.getArrayValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
+        Call<ResponseBody> call = service.getArrayValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getArrayValidDelegate(response, error));
+                    serviceCallback.success(getArrayValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, List<String>>> getArrayValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, List<String>>> getArrayValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, List<String>>>()
                 .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2384,44 +2659,47 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putArrayValidDelegate(service.putArrayValid(arrayBody), null);
+            Call<ResponseBody> call = service.putArrayValid(arrayBody);
+            ServiceResponse<Void> response = putArrayValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putArrayValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
-     * "6"], "2": ["7", "8", "9"]}
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putArrayValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putArrayValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putArrayValidDelegate(response, error));
+                    serviceCallback.success(putArrayValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putArrayValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putArrayValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -2432,11 +2710,13 @@ public class DictionaryImpl implements Dictionary {
      */
     public Map<String, Map<String, String>> getDictionaryNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryNullDelegate(service.getDictionaryNull(), null);
+            Call<ResponseBody> call = service.getDictionaryNull();
+            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -2445,211 +2725,210 @@ public class DictionaryImpl implements Dictionary {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        service.getDictionaryNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+        Call<ResponseBody> call = service.getDictionaryNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDictionaryNullDelegate(response, error));
+                    serviceCallback.success(getDictionaryNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
                 .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, Map<String, String>> getDictionaryEmpty() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryEmptyDelegate(service.getDictionaryEmpty(), null);
+            Call<ResponseBody> call = service.getDictionaryEmpty();
+            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryEmptyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryEmptyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        service.getDictionaryEmptyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+        Call<ResponseBody> call = service.getDictionaryEmpty();
+        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDictionaryEmptyDelegate(response, error));
+                    serviceCallback.success(getDictionaryEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
                 .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, Map<String, String>> getDictionaryItemNull() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryItemNullDelegate(service.getDictionaryItemNull(), null);
+            Call<ResponseBody> call = service.getDictionaryItemNull();
+            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryItemNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryItemNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        service.getDictionaryItemNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+        Call<ResponseBody> call = service.getDictionaryItemNull();
+        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDictionaryItemNullDelegate(response, error));
+                    serviceCallback.success(getDictionaryItemNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
                 .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, Map<String, String>> getDictionaryItemEmpty() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryItemEmptyDelegate(service.getDictionaryItemEmpty(), null);
+            Call<ResponseBody> call = service.getDictionaryItemEmpty();
+            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryItemEmptyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryItemEmptyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
-     * {"7": "seven", "8": "eight", "9": "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        service.getDictionaryItemEmptyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+        Call<ResponseBody> call = service.getDictionaryItemEmpty();
+        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDictionaryItemEmptyDelegate(response, error));
+                    serviceCallback.success(getDictionaryItemEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
                 .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public Map<String, Map<String, String>> getDictionaryValid() throws ServiceException {
         try {
-            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryValidDelegate(service.getDictionaryValid(), null);
+            Call<ResponseBody> call = service.getDictionaryValid();
+            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryValidDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Map<String, Map<String, String>>> response = getDictionaryValidDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        service.getDictionaryValidAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+        Call<ResponseBody> call = service.getDictionaryValid();
+        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDictionaryValidDelegate(response, error));
+                    serviceCallback.success(getDictionaryValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
                 .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -2661,46 +2940,47 @@ public class DictionaryImpl implements Dictionary {
         }
         Validator.validate(arrayBody);
         try {
-            ServiceResponse<Void> response = putDictionaryValidDelegate(service.putDictionaryValid(arrayBody), null);
+            Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
+            ServiceResponse<Void> response = putDictionaryValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putDictionaryValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-     * value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-     * "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
         }
         Validator.validate(arrayBody, serviceCallback);
-        service.putDictionaryValidAsync(arrayBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putDictionaryValidDelegate(response, error));
+                    serviceCallback.success(putDictionaryValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putDictionaryValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putDictionaryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

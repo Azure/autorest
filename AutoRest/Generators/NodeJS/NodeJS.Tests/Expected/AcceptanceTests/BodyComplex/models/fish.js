@@ -29,10 +29,10 @@ var util = require('util');
  */
 function Fish(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.species !== null && parameters.species !== undefined) {
+    if (parameters.species !== undefined) {
       this.species = parameters.species;
     }
-    if (parameters.length !== null && parameters.length !== undefined) {
+    if (parameters.length !== undefined) {
       this.length = parameters.length;
     }
     if (parameters.siblings) {
@@ -45,7 +45,7 @@ function Fish(parameters) {
       });
       this.siblings = tempParameterssiblings;
     }
-    if (parameters.dtype !== null && parameters.dtype !== undefined) {
+    if (parameters.dtype !== undefined) {
       this.dtype = parameters.dtype;
     }
   }    
@@ -104,11 +104,11 @@ Fish.prototype.serialize = function () {
  */
 Fish.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['species'] !== null && instance['species'] !== undefined) {
+    if (instance['species'] !== undefined) {
       this['species'] = instance['species'];
     }
 
-    if (instance['length'] !== null && instance['length'] !== undefined) {
+    if (instance['length'] !== undefined) {
       this['length'] = instance['length'];
     }
 
@@ -123,7 +123,7 @@ Fish.prototype.deserialize = function (instance) {
       this['siblings'] = tempInstancesiblings;
     }
 
-    if (instance['dtype'] !== null && instance['dtype'] !== undefined) {
+    if (instance['dtype'] !== undefined) {
       this['dtype'] = instance['dtype'];
     }
   }

@@ -25,6 +25,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             });
             var clientModel = modeler.Build();
 
+            var description = "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.";
+            var summary = "Product Types";
+
             Assert.NotNull(clientModel);
             Assert.Equal(2, clientModel.Properties.Count);
             Assert.True(clientModel.Properties.Any(p => p.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase)));
@@ -35,7 +38,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(0, clientModel.Methods.Count(m => m.Group != null));
             Assert.Equal(2, clientModel.Methods.Count);
             Assert.Equal("list", clientModel.Methods[0].Name);
-            Assert.NotEmpty(clientModel.Methods[0].Documentation);
+            Assert.NotEmpty(clientModel.Methods[0].Description);
+            Assert.Equal(description, clientModel.Methods[0].Description);
+            Assert.NotEmpty(clientModel.Methods[0].Summary);
+            Assert.Equal(summary, clientModel.Methods[0].Summary);
             Assert.Equal(HttpMethod.Get, clientModel.Methods[0].HttpMethod);
             Assert.Equal(3, clientModel.Methods[0].Parameters.Count);
             Assert.Equal("subscriptionId", clientModel.Methods[0].Parameters[0].Name);
@@ -339,7 +345,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(variableEnumInPath);
             Assert.Equal(variableEnumInPath.Values,
                 new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" } }.ToList());
-            Assert.True(variableEnumInPath.IsExpandable);
+            Assert.True(variableEnumInPath.ModelAsString);
             Assert.Empty(variableEnumInPath.Name);
 
             var variableEnumInQuery =
@@ -347,7 +353,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(variableEnumInQuery);
             Assert.Equal(variableEnumInQuery.Values,
                 new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" }, new EnumValue { Name = "purple" } }.ToList());
-            Assert.True(variableEnumInQuery.IsExpandable);
+            Assert.True(variableEnumInQuery.ModelAsString);
             Assert.Empty(variableEnumInQuery.Name);
 
             var differentEnum =
@@ -355,7 +361,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(differentEnum);
             Assert.Equal(differentEnum.Values,
                 new[] { new EnumValue { Name = "cyan" }, new EnumValue { Name = "yellow" } }.ToList());
-            Assert.True(differentEnum.IsExpandable);
+            Assert.True(differentEnum.ModelAsString);
             Assert.Empty(differentEnum.Name);
 
             var sameEnum =
@@ -363,7 +369,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(sameEnum);
             Assert.Equal(sameEnum.Values,
                 new[] { new EnumValue { Name = "blue" }, new EnumValue { Name = "green" }, new EnumValue { Name = "red" } }.ToList());
-            Assert.True(sameEnum.IsExpandable);
+            Assert.True(sameEnum.ModelAsString);
             Assert.Empty(sameEnum.Name);
 
             var modelEnum =
@@ -371,7 +377,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(modelEnum);
             Assert.Equal(modelEnum.Values,
                 new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" } }.ToList());
-            Assert.True(modelEnum.IsExpandable);
+            Assert.True(modelEnum.ModelAsString);
             Assert.Empty(modelEnum.Name);
 
             var fixedEnum =
@@ -379,7 +385,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(fixedEnum);
             Assert.Equal(fixedEnum.Values,
                 new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" } }.ToList());
-            Assert.False(fixedEnum.IsExpandable);
+            Assert.False(fixedEnum.ModelAsString);
             Assert.Equal("Colors", fixedEnum.Name);
 
             var fixedEnum2 =

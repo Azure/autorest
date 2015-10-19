@@ -35,9 +35,9 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string Name { get; set; }
 
         /// <summary>
-        /// Indicates whether the set of enum values can be modified.
+        /// Indicates whether the set of enum values will be generated as string constants.
         /// </summary>
-        public bool IsExpandable { get; set; }
+        public bool ModelAsString { get; set; }
 
         /// <summary>
         /// Returns a string representation of the PrimaryType object.

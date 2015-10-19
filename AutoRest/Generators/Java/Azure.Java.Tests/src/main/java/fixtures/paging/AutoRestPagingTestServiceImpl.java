@@ -13,7 +13,7 @@ package fixtures.paging;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestPagingTestService class.
@@ -113,10 +113,10 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestPagingTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestPagingTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
@@ -124,9 +124,9 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
     private void initialize() {
         if (this.credentials != null)
         {
-            this.credentials.applyCredentialsFilter(this);
+            this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.paging = new PagingImpl(restAdapter, this);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.paging = new PagingImpl(retrofit, this);
     }
 }

@@ -10,29 +10,30 @@
 
 package fixtures.azurespecials;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.azurespecials.models.Error;
 
 public class ApiVersionLocalImpl implements ApiVersionLocal {
     private ApiVersionLocalService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public ApiVersionLocalImpl(RestAdapter restAdapter, AutoRestAzureSpecialParametersTestClient client) {
-        this.service = restAdapter.create(ApiVersionLocalService.class);
+    public ApiVersionLocalImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+        this.service = retrofit.create(ApiVersionLocalService.class);
         this.client = client;
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version
-     * = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -43,92 +44,96 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getMethodLocalValidDelegate(service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getMethodLocalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getMethodLocalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version
-     * = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMethodLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getMethodLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         if (apiVersion == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null.")));
         }
-        service.getMethodLocalValidAsync(apiVersion, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMethodLocalValidDelegate(response, error));
+                    serviceCallback.success(getMethodLocalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getMethodLocalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version
-     * = null to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void getMethodLocalNull(String apiVersion) throws ServiceException {
         try {
-            ServiceResponse<Void> response = getMethodLocalNullDelegate(service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getMethodLocalNullDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getMethodLocalNullDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version
-     * = null to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
-        service.getMethodLocalNullAsync(apiVersion, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMethodLocalNullDelegate(response, error));
+                    serviceCallback.success(getMethodLocalNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getMethodLocalNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version
-     * = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -139,48 +144,50 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getPathLocalValidDelegate(service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getPathLocalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getPathLocalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version
-     * = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getPathLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getPathLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         if (apiVersion == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null.")));
         }
-        service.getPathLocalValidAsync(apiVersion, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getPathLocalValidDelegate(response, error));
+                    serviceCallback.success(getPathLocalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getPathLocalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version
-     * = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -191,43 +198,46 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = getSwaggerLocalValidDelegate(service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getSwaggerLocalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getSwaggerLocalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version
-     * = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSwaggerLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> getSwaggerLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         if (apiVersion == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null.")));
         }
-        service.getSwaggerLocalValidAsync(apiVersion, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSwaggerLocalValidDelegate(response, error));
+                    serviceCallback.success(getSwaggerLocalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

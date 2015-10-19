@@ -30,17 +30,17 @@ function Product(parameters) {
     if (parameters.displayNames) {
       var tempParametersdisplayNames = [];
       parameters.displayNames.forEach(function(element) {
-        if (element !== null && element !== undefined) {
+        if (element !== undefined) {
           element = element;
         }
         tempParametersdisplayNames.push(element);
       });
       this.displayNames = tempParametersdisplayNames;
     }
-    if (parameters.capacity !== null && parameters.capacity !== undefined) {
+    if (parameters.capacity !== undefined) {
       this.capacity = parameters.capacity;
     }
-    if (parameters.image !== null && parameters.image !== undefined) {
+    if (parameters.image !== undefined) {
       this.image = parameters.image;
     }
   }    
@@ -98,7 +98,7 @@ Product.prototype.deserialize = function (instance) {
     if (instance['display_names']) {
       var tempInstancedisplayNames = [];
       instance['display_names'].forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
+        if (element1 !== undefined) {
           element1 = element1;
         }
         tempInstancedisplayNames.push(element1);
@@ -106,11 +106,11 @@ Product.prototype.deserialize = function (instance) {
       this['displayNames'] = tempInstancedisplayNames;
     }
 
-    if (instance['capacity'] !== null && instance['capacity'] !== undefined) {
+    if (instance['capacity'] !== undefined) {
       this['capacity'] = instance['capacity'];
     }
 
-    if (instance['image'] !== null && instance['image'] !== undefined) {
+    if (instance['image'] !== undefined) {
       this['image'] = instance['image'];
     }
   }

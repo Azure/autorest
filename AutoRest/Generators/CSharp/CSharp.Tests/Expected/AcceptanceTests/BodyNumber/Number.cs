@@ -70,7 +70,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -157,7 +158,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetInvalidFloat", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/invalidfloat").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/invalidfloat").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -244,7 +246,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetInvalidDouble", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/invaliddouble").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/invaliddouble").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -338,7 +341,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "PutBigFloat", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/float/3.402823e+20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/float/3.402823e+20").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -423,7 +427,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetBigFloat", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/float/3.402823e+20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/float/3.402823e+20").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -517,7 +522,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "PutBigDouble", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/double/2.5976931e+101").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/double/2.5976931e+101").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -602,7 +608,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetBigDouble", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/double/2.5976931e+101").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/double/2.5976931e+101").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -696,7 +703,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "PutBigDoublePositiveDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/double/99999999.99").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/double/99999999.99").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -781,7 +789,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetBigDoublePositiveDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/double/99999999.99").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/double/99999999.99").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -875,7 +884,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "PutBigDoubleNegativeDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/double/-99999999.99").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/double/-99999999.99").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -960,7 +970,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetBigDoubleNegativeDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/double/-99999999.99").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/double/-99999999.99").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1054,7 +1065,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "PutSmallFloat", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/small/float/3.402823e-20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/small/float/3.402823e-20").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1139,7 +1151,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetSmallFloat", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/small/float/3.402823e-20").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/small/float/3.402823e-20").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1233,7 +1246,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "PutSmallDouble", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/small/double/2.5976931e-101").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/small/double/2.5976931e-101").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1318,7 +1332,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetSmallDouble", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/small/double/2.5976931e-101").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/small/double/2.5976931e-101").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

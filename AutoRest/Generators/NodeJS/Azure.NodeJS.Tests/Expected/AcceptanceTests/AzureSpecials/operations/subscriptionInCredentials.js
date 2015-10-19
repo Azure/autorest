@@ -35,6 +35,7 @@ function SubscriptionInCredentials(client) {
 /**
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -74,7 +75,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -142,6 +143,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to null, and client-side validation should prevent you from
  * making this call
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -181,7 +183,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -248,6 +250,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
 /**
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -290,7 +293,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -358,6 +361,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
 /**
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -397,7 +401,7 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -464,6 +468,7 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
 /**
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -503,7 +508,7 @@ SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (options, 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];

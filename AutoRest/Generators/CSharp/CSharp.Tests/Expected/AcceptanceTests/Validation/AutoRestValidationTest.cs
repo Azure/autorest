@@ -119,25 +119,32 @@ namespace Fixtures.AcceptanceTestsValidation
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
         }    
         /// <summary>
         /// Validates input parameters on the method. See swagger for details.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
-        /// </param>
+        /// Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+./// </param>
         /// <param name='id'>
-        /// Required int multiple of 10 from 100 to 1000.
-        /// </param>
+        /// Required int multiple of 10 from 100 to 1000./// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -212,7 +219,8 @@ namespace Fixtures.AcceptanceTestsValidation
                 ServiceClientTracing.Enter(invocationId, this, "ValidationOfMethodParameters", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             url = url.Replace("{id}", Uri.EscapeDataString(JsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));
@@ -293,11 +301,9 @@ namespace Fixtures.AcceptanceTestsValidation
         /// Validates body parameters on the method. See swagger for details.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
-        /// </param>
+        /// Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+./// </param>
         /// <param name='id'>
-        /// Required int multiple of 10 from 100 to 1000.
-        /// </param>
+        /// Required int multiple of 10 from 100 to 1000./// </param>
         /// <param name='body'>
         /// </param>
         /// <param name='customHeaders'>
@@ -379,7 +385,8 @@ namespace Fixtures.AcceptanceTestsValidation
                 ServiceClientTracing.Enter(invocationId, this, "ValidationOfBody", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             url = url.Replace("{id}", Uri.EscapeDataString(JsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));

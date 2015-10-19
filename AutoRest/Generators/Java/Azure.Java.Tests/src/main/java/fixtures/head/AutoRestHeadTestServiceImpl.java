@@ -13,7 +13,7 @@ package fixtures.head;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestHeadTestService class.
@@ -113,10 +113,10 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestHeadTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestHeadTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
@@ -124,9 +124,9 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
     private void initialize() {
         if (this.credentials != null)
         {
-            this.credentials.applyCredentialsFilter(this);
+            this.credentials.applyCredentialsFilter(this.client);
         }
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.httpSuccess = new HttpSuccessImpl(restAdapter, this);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.httpSuccess = new HttpSuccessImpl(retrofit, this);
     }
 }

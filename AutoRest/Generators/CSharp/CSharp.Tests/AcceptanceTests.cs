@@ -19,8 +19,10 @@ using Fixtures.AcceptanceTestsBodyComplex;
 using Fixtures.AcceptanceTestsBodyComplex.Models;
 using Fixtures.AcceptanceTestsBodyDate;
 using Fixtures.AcceptanceTestsBodyDateTime;
+using Fixtures.AcceptanceTestsBodyDateTimeRfc1123;
 using Fixtures.AcceptanceTestsBodyDictionary;
 using Fixtures.AcceptanceTestsBodyDictionary.Models;
+using Fixtures.AcceptanceTestsBodyDuration;
 using Fixtures.AcceptanceTestsBodyFile;
 using Fixtures.AcceptanceTestsBodyInteger;
 using Fixtures.AcceptanceTestsBodyNumber;
@@ -41,8 +43,12 @@ using Newtonsoft.Json;
 using Xunit;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 
+
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
+    using Serialization;
+
+
     [Collection("AutoRest Tests")]
     [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",
         "AutoRest.Generator.CSharp.Tests")]
@@ -309,6 +315,42 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
+        public void DateTimeRfc1123Tests()
+        {
+            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+                SwaggerPath("body-datetime-rfc1123.json"), ExpectedPath("BodyDateTimeRfc1123"));
+            using (var client = new AutoRestRFC1123DateTimeTestService(Fixture.Uri))
+            {
+                Assert.Null(client.Datetimerfc1123.GetNull());
+                Assert.Throws<JsonReaderException>(() => client.Datetimerfc1123.GetInvalid());
+                Assert.Throws<JsonReaderException>(() => client.Datetimerfc1123.GetUnderflow());
+                Assert.Throws<JsonReaderException>(() => client.Datetimerfc1123.GetOverflow());
+                client.Datetimerfc1123.GetUtcLowercaseMaxDateTime();
+                client.Datetimerfc1123.GetUtcUppercaseMaxDateTime();
+                client.Datetimerfc1123.GetUtcMinDateTime();
+
+                client.Datetimerfc1123.PutUtcMaxDateTime(DateTime.MaxValue.ToUniversalTime());
+                client.Datetimerfc1123.PutUtcMinDateTime(DateTime.Parse("0001-01-01T00:00:00Z",
+                    CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
+            }
+        }
+        
+        [Fact]
+        public void DurationTests()
+        {
+            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+                SwaggerPath("body-duration.json"), ExpectedPath("BodyDuration"));
+            using (var client = new AutoRestDurationTestService(Fixture.Uri))
+            {
+                Assert.Null(client.Duration.GetNull());
+                Assert.Throws<FormatException>(() => client.Duration.GetInvalid());
+
+                client.Duration.GetPositiveDuration();
+                client.Duration.PutPositiveDuration(new TimeSpan(123, 22, 14, 12, 11));
+            }
+        }
+
+        [Fact]
         public void ArrayTests()
         {
             SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
@@ -345,6 +387,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(
                     new List<DateTime?> {datetime1, datetime2, datetime3}, client.Array.GetDateTimeValid());
                 client.Array.PutDateTimeValid(new List<DateTime?> {datetime1, datetime2, datetime3});
+                dateArray = client.Array.GetDateTimeRfc1123Valid();
+                Assert.Equal(new List<DateTime?> { datetime1, datetime2, datetime3 }, dateArray);
+                client.Array.PutDateTimeRfc1123Valid(dateArray);
                 var bytes1 = new byte[] {0x0FF, 0x0FF, 0x0FF, 0x0FA};
                 var bytes2 = new byte[] {0x01, 0x02, 0x03};
                 var bytes3 = new byte[] {0x025, 0x029, 0x043};
@@ -684,6 +729,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var datetime1 = new DateTimeOffset(2000, 12, 01, 0, 0, 1, TimeSpan.Zero).UtcDateTime;
             var datetime2 = new DateTimeOffset(1980, 1, 2, 0, 11, 35, TimeSpan.FromHours(1)).UtcDateTime;
             var datetime3 = new DateTimeOffset(1492, 10, 12, 10, 15, 1, TimeSpan.FromHours(-8)).UtcDateTime;
+            var rfcDatetime1 = new DateTimeOffset(2000, 12, 01, 0, 0, 1, TimeSpan.Zero).UtcDateTime;
+            var rfcDatetime2 = new DateTimeOffset(1980, 1, 2, 0, 11, 35, TimeSpan.Zero).UtcDateTime;
+            var rfcDatetime3 = new DateTimeOffset(1492, 10, 12, 10, 15, 1, TimeSpan.Zero).UtcDateTime;
             // GET prim/date/valid
             var dateDictionary = client.Dictionary.GetDateValid();
             Assert.Equal(new Dictionary<string, DateTime?> {{"0", date1}, {"1", date2}, {"2", date3}},
@@ -718,6 +766,15 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             };
             Assert.Equal(datetimeNullDict, client.Dictionary.GetDateTimeInvalidNull());
             Assert.Throws<JsonReaderException>(() => client.Dictionary.GetDateTimeInvalidChars());
+            // GET prim/datetimerfc1123/valid
+            Assert.Equal(new Dictionary<string, DateTime?> { { "0", rfcDatetime1 }, { "1", rfcDatetime2 }, { "2", rfcDatetime3 } },
+                client.Dictionary.GetDateTimeRfc1123Valid());
+            client.Dictionary.PutDateTimeRfc1123Valid(new Dictionary<string, DateTime?>
+            {
+                {"0", rfcDatetime1},
+                {"1", rfcDatetime2},
+                {"2", rfcDatetime3}
+            });
             var bytes1 = new byte[] {0x0FF, 0x0FF, 0x0FF, 0x0FA};
             var bytes2 = new byte[] {0x01, 0x02, 0x03};
             var bytes3 = new byte[] {0x025, 0x029, 0x043};
@@ -857,6 +914,15 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     Field = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                     Now = new DateTime(2015, 05, 18, 18, 38, 0, DateTimeKind.Utc)
                 });
+                // GET primitive/datetimerfc1123
+                var datetimeRfc1123Result = client.Primitive.GetDateTimeRfc1123();
+                Assert.Equal(DateTime.MinValue, datetimeRfc1123Result.Field);
+                client.Primitive.PutDateTimeRfc1123(new Datetimerfc1123Wrapper()
+                {
+                    Field = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                    Now = new DateTime(2015, 05, 18, 11, 38, 0, DateTimeKind.Utc)
+                });
+
                 // GET primitive/byte
                 var byteResult = client.Primitive.GetByte();
                 var bytes = new byte[] {0x0FF, 0x0FE, 0x0FD, 0x0FC, 0x000, 0x0FA, 0x0F9, 0x0F8, 0x0F7, 0x0F6};
@@ -1210,6 +1276,26 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(DateTimeOffset.MinValue,
                     JsonConvert.DeserializeObject<DateTimeOffset>(
                         "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                // POST param/prim/datetimerfc1123
+                client.Header.ParamDatetimeRfc1123("valid", new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc));
+                client.Header.ParamDatetimeRfc1123("min", DateTime.MinValue);
+                //POST response/prim/datetimerfc1123
+                response = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("valid").Result;
+                Assert.Equal(new DateTimeOffset(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc)),
+                    JsonConvert.DeserializeObject<DateTimeOffset>(
+                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                response = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("min").Result;
+                Assert.Equal(DateTimeOffset.MinValue,
+                    JsonConvert.DeserializeObject<DateTimeOffset>(
+                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                // POST param/prim/duration
+                client.Header.ParamDuration("valid", new TimeSpan(123, 22, 14, 12, 11));
+                // POST response/prim/duration
+                response = client.Header.ResponseDurationWithHttpMessagesAsync("valid").Result;
+                Assert.Equal(new TimeSpan(123, 22, 14, 12, 11),
+                    JsonConvert.DeserializeObject<TimeSpan?>(
+                    "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\"", 
+                    new Iso8601TimeSpanConverter()));
                 // POST param/prim/string
                 client.Header.ParamByte("valid", Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"));
                 // POST response/prim/string

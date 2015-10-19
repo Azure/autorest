@@ -35,7 +35,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// number of items to skip

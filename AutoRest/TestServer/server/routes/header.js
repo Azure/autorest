@@ -193,6 +193,32 @@ var header = function (coverage, optionalCoverage) {
           }
         }
         utils.send400(res, next, "Did not like datetime scenario \"" + scenario + "\" with value " + value);
+      case "datetimerfc1123":
+        if (scenario === "valid") {
+          if (value === "Fri, 01 Jan 2010 12:34:56 GMT") {
+            coverage['HeaderParameterDateTimeRfc1123Valid']++;
+            res.status(200).end();
+            break;
+          }
+        } else if (scenario === "min") {
+          if (value === "Mon, 01 Jan 0001 00:00:00 GMT" || value == "Mon, 01 Jan 1 00:00:00 GMT") {
+            coverage['HeaderParameterDateTimeRfc1123Min']++;
+            res.status(200).end();
+            break;
+          }
+        }
+        utils.send400(res, next, "Did not like datetimerfc1123 scenario \"" + scenario + "\" with value " + value);
+      case "duration":
+        if (scenario === "valid") {
+          //For some reason moment.js doesn't quite get the right time value out (due to what looks like floating point issues)
+          //so we have to check for two possible times
+          if (value === "P123DT22H14M12.011S" || value == "P123DT22H14M12.010999999998603S") {
+            coverage['HeaderParameterDurationValid']++;
+            res.status(200).end();
+            break;
+          }
+        }
+        utils.send400(res, next, "Did not like duration scenario \"" + scenario + "\" with value " + value);
       case "byte":
         var bytes = new Buffer(constants.MULTIBYTE_BUFFER);
         if (scenario === "valid") {
@@ -315,6 +341,24 @@ var header = function (coverage, optionalCoverage) {
           break;
         }
         utils.send400(res, next, "Did not like datetime scenario \"" + scenario + "\" with value " + value);
+    case "datetimerfc1123":
+        if (scenario === "valid") {
+          coverage['HeaderResponseDateTimeRfc1123Valid']++;
+          res.status(200).set('value', "Fri, 01 Jan 2010 12:34:56 GMT").end();
+          break;
+        } else if (scenario === "min") {
+          coverage['HeaderResponseDateTimeRfc1123Min']++;
+          res.status(200).set('value', "Mon, 01 Jan 0001 00:00:00 GMT").end();
+          break;
+        }
+        utils.send400(res, next, "Did not like datetimerfc1123 scenario \"" + scenario + "\" with value " + value);
+      case "duration":
+        if (scenario === "valid") {
+          coverage['HeaderResponseDurationValid']++;
+          res.status(200).set('value', "P123DT22H14M12.011S").end();
+          break;
+        }
+        utils.send400(res, next, "Did not like duration scenario \"" + scenario + "\" with value " + value);
       case "byte":
         var bytes = new Buffer(constants.MULTIBYTE_BUFFER);
         if (scenario === "valid") {

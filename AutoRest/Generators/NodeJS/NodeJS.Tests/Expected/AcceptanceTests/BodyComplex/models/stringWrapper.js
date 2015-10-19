@@ -23,13 +23,13 @@
  */
 function StringWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== null && parameters.field !== undefined) {
+    if (parameters.field !== undefined) {
       this.field = parameters.field;
     }
-    if (parameters.empty !== null && parameters.empty !== undefined) {
+    if (parameters.empty !== undefined) {
       this.empty = parameters.empty;
     }
-    if (parameters.null !== null && parameters.null !== undefined) {
+    if (parameters.null !== undefined) {
       this.null = parameters.null;
     }
   }    
@@ -76,15 +76,15 @@ StringWrapper.prototype.serialize = function () {
  */
 StringWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['field'] !== null && instance['field'] !== undefined) {
+    if (instance['field'] !== undefined) {
       this['field'] = instance['field'];
     }
 
-    if (instance['empty'] !== null && instance['empty'] !== undefined) {
+    if (instance['empty'] !== undefined) {
       this['empty'] = instance['empty'];
     }
 
-    if (instance['null'] !== null && instance['null'] !== undefined) {
+    if (instance['null'] !== undefined) {
       this['null'] = instance['null'];
     }
   }

@@ -70,7 +70,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Head200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/200").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("HEAD");
@@ -151,7 +152,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/200").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -220,8 +222,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Put boolean value true returning 200 success
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -242,7 +243,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Put200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/200").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -309,8 +311,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Patch true Boolean value in request returning 200
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -331,7 +332,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Patch200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/200").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PATCH");
@@ -398,8 +400,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Post bollean value true in request that returns a 200
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -420,7 +421,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Post200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/200").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -487,8 +489,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Delete simple boolean value true returns 200
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -509,7 +510,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Delete200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/200").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("DELETE");
@@ -576,8 +578,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Put true Boolean value in request returns 201
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -598,7 +599,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Put201", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/201").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/201").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -665,8 +667,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Post true Boolean value in request returns 201 (Created)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -687,7 +688,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Post201", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/201").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/201").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -754,8 +756,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Put true Boolean value in request returns 202 (Accepted)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -776,7 +777,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Put202", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/202").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/202").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -843,8 +845,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Patch true Boolean value in request returns 202
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -865,7 +866,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Patch202", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/202").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/202").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PATCH");
@@ -932,8 +934,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Post true Boolean value in request returns 202 (Accepted)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -954,7 +955,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Post202", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/202").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/202").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1021,8 +1023,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Delete true Boolean value in request returns 202 (accepted)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1043,7 +1044,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Delete202", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/202").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/202").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("DELETE");
@@ -1128,7 +1130,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Head204", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/204").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/204").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("HEAD");
@@ -1191,8 +1194,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Put true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1213,7 +1215,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Put204", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/204").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/204").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1280,8 +1283,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Patch true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1302,7 +1304,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Patch204", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/204").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/204").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PATCH");
@@ -1369,8 +1372,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Post true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1391,7 +1393,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Post204", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/204").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/204").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -1458,8 +1461,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Delete true Boolean value in request returns 204 (no content)
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1480,7 +1482,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Delete204", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/204").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/204").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("DELETE");
@@ -1565,7 +1568,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Head404", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/success/404").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/success/404").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("HEAD");

@@ -19,7 +19,7 @@
  */
 function C(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.httpCode !== null && parameters.httpCode !== undefined) {
+    if (parameters.httpCode !== undefined) {
       this.httpCode = parameters.httpCode;
     }
   }    
@@ -52,7 +52,7 @@ C.prototype.serialize = function () {
  */
 C.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['httpCode'] !== null && instance['httpCode'] !== undefined) {
+    if (instance['httpCode'] !== undefined) {
       this['httpCode'] = instance['httpCode'];
     }
   }

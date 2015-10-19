@@ -1,4 +1,5 @@
-﻿@using Microsoft.Rest.Generator.Java
+@using System
+@using Microsoft.Rest.Generator.Java
 @using Microsoft.Rest.Generator.Java.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
@@ -36,7 +37,7 @@ public interface @Model.Name {
 @:    @property.Type get@(property.Name.ToPascalCase())();
 if(!property.IsReadOnly)
 {
-@EmptyLine    
+@EmptyLine
 @:    /**
 @:     * Sets @(property.Documentation).
 @:     *
@@ -67,18 +68,22 @@ if(!property.IsReadOnly)
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-    @:    Response @(method.Name)(@method.MethodParameterApiDeclaration) throws ServiceException;
-    @EmptyLine
-    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-    @:    void @(method.Name)Async(@method.MethodParameterApiDeclarationWithCallback);
-    }
+    @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
     @EmptyLine
     }
-
+    }
+    @EmptyLine
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:/**
-    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    if (!String.IsNullOrEmpty(method.Summary))
+    {
+    @: * @method.Summary.EscapeXmlComment()
+    }
+    if (!String.IsNullOrEmpty(method.Description))
+    {
+    @: * @method.Description.EscapeXmlComment()
+    }
     @: *
     foreach (var param in method.LocalParameters)
     {
@@ -93,15 +98,23 @@ if(!property.IsReadOnly)
     @:@method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
     @EmptyLine
     @:/**
-    @:@WrapComment(" * ", method.Documentation.EscapeXmlComment())
+    if (!String.IsNullOrEmpty(method.Summary))
+    {
+    @: * @method.Summary.EscapeXmlComment()
+    }
+    if (!String.IsNullOrEmpty(method.Description))
+    {
+    @: * @method.Description.EscapeXmlComment()
+    }
     @: *
     foreach (var param in method.LocalParameters)
     {
     @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
     }
     @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+    @: * @@return the {@@link Call} object
     @: */
-    @:void @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
+    @:Call<@method.CallType> @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
     }
     @EmptyLine
 </text>

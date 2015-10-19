@@ -34,9 +34,21 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         public static string ToString(this IType type, string reference)
         {
             var known = type as PrimaryType;
-            return (known != null && known == PrimaryType.String)
-                ? reference
-                : string.Format("{0}.to_s", reference);
+            string result;
+            if (known != null && known == PrimaryType.String)
+            {
+                result = reference;
+            }
+            else if(known == PrimaryType.DateTimeRfc1123)
+            {
+                result = string.Format("{0}.strftime('%a, %d %b %Y %H:%M:%S GMT')", reference);
+            }
+            else
+            {
+                result = string.Format("{0}.to_s", reference);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -81,9 +93,19 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 return "DateTime";
             }
 
+            if (type == PrimaryType.DateTimeRfc1123)
+            {
+                return "DateTime";
+            }
+
             if (type == PrimaryType.ByteArray)
             {
                 return "Array<Integer>";
+            }
+
+            if (type == PrimaryType.TimeSpan)
+            {
+                return "Duration"; //TODO: Is this a real Ruby type...?
             }
 
             if (compositeType != null)
@@ -160,7 +182,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
             PrimaryType primaryType = sequence.ElementType as PrimaryType;
             EnumType enumType = sequence.ElementType as EnumType;
-            if (enumType != null && enumType.IsExpandable)
+            if (enumType != null && enumType.ModelAsString)
             {
                 primaryType = PrimaryType.String;
             }
@@ -283,6 +305,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 }
 
                 if (primary == PrimaryType.DateTime)
+                {
+                    return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
+                }
+
+                if (primary == PrimaryType.DateTimeRfc1123)
                 {
                     return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
                 }
@@ -410,6 +437,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 if (primary == PrimaryType.DateTime)
                 {
                     return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%FT%TZ')", valueReference).ToString();
+                }
+
+                if (primary == PrimaryType.DateTimeRfc1123)
+                {
+                    return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%a, %d %b %Y %H:%M:%S GMT')", valueReference).ToString();
                 }
             }
             else if (sequence != null)

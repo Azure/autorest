@@ -37,6 +37,15 @@ var util = require('util');
  * 
  * @member {string} [primaryEndpoints.table] Gets the table endpoint.
  * 
+ * @member {object} [primaryEndpoints.dummyEndPoint] Dummy EndPoint
+ * 
+ * @member {object} [primaryEndpoints.fooPoint] Foo point
+ * 
+ * @member {object} [primaryEndpoints.fooPoint.barPoint] Bar point
+ * 
+ * @member {object} [primaryEndpoints.fooPoint.barPoint.recursivePoint]
+ * Recursive Endpoints
+ * 
  * @member {string} [primaryLocation] Gets the location of the primary for the
  * storage account.
  * 
@@ -83,35 +92,44 @@ var util = require('util');
  * 
  * @member {string} [secondaryEndpoints.table] Gets the table endpoint.
  * 
+ * @member {object} [secondaryEndpoints.dummyEndPoint] Dummy EndPoint
+ * 
+ * @member {object} [secondaryEndpoints.fooPoint] Foo point
+ * 
+ * @member {object} [secondaryEndpoints.fooPoint.barPoint] Bar point
+ * 
+ * @member {object} [secondaryEndpoints.fooPoint.barPoint.recursivePoint]
+ * Recursive Endpoints
+ * 
  */
 function StorageAccount(parameters) {
   StorageAccount['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.provisioningState !== null && parameters.provisioningState !== undefined) {
+    if (parameters.provisioningState !== undefined) {
       this.provisioningState = parameters.provisioningState;
     }
-    if (parameters.accountType !== null && parameters.accountType !== undefined) {
+    if (parameters.accountType !== undefined) {
       this.accountType = parameters.accountType;
     }
     if (parameters.primaryEndpoints) {
       this.primaryEndpoints = new models['Endpoints'](parameters.primaryEndpoints);
     }
-    if (parameters.primaryLocation !== null && parameters.primaryLocation !== undefined) {
+    if (parameters.primaryLocation !== undefined) {
       this.primaryLocation = parameters.primaryLocation;
     }
-    if (parameters.statusOfPrimary !== null && parameters.statusOfPrimary !== undefined) {
+    if (parameters.statusOfPrimary !== undefined) {
       this.statusOfPrimary = parameters.statusOfPrimary;
     }
-    if (parameters.lastGeoFailoverTime !== null && parameters.lastGeoFailoverTime !== undefined) {
+    if (parameters.lastGeoFailoverTime !== undefined) {
       this.lastGeoFailoverTime = parameters.lastGeoFailoverTime;
     }
-    if (parameters.secondaryLocation !== null && parameters.secondaryLocation !== undefined) {
+    if (parameters.secondaryLocation !== undefined) {
       this.secondaryLocation = parameters.secondaryLocation;
     }
-    if (parameters.statusOfSecondary !== null && parameters.statusOfSecondary !== undefined) {
+    if (parameters.statusOfSecondary !== undefined) {
       this.statusOfSecondary = parameters.statusOfSecondary;
     }
-    if (parameters.creationTime !== null && parameters.creationTime !== undefined) {
+    if (parameters.creationTime !== undefined) {
       this.creationTime = parameters.creationTime;
     }
     if (parameters.customDomain) {
@@ -255,19 +273,13 @@ StorageAccount.prototype.deserialize = function (instance) {
   StorageAccount['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['provisioningState'] !== null && instance['properties']['provisioningState'] !== undefined) {
-        this['provisioningState'] = instance['properties']['provisioningState'];
-      }
-      else {
+      if (instance['properties']['provisioningState'] !== undefined) {
         this['provisioningState'] = instance['properties']['provisioningState'];
       }
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['accountType'] !== null && instance['properties']['accountType'] !== undefined) {
-        this['accountType'] = instance['properties']['accountType'];
-      }
-      else {
+      if (instance['properties']['accountType'] !== undefined) {
         this['accountType'] = instance['properties']['accountType'];
       }
     }
@@ -276,61 +288,46 @@ StorageAccount.prototype.deserialize = function (instance) {
       if (instance['properties']['primaryEndpoints']) {
         this['primaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['primaryEndpoints']);
       }
-      else {
-        this['primaryEndpoints'] = instance['properties']['primaryEndpoints'];
-      }
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['primaryLocation'] !== null && instance['properties']['primaryLocation'] !== undefined) {
-        this['primaryLocation'] = instance['properties']['primaryLocation'];
-      }
-      else {
+      if (instance['properties']['primaryLocation'] !== undefined) {
         this['primaryLocation'] = instance['properties']['primaryLocation'];
       }
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['statusOfPrimary'] !== null && instance['properties']['statusOfPrimary'] !== undefined) {
-        this['statusOfPrimary'] = instance['properties']['statusOfPrimary'];
-      }
-      else {
+      if (instance['properties']['statusOfPrimary'] !== undefined) {
         this['statusOfPrimary'] = instance['properties']['statusOfPrimary'];
       }
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['lastGeoFailoverTime'] !== null && instance['properties']['lastGeoFailoverTime'] !== undefined) {
+      if (instance['properties']['lastGeoFailoverTime']) {
         this['lastGeoFailoverTime'] = new Date(instance['properties']['lastGeoFailoverTime']);
       }
-      else {
+      else if (instance['properties']['lastGeoFailoverTime'] !== undefined) {
         this['lastGeoFailoverTime'] = instance['properties']['lastGeoFailoverTime'];
       }
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['secondaryLocation'] !== null && instance['properties']['secondaryLocation'] !== undefined) {
-        this['secondaryLocation'] = instance['properties']['secondaryLocation'];
-      }
-      else {
+      if (instance['properties']['secondaryLocation'] !== undefined) {
         this['secondaryLocation'] = instance['properties']['secondaryLocation'];
       }
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['statusOfSecondary'] !== null && instance['properties']['statusOfSecondary'] !== undefined) {
-        this['statusOfSecondary'] = instance['properties']['statusOfSecondary'];
-      }
-      else {
+      if (instance['properties']['statusOfSecondary'] !== undefined) {
         this['statusOfSecondary'] = instance['properties']['statusOfSecondary'];
       }
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['creationTime'] !== null && instance['properties']['creationTime'] !== undefined) {
+      if (instance['properties']['creationTime']) {
         this['creationTime'] = new Date(instance['properties']['creationTime']);
       }
-      else {
+      else if (instance['properties']['creationTime'] !== undefined) {
         this['creationTime'] = instance['properties']['creationTime'];
       }
     }
@@ -339,17 +336,11 @@ StorageAccount.prototype.deserialize = function (instance) {
       if (instance['properties']['customDomain']) {
         this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
       }
-      else {
-        this['customDomain'] = instance['properties']['customDomain'];
-      }
     }
 
     if (instance['properties'] !== null && instance['properties'] !== undefined) {
       if (instance['properties']['secondaryEndpoints']) {
         this['secondaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['secondaryEndpoints']);
-      }
-      else {
-        this['secondaryEndpoints'] = instance['properties']['secondaryEndpoints'];
       }
     }
   }

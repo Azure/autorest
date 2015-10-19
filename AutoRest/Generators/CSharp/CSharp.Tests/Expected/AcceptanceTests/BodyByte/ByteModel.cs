@@ -70,7 +70,8 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "byte/null").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "byte/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -157,7 +158,8 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 ServiceClientTracing.Enter(invocationId, this, "GetEmpty", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "byte/empty").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "byte/empty").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -244,7 +246,8 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 ServiceClientTracing.Enter(invocationId, this, "GetNonAscii", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "byte/nonAscii").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "byte/nonAscii").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -313,8 +316,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         /// </summary>
         /// <param name='byteBody'>
-        /// Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-        /// </param>
+        /// Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -339,7 +341,8 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 ServiceClientTracing.Enter(invocationId, this, "PutNonAscii", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "byte/nonAscii").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "byte/nonAscii").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -424,7 +427,8 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 ServiceClientTracing.Enter(invocationId, this, "GetInvalid", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "byte/invalid").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "byte/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

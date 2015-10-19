@@ -12,7 +12,7 @@ package fixtures.bodystring;
 
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATService class.
@@ -71,17 +71,17 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestSwaggerBATServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestSwaggerBATServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
     private void initialize() {
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.stringOperations = new StringOperationsImpl(restAdapter, this);
-        this.enumOperations = new EnumOperationsImpl(restAdapter, this);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.stringOperations = new StringOperationsImpl(retrofit, this);
+        this.enumOperations = new EnumOperationsImpl(retrofit, this);
     }
 }

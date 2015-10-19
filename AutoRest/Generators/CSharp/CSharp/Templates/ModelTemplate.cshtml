@@ -1,4 +1,4 @@
-﻿@using System.Linq
+@using System.Linq
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
@@ -22,7 +22,7 @@ namespace @(Settings.Namespace).Models
     /// </summary>
     @if (Model.NeedsPolymorphicConverter)
     {
-    @:[JsonObject("@Model.SerializedName")]    
+    @:[JsonObject("@Model.SerializedName")]
     }
     public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
     {
@@ -35,13 +35,17 @@ namespace @(Settings.Namespace).Models
             {
         @:[JsonConverter(typeof(DateJsonConverter))]
             }
+            if (property.Type == PrimaryType.DateTimeRfc1123)
+            {
+        @:[JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
+            }
         @:[JsonProperty(PropertyName = "@property.SerializedName")]
         @:public @property.Type.Name @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine
         @:
         }
-@if(@Model.ShouldValidateChain()) 
-{   
+@if(@Model.ShouldValidateChain())
+{
         @:/// <summary>
         @:/// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
         @:/// </summary>
@@ -54,7 +58,7 @@ namespace @(Settings.Namespace).Models
                 anythingToValidate = true;
             @:base.Validate();
             }
-            
+
             foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly))
             {
                 anythingToValidate = true;

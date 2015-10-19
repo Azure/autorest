@@ -31,13 +31,13 @@
  */
 function CheckNameAvailabilityResult(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.nameAvailable !== null && parameters.nameAvailable !== undefined) {
+    if (parameters.nameAvailable !== undefined) {
       this.nameAvailable = parameters.nameAvailable;
     }
-    if (parameters.reason !== null && parameters.reason !== undefined) {
+    if (parameters.reason !== undefined) {
       this.reason = parameters.reason;
     }
-    if (parameters.message !== null && parameters.message !== undefined) {
+    if (parameters.message !== undefined) {
       this.message = parameters.message;
     }
   }    
@@ -86,15 +86,15 @@ CheckNameAvailabilityResult.prototype.serialize = function () {
  */
 CheckNameAvailabilityResult.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['nameAvailable'] !== null && instance['nameAvailable'] !== undefined) {
+    if (instance['nameAvailable'] !== undefined) {
       this['nameAvailable'] = instance['nameAvailable'];
     }
 
-    if (instance['reason'] !== null && instance['reason'] !== undefined) {
+    if (instance['reason'] !== undefined) {
       this['reason'] = instance['reason'];
     }
 
-    if (instance['message'] !== null && instance['message'] !== undefined) {
+    if (instance['message'] !== undefined) {
       this['message'] = instance['message'];
     }
   }

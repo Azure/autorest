@@ -26,10 +26,10 @@ var util = require('util');
 function Salmon(parameters) {
   Salmon['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.location !== null && parameters.location !== undefined) {
+    if (parameters.location !== undefined) {
       this.location = parameters.location;
     }
-    if (parameters.iswild !== null && parameters.iswild !== undefined) {
+    if (parameters.iswild !== undefined) {
       this.iswild = parameters.iswild;
     }
   }    
@@ -71,11 +71,11 @@ Salmon.prototype.serialize = function () {
 Salmon.prototype.deserialize = function (instance) {
   Salmon['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['location'] !== null && instance['location'] !== undefined) {
+    if (instance['location'] !== undefined) {
       this['location'] = instance['location'];
     }
 
-    if (instance['iswild'] !== null && instance['iswild'] !== undefined) {
+    if (instance['iswild'] !== undefined) {
       this['iswild'] = instance['iswild'];
     }
   }

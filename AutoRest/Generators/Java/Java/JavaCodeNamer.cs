@@ -35,7 +35,7 @@ namespace Microsoft.Rest.Generator.Java
                 "strictfp", "super",    "switch",   "synchronized","this",
                 "throw",    "throws",   "transient","true",     "try",
                 "void",     "volatile", "while",    "date",     "datetime",
-                "period",   "stream",   "string",   "object"
+                "period",   "stream",   "string",   "object", "header"
             }.ForEach(s => ReservedWords.Add(s));
 
             _normalizedTypes = new HashSet<IType>();
@@ -147,7 +147,7 @@ namespace Microsoft.Rest.Generator.Java
                 return null;
             }
             var enumType = type as EnumType;
-            if (enumType != null && enumType.IsExpandable)
+            if (enumType != null && enumType.ModelAsString)
             {
                 type = PrimaryType.String;
             }
@@ -187,7 +187,7 @@ namespace Microsoft.Rest.Generator.Java
 
         private IType NormalizeEnumType(EnumType enumType)
         {
-            if (enumType.IsExpandable)
+            if (enumType.ModelAsString)
             {
                 enumType.SerializedName = "string";
                 enumType.Name = "string";
@@ -237,6 +237,10 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType == PrimaryType.DateTime)
             {
                 primaryType.Name = "DateTime";
+            }
+            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            {
+                primaryType.Name = "DateTimeRfc1123";
             }
             else if (primaryType == PrimaryType.Double)
             {
@@ -340,6 +344,11 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return "org.joda.time.DateTime";
             }
+            else if (primaryType == PrimaryType.DateTimeRfc1123 ||
+               primaryType.Name == "DateTimeRfc1123")
+            {
+                return "com.microsoft.rest.DateTimeRfc1123";
+            }
             else if (primaryType == PrimaryType.Stream ||
                 primaryType.Name == "InputStream")
             {
@@ -348,7 +357,7 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType == PrimaryType.TimeSpan ||
                 primaryType.Name == "Period")
             {
-                return "java.time.Period";
+                return "org.joda.time.Period";
             }
             else
             {

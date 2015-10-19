@@ -195,8 +195,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// Put External Resource as an Array
         /// </summary>
         /// <param name='resourceArray'>
-        /// External Resource as an Array to put
-        /// </param>
+        /// External Resource as an Array to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -217,7 +216,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 ServiceClientTracing.Enter(invocationId, this, "PutArray", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "azure/resource-flatten/array").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azure/resource-flatten/array").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -326,7 +326,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 ServiceClientTracing.Enter(invocationId, this, "GetArray", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "azure/resource-flatten/array").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azure/resource-flatten/array").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -419,8 +420,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// Put External Resource as a Dictionary
         /// </summary>
         /// <param name='resourceDictionary'>
-        /// External Resource as a Dictionary to put
-        /// </param>
+        /// External Resource as a Dictionary to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -441,7 +441,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 ServiceClientTracing.Enter(invocationId, this, "PutDictionary", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "azure/resource-flatten/dictionary").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azure/resource-flatten/dictionary").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -550,7 +551,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 ServiceClientTracing.Enter(invocationId, this, "GetDictionary", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "azure/resource-flatten/dictionary").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azure/resource-flatten/dictionary").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -643,8 +645,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// Put External Resource as a ResourceCollection
         /// </summary>
         /// <param name='resourceComplexObject'>
-        /// External Resource as a ResourceCollection to put
-        /// </param>
+        /// External Resource as a ResourceCollection to put/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -665,7 +666,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 ServiceClientTracing.Enter(invocationId, this, "PutResourceCollection", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "azure/resource-flatten/resourcecollection").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azure/resource-flatten/resourcecollection").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -774,7 +776,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 ServiceClientTracing.Enter(invocationId, this, "GetResourceCollection", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "azure/resource-flatten/resourcecollection").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azure/resource-flatten/resourcecollection").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     /// <summary>
     /// </summary>
-    [JsonObject("sawshark")]    
+    [JsonObject("sawshark")]
     public partial class Sawshark : Shark
     {
         /// <summary>

@@ -70,7 +70,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Head408", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/retry/408").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/retry/408").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("HEAD");
@@ -133,8 +134,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 500 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -155,7 +155,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Put500", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/retry/500").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/retry/500").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -222,8 +223,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 500 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -244,7 +244,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Patch500", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/retry/500").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/retry/500").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PATCH");
@@ -329,7 +330,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Get502", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/retry/502").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/retry/502").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -392,8 +394,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 503 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -414,7 +415,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Post503", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/retry/503").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/retry/503").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -481,8 +483,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 503 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -503,7 +504,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Delete503", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/retry/503").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/retry/503").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("DELETE");
@@ -570,8 +572,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 504 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -592,7 +593,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Put504", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/retry/504").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/retry/504").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -659,8 +661,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 504 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true
-        /// </param>
+        /// Simple boolean value true/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -681,7 +682,8 @@ namespace Fixtures.AcceptanceTestsHttp
                 ServiceClientTracing.Enter(invocationId, this, "Patch504", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "http/retry/504").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "http/retry/504").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PATCH");

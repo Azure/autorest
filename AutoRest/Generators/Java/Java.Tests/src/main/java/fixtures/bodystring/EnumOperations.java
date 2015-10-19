@@ -12,8 +12,8 @@ package fixtures.bodystring;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.bodystring.models.Colors;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -30,21 +30,14 @@ public interface EnumOperations {
      */
     interface EnumService {
         @GET("/string/enum/notExpandable")
-        Response getNotExpandable() throws ServiceException;
-
-        @GET("/string/enum/notExpandable")
-        void getNotExpandableAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getNotExpandable();
 
         @PUT("/string/enum/notExpandable")
-        Response putNotExpandable(@Body Colors stringBody) throws ServiceException;
-
-        @PUT("/string/enum/notExpandable")
-        void putNotExpandableAsync(@Body Colors stringBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putNotExpandable(@Body Colors stringBody);
 
     }
     /**
-     * Get enum value 'red color' from enumeration of 'red color',
-     * 'green-color', 'blue_color'.
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @return the Colors object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -52,16 +45,15 @@ public interface EnumOperations {
     Colors getNotExpandable() throws ServiceException;
 
     /**
-     * Get enum value 'red color' from enumeration of 'red color',
-     * 'green-color', 'blue_color'.
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
+    Call<ResponseBody> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
 
     /**
-     * Sends value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
      *
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -69,12 +61,12 @@ public interface EnumOperations {
     void putNotExpandable(Colors stringBody) throws ServiceException;
 
     /**
-     * Sends value 'red color' from enumeration of 'red color', 'green-color',
-     * 'blue_color'
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
      *
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
 
 }

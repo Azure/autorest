@@ -12,8 +12,8 @@ package fixtures.subscriptionidapiversion;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -31,15 +31,11 @@ public interface Group {
      */
     interface GroupService {
         @GET("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
-        Response getSampleResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
-        void getSampleResourceGroupAsync(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getSampleResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
     }
     /**
-     * Provides a resouce group with name 'testgroup101' and location 'West
-     * US'.
+     * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @return the SampleResourceGroup object if successful.
@@ -48,12 +44,12 @@ public interface Group {
     SampleResourceGroup getSampleResourceGroup(String resourceGroupName) throws ServiceException;
 
     /**
-     * Provides a resouce group with name 'testgroup101' and location 'West
-     * US'.
+     * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback);
+    Call<ResponseBody> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback);
 
 }

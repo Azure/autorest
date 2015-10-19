@@ -54,6 +54,7 @@ util.inherits(AutoRestReportService, ServiceClient);
 
 /**
  * Get test coverage report
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -82,7 +83,7 @@ AutoRestReportService.prototype.getReport = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//report';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

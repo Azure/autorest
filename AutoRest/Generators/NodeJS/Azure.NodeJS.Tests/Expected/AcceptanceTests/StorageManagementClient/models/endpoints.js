@@ -10,6 +10,8 @@
 
 'use strict';
 
+var models = require('./index');
+
 /**
  * @class
  * Initializes a new instance of the Endpoints class.
@@ -22,17 +24,31 @@
  * 
  * @member {string} [table] Gets the table endpoint.
  * 
+ * @member {object} [dummyEndPoint] Dummy EndPoint
+ * 
+ * @member {object} [fooPoint] Foo point
+ * 
+ * @member {object} [fooPoint.barPoint] Bar point
+ * 
+ * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
+ * 
  */
 function Endpoints(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.blob !== null && parameters.blob !== undefined) {
+    if (parameters.blob !== undefined) {
       this.blob = parameters.blob;
     }
-    if (parameters.queue !== null && parameters.queue !== undefined) {
+    if (parameters.queue !== undefined) {
       this.queue = parameters.queue;
     }
-    if (parameters.table !== null && parameters.table !== undefined) {
+    if (parameters.table !== undefined) {
       this.table = parameters.table;
+    }
+    if (parameters.dummyEndPoint) {
+      this.dummyEndPoint = new models['Endpoints'](parameters.dummyEndPoint);
+    }
+    if (parameters.fooPoint) {
+      this.fooPoint = new models['Foo'](parameters.fooPoint);
     }
   }    
 }
@@ -67,6 +83,14 @@ Endpoints.prototype.serialize = function () {
     payload['table'] = this['table'];
   }
 
+  if (this['dummyEndPoint']) {
+    payload['dummyEndPoint'] = this['dummyEndPoint'].serialize();
+  }
+
+  if (this['fooPoint']) {
+    payload['FooPoint'] = this['fooPoint'].serialize();
+  }
+
   return payload;
 };
 
@@ -78,16 +102,24 @@ Endpoints.prototype.serialize = function () {
  */
 Endpoints.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['blob'] !== null && instance['blob'] !== undefined) {
+    if (instance['blob'] !== undefined) {
       this['blob'] = instance['blob'];
     }
 
-    if (instance['queue'] !== null && instance['queue'] !== undefined) {
+    if (instance['queue'] !== undefined) {
       this['queue'] = instance['queue'];
     }
 
-    if (instance['table'] !== null && instance['table'] !== undefined) {
+    if (instance['table'] !== undefined) {
       this['table'] = instance['table'];
+    }
+
+    if (instance['dummyEndPoint']) {
+      this['dummyEndPoint'] = new models['Endpoints']().deserialize(instance['dummyEndPoint']);
+    }
+
+    if (instance['FooPoint']) {
+      this['fooPoint'] = new models['Foo']().deserialize(instance['FooPoint']);
     }
   }
 

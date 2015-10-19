@@ -64,6 +64,7 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
 
 /**
  * Put External Resource as an Array
+ *
  * @param {array} [resourceArray] External Resource as an Array to put
  * 
  * @param {object} [options]
@@ -102,7 +103,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//azure/resource-flatten/array';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -194,6 +195,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
 
 /**
  * Get External Resource as an Array
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -230,7 +232,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//azure/resource-flatten/array';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -325,6 +327,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
 
 /**
  * Put External Resource as a Dictionary
+ *
  * @param {object} [resourceDictionary] External Resource as a Dictionary to
  * put
  * 
@@ -364,7 +367,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//azure/resource-flatten/dictionary';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -400,9 +403,6 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
       for(var valueElement1 in resourceDictionary) {
         if (resourceDictionary[valueElement1]) {
           resourceDictionary[valueElement1] = new client._models['FlattenedProduct'](resourceDictionary[valueElement1]);
-        }
-        else {
-          resourceDictionary[valueElement1] = resourceDictionary[valueElement1];
         }
       }
     }
@@ -459,6 +459,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
 
 /**
  * Get External Resource as a Dictionary
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -495,7 +496,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//azure/resource-flatten/dictionary';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -564,9 +565,6 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['FlattenedProduct'](parsedResponse[valueElement]);
             }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
-            }
           }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -590,6 +588,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
 
 /**
  * Put External Resource as a ResourceCollection
+ *
  * @param {object} [resourceComplexObject] External Resource as a
  * ResourceCollection to put
  * 
@@ -647,7 +646,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//azure/resource-flatten/resourcecollection';
   var queryParameters = [];
   if (queryParameters.length > 0) {
@@ -728,6 +727,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
 
 /**
  * Get External Resource as a ResourceCollection
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -765,7 +765,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   }
 
   // Construct URL
-  var requestUrl = this.baseUri + 
+  var requestUrl = this.baseUri +
                    '//azure/resource-flatten/resourcecollection';
   var queryParameters = [];
   if (queryParameters.length > 0) {

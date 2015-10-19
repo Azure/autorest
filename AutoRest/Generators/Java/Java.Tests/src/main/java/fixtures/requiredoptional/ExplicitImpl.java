@@ -10,15 +10,17 @@
 
 package fixtures.requiredoptional;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.IntOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
@@ -38,14 +40,13 @@ public class ExplicitImpl implements Explicit {
     private ExplicitService service;
     AutoRestRequiredOptionalTestService client;
 
-    public ExplicitImpl(RestAdapter restAdapter, AutoRestRequiredOptionalTestService client) {
-        this.service = restAdapter.create(ExplicitService.class);
+    public ExplicitImpl(Retrofit retrofit, AutoRestRequiredOptionalTestService client) {
+        this.service = retrofit.create(ExplicitService.class);
         this.client = client;
     }
 
     /**
-     * Test explicitly required integer. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
      * @return the Error object if successful.
@@ -53,38 +54,41 @@ public class ExplicitImpl implements Explicit {
      */
     public Error postRequiredIntegerParameter(int bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Error> response = postRequiredIntegerParameterDelegate(service.postRequiredIntegerParameter(bodyParameter), null);
+            Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
+            ServiceResponse<Error> response = postRequiredIntegerParameterDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredIntegerParameterDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required integer. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredIntegerParameterAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
+        Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredIntegerParameterDelegate(response, error));
+                    serviceCallback.success(postRequiredIntegerParameterDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -95,11 +99,13 @@ public class ExplicitImpl implements Explicit {
      */
     public void postOptionalIntegerParameter(Integer bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalIntegerParameterDelegate(service.postOptionalIntegerParameter(bodyParameter), null);
+            Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
+            ServiceResponse<Void> response = postOptionalIntegerParameterDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalIntegerParameterDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -109,30 +115,30 @@ public class ExplicitImpl implements Explicit {
      * @param bodyParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalIntegerParameterAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalIntegerParameterDelegate(response, error));
+                    serviceCallback.success(postOptionalIntegerParameterDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
      * @return the Error object if successful.
@@ -145,94 +151,96 @@ public class ExplicitImpl implements Explicit {
         }
         Validator.validate(bodyParameter);
         try {
-            ServiceResponse<Error> response = postRequiredIntegerPropertyDelegate(service.postRequiredIntegerProperty(bodyParameter), null);
+            Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
+            ServiceResponse<Error> response = postRequiredIntegerPropertyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredIntegerPropertyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
-        service.postRequiredIntegerPropertyAsync(bodyParameter, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredIntegerPropertyDelegate(response, error));
+                    serviceCallback.success(postRequiredIntegerPropertyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly optional integer. Please put a valid int-wrapper with
-     * 'value' = null.
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalIntegerPropertyDelegate(service.postOptionalIntegerProperty(bodyParameter), null);
+            Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
+            ServiceResponse<Void> response = postOptionalIntegerPropertyDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalIntegerPropertyDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly optional integer. Please put a valid int-wrapper with
-     * 'value' = null.
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalIntegerPropertyAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalIntegerPropertyDelegate(response, error));
+                    serviceCallback.success(postOptionalIntegerPropertyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
      * @return the Error object if successful.
@@ -240,88 +248,91 @@ public class ExplicitImpl implements Explicit {
      */
     public Error postRequiredIntegerHeader(int headerParameter) throws ServiceException {
         try {
-            ServiceResponse<Error> response = postRequiredIntegerHeaderDelegate(service.postRequiredIntegerHeader(headerParameter), null);
+            Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
+            ServiceResponse<Error> response = postRequiredIntegerHeaderDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredIntegerHeaderDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
-        service.postRequiredIntegerHeaderAsync(headerParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
+        Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredIntegerHeaderDelegate(response, error));
+                    serviceCallback.success(postRequiredIntegerHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalIntegerHeader(Integer headerParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalIntegerHeaderDelegate(service.postOptionalIntegerHeader(headerParameter), null);
+            Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
+            ServiceResponse<Void> response = postOptionalIntegerHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalIntegerHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalIntegerHeaderAsync(headerParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalIntegerHeaderDelegate(response, error));
+                    serviceCallback.success(postOptionalIntegerHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly required string. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
      * @return the Error object if successful.
@@ -333,42 +344,45 @@ public class ExplicitImpl implements Explicit {
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
         }
         try {
-            ServiceResponse<Error> response = postRequiredStringParameterDelegate(service.postRequiredStringParameter(bodyParameter), null);
+            Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
+            ServiceResponse<Error> response = postRequiredStringParameterDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredStringParameterDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required string. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
-        service.postRequiredStringParameterAsync(bodyParameter, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredStringParameterDelegate(response, error));
+                    serviceCallback.success(postRequiredStringParameterDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringParameterDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -379,11 +393,13 @@ public class ExplicitImpl implements Explicit {
      */
     public void postOptionalStringParameter(String bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalStringParameterDelegate(service.postOptionalStringParameter(bodyParameter), null);
+            Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
+            ServiceResponse<Void> response = postOptionalStringParameterDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalStringParameterDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -393,30 +409,30 @@ public class ExplicitImpl implements Explicit {
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalStringParameterAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalStringParameterDelegate(response, error));
+                    serviceCallback.success(postOptionalStringParameterDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalStringParameterDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalStringParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
      * @return the Error object if successful.
@@ -429,94 +445,96 @@ public class ExplicitImpl implements Explicit {
         }
         Validator.validate(bodyParameter);
         try {
-            ServiceResponse<Error> response = postRequiredStringPropertyDelegate(service.postRequiredStringProperty(bodyParameter), null);
+            Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
+            ServiceResponse<Error> response = postRequiredStringPropertyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredStringPropertyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
-        service.postRequiredStringPropertyAsync(bodyParameter, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredStringPropertyDelegate(response, error));
+                    serviceCallback.success(postRequiredStringPropertyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly optional integer. Please put a valid string-wrapper
-     * with 'value' = null.
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalStringPropertyDelegate(service.postOptionalStringProperty(bodyParameter), null);
+            Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
+            ServiceResponse<Void> response = postOptionalStringPropertyDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalStringPropertyDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly optional integer. Please put a valid string-wrapper
-     * with 'value' = null.
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalStringPropertyAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalStringPropertyDelegate(response, error));
+                    serviceCallback.success(postOptionalStringPropertyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
      * @return the Error object if successful.
@@ -528,92 +546,95 @@ public class ExplicitImpl implements Explicit {
                 new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
         }
         try {
-            ServiceResponse<Error> response = postRequiredStringHeaderDelegate(service.postRequiredStringHeader(headerParameter), null);
+            Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
+            ServiceResponse<Error> response = postRequiredStringHeaderDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredStringHeaderDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
         }
-        service.postRequiredStringHeaderAsync(headerParameter, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredStringHeaderDelegate(response, error));
+                    serviceCallback.success(postRequiredStringHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly optional string. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalStringHeader(String bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalStringHeaderDelegate(service.postOptionalStringHeader(bodyParameter), null);
+            Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
+            ServiceResponse<Void> response = postOptionalStringHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalStringHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly optional string. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalStringHeaderAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalStringHeaderDelegate(response, error));
+                    serviceCallback.success(postOptionalStringHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly required complex object. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
      * @return the Error object if successful.
@@ -626,43 +647,46 @@ public class ExplicitImpl implements Explicit {
         }
         Validator.validate(bodyParameter);
         try {
-            ServiceResponse<Error> response = postRequiredClassParameterDelegate(service.postRequiredClassParameter(bodyParameter), null);
+            Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
+            ServiceResponse<Error> response = postRequiredClassParameterDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredClassParameterDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required complex object. Please put null and the client
-     * library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
-        service.postRequiredClassParameterAsync(bodyParameter, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredClassParameterDelegate(response, error));
+                    serviceCallback.success(postRequiredClassParameterDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredClassParameterDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -673,11 +697,13 @@ public class ExplicitImpl implements Explicit {
      */
     public void postOptionalClassParameter(Product bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalClassParameterDelegate(service.postOptionalClassParameter(bodyParameter), null);
+            Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
+            ServiceResponse<Void> response = postOptionalClassParameterDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalClassParameterDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -687,30 +713,30 @@ public class ExplicitImpl implements Explicit {
      * @param bodyParameter the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalClassParameterAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalClassParameterDelegate(response, error));
+                    serviceCallback.success(postOptionalClassParameterDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalClassParameterDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalClassParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly required complex object. Please put a valid
-     * class-wrapper with 'value' = null and the client library should throw
-     * before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
      * @return the Error object if successful.
@@ -723,93 +749,96 @@ public class ExplicitImpl implements Explicit {
         }
         Validator.validate(bodyParameter);
         try {
-            ServiceResponse<Error> response = postRequiredClassPropertyDelegate(service.postRequiredClassProperty(bodyParameter), null);
+            Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
+            ServiceResponse<Error> response = postRequiredClassPropertyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredClassPropertyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required complex object. Please put a valid
-     * class-wrapper with 'value' = null and the client library should throw
-     * before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
-        service.postRequiredClassPropertyAsync(bodyParameter, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredClassPropertyDelegate(response, error));
+                    serviceCallback.success(postRequiredClassPropertyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly optional complex object. Please put a valid
-     * class-wrapper with 'value' = null.
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalClassPropertyDelegate(service.postOptionalClassProperty(bodyParameter), null);
+            Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
+            ServiceResponse<Void> response = postOptionalClassPropertyDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalClassPropertyDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly optional complex object. Please put a valid
-     * class-wrapper with 'value' = null.
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalClassPropertyAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalClassPropertyDelegate(response, error));
+                    serviceCallback.success(postOptionalClassPropertyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly required array. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @return the Error object if successful.
@@ -822,43 +851,46 @@ public class ExplicitImpl implements Explicit {
         }
         Validator.validate(bodyParameter);
         try {
-            ServiceResponse<Error> response = postRequiredArrayParameterDelegate(service.postRequiredArrayParameter(bodyParameter), null);
+            Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
+            ServiceResponse<Error> response = postRequiredArrayParameterDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredArrayParameterDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required array. Please put null and the client library
-     * should throw before the request is sent.
+     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
-        service.postRequiredArrayParameterAsync(bodyParameter, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredArrayParameterDelegate(response, error));
+                    serviceCallback.success(postRequiredArrayParameterDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -869,11 +901,13 @@ public class ExplicitImpl implements Explicit {
      */
     public void postOptionalArrayParameter(List<String> bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalArrayParameterDelegate(service.postOptionalArrayParameter(bodyParameter), null);
+            Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
+            ServiceResponse<Void> response = postOptionalArrayParameterDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalArrayParameterDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -883,30 +917,30 @@ public class ExplicitImpl implements Explicit {
      * @param bodyParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalArrayParameterAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalArrayParameterDelegate(response, error));
+                    serviceCallback.success(postOptionalArrayParameterDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
      * @return the Error object if successful.
@@ -919,94 +953,96 @@ public class ExplicitImpl implements Explicit {
         }
         Validator.validate(bodyParameter);
         try {
-            ServiceResponse<Error> response = postRequiredArrayPropertyDelegate(service.postRequiredArrayProperty(bodyParameter), null);
+            Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
+            ServiceResponse<Error> response = postRequiredArrayPropertyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredArrayPropertyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with
-     * 'value' = null and the client library should throw before the request
-     * is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
         }
         Validator.validate(bodyParameter, serviceCallback);
-        service.postRequiredArrayPropertyAsync(bodyParameter, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredArrayPropertyDelegate(response, error));
+                    serviceCallback.success(postRequiredArrayPropertyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly optional array. Please put a valid array-wrapper with
-     * 'value' = null.
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalArrayPropertyDelegate(service.postOptionalArrayProperty(bodyParameter), null);
+            Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
+            ServiceResponse<Void> response = postOptionalArrayPropertyDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalArrayPropertyDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly optional array. Please put a valid array-wrapper with
-     * 'value' = null.
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalArrayPropertyAsync(bodyParameter, new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalArrayPropertyDelegate(response, error));
+                    serviceCallback.success(postOptionalArrayPropertyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @return the Error object if successful.
@@ -1019,88 +1055,92 @@ public class ExplicitImpl implements Explicit {
         }
         Validator.validate(headerParameter);
         try {
-            ServiceResponse<Error> response = postRequiredArrayHeaderDelegate(service.postRequiredArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV)), null);
+            Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+            ServiceResponse<Error> response = postRequiredArrayHeaderDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Error> response = postRequiredArrayHeaderDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter'
-     * =&gt; null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
+    public Call<ResponseBody> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
         }
         Validator.validate(headerParameter, serviceCallback);
-        service.postRequiredArrayHeaderAsync(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postRequiredArrayHeaderDelegate(response, error));
+                    serviceCallback.success(postRequiredArrayHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public void postOptionalArrayHeader(List<String> headerParameter) throws ServiceException {
         try {
-            ServiceResponse<Void> response = postOptionalArrayHeaderDelegate(service.postOptionalArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV)), null);
+            Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+            ServiceResponse<Void> response = postOptionalArrayHeaderDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postOptionalArrayHeaderDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Test explicitly optional integer. Please put a header 'headerParameter'
-     * =&gt; null.
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        service.postOptionalArrayHeaderAsync(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV), new ServiceResponseCallback() {
+    public Call<ResponseBody> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postOptionalArrayHeaderDelegate(response, error));
+                    serviceCallback.success(postOptionalArrayHeaderDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

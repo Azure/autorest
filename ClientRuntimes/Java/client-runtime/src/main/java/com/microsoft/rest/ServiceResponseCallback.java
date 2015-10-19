@@ -7,30 +7,22 @@
 
 package com.microsoft.rest;
 
-import retrofit.ResponseCallback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Callback;
 
 /**
  * Inner callback used to merge both successful and failed responses into one
  * callback for customized response handling in a response handling delegate.
  */
-public abstract class ServiceResponseCallback extends ResponseCallback {
-    @Override
-    public void failure(RetrofitError error) {
-        response(error.getResponse(), error);
+public abstract class ServiceResponseCallback<T> implements Callback<ResponseBody> {
+    private ServiceCallback<T> serviceCallback;
+
+    public ServiceResponseCallback(ServiceCallback<T> serviceCallback) {
+        this.serviceCallback = serviceCallback;
     }
 
     @Override
-    public void success(Response response) {
-        response(response, null);
+    public void onFailure(Throwable t) {
+        serviceCallback.failure(new ServiceException(t));
     }
-
-    /**
-     * Override this method to handle REST call responses.
-     *
-     * @param response the response returned by Retrofit, if any
-     * @param error the error returned by Retrofit, if any
-     */
-    public abstract void response(Response response, RetrofitError error);
 }

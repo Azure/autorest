@@ -33,6 +33,7 @@ function HttpRetry(client) {
 
 /**
  * Return 408 status code, then 200 after retry
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ HttpRetry.prototype.head408 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/retry/408';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -118,6 +119,7 @@ HttpRetry.prototype.head408 = function (options, callback) {
 
 /**
  * Return 500 status code, then 200 after retry
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -156,7 +158,7 @@ HttpRetry.prototype.put500 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/retry/500';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -228,6 +230,7 @@ HttpRetry.prototype.put500 = function (booleanValue, options, callback) {
 
 /**
  * Return 500 status code, then 200 after retry
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -266,7 +269,7 @@ HttpRetry.prototype.patch500 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/retry/500';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -338,6 +341,7 @@ HttpRetry.prototype.patch500 = function (booleanValue, options, callback) {
 
 /**
  * Return 502 status code, then 200 after retry
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -366,7 +370,7 @@ HttpRetry.prototype.get502 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/retry/502';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -423,6 +427,7 @@ HttpRetry.prototype.get502 = function (options, callback) {
 
 /**
  * Return 503 status code, then 200 after retry
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -461,7 +466,7 @@ HttpRetry.prototype.post503 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/retry/503';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -533,6 +538,7 @@ HttpRetry.prototype.post503 = function (booleanValue, options, callback) {
 
 /**
  * Return 503 status code, then 200 after retry
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -571,7 +577,7 @@ HttpRetry.prototype.delete503 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/retry/503';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -643,6 +649,7 @@ HttpRetry.prototype.delete503 = function (booleanValue, options, callback) {
 
 /**
  * Return 504 status code, then 200 after retry
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -681,7 +688,7 @@ HttpRetry.prototype.put504 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/retry/504';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -753,6 +760,7 @@ HttpRetry.prototype.put504 = function (booleanValue, options, callback) {
 
 /**
  * Return 504 status code, then 200 after retry
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -791,7 +799,7 @@ HttpRetry.prototype.patch504 = function (booleanValue, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/retry/504';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

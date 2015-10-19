@@ -33,6 +33,7 @@ function Datetime(client) {
 
 /**
  * Get null datetime value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ Datetime.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -134,6 +135,7 @@ Datetime.prototype.getNull = function (options, callback) {
 
 /**
  * Get invalid datetime value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -162,7 +164,7 @@ Datetime.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -235,6 +237,7 @@ Datetime.prototype.getInvalid = function (options, callback) {
 
 /**
  * Get overflow datetime value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -263,7 +266,7 @@ Datetime.prototype.getOverflow = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/overflow';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -336,6 +339,7 @@ Datetime.prototype.getOverflow = function (options, callback) {
 
 /**
  * Get underflow datetime value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -364,7 +368,7 @@ Datetime.prototype.getUnderflow = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/underflow';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -437,6 +441,7 @@ Datetime.prototype.getUnderflow = function (options, callback) {
 
 /**
  * Put max datetime value 9999-12-31T23:59:59.9999999Z
+ *
  * @param {date} datetimeBody
  * 
  * @param {object} [options]
@@ -476,7 +481,7 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/utc';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -546,6 +551,7 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
 
 /**
  * Get max datetime value 9999-12-31t23:59:59.9999999z
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -574,7 +580,7 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/utc/lowercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -647,6 +653,7 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
 
 /**
  * Get max datetime value 9999-12-31T23:59:59.9999999Z
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -675,7 +682,7 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/utc/uppercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -749,6 +756,7 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
 /**
  * Put max datetime value with positive numoffset
  * 9999-12-31t23:59:59.9999999+14:00
+ *
  * @param {date} datetimeBody
  * 
  * @param {object} [options]
@@ -788,7 +796,7 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localpositiveoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -859,6 +867,7 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31t23:59:59.9999999+14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -887,7 +896,7 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localpositiveoffset/lowercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -961,6 +970,7 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31T23:59:59.9999999+14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -989,7 +999,7 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localpositiveoffset/uppercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1063,6 +1073,7 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
 /**
  * Put max datetime value with positive numoffset
  * 9999-12-31t23:59:59.9999999-14:00
+ *
  * @param {date} datetimeBody
  * 
  * @param {object} [options]
@@ -1102,7 +1113,7 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localnegativeoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1173,6 +1184,7 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31T23:59:59.9999999-14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1201,7 +1213,7 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localnegativeoffset/uppercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1275,6 +1287,7 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
 /**
  * Get max datetime value with positive num offset
  * 9999-12-31t23:59:59.9999999-14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1303,7 +1316,7 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/max/localnegativeoffset/lowercase';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1376,6 +1389,7 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
 
 /**
  * Put min datetime value 0001-01-01T00:00:00Z
+ *
  * @param {date} datetimeBody
  * 
  * @param {object} [options]
@@ -1415,7 +1429,7 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/utc';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1485,6 +1499,7 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
 
 /**
  * Get min datetime value 0001-01-01T00:00:00Z
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1513,7 +1528,7 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/utc';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1586,6 +1601,7 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
 
 /**
  * Put min datetime value 0001-01-01T00:00:00+14:00
+ *
  * @param {date} datetimeBody
  * 
  * @param {object} [options]
@@ -1625,7 +1641,7 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/localpositiveoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1695,6 +1711,7 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
 
 /**
  * Get min datetime value 0001-01-01T00:00:00+14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1723,7 +1740,7 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/localpositiveoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1796,6 +1813,7 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
 
 /**
  * Put min datetime value 0001-01-01T00:00:00-14:00
+ *
  * @param {date} datetimeBody
  * 
  * @param {object} [options]
@@ -1835,7 +1853,7 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/localnegativeoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1905,6 +1923,7 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
 
 /**
  * Get min datetime value 0001-01-01T00:00:00-14:00
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1933,7 +1952,7 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//datetime/min/localnegativeoffset';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

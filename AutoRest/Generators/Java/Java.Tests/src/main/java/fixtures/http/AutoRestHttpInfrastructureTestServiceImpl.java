@@ -12,7 +12,7 @@ package fixtures.http;
 
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
@@ -121,22 +121,22 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestHttpInfrastructureTestServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestHttpInfrastructureTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
     private void initialize() {
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.httpFailure = new HttpFailureImpl(restAdapter, this);
-        this.httpSuccess = new HttpSuccessImpl(restAdapter, this);
-        this.httpRedirects = new HttpRedirectsImpl(restAdapter, this);
-        this.httpClientFailure = new HttpClientFailureImpl(restAdapter, this);
-        this.httpServerFailure = new HttpServerFailureImpl(restAdapter, this);
-        this.httpRetry = new HttpRetryImpl(restAdapter, this);
-        this.multipleResponses = new MultipleResponsesImpl(restAdapter, this);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.httpFailure = new HttpFailureImpl(retrofit, this);
+        this.httpSuccess = new HttpSuccessImpl(retrofit, this);
+        this.httpRedirects = new HttpRedirectsImpl(retrofit, this);
+        this.httpClientFailure = new HttpClientFailureImpl(retrofit, this);
+        this.httpServerFailure = new HttpServerFailureImpl(retrofit, this);
+        this.httpRetry = new HttpRetryImpl(retrofit, this);
+        this.multipleResponses = new MultipleResponsesImpl(retrofit, this);
     }
 }

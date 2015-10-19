@@ -10,23 +10,25 @@
 
 package fixtures.bodystring;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.bodystring.models.Error;
 
 public class StringOperationsImpl implements StringOperations {
     private StringService service;
     AutoRestSwaggerBATService client;
 
-    public StringOperationsImpl(RestAdapter restAdapter, AutoRestSwaggerBATService client) {
-        this.service = restAdapter.create(StringService.class);
+    public StringOperationsImpl(Retrofit retrofit, AutoRestSwaggerBATService client) {
+        this.service = retrofit.create(StringService.class);
         this.client = client;
     }
 
@@ -38,11 +40,13 @@ public class StringOperationsImpl implements StringOperations {
      */
     public String getNull() throws ServiceException {
         try {
-            ServiceResponse<String> response = getNullDelegate(service.getNull(), null);
+            Call<ResponseBody> call = service.getNull();
+            ServiceResponse<String> response = getNullDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<String> response = getNullDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -51,24 +55,26 @@ public class StringOperationsImpl implements StringOperations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNullAsync(final ServiceCallback<String> serviceCallback) {
-        service.getNullAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNullAsync(final ServiceCallback<String> serviceCallback) {
+        Call<ResponseBody> call = service.getNull();
+        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, error));
+                    serviceCallback.success(getNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<String> getNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<String> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<String>()
                 .register(200, new TypeToken<String>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -79,11 +85,13 @@ public class StringOperationsImpl implements StringOperations {
      */
     public void putNull(String stringBody) throws ServiceException {
         try {
-            ServiceResponse<Void> response = putNullDelegate(service.putNull(stringBody), null);
+            Call<ResponseBody> call = service.putNull(stringBody);
+            ServiceResponse<Void> response = putNullDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putNullDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -93,24 +101,26 @@ public class StringOperationsImpl implements StringOperations {
      * @param stringBody Possible values for this parameter include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        service.putNullAsync(stringBody, new ServiceResponseCallback() {
+    public Call<ResponseBody> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.putNull(stringBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putNullDelegate(response, error));
+                    serviceCallback.success(putNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -121,11 +131,13 @@ public class StringOperationsImpl implements StringOperations {
      */
     public String getEmpty() throws ServiceException {
         try {
-            ServiceResponse<String> response = getEmptyDelegate(service.getEmpty(), null);
+            Call<ResponseBody> call = service.getEmpty();
+            ServiceResponse<String> response = getEmptyDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<String> response = getEmptyDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -134,24 +146,26 @@ public class StringOperationsImpl implements StringOperations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getEmptyAsync(final ServiceCallback<String> serviceCallback) {
-        service.getEmptyAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
+        Call<ResponseBody> call = service.getEmpty();
+        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response, error));
+                    serviceCallback.success(getEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<String> getEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<String> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<String>()
                 .register(200, new TypeToken<String>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -166,11 +180,13 @@ public class StringOperationsImpl implements StringOperations {
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = putEmptyDelegate(service.putEmpty(stringBody), null);
+            Call<ResponseBody> call = service.putEmpty(stringBody);
+            ServiceResponse<Void> response = putEmptyDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putEmptyDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -180,79 +196,79 @@ public class StringOperationsImpl implements StringOperations {
      * @param stringBody Possible values for this parameter include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
         }
-        service.putEmptyAsync(stringBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putEmpty(stringBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putEmptyDelegate(response, error));
+                    serviceCallback.success(putEmptyDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get mbcs string value
-     * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-     * '
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      *
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public String getMbcs() throws ServiceException {
         try {
-            ServiceResponse<String> response = getMbcsDelegate(service.getMbcs(), null);
+            Call<ResponseBody> call = service.getMbcs();
+            ServiceResponse<String> response = getMbcsDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<String> response = getMbcsDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get mbcs string value
-     * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-     * '
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMbcsAsync(final ServiceCallback<String> serviceCallback) {
-        service.getMbcsAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
+        Call<ResponseBody> call = service.getMbcs();
+        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMbcsDelegate(response, error));
+                    serviceCallback.success(getMbcsDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<String> getMbcsDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<String> getMbcsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<String>()
                 .register(200, new TypeToken<String>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Set string value mbcs
-     * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-     * '
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      *
      * @param stringBody Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -263,98 +279,95 @@ public class StringOperationsImpl implements StringOperations {
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = putMbcsDelegate(service.putMbcs(stringBody), null);
+            Call<ResponseBody> call = service.putMbcs(stringBody);
+            ServiceResponse<Void> response = putMbcsDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putMbcsDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Set string value mbcs
-     * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-     * '
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      *
      * @param stringBody Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
         }
-        service.putMbcsAsync(stringBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putMbcs(stringBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putMbcsDelegate(response, error));
+                    serviceCallback.success(putMbcsDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putMbcsDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Get string value with leading and trailing whitespace
-     * '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men
-     * to come to the aid of their
-     * country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
      *
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public String getWhitespace() throws ServiceException {
         try {
-            ServiceResponse<String> response = getWhitespaceDelegate(service.getWhitespace(), null);
+            Call<ResponseBody> call = service.getWhitespace();
+            ServiceResponse<String> response = getWhitespaceDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<String> response = getWhitespaceDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Get string value with leading and trailing whitespace
-     * '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men
-     * to come to the aid of their
-     * country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
-        service.getWhitespaceAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
+        Call<ResponseBody> call = service.getWhitespace();
+        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getWhitespaceDelegate(response, error));
+                    serviceCallback.success(getWhitespaceDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<String> getWhitespaceDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<String> getWhitespaceDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<String>()
                 .register(200, new TypeToken<String>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
-     * Set String value with leading and trailing whitespace
-     * '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men
-     * to come to the aid of their
-     * country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
      *
      * @param stringBody Possible values for this parameter include: '    Now is the time for all good men to come to the aid of their country    '
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -365,45 +378,46 @@ public class StringOperationsImpl implements StringOperations {
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = putWhitespaceDelegate(service.putWhitespace(stringBody), null);
+            Call<ResponseBody> call = service.putWhitespace(stringBody);
+            ServiceResponse<Void> response = putWhitespaceDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putWhitespaceDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
     /**
-     * Set String value with leading and trailing whitespace
-     * '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men
-     * to come to the aid of their
-     * country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
      *
      * @param stringBody Possible values for this parameter include: '    Now is the time for all good men to come to the aid of their country    '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
         }
-        service.putWhitespaceAsync(stringBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putWhitespace(stringBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putWhitespaceDelegate(response, error));
+                    serviceCallback.success(putWhitespaceDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putWhitespaceDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -414,11 +428,13 @@ public class StringOperationsImpl implements StringOperations {
      */
     public String getNotProvided() throws ServiceException {
         try {
-            ServiceResponse<String> response = getNotProvidedDelegate(service.getNotProvided(), null);
+            Call<ResponseBody> call = service.getNotProvided();
+            ServiceResponse<String> response = getNotProvidedDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<String> response = getNotProvidedDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -427,24 +443,26 @@ public class StringOperationsImpl implements StringOperations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
-        service.getNotProvidedAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
+        Call<ResponseBody> call = service.getNotProvided();
+        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getNotProvidedDelegate(response, error));
+                    serviceCallback.success(getNotProvidedDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<String> getNotProvidedDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<String> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<String>()
                 .register(200, new TypeToken<String>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

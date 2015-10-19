@@ -77,7 +77,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "GetRequiredPath", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/implicit/required/path/{pathParameter}").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/implicit/required/path/{pathParameter}").ToString();
             url = url.Replace("{pathParameter}", Uri.EscapeDataString(pathParameter));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
@@ -164,7 +165,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PutOptionalQuery", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/implicit/optional/query").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/implicit/optional/query").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameter != null)
             {
@@ -257,7 +259,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PutOptionalHeader", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/implicit/optional/header").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/implicit/optional/header").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -349,7 +352,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "PutOptionalBody", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/implicit/optional/body").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/implicit/optional/body").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -438,7 +442,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "GetRequiredGlobalPath", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/global/required/path/{required-global-path}").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/global/required/path/{required-global-path}").ToString();
             url = url.Replace("{required-global-path}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
@@ -526,7 +531,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "GetRequiredGlobalQuery", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/global/required/query").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/global/required/query").ToString();
             List<string> queryParameters = new List<string>();
             if (this.Client.RequiredGlobalQuery != null)
             {
@@ -618,7 +624,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 ServiceClientTracing.Enter(invocationId, this, "GetOptionalGlobalQuery", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "reqopt/global/optional/query").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "reqopt/global/optional/query").ToString();
             List<string> queryParameters = new List<string>();
             if (this.Client.OptionalGlobalQuery != null)
             {

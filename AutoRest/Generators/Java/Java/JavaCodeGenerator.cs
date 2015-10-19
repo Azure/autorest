@@ -14,7 +14,7 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class JavaCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest version 1.1.0";
+        private const string ClientRuntimePackage = "com.microsoft.rest:client-runtime:0.0.1-SNAPSHOT";
 
         public JavaCodeNamer Namer { get; private set; }
 

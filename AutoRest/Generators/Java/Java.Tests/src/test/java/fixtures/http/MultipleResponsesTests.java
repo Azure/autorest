@@ -46,8 +46,8 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get200Model204NoModelDefaultError201Invalid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(201, ex.getResponse().getStatus());
-            Assert.assertNotNull(ex.getErrorModel());
+            Assert.assertEquals(201, ex.getResponse().code());
+            Assert.assertTrue(ex.getMessage().contains("UnrecognizedPropertyException"));
         }
     }
 
@@ -56,7 +56,7 @@ public class MultipleResponsesTests {
         try {
             A result = client.getMultipleResponses().get200Model204NoModelDefaultError202None();
         } catch (ServiceException ex) {
-            Assert.assertEquals(202, ex.getResponse().getStatus());
+            Assert.assertEquals(202, ex.getResponse().code());
         }
     }
 
@@ -66,7 +66,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get200Model204NoModelDefaultError400Valid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -88,7 +88,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get200Model201ModelDefaultError400Valid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
             Error model = JacksonHelper.getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
@@ -123,7 +123,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError400Valid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
             Error model = JacksonHelper.getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
@@ -141,7 +141,7 @@ public class MultipleResponsesTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(202, response.getResponse().getStatus());
+                Assert.assertEquals(202, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -158,7 +158,7 @@ public class MultipleResponsesTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(204, response.getResponse().getStatus());
+                Assert.assertEquals(204, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -171,7 +171,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get202None204NoneDefaultError400Valid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
             Error model = JacksonHelper.getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
@@ -195,7 +195,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get202None204NoneDefaultNone400None();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -205,7 +205,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get202None204NoneDefaultNone400Invalid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -227,7 +227,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().getDefaultModelA400Valid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
             A model = JacksonHelper.getObjectMapper().convertValue(
                     ex.getErrorModel(), A.class);
             Assert.assertEquals("400", model.getStatusCode());
@@ -240,7 +240,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().getDefaultModelA400None();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -260,7 +260,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().getDefaultNone400Invalid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -270,7 +270,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().getDefaultNone400None();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -292,7 +292,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get200ModelA200Invalid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(200, ex.getResponse().getStatus());
+            Assert.assertEquals(200, ex.getResponse().code());
             Assert.assertTrue(ex.getMessage().contains("UnrecognizedPropertyException"));
         }
     }
@@ -303,7 +303,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get200ModelA400None();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
             Assert.assertNull(ex.getErrorModel());
         }
     }
@@ -314,7 +314,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get200ModelA400Valid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -324,7 +324,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get200ModelA400Invalid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -334,7 +334,7 @@ public class MultipleResponsesTests {
             client.getMultipleResponses().get200ModelA202Valid();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(202, ex.getResponse().getStatus());
+            Assert.assertEquals(202, ex.getResponse().code());
         }
     }
 }

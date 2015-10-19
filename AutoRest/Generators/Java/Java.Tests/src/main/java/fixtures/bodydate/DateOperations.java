@@ -12,8 +12,8 @@ package fixtures.bodydate;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import org.joda.time.LocalDate;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -30,52 +30,28 @@ public interface DateOperations {
      */
     interface DateService {
         @GET("/date/null")
-        Response getNull() throws ServiceException;
-
-        @GET("/date/null")
-        void getNullAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getNull();
 
         @GET("/date/invaliddate")
-        Response getInvalidDate() throws ServiceException;
-
-        @GET("/date/invaliddate")
-        void getInvalidDateAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getInvalidDate();
 
         @GET("/date/overflowdate")
-        Response getOverflowDate() throws ServiceException;
-
-        @GET("/date/overflowdate")
-        void getOverflowDateAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getOverflowDate();
 
         @GET("/date/underflowdate")
-        Response getUnderflowDate() throws ServiceException;
-
-        @GET("/date/underflowdate")
-        void getUnderflowDateAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getUnderflowDate();
 
         @PUT("/date/max")
-        Response putMaxDate(@Body LocalDate dateBody) throws ServiceException;
-
-        @PUT("/date/max")
-        void putMaxDateAsync(@Body LocalDate dateBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putMaxDate(@Body LocalDate dateBody);
 
         @GET("/date/max")
-        Response getMaxDate() throws ServiceException;
-
-        @GET("/date/max")
-        void getMaxDateAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getMaxDate();
 
         @PUT("/date/min")
-        Response putMinDate(@Body LocalDate dateBody) throws ServiceException;
-
-        @PUT("/date/min")
-        void putMinDateAsync(@Body LocalDate dateBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putMinDate(@Body LocalDate dateBody);
 
         @GET("/date/min")
-        Response getMinDate() throws ServiceException;
-
-        @GET("/date/min")
-        void getMinDateAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getMinDate();
 
     }
     /**
@@ -90,8 +66,9 @@ public interface DateOperations {
      * Get null date value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
+    Call<ResponseBody> getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get invalid date value
@@ -105,8 +82,9 @@ public interface DateOperations {
      * Get invalid date value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    Call<ResponseBody> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get overflow date value
@@ -120,8 +98,9 @@ public interface DateOperations {
      * Get overflow date value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    Call<ResponseBody> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get underflow date value
@@ -135,8 +114,9 @@ public interface DateOperations {
      * Get underflow date value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    Call<ResponseBody> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Put max date value 9999-12-31
@@ -151,8 +131,9 @@ public interface DateOperations {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get max date value 9999-12-31
@@ -166,8 +147,9 @@ public interface DateOperations {
      * Get max date value 9999-12-31
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    Call<ResponseBody> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Put min date value 0000-01-01
@@ -182,8 +164,9 @@ public interface DateOperations {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get min date value 0000-01-01
@@ -197,7 +180,8 @@ public interface DateOperations {
      * Get min date value 0000-01-01
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    Call<ResponseBody> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
 }

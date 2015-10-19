@@ -12,8 +12,8 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Header;
@@ -30,46 +30,25 @@ public interface SkipUrlEncoding {
      */
     interface SkipUrlEncodingService {
         @GET("/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
-        Response getMethodPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
-        void getMethodPathValidAsync(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMethodPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
-        Response getPathPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
-        void getPathPathValidAsync(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getPathPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
-        Response getSwaggerPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
-        void getSwaggerPathValidAsync(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getSwaggerPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/skipUrlEncoding/method/query/valid")
-        Response getMethodQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/skipUrlEncoding/method/query/valid")
-        void getMethodQueryValidAsync(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMethodQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/skipUrlEncoding/method/query/null")
-        Response getMethodQueryNull(@Query("q1") String q1, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/skipUrlEncoding/method/query/null")
-        void getMethodQueryNullAsync(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMethodQueryNull(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/skipUrlEncoding/path/query/valid")
-        Response getPathQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/skipUrlEncoding/path/query/valid")
-        void getPathQueryValidAsync(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getPathQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/skipUrlEncoding/swagger/query/valid")
-        Response getSwaggerQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/skipUrlEncoding/swagger/query/valid")
-        void getSwaggerQueryValidAsync(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getSwaggerQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
 
     }
     /**
@@ -85,8 +64,9 @@ public interface SkipUrlEncoding {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -101,8 +81,9 @@ public interface SkipUrlEncoding {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -117,12 +98,12 @@ public interface SkipUrlEncoding {
      *
      * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getSwaggerPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getSwaggerPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -130,13 +111,13 @@ public interface SkipUrlEncoding {
     void getMethodQueryValid(String q1) throws ServiceException;
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value null
@@ -151,12 +132,12 @@ public interface SkipUrlEncoding {
      *
      * @param q1 Unencoded query parameter with value null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -164,17 +145,16 @@ public interface SkipUrlEncoding {
     void getPathQueryValid(String q1) throws ServiceException;
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -182,12 +162,12 @@ public interface SkipUrlEncoding {
     void getSwaggerQueryValid(String q1) throws ServiceException;
 
     /**
-     * Get method with unencoded query parameter with value
-     * 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getSwaggerQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getSwaggerQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
 
 }

@@ -39,7 +39,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the HTTP url.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
             Justification= "Url might be used as a template, thus making it invalid url in certain scenarios.")]
         public string Url { get; set; }
 
@@ -89,9 +89,19 @@ namespace Microsoft.Rest.Generator.ClientModel
         public IType ReturnType { get; set; }
 
         /// <summary>
-        /// Gets or sets the documentation.
+        /// Gets or sets the description.
         /// </summary>
-        public string Documentation { get; set; }
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        public string Summary { get; set; }
+
+        /// <summary>
+        /// Gets or sets the content type.
+        /// </summary>
+        public string ContentType { get; set; }
 
         /// <summary>
         /// Gets vendor extensions dictionary.

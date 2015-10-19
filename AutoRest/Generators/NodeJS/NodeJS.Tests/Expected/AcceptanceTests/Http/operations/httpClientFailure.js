@@ -33,6 +33,7 @@ function HttpClientFailure(client) {
 
 /**
  * Return 400 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,7 +63,7 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/400';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -135,6 +136,7 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
 
 /**
  * Return 400 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -164,7 +166,7 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/400';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -237,6 +239,7 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
 
 /**
  * Return 400 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -276,7 +279,7 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/400';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -364,6 +367,7 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
 
 /**
  * Return 400 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -403,7 +407,7 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/400';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -491,6 +495,7 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
 
 /**
  * Return 400 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -530,7 +535,7 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/400';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -618,6 +623,7 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
 
 /**
  * Return 400 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -657,7 +663,7 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/400';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -745,6 +751,7 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
 
 /**
  * Return 401 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -774,7 +781,7 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/401';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -847,6 +854,7 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
 
 /**
  * Return 402 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -876,7 +884,7 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/402';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -949,6 +957,7 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
 
 /**
  * Return 403 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -978,7 +987,7 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/403';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1051,6 +1060,7 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
 
 /**
  * Return 404 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1090,7 +1100,7 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/404';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1178,6 +1188,7 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
 
 /**
  * Return 405 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1217,7 +1228,7 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/405';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1305,6 +1316,7 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
 
 /**
  * Return 406 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1344,7 +1356,7 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/406';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1432,6 +1444,7 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
 
 /**
  * Return 407 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1471,7 +1484,7 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/407';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1559,6 +1572,7 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
 
 /**
  * Return 409 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -1598,7 +1612,7 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/409';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1686,6 +1700,7 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
 
 /**
  * Return 410 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1715,7 +1730,7 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/410';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1788,6 +1803,7 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
 
 /**
  * Return 411 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1817,7 +1833,7 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/411';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1890,6 +1906,7 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
 
 /**
  * Return 412 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1919,7 +1936,7 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/412';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1992,6 +2009,7 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
 
 /**
  * Return 413 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -2031,7 +2049,7 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/413';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2119,6 +2137,7 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
 
 /**
  * Return 414 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -2158,7 +2177,7 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/414';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2246,6 +2265,7 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
 
 /**
  * Return 415 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -2285,7 +2305,7 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/415';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2373,6 +2393,7 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
 
 /**
  * Return 416 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2402,7 +2423,7 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/416';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2475,6 +2496,7 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
 
 /**
  * Return 417 status code - should be represented in the client as an error
+ *
  * @param {boolean} [booleanValue] Simple boolean value true
  * 
  * @param {object} [options]
@@ -2514,7 +2536,7 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/417';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2602,6 +2624,7 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
 
 /**
  * Return 429 status code - should be represented in the client as an error
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2631,7 +2654,7 @@ HttpClientFailure.prototype.head429 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//http/failure/client/429';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

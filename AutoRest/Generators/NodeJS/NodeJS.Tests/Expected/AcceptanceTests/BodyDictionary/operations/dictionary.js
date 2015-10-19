@@ -33,6 +33,7 @@ function Dictionary(client) {
 
 /**
  * Get null dictionary value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -61,7 +62,7 @@ Dictionary.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -131,6 +132,7 @@ Dictionary.prototype.getNull = function (options, callback) {
 
 /**
  * Get empty dictionary value {}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -159,7 +161,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -229,6 +231,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
 
 /**
  * Set dictionary value empty {}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -272,7 +275,7 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -350,6 +353,7 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
 
 /**
  * Get Dictionary with null value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -378,7 +382,7 @@ Dictionary.prototype.getNullValue = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/nullvalue';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -448,6 +452,7 @@ Dictionary.prototype.getNullValue = function (options, callback) {
 
 /**
  * Get Dictionary with null key
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -476,7 +481,7 @@ Dictionary.prototype.getNullKey = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/nullkey';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -546,6 +551,7 @@ Dictionary.prototype.getNullKey = function (options, callback) {
 
 /**
  * Get Dictionary with key as empty string
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -574,7 +580,7 @@ Dictionary.prototype.getEmptyStringKey = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/keyemptystring';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -644,6 +650,7 @@ Dictionary.prototype.getEmptyStringKey = function (options, callback) {
 
 /**
  * Get invalid Dictionary value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -672,7 +679,7 @@ Dictionary.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/invalid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -742,6 +749,7 @@ Dictionary.prototype.getInvalid = function (options, callback) {
 
 /**
  * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -770,7 +778,7 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/boolean/tfft';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -840,6 +848,7 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
 
 /**
  * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -883,7 +892,7 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/boolean/tfft';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -961,6 +970,7 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
 
 /**
  * Get boolean dictionary value {"0": true, "1": null, "2": false }
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -989,7 +999,7 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/boolean/true.null.false';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1059,6 +1069,7 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
 
 /**
  * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1087,7 +1098,7 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/boolean/true.boolean.false';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1157,6 +1168,7 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
 
 /**
  * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1185,7 +1197,7 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/integer/1.-1.3.300';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1255,6 +1267,7 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
 
 /**
  * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -1298,7 +1311,7 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/integer/1.-1.3.300';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1376,6 +1389,7 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
 
 /**
  * Get integer dictionary value {"0": 1, "1": null, "2": 0}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1404,7 +1418,7 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/integer/1.null.zero';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1474,6 +1488,7 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
 
 /**
  * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1502,7 +1517,7 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/integer/1.integer.0';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1572,6 +1587,7 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
 
 /**
  * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1600,7 +1616,7 @@ Dictionary.prototype.getLongValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/long/1.-1.3.300';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1670,6 +1686,7 @@ Dictionary.prototype.getLongValid = function (options, callback) {
 
 /**
  * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -1713,7 +1730,7 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/long/1.-1.3.300';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1791,6 +1808,7 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
 
 /**
  * Get long dictionary value {"0": 1, "1": null, "2": 0}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1819,7 +1837,7 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/long/1.null.zero';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1889,6 +1907,7 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
 
 /**
  * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1917,7 +1936,7 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/long/1.integer.0';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1987,6 +2006,7 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
 
 /**
  * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2015,7 +2035,7 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/float/0--0.01-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2085,6 +2105,7 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
 
 /**
  * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -2128,7 +2149,7 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/float/0--0.01-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2206,6 +2227,7 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
 
 /**
  * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2234,7 +2256,7 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/float/0.0-null-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2304,6 +2326,7 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
 
 /**
  * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2332,7 +2355,7 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/float/1.number.0';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2402,6 +2425,7 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
 
 /**
  * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2430,7 +2454,7 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/double/0--0.01-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2500,6 +2524,7 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
 
 /**
  * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -2543,7 +2568,7 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/double/0--0.01-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2621,6 +2646,7 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
 
 /**
  * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2649,7 +2675,7 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/double/0.0-null-1.2e20';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2719,6 +2745,7 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
 
 /**
  * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2747,7 +2774,7 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/double/1.number.0';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2817,6 +2844,7 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
 
 /**
  * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -2845,7 +2873,7 @@ Dictionary.prototype.getStringValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/string/foo1.foo2.foo3';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -2915,6 +2943,7 @@ Dictionary.prototype.getStringValid = function (options, callback) {
 
 /**
  * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -2958,7 +2987,7 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/string/foo1.foo2.foo3';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3036,6 +3065,7 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
 
 /**
  * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3064,7 +3094,7 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/string/foo.null.foo2';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3134,6 +3164,7 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
 
 /**
  * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3162,7 +3193,7 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/string/foo.123.foo2';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3233,6 +3264,7 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
 /**
  * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2":
  * "1492-10-12"}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3261,7 +3293,7 @@ Dictionary.prototype.getDateValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/date/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3339,6 +3371,7 @@ Dictionary.prototype.getDateValid = function (options, callback) {
 /**
  * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
  * "1492-10-12"}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -3383,7 +3416,7 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/date/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3461,6 +3494,7 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
 
 /**
  * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3489,7 +3523,7 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/date/invalidnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3566,6 +3600,7 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
 
 /**
  * Get date dictionary value {"0": "2011-03-22", "1": "date"}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3594,7 +3629,7 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/date/invalidchars';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3672,6 +3707,7 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
 /**
  * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
  * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3700,7 +3736,7 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/date-time/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3778,6 +3814,7 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
 /**
  * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
  * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -3822,7 +3859,7 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/date-time/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -3900,6 +3937,7 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
 
 /**
  * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -3928,7 +3966,7 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/date-time/invalidnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4005,6 +4043,7 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
 
 /**
  * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4033,7 +4072,7 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/date-time/invalidchars';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4109,8 +4148,241 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
 };
 
 /**
+ * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
+ * GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492
+ * 10:15:01 GMT"}
+ *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Dictionary.prototype.getDateTimeRfc1123Valid = function (options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri +
+                   '//dictionary/prim/date-time-rfc1123/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'GET';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          for (var property in result) {
+            if (result[property] !== null && result[property] !== undefined) {
+              result[property] = new Date(result[property]);
+            }
+          }
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
+ * "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+ *
+ * @param {object} arrayBody
+ * 
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Dictionary.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    }
+    for(var valueElement in arrayBody) {
+      if (arrayBody[valueElement] && !(arrayBody[valueElement] instanceof Date || 
+          (typeof arrayBody[valueElement].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement]))))) {
+            throw new Error('arrayBody[valueElement] must be of type date.');
+          }
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri +
+                   '//dictionary/prim/date-time-rfc1123/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'PUT';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
+      throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
+    }
+    requestModel = {};
+    for(var valueElement2 in arrayBody) {
+      if (arrayBody[valueElement2]) {
+        if (!(arrayBody[valueElement2] instanceof Date || typeof arrayBody[valueElement2].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement2])))) {
+          throw new Error('arrayBody[valueElement2] must be of type date.');
+        }
+        requestModel[valueElement2] = (arrayBody[valueElement2] instanceof Date) ? arrayBody[valueElement2].toUTCString() : arrayBody[valueElement2];
+      }
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
  * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
  * hex (25, 29, 43)} with each item encoded in base64
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4139,7 +4411,7 @@ Dictionary.prototype.getByteValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/byte/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4217,6 +4489,7 @@ Dictionary.prototype.getByteValid = function (options, callback) {
 /**
  * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
  * hex (25, 29, 43)} with each elementencoded in base 64
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -4260,7 +4533,7 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/byte/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4339,6 +4612,7 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
 /**
  * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first
  * item base64 encoded
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4367,7 +4641,7 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/prim/byte/invalidnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4444,6 +4718,7 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
 
 /**
  * Get dictionary of complex type null value
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4472,7 +4747,7 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/complex/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4533,9 +4808,6 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
-            }
           }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -4559,6 +4831,7 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
 
 /**
  * Get empty dictionary of complex type {}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4587,7 +4860,7 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/complex/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4648,9 +4921,6 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
-            }
           }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -4675,6 +4945,7 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
 /**
  * Get dictionary of complex type with null item {"0": {"integer": 1,
  * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4703,7 +4974,7 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/complex/itemnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4764,9 +5035,6 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
-            }
           }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -4791,6 +5059,7 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
 /**
  * Get dictionary of complex type with empty item {"0": {"integer": 1,
  * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4819,7 +5088,7 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/complex/itemempty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4880,9 +5149,6 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
-            }
           }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -4907,6 +5173,7 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
 /**
  * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"},
  * "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -4935,7 +5202,7 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/complex/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -4996,9 +5263,6 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
             if (parsedResponse[valueElement]) {
               result[valueElement] = new client._models['Widget'](parsedResponse[valueElement]);
             }
-            else {
-              result[valueElement] = parsedResponse[valueElement];
-            }
           }
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
@@ -5024,6 +5288,7 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
  * Put an dictionary of complex type with values {"0": {"integer": 1,
  * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
  * "string": "6"}}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -5054,7 +5319,7 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/complex/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5082,9 +5347,6 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
       for(var valueElement1 in arrayBody) {
         if (arrayBody[valueElement1]) {
           arrayBody[valueElement1] = new client._models['Widget'](arrayBody[valueElement1]);
-        }
-        else {
-          arrayBody[valueElement1] = arrayBody[valueElement1];
         }
       }
     }
@@ -5139,6 +5401,7 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
 
 /**
  * Get a null array
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5167,7 +5430,7 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/array/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5237,6 +5500,7 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
 
 /**
  * Get an empty dictionary {}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5265,7 +5529,7 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/array/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5336,6 +5600,7 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
 /**
  * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
  * "2": ["7", "8", "9"]}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5364,7 +5629,7 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/array/itemnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5435,6 +5700,7 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
 /**
  * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
  * ["7", "8", "9"]}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5463,7 +5729,7 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/array/itemempty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5534,6 +5800,7 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
 /**
  * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
  * "6"], "2": ["7", "8", "9"]}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5562,7 +5829,7 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/array/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5633,6 +5900,7 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
 /**
  * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
  * "6"], "2": ["7", "8", "9"]}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -5680,7 +5948,7 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/array/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5766,6 +6034,7 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
 
 /**
  * Get an dictionaries of dictionaries with value null
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5794,7 +6063,7 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/dictionary/null';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5864,6 +6133,7 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
 
 /**
  * Get an dictionaries of dictionaries of type <string, string> with value {}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5892,7 +6162,7 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/dictionary/empty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -5964,6 +6234,7 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
  * Get an dictionaries of dictionaries of type <string, string> with value
  * {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7":
  * "seven", "8": "eight", "9": "nine"}}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -5992,7 +6263,7 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/dictionary/itemnull';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -6064,6 +6335,7 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
  * Get an dictionaries of dictionaries of type <string, string> with value
  * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven",
  * "8": "eight", "9": "nine"}}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -6092,7 +6364,7 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/dictionary/itemempty';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -6164,6 +6436,7 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
  * Get an dictionaries of dictionaries of type <string, string> with value
  * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
  * "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -6192,7 +6465,7 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/dictionary/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -6264,6 +6537,7 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
  * Get an dictionaries of dictionaries of type <string, string> with value
  * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
  * "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+ *
  * @param {object} arrayBody
  * 
  * @param {object} [options]
@@ -6311,7 +6585,7 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//dictionary/dictionary/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

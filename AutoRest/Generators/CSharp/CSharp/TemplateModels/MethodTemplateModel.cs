@@ -282,7 +282,12 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 return "new DateJsonConverter()";
             }
-
+            else if (serializationType == PrimaryType.DateTimeRfc1123 ||
+                     (sequenceType != null && sequenceType.ElementType == PrimaryType.DateTimeRfc1123) ||
+                     (dictionaryType != null && dictionaryType.ValueType == PrimaryType.DateTimeRfc1123))
+            {
+                return "new DateTimeRfc1123JsonConverter()";
+            }
             return ClientReference + ".SerializationSettings";
         }
 

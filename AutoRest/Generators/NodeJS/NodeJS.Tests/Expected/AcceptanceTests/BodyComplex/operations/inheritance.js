@@ -33,6 +33,7 @@ function Inheritance(client) {
 
 /**
  * Get complex types that extend others
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,7 +63,7 @@ Inheritance.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/inheritance/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -138,6 +139,7 @@ Inheritance.prototype.getValid = function (options, callback) {
 
 /**
  * Put complex types that extend others
+ *
  * @param {object} complexBody Please put a siamese with id=2, name="Siameee",
  * color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato"
  * with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
@@ -185,7 +187,7 @@ Inheritance.prototype.putValid = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/inheritance/valid';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

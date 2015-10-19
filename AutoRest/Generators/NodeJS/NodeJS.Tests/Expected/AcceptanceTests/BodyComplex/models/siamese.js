@@ -24,7 +24,7 @@ var util = require('util');
 function Siamese(parameters) {
   Siamese['super_'].call(this, parameters);
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.breed !== null && parameters.breed !== undefined) {
+    if (parameters.breed !== undefined) {
       this.breed = parameters.breed;
     }
   }    
@@ -59,7 +59,7 @@ Siamese.prototype.serialize = function () {
 Siamese.prototype.deserialize = function (instance) {
   Siamese['super_'].prototype.deserialize.call(this, instance);
   if (instance) {
-    if (instance['breed'] !== null && instance['breed'] !== undefined) {
+    if (instance['breed'] !== undefined) {
       this['breed'] = instance['breed'];
     }
   }

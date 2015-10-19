@@ -147,6 +147,13 @@ var dictionary = function(coverage) {
             } else {
                 res.status(400).send('Request scenario for date-time primitive type must contain valid or invalidnull or invalidchars');
             }
+        } else if (req.params.type == 'date-time-rfc1123') {
+            if (req.params.scenario === 'valid') {
+                coverage['getDictionaryDateTimeRfc1123Valid']++;
+                res.status(200).end('{"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}');
+            } else {
+                res.status(400).send('Request scenario for date-time-rfc1123 primitive type must contain valid');
+            }        
         } else if (req.params.type == 'byte') {
             if (req.params.scenario === 'valid') {
                 var bytes1 = new Buffer([255, 255, 255, 250]);
@@ -257,6 +264,17 @@ var dictionary = function(coverage) {
 	    } else {
 		    res.status(400).send('Request scenario for date-time primitive type must contain valid');
 	    }
+    } else if (req.params.type == 'date-time-rfc1123') {
+        if (req.params.scenario === 'valid') {
+            if ((_.isEqual(req.body, {'0': 'Fri, 01 Dec 2000 00:00:01 GMT', '1': 'Wed, 02 Jan 1980 00:11:35 GMT', '2': 'Wed, 12 Oct 1492 10:15:01 GMT'}))) {
+                coverage['putDictionaryDateTimeRfc1123Valid']++;
+                res.status(200).end();
+            } else {
+              utils.send400(res, next, "Did not like date-time-rfc1123 dictionary req '" + util.inspect(req.body) + "'");
+            }
+        } else {
+            res.status(400).send('Request scenario for date-time-rfc1123 primitive type must contain valid');
+        }
 	} else if (req.params.type == 'byte') {
             if (req.params.scenario === 'valid') {
 		var bytes1 = new Buffer([255, 255, 255, 250]);

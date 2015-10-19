@@ -1,4 +1,5 @@
-﻿@using Microsoft.Rest.Generator.Utilities
+@using System
+@using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ServiceClientTemplateModel>
 @Header("// ")
 @EmptyLine
@@ -36,9 +37,9 @@ namespace @Settings.Namespace
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
         @EmptyLine
-        
+
         @foreach (var property in Model.Properties)
         {
         @:/// <summary>
@@ -54,14 +55,19 @@ namespace @Settings.Namespace
         @:I@(operation.MethodGroupType) @(operation.MethodGroupName) { get; }
         @EmptyLine
         @:
-    }        
+    }
     @foreach(var method in Model.MethodTemplateModels)
     {
-        <text>
-        /// <summary>
-        @WrapComment("/// ", method.Documentation.EscapeXmlComment())
-        /// </summary>
-        </text>    
+        if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", String.IsNullOrEmpty(method.Summary) ? method.Description.EscapeXmlComment() : method.Summary.EscapeXmlComment())
+        @:/// </summary>
+        }
+        if (!String.IsNullOrEmpty(method.Description) && !String.IsNullOrEmpty(method.Summary))
+        {
+        @:@WrapComment("/// ", method.Description.EscapeXmlComment())
+        }
         foreach (var parameter in method.LocalParameters)
         {
         @:/// <param name='@parameter.Name'>
@@ -70,7 +76,7 @@ namespace @Settings.Namespace
         }
         @:/// <param name='customHeaders'>
         @:/// The headers that will be added to request.
-        @:/// </param>        
+        @:/// </param>
         @:/// <param name='cancellationToken'>
         @:/// The cancellation token.
         @:/// </param>

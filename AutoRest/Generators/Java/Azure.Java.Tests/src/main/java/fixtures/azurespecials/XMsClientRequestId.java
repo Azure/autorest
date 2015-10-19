@@ -12,8 +12,8 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import retrofit.http.GET;
 import retrofit.http.Header;
 
@@ -28,37 +28,29 @@ public interface XMsClientRequestId {
      */
     interface XMsClientRequestIdService {
         @GET("/azurespecials/overwrite/x-ms-client-request-id/method/")
-        Response get(@Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/overwrite/x-ms-client-request-id/method/")
-        void getAsync(@Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> get(@Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
-        Response paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
-        void paramGetAsync(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage);
 
     }
     /**
-     * Get method that overwrites x-ms-client-request header with value
-     * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     void get() throws ServiceException;
 
     /**
-     * Get method that overwrites x-ms-client-request header with value
-     * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get method that overwrites x-ms-client-request header with value
-     * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -66,12 +58,12 @@ public interface XMsClientRequestId {
     void paramGet(String xMsClientRequestId) throws ServiceException;
 
     /**
-     * Get method that overwrites x-ms-client-request header with value
-     * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback);
 
 }

@@ -33,6 +33,7 @@ function Primitive(client) {
 
 /**
  * Get complex types with integer properties
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -62,7 +63,7 @@ Primitive.prototype.getInt = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/integer';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -138,6 +139,7 @@ Primitive.prototype.getInt = function (options, callback) {
 
 /**
  * Put complex types with integer properties
+ *
  * @param {object} complexBody Please put -1 and 2
  * 
  * @param {number} [complexBody.field1]
@@ -180,7 +182,7 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/integer';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -253,6 +255,7 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
 
 /**
  * Get complex types with long properties
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -282,7 +285,7 @@ Primitive.prototype.getLong = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/long';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -358,6 +361,7 @@ Primitive.prototype.getLong = function (options, callback) {
 
 /**
  * Put complex types with long properties
+ *
  * @param {object} complexBody Please put 1099511627775 and -999511627788
  * 
  * @param {number} [complexBody.field1]
@@ -400,7 +404,7 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/long';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -473,6 +477,7 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
 
 /**
  * Get complex types with float properties
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -502,7 +507,7 @@ Primitive.prototype.getFloat = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/float';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -578,6 +583,7 @@ Primitive.prototype.getFloat = function (options, callback) {
 
 /**
  * Put complex types with float properties
+ *
  * @param {object} complexBody Please put 1.05 and -0.003
  * 
  * @param {number} [complexBody.field1]
@@ -620,7 +626,7 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/float';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -693,6 +699,7 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
 
 /**
  * Get complex types with double properties
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -722,7 +729,7 @@ Primitive.prototype.getDouble = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/double';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -798,6 +805,7 @@ Primitive.prototype.getDouble = function (options, callback) {
 
 /**
  * Put complex types with double properties
+ *
  * @param {object} complexBody Please put 3e-100 and
  * -0.000000000000000000000000000000000000000000000000000000005
  * 
@@ -842,7 +850,7 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/double';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -915,6 +923,7 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
 
 /**
  * Get complex types with bool properties
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -944,7 +953,7 @@ Primitive.prototype.getBool = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/bool';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1020,6 +1029,7 @@ Primitive.prototype.getBool = function (options, callback) {
 
 /**
  * Put complex types with bool properties
+ *
  * @param {object} complexBody Please put true and false
  * 
  * @param {boolean} [complexBody.fieldTrue]
@@ -1062,7 +1072,7 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/bool';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1135,6 +1145,7 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
 
 /**
  * Get complex types with string properties
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1164,7 +1175,7 @@ Primitive.prototype.getString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/string';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1240,6 +1251,7 @@ Primitive.prototype.getString = function (options, callback) {
 
 /**
  * Put complex types with string properties
+ *
  * @param {object} complexBody Please put 'goodrequest', '', and null
  * 
  * @param {string} [complexBody.field]
@@ -1284,7 +1296,7 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/string';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1357,6 +1369,7 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
 
 /**
  * Get complex types with date properties
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1386,7 +1399,7 @@ Primitive.prototype.getDate = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/date';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1462,6 +1475,7 @@ Primitive.prototype.getDate = function (options, callback) {
 
 /**
  * Put complex types with date properties
+ *
  * @param {object} complexBody Please put '0001-01-01' and '2016-02-29'
  * 
  * @param {date} [complexBody.field]
@@ -1504,7 +1518,7 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/date';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1577,6 +1591,7 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
 
 /**
  * Get complex types with datetime properties
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1606,7 +1621,7 @@ Primitive.prototype.getDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/datetime';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1682,6 +1697,7 @@ Primitive.prototype.getDateTime = function (options, callback) {
 
 /**
  * Put complex types with datetime properties
+ *
  * @param {object} complexBody Please put '0001-01-01T12:00:00-04:00' and
  * '2015-05-18T11:38:00-08:00'
  * 
@@ -1725,7 +1741,7 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/datetime';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1797,7 +1813,232 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
 };
 
 /**
+ * Get complex types with datetimeRfc1123 properties
+ *
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Datetimerfc1123Wrapper} for more
+ *                      information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Primitive.prototype.getDateTimeRfc1123 = function (options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri +
+                   '//complex/primitive/datetimerfc1123';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'GET';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse) {
+          result = new client._models['Datetimerfc1123Wrapper'](parsedResponse);
+        }
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          result.deserialize(parsedResponse);
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = httpRequest;
+        deserializationError.response = response;
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Put complex types with datetimeRfc1123 properties
+ *
+ * @param {object} complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and
+ * 'Mon, 18 May 2015 11:38:00 GMT'
+ * 
+ * @param {date} [complexBody.field]
+ * 
+ * @param {date} [complexBody.now]
+ * 
+ * @param {object} [options]
+ *
+ * @param {object} [options.customHeaders] headers that will be added to
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Primitive.prototype.putDateTimeRfc1123 = function (complexBody, options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri +
+                   '//complex/primitive/datetimerfc1123';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'PUT';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    if (complexBody) {
+      requestModel = new client._models['Datetimerfc1123Wrapper'](complexBody);
+    }
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = httpRequest;
+      error.response = response;
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          error.body.deserialize(parsedErrorResponse);
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
  * Get complex types with byte properties
+ *
  * @param {object} [options]
  *
  * @param {object} [options.customHeaders] headers that will be added to
@@ -1827,7 +2068,7 @@ Primitive.prototype.getByte = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/byte';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1903,6 +2144,7 @@ Primitive.prototype.getByte = function (options, callback) {
 
 /**
  * Put complex types with byte properties
+ *
  * @param {object} complexBody Please put non-ascii byte string hex(FF FE FD
  * FC 00 FA F9 F8 F7 F6)
  * 
@@ -1944,7 +2186,7 @@ Primitive.prototype.putByte = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri + 
+  var requestUrl = this.client.baseUri +
                    '//complex/primitive/byte';
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

@@ -71,7 +71,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "Get", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/overwrite/x-ms-client-request-id/method").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/overwrite/x-ms-client-request-id/method").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -160,8 +161,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         /// <param name='xMsClientRequestId'>
         /// This should appear as a method parameter, use value
-        /// '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
-        /// </param>
+        /// '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'/// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -186,7 +186,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 ServiceClientTracing.Enter(invocationId, this, "ParamGet", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "azurespecials/overwrite/x-ms-client-request-id/via-param/method").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/overwrite/x-ms-client-request-id/via-param/method").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

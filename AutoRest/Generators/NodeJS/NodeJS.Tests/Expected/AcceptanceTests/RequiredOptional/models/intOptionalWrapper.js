@@ -19,7 +19,7 @@
  */
 function IntOptionalWrapper(parameters) {
   if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== null && parameters.value !== undefined) {
+    if (parameters.value !== undefined) {
       this.value = parameters.value;
     }
   }    
@@ -52,7 +52,7 @@ IntOptionalWrapper.prototype.serialize = function () {
  */
 IntOptionalWrapper.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['value'] !== null && instance['value'] !== undefined) {
+    if (instance['value'] !== undefined) {
       this['value'] = instance['value'];
     }
   }

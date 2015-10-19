@@ -285,7 +285,7 @@
             }
           }
         },
-        "x-ms-pageable": true      
+        "x-ms-pageable": { "path": "nextLink" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts": {
@@ -318,7 +318,7 @@
             }
           }
         },
-        "x-ms-pageable": true
+        "x-ms-pageable": { "path": "nextLink" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
@@ -419,7 +419,7 @@
             "AccountNameInvalid",
             "AlreadyExists"
           ],
-          "x-ms-enum": "Reason"
+          "x-ms-enum": { "name": "Reason" }
         },
         "message": {
           "type": "string",
@@ -440,7 +440,7 @@
             "Standard_RAGRS",
             "Premium_LRS"
           ],
-          "x-ms-enum": "AccountType"
+          "x-ms-enum": { "name": "AccountType" }
         }
       }
     },
@@ -470,6 +470,32 @@
         "table": {
           "type": "string",
           "description": "Gets the table endpoint."
+        },
+        "dummyEndPoint": {
+          "$ref": "#/definitions/Endpoints",
+          "description": "Dummy EndPoint"
+        },
+        "FooPoint": {
+          "$ref": "#/definitions/Foo",
+          "description": "Foo point"
+        }
+      },
+      "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
+    },
+    "Foo": {
+      "properties": {
+        "BarPoint": {
+          "$ref": "#/definitions/Bar",
+          "description": "Bar point"
+        }
+      },
+      "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
+    },
+    "Bar": {
+      "properties": {
+        "RecursivePoint": {
+          "$ref": "#/definitions/Endpoints",
+          "description": "Recursive Endpoints"
         }
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
@@ -497,7 +523,7 @@
             "ResolvingDNS",
             "Succeeded"
           ],
-          "x-ms-enum": "ProvisioningState"
+          "x-ms-enum": { "name": "ProvisioningState" }
         },
         "accountType": {
           "type": "string",
@@ -509,7 +535,7 @@
             "Standard_RAGRS",
             "Premium_LRS"
           ],
-          "x-ms-enum": "AccountType"
+          "x-ms-enum": { "name": "AccountType" }
         },
         "primaryEndpoints": {
           "$ref": "#/definitions/Endpoints",
@@ -526,7 +552,7 @@
             "Available",
             "Unavailable"
           ],
-          "x-ms-enum": "AccountStatus"
+          "x-ms-enum": { "name": "AccountStatus" }
         },
         "lastGeoFailoverTime": {
           "type": "string",
@@ -544,7 +570,7 @@
             "Available",
             "Unavailable"
           ],
-          "x-ms-enum": "AccountStatus"
+          "x-ms-enum": { "name": "AccountStatus" }
         },
         "creationTime": {
           "type": "string",
@@ -596,9 +622,9 @@
           },
           "description": "Gets the list of storage accounts and their properties."
         },
-        "nextLink": {  
+        "nextLink": {
           "type": "string",
-            "description": "Gets the link to the next set of results. Currently this will always be empty as the API does not support pagination."
+          "description": "Gets the link to the next set of results. Currently this will always be empty as the API does not support pagination."
         }
       },
       "description": "The list storage accounts operation response."
@@ -615,7 +641,7 @@
             "Standard_RAGRS",
             "Premium_LRS"
           ],
-          "x-ms-enum": "AccountType"
+          "x-ms-enum": { "name": "AccountType" }
         },
         "customDomain": {
           "$ref": "#/definitions/CustomDomain",
@@ -644,7 +670,7 @@
             "key1",
             "key2"
           ],
-          "x-ms-enum": "KeyName"
+          "x-ms-enum": { "name": "KeyName" }
         }
       }
     },
@@ -674,7 +700,7 @@
             "CountsPerSecond",
             "BytesPerSecond"
           ],
-          "x-ms-enum": "UsageUnit"
+          "x-ms-enum": { "name": "UsageUnit" }
         },
         "currentValue": {
           "type": "integer",

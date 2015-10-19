@@ -33,7 +33,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -50,7 +50,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<List<String>> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -67,7 +67,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -84,7 +84,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -102,7 +102,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(301, response.getResponse().getStatus());
+                Assert.assertEquals(301, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -119,7 +119,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -136,7 +136,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -154,7 +154,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(302, response.getResponse().getStatus());
+                Assert.assertEquals(302, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -171,7 +171,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -188,7 +188,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -205,7 +205,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().getStatus());
+                Assert.assertEquals(200, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -222,7 +222,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(307, response.getResponse().getStatus());
+                Assert.assertEquals(307, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -239,7 +239,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(307, response.getResponse().getStatus());
+                Assert.assertEquals(307, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -256,7 +256,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(307, response.getResponse().getStatus());
+                Assert.assertEquals(307, response.getResponse().code());
                 lock.countDown();
             }
         });
@@ -273,7 +273,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(307, response.getResponse().getStatus());
+                Assert.assertEquals(307, response.getResponse().code());
                 lock.countDown();
             }
         });

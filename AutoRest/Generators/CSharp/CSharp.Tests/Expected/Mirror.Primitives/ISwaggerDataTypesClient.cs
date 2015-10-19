@@ -35,10 +35,11 @@ namespace Fixtures.MirrorPrimitives
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
 
 
-        /// <summary>
+            /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
         /// The desired returned status code
@@ -48,13 +49,14 @@ namespace Fixtures.MirrorPrimitives
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Product>> GetProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
         /// The desired returned status code
@@ -64,13 +66,14 @@ namespace Fixtures.MirrorPrimitives
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Product>> PutProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
         /// The desired returned status code
@@ -80,13 +83,14 @@ namespace Fixtures.MirrorPrimitives
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<Product>> PostProductWithHttpMessagesAsync(string responseCode = default(string), Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Product Types
         /// </summary>
         /// <param name='responseCode'>
         /// The desired returned status code
@@ -96,7 +100,7 @@ namespace Fixtures.MirrorPrimitives
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
-        /// </param>        
+        /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
