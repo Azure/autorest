@@ -124,9 +124,9 @@ namespace Microsoft.Rest.Generator.CSharp
 
         private IType NormalizeEnumType(EnumType enumType)
         {
-            if (enumType.IsExpandable)
+            if (enumType.ModelAsString)
             {
-                enumType.SerializedName = "string";
+                // We will keep SerializedName to use for the constant wrapper class name 
                 enumType.Name = "string";
             }
             else

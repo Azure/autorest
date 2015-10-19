@@ -345,7 +345,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(variableEnumInPath);
             Assert.Equal(variableEnumInPath.Values,
                 new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" } }.ToList());
-            Assert.True(variableEnumInPath.IsExpandable);
+            Assert.True(variableEnumInPath.ModelAsString);
             Assert.Empty(variableEnumInPath.Name);
 
             var variableEnumInQuery =
@@ -353,7 +353,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(variableEnumInQuery);
             Assert.Equal(variableEnumInQuery.Values,
                 new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" }, new EnumValue { Name = "purple" } }.ToList());
-            Assert.True(variableEnumInQuery.IsExpandable);
+            Assert.True(variableEnumInQuery.ModelAsString);
             Assert.Empty(variableEnumInQuery.Name);
 
             var differentEnum =
@@ -361,7 +361,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(differentEnum);
             Assert.Equal(differentEnum.Values,
                 new[] { new EnumValue { Name = "cyan" }, new EnumValue { Name = "yellow" } }.ToList());
-            Assert.True(differentEnum.IsExpandable);
+            Assert.True(differentEnum.ModelAsString);
             Assert.Empty(differentEnum.Name);
 
             var sameEnum =
@@ -369,7 +369,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(sameEnum);
             Assert.Equal(sameEnum.Values,
                 new[] { new EnumValue { Name = "blue" }, new EnumValue { Name = "green" }, new EnumValue { Name = "red" } }.ToList());
-            Assert.True(sameEnum.IsExpandable);
+            Assert.True(sameEnum.ModelAsString);
             Assert.Empty(sameEnum.Name);
 
             var modelEnum =
@@ -377,7 +377,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(modelEnum);
             Assert.Equal(modelEnum.Values,
                 new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" } }.ToList());
-            Assert.True(modelEnum.IsExpandable);
+            Assert.True(modelEnum.ModelAsString);
             Assert.Empty(modelEnum.Name);
 
             var fixedEnum =
@@ -385,7 +385,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(fixedEnum);
             Assert.Equal(fixedEnum.Values,
                 new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" } }.ToList());
-            Assert.False(fixedEnum.IsExpandable);
+            Assert.False(fixedEnum.ModelAsString);
             Assert.Equal("Colors", fixedEnum.Name);
 
             var fixedEnum2 =

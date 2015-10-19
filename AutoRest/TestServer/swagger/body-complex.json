@@ -1036,7 +1036,7 @@
         "color": {
           "type": "string",
           "enum": [ "cyan", "Magenta", "YELLOW", "blacK" ],
-          "x-ms-enum": "CMYKColors"
+          "x-ms-enum": { "name": "CMYKColors" , "modelAsString": true}
         }
       }
     },

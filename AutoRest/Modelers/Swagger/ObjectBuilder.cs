@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -45,14 +46,24 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 var enumType = new EnumType();
                 SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
-                if (SwaggerObject.Extensions.ContainsKey("x-ms-enum"))
+                if (SwaggerObject.Extensions.ContainsKey(CodeGenerator.EnumObject))
                 {
-                    enumType.IsExpandable = false;
-                    enumType.Name = SwaggerObject.Extensions["x-ms-enum"] as string;
+                    var enumObject = SwaggerObject.Extensions[CodeGenerator.EnumObject] as Newtonsoft.Json.Linq.JContainer;
+                    if (enumObject != null)
+                    {
+                        enumType.Name= enumObject["name"].ToString();
+                        if (enumObject["modelAsString"] != null)
+                        {
+                            enumType.ModelAsString = bool.Parse(enumObject["modelAsString"].ToString());
+                        }
+                    }
                     enumType.SerializedName = enumType.Name;
                     if (string.IsNullOrEmpty(enumType.Name))
                     {
-                        throw new InvalidOperationException("x-ms-enum extension needs to specify an enum name.");
+                        throw new InvalidOperationException(
+                            string.Format(CultureInfo.InvariantCulture, 
+                                "{0} extension needs to specify an enum name.", 
+                                CodeGenerator.EnumObject));
                     }
                     var existingEnum =
                         Modeler.ServiceClient.EnumTypes.FirstOrDefault(
@@ -63,7 +74,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                         {
                             throw new InvalidOperationException(
                                 string.Format(CultureInfo.InvariantCulture,
-                                    "Swagger document contains two or more x-ms-enum extensions with the same name '{0}' and different values.",
+                                    "Swagger document contains two or more {0} extensions with the same name '{1}' and different values.",
+                                    CodeGenerator.EnumObject,
                                     enumType.Name));
                         }
                     }
@@ -74,7 +86,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
                 else
                 {
-                    enumType.IsExpandable = true;
+                    enumType.ModelAsString = true;
                     enumType.Name = string.Empty;
                     enumType.SerializedName = string.Empty;
                 }
