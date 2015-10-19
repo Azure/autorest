@@ -84,10 +84,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.config" />
-    <None Include="Expected\**\*.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
+  <Target Name="CopyExpectedFiles" AfterTargets="BeforeBuild">
+    <ItemGroup>
+      <None Include="Expected\**\*.cs">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

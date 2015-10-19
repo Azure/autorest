@@ -108,14 +108,23 @@ namespace Fixtures.MirrorPolymorphic
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Animal>("dtype"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Animal>("dtype"));
@@ -149,7 +158,8 @@ namespace Fixtures.MirrorPolymorphic
                 ServiceClientTracing.Enter(invocationId, this, "CreateOrUpdatePolymorphicAnimals", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "getpolymorphicAnimals").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "getpolymorphicAnimals").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

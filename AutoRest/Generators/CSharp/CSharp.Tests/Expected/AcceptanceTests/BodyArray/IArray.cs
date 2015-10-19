@@ -402,6 +402,30 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </param>
         Task<HttpOperationResponse<IList<DateTime?>>> GetDateTimeInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed,
+        /// 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<DateTime?>>> GetDateTimeRfc1123ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan
+        /// 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+        /// </summary>
+        /// <param name='arrayBody'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> PutDateTimeRfc1123ValidWithHttpMessagesAsync(IList<DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25,
         /// 29, 43)] with each item encoded in base64
         /// </summary>

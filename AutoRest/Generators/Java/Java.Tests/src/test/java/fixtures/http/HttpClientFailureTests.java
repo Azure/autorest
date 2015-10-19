@@ -23,7 +23,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().head400();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -33,7 +33,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().get400();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -43,7 +43,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().put400(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -53,7 +53,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().patch400(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -63,7 +63,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().post400(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -73,7 +73,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().delete400(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().getStatus());
+            Assert.assertEquals(400, ex.getResponse().code());
         }
     }
 
@@ -83,7 +83,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().head401();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(401, ex.getResponse().getStatus());
+            Assert.assertEquals(401, ex.getResponse().code());
         }
     }
 
@@ -93,7 +93,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().get402();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(402, ex.getResponse().getStatus());
+            Assert.assertEquals(402, ex.getResponse().code());
         }
     }
 
@@ -103,7 +103,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().get403();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(403, ex.getResponse().getStatus());
+            Assert.assertEquals(403, ex.getResponse().code());
         }
     }
 
@@ -113,7 +113,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().put404(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(404, ex.getResponse().getStatus());
+            Assert.assertEquals(404, ex.getResponse().code());
         }
     }
 
@@ -123,7 +123,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().patch405(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(405, ex.getResponse().getStatus());
+            Assert.assertEquals(405, ex.getResponse().code());
         }
     }
 
@@ -133,7 +133,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().post406(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(406, ex.getResponse().getStatus());
+            Assert.assertEquals(406, ex.getResponse().code());
         }
     }
 
@@ -153,7 +153,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().put409(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(409, ex.getResponse().getStatus());
+            Assert.assertEquals(409, ex.getResponse().code());
         }
     }
 
@@ -163,7 +163,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().head410();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(410, ex.getResponse().getStatus());
+            Assert.assertEquals(410, ex.getResponse().code());
         }
     }
 
@@ -173,7 +173,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().get411();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(411, ex.getResponse().getStatus());
+            Assert.assertEquals(411, ex.getResponse().code());
         }
     }
 
@@ -183,7 +183,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().get412();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(412, ex.getResponse().getStatus());
+            Assert.assertEquals(412, ex.getResponse().code());
         }
     }
 
@@ -193,7 +193,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().put413(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(413, ex.getResponse().getStatus());
+            Assert.assertEquals(413, ex.getResponse().code());
         }
     }
 
@@ -203,7 +203,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().patch414(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(414, ex.getResponse().getStatus());
+            Assert.assertEquals(414, ex.getResponse().code());
         }
     }
 
@@ -213,7 +213,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().post415(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(415, ex.getResponse().getStatus());
+            Assert.assertEquals(415, ex.getResponse().code());
         }
     }
 
@@ -223,7 +223,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().get416();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(416, ex.getResponse().getStatus());
+            Assert.assertEquals(416, ex.getResponse().code());
         }
     }
 
@@ -233,7 +233,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().delete417(true);
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(417, ex.getResponse().getStatus());
+            Assert.assertEquals(417, ex.getResponse().code());
         }
     }
 
@@ -243,7 +243,7 @@ public class HttpClientFailureTests {
             client.getHttpClientFailure().head429();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(429, ex.getResponse().getStatus());
+            Assert.assertEquals(429, ex.getResponse().code());
         }
     }
 }

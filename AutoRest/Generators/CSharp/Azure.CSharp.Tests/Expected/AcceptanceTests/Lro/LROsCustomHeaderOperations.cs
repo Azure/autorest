@@ -103,7 +103,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutAsyncRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/customheader/putasync/retry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/customheader/putasync/retry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -252,7 +253,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPut201CreatingSucceeded200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/customheader/put/201/creating/succeeded/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/customheader/put/201/creating/succeeded/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -403,7 +405,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPost202Retry200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/customheader/post/202/retry/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/customheader/post/202/retry/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -544,7 +547,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPostAsyncRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/customheader/postasync/retry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/customheader/postasync/retry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

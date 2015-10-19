@@ -313,13 +313,18 @@ namespace Microsoft.Rest.Generator.NodeJS
             if (primary != null)
             {
                 if (primary == PrimaryType.DateTime ||
-                    primary == PrimaryType.Date)
+                    primary == PrimaryType.Date || 
+                    primary == PrimaryType.DateTimeRfc1123)
                 {
                     builder.AppendLine("{0} = new Date({0});", valueReference);
                 }
                 else if (primary == PrimaryType.ByteArray)
                 {
                     builder.AppendLine("{0} = new Buffer({0}, 'base64');", valueReference);
+                }
+                else if (primary == PrimaryType.TimeSpan)
+                {
+                    builder.AppendLine("{0} = moment.duration({0});", valueReference);
                 }
             }
             else if (IsSpecialProcessingRequired(sequence))
@@ -334,7 +339,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                     builder.AppendLine("if ({0}[i] !== null && {0}[i] !== undefined) {{", valueReference)
                              .Indent();
                     if (sequence.ElementType == PrimaryType.DateTime ||
-                       sequence.ElementType == PrimaryType.Date)
+                       sequence.ElementType == PrimaryType.Date || 
+                        sequence.ElementType == PrimaryType.DateTimeRfc1123)
                     {
                         builder.AppendLine("{0}[i] = new Date({0}[i]);", valueReference);
                     }
@@ -367,7 +373,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                     builder.AppendLine("if ({0}[property] !== null && {0}[property] !== undefined) {{", valueReference)
                              .Indent();
                     if (dictionary.ValueType == PrimaryType.DateTime || 
-                        dictionary.ValueType == PrimaryType.Date)
+                        dictionary.ValueType == PrimaryType.Date || 
+                        dictionary.ValueType == PrimaryType.DateTimeRfc1123)
                     {
                         builder.AppendLine("{0}[property] = new Date({0}[property]);", valueReference);
                     }
@@ -441,7 +448,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <returns>True if special deserialization is required. False, otherwise.</returns>
         private static bool IsSpecialProcessingRequired(IType type)
         {
-            PrimaryType[] validTypes = new PrimaryType[] { PrimaryType.DateTime, PrimaryType.Date, PrimaryType.ByteArray };
+            PrimaryType[] validTypes = new PrimaryType[] { PrimaryType.DateTime, PrimaryType.Date, PrimaryType.DateTimeRfc1123, PrimaryType.ByteArray };
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
             bool result = false;

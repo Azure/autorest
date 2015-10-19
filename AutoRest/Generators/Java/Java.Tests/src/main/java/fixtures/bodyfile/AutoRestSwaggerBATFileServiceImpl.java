@@ -12,7 +12,7 @@ package fixtures.bodyfile;
 
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFileService class.
@@ -61,16 +61,16 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
      *
      * @param baseUri the base URI of the host
      * @param client the {@link OkHttpClient} client to use for REST calls
-     * @param restAdapterBuilder the builder for building up a {@link RestAdapter}
+     * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestSwaggerBATFileServiceImpl(String baseUri, OkHttpClient client, RestAdapter.Builder restAdapterBuilder) {
-        super(client, restAdapterBuilder);
+    public AutoRestSwaggerBATFileServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
     private void initialize() {
-        RestAdapter restAdapter = restAdapterBuilder.setEndpoint(baseUri).build();
-        this.files = new FilesImpl(restAdapter, this);
+        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.files = new FilesImpl(retrofit, this);
     }
 }

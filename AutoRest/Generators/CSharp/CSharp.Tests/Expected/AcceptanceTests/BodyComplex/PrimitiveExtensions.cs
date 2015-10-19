@@ -477,6 +477,65 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             }
 
             /// <summary>
+            /// Get complex types with datetimeRfc1123 properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Datetimerfc1123Wrapper GetDateTimeRfc1123(this IPrimitive operations)
+            {
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDateTimeRfc1123Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get complex types with datetimeRfc1123 properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Datetimerfc1123Wrapper> GetDateTimeRfc1123Async( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                HttpOperationResponse<Datetimerfc1123Wrapper> result = await operations.GetDateTimeRfc1123WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Put complex types with datetimeRfc1123 properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00
+            /// GMT'
+            /// </param>
+            public static void PutDateTimeRfc1123(this IPrimitive operations, Datetimerfc1123Wrapper complexBody)
+            {
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutDateTimeRfc1123Async(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types with datetimeRfc1123 properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00
+            /// GMT'
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutDateTimeRfc1123Async( this IPrimitive operations, Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.PutDateTimeRfc1123WithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
             /// Get complex types with byte properties
             /// </summary>
             /// <param name='operations'>

@@ -510,6 +510,52 @@
         }
       }
     },
+    "/complex/primitive/datetimerfc1123": {
+      "get": {
+        "operationId": "primitive_getDateTimeRfc1123",
+        "description": "Get complex types with datetimeRfc1123 properties",
+        "responses": {
+          "200": {
+            "description": "Get complex types with primitive property",
+            "schema": {
+              "$ref": "#/definitions/datetimerfc1123-wrapper"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "primitive_putDateTimeRfc1123",
+        "description": "Put complex types with datetimeRfc1123 properties",
+        "parameters": [
+          {
+            "name": "complexBody",
+            "in": "body",
+            "description": "Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'",
+            "schema": {
+              "$ref": "#/definitions/datetimerfc1123-wrapper"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/complex/primitive/byte": {
       "get": {
         "operationId": "primitive_getByte",
@@ -990,7 +1036,7 @@
         "color": {
           "type": "string",
           "enum": [ "cyan", "Magenta", "YELLOW", "blacK" ],
-          "x-ms-enum": "CMYKColors"
+          "x-ms-enum": { "name": "CMYKColors" , "modelAsString": true}
         }
       }
     },
@@ -1206,6 +1252,18 @@
         "now": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "datetimerfc1123-wrapper": {
+      "properties": {
+        "field": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "now": {
+          "type": "string",
+          "format": "date-time-rfc1123"
         }
       }
     },

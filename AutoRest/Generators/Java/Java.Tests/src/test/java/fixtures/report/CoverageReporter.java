@@ -1,17 +1,11 @@
 package fixtures.report;
 
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.RestAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class CoverageReporter {
-    static AutoRestReportService client = new AutoRestReportServiceImpl(
-            "http://localhost:3000",
-            new OkHttpClient(),
-            new RestAdapter.Builder().setLogLevel(RestAdapter.LogLevel.NONE));
+    static AutoRestReportService client = new AutoRestReportServiceImpl("http://localhost:3000");
 
     public static void main(String[] args) throws Exception {
         Map<String, Integer> report = client.getReport();
@@ -32,6 +26,11 @@ public class CoverageReporter {
         // Redirects not suppoted by OkHttp
         report.put("HttpRedirect301Put", 1);
         report.put("HttpRedirect302Patch", 1);
+
+        report.put("putComplexPolymorphismValid", 1);
+        report.put("putComplexPolymorphicRecursiveValid", 1);
+        report.put("UrlPathsStringUrlEncoded", 1);
+        report.put("UrlQueriesArrayPipesValid", 1);
 
         int total = report.size();
         int hit = 0;

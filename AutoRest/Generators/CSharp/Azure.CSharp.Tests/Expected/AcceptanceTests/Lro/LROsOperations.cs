@@ -97,7 +97,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPut200Succeeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/put/200/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/put/200/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -240,7 +241,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPut200SucceededNoState", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/put/200/succeeded/nostate").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/put/200/succeeded/nostate").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -385,7 +387,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPut202Retry200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/put/202/retry/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/put/202/retry/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -532,7 +535,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPut201CreatingSucceeded200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/put/201/creating/succeeded/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/put/201/creating/succeeded/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -685,7 +689,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPut200UpdatingSucceeded204", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/put/200/updating/succeeded/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/put/200/updating/succeeded/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -832,7 +837,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPut201CreatingFailed200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/put/201/created/failed/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/put/201/created/failed/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -985,7 +991,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPut200Acceptedcanceled200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/put/200/accepted/canceled/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/put/200/accepted/canceled/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -1130,7 +1137,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutNoHeaderInRetry", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/put/noheader/202/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/put/noheader/202/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -1275,7 +1283,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutAsyncRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/putasync/retry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/putasync/retry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -1420,7 +1429,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutAsyncNoRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/putasync/noretry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/putasync/noretry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -1565,7 +1575,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutAsyncRetryFailed", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/putasync/retry/failed").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/putasync/retry/failed").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -1710,7 +1721,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutAsyncNoRetrycanceled", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/putasync/noretry/canceled").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/putasync/noretry/canceled").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -1855,7 +1867,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutAsyncNoHeaderInRetry", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/putasync/noheader/201/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/putasync/noheader/201/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -1996,7 +2009,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutNonResource", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/putnonresource/202/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/putnonresource/202/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -2137,7 +2151,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutAsyncNonResource", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/putnonresourceasync/202/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/putnonresourceasync/202/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -2278,7 +2293,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutSubResource", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/putsubresource/202/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/putsubresource/202/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -2419,7 +2435,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPutAsyncSubResource", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/putsubresourceasync/202/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/putsubresourceasync/202/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -2558,7 +2575,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteProvisioning202Accepted200Succeeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/delete/provisioning/202/accepted/200/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/delete/provisioning/202/accepted/200/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -2699,7 +2717,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteProvisioning202DeletingFailed200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/delete/provisioning/202/deleting/200/failed").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/delete/provisioning/202/deleting/200/failed").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -2840,7 +2859,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteProvisioning202Deletingcanceled200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/delete/provisioning/202/deleting/200/canceled").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/delete/provisioning/202/deleting/200/canceled").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -2975,7 +2995,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDelete204Succeeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/delete/204/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/delete/204/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -3102,7 +3123,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDelete202Retry200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/delete/202/retry/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/delete/202/retry/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -3235,7 +3257,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDelete202NoRetry204", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/delete/202/noretry/204").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/delete/202/noretry/204").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -3368,7 +3391,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteNoHeaderInRetry", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/delete/noheader").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/delete/noheader").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -3495,7 +3519,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteAsyncNoHeaderInRetry", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/deleteasync/noheader/202/204").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/deleteasync/noheader/202/204").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -3622,7 +3647,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteAsyncRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/deleteasync/retry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/deleteasync/retry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -3749,7 +3775,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteAsyncNoRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/deleteasync/noretry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/deleteasync/noretry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -3876,7 +3903,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteAsyncRetryFailed", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/deleteasync/retry/failed").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/deleteasync/retry/failed").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -4003,7 +4031,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginDeleteAsyncRetrycanceled", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/deleteasync/retry/canceled").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/deleteasync/retry/canceled").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -4130,7 +4159,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPost200WithPayload", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/post/payload/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/post/payload/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -4275,7 +4305,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPost202Retry200", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/post/202/retry/200").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/post/202/retry/200").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -4410,7 +4441,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPost202NoRetry204", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/post/202/noretry/204").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/post/202/noretry/204").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -4553,7 +4585,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPostAsyncRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/postasync/retry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/postasync/retry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -4696,7 +4729,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPostAsyncNoRetrySucceeded", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/postasync/noretry/succeeded").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/postasync/noretry/succeeded").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -4839,7 +4873,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPostAsyncRetryFailed", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/postasync/retry/failed").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/postasync/retry/failed").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {
@@ -4976,7 +5011,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.Enter(invocationId, this, "BeginPostAsyncRetrycanceled", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "lro/postasync/retry/canceled").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "lro/postasync/retry/canceled").ToString();
             List<string> queryParameters = new List<string>();
             if (queryParameters.Count > 0)
             {

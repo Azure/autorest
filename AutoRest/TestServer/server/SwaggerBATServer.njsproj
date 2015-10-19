@@ -32,6 +32,7 @@
     <Compile Include="routes\date.js" />
     <Compile Include="routes\datetime.js" />
     <Compile Include="routes\dictionary.js" />
+    <Compile Include="routes\duration.js" />
     <Compile Include="routes\header.js" />
     <Compile Include="routes\httpResponses.js" />
     <Compile Include="routes\index.js" />

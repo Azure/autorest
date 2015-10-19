@@ -45,6 +45,8 @@ var defaultMappings = {
   'AcceptanceTests/BodyComplex': '../../../TestServer/swagger/body-complex.json',
   'AcceptanceTests/BodyDate': '../../../TestServer/swagger/body-date.json',
   'AcceptanceTests/BodyDateTime': '../../../TestServer/swagger/body-datetime.json',
+  'AcceptanceTests/BodyDateTimeRfc1123': '../../../TestServer/swagger/body-datetime-rfc1123.json',
+  'AcceptanceTests/BodyDuration': '../../../TestServer/swagger/body-duration.json',
   'AcceptanceTests/BodyDictionary': '../../../TestServer/swagger/body-dictionary.json',
   'AcceptanceTests/BodyFile': '../../../TestServer/swagger/body-file.json',
   'AcceptanceTests/BodyInteger': '../../../TestServer/swagger/body-integer.json',
@@ -68,6 +70,8 @@ var rubyMappings = {
   'dictionary':['../../../TestServer/swagger/body-dictionary.json','DictionaryModule'],
   'date':['../../../TestServer/swagger/body-date.json','DateModule'],
   'datetime':['../../../TestServer/swagger/body-datetime.json','DatetimeModule'],
+  'datetime_rfc1123':['../../../TestServer/swagger/body-datetime-rfc1123.json','DatetimeRfc1123Module'],
+  'duration':['../../../TestServer/swagger/body-duration.json','DurationModule'],
   'complex':['../../../TestServer/swagger/body-complex.json','ComplexModule'],
   'url':['../../../TestServer/swagger/url.json','UrlModule'],
   'url_items':['../../../TestServer/swagger/url.json','UrlModule'],
@@ -354,8 +358,8 @@ var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
   'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Modeler.Swagger.Tests.dll',
   'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
-  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/bin/Net45-Debug/Azure.CSharp.Tests.dll',
-  'AutoRest/Generators/CSharp/CSharp.Tests/bin/Net45-Debug/CSharp.Tests.dll',
+  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.CSharp.Tests.dll',
+  'AutoRest/Generators/CSharp/CSharp.Tests/bin/Net45-Debug/AutoRest.Generator.CSharp.Tests.dll',
   'ClientRuntimes/CSharp/ClientRuntime.Azure.Tests/bin/Net45-Debug/ClientRuntime.Azure.Tests.dll',
   'ClientRuntimes/CSharp/ClientRuntime.Tests/bin/Net45-Debug/ClientRuntime.Tests.dll',
 ];
@@ -391,12 +395,15 @@ gulp.task('test:xunit', function () {
 var nugetPath = path.resolve('Tools/NuGet.exe');
 var nugetTestProjDir = path.resolve('AutoRest/NugetPackageTest');
 var packagesDir = path.resolve('binaries/packages');
+var cachedClientRuntimePackages = path.join(process.env.HOME || (process.env.HOMEDRIVE + process.env.HOMEPATH),
+    'AppData', 'Local', 'NuGet', 'Cache', "Microsoft.Rest.ClientRuntime.*.nupkg");
 gulp.task('test:nugetPackages:restore', ['test:nugetPackages:clean'], clrTask(nugetPath + ' restore ' + path.join(nugetTestProjDir, '/NugetPackageTest.sln') + ' -source ' + path.resolve(packagesDir)));
-
-gulp.task('test:nugetPackages:clean', function(){
-  return del([path.join(nugetTestProjDir, 'Generated')]);
+gulp.task('test:nugetPackages:clean', function () {
+  //turn on 'force' so we can remove files outside of repo folder.
+  return del([path.join(nugetTestProjDir, 'Generated'), cachedClientRuntimePackages], {'force' : true});
 });
 
+// TODO: This needs to be synced with the version of AutoRest
 var toolsDir = 'packages/autorest.0.11.0/tools';
 var autoRestExe = function(){
   return fs.readdirSync(path.join(nugetTestProjDir, toolsDir)).filter(function(file) {

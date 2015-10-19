@@ -1,5 +1,6 @@
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.DateTimeRfc1123;
 import fixtures.bodycomplex.models.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -137,6 +138,21 @@ public class PrimitiveTests {
         body.setField(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
         body.setNow(new DateTime(2015, 5, 18, 18, 38, 0, DateTimeZone.UTC));
         client.getPrimitive().putDateTime(body);
+    }
+
+    @Test
+    public void getDateTimeRfc1123() throws Exception {
+        Datetimerfc1123Wrapper result = client.getPrimitive().getDateTimeRfc1123();
+        Assert.assertEquals(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC), result.getField().getDateTime());
+        Assert.assertEquals(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC), result.getNow().getDateTime());
+    }
+
+    @Test
+    public void putDateTimeRfc1123() throws Exception {
+        Datetimerfc1123Wrapper body = new Datetimerfc1123Wrapper();
+        body.setField(new DateTimeRfc1123(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC)));
+        body.setNow(new DateTimeRfc1123(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC)));
+        client.getPrimitive().putDateTimeRfc1123(body);
     }
 
     @Test

@@ -164,7 +164,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 return null;
             }
             var enumType = type as EnumType;
-            if (enumType != null && enumType.IsExpandable)
+            if (enumType != null && enumType.ModelAsString)
             {
                 type = PrimaryType.String;
             }
@@ -238,6 +238,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 primaryType.Name = "Date";
             }
+            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            {
+                primaryType.Name = "Date";
+            }
             else if (primaryType == PrimaryType.Double)
             {
                 primaryType.Name = "Number";
@@ -260,7 +264,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else if (primaryType == PrimaryType.TimeSpan)
             {
-                primaryType.Name = "TimeSpan";
+                primaryType.Name = "moment.duration"; 
             }
             else if (primaryType == PrimaryType.Object)
             {

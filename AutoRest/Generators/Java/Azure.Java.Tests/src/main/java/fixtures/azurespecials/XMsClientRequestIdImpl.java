@@ -10,23 +10,25 @@
 
 package fixtures.azurespecials;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.azurespecials.models.Error;
 
 public class XMsClientRequestIdImpl implements XMsClientRequestId {
     private XMsClientRequestIdService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public XMsClientRequestIdImpl(RestAdapter restAdapter, AutoRestAzureSpecialParametersTestClient client) {
-        this.service = restAdapter.create(XMsClientRequestIdService.class);
+    public XMsClientRequestIdImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+        this.service = retrofit.create(XMsClientRequestIdService.class);
         this.client = client;
     }
 
@@ -37,11 +39,13 @@ public class XMsClientRequestIdImpl implements XMsClientRequestId {
      */
     public void get() throws ServiceException {
         try {
-            ServiceResponse<Void> response = getDelegate(service.get(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = getDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = getDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -50,24 +54,26 @@ public class XMsClientRequestIdImpl implements XMsClientRequestId {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getAsync(final ServiceCallback<Void> serviceCallback) {
-        service.getAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getAsync(final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDelegate(response, error));
+                    serviceCallback.success(getDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> getDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> getDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -82,11 +88,13 @@ public class XMsClientRequestIdImpl implements XMsClientRequestId {
                 new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = paramGetDelegate(service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = paramGetDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = paramGetDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -96,28 +104,30 @@ public class XMsClientRequestIdImpl implements XMsClientRequestId {
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
         if (xMsClientRequestId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.")));
         }
-        service.paramGetAsync(xMsClientRequestId, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(paramGetDelegate(response, error));
+                    serviceCallback.success(paramGetDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> paramGetDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

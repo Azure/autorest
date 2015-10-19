@@ -10,15 +10,17 @@
 
 package fixtures.bodycomplex;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.FloatWrapper;
@@ -27,6 +29,7 @@ import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import fixtures.bodycomplex.models.DateWrapper;
 import fixtures.bodycomplex.models.DatetimeWrapper;
+import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Error;
 import com.microsoft.rest.Validator;
@@ -35,8 +38,8 @@ public class PrimitiveImpl implements Primitive {
     private PrimitiveService service;
     AutoRestComplexTestService client;
 
-    public PrimitiveImpl(RestAdapter restAdapter, AutoRestComplexTestService client) {
-        this.service = restAdapter.create(PrimitiveService.class);
+    public PrimitiveImpl(Retrofit retrofit, AutoRestComplexTestService client) {
+        this.service = retrofit.create(PrimitiveService.class);
         this.client = client;
     }
 
@@ -48,11 +51,13 @@ public class PrimitiveImpl implements Primitive {
      */
     public IntWrapper getInt() throws ServiceException {
         try {
-            ServiceResponse<IntWrapper> response = getIntDelegate(service.getInt(), null);
+            Call<ResponseBody> call = service.getInt();
+            ServiceResponse<IntWrapper> response = getIntDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<IntWrapper> response = getIntDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -61,24 +66,26 @@ public class PrimitiveImpl implements Primitive {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
-        service.getIntAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getInt();
+        call.enqueue(new ServiceResponseCallback<IntWrapper>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getIntDelegate(response, error));
+                    serviceCallback.success(getIntDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<IntWrapper> getIntDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<IntWrapper>()
                 .register(200, new TypeToken<IntWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -94,11 +101,13 @@ public class PrimitiveImpl implements Primitive {
         }
         Validator.validate(complexBody);
         try {
-            ServiceResponse<Void> response = putIntDelegate(service.putInt(complexBody), null);
+            Call<ResponseBody> call = service.putInt(complexBody);
+            ServiceResponse<Void> response = putIntDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putIntDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -108,29 +117,31 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put -1 and 2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
-        service.putIntAsync(complexBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putInt(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putIntDelegate(response, error));
+                    serviceCallback.success(putIntDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putIntDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -141,11 +152,13 @@ public class PrimitiveImpl implements Primitive {
      */
     public LongWrapper getLong() throws ServiceException {
         try {
-            ServiceResponse<LongWrapper> response = getLongDelegate(service.getLong(), null);
+            Call<ResponseBody> call = service.getLong();
+            ServiceResponse<LongWrapper> response = getLongDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<LongWrapper> response = getLongDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -154,24 +167,26 @@ public class PrimitiveImpl implements Primitive {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
-        service.getLongAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getLong();
+        call.enqueue(new ServiceResponseCallback<LongWrapper>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getLongDelegate(response, error));
+                    serviceCallback.success(getLongDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<LongWrapper> getLongDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<LongWrapper>()
                 .register(200, new TypeToken<LongWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -187,11 +202,13 @@ public class PrimitiveImpl implements Primitive {
         }
         Validator.validate(complexBody);
         try {
-            ServiceResponse<Void> response = putLongDelegate(service.putLong(complexBody), null);
+            Call<ResponseBody> call = service.putLong(complexBody);
+            ServiceResponse<Void> response = putLongDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putLongDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -201,29 +218,31 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put 1099511627775 and -999511627788
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
-        service.putLongAsync(complexBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putLong(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putLongDelegate(response, error));
+                    serviceCallback.success(putLongDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putLongDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -234,11 +253,13 @@ public class PrimitiveImpl implements Primitive {
      */
     public FloatWrapper getFloat() throws ServiceException {
         try {
-            ServiceResponse<FloatWrapper> response = getFloatDelegate(service.getFloat(), null);
+            Call<ResponseBody> call = service.getFloat();
+            ServiceResponse<FloatWrapper> response = getFloatDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<FloatWrapper> response = getFloatDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -247,24 +268,26 @@ public class PrimitiveImpl implements Primitive {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
-        service.getFloatAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getFloat();
+        call.enqueue(new ServiceResponseCallback<FloatWrapper>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getFloatDelegate(response, error));
+                    serviceCallback.success(getFloatDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<FloatWrapper> getFloatDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<FloatWrapper>()
                 .register(200, new TypeToken<FloatWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -280,11 +303,13 @@ public class PrimitiveImpl implements Primitive {
         }
         Validator.validate(complexBody);
         try {
-            ServiceResponse<Void> response = putFloatDelegate(service.putFloat(complexBody), null);
+            Call<ResponseBody> call = service.putFloat(complexBody);
+            ServiceResponse<Void> response = putFloatDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putFloatDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -294,29 +319,31 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put 1.05 and -0.003
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
-        service.putFloatAsync(complexBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putFloat(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putFloatDelegate(response, error));
+                    serviceCallback.success(putFloatDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putFloatDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -327,11 +354,13 @@ public class PrimitiveImpl implements Primitive {
      */
     public DoubleWrapper getDouble() throws ServiceException {
         try {
-            ServiceResponse<DoubleWrapper> response = getDoubleDelegate(service.getDouble(), null);
+            Call<ResponseBody> call = service.getDouble();
+            ServiceResponse<DoubleWrapper> response = getDoubleDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<DoubleWrapper> response = getDoubleDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -340,24 +369,26 @@ public class PrimitiveImpl implements Primitive {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
-        service.getDoubleAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getDouble();
+        call.enqueue(new ServiceResponseCallback<DoubleWrapper>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDoubleDelegate(response, error));
+                    serviceCallback.success(getDoubleDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<DoubleWrapper>()
                 .register(200, new TypeToken<DoubleWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -373,11 +404,13 @@ public class PrimitiveImpl implements Primitive {
         }
         Validator.validate(complexBody);
         try {
-            ServiceResponse<Void> response = putDoubleDelegate(service.putDouble(complexBody), null);
+            Call<ResponseBody> call = service.putDouble(complexBody);
+            ServiceResponse<Void> response = putDoubleDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putDoubleDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -387,29 +420,31 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
-        service.putDoubleAsync(complexBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putDouble(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putDoubleDelegate(response, error));
+                    serviceCallback.success(putDoubleDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putDoubleDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -420,11 +455,13 @@ public class PrimitiveImpl implements Primitive {
      */
     public BooleanWrapper getBool() throws ServiceException {
         try {
-            ServiceResponse<BooleanWrapper> response = getBoolDelegate(service.getBool(), null);
+            Call<ResponseBody> call = service.getBool();
+            ServiceResponse<BooleanWrapper> response = getBoolDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<BooleanWrapper> response = getBoolDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -433,24 +470,26 @@ public class PrimitiveImpl implements Primitive {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
-        service.getBoolAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getBool();
+        call.enqueue(new ServiceResponseCallback<BooleanWrapper>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getBoolDelegate(response, error));
+                    serviceCallback.success(getBoolDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<BooleanWrapper>()
                 .register(200, new TypeToken<BooleanWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -466,11 +505,13 @@ public class PrimitiveImpl implements Primitive {
         }
         Validator.validate(complexBody);
         try {
-            ServiceResponse<Void> response = putBoolDelegate(service.putBool(complexBody), null);
+            Call<ResponseBody> call = service.putBool(complexBody);
+            ServiceResponse<Void> response = putBoolDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putBoolDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -480,29 +521,31 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put true and false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
-        service.putBoolAsync(complexBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putBool(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putBoolDelegate(response, error));
+                    serviceCallback.success(putBoolDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putBoolDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -513,11 +556,13 @@ public class PrimitiveImpl implements Primitive {
      */
     public StringWrapper getString() throws ServiceException {
         try {
-            ServiceResponse<StringWrapper> response = getStringDelegate(service.getString(), null);
+            Call<ResponseBody> call = service.getString();
+            ServiceResponse<StringWrapper> response = getStringDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<StringWrapper> response = getStringDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -526,24 +571,26 @@ public class PrimitiveImpl implements Primitive {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
-        service.getStringAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getString();
+        call.enqueue(new ServiceResponseCallback<StringWrapper>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getStringDelegate(response, error));
+                    serviceCallback.success(getStringDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<StringWrapper> getStringDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<StringWrapper>()
                 .register(200, new TypeToken<StringWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -559,11 +606,13 @@ public class PrimitiveImpl implements Primitive {
         }
         Validator.validate(complexBody);
         try {
-            ServiceResponse<Void> response = putStringDelegate(service.putString(complexBody), null);
+            Call<ResponseBody> call = service.putString(complexBody);
+            ServiceResponse<Void> response = putStringDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putStringDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -573,29 +622,31 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put 'goodrequest', '', and null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
-        service.putStringAsync(complexBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putString(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putStringDelegate(response, error));
+                    serviceCallback.success(putStringDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putStringDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -606,11 +657,13 @@ public class PrimitiveImpl implements Primitive {
      */
     public DateWrapper getDate() throws ServiceException {
         try {
-            ServiceResponse<DateWrapper> response = getDateDelegate(service.getDate(), null);
+            Call<ResponseBody> call = service.getDate();
+            ServiceResponse<DateWrapper> response = getDateDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<DateWrapper> response = getDateDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -619,24 +672,26 @@ public class PrimitiveImpl implements Primitive {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
-        service.getDateAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getDate();
+        call.enqueue(new ServiceResponseCallback<DateWrapper>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDateDelegate(response, error));
+                    serviceCallback.success(getDateDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<DateWrapper> getDateDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<DateWrapper>()
                 .register(200, new TypeToken<DateWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -652,11 +707,13 @@ public class PrimitiveImpl implements Primitive {
         }
         Validator.validate(complexBody);
         try {
-            ServiceResponse<Void> response = putDateDelegate(service.putDate(complexBody), null);
+            Call<ResponseBody> call = service.putDate(complexBody);
+            ServiceResponse<Void> response = putDateDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putDateDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -666,29 +723,31 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
-        service.putDateAsync(complexBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putDate(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putDateDelegate(response, error));
+                    serviceCallback.success(putDateDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putDateDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -699,11 +758,13 @@ public class PrimitiveImpl implements Primitive {
      */
     public DatetimeWrapper getDateTime() throws ServiceException {
         try {
-            ServiceResponse<DatetimeWrapper> response = getDateTimeDelegate(service.getDateTime(), null);
+            Call<ResponseBody> call = service.getDateTime();
+            ServiceResponse<DatetimeWrapper> response = getDateTimeDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<DatetimeWrapper> response = getDateTimeDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -712,24 +773,26 @@ public class PrimitiveImpl implements Primitive {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
-        service.getDateTimeAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getDateTime();
+        call.enqueue(new ServiceResponseCallback<DatetimeWrapper>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getDateTimeDelegate(response, error));
+                    serviceCallback.success(getDateTimeDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<DatetimeWrapper>()
                 .register(200, new TypeToken<DatetimeWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -745,11 +808,13 @@ public class PrimitiveImpl implements Primitive {
         }
         Validator.validate(complexBody);
         try {
-            ServiceResponse<Void> response = putDateTimeDelegate(service.putDateTime(complexBody), null);
+            Call<ResponseBody> call = service.putDateTime(complexBody);
+            ServiceResponse<Void> response = putDateTimeDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putDateTimeDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -759,29 +824,132 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
-        service.putDateTimeAsync(complexBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putDateTime(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putDateTimeDelegate(response, error));
+                    serviceCallback.success(putDateTimeDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putDateTimeDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
+    }
+
+    /**
+     * Get complex types with datetimeRfc1123 properties
+     *
+     * @return the Datetimerfc1123Wrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public Datetimerfc1123Wrapper getDateTimeRfc1123() throws ServiceException {
+        try {
+            Call<ResponseBody> call = service.getDateTimeRfc1123();
+            ServiceResponse<Datetimerfc1123Wrapper> response = getDateTimeRfc1123Delegate(call.execute(), null);
+            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Get complex types with datetimeRfc1123 properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<ResponseBody> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getDateTimeRfc1123();
+        call.enqueue(new ServiceResponseCallback<Datetimerfc1123Wrapper>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(getDateTimeRfc1123Delegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<Datetimerfc1123Wrapper>()
+                .register(200, new TypeToken<Datetimerfc1123Wrapper>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, retrofit);
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException {
+        if (complexBody == null) {
+            throw new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+        }
+        Validator.validate(complexBody);
+        try {
+            Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
+            ServiceResponse<Void> response = putDateTimeRfc1123Delegate(call.execute(), null);
+            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Put complex types with datetimeRfc1123 properties
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<ResponseBody> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        if (complexBody == null) {
+            serviceCallback.failure(new ServiceException(
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+        }
+        Validator.validate(complexBody, serviceCallback);
+        Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(putDateTimeRfc1123Delegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<Void>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<Error>(){}.getType())
+                .build(response, retrofit);
     }
 
     /**
@@ -792,11 +960,13 @@ public class PrimitiveImpl implements Primitive {
      */
     public ByteWrapper getByte() throws ServiceException {
         try {
-            ServiceResponse<ByteWrapper> response = getByteDelegate(service.getByte(), null);
+            Call<ResponseBody> call = service.getByte();
+            ServiceResponse<ByteWrapper> response = getByteDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ByteWrapper> response = getByteDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -805,24 +975,26 @@ public class PrimitiveImpl implements Primitive {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
-        service.getByteAsync(new ServiceResponseCallback() {
+    public Call<ResponseBody> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
+        Call<ResponseBody> call = service.getByte();
+        call.enqueue(new ServiceResponseCallback<ByteWrapper>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getByteDelegate(response, error));
+                    serviceCallback.success(getByteDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ByteWrapper> getByteDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ByteWrapper>()
                 .register(200, new TypeToken<ByteWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -838,11 +1010,13 @@ public class PrimitiveImpl implements Primitive {
         }
         Validator.validate(complexBody);
         try {
-            ServiceResponse<Void> response = putByteDelegate(service.putByte(complexBody), null);
+            Call<ResponseBody> call = service.putByte(complexBody);
+            ServiceResponse<Void> response = putByteDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = putByteDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -852,29 +1026,31 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
         }
         Validator.validate(complexBody, serviceCallback);
-        service.putByteAsync(complexBody, new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.putByte(complexBody);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(putByteDelegate(response, error));
+                    serviceCallback.success(putByteDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> putByteDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

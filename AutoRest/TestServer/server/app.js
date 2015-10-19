@@ -15,6 +15,8 @@ var string = require('./routes/string');
 var byte = require('./routes/byte');
 var date = require('./routes/date');
 var datetime = require('./routes/datetime');
+var datetimeRfc1123 = require('./routes/datetime-rfc1123');
+var duration = require('./routes/duration');
 var complex = require('./routes/complex');
 var report = require('./routes/report');
 var dictionary = require('./routes/dictionary');
@@ -84,6 +86,8 @@ var coverage = {
   "putArrayDateTimeValid": 0,
   "getArrayDateTimeWithNull": 0,
   "getArrayDateTimeWithInvalidChars": 0,
+  "getArrayDateTimeRfc1123Valid": 0,
+  "putArrayDateTimeRfc1123Valid": 0,
   "getArrayByteValid": 0,
   "putArrayByteValid": 0,
   "getArrayByteWithNull": 0,
@@ -139,6 +143,15 @@ var coverage = {
   "putDateTimeMinUtc": 0,
   "getDateTimeMinLocalPositiveOffset": 0,
   "getDateTimeMinLocalNegativeOffset": 0,
+  "getDateTimeRfc1123Null": 0,
+  "getDateTimeRfc1123Invalid": 0,
+  "getDateTimeRfc1123Overflow": 0,
+  "getDateTimeRfc1123Underflow": 0,
+  "getDateTimeRfc1123MinUtc": 0,
+  "putDateTimeRfc1123Max": 0,
+  "putDateTimeRfc1123Min": 0,
+  "getDateTimeRfc1123MaxUtcLowercase": 0,
+  "getDateTimeRfc1123MaxUtcUppercase": 0,
   "getIntegerNull": 0,
   "getIntegerInvalid": 0,
   "getIntegerOverflow" : 0,
@@ -189,6 +202,7 @@ var coverage = {
   "putComplexPrimitiveString": 0,
   "putComplexPrimitiveDate": 0,
   "putComplexPrimitiveDateTime": 0,
+  "putComplexPrimitiveDateTimeRfc1123": 0,
   "putComplexPrimitiveByte": 0,
   "getComplexPrimitiveInteger": 0,
   "getComplexPrimitiveLong": 0,
@@ -198,6 +212,7 @@ var coverage = {
   "getComplexPrimitiveString": 0,
   "getComplexPrimitiveDate": 0,
   "getComplexPrimitiveDateTime": 0,
+  "getComplexPrimitiveDateTimeRfc1123": 0,
   "getComplexPrimitiveByte": 0,
   "putComplexArrayValid": 0,
   "putComplexArrayEmpty": 0,
@@ -301,6 +316,7 @@ var coverage = {
   "getDictionaryDateTimeValid": 0,
   "getDictionaryDateTimeWithNull": 0,
   "getDictionaryDateTimeWithInvalidChars": 0,
+  "getDictionaryDateTimeRfc1123Valid": 0,
   "getDictionaryByteValid": 0,
   "getDictionaryByteWithNull": 0,
   "putDictionaryBooleanValid": 0,
@@ -311,6 +327,7 @@ var coverage = {
   "putDictionaryStringValid": 0,
   "putDictionaryDateValid": 0,
   "putDictionaryDateTimeValid": 0,
+  "putDictionaryDateTimeRfc1123Valid": 0,
   "putDictionaryByteValid": 0,
   "getDictionaryComplexNull": 0,
   "getDictionaryComplexEmpty": 0,
@@ -330,6 +347,10 @@ var coverage = {
   "getDictionaryDictionaryItemEmpty": 0,
   "getDictionaryDictionaryValid": 0,
   "putDictionaryDictionaryValid": 0,
+  "putDurationPositive": 0,
+  "getDurationNull": 0,
+  "getDurationInvalid": 0,
+  "getDurationPositive": 0,
   "HeaderParameterExistingKey": 0,
   "HeaderResponseExistingKey": 0,
   "HeaderResponseProtectedKey": 0,
@@ -350,7 +371,10 @@ var coverage = {
   "HeaderParameterDateMin": 0,
   "HeaderParameterDateTimeValid": 0,
   "HeaderParameterDateTimeMin": 0,
+  "HeaderParameterDateTimeRfc1123Valid": 0,
+  "HeaderParameterDateTimeRfc1123Min": 0,
   "HeaderParameterBytesValid": 0,
+  "HeaderParameterDurationValid": 0,
   "HeaderResponseIntegerPositive": 0,
   "HeaderResponseIntegerNegative": 0,
   "HeaderResponseLongPositive": 0,
@@ -372,7 +396,10 @@ var coverage = {
   "HeaderResponseDateMin": 0,
   "HeaderResponseDateTimeValid": 0,
   "HeaderResponseDateTimeMin": 0,
-  "HeaderResponseBytesValid": 0
+  "HeaderResponseDateTimeRfc1123Valid": 0,
+  "HeaderResponseDateTimeRfc1123Min": 0,
+  "HeaderResponseBytesValid": 0,
+  "HeaderResponseDurationValid": 0
 };
 
 // view engine setup
@@ -395,6 +422,8 @@ app.use('/string', new string(coverage).router);
 app.use('/byte', new byte(coverage).router);
 app.use('/date', new date(coverage).router);
 app.use('/datetime', new datetime(coverage, optionalCoverage).router);
+app.use('/datetimeRfc1123', new datetimeRfc1123(coverage).router);
+app.use('/duration', new duration(coverage, optionalCoverage).router);
 app.use('/array', new array(coverage).router);
 app.use('/complex', new complex(coverage).router);
 app.use('/dictionary', new dictionary(coverage).router);

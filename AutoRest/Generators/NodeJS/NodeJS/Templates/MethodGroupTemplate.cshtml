@@ -18,6 +18,10 @@ var WebResource = msRest.WebResource;
 @EmptyLine
 @:var models = require('../models');
 }
+@if (Model.ContainsTimeSpan)
+{
+@:var moment = require('moment');
+}
 @EmptyLine
 /**
  * @@class

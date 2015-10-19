@@ -15,16 +15,11 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     /// <summary>
     /// Defines values for CMYKColors.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum CMYKColors
+    public static class CMYKColors
     {
-        [EnumMember(Value = "cyan")]
-        Cyan,
-        [EnumMember(Value = "Magenta")]
-        Magenta,
-        [EnumMember(Value = "YELLOW")]
-        YELLOW,
-        [EnumMember(Value = "blacK")]
-        BlacK
+        public const string Cyan = "cyan";
+        public const string Magenta = "Magenta";
+        public const string YELLOW = "YELLOW";
+        public const string BlacK = "blacK";
     }
 }

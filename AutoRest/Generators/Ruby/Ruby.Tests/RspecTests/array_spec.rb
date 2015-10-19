@@ -29,6 +29,7 @@ module ArrayModule
       @arr_date = [Date.new(2000, 12, 01, 0), Date.new(1980, 1, 2, 0),Date.new(1492, 10, 12, 0)]
       @arr_date_nil = [Date.new(2012, 1, 1, 0), nil, Date.new(1776, 7, 4, 0)]
       @arr_dateTime = [DateTime.new(2000, 12, 01, 0, 0, 1), DateTime.new(1980, 1, 2, 0, 11, 35),DateTime.new(1492, 10, 12, 10, 15, 1)]
+      @arr_dateTime_rfc1123 = [DateTime.new(2000, 12, 01, 0, 0, 1, 'Z'), DateTime.new(1980, 1, 2, 0, 11, 35, 'Z'), DateTime.new(1492, 10, 12, 10, 15, 1, 'Z')]
       @arr_dateTime_nil = [DateTime.new(2000, 12, 01, 0, 0, 1), nil]
 
       @product1 = Product.new
@@ -255,6 +256,19 @@ module ArrayModule
       expect { @array_client.get_date_time_invalid_chars().value! }.to raise_exception(MsRest::DeserializationError)
     end
 
+    # DateTimeRfc1123 tests
+    it 'should get dateTimeRfc1123 valid' do
+      result = @array_client.get_date_time_rfc1123valid().value!
+      expect(result.response.status).to eq(200)
+      expect(result.body).to eq(@arr_dateTime_rfc1123)
+    end
+
+    it 'should put dateTimeRfc1123 valid' do
+      pending("Ruby DateTime -> RFC1123 serialization thinks DateTime.new(1492, 10, 12, 10, 15, 1, 'Z') is a Friday, but NodeJS/C# think it's a Wed")
+      result = @array_client.put_date_time_rfc1123valid(@arr_dateTime_rfc1123).value!
+      expect(result.response.status).to eq(200)
+    end
+    
     # Byte tests
     it 'should get byte valid' do
       result = @array_client.get_byte_valid().value!

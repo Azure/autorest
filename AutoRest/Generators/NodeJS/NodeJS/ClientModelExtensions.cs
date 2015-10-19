@@ -43,7 +43,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             PrimaryType primaryType = sequence.ElementType as PrimaryType;
             EnumType enumType = sequence.ElementType as EnumType;
-            if (enumType != null && enumType.IsExpandable)
+            if (enumType != null && enumType.ModelAsString)
             {
                 primaryType = PrimaryType.String;
             }
@@ -121,11 +121,22 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     "msRest.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
             }
 
-            if (known == PrimaryType.DateTime
-                || known == PrimaryType.ByteArray)
+            if (known == PrimaryType.DateTimeRfc1123)
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0}.toUTCString()", reference);
+            }
+
+            if (known == PrimaryType.DateTime || 
+                known == PrimaryType.ByteArray)
             {
                 return string.Format(CultureInfo.InvariantCulture,
                     "msRest.serializeObject({0})", reference);
+            }
+
+            if (known == PrimaryType.TimeSpan)
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    "{0}.toISOString()", reference);
             }
 
             return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
@@ -218,21 +229,32 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} && !Buffer.isBuffer({0})) {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
+            else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date || primary == PrimaryType.DateTimeRfc1123)
             {
                 if (isRequired)
                 {
                     builder.AppendLine("if(!{0} || !({0} instanceof Date || ", valueReference)
-                              .Indent()
-                                .Indent()
-                                .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
+                                                  .Indent()
+                                                  .Indent()
+                                                  .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
                     return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
                 }
 
-                builder.AppendLine("if ({0} && !({0} instanceof Date || ", valueReference)
-                         .Indent()
-                           .Indent()
-                           .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
+                builder = builder.AppendLine("if ({0} && !({0} instanceof Date || ", valueReference)
+                                              .Indent()
+                                              .Indent()
+                                              .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
+                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+            }
+            else if (primary == PrimaryType.TimeSpan)
+            {
+                if (isRequired)
+                {
+                    builder.AppendLine("if(!{0} || !moment.isDuration({0})) {{", valueReference);
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                }
+
+                builder.AppendLine("if({0} && !moment.isDuration({0})) {{", valueReference);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else
@@ -247,21 +269,24 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// </summary>
         /// <param name="primary">primary type to query</param>
         /// <returns>The TypeScript type correspoinding to this model primary type</returns>
-        private static string PrimaryTSType(this PrimaryType primary) {
+        private static string PrimaryTSType(this PrimaryType primary) 
+        {
             if (primary == PrimaryType.Boolean)
                 return "boolean";
             else if (primary == PrimaryType.Double || primary == PrimaryType.Int || primary == PrimaryType.Long)
                 return "number";
             else if (primary == PrimaryType.String)
                 return "string";
-            else if (primary == PrimaryType.Date || primary == PrimaryType.DateTime)
+            else if (primary == PrimaryType.Date || primary == PrimaryType.DateTime || primary == PrimaryType.DateTimeRfc1123)
                 return "Date";
             else if (primary == PrimaryType.Object)
                 return "any";   // TODO: test this
-            else if (primary == PrimaryType.ByteArray)
-                return "Buffer";
-            else if (primary == PrimaryType.Stream)
+            else if (primary == PrimaryType.ByteArray)  
+                return "Buffer";  
+            else if (primary == PrimaryType.Stream)  
                 return "stream.Readable";
+            else if (primary == PrimaryType.TimeSpan)
+                return "moment.Duration"; //TODO: test this, add include for it
             else {
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
                     "Type '{0}' not implemented", primary));
@@ -610,6 +635,48 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                 .Outdent()
                                 .AppendLine("}").ToString();
             }
+            else if (primary == PrimaryType.DateTimeRfc1123)
+            {
+                if (isRequired)
+                {
+                    builder.AppendLine("if(!{0} || !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{",
+                        objectReference);
+                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
+                    return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toUTCString() : {1};",
+                        valueReference, objectReference).ToString();
+                }
+
+                builder.AppendLine("if ({0}) {{", objectReference)
+                         .Indent()
+                         .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{",
+                         objectReference);
+                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                builder = ConstructBasePropertyCheck(builder, valueReference);
+                return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toUTCString() : {1};", valueReference, objectReference)
+                                .Outdent()
+                                .AppendLine("}").ToString();
+            }
+            else if (primary == PrimaryType.TimeSpan)
+            {
+                if (isRequired)
+                {
+                    builder.AppendLine("if(!{0} || !moment.isDuration({0})) {{", objectReference);
+                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
+                    return builder.AppendLine("{0} = {1}.toISOString();", valueReference, objectReference).ToString();
+                }
+
+                builder.AppendLine("if ({0}) {{", objectReference)
+                         .Indent()
+                         .AppendLine("if !(moment.isDuration({0})) {{",
+                         objectReference);
+                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
+                builder = ConstructBasePropertyCheck(builder, valueReference);
+                return builder.AppendLine("{0} = {1}.toISOString();", valueReference, objectReference)
+                                .Outdent()
+                                .AppendLine("}").ToString();
+            }
             else
             {
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
@@ -906,7 +973,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                            .Outdent()
                            .AppendLine("}");
                 }
-                else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date)
+                else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date || primary == PrimaryType.DateTimeRfc1123)
                 {
                     builder.AppendLine("if ({0}) {{", valueReference)
                              .Indent()

@@ -1,6 +1,7 @@
 package fixtures.bodyarray;
 
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.DateTimeRfc1123;
 import fixtures.bodyarray.models.Product;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -27,7 +28,7 @@ public class ArrayTests {
     @Test
     public void getInvalid() throws Exception {
         try {
-            client.getArray().getInvalid();
+            List<Integer> result = client.getArray().getInvalid();
             Assert.assertTrue(false);
         } catch (ServiceException exception) {
             // expected
@@ -316,6 +317,26 @@ public class ArrayTests {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
         }
+    }
+
+    @Test
+    public void getDateTimeRfc1123Valid() throws Exception {
+        List<DateTimeRfc1123> result = client.getArray().getDateTimeRfc1123Valid();
+        Object[] expected = new DateTimeRfc1123[] {
+                new DateTimeRfc1123(new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC)),
+                new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)),
+                new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC))
+        };
+        Assert.assertArrayEquals(expected, result.toArray());
+    }
+
+    @Test
+    public void putDateTimeRfc1123Valid() throws Exception {
+        client.getArray().putDateTimeRfc1123Valid(Arrays.asList(
+                new DateTimeRfc1123(new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC)),
+                new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)),
+                new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC))
+        ));
     }
 
     @Test

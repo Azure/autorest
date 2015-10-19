@@ -12,8 +12,8 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.FloatWrapper;
@@ -22,6 +22,7 @@ import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import fixtures.bodycomplex.models.DateWrapper;
 import fixtures.bodycomplex.models.DatetimeWrapper;
+import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import retrofit.http.GET;
 import retrofit.http.PUT;
@@ -38,112 +39,64 @@ public interface Primitive {
      */
     interface PrimitiveService {
         @GET("/complex/primitive/integer")
-        Response getInt() throws ServiceException;
-
-        @GET("/complex/primitive/integer")
-        void getIntAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getInt();
 
         @PUT("/complex/primitive/integer")
-        Response putInt(@Body IntWrapper complexBody) throws ServiceException;
-
-        @PUT("/complex/primitive/integer")
-        void putIntAsync(@Body IntWrapper complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putInt(@Body IntWrapper complexBody);
 
         @GET("/complex/primitive/long")
-        Response getLong() throws ServiceException;
-
-        @GET("/complex/primitive/long")
-        void getLongAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getLong();
 
         @PUT("/complex/primitive/long")
-        Response putLong(@Body LongWrapper complexBody) throws ServiceException;
-
-        @PUT("/complex/primitive/long")
-        void putLongAsync(@Body LongWrapper complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putLong(@Body LongWrapper complexBody);
 
         @GET("/complex/primitive/float")
-        Response getFloat() throws ServiceException;
-
-        @GET("/complex/primitive/float")
-        void getFloatAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getFloat();
 
         @PUT("/complex/primitive/float")
-        Response putFloat(@Body FloatWrapper complexBody) throws ServiceException;
-
-        @PUT("/complex/primitive/float")
-        void putFloatAsync(@Body FloatWrapper complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putFloat(@Body FloatWrapper complexBody);
 
         @GET("/complex/primitive/double")
-        Response getDouble() throws ServiceException;
-
-        @GET("/complex/primitive/double")
-        void getDoubleAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDouble();
 
         @PUT("/complex/primitive/double")
-        Response putDouble(@Body DoubleWrapper complexBody) throws ServiceException;
-
-        @PUT("/complex/primitive/double")
-        void putDoubleAsync(@Body DoubleWrapper complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putDouble(@Body DoubleWrapper complexBody);
 
         @GET("/complex/primitive/bool")
-        Response getBool() throws ServiceException;
-
-        @GET("/complex/primitive/bool")
-        void getBoolAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getBool();
 
         @PUT("/complex/primitive/bool")
-        Response putBool(@Body BooleanWrapper complexBody) throws ServiceException;
-
-        @PUT("/complex/primitive/bool")
-        void putBoolAsync(@Body BooleanWrapper complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putBool(@Body BooleanWrapper complexBody);
 
         @GET("/complex/primitive/string")
-        Response getString() throws ServiceException;
-
-        @GET("/complex/primitive/string")
-        void getStringAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getString();
 
         @PUT("/complex/primitive/string")
-        Response putString(@Body StringWrapper complexBody) throws ServiceException;
-
-        @PUT("/complex/primitive/string")
-        void putStringAsync(@Body StringWrapper complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putString(@Body StringWrapper complexBody);
 
         @GET("/complex/primitive/date")
-        Response getDate() throws ServiceException;
-
-        @GET("/complex/primitive/date")
-        void getDateAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDate();
 
         @PUT("/complex/primitive/date")
-        Response putDate(@Body DateWrapper complexBody) throws ServiceException;
-
-        @PUT("/complex/primitive/date")
-        void putDateAsync(@Body DateWrapper complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putDate(@Body DateWrapper complexBody);
 
         @GET("/complex/primitive/datetime")
-        Response getDateTime() throws ServiceException;
-
-        @GET("/complex/primitive/datetime")
-        void getDateTimeAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getDateTime();
 
         @PUT("/complex/primitive/datetime")
-        Response putDateTime(@Body DatetimeWrapper complexBody) throws ServiceException;
+        Call<ResponseBody> putDateTime(@Body DatetimeWrapper complexBody);
 
-        @PUT("/complex/primitive/datetime")
-        void putDateTimeAsync(@Body DatetimeWrapper complexBody, ServiceResponseCallback cb);
+        @GET("/complex/primitive/datetimerfc1123")
+        Call<ResponseBody> getDateTimeRfc1123();
+
+        @PUT("/complex/primitive/datetimerfc1123")
+        Call<ResponseBody> putDateTimeRfc1123(@Body Datetimerfc1123Wrapper complexBody);
 
         @GET("/complex/primitive/byte")
-        Response getByte() throws ServiceException;
-
-        @GET("/complex/primitive/byte")
-        void getByteAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getByte();
 
         @PUT("/complex/primitive/byte")
-        Response putByte(@Body ByteWrapper complexBody) throws ServiceException;
-
-        @PUT("/complex/primitive/byte")
-        void putByteAsync(@Body ByteWrapper complexBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putByte(@Body ByteWrapper complexBody);
 
     }
     /**
@@ -158,8 +111,9 @@ public interface Primitive {
      * Get complex types with integer properties
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getIntAsync(final ServiceCallback<IntWrapper> serviceCallback);
+    Call<ResponseBody> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback);
 
     /**
      * Put complex types with integer properties
@@ -174,8 +128,9 @@ public interface Primitive {
      *
      * @param complexBody Please put -1 and 2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with long properties
@@ -189,8 +144,9 @@ public interface Primitive {
      * Get complex types with long properties
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getLongAsync(final ServiceCallback<LongWrapper> serviceCallback);
+    Call<ResponseBody> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback);
 
     /**
      * Put complex types with long properties
@@ -205,8 +161,9 @@ public interface Primitive {
      *
      * @param complexBody Please put 1099511627775 and -999511627788
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with float properties
@@ -220,8 +177,9 @@ public interface Primitive {
      * Get complex types with float properties
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback);
+    Call<ResponseBody> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback);
 
     /**
      * Put complex types with float properties
@@ -236,8 +194,9 @@ public interface Primitive {
      *
      * @param complexBody Please put 1.05 and -0.003
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with double properties
@@ -251,8 +210,9 @@ public interface Primitive {
      * Get complex types with double properties
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback);
+    Call<ResponseBody> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback);
 
     /**
      * Put complex types with double properties
@@ -267,8 +227,9 @@ public interface Primitive {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with bool properties
@@ -282,8 +243,9 @@ public interface Primitive {
      * Get complex types with bool properties
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback);
+    Call<ResponseBody> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback);
 
     /**
      * Put complex types with bool properties
@@ -298,8 +260,9 @@ public interface Primitive {
      *
      * @param complexBody Please put true and false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with string properties
@@ -313,8 +276,9 @@ public interface Primitive {
      * Get complex types with string properties
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getStringAsync(final ServiceCallback<StringWrapper> serviceCallback);
+    Call<ResponseBody> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback);
 
     /**
      * Put complex types with string properties
@@ -329,8 +293,9 @@ public interface Primitive {
      *
      * @param complexBody Please put 'goodrequest', '', and null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with date properties
@@ -344,8 +309,9 @@ public interface Primitive {
      * Get complex types with date properties
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDateAsync(final ServiceCallback<DateWrapper> serviceCallback);
+    Call<ResponseBody> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback);
 
     /**
      * Put complex types with date properties
@@ -360,8 +326,9 @@ public interface Primitive {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with datetime properties
@@ -375,8 +342,9 @@ public interface Primitive {
      * Get complex types with datetime properties
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback);
+    Call<ResponseBody> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback);
 
     /**
      * Put complex types with datetime properties
@@ -391,8 +359,42 @@ public interface Primitive {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get complex types with datetimeRfc1123 properties
+     *
+     * @return the Datetimerfc1123Wrapper object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    Datetimerfc1123Wrapper getDateTimeRfc1123() throws ServiceException;
+
+    /**
+     * Get complex types with datetimeRfc1123 properties
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback);
+
+    /**
+     * Put complex types with datetimeRfc1123 properties
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException;
+
+    /**
+     * Put complex types with datetimeRfc1123 properties
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with byte properties
@@ -406,8 +408,9 @@ public interface Primitive {
      * Get complex types with byte properties
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback);
+    Call<ResponseBody> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback);
 
     /**
      * Put complex types with byte properties
@@ -422,7 +425,8 @@ public interface Primitive {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
 }

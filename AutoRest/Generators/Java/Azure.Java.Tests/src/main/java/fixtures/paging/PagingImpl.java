@@ -10,15 +10,17 @@
 
 package fixtures.paging;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.paging.models.ProductResult;
 import fixtures.paging.models.CloudError;
 
@@ -26,8 +28,8 @@ public class PagingImpl implements Paging {
     private PagingService service;
     AutoRestPagingTestService client;
 
-    public PagingImpl(RestAdapter restAdapter, AutoRestPagingTestService client) {
-        this.service = restAdapter.create(PagingService.class);
+    public PagingImpl(Retrofit retrofit, AutoRestPagingTestService client) {
+        this.service = retrofit.create(PagingService.class);
         this.client = client;
     }
 
@@ -39,11 +41,13 @@ public class PagingImpl implements Paging {
      */
     public ProductResult getSinglePages() throws ServiceException {
         try {
-            ServiceResponse<ProductResult> response = getSinglePagesDelegate(service.getSinglePages(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getSinglePagesDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getSinglePagesDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -52,24 +56,26 @@ public class PagingImpl implements Paging {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSinglePagesAsync(final ServiceCallback<ProductResult> serviceCallback) {
-        service.getSinglePagesAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getSinglePagesAsync(final ServiceCallback<ProductResult> serviceCallback) {
+        Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSinglePagesDelegate(response, error));
+                    serviceCallback.success(getSinglePagesDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getSinglePagesDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getSinglePagesDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -80,11 +86,13 @@ public class PagingImpl implements Paging {
      */
     public ProductResult getMultiplePages() throws ServiceException {
         try {
-            ServiceResponse<ProductResult> response = getMultiplePagesDelegate(service.getMultiplePages(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMultiplePages(this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getMultiplePagesDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getMultiplePagesDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -93,24 +101,26 @@ public class PagingImpl implements Paging {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMultiplePagesAsync(final ServiceCallback<ProductResult> serviceCallback) {
-        service.getMultiplePagesAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getMultiplePagesAsync(final ServiceCallback<ProductResult> serviceCallback) {
+        Call<ResponseBody> call = service.getMultiplePages(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesDelegate(response, error));
+                    serviceCallback.success(getMultiplePagesDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getMultiplePagesDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getMultiplePagesDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -121,11 +131,13 @@ public class PagingImpl implements Paging {
      */
     public ProductResult getMultiplePagesRetryFirst() throws ServiceException {
         try {
-            ServiceResponse<ProductResult> response = getMultiplePagesRetryFirstDelegate(service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getMultiplePagesRetryFirstDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getMultiplePagesRetryFirstDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -134,24 +146,26 @@ public class PagingImpl implements Paging {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMultiplePagesRetryFirstAsync(final ServiceCallback<ProductResult> serviceCallback) {
-        service.getMultiplePagesRetryFirstAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getMultiplePagesRetryFirstAsync(final ServiceCallback<ProductResult> serviceCallback) {
+        Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesRetryFirstDelegate(response, error));
+                    serviceCallback.success(getMultiplePagesRetryFirstDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getMultiplePagesRetryFirstDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getMultiplePagesRetryFirstDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -162,11 +176,13 @@ public class PagingImpl implements Paging {
      */
     public ProductResult getMultiplePagesRetrySecond() throws ServiceException {
         try {
-            ServiceResponse<ProductResult> response = getMultiplePagesRetrySecondDelegate(service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getMultiplePagesRetrySecondDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getMultiplePagesRetrySecondDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -175,24 +191,26 @@ public class PagingImpl implements Paging {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMultiplePagesRetrySecondAsync(final ServiceCallback<ProductResult> serviceCallback) {
-        service.getMultiplePagesRetrySecondAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getMultiplePagesRetrySecondAsync(final ServiceCallback<ProductResult> serviceCallback) {
+        Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesRetrySecondDelegate(response, error));
+                    serviceCallback.success(getMultiplePagesRetrySecondDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getMultiplePagesRetrySecondDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getMultiplePagesRetrySecondDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -203,11 +221,13 @@ public class PagingImpl implements Paging {
      */
     public ProductResult getSinglePagesFailure() throws ServiceException {
         try {
-            ServiceResponse<ProductResult> response = getSinglePagesFailureDelegate(service.getSinglePagesFailure(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getSinglePagesFailureDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getSinglePagesFailureDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -216,24 +236,26 @@ public class PagingImpl implements Paging {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSinglePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback) {
-        service.getSinglePagesFailureAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getSinglePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback) {
+        Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSinglePagesFailureDelegate(response, error));
+                    serviceCallback.success(getSinglePagesFailureDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getSinglePagesFailureDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getSinglePagesFailureDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -244,11 +266,13 @@ public class PagingImpl implements Paging {
      */
     public ProductResult getMultiplePagesFailure() throws ServiceException {
         try {
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureDelegate(service.getMultiplePagesFailure(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getMultiplePagesFailureDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -257,24 +281,26 @@ public class PagingImpl implements Paging {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMultiplePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback) {
-        service.getMultiplePagesFailureAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getMultiplePagesFailureAsync(final ServiceCallback<ProductResult> serviceCallback) {
+        Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesFailureDelegate(response, error));
+                    serviceCallback.success(getMultiplePagesFailureDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getMultiplePagesFailureDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getMultiplePagesFailureDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -285,11 +311,13 @@ public class PagingImpl implements Paging {
      */
     public ProductResult getMultiplePagesFailureUri() throws ServiceException {
         try {
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureUriDelegate(service.getMultiplePagesFailureUri(this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getMultiplePagesFailureUriDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureUriDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -298,24 +326,26 @@ public class PagingImpl implements Paging {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMultiplePagesFailureUriAsync(final ServiceCallback<ProductResult> serviceCallback) {
-        service.getMultiplePagesFailureUriAsync(this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+    public Call<ResponseBody> getMultiplePagesFailureUriAsync(final ServiceCallback<ProductResult> serviceCallback) {
+        Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesFailureUriDelegate(response, error));
+                    serviceCallback.success(getMultiplePagesFailureUriDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getMultiplePagesFailureUriDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getMultiplePagesFailureUriDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -331,11 +361,13 @@ public class PagingImpl implements Paging {
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
-            ServiceResponse<ProductResult> response = getSinglePagesNextDelegate(service.getSinglePagesNext(nextPageLink, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getSinglePagesNextDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getSinglePagesNextDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -345,28 +377,30 @@ public class PagingImpl implements Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSinglePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
+    public Call<ResponseBody> getSinglePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
         }
-        service.getSinglePagesNextAsync(nextPageLink, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSinglePagesNextDelegate(response, error));
+                    serviceCallback.success(getSinglePagesNextDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getSinglePagesNextDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getSinglePagesNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -382,11 +416,13 @@ public class PagingImpl implements Paging {
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
-            ServiceResponse<ProductResult> response = getMultiplePagesNextDelegate(service.getMultiplePagesNext(nextPageLink, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getMultiplePagesNextDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getMultiplePagesNextDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -396,28 +432,30 @@ public class PagingImpl implements Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMultiplePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
         }
-        service.getMultiplePagesNextAsync(nextPageLink, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesNextDelegate(response, error));
+                    serviceCallback.success(getMultiplePagesNextDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getMultiplePagesNextDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getMultiplePagesNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -433,11 +471,13 @@ public class PagingImpl implements Paging {
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
-            ServiceResponse<ProductResult> response = getMultiplePagesRetryFirstNextDelegate(service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getMultiplePagesRetryFirstNextDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getMultiplePagesRetryFirstNextDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -447,28 +487,30 @@ public class PagingImpl implements Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMultiplePagesRetryFirstNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesRetryFirstNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
         }
-        service.getMultiplePagesRetryFirstNextAsync(nextPageLink, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesRetryFirstNextDelegate(response, error));
+                    serviceCallback.success(getMultiplePagesRetryFirstNextDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getMultiplePagesRetryFirstNextDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getMultiplePagesRetryFirstNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -484,11 +526,13 @@ public class PagingImpl implements Paging {
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
-            ServiceResponse<ProductResult> response = getMultiplePagesRetrySecondNextDelegate(service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getMultiplePagesRetrySecondNextDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getMultiplePagesRetrySecondNextDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -498,28 +542,30 @@ public class PagingImpl implements Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMultiplePagesRetrySecondNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesRetrySecondNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
         }
-        service.getMultiplePagesRetrySecondNextAsync(nextPageLink, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesRetrySecondNextDelegate(response, error));
+                    serviceCallback.success(getMultiplePagesRetrySecondNextDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getMultiplePagesRetrySecondNextDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getMultiplePagesRetrySecondNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -535,11 +581,13 @@ public class PagingImpl implements Paging {
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
-            ServiceResponse<ProductResult> response = getSinglePagesFailureNextDelegate(service.getSinglePagesFailureNext(nextPageLink, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getSinglePagesFailureNextDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getSinglePagesFailureNextDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -549,28 +597,30 @@ public class PagingImpl implements Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getSinglePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
+    public Call<ResponseBody> getSinglePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
         }
-        service.getSinglePagesFailureNextAsync(nextPageLink, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSinglePagesFailureNextDelegate(response, error));
+                    serviceCallback.success(getSinglePagesFailureNextDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getSinglePagesFailureNextDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getSinglePagesFailureNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -586,11 +636,13 @@ public class PagingImpl implements Paging {
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureNextDelegate(service.getMultiplePagesFailureNext(nextPageLink, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getMultiplePagesFailureNextDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureNextDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -600,28 +652,30 @@ public class PagingImpl implements Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMultiplePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesFailureNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
         }
-        service.getMultiplePagesFailureNextAsync(nextPageLink, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesFailureNextDelegate(response, error));
+                    serviceCallback.success(getMultiplePagesFailureNextDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getMultiplePagesFailureNextDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getMultiplePagesFailureNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -637,11 +691,13 @@ public class PagingImpl implements Paging {
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureUriNextDelegate(service.getMultiplePagesFailureUriNext(nextPageLink, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.getAcceptLanguage());
+            ServiceResponse<ProductResult> response = getMultiplePagesFailureUriNextDelegate(call.execute(), null);
             return response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureUriNextDelegate(error.getResponse(), error);
-            return response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -651,28 +707,30 @@ public class PagingImpl implements Paging {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void getMultiplePagesFailureUriNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesFailureUriNextAsync(String nextPageLink, final ServiceCallback<ProductResult> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
         }
-        service.getMultiplePagesFailureUriNextAsync(nextPageLink, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<ProductResult>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesFailureUriNextDelegate(response, error));
+                    serviceCallback.success(getMultiplePagesFailureUriNextDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<ProductResult> getMultiplePagesFailureUriNextDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<ProductResult> getMultiplePagesFailureUriNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<ProductResult>()
                 .register(200, new TypeToken<ProductResult>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

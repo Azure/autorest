@@ -109,14 +109,23 @@ namespace Fixtures.MirrorSequences
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
         }    
         /// <summary>
@@ -158,7 +167,8 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "AddPet", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "pets").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pets").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -256,7 +266,8 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "AddPetStyles", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "primitives").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "primitives").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -354,7 +365,8 @@ namespace Fixtures.MirrorSequences
                 ServiceClientTracing.Enter(invocationId, this, "UpdatePetStyles", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "primitives").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "primitives").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");

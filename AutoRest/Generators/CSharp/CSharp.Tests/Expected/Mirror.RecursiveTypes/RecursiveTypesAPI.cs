@@ -108,14 +108,23 @@ namespace Fixtures.MirrorRecursiveTypes
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
         }    
         /// <summary>
@@ -168,7 +177,8 @@ namespace Fixtures.MirrorRecursiveTypes
                 ServiceClientTracing.Enter(invocationId, this, "Post", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.BaseUri, "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}").ToString();
+            var baseUrl = this.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             url = url.Replace("{apiVersion}", Uri.EscapeDataString(apiVersion));

@@ -591,6 +591,59 @@ export interface Primitive {
     putDateTime(complexBody: models.DatetimeWrapper, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
 
     /**
+     * Get complex types with datetimeRfc1123 properties
+     *
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {object} [result]   - The deserialized result object.
+     *                      See {@link Datetimerfc1123Wrapper} for more
+     *                      information.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDateTimeRfc1123(options: RequestOptions, callback: (err: Error, result: models.Datetimerfc1123Wrapper, request: WebResource, response: stream.Readable) => void): void;
+
+    /**
+     * Put complex types with datetimeRfc1123 properties
+     *
+     * @param {object} complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and
+     * 'Mon, 18 May 2015 11:38:00 GMT'
+     * 
+     * @param {date} [complexBody.field]
+     * 
+     * @param {date} [complexBody.now]
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putDateTimeRfc1123(complexBody: models.Datetimerfc1123Wrapper, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+
+    /**
      * Get complex types with byte properties
      *
      * @param {object} [options]

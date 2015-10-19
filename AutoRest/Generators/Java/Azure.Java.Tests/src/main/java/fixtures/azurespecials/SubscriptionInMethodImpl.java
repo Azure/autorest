@@ -10,23 +10,25 @@
 
 package fixtures.azurespecials;
 
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
 import fixtures.azurespecials.models.Error;
 
 public class SubscriptionInMethodImpl implements SubscriptionInMethod {
     private SubscriptionInMethodService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public SubscriptionInMethodImpl(RestAdapter restAdapter, AutoRestAzureSpecialParametersTestClient client) {
-        this.service = restAdapter.create(SubscriptionInMethodService.class);
+    public SubscriptionInMethodImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+        this.service = retrofit.create(SubscriptionInMethodService.class);
         this.client = client;
     }
 
@@ -42,11 +44,13 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = postMethodLocalValidDelegate(service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postMethodLocalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postMethodLocalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -56,28 +60,30 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
         }
-        service.postMethodLocalValidAsync(subscriptionId, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postMethodLocalValidDelegate(response, error));
+                    serviceCallback.success(postMethodLocalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postMethodLocalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -92,11 +98,13 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = postMethodLocalNullDelegate(service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postMethodLocalNullDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postMethodLocalNullDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -106,28 +114,30 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
         }
-        service.postMethodLocalNullAsync(subscriptionId, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postMethodLocalNullDelegate(response, error));
+                    serviceCallback.success(postMethodLocalNullDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postMethodLocalNullDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -142,11 +152,13 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = postPathLocalValidDelegate(service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postPathLocalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postPathLocalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -156,28 +168,30 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
         }
-        service.postPathLocalValidAsync(subscriptionId, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postPathLocalValidDelegate(response, error));
+                    serviceCallback.success(postPathLocalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postPathLocalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
     /**
@@ -192,11 +206,13 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
         try {
-            ServiceResponse<Void> response = postSwaggerLocalValidDelegate(service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage()), null);
+            Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage());
+            ServiceResponse<Void> response = postSwaggerLocalValidDelegate(call.execute(), null);
             response.getBody();
-        } catch (RetrofitError error) {
-            ServiceResponse<Void> response = postSwaggerLocalValidDelegate(error.getResponse(), error);
-            response.getBody();
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
         }
     }
 
@@ -206,28 +222,30 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
-    public void postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
         }
-        service.postSwaggerLocalValidAsync(subscriptionId, this.client.getAcceptLanguage(), new ServiceResponseCallback() {
+        Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void response(Response response, RetrofitError error) {
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postSwaggerLocalValidDelegate(response, error));
+                    serviceCallback.success(postSwaggerLocalValidDelegate(response, retrofit));
                 } catch (ServiceException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
+        return call;
     }
 
-    private ServiceResponse<Void> postSwaggerLocalValidDelegate(Response response, RetrofitError error) throws ServiceException {
+    private ServiceResponse<Void> postSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
-                .build(response, error);
+                .build(response, retrofit);
     }
 
 }

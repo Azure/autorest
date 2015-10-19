@@ -34,7 +34,7 @@ public class RetryHandlerTests {
             }
         });
         Response response = serviceClient.client.newCall(
-                new Request.Builder().url("localhost").get().build()).execute();
+                new Request.Builder().url("http://localhost").get().build()).execute();
         Assert.assertEquals(501, response.code());
     }
 
@@ -55,7 +55,7 @@ public class RetryHandlerTests {
             }
         });
         Response response = serviceClient.client.newCall(
-                new Request.Builder().url("localhost").get().build()).execute();
+                new Request.Builder().url("http://localhost").get().build()).execute();
         Assert.assertEquals(500, response.code());
     }
 }

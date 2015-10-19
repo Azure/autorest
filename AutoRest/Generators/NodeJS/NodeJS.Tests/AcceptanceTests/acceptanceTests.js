@@ -8,6 +8,7 @@ var http = require('http');
 var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
+var moment = require('moment');
 var fs = require('fs');
 
 var boolClient = require('../Expected/AcceptanceTests/BodyBoolean/autoRestBoolTestService');
@@ -17,6 +18,8 @@ var numberClient = require('../Expected/AcceptanceTests/BodyNumber/autoRestNumbe
 var byteClient = require('../Expected/AcceptanceTests/BodyByte/autoRestSwaggerBATByteService');
 var dateClient = require('../Expected/AcceptanceTests/BodyDate/autoRestDateTestService');
 var dateTimeClient = require('../Expected/AcceptanceTests/BodyDateTime/autoRestDateTimeTestService');
+var dateTimeRfc1123Client = require('../Expected/AcceptanceTests/BodyDateTimeRfc1123/autoRestRFC1123DateTimeTestService');
+var durationClient = require('../Expected/AcceptanceTests/BodyDuration/autoRestDurationTestService');
 var urlClient = require('../Expected/AcceptanceTests/Url/autoRestUrlTestService');
 var fileClient = require('../Expected/AcceptanceTests/BodyFile/autoRestSwaggerBATFileService');
 var arrayClient = require('../Expected/AcceptanceTests/BodyArray/autoRestSwaggerBATArrayService');
@@ -599,6 +602,143 @@ describe('nodejs', function () {
       });
     });
 
+    describe('DateTimeRfc1123 Client', function () {
+      var testClient = new dateTimeRfc1123Client(baseUri, clientOptions);
+      it('should properly handle null value for DateTimeRfc1123', function (done) {
+        testClient.datetimerfc1123.getNull(function (error, result) {
+          should.not.exist(result);
+          should.not.exist(error);
+          done();
+        });
+      });
+
+      it('should properly handle invalid dateTimeRfc1123 value', function (done) {
+        testClient.datetimerfc1123.getInvalid(function (error, result) {
+          isNaN(result).should.equal(true);
+          should.not.exist(error);
+          done();
+        });
+      });
+
+      it('should get uppercase and lowercase UTC max date time dateTimeRfc1123', function (done) {
+        testClient.datetimerfc1123.getUtcUppercaseMaxDateTime(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          var date = result;
+          date.getUTCFullYear().should.equal(9999);
+          date.getUTCMonth().should.equal(11);
+          date.getUTCDate().should.equal(31);
+          date.getUTCHours().should.equal(23);
+          date.getUTCMinutes().should.equal(59);
+          date.getUTCSeconds().should.equal(59);
+          testClient.datetimerfc1123.getUtcLowercaseMaxDateTime(function (error, result) {
+            should.not.exist(error);
+            should.exist(result);
+            var date = result;
+            date.getUTCFullYear().should.equal(9999);
+            date.getUTCMonth().should.equal(11);
+            date.getUTCDate().should.equal(31);
+            date.getUTCHours().should.equal(23);
+            date.getUTCMinutes().should.equal(59);
+            date.getUTCSeconds().should.equal(59);
+            done();
+          });
+        });
+      });
+
+      it('should get UTC min dateTimeRfc1123 value', function (done) {
+        testClient.datetimerfc1123.getUtcMinDateTime(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          var date = result;
+          done();
+          //TODO: NodeJS doesn't deserialize this time correctly
+          var dateFormat = 'ddd, DD MMM YYYY HH:mm:ss';
+          var myMoment = moment.utc('Mon, 01 Jan 0001 00:00:00 GMT', dateFormat);
+          should.not.exist(myMoment.toDate().toUTCString());
+
+          date.getUTCFullYear().should.equal(1);
+          date.getUTCMonth().should.equal(0);
+          date.getUTCDate().should.equal(1);
+          date.getUTCHours().should.equal(0);
+          date.getUTCMinutes().should.equal(0);
+          date.getUTCSeconds().should.equal(0);
+          date.getUTCMilliseconds().should.equal(0);
+          done();
+        });
+      });
+      
+      it('should get overflow and underflow', function (done) {
+        testClient.datetimerfc1123.getOverflow(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          var date = result;
+          date.getUTCFullYear().should.equal(10000);
+          date.getUTCMonth().should.equal(0);
+          date.getUTCDate().should.equal(1);
+          date.getUTCHours().should.equal(0);
+          date.getUTCMinutes().should.equal(0);
+          date.getUTCSeconds().should.equal(0);
+          testClient.datetimerfc1123.getUnderflow(function (error, result) {
+            isNaN(result).should.equal(true);
+            should.not.exist(error);
+            done();
+          });
+        });
+      });
+
+      it('should put UTC min and max dateTimeRfc1123', function (done) {
+        testClient.datetimerfc1123.putUtcMinDateTime(new Date('Mon, 01 Jan 0001 00:00:00 GMT'), function (error, result) {
+          should.not.exist(error);
+          should.not.exist(result);
+          testClient.datetimerfc1123.putUtcMaxDateTime(new Date('Fri, 31 Dec 9999 23:59:59 GMT'), function (error, result) {
+            should.not.exist(error);
+            should.not.exist(result);
+            done();
+          });
+        });
+      });
+    });
+
+    describe('Duration Client', function () {
+      var testClient = new durationClient(baseUri, clientOptions);
+      it('should properly handle null value for Duration', function (done) {
+        testClient.duration.getNull(function (error, result) {
+          should.not.exist(result);
+          should.not.exist(error);
+          done();
+        });
+      });
+
+      it('should properly handle invalid value for Duration', function (done) {
+        testClient.duration.getInvalid(function (error, result) {
+          //For some reason moment.js allows non-ISO strings and will just construct a duration of length 0, so we don't expect an error here, but the result
+          //should be duration of length 0
+          should.not.exist(error);
+          should.equal(result.asSeconds(), 0);
+          done();
+        });
+      });
+
+      it('should properly handle positive value for Duration', function (done) {
+        testClient.duration.getPositiveDuration(function (error, result) {
+          should.exist(result);
+          should.not.exist(error);
+          should.equal(result.asSeconds(), moment.duration('P3Y6M4DT12H30M5S').asSeconds());
+          done();
+        });
+      });
+
+      it('should properly put positive value for Duration', function (done) {
+        var duration = moment.duration({days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11});
+        testClient.duration.putPositiveDuration(duration, function (error, result) {
+          should.not.exist(error);
+          should.not.exist(result);
+          done();
+        });
+      });
+    });
+
     describe('Array Client', function () {
 
       describe('for primitive types', function () {
@@ -773,6 +913,18 @@ describe('nodejs', function () {
                   done();
                 });
               });
+            });
+          });
+        });
+         
+        it('should get and put dateTimeRfc1123 arrays', function (done) {
+          var testArray = [new Date('Fri, 01 Dec 2000 00:00:01 GMT'), new Date('Wed, 02 Jan 1980 00:11:35 GMT'), new Date('Wed, 12 Oct 1492 10:15:01 GMT')];
+          testClient.arrayModel.getDateTimeRfc1123Valid(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, testArray);
+            testClient.arrayModel.putDateTimeRfc1123Valid(testArray, function (error, result) {
+              should.not.exist(error);
+              done();
             });
           });
         });
@@ -1186,6 +1338,18 @@ describe('nodejs', function () {
             should.not.exist(error);
             assert.deepEqual(result, getDictionary);
             testClient.dictionary.putDateTimeValid(putDictionary, function (error, result) {
+              should.not.exist(error);
+              done();
+            });
+          });
+        });
+
+        it('should get and put dateTimeRfc1123 dictionaries', function (done) {
+          var dictionary = { 0: new Date('Fri, 01 Dec 2000 00:00:01 GMT'), 1: new Date('Wed, 02 Jan 1980 00:11:35 GMT'), 2: new Date('Wed, 12 Oct 1492 10:15:01 GMT') };
+          testClient.dictionary.getDateTimeRfc1123Valid(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, dictionary);
+            testClient.dictionary.putDateTimeRfc1123Valid(dictionary, function (error, result) {
               should.not.exist(error);
               done();
             });

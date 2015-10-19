@@ -26,11 +26,11 @@ var models = require('./index');
  * 
  * @member {object} [dummyEndPoint] Dummy EndPoint
  * 
- * @member {string} [dummyEndPoint.blob] Gets the blob endpoint.
+ * @member {object} [fooPoint] Foo point
  * 
- * @member {string} [dummyEndPoint.queue] Gets the queue endpoint.
+ * @member {object} [fooPoint.barPoint] Bar point
  * 
- * @member {string} [dummyEndPoint.table] Gets the table endpoint.
+ * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
  * 
  */
 function Endpoints(parameters) {
@@ -46,6 +46,9 @@ function Endpoints(parameters) {
     }
     if (parameters.dummyEndPoint) {
       this.dummyEndPoint = new models['Endpoints'](parameters.dummyEndPoint);
+    }
+    if (parameters.fooPoint) {
+      this.fooPoint = new models['Foo'](parameters.fooPoint);
     }
   }    
 }
@@ -84,6 +87,10 @@ Endpoints.prototype.serialize = function () {
     payload['dummyEndPoint'] = this['dummyEndPoint'].serialize();
   }
 
+  if (this['fooPoint']) {
+    payload['FooPoint'] = this['fooPoint'].serialize();
+  }
+
   return payload;
 };
 
@@ -109,6 +116,10 @@ Endpoints.prototype.deserialize = function (instance) {
 
     if (instance['dummyEndPoint']) {
       this['dummyEndPoint'] = new models['Endpoints']().deserialize(instance['dummyEndPoint']);
+    }
+
+    if (instance['FooPoint']) {
+      this['fooPoint'] = new models['Foo']().deserialize(instance['FooPoint']);
     }
   }
 

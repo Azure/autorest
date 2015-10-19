@@ -12,8 +12,8 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
-import retrofit.client.Response;
+import retrofit.Call;
+import com.squareup.okhttp.ResponseBody;
 import retrofit.http.GET;
 import retrofit.http.Query;
 import retrofit.http.Header;
@@ -29,28 +29,16 @@ public interface ApiVersionDefault {
      */
     interface ApiVersionDefaultService {
         @GET("/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
-        Response getMethodGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
-        void getMethodGlobalValidAsync(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMethodGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
-        Response getMethodGlobalNotProvidedValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
-        void getMethodGlobalNotProvidedValidAsync(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getMethodGlobalNotProvidedValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
-        Response getPathGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
-        void getPathGlobalValidAsync(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getPathGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
-        Response getSwaggerGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage) throws ServiceException;
-
-        @GET("/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
-        void getSwaggerGlobalValidAsync(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, ServiceResponseCallback cb);
+        Call<ResponseBody> getSwaggerGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
     }
     /**
@@ -64,8 +52,9 @@ public interface ApiVersionDefault {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -78,8 +67,9 @@ public interface ApiVersionDefault {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -92,8 +82,9 @@ public interface ApiVersionDefault {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -106,7 +97,8 @@ public interface ApiVersionDefault {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
 }

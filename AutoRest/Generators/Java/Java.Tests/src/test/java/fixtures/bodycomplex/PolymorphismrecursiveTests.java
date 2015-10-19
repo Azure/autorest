@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class PolymorphismrecursiveTests {
                 sib3.getBirthday());
     }
 
-    @Test
+    @Ignore("Pending https://github.com/square/retrofit/issues/1192")
     public void putValid() throws Exception {
         Salmon body = new Salmon();
         body.setLocation("alaska");

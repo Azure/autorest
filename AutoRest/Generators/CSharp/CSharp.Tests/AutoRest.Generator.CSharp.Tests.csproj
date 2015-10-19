@@ -98,6 +98,14 @@
       <Link>Swagger\body-datetime.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\..\TestServer\swagger\body-datetime-rfc1123.json">
+      <Link>Swagger\body-datetime-rfc1123.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\TestServer\swagger\body-duration.json">
+      <Link>Swagger\body-duration.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\..\..\TestServer\swagger\body-dictionary.json">
       <Link>Swagger\body-dictionary.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -187,10 +195,14 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Expected\**\*.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
+  <Target Name="CopyExpectedFiles" AfterTargets="BeforeBuild">
+    <ItemGroup>
+      <None Include="Expected\**\*.cs">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AcceptanceTests.cs" />

@@ -244,6 +244,29 @@ module HeaderModule
       # expect(Date.parse(result.response['value'])).to eq(Date.parse('0001-01-01T00:00:00Z'))
     end
 
+    it 'should post valid param dateTimeRfc1123' do
+      result = @header_client.param_datetime_rfc1123("valid", DateTime.new(2010, 1, 1, 12, 34, 56, 'Z')).value!
+      expect(result.response.status).to eq(200)
+    end
+
+    it 'should post min param dateTimeRfc1123' do
+      pending('proper working with minimum value datetime isnt implemented yet')
+      result = @header_client.param_datetime_rfc1123("min", DateTime.new(1, 1, 1, 0, 0, 0, 'Z')).value!
+      expect(result.response.status).to eq(200)
+    end
+
+    it 'should get response valid dateTimeRfc1123' do
+      result = @header_client.response_datetime_rfc1123("valid").value!
+      expect(result.response.status).to eq(200)
+      expect(Date.parse(result.response['value'])).to eq(Date.parse('2010-01-01T12:34:56Z'))
+    end
+
+    it 'should get response min dateTimeRfc1123' do
+      result = @header_client.response_datetime_rfc1123("min").value!
+      expect(result.response.status).to eq(200)
+      expect(Date.parse(result.response['value'])).to eq(Date.parse('0001-01-01T00:00:00Z'))
+    end
+    
     it 'should post valid byte' do
       pending('proper working with unicode isnt implemented yet')
       fail

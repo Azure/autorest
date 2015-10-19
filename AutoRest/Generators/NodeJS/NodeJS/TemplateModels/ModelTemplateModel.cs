@@ -84,59 +84,79 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        private class PropertyWrapper
+        {
+            public Property Property { get; set; }
+            public List<string> RecursiveTypes { get; set; }
+
+            public PropertyWrapper() { RecursiveTypes = new List<string>(); }
+        }
+
         public IEnumerable<Property> DocumentationPropertyList
         {
             get
             {
-                var traversalStack = new Stack<Property>();
-                var visitedHash = new Dictionary<string, Property>();
+                var traversalStack = new Stack<PropertyWrapper>();
+                var visitedHash = new Dictionary<string, PropertyWrapper>();
                 var retValue = new Stack<Property>();
 
                 foreach (var property in Properties)
                 {
-                    traversalStack.Push(property);
+                    var tempWrapper = new PropertyWrapper()
+                    {
+                        Property = property,
+                        RecursiveTypes = new List<string> () { Name }
+                    };
+                    traversalStack.Push(tempWrapper);
                 }
 
                 while (traversalStack.Count() != 0)
                 {
-                    var property = traversalStack.Pop();
-                    if (!(property.Type is CompositeType))
+                    var wrapper = traversalStack.Pop();
+                    if (wrapper.Property.Type is CompositeType)
                     {
-                        retValue.Push(property);
-                    }
-
-                    if (property.Type is CompositeType)
-                    {
-                        if (!visitedHash.ContainsKey(property.Name))
+                        if (!visitedHash.ContainsKey(wrapper.Property.Name))
                         {
-                            traversalStack.Push(property);
-                            foreach (var subProperty in ((CompositeType)property.Type).Properties)
+                            if (wrapper.RecursiveTypes.Contains(wrapper.Property.Type.Name))
                             {
-                                var individualProperty = new Property();
-                                if (subProperty.Type.Name == property.Type.Name)
+                                retValue.Push(wrapper.Property);
+                            }
+                            else
+                            {
+                                traversalStack.Push(wrapper);
+                                foreach (var subProperty in ((CompositeType)wrapper.Property.Type).Properties)
                                 {
-                                    //don't document this recursive property while documenting the model itself. 
-                                    if (subProperty.Type.Name == this.Name)
-                                    {
-                                        continue;
-                                    }
-                                    individualProperty.Type = PrimaryType.Object;
-                                }
-                                else
-                                {
+                                    var individualProperty = new Property();
+                                    individualProperty.Name = wrapper.Property.Name + "." + subProperty.Name;
                                     individualProperty.Type = subProperty.Type;
+                                    individualProperty.Documentation = subProperty.Documentation;
+                                    //Adding the parent type to recursive list
+                                    var recursiveList = new List<string>() { wrapper.Property.Type.Name };
+                                    if (subProperty.Type is CompositeType)
+                                    {
+                                        //Adding parent's recursive types to the list as well
+                                        recursiveList.AddRange(wrapper.RecursiveTypes);
+                                    }
+                                    var subPropertyWrapper = new PropertyWrapper()
+                                    {
+                                        Property = individualProperty,
+                                        RecursiveTypes = recursiveList
+                                    };
+                                    
+                                    traversalStack.Push(subPropertyWrapper);
                                 }
-                                individualProperty.Name = property.Name + "." + subProperty.Name;
-                                individualProperty.Documentation = subProperty.Documentation;
-                                traversalStack.Push(individualProperty);
                             }
 
-                            visitedHash.Add(property.Name, property);
+                            visitedHash.Add(wrapper.Property.Name, wrapper);
                         }
                         else
                         {
-                            retValue.Push(property);
+                            retValue.Push(wrapper.Property);
                         }
+                    }
+                    else
+                    {
+                        retValue.Push(wrapper.Property);
                     }
                 }
 
@@ -170,8 +190,10 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <param name="property">Model property to query</param>
         /// <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
         /// <returns>TypeScript property definition</returns>
-        public static string PropertyTS(Property property, bool inModelsModule) {
-            if (property == null) {
+        public static string PropertyTS(Property property, bool inModelsModule) 
+        {
+            if (property == null) 
+            {
                 throw new ArgumentNullException("property");
             }
 
