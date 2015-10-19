@@ -137,7 +137,8 @@ namespace Fixtures.MirrorPolymorphic
         /// details about each product, and lists the products in the proper display
         /// order.
         /// <param name='animalCreateOrUpdateParameter'>
-        /// An Animal/// </param>
+        /// An Animal
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

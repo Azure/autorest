@@ -140,7 +140,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Please put {id: 2, name: 'abc', color: 'Magenta'}
         /// </summary>
         /// <param name='complexBody'>
-        /// Please put {id: 2, name: 'abc', color: 'Magenta'}/// </param>
+        /// Please put {id: 2, name: 'abc', color: 'Magenta'}
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

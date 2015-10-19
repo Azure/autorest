@@ -220,7 +220,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 400 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -311,7 +312,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 400 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -402,7 +404,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 400 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -493,7 +496,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 400 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -836,7 +840,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 404 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -927,7 +932,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 405 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1018,7 +1024,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 406 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1109,7 +1116,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 407 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1200,7 +1208,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 409 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1543,7 +1552,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 413 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1634,7 +1644,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 414 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1725,7 +1736,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 415 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1900,7 +1912,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 417 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

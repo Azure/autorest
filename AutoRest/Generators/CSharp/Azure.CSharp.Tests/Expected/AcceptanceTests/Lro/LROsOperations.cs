@@ -76,7 +76,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// with an entity that contains ProvisioningState=’Succeeded’.
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -220,7 +221,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// with an entity that does not contain ProvisioningState=’Succeeded’.
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -366,7 +368,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// and an entity that doesn't contains ProvisioningState
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -514,7 +517,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -668,7 +672,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -816,7 +821,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// ProvisioningState=’Failed’
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -970,7 +976,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// ProvisioningState=’Canceled’
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1116,7 +1123,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// location header.
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1262,7 +1270,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1408,7 +1417,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1554,7 +1564,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1700,7 +1711,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1846,7 +1858,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// not contain Azure-AsyncOperation header.
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1988,7 +2001,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Long running put request with non resource.
         /// </summary>
         /// <param name='sku'>
-        /// sku to put/// </param>
+        /// sku to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2130,7 +2144,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Long running put request with non resource.
         /// </summary>
         /// <param name='sku'>
-        /// Sku to put/// </param>
+        /// Sku to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2272,7 +2287,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Long running put request with sub resource.
         /// </summary>
         /// <param name='product'>
-        /// Sub Product to put/// </param>
+        /// Sub Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -2414,7 +2430,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Long running put request with sub resource.
         /// </summary>
         /// <param name='product'>
-        /// Sub Product to put/// </param>
+        /// Sub Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -4284,7 +4301,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// response body after success
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -4420,7 +4438,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// with 'Location' header, 204 with noresponse body after success
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -4564,7 +4583,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -4708,7 +4728,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -4852,7 +4873,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -4990,7 +5012,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// endpoint indicated in the Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
