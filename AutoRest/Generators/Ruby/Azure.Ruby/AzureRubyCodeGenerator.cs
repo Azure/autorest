@@ -113,7 +113,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Models
             foreach (var model in serviceClient.ModelTypes)
             {
-                if (model.Extensions.ContainsKey("x-ms-external"))
+                if (model.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension) || model.Extensions.ContainsKey(AzureCodeGenerator.AzureResourceExtension))
                 {
                     continue;
                 }
