@@ -8,7 +8,6 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.microsoft.rest.PollingState.PollingResource;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonHelper;
 import com.squareup.okhttp.OkHttpClient;
@@ -114,7 +113,7 @@ public class AzureClient extends ServiceClient {
     }
 
     private <T> void updateStateFromLocationHeaderOnPut(PollingState<T> pollingState) throws ServiceException, IOException {
-        ServiceResponse<PollingResource> response = poll(pollingState.getLocationHeaderLink());
+        ServiceResponse<PollingState<T>.PollingResource> response = poll(pollingState.getLocationHeaderLink());
         int statusCode = response.getResponse().code();
         if (statusCode == 202) {
             pollingState.setResponse(response.getResponse());
@@ -125,12 +124,12 @@ public class AzureClient extends ServiceClient {
     }
 
     private <T> Call<ResponseBody> updateStateFromLocationHeaderOnPutAsync(final PollingState<T> pollingState, final ServiceCallback<T> callback) {
-        return pollAsync(pollingState.getLocationHeaderLink(), new ServiceCallback<PollingResource>() {
+        return pollAsync(pollingState.getLocationHeaderLink(), new ServiceCallback<PollingState<T>.PollingResource>() {
             @Override
             public void failure(Throwable t) { callback.failure(t); }
 
             @Override
-            public void success(ServiceResponse<PollingResource> result) {
+            public void success(ServiceResponse<PollingState<T>.PollingResource> result) {
                 try {
                     int statusCode = result.getResponse().code();
                     if (statusCode == 202) {
@@ -147,17 +146,17 @@ public class AzureClient extends ServiceClient {
     }
 
     private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws ServiceException, IOException {
-        ServiceResponse<PollingResource> response = poll(url);
+        ServiceResponse<PollingState<T>.PollingResource> response = poll(url);
         pollingState.updateFromResponse(response);
     }
 
     private <T> Call<ResponseBody> updateStateFromGetResourceOperationAsync(final PollingState<T> pollingState, String url, final ServiceCallback<T> callback) {
-        return pollAsync(url, new ServiceCallback<PollingResource>() {
+        return pollAsync(url, new ServiceCallback<PollingState<T>.PollingResource>() {
             @Override
             public void failure(Throwable t) { callback.failure(t); }
 
             @Override
-            public void success(ServiceResponse<PollingResource> result) {
+            public void success(ServiceResponse<PollingState<T>.PollingResource> result) {
                 try {
                     pollingState.updateFromResponse(result);
                 } catch (Throwable t) {
@@ -257,13 +256,18 @@ public class AzureClient extends ServiceClient {
         Call<ResponseBody> get(@Path("url") String url);
     }
 
-    public class AsyncPollingTask<T> extends TimerTask {
-        private final String url;
+    class AsyncPollingTask<T> extends TimerTask {
+        private String url;
         private PollingState<T> pollingState;
         private ServiceCallback<T> pollingCallback;
         private Call<ResponseBody> call;
 
         public AsyncPollingTask(final PollingState<T> pollingState, final String url, final ServiceCallback<T> clientCallback) {
+            this.create(pollingState, url, clientCallback);
+        }
+
+        public AsyncPollingTask<T> create(final PollingState<T> pollingState, final String url, final ServiceCallback<T> clientCallback) {
+            this.call = null;
             this.pollingState = pollingState;
             this.url = url;
             this.pollingCallback = new ServiceCallback<T>() {
@@ -276,9 +280,7 @@ public class AzureClient extends ServiceClient {
                 public void success(ServiceResponse<T> result) {
                     // Check provisioning state
                     if (AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
-                        new Timer().schedule(
-                                new AsyncPollingTask<T>(pollingState, url, clientCallback),
-                                pollingState.getDelayInMilliseconds());
+                        new Timer().schedule(create(pollingState, url, clientCallback), pollingState.getDelayInMilliseconds());
                     } else {
                         if (AzureAsyncOperation.successStatus.equals(pollingState.getStatus()) && pollingState.getResource() == null) {
                             call = updateStateFromGetResourceOperationAsync(pollingState, url, new ServiceCallback<T>() {
@@ -302,6 +304,7 @@ public class AzureClient extends ServiceClient {
                     }
                 }
             };
+            return this;
         }
 
         @Override
