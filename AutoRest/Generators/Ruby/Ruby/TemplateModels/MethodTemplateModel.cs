@@ -105,7 +105,23 @@ namespace Microsoft.Rest.Generator.Ruby
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters)
                 {
-                    string format = (parameter.IsRequired ? "{0}" : "{0} = nil");
+                    string format = "{0}";
+                    if (!parameter.IsRequired)
+                    {
+                        format = "{0} = nil";
+                        if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
+                        {
+                            PrimaryType type = parameter.Type as PrimaryType;
+                            if (type == PrimaryType.Boolean || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long)
+                            {
+                                format = "{0} = " + parameter.DefaultValue;
+                            }
+                            else if (type == PrimaryType.String)
+                            {
+                                format = "{0} = \"" + parameter.DefaultValue + "\"";
+                            }
+                        }
+                    }
                     declarations.Add(string.Format(format, parameter.Name));
                 }
 
