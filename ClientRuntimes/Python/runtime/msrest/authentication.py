@@ -35,7 +35,7 @@ class Authentication(object):
     
     header = "Authorization"
 
-    def signed_session(self):
+    def signed_session(self, request):
         session = requests.Session()
         return session
 
@@ -46,7 +46,7 @@ class BasicAuthentication(Authentication):
         self.username = username
         self.password = passw
 
-    def signed_session(self):
+    def signed_session(self, request):
         session = super(BasicAuthentication, self).signed_session()
 
         credentials = "{0}:{1}".format(self.username, self.password)
@@ -65,7 +65,7 @@ class TokenAuthentication(Authentication):
     def construct_auth(self):
         return "{0} {1}".format(self.scheme, self.token)
 
-    def signed_session(self):
+    def signed_session(self, request):
 
         expiry = self.token.get('expires_at')
 

@@ -25,13 +25,22 @@
 #--------------------------------------------------------------------------
 
 
-from ..msrest.authentication import TokenAuthentication
+from ..msrest.authentication import Authentication, TokenAuthentication
 from .azure_configuration import AzureConfiguration
 import requests_oauthlib as oauth
 from oauthlib.oauth2 import BackendApplicationClient, LegacyApplicationClient
 import time
 import keyring
 import ast
+import base64
+import hmac
+import hashlib
+
+try:
+    from urlparse import urlparse, parse_qs
+
+except ImportError:
+    from urllib.parse import urlparse, parse_qs
 
 def _http(base_uri, *extra):
 
@@ -115,7 +124,7 @@ class AADMixin(object):
             raise
 
 
-class HeadlessAuth(TokenAuthentication, AADMixin):
+class UserPassCredentials(TokenAuthentication, AADMixin):
     
 
     def __init__(self, client_id, username, password, secret=None, config=None):
@@ -148,7 +157,7 @@ class HeadlessAuth(TokenAuthentication, AADMixin):
         return token
 
 
-class ServicePrincipalAuth(TokenAuthentication, AADMixin):
+class ServicePrincipalCredentials(TokenAuthentication, AADMixin):
     
     def __init__(self, client_id, secret, resource, tenant=None, config=None):
 
@@ -187,7 +196,7 @@ class ServicePrincipalAuth(TokenAuthentication, AADMixin):
 
 
 
-class InteractiveAuth(TokenAuthentication, AADMixin):
+class InteractiveCredentials(TokenAuthentication, AADMixin):
     
     def __init__(self, client_id, resource, redirect, config=None):
 
@@ -271,4 +280,77 @@ class InteractiveAuth(TokenAuthentication, AADMixin):
         except oauth2.rfc6749.errors.TokenExpiredError as err:
             #TODO: Error handling
             raise
+
+
+class SharedKeyCredentials(Authentication):
+
+    headers_to_sign = [
+            'content-encoding',
+            'content-language',
+            'content-length',
+            'content-md5',
+            'content-type',
+            'date',
+            'if-modified-since',
+            'if-match',
+            'if-none-match',
+            'if-unmodified-since',
+            'range']
+
+    def __init__(self, account_name, key):
+        self._account_name = account_name
+        self._key = key
+
+    def _sign_string(self, string_to_sign):
+        if isinstance(self._key, unicode):
+            self._key = self._key.encode('utf-8')
+
+        key = base64.b64decode(self._key)
+        if isinstance(string_to_sign, unicode):
+            string_to_sign = string_to_sign.encode('utf-8')
+
+        signed_hmac_sha256 = hmac.HMAC(key, string_to_sign, hashlib.sha256)
+        digest = signed_hmac_sha256.digest()
+
+        return base64.b64encode(digest)
+
+    def signed_session(self, request):
+
+        url = urlparse(request.url);
+        uri_path = url.path;
+
+        string_to_sign = request.method + '\n'
+
+        request_headers = {name.lower():val for name,val in request.headers.items() if val}
+        string_to_sign += '\n'.join(request_headers.get(x, '') for x in self.headers_to_sign)
+        string_to_sign += '\n'
+
+        ocp_headers = []
+        for name, val in request_headers.items():
+            if 'ocp-' in name and val:
+                ocp_headers.append((name.lower(), val))
+
+        ocp_headers.sort()
+        
+        for name,val in ocp_headers:
+            string_to_sign += '{}:{}\n'.format(name,val)
+
+        string_to_sign += '/' + self._account_name + uri_path
+
+        auth_string = 'SharedKey ' + self._account_name + ':' + \
+            self._sign_string(string_to_sign)
+
+        query_to_sign = parse_qs(url.query)
+
+        for name in sorted(query_to_sign.keys()):
+            if query_to_sign[name][0]:
+                string_to_sign += '\n' + name + ':' + query_to_sign[name][0]
+
+        session = super(SharedKeyCredentials, self).signed_session(request)
+        session.headers[self.header] = auth_string
+        request.headers[self.header] = auth_string
+
+        return session
+
+
 

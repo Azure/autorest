@@ -1,7 +1,8 @@
 ﻿
 from runtime.msrest.exceptions import InvalidOperationError
-from constants import *
-from shared import *
+from runtime.msrest.utils import *
+from ..batch_constants import *
+from .shared import *
 
 
 
@@ -11,6 +12,20 @@ class DetailLevel(object):
         self.filter_clause = None
         self.select_clause = None
         self.expand_clause = None
+
+    def get_parameters(self):
+        params = {}
+
+        if self.select_clause:
+            params['$select'] = self.select_clause
+
+        if self.expand_clause:
+            params['$expand'] = self.expand_clause
+
+        if self.filter_clause:
+            params['$filter'] = self.filter_clause
+
+        return params
 
 
 class PoolSpec(object):
@@ -35,22 +50,22 @@ class PoolSpec(object):
             'target_os_version': {'key':'targetOSVersion', 'type':'str'},
         }
     
-    def __init__(self, manager, **kwargs):
+    def __init__(self, *args, **kwargs):
 
-        self._manager = manager
+        self._manager = kwargs.get('manager')
         
         self.id = None
         self.certificate_references = []
         self.metadata = {}
         self.name = None
-        self.tvm_size = None
+        self.vm_size = None
         self.resize_timeout = None
         self.target_dedicated = None
         self.enable_auto_scale = None
         self.auto_scale_formula = None
         self.communication = None
         self.start_task = None
-        self.max_tasks_per_tvm = None
+        self.max_tasks_per_node = None
         self.scheduling_policy = None
         self.os_family = None
         self.target_os_version = None
@@ -100,9 +115,9 @@ class Pool(object):
             'current_os_version': {'key':'currentOSVersion', 'type':'str'},
         }
 
-    def __init__(self, manager, **kwargs):
+    def __init__(self, **kwargs):
 
-        self._manager = manager
+        self._manager = kwargs.get('manager')
         
         self.id = None
         self.certificate_references = []

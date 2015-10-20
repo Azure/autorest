@@ -133,12 +133,13 @@ class Deserialized(object):
 
     basic_types = ['str', 'int', 'bool', 'float']
 
-    def __init__(self, response_obj, response_data=None):
+    def __init__(self, response_obj, response_data=None, manager=None):
 
-        self.response = response_obj()
+        self.client = manager
+        self.response = response_obj(manager=self.client)
         self.dependencies = {}
 
-        if response_data:
+        if response_data is not None:
             try:
                 self.unpack_response(response_data)
 
@@ -197,7 +198,7 @@ class Deserialized(object):
         except (ValueError, TypeError) as err:
             raise DeserializationError("Unable to deserialize response data: {0}".format(err))
 
-        deserialize_obj = Deserialized(self.dependencies[data_type])
+        deserialize_obj = Deserialized(self.dependencies[data_type], manager=self.client)
         return deserialize_obj(data, self.dependencies)
 
     def unpack_response(self, raw_data):

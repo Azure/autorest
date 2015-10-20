@@ -29,9 +29,9 @@ from ..msrest import Configuration
 
 class AzureConfiguration(Configuration):
 
-    def __init__(self, filepath=None):
+    def __init__(self, base_url=None, filepath=None):
 
-        super(AzureConfiguration, self).__init__(filepath)
+        super(AzureConfiguration, self).__init__(base_url, filepath)
 
         # Authentication
         self.auth_endpoint = "login.windows.net/"

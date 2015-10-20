@@ -24,3 +24,7 @@
 #
 #--------------------------------------------------------------------------
     
+
+def format_datetime_header(date_obj):
+    date_str = date_obj.strftime('%a, %d %b %Y %H:%M:%S GMT')
+    return date_str

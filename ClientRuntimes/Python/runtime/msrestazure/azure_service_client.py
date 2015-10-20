@@ -25,10 +25,11 @@
 #--------------------------------------------------------------------------
 
 from ..msrest import ServiceClient
+from .azure_configuration import AzureConfiguration
 
 class AzureServiceClient(ServiceClient):
 
-    def __init__(self, config, creds):
+    def __init__(self, creds, config):
         """
         Create service client.
 
@@ -37,21 +38,22 @@ class AzureServiceClient(ServiceClient):
             - creds (`.Authentication`): Authenticated credentials.
 
         """
-
-        if not isinstance(self.config, AzureConfiguration):
-            raise TypeError("AzureServiceClient must use AzureConfiguration")
-
         if not config:
             config = AzureConfiguration()
 
-        super(AzureServiceClient, self).__init__(config, creds)
+        if not isinstance(config, AzureConfiguration):
+            raise TypeError("AzureServiceClient must use AzureConfiguration")
+
+        
+
+        super(AzureServiceClient, self).__init__(creds, config)
 
 
 class AzureChinaServiceClient(AzureServiceClient):
 
-    def __init__(self, config, creds):
+    def __init__(self, creds, config):
 
-        super(AzureChinaServiceClient, self).__init__(config, creds)
+        super(AzureChinaServiceClient, self).__init__(creds, config)
 
         self.config.auth_endpoint = "login.chinacloudapi.cn/"
         self.resource = "https://management.core.chinacloudapi.cn/"

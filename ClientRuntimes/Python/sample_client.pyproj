@@ -27,10 +27,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="sample\batch_configuration.py" />
+    <Compile Include="sample\batch_exception.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="sample\batch_response.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sample\models\constants.py">
+    <Compile Include="sample\batch_constants.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="sample\models\pool_models.py">
@@ -42,10 +45,13 @@
     <Compile Include="sample\models\shared.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="sample\models\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="sample\operations\pool_operations.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sample\pool_manager.py">
+    <Compile Include="sample\operations\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="sample\test_script.py">

@@ -2,7 +2,7 @@
 
 class BatchOperationResponse(HTTPResponse):
     
-    def __init__(self):
+    def __init__(self, **kwargs):
 
         super(BatchOperationResponse, self).__init__()
 

@@ -1,7 +1,8 @@
 ﻿
 
 from runtime.msrestazure import AzureServiceClient, AzureConfiguration
-from pool_manager import PoolManager
+from .operations.pool_operations import PoolManager
+
 
 class BatchClient(AzureServiceClient):
 
@@ -9,4 +10,4 @@ class BatchClient(AzureServiceClient):
 
         super(BatchClient, self).__init__(credentials, config)
 
-        self.pools = PoolManager(self._client)
+        self.pools = PoolManager(self)

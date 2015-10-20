@@ -40,7 +40,7 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
         self._client_headers = {}
         self._client_hooks = {
             'request':ClientPipelineHook(),
-            'reponse':ClientPipelineHook()}
+            'response':ClientPipelineHook()}
 
         super(ClientHTTPAdapter, self).__init__()
 
@@ -66,7 +66,7 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
             raise InvalidHookError("Callback must be callable.")
 
         if event not in self._client_hooks:
-            raise InvalidHookError("Event: '{0}' is not able to be hooked.")
+            raise InvalidHookError("Event: '{0}' is not able to be hooked.".format(event))
 
         if precall:
             self._client_hooks[event].precalls.append(callback)

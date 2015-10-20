@@ -1,3 +1,5 @@
+﻿
+from ..batch_response import BatchOperationResponse
 
 class BatchPoolAddResponse(BatchOperationResponse):
     accept_status = [201]
@@ -22,7 +24,7 @@ class BatchPoolEvaluateAutoScaleResponse(BatchOperationResponse):
 class BatchPoolGetResponse(BatchOperationResponse):
     accept_status = [200]
 
-    def __init__(self):
+    def __init__(self, **kwargs):
 
         super(BatchPoolGetResponse, self).__init__()
 
@@ -36,7 +38,7 @@ class BatchPoolGetResponse(BatchOperationResponse):
 class BatchPoolListResponse(BatchOperationResponse):
     accept_status = [200]
 
-    def __init__(self):
+    def __init__(self, **kwargs):
 
         super(BatchPoolListResponse, self).__init__()
 

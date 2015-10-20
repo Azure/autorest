@@ -1,500 +1,441 @@
-﻿  
-import urlparse
-import urllib
+﻿
+import sys
+from datetime import datetime
 
-class PoolOperations(object):
-    
+try:
+    from urlparse import urljoin
+
+except ImportError:
+    from urllib.parse import urljoin
+
+from runtime.msrest.serialization import Serialized, Deserialized
+from runtime.msrest.exceptions import ResponseStatusError
+from runtime.msrest.utils import *
+
+from runtime.msrestazure.azure_handlers import Paged, Polled
+
+from ..batch_constants import ContentTypes
+from ..batch_exception import BatchException
+
+from ..models import pool_models
+from ..models.pool_models import *
+from ..models.pool_responses import *
+
+
+class PoolManager(object):
+
     def __init__(self, client):
-        self.client = client
 
-    def add(self, content):
-        
-        # Construct URL
-        url = '/pools'
-        query_parameters = {}
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
-        
-        # Set Headers
-        http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Serialize Request
-        http_request.add_content(content)
-        
-        # Send Request
-        response = self.client.post(http_request)
-        
-        return response
-    
-    def delete(self, **parameters):
+        self._client = client
+        self._classes = {k:v for k,v in pool_models.__dict__.items() if isinstance(v, type)}
 
-        # Construct URL
-        url = '/pools/'
-        url = url + parameters.get(pool_name)
+        self.access_condition = None
+        self.max_results = None
+        self.filter = None
 
-        query_parameters = {}
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
+    def __getitem__(self, name):
+        response = self.get(name)
+        return response.pool
 
-        access_condition = parameters.get('access_condition')
-        
-        # Set Headers
-        if access_condition:
-            if access_condition.if_match_e_tag:
-                http_request.add_header('If-Match', access_condition.if_match_e_tag)
-        
-            if access_condition.if_modified_since_time:
-                http_request.add_header('If-Modified-Since', access_condition.if_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-            if access_condition.if_none_match_e_tag:
-                http_request.add_header('If-None-Match', access_condition.if_none_match_e_tag)
-        
-            if access_condition.if_not_modified_since_time:
-                http_request.add_header('If-Unmodified-Since', access_condition.if_not_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Send Request
-        response = self.client.delete(http_request)
-        
-        return response
-    
-    def disable_auto_scale(self, **parameters):
-        
-        # Construct URL
-        url = '/pools/'
-        url = url + parameters.get(pool_name)
+    def __setitem__(self, name, value):
+        raise InvalidOperationError("Pool cannot be overwritten.")
 
-        query_parameters = {}
-        query_parameters['disableautoscale'] = None
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
+    def __iter__(self):
+        pools = self.list(self.max_results)
         
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
+        for p in pools:
+            yield p
 
-        access_condition = parameters.get('access_condition')
-        
-        # Set Headers
-        if access_condition:
-            if access_condition.if_match_e_tag:
-                http_request.add_header('If-Match', access_condition.if_match_e_tag)
-        
-            if access_condition.if_modified_since_time:
-                http_request.add_header('If-Modified-Since', access_condition.if_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-            if access_condition.if_none_match_e_tag:
-                http_request.add_header('If-None-Match', access_condition.if_none_match_e_tag)
-        
-            if access_condition.if_not_modified_since_time:
-                http_request.add_header('If-Unmodified-Since', access_condition.if_not_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Send Request
-        response = self.client.post(http_request)
-        
-        return response
-    
-    def enable_auto_scale(self, content, **parameters):
-        
-        # Construct URL
-        url = '/pools/'
-        url = url + parameters.get(pool_name)
+    def _url(self, *extension):
+        path = ['/pools']
+        path += [x.strip('/') for x in extension if x]
+        return '/'.join(path)
 
-        query_parameters = {}
-        query_parameters['enableautoscale'] = None
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
-        
-        # Set Headers
-        http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
+    def _parameters(self, filter=False, max=False, **params):
+        params = {}
+        params['api-version'] = '2014-10-01.1.0'
+        params['timeout'] = '30'
 
-        access_condition = parameters.get('access_condition')
+        if filter and self.filter:
+            params.update(self.filter.get_parameters())
 
-        if access_condition:
-            if access_condition.if_match_e_tag:
-                http_request.add_header('If-Match', access_condition.if_match_e_tag)
-        
-            if access_condition.if_modified_since_time:
-                http_request.add_header('If-Modified-Since', access_condition.if_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-            if access_condition.if_none_match_e_tag:
-                http_request.add_header('If-None-Match', access_condition.if_none_match_e_tag)
-        
-            if access_condition.if_not_modified_since_time:
-                http_request.add_header('If-Unmodified-Since', access_condition.if_not_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Serialize Request
-        http_request.add_content(content)
-        
-        # Send Request
-        response = self.client.post(http_request)
-        
-        return response
-    
-    def evaluate_auto_scale(self, content, **parameters):
-        
-        # Construct URL
-        url = '/pools/'
-        url = url + parameters.get(pool_name)
+        if max and self.max_results:
+            params['maxresults'] = str(self.max_results)
 
-        query_parameters = {}
-        query_parameters['evaluateautoscale'] = None
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
-        
-        # Set Headers
-        # Set Headers
-        http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Serialize Request
-        http_request.add_content(content)
-        
-        # Send Request
-        response = self.client.post(http_request)
-        
-        return response
-    
-    def get(self, **parameters):
-        
-        # Construct URL
-        url = ''
-        url = url + '/pools/'
-        url = url + quote(pool_name)
+        return params
 
-        query_parameters = {}
+    def _headers(self, access=True, content=None):
+        headers = {}
+        headers['ocp-date'] = format_datetime_header(datetime.utcnow())
 
-        detail_level = parameters.get('detail_level')
-        if detail_level:
-            if detail_level.select_clause:
-                query_parameters['$select'] = detail_level.select_clause
-        
-            if detail_level.expand_clause:
-                query_parameters['$expand'] = detail_level.expand_clause
-        
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
+        if content:
+            headers['Content-Type'] = content
 
-        access_condition = parameters.get('access_condition')
-        
-        # Set Headers
-        if access_condition:
-            if access_condition.if_match_e_tag:
-                http_request.add_header('If-Match', access_condition.if_match_e_tag)
-        
-            if access_condition.if_modified_since_time:
-                http_request.add_header('If-Modified-Since', access_condition.if_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-            if access_condition.if_none_match_e_tag:
-                http_request.add_header('If-None-Match', access_condition.if_none_match_e_tag)
-        
-            if access_condition.if_not_modified_since_time:
-                http_request.add_header('If-Unmodified-Since', access_condition.if_not_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Send Request
-        response = self.client.get(http_request)
-        
-        return response
+        if access and self.access_condition:
+            headers.update(self.access_condition.get_headers())
 
-    def get_status(self, **parameters):
-        
-        # Construct URL
-        url = parameters.get('status_link')
-        url = urllib.quote(url)
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url)
-        
-        # Send Request
-        response = self.client.get(http_request)
-        
-        return response
-    
-    def list(self, **parameters):
-        
-        # Construct URL
-        url = '/pools'
-        query_parameters = {}
-        odata_filter = []
+        return headers
 
-        detail_level = parameters.get('detail_level')
-        if detail_level:
-        
-            if detail_level.filter_clause:
-                odata_filter.append(detail_level.filter_clause)
+    def pool(self, **kwargs):
+        return PoolSpec(self, manager=self._client, **kwargs)
 
-            if detail_level.select_clause:
-                query_parameters['$select'] = detail_level.select_clause
-        
-            if detail_level.expand_clause:
-                query_parameters['$expand'] = detail_level.expand_clause
-        
-        max_results = parameters.get('detail_level')
-        if max_results:
-            query_parameters['maxresults'] = str(max_results)
+    def add(self, pool):
 
-        if odata_filter:
-            query_parameters['$filter'] = ''.join(odata_filter)
+        # Validate
+        if not pool:
+            raise ValueError("pool cannot be None")
         
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
-        
-        # Set Headers
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Send Request
-        response = self.client.get(http_request)
-        
-        return response
-    
-    def list_next(self, **parameters):
-        
-        # Construct URL
-        url = parameters.get('next_link')
-        url = urllib.quote(url)
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url)
-        
-        # Set Headers
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Set Credentials
-        self.client.credentials.process_request(http_request)
-        
-        # Send Request
-        response = self.client.get(http_request)
-        
-        return response
-    
-    def patch(self, content, **parameters):
-        
-        # Construct URL
-        url = '/pools/'
-        url = url + parameters.get(pool_name)
+        content = Serialized(pool)
 
-        query_parameters = {}
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
-        
-        # Set Headers
-        http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
+        try:
+            url = self._url()
+            query = self._parameters()
+            request = self._client.request(url, query)
+            request.add_content(content)
+            request.add_headers(self._headers(access=False, content=ContentTypes.json))
 
-        access_condition = parameters.get('access_condition')
+            response = self._client.post(request)
+       
+            deserialize = Deserialized(BatchPoolAddResponse, response)
+            deserialized = deserialize(response.content, self._classes)
 
-        if access_condition:
-            if access_condition.if_match_e_tag:
-                http_request.add_header('If-Match', access_condition.if_match_e_tag)
-        
-            if access_condition.if_modified_since_time:
-                http_request.add_header('If-Modified-Since', access_condition.if_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-            if access_condition.if_none_match_e_tag:
-                http_request.add_header('If-None-Match', access_condition.if_none_match_e_tag)
-        
-            if access_condition.if_not_modified_since_time:
-                http_request.add_header('If-Unmodified-Since', access_condition.if_not_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Serialize Request
-        http_request.add_content(content)
-        
-        # Send Request
-        response = self.client.patch(http_request)
-        
-        return response
-    
-    def resize(self, content, **parameters):
-        
-        # Construct URL
-        url = '/pools/'
-        url = url + parameters.get(pool_name)
+            #def get_status(status_link):
+            #    request = self._client.request()
+            #    request.url = status_link
+            #    response = self._client.get(request)
 
-        query_parameters = {}
-        query_parameters['resize'] = None
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
-        
-        # Set Headers
-        http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
+            #    deserialize = Deserialized(BatchPoolAddResponse, response)
+            #    deserialized = deserialize(response.content, self._classes)
 
-        access_condition = parameters.get('access_condition')
+            #polling = Polled(deserialized, get_status)
+            
+        except ResponseStatusError as err:
+            raise BatchException(response)
 
-        if access_condition:
-            if access_condition.if_match_e_tag:
-                http_request.add_header('If-Match', access_condition.if_match_e_tag)
-        
-            if access_condition.if_modified_since_time:
-                http_request.add_header('If-Modified-Since', access_condition.if_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-            if access_condition.if_none_match_e_tag:
-                http_request.add_header('If-None-Match', access_condition.if_none_match_e_tag)
-        
-            if access_condition.if_not_modified_since_time:
-                http_request.add_header('If-Unmodified-Since', access_condition.if_not_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Serialize Request
-        http_request.add_content(content)
-        
-        # Send Request
-        response = self.client.post(http_request)
-        
-        return response
-    
-    def stop_resize(self, **parameters):
+        except:
+            raise #TODO: exception handling
 
-        # Construct URL
-        url = '/pools/'
-        url = url + parameters.get(pool_name)
+        #return polling
+        return deserialized
 
-        query_parameters = {}
-        query_parameters['stopresize'] = None
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
-        
-        # Set Headers
-        http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
+    def delete(self, pool_name=None):
 
-        access_condition = parameters.get('access_condition')
+        # Validate
+        if not pool_name:
+            raise ValueError('pool_name cannot be None.')
 
-        if access_condition:
-            if access_condition.if_match_e_tag:
-                http_request.add_header('If-Match', access_condition.if_match_e_tag)
-        
-            if access_condition.if_modified_since_time:
-                http_request.add_header('If-Modified-Since', access_condition.if_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-            if access_condition.if_none_match_e_tag:
-                http_request.add_header('If-None-Match', access_condition.if_none_match_e_tag)
-        
-            if access_condition.if_not_modified_since_time:
-                http_request.add_header('If-Unmodified-Since', access_condition.if_not_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
+        try:
+            url = self._url(pool_name)
+            query = self._parameters()
+            request = self._client.request(url, query)
 
-        # Send Request
-        response = self.client.post(http_request)
-        
-        return response
-    
-    def update_properties(self, content, **parameters):
-        
-        # Construct URL
-        url = '/pools/'
-        url = url + parameters.get(pool_name)
+            request.add_headers(self._headers())
+            response = self._client.delete(request)
 
-        query_parameters = {}
-        query_parameters['updateproperties'] = None
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
-        
-        # Set Headers
-        http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
+            deserialize = Deserialized(BatchPoolDeleteResponse, response)
+            deserialized = deserialize()
+            
+        except ResponseStatusError as err:
+            raise BatchException(response)
 
-        access_condition = parameters.get('access_condition')
+        except:
+            raise #TODO: exception handling
 
-        if access_condition:
-            if access_condition.if_match_e_tag:
-                http_request.add_header('If-Match', access_condition.if_match_e_tag)
-        
-            if access_condition.if_modified_since_time:
-                http_request.add_header('If-Modified-Since', access_condition.if_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-            if access_condition.if_none_match_e_tag:
-                http_request.add_header('If-None-Match', access_condition.if_none_match_e_tag)
-        
-            if access_condition.if_not_modified_since_time:
-                http_request.add_header('If-Unmodified-Since', access_condition.if_not_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
-        
-        # Serialize Request
-        http_request.add_content(content)
-        
-        # Send Request
-        response = self.client.post(http_request)
-        
-        return response
-    
-    def upgrade_os(self, content, **parameters):
-        
-        # Construct URL
-        url = '/pools/'
-        url = url + parameters.get(pool_name)
+        return deserialized
 
-        query_parameters = {}
-        query_parameters['upgradeos'] = None
-        query_parameters['api-version'] = '2014-10-01.1.0'
-        query_parameters['timeout'] = '30'
-        
-        # Create HTTP transport objects
-        http_request = self.client.request(url, query_parameters)
-        
-        # Set Headers
-        http_request.add_header('Content-Type', 'application/json;odata=minimalmetadata')
+    def disable_auto_scale(self, pool_name=None):
 
-        access_condition = parameters.get('access_condition')
+        if not pool_name:
+            raise ValueError('pool_name cannot be None.')
 
-        if access_condition:
-            if access_condition.if_match_e_tag:
-                http_request.add_header('If-Match', access_condition.if_match_e_tag)
+        try:
+            url = self._url(pool_name, 'disableautoscale')
+            query = self._parameters()
+            request = self._client.request(url, query)
+
+            request.add_headers(self._headers())
+            response = self._client.post(request)
+
+            deserialize = Deserialized(BatchPoolDisableAutoScaleResponse, response)
+            dersialized = deserialize()
+           
+        except ResponseStatusError as err:
+            raise BatchException(response)
+
+        except:
+            raise #TODO: exception handling
+
+        return dersialized
+
+    def enable_auto_scale(self, auto_scale_parameters, pool_name=None):
+
+        # Validate
+        if not pool_name:
+            raise ValueError('pool_name cannot be None.')
         
-            if access_condition.if_modified_since_time:
-                http_request.add_header('If-Modified-Since', access_condition.if_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
+        if not auto_scale_parameters:
+            raise ValueError('parameters cannot be None.')
+
+        content = Serialized(auto_scale_parameters)
+
+        try:
+            url = self._url(pool_name, 'enableautoscale')
+            query = self._parameters()
+
+            request = self._client.request(url, query)
+            request.add_content(content)
+            request.add_headers(self._headers(content=ContentTypes.json))
+
+            response = self._client.post(request)
+
+            deserialize = Deserialized(BatchPoolEnableAutoScaleResponse, response)
+            dersialized = deserialize()
+           
+        except ResponseStatusError as err:
+            raise BatchException(response)
+
+        except:
+            raise #TODO: exception handling
+
+        return dersialized
+
+    def evaluate_auto_scale(self, evaluation_parameters, pool_name=None):
+
+        # Validate
+        if (pool_name is None):
+            raise ValueError('pool_name cannot be None.')
         
-            if access_condition.if_none_match_e_tag:
-                http_request.add_header('If-None-Match', access_condition.if_none_match_e_tag)
+        if (evaluation_parameters is None):
+            raise ValueError('parameters cannot be None.')
+
+        content = Serialized(evaluation_parameters)
+
+        try:
+            url = self._url(pool_name, 'evaluateautoscale')
+            query = self._parameters()
+
+            request = self._client.request(url, query)
+            request.add_content(content)
+            request.add_headers(self._headers(content=ContentTypes.json))
+
+            response = self._client.post(request)
+
+            deserialize = Deserialized(BatchPoolEvaluateAutoScaleResponse, response)
+            dersialized = deserialize()
+           
+        except ResponseStatusError as err:
+            raise BatchException(response)
+
+        except:
+            raise #TODO: exception handling
+
+        return dersialized
+
+    def get(self, pool_name=None):
+
+        # Validate
+        if not pool_name:
+            raise ValueError('pool_name cannot be None.')
+
+        try:
+            url = self._url(pool_name)
+            query = self._parameters(filter=True)
+            request = self._client.request(url, query)
+
+            request.add_headers(self._headers())
+            response = self._client.get(request)
+
+            deserialize = Deserialized(BatchPoolGetResponse, response, self._client)
+            dersialized = deserialize(response.content, self._classes)
+            
+        except ResponseStatusError as err:
+            raise BatchException(response)
+
+        except:
+            raise #TODO: exception handling
+
+        return dersialized
+
+    def list(self):
+
+        try:
+            url = self._url()
+            query = self._parameters(filter=True, max=True)
+            request = self._client.request(url, query)
+            request.add_headers(self._headers())
+            response = self._client.get(request)
+
+            deserialize = Deserialized(BatchPoolListResponse, response)
+            deserialized = deserialize(response.content, self._classes)
+
+            def next_page(next_link):
+                request = self._client.request()
+                request.url = next_link
+                request.add_headers(self._headers())
+                response = self._client.get(request)
+
+                deserialize = Deserialized(BatchPoolListResponse, response)
+                dersialized = deserialize(response.content, self._classes)   
+                return deserialized    
+
+            pager = Paged(deserialized.pools, deserialized.next_link, next_page)
+
+        except ResponseStatusError as err:
+            raise BatchException(response)
+
+        except:
+            raise #TODO: exception handling
+
+        return pager
+
+    def patch(self, patch_parameters, pool_name=None):
+
+        # Validate
+        if not pool_name:
+            raise ValueError('pool_name cannot be None.')
         
-            if access_condition.if_not_modified_since_time:
-                http_request.add_header('If-Unmodified-Since', access_condition.if_not_modified_since_time.strftime('%a, %d %b %Y %H:%M:%S GMT'))
+        if not patch_parameters:
+            raise ValueError('patch_parameters cannot be None.')
+
+        content = Serialized(patch_parameters)
+
+        try:
+            url = self._url(pool_name)
+            query = self._parameters()
+
+            request = self._client.request(url, query)
+            request.add_content(content)
+            request.add_headers(self._headers(content=ContentTypes.json))
+
+            response = self._client.patch(request)
+
+            deserialize = Deserialized(BatchPoolPatchResponse, response)
+            dersialized = deserialize()
+
+        except ResponseStatusError as err:
+            raise BatchException(response)
+
+        except:
+            raise #TODO: exception handling
+
+        return dersialized
+
+    def resize(self, resize_parameters, pool_name=None):
+
+        # Validate
+        if not pool_name:
+            raise ValueError('pool_name cannot be None.')
         
-        http_request.add_header('ocp-date', datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
+        if not resize_parameters:
+            raise ValueError('resize_parameters cannot be None.')
+
+        content = Serialized(resize_parameters)
+
+        try:
+            url = self._url(pool_name, 'resize')
+            query = self._parameters()
+
+            request = self._client.request(url, query)
+            request.add_content(content)
+            request.add_headers(self._headers(content=ContentTypes.json))
+            response = self._client.post(request)
+
+            deserialize = Deserialized(BatchPoolResizeResponse, response)
+            dersialized = deserialize()
+
+        except ResponseStatusError as err:
+            raise BatchException(response)
+
+        except:
+            raise #TODO: exception handling
+
+        return dersialized
+
+    def stop_resize(self, pool_name=None):
+
+        # Validate
+        if not pool_name:
+            raise ValueError('pool_name cannot be None.')
+
+        try:
+            url = self._url(pool_name, 'stopresize')
+            query = self._parameters()
+            request = self._client.request(url, query)
+
+            request.add_headers(self._headers(content=ContentTypes.json))
+            response = self._client.post(request)
+
+            deserialize = Deserialized(BatchPoolStopResizeResponse, response)
+            dersialized = deserialize()
+
+        except ResponseStatusError as err:
+            raise BatchException(response)
+
+        except:
+            raise #TODO: exception handling
+
+        return dersialized
+
+    def update_properties(self, update_properties, pool_name=None):
+
+        # Validate
+        if not pool_name:
+            raise ValueError('pool_name cannot be None.')
+
+        if not update_properties:
+            raise ValueError('update_properties cannot be None.')
+                    
+        content = Serialized(update_properties)
+
+        try:
+            url = self._url(pool_name, 'updateproperties')
+            query = self._parameters()
+
+            request = self._client.request(url, query)
+            request.add_content(content)
+            request.add_headers(self._headers(content=ContentTypes.json))
+            response = self._client.post(request)
+
+            deserialize = Deserialized(BatchPoolUpdatePropertiesResponse, response)
+            dersialized = deserialize()
+
+        except ResponseStatusError as err:
+            raise BatchException(response)
+
+        except:
+            raise #TODO: exception handling
+
+        return dersialized
+
+    def upgrade_os(self, os_parameters, pool_name=None):
+
+        # Validate
+        if not pool_name:
+            raise ValueError('pool_name cannot be None.')
         
-        # Serialize Request
-        http_request.add_content(content)
-        
-        # Send Request
-        response = self.client.post(http_request)
-        
-        return response
-        
+        if not os_parameters:
+            raise ValueError('os_parameters cannot be None.')
+
+        content = Serialized(os_parameters)
+
+        try:
+            url = self._url(pool_name, 'upgradeos')
+            query = self._parameters()
+
+            request = self._client.request(url, query)
+            request.add_content(content)
+            request.add_headers(self._headers(content=ContentTypes.json))
+            response = self._client.post(request)
+
+            deserialize = Deserialized(BatchPoolUpgradeOSResponse, response)
+            dersialized = deserialize()
+
+        except ResponseStatusError as err:
+            raise BatchException(response)
+
+        except:
+            raise #TODO: exception handling
+
+        return dersialized
+
+

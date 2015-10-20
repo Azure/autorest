@@ -45,8 +45,12 @@ class ClientRequest(requests.Request):
     def add_header(self, header, value):
         self.headers[header] = value
 
+    def add_headers(self, headers):
+        for key, value in headers.items():
+            self.add_header(key, value)
+
     def add_content(self, data):
         self.data = json.dumps(data())
-        self.headers['Content-Length'] = len(http_request.data)
+        self.headers['Content-Length'] = len(self.data)
 
 
