@@ -131,16 +131,14 @@ def setup_logger(config):
 
 def log_request(adapter, request, *args, **kwargs):
     #TODO: Proper log formatting
-    LOGGER.debug("Just about to send request")
     LOGGER.debug(str(request.headers))
+    LOGGER.debug(str(request.body))
     LOGGER.debug(request.url)
 
     return request
 
 def log_response(adapter, request, response, *args, **kwargs):
     #TODO: Proper log formatting
-    LOGGER.debug("Response received!")
-
     resp = kwargs.get('result')
     LOGGER.debug(resp.status_code)
     LOGGER.debug(resp.content)

@@ -29,6 +29,7 @@ from ..msrest.authentication import Authentication, TokenAuthentication
 from .azure_configuration import AzureConfiguration
 import requests_oauthlib as oauth
 from oauthlib.oauth2 import BackendApplicationClient, LegacyApplicationClient
+from requests.auth import AuthBase
 import time
 import keyring
 import ast
@@ -282,24 +283,59 @@ class InteractiveCredentials(TokenAuthentication, AADMixin):
             raise
 
 
-class SharedKeyCredentials(Authentication):
+class SharedKeyAuth(AuthBase):
 
-    headers_to_sign = [
-            'content-encoding',
-            'content-language',
-            'content-length',
-            'content-md5',
-            'content-type',
-            'date',
-            'if-modified-since',
-            'if-match',
-            'if-none-match',
-            'if-unmodified-since',
-            'range']
-
-    def __init__(self, account_name, key):
+    def __init__(self, header, account_name, key):
+        self._header = header
         self._account_name = account_name
         self._key = key
+
+    def __call__(self, request):
+
+        url = urlparse(request.url);
+        uri_path = url.path;
+
+        # method to sign
+        string_to_sign = request.method + '\n'
+
+        # get headers to sign
+        headers_to_sign = [
+            'content-encoding', 'content-language', 'content-length',
+            'content-md5', 'content-type', 'date', 'if-modified-since',
+            'if-match', 'if-none-match', 'if-unmodified-since', 'range']
+
+        request_header_dict = dict((name.lower(), value)
+                                   for name, value in request.headers.iteritems() if value)
+        string_to_sign += '\n'.join(request_header_dict.get(x, '')
+                                    for x in headers_to_sign) + '\n'
+
+        # get ocp- header to sign
+        ocp_headers = []
+        for name, value in request.headers.iteritems():
+            if 'ocp-' in name:
+                ocp_headers.append((name.lower(), value))
+        ocp_headers.sort()
+        for name, value in ocp_headers:
+            if value:
+                string_to_sign += ''.join([name, ':', value, '\n'])
+
+        # get account_name and uri path to sign
+        string_to_sign += '/' + self._account_name + uri_path
+
+        # get query string to sign if it is not table service
+        query_to_sign = parse_qs(url.query)
+
+        for name in sorted(query_to_sign.iterkeys()):
+            if query_to_sign[name][0]:
+                string_to_sign += '\n' + name + ':' + query_to_sign[name][0]
+
+        # sign the request
+        auth_string = 'SharedKey ' + self._account_name + ':' + \
+            self._sign_string(string_to_sign)
+
+        request.headers[self._header] = auth_string
+
+        return request
 
     def _sign_string(self, string_to_sign):
         if isinstance(self._key, unicode):
@@ -314,41 +350,16 @@ class SharedKeyCredentials(Authentication):
 
         return base64.b64encode(digest)
 
-    def signed_session(self, request):
+class SharedKeyCredentials(Authentication):
 
-        url = urlparse(request.url);
-        uri_path = url.path;
+    def __init__(self, account_name, key):
+        super(SharedKeyCredentials, self).__init__()
+        self.auth = SharedKeyAuth(self.header, account_name, key)
+    
+    def signed_session(self):
 
-        string_to_sign = request.method + '\n'
-
-        request_headers = {name.lower():val for name,val in request.headers.items() if val}
-        string_to_sign += '\n'.join(request_headers.get(x, '') for x in self.headers_to_sign)
-        string_to_sign += '\n'
-
-        ocp_headers = []
-        for name, val in request_headers.items():
-            if 'ocp-' in name and val:
-                ocp_headers.append((name.lower(), val))
-
-        ocp_headers.sort()
-        
-        for name,val in ocp_headers:
-            string_to_sign += '{}:{}\n'.format(name,val)
-
-        string_to_sign += '/' + self._account_name + uri_path
-
-        auth_string = 'SharedKey ' + self._account_name + ':' + \
-            self._sign_string(string_to_sign)
-
-        query_to_sign = parse_qs(url.query)
-
-        for name in sorted(query_to_sign.keys()):
-            if query_to_sign[name][0]:
-                string_to_sign += '\n' + name + ':' + query_to_sign[name][0]
-
-        session = super(SharedKeyCredentials, self).signed_session(request)
-        session.headers[self.header] = auth_string
-        request.headers[self.header] = auth_string
+        session = super(SharedKeyCredentials, self).signed_session()
+        session.auth = self.auth
 
         return session
 

@@ -28,6 +28,7 @@ from base64 import b64encode
 import time
 import requests
 import requests_oauthlib as oauth
+from requests.auth import HTTPBasicAuth
 
 
 
@@ -35,7 +36,7 @@ class Authentication(object):
     
     header = "Authorization"
 
-    def signed_session(self, request):
+    def signed_session(self):
         session = requests.Session()
         return session
 
@@ -46,12 +47,9 @@ class BasicAuthentication(Authentication):
         self.username = username
         self.password = passw
 
-    def signed_session(self, request):
+    def signed_session(self):
         session = super(BasicAuthentication, self).signed_session()
-
-        credentials = "{0}:{1}".format(self.username, self.password)
-        encoded = "{0} {1}".format(self.scheme, b64encode(credentials))
-        session.headers[self.header] = encoded
+        session.auth = HTTPBasicAuth(self.username, self.password)
 
         return session
 
@@ -65,7 +63,7 @@ class TokenAuthentication(Authentication):
     def construct_auth(self):
         return "{0} {1}".format(self.scheme, self.token)
 
-    def signed_session(self, request):
+    def signed_session(self):
 
         expiry = self.token.get('expires_at')
 

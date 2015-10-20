@@ -29,7 +29,7 @@ class BatchPoolGetResponse(BatchOperationResponse):
         super(BatchPoolGetResponse, self).__init__()
 
         self.body_map.update({
-            'pool': {'key':'value', 'type':'Pool'},
+            'pool': {'key':'.', 'type':'Pool'},
         })
 
         self.pool = None
@@ -44,7 +44,7 @@ class BatchPoolListResponse(BatchOperationResponse):
 
         self.body_map.update({
             'pools': {'key':'value', 'type':'[Pool]'},
-            'next_link': {'key':'', 'type':'str'},
+            'next_link': {'key':'odata.nextLink', 'type':'str'},
         })
 
         self.pools = []

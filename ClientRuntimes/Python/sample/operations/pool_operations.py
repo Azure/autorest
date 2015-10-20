@@ -15,7 +15,7 @@ from runtime.msrest.utils import *
 from runtime.msrestazure.azure_handlers import Paged, Polled
 
 from ..batch_constants import ContentTypes
-from ..batch_exception import BatchException
+from ..batch_exception import BatchStatusError
 
 from ..models import pool_models
 from ..models.pool_models import *
@@ -35,6 +35,7 @@ class PoolManager(object):
 
     def __getitem__(self, name):
         response = self.get(name)
+        print(response, type(response), dir(response))
         return response.pool
 
     def __setitem__(self, name, value):
@@ -53,7 +54,7 @@ class PoolManager(object):
 
     def _parameters(self, filter=False, max=False, **params):
         params = {}
-        params['api-version'] = '2014-10-01.1.0'
+        params['api-version'] = '2015-06-01.2.0'
         params['timeout'] = '30'
 
         if filter and self.filter:
@@ -109,8 +110,8 @@ class PoolManager(object):
 
             #polling = Polled(deserialized, get_status)
             
-        except ResponseStatusError as err:
-            raise BatchException(response)
+        except ResponseStatusError:
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -136,7 +137,7 @@ class PoolManager(object):
             deserialized = deserialize()
             
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -160,7 +161,7 @@ class PoolManager(object):
             dersialized = deserialize()
            
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -192,7 +193,7 @@ class PoolManager(object):
             dersialized = deserialize()
            
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -224,7 +225,7 @@ class PoolManager(object):
             dersialized = deserialize()
            
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -249,7 +250,7 @@ class PoolManager(object):
             dersialized = deserialize(response.content, self._classes)
             
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -281,7 +282,7 @@ class PoolManager(object):
             pager = Paged(deserialized.pools, deserialized.next_link, next_page)
 
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -313,7 +314,7 @@ class PoolManager(object):
             dersialized = deserialize()
 
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -344,7 +345,7 @@ class PoolManager(object):
             dersialized = deserialize()
 
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -369,7 +370,7 @@ class PoolManager(object):
             dersialized = deserialize()
 
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -400,7 +401,7 @@ class PoolManager(object):
             dersialized = deserialize()
 
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling
@@ -431,7 +432,7 @@ class PoolManager(object):
             dersialized = deserialize()
 
         except ResponseStatusError as err:
-            raise BatchException(response)
+            raise BatchStatusError(response)
 
         except:
             raise #TODO: exception handling

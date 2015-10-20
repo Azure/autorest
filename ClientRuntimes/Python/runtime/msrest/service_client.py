@@ -56,13 +56,14 @@ class ServiceClient(object):
         self._adapter.add_hook("response", log_response, precall=False)
 
     def _send(self, request, **kwargs):
-        session = self.creds.signed_session(request)
+        session = self.creds.signed_session()
         session.proxies = self.config.proxies
 
         for protocol in self.config.protocols:
             session.mount(protocol, self._adapter)
 
-        return session.send(request)
+        prepped = session.prepare_request(request)
+        return session.send(prepped)
 
     def _format_url(self, url):
        
@@ -89,24 +90,24 @@ class ServiceClient(object):
 
     def get(self, request):
         request.method = 'GET'
-        return self._send(request.prepare())
+        return self._send(request)
 
     def put(self, request):
         request.method = 'PUT'
-        return self._send(request.prepare())
+        return self._send(request)
 
     def post(self, request):
         request.method = 'POST'
-        return self._send(request.prepare())
+        return self._send(request)
 
     def patch(self, request):
         request.method = 'PATCH'
-        return self._send(request.prepare())
+        return self._send(request)
 
     def delete(self, request):
         request.method = 'DELETE'
-        return self._send(request.prepare())
+        return self._send(request)
 
     def merge(self, request):
         request.method = 'MERGE'
-        return self._send(request.prepare())
+        return self._send(request)

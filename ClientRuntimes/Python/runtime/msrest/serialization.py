@@ -63,7 +63,10 @@ class Serialized(object):
         try:
             for attr, map in self.request._attribute_map.items():
                 attr_name = attr
-                serialized[map['key']] = getattr(self, attr)
+                try:
+                    serialized[map['key']] = getattr(self, attr)
+                except ValueError:
+                    continue
 
         except (AttributeError, KeyError, TypeError) as err:
             raise SerializationError(
@@ -78,7 +81,10 @@ class Serialized(object):
             raise AttributeError(
                 "Object '{}' missing required attribute".format(class_name))
 
-        if data is None or data_type is None:
+        if not data:
+            raise ValueError("No value for given attribute")
+        
+        if data_type is None:
             return data
 
         try:
@@ -135,6 +141,15 @@ class Deserialized(object):
 
     def __init__(self, response_obj, response_data=None, manager=None):
 
+        self.deserialize_type = {
+            'datetime':self.deserialize_datetime,
+            'duration':self.deserialize_duration,
+            'time':self.deserialize_time,
+            '[]':self.deserialize_iter,
+            '{}':self.deserialize_dict
+            # etc
+            }
+
         self.client = manager
         self.response = response_obj(manager=self.client)
         self.dependencies = {}
@@ -146,21 +161,14 @@ class Deserialized(object):
             except (AttributeError, TypeError, KeyError) as err:
                 raise DeserializationError("Unable to deserialize to type: '{0}' because: '{1}'.".format(response_obj, err))
 
-        self.deserialize_type = {
-            'datetime':self.deserialize_datetime,
-            'duration':self.deserialize_duration,
-            'time':self.deserialize_time,
-            '[]':self.deserialize_iter,
-            '{}':self.deserialize_dict
-            # etc
-            }
+        
 
     def __call__(self, raw=None, classes={}):
         
         self.dependencies = dict(classes)
 
         if raw:
-            map = 'attribute_map'
+            map = '_attribute_map'
 
             if hasattr(self.response, 'body_map'):
                 raw = json.loads(raw)
@@ -169,7 +177,11 @@ class Deserialized(object):
             map_dict = getattr(self.response, map)
             for attr in map_dict:
                 attr_type = map_dict[attr]['type']
-                raw_value = raw.get(map_dict[attr]['key'])
+                key = map_dict[attr]['key']
+                if key == '.':
+                    raw_value = raw
+                else:
+                    raw_value = raw.get(key)
 
                 value = self._deserialize_data(raw_value, attr_type) 
                 setattr(self.response, attr, value)

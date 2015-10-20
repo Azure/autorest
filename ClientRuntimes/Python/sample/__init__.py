@@ -7,3 +7,4 @@ from runtime.msrestazure.aad import (
     SharedKeyCredentials)
 
 from .batch_client import BatchClient
+from .batch_exception import BatchException
