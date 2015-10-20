@@ -41,7 +41,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseExistingKeyAsync(new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -71,7 +71,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseProtectedKeyAsync(new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -98,7 +98,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseIntegerAsync("positive", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -115,7 +115,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseIntegerAsync("negative", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -142,7 +142,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseLongAsync("positive", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -159,7 +159,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseLongAsync("negative", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -186,7 +186,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseFloatAsync("positive", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -203,7 +203,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseFloatAsync("negative", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -230,7 +230,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseDoubleAsync("positive", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -247,7 +247,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseDoubleAsync("negative", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -274,7 +274,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseBoolAsync("true", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -291,7 +291,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseBoolAsync("false", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -319,7 +319,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseStringAsync("valid", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -336,7 +336,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseStringAsync("null", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -353,7 +353,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseStringAsync("empty", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -380,7 +380,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseDateAsync("valid", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -397,7 +397,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseDateAsync("min", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -423,7 +423,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseDurationAsync("valid", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -497,7 +497,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseDatetimeAsync("valid", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -514,7 +514,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseDatetimeAsync("min", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -540,7 +540,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseByteAsync("valid", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -569,7 +569,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseEnumAsync("valid", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -586,7 +586,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseEnumAsync("null", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 

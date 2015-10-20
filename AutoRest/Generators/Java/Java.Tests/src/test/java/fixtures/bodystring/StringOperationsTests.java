@@ -47,7 +47,7 @@ public class StringOperationsTests {
     public void putEmpty() throws Exception {
         client.getStringOperations().putEmptyAsync("", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
             }
 
             @Override

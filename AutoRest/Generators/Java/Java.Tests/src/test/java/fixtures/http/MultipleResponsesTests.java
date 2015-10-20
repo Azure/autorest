@@ -135,7 +135,7 @@ public class MultipleResponsesTests {
     public void get202None204NoneDefaultError202None() throws Exception {
         client.getMultipleResponses().get202None204NoneDefaultError202NoneAsync(new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -152,7 +152,7 @@ public class MultipleResponsesTests {
     public void get202None204NoneDefaultError204None() throws Exception {
         client.getMultipleResponses().get202None204NoneDefaultError204NoneAsync(new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
