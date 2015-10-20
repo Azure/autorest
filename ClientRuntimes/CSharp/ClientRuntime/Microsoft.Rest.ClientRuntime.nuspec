@@ -17,7 +17,8 @@
       -   Portable Class Libraries
       -   .NET Framework 4.5
       -   Windows 8
-      -   Windows Phone 8.1</description>
+      -   Windows Phone 8.1
+      -   DotNet Core</description>
     <copyright>Copyright (c) Microsoft Corporation</copyright>
     <tags>Microsoft AutoRest ClientRuntime REST</tags>
     <dependencies>
@@ -26,9 +27,7 @@
       </group>
       <group targetFramework="portable-net45+win8+wpa81">
         <dependency id="Microsoft.Bcl" version="1.1.9"/>
-        <dependency id="Microsoft.Bcl.Async" version="1.0.168"/>
         <dependency id="Microsoft.Bcl.Build" version="1.0.14"/>
-        <dependency id="Microsoft.Net.Http" version="2.2.22"/>
         <dependency id="Newtonsoft.Json" version="6.0.8"/>
       </group>
       <group targetFramework="dotnet">
