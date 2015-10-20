@@ -36,7 +36,6 @@
     <Compile Include="OData\UrlExpressionVisitor.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PollingState.cs" />
-    <Compile Include="SubResource.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="CloudErrorJsonConverter.cs" />
     <Compile Include="ResourceJsonConverter.cs" />

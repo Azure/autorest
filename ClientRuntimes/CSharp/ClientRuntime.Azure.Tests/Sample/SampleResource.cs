@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Azure
@@ -8,8 +9,38 @@ namespace Microsoft.Rest.Azure
     /// <summary>
     /// Information for resource.
     /// </summary>
-    public partial class SampleResource : Resource
+    public partial class SampleResource : IResource
     {
+        /// <summary>
+        /// Gets the ID of the resource.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the resource.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets the type of the resource.
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type { get; private set; }
+
+        /// <summary>
+        /// Required. Gets or sets the location of the resource.
+        /// </summary>
+        [JsonProperty("location")]
+        public string Location { get; set; }
+
+        /// <summary>
+        /// Optional. Gets or sets the tags attached to the resource.
+        /// </summary>
+        [JsonProperty("tags")]
+        public IDictionary<string, string> Tags { get; set; }
+
         /// <summary>
         /// Optional. Gets or sets the size of the resource.
         /// </summary>
@@ -39,13 +70,30 @@ namespace Microsoft.Rest.Azure
         /// </summary>
         [JsonProperty("properties.provisioningState")]
         public string ProvisioningState { get; set; }
+
+        /// <summary>
+        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
+        /// </summary>
+        public virtual void Validate()
+        {
+            if (Location == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Location");
+            }
+        }
+
     }
 
     /// <summary>
     /// Information for resource.
     /// </summary>
-    public abstract class SampleResourceChild : SubResource
+    public abstract class SampleResourceChild : IResource
     {
+        /// <summary>
+        /// Gets the ID of the resource.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; private set; }
     }
 
     /// <summary>
@@ -75,8 +123,38 @@ namespace Microsoft.Rest.Azure
     /// <summary>
     /// Information for resource.
     /// </summary>
-    public partial class SampleResourceWithConflict : Resource
+    public partial class SampleResourceWithConflict : IResource
     {
+        /// <summary>
+        /// Gets the ID of the resource.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the resource.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets the type of the resource.
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type { get; private set; }
+
+        /// <summary>
+        /// Required. Gets or sets the location of the resource.
+        /// </summary>
+        [JsonProperty("location")]
+        public string Location { get; set; }
+
+        /// <summary>
+        /// Optional. Gets or sets the tags attached to the resource.
+        /// </summary>
+        [JsonProperty("tags")]
+        public IDictionary<string, string> Tags { get; set; }
+
         /// <summary>
         /// Optional. Gets or sets the special location of the resource.
         /// </summary>
