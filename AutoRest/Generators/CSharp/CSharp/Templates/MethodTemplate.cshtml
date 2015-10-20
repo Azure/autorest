@@ -19,7 +19,7 @@
 @foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
-@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
 @:/// </param>
 }
 /// <param name='customHeaders'>

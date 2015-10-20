@@ -220,7 +220,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 505 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -311,7 +312,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 505 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

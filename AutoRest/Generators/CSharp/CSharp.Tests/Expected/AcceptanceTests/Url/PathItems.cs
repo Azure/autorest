@@ -56,13 +56,17 @@ namespace Fixtures.AcceptanceTestsUrl
         /// localStringQuery='localStringQuery'
         /// </summary>
         /// <param name='localStringPath'>
-        /// should contain value 'localStringPath'/// </param>
+        /// should contain value 'localStringPath'
+        /// </param>
         /// <param name='pathItemStringPath'>
-        /// A string value 'pathItemStringPath' that appears in the path/// </param>
+        /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
         /// <param name='localStringQuery'>
-        /// should contain value 'localStringQuery'/// </param>
+        /// should contain value 'localStringQuery'
+        /// </param>
         /// <param name='pathItemStringQuery'>
-        /// A string value 'pathItemStringQuery' that appears as a query parameter/// </param>
+        /// A string value 'pathItemStringQuery' that appears as a query parameter
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -186,13 +190,17 @@ namespace Fixtures.AcceptanceTestsUrl
         /// localStringQuery='localStringQuery'
         /// </summary>
         /// <param name='localStringPath'>
-        /// should contain value 'localStringPath'/// </param>
+        /// should contain value 'localStringPath'
+        /// </param>
         /// <param name='pathItemStringPath'>
-        /// A string value 'pathItemStringPath' that appears in the path/// </param>
+        /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
         /// <param name='localStringQuery'>
-        /// should contain value 'localStringQuery'/// </param>
+        /// should contain value 'localStringQuery'
+        /// </param>
         /// <param name='pathItemStringQuery'>
-        /// A string value 'pathItemStringQuery' that appears as a query parameter/// </param>
+        /// A string value 'pathItemStringQuery' that appears as a query parameter
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -315,13 +323,17 @@ namespace Fixtures.AcceptanceTestsUrl
         /// pathItemStringQuery='pathItemStringQuery', localStringQuery=null
         /// </summary>
         /// <param name='localStringPath'>
-        /// should contain value 'localStringPath'/// </param>
+        /// should contain value 'localStringPath'
+        /// </param>
         /// <param name='pathItemStringPath'>
-        /// A string value 'pathItemStringPath' that appears in the path/// </param>
+        /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
         /// <param name='localStringQuery'>
-        /// should contain null value/// </param>
+        /// should contain null value
+        /// </param>
         /// <param name='pathItemStringQuery'>
-        /// A string value 'pathItemStringQuery' that appears as a query parameter/// </param>
+        /// A string value 'pathItemStringQuery' that appears as a query parameter
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -444,13 +456,17 @@ namespace Fixtures.AcceptanceTestsUrl
         /// pathItemStringQuery=null, localStringQuery=null
         /// </summary>
         /// <param name='localStringPath'>
-        /// should contain value 'localStringPath'/// </param>
+        /// should contain value 'localStringPath'
+        /// </param>
         /// <param name='pathItemStringPath'>
-        /// A string value 'pathItemStringPath' that appears in the path/// </param>
+        /// A string value 'pathItemStringPath' that appears in the path
+        /// </param>
         /// <param name='localStringQuery'>
-        /// should contain value null/// </param>
+        /// should contain value null
+        /// </param>
         /// <param name='pathItemStringQuery'>
-        /// should contain value null/// </param>
+        /// should contain value null
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
