@@ -36,14 +36,6 @@ describe('nodejs', function () {
         });
       });
 
-      it('should handle invalid enum value in a complex type', function (done) {
-        testClient.basicOperations.putValid({ 'id': 2, 'name': 'abc', color: 'Blue' }, function (error, result) {
-          should.exist(error);
-          error.message.should.match(/.*is not a valid value.*/ig);
-          done();
-        });
-      });
-
       it('should get null basic type properties', function (done) {
         testClient.basicOperations.getNull(function (error, result) {
           should.not.exist(error);

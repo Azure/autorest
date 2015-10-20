@@ -29,7 +29,7 @@ public class Basic {
      * Possible values for this property include: 'cyan', 'Magenta', 'YELLOW',
      * 'blacK'.
      */
-    private CMYKColors color;
+    private String color;
 
     /**
      * Get the id value.
@@ -72,7 +72,7 @@ public class Basic {
      *
      * @return the color value
      */ 
-    public CMYKColors getColor() {
+    public String getColor() {
         return this.color;
     }
 
@@ -81,7 +81,7 @@ public class Basic {
      *
      * @param color the color value to set
      */
-    public void setColor(CMYKColors color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
