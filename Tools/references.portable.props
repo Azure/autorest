@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(LibraryFxTarget)' == 'portable' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>$(CommonNugetPackageFolder)\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(CommonNugetPackageFolder)\Newtonsoft.Json.6.0.8\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>$(CommonNugetPackageFolder)\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wp8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
