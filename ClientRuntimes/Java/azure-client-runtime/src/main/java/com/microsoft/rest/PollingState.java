@@ -7,6 +7,8 @@
 
 package com.microsoft.rest;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.microsoft.rest.serializer.JacksonHelper;
 import retrofit.Response;
@@ -27,33 +29,52 @@ public class PollingState<T> {
     private T resource;
     private CloudError error;
 
-    public PollingState(ServiceResponse<T> response, int retryTimeout) throws ServiceException {
+    public PollingState(ServiceResponse<T> response, int retryTimeout) {
         this.retryTimeout = retryTimeout;
         this.setResponse(response.getResponse());
         this.resource = response.getBody();
 
+        JsonNode resource = null;
         try {
-            JsonNode resource = JacksonHelper.getObjectMapper().readTree(this.response.raw().body().byteStream());
-            if (resource != null && resource.get("properties") != null &&
-                    resource.get("properties").get("provisioningState") != null) {
-                setStatus(resource.get("properties").get("provisioningState").asText());
-            } else {
-                switch (this.response.code()) {
-                    case 202:
-                        setStatus(AzureAsyncOperation.inProgressStatus);
-                        break;
-                    case 204:
-                    case 201:
-                    case 200:
-                        setStatus(AzureAsyncOperation.successStatus);
-                        break;
-                    default:
-                        setStatus(AzureAsyncOperation.failedStatus);
-                }
+            resource = JacksonHelper.getObjectMapper().readTree(this.response.raw().body().byteStream());
+        } catch (Exception e) {}
+        if (resource != null && resource.get("properties") != null &&
+                resource.get("properties").get("provisioningState") != null) {
+            setStatus(resource.get("properties").get("provisioningState").asText());
+        } else {
+            switch (this.response.code()) {
+                case 202:
+                    setStatus(AzureAsyncOperation.inProgressStatus);
+                    break;
+                case 204:
+                case 201:
+                case 200:
+                    setStatus(AzureAsyncOperation.successStatus);
+                    break;
+                default:
+                    setStatus(AzureAsyncOperation.failedStatus);
             }
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
         }
+    }
+
+    public void updateFromResponse(ServiceResponse<PollingResource> response) throws ServiceException, IOException {
+        if (response.getBody() == null) {
+            throw new ServiceException("no body");
+        }
+
+        PollingResource resource = response.getBody();
+        if (resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
+            this.setStatus(resource.getProperties().getProvisioningState());
+        } else {
+            this.setStatus(AzureAsyncOperation.successStatus);
+        }
+
+        CloudError error = new CloudError();
+        this.setError(error);
+        error.setCode(this.getStatus());
+        error.setMessage("Long running operation failed");
+        this.setResponse(response.getResponse());
+        this.setResource(JacksonHelper.<T>deserialize(response.getResponse().raw().body().string(), new TypeReference<T>() {}));
     }
 
     public int getDelayInMilliseconds() {
@@ -111,5 +132,23 @@ public class PollingState<T> {
 
     public void setError(CloudError error) {
         this.error = error;
+    }
+
+    class PollingResource {
+        @JsonProperty
+        private Properties properties;
+
+        public Properties getProperties() {
+            return properties;
+        }
+
+        private class Properties {
+            @JsonProperty
+            private String provisioningState;
+
+            public String getProvisioningState() {
+                return provisioningState;
+            }
+        }
     }
 }

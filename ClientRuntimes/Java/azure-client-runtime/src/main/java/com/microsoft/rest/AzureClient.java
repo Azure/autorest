@@ -7,8 +7,8 @@
 
 package com.microsoft.rest;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.microsoft.rest.PollingState.PollingResource;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonHelper;
 import com.squareup.okhttp.OkHttpClient;
@@ -19,6 +19,8 @@ import retrofit.Retrofit;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -48,7 +50,7 @@ public class AzureClient extends ServiceClient {
      * @throws ServiceException service exception
      * @throws InterruptedException interrupted exception
      */
-    public <T> ServiceResponse<T> getPutOrPatchResult(ServiceResponse<T> response) throws ServiceException, InterruptedException {
+    public <T> ServiceResponse<T> getPutOrPatchResult(ServiceResponse<T> response) throws ServiceException, InterruptedException, IOException {
         if (response == null || response.getResponse() == null) {
             throw new ServiceException("response is null.");
         }
@@ -87,101 +89,86 @@ public class AzureClient extends ServiceClient {
         return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
     }
 
-    // A lot of duplication with the previous method - should simplify
-    public <T> ServiceResponse<T> getPutOrPatchResultAsync(ServiceResponse<T> response, ServiceCallback<T> callback) {
+    public <T> AsyncPollingTask<T> getPutOrPatchResultAsync(ServiceResponse<T> response, ServiceCallback<T> callback) {
         if (response == null || response.getResponse() == null) {
             callback.failure(new ServiceException("response is null."));
+            return null;
         }
 
         int statusCode = response.getResponse().code();
         if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
             callback.failure(new ServiceException(statusCode + " is not a valid polling status code"));
+            return null;
         }
 
-        try {
-            PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout());
-            String url = response.getResponse().raw().request().urlString();
+        PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout());
+        String url = response.getResponse().raw().request().urlString();
 
-            // Check provisioning state
-            while (AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
-
-                if (pollingState.getAzureAsyncOperationHeaderLink() != null &&
-                        !pollingState.getAzureAsyncOperationHeaderLink().isEmpty()) {
-                    updateStateFromAzureAsyncOperationHeader(pollingState);
-                } else if (pollingState.getLocationHeaderLink() != null &&
-                        !pollingState.getLocationHeaderLink().isEmpty()) {
-                    updateStateFromLocationHeaderOnPut(pollingState);
-                } else {
-                    updateStateFromGetResourceOperation(pollingState, url);
-                }
-            }
-        } catch (ServiceException ex) {
-            callback.failure(ex);
+        // Check provisioning state
+        if (AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
+            AsyncPollingTask<T> task = new AsyncPollingTask<T>(pollingState, url, callback);
+            new Timer().schedule(task, pollingState.getDelayInMilliseconds());
+            return task;
         }
         return null;
     }
 
-    private <T> void updateStateFromLocationHeaderOnPut(PollingState<T> pollingState) throws ServiceException {
-        ServiceResponse<PollingResource> response = getAsync(pollingState.getLocationHeaderLink());
-
-        pollingState.setResponse(response.getResponse());
-
+    private <T> void updateStateFromLocationHeaderOnPut(PollingState<T> pollingState) throws ServiceException, IOException {
+        ServiceResponse<PollingResource> response = poll(pollingState.getLocationHeaderLink());
         int statusCode = response.getResponse().code();
         if (statusCode == 202) {
+            pollingState.setResponse(response.getResponse());
             pollingState.setStatus(AzureAsyncOperation.inProgressStatus);
         } else if (statusCode == 200 || statusCode == 201) {
-            if (response.getBody() == null) {
-                throw new ServiceException("no body");
-            }
-
-            PollingResource resource = response.getBody();
-            if (resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
-                pollingState.setStatus(resource.getProperties().getProvisioningState());
-            } else {
-                pollingState.setStatus(AzureAsyncOperation.successStatus);
-            }
-
-            CloudError error = new CloudError();
-            pollingState.setError(error);
-            error.setCode(pollingState.getStatus());
-            error.setMessage("Long running operation failed");
-            try {
-                pollingState.setResource(JacksonHelper.<T>deserialize(response.getResponse().raw().body().string(), new TypeReference<T>() {}));
-            } catch (Exception ex) {
-                throw new ServiceException("Cannot deserialize response", ex);
-            }
+            pollingState.updateFromResponse(response);
         }
     }
 
-    private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws ServiceException {
-        ServiceResponse<PollingResource> response = getAsync(url);
+    private <T> Call<ResponseBody> updateStateFromLocationHeaderOnPutAsync(final PollingState<T> pollingState, final ServiceCallback<T> callback) {
+        return pollAsync(pollingState.getLocationHeaderLink(), new ServiceCallback<PollingResource>() {
+            @Override
+            public void failure(Throwable t) { callback.failure(t); }
 
-        if (response.getBody() == null) {
-            throw new ServiceException("no body");
-        }
-
-        PollingResource resource = response.getBody();
-        if (resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
-            pollingState.setStatus(resource.getProperties().getProvisioningState());
-        } else {
-            pollingState.setStatus(AzureAsyncOperation.successStatus);
-        }
-
-        CloudError error = new CloudError();
-        pollingState.setError(error);
-        error.setCode(pollingState.getStatus());
-        error.setMessage("Long running operation failed");
-
-        pollingState.setResponse(response.getResponse());
-        try {
-            pollingState.setResource(JacksonHelper.<T>deserialize(response.getResponse().raw().body().string(), new TypeReference<T>(){}));
-        } catch (Exception ex) {
-            throw new ServiceException("Cannot deserialize response", ex);
-        }
+            @Override
+            public void success(ServiceResponse<PollingResource> result) {
+                try {
+                    int statusCode = result.getResponse().code();
+                    if (statusCode == 202) {
+                        pollingState.setResponse(result.getResponse());
+                        pollingState.setStatus(AzureAsyncOperation.inProgressStatus);
+                    } else if (statusCode == 200 || statusCode == 201) {
+                        pollingState.updateFromResponse(result);
+                    }
+                } catch (Throwable t) {
+                    failure(t);
+                }
+            }
+        });
     }
 
-    private <T> void updateStateFromAzureAsyncOperationHeader(PollingState<T> pollingState) throws ServiceException {
-        ServiceResponse<AzureAsyncOperation> response = getAsync(pollingState.getLocationHeaderLink());
+    private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws ServiceException, IOException {
+        ServiceResponse<PollingResource> response = poll(url);
+        pollingState.updateFromResponse(response);
+    }
+
+    private <T> Call<ResponseBody> updateStateFromGetResourceOperationAsync(final PollingState<T> pollingState, String url, final ServiceCallback<T> callback) {
+        return pollAsync(url, new ServiceCallback<PollingResource>() {
+            @Override
+            public void failure(Throwable t) { callback.failure(t); }
+
+            @Override
+            public void success(ServiceResponse<PollingResource> result) {
+                try {
+                    pollingState.updateFromResponse(result);
+                } catch (Throwable t) {
+                    failure(t);
+                }
+            }
+        });
+    }
+
+    private <T> void updateStateFromAzureAsyncOperationHeader(PollingState<T> pollingState) throws ServiceException, IOException {
+        ServiceResponse<AzureAsyncOperation> response = poll(pollingState.getLocationHeaderLink());
 
         if (response.getBody() == null || response.getBody().getStatus() == null) {
             throw new ServiceException("no body");
@@ -192,23 +179,61 @@ public class AzureClient extends ServiceClient {
         pollingState.setResource(null);
     }
 
-    private <T> ServiceResponse<T> getAsync(String url) throws ServiceException {
-        URL endpoint = null;
+    private <T> Call<ResponseBody> updateStateFromAzureAsyncOperationHeaderAsync(final PollingState<T> pollingState, final ServiceCallback<T> callback) {
+        return pollAsync(pollingState.getLocationHeaderLink(), new ServiceCallback<AzureAsyncOperation>() {
+            @Override
+            public void failure(Throwable t) {
+                callback.failure(t);
+            }
+
+            @Override
+            public void success(ServiceResponse<AzureAsyncOperation> result) {
+                if (result.getBody() == null || result.getBody().getStatus() == null) {
+                    failure(new ServiceException("no body"));
+                }
+
+                pollingState.setStatus(result.getBody().getStatus());
+                pollingState.setResponse(result.getResponse());
+                pollingState.setResource(null);
+            }
+        });
+    }
+
+    private <T> ServiceResponse<T> poll(String url) throws IOException {
+        URL endpoint;
+        endpoint = new URL(url);
+        AsyncService service = this.retrofitBuilder
+                .baseUrl(endpoint.getHost()).build().create(AsyncService.class);
+        Response<ResponseBody> response = service.get(endpoint.getPath()).execute();
+        return new ServiceResponse<T>(
+                JacksonHelper.<T>deserialize(response.raw().body().string(), new TypeReference<T>() {}),
+                response);
+    }
+
+    private <T> Call<ResponseBody> pollAsync(String url, final ServiceCallback<T> callback) {
+        URL endpoint;
         try {
             endpoint = new URL(url);
-        } catch (Exception ex) {
-            throw new ServiceException("Invalid url " + url, ex);
+        } catch (MalformedURLException e) {
+            callback.failure(e);
+            return null;
         }
         AsyncService service = this.retrofitBuilder
                 .baseUrl(endpoint.getHost()).build().create(AsyncService.class);
-        try {
-            Response<ResponseBody> response = service.get(endpoint.getPath()).execute();
-            return new ServiceResponse<T>(
-                    JacksonHelper.<T>deserialize(response.raw().body().string(), new TypeReference<T>() {}),
-                    response);
-        } catch (Exception ex) {
-            throw new ServiceException("Cannot deserialize response", ex);
-        }
+        Call<ResponseBody> call = service.get(endpoint.getFile());
+        call.enqueue(new ServiceResponseCallback<T>(callback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    callback.success(new ServiceResponse<T>(
+                            JacksonHelper.<T>deserialize(response.raw().body().string(), new TypeReference<T>() {}),
+                            response));
+                } catch (IOException ex) {
+                    callback.failure(ex);
+                }
+            }
+        });
+        return call;
     }
 
     public int getLongRunningOperationRetryTimeout() {
@@ -232,21 +257,72 @@ public class AzureClient extends ServiceClient {
         Call<ResponseBody> get(@Path("url") String url);
     }
 
-    private class PollingResource {
-        @JsonProperty
-        private Properties properties;
+    public class AsyncPollingTask<T> extends TimerTask {
+        private final String url;
+        private PollingState<T> pollingState;
+        private ServiceCallback<T> pollingCallback;
+        private Call<ResponseBody> call;
 
-        public Properties getProperties() {
-            return properties;
+        public AsyncPollingTask(final PollingState<T> pollingState, final String url, final ServiceCallback<T> clientCallback) {
+            this.pollingState = pollingState;
+            this.url = url;
+            this.pollingCallback = new ServiceCallback<T>() {
+                @Override
+                public void failure(Throwable t) {
+                    clientCallback.failure(t);
+                }
+
+                @Override
+                public void success(ServiceResponse<T> result) {
+                    // Check provisioning state
+                    if (AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
+                        new Timer().schedule(
+                                new AsyncPollingTask<T>(pollingState, url, clientCallback),
+                                pollingState.getDelayInMilliseconds());
+                    } else {
+                        if (AzureAsyncOperation.successStatus.equals(pollingState.getStatus()) && pollingState.getResource() == null) {
+                            call = updateStateFromGetResourceOperationAsync(pollingState, url, new ServiceCallback<T>() {
+                                @Override
+                                public void failure(Throwable t) {
+                                    clientCallback.failure(t);
+                                }
+
+                                @Override
+                                public void success(ServiceResponse<T> result) {
+                                    clientCallback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
+                                }
+                            });
+                        }
+
+                        if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus())) {
+                            clientCallback.failure(new ServiceException("Async operation failed"));
+                        }
+
+                        clientCallback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
+                    }
+                }
+            };
         }
 
-        private class Properties {
-            @JsonProperty
-            private String provisioningState;
-
-            public String getProvisioningState() {
-                return provisioningState;
+        @Override
+        public void run() {
+            if (pollingState.getAzureAsyncOperationHeaderLink() != null &&
+                    !pollingState.getAzureAsyncOperationHeaderLink().isEmpty()) {
+                this.call = updateStateFromAzureAsyncOperationHeaderAsync(pollingState, pollingCallback);
+            } else if (pollingState.getLocationHeaderLink() != null &&
+                    !pollingState.getLocationHeaderLink().isEmpty()) {
+                this.call = updateStateFromLocationHeaderOnPutAsync(pollingState, pollingCallback);
+            } else {
+                this.call = updateStateFromGetResourceOperationAsync(pollingState, url, pollingCallback);
             }
+        }
+
+        @Override
+        public boolean cancel() {
+            if (call != null) {
+                call.cancel();
+            }
+            return super.cancel();
         }
     }
 }
