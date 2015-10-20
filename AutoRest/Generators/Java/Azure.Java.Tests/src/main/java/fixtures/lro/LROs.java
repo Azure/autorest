@@ -12,8 +12,10 @@ package fixtures.lro;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
@@ -257,7 +259,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product put200Succeeded(Product product) throws ServiceException;
+    ServiceResponse<Product> put200Succeeded(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -275,7 +277,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPut200Succeeded(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPut200Succeeded(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -293,7 +295,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product put200SucceededNoState(Product product) throws ServiceException;
+    ServiceResponse<Product> put200SucceededNoState(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -311,7 +313,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPut200SucceededNoState(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPut200SucceededNoState(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -329,7 +331,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product put202Retry200(Product product) throws ServiceException;
+    ServiceResponse<Product> put202Retry200(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState
@@ -347,7 +349,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPut202Retry200(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPut202Retry200(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState
@@ -365,7 +367,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product put201CreatingSucceeded200(Product product) throws ServiceException;
+    ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -383,7 +385,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPut201CreatingSucceeded200(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPut201CreatingSucceeded200(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -401,7 +403,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product put200UpdatingSucceeded204(Product product) throws ServiceException;
+    ServiceResponse<Product> put200UpdatingSucceeded204(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -419,7 +421,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPut200UpdatingSucceeded204(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPut200UpdatingSucceeded204(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -437,7 +439,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product put201CreatingFailed200(Product product) throws ServiceException;
+    ServiceResponse<Product> put201CreatingFailed200(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
@@ -455,7 +457,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPut201CreatingFailed200(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPut201CreatingFailed200(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
@@ -473,7 +475,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product put200Acceptedcanceled200(Product product) throws ServiceException;
+    ServiceResponse<Product> put200Acceptedcanceled200(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
@@ -491,7 +493,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPut200Acceptedcanceled200(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPut200Acceptedcanceled200(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
@@ -509,7 +511,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product putNoHeaderInRetry(Product product) throws ServiceException;
+    ServiceResponse<Product> putNoHeaderInRetry(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -527,7 +529,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPutNoHeaderInRetry(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPutNoHeaderInRetry(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -545,7 +547,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product putAsyncRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> putAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -563,7 +565,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPutAsyncRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPutAsyncRetrySucceeded(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -581,7 +583,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product putAsyncNoRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> putAsyncNoRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -599,7 +601,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPutAsyncNoRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPutAsyncNoRetrySucceeded(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -617,7 +619,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product putAsyncRetryFailed(Product product) throws ServiceException;
+    ServiceResponse<Product> putAsyncRetryFailed(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -635,7 +637,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPutAsyncRetryFailed(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPutAsyncRetryFailed(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -653,7 +655,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product putAsyncNoRetrycanceled(Product product) throws ServiceException;
+    ServiceResponse<Product> putAsyncNoRetrycanceled(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -671,7 +673,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPutAsyncNoRetrycanceled(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPutAsyncNoRetrycanceled(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -689,7 +691,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product putAsyncNoHeaderInRetry(Product product) throws ServiceException;
+    ServiceResponse<Product> putAsyncNoHeaderInRetry(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -707,7 +709,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPutAsyncNoHeaderInRetry(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPutAsyncNoHeaderInRetry(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -725,7 +727,7 @@ public interface LROs {
      * @return the Sku object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Sku putNonResource(Sku sku) throws ServiceException;
+    ServiceResponse<Sku> putNonResource(Sku sku) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request with non resource.
@@ -743,7 +745,7 @@ public interface LROs {
      * @return the Sku object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Sku beginPutNonResource(Sku sku) throws ServiceException;
+    ServiceResponse<Sku> beginPutNonResource(Sku sku) throws ServiceException;
 
     /**
      * Long running put request with non resource.
@@ -761,7 +763,7 @@ public interface LROs {
      * @return the Sku object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Sku putAsyncNonResource(Sku sku) throws ServiceException;
+    ServiceResponse<Sku> putAsyncNonResource(Sku sku) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request with non resource.
@@ -779,7 +781,7 @@ public interface LROs {
      * @return the Sku object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Sku beginPutAsyncNonResource(Sku sku) throws ServiceException;
+    ServiceResponse<Sku> beginPutAsyncNonResource(Sku sku) throws ServiceException;
 
     /**
      * Long running put request with non resource.
@@ -797,7 +799,7 @@ public interface LROs {
      * @return the SubProduct object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    SubProduct putSubResource(SubProduct product) throws ServiceException;
+    ServiceResponse<SubProduct> putSubResource(SubProduct product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request with sub resource.
@@ -815,7 +817,7 @@ public interface LROs {
      * @return the SubProduct object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    SubProduct beginPutSubResource(SubProduct product) throws ServiceException;
+    ServiceResponse<SubProduct> beginPutSubResource(SubProduct product) throws ServiceException;
 
     /**
      * Long running put request with sub resource.
@@ -833,7 +835,7 @@ public interface LROs {
      * @return the SubProduct object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    SubProduct putAsyncSubResource(SubProduct product) throws ServiceException;
+    ServiceResponse<SubProduct> putAsyncSubResource(SubProduct product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request with sub resource.
@@ -851,7 +853,7 @@ public interface LROs {
      * @return the SubProduct object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    SubProduct beginPutAsyncSubResource(SubProduct product) throws ServiceException;
+    ServiceResponse<SubProduct> beginPutAsyncSubResource(SubProduct product) throws ServiceException;
 
     /**
      * Long running put request with sub resource.
@@ -868,7 +870,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product deleteProvisioning202Accepted200Succeeded() throws ServiceException;
+    ServiceResponse<Product> deleteProvisioning202Accepted200Succeeded() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -884,7 +886,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginDeleteProvisioning202Accepted200Succeeded() throws ServiceException;
+    ServiceResponse<Product> beginDeleteProvisioning202Accepted200Succeeded() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -900,7 +902,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product deleteProvisioning202DeletingFailed200() throws ServiceException;
+    ServiceResponse<Product> deleteProvisioning202DeletingFailed200() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
@@ -916,7 +918,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginDeleteProvisioning202DeletingFailed200() throws ServiceException;
+    ServiceResponse<Product> beginDeleteProvisioning202DeletingFailed200() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
@@ -932,7 +934,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product deleteProvisioning202Deletingcanceled200() throws ServiceException;
+    ServiceResponse<Product> deleteProvisioning202Deletingcanceled200() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
@@ -948,7 +950,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginDeleteProvisioning202Deletingcanceled200() throws ServiceException;
+    ServiceResponse<Product> beginDeleteProvisioning202Deletingcanceled200() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
@@ -963,7 +965,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void delete204Succeeded() throws ServiceException;
+    ServiceResponse<Void> delete204Succeeded() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete succeeds and returns right away
@@ -978,7 +980,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginDelete204Succeeded() throws ServiceException;
+    ServiceResponse<Void> beginDelete204Succeeded() throws ServiceException;
 
     /**
      * Long running delete succeeds and returns right away
@@ -994,7 +996,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product delete202Retry200() throws ServiceException;
+    ServiceResponse<Product> delete202Retry200() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -1010,7 +1012,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginDelete202Retry200() throws ServiceException;
+    ServiceResponse<Product> beginDelete202Retry200() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -1026,7 +1028,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product delete202NoRetry204() throws ServiceException;
+    ServiceResponse<Product> delete202NoRetry204() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -1042,7 +1044,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginDelete202NoRetry204() throws ServiceException;
+    ServiceResponse<Product> beginDelete202NoRetry204() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -1057,7 +1059,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void deleteNoHeaderInRetry() throws ServiceException;
+    ServiceResponse<Void> deleteNoHeaderInRetry() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
@@ -1072,7 +1074,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginDeleteNoHeaderInRetry() throws ServiceException;
+    ServiceResponse<Void> beginDeleteNoHeaderInRetry() throws ServiceException;
 
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
@@ -1087,7 +1089,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void deleteAsyncNoHeaderInRetry() throws ServiceException;
+    ServiceResponse<Void> deleteAsyncNoHeaderInRetry() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -1102,7 +1104,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginDeleteAsyncNoHeaderInRetry() throws ServiceException;
+    ServiceResponse<Void> beginDeleteAsyncNoHeaderInRetry() throws ServiceException;
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -1117,7 +1119,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void deleteAsyncRetrySucceeded() throws ServiceException;
+    ServiceResponse<Void> deleteAsyncRetrySucceeded() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1132,7 +1134,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginDeleteAsyncRetrySucceeded() throws ServiceException;
+    ServiceResponse<Void> beginDeleteAsyncRetrySucceeded() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1147,7 +1149,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void deleteAsyncNoRetrySucceeded() throws ServiceException;
+    ServiceResponse<Void> deleteAsyncNoRetrySucceeded() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1162,7 +1164,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginDeleteAsyncNoRetrySucceeded() throws ServiceException;
+    ServiceResponse<Void> beginDeleteAsyncNoRetrySucceeded() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1177,7 +1179,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void deleteAsyncRetryFailed() throws ServiceException;
+    ServiceResponse<Void> deleteAsyncRetryFailed() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1192,7 +1194,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginDeleteAsyncRetryFailed() throws ServiceException;
+    ServiceResponse<Void> beginDeleteAsyncRetryFailed() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1207,7 +1209,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void deleteAsyncRetrycanceled() throws ServiceException;
+    ServiceResponse<Void> deleteAsyncRetrycanceled() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1222,7 +1224,7 @@ public interface LROs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginDeleteAsyncRetrycanceled() throws ServiceException;
+    ServiceResponse<Void> beginDeleteAsyncRetrycanceled() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1238,7 +1240,7 @@ public interface LROs {
      * @return the Sku object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Sku post200WithPayload() throws ServiceException;
+    ServiceResponse<Sku> post200WithPayload() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
@@ -1254,7 +1256,7 @@ public interface LROs {
      * @return the Sku object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Sku beginPost200WithPayload() throws ServiceException;
+    ServiceResponse<Sku> beginPost200WithPayload() throws ServiceException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
@@ -1270,7 +1272,7 @@ public interface LROs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void post202Retry200(Product product) throws ServiceException;
+    ServiceResponse<Void> post202Retry200(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
@@ -1287,7 +1289,7 @@ public interface LROs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginPost202Retry200(Product product) throws ServiceException;
+    ServiceResponse<Void> beginPost202Retry200(Product product) throws ServiceException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
@@ -1305,7 +1307,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product post202NoRetry204(Product product) throws ServiceException;
+    ServiceResponse<Product> post202NoRetry204(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success
@@ -1323,7 +1325,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPost202NoRetry204(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPost202NoRetry204(Product product) throws ServiceException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success
@@ -1341,7 +1343,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product postAsyncRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> postAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1359,7 +1361,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPostAsyncRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPostAsyncRetrySucceeded(Product product) throws ServiceException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1377,7 +1379,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product postAsyncNoRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> postAsyncNoRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1395,7 +1397,7 @@ public interface LROs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPostAsyncNoRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPostAsyncNoRetrySucceeded(Product product) throws ServiceException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1412,7 +1414,7 @@ public interface LROs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postAsyncRetryFailed(Product product) throws ServiceException;
+    ServiceResponse<Void> postAsyncRetryFailed(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1429,7 +1431,7 @@ public interface LROs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginPostAsyncRetryFailed(Product product) throws ServiceException;
+    ServiceResponse<Void> beginPostAsyncRetryFailed(Product product) throws ServiceException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1446,7 +1448,7 @@ public interface LROs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postAsyncRetrycanceled(Product product) throws ServiceException;
+    ServiceResponse<Void> postAsyncRetrycanceled(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -1463,7 +1465,7 @@ public interface LROs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginPostAsyncRetrycanceled(Product product) throws ServiceException;
+    ServiceResponse<Void> beginPostAsyncRetrycanceled(Product product) throws ServiceException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status

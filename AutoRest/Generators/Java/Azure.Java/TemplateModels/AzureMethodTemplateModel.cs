@@ -56,5 +56,20 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
         }
+
+        public String Exceptions
+        {
+            get
+            {
+                List<String> exceptions = new List<string>();
+                exceptions.Add("ServiceException");
+                if (this.IsLongRunningOperation)
+                {
+                    exceptions.Add("IOException");
+                    exceptions.Add("InterruptedException");
+                }
+                return string.Join(", ", exceptions);
+            }
+        }
     }
 }

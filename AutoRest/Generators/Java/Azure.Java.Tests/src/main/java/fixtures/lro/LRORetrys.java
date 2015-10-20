@@ -12,8 +12,10 @@ package fixtures.lro;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import fixtures.lro.models.Product;
 import retrofit.http.PUT;
 import retrofit.http.Body;
@@ -81,7 +83,7 @@ public interface LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product put201CreatingSucceeded200(Product product) throws ServiceException;
+    ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -99,7 +101,7 @@ public interface LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPut201CreatingSucceeded200(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPut201CreatingSucceeded200(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -117,7 +119,7 @@ public interface LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product putAsyncRelativeRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> putAsyncRelativeRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -135,7 +137,7 @@ public interface LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPutAsyncRelativeRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPutAsyncRelativeRetrySucceeded(Product product) throws ServiceException;
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -152,7 +154,7 @@ public interface LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product deleteProvisioning202Accepted200Succeeded() throws ServiceException;
+    ServiceResponse<Product> deleteProvisioning202Accepted200Succeeded() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -168,7 +170,7 @@ public interface LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginDeleteProvisioning202Accepted200Succeeded() throws ServiceException;
+    ServiceResponse<Product> beginDeleteProvisioning202Accepted200Succeeded() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -183,7 +185,7 @@ public interface LRORetrys {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void delete202Retry200() throws ServiceException;
+    ServiceResponse<Void> delete202Retry200() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -198,7 +200,7 @@ public interface LRORetrys {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginDelete202Retry200() throws ServiceException;
+    ServiceResponse<Void> beginDelete202Retry200() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -213,7 +215,7 @@ public interface LRORetrys {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void deleteAsyncRelativeRetrySucceeded() throws ServiceException;
+    ServiceResponse<Void> deleteAsyncRelativeRetrySucceeded() throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -228,7 +230,7 @@ public interface LRORetrys {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginDeleteAsyncRelativeRetrySucceeded() throws ServiceException;
+    ServiceResponse<Void> beginDeleteAsyncRelativeRetrySucceeded() throws ServiceException;
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -244,7 +246,7 @@ public interface LRORetrys {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void post202Retry200(Product product) throws ServiceException;
+    ServiceResponse<Void> post202Retry200(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
@@ -261,7 +263,7 @@ public interface LRORetrys {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginPost202Retry200(Product product) throws ServiceException;
+    ServiceResponse<Void> beginPost202Retry200(Product product) throws ServiceException;
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
@@ -278,7 +280,7 @@ public interface LRORetrys {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postAsyncRelativeRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Void> postAsyncRelativeRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -295,7 +297,7 @@ public interface LRORetrys {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginPostAsyncRelativeRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Void> beginPostAsyncRelativeRetrySucceeded(Product product) throws ServiceException;
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status

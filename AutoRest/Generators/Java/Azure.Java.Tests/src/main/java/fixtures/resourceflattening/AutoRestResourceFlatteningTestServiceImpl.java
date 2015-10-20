@@ -32,6 +32,7 @@ import fixtures.resourceflattening.models.Error;
 import fixtures.resourceflattening.models.CloudError;
 import fixtures.resourceflattening.models.Resource;
 import fixtures.resourceflattening.models.FlattenedProduct;
+import com.microsoft.rest.AzureClient;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
@@ -39,6 +40,7 @@ import fixtures.resourceflattening.models.FlattenedProduct;
 public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
     private AutoRestResourceFlatteningTestServiceService service;
     private String baseUri;
+    private AzureClient azureClient;
 
     /**
      * Gets the URI used as the base for all cloud service requests.
@@ -46,6 +48,14 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public String getBaseUri() {
         return this.baseUri;
+    }
+
+    /**
+     * Gets the {@link AzureClient} used for long running operations.
+     * @return the azure client;
+     */
+    public AzureClient getAzureClient() {
+        return this.azureClient;
     }
 
     private ServiceClientCredentials credentials;
@@ -135,6 +145,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.azureClient = new AzureClient(client, retrofitBuilder);
+        this.azureClient.setCredentials(this.credentials);
+        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
         service = retrofit.create(AutoRestResourceFlatteningTestServiceService.class);
     }
@@ -145,11 +158,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param resourceArray External Resource as an Array to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putArray(List<Resource> resourceArray) throws ServiceException {
+    public ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ServiceException {
         try {
             Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
-            ServiceResponse<Void> response = putArrayDelegate(call.execute(), null);
-            response.getBody();
+            return putArrayDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -191,11 +203,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public List<FlattenedProduct> getArray() throws ServiceException {
+    public ServiceResponse<List<FlattenedProduct>> getArray() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
-            ServiceResponse<List<FlattenedProduct>> response = getArrayDelegate(call.execute(), null);
-            return response.getBody();
+            return getArrayDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -236,11 +247,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException {
+    public ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException {
         try {
             Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
-            ServiceResponse<Void> response = putDictionaryDelegate(call.execute(), null);
-            response.getBody();
+            return putDictionaryDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -282,11 +292,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, FlattenedProduct> getDictionary() throws ServiceException {
+    public ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
-            ServiceResponse<Map<String, FlattenedProduct>> response = getDictionaryDelegate(call.execute(), null);
-            return response.getBody();
+            return getDictionaryDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -327,11 +336,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException {
+    public ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException {
         try {
             Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
-            ServiceResponse<Void> response = putResourceCollectionDelegate(call.execute(), null);
-            response.getBody();
+            return putResourceCollectionDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -373,11 +381,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the ResourceCollection object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ResourceCollection getResourceCollection() throws ServiceException {
+    public ServiceResponse<ResourceCollection> getResourceCollection() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());
-            ServiceResponse<ResourceCollection> response = getResourceCollectionDelegate(call.execute(), null);
-            return response.getBody();
+            return getResourceCollectionDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

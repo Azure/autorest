@@ -14,12 +14,14 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import java.math.BigDecimal;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Call;
 import java.util.Map;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import com.microsoft.rest.AzureClient;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.
@@ -30,6 +32,12 @@ public interface AutoRestReportServiceForAzure {
      * @return The BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the {@link AzureClient} used for long running operations.
+     * @return the azure client;
+     */
+    AzureClient getAzureClient();
 
     /**
      * Gets The management credentials for Azure..
@@ -82,7 +90,7 @@ public interface AutoRestReportServiceForAzure {
      * @return the Map&lt;String, Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, Integer> getReport() throws ServiceException;
+    ServiceResponse<Map<String, Integer>> getReport() throws ServiceException;
 
     /**
      * Get test coverage report

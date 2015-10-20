@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Response;
+import java.io.IOException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import fixtures.subscriptionidapiversion.models.Error;
 
@@ -40,7 +41,7 @@ public class GroupImpl implements Group {
      * @return the SampleResourceGroup object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public SampleResourceGroup getSampleResourceGroup(String resourceGroupName) throws ServiceException {
+    public ServiceResponse<SampleResourceGroup> getSampleResourceGroup(String resourceGroupName) throws ServiceException {
         if (this.client.getSubscriptionId() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -55,8 +56,7 @@ public class GroupImpl implements Group {
         }
         try {
             Call<ResponseBody> call = service.getSampleResourceGroup(this.client.getSubscriptionId(), resourceGroupName, this.client.getApiVersion(), this.client.getAcceptLanguage());
-            ServiceResponse<SampleResourceGroup> response = getSampleResourceGroupDelegate(call.execute(), null);
-            return response.getBody();
+            return getSampleResourceGroupDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

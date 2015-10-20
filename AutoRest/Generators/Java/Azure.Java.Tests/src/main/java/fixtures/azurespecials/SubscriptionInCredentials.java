@@ -12,8 +12,10 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Header;
@@ -50,7 +52,7 @@ public interface SubscriptionInCredentials {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postMethodGlobalValid() throws ServiceException;
+    ServiceResponse<Void> postMethodGlobalValid() throws ServiceException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -65,7 +67,7 @@ public interface SubscriptionInCredentials {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postMethodGlobalNull() throws ServiceException;
+    ServiceResponse<Void> postMethodGlobalNull() throws ServiceException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call
@@ -80,7 +82,7 @@ public interface SubscriptionInCredentials {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postMethodGlobalNotProvidedValid() throws ServiceException;
+    ServiceResponse<Void> postMethodGlobalNotProvidedValid() throws ServiceException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -95,7 +97,7 @@ public interface SubscriptionInCredentials {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postPathGlobalValid() throws ServiceException;
+    ServiceResponse<Void> postPathGlobalValid() throws ServiceException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -110,7 +112,7 @@ public interface SubscriptionInCredentials {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postSwaggerGlobalValid() throws ServiceException;
+    ServiceResponse<Void> postSwaggerGlobalValid() throws ServiceException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed

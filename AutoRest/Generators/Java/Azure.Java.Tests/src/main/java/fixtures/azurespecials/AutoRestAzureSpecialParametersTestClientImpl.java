@@ -14,12 +14,14 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.Retrofit;
+import com.microsoft.rest.AzureClient;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
  */
 public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient implements AutoRestAzureSpecialParametersTestClient {
     private String baseUri;
+    private AzureClient azureClient;
 
     /**
      * Gets the URI used as the base for all cloud service requests.
@@ -27,6 +29,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      */
     public String getBaseUri() {
         return this.baseUri;
+    }
+
+    /**
+     * Gets the {@link AzureClient} used for long running operations.
+     * @return the azure client;
+     */
+    public AzureClient getAzureClient() {
+        return this.azureClient;
     }
 
     private ServiceClientCredentials credentials;
@@ -217,6 +227,9 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.azureClient = new AzureClient(client, retrofitBuilder);
+        this.azureClient.setCredentials(this.credentials);
+        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
         this.xMsClientRequestId = new XMsClientRequestIdImpl(retrofit, this);
         this.subscriptionInCredentials = new SubscriptionInCredentialsImpl(retrofit, this);

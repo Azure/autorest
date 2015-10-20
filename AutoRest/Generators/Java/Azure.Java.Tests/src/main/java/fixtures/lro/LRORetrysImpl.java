@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Response;
+import java.io.IOException;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.CloudError;
 
@@ -40,16 +41,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product put201CreatingSucceeded200(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = put201CreatingSucceeded200Delegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPut201CreatingSucceeded200(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -59,26 +53,14 @@ public class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPut201CreatingSucceeded200Async(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(put201CreatingSucceeded200Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> put201CreatingSucceeded200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(201, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -88,11 +70,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPut201CreatingSucceeded200(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPut201CreatingSucceeded200(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPut201CreatingSucceeded200Delegate(call.execute(), null);
-            return response.getBody();
+            return beginPut201CreatingSucceeded200Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -136,16 +117,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product putAsyncRelativeRetrySucceeded(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = putAsyncRelativeRetrySucceededDelegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> putAsyncRelativeRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPutAsyncRelativeRetrySucceeded(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -155,25 +129,14 @@ public class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> putAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.putAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPutAsyncRelativeRetrySucceededAsync(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(putAsyncRelativeRetrySucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> putAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -183,11 +146,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPutAsyncRelativeRetrySucceeded(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPutAsyncRelativeRetrySucceeded(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetrySucceededDelegate(call.execute(), null);
-            return response.getBody();
+            return beginPutAsyncRelativeRetrySucceededDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -229,16 +191,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product deleteProvisioning202Accepted200Succeeded() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.deleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = deleteProvisioning202Accepted200SucceededDelegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> deleteProvisioning202Accepted200Succeeded() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginDeleteProvisioning202Accepted200Succeeded();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -247,26 +202,14 @@ public class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.deleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginDeleteProvisioning202Accepted200SucceededAsync(new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(deleteProvisioning202Accepted200SucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> deleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(202, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -275,11 +218,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginDeleteProvisioning202Accepted200Succeeded() throws ServiceException {
+    public ServiceResponse<Product> beginDeleteProvisioning202Accepted200Succeeded() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginDeleteProvisioning202Accepted200SucceededDelegate(call.execute(), null);
-            return response.getBody();
+            return beginDeleteProvisioning202Accepted200SucceededDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -320,16 +262,9 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete202Retry200() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.delete202Retry200(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = delete202Retry200Delegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> delete202Retry200() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginDelete202Retry200();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -338,25 +273,14 @@ public class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> delete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.delete202Retry200(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginDelete202Retry200Async(new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(delete202Retry200Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> delete202Retry200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -364,11 +288,10 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginDelete202Retry200() throws ServiceException {
+    public ServiceResponse<Void> beginDelete202Retry200() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDelete202Retry200(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginDelete202Retry200Delegate(call.execute(), null);
-            response.getBody();
+            return beginDelete202Retry200Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -408,16 +331,9 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void deleteAsyncRelativeRetrySucceeded() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.deleteAsyncRelativeRetrySucceeded(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = deleteAsyncRelativeRetrySucceededDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> deleteAsyncRelativeRetrySucceeded() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginDeleteAsyncRelativeRetrySucceeded();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -426,25 +342,14 @@ public class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRelativeRetrySucceeded(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginDeleteAsyncRelativeRetrySucceededAsync(new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(deleteAsyncRelativeRetrySucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> deleteAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -452,11 +357,10 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginDeleteAsyncRelativeRetrySucceeded() throws ServiceException {
+    public ServiceResponse<Void> beginDeleteAsyncRelativeRetrySucceeded() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetrySucceeded(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetrySucceededDelegate(call.execute(), null);
-            response.getBody();
+            return beginDeleteAsyncRelativeRetrySucceededDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -497,16 +401,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post202Retry200(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = post202Retry200Delegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> post202Retry200(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginPost202Retry200(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -516,25 +413,14 @@ public class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginPost202Retry200Async(product, new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(post202Retry200Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> post202Retry200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -543,11 +429,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginPost202Retry200(Product product) throws ServiceException {
+    public ServiceResponse<Void> beginPost202Retry200(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginPost202Retry200Delegate(call.execute(), null);
-            response.getBody();
+            return beginPost202Retry200Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -589,16 +474,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postAsyncRelativeRetrySucceeded(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postAsyncRelativeRetrySucceededDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postAsyncRelativeRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginPostAsyncRelativeRetrySucceeded(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -608,25 +486,14 @@ public class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginPostAsyncRelativeRetrySucceededAsync(product, new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(postAsyncRelativeRetrySucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> postAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -635,11 +502,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginPostAsyncRelativeRetrySucceeded(Product product) throws ServiceException {
+    public ServiceResponse<Void> beginPostAsyncRelativeRetrySucceeded(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetrySucceededDelegate(call.execute(), null);
-            response.getBody();
+            return beginPostAsyncRelativeRetrySucceededDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

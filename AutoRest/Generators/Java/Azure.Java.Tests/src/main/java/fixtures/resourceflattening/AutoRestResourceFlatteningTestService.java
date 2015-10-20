@@ -14,6 +14,7 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import java.math.BigDecimal;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Call;
@@ -26,6 +27,7 @@ import retrofit.http.PUT;
 import retrofit.http.Body;
 import retrofit.http.Header;
 import retrofit.http.GET;
+import com.microsoft.rest.AzureClient;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
@@ -36,6 +38,12 @@ public interface AutoRestResourceFlatteningTestService {
      * @return The BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the {@link AzureClient} used for long running operations.
+     * @return the azure client;
+     */
+    AzureClient getAzureClient();
 
     /**
      * Gets The management credentials for Azure..
@@ -103,7 +111,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @param resourceArray External Resource as an Array to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putArray(List<Resource> resourceArray) throws ServiceException;
+    ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ServiceException;
 
     /**
      * Put External Resource as an Array
@@ -119,7 +127,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    List<FlattenedProduct> getArray() throws ServiceException;
+    ServiceResponse<List<FlattenedProduct>> getArray() throws ServiceException;
 
     /**
      * Get External Resource as an Array
@@ -134,7 +142,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException;
+    ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException;
 
     /**
      * Put External Resource as a Dictionary
@@ -150,7 +158,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, FlattenedProduct> getDictionary() throws ServiceException;
+    ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ServiceException;
 
     /**
      * Get External Resource as a Dictionary
@@ -165,7 +173,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException;
+    ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException;
 
     /**
      * Put External Resource as a ResourceCollection
@@ -181,7 +189,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the ResourceCollection object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ResourceCollection getResourceCollection() throws ServiceException;
+    ServiceResponse<ResourceCollection> getResourceCollection() throws ServiceException;
 
     /**
      * Get External Resource as a ResourceCollection

@@ -8,6 +8,13 @@
 @using Microsoft.Rest.Generator.ClientModel
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureMethodTemplateModel>
+@if (!Model.IsLongRunningOperation)
+{
+@:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
+}
+else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
+{
+<text>
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -28,59 +35,116 @@
 }
  * @@throws ServiceException the exception wrapped in ServiceException if failed.
  */
-@if (!Model.IsLongRunningOperation)
-{
-@:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
+public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
+    ServiceResponse<@Model.GenericReturnTypeString> result = this.begin@(Model.Name.ToPascalCase())(@Model.LocalMethodParameterInvocation);
+    return client.getAzureClient().getPutOrPatchResult(result);
 }
-else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
 {
-@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+@: * @Model.Summary.EscapeXmlComment()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
 {
-<text>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+@: * @Model.Description.EscapeXmlComment()
+}
+ *
+@foreach (var param in Model.LocalParameters)
 {
-    // Send request
-    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
-        @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+}
+ * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+ */
+public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+@foreach (var param in Model.RequiredNullableParameters)
+{
+@:    if (@param.Name == null) {
+@:        serviceCallback.failure(new ServiceException(
+@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+@:    }
+}
+@foreach (var param in Model.ParametersToValidate)
+{
+@:    Validator.validate(@(param.Name), serviceCallback);
+}
+    return this.begin@(Model.Name.ToPascalCase())Async(@Model.LocalMethodParameterInvocationWithCallback {
+        @@Override
+        public void failure(Throwable t) { serviceCallback.failure(t); }
 
-    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
+        @@Override
+        public void success(ServiceResponse<@Model.GenericReturnTypeString> result) {
+            client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
+        }
+    });
 }
 </text>
 }
 else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
 {
-@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
-{
-@:/// <summary>
-@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
-@:/// </summary>
-}
-@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
-{
-@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
-}
-@foreach (var parameter in Model.LocalParameters)
-{
-@:/// <param name='@parameter.Name'>
-@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
-@:/// </param>
-}
-@:/// <param name='customHeaders'>
-@:/// The headers that will be added to request.
-@:/// </param>
-@:/// <param name='cancellationToken'>
-@:/// The cancellation token.
-@:/// </param>
 <text>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
 {
-    // Send Request
-    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
-        @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
+@: * @Model.Summary.EscapeXmlComment()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment()
+}
+ *
+@foreach (var param in Model.LocalParameters)
+{
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+}
+@if (Model.ReturnType != null)
+{
+@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object if successful.
+}
+ * @@throws ServiceException the exception wrapped in ServiceException if failed.
+ */
+public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
+    ServiceResponse<@Model.GenericReturnTypeString> result = this.begin@(Model.Name.ToPascalCase())(@Model.LocalMethodParameterInvocation);
+    return client.getAzureClient().getPutOrPatchResult(result);
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment()
+}
+ *
+@foreach (var param in Model.LocalParameters)
+{
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+}
+ * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+ */
+public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+@foreach (var param in Model.RequiredNullableParameters)
+{
+@:    if (@param.Name == null) {
+@:        serviceCallback.failure(new ServiceException(
+@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+@:    }
+}
+@foreach (var param in Model.ParametersToValidate)
+{
+@:    Validator.validate(@(param.Name), serviceCallback);
+}
+    return this.begin@(Model.Name.ToPascalCase())Async(@Model.LocalMethodParameterInvocationWithCallback {
+        @@Override
+        public void failure(Throwable t) { serviceCallback.failure(t); }
 
-    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync<@(Model.ReturnType.Name)>(response,
-        customHeaders,
-        cancellationToken);
+        @@Override
+        public void success(ServiceResponse<@Model.GenericReturnTypeString> result) {
+            client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
+        }
+    });
 }
 </text>
 }

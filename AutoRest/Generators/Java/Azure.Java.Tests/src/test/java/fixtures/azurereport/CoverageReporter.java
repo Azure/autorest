@@ -8,7 +8,7 @@ public class CoverageReporter {
     static AutoRestReportServiceForAzure client = new AutoRestReportServiceForAzureImpl("http://localhost:3000");
 
     public static void main(String[] args) throws Exception {
-        Map<String, Integer> report = client.getReport();
+        Map<String, Integer> report = client.getReport().getBody();
 
         int total = report.size();
         int hit = 0;

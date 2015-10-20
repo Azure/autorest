@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Response;
+import java.io.IOException;
 import fixtures.azurespecials.models.Error;
 
 public class SkipUrlEncodingImpl implements SkipUrlEncoding {
@@ -38,15 +39,14 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getMethodPathValid(String unencodedPathParam) throws ServiceException {
+    public ServiceResponse<Void> getMethodPathValid(String unencodedPathParam) throws ServiceException {
         if (unencodedPathParam == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getMethodPathValidDelegate(call.execute(), null);
-            response.getBody();
+            return getMethodPathValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -92,15 +92,14 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getPathPathValid(String unencodedPathParam) throws ServiceException {
+    public ServiceResponse<Void> getPathPathValid(String unencodedPathParam) throws ServiceException {
         if (unencodedPathParam == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getPathPathValidDelegate(call.execute(), null);
-            response.getBody();
+            return getPathPathValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -146,15 +145,14 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getSwaggerPathValid(String unencodedPathParam) throws ServiceException {
+    public ServiceResponse<Void> getSwaggerPathValid(String unencodedPathParam) throws ServiceException {
         if (unencodedPathParam == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getSwaggerPathValidDelegate(call.execute(), null);
-            response.getBody();
+            return getSwaggerPathValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -200,15 +198,14 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getMethodQueryValid(String q1) throws ServiceException {
+    public ServiceResponse<Void> getMethodQueryValid(String q1) throws ServiceException {
         if (q1 == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter q1 is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getMethodQueryValidDelegate(call.execute(), null);
-            response.getBody();
+            return getMethodQueryValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -254,11 +251,10 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param q1 Unencoded query parameter with value null
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getMethodQueryNull(String q1) throws ServiceException {
+    public ServiceResponse<Void> getMethodQueryNull(String q1) throws ServiceException {
         try {
             Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getMethodQueryNullDelegate(call.execute(), null);
-            response.getBody();
+            return getMethodQueryNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -300,15 +296,14 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getPathQueryValid(String q1) throws ServiceException {
+    public ServiceResponse<Void> getPathQueryValid(String q1) throws ServiceException {
         if (q1 == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter q1 is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getPathQueryValidDelegate(call.execute(), null);
-            response.getBody();
+            return getPathQueryValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -354,11 +349,10 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getSwaggerQueryValid(String q1) throws ServiceException {
+    public ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ServiceException {
         try {
             Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getSwaggerQueryValidDelegate(call.execute(), null);
-            response.getBody();
+            return getSwaggerQueryValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

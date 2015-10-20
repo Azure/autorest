@@ -12,8 +12,10 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Header;
@@ -57,7 +59,7 @@ public interface SkipUrlEncoding {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getMethodPathValid(String unencodedPathParam) throws ServiceException;
+    ServiceResponse<Void> getMethodPathValid(String unencodedPathParam) throws ServiceException;
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -74,7 +76,7 @@ public interface SkipUrlEncoding {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getPathPathValid(String unencodedPathParam) throws ServiceException;
+    ServiceResponse<Void> getPathPathValid(String unencodedPathParam) throws ServiceException;
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -91,7 +93,7 @@ public interface SkipUrlEncoding {
      * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getSwaggerPathValid(String unencodedPathParam) throws ServiceException;
+    ServiceResponse<Void> getSwaggerPathValid(String unencodedPathParam) throws ServiceException;
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -108,7 +110,7 @@ public interface SkipUrlEncoding {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getMethodQueryValid(String q1) throws ServiceException;
+    ServiceResponse<Void> getMethodQueryValid(String q1) throws ServiceException;
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
@@ -125,7 +127,7 @@ public interface SkipUrlEncoding {
      * @param q1 Unencoded query parameter with value null
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getMethodQueryNull(String q1) throws ServiceException;
+    ServiceResponse<Void> getMethodQueryNull(String q1) throws ServiceException;
 
     /**
      * Get method with unencoded query parameter with value null
@@ -142,7 +144,7 @@ public interface SkipUrlEncoding {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getPathQueryValid(String q1) throws ServiceException;
+    ServiceResponse<Void> getPathQueryValid(String q1) throws ServiceException;
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
@@ -159,7 +161,7 @@ public interface SkipUrlEncoding {
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getSwaggerQueryValid(String q1) throws ServiceException;
+    ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ServiceException;
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'

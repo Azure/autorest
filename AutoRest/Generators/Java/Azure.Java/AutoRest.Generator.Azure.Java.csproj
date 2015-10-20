@@ -35,8 +35,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TemplateModels\AzureMethodGroupTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureMethodTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
+    <Compile Include="Templates\AzureMethodGroupTemplate.cs">
+      <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\AzureMethodTemplate.cs">
       <DependentUpon>AzureMethodTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureServiceClientInterfaceTemplate.cs">
+      <DependentUpon>AzureServiceClientInterfaceTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureServiceClientTemplate.cs">
+      <DependentUpon>AzureServiceClientTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureMethodGroupInterfaceTemplate.cs">
+      <DependentUpon>AzureMethodGroupInterfaceTemplate.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -65,7 +80,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\AzureMethodGroupTemplate.cshtml" />
     <None Include="Templates\AzureMethodTemplate.cshtml" />
+    <None Include="Templates\AzureServiceClientInterfaceTemplate.cshtml" />
+    <None Include="Templates\AzureServiceClientTemplate.cshtml" />
+    <None Include="Templates\AzureMethodGroupInterfaceTemplate.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

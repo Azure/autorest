@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Response;
+import java.io.IOException;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.CloudError;
 
@@ -40,16 +41,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product putNonRetry400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putNonRetry400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = putNonRetry400Delegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> putNonRetry400(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPutNonRetry400(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -59,26 +53,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> putNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.putNonRetry400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPutNonRetry400Async(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(putNonRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> putNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(201, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -88,11 +70,10 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPutNonRetry400(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPutNonRetry400(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPutNonRetry400Delegate(call.execute(), null);
-            return response.getBody();
+            return beginPutNonRetry400Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -136,16 +117,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product putNonRetry201Creating400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = putNonRetry201Creating400Delegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> putNonRetry201Creating400(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPutNonRetry201Creating400(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -155,26 +129,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> putNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPutNonRetry201Creating400Async(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(putNonRetry201Creating400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> putNonRetry201Creating400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(201, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -184,11 +146,10 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPutNonRetry201Creating400(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPutNonRetry201Creating400(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPutNonRetry201Creating400Delegate(call.execute(), null);
-            return response.getBody();
+            return beginPutNonRetry201Creating400Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -232,16 +193,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product putAsyncRelativeRetry400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = putAsyncRelativeRetry400Delegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> putAsyncRelativeRetry400(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPutAsyncRelativeRetry400(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -251,25 +205,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> putAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPutAsyncRelativeRetry400Async(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(putAsyncRelativeRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> putAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -279,11 +222,10 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPutAsyncRelativeRetry400(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPutAsyncRelativeRetry400(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetry400Delegate(call.execute(), null);
-            return response.getBody();
+            return beginPutAsyncRelativeRetry400Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -324,16 +266,9 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void deleteNonRetry400() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.deleteNonRetry400(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = deleteNonRetry400Delegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> deleteNonRetry400() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginDeleteNonRetry400();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -342,25 +277,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteNonRetry400(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginDeleteNonRetry400Async(new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(deleteNonRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> deleteNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -368,11 +292,10 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginDeleteNonRetry400() throws ServiceException {
+    public ServiceResponse<Void> beginDeleteNonRetry400() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDeleteNonRetry400(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginDeleteNonRetry400Delegate(call.execute(), null);
-            response.getBody();
+            return beginDeleteNonRetry400Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -412,16 +335,9 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete202NonRetry400() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.delete202NonRetry400(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = delete202NonRetry400Delegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> delete202NonRetry400() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginDelete202NonRetry400();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -430,25 +346,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.delete202NonRetry400(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginDelete202NonRetry400Async(new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(delete202NonRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> delete202NonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -456,11 +361,10 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginDelete202NonRetry400() throws ServiceException {
+    public ServiceResponse<Void> beginDelete202NonRetry400() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDelete202NonRetry400(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginDelete202NonRetry400Delegate(call.execute(), null);
-            response.getBody();
+            return beginDelete202NonRetry400Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -500,16 +404,9 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void deleteAsyncRelativeRetry400() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.deleteAsyncRelativeRetry400(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = deleteAsyncRelativeRetry400Delegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> deleteAsyncRelativeRetry400() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginDeleteAsyncRelativeRetry400();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -518,25 +415,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRelativeRetry400(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginDeleteAsyncRelativeRetry400Async(new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(deleteAsyncRelativeRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> deleteAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -544,11 +430,10 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginDeleteAsyncRelativeRetry400() throws ServiceException {
+    public ServiceResponse<Void> beginDeleteAsyncRelativeRetry400() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetry400(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetry400Delegate(call.execute(), null);
-            response.getBody();
+            return beginDeleteAsyncRelativeRetry400Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -589,16 +474,9 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postNonRetry400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postNonRetry400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postNonRetry400Delegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postNonRetry400(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginPostNonRetry400(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -608,25 +486,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postNonRetry400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginPostNonRetry400Async(product, new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(postNonRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> postNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -635,11 +502,10 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginPostNonRetry400(Product product) throws ServiceException {
+    public ServiceResponse<Void> beginPostNonRetry400(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginPostNonRetry400Delegate(call.execute(), null);
-            response.getBody();
+            return beginPostNonRetry400Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -681,16 +547,9 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post202NonRetry400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post202NonRetry400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = post202NonRetry400Delegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> post202NonRetry400(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginPost202NonRetry400(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -700,25 +559,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> post202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.post202NonRetry400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginPost202NonRetry400Async(product, new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(post202NonRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> post202NonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -727,11 +575,10 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginPost202NonRetry400(Product product) throws ServiceException {
+    public ServiceResponse<Void> beginPost202NonRetry400(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginPost202NonRetry400Delegate(call.execute(), null);
-            response.getBody();
+            return beginPost202NonRetry400Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -773,16 +620,9 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postAsyncRelativeRetry400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postAsyncRelativeRetry400Delegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postAsyncRelativeRetry400(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginPostAsyncRelativeRetry400(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -792,25 +632,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginPostAsyncRelativeRetry400Async(product, new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(postAsyncRelativeRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> postAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -819,11 +648,10 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginPostAsyncRelativeRetry400(Product product) throws ServiceException {
+    public ServiceResponse<Void> beginPostAsyncRelativeRetry400(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetry400Delegate(call.execute(), null);
-            response.getBody();
+            return beginPostAsyncRelativeRetry400Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -866,16 +694,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product putError201NoProvisioningStatePayload(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = putError201NoProvisioningStatePayloadDelegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> putError201NoProvisioningStatePayload(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPutError201NoProvisioningStatePayload(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -885,26 +706,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> putError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPutError201NoProvisioningStatePayloadAsync(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(putError201NoProvisioningStatePayloadDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> putError201NoProvisioningStatePayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(201, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -914,11 +723,10 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPutError201NoProvisioningStatePayload(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPutError201NoProvisioningStatePayload(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPutError201NoProvisioningStatePayloadDelegate(call.execute(), null);
-            return response.getBody();
+            return beginPutError201NoProvisioningStatePayloadDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -962,16 +770,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product putAsyncRelativeRetryNoStatus(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = putAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> putAsyncRelativeRetryNoStatus(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPutAsyncRelativeRetryNoStatus(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -981,25 +782,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> putAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPutAsyncRelativeRetryNoStatusAsync(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(putAsyncRelativeRetryNoStatusDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> putAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1009,11 +799,10 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPutAsyncRelativeRetryNoStatus(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatus(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
-            return response.getBody();
+            return beginPutAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1056,16 +845,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product putAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = putAsyncRelativeRetryNoStatusPayloadDelegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> putAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPutAsyncRelativeRetryNoStatusPayload(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1075,25 +857,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> putAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPutAsyncRelativeRetryNoStatusPayloadAsync(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(putAsyncRelativeRetryNoStatusPayloadDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> putAsyncRelativeRetryNoStatusPayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1103,11 +874,10 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPutAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryNoStatusPayloadDelegate(call.execute(), null);
-            return response.getBody();
+            return beginPutAsyncRelativeRetryNoStatusPayloadDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1148,16 +918,9 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete204Succeeded() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.delete204Succeeded(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = delete204SucceededDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> delete204Succeeded() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginDelete204Succeeded();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1166,25 +929,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.delete204Succeeded(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginDelete204SucceededAsync(new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(delete204SucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> delete204SucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(204, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1192,11 +944,10 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginDelete204Succeeded() throws ServiceException {
+    public ServiceResponse<Void> beginDelete204Succeeded() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginDelete204SucceededDelegate(call.execute(), null);
-            response.getBody();
+            return beginDelete204SucceededDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1236,16 +987,9 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void deleteAsyncRelativeRetryNoStatus() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.deleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = deleteAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> deleteAsyncRelativeRetryNoStatus() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginDeleteAsyncRelativeRetryNoStatus();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1254,25 +998,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginDeleteAsyncRelativeRetryNoStatusAsync(new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(deleteAsyncRelativeRetryNoStatusDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> deleteAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1280,11 +1013,10 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginDeleteAsyncRelativeRetryNoStatus() throws ServiceException {
+    public ServiceResponse<Void> beginDeleteAsyncRelativeRetryNoStatus() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
-            response.getBody();
+            return beginDeleteAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1325,16 +1057,9 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post202NoLocation(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post202NoLocation(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = post202NoLocationDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> post202NoLocation(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginPost202NoLocation(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1344,25 +1069,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> post202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.post202NoLocation(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginPost202NoLocationAsync(product, new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(post202NoLocationDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> post202NoLocationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1371,11 +1085,10 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginPost202NoLocation(Product product) throws ServiceException {
+    public ServiceResponse<Void> beginPost202NoLocation(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginPost202NoLocationDelegate(call.execute(), null);
-            response.getBody();
+            return beginPost202NoLocationDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1417,16 +1130,9 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postAsyncRelativeRetryNoPayload(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postAsyncRelativeRetryNoPayloadDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postAsyncRelativeRetryNoPayload(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginPostAsyncRelativeRetryNoPayload(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1436,25 +1142,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginPostAsyncRelativeRetryNoPayloadAsync(product, new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(postAsyncRelativeRetryNoPayloadDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> postAsyncRelativeRetryNoPayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1463,11 +1158,10 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginPostAsyncRelativeRetryNoPayload(Product product) throws ServiceException {
+    public ServiceResponse<Void> beginPostAsyncRelativeRetryNoPayload(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetryNoPayloadDelegate(call.execute(), null);
-            response.getBody();
+            return beginPostAsyncRelativeRetryNoPayloadDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1510,16 +1204,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product put200InvalidJson(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put200InvalidJson(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = put200InvalidJsonDelegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> put200InvalidJson(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPut200InvalidJson(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1529,26 +1216,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> put200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.put200InvalidJson(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPut200InvalidJsonAsync(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(put200InvalidJsonDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> put200InvalidJsonDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(204, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1558,11 +1233,10 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPut200InvalidJson(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPut200InvalidJson(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPut200InvalidJsonDelegate(call.execute(), null);
-            return response.getBody();
+            return beginPut200InvalidJsonDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1606,16 +1280,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product putAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = putAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> putAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPutAsyncRelativeRetryInvalidHeader(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1625,25 +1292,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> putAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPutAsyncRelativeRetryInvalidHeaderAsync(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(putAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> putAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1653,11 +1309,10 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPutAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
-            return response.getBody();
+            return beginPutAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1700,16 +1355,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product putAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = putAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
-            return response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Product> putAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Product> result = this.beginPutAsyncRelativeRetryInvalidJsonPolling(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1719,25 +1367,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        return this.beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product, new ServiceCallback<Product>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(putAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Product> putAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1747,11 +1384,10 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
+    public ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-            ServiceResponse<Product> response = beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
-            return response.getBody();
+            return beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1792,16 +1428,9 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete202RetryInvalidHeader() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.delete202RetryInvalidHeader(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = delete202RetryInvalidHeaderDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> delete202RetryInvalidHeader() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginDelete202RetryInvalidHeader();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1810,25 +1439,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.delete202RetryInvalidHeader(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginDelete202RetryInvalidHeaderAsync(new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(delete202RetryInvalidHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> delete202RetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1836,11 +1454,10 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginDelete202RetryInvalidHeader() throws ServiceException {
+    public ServiceResponse<Void> beginDelete202RetryInvalidHeader() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDelete202RetryInvalidHeader(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginDelete202RetryInvalidHeaderDelegate(call.execute(), null);
-            response.getBody();
+            return beginDelete202RetryInvalidHeaderDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1880,16 +1497,9 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void deleteAsyncRelativeRetryInvalidHeader() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = deleteAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> deleteAsyncRelativeRetryInvalidHeader() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginDeleteAsyncRelativeRetryInvalidHeader();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1898,25 +1508,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginDeleteAsyncRelativeRetryInvalidHeaderAsync(new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(deleteAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> deleteAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1924,11 +1523,10 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginDeleteAsyncRelativeRetryInvalidHeader() throws ServiceException {
+    public ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidHeader() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
-            response.getBody();
+            return beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1968,16 +1566,9 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void deleteAsyncRelativeRetryInvalidJsonPolling() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = deleteAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> deleteAsyncRelativeRetryInvalidJsonPolling() throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginDeleteAsyncRelativeRetryInvalidJsonPolling();
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -1986,25 +1577,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(deleteAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> deleteAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -2012,11 +1592,10 @@ public class LROSADsImpl implements LROSADs {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginDeleteAsyncRelativeRetryInvalidJsonPolling() throws ServiceException {
+    public ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidJsonPolling() throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
-            response.getBody();
+            return beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -2057,16 +1636,9 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post202RetryInvalidHeader(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = post202RetryInvalidHeaderDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> post202RetryInvalidHeader(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginPost202RetryInvalidHeader(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -2076,25 +1648,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> post202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginPost202RetryInvalidHeaderAsync(product, new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(post202RetryInvalidHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> post202RetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -2103,11 +1664,10 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginPost202RetryInvalidHeader(Product product) throws ServiceException {
+    public ServiceResponse<Void> beginPost202RetryInvalidHeader(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginPost202RetryInvalidHeaderDelegate(call.execute(), null);
-            response.getBody();
+            return beginPost202RetryInvalidHeaderDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -2149,16 +1709,9 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginPostAsyncRelativeRetryInvalidHeader(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -2168,25 +1721,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginPostAsyncRelativeRetryInvalidHeaderAsync(product, new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(postAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> postAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -2195,11 +1737,10 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginPostAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
+    public ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
-            response.getBody();
+            return beginPostAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -2241,16 +1782,9 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
-            response.getBody();
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException, IOException, InterruptedException {
+        ServiceResponse<Void> result = this.beginPostAsyncRelativeRetryInvalidJsonPolling(product);
+        return client.getAzureClient().getPutOrPatchResult(result);
     }
 
     /**
@@ -2260,25 +1794,14 @@ public class LROSADsImpl implements LROSADs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        return this.beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product, new ServiceCallback<Void>() {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(postAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
+            public void failure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void success(ServiceResponse<Void> result) {
+                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
             }
         });
-        return call;
-    }
-
-    private ServiceResponse<Void> postAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -2287,11 +1810,10 @@ public class LROSADsImpl implements LROSADs {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
+    public ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
         try {
             Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
-            response.getBody();
+            return beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

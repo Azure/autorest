@@ -12,8 +12,10 @@ package fixtures.lro;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import fixtures.lro.models.Product;
 import retrofit.http.PUT;
 import retrofit.http.Body;
@@ -62,7 +64,7 @@ public interface LROsCustomHeader {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product putAsyncRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> putAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -80,7 +82,7 @@ public interface LROsCustomHeader {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPutAsyncRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPutAsyncRetrySucceeded(Product product) throws ServiceException;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -98,7 +100,7 @@ public interface LROsCustomHeader {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product put201CreatingSucceeded200(Product product) throws ServiceException;
+    ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -116,7 +118,7 @@ public interface LROsCustomHeader {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product beginPut201CreatingSucceeded200(Product product) throws ServiceException;
+    ServiceResponse<Product> beginPut201CreatingSucceeded200(Product product) throws ServiceException;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -133,7 +135,7 @@ public interface LROsCustomHeader {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void post202Retry200(Product product) throws ServiceException;
+    ServiceResponse<Void> post202Retry200(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
@@ -150,7 +152,7 @@ public interface LROsCustomHeader {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginPost202Retry200(Product product) throws ServiceException;
+    ServiceResponse<Void> beginPost202Retry200(Product product) throws ServiceException;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
@@ -167,7 +169,7 @@ public interface LROsCustomHeader {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void postAsyncRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Void> postAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -184,7 +186,7 @@ public interface LROsCustomHeader {
      * @param product Product to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void beginPostAsyncRetrySucceeded(Product product) throws ServiceException;
+    ServiceResponse<Void> beginPostAsyncRetrySucceeded(Product product) throws ServiceException;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status

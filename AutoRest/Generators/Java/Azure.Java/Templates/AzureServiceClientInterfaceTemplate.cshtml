@@ -1,9 +1,9 @@
-@using System
+﻿@using System
 @using Microsoft.Rest.Generator.Java
 @using Microsoft.Rest.Generator.Java.Templates
 @using Microsoft.Rest.Generator.Utilities
-@using System.Linq;
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodGroupTemplateModel>
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureServiceClientTemplateModel>
 /**
 @Header(" * ")
  */
@@ -11,11 +11,6 @@
 
 package @(Settings.Namespace.ToLower());
 @EmptyLine
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import retrofit.Call;
-import com.squareup.okhttp.ResponseBody;
 @foreach (var importClass in Model.InterfaceImports)
 {
 @:import @importClass;
@@ -23,30 +18,67 @@ import com.squareup.okhttp.ResponseBody;
 @EmptyLine
 
 /**
- * An instance of this class provides access to all the operations defined
- * in @(Model.MethodGroupType).
+ * The interface for @Model.Name class.
  */
-public interface @Model.MethodGroupType {
+public interface @Model.Name {
     /**
-     * The interface defining all the services for @Model.MethodGroupType to be
+     * Gets the URI used as the base for all cloud service requests.
+     * @@return The BaseUri value.
+     */
+    String getBaseUri();
+@EmptyLine
+    /**
+     * Gets the {@@link AzureClient} used for long running operations.
+     * @@return the azure client;
+     */
+    AzureClient getAzureClient();
+@foreach (var property in Model.Properties)
+{
+@EmptyLine
+@:    /**
+@:     * Gets @(property.Documentation).
+@:     *
+@:     * @@return the @(property.Name) value.
+@:     */
+@:    @property.Type get@(property.Name.ToPascalCase())();
+if(!property.IsReadOnly)
+{
+@EmptyLine
+@:    /**
+@:     * Sets @(property.Documentation).
+@:     *
+@:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     */
+@:    void set@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
+}
+}
+
+@foreach (var operation in Model.Operations)
+{
+@EmptyLine
+@:    /**
+@:     * Gets the @(operation.MethodGroupType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupName) value.
+@:     */
+@:    @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())();
+}
+@EmptyLine
+@if (Model.MethodTemplateModels.Any())
+{
+<text>
+    /**
+     * The interface defining all the services for @Model.Name to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface @Model.MethodGroupServiceType {
+    interface @Model.ServiceClientServiceType {
     @foreach (var method in Model.MethodTemplateModels)
     {
-    if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
-    {
-    @:    @@HTTP(path = "@(method.Url)", method = "DELETE", hasBody = true)
-    }
-    else
-    {
     @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
-    }
     @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
     @EmptyLine
     }
     }
-
+    @EmptyLine
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:/**
@@ -89,6 +121,8 @@ public interface @Model.MethodGroupType {
     @: * @@return the {@@link Call} object
     @: */
     @:Call<@method.CallType> @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
-    @EmptyLine
     }
+    @EmptyLine
+</text>
+}
 }

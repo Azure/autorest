@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Response;
+import java.io.IOException;
 import fixtures.azurespecials.models.Error;
 
 public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
@@ -37,15 +38,14 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postMethodGlobalValid() throws ServiceException {
+    public ServiceResponse<Void> postMethodGlobalValid() throws ServiceException {
         if (this.client.getSubscriptionId() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.postMethodGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postMethodGlobalValidDelegate(call.execute(), null);
-            response.getBody();
+            return postMethodGlobalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -89,15 +89,14 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postMethodGlobalNull() throws ServiceException {
+    public ServiceResponse<Void> postMethodGlobalNull() throws ServiceException {
         if (this.client.getSubscriptionId() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.postMethodGlobalNull(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postMethodGlobalNullDelegate(call.execute(), null);
-            response.getBody();
+            return postMethodGlobalNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -141,7 +140,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postMethodGlobalNotProvidedValid() throws ServiceException {
+    public ServiceResponse<Void> postMethodGlobalNotProvidedValid() throws ServiceException {
         if (this.client.getSubscriptionId() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -152,8 +151,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
         }
         try {
             Call<ResponseBody> call = service.postMethodGlobalNotProvidedValid(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postMethodGlobalNotProvidedValidDelegate(call.execute(), null);
-            response.getBody();
+            return postMethodGlobalNotProvidedValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -201,15 +199,14 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postPathGlobalValid() throws ServiceException {
+    public ServiceResponse<Void> postPathGlobalValid() throws ServiceException {
         if (this.client.getSubscriptionId() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.postPathGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postPathGlobalValidDelegate(call.execute(), null);
-            response.getBody();
+            return postPathGlobalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -253,15 +250,14 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postSwaggerGlobalValid() throws ServiceException {
+    public ServiceResponse<Void> postSwaggerGlobalValid() throws ServiceException {
         if (this.client.getSubscriptionId() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.postSwaggerGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postSwaggerGlobalValidDelegate(call.execute(), null);
-            response.getBody();
+            return postSwaggerGlobalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

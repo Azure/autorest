@@ -12,8 +12,10 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.http.GET;
 import retrofit.http.Query;
 import retrofit.http.Header;
@@ -46,7 +48,7 @@ public interface ApiVersionDefault {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getMethodGlobalValid() throws ServiceException;
+    ServiceResponse<Void> getMethodGlobalValid() throws ServiceException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -61,7 +63,7 @@ public interface ApiVersionDefault {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getMethodGlobalNotProvidedValid() throws ServiceException;
+    ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ServiceException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -76,7 +78,7 @@ public interface ApiVersionDefault {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getPathGlobalValid() throws ServiceException;
+    ServiceResponse<Void> getPathGlobalValid() throws ServiceException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -91,7 +93,7 @@ public interface ApiVersionDefault {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getSwaggerGlobalValid() throws ServiceException;
+    ServiceResponse<Void> getSwaggerGlobalValid() throws ServiceException;
 
     /**
      * GET method with api-version modeled in global settings.

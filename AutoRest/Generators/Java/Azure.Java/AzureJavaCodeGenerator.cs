@@ -9,6 +9,7 @@ using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.Templates;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Java.Azure.Templates;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
@@ -68,15 +69,15 @@ namespace Microsoft.Rest.Generator.Java.Azure
         /// <returns></returns>
         public override async Task Generate(ServiceClient serviceClient)
         {
-            var serviceClientTemplateModel = new ServiceClientTemplateModel(serviceClient);
+            var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
             // Service client
-            var serviceClientTemplate = new ServiceClientTemplate
+            var serviceClientTemplate = new AzureServiceClientTemplate
             {
                 Model = serviceClientTemplateModel,
             };
             await Write(serviceClientTemplate, serviceClient.Name.ToPascalCase() + "Impl.java");
 
-            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate
+            var serviceClientInterfaceTemplate = new AzureServiceClientInterfaceTemplate
             {
                 Model = serviceClientTemplateModel,
             };
@@ -100,14 +101,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
-                    var methodGroupTemplate = new MethodGroupTemplate
+                    var methodGroupTemplate = new AzureMethodGroupTemplate
                     {
-                        Model = methodGroupModel
+                        Model = (AzureMethodGroupTemplateModel)methodGroupModel
                     };
                     await Write(methodGroupTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + "Impl.java");
-                    var methodGroupInterfaceTemplate = new MethodGroupInterfaceTemplate
+                    var methodGroupInterfaceTemplate = new AzureMethodGroupInterfaceTemplate
                     {
-                        Model = methodGroupModel
+                        Model = (AzureMethodGroupTemplateModel)methodGroupModel
                     };
                     await Write(methodGroupInterfaceTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + ".java");
                 }

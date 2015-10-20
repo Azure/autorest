@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Response;
+import java.io.IOException;
 import fixtures.head.models.CloudError;
 
 public class HttpSuccessImpl implements HttpSuccess {
@@ -38,11 +39,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Boolean head204() throws ServiceException {
+    public ServiceResponse<Boolean> head204() throws ServiceException {
         try {
             Call<Void> call = service.head204(this.client.getAcceptLanguage());
-            ServiceResponse<Boolean> response = head204Delegate(call.execute(), null);
-            return response.getBody();
+            return head204Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -84,11 +84,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Boolean head404() throws ServiceException {
+    public ServiceResponse<Boolean> head404() throws ServiceException {
         try {
             Call<Void> call = service.head404(this.client.getAcceptLanguage());
-            ServiceResponse<Boolean> response = head404Delegate(call.execute(), null);
-            return response.getBody();
+            return head404Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

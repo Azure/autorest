@@ -12,8 +12,10 @@ package fixtures.paging;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import fixtures.paging.models.ProductResult;
 import retrofit.http.GET;
 import retrofit.http.Header;
@@ -78,7 +80,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getSinglePages() throws ServiceException;
+    ServiceResponse<ProductResult> getSinglePages() throws ServiceException;
 
     /**
      * A paging operation that finishes on the first call without a nextlink
@@ -94,7 +96,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getMultiplePages() throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePages() throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
@@ -110,7 +112,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getMultiplePagesRetryFirst() throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesRetryFirst() throws ServiceException;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
@@ -126,7 +128,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getMultiplePagesRetrySecond() throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesRetrySecond() throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -142,7 +144,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getSinglePagesFailure() throws ServiceException;
+    ServiceResponse<ProductResult> getSinglePagesFailure() throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the first call
@@ -158,7 +160,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getMultiplePagesFailure() throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesFailure() throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the second call
@@ -174,7 +176,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getMultiplePagesFailureUri() throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesFailureUri() throws ServiceException;
 
     /**
      * A paging operation that receives an invalid nextLink
@@ -191,7 +193,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getSinglePagesNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getSinglePagesNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that finishes on the first call without a nextlink
@@ -209,7 +211,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getMultiplePagesNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
@@ -227,7 +229,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
@@ -245,7 +247,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -263,7 +265,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getSinglePagesFailureNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getSinglePagesFailureNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the first call
@@ -281,7 +283,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getMultiplePagesFailureNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesFailureNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the second call
@@ -299,7 +301,7 @@ public interface Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ProductResult getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that receives an invalid nextLink

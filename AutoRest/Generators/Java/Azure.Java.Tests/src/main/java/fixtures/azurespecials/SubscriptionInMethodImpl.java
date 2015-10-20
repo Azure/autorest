@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Response;
+import java.io.IOException;
 import fixtures.azurespecials.models.Error;
 
 public class SubscriptionInMethodImpl implements SubscriptionInMethod {
@@ -38,15 +39,14 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postMethodLocalValid(String subscriptionId) throws ServiceException {
+    public ServiceResponse<Void> postMethodLocalValid(String subscriptionId) throws ServiceException {
         if (subscriptionId == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postMethodLocalValidDelegate(call.execute(), null);
-            response.getBody();
+            return postMethodLocalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -92,15 +92,14 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postMethodLocalNull(String subscriptionId) throws ServiceException {
+    public ServiceResponse<Void> postMethodLocalNull(String subscriptionId) throws ServiceException {
         if (subscriptionId == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postMethodLocalNullDelegate(call.execute(), null);
-            response.getBody();
+            return postMethodLocalNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -146,15 +145,14 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postPathLocalValid(String subscriptionId) throws ServiceException {
+    public ServiceResponse<Void> postPathLocalValid(String subscriptionId) throws ServiceException {
         if (subscriptionId == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postPathLocalValidDelegate(call.execute(), null);
-            response.getBody();
+            return postPathLocalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -200,15 +198,14 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void postSwaggerLocalValid(String subscriptionId) throws ServiceException {
+    public ServiceResponse<Void> postSwaggerLocalValid(String subscriptionId) throws ServiceException {
         if (subscriptionId == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = postSwaggerLocalValidDelegate(call.execute(), null);
-            response.getBody();
+            return postSwaggerLocalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

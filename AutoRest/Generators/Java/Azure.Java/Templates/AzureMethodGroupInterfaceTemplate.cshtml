@@ -1,9 +1,9 @@
 @using System
-@using Microsoft.Rest.Generator.Java
-@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Java.Azure
+@using Microsoft.Rest.Generator.Java.Azure.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq;
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodGroupTemplateModel>
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureMethodGroupTemplateModel>
 /**
 @Header(" * ")
  */
@@ -16,6 +16,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
+
 @foreach (var importClass in Model.InterfaceImports)
 {
 @:import @importClass;
@@ -47,7 +49,7 @@ public interface @Model.MethodGroupType {
     }
     }
 
-    @foreach (var method in Model.MethodTemplateModels)
+    @foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
     {
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))
@@ -69,7 +71,7 @@ public interface @Model.MethodGroupType {
     }
     @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
     @: */
-    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
+    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws @method.Exceptions;
     @EmptyLine
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))
