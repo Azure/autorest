@@ -53,7 +53,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// header of the request
         /// </summary>
         /// <param name='fooClientRequestId'>
-        /// The fooRequestId/// </param>
+        /// The fooRequestId
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

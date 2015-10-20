@@ -134,7 +134,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 500 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -223,7 +224,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 500 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -394,7 +396,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 503 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -483,7 +486,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 503 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -572,7 +576,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 504 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -661,7 +666,8 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 504 status code, then 200 after retry
         /// </summary>
         /// <param name='booleanValue'>
-        /// Simple boolean value true/// </param>
+        /// Simple boolean value true
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
