@@ -424,7 +424,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("3", result[2].Id);
                 Assert.Equal("Resource3", result[2].Name);
 
-                var resourceArray = new List<Resource>();
+                var resourceArray = new List<Fixtures.Azure.AcceptanceTestsResourceFlattening.Models.Resource>();
                 resourceArray.Add(new FlattenedProduct
                 {
                     Location = "West US",

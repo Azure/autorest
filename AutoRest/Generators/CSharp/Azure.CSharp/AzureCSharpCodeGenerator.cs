@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.1.1.1";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.0.0";
 
         public AzureCSharpCodeGenerator(Settings settings) : base(settings)
         {
@@ -58,6 +58,17 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient);
+
+            if (serviceClient != null)
+            {
+                foreach (var model in serviceClient.ModelTypes)
+                {
+                    if (model.Extensions.ContainsKey(AzureResourceExtension) && (bool)model.Extensions[AzureResourceExtension])
+                    {
+                        model.BaseModelType = new CompositeType { Name = "IResource", SerializedName = "IResource" };
+                    }
+                }
+            }
         }
 
         /// <summary>

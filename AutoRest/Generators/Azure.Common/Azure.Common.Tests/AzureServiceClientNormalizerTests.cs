@@ -32,7 +32,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             serviceClient.ModelTypes.Add(dog);
 
             resource.Name = "resource";
-            resource.Extensions[AzureCodeGenerator.ExternalExtension] = true;
+            resource.Extensions[AzureCodeGenerator.AzureResourceExtension] = true;
             resource.Properties.Add(new Property
             {
                 Name = "id",
@@ -112,7 +112,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             serviceClient.ModelTypes.Add(dog);
 
             resource.Name = "resource";
-            resource.Extensions[AzureCodeGenerator.ExternalExtension] = true;
+            resource.Extensions[AzureCodeGenerator.AzureResourceExtension] = true;
             resource.Properties.Add(new Property
             {
                 Name = "id",
@@ -230,7 +230,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
                  Type = PrimaryType.String,
                  IsRequired = true
             });
-           resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
+            resource.Extensions[AzureCodeGenerator.AzureResourceExtension] = null;
             resourceProperties.Name = "resourceProperties";
             resourceProperties.Properties.Add(new Property
             {
@@ -296,7 +296,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
                  Type = PrimaryType.String,
                  IsRequired = true
             });
-            resource.Extensions[AzureCodeGenerator.ExternalExtension] = null;
+            resource.Extensions[AzureCodeGenerator.AzureResourceExtension] = null;
             resourceProperties.Name = "resourceProperties";
             resourceProperties.Properties.Add(new Property
             {
@@ -384,8 +384,8 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             Assert.NotNull(serviceClient);
             var resource = serviceClient.ModelTypes.First(m =>
                 m.Name.Equals("Resource", System.StringComparison.OrdinalIgnoreCase));
-            Assert.True(resource.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension));
-            Assert.False((bool)resource.Extensions[AzureCodeGenerator.ExternalExtension]);
+            Assert.True(resource.Extensions.ContainsKey(AzureCodeGenerator.AzureResourceExtension));
+            Assert.False((bool)resource.Extensions[AzureCodeGenerator.AzureResourceExtension]);
             var flattenedProduct = serviceClient.ModelTypes.First(m =>
                 m.Name.Equals("FlattenedProduct", System.StringComparison.OrdinalIgnoreCase));
             Assert.True(flattenedProduct.BaseModelType.Equals(resource));

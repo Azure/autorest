@@ -177,7 +177,7 @@
       }
     },
     "Resource": {
-      "x-ms-external": false,
+      "x-ms-azure-resource": false,
       "properties": {
         "id": {
           "type": "string",
