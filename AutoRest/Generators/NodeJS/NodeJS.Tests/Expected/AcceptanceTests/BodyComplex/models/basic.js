@@ -60,10 +60,8 @@ Basic.prototype.serialize = function () {
   }
 
   if (this['color'] !== null && this['color'] !== undefined) {
-    var allowedValues = [ 'cyan', 'Magenta', 'YELLOW', 'blacK' ];
-    var thiscolor = this['color'];
-    if (!allowedValues.some( function(item) { return item === thiscolor; })) {
-      throw new Error(this['color'] + ' is not a valid value. The valid values are: ' + allowedValues);
+    if (typeof this['color'].valueOf() !== 'string') {
+      throw new Error('this[\'color\'] must be of type string.');
     }
     payload['color'] = this['color'];
   }
