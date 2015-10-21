@@ -21,14 +21,40 @@ public class SkipUrlEncodingTests {
     }
 
     @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")
-    public void getMethodPathValid() throws Exception{
+    public void getMethodPathValid() throws Exception {
         ServiceResponse<Void> response = client.getMethodPathValid(unencodedPath);
         // Will throw ServiceException if not 200.
         //Assert.assertEquals(OK_STATUS_CODE, response.getResponse().code());
     }
 
-    @Test
-    public void getPathPathValid() {
-        //Assert.assertEquals((int) 200, (int)300);
+    @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")
+    public void getPathPathValid() throws Exception {
+        ServiceResponse<Void> response = client.getPathPathValid(unencodedPath);
     }
+
+    @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")
+    public void getSwaggerPathValid() throws Exception {
+        ServiceResponse<Void> response = client.getSwaggerPathValid(unencodedPath);
+    }
+
+    @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")
+    public void getMethodQueryValid() throws Exception {
+        ServiceResponse<Void> response = client.getMethodQueryValid(unencodedQuery);
+    }
+
+    @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")
+    public void getPathQueryValid() throws Exception {
+        ServiceResponse<Void> response = client.getPathQueryValid(unencodedQuery);
+    }
+
+    @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")
+    public void getSwaggerQueryValid() throws Exception {
+        ServiceResponse<Void> response = client.getSwaggerQueryValid(unencodedQuery);
+    }
+
+    @Test
+    public void getMethodQueryNull() throws Exception {
+        ServiceResponse<Void> response = client.getMethodQueryNull(null);
+    }
+
 }
