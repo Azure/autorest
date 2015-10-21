@@ -209,7 +209,10 @@ gulp.task('regenerate:expected:java', function(cb){
 })
 
 gulp.task('regenerate:expected:csazure', function(cb){
-  mappings = mergeOptions(defaultAzureMappings);
+  mappings = mergeOptions({
+    'AcceptanceTests/AzureBodyDuration': '../../../TestServer/swagger/body-duration.json'
+  }, defaultAzureMappings);
+
   regenExpected({
     'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
     'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',

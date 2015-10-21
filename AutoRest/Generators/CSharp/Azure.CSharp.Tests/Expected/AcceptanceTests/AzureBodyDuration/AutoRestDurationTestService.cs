@@ -6,7 +6,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace Fixtures.Azure.AcceptanceTestsHead
+namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
 {
     using System;
     using System.Linq;
@@ -23,11 +23,12 @@ namespace Fixtures.Azure.AcceptanceTestsHead
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using Microsoft.Rest.Azure;
+    using Models;
 
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial class AutoRestHeadTestService : ServiceClient<AutoRestHeadTestService>, IAutoRestHeadTestService, IAzureClient
+    public partial class AutoRestDurationTestService : ServiceClient<AutoRestDurationTestService>, IAutoRestDurationTestService, IAzureClient
     {
         /// <summary>
         /// The base URI of the service.
@@ -59,30 +60,30 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// </summary>
         public int? LongRunningOperationRetryTimeout { get; set; }
 
-        public virtual IHttpSuccessOperations HttpSuccess { get; private set; }
+        public virtual IDurationOperations Duration { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestHeadTestService class.
+        /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
-        public AutoRestHeadTestService() : base()
+        public AutoRestDurationTestService() : base()
         {
             this.Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestHeadTestService class.
+        /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
         /// <param name='handlers'>
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestHeadTestService(params DelegatingHandler[] handlers) : base(handlers)
+        public AutoRestDurationTestService(params DelegatingHandler[] handlers) : base(handlers)
         {
             this.Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestHeadTestService class.
+        /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -91,13 +92,13 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestHeadTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        public AutoRestDurationTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestHeadTestService class.
+        /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -106,7 +107,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestHeadTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestDurationTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -116,7 +117,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestHeadTestService class.
+        /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
         /// <param name='credentials'>
         /// Required. The management credentials for Azure.
@@ -125,7 +126,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestHeadTestService(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestDurationTestService(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
@@ -135,7 +136,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         }
 
         /// <summary>
-        /// Initializes a new instance of the AutoRestHeadTestService class.
+        /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -147,7 +148,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Optional. The set of delegating handlers to insert in the http
         /// client pipeline.
         /// </param>
-        public AutoRestHeadTestService(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestDurationTestService(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -166,8 +167,8 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// </summary>
         private void Initialize()
         {
-            this.HttpSuccess = new HttpSuccessOperations(this);
-            this.BaseUri = new Uri("http://localhost");
+            this.Duration = new DurationOperations(this);
+            this.BaseUri = new Uri("https://localhost");
             this.AcceptLanguage = "en-US";
             if (this.Credentials != null)
             {
