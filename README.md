@@ -26,8 +26,12 @@ If you are using Visual Studio 2013,
 - Ensure "Nuget Package Manager For Visual Studio" is updated to a newer version, like "2.8.60723.765", which is needed to install xunit.
 - Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
 
-#### on Mac
+Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-windows.html).
+
+#### on Mac or Linux
 Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
+
+Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-mac.html).
 
 ### Node.js
 Install the latest from [nodejs.org](https://nodejs.org/). Then from the project root run `npm install`.

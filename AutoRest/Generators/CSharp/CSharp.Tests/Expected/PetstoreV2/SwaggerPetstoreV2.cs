@@ -135,7 +135,8 @@ namespace Fixtures.PetstoreV2
         /// Add a new pet to the store
         /// </summary>
         /// <param name='body'>
-        /// Pet object that needs to be added to the store/// </param>
+        /// Pet object that needs to be added to the store
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -232,7 +233,8 @@ namespace Fixtures.PetstoreV2
         /// Update an existing pet
         /// </summary>
         /// <param name='body'>
-        /// Pet object that needs to be added to the store/// </param>
+        /// Pet object that needs to be added to the store
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -324,7 +326,8 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// Multiple status values can be provided with comma seperated strings
         /// <param name='status'>
-        /// Status values that need to be considered for filter/// </param>
+        /// Status values that need to be considered for filter
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -424,7 +427,8 @@ namespace Fixtures.PetstoreV2
         /// Muliple tags can be provided with comma seperated strings. Use tag1, tag2,
         /// tag3 for testing.
         /// <param name='tags'>
-        /// Tags to filter by/// </param>
+        /// Tags to filter by
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -523,7 +527,8 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// Returns a single pet
         /// <param name='petId'>
-        /// Id of pet to return/// </param>
+        /// Id of pet to return
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -613,11 +618,14 @@ namespace Fixtures.PetstoreV2
         /// Updates a pet in the store with form data
         /// </summary>
         /// <param name='petId'>
-        /// Id of pet that needs to be updated/// </param>
+        /// Id of pet that needs to be updated
+        /// </param>
         /// <param name='name'>
-        /// Updated name of the pet/// </param>
+        /// Updated name of the pet
+        /// </param>
         /// <param name='status'>
-        /// Updated status of the pet/// </param>
+        /// Updated status of the pet
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -703,7 +711,8 @@ namespace Fixtures.PetstoreV2
         /// Deletes a pet
         /// </summary>
         /// <param name='petId'>
-        /// Pet id to delete/// </param>
+        /// Pet id to delete
+        /// </param>
         /// <param name='apiKey'>
         /// </param>
         /// <param name='customHeaders'>
@@ -712,7 +721,7 @@ namespace Fixtures.PetstoreV2
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> DeletePetWithHttpMessagesAsync(long? petId, string apiKey = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DeletePetWithHttpMessagesAsync(long? petId, string apiKey = "", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (petId == null)
             {
@@ -881,7 +890,8 @@ namespace Fixtures.PetstoreV2
         /// Place an order for a pet
         /// </summary>
         /// <param name='body'>
-        /// order placed for purchasing the pet/// </param>
+        /// order placed for purchasing the pet
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -976,7 +986,8 @@ namespace Fixtures.PetstoreV2
         /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
         /// values will generated exceptions
         /// <param name='orderId'>
-        /// Id of pet that needs to be fetched/// </param>
+        /// Id of pet that needs to be fetched
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1079,7 +1090,8 @@ namespace Fixtures.PetstoreV2
         /// For valid response try integer IDs with value &lt; 1000. Anything above
         /// 1000 or nonintegers will generate API errors
         /// <param name='orderId'>
-        /// Id of the order that needs to be deleted/// </param>
+        /// Id of the order that needs to be deleted
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1171,7 +1183,8 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// This can only be done by the logged in user.
         /// <param name='body'>
-        /// Created user object/// </param>
+        /// Created user object
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1258,7 +1271,8 @@ namespace Fixtures.PetstoreV2
         /// Creates list of users with given input array
         /// </summary>
         /// <param name='body'>
-        /// List of user object/// </param>
+        /// List of user object
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1345,7 +1359,8 @@ namespace Fixtures.PetstoreV2
         /// Creates list of users with given input array
         /// </summary>
         /// <param name='body'>
-        /// List of user object/// </param>
+        /// List of user object
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1432,9 +1447,11 @@ namespace Fixtures.PetstoreV2
         /// Logs user into the system
         /// </summary>
         /// <param name='username'>
-        /// The user name for login/// </param>
+        /// The user name for login
+        /// </param>
         /// <param name='password'>
-        /// The password for login in clear text/// </param>
+        /// The password for login in clear text
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1617,7 +1634,8 @@ namespace Fixtures.PetstoreV2
         /// Get user by user name
         /// </summary>
         /// <param name='username'>
-        /// The name that needs to be fetched. Use user1 for testing./// </param>
+        /// The name that needs to be fetched. Use user1 for testing.
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1708,9 +1726,11 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// This can only be done by the logged in user.
         /// <param name='username'>
-        /// name that need to be deleted/// </param>
+        /// name that need to be deleted
+        /// </param>
         /// <param name='body'>
-        /// Updated user object/// </param>
+        /// Updated user object
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1804,7 +1824,8 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// This can only be done by the logged in user.
         /// <param name='username'>
-        /// The name that needs to be deleted/// </param>
+        /// The name that needs to be deleted
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>

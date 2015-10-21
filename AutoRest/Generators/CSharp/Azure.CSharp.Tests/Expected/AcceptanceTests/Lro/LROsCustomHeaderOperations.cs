@@ -82,7 +82,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -232,7 +233,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// poll returns a ‘200’ with ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -384,7 +386,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// headers, Polls return a 200 with a response body after success
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -526,7 +529,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Azure-AsyncOperation header for operation status
         /// </summary>
         /// <param name='product'>
-        /// Product to put/// </param>
+        /// Product to put
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
