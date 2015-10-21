@@ -20,5 +20,16 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get { return Type.Name; }
         }
+
+        /// <summary>
+        /// Gets True if parameter can call .Validate method
+        /// </summary>
+        public virtual bool CanBeValidated
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 }
