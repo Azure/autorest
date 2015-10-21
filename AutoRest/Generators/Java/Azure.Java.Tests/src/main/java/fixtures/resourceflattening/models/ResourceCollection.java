@@ -12,11 +12,12 @@ package fixtures.resourceflattening.models;
 
 import java.util.List;
 import java.util.Map;
+import com.microsoft.rest.Resource;
 
 /**
  * The ResourceCollection model.
  */
-public class ResourceCollection {
+public class ResourceCollection extends Resource {
     /**
      * The productresource property.
      */

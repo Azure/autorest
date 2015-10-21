@@ -10,11 +10,12 @@
 
 package fixtures.lro.models;
 
+import com.microsoft.rest.Resource;
 
 /**
  * The OperationResultError model.
  */
-public class OperationResultError {
+public class OperationResultError extends Resource {
     /**
      * The error code for an operation failure
      */

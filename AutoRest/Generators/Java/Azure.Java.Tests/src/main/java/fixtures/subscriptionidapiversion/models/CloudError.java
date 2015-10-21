@@ -14,5 +14,5 @@ package fixtures.subscriptionidapiversion.models;
 /**
  * The CloudError model.
  */
-public class CloudError {
+public class CloudError extends Resource {
 }

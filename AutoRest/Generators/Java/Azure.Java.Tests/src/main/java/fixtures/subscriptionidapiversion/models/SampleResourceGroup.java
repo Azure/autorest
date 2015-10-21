@@ -10,11 +10,12 @@
 
 package fixtures.subscriptionidapiversion.models;
 
+import com.microsoft.rest.Resource;
 
 /**
  * The SampleResourceGroup model.
  */
-public class SampleResourceGroup {
+public class SampleResourceGroup extends Resource {
     /**
      * resource group name 'testgroup101'
      */

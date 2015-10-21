@@ -10,11 +10,12 @@
 
 package fixtures.resourceflattening.models;
 
+import com.microsoft.rest.Resource;
 
 /**
  * The Error model.
  */
-public class Error {
+public class Error extends Resource {
     /**
      * The status property.
      */

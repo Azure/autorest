@@ -10,11 +10,12 @@
 
 package fixtures.lro.models;
 
+import com.microsoft.rest.Resource;
 
 /**
  * The Sku model.
  */
-public class Sku {
+public class Sku extends Resource {
     /**
      * The name property.
      */

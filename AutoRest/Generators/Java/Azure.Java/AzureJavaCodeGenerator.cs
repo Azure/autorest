@@ -56,10 +56,17 @@ namespace Microsoft.Rest.Generator.Java.Azure
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             base.NormalizeClientModel(serviceClient);
+            NormalizeAllModelsToExtendResource(serviceClient);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient);
+        }
+
+        private static void NormalizeAllModelsToExtendResource(ServiceClient serviceClient)
+        {
+            serviceClient.ModelTypes.Where(t => t.BaseModelType == null)
+                .ForEach(t => t.BaseModelType = new CompositeType { Name = "Resource" });
         }
 
         /// <summary>
@@ -88,6 +95,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
+                    if (modelType.Extensions.ContainsKey(ExternalExtension) && (bool)modelType.Extensions[ExternalExtension])
+                    {
+                        continue;
+                    }
+
                     var modelTemplate = new ModelTemplate
                     {
                         Model = modelType

@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * The Resource model.
  */
-public class Resource {
+public class Resource extends Resource {
     /**
      * Resource Id
      */

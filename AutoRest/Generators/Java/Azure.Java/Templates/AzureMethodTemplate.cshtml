@@ -12,75 +12,7 @@
 {
 @:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
 }
-else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
-{
-<text>
-/**
-@if (!string.IsNullOrEmpty(Model.Summary))
-{
-@: * @Model.Summary.EscapeXmlComment()
-}
-@if (!string.IsNullOrEmpty(Model.Description))
-{
-@: * @Model.Description.EscapeXmlComment()
-}
- *
-@foreach (var param in Model.LocalParameters)
-{
-@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
-}
-@if (Model.ReturnType != null)
-{
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object if successful.
-}
- * @@throws ServiceException the exception wrapped in ServiceException if failed.
- */
-public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
-    ServiceResponse<@Model.GenericReturnTypeString> result = this.begin@(Model.Name.ToPascalCase())(@Model.LocalMethodParameterInvocation);
-    return client.getAzureClient().getPutOrPatchResult(result);
-}
-@EmptyLine
-/**
-@if (!string.IsNullOrEmpty(Model.Summary))
-{
-@: * @Model.Summary.EscapeXmlComment()
-}
-@if (!string.IsNullOrEmpty(Model.Description))
-{
-@: * @Model.Description.EscapeXmlComment()
-}
- *
-@foreach (var param in Model.LocalParameters)
-{
-@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
-}
- * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
- */
-public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
-@foreach (var param in Model.RequiredNullableParameters)
-{
-@:    if (@param.Name == null) {
-@:        serviceCallback.failure(new ServiceException(
-@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
-@:    }
-}
-@foreach (var param in Model.ParametersToValidate)
-{
-@:    Validator.validate(@(param.Name), serviceCallback);
-}
-    return this.begin@(Model.Name.ToPascalCase())Async(@Model.LocalMethodParameterInvocationWithCallback {
-        @@Override
-        public void failure(Throwable t) { serviceCallback.failure(t); }
-
-        @@Override
-        public void success(ServiceResponse<@Model.GenericReturnTypeString> result) {
-            client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
-        }
-    });
-}
-</text>
-}
-else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
+else
 {
 <text>
 /**

@@ -14,7 +14,7 @@ package fixtures.lro.models;
 /**
  * The SubResource model.
  */
-public class SubResource {
+public class SubResource extends Resource {
     /**
      * Sub Resource Id
      */

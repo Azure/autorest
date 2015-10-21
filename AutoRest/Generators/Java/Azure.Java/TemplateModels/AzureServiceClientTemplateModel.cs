@@ -18,8 +18,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
-
-            ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
+            ModelTemplateModels.Clear();
+            ModelTypes.ForEach(m => ModelTemplateModels.Add(new AzureModelTemplateModel(m, serviceClient)));
         }
 
         public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels

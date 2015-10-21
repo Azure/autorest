@@ -10,11 +10,12 @@
 
 package fixtures.paging.models;
 
+import com.microsoft.rest.Resource;
 
 /**
  * The OperationResult model.
  */
-public class OperationResult {
+public class OperationResult extends Resource {
     /**
      * The status of the request. Possible values for this property include:
      * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',

@@ -11,11 +11,12 @@
 package fixtures.paging.models;
 
 import java.util.List;
+import com.microsoft.rest.Resource;
 
 /**
  * The ProductResult model.
  */
-public class ProductResult {
+public class ProductResult extends Resource {
     /**
      * The values property.
      */

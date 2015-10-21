@@ -14,7 +14,7 @@ package fixtures.lro.models;
 /**
  * The CloudError model.
  */
-public class CloudError {
+public class CloudError extends Resource {
     /**
      * The status property.
      */
