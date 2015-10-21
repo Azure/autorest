@@ -59,11 +59,14 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient);
 
-            foreach (var model in serviceClient.ModelTypes)
+            if (serviceClient != null)
             {
-                if (model.Extensions.ContainsKey(AzureResourceExtension) && (bool)model.Extensions[AzureResourceExtension])
+                foreach (var model in serviceClient.ModelTypes)
                 {
-                    model.BaseModelType = new CompositeType { Name = "IResource", SerializedName = "IResource" };
+                    if (model.Extensions.ContainsKey(AzureResourceExtension) && (bool)model.Extensions[AzureResourceExtension])
+                    {
+                        model.BaseModelType = new CompositeType { Name = "IResource", SerializedName = "IResource" };
+                    }
                 }
             }
         }
