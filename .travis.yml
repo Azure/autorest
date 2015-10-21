@@ -17,6 +17,8 @@ script:
   - gulp
 after_failure:
   - echo "========== Server log: ============"
+  - pwd
+  - ls TestResults
   - cat TestResults/*.log
 notifications:
   slack:
