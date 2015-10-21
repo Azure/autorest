@@ -118,6 +118,7 @@ class Pool(object):
     def __init__(self, **kwargs):
 
         self._manager = kwargs.get('manager')
+        print("set manager", self._manager)
         
         self.id = None
         self.certificate_references = []
@@ -157,53 +158,54 @@ class Pool(object):
             setattr(self, attr, getattr(new_pool, attr))
 
     def update(self):
-        response = self._manager.get(self.name)
+        response = self._manager.get(self.id)
         self._update(response.pool)
 
     def delete(self):
-        response = self._manager.delete(self.name)
+        print("deleting with", self._manager)
+        response = self._manager.delete(self.id)
 
     def disable_auto_scale(self):
-        response = self._manager.disable_auto_scale(self.name)
+        response = self._manager.disable_auto_scale(self.id)
 
     def enable_auto_scale(self, auto_scale_formula):
         parameters = PoolAutoScale()
         parameters.auto_scale_formula = auto_scale_formula
-        response = self._manager.enable_auto_scale(parameters, self.namen)
+        response = self._manager.enable_auto_scale(parameters, self.id)
 
     def evaluate_auto_scale(self, auto_scale_formula):
         parameters = PoolAutoScale()
         parameters.auto_scale_formula = auto_scale_formula
-        response = self._manager.evaluate_auto_scale(parameters, self.name)
+        response = self._manager.evaluate_auto_scale(parameters, self.id)
 
     def patch(self, certificate_references=[], metadata={}, start_task=None):
         parameters = PoolProperties()
         parameters.certificate_references = certificate_references
         parameters.metadata = metadata
         parameters.start_task = start_task
-        response = self._manager.patch(parameters, self.name)
+        response = self._manager.patch(parameters, self.id)
 
     def resize(self, resize_timeout=None, target_dedicated=None, tvm_deallocation=None):
         parameters = PoolResize()
         paramters.resize_timeout = resize_timeout
         parameters.target_dedicated = target_dedicated
         parameters.tvm_deallocation_option = tvm_deallocation
-        response = self._manager.resize(parameters, self.name)
+        response = self._manager.resize(parameters, self.id)
 
     def stop_resize(self):
-        response = self._manager.stop_resize(self.name)
+        response = self._manager.stop_resize(self.id)
 
     def update_properties(self, certificate_references=[], metadata={}, start_task=None):
         parameters = PoolProperties()
         parameters.certificate_references = certificate_references
         parameters.metadata = metadata
         parameters.start_task = start_task
-        response = self._manager.update_properties(parameters, self.name)
+        response = self._manager.update_properties(parameters, self.id)
 
     def upgrade_os(self, target_os_version):
         parameters = PoolOS()
         parameters.target_os_version = target_os_version
-        response = self._manager.upgrade_os(parameters, self.namen)
+        response = self._manager.upgrade_os(parameters, self.id)
 
 
 class PoolAutoScale(object):

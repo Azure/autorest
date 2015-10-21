@@ -34,9 +34,10 @@ try:
     all_pools =  [p for p in pools]
 
     first_pool = all_pools[0]
-    print(p.os_family)
-    print(p.name)
-    print(p.scheduling_policy.node_fill_type)
+    print(first_pool.os_family)
+    print(first_pool.name)
+    print(first_pool.scheduling_policy.node_fill_type)
+    first_pool.delete()
 
 except BatchException as err:
     print("{0}: {1}".format(err.error, err.message))

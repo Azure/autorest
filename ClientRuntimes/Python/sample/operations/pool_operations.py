@@ -97,7 +97,7 @@ class PoolManager(object):
 
             response = self._client.post(request)
        
-            deserialize = Deserialized(BatchPoolAddResponse, response)
+            deserialize = Deserialized(BatchPoolAddResponse, response, self)
             deserialized = deserialize(response.content, self._classes)
 
             #def get_status(status_link):
@@ -133,7 +133,7 @@ class PoolManager(object):
             request.add_headers(self._headers())
             response = self._client.delete(request)
 
-            deserialize = Deserialized(BatchPoolDeleteResponse, response)
+            deserialize = Deserialized(BatchPoolDeleteResponse, response, self)
             deserialized = deserialize()
             
         except ResponseStatusError as err:
@@ -157,7 +157,7 @@ class PoolManager(object):
             request.add_headers(self._headers())
             response = self._client.post(request)
 
-            deserialize = Deserialized(BatchPoolDisableAutoScaleResponse, response)
+            deserialize = Deserialized(BatchPoolDisableAutoScaleResponse, response, self)
             dersialized = deserialize()
            
         except ResponseStatusError as err:
@@ -189,7 +189,7 @@ class PoolManager(object):
 
             response = self._client.post(request)
 
-            deserialize = Deserialized(BatchPoolEnableAutoScaleResponse, response)
+            deserialize = Deserialized(BatchPoolEnableAutoScaleResponse, response, self)
             dersialized = deserialize()
            
         except ResponseStatusError as err:
@@ -221,7 +221,7 @@ class PoolManager(object):
 
             response = self._client.post(request)
 
-            deserialize = Deserialized(BatchPoolEvaluateAutoScaleResponse, response)
+            deserialize = Deserialized(BatchPoolEvaluateAutoScaleResponse, response, self)
             dersialized = deserialize()
            
         except ResponseStatusError as err:
@@ -246,7 +246,7 @@ class PoolManager(object):
             request.add_headers(self._headers())
             response = self._client.get(request)
 
-            deserialize = Deserialized(BatchPoolGetResponse, response, self._client)
+            deserialize = Deserialized(BatchPoolGetResponse, response, self)
             dersialized = deserialize(response.content, self._classes)
             
         except ResponseStatusError as err:
@@ -266,7 +266,7 @@ class PoolManager(object):
             request.add_headers(self._headers())
             response = self._client.get(request)
 
-            deserialize = Deserialized(BatchPoolListResponse, response)
+            deserialize = Deserialized(BatchPoolListResponse, response, self)
             deserialized = deserialize(response.content, self._classes)
 
             def next_page(next_link):
@@ -275,7 +275,7 @@ class PoolManager(object):
                 request.add_headers(self._headers())
                 response = self._client.get(request)
 
-                deserialize = Deserialized(BatchPoolListResponse, response)
+                deserialize = Deserialized(BatchPoolListResponse, response, self)
                 dersialized = deserialize(response.content, self._classes)   
                 return deserialized    
 
@@ -310,7 +310,7 @@ class PoolManager(object):
 
             response = self._client.patch(request)
 
-            deserialize = Deserialized(BatchPoolPatchResponse, response)
+            deserialize = Deserialized(BatchPoolPatchResponse, response, self)
             dersialized = deserialize()
 
         except ResponseStatusError as err:
@@ -341,7 +341,7 @@ class PoolManager(object):
             request.add_headers(self._headers(content=ContentTypes.json))
             response = self._client.post(request)
 
-            deserialize = Deserialized(BatchPoolResizeResponse, response)
+            deserialize = Deserialized(BatchPoolResizeResponse, response, self)
             dersialized = deserialize()
 
         except ResponseStatusError as err:
@@ -366,7 +366,7 @@ class PoolManager(object):
             request.add_headers(self._headers(content=ContentTypes.json))
             response = self._client.post(request)
 
-            deserialize = Deserialized(BatchPoolStopResizeResponse, response)
+            deserialize = Deserialized(BatchPoolStopResizeResponse, response, self)
             dersialized = deserialize()
 
         except ResponseStatusError as err:
@@ -397,7 +397,7 @@ class PoolManager(object):
             request.add_headers(self._headers(content=ContentTypes.json))
             response = self._client.post(request)
 
-            deserialize = Deserialized(BatchPoolUpdatePropertiesResponse, response)
+            deserialize = Deserialized(BatchPoolUpdatePropertiesResponse, response, self)
             dersialized = deserialize()
 
         except ResponseStatusError as err:
@@ -428,7 +428,7 @@ class PoolManager(object):
             request.add_headers(self._headers(content=ContentTypes.json))
             response = self._client.post(request)
 
-            deserialize = Deserialized(BatchPoolUpgradeOSResponse, response)
+            deserialize = Deserialized(BatchPoolUpgradeOSResponse, response, self)
             dersialized = deserialize()
 
         except ResponseStatusError as err:
