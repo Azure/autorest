@@ -3,6 +3,8 @@ mono:
   - alpha
 install:
   - ls -al
+  - touch /home/travis/build/amarzavery/AutoRest/server.log
+  - cat /home/travis/build/amarzavery/AutoRest/server.log
   - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | sh && source ~/.dnx/dnvm/dnvm.sh && dnvm upgrade
   - npm install -g npm@'>=1.4.3'
   - npm install
