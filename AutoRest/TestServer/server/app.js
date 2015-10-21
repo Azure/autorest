@@ -43,8 +43,10 @@ var logFileName = 'AccTestServer-' + now.getHours() +
 var testResultDir = path.join(__dirname, '../../TestResults');
 if (!fs.existsSync(testResultDir)) {
   fs.mkdirSync(testResultDir);
+  console.log(">>>> Created directory " + testResultDir);
 }
 var logfile = fs.createWriteStream(path.join(testResultDir, logFileName), {flags: 'a'});
+console.log(">>>> Created log file " + logfile);
 app.use(morgan('combined', {stream: logfile}));
 
 var azurecoverage = {};

@@ -2,6 +2,7 @@ language: csharp
 mono:
   - alpha
 install:
+  - ls -al
   - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | sh && source ~/.dnx/dnvm/dnvm.sh && dnvm upgrade
   - npm install -g npm@'>=1.4.3'
   - npm install
@@ -17,6 +18,9 @@ script:
   - gulp
 after_failure:
   - echo "========== Server log: ============"
+  - pwd
+  - ls -al
+  - ls -al TestResults
   - cat TestResults/*.log
 notifications:
   slack:
