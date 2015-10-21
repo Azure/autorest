@@ -19,6 +19,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
         private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.1.1.1";
 
+        // page extensions class dictionary.
+        private IDictionary<KeyValuePair<string, string>, string> pageClasses;
+
         public AzureCSharpCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new AzureCSharpCodeNamer();
