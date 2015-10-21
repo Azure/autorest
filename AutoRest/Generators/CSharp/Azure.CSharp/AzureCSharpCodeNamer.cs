@@ -24,7 +24,7 @@ namespace Microsoft.Rest.Generator.CSharp
             // Do nothing
         }
 
-        private static string GetPagingSetting(ServiceClient serviceClient, Dictionary<string, object> extensions, out string nextLinkName)
+        private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
         {
             // default value
             nextLinkName = null;
@@ -36,26 +36,34 @@ namespace Microsoft.Rest.Generator.CSharp
 
             nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
             string itemName = (string)ext["itemName"] ?? "value";
+            
             var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
-            if (!serviceClient.PageClasses.ContainsKey(keypair))
+            if (!pageClasses.ContainsKey(keypair))
             {
-                if (serviceClient.PageClasses.Count > 0)
+                string className = (string)ext["className"];
+                if (string.IsNullOrEmpty(className))
                 {
-                    serviceClient.PageClasses.Add(keypair, String.Format(CultureInfo.InvariantCulture, "Page{0}", serviceClient.PageClasses.Count));
+                    if (pageClasses.Count > 0)
+                    {
+                        className = String.Format(CultureInfo.InvariantCulture, "Page{0}", pageClasses.Count);
+                    }
+                    else
+                    {
+                        className = "Page";
+                    }
                 }
-                else 
-                {
-                    serviceClient.PageClasses.Add(keypair, "Page");
-                }
+                pageClasses.Add(keypair, className);
             }
-            return serviceClient.PageClasses[keypair];
+
+            return pageClasses[keypair];
         }
 
         /// <summary>
         /// Changes paginated method signatures to return Page type.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public virtual void NormalizePaginatedMethods(ServiceClient serviceClient)
+        /// <param name="pageClasses"></param>
+        public virtual void NormalizePaginatedMethods(ServiceClient serviceClient, IDictionary<KeyValuePair<string, string>, string> pageClasses)
         {
             if (serviceClient == null)
             {
@@ -67,12 +75,13 @@ namespace Microsoft.Rest.Generator.CSharp
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
             {
                 string nextLinkString;
-                string pageClassName = GetPagingSetting(serviceClient, method.Extensions, out nextLinkString);
+                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, out nextLinkString);
                 if (string.IsNullOrEmpty(pageClassName))
                 {
                     continue;
                 }
                 var pageTypeFormat = "{0}<{1}>";
+                var ipageTypeFormat = "IPage<{0}>";
 
                 foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
                 {
@@ -85,12 +94,14 @@ namespace Microsoft.Rest.Generator.CSharp
                        compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
                     {
                         var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName, sequenceType.ElementType.Name);
+                        var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat, sequenceType.ElementType.Name);
 
                         CompositeType pagedResult = new CompositeType
                         {
                             Name = pagableTypeName
                         };
                         pagedResult.Extensions[AzureCodeGenerator.ExternalExtension] = true;
+                        pagedResult.Extensions[AzureCodeGenerator.PageableExtension] = ipagableTypeName;
 
                         convertedTypes[method.Responses[responseStatus]] = pagedResult;
                         method.Responses[responseStatus] = pagedResult;

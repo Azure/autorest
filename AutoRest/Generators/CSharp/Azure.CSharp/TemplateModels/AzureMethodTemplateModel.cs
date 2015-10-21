@@ -80,6 +80,23 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
         }
 
+        private string ReturnTypePageInterfaceName
+        {
+            get
+            {
+                if (ReturnType is CompositeType)
+                {
+                    // Special handle Page class with IPage interface
+                    CompositeType compositeType = ReturnType as CompositeType;
+                    if (compositeType.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension))
+                    {
+                        return (string)compositeType.Extensions[AzureCodeGenerator.PageableExtension];
+                    }
+                }
+                return null;
+            }
+        }
+
         /// <summary>
         /// Returns AzureOperationResponse generic type declaration.
         /// </summary>
@@ -89,6 +106,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 if (ReturnType != null)
                 {
+                    if (!string.IsNullOrEmpty(ReturnTypePageInterfaceName))
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "AzureOperationResponse<{0}>", ReturnTypePageInterfaceName);
+                    }
                     return string.Format(CultureInfo.InvariantCulture,
                         "AzureOperationResponse<{0}>", ReturnType.Name);
                 }
@@ -96,6 +118,33 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 {
                     return "AzureOperationResponse";
                 }
+            }
+        }
+
+        /// <summary>
+        /// Get the type name for the method's return type
+        /// </summary>
+        public override string ReturnTypeString
+        {
+            get
+            {
+                return ReturnTypePageInterfaceName ?? base.ReturnTypeString;
+            }
+        }
+
+        /// <summary>
+        /// Get the return type for the async extension method
+        /// </summary>
+        public override string TaskExtensionReturnTypeString
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(ReturnTypePageInterfaceName))
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "Task<{0}>", ReturnTypePageInterfaceName);
+                }
+                return base.TaskExtensionReturnTypeString;
             }
         }
 

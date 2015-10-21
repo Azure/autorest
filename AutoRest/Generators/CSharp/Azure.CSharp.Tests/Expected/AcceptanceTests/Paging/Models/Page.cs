@@ -11,13 +11,14 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
     using System.Collections.Generic;
     using System.Linq;
     using Newtonsoft.Json;
+    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines a page in Azure responses.
     /// </summary>
     /// <typeparam name="T">Type of the page content items</typeparam>
     [JsonObject]
-    public class Page<T> : IEnumerable<T>
+    public class Page<T> : IPage<T>
     {
          /// <summary>
          /// Gets the link to the next page.

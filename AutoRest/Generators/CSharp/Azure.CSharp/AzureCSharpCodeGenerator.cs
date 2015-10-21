@@ -9,6 +9,7 @@ using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Templates;
 using Microsoft.Rest.Generator.CSharp.Templates;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
 {
@@ -16,12 +17,16 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.1.1.0";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.1.2.0";
+
+        // page extensions class dictionary.
+        private IDictionary<KeyValuePair<string, string>, string> pageClasses;
 
         public AzureCSharpCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new AzureCSharpCodeNamer();
             IsSingleFileGenerationSupported = true;
+            pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
         }
 
         public override string Name
@@ -58,7 +63,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
-            _namer.NormalizePaginatedMethods(serviceClient);
+            _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
         }
 
         /// <summary>
@@ -141,7 +146,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             }
 
             // Page class
-            foreach (var pageClass in serviceClient.PageClasses)
+            foreach (var pageClass in pageClasses)
             {
                 var pageTemplate = new PageTemplate
                 {

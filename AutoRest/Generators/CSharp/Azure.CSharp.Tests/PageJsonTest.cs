@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using Microsoft.Rest.Azure;
+using Fixtures.Azure.AcceptanceTestsPaging.Models;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
@@ -42,7 +43,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             };
             deserializeSettings.Converters.Add(new ResourceJsonConverter());
             deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<TestProduct>("dType"));
-            var deserializedProduct = JsonConvert.DeserializeObject<Fixtures.Azure.AcceptanceTestsPaging.Models.Page<TestProduct>>(responseBody, deserializeSettings);
+            var deserializedProduct = JsonConvert.DeserializeObject<Page<TestProduct>>(responseBody, deserializeSettings);
 
             Assert.Equal(0, deserializedProduct.Count());
         }
@@ -73,7 +74,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             };
             deserializeSettings.Converters.Add(new ResourceJsonConverter());
             deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<TestProduct>("dType"));
-            var deserializedProduct = JsonConvert.DeserializeObject<Fixtures.Azure.AcceptanceTestsPaging.Models.Page<TestProduct>>(responseBody, deserializeSettings);
+            var deserializedProduct = JsonConvert.DeserializeObject<Page<TestProduct>>(responseBody, deserializeSettings);
             
             Assert.Equal(2, deserializedProduct.Count());
             Assert.Equal("https://sdktestvault7826.vault.azure.net:443/keys?api-version=2015-06-01", deserializedProduct.NextPageLink);
