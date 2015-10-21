@@ -1131,6 +1131,63 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             }
 
             /// <summary>
+            /// Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
+            /// "P5DT1H0M0S"}
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IDictionary<string, TimeSpan?> GetDurationValid(this IDictionary operations)
+            {
+                return Task.Factory.StartNew(s => ((IDictionary)s).GetDurationValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
+            /// "P5DT1H0M0S"}
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IDictionary<string, TimeSpan?>> GetDurationValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                HttpOperationResponse<IDictionary<string, TimeSpan?>> result = await operations.GetDurationValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            public static void PutDurationValid(this IDictionary operations, IDictionary<string, TimeSpan?> arrayBody)
+            {
+                Task.Factory.StartNew(s => ((IDictionary)s).PutDurationValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutDurationValidAsync( this IDictionary operations, IDictionary<string, TimeSpan?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.PutDurationValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
             /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
             /// hex (25, 29, 43)} with each item encoded in base64
             /// </summary>

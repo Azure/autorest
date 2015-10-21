@@ -465,6 +465,30 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// </param>
         Task<HttpOperationResponse> PutDateTimeRfc1123ValidWithHttpMessagesAsync(IDictionary<string, DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
+        /// "P5DT1H0M0S"}
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IDictionary<string, TimeSpan?>>> GetDurationValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Set dictionary value  {"0": "P123DT22H14M12.011S", "1":
+        /// "P5DT1H0M0S"}
+        /// </summary>
+        /// <param name='arrayBody'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> PutDurationValidWithHttpMessagesAsync(IDictionary<string, TimeSpan?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02
         /// 03), "2": hex (25, 29, 43)} with each item encoded in base64
         /// </summary>

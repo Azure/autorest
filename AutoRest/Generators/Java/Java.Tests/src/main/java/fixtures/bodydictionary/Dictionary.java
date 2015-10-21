@@ -18,6 +18,7 @@ import java.util.Map;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import com.microsoft.rest.DateTimeRfc1123;
+import org.joda.time.Period;
 import fixtures.bodydictionary.models.Widget;
 import java.util.List;
 import retrofit.http.GET;
@@ -156,6 +157,12 @@ public interface Dictionary {
 
         @PUT("/dictionary/prim/date-time-rfc1123/valid")
         Call<ResponseBody> putDateTimeRfc1123Valid(@Body Map<String, DateTimeRfc1123> arrayBody);
+
+        @GET("/dictionary/prim/duration/valid")
+        Call<ResponseBody> getDurationValid();
+
+        @PUT("/dictionary/prim/duration/valid")
+        Call<ResponseBody> putDurationValid(@Body Map<String, Period> arrayBody);
 
         @GET("/dictionary/prim/byte/valid")
         Call<ResponseBody> getByteValid();
@@ -886,6 +893,39 @@ public interface Dictionary {
      * @return the {@link Call} object
      */
     Call<ResponseBody> putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+     *
+     * @return the Map&lt;String, Period&gt; object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    Map<String, Period> getDurationValid() throws ServiceException;
+
+    /**
+     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback);
+
+    /**
+     * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+     *
+     * @param arrayBody the Map&lt;String, Period&gt; value
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    void putDurationValid(Map<String, Period> arrayBody) throws ServiceException;
+
+    /**
+     * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+     *
+     * @param arrayBody the Map&lt;String, Period&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64

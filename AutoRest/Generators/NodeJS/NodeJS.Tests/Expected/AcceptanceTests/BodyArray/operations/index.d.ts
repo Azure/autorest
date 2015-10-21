@@ -882,6 +882,52 @@ export interface ArrayModel {
     putDateTimeRfc1123Valid(arrayBody: Date[], options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
 
     /**
+     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+     *
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {array} [result]   - The deserialized result object.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDurationValid(options: RequestOptions, callback: (err: Error, result: moment.Duration[], request: WebResource, response: stream.Readable) => void): void;
+
+    /**
+     * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+     *
+     * @param {array} arrayBody
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {function} callback
+     *
+     * @returns {function} callback(err, result, request, response)
+     *
+     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object.
+     *
+     *                      {object} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putDurationValid(arrayBody: moment.Duration[], options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+
+    /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
      * with each item encoded in base64
      *

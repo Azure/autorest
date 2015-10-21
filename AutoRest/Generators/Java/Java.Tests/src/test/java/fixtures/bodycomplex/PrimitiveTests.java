@@ -5,6 +5,7 @@ import fixtures.bodycomplex.models.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.Period;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -153,6 +154,19 @@ public class PrimitiveTests {
         body.setField(new DateTimeRfc1123(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC)));
         body.setNow(new DateTimeRfc1123(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC)));
         client.getPrimitive().putDateTimeRfc1123(body);
+    }
+
+    @Test
+    public void getDuration() throws Exception {
+        DurationWrapper result = client.getPrimitive().getDuration();
+        Assert.assertEquals(new Period(0, 0, 0, 123, 22, 14, 12, 11), result.getField());
+    }
+
+    @Test
+    public void putDuration() throws Exception {
+        DurationWrapper body = new DurationWrapper();
+        body.setField(new Period(0, 0, 0, 123, 22, 14, 12, 11));
+        client.getPrimitive().putDuration(body);
     }
 
     @Test

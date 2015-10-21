@@ -426,6 +426,28 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </param>
         Task<HttpOperationResponse> PutDateTimeRfc1123ValidWithHttpMessagesAsync(IList<DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<TimeSpan?>>> GetDurationValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+        /// </summary>
+        /// <param name='arrayBody'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> PutDurationValidWithHttpMessagesAsync(IList<TimeSpan?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25,
         /// 29, 43)] with each item encoded in base64
         /// </summary>

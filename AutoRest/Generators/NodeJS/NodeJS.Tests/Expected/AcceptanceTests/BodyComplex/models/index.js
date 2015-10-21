@@ -33,6 +33,7 @@ exports.StringWrapper = require('./stringWrapper');
 exports.DateWrapper = require('./dateWrapper');
 exports.DatetimeWrapper = require('./datetimeWrapper');
 exports.Datetimerfc1123Wrapper = require('./datetimerfc1123Wrapper');
+exports.DurationWrapper = require('./durationWrapper');
 exports.ByteWrapper = require('./byteWrapper');
 exports.ArrayWrapper = require('./arrayWrapper');
 exports.DictionaryWrapper = require('./dictionaryWrapper');

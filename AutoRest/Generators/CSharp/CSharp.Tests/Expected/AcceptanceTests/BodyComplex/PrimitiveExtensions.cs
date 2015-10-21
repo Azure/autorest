@@ -536,6 +536,63 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             }
 
             /// <summary>
+            /// Get complex types with duration properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static DurationWrapper GetDuration(this IPrimitive operations)
+            {
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDurationAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get complex types with duration properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DurationWrapper> GetDurationAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                HttpOperationResponse<DurationWrapper> result = await operations.GetDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
+            /// Put complex types with duration properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put 'P123DT22H14M12.011S'
+            /// </param>
+            public static void PutDuration(this IPrimitive operations, DurationWrapper complexBody)
+            {
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutDurationAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types with duration properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put 'P123DT22H14M12.011S'
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutDurationAsync( this IPrimitive operations, DurationWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.PutDurationWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
             /// Get complex types with byte properties
             /// </summary>
             /// <param name='operations'>
