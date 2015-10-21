@@ -87,6 +87,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.Java", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.Azure.Java", "AutoRest\Generators\Java\Azure.Java\AutoRest.Generator.Azure.Java.csproj", "{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.NodeJS.Tests", "AutoRest\Generators\NodeJS\NodeJS.Tests\AutoRest.Generator.NodeJS.Tests.csproj", "{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -335,6 +337,18 @@ Global
 		{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}.Portable-Release|Any CPU.Build.0 = Portable-Release|Any CPU
 		{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}.Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
 		{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}.Release|Any CPU.Build.0 = Portable-Release|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Debug|Any CPU.Build.0 = Portable-Debug|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Net45-Debug|Any CPU.ActiveCfg = Net45-Debug|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Net45-Debug|Any CPU.Build.0 = Net45-Debug|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Net45-Release|Any CPU.ActiveCfg = Net45-Release|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Net45-Release|Any CPU.Build.0 = Net45-Release|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Portable-Debug|Any CPU.ActiveCfg = Portable-Debug|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Portable-Debug|Any CPU.Build.0 = Portable-Debug|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Portable-Release|Any CPU.Build.0 = Portable-Release|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}.Release|Any CPU.Build.0 = Portable-Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -364,5 +378,6 @@ Global
 		{A9C01442-1E93-4C2D-9182-B61C9F53C3FF} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
 		{34B82690-0083-4F4C-8ABF-2D2A09304915} = {A9C01442-1E93-4C2D-9182-B61C9F53C3FF}
 		{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C} = {A9C01442-1E93-4C2D-9182-B61C9F53C3FF}
+		{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD} = {9B87B0F7-B02C-4498-BB03-B6E282F86557}
 	EndGlobalSection
 EndGlobal

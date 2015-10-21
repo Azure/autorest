@@ -40,7 +40,8 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @:}
 @:
         }
-        if(Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body)
+        if (parameter.CanBeValidated == true &&
+            (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
         {
     @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.Constraints))
         }

@@ -7,16 +7,15 @@ using System.Globalization;
 using System.IO;
 using System.Collections.Generic;
 using Microsoft.Rest.Generator.NodeJS;
-using Microsoft.Rest.Generator.Azure.NodeJS;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
 using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.Rest.Generator.NodeJS.Azure.Tests
+namespace Microsoft.Rest.Generator.NodeJS.Tests
 {
-    [Collection("AutoRest Azure NodeJS Tests")]
+    [Collection("AutoRest NodeJS Tests")]
     public static class AcceptanceTests
     {
         private static string ExpectedPath(string file)
@@ -30,10 +29,10 @@ namespace Microsoft.Rest.Generator.NodeJS.Azure.Tests
         }
 
         [Fact]
-        public static void SampleTestForGeneratingAzureNodeJS()
+        public static void SampleTestForGeneratingNodeJS()
         {
-            SwaggerSpecHelper.RunTests<AzureNodeJSCodeGenerator>(
-                SwaggerPath("storage.json"), ExpectedPath("StorageManagementClient"));
+            SwaggerSpecHelper.RunTests<NodeJSCodeGenerator>(
+                SwaggerPath("body-complex.json"), ExpectedPath("BodyComplex"));
         }
     }
 }
