@@ -31,7 +31,7 @@ public interface SkipUrlEncoding {
      */
     interface SkipUrlEncodingService {
         @GET("/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
-        Call<ResponseBody> getMethodPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMethodPathValid(@Path(value="unencodedPathParam", encoded=false) String unencodedPathParam, @Header("accept-language") String acceptLanguage);
 
         @GET("/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
         Call<ResponseBody> getPathPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
