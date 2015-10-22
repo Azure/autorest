@@ -16,6 +16,7 @@
     "frameworks": {
         "dnxcore50": {
             "dependencies": {
+                "System.IO": "4.0.10",
                 "System.Diagnostics.Tools": "4.0.0",
                 "System.Net.Http": "4.0.0",
                 "System.Threading.Tasks": "4.0.10",
