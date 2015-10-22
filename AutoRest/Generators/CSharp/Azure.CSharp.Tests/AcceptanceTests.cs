@@ -360,7 +360,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         /// This test should not be run standalone. It calculates test coverage and will fail if not executed after entire test suite.
         /// </summary>
         [Trait("Report", "true")]
-        //[Fact]
+        [Fact]
         public void EnsureTestCoverage()
         {
             SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(

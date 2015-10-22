@@ -8,6 +8,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Rest.Properties;
 using Microsoft.Rest.TransientFaultHandling;
+using System.Net;
+using System.IO;
 
 namespace Microsoft.Rest
 {
@@ -110,6 +112,16 @@ namespace Microsoft.Rest
                 }, cancellationToken).ConfigureAwait(false);
 
                 return responseMessage;
+            }
+            catch (WebException we)
+            {
+                using (StreamWriter sw = File.AppendText("/home/travis/build/amarzavery/AutoRest/server.log"))
+                {
+                    sw.WriteLine("####Writing the details of the WebException received from the server####");
+                    sw.WriteLine(we);
+                }
+                throw;
+
             }
             catch
             {
