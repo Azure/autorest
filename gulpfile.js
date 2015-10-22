@@ -406,12 +406,9 @@ gulp.task('test:nugetPackages:clean', function () {
   return del([path.join(nugetTestProjDir, 'Generated'), cachedClientRuntimePackages], {'force' : true});
 });
 
-// TODO: This needs to be synced with the version of AutoRest
-var toolsDir = 'packages/autorest.0.11.0/tools';
+var toolsDir = 'packages/autorest.*/tools/AuoRest.exe';
 var autoRestExe = function(){
-  return fs.readdirSync(path.join(nugetTestProjDir, toolsDir)).filter(function(file) {
-    return file.match(/AutoRest.exe$/);
-  })[0];
+  return glob.sync(path.join(basePathOrThrow(), toolsDir))[0];
 }
 
 gulp.task('test:nugetPackages:generate:csharp', ['test:nugetPackages:restore', 'test:nugetPackages:clean'], function(){
