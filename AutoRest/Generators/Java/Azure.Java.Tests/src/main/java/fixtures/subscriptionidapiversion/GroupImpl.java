@@ -23,6 +23,7 @@ import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
 import java.io.IOException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;

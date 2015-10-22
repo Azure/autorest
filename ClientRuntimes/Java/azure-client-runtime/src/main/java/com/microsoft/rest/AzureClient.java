@@ -8,6 +8,8 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.reflect.TypeResolver;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonHelper;
 import com.squareup.okhttp.OkHttpClient;
@@ -16,10 +18,10 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 import retrofit.http.GET;
-import retrofit.http.Path;
 import retrofit.http.Url;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Timer;
@@ -50,18 +52,18 @@ public class AzureClient extends ServiceClient {
      * @throws ServiceException service exception
      * @throws InterruptedException interrupted exception
      */
-    public <T> ServiceResponse<T> getPutOrPatchResult(ServiceResponse<T> response) throws ServiceException, InterruptedException, IOException {
-        if (response == null || response.getResponse() == null) {
+    public <T> ServiceResponse<T> getPutOrPatchResult(Response<ResponseBody> response, Type resourceType) throws ServiceException, InterruptedException, IOException {
+        if (response == null) {
             throw new ServiceException("response is null.");
         }
 
-        int statusCode = response.getResponse().code();
+        int statusCode = response.code();
         if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
             throw new ServiceException(statusCode + " is not a valid polling status code");
         }
 
-        PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout());
-        String url = response.getResponse().raw().request().urlString();
+        PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
+        String url = response.raw().request().urlString();
 
         // Check provisioning state
         while (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
@@ -89,20 +91,26 @@ public class AzureClient extends ServiceClient {
         return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
     }
 
-    public <T> AsyncPollingTask<T> getPutOrPatchResultAsync(ServiceResponse<T> response, ServiceCallback<T> callback) {
-        if (response == null || response.getResponse() == null) {
+    public <T> AsyncPollingTask<T> getPutOrPatchResultAsync(Response<ResponseBody> response, ServiceCallback<T> callback) {
+        if (response == null) {
             callback.failure(new ServiceException("response is null."));
             return null;
         }
 
-        int statusCode = response.getResponse().code();
+        int statusCode = response.code();
         if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
             callback.failure(new ServiceException(statusCode + " is not a valid polling status code"));
             return null;
         }
 
-        PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout());
-        String url = response.getResponse().raw().request().urlString();
+        PollingState<T> pollingState = null;
+        try {
+            pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout(), new TypeToken<T>(getClass()){}.getType());
+        } catch (IOException e) {
+            callback.failure(e);
+            return null;
+        }
+        String url = response.raw().request().urlString();
 
         // Check provisioning state
         if (AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
@@ -114,10 +122,10 @@ public class AzureClient extends ServiceClient {
     }
 
     private <T> void updateStateFromLocationHeaderOnPut(PollingState<T> pollingState) throws ServiceException, IOException {
-        ServiceResponse<PollingState<T>.PollingResource> response = poll(pollingState.getLocationHeaderLink());
-        int statusCode = response.getResponse().code();
+        Response<ResponseBody> response = poll(pollingState.getLocationHeaderLink());
+        int statusCode = response.code();
         if (statusCode == 202) {
-            pollingState.setResponse(response.getResponse());
+            pollingState.setResponse(response);
             pollingState.setStatus(AzureAsyncOperation.inProgressStatus);
         } else if (statusCode == 200 || statusCode == 201) {
             pollingState.updateFromResponse(response);
@@ -125,19 +133,19 @@ public class AzureClient extends ServiceClient {
     }
 
     private <T> Call<ResponseBody> updateStateFromLocationHeaderOnPutAsync(final PollingState<T> pollingState, final ServiceCallback<T> callback) {
-        return pollAsync(pollingState.getLocationHeaderLink(), new ServiceCallback<PollingState<T>.PollingResource>() {
+        return pollAsync(pollingState.getLocationHeaderLink(), new ServiceCallback<ResponseBody>() {
             @Override
             public void failure(Throwable t) { callback.failure(t); }
 
             @Override
-            public void success(ServiceResponse<PollingState<T>.PollingResource> result) {
+            public void success(ServiceResponse<ResponseBody> result) {
                 try {
                     int statusCode = result.getResponse().code();
                     if (statusCode == 202) {
                         pollingState.setResponse(result.getResponse());
                         pollingState.setStatus(AzureAsyncOperation.inProgressStatus);
                     } else if (statusCode == 200 || statusCode == 201) {
-                        pollingState.updateFromResponse(result);
+                        pollingState.updateFromResponse(result.getResponse());
                     }
                 } catch (Throwable t) {
                     failure(t);
@@ -147,19 +155,19 @@ public class AzureClient extends ServiceClient {
     }
 
     private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws ServiceException, IOException {
-        ServiceResponse<PollingState<T>.PollingResource> response = poll(url);
+        Response<ResponseBody> response = poll(url);
         pollingState.updateFromResponse(response);
     }
 
     private <T> Call<ResponseBody> updateStateFromGetResourceOperationAsync(final PollingState<T> pollingState, String url, final ServiceCallback<T> callback) {
-        return pollAsync(url, new ServiceCallback<PollingState<T>.PollingResource>() {
+        return pollAsync(url, new ServiceCallback<ResponseBody>() {
             @Override
             public void failure(Throwable t) { callback.failure(t); }
 
             @Override
-            public void success(ServiceResponse<PollingState<T>.PollingResource> result) {
+            public void success(ServiceResponse<ResponseBody> result) {
                 try {
-                    pollingState.updateFromResponse(result);
+                    pollingState.updateFromResponse(result.getResponse());
                 } catch (Throwable t) {
                     failure(t);
                 }
@@ -168,49 +176,54 @@ public class AzureClient extends ServiceClient {
     }
 
     private <T> void updateStateFromAzureAsyncOperationHeader(PollingState<T> pollingState) throws ServiceException, IOException {
-        ServiceResponse<AzureAsyncOperation> response = poll(pollingState.getLocationHeaderLink());
+        Response<ResponseBody> response = poll(pollingState.getAzureAsyncOperationHeaderLink());
 
-        if (response.getBody() == null || response.getBody().getStatus() == null) {
+        AzureAsyncOperation body = JacksonHelper.deserialize(response.body().byteStream(), new TypeReference<AzureAsyncOperation>() {});
+
+        if (body == null || body.getStatus() == null) {
             throw new ServiceException("no body");
         }
 
-        pollingState.setStatus(response.getBody().getStatus());
-        pollingState.setResponse(response.getResponse());
+        pollingState.setStatus(body.getStatus());
+        pollingState.setResponse(response);
         pollingState.setResource(null);
     }
 
     private <T> Call<ResponseBody> updateStateFromAzureAsyncOperationHeaderAsync(final PollingState<T> pollingState, final ServiceCallback<T> callback) {
-        return pollAsync(pollingState.getLocationHeaderLink(), new ServiceCallback<AzureAsyncOperation>() {
+        return pollAsync(pollingState.getLocationHeaderLink(), new ServiceCallback<ResponseBody>() {
             @Override
             public void failure(Throwable t) {
                 callback.failure(t);
             }
 
             @Override
-            public void success(ServiceResponse<AzureAsyncOperation> result) {
-                if (result.getBody() == null || result.getBody().getStatus() == null) {
-                    failure(new ServiceException("no body"));
-                }
+            public void success(ServiceResponse<ResponseBody> result) {
+                try {
+                    AzureAsyncOperation body = JacksonHelper.deserialize(result.getBody().byteStream(), new TypeReference<AzureAsyncOperation>() {
+                    });
+                    if (body == null || body.getStatus() == null) {
+                        failure(new ServiceException("no body"));
+                    }
 
-                pollingState.setStatus(result.getBody().getStatus());
-                pollingState.setResponse(result.getResponse());
-                pollingState.setResource(null);
+                    pollingState.setStatus(body.getStatus());
+                    pollingState.setResponse(result.getResponse());
+                    pollingState.setResource(null);
+                } catch (IOException ex) {
+                    failure(ex);
+                }
             }
         });
     }
 
-    private <T> ServiceResponse<T> poll(String url) throws IOException {
+    private Response<ResponseBody> poll(String url) throws IOException {
         URL endpoint;
         endpoint = new URL(url);
         AsyncService service = this.retrofitBuilder
                 .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + endpoint.getPort()).build().create(AsyncService.class);
-        Response<ResponseBody> response = service.get(endpoint.getPath()).execute();
-        return new ServiceResponse<T>(
-                JacksonHelper.<T>deserialize(response.raw().body().string(), new TypeReference<T>() {}),
-                response);
+        return service.get(endpoint.getPath()).execute();
     }
 
-    private <T> Call<ResponseBody> pollAsync(String url, final ServiceCallback<T> callback) {
+    private Call<ResponseBody> pollAsync(String url, final ServiceCallback<ResponseBody> callback) {
         URL endpoint;
         try {
             endpoint = new URL(url);
@@ -221,16 +234,10 @@ public class AzureClient extends ServiceClient {
         AsyncService service = this.retrofitBuilder
                 .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + endpoint.getPort()).build().create(AsyncService.class);
         Call<ResponseBody> call = service.get(endpoint.getFile());
-        call.enqueue(new ServiceResponseCallback<T>(callback) {
+        call.enqueue(new ServiceResponseCallback<ResponseBody>(callback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    callback.success(new ServiceResponse<T>(
-                            JacksonHelper.<T>deserialize(response.raw().body().string(), new TypeReference<T>() {}),
-                            response));
-                } catch (IOException ex) {
-                    callback.failure(ex);
-                }
+                callback.success(new ServiceResponse<ResponseBody>(response.body(), response));
             }
         });
         return call;

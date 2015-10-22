@@ -16,7 +16,7 @@ import com.microsoft.rest.SubResource;
 /**
  * The OperationResultError model.
  */
-public class OperationResultError extends Resource {
+public class OperationResultError {
     /**
      * The error code for an operation failure
      */

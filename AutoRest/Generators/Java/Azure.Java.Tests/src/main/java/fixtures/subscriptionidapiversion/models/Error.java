@@ -16,7 +16,7 @@ import com.microsoft.rest.SubResource;
 /**
  * The Error model.
  */
-public class Error extends Resource {
+public class Error {
     /**
      * The code property.
      */

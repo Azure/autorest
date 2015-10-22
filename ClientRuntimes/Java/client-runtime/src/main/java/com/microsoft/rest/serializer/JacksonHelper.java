@@ -23,6 +23,7 @@ import retrofit.JacksonConverterFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,6 +127,15 @@ public class JacksonHelper {
     public static <T> T deserialize(String value, TypeReference<?> type) throws IOException {
         if (value == null || value.isEmpty()) return null;
         return (T)new JacksonHelper().getObjectMapper().readValue(value, type);
+    }
+
+    public static <T> T deserialize(String value, final Type type) throws IOException {
+        return deserialize(value, new TypeReference<T>() {
+            @Override
+            public Type getType() {
+                return type;
+            }
+        });
     }
 
     /**

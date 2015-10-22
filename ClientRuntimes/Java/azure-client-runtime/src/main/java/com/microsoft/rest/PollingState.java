@@ -10,11 +10,16 @@ package com.microsoft.rest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.AzureJacksonHelper;
 import com.microsoft.rest.serializer.JacksonHelper;
+import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * An instance of this class defines the state of a long running operation.
@@ -28,20 +33,21 @@ public class PollingState<T> {
     private String locationHeaderLink;
     private Integer retryTimeout;
     private T resource;
+    private Type resourceType;
     private CloudError error;
 
-    public PollingState(ServiceResponse<T> response, int retryTimeout) {
+    public PollingState(Response<ResponseBody> response, int retryTimeout, Type resourceType) throws IOException {
         this.retryTimeout = retryTimeout;
-        this.setResponse(response.getResponse());
-        this.resource = response.getBody();
+        this.setResponse(response);
 
-        JsonNode resource = null;
-        try {
-            resource = new AzureJacksonHelper().getObjectMapper().readTree(this.response.raw().body().byteStream());
-        } catch (Exception e) {}
-        if (resource != null && resource.get("properties") != null &&
-                resource.get("properties").get("provisioningState") != null) {
-            setStatus(resource.get("properties").get("provisioningState").asText());
+        String responseContent = response.body().string();
+        this.resource = JacksonHelper.deserialize(responseContent, resourceType);
+        this.resourceType = resourceType;
+
+        PollingResource resource = JacksonHelper.deserialize(responseContent, new TypeReference<PollingResource>() {});
+        if (resource != null && resource.getProperties() != null &&
+                resource.getProperties().getProvisioningState() != null) {
+            setStatus(resource.getProperties().getProvisioningState());
         } else {
             switch (this.response.code()) {
                 case 202:
@@ -58,12 +64,13 @@ public class PollingState<T> {
         }
     }
 
-    public void updateFromResponse(ServiceResponse<PollingResource> response) throws ServiceException, IOException {
-        if (response.getBody() == null) {
+    public void updateFromResponse(Response<ResponseBody> response) throws ServiceException, IOException {
+        if (response.body() == null) {
             throw new ServiceException("no body");
         }
 
-        PollingResource resource = response.getBody();
+        String responseContent = response.body().string();
+        final PollingResource resource = JacksonHelper.deserialize(responseContent, new TypeReference<PollingResource>() {});
         if (resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
             this.setStatus(resource.getProperties().getProvisioningState());
         } else {
@@ -74,8 +81,13 @@ public class PollingState<T> {
         this.setError(error);
         error.setCode(this.getStatus());
         error.setMessage("Long running operation failed");
-        this.setResponse(response.getResponse());
-        this.setResource(JacksonHelper.<T>deserialize(response.getResponse().raw().body().string(), new TypeReference<T>() {}));
+        this.setResponse(response);
+        this.setResource(JacksonHelper.<T>deserialize(responseContent, new TypeReference<T>() {
+            @Override
+            public Type getType() {
+                return resourceType;
+            }
+        }));
     }
 
     public int getDelayInMilliseconds() {
@@ -106,8 +118,14 @@ public class PollingState<T> {
     public void setResponse(Response response) {
         this.response = response;
         if (response != null) {
-            this.azureAsyncOperationHeaderLink = response.headers().get("Azure-AsyncOperation");
-            this.locationHeaderLink = response.headers().get("Location");
+            String asyncHeader = response.headers().get("Azure-AsyncOperation");
+            String locationHeader = response.headers().get("Location");
+            if (asyncHeader != null) {
+                this.azureAsyncOperationHeaderLink = asyncHeader;
+            }
+            if (locationHeader != null) {
+                this.locationHeaderLink = locationHeader;
+            }
         }
     }
 
@@ -135,20 +153,28 @@ public class PollingState<T> {
         this.error = error;
     }
 
-    class PollingResource {
-        @JsonProperty
+    static class PollingResource {
+        @JsonProperty(value = "properties")
         private Properties properties;
 
         public Properties getProperties() {
             return properties;
         }
 
-        private class Properties {
-            @JsonProperty
+        public void setProperties(Properties properties) {
+            this.properties = properties;
+        }
+
+        static class Properties {
+            @JsonProperty(value = "provisioningState")
             private String provisioningState;
 
             public String getProvisioningState() {
                 return provisioningState;
+            }
+
+            public void setProvisioningState(String provisioningState) {
+                this.provisioningState = provisioningState;
             }
         }
     }

@@ -16,7 +16,7 @@ import com.microsoft.rest.SubResource;
 /**
  * The SampleResourceGroup model.
  */
-public class SampleResourceGroup extends Resource {
+public class SampleResourceGroup {
     /**
      * resource group name 'testgroup101'
      */

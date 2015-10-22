@@ -18,7 +18,7 @@ import com.microsoft.rest.SubResource;
 /**
  * The ResourceCollection model.
  */
-public class ResourceCollection extends Resource {
+public class ResourceCollection {
     /**
      * The productresource property.
      */

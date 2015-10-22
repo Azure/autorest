@@ -66,7 +66,7 @@ describe('nodejs', function () {
       });
     });
 
-    it('should work with PutNoHeaderInRetry', function (done) {
+    it.only('should work with PutNoHeaderInRetry', function (done) {
       testClient.lROs.putNoHeaderInRetry(product, function (error, result) {
         should.not.exist(error);
         result.provisioningState.should.be.exactly('Succeeded');

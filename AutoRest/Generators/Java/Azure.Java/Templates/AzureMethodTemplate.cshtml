@@ -36,8 +36,8 @@ else
  * @@throws ServiceException the exception wrapped in ServiceException if failed.
  */
 public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
-    ServiceResponse<@Model.GenericReturnTypeString> result = this.begin@(Model.Name.ToPascalCase())(@Model.LocalMethodParameterInvocation);
-    return client.getAzureClient().getPutOrPatchResult(result);
+    Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterInvocation).execute();
+    return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<@Model.GenericReturnTypeString>() {}.getType());
 }
 @EmptyLine
 /**
@@ -68,15 +68,17 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 {
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
-    return this.begin@(Model.Name.ToPascalCase())Async(@Model.LocalMethodParameterInvocationWithCallback {
+    Call<ResponseBody> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
+    call.enqueue(new Callback<ResponseBody>() {
         @@Override
-        public void failure(Throwable t) { serviceCallback.failure(t); }
+        public void onFailure(Throwable t) { serviceCallback.failure(t); }
 
         @@Override
-        public void success(ServiceResponse<@Model.GenericReturnTypeString> result) {
-            client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
+        public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
         }
     });
+    return call;
 }
 </text>
 }

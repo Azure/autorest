@@ -16,7 +16,7 @@ import com.microsoft.rest.SubResource;
 /**
  * The OperationResult model.
  */
-public class OperationResult extends Resource {
+public class OperationResult {
     /**
      * The status of the request. Possible values for this property include:
      * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',

@@ -67,6 +67,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 res.Add("com.microsoft.rest.AzureClient");
                 res.Add("com.microsoft.rest.CloudError");
                 res.Add("com.microsoft.rest.Resource");
+                res.Add("retrofit.Callback");
                 return res;
             }
         }

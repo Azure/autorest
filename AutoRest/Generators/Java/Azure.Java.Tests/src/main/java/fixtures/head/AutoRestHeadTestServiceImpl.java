@@ -17,6 +17,7 @@ import retrofit.Retrofit;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.CloudError;
 import com.microsoft.rest.Resource;
+import retrofit.Callback;
 
 /**
  * Initializes a new instance of the AutoRestHeadTestService class.

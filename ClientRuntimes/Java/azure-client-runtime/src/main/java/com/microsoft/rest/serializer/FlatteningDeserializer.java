@@ -10,6 +10,7 @@ package com.microsoft.rest.serializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -21,9 +22,11 @@ import com.fasterxml.jackson.databind.deser.ResolvableDeserializer;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.microsoft.rest.Resource;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 /**
  * Custom serializer for serializing {@link Byte[]} objects into Base64 strings.
@@ -36,13 +39,14 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
         this.defaultDeserializer = defaultDeserializer;
     }
 
-    public static <V> SimpleModule getModule(final Class<V> vc) {
+    public static SimpleModule getModule() {
+        final Class<?> vc = Resource.class;
         SimpleModule module = new SimpleModule();
         module.setDeserializerModifier(new BeanDeserializerModifier() {
             @Override
             public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
-                if (vc.isAssignableFrom(beanDesc.getBeanClass()))
-                    return new FlatteningDeserializer<V>(vc, deserializer);
+                if (vc.isAssignableFrom(beanDesc.getBeanClass()) && vc != beanDesc.getBeanClass())
+                    return new FlatteningDeserializer<Resource>(vc, deserializer);
                 return deserializer;
             }
         });
@@ -53,7 +57,7 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
     @Override
     public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
         JsonNode root = jp.getCodec().readTree(jp);
-        Class<?> tClass = this.defaultDeserializer.handledType();
+        final Class<?> tClass = this.defaultDeserializer.handledType();
         for (Field field : tClass.getDeclaredFields()) {
             JsonNode node = root;
             JsonProperty property = field.getAnnotation(JsonProperty.class);
@@ -63,6 +67,7 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
                     String[] values = value.split("\\.");
                     for (String val : values) {
                         node = node.get(val);
+                        if (node == null) break;
                     }
                 }
                 ((ObjectNode)root).put(value, node);

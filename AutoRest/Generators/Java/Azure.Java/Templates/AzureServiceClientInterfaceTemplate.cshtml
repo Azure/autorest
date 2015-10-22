@@ -1,6 +1,6 @@
 ﻿@using System
-@using Microsoft.Rest.Generator.Java
-@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Java.Azure
+@using Microsoft.Rest.Generator.Java.Azure.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureServiceClientTemplateModel>
@@ -79,7 +79,7 @@ if(!property.IsReadOnly)
     }
     }
     @EmptyLine
-    @foreach (var method in Model.MethodTemplateModels)
+    @foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
     {
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))
@@ -121,8 +121,8 @@ if(!property.IsReadOnly)
     @: * @@return the {@@link Call} object
     @: */
     @:Call<@method.CallType> @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
-    }
     @EmptyLine
+    }
 </text>
 }
 }

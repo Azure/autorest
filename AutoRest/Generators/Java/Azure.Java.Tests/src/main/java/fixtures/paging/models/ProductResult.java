@@ -17,7 +17,7 @@ import com.microsoft.rest.SubResource;
 /**
  * The ProductResult model.
  */
-public class ProductResult extends Resource {
+public class ProductResult {
     /**
      * The values property.
      */

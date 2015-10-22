@@ -11,10 +11,8 @@
 package fixtures.lro.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.microsoft.rest.Resource;
 import com.microsoft.rest.SubResource;
-import com.microsoft.rest.serializer.FlatteningDeserializer;
 
 /**
  * The Product model.

@@ -23,6 +23,7 @@ import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
 import java.io.IOException;
 import fixtures.lro.models.Product;
@@ -48,8 +49,8 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Product> putAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException {
-        ServiceResponse<Product> result = this.beginPutAsyncRetrySucceeded(product);
-        return client.getAzureClient().getPutOrPatchResult(result);
+        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
     }
 
     /**
@@ -59,14 +60,16 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return this.beginPutAsyncRetrySucceededAsync(product, new ServiceCallback<Product>() {
+        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void failure(Throwable t) { serviceCallback.failure(t); }
+            public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
-            public void success(ServiceResponse<Product> result) {
-                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
             }
         });
+        return call;
     }
 
     /**
@@ -123,8 +126,8 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws ServiceException, IOException, InterruptedException {
-        ServiceResponse<Product> result = this.beginPut201CreatingSucceeded200(product);
-        return client.getAzureClient().getPutOrPatchResult(result);
+        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage()).execute();
+        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
     }
 
     /**
@@ -134,14 +137,16 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return this.beginPut201CreatingSucceeded200Async(product, new ServiceCallback<Product>() {
+        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void failure(Throwable t) { serviceCallback.failure(t); }
+            public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
-            public void success(ServiceResponse<Product> result) {
-                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
             }
         });
+        return call;
     }
 
     /**
@@ -198,8 +203,8 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Void> post202Retry200(Product product) throws ServiceException, IOException, InterruptedException {
-        ServiceResponse<Void> result = this.beginPost202Retry200(product);
-        return client.getAzureClient().getPutOrPatchResult(result);
+        Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
+        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -209,14 +214,16 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return this.beginPost202Retry200Async(product, new ServiceCallback<Void>() {
+        Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void failure(Throwable t) { serviceCallback.failure(t); }
+            public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
-            public void success(ServiceResponse<Void> result) {
-                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
             }
         });
+        return call;
     }
 
     /**
@@ -271,8 +278,8 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Void> postAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException {
-        ServiceResponse<Void> result = this.beginPostAsyncRetrySucceeded(product);
-        return client.getAzureClient().getPutOrPatchResult(result);
+        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -282,14 +289,16 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return this.beginPostAsyncRetrySucceededAsync(product, new ServiceCallback<Void>() {
+        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void failure(Throwable t) { serviceCallback.failure(t); }
+            public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
-            public void success(ServiceResponse<Void> result) {
-                client.getAzureClient().getPutOrPatchResultAsync(result, serviceCallback);
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
             }
         });
+        return call;
     }
 
     /**

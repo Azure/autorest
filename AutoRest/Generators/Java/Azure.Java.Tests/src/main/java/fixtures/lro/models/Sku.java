@@ -16,7 +16,7 @@ import com.microsoft.rest.SubResource;
 /**
  * The Sku model.
  */
-public class Sku extends Resource {
+public class Sku {
     /**
      * The name property.
      */

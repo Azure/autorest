@@ -122,6 +122,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Call} object
      */
     Call<ResponseBody> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Get External Resource as an Array
      *
@@ -137,6 +138,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Call} object
      */
     Call<ResponseBody> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
+
     /**
      * Put External Resource as a Dictionary
      *
@@ -153,6 +155,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Call} object
      */
     Call<ResponseBody> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Get External Resource as a Dictionary
      *
@@ -168,6 +171,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Call} object
      */
     Call<ResponseBody> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
+
     /**
      * Put External Resource as a ResourceCollection
      *
@@ -184,6 +188,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Call} object
      */
     Call<ResponseBody> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Get External Resource as a ResourceCollection
      *
