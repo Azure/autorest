@@ -17,6 +17,7 @@ import retrofit.Response;
 import retrofit.Retrofit;
 import retrofit.http.GET;
 import retrofit.http.Path;
+import retrofit.http.Url;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -63,7 +64,7 @@ public class AzureClient extends ServiceClient {
         String url = response.getResponse().raw().request().urlString();
 
         // Check provisioning state
-        while (AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
+        while (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
             Thread.sleep(pollingState.getDelayInMilliseconds());
 
             if (pollingState.getAzureAsyncOperationHeaderLink() != null &&
@@ -202,7 +203,7 @@ public class AzureClient extends ServiceClient {
         URL endpoint;
         endpoint = new URL(url);
         AsyncService service = this.retrofitBuilder
-                .baseUrl(endpoint.getHost()).build().create(AsyncService.class);
+                .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + endpoint.getPort()).build().create(AsyncService.class);
         Response<ResponseBody> response = service.get(endpoint.getPath()).execute();
         return new ServiceResponse<T>(
                 JacksonHelper.<T>deserialize(response.raw().body().string(), new TypeReference<T>() {}),
@@ -218,7 +219,7 @@ public class AzureClient extends ServiceClient {
             return null;
         }
         AsyncService service = this.retrofitBuilder
-                .baseUrl(endpoint.getHost()).build().create(AsyncService.class);
+                .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + endpoint.getPort()).build().create(AsyncService.class);
         Call<ResponseBody> call = service.get(endpoint.getFile());
         call.enqueue(new ServiceResponseCallback<T>(callback) {
             @Override
@@ -252,8 +253,8 @@ public class AzureClient extends ServiceClient {
     }
 
     private interface AsyncService {
-        @GET("/{url}")
-        Call<ResponseBody> get(@Path("url") String url);
+        @GET
+        Call<ResponseBody> get(@Url String url);
     }
 
     class AsyncPollingTask<T> extends TimerTask {

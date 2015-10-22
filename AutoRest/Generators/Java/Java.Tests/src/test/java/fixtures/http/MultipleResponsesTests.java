@@ -89,7 +89,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = JacksonHelper.getObjectMapper().convertValue(
+            Error model = new JacksonHelper().getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -124,7 +124,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = JacksonHelper.getObjectMapper().convertValue(
+            Error model = new JacksonHelper().getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -172,7 +172,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = JacksonHelper.getObjectMapper().convertValue(
+            Error model = new JacksonHelper().getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -228,7 +228,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            A model = JacksonHelper.getObjectMapper().convertValue(
+            A model = new JacksonHelper().getObjectMapper().convertValue(
                     ex.getErrorModel(), A.class);
             Assert.assertEquals("400", model.getStatusCode());
         }

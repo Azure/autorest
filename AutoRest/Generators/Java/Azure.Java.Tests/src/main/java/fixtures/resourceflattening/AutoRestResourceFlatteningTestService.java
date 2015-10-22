@@ -21,13 +21,14 @@ import retrofit.Call;
 import java.util.List;
 import java.util.Map;
 import fixtures.resourceflattening.models.ResourceCollection;
-import fixtures.resourceflattening.models.Resource;
 import fixtures.resourceflattening.models.FlattenedProduct;
 import retrofit.http.PUT;
 import retrofit.http.Body;
 import retrofit.http.Header;
 import retrofit.http.GET;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.Resource;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.

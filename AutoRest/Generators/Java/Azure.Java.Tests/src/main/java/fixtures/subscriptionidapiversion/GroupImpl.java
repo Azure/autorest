@@ -11,6 +11,9 @@
 package fixtures.subscriptionidapiversion;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.Resource;
+import com.microsoft.rest.SubResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -23,7 +26,10 @@ import retrofit.Call;
 import retrofit.Response;
 import java.io.IOException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
-import fixtures.subscriptionidapiversion.models.Error;
+import retrofit.http.GET;
+import retrofit.http.Path;
+import retrofit.http.Query;
+import retrofit.http.Header;
 
 public class GroupImpl implements Group {
     private GroupService service;

@@ -12,6 +12,8 @@ package fixtures.lro;
 
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.Resource;
 
 /**
  * The interface for AutoRestLongRunningOperationTestService class.

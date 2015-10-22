@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
@@ -12,6 +13,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureMethodGroupTemplateModel : MethodGroupTemplateModel
     {
+        public const string ExternalExtension = "x-ms-external";
+
         public AzureMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
             : base(serviceClient, methodGroupName)
         {
@@ -20,6 +23,30 @@ namespace Microsoft.Rest.Generator.Java.Azure
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == methodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
+        }
+
+        public override IEnumerable<string> ImplImports
+        {
+            get
+            {
+                var res = base.InterfaceImports.ToList();
+                this.ModelTypes.Where(m => m.Extensions.ContainsKey(ExternalExtension) && (bool)m.Extensions[ExternalExtension])
+                    .Select(m => (IType)m).ToList().TypeImports(this.Namespace)
+                    .ForEach(t => res.Remove(t));
+                return res;
+            }
+        }
+
+        public override IEnumerable<string> InterfaceImports
+        {
+            get
+            {
+                var res = base.InterfaceImports.ToList();
+                this.ModelTypes.Where(m => m.Extensions.ContainsKey(ExternalExtension) && (bool)m.Extensions[ExternalExtension])
+                    .Select(m => (IType)m).ToList().TypeImports(this.Namespace)
+                    .ForEach(t => res.Remove(t));
+                return res;
+            }
         }
     }
 }

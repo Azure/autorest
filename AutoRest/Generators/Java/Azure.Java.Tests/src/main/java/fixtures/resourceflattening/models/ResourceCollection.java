@@ -13,6 +13,7 @@ package fixtures.resourceflattening.models;
 import java.util.List;
 import java.util.Map;
 import com.microsoft.rest.Resource;
+import com.microsoft.rest.SubResource;
 
 /**
  * The ResourceCollection model.

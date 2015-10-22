@@ -22,6 +22,8 @@ import java.util.Map;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.Resource;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.

@@ -11,6 +11,9 @@
 package fixtures.lro;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.Resource;
+import com.microsoft.rest.SubResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -23,7 +26,11 @@ import retrofit.Call;
 import retrofit.Response;
 import java.io.IOException;
 import fixtures.lro.models.Product;
-import fixtures.lro.models.CloudError;
+import retrofit.http.PUT;
+import retrofit.http.Body;
+import retrofit.http.Header;
+import retrofit.http.HTTP;
+import retrofit.http.POST;
 
 public class LRORetrysImpl implements LRORetrys {
     private LRORetrysService service;

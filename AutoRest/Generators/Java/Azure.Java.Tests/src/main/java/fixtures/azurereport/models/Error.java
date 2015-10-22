@@ -11,6 +11,7 @@
 package fixtures.azurereport.models;
 
 import com.microsoft.rest.Resource;
+import com.microsoft.rest.SubResource;
 
 /**
  * The Error model.

@@ -33,18 +33,17 @@ public class JacksonHelper {
     private static ObjectMapper objectMapper;
     private static JacksonConverterFactory converterFactory;
 
-    private JacksonHelper() {}
-
     /**
      * Gets a static instance of {@link ObjectMapper}.
      *
      * @return an instance of {@link ObjectMapper}.
      */
-    public static ObjectMapper getObjectMapper() {
+    public ObjectMapper getObjectMapper() {
         if (objectMapper == null) {
             objectMapper = new ObjectMapper()
                     .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                     .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
+                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                     .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                     .registerModule(new JodaModule())
                     .registerModule(ByteArraySerializer.getModule())
@@ -59,7 +58,7 @@ public class JacksonHelper {
      *
      * @return an instance of {@link Converter.Factory}.
      */
-    public static JacksonConverterFactory getConverterFactory() {
+    public JacksonConverterFactory getConverterFactory() {
         if (converterFactory == null) {
             converterFactory = JacksonConverterFactory.create(getObjectMapper());
         }
@@ -76,7 +75,7 @@ public class JacksonHelper {
         if (object == null) return null;
         try {
             StringWriter writer = new StringWriter();
-            getObjectMapper().writeValue(writer, object);
+            new JacksonHelper().getObjectMapper().writeValue(writer, object);
             return writer.toString();
         } catch (Exception e) {
             return null;
@@ -126,7 +125,7 @@ public class JacksonHelper {
     @SuppressWarnings("unchecked")
     public static <T> T deserialize(String value, TypeReference<?> type) throws IOException {
         if (value == null || value.isEmpty()) return null;
-        return (T)getObjectMapper().readValue(value, type);
+        return (T)new JacksonHelper().getObjectMapper().readValue(value, type);
     }
 
     /**

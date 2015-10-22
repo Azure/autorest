@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.lro.models;
+package com.microsoft.rest;
 
 
 /**

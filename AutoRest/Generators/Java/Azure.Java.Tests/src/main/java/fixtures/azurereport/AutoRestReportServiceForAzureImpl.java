@@ -28,6 +28,8 @@ import retrofit.Response;
 import java.util.Map;
 import fixtures.azurereport.models.Error;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.Resource;
 
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzure class.

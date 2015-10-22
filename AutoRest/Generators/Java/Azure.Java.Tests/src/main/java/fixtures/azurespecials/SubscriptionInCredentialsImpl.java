@@ -11,6 +11,9 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.Resource;
+import com.microsoft.rest.SubResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -22,7 +25,10 @@ import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Response;
 import java.io.IOException;
-import fixtures.azurespecials.models.Error;
+import retrofit.http.POST;
+import retrofit.http.Path;
+import retrofit.http.Header;
+import retrofit.http.Query;
 
 public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
     private SubscriptionInCredentialsService service;

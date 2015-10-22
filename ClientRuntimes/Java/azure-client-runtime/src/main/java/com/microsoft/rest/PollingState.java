@@ -10,6 +10,7 @@ package com.microsoft.rest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.microsoft.rest.serializer.AzureJacksonHelper;
 import com.microsoft.rest.serializer.JacksonHelper;
 import retrofit.Response;
 
@@ -36,7 +37,7 @@ public class PollingState<T> {
 
         JsonNode resource = null;
         try {
-            resource = JacksonHelper.getObjectMapper().readTree(this.response.raw().body().byteStream());
+            resource = new AzureJacksonHelper().getObjectMapper().readTree(this.response.raw().body().byteStream());
         } catch (Exception e) {}
         if (resource != null && resource.get("properties") != null &&
                 resource.get("properties").get("provisioningState") != null) {

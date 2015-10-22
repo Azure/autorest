@@ -11,6 +11,7 @@
 package fixtures.paging.models;
 
 import com.microsoft.rest.Resource;
+import com.microsoft.rest.SubResource;
 
 /**
  * The Product model.

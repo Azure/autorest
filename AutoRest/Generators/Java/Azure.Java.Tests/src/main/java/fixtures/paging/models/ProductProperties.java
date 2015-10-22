@@ -11,11 +11,12 @@
 package fixtures.paging.models;
 
 import com.microsoft.rest.Resource;
+import com.microsoft.rest.SubResource;
 
 /**
  * The ProductProperties model.
  */
-public class ProductProperties extends Resource {
+public class ProductProperties {
     /**
      * The id property.
      */

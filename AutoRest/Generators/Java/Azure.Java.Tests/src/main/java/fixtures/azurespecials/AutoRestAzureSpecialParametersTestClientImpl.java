@@ -15,6 +15,8 @@ import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.Retrofit;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.Resource;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.

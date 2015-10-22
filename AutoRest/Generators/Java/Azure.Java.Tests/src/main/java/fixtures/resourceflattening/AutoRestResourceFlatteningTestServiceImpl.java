@@ -29,10 +29,10 @@ import java.util.List;
 import java.util.Map;
 import fixtures.resourceflattening.models.ResourceCollection;
 import fixtures.resourceflattening.models.Error;
-import fixtures.resourceflattening.models.CloudError;
-import fixtures.resourceflattening.models.Resource;
 import fixtures.resourceflattening.models.FlattenedProduct;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.Resource;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
