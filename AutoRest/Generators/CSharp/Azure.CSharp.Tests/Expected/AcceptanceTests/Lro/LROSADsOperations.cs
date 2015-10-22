@@ -147,15 +147,22 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             cancellationToken.ThrowIfCancellationRequested();
             HttpResponseMessage httpResponse = null;
+            Trace.Listeners.Add(new TextWriterTraceListener("/home/travis/build/amarzavery/AutoRest/server.log", "myListener"));
             try
             {
                 httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                Trace.TraceInformation("@@@@We are fine...");
             }
             catch (WebException we)
             {
-                Trace.Listeners.Add(new TextWriterTraceListener("/home/travis/build/amarzavery/AutoRest/server.log", "myListener"));
                 Trace.TraceInformation("####Writing the details of the WebException received from the server####");
                 Trace.TraceInformation(we.ToString());
+                Trace.TraceInformation("####Response####");
+                Trace.TraceInformation(we.Response.ToString());
+                Trace.TraceInformation("####Inner Exception####");
+                Trace.TraceInformation(we.InnerException.ToString());
+                Trace.TraceInformation("####Hresult####");
+                Trace.TraceInformation(we.HResult.ToString());
                 throw;
 
             }
