@@ -116,8 +116,8 @@ namespace Microsoft.Rest
             }
             catch (WebException we)
             {
-                Console.WriteLine("####Writing the details of the WebException received from the server####");
-                Console.WriteLine(we);
+                System.Console.WriteLine("####Writing the details of the WebException received from the server####");
+                System.Console.WriteLine(we);
                 throw;
 
             }
