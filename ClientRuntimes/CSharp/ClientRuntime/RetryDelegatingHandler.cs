@@ -115,11 +115,9 @@ namespace Microsoft.Rest
             }
             catch (WebException we)
             {
-                using (StreamWriter sw = File.AppendText("/home/travis/build/amarzavery/AutoRest/server.log"))
-                {
-                    sw.WriteLine("####Writing the details of the WebException received from the server####");
-                    sw.WriteLine(we);
-                }
+                StreamWriter sw = File.AppendText("/home/travis/build/amarzavery/AutoRest/server.log");
+                sw.WriteLine("####Writing the details of the WebException received from the server####");
+                sw.WriteLine(we);
                 throw;
 
             }
