@@ -64,7 +64,7 @@ public class PollingState<T> {
         }
     }
 
-    public void updateFromResponse(Response<ResponseBody> response) throws ServiceException, IOException {
+    public void updateFromResponseOnPut(Response<ResponseBody> response) throws ServiceException, IOException {
         if (response.body() == null) {
             throw new ServiceException("no body");
         }
@@ -83,6 +83,16 @@ public class PollingState<T> {
         error.setMessage("Long running operation failed");
         this.setResponse(response);
         this.setResource(JacksonHelper.<T>deserialize(responseContent, new TypeReference<T>() {
+            @Override
+            public Type getType() {
+                return resourceType;
+            }
+        }));
+    }
+
+    public void updateFromResponseOnDelete(Response<ResponseBody> response) throws IOException {
+        this.setResponse(response);
+        this.setResource(JacksonHelper.<T>deserialize(response.body().string(), new TypeReference<T>() {
             @Override
             public Type getType() {
                 return resourceType;

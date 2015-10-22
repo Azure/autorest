@@ -14,7 +14,7 @@ import retrofit.Response;
  */
 public class ServiceResponse<T> {
     private T body;
-    private Response response;
+    private Response<T> response;
 
     /**
      * Instantiate a ServiceResponse instance with a response object and a raw REST response
@@ -38,7 +38,7 @@ public class ServiceResponse<T> {
      * Gets the raw REST response.
      * @return the raw REST response.
      */
-    public Response getResponse() {
+    public Response<T> getResponse() {
         return this.response;
     }
 }
