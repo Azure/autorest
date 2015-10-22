@@ -1,6 +1,6 @@
 language: csharp
 mono:
-  - alpha
+  - beta
 install:
   - ls -al
   - touch /home/travis/build/amarzavery/AutoRest/server.log
@@ -15,8 +15,8 @@ install:
   - unzip gradle-2.6-bin.zip
   - PATH=$PATH:$(pwd)/gradle-2.6/bin
 script:
-  - dnvm install 1.0.0-beta7
-  - dnvm use 1.0.0-beta7 -persistent
+  - dnvm install 1.0.0-beta8
+  - dnvm use 1.0.0-beta8 -persistent
   - gulp
 after_script:
   - echo "========== Server log: ============"
