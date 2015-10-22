@@ -184,6 +184,15 @@ namespace Microsoft.Rest.Generator.NodeJS
             return sample != null;
         }
 
+        public bool ContainsDurationProperty()
+        {
+            Property prop = ComposedProperties.FirstOrDefault(p =>
+                (p.Type is PrimaryType && (p.Type as PrimaryType) == PrimaryType.TimeSpan) ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.TimeSpan) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.TimeSpan));
+            return prop != null;
+        }
+
         /// <summary>
         /// Returns the TypeScript string to define the specified property, including its type and whether it's optional or not
         /// </summary>

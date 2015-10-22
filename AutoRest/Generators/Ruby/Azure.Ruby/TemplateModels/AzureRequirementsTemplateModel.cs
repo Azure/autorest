@@ -19,7 +19,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <returns>True if should be excluded, false otherwise.</returns>
         protected override bool ExcludeModel(CompositeType model)
         {
-            return model.Extensions.ContainsKey("x-ms-external");
+            return model.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension) || model.Extensions.ContainsKey(AzureCodeGenerator.AzureResourceExtension);
         }
 
         /// <summary>

@@ -382,6 +382,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 var datetime2 = new DateTimeOffset(1980, 1, 2, 0, 11, 35, TimeSpan.Zero).UtcDateTime;
                 var datetime3 = new DateTimeOffset(1492, 10, 12, 10, 15, 1, TimeSpan.Zero).UtcDateTime;
                 var dateArray = client.Array.GetDateValid();
+                var duration1 = new TimeSpan(123, 22, 14, 12, 11);
+                var duration2 = new TimeSpan(5, 1, 0, 0, 0);
+
                 Assert.Equal(new List<DateTime?> {date1, date2, date3}, dateArray);
                 client.Array.PutDateValid(new List<DateTime?> {date1, date2, date3});
                 Assert.Equal(
@@ -390,6 +393,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 dateArray = client.Array.GetDateTimeRfc1123Valid();
                 Assert.Equal(new List<DateTime?> { datetime1, datetime2, datetime3 }, dateArray);
                 client.Array.PutDateTimeRfc1123Valid(dateArray);
+                Assert.Equal(new List<TimeSpan?> { duration1, duration2 }, client.Array.GetDurationValid());
+                client.Array.PutDurationValid(new List<TimeSpan?> { duration1, duration2 });
                 var bytes1 = new byte[] {0x0FF, 0x0FF, 0x0FF, 0x0FA};
                 var bytes2 = new byte[] {0x01, 0x02, 0x03};
                 var bytes3 = new byte[] {0x025, 0x029, 0x043};
@@ -732,6 +737,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var rfcDatetime1 = new DateTimeOffset(2000, 12, 01, 0, 0, 1, TimeSpan.Zero).UtcDateTime;
             var rfcDatetime2 = new DateTimeOffset(1980, 1, 2, 0, 11, 35, TimeSpan.Zero).UtcDateTime;
             var rfcDatetime3 = new DateTimeOffset(1492, 10, 12, 10, 15, 1, TimeSpan.Zero).UtcDateTime;
+            var duration1 = new TimeSpan(123, 22, 14, 12, 11);
+            var duration2 = new TimeSpan(5, 1, 0, 0, 0);
+
             // GET prim/date/valid
             var dateDictionary = client.Dictionary.GetDateValid();
             Assert.Equal(new Dictionary<string, DateTime?> {{"0", date1}, {"1", date2}, {"2", date3}},
@@ -775,6 +783,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {"1", rfcDatetime2},
                 {"2", rfcDatetime3}
             });
+            // GET prim/duration/valid
+            Assert.Equal(new Dictionary<string, TimeSpan?> { {"0", duration1}, {"1", duration2 }}, client.Dictionary.GetDurationValid());
+            client.Dictionary.PutDurationValid(new Dictionary<string, TimeSpan?>
+                {
+                    {"0", duration1},
+                    {"1", duration2},
+                });
             var bytes1 = new byte[] {0x0FF, 0x0FF, 0x0FF, 0x0FA};
             var bytes2 = new byte[] {0x01, 0x02, 0x03};
             var bytes3 = new byte[] {0x025, 0x029, 0x043};
@@ -922,6 +937,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     Field = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                     Now = new DateTime(2015, 05, 18, 11, 38, 0, DateTimeKind.Utc)
                 });
+                //GET primitive/duration
+                TimeSpan expectedDuration = new TimeSpan(123, 22, 14, 12, 11);
+                var durationResult = client.Primitive.GetDuration();
+                Assert.Equal(expectedDuration, durationResult.Field);
+                client.Primitive.PutDuration(new DurationWrapper() { Field = expectedDuration });
 
                 // GET primitive/byte
                 var byteResult = client.Primitive.GetByte();

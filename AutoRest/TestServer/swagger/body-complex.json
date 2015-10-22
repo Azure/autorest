@@ -556,6 +556,52 @@
         }
       }
     },
+    "/complex/primitive/duration": {
+      "get": {
+        "operationId": "primitive_getDuration",
+        "description": "Get complex types with duration properties",
+        "responses": {
+          "200": {
+            "description": "Get complex types with primitive property",
+            "schema": {
+              "$ref": "#/definitions/duration-wrapper"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "primitive_putDuration",
+        "description": "Put complex types with duration properties",
+        "parameters": [
+          {
+            "name": "complexBody",
+            "in": "body",
+            "description": "Please put 'P123DT22H14M12.011S'",
+            "schema": {
+              "$ref": "#/definitions/duration-wrapper"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/complex/primitive/byte": {
       "get": {
         "operationId": "primitive_getByte",
@@ -1264,6 +1310,14 @@
         "now": {
           "type": "string",
           "format": "date-time-rfc1123"
+        }
+      }
+    },
+    "duration-wrapper": {
+      "properties": {
+        "field": {
+          "type": "string",
+          "format": "duration"
         }
       }
     },

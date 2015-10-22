@@ -22,6 +22,7 @@ namespace Microsoft.Rest.Generator.Azure
         public const string LongRunningExtension = "x-ms-long-running-operation";
         public const string PageableExtension = "x-ms-pageable";
         public const string ExternalExtension = "x-ms-external";
+        public const string AzureResourceExtension = "x-ms-azure-resource";
         public const string ODataExtension = "x-ms-odata";
         public const string ClientRequestIdExtension = "x-ms-client-request-id";
         
@@ -291,12 +292,12 @@ namespace Microsoft.Rest.Generator.Azure
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes.ToArray())
             {
-                if (IsExternalResource(compositeType))
+                if (IsAzureResource(compositeType))
                 {
-                    CheckExternalResourceProperties(compositeType);
+                    CheckAzureResourceProperties(compositeType);
                 }
 
-                if (IsDerivedFromExternalResource(compositeType))
+                if (IsDerivedFromAzureResource(compositeType))
                 {
                     // First find "properties" property
                     var propertiesProperty = compositeType.Properties.FirstOrDefault(
@@ -381,7 +382,7 @@ namespace Microsoft.Rest.Generator.Azure
             }
         }
 
-        public static bool IsDerivedFromExternalResource(CompositeType compositeType)
+        public static bool IsDerivedFromAzureResource(CompositeType compositeType)
         {
             if (compositeType == null)
             {
@@ -389,11 +390,9 @@ namespace Microsoft.Rest.Generator.Azure
             }
 
             if (compositeType.BaseModelType != null &&
-                (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
-                 compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
-                compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension))
+                compositeType.BaseModelType.Extensions.ContainsKey(AzureResourceExtension))
             {
-                var external = compositeType.BaseModelType.Extensions[ExternalExtension] as bool?;
+                var external = compositeType.BaseModelType.Extensions[AzureResourceExtension] as bool?;
                 return (external == null || external.Value);
             }
 
@@ -402,21 +401,21 @@ namespace Microsoft.Rest.Generator.Azure
 
         /// <summary>
         /// Determines a composite type as an External Resource if it's name equals "Resource" 
-        /// and it has an extension named "x-ms-external" marked as true.
+        /// and it has an extension named "x-ms-azure-resource" marked as true.
         /// </summary>
         /// <param name="compositeType">Type to determine if it is an external resource</param>
         /// <returns>True if it is an external resource, false otherwise</returns>
-        public static bool IsExternalResource(CompositeType compositeType)
+        public static bool IsAzureResource(CompositeType compositeType)
         {
             if (compositeType == null)
             {
                 return false;
             }
 
-            if (compositeType.Extensions.ContainsKey(ExternalExtension) && 
+            if (compositeType.Extensions.ContainsKey(AzureResourceExtension) &&
                 compositeType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase))
             {
-                var external = compositeType.Extensions[ExternalExtension] as bool?;
+                var external = compositeType.Extensions[AzureResourceExtension] as bool?;
                 return (external == null || external.Value);
             }
 
@@ -508,9 +507,9 @@ namespace Microsoft.Rest.Generator.Azure
             return requestIdName;
         }
 
-        private static void CheckExternalResourceProperties(CompositeType compositeType)
+        private static void CheckAzureResourceProperties(CompositeType compositeType)
         {
-            // If derived from resource with x-ms-external then resource should have resource properties 
+            // If derived from resource with x-ms-azure-resource then resource should have resource properties 
             // that are in client-runtime, except provisioning state
             var extraResourceProperties = compositeType.Properties
                                                        .Select(p => p.Name.ToUpperInvariant())

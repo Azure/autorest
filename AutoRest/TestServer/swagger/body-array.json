@@ -1109,6 +1109,67 @@
                 }
             }
         },
+        "/array/prim/duration/valid": {
+            "get": {
+                "operationId": "array_getDurationValid",
+                "description": "Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']",
+                "tags": [
+                    "Array Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']",
+                        "schema": {
+                            "description": "The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']",
+                            "type": "array",
+                            "items":  {
+                                "type":  "string",
+                                "format":  "duration"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "array_putDurationValid",
+                "description": "Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']",
+                "parameters": [
+                    {
+                        "name": "arrayBody",
+                        "in": "body",
+                        "schema" : {
+                            "description":  "The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']",
+                            "type": "array",
+                            "items":  {
+                                "type":  "string",
+                                "format":  "duration"
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Array Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Empty Response"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/array/prim/byte/valid": {
             "get": {
                 "operationId": "array_getByteValid",

@@ -27,3 +27,11 @@ Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.Tests.Acceptan
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Scope = "type", Target = "Fixtures.Azure.AcceptanceTestsPaging.Models.Page`1")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.Tests.PageJsonTest.#TestNullPageDeSerialization()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.Tests.PageJsonTest.#TestNextLinkDeSerialization()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Fixtures.Azure.AcceptanceTestsLro.Models.Resource.#Id")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Fixtures.Azure.AcceptanceTestsLro.Models.Resource.#Type")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Fixtures.Azure.AcceptanceTestsLro.Models.Resource.#Name")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Fixtures.Azure.AcceptanceTestsLro.Models.SubResource.#Id")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Fixtures.Azure.AcceptanceTestsResourceFlattening.Models.Resource.#Id")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Fixtures.Azure.AcceptanceTestsResourceFlattening.Models.Resource.#Type")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Fixtures.Azure.AcceptanceTestsResourceFlattening.Models.Resource.#Name")]
+

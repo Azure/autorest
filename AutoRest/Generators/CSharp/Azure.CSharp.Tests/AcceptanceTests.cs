@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Fixtures.Azure.AcceptanceTestsAzureBodyDuration;
 using Fixtures.Azure.AcceptanceTestsAzureReport;
 using Fixtures.Azure.AcceptanceTestsAzureSpecials;
 using Fixtures.Azure.AcceptanceTestsHead;
@@ -424,7 +425,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("3", result[2].Id);
                 Assert.Equal("Resource3", result[2].Name);
 
-                var resourceArray = new List<Resource>();
+                var resourceArray = new List<Fixtures.Azure.AcceptanceTestsResourceFlattening.Models.Resource>();
                 resourceArray.Add(new FlattenedProduct
                 {
                     Location = "West US",
@@ -683,6 +684,21 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 AzureOperationResponse response = client.Header.CustomNamedRequestIdWithHttpMessagesAsync(expectedRequestId).Result;
 
                 Assert.Equal("123", response.RequestId);
+            }
+        }
+
+        [Fact]
+        public void DurationTests()
+        {
+            SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
+                SwaggerPath("body-duration.json"), ExpectedPath("AzureBodyDuration"));
+            using (var client = new AutoRestDurationTestService(Fixture.Uri))
+            {
+                Assert.Null(client.Duration.GetNull());
+                Assert.Throws<FormatException>(() => client.Duration.GetInvalid());
+
+                client.Duration.GetPositiveDuration();
+                client.Duration.PutPositiveDuration(new TimeSpan(123, 22, 14, 12, 11));
             }
         }
     }

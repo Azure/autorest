@@ -17,7 +17,8 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
-            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey("x-ms-external"));
+            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension));
+            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureCodeGenerator.AzureResourceExtension));
         }
 
         public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels

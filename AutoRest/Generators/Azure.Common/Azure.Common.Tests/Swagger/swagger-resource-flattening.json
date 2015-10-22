@@ -175,7 +175,7 @@
           "description": "Gets or sets the resource tags."
         }
       },
-      "x-ms-external": true
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
