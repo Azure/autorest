@@ -31,7 +31,6 @@
     <None Include="Microsoft.Rest.ClientRuntime.Etw.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
