@@ -73,52 +73,6 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
     }
 
     /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPutAsyncRetrySucceeded(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
-            return beginPutAsyncRetrySucceededDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPutAsyncRetrySucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPutAsyncRetrySucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
@@ -147,53 +101,6 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
             }
         });
         return call;
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPut201CreatingSucceeded200(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
-            return beginPut201CreatingSucceeded200Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPut201CreatingSucceeded200Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(201, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -227,51 +134,6 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
     }
 
     /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPost202Retry200(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
-            return beginPost202Retry200Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPost202Retry200Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPost202Retry200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
@@ -299,51 +161,6 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
             }
         });
         return call;
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPostAsyncRetrySucceeded(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
-            return beginPostAsyncRetrySucceededDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPostAsyncRetrySucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPostAsyncRetrySucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
 }

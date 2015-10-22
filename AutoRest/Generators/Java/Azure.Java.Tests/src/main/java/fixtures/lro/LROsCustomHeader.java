@@ -38,26 +38,14 @@ public interface LROsCustomHeader {
         @PUT("/lro/customheader/putasync/retry/succeeded")
         Call<ResponseBody> putAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/customheader/putasync/retry/succeeded")
-        Call<ResponseBody> beginPutAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @PUT("/lro/customheader/put/201/creating/succeeded/200")
         Call<ResponseBody> put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @PUT("/lro/customheader/put/201/creating/succeeded/200")
-        Call<ResponseBody> beginPut201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/customheader/post/202/retry/200")
         Call<ResponseBody> post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/customheader/post/202/retry/200")
-        Call<ResponseBody> beginPost202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @POST("/lro/customheader/postasync/retry/succeeded")
         Call<ResponseBody> postAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @POST("/lro/customheader/postasync/retry/succeeded")
-        Call<ResponseBody> beginPostAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
     }
     /**
@@ -79,24 +67,6 @@ public interface LROsCustomHeader {
     Call<ResponseBody> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Product> beginPutAsyncRetrySucceeded(Product product) throws ServiceException;
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
@@ -113,24 +83,6 @@ public interface LROsCustomHeader {
      * @return the {@link Call} object
      */
     Call<ResponseBody> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Product> beginPut201CreatingSucceeded200(Product product) throws ServiceException;
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
@@ -150,23 +102,6 @@ public interface LROsCustomHeader {
     Call<ResponseBody> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginPost202Retry200(Product product) throws ServiceException;
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
-
-    /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
@@ -182,22 +117,5 @@ public interface LROsCustomHeader {
      * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginPostAsyncRetrySucceeded(Product product) throws ServiceException;
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
 }

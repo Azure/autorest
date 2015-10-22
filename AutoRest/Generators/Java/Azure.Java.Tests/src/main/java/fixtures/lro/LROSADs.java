@@ -39,152 +39,77 @@ public interface LROSADs {
         @PUT("/lro/nonretryerror/put/400")
         Call<ResponseBody> putNonRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/nonretryerror/put/400")
-        Call<ResponseBody> beginPutNonRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @PUT("/lro/nonretryerror/put/201/creating/400")
         Call<ResponseBody> putNonRetry201Creating400(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @PUT("/lro/nonretryerror/put/201/creating/400")
-        Call<ResponseBody> beginPutNonRetry201Creating400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/nonretryerror/putasync/retry/400")
         Call<ResponseBody> putAsyncRelativeRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/nonretryerror/putasync/retry/400")
-        Call<ResponseBody> beginPutAsyncRelativeRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @HTTP(path = "/lro/nonretryerror/delete/400", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteNonRetry400(@Header("accept-language") String acceptLanguage);
-
-        @HTTP(path = "/lro/nonretryerror/delete/400", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDeleteNonRetry400(@Header("accept-language") String acceptLanguage);
 
         @HTTP(path = "/lro/nonretryerror/delete/202/retry/400", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete202NonRetry400(@Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/nonretryerror/delete/202/retry/400", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDelete202NonRetry400(@Header("accept-language") String acceptLanguage);
-
         @HTTP(path = "/lro/nonretryerror/deleteasync/retry/400", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteAsyncRelativeRetry400(@Header("accept-language") String acceptLanguage);
-
-        @HTTP(path = "/lro/nonretryerror/deleteasync/retry/400", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDeleteAsyncRelativeRetry400(@Header("accept-language") String acceptLanguage);
 
         @POST("/lro/nonretryerror/post/400")
         Call<ResponseBody> postNonRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/nonretryerror/post/400")
-        Call<ResponseBody> beginPostNonRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @POST("/lro/nonretryerror/post/202/retry/400")
         Call<ResponseBody> post202NonRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @POST("/lro/nonretryerror/post/202/retry/400")
-        Call<ResponseBody> beginPost202NonRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @POST("/lro/nonretryerror/postasync/retry/400")
         Call<ResponseBody> postAsyncRelativeRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/nonretryerror/postasync/retry/400")
-        Call<ResponseBody> beginPostAsyncRelativeRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @PUT("/lro/error/put/201/noprovisioningstatepayload")
         Call<ResponseBody> putError201NoProvisioningStatePayload(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @PUT("/lro/error/put/201/noprovisioningstatepayload")
-        Call<ResponseBody> beginPutError201NoProvisioningStatePayload(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/error/putasync/retry/nostatus")
         Call<ResponseBody> putAsyncRelativeRetryNoStatus(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/error/putasync/retry/nostatus")
-        Call<ResponseBody> beginPutAsyncRelativeRetryNoStatus(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @PUT("/lro/error/putasync/retry/nostatuspayload")
         Call<ResponseBody> putAsyncRelativeRetryNoStatusPayload(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @PUT("/lro/error/putasync/retry/nostatuspayload")
-        Call<ResponseBody> beginPutAsyncRelativeRetryNoStatusPayload(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @HTTP(path = "/lro/error/delete/204/nolocation", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete204Succeeded(@Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/error/delete/204/nolocation", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDelete204Succeeded(@Header("accept-language") String acceptLanguage);
-
         @HTTP(path = "/lro/error/deleteasync/retry/nostatus", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteAsyncRelativeRetryNoStatus(@Header("accept-language") String acceptLanguage);
-
-        @HTTP(path = "/lro/error/deleteasync/retry/nostatus", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDeleteAsyncRelativeRetryNoStatus(@Header("accept-language") String acceptLanguage);
 
         @POST("/lro/error/post/202/nolocation")
         Call<ResponseBody> post202NoLocation(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/error/post/202/nolocation")
-        Call<ResponseBody> beginPost202NoLocation(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @POST("/lro/error/postasync/retry/nopayload")
         Call<ResponseBody> postAsyncRelativeRetryNoPayload(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @POST("/lro/error/postasync/retry/nopayload")
-        Call<ResponseBody> beginPostAsyncRelativeRetryNoPayload(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/error/put/200/invalidjson")
         Call<ResponseBody> put200InvalidJson(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/error/put/200/invalidjson")
-        Call<ResponseBody> beginPut200InvalidJson(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @PUT("/lro/error/putasync/retry/invalidheader")
         Call<ResponseBody> putAsyncRelativeRetryInvalidHeader(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @PUT("/lro/error/putasync/retry/invalidheader")
-        Call<ResponseBody> beginPutAsyncRelativeRetryInvalidHeader(@Body Product product, @Header("accept-language") String acceptLanguage);
 
         @PUT("/lro/error/putasync/retry/invalidjsonpolling")
         Call<ResponseBody> putAsyncRelativeRetryInvalidJsonPolling(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/error/putasync/retry/invalidjsonpolling")
-        Call<ResponseBody> beginPutAsyncRelativeRetryInvalidJsonPolling(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @HTTP(path = "/lro/error/delete/202/retry/invalidheader", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete202RetryInvalidHeader(@Header("accept-language") String acceptLanguage);
-
-        @HTTP(path = "/lro/error/delete/202/retry/invalidheader", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDelete202RetryInvalidHeader(@Header("accept-language") String acceptLanguage);
 
         @HTTP(path = "/lro/error/deleteasync/retry/invalidheader", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteAsyncRelativeRetryInvalidHeader(@Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/error/deleteasync/retry/invalidheader", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDeleteAsyncRelativeRetryInvalidHeader(@Header("accept-language") String acceptLanguage);
-
         @HTTP(path = "/lro/error/deleteasync/retry/invalidjsonpolling", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteAsyncRelativeRetryInvalidJsonPolling(@Header("accept-language") String acceptLanguage);
-
-        @HTTP(path = "/lro/error/deleteasync/retry/invalidjsonpolling", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDeleteAsyncRelativeRetryInvalidJsonPolling(@Header("accept-language") String acceptLanguage);
 
         @POST("/lro/error/post/202/retry/invalidheader")
         Call<ResponseBody> post202RetryInvalidHeader(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/error/post/202/retry/invalidheader")
-        Call<ResponseBody> beginPost202RetryInvalidHeader(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @POST("/lro/error/postasync/retry/invalidheader")
         Call<ResponseBody> postAsyncRelativeRetryInvalidHeader(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/error/postasync/retry/invalidheader")
-        Call<ResponseBody> beginPostAsyncRelativeRetryInvalidHeader(@Body Product product, @Header("accept-language") String acceptLanguage);
-
         @POST("/lro/error/postasync/retry/invalidjsonpolling")
         Call<ResponseBody> postAsyncRelativeRetryInvalidJsonPolling(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @POST("/lro/error/postasync/retry/invalidjsonpolling")
-        Call<ResponseBody> beginPostAsyncRelativeRetryInvalidJsonPolling(@Body Product product, @Header("accept-language") String acceptLanguage);
 
     }
     /**
@@ -206,24 +131,6 @@ public interface LROSADs {
     Call<ResponseBody> putNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 400 to the initial request
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Product> beginPutNonRetry400(Product product) throws ServiceException;
-
-    /**
-     * Long running put request, service returns a 400 to the initial request
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPutNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
      *
      * @param product Product to put
@@ -240,24 +147,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> putNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
-     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Product> beginPutNonRetry201Creating400(Product product) throws ServiceException;
-
-    /**
-     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -278,24 +167,6 @@ public interface LROSADs {
     Call<ResponseBody> putAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Product> beginPutAsyncRelativeRetry400(Product product) throws ServiceException;
-
-    /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPutAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
      * Long running delete request, service returns a 400 with an error body
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -309,21 +180,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Long running delete request, service returns a 400 with an error body
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginDeleteNonRetry400() throws ServiceException;
-
-    /**
-     * Long running delete request, service returns a 400 with an error body
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running delete request, service returns a 202 with a location header
@@ -341,21 +197,6 @@ public interface LROSADs {
     Call<ResponseBody> delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 with a location header
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginDelete202NonRetry400() throws ServiceException;
-
-    /**
-     * Long running delete request, service returns a 202 with a location header
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback);
-
-    /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -369,21 +210,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginDeleteAsyncRelativeRetry400() throws ServiceException;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 400 with no error body
@@ -403,23 +229,6 @@ public interface LROSADs {
     Call<ResponseBody> postNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 400 with no error body
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginPostNonRetry400(Product product) throws ServiceException;
-
-    /**
-     * Long running post request, service returns a 400 with no error body
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPostNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
-
-    /**
      * Long running post request, service returns a 202 with a location header
      *
      * @param product Product to put
@@ -435,23 +244,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> post202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Long running post request, service returns a 202 with a location header
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginPost202NonRetry400(Product product) throws ServiceException;
-
-    /**
-     * Long running post request, service returns a 202 with a location header
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPost202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -471,23 +263,6 @@ public interface LROSADs {
     Call<ResponseBody> postAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginPostAsyncRelativeRetry400(Product product) throws ServiceException;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPostAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
-
-    /**
      * Long running put request, service returns a 201 to the initial request with no payload
      *
      * @param product Product to put
@@ -504,24 +279,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> putError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
-     * Long running put request, service returns a 201 to the initial request with no payload
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Product> beginPutError201NoProvisioningStatePayload(Product product) throws ServiceException;
-
-    /**
-     * Long running put request, service returns a 201 to the initial request with no payload
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPutError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -548,24 +305,6 @@ public interface LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatus(Product product) throws ServiceException;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPutAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
     ServiceResponse<Product> putAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException, IOException, InterruptedException;
 
     /**
@@ -576,24 +315,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
@@ -611,21 +332,6 @@ public interface LROSADs {
     Call<ResponseBody> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 204 to the initial request, indicating success.
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginDelete204Succeeded() throws ServiceException;
-
-    /**
-     * Long running delete request, service returns a 204 to the initial request, indicating success.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -639,21 +345,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginDeleteAsyncRelativeRetryNoStatus() throws ServiceException;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
@@ -673,23 +364,6 @@ public interface LROSADs {
     Call<ResponseBody> post202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial request, without a location header.
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginPost202NoLocation(Product product) throws ServiceException;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, without a location header.
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPost202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback);
-
-    /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
@@ -705,23 +379,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginPostAsyncRelativeRetryNoPayload(Product product) throws ServiceException;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPostAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
@@ -742,24 +399,6 @@ public interface LROSADs {
     Call<ResponseBody> put200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Product> beginPut200InvalidJson(Product product) throws ServiceException;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPut200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
@@ -776,24 +415,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> putAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -814,24 +435,6 @@ public interface LROSADs {
     Call<ResponseBody> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback);
-
-    /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -845,21 +448,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginDelete202RetryInvalidHeader() throws ServiceException;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
@@ -877,21 +465,6 @@ public interface LROSADs {
     Call<ResponseBody> deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidHeader() throws ServiceException;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -905,21 +478,6 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidJsonPolling() throws ServiceException;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
@@ -939,23 +497,6 @@ public interface LROSADs {
     Call<ResponseBody> post202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginPost202RetryInvalidHeader(Product product) throws ServiceException;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPost202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
-
-    /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
@@ -973,23 +514,6 @@ public interface LROSADs {
     Call<ResponseBody> postAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
-
-    /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
@@ -1005,22 +529,5 @@ public interface LROSADs {
      * @return the {@link Call} object
      */
     Call<ResponseBody> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
 }

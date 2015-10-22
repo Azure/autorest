@@ -74,53 +74,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running put request, service returns a 400 to the initial request
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPutNonRetry400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.getAcceptLanguage());
-            return beginPutNonRetry400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a 400 to the initial request
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPutNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPutNonRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPutNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(201, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
      *
      * @param product Product to put
@@ -149,53 +102,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPutNonRetry201Creating400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.getAcceptLanguage());
-            return beginPutNonRetry201Creating400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPutNonRetry201Creating400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPutNonRetry201Creating400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(201, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -230,52 +136,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPutAsyncRelativeRetry400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-            return beginPutAsyncRelativeRetry400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPutAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPutAsyncRelativeRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPutAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running delete request, service returns a 400 with an error body
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -301,49 +161,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running delete request, service returns a 400 with an error body
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginDeleteNonRetry400() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDeleteNonRetry400(this.client.getAcceptLanguage());
-            return beginDeleteNonRetry400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 400 with an error body
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDeleteNonRetry400(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDeleteNonRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginDeleteNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -375,49 +192,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running delete request, service returns a 202 with a location header
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginDelete202NonRetry400() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDelete202NonRetry400(this.client.getAcceptLanguage());
-            return beginDelete202NonRetry400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 202 with a location header
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDelete202NonRetry400(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDelete202NonRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginDelete202NonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -443,49 +217,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginDeleteAsyncRelativeRetry400() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetry400(this.client.getAcceptLanguage());
-            return beginDeleteAsyncRelativeRetry400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetry400(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginDeleteAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -519,51 +250,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running post request, service returns a 400 with no error body
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPostNonRetry400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.getAcceptLanguage());
-            return beginPostNonRetry400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running post request, service returns a 400 with no error body
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPostNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPostNonRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPostNonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running post request, service returns a 202 with a location header
      *
      * @param product Product to put
@@ -591,51 +277,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running post request, service returns a 202 with a location header
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPost202NonRetry400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.getAcceptLanguage());
-            return beginPost202NonRetry400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running post request, service returns a 202 with a location header
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPost202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPost202NonRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPost202NonRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -669,51 +310,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPostAsyncRelativeRetry400(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-            return beginPostAsyncRelativeRetry400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPostAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPostAsyncRelativeRetry400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPostAsyncRelativeRetry400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running put request, service returns a 201 to the initial request with no payload
      *
      * @param product Product to put
@@ -742,53 +338,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running put request, service returns a 201 to the initial request with no payload
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPutError201NoProvisioningStatePayload(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
-            return beginPutError201NoProvisioningStatePayloadDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a 201 to the initial request with no payload
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPutError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPutError201NoProvisioningStatePayloadDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPutError201NoProvisioningStatePayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(201, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -829,52 +378,6 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatus(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
-            return beginPutAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPutAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryNoStatusDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
     public ServiceResponse<Product> putAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
@@ -897,52 +400,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
-            return beginPutAsyncRelativeRetryNoStatusPayloadDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryNoStatusPayloadDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPutAsyncRelativeRetryNoStatusPayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -974,49 +431,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running delete request, service returns a 204 to the initial request, indicating success.
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginDelete204Succeeded() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.getAcceptLanguage());
-            return beginDelete204SucceededDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 204 to the initial request, indicating success.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDelete204SucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginDelete204SucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(204, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1042,49 +456,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginDeleteAsyncRelativeRetryNoStatus() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage());
-            return beginDeleteAsyncRelativeRetryNoStatusDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetryNoStatusDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginDeleteAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1118,51 +489,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, without a location header.
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPost202NoLocation(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.getAcceptLanguage());
-            return beginPost202NoLocationDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, without a location header.
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPost202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPost202NoLocationDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPost202NoLocationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
@@ -1190,51 +516,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPostAsyncRelativeRetryNoPayload(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
-            return beginPostAsyncRelativeRetryNoPayloadDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPostAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryNoPayloadDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPostAsyncRelativeRetryNoPayloadDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1269,53 +550,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPut200InvalidJson(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.getAcceptLanguage());
-            return beginPut200InvalidJsonDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPut200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPut200InvalidJsonDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPut200InvalidJsonDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(204, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
@@ -1344,52 +578,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-            return beginPutAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1424,52 +612,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-            return beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1495,49 +637,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginDelete202RetryInvalidHeader() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDelete202RetryInvalidHeader(this.client.getAcceptLanguage());
-            return beginDelete202RetryInvalidHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDelete202RetryInvalidHeader(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDelete202RetryInvalidHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginDelete202RetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1569,49 +668,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidHeader() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage());
-            return beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -1637,49 +693,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidJsonPolling() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage());
-            return beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -1713,51 +726,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPost202RetryInvalidHeader(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.getAcceptLanguage());
-            return beginPost202RetryInvalidHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPost202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPost202RetryInvalidHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPost202RetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
@@ -1788,51 +756,6 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-            return beginPostAsyncRelativeRetryInvalidHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryInvalidHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
@@ -1860,51 +783,6 @@ public class LROSADsImpl implements LROSADs {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-            return beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
 }

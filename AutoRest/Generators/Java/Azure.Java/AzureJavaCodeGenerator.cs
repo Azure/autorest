@@ -55,7 +55,13 @@ namespace Microsoft.Rest.Generator.Java.Azure
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            base.NormalizeClientModel(serviceClient);
+            Settings.AddCredentials = true;
+            UpdateHeadMethods(serviceClient);
+            ParseODataExtension(serviceClient);
+            FlattenResourceProperties(serviceClient);
+            AddPageableMethod(serviceClient);
+            AddAzureProperties(serviceClient);
+            SetDefaultResponses(serviceClient);
             //NormalizeAllModelsToExtendResource(serviceClient);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,

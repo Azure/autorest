@@ -74,53 +74,6 @@ public class LRORetrysImpl implements LRORetrys {
     }
 
     /**
-     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPut201CreatingSucceeded200(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
-            return beginPut201CreatingSucceeded200Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPut201CreatingSucceeded200Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(201, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
@@ -149,52 +102,6 @@ public class LRORetrysImpl implements LRORetrys {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginPutAsyncRelativeRetrySucceeded(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-            return beginPutAsyncRelativeRetrySucceededDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPutAsyncRelativeRetrySucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginPutAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -227,51 +134,6 @@ public class LRORetrysImpl implements LRORetrys {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Product> beginDeleteProvisioning202Accepted200Succeeded() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
-            return beginDeleteProvisioning202Accepted200SucceededDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDeleteProvisioning202Accepted200SucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Product> beginDeleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Product>()
-                .register(200, new TypeToken<Product>(){}.getType())
-                .register(202, new TypeToken<Product>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -300,49 +162,6 @@ public class LRORetrysImpl implements LRORetrys {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginDelete202Retry200() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDelete202Retry200(this.client.getAcceptLanguage());
-            return beginDelete202Retry200Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDelete202Retry200(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDelete202Retry200Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginDelete202Retry200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
@@ -368,49 +187,6 @@ public class LRORetrysImpl implements LRORetrys {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginDeleteAsyncRelativeRetrySucceeded() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetrySucceeded(this.client.getAcceptLanguage());
-            return beginDeleteAsyncRelativeRetrySucceededDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetrySucceeded(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetrySucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginDeleteAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
     /**
@@ -444,51 +220,6 @@ public class LRORetrysImpl implements LRORetrys {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPost202Retry200(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
-            return beginPost202Retry200Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPost202Retry200Delegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPost202Retry200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
-    }
-
-    /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
@@ -516,51 +247,6 @@ public class LRORetrysImpl implements LRORetrys {
             }
         });
         return call;
-    }
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
-     */
-    public ServiceResponse<Void> beginPostAsyncRelativeRetrySucceeded(Product product) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-            return beginPostAsyncRelativeRetrySucceededDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
-    }
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param product Product to put
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     */
-    public Call<ResponseBody> beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(beginPostAsyncRelativeRetrySucceededDelegate(response, retrofit));
-                } catch (ServiceException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> beginPostAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
-                .register(202, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
-                .build(response, retrofit);
     }
 
 }

@@ -47,7 +47,6 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(201, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("UnrecognizedPropertyException"));
         }
     }
 
@@ -288,13 +287,7 @@ public class MultipleResponsesTests {
 
     @Test
     public void get200ModelA200Invalid() throws Exception {
-        try {
-            client.getMultipleResponses().get200ModelA200Invalid();
-            fail();
-        } catch (ServiceException ex) {
-            Assert.assertEquals(200, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("UnrecognizedPropertyException"));
-        }
+        Assert.assertEquals(null, client.getMultipleResponses().get200ModelA200Invalid().getStatusCode());
     }
 
     @Test
