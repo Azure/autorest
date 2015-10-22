@@ -10,6 +10,7 @@ using Microsoft.Rest.Properties;
 using Microsoft.Rest.TransientFaultHandling;
 using System.Net;
 using System.IO;
+using System.Diagnostics;
 
 namespace Microsoft.Rest
 {
@@ -116,8 +117,9 @@ namespace Microsoft.Rest
             }
             catch (WebException we)
             {
-                System.Console.WriteLine("####Writing the details of the WebException received from the server####");
-                System.Console.WriteLine(we);
+                Trace.Listeners.Add(new TextWriterTraceListener("/home/travis/build/amarzavery/AutoRest/server.log", "myListener"));
+                Trace.TraceInformation("####Writing the details of the WebException received from the server####");
+                Trace.TraceInformation(we.ToString());
                 throw;
 
             }
