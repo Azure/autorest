@@ -1,6 +1,6 @@
 language: csharp
 mono:
-  - alpha
+  - beta
 install:
   - ls -al
   - touch /home/travis/build/amarzavery/AutoRest/server.log
