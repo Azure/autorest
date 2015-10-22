@@ -8,9 +8,9 @@
  * regenerated.
 */
 
-import { RequestOptions, WebResource } from "ms-rest";
-import * as stream from "stream";
-import * as models from "../models";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import * as moment from 'moment';
+import * as models from '../models';
 
 
 /**
@@ -29,19 +29,11 @@ export interface Duration {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {moment.duration} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: (err: Error, result: moment.Duration, request: WebResource, response: stream.Readable) => void): void;
+    getNull(options: RequestOptions, callback: ServiceCallback<moment.Duration>): void;
+    getNull(callback: ServiceCallback<moment.Duration>): void;
 
     /**
      * Put a positive duration value
@@ -53,19 +45,11 @@ export interface Duration {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putPositiveDuration(durationBody: moment.Duration, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putPositiveDuration(durationBody: moment.Duration, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putPositiveDuration(durationBody: moment.Duration, callback: ServiceCallback<void>): void;
 
     /**
      * Get a positive duration value
@@ -75,19 +59,11 @@ export interface Duration {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {moment.duration} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getPositiveDuration(options: RequestOptions, callback: (err: Error, result: moment.Duration, request: WebResource, response: stream.Readable) => void): void;
+    getPositiveDuration(options: RequestOptions, callback: ServiceCallback<moment.Duration>): void;
+    getPositiveDuration(callback: ServiceCallback<moment.Duration>): void;
 
     /**
      * Get an invalid duration value
@@ -97,17 +73,9 @@ export interface Duration {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {moment.duration} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: (err: Error, result: moment.Duration, request: WebResource, response: stream.Readable) => void): void;
+    getInvalid(options: RequestOptions, callback: ServiceCallback<moment.Duration>): void;
+    getInvalid(callback: ServiceCallback<moment.Duration>): void;
 }

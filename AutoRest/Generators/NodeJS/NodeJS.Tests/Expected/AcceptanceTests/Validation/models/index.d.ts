@@ -21,7 +21,7 @@
  * 
  * @member {string} [image] Image URL representing the product.
  * 
-*/
+ */
 export interface Product {
     displayNames?: string[];
     capacity?: number;
@@ -38,10 +38,9 @@ export interface Product {
  * 
  * @member {string} [fields]
  * 
-*/
+ */
 export interface ErrorModel {
     code?: number;
     message?: string;
     fields?: string;
 }
-//TODO: What about PolymorphicDictionary?

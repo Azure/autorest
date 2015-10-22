@@ -29,7 +29,12 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public bool ContainsTimeSpan
         {
-            get { return this.Methods.FirstOrDefault(m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.TimeSpan) != null) != null; }
+            get { return this.Methods.FirstOrDefault(m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.TimeSpan) != null || m.ReturnType == PrimaryType.TimeSpan) != null; }
+        }
+
+        public bool ContainsStream
+        {
+            get { return this.Methods.FirstOrDefault(m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.Stream) != null || m.ReturnType == PrimaryType.Stream) != null; }
         }
     }
 }

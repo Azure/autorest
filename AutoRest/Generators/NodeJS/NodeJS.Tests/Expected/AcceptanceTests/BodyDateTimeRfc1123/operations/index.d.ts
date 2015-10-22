@@ -8,9 +8,8 @@
  * regenerated.
 */
 
-import { RequestOptions, WebResource } from "ms-rest";
-import * as stream from "stream";
-import * as models from "../models";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import * as models from '../models';
 
 
 /**
@@ -29,19 +28,11 @@ export interface Datetimerfc1123 {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getNull(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getNull(callback: ServiceCallback<Date>): void;
 
     /**
      * Get invalid datetime value
@@ -51,19 +42,11 @@ export interface Datetimerfc1123 {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getInvalid(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getInvalid(callback: ServiceCallback<Date>): void;
 
     /**
      * Get overflow datetime value
@@ -73,19 +56,11 @@ export interface Datetimerfc1123 {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getOverflow(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getOverflow(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getOverflow(callback: ServiceCallback<Date>): void;
 
     /**
      * Get underflow datetime value
@@ -95,19 +70,11 @@ export interface Datetimerfc1123 {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getUnderflow(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getUnderflow(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUnderflow(callback: ServiceCallback<Date>): void;
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
@@ -119,19 +86,11 @@ export interface Datetimerfc1123 {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putUtcMaxDateTime(datetimeBody: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putUtcMaxDateTime(datetimeBody: Date, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putUtcMaxDateTime(datetimeBody: Date, callback: ServiceCallback<void>): void;
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt
@@ -141,19 +100,11 @@ export interface Datetimerfc1123 {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getUtcLowercaseMaxDateTime(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getUtcLowercaseMaxDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUtcLowercaseMaxDateTime(callback: ServiceCallback<Date>): void;
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
@@ -163,19 +114,11 @@ export interface Datetimerfc1123 {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getUtcUppercaseMaxDateTime(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getUtcUppercaseMaxDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUtcUppercaseMaxDateTime(callback: ServiceCallback<Date>): void;
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
@@ -187,19 +130,11 @@ export interface Datetimerfc1123 {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putUtcMinDateTime(datetimeBody: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putUtcMinDateTime(datetimeBody: Date, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putUtcMinDateTime(datetimeBody: Date, callback: ServiceCallback<void>): void;
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT
@@ -209,17 +144,9 @@ export interface Datetimerfc1123 {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getUtcMinDateTime(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getUtcMinDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUtcMinDateTime(callback: ServiceCallback<Date>): void;
 }

@@ -17,9 +17,8 @@
  * 
  * @member {string} [message]
  * 
-*/
+ */
 export interface ErrorModel {
     status?: number;
     message?: string;
 }
-//TODO: What about PolymorphicDictionary?

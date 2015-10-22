@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
-export default class AutoRestUrlTestService {
+declare class AutoRestUrlTestService {
     /**
      * @class
      * Initializes a new instance of the AutoRestUrlTestService class.
@@ -32,8 +32,14 @@ export default class AutoRestUrlTestService {
      */
     constructor(globalStringPath: string, baseUri: string, options: ServiceClientOptions);
 
+    globalStringPath: string;
+
+    globalStringQuery: string;
+
     // Operation groups
     paths: operations.Paths;
     queries: operations.Queries;
     pathItems: operations.PathItems;
     }
+
+export = AutoRestUrlTestService;

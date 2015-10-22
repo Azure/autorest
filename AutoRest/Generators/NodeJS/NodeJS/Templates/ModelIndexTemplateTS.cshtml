@@ -11,10 +11,3 @@
 @EmptyLine
 @:@(Include(new ModelTemplateTS(), model))
 }
-//TODO: What about PolymorphicDictionary?
-@if (!string.IsNullOrWhiteSpace(Model.PolymorphicDictionary))
-{
-@:exports.discriminators = {
-@:  @(Model.PolymorphicDictionary)
-@:};
-} 

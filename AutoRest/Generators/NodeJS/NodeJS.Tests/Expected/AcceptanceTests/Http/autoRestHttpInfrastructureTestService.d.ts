@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
-export default class AutoRestHttpInfrastructureTestService {
+declare class AutoRestHttpInfrastructureTestService {
     /**
      * @class
      * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
@@ -39,3 +39,5 @@ export default class AutoRestHttpInfrastructureTestService {
     httpRetry: operations.HttpRetry;
     multipleResponses: operations.MultipleResponses;
     }
+
+export = AutoRestHttpInfrastructureTestService;

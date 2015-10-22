@@ -27,18 +27,7 @@
  *
 @WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
  *
-@WrapComment(" * ", " @param {function} callback")
- *
-@WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
-@WrapComment(" *                      ", Model.ReturnTypeInfo)
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+@WrapComment(" * ", " @param {ServiceCallback} [callback] callback function; see ServiceCallback doc in ms-rest index.d.ts for details")
  */
-@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallbackTS)): void;
- 
+@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallbackTS(true))): void;
+@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallbackTS(false))): void;

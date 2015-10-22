@@ -8,9 +8,8 @@
  * regenerated.
 */
 
-import { RequestOptions, WebResource } from "ms-rest";
-import * as stream from "stream";
-import * as models from "../models";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import * as models from '../models';
 
 
 /**
@@ -29,19 +28,11 @@ export interface IntModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {number} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: (err: Error, result: number, request: WebResource, response: stream.Readable) => void): void;
+    getNull(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getNull(callback: ServiceCallback<number>): void;
 
     /**
      * Get invalid Int value
@@ -51,19 +42,11 @@ export interface IntModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {number} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: (err: Error, result: number, request: WebResource, response: stream.Readable) => void): void;
+    getInvalid(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getInvalid(callback: ServiceCallback<number>): void;
 
     /**
      * Get overflow Int32 value
@@ -73,19 +56,11 @@ export interface IntModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {number} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getOverflowInt32(options: RequestOptions, callback: (err: Error, result: number, request: WebResource, response: stream.Readable) => void): void;
+    getOverflowInt32(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getOverflowInt32(callback: ServiceCallback<number>): void;
 
     /**
      * Get underflow Int32 value
@@ -95,19 +70,11 @@ export interface IntModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {number} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getUnderflowInt32(options: RequestOptions, callback: (err: Error, result: number, request: WebResource, response: stream.Readable) => void): void;
+    getUnderflowInt32(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getUnderflowInt32(callback: ServiceCallback<number>): void;
 
     /**
      * Get overflow Int64 value
@@ -117,19 +84,11 @@ export interface IntModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {number} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getOverflowInt64(options: RequestOptions, callback: (err: Error, result: number, request: WebResource, response: stream.Readable) => void): void;
+    getOverflowInt64(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getOverflowInt64(callback: ServiceCallback<number>): void;
 
     /**
      * Get underflow Int64 value
@@ -139,19 +98,11 @@ export interface IntModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {number} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getUnderflowInt64(options: RequestOptions, callback: (err: Error, result: number, request: WebResource, response: stream.Readable) => void): void;
+    getUnderflowInt64(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getUnderflowInt64(callback: ServiceCallback<number>): void;
 
     /**
      * Put max int32 value
@@ -163,19 +114,11 @@ export interface IntModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putMax32(intBody: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putMax32(intBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMax32(intBody: number, callback: ServiceCallback<void>): void;
 
     /**
      * Put max int64 value
@@ -187,19 +130,11 @@ export interface IntModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putMax64(intBody: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putMax64(intBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMax64(intBody: number, callback: ServiceCallback<void>): void;
 
     /**
      * Put min int32 value
@@ -211,19 +146,11 @@ export interface IntModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putMin32(intBody: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putMin32(intBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMin32(intBody: number, callback: ServiceCallback<void>): void;
 
     /**
      * Put min int64 value
@@ -235,17 +162,9 @@ export interface IntModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putMin64(intBody: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putMin64(intBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMin64(intBody: number, callback: ServiceCallback<void>): void;
 }

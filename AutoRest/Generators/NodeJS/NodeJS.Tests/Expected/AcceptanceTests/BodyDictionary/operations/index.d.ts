@@ -8,9 +8,8 @@
  * regenerated.
 */
 
-import { RequestOptions, WebResource } from "ms-rest";
-import * as stream from "stream";
-import * as models from "../models";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import * as models from '../models';
 
 
 /**
@@ -29,19 +28,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getNull(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Get empty dictionary value {}
@@ -51,19 +42,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getEmpty(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getEmpty(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getEmpty(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Set dictionary value empty {}
@@ -75,19 +58,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putEmpty(arrayBody: { [propertyName: string]: string }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putEmpty(arrayBody: { [propertyName: string]: string }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putEmpty(arrayBody: { [propertyName: string]: string }, callback: ServiceCallback<void>): void;
 
     /**
      * Get Dictionary with null value
@@ -97,19 +72,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getNullValue(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string }, request: WebResource, response: stream.Readable) => void): void;
+    getNullValue(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getNullValue(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
      * Get Dictionary with null key
@@ -119,19 +86,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getNullKey(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string }, request: WebResource, response: stream.Readable) => void): void;
+    getNullKey(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getNullKey(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
      * Get Dictionary with key as empty string
@@ -141,19 +100,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getEmptyStringKey(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string }, request: WebResource, response: stream.Readable) => void): void;
+    getEmptyStringKey(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getEmptyStringKey(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
      * Get invalid Dictionary value
@@ -163,19 +114,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string }, request: WebResource, response: stream.Readable) => void): void;
+    getInvalid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getInvalid(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
@@ -185,19 +128,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getBooleanTfft(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: boolean }, request: WebResource, response: stream.Readable) => void): void;
+    getBooleanTfft(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
+    getBooleanTfft(callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
@@ -209,19 +144,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putBooleanTfft(arrayBody: { [propertyName: string]: boolean }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putBooleanTfft(arrayBody: { [propertyName: string]: boolean }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putBooleanTfft(arrayBody: { [propertyName: string]: boolean }, callback: ServiceCallback<void>): void;
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }
@@ -231,19 +158,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getBooleanInvalidNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: boolean }, request: WebResource, response: stream.Readable) => void): void;
+    getBooleanInvalidNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
+    getBooleanInvalidNull(callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
@@ -253,19 +172,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getBooleanInvalidString(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: boolean }, request: WebResource, response: stream.Readable) => void): void;
+    getBooleanInvalidString(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
+    getBooleanInvalidString(callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -275,19 +186,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getIntegerValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getIntegerValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getIntegerValid(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -299,19 +202,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putIntegerValid(arrayBody: { [propertyName: string]: number }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putIntegerValid(arrayBody: { [propertyName: string]: number }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putIntegerValid(arrayBody: { [propertyName: string]: number }, callback: ServiceCallback<void>): void;
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}
@@ -321,19 +216,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getIntInvalidNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getIntInvalidNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getIntInvalidNull(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
@@ -343,19 +230,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getIntInvalidString(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getIntInvalidString(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getIntInvalidString(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -365,19 +244,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getLongValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getLongValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getLongValid(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -389,19 +260,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putLongValid(arrayBody: { [propertyName: string]: number }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putLongValid(arrayBody: { [propertyName: string]: number }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putLongValid(arrayBody: { [propertyName: string]: number }, callback: ServiceCallback<void>): void;
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}
@@ -411,19 +274,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getLongInvalidNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getLongInvalidNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getLongInvalidNull(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
@@ -433,19 +288,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getLongInvalidString(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getLongInvalidString(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getLongInvalidString(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -455,19 +302,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getFloatValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getFloatValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getFloatValid(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -479,19 +318,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putFloatValid(arrayBody: { [propertyName: string]: number }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putFloatValid(arrayBody: { [propertyName: string]: number }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putFloatValid(arrayBody: { [propertyName: string]: number }, callback: ServiceCallback<void>): void;
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
@@ -501,19 +332,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getFloatInvalidNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getFloatInvalidNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getFloatInvalidNull(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
@@ -523,19 +346,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getFloatInvalidString(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getFloatInvalidString(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getFloatInvalidString(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -545,19 +360,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDoubleValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getDoubleValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getDoubleValid(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -569,19 +376,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putDoubleValid(arrayBody: { [propertyName: string]: number }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putDoubleValid(arrayBody: { [propertyName: string]: number }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putDoubleValid(arrayBody: { [propertyName: string]: number }, callback: ServiceCallback<void>): void;
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
@@ -591,19 +390,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDoubleInvalidNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getDoubleInvalidNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getDoubleInvalidNull(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
@@ -613,19 +404,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDoubleInvalidString(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+    getDoubleInvalidString(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getDoubleInvalidString(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
@@ -635,19 +418,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getStringValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string }, request: WebResource, response: stream.Readable) => void): void;
+    getStringValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getStringValid(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
@@ -659,19 +434,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putStringValid(arrayBody: { [propertyName: string]: string }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putStringValid(arrayBody: { [propertyName: string]: string }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putStringValid(arrayBody: { [propertyName: string]: string }, callback: ServiceCallback<void>): void;
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
@@ -681,19 +448,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getStringWithNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string }, request: WebResource, response: stream.Readable) => void): void;
+    getStringWithNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getStringWithNull(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
@@ -703,19 +462,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getStringWithInvalid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string }, request: WebResource, response: stream.Readable) => void): void;
+    getStringWithInvalid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getStringWithInvalid(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2":
@@ -726,19 +477,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDateValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: Date }, request: WebResource, response: stream.Readable) => void): void;
+    getDateValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateValid(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
@@ -751,19 +494,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putDateValid(arrayBody: { [propertyName: string]: Date }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putDateValid(arrayBody: { [propertyName: string]: Date }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putDateValid(arrayBody: { [propertyName: string]: Date }, callback: ServiceCallback<void>): void;
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
@@ -773,19 +508,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDateInvalidNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: Date }, request: WebResource, response: stream.Readable) => void): void;
+    getDateInvalidNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateInvalidNull(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}
@@ -795,19 +522,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDateInvalidChars(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: Date }, request: WebResource, response: stream.Readable) => void): void;
+    getDateInvalidChars(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateInvalidChars(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
@@ -818,19 +537,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDateTimeValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: Date }, request: WebResource, response: stream.Readable) => void): void;
+    getDateTimeValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateTimeValid(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
@@ -843,19 +554,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putDateTimeValid(arrayBody: { [propertyName: string]: Date }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putDateTimeValid(arrayBody: { [propertyName: string]: Date }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putDateTimeValid(arrayBody: { [propertyName: string]: Date }, callback: ServiceCallback<void>): void;
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
@@ -865,19 +568,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDateTimeInvalidNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: Date }, request: WebResource, response: stream.Readable) => void): void;
+    getDateTimeInvalidNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateTimeInvalidNull(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
@@ -887,19 +582,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDateTimeInvalidChars(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: Date }, request: WebResource, response: stream.Readable) => void): void;
+    getDateTimeInvalidChars(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateTimeInvalidChars(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
@@ -911,19 +598,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDateTimeRfc1123Valid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: Date }, request: WebResource, response: stream.Readable) => void): void;
+    getDateTimeRfc1123Valid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateTimeRfc1123Valid(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
@@ -936,19 +615,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putDateTimeRfc1123Valid(arrayBody: { [propertyName: string]: Date }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putDateTimeRfc1123Valid(arrayBody: { [propertyName: string]: Date }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putDateTimeRfc1123Valid(arrayBody: { [propertyName: string]: Date }, callback: ServiceCallback<void>): void;
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
@@ -959,19 +630,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getByteValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: Buffer }, request: WebResource, response: stream.Readable) => void): void;
+    getByteValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
+    getByteValid(callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
@@ -984,19 +647,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putByteValid(arrayBody: { [propertyName: string]: Buffer }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putByteValid(arrayBody: { [propertyName: string]: Buffer }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putByteValid(arrayBody: { [propertyName: string]: Buffer }, callback: ServiceCallback<void>): void;
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first
@@ -1007,19 +662,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getByteInvalidNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: Buffer }, request: WebResource, response: stream.Readable) => void): void;
+    getByteInvalidNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
+    getByteInvalidNull(callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
 
     /**
      * Get dictionary of complex type null value
@@ -1029,19 +676,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getComplexNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: models.Widget }, request: WebResource, response: stream.Readable) => void): void;
+    getComplexNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
+    getComplexNull(callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
 
     /**
      * Get empty dictionary of complex type {}
@@ -1051,19 +690,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getComplexEmpty(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: models.Widget }, request: WebResource, response: stream.Readable) => void): void;
+    getComplexEmpty(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
+    getComplexEmpty(callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1,
@@ -1074,19 +705,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getComplexItemNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: models.Widget }, request: WebResource, response: stream.Readable) => void): void;
+    getComplexItemNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
+    getComplexItemNull(callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1,
@@ -1097,19 +720,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getComplexItemEmpty(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: models.Widget }, request: WebResource, response: stream.Readable) => void): void;
+    getComplexItemEmpty(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
+    getComplexItemEmpty(callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"},
@@ -1120,19 +735,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getComplexValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: models.Widget }, request: WebResource, response: stream.Readable) => void): void;
+    getComplexValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
+    getComplexValid(callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1,
@@ -1146,19 +753,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putComplexValid(arrayBody: { [propertyName: string]: models.Widget }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putComplexValid(arrayBody: { [propertyName: string]: models.Widget }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putComplexValid(arrayBody: { [propertyName: string]: models.Widget }, callback: ServiceCallback<void>): void;
 
     /**
      * Get a null array
@@ -1168,19 +767,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getArrayNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string[] }, request: WebResource, response: stream.Readable) => void): void;
+    getArrayNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
+    getArrayNull(callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
 
     /**
      * Get an empty dictionary {}
@@ -1190,19 +781,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getArrayEmpty(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string[] }, request: WebResource, response: stream.Readable) => void): void;
+    getArrayEmpty(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
+    getArrayEmpty(callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
@@ -1213,19 +796,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getArrayItemNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string[] }, request: WebResource, response: stream.Readable) => void): void;
+    getArrayItemNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
+    getArrayItemNull(callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
@@ -1236,19 +811,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getArrayItemEmpty(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string[] }, request: WebResource, response: stream.Readable) => void): void;
+    getArrayItemEmpty(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
+    getArrayItemEmpty(callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
@@ -1259,19 +826,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getArrayValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: string[] }, request: WebResource, response: stream.Readable) => void): void;
+    getArrayValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
+    getArrayValid(callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
@@ -1284,19 +843,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putArrayValid(arrayBody: { [propertyName: string]: string[] }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putArrayValid(arrayBody: { [propertyName: string]: string[] }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putArrayValid(arrayBody: { [propertyName: string]: string[] }, callback: ServiceCallback<void>): void;
 
     /**
      * Get an dictionaries of dictionaries with value null
@@ -1306,19 +857,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDictionaryNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: { [propertyName: string]: string } }, request: WebResource, response: stream.Readable) => void): void;
+    getDictionaryNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
+    getDictionaryNull(callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
 
     /**
      * Get an dictionaries of dictionaries of type <string, string> with value {}
@@ -1328,19 +871,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDictionaryEmpty(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: { [propertyName: string]: string } }, request: WebResource, response: stream.Readable) => void): void;
+    getDictionaryEmpty(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
+    getDictionaryEmpty(callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
 
     /**
      * Get an dictionaries of dictionaries of type <string, string> with value
@@ -1352,19 +887,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDictionaryItemNull(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: { [propertyName: string]: string } }, request: WebResource, response: stream.Readable) => void): void;
+    getDictionaryItemNull(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
+    getDictionaryItemNull(callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
 
     /**
      * Get an dictionaries of dictionaries of type <string, string> with value
@@ -1376,19 +903,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDictionaryItemEmpty(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: { [propertyName: string]: string } }, request: WebResource, response: stream.Readable) => void): void;
+    getDictionaryItemEmpty(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
+    getDictionaryItemEmpty(callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
 
     /**
      * Get an dictionaries of dictionaries of type <string, string> with value
@@ -1400,19 +919,11 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getDictionaryValid(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: { [propertyName: string]: string } }, request: WebResource, response: stream.Readable) => void): void;
+    getDictionaryValid(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
+    getDictionaryValid(callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
 
     /**
      * Get an dictionaries of dictionaries of type <string, string> with value
@@ -1426,17 +937,9 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putDictionaryValid(arrayBody: { [propertyName: string]: { [propertyName: string]: string } }, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putDictionaryValid(arrayBody: { [propertyName: string]: { [propertyName: string]: string } }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putDictionaryValid(arrayBody: { [propertyName: string]: { [propertyName: string]: string } }, callback: ServiceCallback<void>): void;
 }
