@@ -179,7 +179,7 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the return type for the async extension method
         /// </summary>
-        public string TaskExtensionReturnTypeString
+        public virtual string TaskExtensionReturnTypeString
         {
             get
             {
@@ -239,7 +239,7 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
-        public string ReturnTypeString
+        public virtual string ReturnTypeString
         {
             get
             {
