@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
-export default class AutoRestRequiredOptionalTestService {
+declare class AutoRestRequiredOptionalTestService {
     /**
      * @class
      * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
@@ -34,7 +34,15 @@ export default class AutoRestRequiredOptionalTestService {
      */
     constructor(requiredGlobalPath: string, requiredGlobalQuery: string, baseUri: string, options: ServiceClientOptions);
 
+    requiredGlobalPath: string;
+
+    requiredGlobalQuery: string;
+
+    optionalGlobalQuery: number;
+
     // Operation groups
     implicit: operations.Implicit;
     explicit: operations.Explicit;
     }
+
+export = AutoRestRequiredOptionalTestService;

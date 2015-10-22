@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
-export default class AutoRestDateTestService {
+declare class AutoRestDateTestService {
     /**
      * @class
      * Initializes a new instance of the AutoRestDateTestService class.
@@ -33,3 +33,5 @@ export default class AutoRestDateTestService {
     // Operation groups
     dateModel: operations.DateModel;
     }
+
+export = AutoRestDateTestService;

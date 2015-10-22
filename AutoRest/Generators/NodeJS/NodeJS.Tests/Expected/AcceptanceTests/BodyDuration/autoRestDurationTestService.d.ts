@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
-export default class AutoRestDurationTestService {
+declare class AutoRestDurationTestService {
     /**
      * @class
      * Initializes a new instance of the AutoRestDurationTestService class.
@@ -33,3 +33,5 @@ export default class AutoRestDurationTestService {
     // Operation groups
     duration: operations.Duration;
     }
+
+export = AutoRestDurationTestService;

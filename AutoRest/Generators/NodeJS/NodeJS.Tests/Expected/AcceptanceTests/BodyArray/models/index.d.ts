@@ -17,7 +17,7 @@
  * 
  * @member {string} [string]
  * 
-*/
+ */
 export interface Product {
     integer?: number;
     string?: string;
@@ -31,9 +31,8 @@ export interface Product {
  * 
  * @member {string} [message]
  * 
-*/
+ */
 export interface ErrorModel {
     status?: number;
     message?: string;
 }
-//TODO: What about PolymorphicDictionary?
