@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
-export default class AutoRestIntegerTestService {
+declare class AutoRestIntegerTestService {
     /**
      * @class
      * Initializes a new instance of the AutoRestIntegerTestService class.
@@ -33,3 +33,5 @@ export default class AutoRestIntegerTestService {
     // Operation groups
     intModel: operations.IntModel;
     }
+
+export = AutoRestIntegerTestService;

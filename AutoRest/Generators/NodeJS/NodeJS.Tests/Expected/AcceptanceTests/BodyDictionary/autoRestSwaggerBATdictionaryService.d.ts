@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
-export default class AutoRestSwaggerBATdictionaryService {
+declare class AutoRestSwaggerBATdictionaryService {
     /**
      * @class
      * Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
@@ -33,3 +33,5 @@ export default class AutoRestSwaggerBATdictionaryService {
     // Operation groups
     dictionary: operations.Dictionary;
     }
+
+export = AutoRestSwaggerBATdictionaryService;

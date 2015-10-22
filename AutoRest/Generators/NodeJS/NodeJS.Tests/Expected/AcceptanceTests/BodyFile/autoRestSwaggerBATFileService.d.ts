@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
-export default class AutoRestSwaggerBATFileService {
+declare class AutoRestSwaggerBATFileService {
     /**
      * @class
      * Initializes a new instance of the AutoRestSwaggerBATFileService class.
@@ -33,3 +33,5 @@ export default class AutoRestSwaggerBATFileService {
     // Operation groups
     files: operations.Files;
     }
+
+export = AutoRestSwaggerBATFileService;

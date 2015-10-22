@@ -8,11 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as models from "./models";
-import * as stream from "stream";
 
-export default class AutoRestReportService {
+declare class AutoRestReportService {
     /**
      * @class
      * Initializes a new instance of the AutoRestReportService class.
@@ -31,25 +30,19 @@ export default class AutoRestReportService {
      */
     constructor(baseUri: string, options: ServiceClientOptions);
 
-        /**
-     * Get test coverage report
-     *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
-     * request
-     *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
-     */
-    getReport(options: RequestOptions, callback: (err: Error, result: { [propertyName: string]: number }, request: WebResource, response: stream.Readable) => void): void;
+            /**
+         * Get test coverage report
+         *
+         * @param {object} [options]
+         *
+         * @param {object} [options.customHeaders] headers that will be added to
+         * request
+         *
+         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+         * doc in ms-rest index.d.ts for details
+         */
+        getReport(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+        getReport(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 }
+
+export = AutoRestReportService;

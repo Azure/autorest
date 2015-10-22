@@ -8,9 +8,8 @@
  * regenerated.
 */
 
-import { RequestOptions, WebResource } from "ms-rest";
-import * as stream from "stream";
-import * as models from "../models";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import * as models from '../models';
 
 
 /**
@@ -29,19 +28,11 @@ export interface DateModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getNull(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getNull(callback: ServiceCallback<Date>): void;
 
     /**
      * Get invalid date value
@@ -51,19 +42,11 @@ export interface DateModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getInvalidDate(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getInvalidDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getInvalidDate(callback: ServiceCallback<Date>): void;
 
     /**
      * Get overflow date value
@@ -73,19 +56,11 @@ export interface DateModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getOverflowDate(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getOverflowDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getOverflowDate(callback: ServiceCallback<Date>): void;
 
     /**
      * Get underflow date value
@@ -95,19 +70,11 @@ export interface DateModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getUnderflowDate(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getUnderflowDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUnderflowDate(callback: ServiceCallback<Date>): void;
 
     /**
      * Put max date value 9999-12-31
@@ -119,19 +86,11 @@ export interface DateModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putMaxDate(dateBody: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putMaxDate(dateBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMaxDate(dateBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get max date value 9999-12-31
@@ -141,19 +100,11 @@ export interface DateModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getMaxDate(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getMaxDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getMaxDate(callback: ServiceCallback<Date>): void;
 
     /**
      * Put min date value 0000-01-01
@@ -165,19 +116,11 @@ export interface DateModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putMinDate(dateBody: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putMinDate(dateBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMinDate(dateBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get min date value 0000-01-01
@@ -187,17 +130,9 @@ export interface DateModel {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {date} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getMinDate(options: RequestOptions, callback: (err: Error, result: Date, request: WebResource, response: stream.Readable) => void): void;
+    getMinDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getMinDate(callback: ServiceCallback<Date>): void;
 }

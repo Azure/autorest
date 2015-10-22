@@ -8,9 +8,9 @@
  * regenerated.
 */
 
-import { RequestOptions, WebResource } from "ms-rest";
-import * as stream from "stream";
-import * as models from "../models";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import * as stream from 'stream';
+import * as models from '../models';
 
 
 /**
@@ -29,19 +29,11 @@ export interface Files {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getFile(options: RequestOptions, callback: (err: Error, result: stream.Readable, request: WebResource, response: stream.Readable) => void): void;
+    getFile(options: RequestOptions, callback: ServiceCallback<stream.Readable>): void;
+    getFile(callback: ServiceCallback<stream.Readable>): void;
 
     /**
      * Get empty file
@@ -51,17 +43,9 @@ export interface Files {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {object} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getEmptyFile(options: RequestOptions, callback: (err: Error, result: stream.Readable, request: WebResource, response: stream.Readable) => void): void;
+    getEmptyFile(options: RequestOptions, callback: ServiceCallback<stream.Readable>): void;
+    getEmptyFile(callback: ServiceCallback<stream.Readable>): void;
 }
