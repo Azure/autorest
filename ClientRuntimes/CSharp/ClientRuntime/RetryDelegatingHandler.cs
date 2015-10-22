@@ -93,6 +93,7 @@ namespace Microsoft.Rest
             };
 
             HttpResponseMessage responseMessage = null;
+            StreamWriter sw = System.IO.File.AppendText("/home/travis/build/amarzavery/AutoRest/server.log");
             try
             {
                 await RetryPolicy.ExecuteAsync(async () =>
@@ -115,7 +116,6 @@ namespace Microsoft.Rest
             }
             catch (WebException we)
             {
-                StreamWriter sw = File.AppendText("/home/travis/build/amarzavery/AutoRest/server.log");
                 sw.WriteLine("####Writing the details of the WebException received from the server####");
                 sw.WriteLine(we);
                 throw;
