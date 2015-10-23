@@ -79,9 +79,13 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         classes.Add("com.microsoft.rest.serializer.CollectionFormat");
                     }
-                    if (param.Type == PrimaryType.ByteArray)
+                    if (param.Type is PrimaryType)
                     {
-                        classes.Add("org.apache.commons.codec.binary.Base64");
+                        var importedFrom = JavaCodeNamer.ImportedFrom(param.Type as PrimaryType);
+                        if (importedFrom != null)
+                        {
+                            classes.Add(importedFrom);
+                        }
                     }
                 }
                 
@@ -116,6 +120,15 @@ namespace Microsoft.Rest.Generator.Java
                         if (param.Location != ParameterLocation.None &&
                             param.Location != ParameterLocation.FormData)
                             classes.Add("retrofit.http." + param.Location.ToString());
+
+                        if (param.Type is PrimaryType)
+                        {
+                            var importedFrom = JavaCodeNamer.ImportedFrom(param.Type as PrimaryType);
+                            if (importedFrom != null)
+                            {
+                                classes.Add(importedFrom);
+                            }
+                        }
                     }
                 }
                 return classes.AsEnumerable();

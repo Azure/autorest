@@ -334,7 +334,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetInvalidDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/invaliddecimal").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/invaliddecimal").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1152,7 +1153,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "PutBigDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/decimal/2.5976931e+101").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/decimal/2.5976931e+101").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1237,7 +1239,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetBigDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/decimal/2.5976931e+101").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/decimal/2.5976931e+101").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1331,7 +1334,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "PutBigDecimalPositiveDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/decimal/99999999.99").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/decimal/99999999.99").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1416,7 +1420,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetBigDecimalPositiveDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/decimal/99999999.99").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/decimal/99999999.99").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1510,7 +1515,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "PutBigDecimalNegativeDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/decimal/-99999999.99").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/decimal/-99999999.99").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -1595,7 +1601,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetBigDecimalNegativeDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/big/decimal/-99999999.99").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/big/decimal/-99999999.99").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2051,7 +2058,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "PutSmallDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/small/decimal/2.5976931e-101").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/small/decimal/2.5976931e-101").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("PUT");
@@ -2136,7 +2144,8 @@ namespace Fixtures.AcceptanceTestsBodyNumber
                 ServiceClientTracing.Enter(invocationId, this, "GetSmallDecimal", tracingParameters);
             }
             // Construct URL
-            var url = new Uri(this.Client.BaseUri, "number/small/decimal/2.5976931e-101").ToString();
+            var baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "number/small/decimal/2.5976931e-101").ToString();
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");

@@ -58,7 +58,7 @@ namespace Microsoft.Rest.Generator
             }
             catch (Exception exception)
             {
-                throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.ToString());
+                throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
             }
         }
     }

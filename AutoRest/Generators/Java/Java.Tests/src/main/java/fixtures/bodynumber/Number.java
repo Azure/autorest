@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.math.BigDecimal;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;
@@ -38,10 +39,7 @@ public interface Number {
         Call<ResponseBody> getInvalidDouble();
 
         @GET("/number/invaliddecimal")
-        Response getInvalidDecimal() throws ServiceException;
-
-        @GET("/number/invaliddecimal")
-        void getInvalidDecimalAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getInvalidDecimal();
 
         @PUT("/number/big/float/3.402823e+20")
         Call<ResponseBody> putBigFloat(@Body double numberBody);
@@ -68,40 +66,22 @@ public interface Number {
         Call<ResponseBody> getBigDoubleNegativeDecimal();
 
         @PUT("/number/big/decimal/2.5976931e+101")
-        Response putBigDecimal(@Body Decimal numberBody) throws ServiceException;
-
-        @PUT("/number/big/decimal/2.5976931e+101")
-        void putBigDecimalAsync(@Body Decimal numberBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putBigDecimal(@Body BigDecimal numberBody);
 
         @GET("/number/big/decimal/2.5976931e+101")
-        Response getBigDecimal() throws ServiceException;
-
-        @GET("/number/big/decimal/2.5976931e+101")
-        void getBigDecimalAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getBigDecimal();
 
         @PUT("/number/big/decimal/99999999.99")
-        Response putBigDecimalPositiveDecimal(@Body Decimal numberBody) throws ServiceException;
-
-        @PUT("/number/big/decimal/99999999.99")
-        void putBigDecimalPositiveDecimalAsync(@Body Decimal numberBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putBigDecimalPositiveDecimal(@Body BigDecimal numberBody);
 
         @GET("/number/big/decimal/99999999.99")
-        Response getBigDecimalPositiveDecimal() throws ServiceException;
-
-        @GET("/number/big/decimal/99999999.99")
-        void getBigDecimalPositiveDecimalAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getBigDecimalPositiveDecimal();
 
         @PUT("/number/big/decimal/-99999999.99")
-        Response putBigDecimalNegativeDecimal(@Body Decimal numberBody) throws ServiceException;
-
-        @PUT("/number/big/decimal/-99999999.99")
-        void putBigDecimalNegativeDecimalAsync(@Body Decimal numberBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putBigDecimalNegativeDecimal(@Body BigDecimal numberBody);
 
         @GET("/number/big/decimal/-99999999.99")
-        Response getBigDecimalNegativeDecimal() throws ServiceException;
-
-        @GET("/number/big/decimal/-99999999.99")
-        void getBigDecimalNegativeDecimalAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getBigDecimalNegativeDecimal();
 
         @PUT("/number/small/float/3.402823e-20")
         Call<ResponseBody> putSmallFloat(@Body double numberBody);
@@ -116,16 +96,10 @@ public interface Number {
         Call<ResponseBody> getSmallDouble();
 
         @PUT("/number/small/decimal/2.5976931e-101")
-        Response putSmallDecimal(@Body Decimal numberBody) throws ServiceException;
-
-        @PUT("/number/small/decimal/2.5976931e-101")
-        void putSmallDecimalAsync(@Body Decimal numberBody, ServiceResponseCallback cb);
+        Call<ResponseBody> putSmallDecimal(@Body BigDecimal numberBody);
 
         @GET("/number/small/decimal/2.5976931e-101")
-        Response getSmallDecimal() throws ServiceException;
-
-        @GET("/number/small/decimal/2.5976931e-101")
-        void getSmallDecimalAsync(ServiceResponseCallback cb);
+        Call<ResponseBody> getSmallDecimal();
 
     }
     /**
@@ -179,17 +153,18 @@ public interface Number {
     /**
      * Get invalid decimal Number value
      *
-     * @return the Decimal object if successful.
+     * @return the BigDecimal object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Decimal getInvalidDecimal() throws ServiceException;
+    BigDecimal getInvalidDecimal() throws ServiceException;
 
     /**
      * Get invalid decimal Number value
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getInvalidDecimalAsync(final ServiceCallback<Decimal> serviceCallback);
+    Call<ResponseBody> getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
 
     /**
      * Put big float value 3.402823e+20
@@ -326,95 +301,101 @@ public interface Number {
     /**
      * Put big decimal value 2.5976931e+101
      *
-     * @param numberBody the Decimal value
+     * @param numberBody the BigDecimal value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putBigDecimal(Decimal numberBody) throws ServiceException;
+    void putBigDecimal(BigDecimal numberBody) throws ServiceException;
 
     /**
      * Put big decimal value 2.5976931e+101
      *
-     * @param numberBody the Decimal value
+     * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putBigDecimalAsync(Decimal numberBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get big decimal value 2.5976931e+101
      *
-     * @return the Decimal object if successful.
+     * @return the BigDecimal object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Decimal getBigDecimal() throws ServiceException;
+    BigDecimal getBigDecimal() throws ServiceException;
 
     /**
      * Get big decimal value 2.5976931e+101
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getBigDecimalAsync(final ServiceCallback<Decimal> serviceCallback);
+    Call<ResponseBody> getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
 
     /**
      * Put big decimal value 99999999.99
      *
-     * @param numberBody the Decimal value
+     * @param numberBody the BigDecimal value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putBigDecimalPositiveDecimal(Decimal numberBody) throws ServiceException;
+    void putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ServiceException;
 
     /**
      * Put big decimal value 99999999.99
      *
-     * @param numberBody the Decimal value
+     * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putBigDecimalPositiveDecimalAsync(Decimal numberBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get big decimal value 99999999.99
      *
-     * @return the Decimal object if successful.
+     * @return the BigDecimal object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Decimal getBigDecimalPositiveDecimal() throws ServiceException;
+    BigDecimal getBigDecimalPositiveDecimal() throws ServiceException;
 
     /**
      * Get big decimal value 99999999.99
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getBigDecimalPositiveDecimalAsync(final ServiceCallback<Decimal> serviceCallback);
+    Call<ResponseBody> getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
 
     /**
      * Put big decimal value -99999999.99
      *
-     * @param numberBody the Decimal value
+     * @param numberBody the BigDecimal value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putBigDecimalNegativeDecimal(Decimal numberBody) throws ServiceException;
+    void putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ServiceException;
 
     /**
      * Put big decimal value -99999999.99
      *
-     * @param numberBody the Decimal value
+     * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putBigDecimalNegativeDecimalAsync(Decimal numberBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get big decimal value -99999999.99
      *
-     * @return the Decimal object if successful.
+     * @return the BigDecimal object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Decimal getBigDecimalNegativeDecimal() throws ServiceException;
+    BigDecimal getBigDecimalNegativeDecimal() throws ServiceException;
 
     /**
      * Get big decimal value -99999999.99
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getBigDecimalNegativeDecimalAsync(final ServiceCallback<Decimal> serviceCallback);
+    Call<ResponseBody> getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
 
     /**
      * Put small float value 3.402823e-20
@@ -485,32 +466,34 @@ public interface Number {
     /**
      * Put small decimal value 2.5976931e-101
      *
-     * @param numberBody the Decimal value
+     * @param numberBody the BigDecimal value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putSmallDecimal(Decimal numberBody) throws ServiceException;
+    void putSmallDecimal(BigDecimal numberBody) throws ServiceException;
 
     /**
      * Put small decimal value 2.5976931e-101
      *
-     * @param numberBody the Decimal value
+     * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void putSmallDecimalAsync(Decimal numberBody, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get small decimal value 2.5976931e-101
      *
-     * @return the Decimal object if successful.
+     * @return the BigDecimal object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Decimal getSmallDecimal() throws ServiceException;
+    BigDecimal getSmallDecimal() throws ServiceException;
 
     /**
      * Get small decimal value 2.5976931e-101
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
-    void getSmallDecimalAsync(final ServiceCallback<Decimal> serviceCallback);
+    Call<ResponseBody> getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
 
 }

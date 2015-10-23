@@ -19,6 +19,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import com.microsoft.rest.DateTimeRfc1123;
 import org.joda.time.Period;
+import org.apache.commons.codec.binary.Base64;
 import fixtures.bodyarray.models.Product;
 import java.util.Map;
 import retrofit.http.GET;
