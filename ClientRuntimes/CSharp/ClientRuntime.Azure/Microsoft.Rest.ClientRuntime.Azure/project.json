@@ -7,7 +7,7 @@
     "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
 
     "dependencies": {
-        "Microsoft.Rest.ClientRuntime": "",
+        "Microsoft.Rest.ClientRuntime": ""
     },
 
     "commands": {

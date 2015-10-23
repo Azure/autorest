@@ -41,7 +41,7 @@ var app = express();
 var now = new Date();
 var logFileName = 'AccTestServer-' + now.getHours() +
     now.getMinutes() + now.getSeconds() + '.log';
-var testResultDir = '../../../../TestResults';
+var testResultDir = path.join(__dirname, '../../../TestResults');
 if (!fs.existsSync(testResultDir)) {
   fs.mkdirSync(testResultDir);
 }
