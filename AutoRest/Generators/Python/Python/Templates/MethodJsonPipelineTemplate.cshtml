@@ -1,0 +1,74 @@
+﻿@using System.Linq;
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodTemplateModel>
+// Send Request
+return client.pipeline(httpRequest, function (err, response, responseBody) {
+  if (err) {
+    return callback(err);
+  }
+  var statusCode = response.statusCode;
+  if (@(Model.FailureStatusCodePredicate)) {
+    var error = new Error(responseBody);
+    error.statusCode = response.statusCode;
+    error.request = httpRequest;
+    error.response = response;
+    if (responseBody === '') responseBody = null;
+    var parsedErrorResponse;
+    try {
+      parsedErrorResponse = JSON.parse(responseBody);
+  @if (Model.DefaultResponse != null)
+  {
+      if (Model.DefaultResponse is CompositeType)
+      {
+          if (!string.IsNullOrEmpty(((CompositeType)Model.DefaultResponse).PolymorphicDiscriminator))
+          {
+      @:error.body = new client._models.discriminators[parsedErrorResponse['@(((CompositeType)Model.DefaultResponse).PolymorphicDiscriminator)']]();
+          }
+          else
+          {
+      @:error.body = new client._models['@(Model.DefaultResponse.Name)']();
+          }
+      }
+      else
+      {
+      @:error.body = parsedErrorResponse;
+      }
+      
+      var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse, "error.body", "parsedErrorResponse");
+      if (!string.IsNullOrWhiteSpace(deserializeErrorBody))
+      {
+@:      if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+@:        @(deserializeErrorBody)
+@:      }
+      }
+  }
+    } catch (defaultError) {
+      error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+      return callback(error);
+    }
+    return callback(error);
+  }
+
+  // Create Result
+  var result = null;
+  if (responseBody === '') responseBody = null;
+  @Model.InitializeResult
+  @foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
+  {
+      <text>
+  // Deserialize Response
+  if (statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
+    @(Model.DeserializeResponse(responsePair.Value))
+  }
+      </text>
+  }
+  @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
+  {
+    @(Model.DeserializeResponse(Model.DefaultResponse))
+  }
+  @EmptyLine
+
+  return callback(null, result, httpRequest, response);
+});
