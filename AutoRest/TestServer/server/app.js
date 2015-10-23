@@ -35,7 +35,7 @@ var azureSpecial = require('./routes/azureSpecials');
 var util = require('util');
 
 var app = express();
-var tempFile = '/home/travis/build/amarzavery/AutoRest/server.log';
+//var tempFile = '/home/travis/build/amarzavery/AutoRest/server.log';
 //set up server log
 var now = new Date();
 var logFileName = 'AccTestServer-' + now.getHours() +
@@ -43,10 +43,10 @@ var logFileName = 'AccTestServer-' + now.getHours() +
 var testResultDir = path.join(__dirname, '../../../TestResults');
 if (!fs.existsSync(testResultDir)) {
   fs.mkdirSync(testResultDir);
-  fs.appendFileSync(tempFile, '>>>> Created directory ' + testResultDir);
+  //fs.appendFileSync(tempFile, '>>>> Created directory ' + testResultDir);
 }
 var logfile = fs.createWriteStream(path.join(testResultDir, logFileName), {flags: 'a'});
-fs.appendFileSync(tempFile, '>>>> Created log file ' + logFileName);
+//fs.appendFileSync(tempFile, '>>>> Created log file ' + logFileName);
 app.use(morgan('combined', {stream: logfile}));
 
 var azurecoverage = {};
