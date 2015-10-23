@@ -132,6 +132,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 throw new ArgumentNullException("credentials");
             }
             this.Credentials = credentials;
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
         }
 
         /// <summary>
@@ -159,6 +163,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
         }
 
         /// <summary>
@@ -169,10 +177,6 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             this.HttpSuccess = new HttpSuccessOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.AcceptLanguage = "en-US";
-            if (this.Credentials != null)
-            {
-                this.Credentials.InitializeServiceClient(this);
-            }
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
