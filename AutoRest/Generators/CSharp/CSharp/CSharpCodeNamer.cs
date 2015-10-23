@@ -111,7 +111,8 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public override IType NormalizeTypeReference(IType type)
         {
-            if (type is EnumType && ((EnumType)type).ModelAsString)
+            var enumType = type as EnumType;
+            if (type != null && enumType.ModelAsString)
             {
                 return PrimaryType.String;
             }
