@@ -55,23 +55,13 @@ class ServiceClient(object):
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
 
-    def _send(self, request, **kwargs):
-        session = self.creds.signed_session()
-        session.proxies = self.config.proxies
-
-        for protocol in self.config.protocols:
-            session.mount(protocol, self._adapter)
-
-        prepped = session.prepare_request(request)
-        return session.send(prepped)
-
     def _format_url(self, url):
        
         url = quote(url)
         url = urljoin(self.config.base_url, url)
         return url
 
-    def request(self, url=None, params={}):
+    def _request(self, url, params):
         request = ClientRequest(self.config)
 
         if url:
@@ -82,32 +72,48 @@ class ServiceClient(object):
 
         return request
 
+    def send(self, request, **kwargs):
+        session = self.creds.signed_session()
+        session.proxies = self.config.proxies
+
+        for protocol in self.config.protocols:
+            session.mount(protocol, self._adapter)
+
+        prepped = session.prepare_request(request)
+        return session.send(prepped)
+
     def add_hook(self, hook):
         self.adapter.add_hook(event, hook)
 
     def add_header(self, header, value):
         self._adapter.client_headers[header] = value
 
-    def get(self, request):
+    def get(self, url=None, params={}):
+        request = self._request(url, params)
         request.method = 'GET'
-        return self._send(request)
+        return request
 
-    def put(self, request):
+    def put(self, url=None, params={}):
+        request = self._request(url, params)
         request.method = 'PUT'
-        return self._send(request)
+        return request
 
-    def post(self, request):
+    def post(self, url=None, params={}):
+        request = self._request(url, params)
         request.method = 'POST'
-        return self._send(request)
+        return request
 
-    def patch(self, request):
+    def patch(self, url=None, params={}):
+        request = self._request(url, params)
         request.method = 'PATCH'
-        return self._send(request)
+        return request
 
-    def delete(self, request):
+    def delete(self, url=None, params={}):
+        request = self._request(url, params)
         request.method = 'DELETE'
-        return self._send(request)
+        return request
 
-    def merge(self, request):
+    def merge(self, url=None, params={}):
+        request = self._request(url, params)
         request.method = 'MERGE'
-        return self._send(request)
+        return request

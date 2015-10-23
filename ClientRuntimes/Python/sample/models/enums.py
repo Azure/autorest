@@ -1,7 +1,4 @@
 ﻿
-class ContentTypes(object):
-
-    json = 'application/json;odata=minimalmetadata'
 
 
 class PoolState(object):

@@ -30,16 +30,10 @@
     <Compile Include="sample\batch_exception.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sample\batch_response.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\batch_constants.py">
+    <Compile Include="sample\models\enums.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="sample\models\pool_models.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\models\pool_responses.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="sample\models\shared.py">
