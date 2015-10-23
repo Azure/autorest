@@ -1,5 +1,4 @@
 2015.10.23 Version 0.12.0
-* Added Java language support
 * Added Ruby language support
 * Implemented validation in C#
 * Added support for dotnet (CoreClr) to Microsoft.Rest.ClientRuntime and Microsoft.Rest.ClientRuntime.Azure
