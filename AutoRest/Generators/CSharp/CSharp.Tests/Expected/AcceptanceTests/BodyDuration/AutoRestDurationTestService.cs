@@ -93,7 +93,6 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             {
                 throw new ArgumentNullException("baseUri");
             }
-            this.Initialize();
             this.BaseUri = baseUri;
         }
 

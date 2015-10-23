@@ -95,7 +95,6 @@ namespace Fixtures.PetstoreV2
             {
                 throw new ArgumentNullException("baseUri");
             }
-            this.Initialize();
             this.BaseUri = baseUri;
         }
 
