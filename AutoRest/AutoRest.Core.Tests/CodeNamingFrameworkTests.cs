@@ -7,7 +7,12 @@ namespace Microsoft.Rest.Generator.Test
 {
     public class FakeCodeNamer : CodeNamer
     {
-        public override ClientModel.IType NormalizeType(ClientModel.IType type)
+        public override ClientModel.IType NormalizeTypeReference(ClientModel.IType type)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override ClientModel.IType NormalizeTypeDeclaration(ClientModel.IType type)
         {
             throw new System.NotImplementedException();
         }
