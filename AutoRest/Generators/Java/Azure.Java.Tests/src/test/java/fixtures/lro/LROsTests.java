@@ -201,4 +201,150 @@ public class LROsTests {
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
     }
+
+    @Test
+    public void deleteProvisioning202Accepted200Succeeded() throws Exception {
+        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202Accepted200Succeeded();
+        Assert.assertEquals(200, response.getResponse().code());
+        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+    }
+
+    @Test
+    public void deleteProvisioning202DeletingFailed200() throws Exception {
+        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202Accepted200Succeeded();
+        Assert.assertEquals(200, response.getResponse().code());
+        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+    }
+
+    @Test
+    public void deleteProvisioning202Deletingcanceled200() throws Exception {
+        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202Accepted200Succeeded();
+        Assert.assertEquals(200, response.getResponse().code());
+        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+    }
+
+    @Test
+    public void delete204Succeeded() throws Exception {
+        ServiceResponse<Void> response = client.getLROs().delete204Succeeded();
+        Assert.assertEquals(204, response.getResponse().code());
+    }
+
+    @Test
+    public void delete202Retry200() throws Exception {
+        ServiceResponse<Product> response = client.getLROs().delete202Retry200();
+        Assert.assertEquals(200, response.getResponse().code());
+    }
+
+    @Test
+    public void delete202NoRetry204() throws Exception {
+        ServiceResponse<Product> response = client.getLROs().delete202NoRetry204();
+        Assert.assertEquals(204, response.getResponse().code());
+    }
+
+    @Test
+    public void deleteNoHeaderInRetry() throws Exception {
+        ServiceResponse<Void> response = client.getLROs().deleteNoHeaderInRetry();
+        Assert.assertEquals(204, response.getResponse().code());
+    }
+
+    @Test
+    public void deleteAsyncNoHeaderInRetry() throws Exception {
+        ServiceResponse<Void> response = client.getLROs().deleteAsyncNoHeaderInRetry();
+        Assert.assertEquals(200, response.getResponse().code());
+    }
+
+    @Test
+    public void deleteAsyncRetrySucceeded() throws Exception {
+        ServiceResponse<Void> response = client.getLROs().deleteAsyncRetrySucceeded();
+        Assert.assertEquals(200, response.getResponse().code());
+    }
+
+    @Test
+    public void deleteAsyncNoRetrySucceeded() throws Exception {
+        ServiceResponse<Void> response = client.getLROs().deleteAsyncNoRetrySucceeded();
+        Assert.assertEquals(200, response.getResponse().code());
+    }
+
+    @Test
+    public void deleteAsyncRetryFailed() throws Exception {
+        try {
+            ServiceResponse<Void> response = client.getLROs().deleteAsyncRetryFailed();
+            fail();
+        } catch (ServiceException e) {
+            Assert.assertEquals("Async operation failed", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deleteAsyncRetrycanceled() throws Exception {
+        try {
+            ServiceResponse<Void> response = client.getLROs().deleteAsyncRetrycanceled();
+            fail();
+        } catch (ServiceException e) {
+            Assert.assertEquals("Async operation failed", e.getMessage());
+        }
+    }
+
+    @Test
+    public void post200WithPayload() throws Exception {
+        ServiceResponse<Sku> response = client.getLROs().post200WithPayload();
+        Assert.assertEquals(200, response.getResponse().code());
+        Assert.assertEquals("1", response.getBody().getId());
+    }
+
+    @Test
+    public void post202Retry200() throws Exception {
+        Product product = new Product();
+        product.setLocation("West US");
+        ServiceResponse<Void> response = client.getLROs().post202Retry200(product);
+        Assert.assertEquals(200, response.getResponse().code());
+    }
+
+    @Test
+    public void post202NoRetry204() throws Exception {
+        Product product = new Product();
+        product.setLocation("West US");
+        ServiceResponse<Product> response = client.getLROs().post202NoRetry204(product);
+        Assert.assertEquals(204, response.getResponse().code());
+    }
+
+    @Test
+    public void postAsyncRetrySucceeded() throws Exception {
+        Product product = new Product();
+        product.setLocation("West US");
+        ServiceResponse<Product> response = client.getLROs().postAsyncRetrySucceeded(product);
+        Assert.assertEquals(200, response.getResponse().code());
+    }
+
+    @Test
+    public void postAsyncNoRetrySucceeded() throws Exception {
+        Product product = new Product();
+        product.setLocation("West US");
+        ServiceResponse<Product> response = client.getLROs().postAsyncNoRetrySucceeded(product);
+        Assert.assertEquals(200, response.getResponse().code());
+    }
+
+    @Test
+    public void postAsyncRetryFailed() throws Exception {
+        try {
+            Product product = new Product();
+            product.setLocation("West US");
+            ServiceResponse<Void> response = client.getLROs().postAsyncRetryFailed(product);
+            fail();
+        } catch (ServiceException e) {
+            Assert.assertEquals("Async operation failed", e.getMessage());
+        }
+    }
+
+    @Test
+    public void postAsyncRetrycanceled() throws Exception {
+        try {
+            Product product = new Product();
+            product.setLocation("West US");
+            ServiceResponse<Void> response = client.getLROs().postAsyncRetrycanceled(product);
+            fail();
+        } catch (ServiceException e) {
+            Assert.assertEquals("Async operation failed", e.getMessage());
+        }
+    }
 }

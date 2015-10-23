@@ -579,7 +579,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Product> deleteProvisioning202Accepted200Succeeded() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() {}.getType());
     }
 
     /**
@@ -594,7 +594,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -608,7 +608,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Product> deleteProvisioning202DeletingFailed200() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteProvisioning202DeletingFailed200(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() {}.getType());
     }
 
     /**
@@ -623,7 +623,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -637,7 +637,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Product> deleteProvisioning202Deletingcanceled200() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteProvisioning202Deletingcanceled200(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() {}.getType());
     }
 
     /**
@@ -652,7 +652,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -665,7 +665,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Void> delete204Succeeded() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete204Succeeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -680,7 +680,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -694,7 +694,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Product> delete202Retry200() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202Retry200(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() {}.getType());
     }
 
     /**
@@ -709,7 +709,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -723,7 +723,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Product> delete202NoRetry204() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202NoRetry204(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() {}.getType());
     }
 
     /**
@@ -738,7 +738,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -751,7 +751,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Void> deleteNoHeaderInRetry() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteNoHeaderInRetry(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -766,7 +766,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -779,7 +779,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Void> deleteAsyncNoHeaderInRetry() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncNoHeaderInRetry(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -794,7 +794,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -807,7 +807,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Void> deleteAsyncRetrySucceeded() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRetrySucceeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -822,7 +822,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -835,7 +835,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Void> deleteAsyncNoRetrySucceeded() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncNoRetrySucceeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -850,7 +850,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -863,7 +863,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Void> deleteAsyncRetryFailed() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRetryFailed(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -878,7 +878,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -891,7 +891,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Void> deleteAsyncRetrycanceled() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRetrycanceled(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -906,7 +906,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -920,7 +920,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Sku> post200WithPayload() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post200WithPayload(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Sku>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Sku>() {}.getType());
     }
 
     /**
@@ -935,7 +935,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -949,7 +949,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Void> post202Retry200(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -965,7 +965,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -980,7 +980,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Product> post202NoRetry204(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202NoRetry204(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() {}.getType());
     }
 
     /**
@@ -996,7 +996,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -1011,7 +1011,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Product> postAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() {}.getType());
     }
 
     /**
@@ -1027,7 +1027,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -1042,7 +1042,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Product> postAsyncNoRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() {}.getType());
     }
 
     /**
@@ -1058,7 +1058,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -1072,7 +1072,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Void> postAsyncRetryFailed(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRetryFailed(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -1088,7 +1088,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -1102,7 +1102,7 @@ public class LROsImpl implements LROs {
      */
     public ServiceResponse<Void> postAsyncRetrycanceled(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRetrycanceled(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -1118,7 +1118,7 @@ public class LROsImpl implements LROs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;

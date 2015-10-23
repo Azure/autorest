@@ -57,11 +57,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
         }
 
-        public String Exceptions
+        public string Exceptions
         {
             get
             {
-                List<String> exceptions = new List<string>();
+                List<string> exceptions = new List<string>();
                 exceptions.Add("ServiceException");
                 if (this.IsLongRunningOperation)
                 {
@@ -69,6 +69,22 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     exceptions.Add("InterruptedException");
                 }
                 return string.Join(", ", exceptions);
+            }
+        }
+
+        public string PollingMethod
+        {
+            get
+            {
+                if (this.HttpMethod == HttpMethod.Put || this.HttpMethod == HttpMethod.Patch)
+                {
+                    return "getPutOrPatchResult";
+                }
+                else if (this.HttpMethod == HttpMethod.Delete || this.HttpMethod == HttpMethod.Post)
+                {
+                    return "getPostOrDeleteResult";
+                }
+                throw new InvalidOperationException("Invalid long running operation HTTP method " + this.HttpMethod);
             }
         }
     }

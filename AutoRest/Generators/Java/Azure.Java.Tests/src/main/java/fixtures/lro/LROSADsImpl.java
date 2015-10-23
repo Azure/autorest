@@ -142,7 +142,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> deleteNonRetry400() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteNonRetry400(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -157,7 +157,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -170,7 +170,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> delete202NonRetry400() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202NonRetry400(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -185,7 +185,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -198,7 +198,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> deleteAsyncRelativeRetry400() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetry400(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -213,7 +213,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -227,7 +227,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> postNonRetry400(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postNonRetry400(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -243,7 +243,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -257,7 +257,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> post202NonRetry400(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202NonRetry400(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -273,7 +273,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -287,7 +287,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> postAsyncRelativeRetry400(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetry400(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -303,7 +303,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -409,7 +409,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> delete204Succeeded() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete204Succeeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -424,7 +424,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -437,7 +437,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> deleteAsyncRelativeRetryNoStatus() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -452,7 +452,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -466,7 +466,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> post202NoLocation(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202NoLocation(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -482,7 +482,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -496,7 +496,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> postAsyncRelativeRetryNoPayload(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -512,7 +512,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -618,7 +618,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> delete202RetryInvalidHeader() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202RetryInvalidHeader(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -633,7 +633,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -646,7 +646,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> deleteAsyncRelativeRetryInvalidHeader() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -661,7 +661,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -674,7 +674,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> deleteAsyncRelativeRetryInvalidJsonPolling() throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -689,7 +689,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -703,7 +703,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> post202RetryInvalidHeader(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202RetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -719,7 +719,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -733,7 +733,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> postAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -749,7 +749,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;
@@ -763,7 +763,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public ServiceResponse<Void> postAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Void>() {}.getType());
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
     }
 
     /**
@@ -779,7 +779,7 @@ public class LROSADsImpl implements LROSADs {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
             }
         });
         return call;

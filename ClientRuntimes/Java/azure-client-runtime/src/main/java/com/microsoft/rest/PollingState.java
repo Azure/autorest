@@ -39,12 +39,17 @@ public class PollingState<T> {
     public PollingState(Response<ResponseBody> response, int retryTimeout, Type resourceType) throws IOException {
         this.retryTimeout = retryTimeout;
         this.setResponse(response);
-
-        String responseContent = response.body().string();
-        this.resource = JacksonHelper.deserialize(responseContent, resourceType);
         this.resourceType = resourceType;
 
-        PollingResource resource = JacksonHelper.deserialize(responseContent, new TypeReference<PollingResource>() {});
+        String responseContent = null;
+        PollingResource resource = null;
+        if (response.body() != null) {
+            responseContent = response.body().string();
+        }
+        if (responseContent != null && !responseContent.isEmpty()) {
+            this.resource = JacksonHelper.deserialize(responseContent, resourceType);
+            resource = JacksonHelper.deserialize(responseContent, new TypeReference<PollingResource>() {});
+        }
         if (resource != null && resource.getProperties() != null &&
                 resource.getProperties().getProvisioningState() != null) {
             setStatus(resource.getProperties().getProvisioningState());
@@ -69,9 +74,12 @@ public class PollingState<T> {
             throw new ServiceException("no body");
         }
 
-        String responseContent = response.body().string();
-        final PollingResource resource = JacksonHelper.deserialize(responseContent, new TypeReference<PollingResource>() {});
-        if (resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
+        String responseContent = null;
+        if (response.body() != null) {
+            responseContent = response.body().string();
+        }
+        PollingResource resource = JacksonHelper.deserialize(responseContent, new TypeReference<PollingResource>() {});
+        if (resource != null && resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
             this.setStatus(resource.getProperties().getProvisioningState());
         } else {
             this.setStatus(AzureAsyncOperation.successStatus);
@@ -92,12 +100,17 @@ public class PollingState<T> {
 
     public void updateFromResponseOnDelete(Response<ResponseBody> response) throws IOException {
         this.setResponse(response);
-        this.setResource(JacksonHelper.<T>deserialize(response.body().string(), new TypeReference<T>() {
+        String responseContent = null;
+        if (response.body() != null) {
+            responseContent = response.body().string();
+        }
+        this.setResource(JacksonHelper.<T>deserialize(responseContent, new TypeReference<T>() {
             @Override
             public Type getType() {
                 return resourceType;
             }
         }));
+        setStatus(AzureAsyncOperation.successStatus);
     }
 
     public int getDelayInMilliseconds() {

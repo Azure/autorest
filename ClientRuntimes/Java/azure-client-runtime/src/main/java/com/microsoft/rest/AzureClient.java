@@ -126,7 +126,7 @@ public class AzureClient extends ServiceClient {
         }
 
         int statusCode = response.code();
-        if (statusCode != 200 && statusCode != 201 && statusCode != 202) {
+        if (statusCode != 200 && statusCode != 202 && statusCode != 204) {
             throw new ServiceException(statusCode + " is not a valid polling status code");
         }
 
@@ -150,7 +150,7 @@ public class AzureClient extends ServiceClient {
         // Check if operation failed
         if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus()))
         {
-            throw new ServiceException("Async operaion failed");
+            throw new ServiceException("Async operation failed");
         }
 
         return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
