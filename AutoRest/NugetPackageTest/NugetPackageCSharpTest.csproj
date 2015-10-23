@@ -38,11 +38,13 @@
     <Compile Include="Generated\CSharp\**\*.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Rest.ClientRuntime">
-      <HintPath>packages\Microsoft.Rest.ClientRuntime.1.4.1\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Rest.ClientRuntime.1.4.1\lib\portable-net45+win8+wpa81\Microsoft.Rest.ClientRuntime.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
@@ -73,7 +75,6 @@
     <Compile Include="PackageTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
