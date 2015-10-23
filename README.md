@@ -6,12 +6,17 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 
 ##Getting AutoRest##
 The AutoRest tools can be installed with Nuget for use in a Visual Studio project.
+[![AutoRest NuGet](https://img.shields.io/nuget/v/autorest.svg?style=flat-square)](https://www.nuget.org/packages/autorest/)
 
     nuget.exe install AutoRest
 
 Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by running:
+[![AutoRest Chocolatey](https://img.shields.io/chocolatey/v/autorest.svg?style=flat-square)](https://chocolatey.org/packages/AutoRest)
 
     choco install autorest
+    
+Nightlies are available via MyGet:
+[![AutoRest MyGet](https://img.shields.io/myget/autorest/vpre/autorest.svg?style=flat-square)](https://www.myget.org/gallery/autorest)
 
 ## Build Prerequisites
 AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.

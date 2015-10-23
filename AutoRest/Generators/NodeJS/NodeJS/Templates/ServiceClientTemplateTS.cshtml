@@ -2,22 +2,22 @@
 @using Microsoft.Rest.Generator.NodeJS.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
+@using Microsoft.Rest.Generator.NodeJS.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ServiceClientTemplateModel>
 /*
 @Header(" * ")
  */
 @EmptyLine
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 @if (Model.MethodTemplateModels.Any())
 {
 @:import * as models from "./models";
-@:import * as stream from "stream";
 }
 @if (Model.MethodGroups.Any()) {
 @:import * as operations from "./operations";
 }
 @EmptyLine
-export default class @(Model.Name) {
+declare class @(Model.Name) {
     @{var parameters = Model.Properties.Where(p => p.IsRequired);}
     /**
      * @@class
@@ -42,6 +42,12 @@ export default class @(Model.Name) {
      */
     constructor(@(Model.RequiredConstructorParametersTS), options: ServiceClientOptions);
 
+    @foreach (var property in Model.Properties)
+    {
+    @EmptyLine
+    @:@(property.Name): @(property.Type.TSType(false));
+    }
+
     @if (Model.MethodGroupModels.Any())
     {
     @EmptyLine
@@ -51,8 +57,11 @@ export default class @(Model.Name) {
     @:@(methodGroup.MethodGroupName): operations.@(methodGroup.MethodGroupType);
     }
     }
-    @foreach (var method in Model.MethodTemplateModels) {
-    @EmptyLine
-    @:@(Include(new MethodTemplateTS(), method))
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+        @EmptyLine
+        @:@(Include(new MethodTemplateTS(), method))
     }
 }
+@EmptyLine
+export = @(Model.Name);

@@ -1,13 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Templates;
 using Microsoft.Rest.Generator.CSharp.Templates;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
 {
@@ -15,12 +18,16 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.1.1.1";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.0.0";
+
+        // page extensions class dictionary.
+        private IDictionary<KeyValuePair<string, string>, string> pageClasses;
 
         public AzureCSharpCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new AzureCSharpCodeNamer();
             IsSingleFileGenerationSupported = true;
+            pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
         }
 
         public override string Name
@@ -57,7 +64,18 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
-            _namer.NormalizePaginatedMethods(serviceClient);
+            _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
+
+            if (serviceClient != null)
+            {
+                foreach (var model in serviceClient.ModelTypes)
+                {
+                    if (model.Extensions.ContainsKey(AzureResourceExtension) && (bool)model.Extensions[AzureResourceExtension])
+                    {
+                        model.BaseModelType = new CompositeType { Name = "IResource", SerializedName = "IResource" };
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -129,7 +147,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 await Write(modelTemplate, Path.Combine("Models", model.Name + ".cs"));
             }
 
-
             // Enums
             foreach (var enumType in serviceClient.EnumTypes)
             {
@@ -138,6 +155,16 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                     Model = new EnumTemplateModel(enumType),
                 };
                 await Write(enumTemplate, Path.Combine("Models", enumTemplate.Model.TypeDefinitionName + ".cs"));
+            }
+
+            // Page class
+            foreach (var pageClass in pageClasses)
+            {
+                var pageTemplate = new PageTemplate
+                {
+                    Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
+                };
+                await Write(pageTemplate, Path.Combine("Models", pageTemplate.Model.TypeDefinitionName + ".cs"));
             }
         }
     }

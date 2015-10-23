@@ -43,7 +43,7 @@ namespace Microsoft.Rest
         /// <returns>The access token.</returns>
         public Task<AuthenticationHeaderValue> GetAuthenticationHeaderAsync(CancellationToken cancellationToken)
         {
-            return PlatformTask.FromResult(new AuthenticationHeaderValue(_type, _accessToken));
+            return Task.FromResult(new AuthenticationHeaderValue(_type, _accessToken));
         }
     }
 }

@@ -175,7 +175,7 @@ namespace Microsoft.Rest.TransientFaultHandling
 
                 if (retryCount > 1 || !this.RetryStrategy.FastFirstRetry)
                 {
-                    PlatformTask.Delay(delay).Wait();
+                    Task.Delay(delay).Wait();
                 }
             }
         }

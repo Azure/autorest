@@ -146,13 +146,14 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Get the parameters that are actually method parameters in the order they apopear in the method signatur
+        /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
         public IEnumerable<ParameterTemplateModel> LocalParameters
         {
             get
             {
+                //Omit parameter group parameters for now since AutoRest-Ruby doesn't support them
                 return
                     ParameterTemplateModels.Where(
                         p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
@@ -161,7 +162,7 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Gets the return type name for the underlyign interface method
+        /// Gets the return type name for the underlying interface method
         /// </summary>
         public virtual string OperationResponseReturnTypeString
         {

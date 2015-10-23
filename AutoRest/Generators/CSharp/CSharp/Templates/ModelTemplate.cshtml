@@ -2,6 +2,7 @@
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ModelTemplateModel>
 @Header("// ")
 @EmptyLine
@@ -26,6 +27,24 @@ namespace @(Settings.Namespace).Models
     }
     public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
     {
+        /// <summary>
+        @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
+        /// </summary>
+        public @(Model.Name)() { }
+
+        @EmptyLine
+
+        /// <summary>
+        @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
+        /// </summary>
+        public @(Model.Name)(@Model.ConstructorParameters)
+        {
+        @foreach (var property in Model.Properties)
+        {
+            @:@(property.Name) = @(CodeNamer.CamelCase(property.Name));
+        }
+        }
+        @EmptyLine
         @foreach (var property in Model.PropertyTemplateModels)
         {
         @:/// <summary>

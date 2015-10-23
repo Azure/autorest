@@ -67,6 +67,11 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        public IEnumerable<Property> SerializableProperties
+        {
+            get { return this.Properties.Where(p => !string.IsNullOrEmpty(p.SerializedName)); }
+        }
+
         public bool IsPolymorphic
         {
             get
@@ -182,6 +187,15 @@ namespace Microsoft.Rest.Generator.NodeJS
             var sample = ComposedProperties.FirstOrDefault(p => 
                 p.Type is CompositeType || p.Type is SequenceType && (p.Type as SequenceType).ElementType is CompositeType);
             return sample != null;
+        }
+
+        public bool ContainsDurationProperty()
+        {
+            Property prop = ComposedProperties.FirstOrDefault(p =>
+                (p.Type is PrimaryType && (p.Type as PrimaryType) == PrimaryType.TimeSpan) ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.TimeSpan) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.TimeSpan));
+            return prop != null;
         }
 
         /// <summary>

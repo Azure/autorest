@@ -929,6 +929,18 @@ describe('nodejs', function () {
           });
         });
 
+        it('should get and put duration arrays', function (done) {
+          var testArray = [moment.duration('P123DT22H14M12.011S'), moment.duration('P5DT1H')];
+          testClient.arrayModel.getDurationValid(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, testArray);
+            testClient.arrayModel.putDurationValid(testArray, function (error, result) {
+              should.not.exist(error);
+              done();
+            });
+          });
+        });
+
         it('should get and put byte arrays', function (done) {
           var bytes1 = new Buffer([255, 255, 255, 250]);
           var bytes2 = new Buffer([1, 2, 3]);
@@ -1350,6 +1362,18 @@ describe('nodejs', function () {
             should.not.exist(error);
             assert.deepEqual(result, dictionary);
             testClient.dictionary.putDateTimeRfc1123Valid(dictionary, function (error, result) {
+              should.not.exist(error);
+              done();
+            });
+          });
+        });
+
+        it('should get and put duration dictionaries', function (done) {
+          var dictionary = { 0: moment.duration('P123DT22H14M12.011S'), 1: moment.duration('P5DT1H') };
+          testClient.dictionary.getDurationValid(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, dictionary);
+            testClient.dictionary.putDurationValid(dictionary, function (error, result) {
               should.not.exist(error);
               done();
             });

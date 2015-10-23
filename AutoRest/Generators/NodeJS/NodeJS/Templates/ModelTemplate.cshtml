@@ -20,7 +20,11 @@
 @:var util = require('util');
 @EmptyLine
 }
-
+@if (Model.ContainsDurationProperty())
+{
+@:var moment = require('moment');
+@EmptyLine
+}
 /**
  * @@class
  * Initializes a new instance of the @(Model.Name) class.
@@ -60,14 +64,16 @@ if (Model.BaseModelType != null)
 }
 }
 @EmptyLine
-/**
- * Validate the payload against the @Model.Name schema
- *
- * @@param {JSON} payload
- *
- */
-@(Model.Name).prototype.serialize = function () {
-@{
+@if(Model.SerializableProperties.Any())
+{
+@:/**
+@: * Validate the payload against the @Model.Name schema
+@: *
+@: * @@param {JSON} payload
+@: *
+@: */
+@:@(Model.Name).prototype.serialize = function () {
+{
   if (Model.BaseModelType != null)
   {
   @:var payload = @(Model.Name)['super_'].prototype.serialize.call(this);
@@ -76,7 +82,7 @@ if (Model.BaseModelType != null)
   {
   @:var payload = {};
   }
-  var serializationPropertyList = new List<Property>(Model.Properties);
+  var serializationPropertyList = new List<Property>(Model.SerializableProperties);
   for (int i = 0; i < serializationPropertyList.Count; i++)
   {
   @:@(Model.SerializeProperty("this", "payload", serializationPropertyList[i]))
@@ -88,16 +94,17 @@ if (Model.BaseModelType != null)
   @EmptyLine
   @:return payload;
 }
-};
+@:};
 @EmptyLine
-/**
- * Deserialize the instance to @Model.Name schema
- *
- * @@param {JSON} instance
- *
- */
-@(Model.Name).prototype.deserialize = function (instance) {
-  @{
+
+@:/**
+@: * Deserialize the instance to @Model.Name schema
+@: *
+@: * @@param {JSON} instance
+@: *
+@: */
+@:@(Model.Name).prototype.deserialize = function (instance) {
+  {
   if (Model.BaseModelType != null)
   {
   @:@(Model.Name)['super_'].prototype.deserialize.call(this, instance);
@@ -106,7 +113,7 @@ if (Model.BaseModelType != null)
   if (properties.Count > 0)
   {
   @:if (instance) {
-    var propertiesList = new List<Property>(Model.Properties);
+    var propertiesList = new List<Property>(Model.SerializableProperties);
     for (int i = 0; i < propertiesList.Count; i++)
     {
     @:@(Model.DeserializeProperty("this", "instance", propertiesList[i]))
@@ -119,7 +126,8 @@ if (Model.BaseModelType != null)
   }
   }
   @EmptyLine
-  return this;
-};
+  @:return this;
+@:};
+}
 @EmptyLine
 module.exports = @(Model.Name);

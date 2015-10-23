@@ -22,14 +22,17 @@ namespace Microsoft.Rest.Generator.Azure
         public const string LongRunningExtension = "x-ms-long-running-operation";
         public const string PageableExtension = "x-ms-pageable";
         public const string ExternalExtension = "x-ms-external";
+        public const string AzureResourceExtension = "x-ms-azure-resource";
         public const string ODataExtension = "x-ms-odata";
         public const string ClientRequestIdExtension = "x-ms-client-request-id";
         
         //TODO: Ideally this would be the same extension as the ClientRequestIdExtension and have it specified on the response headers,
         //TODO: But the response headers aren't currently used at all so we put an extension on the operation for now
         public const string RequestIdExtension = "x-ms-request-id";
+        public const string ParameterGroupExtension = "x-ms-parameter-grouping";
         public const string ApiVersion = "api-version";
         public const string AcceptLanguage = "accept-language";
+        
         private const string ResourceType = "Resource";
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
@@ -63,6 +66,7 @@ namespace Microsoft.Rest.Generator.Azure
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
+            AddParameterGroups(serviceClient);
         }
 
         /// <summary>
@@ -204,6 +208,104 @@ namespace Microsoft.Rest.Generator.Azure
         }
 
         /// <summary>
+        /// Adds the parameter groups to operation parameters.
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        public static void AddParameterGroups(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            foreach (Method method in serviceClient.Methods)
+            {
+                //This group name is normalized by each languages code generator later, so it need not happen here.
+                Dictionary<string, Dictionary<Property, Parameter>> parameterGroups = new Dictionary<string, Dictionary<Property, Parameter>>();
+                
+                foreach (Parameter parameter in method.Parameters)
+                {
+                    if (parameter.Extensions.ContainsKey(ParameterGroupExtension))
+                    {
+                        Newtonsoft.Json.Linq.JContainer extensionObject = parameter.Extensions[ParameterGroupExtension] as Newtonsoft.Json.Linq.JContainer;
+                        if (extensionObject != null)
+                        {
+                            string parameterGroupName = method.Group + "-" + method.Name + "-" + "Parameters";
+                            parameterGroupName = extensionObject.Value<string>("name") ?? parameterGroupName;
+                            
+                            if (!parameterGroups.ContainsKey(parameterGroupName))
+                            {
+                                parameterGroups.Add(parameterGroupName, new Dictionary<Property, Parameter>());
+                            }
+
+                            Property groupProperty = new Property()
+                                {
+                                    IsReadOnly = false, //Since these properties are used as parameters they are never read only
+                                    Name = parameter.Name,
+                                    IsRequired = parameter.IsRequired,
+                                    DefaultValue = parameter.DefaultValue,
+                                    //Constraints = parameter.Constraints, Omit these since we don't want to perform parameter validation
+                                    Documentation = parameter.Documentation,
+                                    Type = parameter.Type,
+                                    SerializedName = null //Parameter is never serialized directly
+                                };
+                            
+                            parameterGroups[parameterGroupName].Add(groupProperty, parameter);
+                        }
+                    }
+                }
+
+                foreach (string parameterGroupName in parameterGroups.Keys)
+                {
+                    //Define the new parameter group type (it's always a composite type)
+                    CompositeType parameterGroupType = new CompositeType()
+                        {
+                            Name = parameterGroupName,
+                            Documentation = "Additional parameters for the " + method.Name + " operation."
+                        };
+                    
+                    //Populate the parameter group type with properties.
+                    foreach (Property property in parameterGroups[parameterGroupName].Keys)
+                    {
+                        parameterGroupType.Properties.Add(property);
+                    }
+
+                    //Add to the service client
+                    serviceClient.ModelTypes.Add(parameterGroupType);
+
+                    bool isGroupParameterRequired = parameterGroupType.Properties.Any(p => p.IsRequired);
+
+                    //Create the new parameter object based on the parameter group type
+                    Parameter parameterGroup = new Parameter()
+                        {
+                            Name = parameterGroupName,
+                            IsRequired = isGroupParameterRequired,
+                            Location = ParameterLocation.None,
+                            SerializedName = string.Empty,
+                            Type = parameterGroupType,
+                            Documentation = "Additional parameters for the operation"
+                        };
+                    
+                    method.Parameters.Add(parameterGroup);
+
+                    //Link the grouped parameters to their parent, and remove them from the method parameters
+                    foreach (Property property in parameterGroups[parameterGroupName].Keys)
+                    {
+                        Parameter p = parameterGroups[parameterGroupName][property];
+                        
+                        method.InputParameterMappings.Add(new ParameterMapping
+                        {
+                            InputParameter = parameterGroup,
+                            OutputParameter = p,
+                            InputParameterProperty = property.Name
+                        });
+                        method.Parameters.Remove(p);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Creates azure specific properties.
         /// </summary>
         /// <param name="serviceClient"></param>
@@ -291,12 +393,12 @@ namespace Microsoft.Rest.Generator.Azure
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes.ToArray())
             {
-                if (IsExternalResource(compositeType))
+                if (IsAzureResource(compositeType))
                 {
-                    CheckExternalResourceProperties(compositeType);
+                    CheckAzureResourceProperties(compositeType);
                 }
 
-                if (IsDerivedFromExternalResource(compositeType))
+                if (IsDerivedFromAzureResource(compositeType))
                 {
                     // First find "properties" property
                     var propertiesProperty = compositeType.Properties.FirstOrDefault(
@@ -381,7 +483,7 @@ namespace Microsoft.Rest.Generator.Azure
             }
         }
 
-        public static bool IsDerivedFromExternalResource(CompositeType compositeType)
+        public static bool IsDerivedFromAzureResource(CompositeType compositeType)
         {
             if (compositeType == null)
             {
@@ -389,11 +491,9 @@ namespace Microsoft.Rest.Generator.Azure
             }
 
             if (compositeType.BaseModelType != null &&
-                (compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase) ||
-                 compositeType.BaseModelType.Name.Equals(SubResourceType, StringComparison.OrdinalIgnoreCase)) &&
-                compositeType.BaseModelType.Extensions.ContainsKey(ExternalExtension))
+                compositeType.BaseModelType.Extensions.ContainsKey(AzureResourceExtension))
             {
-                var external = compositeType.BaseModelType.Extensions[ExternalExtension] as bool?;
+                var external = compositeType.BaseModelType.Extensions[AzureResourceExtension] as bool?;
                 return (external == null || external.Value);
             }
 
@@ -402,21 +502,21 @@ namespace Microsoft.Rest.Generator.Azure
 
         /// <summary>
         /// Determines a composite type as an External Resource if it's name equals "Resource" 
-        /// and it has an extension named "x-ms-external" marked as true.
+        /// and it has an extension named "x-ms-azure-resource" marked as true.
         /// </summary>
         /// <param name="compositeType">Type to determine if it is an external resource</param>
         /// <returns>True if it is an external resource, false otherwise</returns>
-        public static bool IsExternalResource(CompositeType compositeType)
+        public static bool IsAzureResource(CompositeType compositeType)
         {
             if (compositeType == null)
             {
                 return false;
             }
 
-            if (compositeType.Extensions.ContainsKey(ExternalExtension) && 
+            if (compositeType.Extensions.ContainsKey(AzureResourceExtension) &&
                 compositeType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase))
             {
-                var external = compositeType.Extensions[ExternalExtension] as bool?;
+                var external = compositeType.Extensions[AzureResourceExtension] as bool?;
                 return (external == null || external.Value);
             }
 
@@ -508,9 +608,9 @@ namespace Microsoft.Rest.Generator.Azure
             return requestIdName;
         }
 
-        private static void CheckExternalResourceProperties(CompositeType compositeType)
+        private static void CheckAzureResourceProperties(CompositeType compositeType)
         {
-            // If derived from resource with x-ms-external then resource should have resource properties 
+            // If derived from resource with x-ms-azure-resource then resource should have resource properties 
             // that are in client-runtime, except provisioning state
             var extraResourceProperties = compositeType.Properties
                                                        .Select(p => p.Name.ToUpperInvariant())
