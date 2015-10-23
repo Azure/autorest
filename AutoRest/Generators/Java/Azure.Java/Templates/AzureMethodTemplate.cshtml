@@ -75,7 +75,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 
         @@Override
         public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-            client.getAzureClient().@(Model.PollingMethod)Async(response, serviceCallback);
+            client.getAzureClient().@(Model.PollingMethod)Async(response, new TypeToken<@Model.GenericReturnTypeString>() {}.getType(), serviceCallback);
         }
     });
     return call;

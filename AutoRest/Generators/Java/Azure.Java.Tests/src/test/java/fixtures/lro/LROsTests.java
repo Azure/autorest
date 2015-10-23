@@ -1,6 +1,7 @@
 package fixtures.lro;
 
 import com.microsoft.rest.CloudError;
+import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.serializer.AzureJacksonHelper;
@@ -18,8 +19,10 @@ import retrofit.Retrofit;
 import javax.xml.ws.Service;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
@@ -51,6 +54,27 @@ public class LROsTests {
     }
 
     @Test
+    public void put200SucceededAsync() throws Exception {
+        final CountDownLatch lock = new CountDownLatch(1);
+        Product product = new Product();
+        product.setLocation("West US");
+        client.getLROs().put200SucceededAsync(product, new ServiceCallback<Product>() {
+            @Override
+            public void failure(Throwable t) {
+                fail();
+            }
+
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                Assert.assertEquals(200, result.getResponse().code());
+                Assert.assertEquals("Succeeded", result.getBody().getProvisioningState());
+                lock.countDown();
+            }
+        });
+        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+    }
+
+    @Test
     public void put200SucceededNoState() throws Exception {
         Product product = new Product();
         product.setLocation("West US");
@@ -66,6 +90,35 @@ public class LROsTests {
         ServiceResponse<Product> response = client.getLROs().put202Retry200(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("100", response.getBody().getId());
+    }
+
+    @Test
+    public void put202Retry200Async() throws Exception {
+        final CountDownLatch lock = new CountDownLatch(1);
+        long startTime = System.currentTimeMillis();
+        final long[] callbackTime = new long[1];
+        Product product = new Product();
+        product.setLocation("West US");
+        client.getAzureClient().setLongRunningOperationRetryTimeout(1);
+        client.getLROs().put202Retry200Async(product, new ServiceCallback<Product>() {
+            @Override
+            public void failure(Throwable t) {
+                fail();
+            }
+
+            @Override
+            public void success(ServiceResponse<Product> result) {
+                Assert.assertEquals(200, result.getResponse().code());
+                Assert.assertEquals("100", result.getBody().getId());
+                callbackTime[0] = System.currentTimeMillis();
+                lock.countDown();
+            }
+        });
+        long endTime = System.currentTimeMillis();
+        Assert.assertTrue(500 > endTime - startTime);
+        Assert.assertTrue(lock.await(3000, TimeUnit.MILLISECONDS));
+        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
+        Assert.assertTrue(1000 < callbackTime[0] - startTime);
     }
 
     @Test

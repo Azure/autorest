@@ -66,7 +66,7 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() {}.getType(), serviceCallback);
             }
         });
         return call;
@@ -97,7 +97,7 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, serviceCallback);
+                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() {}.getType(), serviceCallback);
             }
         });
         return call;
@@ -127,7 +127,7 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() {}.getType(), serviceCallback);
             }
         });
         return call;
@@ -157,7 +157,7 @@ public class LROsCustomHeaderImpl implements LROsCustomHeader {
             public void onFailure(Throwable t) { serviceCallback.failure(t); }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() {}.getType(), serviceCallback);
             }
         });
         return call;
