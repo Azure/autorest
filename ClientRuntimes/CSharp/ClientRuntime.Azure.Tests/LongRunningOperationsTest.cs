@@ -1390,7 +1390,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 Content = new StringContent(@"")
             };
             response1.Headers.Add("Location", "http://custom/location/status");
-            response1.Headers.Add("Retry-After", "2");
+            response1.Headers.Add("Retry-After", "3");
 
             yield return response1;
 

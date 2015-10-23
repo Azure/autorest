@@ -374,7 +374,7 @@
           "type": "string"
         },
         "color": {
-          "x-ms-enum": "Colors",
+          "x-ms-enum": { "name": "Colors", "modelAsString": false },
           "type": "string",
           "enum": [ "red", "blue", "green" ]
         },
@@ -383,7 +383,7 @@
           "enum": [ "red", "blue", "green" ]
         },
         "color3": {
-          "x-ms-enum": "Colors",
+          "x-ms-enum": { "name": "Colors", "modelAsString": false },
           "type": "string",
           "enum": [ "red", "green", "blue" ]
         },

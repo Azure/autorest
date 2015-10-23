@@ -3,7 +3,6 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceException;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.Basic;
-import fixtures.bodycomplex.models.CMYKColors;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

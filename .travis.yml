@@ -15,6 +15,9 @@ script:
   - dnvm install 1.0.0-beta7
   - dnvm use 1.0.0-beta7 -persistent
   - gulp
+after_failure:
+  - echo "========== Server log: ============"
+  - cat TestResults/*.log
 notifications:
   slack:
     secure: d0PFVLcyqcMxNtmZ8JaEpIBzXbUbZCgKs8QtBB5qEIXDnxflSR3AhczlILNhTBKtMEBlwVzsz65yP09XcmvB6xpAfJbHqSRzk2frKa5viPcAD8Wr/NYamt9/UiTCsnql8MqzjVy0tLdMscXKRmsUey4YF570zl0b7gAbq7XTqxM=

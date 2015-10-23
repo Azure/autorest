@@ -2900,7 +2900,7 @@
       }
     },
     "Resource": {
-      "x-ms-external": true,
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -3008,7 +3008,7 @@
       }
     },
     "SubResource": {
-      "x-ms-external": true,
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",

@@ -265,6 +265,10 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 primaryType.Name = "DateTime";
             }
+            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            {
+                primaryType.Name = "DateTime";
+            }
             else if (primaryType == PrimaryType.Double)
             {
                 primaryType.Name = "Float";

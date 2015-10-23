@@ -1048,6 +1048,128 @@
                 }
             }
         },
+        "/array/prim/date-time-rfc1123/valid": {
+            "get": {
+                "operationId": "array_getDateTimeRfc1123Valid",
+                "description": "Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']",
+                "tags": [
+                    "Array Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']",
+                        "schema": {
+                            "description": "The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']",
+                            "type": "array",
+                            "items":  {
+                                "type":  "string",
+                                "format":  "date-time-rfc1123"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "array_putDateTimeRfc1123Valid",
+                "description": "Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']",
+                "parameters": [
+                    {
+                        "name": "arrayBody",
+                        "in": "body",
+                        "schema" : {
+                            "description":  "The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']",
+                            "type": "array",
+                            "items":  {
+                                "type":  "string",
+                                "format":  "date-time-rfc1123"
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Array Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Empty Response"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/array/prim/duration/valid": {
+            "get": {
+                "operationId": "array_getDurationValid",
+                "description": "Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']",
+                "tags": [
+                    "Array Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']",
+                        "schema": {
+                            "description": "The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']",
+                            "type": "array",
+                            "items":  {
+                                "type":  "string",
+                                "format":  "duration"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "array_putDurationValid",
+                "description": "Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']",
+                "parameters": [
+                    {
+                        "name": "arrayBody",
+                        "in": "body",
+                        "schema" : {
+                            "description":  "The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']",
+                            "type": "array",
+                            "items":  {
+                                "type":  "string",
+                                "format":  "duration"
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Array Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Empty Response"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/array/prim/byte/valid": {
             "get": {
                 "operationId": "array_getByteValid",

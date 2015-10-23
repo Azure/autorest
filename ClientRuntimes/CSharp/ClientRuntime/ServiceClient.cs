@@ -84,10 +84,7 @@ namespace Microsoft.Rest
 #if NET45
             return new WebRequestHandler();
 #else
-            return new HttpClientHandler
-            {
-                ClientCertificateOptions = ClientCertificateOption.Automatic
-            };
+            return new HttpClientHandler();
 #endif
         }
 

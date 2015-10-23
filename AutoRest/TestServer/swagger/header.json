@@ -706,6 +706,78 @@
         }
       }
     },
+    "/header/param/prim/datetimerfc1123": {
+      "post": {
+        "operationId": "header_paramDatetimeRfc1123",
+        "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"Wed, 01 Jan 2010 12:34:56 GMT\" or \"scenario\": \"min\", \"value\": \"Mon, 01 Jan 0001 00:00:00 GMT\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values \"Wed, 01 Jan 2010 12:34:56 GMT\" or \"Mon, 01 Jan 0001 00:00:00 GMT\"",
+            "name": "value",
+            "in": "header",
+            "type": "string",
+            "format": "date-time-rfc1123",
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/datetimerfc1123": {
+      "post": {
+        "operationId": "header_responseDatetimeRfc1123",
+        "description": "Get a response with header values \"Wed, 01 Jan 2010 12:34:56 GMT\" or \"Mon, 01 Jan 0001 00:00:00 GMT\"",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
+             "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header values \"Wed, 01 Jan 2010 12:34:56 GMT\" or \"Mon, 01 Jan 0001 00:00:00 GMT\"",
+                "type": "string",
+                "format": "date-time-rfc1123"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/header/param/prim/duration": {
       "post": {
         "operationId": "header_paramDuration",
@@ -873,7 +945,7 @@
             "in": "header",
             "type": "string",
             "enum": [ "White", "black", "GREY" ],
-            "x-ms-enum":  "GreyscaleColors",
+            "x-ms-enum": { "name": "GreyscaleColors", "modelAsString": false},
             "required": false
           }
         ],
@@ -914,7 +986,7 @@
                 "description": "response with header values \"GREY\" or null",
                 "type": "string",
                 "enum": [ "White", "black", "GREY" ],
-                "x-ms-enum":  "GreyscaleColors"
+                "x-ms-enum": { "name": "GreyscaleColors", "modelAsString": false}
               }
             }
           },
@@ -937,7 +1009,7 @@
         "responses": {
           "200": {
             "description": "Empty Response indicates that x-ms-client-request-id was successfuly received"
-            },
+          },
           "default": {
             "description": "Unexpected error",
             "schema": {

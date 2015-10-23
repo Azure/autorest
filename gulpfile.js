@@ -45,6 +45,7 @@ var defaultMappings = {
   'AcceptanceTests/BodyComplex': '../../../TestServer/swagger/body-complex.json',
   'AcceptanceTests/BodyDate': '../../../TestServer/swagger/body-date.json',
   'AcceptanceTests/BodyDateTime': '../../../TestServer/swagger/body-datetime.json',
+  'AcceptanceTests/BodyDateTimeRfc1123': '../../../TestServer/swagger/body-datetime-rfc1123.json',
   'AcceptanceTests/BodyDuration': '../../../TestServer/swagger/body-duration.json',
   'AcceptanceTests/BodyDictionary': '../../../TestServer/swagger/body-dictionary.json',
   'AcceptanceTests/BodyFile': '../../../TestServer/swagger/body-file.json',
@@ -69,6 +70,7 @@ var rubyMappings = {
   'dictionary':['../../../TestServer/swagger/body-dictionary.json','DictionaryModule'],
   'date':['../../../TestServer/swagger/body-date.json','DateModule'],
   'datetime':['../../../TestServer/swagger/body-datetime.json','DatetimeModule'],
+  'datetime_rfc1123':['../../../TestServer/swagger/body-datetime-rfc1123.json','DatetimeRfc1123Module'],
   'duration':['../../../TestServer/swagger/body-duration.json','DurationModule'],
   'complex':['../../../TestServer/swagger/body-complex.json','ComplexModule'],
   'url':['../../../TestServer/swagger/url.json','UrlModule'],
@@ -84,6 +86,7 @@ var defaultAzureMappings = {
   'AcceptanceTests/Lro': '../../../TestServer/swagger/lro.json',
   'AcceptanceTests/Paging': '../../../TestServer/swagger/paging.json',
   'AcceptanceTests/AzureReport': '../../../TestServer/swagger/azure-report.json',
+  'AcceptanceTests/AzureParameterGrouping': '../../../TestServer/swagger/azure-parameter-grouping.json',
   'AcceptanceTests/ResourceFlattening': '../../../TestServer/swagger/resource-flattening.json',
   'AcceptanceTests/Head': '../../../TestServer/swagger/head.json',
   'AcceptanceTests/SubscriptionIdApiVersion': '../../../TestServer/swagger/subscriptionId-apiVersion.json',
@@ -207,7 +210,10 @@ gulp.task('regenerate:expected:java', function(cb){
 })
 
 gulp.task('regenerate:expected:csazure', function(cb){
-  mappings = mergeOptions(defaultAzureMappings);
+  mappings = mergeOptions({
+    'AcceptanceTests/AzureBodyDuration': '../../../TestServer/swagger/body-duration.json'
+  }, defaultAzureMappings);
+
   regenExpected({
     'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
     'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
@@ -356,8 +362,8 @@ var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
   'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Modeler.Swagger.Tests.dll',
   'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
-  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/bin/Net45-Debug/Azure.CSharp.Tests.dll',
-  'AutoRest/Generators/CSharp/CSharp.Tests/bin/Net45-Debug/CSharp.Tests.dll',
+  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.CSharp.Tests.dll',
+  'AutoRest/Generators/CSharp/CSharp.Tests/bin/Net45-Debug/AutoRest.Generator.CSharp.Tests.dll',
   'ClientRuntimes/CSharp/ClientRuntime.Azure.Tests/bin/Net45-Debug/ClientRuntime.Azure.Tests.dll',
   'ClientRuntimes/CSharp/ClientRuntime.Tests/bin/Net45-Debug/ClientRuntime.Tests.dll',
 ];
@@ -401,21 +407,18 @@ gulp.task('test:nugetPackages:clean', function () {
   return del([path.join(nugetTestProjDir, 'Generated'), cachedClientRuntimePackages], {'force' : true});
 });
 
-// TODO: This needs to be synced with the version of AutoRest
-var toolsDir = 'packages/autorest.0.11.0/tools';
 var autoRestExe = function(){
-  return fs.readdirSync(path.join(nugetTestProjDir, toolsDir)).filter(function(file) {
-    return file.match(/AutoRest.exe$/);
-  })[0];
+  gutil.log(glob.sync(path.join(basePathOrThrow(), 'AutoRest/NugetPackageTest/packages/autorest.*/tools/AutoRest.exe')));
+  return glob.sync(path.join(basePathOrThrow(), 'AutoRest/NugetPackageTest/packages/autorest.*/tools/AutoRest.exe'))[0];
 }
 
 gulp.task('test:nugetPackages:generate:csharp', ['test:nugetPackages:restore', 'test:nugetPackages:clean'], function(){
-  var csharp = path.join(nugetTestProjDir, toolsDir, autoRestExe()) + ' -Modeler Swagger -CodeGenerator CSharp -OutputDirectory ' + path.join(nugetTestProjDir, '/Generated/CSharp') + ' -Namespace Fixtures.Bodynumber -Input <%= file.path %> -Header NONE';
+  var csharp = autoRestExe() + ' -Modeler Swagger -CodeGenerator CSharp -OutputDirectory ' + path.join(nugetTestProjDir, '/Generated/CSharp') + ' -Namespace Fixtures.Bodynumber -Input <%= file.path %> -Header NONE';
   return gulp.src('AutoRest/TestServer/swagger/body-number.json').pipe(execClrCmd(csharp, {verbosity: 3}));
 });
 
 gulp.task('test:nugetPackages:generate:node', ['test:nugetPackages:restore', 'test:nugetPackages:clean'], function(){
-  var nodejs = path.join(nugetTestProjDir, toolsDir, autoRestExe()) + ' -Modeler Swagger -CodeGenerator NodeJS -OutputDirectory ' + path.join(nugetTestProjDir, '/Generated/NodeJS') + ' -Input <%= file.path %> -Header NONE';
+  var nodejs = autoRestExe() + ' -Modeler Swagger -CodeGenerator NodeJS -OutputDirectory ' + path.join(nugetTestProjDir, '/Generated/NodeJS') + ' -Input <%= file.path %> -Header NONE';
   return gulp.src('AutoRest/TestServer/swagger/body-number.json').pipe(execClrCmd(nodejs, {verbosity: 3}));
 });
 

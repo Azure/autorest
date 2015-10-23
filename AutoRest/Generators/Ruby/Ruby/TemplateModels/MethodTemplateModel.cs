@@ -105,7 +105,23 @@ namespace Microsoft.Rest.Generator.Ruby
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters)
                 {
-                    string format = (parameter.IsRequired ? "{0}" : "{0} = nil");
+                    string format = "{0}";
+                    if (!parameter.IsRequired)
+                    {
+                        format = "{0} = nil";
+                        if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
+                        {
+                            PrimaryType type = parameter.Type as PrimaryType;
+                            if (type == PrimaryType.Boolean || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long)
+                            {
+                                format = "{0} = " + parameter.DefaultValue;
+                            }
+                            else if (type == PrimaryType.String)
+                            {
+                                format = "{0} = \"" + parameter.DefaultValue + "\"";
+                            }
+                        }
+                    }
                     declarations.Add(string.Format(format, parameter.Name));
                 }
 
@@ -130,13 +146,14 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Get the parameters that are actually method parameters in the order they apopear in the method signatur
+        /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
         public IEnumerable<ParameterTemplateModel> LocalParameters
         {
             get
             {
+                //Omit parameter group parameters for now since AutoRest-Ruby doesn't support them
                 return
                     ParameterTemplateModels.Where(
                         p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
@@ -145,7 +162,7 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Gets the return type name for the underlyign interface method
+        /// Gets the return type name for the underlying interface method
         /// </summary>
         public virtual string OperationResponseReturnTypeString
         {

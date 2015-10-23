@@ -39,11 +39,11 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<SampleResourceChild>("dType"));
             string json = JsonConvert.SerializeObject(sampleResource, serializeSettings);
             Assert.Equal(@"{
-  ""plan"": ""testPlan"",
   ""location"": ""EastUS"",
   ""tags"": {
     ""tag1"": ""value1""
   },
+  ""plan"": ""testPlan"",
   ""properties"": {
     ""size"": ""3"",
     ""child"": {
@@ -89,7 +89,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 ContractResolver = new ReadOnlyJsonContractResolver()
             };
             serializeSettings.Converters.Add(new ResourceJsonConverter());
-            serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Resource>("dType"));
+            serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<SampleResource>("dType"));
             serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<SampleResourceChild>("dType"));
             string json = JsonConvert.SerializeObject(sampleResource, serializeSettings);
             Assert.Equal(@"{
@@ -128,12 +128,12 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<SampleResourceChild>("dType"));
             string json = JsonConvert.SerializeObject(sampleResource, serializeSettings);
             Assert.Equal(@"{
-  ""properties"": {
-    ""size"": ""3""
-  },
   ""location"": ""EastUS"",
   ""tags"": {
     ""tag1"": ""value1""
+  },
+  ""properties"": {
+    ""size"": ""3""
   }
 }", json);
 

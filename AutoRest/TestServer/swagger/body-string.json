@@ -234,7 +234,7 @@
           "200": {
             "description": "The String value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'",
             "schema": {
-              "x-ms-enum": "Colors",
+              "x-ms-enum": { "name": "Colors", "modelAsString": false},
               "type": "string",
               "enum": [ "red color", "green-color", "blue_color" ]
             }
@@ -255,7 +255,7 @@
             "name": "stringBody",
             "in": "body",
             "schema": {
-              "x-ms-enum": "Colors",
+              "x-ms-enum": { "name": "Colors", "modelAsString": false},
               "type": "string",
               "enum": [ "red color", "green-color", "blue_color" ]
             },

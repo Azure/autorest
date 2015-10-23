@@ -4,7 +4,6 @@ import com.microsoft.rest.ServiceException;
 import fixtures.bodyboolean.AutoRestBoolTestService;
 import fixtures.bodyboolean.AutoRestBoolTestServiceImpl;
 import fixtures.bodycomplex.models.Basic;
-import fixtures.bodycomplex.models.CMYKColors;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,7 +21,7 @@ public class BasicOperationsTests {
         Basic result = client.getBasicOperations().getValid();
         Assert.assertEquals(2, result.getId().intValue());
         Assert.assertEquals("abc", result.getName());
-        Assert.assertEquals(CMYKColors.YELLOW, result.getColor());
+        Assert.assertEquals("YELLOW", result.getColor());
     }
 
     @Test
@@ -30,7 +29,7 @@ public class BasicOperationsTests {
         Basic body = new Basic();
         body.setId(2);
         body.setName("abc");
-        body.setColor(CMYKColors.MAGENTA);
+        body.setColor("Magenta");
         client.getBasicOperations().putValid(body);
     }
 

@@ -55,6 +55,10 @@ var complex = function(coverage) {
     var stringBodyInbound = '{"field":"goodrequest","empty":""}';
     var dateBody = '{"field":"0001-01-01","leap":"2016-02-29"}';
     var datetimeBody = '{"field":"0001-01-01T00:00:00Z","now":"2015-05-18T18:38:00Z"}';
+    var datetimeRfc1123Body = '{"field":"Mon, 01 Jan 0001 00:00:00 GMT","now":"Mon, 18 May 2015 11:38:00 GMT"}';
+    var datetimeRfc1123BodyAlternate = '{"field":"Mon, 01 Jan 1 00:00:00 GMT","now":"Mon, 18 May 2015 11:38:00 GMT"}';
+    var durationBody = '{"field":"P123DT22H14M12.011S"}';
+    var durationBodyAlternate = '{"field":"P123DT22H14M12.010999999998603S"}';
     var datetimeBodyExact = '{"field":"0001-01-01T00:00:00.000Z","now":"2015-05-18T18:38:00.000Z"}';
     var byteString = new Buffer([255, 254, 253, 252, 0, 250, 249, 248, 247, 246]).toString('base64');
     var byteBody = '{"field":"' + byteString + '"}';
@@ -116,6 +120,20 @@ var complex = function(coverage) {
             } else {
                 utils.send400(res, next, "Did not like datetime req " + util.inspect(req.body));
             }
+        } else if (req.params.scenario === 'datetimerfc1123') {
+            if (JSON.stringify(req.body) === datetimeRfc1123Body || JSON.stringify(req.body) === datetimeRfc1123BodyAlternate) {
+                coverage['putComplexPrimitiveDateTimeRfc1123']++;
+                res.status(200).end();
+            } else {
+                utils.send400(res, next, "Did not like datetimerfc1123 req " + util.inspect(req.body));
+            }
+        } else if (req.params.scenario === 'duration') {
+            if (JSON.stringify(req.body) === durationBody || JSON.stringify(req.body) === durationBodyAlternate) {
+                coverage['putComplexPrimitiveDuration']++;
+                res.status(200).end();
+            } else {
+                utils.send400(res, next, "Did not like duration req " + util.inspect(req.body));
+            }
         } else if (req.params.scenario === 'byte') {
             if (JSON.stringify(req.body) === byteBody) {
                 coverage['putComplexPrimitiveByte']++;
@@ -153,6 +171,12 @@ var complex = function(coverage) {
         } else if (req.params.scenario === 'datetime') {
             coverage['getComplexPrimitiveDateTime']++;
             res.status(200).end(datetimeBody);
+        } else if (req.params.scenario === 'datetimerfc1123') {
+            coverage['getComplexPrimitiveDateTimeRfc1123']++;
+            res.status(200).end(datetimeRfc1123Body);
+        } else if (req.params.scenario === 'duration') {
+            coverage['getComplexPrimitiveDuration']++;
+            res.status(200).end(durationBody);
         } else if (req.params.scenario === 'byte') {
             coverage['getComplexPrimitiveByte']++;
             res.status(200).end(byteBody);

@@ -29,6 +29,7 @@ describe('nodejs', function () {
       testClient.getReport(function (error, result) {
         should.not.exist(error);
         //console.log('The test coverage for azure is ' + util.inspect(result));
+        
         var total = _.keys(result).length;
         var passed = 0;
         _.keys(result).forEach(function(item) {

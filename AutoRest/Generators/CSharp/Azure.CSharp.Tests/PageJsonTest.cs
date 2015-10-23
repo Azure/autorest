@@ -7,12 +7,12 @@ using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
-using Microsoft.Azure;
 using Microsoft.Rest.Azure;
+using Fixtures.Azure.AcceptanceTestsPaging.Models;
 
-namespace Microsoft.Rest.ClientRuntime.Azure.Test
+namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
-    public class Product
+    public class TestProduct
     {
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
@@ -20,7 +20,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
-        public Product()
+        public TestProduct()
         {
         }
     }
@@ -42,8 +42,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 ContractResolver = new ReadOnlyJsonContractResolver()
             };
             deserializeSettings.Converters.Add(new ResourceJsonConverter());
-            deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Product>("dType"));
-            var deserializedProduct = JsonConvert.DeserializeObject<Page<Product>>(responseBody, deserializeSettings);
+            deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<TestProduct>("dType"));
+            var deserializedProduct = JsonConvert.DeserializeObject<Page<TestProduct>>(responseBody, deserializeSettings);
 
             Assert.Equal(0, deserializedProduct.Count());
         }
@@ -73,39 +73,11 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 ContractResolver = new ReadOnlyJsonContractResolver()
             };
             deserializeSettings.Converters.Add(new ResourceJsonConverter());
-            deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Product>("dType"));
-            var deserializedProduct = JsonConvert.DeserializeObject<Page<Product>>(responseBody, deserializeSettings);
+            deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<TestProduct>("dType"));
+            var deserializedProduct = JsonConvert.DeserializeObject<Page<TestProduct>>(responseBody, deserializeSettings);
             
             Assert.Equal(2, deserializedProduct.Count());
             Assert.Equal("https://sdktestvault7826.vault.azure.net:443/keys?api-version=2015-06-01", deserializedProduct.NextPageLink);
-        }
-
-        [Fact]
-        public void TestOdataNextLinkDeSerialization()
-        {
-            var responseBody = @"{
-  ""value"": [
-    {
-      ""id"": ""Product_1"",
-      ""name"": ""ProductOne""
-    }
-  ],
-  ""@odata.nextLink"": ""https://ODataLink.vault.azure.net:443/keys?api-version=2015-06-01""
-}";
-
-            var deserializeSettings = new JsonSerializerSettings()
-            {
-                Formatting = Formatting.Indented,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
-            };
-            deserializeSettings.Converters.Add(new ResourceJsonConverter());
-            deserializeSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Product>("dType"));
-            var deserializedProduct = JsonConvert.DeserializeObject<Page<Product>>(responseBody, deserializeSettings);
-
-            Assert.Equal(1, deserializedProduct.Count());
-            Assert.Equal("https://ODataLink.vault.azure.net:443/keys?api-version=2015-06-01", deserializedProduct.NextPageLink);
         }
     }
 }

@@ -19,7 +19,9 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             this.LoadFrom(source);
             ParameterTemplateModels = new List<ParameterTemplateModel>();
+            LogicalParameterTemplateModels = new List<ParameterTemplateModel>();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
             ServiceClient = serviceClient;
             MethodGroupName = source.Group ?? serviceClient.Name;
         }
@@ -28,7 +30,9 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public ServiceClient ServiceClient { get; set; }
 
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        protected List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+
+        public List<ParameterTemplateModel> LogicalParameterTemplateModels { get; private set; }
 
         public IScopeProvider Scope
         {
@@ -65,11 +69,24 @@ namespace Microsoft.Rest.Generator.CSharp
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in  LocalParameters)
+                foreach (var parameter in LocalParameters)
                 {
-                    string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
+                    string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
+                    string defaultValue = string.Format(CultureInfo.InvariantCulture, "default({0})", parameter.DeclarationExpression);
+                    if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
+                    {
+                        PrimaryType type = parameter.Type as PrimaryType;
+                        if (type == PrimaryType.Boolean || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long)
+                        {
+                            defaultValue = parameter.DefaultValue;
+                        }
+                        else if (type == PrimaryType.String)
+                        {
+                            defaultValue = "\"" + parameter.DefaultValue + "\"";
+                        }
+                    }
                     declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                        format, parameter.DeclarationExpression, parameter.Name));
+                        format, parameter.DeclarationExpression, parameter.Name, defaultValue ));
                 }
 
                 return string.Join(", ", declarations);
@@ -133,7 +150,7 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Get the parameters that are actually method parameters in the order they apopear in the method signatur
+        /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
         public IEnumerable<ParameterTemplateModel> LocalParameters
@@ -166,7 +183,7 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the return type for the async extension method
         /// </summary>
-        public string TaskExtensionReturnTypeString
+        public virtual string TaskExtensionReturnTypeString
         {
             get
             {
@@ -226,7 +243,7 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
-        public string ReturnTypeString
+        public virtual string ReturnTypeString
         {
             get
             {
@@ -243,7 +260,10 @@ namespace Microsoft.Rest.Generator.CSharp
         /// </summary>
         public ParameterTemplateModel RequestBody
         {
-            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
+            get
+            {
+                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;                
+            }
         }
 
         /// <summary>
@@ -269,7 +289,12 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 return "new DateJsonConverter()";
             }
-
+            else if (serializationType == PrimaryType.DateTimeRfc1123 ||
+                     (sequenceType != null && sequenceType.ElementType == PrimaryType.DateTimeRfc1123) ||
+                     (dictionaryType != null && dictionaryType.ValueType == PrimaryType.DateTimeRfc1123))
+            {
+                return "new DateTimeRfc1123JsonConverter()";
+            }
             return ClientReference + ".SerializationSettings";
         }
 
@@ -316,18 +341,17 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             var builder = new IndentedStringBuilder();
 
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
             {
                 builder.AppendLine("{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));",
                     variableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
             }
-            if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
+            if (this.LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
             {
                 builder.AppendLine("List<string> queryParameters = new List<string>();");
-                foreach (var queryParameter in ParameterTemplateModels
-                    .Where(p => p.Location == ParameterLocation.Query))
+                foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
                 {
                     builder.AppendLine("if ({0} != null)", queryParameter.Name)
                         .AppendLine("{").Indent()

@@ -12,7 +12,7 @@ import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-
+import org.joda.time.Period;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +39,9 @@ public class Validator {
                 parameterType.isEnum() ||
                 ClassUtils.isAssignable(parameterType, LocalDate.class) ||
                 ClassUtils.isAssignable(parameterType, DateTime.class) ||
-                ClassUtils.isAssignable(parameterType, String.class)) {
+                ClassUtils.isAssignable(parameterType, String.class) || 
+                ClassUtils.isAssignable(parameterType, DateTimeRfc1123.class) || 
+                ClassUtils.isAssignable(parameterType, Period.class)) {
             return;
         }
 

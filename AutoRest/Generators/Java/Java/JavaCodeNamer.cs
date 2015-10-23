@@ -147,7 +147,7 @@ namespace Microsoft.Rest.Generator.Java
                 return null;
             }
             var enumType = type as EnumType;
-            if (enumType != null && enumType.IsExpandable)
+            if (enumType != null && enumType.ModelAsString)
             {
                 type = PrimaryType.String;
             }
@@ -187,7 +187,7 @@ namespace Microsoft.Rest.Generator.Java
 
         private IType NormalizeEnumType(EnumType enumType)
         {
-            if (enumType.IsExpandable)
+            if (enumType.ModelAsString)
             {
                 enumType.SerializedName = "string";
                 enumType.Name = "string";
@@ -237,6 +237,10 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType == PrimaryType.DateTime)
             {
                 primaryType.Name = "DateTime";
+            }
+            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            {
+                primaryType.Name = "DateTimeRfc1123";
             }
             else if (primaryType == PrimaryType.Double)
             {
@@ -339,6 +343,11 @@ namespace Microsoft.Rest.Generator.Java
                 primaryType.Name == "DateTime")
             {
                 return "org.joda.time.DateTime";
+            }
+            else if (primaryType == PrimaryType.DateTimeRfc1123 ||
+               primaryType.Name == "DateTimeRfc1123")
+            {
+                return "com.microsoft.rest.DateTimeRfc1123";
             }
             else if (primaryType == PrimaryType.Stream ||
                 primaryType.Name == "InputStream")

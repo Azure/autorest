@@ -1,8 +1,10 @@
 package fixtures.bodyarray;
 
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.DateTimeRfc1123;
 import fixtures.bodyarray.models.Product;
 import org.joda.time.DateTime;
+import org.joda.time.Period;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
@@ -316,6 +318,43 @@ public class ArrayTests {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
         }
+    }
+
+    @Test
+    public void getDateTimeRfc1123Valid() throws Exception {
+        List<DateTimeRfc1123> result = client.getArray().getDateTimeRfc1123Valid();
+        Object[] expected = new DateTimeRfc1123[] {
+                new DateTimeRfc1123(new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC)),
+                new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)),
+                new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC))
+        };
+        Assert.assertArrayEquals(expected, result.toArray());
+    }
+
+    @Test
+    public void putDateTimeRfc1123Valid() throws Exception {
+        client.getArray().putDateTimeRfc1123Valid(Arrays.asList(
+                new DateTimeRfc1123(new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC)),
+                new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)),
+                new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC))
+        ));
+    }
+
+    @Test
+    public void getDurationValid() throws Exception {
+        List<Period> result = client.getArray().getDurationValid();
+        Object[] expected = new Period[] {
+                new Period(0, 0, 0, 123, 22, 14, 12, 11),
+                new Period(0, 0, 0, 5, 1, 0, 0, 0)
+        };
+        Assert.assertArrayEquals(expected, result.toArray());
+    }
+
+    @Test
+    public void putDurationValid() throws Exception {
+        client.getArray().putDurationValid(Arrays.asList(
+                        new Period(0, 0, 0, 123, 22, 14, 12, 11),
+                        new Period(0, 0, 0, 5, 1, 0, 0, 0)));
     }
 
     @Test

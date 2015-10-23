@@ -1114,6 +1114,128 @@
         }
       }
     },
+    "/dictionary/prim/date-time-rfc1123/valid": {
+      "get": {
+        "operationId": "dictionary_getDateTimeRfc1123Valid",
+        "description": "Get date-time-rfc1123 dictionary value {\"0\": \"Fri, 01 Dec 2000 00:00:01 GMT\", \"1\": \"Wed, 02 Jan 1980 00:11:35 GMT\", \"2\": \"Wed, 12 Oct 1492 10:15:01 GMT\"}",
+        "tags": [
+          "Dictionary operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The dictionary value {\"0\": \"Fri, 01 Dec 2000 00:00:01 GMT\", \"1\": \"Wed, 02 Jan 1980 00:11:35 GMT\", \"2\": \"Wed, 12 Oct 1492 10:15:01 GMT\"}",
+            "schema": {
+              "description": "The dictionary value {\"0\": \"Fri, 01 Dec 2000 00:00:01 GMT\", \"1\": \"Wed, 02 Jan 1980 00:11:35 GMT\", \"2\": \"Wed, 12 Oct 1492 10:15:01 GMT\"}",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "format": "date-time-rfc1123"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "dictionary_putDateTimeRfc1123Valid",
+        "description": "Set dictionary value empty {\"0\": \"Fri, 01 Dec 2000 00:00:01 GMT\", \"1\": \"Wed, 02 Jan 1980 00:11:35 GMT\", \"2\": \"Wed, 12 Oct 1492 10:15:01 GMT\"}",
+        "parameters": [
+          {
+            "name": "arrayBody",
+            "in": "body",
+            "schema": {
+              "description": "The dictionary value {\"0\": \"Fri, 01 Dec 2000 00:00:01 GMT\", \"1\": \"Wed, 02 Jan 1980 00:11:35 GMT\", \"2\": \"Wed, 12 Oct 1492 10:15:01 GMT\"}",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "format": "date-time-rfc1123"
+              }
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Dictionary operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/dictionary/prim/duration/valid": {
+      "get": {
+        "operationId": "dictionary_getDurationValid",
+        "description": "Get duration dictionary value {\"0\": \"P123DT22H14M12.011S\", \"1\": \"P5DT1H0M0S\"}",
+        "tags": [
+          "Dictionary operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The dictionary value {\"0\": \"P123DT22H14M12.011S\", \"1\": \"P5DT1H0M0S\"}",
+            "schema": {
+              "description": "The dictionary value {\"0\": \"P123DT22H14M12.011S\", \"1\": \"P5DT1H0M0S\"}",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "format": "duration"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "dictionary_putDurationValid",
+        "description": "Set dictionary value  {\"0\": \"P123DT22H14M12.011S\", \"1\": \"P5DT1H0M0S\"}",
+        "parameters": [
+          {
+            "name": "arrayBody",
+            "in": "body",
+            "schema": {
+              "description": "The dictionary value {\"0\": \"P123DT22H14M12.011S\", \"1\": \"P5DT1H0M0S\"}",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "format": "duration"
+              }
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Dictionary operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/dictionary/prim/byte/valid": {
       "get": {
         "operationId": "dictionary_getByteValid",
