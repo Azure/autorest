@@ -388,12 +388,12 @@ var clrTask = function(cmd, options){
 };
 
 var xunit = function(template, options){
-  var xunitRunner = path.resolve('packages/xunit.runner.console.2.1.0-beta4-build3109/tools/xunit.console.x86.exe');
+  var xunitRunner = path.resolve('packages/xunit.runner.console.2.1.0/tools/xunit.console.exe');
   return execClrCmd(xunitRunner + ' ' + template, options);
 }
 
 gulp.task('test:xunit', function () {
-  return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain', defaultShellOptions));
+  return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain -diagnostics', defaultShellOptions));
 });
 
 var nugetPath = path.resolve('Tools/NuGet.exe');
