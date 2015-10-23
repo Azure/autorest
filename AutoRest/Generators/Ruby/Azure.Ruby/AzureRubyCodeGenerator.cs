@@ -45,7 +45,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         public override string UsageInstructions
         {
-            get { return "The gem 'ms-rest-azure' is required for working with generated code."; }
+            get { return "The gem 'ms_rest_azure' is required for working with generated code."; }
         }
 
         /// <summary>

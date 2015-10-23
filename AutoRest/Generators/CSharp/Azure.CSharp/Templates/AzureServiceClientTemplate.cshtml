@@ -151,6 +151,15 @@ namespace @Settings.Namespace
         foreach (var param in parameters)
         {
         @:    this.@(param.Name) = @(param.Name.ToCamelCase());
+
+            @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
+            "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
+            {
+            @:if (this.Credentials != null)
+            @:{
+            @:    this.Credentials.InitializeServiceClient(this);
+            @:}
+            }
         }
         @:}
         @:@EmptyLine
@@ -188,6 +197,14 @@ namespace @Settings.Namespace
         foreach (var param in parameters)
         {
         @:    this.@(param.Name) = @(param.Name.ToCamelCase());
+            @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
+            "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
+            {
+            @:if (this.Credentials != null)
+            @:{
+            @:    this.Credentials.InitializeServiceClient(this);
+            @:}
+            }
         }
         @:}
         @:@EmptyLine
@@ -206,15 +223,6 @@ namespace @Settings.Namespace
         @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
         {
             @:this.@(property.Name) = @(property.DefaultValue);
-        }
-
-        @if (Model.Properties.Any(p => "Credentials".Equals(p.Name, StringComparison.OrdinalIgnoreCase) &&
-            "ServiceClientCredentials".Equals(p.Type.Name, StringComparison.OrdinalIgnoreCase)))
-        {
-            @:if (this.Credentials != null)
-            @:{
-            @:    this.Credentials.InitializeServiceClient(this);
-            @:}
         }
             SerializationSettings = new JsonSerializerSettings
             {

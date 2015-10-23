@@ -31,8 +31,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             SwaggerModeler modeler = new SwaggerModeler(settings);
             var serviceClient = modeler.Build();
             var codeNamer = new AzureCSharpCodeNamer();
-            var objName = codeNamer.NormalizeType(PrimaryType.Object).Name;
-            var strName = codeNamer.NormalizeType(PrimaryType.String).Name;
+            var objName = codeNamer.NormalizeTypeReference(PrimaryType.Object).Name;
+            var strName = codeNamer.NormalizeTypeReference(PrimaryType.String).Name;
             IDictionary<KeyValuePair<string, string>, string> pageClass = new Dictionary<KeyValuePair<string, string>, string>();
 
             codeNamer.NormalizePaginatedMethods(serviceClient, pageClass);

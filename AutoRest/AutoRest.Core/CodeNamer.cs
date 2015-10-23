@@ -83,13 +83,13 @@ namespace Microsoft.Rest.Generator
             foreach (var property in client.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             var normalizedModels = new List<CompositeType>();
             foreach (var modelType in client.ModelTypes)
             {
-                normalizedModels.Add(NormalizeType(modelType) as CompositeType);
+                normalizedModels.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
             }
             client.ModelTypes.Clear();
             normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
@@ -97,10 +97,10 @@ namespace Microsoft.Rest.Generator
             var normalizedEnums = new List<EnumType>();
             foreach (var enumType in client.EnumTypes)
             {
-                var normalizedType = NormalizeType(enumType) as EnumType;
+                var normalizedType = NormalizeTypeDeclaration(enumType) as EnumType;
                 if (normalizedType != null)
                 {
-                    normalizedEnums.Add(NormalizeType(enumType) as EnumType);
+                    normalizedEnums.Add(NormalizeTypeDeclaration(enumType) as EnumType);
                 }
             }
             client.EnumTypes.Clear();
@@ -110,12 +110,12 @@ namespace Microsoft.Rest.Generator
             {
                 method.Name = GetMethodName(method.Name);
                 method.Group = GetMethodGroupName(method.Group);
-                method.ReturnType = NormalizeType(method.ReturnType);
-                method.DefaultResponse = NormalizeType(method.DefaultResponse);
+                method.ReturnType = NormalizeTypeReference(method.ReturnType);
+                method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
                 var normalizedResponses = new Dictionary<HttpStatusCode, IType>();
                 foreach (var statusCode in method.Responses.Keys)
                 {
-                    normalizedResponses[statusCode] = NormalizeType(method.Responses[statusCode]);
+                    normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
                 }
 
                 method.Responses.Clear();
@@ -126,15 +126,15 @@ namespace Microsoft.Rest.Generator
                 foreach (var parameter in method.Parameters)
                 {
                     parameter.Name = GetParameterName(parameter.Name);
-                    parameter.Type = NormalizeType(parameter.Type);
+                    parameter.Type = NormalizeTypeReference(parameter.Type);
                 }
 
                 foreach (var parameterMapping in method.InputParameterMappings)
                 {
                     parameterMapping.InputParameter.Name = GetParameterName(parameterMapping.InputParameter.Name);
-                    parameterMapping.InputParameter.Type = NormalizeType(parameterMapping.InputParameter.Type);
+                    parameterMapping.InputParameter.Type = NormalizeTypeReference(parameterMapping.InputParameter.Type);
                     parameterMapping.OutputParameter.Name = GetParameterName(parameterMapping.OutputParameter.Name);
-                    parameterMapping.OutputParameter.Type = NormalizeType(parameterMapping.OutputParameter.Type);
+                    parameterMapping.OutputParameter.Type = NormalizeTypeReference(parameterMapping.OutputParameter.Type);
 
                     if (parameterMapping.InputParameterProperty != null)
                     {
@@ -294,11 +294,19 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
-        /// Returns language specific type name.
+        /// Returns language specific type reference name.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public abstract IType NormalizeType(IType type);
+        public abstract IType NormalizeTypeReference(IType type);
+
+        /// <summary>
+        /// Returns language specific type declaration name.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public abstract IType NormalizeTypeDeclaration(IType type);
+
 
         /// <summary>
         /// Formats a string as upper or lower case. Two-letter inputs that are all upper case are both lowered.

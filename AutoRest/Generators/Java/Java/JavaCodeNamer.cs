@@ -139,8 +139,12 @@ namespace Microsoft.Rest.Generator.Java
                 }
             }
         }
+        public override IType NormalizeTypeDeclaration(IType type)
+        {
+            return NormalizeTypeReference(type);
+        }
 
-        public override IType NormalizeType(IType type)
+        public override IType NormalizeTypeReference(IType type)
         {
             if (type == null)
             {
@@ -210,7 +214,7 @@ namespace Microsoft.Rest.Generator.Java
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
                 if (!property.IsRequired)
                 {
                     property.Type = WrapPrimitiveType(property.Type);
@@ -319,14 +323,14 @@ namespace Microsoft.Rest.Generator.Java
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = WrapPrimitiveType(NormalizeType(sequenceType.ElementType));
+            sequenceType.ElementType = WrapPrimitiveType(NormalizeTypeReference(sequenceType.ElementType));
             sequenceType.NameFormat = "List<{0}>";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = WrapPrimitiveType(NormalizeType(dictionaryType.ValueType));
+            dictionaryType.ValueType = WrapPrimitiveType(NormalizeTypeReference(dictionaryType.ValueType));
             dictionaryType.NameFormat = "Map<String, {0}>";
             return dictionaryType;
         }
