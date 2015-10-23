@@ -67,6 +67,11 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        public IEnumerable<Property> SerializableProperties
+        {
+            get { return this.Properties.Where(p => !string.IsNullOrEmpty(p.SerializedName)); }
+        }
+
         public bool IsPolymorphic
         {
             get

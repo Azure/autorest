@@ -21,6 +21,20 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
     public partial class SampleResourceGroup
     {
         /// <summary>
+        /// Initializes a new instance of the SampleResourceGroup class.
+        /// </summary>
+        public SampleResourceGroup() { }
+
+        /// <summary>
+        /// Initializes a new instance of the SampleResourceGroup class.
+        /// </summary>
+        public SampleResourceGroup(string name = default(string), string location = default(string))
+        {
+            Name = name;
+            Location = location;
+        }
+
+        /// <summary>
         /// resource group name 'testgroup101'
         /// </summary>
         [JsonProperty(PropertyName = "name")]

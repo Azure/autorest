@@ -20,6 +20,20 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
     public partial class Product
     {
         /// <summary>
+        /// Initializes a new instance of the Product class.
+        /// </summary>
+        public Product() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Product class.
+        /// </summary>
+        public Product(int? id, string name = default(string))
+        {
+            Id = id;
+            Name = name;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public int? Id { get; set; }

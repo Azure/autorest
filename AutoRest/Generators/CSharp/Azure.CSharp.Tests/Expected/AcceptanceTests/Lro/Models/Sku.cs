@@ -21,6 +21,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     public partial class Sku
     {
         /// <summary>
+        /// Initializes a new instance of the Sku class.
+        /// </summary>
+        public Sku() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Sku class.
+        /// </summary>
+        public Sku(string name = default(string), string id = default(string))
+        {
+            Name = name;
+            Id = id;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

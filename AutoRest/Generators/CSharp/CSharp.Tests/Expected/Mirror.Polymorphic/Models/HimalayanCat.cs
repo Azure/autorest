@@ -20,6 +20,19 @@ namespace Fixtures.MirrorPolymorphic.Models
     public partial class HimalayanCat : SiameseCat
     {
         /// <summary>
+        /// Initializes a new instance of the HimalayanCat class.
+        /// </summary>
+        public HimalayanCat() { }
+
+        /// <summary>
+        /// Initializes a new instance of the HimalayanCat class.
+        /// </summary>
+        public HimalayanCat(int? hairLength = default(int?))
+        {
+            HairLength = hairLength;
+        }
+
+        /// <summary>
         /// cat hair length
         /// </summary>
         [JsonProperty(PropertyName = "hairLength")]

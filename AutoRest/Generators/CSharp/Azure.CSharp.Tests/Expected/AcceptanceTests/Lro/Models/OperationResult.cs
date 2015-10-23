@@ -21,6 +21,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     public partial class OperationResult
     {
         /// <summary>
+        /// Initializes a new instance of the OperationResult class.
+        /// </summary>
+        public OperationResult() { }
+
+        /// <summary>
+        /// Initializes a new instance of the OperationResult class.
+        /// </summary>
+        public OperationResult(string status = default(string), OperationResultError error = default(OperationResultError))
+        {
+            Status = status;
+            Error = error;
+        }
+
+        /// <summary>
         /// The status of the request. Possible values for this property
         /// include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
         /// 'Creating', 'Created', 'Updating', 'Updated', 'Deleting',

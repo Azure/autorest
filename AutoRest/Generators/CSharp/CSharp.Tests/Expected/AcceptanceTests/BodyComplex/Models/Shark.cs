@@ -21,6 +21,20 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class Shark : Fish
     {
         /// <summary>
+        /// Initializes a new instance of the Shark class.
+        /// </summary>
+        public Shark() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Shark class.
+        /// </summary>
+        public Shark(DateTime? birthday, int? age = default(int?))
+        {
+            Age = age;
+            Birthday = birthday;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "age")]
         public int? Age { get; set; }

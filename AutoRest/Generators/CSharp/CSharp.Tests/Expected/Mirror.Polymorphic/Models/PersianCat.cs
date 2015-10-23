@@ -20,6 +20,19 @@ namespace Fixtures.MirrorPolymorphic.Models
     public partial class PersianCat : BaseCat
     {
         /// <summary>
+        /// Initializes a new instance of the PersianCat class.
+        /// </summary>
+        public PersianCat() { }
+
+        /// <summary>
+        /// Initializes a new instance of the PersianCat class.
+        /// </summary>
+        public PersianCat(int? size = default(int?))
+        {
+            Size = size;
+        }
+
+        /// <summary>
         /// cat size
         /// </summary>
         [JsonProperty(PropertyName = "size")]

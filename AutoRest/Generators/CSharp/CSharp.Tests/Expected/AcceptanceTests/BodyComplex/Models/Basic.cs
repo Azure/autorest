@@ -20,6 +20,21 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class Basic
     {
         /// <summary>
+        /// Initializes a new instance of the Basic class.
+        /// </summary>
+        public Basic() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Basic class.
+        /// </summary>
+        public Basic(int? id = default(int?), string name = default(string), string color = default(string))
+        {
+            Id = id;
+            Name = name;
+            Color = color;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public int? Id { get; set; }

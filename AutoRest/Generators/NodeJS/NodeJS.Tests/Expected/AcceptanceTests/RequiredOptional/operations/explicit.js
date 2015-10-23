@@ -564,7 +564,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (headerParameter !== null) {
+  if (headerParameter !== undefined && headerParameter !== null) {
     httpRequest.headers['headerParameter'] = headerParameter.toString();
   }
   if(options) {
@@ -680,7 +680,7 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (headerParameter !== null) {
+  if (headerParameter !== undefined && headerParameter !== null) {
     httpRequest.headers['headerParameter'] = headerParameter.toString();
   }
   if(options) {
@@ -1259,7 +1259,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (headerParameter !== null) {
+  if (headerParameter !== undefined && headerParameter !== null) {
     httpRequest.headers['headerParameter'] = headerParameter;
   }
   if(options) {
@@ -1375,7 +1375,7 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (bodyParameter !== null) {
+  if (bodyParameter !== undefined && bodyParameter !== null) {
     httpRequest.headers['bodyParameter'] = bodyParameter;
   }
   if(options) {
@@ -2471,7 +2471,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (headerParameter !== null) {
+  if (headerParameter !== undefined && headerParameter !== null) {
     httpRequest.headers['headerParameter'] = headerParameter.toString();
   }
   if(options) {
@@ -2591,7 +2591,7 @@ Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options,
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (headerParameter !== null) {
+  if (headerParameter !== undefined && headerParameter !== null) {
     httpRequest.headers['headerParameter'] = headerParameter.toString();
   }
   if(options) {

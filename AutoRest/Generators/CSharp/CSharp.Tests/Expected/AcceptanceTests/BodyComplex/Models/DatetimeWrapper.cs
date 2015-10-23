@@ -20,6 +20,20 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class DatetimeWrapper
     {
         /// <summary>
+        /// Initializes a new instance of the DatetimeWrapper class.
+        /// </summary>
+        public DatetimeWrapper() { }
+
+        /// <summary>
+        /// Initializes a new instance of the DatetimeWrapper class.
+        /// </summary>
+        public DatetimeWrapper(DateTime? field = default(DateTime?), DateTime? now = default(DateTime?))
+        {
+            Field = field;
+            Now = now;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "field")]
         public DateTime? Field { get; set; }

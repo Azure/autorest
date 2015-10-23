@@ -9,6 +9,8 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
+    using System.Globalization;
+
     public class ModelTemplateModel : CompositeType
     {
         private readonly IScopeProvider _scope = new ScopeProvider();
@@ -46,6 +48,24 @@ namespace Microsoft.Rest.Generator.CSharp
                        (_baseModel != null && _baseModel.NeedsPolymorphicConverter);
             }
         }
+
+        //TODO: this could just be the "required" parameters instead of required and all the optional ones with defaults if we wanted a bit cleaner constructors
+        public string ConstructorParameters
+        {
+            get
+            {
+                List<string> declarations = new List<string>();
+                foreach (var property in this.PropertyTemplateModels.OrderBy(p => !p.IsRequired))
+                {
+                    string format = (property.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture,
+                        format, property.Type, CodeNamer.CamelCase(property.Name)));
+                }
+
+                return string.Join(", ", declarations);
+            }
+        }
+
 
         public virtual IEnumerable<string> Usings
         {

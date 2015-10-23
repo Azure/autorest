@@ -20,6 +20,27 @@ namespace Fixtures.PetstoreV2.Models
     public partial class Pet
     {
         /// <summary>
+        /// Initializes a new instance of the Pet class.
+        /// </summary>
+        public Pet() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Pet class.
+        /// </summary>
+        public Pet(string name, IList<string> photoUrls, long? id = default(long?), Category category = default(Category), IList<Tag> tags = default(IList<Tag>), byte[] sByteProperty = default(byte[]), DateTime? birthday = default(DateTime?), IDictionary<string, Category> dictionary = default(IDictionary<string, Category>), string status = default(string))
+        {
+            Id = id;
+            Category = category;
+            Name = name;
+            PhotoUrls = photoUrls;
+            Tags = tags;
+            SByteProperty = sByteProperty;
+            Birthday = birthday;
+            Dictionary = dictionary;
+            Status = status;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public long? Id { get; set; }

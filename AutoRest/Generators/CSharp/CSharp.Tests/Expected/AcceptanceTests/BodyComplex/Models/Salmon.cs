@@ -21,6 +21,20 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class Salmon : Fish
     {
         /// <summary>
+        /// Initializes a new instance of the Salmon class.
+        /// </summary>
+        public Salmon() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Salmon class.
+        /// </summary>
+        public Salmon(string location = default(string), bool? iswild = default(bool?))
+        {
+            Location = location;
+            Iswild = iswild;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }

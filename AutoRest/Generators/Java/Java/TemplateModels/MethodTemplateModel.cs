@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.Java
         public ServiceClient ServiceClient { get; set; }
 
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
-
+        
         public IScopeProvider Scope
         {
             get { return _scopeProvider; }
@@ -51,7 +51,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in ParameterTemplateModels)
+                foreach (var parameter in ParameterTemplateModels.Where(p => p.Location != ParameterLocation.None))
                 {
                     StringBuilder declarationBuilder = new StringBuilder();
                     if (Url.Contains("{" + parameter.Name + "}"))
@@ -112,7 +112,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in ParameterTemplateModels)
+                foreach (var parameter in ParameterTemplateModels.Where(p => p.Location != ParameterLocation.None))
                 {
                     if ((parameter.Location != ParameterLocation.Body)
                          && parameter.Type.NeedsSpecialSerialization())
@@ -232,6 +232,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
+                //Omit parameter-group properties for now since Java doesn't support them yet
                 return ParameterTemplateModels.Where(
                     p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
                     .OrderBy(item => !item.IsRequired);

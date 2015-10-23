@@ -9,6 +9,8 @@ using Microsoft.Rest.Generator.Utilities;
 using System.Text.RegularExpressions;
 namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 {
+    using System.Collections.Generic;
+
     public static class ClientModelExtensions
     {
         public static string GetHttpMethod(this HttpMethod method)

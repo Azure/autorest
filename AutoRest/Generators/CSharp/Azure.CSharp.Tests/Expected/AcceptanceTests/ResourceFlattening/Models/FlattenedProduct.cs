@@ -21,6 +21,22 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening.Models
     public partial class FlattenedProduct : Resource
     {
         /// <summary>
+        /// Initializes a new instance of the FlattenedProduct class.
+        /// </summary>
+        public FlattenedProduct() { }
+
+        /// <summary>
+        /// Initializes a new instance of the FlattenedProduct class.
+        /// </summary>
+        public FlattenedProduct(string pname = default(string), string flattenedProductType = default(string), string provisioningStateValues = default(string), string provisioningState = default(string))
+        {
+            Pname = pname;
+            FlattenedProductType = flattenedProductType;
+            ProvisioningStateValues = provisioningStateValues;
+            ProvisioningState = provisioningState;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "properties.pname")]
         public string Pname { get; set; }

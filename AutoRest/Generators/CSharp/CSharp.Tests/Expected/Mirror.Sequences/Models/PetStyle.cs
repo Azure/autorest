@@ -20,6 +20,19 @@ namespace Fixtures.MirrorSequences.Models
     public partial class PetStyle
     {
         /// <summary>
+        /// Initializes a new instance of the PetStyle class.
+        /// </summary>
+        public PetStyle() { }
+
+        /// <summary>
+        /// Initializes a new instance of the PetStyle class.
+        /// </summary>
+        public PetStyle(string name)
+        {
+            Name = name;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

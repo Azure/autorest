@@ -1,3 +1,4 @@
+@using System.Globalization
 @using System.Linq;
 @using System
 @using Microsoft.Rest.Generator.ClientModel
@@ -30,7 +31,15 @@
 /// </param>
 public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
-    @foreach (var parameter in Model.ParameterTemplateModels)
+    @foreach (var mapping in Model.InputParameterMappings)
+    {
+    @:var @(mapping.OutputParameter.Name) = @string.Format(CultureInfo.InvariantCulture,
+                                 "({0} == null ? default({1}) : {0}.{2})",
+                                 mapping.InputParameter.Name,
+                                 mapping.OutputParameter.Type.Name, mapping.InputParameterProperty);
+    }
+
+    @foreach (var parameter in Model.LogicalParameterTemplateModels)
     {
         if (parameter.IsRequired)
         {
@@ -40,8 +49,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @:}
 @:
         }
-        if (parameter.CanBeValidated == true &&
-            (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+        if(parameter.CanBeValidated == true && parameter.Location != ParameterLocation.None && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
         {
     @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.Constraints))
         }
@@ -53,7 +61,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     {
         invocationId = ServiceClientTracing.NextInvocationId.ToString();
         Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-    @foreach (var parameter in Model.LocalParameters)
+    @foreach (var parameter in Model.LogicalParameters.Where(p => p.ClientProperty == null))
     {
         @:tracingParameters.Add("@(parameter.Name)", @(parameter.Name));
     }
@@ -78,7 +86,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     httpRequest.RequestUri = new Uri(url);
     // Set Headers
     @(Model.SetDefaultHeaders)
-    @foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
+    @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
     {
     @:if (@(parameter.Name) != null)
     @:{

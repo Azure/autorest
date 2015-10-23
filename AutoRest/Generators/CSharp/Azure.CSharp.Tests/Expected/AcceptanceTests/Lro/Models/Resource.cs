@@ -21,6 +21,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     public partial class Resource : IResource
     {
         /// <summary>
+        /// Initializes a new instance of the Resource class.
+        /// </summary>
+        public Resource() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Resource class.
+        /// </summary>
+        public Resource(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string))
+        {
+            Id = id;
+            Type = type;
+            Tags = tags;
+            Location = location;
+            Name = name;
+        }
+
+        /// <summary>
         /// Resource Id
         /// </summary>
         [JsonProperty(PropertyName = "id")]

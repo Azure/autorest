@@ -20,6 +20,20 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class BooleanWrapper
     {
         /// <summary>
+        /// Initializes a new instance of the BooleanWrapper class.
+        /// </summary>
+        public BooleanWrapper() { }
+
+        /// <summary>
+        /// Initializes a new instance of the BooleanWrapper class.
+        /// </summary>
+        public BooleanWrapper(bool? fieldTrue = default(bool?), bool? fieldFalse = default(bool?))
+        {
+            FieldTrue = fieldTrue;
+            FieldFalse = fieldFalse;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "field_true")]
         public bool? FieldTrue { get; set; }

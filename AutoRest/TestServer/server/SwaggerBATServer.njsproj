@@ -45,6 +45,7 @@
     <Compile Include="routes\queries.js" />
     <Compile Include="routes\report.js" />
     <Compile Include="routes\reqopt.js" />
+    <Compile Include="routes\azureParameterGrouping.js" />
     <Compile Include="routes\resource-flatten.js" />
     <Compile Include="routes\string.js" />
     <Content Include="startup\www.js" />

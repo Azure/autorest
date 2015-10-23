@@ -20,6 +20,19 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
     public partial class ArrayWrapper
     {
         /// <summary>
+        /// Initializes a new instance of the ArrayWrapper class.
+        /// </summary>
+        public ArrayWrapper() { }
+
+        /// <summary>
+        /// Initializes a new instance of the ArrayWrapper class.
+        /// </summary>
+        public ArrayWrapper(IList<string> value)
+        {
+            Value = value;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public IList<string> Value { get; set; }
