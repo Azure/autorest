@@ -22,7 +22,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     using Newtonsoft.Json;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Diagnostics;
 
     /// <summary>
     /// LROSADsOperations operations.
@@ -146,26 +145,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 ServiceClientTracing.SendRequest(invocationId, httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = null;
-            Trace.Listeners.Add(new TextWriterTraceListener("/home/travis/build/amarzavery/AutoRest/server.log", "myListener"));
-            try
-            {
-                httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-                Trace.TraceInformation("@@@@We are fine...");
-            }
-            catch (WebException we)
-            {
-                Trace.TraceInformation("####Writing the details of the WebException received from the server####");
-                Trace.TraceInformation(we.ToString());
-                Trace.TraceInformation("####Response####");
-                Trace.TraceInformation(we.Response.ToString());
-                Trace.TraceInformation("####Inner Exception####");
-                Trace.TraceInformation(we.InnerException.ToString());
-                Trace.TraceInformation("####Hresult####");
-                Trace.TraceInformation(we.HResult.ToString());
-                throw;
-
-            }
+            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             if (shouldTrace)
             {
                 ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
