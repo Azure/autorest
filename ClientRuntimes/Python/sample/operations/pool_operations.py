@@ -9,34 +9,28 @@ except ImportError:
     from urllib.parse import urljoin
 
 from runtime.msrest.serialization import Serialized, Deserialized
-from runtime.msrest.exceptions import ResponseStatusError
-from runtime.msrest.utils import *
+from runtime.msrest.exceptions import SerializationError, DeserializationError
 
 from runtime.msrestazure.azure_handlers import Paged, Polled
 
-from ..batch_constants import ContentTypes
 from ..batch_exception import BatchStatusError
 
-from ..models import pool_models
 from ..models.pool_models import *
-from ..models.pool_responses import *
+from ..models.shared import *
+from ..models import enums
 
 
 class PoolManager(object):
 
-    def __init__(self, client):
+    def __init__(self, client, config):
 
         self._client = client
+        self._config = config
         self._classes = {k:v for k,v in pool_models.__dict__.items() if isinstance(v, type)}
-
-        self.access_condition = None
-        self.max_results = None
-        self.filter = None
 
     def __getitem__(self, name):
         response = self.get(name)
-        print(response, type(response), dir(response))
-        return response.pool
+        return response
 
     def __setitem__(self, name, value):
         raise InvalidOperationError("Pool cannot be overwritten.")
@@ -48,159 +42,181 @@ class PoolManager(object):
             yield p
 
     def _url(self, *extension):
-        path = ['/pools']
-        path += [x.strip('/') for x in extension if x]
-        return '/'.join(path)
+        path = [x.strip('/') for x in extension if x]
+        return '/' + '/'.join(path)
 
-    def _parameters(self, filter=False, max=False, **params):
-        params = {}
-        params['api-version'] = '2015-06-01.2.0'
-        params['timeout'] = '30'
-
-        if filter and self.filter:
-            params.update(self.filter.get_parameters())
-
-        if max and self.max_results:
-            params['maxresults'] = str(self.max_results)
-
-        return params
-
-    def _headers(self, access=True, content=None):
-        headers = {}
-        headers['ocp-date'] = format_datetime_header(datetime.utcnow())
-
-        if content:
-            headers['Content-Type'] = content
-
-        if access and self.access_condition:
-            headers.update(self.access_condition.get_headers())
-
-        return headers
-
-    def pool(self, **kwargs):
-        return PoolSpec(self, manager=self._client, **kwargs)
-
-    def add(self, pool):
-
-        # Validate
-        if not pool:
-            raise ValueError("pool cannot be None")
-        
-        content = Serialized(pool)
+    def _send(self, request, accept_status, headers, content=None):
 
         try:
-            url = self._url()
-            query = self._parameters()
-            request = self._client.request(url, query)
-            request.add_content(content)
-            request.add_headers(self._headers(access=False, content=ContentTypes.json))
+            request.add_headers(headers)
+            if content:
+                request.add_content(content)
 
-            response = self._client.post(request)
+            response =  self._client.send(request)
+
+            if response.status_code not in accept_status:
        
-            deserialize = Deserialized(BatchPoolAddResponse, response, self)
-            deserialized = deserialize(response.content, self._classes)
+                deserialize = Deserialized(BatchStatusError, response, self)
+                deserialized = deserialize(response.content, self._classes)
+                raise deserialized
+
+            return response
+
+        except:
+            #TODO: All handling of requests errors goes here.
+            raise
+
+    def add(self, pool_parameters):
+        """
+        Add a new pool.
+        """
+        accept_status = [201]
+
+        # Validate
+        if not pool_parameters:
+            raise ValueError("pool cannot be None")
+
+        try:
+            # Construct URL
+            url = self._url('pools')
+
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
+
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+
+            # Construct body
+            content = Serialized(pool_parameters)
+
+            # Construct and send request
+            request = self._client.post(url, query)
+            response = self._send(request, accept_status, headers, content)
 
             #def get_status(status_link):
-            #    request = self._client.request()
+            #    request = self._client.get()
             #    request.url = status_link
-            #    response = self._client.get(request)
+            #    return self._send(request)
 
-            #    deserialize = Deserialized(BatchPoolAddResponse, response)
-            #    deserialized = deserialize(response.content, self._classes)
+            #return Polled(response, get_status)
 
-            #polling = Polled(deserialized, get_status)
-            
-        except ResponseStatusError:
-            raise BatchStatusError(response)
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
 
-        except:
-            raise #TODO: exception handling
 
-        #return polling
-        return deserialized
+    def delete(self, pool_name=None, access=AccessCondition()):
+        """
+        Delete a pool.
+        """
 
-    def delete(self, pool_name=None):
+        accept_status = [201]
 
         # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
         try:
-            url = self._url(pool_name)
-            query = self._parameters()
-            request = self._client.request(url, query)
+            # Construct URL
+            url = self._url('pools', pool_name)
 
-            request.add_headers(self._headers())
-            response = self._client.delete(request)
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
 
-            deserialize = Deserialized(BatchPoolDeleteResponse, response, self)
-            deserialized = deserialize()
-            
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers.update(access.get_headers())
 
-        except:
-            raise #TODO: exception handling
+            # Construct and send request
+            request = self._client.delete(url, query)
+            response = self._send(request, accept_status, headers)
 
-        return deserialized
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
 
-    def disable_auto_scale(self, pool_name=None):
+    def disable_auto_scale(self, pool_name=None, access=AccessCondition()):
+        """
+        Disable auto-scale on a pool.
+        """
 
+        accept_status = [202]
+
+        # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
         try:
-            url = self._url(pool_name, 'disableautoscale')
-            query = self._parameters()
-            request = self._client.request(url, query)
+            # Construct URL
+            url = self._url('pools', pool_name, 'disableautoscale')
 
-            request.add_headers(self._headers())
-            response = self._client.post(request)
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
 
-            deserialize = Deserialized(BatchPoolDisableAutoScaleResponse, response, self)
-            dersialized = deserialize()
-           
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers.update(access.get_headers())
 
-        except:
-            raise #TODO: exception handling
+            # Construct and send request
+            request = self._client.post(url, query)
+            response = self._send(request, accept_status, headers)
 
-        return dersialized
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
 
-    def enable_auto_scale(self, auto_scale_parameters, pool_name=None):
+    def enable_auto_scale(self, auto_scale_parameters, pool_name=None, access=AccessCondition()):
+        """
+        Enable auto-scale on a pool using given formula.
+        """
+
+        accept_status = [202]
 
         # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
         
         if not auto_scale_parameters:
-            raise ValueError('parameters cannot be None.')
-
-        content = Serialized(auto_scale_parameters)
+            raise ValueError('auto_scale_parameters cannot be None.')
 
         try:
-            url = self._url(pool_name, 'enableautoscale')
-            query = self._parameters()
+            # Construct URL
+            url = self._url('pools', pool_name, 'enableautoscale')
 
-            request = self._client.request(url, query)
-            request.add_content(content)
-            request.add_headers(self._headers(content=ContentTypes.json))
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
 
-            response = self._client.post(request)
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+            headers.update(access.get_headers())
 
-            deserialize = Deserialized(BatchPoolEnableAutoScaleResponse, response, self)
-            dersialized = deserialize()
-           
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            # Construct body
+            content = Serialized(auto_scale_parameters)
 
-        except:
-            raise #TODO: exception handling
+            # Construct and send request
+            request = self._client.post(url, query)
+            response = self._send(request, accept_status, headers, content)
 
-        return dersialized
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
 
-    def evaluate_auto_scale(self, evaluation_parameters, pool_name=None):
+    def evaluate_auto_scale(self, evaluation_parameters, pool_name=None, access=AccessCondition()):
+        """
+        Evaluate pool auto-scale formula.
+        """
+
+        accept_status = [202]
 
         # Validate
         if (pool_name is None):
@@ -209,87 +225,122 @@ class PoolManager(object):
         if (evaluation_parameters is None):
             raise ValueError('parameters cannot be None.')
 
-        content = Serialized(evaluation_parameters)
-
         try:
-            url = self._url(pool_name, 'evaluateautoscale')
-            query = self._parameters()
+            # Construct URL
+            url = self._url('pools', pool_name, 'evaluateautoscale')
 
-            request = self._client.request(url, query)
-            request.add_content(content)
-            request.add_headers(self._headers(content=ContentTypes.json))
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
 
-            response = self._client.post(request)
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+            headers.update(access.get_headers())
 
-            deserialize = Deserialized(BatchPoolEvaluateAutoScaleResponse, response, self)
-            dersialized = deserialize()
-           
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            # Construct body
+            content = Serialized(evaluation_parameters)
 
-        except:
-            raise #TODO: exception handling
+            # Construct and send request
+            request = self._client.post(url, query)
+            response = self._send(request, accept_status, headers, content)
 
-        return dersialized
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
 
-    def get(self, pool_name=None):
+    def get(self, pool_name=None, filter=DetailLevel(), access=AccessCondition()):
+        """
+        Get details on a pool.
+        """
+        accept_status = [200]
 
         # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
         try:
-            url = self._url(pool_name)
-            query = self._parameters(filter=True)
-            request = self._client.request(url, query)
+            # Construct URL
+            url = self._url('pools', pool_name)
 
-            request.add_headers(self._headers())
-            response = self._client.get(request)
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
+            query.update(filter.get_parameters())
 
-            deserialize = Deserialized(BatchPoolGetResponse, response, self)
-            dersialized = deserialize(response.content, self._classes)
-            
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers.update(access.get_headers())
 
-        except:
-            raise #TODO: exception handling
+            # Construct and send request
+            request = self._client.get(url, query)
+            response = self._send(request, accept_status, headers)
 
-        return dersialized
-
-    def list(self):
-
-        try:
-            url = self._url()
-            query = self._parameters(filter=True, max=True)
-            request = self._client.request(url, query)
-            request.add_headers(self._headers())
-            response = self._client.get(request)
-
-            deserialize = Deserialized(BatchPoolListResponse, response, self)
+            # Deserialize response
+            deserialize = Deserialized(Pool, response, self)
             deserialized = deserialize(response.content, self._classes)
+            return deserialized
 
-            def next_page(next_link):
-                request = self._client.request()
-                request.url = next_link
-                request.add_headers(self._headers())
-                response = self._client.get(request)
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
 
-                deserialize = Deserialized(BatchPoolListResponse, response, self)
-                dersialized = deserialize(response.content, self._classes)   
-                return deserialized    
+    def list(self, max_results=None, filter=DetailLevel(), access=AccessCondition()):
+        """
+        List pools in account.
+        """
 
-            pager = Paged(deserialized.pools, deserialized.next_link, next_page)
+        def paging(next=None):
 
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            accept_status = [200]
 
-        except:
-            raise #TODO: exception handling
+            try:
+                if next is None:
+                    # Construct URL
+                    url = self._url('pools')
 
-        return pager
+                    # Construct parameters
+                    query = {}
+                    query['api-version'] = self._config.api_version
+                    query['timeout'] = self._config.request_timeout
+                    query.update(filter.get_parameters())
+                    if max_results:
+                        query['maxresults'] = str(max_results)
 
-    def patch(self, patch_parameters, pool_name=None):
+                    request = self._client.get(url, query)
+
+                else:
+                    request = self._client.get()
+                    request.url = next
+
+                # Construct headers
+                headers = {}
+                headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+                headers.update(access.get_headers())
+
+                # Construct and send request
+                response = self._send(request, accept_status, headers)
+
+                # Deserialize response
+                deserialize = Deserialized(Pool, response, self, "value")
+                deserialized = deserialize(response.content, self._classes)
+                page = Deserialized(Page, response, self, "odata.next_link")()
+
+                return deserialized, page.next_link
+
+            except (SerializationError, DeserializationError):
+                raise #TODO: Wrap in client-specific error?
+
+        response_list, next_link = paging()
+        return Paged(response_list, next_link, paging)
+
+        
+
+    def patch(self, patch_parameters, pool_name=None, access=AccessCondition()):
+
+        accept_status = [200]
 
         # Validate
         if not pool_name:
@@ -298,30 +349,34 @@ class PoolManager(object):
         if not patch_parameters:
             raise ValueError('patch_parameters cannot be None.')
 
-        content = Serialized(patch_parameters)
-
         try:
-            url = self._url(pool_name)
-            query = self._parameters()
+            # Construct URL
+            url = self._url('pools', pool_name)
 
-            request = self._client.request(url, query)
-            request.add_content(content)
-            request.add_headers(self._headers(content=ContentTypes.json))
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
 
-            response = self._client.patch(request)
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+            headers.update(access.get_headers())
 
-            deserialize = Deserialized(BatchPoolPatchResponse, response, self)
-            dersialized = deserialize()
+            # Construct body
+            content = Serialized(patch_parameters)
 
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            # Construct and send request
+            request = self._client.patch(url, query)
+            response = self._send(request, accept_status, headers, content)
 
-        except:
-            raise #TODO: exception handling
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
 
-        return dersialized
+    def resize(self, resize_parameters, pool_name=None, access=AccessCondition()):
 
-    def resize(self, resize_parameters, pool_name=None):
+        accept_status = [202]
 
         # Validate
         if not pool_name:
@@ -330,54 +385,64 @@ class PoolManager(object):
         if not resize_parameters:
             raise ValueError('resize_parameters cannot be None.')
 
-        content = Serialized(resize_parameters)
-
         try:
-            url = self._url(pool_name, 'resize')
-            query = self._parameters()
+            # Construct URL
+            url = self._url('pools', pool_name, 'resize')
 
-            request = self._client.request(url, query)
-            request.add_content(content)
-            request.add_headers(self._headers(content=ContentTypes.json))
-            response = self._client.post(request)
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
 
-            deserialize = Deserialized(BatchPoolResizeResponse, response, self)
-            dersialized = deserialize()
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+            headers.update(access.get_headers())
 
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            # Construct body
+            content = Serialized(resize_parameters)
 
-        except:
-            raise #TODO: exception handling
+            # Construct and send request
+            request = self._client.post(url, query)
+            response = self._send(request, accept_status, headers, content)
 
-        return dersialized
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
 
-    def stop_resize(self, pool_name=None):
+    def stop_resize(self, pool_name=None, access=AccessCondition()):
+
+        accept_status = [202]
 
         # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
         try:
-            url = self._url(pool_name, 'stopresize')
-            query = self._parameters()
-            request = self._client.request(url, query)
+            # Construct URL
+            url = self._url('pools', pool_name, 'stopresize')
 
-            request.add_headers(self._headers(content=ContentTypes.json))
-            response = self._client.post(request)
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
 
-            deserialize = Deserialized(BatchPoolStopResizeResponse, response, self)
-            dersialized = deserialize()
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+            headers.update(access.get_headers())
 
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            # Construct and send request
+            request = self._client.post(url, query)
+            response = self._send(request, accept_status, headers)
+           
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
 
-        except:
-            raise #TODO: exception handling
+    def update_properties(self, update_properties, pool_name=None, access=AccessCondition()):
 
-        return dersialized
-
-    def update_properties(self, update_properties, pool_name=None):
+        accept_status = [204]
 
         # Validate
         if not pool_name:
@@ -385,30 +450,35 @@ class PoolManager(object):
 
         if not update_properties:
             raise ValueError('update_properties cannot be None.')
-                    
-        content = Serialized(update_properties)
 
         try:
-            url = self._url(pool_name, 'updateproperties')
-            query = self._parameters()
+            # Construct URL
+            url = self._url('pools', pool_name, 'updateproperties')
 
-            request = self._client.request(url, query)
-            request.add_content(content)
-            request.add_headers(self._headers(content=ContentTypes.json))
-            response = self._client.post(request)
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
 
-            deserialize = Deserialized(BatchPoolUpdatePropertiesResponse, response, self)
-            dersialized = deserialize()
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+            headers.update(access.get_headers())
 
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            # Construct body
+            content = Serialized(update_properties)
 
-        except:
-            raise #TODO: exception handling
+            # Construct and send request
+            request = self._client.post(url, query)
+            response = self._send(request, accept_status, headers, content)
 
-        return dersialized
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
 
-    def upgrade_os(self, os_parameters, pool_name=None):
+    def upgrade_os(self, os_parameters, pool_name=None, access=AccessCondition()):
+
+        accept_status = [202]
 
         # Validate
         if not pool_name:
@@ -417,26 +487,30 @@ class PoolManager(object):
         if not os_parameters:
             raise ValueError('os_parameters cannot be None.')
 
-        content = Serialized(os_parameters)
-
         try:
-            url = self._url(pool_name, 'upgradeos')
-            query = self._parameters()
+            # Construct URL
+            url = self._url('pools', pool_name, 'upgradeos')
 
-            request = self._client.request(url, query)
-            request.add_content(content)
-            request.add_headers(self._headers(content=ContentTypes.json))
-            response = self._client.post(request)
+            # Construct parameters
+            query = {}
+            query['api-version'] = self._config.api_version
+            query['timeout'] = self._config.request_timeout
 
-            deserialize = Deserialized(BatchPoolUpgradeOSResponse, response, self)
-            dersialized = deserialize()
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+            headers.update(access.get_headers())
 
-        except ResponseStatusError as err:
-            raise BatchStatusError(response)
+            # Construct body
+            content = Serialized(os_parameters)
 
-        except:
-            raise #TODO: exception handling
+            # Construct and send request
+            request = self._client.post(url, query)
+            response = self._send(request, accept_status, headers, content)
 
-        return dersialized
+        except (SerializationError, DeserializationError):
+            raise #TODO: Wrap in client-specific error?
+
 
 

@@ -28,7 +28,7 @@ class DetailLevel(object):
         return params
 
 
-class PoolSpec(object):
+class PoolParameters(object):
 
     _required = ['name']
 
@@ -80,6 +80,22 @@ class PoolSpec(object):
         return None
 
 
+class Page(object):
+
+    _required = []
+
+    _attribute_map = {
+        'next_link': {'key':None, 'type':'str'}
+        }
+
+    def __init__(self, **kwargs):
+
+        self.next_link = None
+
+        for k in kwargs:
+            if hasattr(self, k):
+                setattr(self, k, kwargs[k])
+
 class Pool(object):
 
     _required = ['name'] # Not sure what else needs to be here
@@ -102,12 +118,12 @@ class Pool(object):
             'target_os_version': {'key':'targetOSVersion', 'type':'str'},
             'url': {'key':'url', 'type':'str'},
             'e_tag': {'key':'eTag', 'type':'str'},
-            'last_modified': {'key':'lastModifed', 'type':'datetime'},
-            'creation_time': {'key':'creationTime', 'type':'datetime'},
+            'last_modified': {'key':'lastModifed', 'type':'iso-date'},
+            'creation_time': {'key':'creationTime', 'type':'iso-date'},
             'state': {'key':'state', 'type':'str'},
-            'state_transition_time': {'key':'stateTransitionTime', 'type':'datetime'},
+            'state_transition_time': {'key':'stateTransitionTime', 'type':'iso-date'},
             'allocation_state': {'key':'allocationState', 'type':'str'},
-            'allocation_state_transition_time': {'key':'allocationStateTransitionTime', 'type':'datetime'},
+            'allocation_state_transition_time': {'key':'allocationStateTransitionTime', 'type':'iso-date'},
             'resize_error': {'key':'resizeError', 'type':'ResizeError'},
             'current_dedicated': {'key':'currentDedicated', 'type':'int'},
             'auto_scale_run': {'key':'autoScaleRun', 'type':'AutoScaleRun'},
@@ -118,7 +134,6 @@ class Pool(object):
     def __init__(self, **kwargs):
 
         self._manager = kwargs.get('manager')
-        print("set manager", self._manager)
         
         self.id = None
         self.certificate_references = []
@@ -162,7 +177,6 @@ class Pool(object):
         self._update(response.pool)
 
     def delete(self):
-        print("deleting with", self._manager)
         response = self._manager.delete(self.id)
 
     def disable_auto_scale(self):
