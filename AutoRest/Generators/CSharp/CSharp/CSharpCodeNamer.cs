@@ -67,11 +67,11 @@ namespace Microsoft.Rest.Generator.CSharp
                     {
                         parameter.Name = scope.GetVariableName(parameter.Name);
                     }
-                }
+                }                
             }
         }
 
-        public override IType NormalizeType(IType type)
+        public override IType NormalizeTypeDeclaration(IType type)
         {
             if (type == null)
             {
@@ -109,6 +109,16 @@ namespace Microsoft.Rest.Generator.CSharp
                 "Type {0} is not supported.", type.GetType()));
         }
 
+        public override IType NormalizeTypeReference(IType type)
+        {
+            var enumType = type as EnumType;
+            if (enumType != null && enumType.ModelAsString)
+            {
+                return PrimaryType.String;
+            }
+            return NormalizeTypeDeclaration(type);
+        }
+
         private IType NormalizeCompositeType(CompositeType compositeType)
         {
             compositeType.Name = GetTypeName(compositeType.Name);
@@ -116,7 +126,7 @@ namespace Microsoft.Rest.Generator.CSharp
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             return compositeType;
@@ -124,15 +134,8 @@ namespace Microsoft.Rest.Generator.CSharp
 
         private IType NormalizeEnumType(EnumType enumType)
         {
-            if (enumType.ModelAsString)
-            {
-                // We will keep SerializedName to use for the constant wrapper class name 
-                enumType.Name = "string";
-            }
-            else
-            {
-                enumType.Name = GetTypeName(enumType.Name) + "?";
-            }
+            enumType.Name = GetTypeName(enumType.Name) + "?";
+
             for (int i = 0; i < enumType.Values.Count; i++)
             {
                 enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
@@ -196,14 +199,14 @@ namespace Microsoft.Rest.Generator.CSharp
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
+            sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
             sequenceType.NameFormat = "IList<{0}>";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
+            dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             dictionaryType.NameFormat = "IDictionary<string, {0}>";
             return dictionaryType;
         }
