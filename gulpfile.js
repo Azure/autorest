@@ -380,6 +380,7 @@ var clrCmd = function(cmd){
 };
 
 var execClrCmd = function(cmd, options){
+  gutil.log(cmd);
   return shell(clrCmd(cmd), options);
 };
 
@@ -401,7 +402,7 @@ var nugetTestProjDir = path.resolve('AutoRest/NugetPackageTest');
 var packagesDir = path.resolve('binaries/packages');
 var cachedClientRuntimePackages = path.join(process.env.HOME || (process.env.HOMEDRIVE + process.env.HOMEPATH),
     'AppData', 'Local', 'NuGet', 'Cache', "Microsoft.Rest.ClientRuntime.*.nupkg");
-gulp.task('test:nugetPackages:restore', ['test:nugetPackages:clean'], clrTask(nugetPath + ' restore ' + path.join(nugetTestProjDir, '/NugetPackageTest.sln') + ' -source ' + path.resolve(packagesDir)));
+gulp.task('test:nugetPackages:restore', ['test:nugetPackages:clean'], clrTask(nugetPath + ' restore ' + path.join(nugetTestProjDir, '/NugetPackageTest.sln') + ' -source "' + path.resolve(packagesDir) + ';https://www.nuget.org/api/v2/"'));
 gulp.task('test:nugetPackages:clean', function () {
   //turn on 'force' so we can remove files outside of repo folder.
   return del([path.join(nugetTestProjDir, 'Generated'), cachedClientRuntimePackages], {'force' : true});
