@@ -1,0 +1,155 @@
+@using System
+@using System.Linq;
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.TemplateModels
+@using Microsoft.Rest.Generator.Python.Templates
+@inherits Microsoft.Rest.Generator.Template<MethodTemplateModel>
+
+/**
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+  @WrapComment(" * ", "@summary " + Model.Summary)@:
+@: *
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+  @WrapComment(" * ", Model.Description)@:
+@: *
+}
+@foreach (var parameter in Model.DocumentationParameters)
+{
+ @MethodTemplateModel.ConstructParameterDocumentation(
+                      WrapComment(" * ", "@param {"
+                                        + MethodTemplateModel.GetParameterDocumentationType(parameter)
+                                        + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
+                                        + " " + parameter.Documentation))
+}
+@WrapComment(" * ", " @param {object} [options]")
+ *
+@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
+ *
+@WrapComment(" * ", " @param {function} callback")
+ *
+@WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
+@WrapComment(" *                      ", Model.ReturnTypeInfo)
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+@(Model.OperationName).prototype.@(Model.Name.ToCamelCase()) = function (@(Model.MethodParameterDeclarationWithCallback)) {
+  var client = @(Model.ClientReference);
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  @if (Model.ParameterTemplateModels.Any())
+  {
+      var validationBlock = Model.ValidationString;
+  if (!string.IsNullOrWhiteSpace(validationBlock))
+  {
+  <text>
+  // Validate
+  try {
+    @(validationBlock)
+  } catch (error) {
+    return callback(error);
+  }
+  </text>
+  }
+  }
+  @EmptyLine
+  // Construct URL
+  @if (Model.IsAbsoluteUrl)
+  {
+  @:var requestUrl = '@(Model.Url)';
+  }
+  else
+  {
+  @:var requestUrl = @(Model.ClientReference).baseUri +
+  @:                 '/@(Model.Url)';
+  }
+  @(Model.BuildUrl("requestUrl"))
+  @(Model.RemoveDuplicateForwardSlashes("requestUrl"))
+  @EmptyLine
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = '@(Model.HttpMethod.ToString().ToUpper())';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+
+  // Set Headers
+  @(Model.SetDefaultHeaders)
+  @foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
+  {
+  @:if (@(parameter.Name) !== null) {
+  @:  httpRequest.headers['@(parameter.SerializedName)'] = @parameter.Type.ToString(parameter.Name);
+  @:}
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = '@(Model.ContentType)';
+
+  @if (Model.RequestBody != null)
+  {
+  <text>
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    @(Model.InitializeRequestBody)
+  @if (Model.RequestBody.Type is CompositeType)
+  {
+  <text>
+    if (requestModel !== null && requestModel !== undefined) {
+      requestContent = JSON.stringify(requestModel.serialize());
+    } else {
+      requestContent = JSON.stringify(requestModel);
+    }
+  </text>
+  }
+  else
+  {
+    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired))
+    @:requestContent = JSON.stringify(requestModel);
+  }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    return callback(serializationError);
+  }
+
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  </text>
+  }
+  else
+  {
+  <text>
+  httpRequest.body = null;
+  httpRequest.headers['Content-Length'] = 0;
+  </text>
+  }
+
+  @if (Model.Responses.Any(r => r.Value == PrimaryType.Stream))
+  {
+@:  @Include(new MethodStreamPipelineTemplate(), Model)
+  }
+  else
+  {
+@:  @Include(new MethodJsonPipelineTemplate(), Model)
+  }
+};
