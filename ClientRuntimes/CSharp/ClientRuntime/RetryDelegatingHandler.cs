@@ -91,7 +91,6 @@ namespace Microsoft.Rest
             };
 
             HttpResponseMessage responseMessage = null;
-            //StreamWriter sw = File.AppendText("/home/travis/build/amarzavery/AutoRest/server.log");
             try
             {
                 await RetryPolicy.ExecuteAsync(async () =>
