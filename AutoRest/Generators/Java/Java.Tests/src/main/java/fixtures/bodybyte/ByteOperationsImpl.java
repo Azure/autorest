@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Response;
+import org.apache.commons.codec.binary.Base64;
 import fixtures.bodybyte.models.Error;
 
 public class ByteOperationsImpl implements ByteOperations {

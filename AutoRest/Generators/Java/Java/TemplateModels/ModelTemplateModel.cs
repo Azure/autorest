@@ -139,7 +139,7 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         classes.Add("java.util.Map");
                     }
-                    else if (property.Type is PrimaryType && property.Type != PrimaryType.ByteArray)
+                    else if (property.Type is PrimaryType)
                     {
                         var importedFrom = JavaCodeNamer.ImportedFrom(property.Type as PrimaryType);
                         if (importedFrom != null)

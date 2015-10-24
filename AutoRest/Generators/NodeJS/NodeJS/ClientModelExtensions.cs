@@ -195,6 +195,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var lowercaseTypeName = primary.Name.ToLower(CultureInfo.InvariantCulture);
             if (primary == PrimaryType.Boolean ||
                 primary == PrimaryType.Double ||
+                primary == PrimaryType.Decimal ||
                 primary == PrimaryType.Int ||
                 primary == PrimaryType.Long ||
                 primary == PrimaryType.Object)
@@ -275,7 +276,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         {
             if (primary == PrimaryType.Boolean)
                 return "boolean";
-            else if (primary == PrimaryType.Double || primary == PrimaryType.Int || primary == PrimaryType.Long)
+            else if (primary == PrimaryType.Double || primary == PrimaryType.Decimal || primary == PrimaryType.Int || primary == PrimaryType.Long)
                 return "number";
             else if (primary == PrimaryType.String)
                 return "string";
@@ -534,6 +535,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             if (primary == PrimaryType.Boolean ||
                 primary == PrimaryType.Double ||
+                primary == PrimaryType.Decimal ||
                 primary == PrimaryType.Int ||
                 primary == PrimaryType.Long ||
                 primary == PrimaryType.Object)

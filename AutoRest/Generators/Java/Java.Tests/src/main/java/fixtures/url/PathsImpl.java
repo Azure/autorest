@@ -22,10 +22,10 @@ import retrofit.Retrofit;
 import retrofit.Call;
 import retrofit.Response;
 import fixtures.url.models.UriColor;
+import org.apache.commons.codec.binary.Base64;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import fixtures.url.models.Error;
-import org.apache.commons.codec.binary.Base64;
 import com.microsoft.rest.serializer.JacksonHelper;
 
 public class PathsImpl implements Paths {

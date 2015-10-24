@@ -169,6 +169,10 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 primaryType.Name = "double?";
             }
+            else if (primaryType == PrimaryType.Decimal)
+            {
+                primaryType.Name = "decimal?";
+            }
             else if (primaryType == PrimaryType.Int)
             {
                 primaryType.Name = "int?";

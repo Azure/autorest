@@ -250,6 +250,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 primaryType.Name = "Number";
             }
+            else if (primaryType == PrimaryType.Decimal)
+            {
+                primaryType.Name = "Number";
+            }
             else if (primaryType == PrimaryType.Int)
             {
                 primaryType.Name = "Number";

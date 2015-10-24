@@ -250,6 +250,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 primaryType.Name = "double";
             }
+            else if (primaryType == PrimaryType.Decimal)
+            {
+                primaryType.Name = "BigDecimal";
+            }
             else if (primaryType == PrimaryType.Int)
             {
                 primaryType.Name = "int";
@@ -348,6 +352,11 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return "org.joda.time.DateTime";
             }
+            else if (primaryType == PrimaryType.Decimal ||
+                primaryType.Name == "Decimal")
+            {
+                return "java.math.BigDecimal";
+            }
             else if (primaryType == PrimaryType.DateTimeRfc1123 ||
                primaryType.Name == "DateTimeRfc1123")
             {
@@ -357,6 +366,11 @@ namespace Microsoft.Rest.Generator.Java
                 primaryType.Name == "InputStream")
             {
                 return "java.io.InputStream";
+            }
+            else if (primaryType == PrimaryType.ByteArray ||
+                primaryType.Name == "ByteArray")
+            {
+                return "org.apache.commons.codec.binary.Base64";
             }
             else if (primaryType == PrimaryType.TimeSpan ||
                 primaryType.Name == "Period")
