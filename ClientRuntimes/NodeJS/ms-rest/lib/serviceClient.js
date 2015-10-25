@@ -3,7 +3,7 @@
 
 'use strict';
 
-var url = require('url');
+var parse = require('url-parse');
 var Constants = require('./constants');
 var ProxyFilter = require('./filters/proxyFilter');
 var RedirectFilter = require('./filters/redirectFilter');
@@ -91,7 +91,7 @@ ServiceClient._loadEnvironmentProxyValue = function () {
 ServiceClient.prototype._setDefaultProxy = function () {
   var proxyUrl = ServiceClient._loadEnvironmentProxyValue();
   if (proxyUrl) {
-    var parsedUrl = url.parse(proxyUrl);
+    var parsedUrl = parse(proxyUrl);
     if (!parsedUrl.port) {
       parsedUrl.port = 80;
     }

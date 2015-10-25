@@ -37,6 +37,7 @@
     "through": "~2.3.4",
     "tunnel": "~0.0.2",
     "underscore": "1.4.x",
+    "url-parse": "^1.0.4",
     "validator": "~3.1.0"
   },
   "devDependencies": {
