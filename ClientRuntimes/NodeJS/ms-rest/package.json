@@ -33,7 +33,6 @@
   "dependencies": {
     "duplexer": "~0.1.1",
     "superagent": "^1.4.0",
-    "superagent-defaults": "^0.1.13",
     "through": "~2.3.4",
     "tunnel": "~0.0.2",
     "underscore": "1.4.x",
@@ -58,6 +57,7 @@
   "scripts": {
     "test": "npm install && npm -s run-script jshint && npm -s run-script unit",
     "unit": "node test/unit.js testlist.txt",
+    "test-browser": "zuul -- tests/*.js",
     "jshint": "jshint lib --reporter=jslint"
   }
 }
