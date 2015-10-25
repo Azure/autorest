@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information. 
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 'use strict';
 
-var request = require('request');
+var superagent = require('superagent');
 var through = require('through');
 var duplexer = require('duplexer');
 var _ = require('underscore');
@@ -82,35 +82,26 @@ exports.createWithSink = function(sink) {
  */
 
 exports.requestLibrarySink = function (requestOptions) {
-
   return function (options, callback) {
-    request = request.defaults(requestOptions);
-    if (options.headersOnly) {
-      var requestHeaderStream = request(options);
-      requestHeaderStream.on('error', function (err) {
-        return callback(err);
-      });
-      requestHeaderStream.on('response', function (response) {
-        requestHeaderStream.on('end', function () {
-          return callback(null, response);
-        });
-      });      
-      return requestHeaderStream;
-    } else if (options.streamedResponse) {
-      var requestStream = request(options);
-      requestStream.on('error', function (err) {
-        return callback(err);
-      });
-      requestStream.on('response', function (response) {
-        return callback(null, response);
-      });
-      return requestStream;
-    } else {
-      return request(options, function (err, response, body) {
-        if (err) { return callback(err); }
-        return callback(null, response, body);
-      });
+    var superagentMock = null;
+    if(requestOptions.testConfig){
+      superagentMock = require('superagent-mock')(superagent, requestOptions.testConfig);
     }
+
+    var request = superagent(options.method, options.url);
+
+    if(requestOptions.headers){ request.set(requestOptions.headers); }
+    if(options.headers){ request.set(options.headers); }
+    if(options.query){ request.query(options.query); }
+    request.send(options.body);
+    return request.end(function(err, res){
+      if(superagentMock){
+        superagentMock.unset();
+      }
+
+      if (err) { return callback(err); }
+      return callback(null, res, res.text);
+    });
   };
 };
 /**
