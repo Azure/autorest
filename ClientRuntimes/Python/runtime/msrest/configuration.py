@@ -38,6 +38,11 @@ except ImportError:
     import ConfigParser as configparser
 
 from . import logger
+from .pipeline import (
+    ClientRetryPolicy,
+    ClientRedirectPolicy,
+    ClientProxies,
+    ClientConnection)
 
 class Configuration(object):
     
@@ -55,16 +60,17 @@ class Configuration(object):
 
         self._log = logger.setup_logger(self)
 
-        # Communication configuration - TODO: Populate
-        self.protocols = ['https://']
-        self.proxies = {}
-        self.timeout = None
-        self.allow_redirects = True
-        self.verify = True
-        self.cert = None
+        # Communication configuration
+        self.connection = ClientConnection(self._log_name)
 
-        self._config = configparser.RawConfigParser()
-        self._config.optionxform = str
+        # ProxyConfiguration
+        self.proxies = ClientProxies(self._log_name)
+
+        # Retry configuration
+        self.retry_policy = ClientRetryPolicy(self._log_name)
+
+        # Redirect configuration
+        self.redirect_policy = ClientRedirectPolicy(self._log_name)
 
         if filepath:
             self.load(filepath)
@@ -117,40 +123,43 @@ class Configuration(object):
     def save(self, filepath):
         
         _config = configparser.RawConfigParser()
-        _config.add_section("Logging")
-        _config.add_section("HTTP")
+        _config.optionxform = str
 
-        _config.set("Logging", "log_name", self._log_name)
-        _config.set("Logging", "log_dir", self._log_dir)
-        _config.set("Logging", "stream_format", self._stream_logging)
-        _config.set("Logging", "file_format", self._file_logging)
-        _config.set("Logging", "level", self._level)
+        #_config.add_section("Logging")
+        #_config.add_section("HTTP")
 
-        _config.set("HTTP", "protocols", self.protocols)
-        _config.set("HTTP", "timeout", self.timeout)
-        _config.set("HTTP", "allow_redirects", self.allow_redirects)
-        _config.set("HTTP", "verify", self.verify)
-        _config.set("HTTP", "cert", self.cert)
+        #_config.set("Logging", "log_name", self._log_name)
+        #_config.set("Logging", "log_dir", self._log_dir)
+        #_config.set("Logging", "stream_format", self._stream_logging)
+        #_config.set("Logging", "file_format", self._file_logging)
+        #_config.set("Logging", "level", self._level)
 
-        with open(filepath, 'w') as configfile:
-            self._config.write(configfile)
+        #_config.set("HTTP", "protocols", self.protocols)
+        #_config.set("HTTP", "timeout", self.timeout)
+        #_config.set("HTTP", "allow_redirects", self.allow_redirects)
+        #_config.set("HTTP", "verify", self.verify)
+        #_config.set("HTTP", "cert", self.cert)
+
+        #with open(filepath, 'w') as configfile:
+        #    self._config.write(configfile)
 
     def load(self, filepath):
         
         _config = configparser.RawConfigParser()
+        _config.optionxform = str
         _config.read(filepath)
 
-        self._log_name = _config.get("Logging", "log_name")
-        self._log_dir = _config.get("Logging", "log_dir")
-        self._stream_logging = _config.get("Logging", "stream_format")
-        self._file_logging = _config.get("Logging", "file_format")
-        self._level = _config.getint("Logging", "level")
+        #self._log_name = _config.get("Logging", "log_name")
+        #self._log_dir = _config.get("Logging", "log_dir")
+        #self._stream_logging = _config.get("Logging", "stream_format")
+        #self._file_logging = _config.get("Logging", "file_format")
+        #self._level = _config.getint("Logging", "level")
 
-        self.protocols = _config.get("HTTP", "protocols")
-        self.timeout = _config.get("HTTP", "timeout")
-        self.allow_redirects = _config.get("HTTP", "allow_redirects")
-        self.verify = _config.get("HTTP", "verify")
-        self.cert = _config.get("HTTP", "cert")
+        #self.protocols = _config.get("HTTP", "protocols")
+        #self.timeout = _config.get("HTTP", "timeout")
+        #self.allow_redirects = _config.get("HTTP", "allow_redirects")
+        #self.verify = _config.get("HTTP", "verify")
+        #self.cert = _config.get("HTTP", "cert")
 
-        self._log = logger.setup_logger(self)
+        #self._log = logger.setup_logger(self)
 
