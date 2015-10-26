@@ -98,8 +98,6 @@ class Page(object):
 
 class Pool(object):
 
-    _required = ['name'] # Not sure what else needs to be here
-
     _attribute_map = {
             'id':{'key':'id', 'type':'str'},
             'certificate_references': {'key':'certificateReferences', 'type':'[Certificate]'},
@@ -132,41 +130,7 @@ class Pool(object):
         }
 
     def __init__(self, **kwargs):
-
         self._manager = kwargs.get('manager')
-        
-        self.id = None
-        self.certificate_references = []
-        self.metadata = {}
-        self.name = None
-        self.tvm_size = None
-        self.resize_timeout = None
-        self.target_dedicated = None
-        self.enable_auto_scale = None
-        self.auto_scale_formula = None
-        self.communication = None
-        self.start_task = None
-        self.max_tasks_per_tvm = None
-        self.scheduling_policy = None
-        self.os_family = None
-        self.target_os_version = None
-        self.url = None
-        self.e_tag = None
-        self.last_modified = None
-        self.creation_time = None
-        self.state = None
-        self.state_transition_time = None
-        self.allocation_state = None
-        self.allocation_state_transition_time = None
-        self.resize_error = None
-        self.current_dedicated = None
-        self.auto_scale_run = None
-        self.stats = None
-        self.current_os_version = None
-
-        for k in kwargs:
-            if hasattr(self, k):
-                setattr(self, k, kwargs[k])
 
     def _update(self, new_pool):
         for attr in self.attribute_map:

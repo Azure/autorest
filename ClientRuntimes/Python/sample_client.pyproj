@@ -23,6 +23,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="sample\batch_auth.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="sample\batch_client.py">
       <SubType>Code</SubType>
     </Compile>
