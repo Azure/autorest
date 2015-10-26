@@ -31,6 +31,9 @@ import pickle
 class Paged(object):
 
     def __init__(self, items, url, command):
+        """
+        A collection for paged REST responses.
+        """
 
         self.items = items
         self.url = url
@@ -56,6 +59,9 @@ class Paged(object):
 class Polled(object):
 
     def __init__(self, response, update_cmd):
+        """
+        A container for polling long-running Azure requests.
+        """
 
         self._response = response
         self._url = self._extract_url()
