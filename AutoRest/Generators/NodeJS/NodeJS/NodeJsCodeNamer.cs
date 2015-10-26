@@ -3,11 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -20,7 +19,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// </summary>
         public NodeJsCodeNamer()
         {
-            // List retrieved from 
+            // List retrieved from
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords
             new HashSet<string>
             {
@@ -157,15 +156,19 @@ namespace Microsoft.Rest.Generator.NodeJS
                 }
             }
         }
+        public override IType NormalizeTypeDeclaration(IType type)
+        {
+            return NormalizeTypeReference(type);
+        }
 
-        protected override IType NormalizeType(IType type)
+        public override IType NormalizeTypeReference(IType type)
         {
             if (type == null)
             {
                 return null;
             }
             var enumType = type as EnumType;
-            if (enumType != null && enumType.IsExpandable)
+            if (enumType != null && enumType.ModelAsString)
             {
                 type = PrimaryType.String;
             }
@@ -199,7 +202,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
 
 
-            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                 "Type {0} is not supported.", type.GetType()));
         }
 
@@ -215,7 +218,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             return compositeType;
@@ -239,7 +242,15 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 primaryType.Name = "Date";
             }
+            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            {
+                primaryType.Name = "Date";
+            }
             else if (primaryType == PrimaryType.Double)
+            {
+                primaryType.Name = "Number";
+            }
+            else if (primaryType == PrimaryType.Decimal)
             {
                 primaryType.Name = "Number";
             }
@@ -261,7 +272,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else if (primaryType == PrimaryType.TimeSpan)
             {
-                primaryType.Name = "TimeSpan";
+                primaryType.Name = "moment.duration"; 
             }
             else if (primaryType == PrimaryType.Object)
             {
@@ -273,14 +284,14 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
+            sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
             sequenceType.NameFormat = "Array";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
+            dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             dictionaryType.NameFormat = "Object";
             return dictionaryType;
         }

@@ -191,7 +191,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var handler = new PlaybackTestHandler(MockOperaionWithImmediateSuccessNoContentStatus());
             var fakeClient = new RedisManagementClient(tokenCredentials, handler);
             fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
-            var sku = fakeClient.RedisOperations.Post("rg", "redis", "1234");
+            fakeClient.RedisOperations.Post("rg", "redis", "1234");
             Assert.Equal(1, handler.Requests.Count);
         }
 
@@ -1390,7 +1390,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 Content = new StringContent(@"")
             };
             response1.Headers.Add("Location", "http://custom/location/status");
-            response1.Headers.Add("Retry-After", "2");
+            response1.Headers.Add("Retry-After", "3");
 
             yield return response1;
 

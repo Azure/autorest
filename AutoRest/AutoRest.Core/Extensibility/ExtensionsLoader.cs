@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -121,6 +122,7 @@ namespace Microsoft.Rest.Generator.Extensibility
             return settings.FileSystem.ReadFileAsText(path);
         }
 
+        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom")]
         private static T LoadTypeFromAssembly<T>(IDictionary<string, AutoRestProviderConfiguration> section,
             string key, Settings settings)
         {
@@ -144,7 +146,20 @@ namespace Microsoft.Rest.Generator.Extensibility
 
                 try
                 {
-                    Assembly loadedAssembly = Assembly.Load(assemblyName);
+                    Assembly loadedAssembly;
+                    try
+                    {
+                        loadedAssembly = Assembly.Load(assemblyName);
+                    }
+                    catch(FileNotFoundException)
+                    {
+                        loadedAssembly = Assembly.LoadFrom(assemblyName + ".dll");
+                        if(loadedAssembly == null)
+                        {
+                            throw;
+                        }
+                    }
+
                     Type loadedType = loadedAssembly.GetTypes()
                         .Single(t => string.IsNullOrEmpty(typeName) ||
                                      t.Name == typeName ||

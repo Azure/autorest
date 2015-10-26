@@ -9,7 +9,7 @@ namespace Microsoft.Rest
     /// <summary>
     /// Generic exception for Microsoft Rest Client. 
     /// </summary>
-#if !PORTABLE
+#if !PORTABLE && !DNXCORE50
     [Serializable]
 #endif
     public class RestException : Exception
@@ -40,7 +40,7 @@ namespace Microsoft.Rest
         {
         }
 
-#if !PORTABLE
+#if !PORTABLE && !DNXCORE50
         /// <summary>
         /// Initializes a new instance of the RestException class.
         /// </summary>

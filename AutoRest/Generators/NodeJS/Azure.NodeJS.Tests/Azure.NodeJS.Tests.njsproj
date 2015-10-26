@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8e7b23e3-7e9f-478b-8f69-ab0b531647ab}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>
     </StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
@@ -19,8 +19,12 @@
   <ItemGroup>
     <Content Include=".jshintrc" />
     <Content Include="package.json" />
-    <Compile Include="AcceptanceTests\coverage.js">
+    <Compile Include="AcceptanceTests\parameterGrouping.js" >
       <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="AcceptanceTests\coverage.js">
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\azureSpecialProperties.js">
       <TestFramework>Mocha</TestFramework>
@@ -37,65 +41,15 @@
     <Compile Include="AcceptanceTests\resourceFlattening.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
-    <Compile Include="Expected\AcceptanceTests\AzureReport\autoRestReportServiceForAzure.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureReport\models\errorModel.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureReport\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\autoRestAzureSpecialParametersTestClient.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\models\errorModel.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\apiVersionDefault.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\apiVersionLocal.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\index.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\skipUrlEncoding.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\subscriptionInCredentials.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\subscriptionInMethod.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\xMsClientRequestId.js" />
-    <Compile Include="Expected\AcceptanceTests\Head\autoRestHeadTestService.js" />
-    <Compile Include="Expected\AcceptanceTests\Head\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Head\operations\httpSuccess.js" />
-    <Compile Include="Expected\AcceptanceTests\Head\operations\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\autoRestLongRunningOperationTestService.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\operationResult.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\operationResultError.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\product.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\productProperties.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\sku.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\subProduct.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\subProductProperties.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\dONOTCALLs.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\lRORetrys.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\lROs.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\lROSADs.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\lROsCustomHeader.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\autoRestPagingTestService.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\models\operationResult.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\models\product.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\models\productProperties.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\models\productResult.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\operations\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\operations\paging.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\autoRestResourceFlatteningTestService.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\errorModel.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\flattenedProduct.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\flattenedProductProperties.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\resourceCollection.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoftAzureTestUrl.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\errorModel.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\sampleResourceGroup.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\group.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\index.js" />
+    <Compile Include="Expected\**\*.js" />
     <Compile Include="unit.js" />
     <Content Include="AcceptanceTests\testlist.txt" />
     <Compile Include="AcceptanceTests\lro.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\startServer.js">
-      <TestFramework>Mocha</TestFramework>
+      <TestFramework>
+      </TestFramework>
     </Compile>
     <Content Include="bin\Net45-Debug\AutoRest.json" />
     <Content Include="bin\Net45-Debug\AutoRest.Core.xml" />
@@ -120,7 +74,6 @@
     <Content Include="bin\Net45-Debug\Swagger\swagger-simple-spec.json" />
     <Content Include="bin\Net45-Debug\Swagger\swagger-streaming.json" />
     <Content Include="packages.config" />
-    <Content Include="RegenerateExpectedClasses.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AcceptanceTests" />
@@ -129,6 +82,9 @@
     <Folder Include="bin\Net45-Debug\Swagger" />
     <Folder Include="Expected" />
     <Folder Include="Expected\AcceptanceTests\" />
+    <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\" />
+    <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\operations\" />
     <Folder Include="Expected\AcceptanceTests\AzureReport\" />
     <Folder Include="Expected\AcceptanceTests\AzureReport\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\" />
@@ -147,6 +103,9 @@
     <Folder Include="Expected\AcceptanceTests\Report\models\" />
     <Folder Include="Expected\AcceptanceTests\ResourceFlattening\" />
     <Folder Include="Expected\AcceptanceTests\ResourceFlattening\models\" />
+    <Folder Include="Expected\AcceptanceTests\StorageManagementClient\" />
+    <Folder Include="Expected\AcceptanceTests\StorageManagementClient\models\" />
+    <Folder Include="Expected\AcceptanceTests\StorageManagementClient\operations\" />
     <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\" />
     <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\" />
     <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\" />

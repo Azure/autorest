@@ -11,8 +11,14 @@
     <RootNamespace>Microsoft.Rest.Generator.NodeJS</RootNamespace>
     <AssemblyName>AutoRest.Generator.NodeJS</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Net45-Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -41,8 +47,14 @@
     <Compile Include="Templates\MethodGroupIndexTemplate.cs">
       <DependentUpon>MethodGroupIndexTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\MethodGroupIndexTemplateTS.cs">
+      <DependentUpon>MethodGroupIndexTemplateTS.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\MethodGroupTemplate.cs">
       <DependentUpon>MethodGroupTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodGroupTemplateTS.cs">
+      <DependentUpon>MethodGroupTemplateTS.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\MethodJsonPipelineTemplate.cs">
       <DependentUpon>MethodJsonPipelineTemplate.cshtml</DependentUpon>
@@ -53,22 +65,40 @@
     <Compile Include="Templates\MethodTemplate.cs">
       <DependentUpon>MethodTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\MethodTemplateTS.cs">
+      <DependentUpon>MethodTemplateTS.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ModelIndexTemplate.cs">
       <DependentUpon>ModelIndexTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ModelIndexTemplateTS.cs">
+      <DependentUpon>ModelIndexTemplateTS.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\ModelTemplate.cs">
       <DependentUpon>ModelTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ModelTemplateTS.cs">
+      <DependentUpon>ModelTemplateTS.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ServiceClientTemplate.cs">
       <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ServiceClientTemplateTS.cs">
+      <DependentUpon>ServiceClientTemplateTS.cshtml</DependentUpon>
+    </Compile>
     <None Include="Templates\MethodGroupTemplate.cshtml" />
+    <None Include="Templates\MethodGroupTemplateTS.cshtml" />
     <None Include="Templates\MethodJsonPipelineTemplate.cshtml" />
     <None Include="Templates\MethodStreamPipelineTemplate.cshtml" />
+    <None Include="Templates\MethodTemplateTS.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
+    <None Include="Templates\ModelTemplateTS.cshtml" />
     <None Include="Templates\ModelIndexTemplate.cshtml" />
+    <None Include="Templates\ModelIndexTemplateTS.cshtml" />
     <None Include="Templates\MethodGroupIndexTemplate.cshtml" />
+    <None Include="Templates\MethodGroupIndexTemplateTS.cshtml" />
     <None Include="Templates\ServiceClientTemplate.cshtml" />
+    <None Include="Templates\ServiceClientTemplateTS.cshtml" />
     <None Include="Templates\MethodTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>

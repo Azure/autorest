@@ -10,7 +10,7 @@ var assert = require('assert');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 
-var headClient = require('../Expected/AcceptanceTests/Head/AutoRestHeadTestService');
+var headClient = require('../Expected/AcceptanceTests/Head/autoRestHeadTestService');
 
 var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
 var dummyToken = 'dummy12321343423';
@@ -33,7 +33,7 @@ describe('nodejs', function () {
       it('should return true for 204 status code', function (done) {
         testClient.httpSuccess.head204(function (error, result) {
           should.not.exist(error);
-          result.body.should.be.exactly(true);
+          result.should.be.exactly(true);
           done();
         });
       });
@@ -41,7 +41,7 @@ describe('nodejs', function () {
       it('should return false for 404 status code', function (done) {
         testClient.httpSuccess.head404(function (error, result) {
           should.not.exist(error);
-          result.body.should.be.exactly(false);
+          result.should.be.exactly(false);
           done();
         });
       });

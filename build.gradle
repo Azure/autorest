@@ -1,0 +1,23 @@
+subprojects {
+    apply plugin: 'java'
+    group = 'com.microsoft.rest'
+}
+
+project(':azure-client-runtime') {
+    dependencies {
+        compile project(':client-runtime')
+    }
+}
+
+project(':codegen-tests') {
+    dependencies {
+        compile project(':client-runtime')
+    }
+}
+
+project(':azure-codegen-tests') {
+    dependencies {
+        compile project(':client-runtime')
+        compile project(':azure-client-runtime')
+    }
+}

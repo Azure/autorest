@@ -24,6 +24,8 @@
     <file src="binaries/net45/AutoRest.Generator.Azure.Common.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Generator.NodeJS.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Generator.Azure.NodeJS.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.Ruby.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.Azure.Ruby.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Modeler.Swagger.dll" target="tools" />
     <file src="binaries/net45/Newtonsoft.Json.dll" target="tools" />
   </files>

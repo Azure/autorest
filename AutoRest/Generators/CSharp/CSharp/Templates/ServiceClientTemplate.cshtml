@@ -5,9 +5,11 @@
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ServiceClientTemplateModel>
 @Header("// ")
+@EmptyLine
 namespace @Settings.Namespace
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
@@ -111,7 +113,7 @@ namespace @Settings.Namespace
             {
                 throw new ArgumentNullException("baseUri");
             }
-            this.Initialize();
+
             this.BaseUri = baseUri;
         }
         @EmptyLine
@@ -143,8 +145,15 @@ namespace @Settings.Namespace
         foreach (var param in parameters)
         {
         @:    this.@(param.Name) = @(param.Name.ToCamelCase());
+            @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
+            "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
+            {
+            @:if (this.Credentials != null)
+            @:{
+            @:    this.Credentials.InitializeServiceClient(this);
+            @:}
+            }
         }
-        @:    this.Initialize();
         @:}
         @:@EmptyLine
 
@@ -180,7 +189,16 @@ namespace @Settings.Namespace
         foreach (var param in parameters)
         {
         @:    this.@(param.Name) = @(param.Name.ToCamelCase());
-        }
+
+            @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
+            "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                @:if (this.Credentials != null)
+                @:{
+                @:    this.Credentials.InitializeServiceClient(this);
+                @:}
+            }
+    }
         @:}
         @:@EmptyLine
         }
@@ -200,14 +218,6 @@ namespace @Settings.Namespace
             @:this.@(property.Name) = @(property.DefaultValue);
         }
 
-        @if (Model.Properties.Any(p => "Credentials".Equals(p.Name, StringComparison.OrdinalIgnoreCase) &&
-            "ServiceClientCredentials".Equals(p.Type.Name, StringComparison.OrdinalIgnoreCase)))
-        {
-            @:if (this.Credentials != null) 
-            @:{
-            @:    this.Credentials.InitializeServiceClient(this);
-            @:}
-        }
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
@@ -215,14 +225,23 @@ namespace @Settings.Namespace
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
             @foreach (var polymorphicType in Model.ModelTypes.Where(t => t.PolymorphicDiscriminator != null))
             {

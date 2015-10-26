@@ -1,11 +1,12 @@
+# encoding: utf-8
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License. See License.txt in the project root for license information.
+
 source 'https://rubygems.org'
 
 # Specify your gem's dependencies in ms_rest.gemspec
 gemspec
 
-group :development, :local, :test do
+group :test do
   gem 'rspec'
-  gem 'json'
-  gem 'timeliness'
-  gem 'concurrent-ruby-ext'
 end

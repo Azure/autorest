@@ -1,15 +1,20 @@
+# encoding: utf-8
+
+$: << 'RspecTests/Generated/azure_url'
+
 require 'rspec'
 require 'securerandom'
-require_relative 'AzureURL/sdk_requirements'
-include MyNamespace
+
+require 'subscription_id_api_version'
+
+include AzureUrlModule
 
 describe Group do
   before(:all) do
     @base_url = ENV['StubServerURI']
 
     dummyToken = 'dummy12321343423'
-    dummySubscription = '1-1-1-1'
-    @credentials = MsRestAzure::TokenCloudCredentials.new(dummySubscription, dummyToken)
+    @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     @client = MicrosoftAzureTestUrl.new(@credentials, @base_url)
 	@client.subscription_id = SecureRandom.uuid

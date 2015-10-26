@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
@@ -11,6 +12,7 @@ module MsRestAzure
     FAILED_STATUS = "Failed"
     CANCELED_STATUS = "Canceled"
 
+    ALL_STATUSES = [FAILED_STATUS, CANCELED_STATUS, SUCCESS_STATUS, IN_PROGRESS_STATUS]
     FAILED_STATUSES = [FAILED_STATUS, CANCELED_STATUS]
     TERMINAL_STATUSES = [FAILED_STATUS, CANCELED_STATUS, SUCCESS_STATUS]
 
@@ -19,8 +21,8 @@ module MsRestAzure
     # @return [Integer] delay in seconds which should be used for polling for result of async operation.
     attr_accessor :retry_after
 
-    # @return [MsRestAzure::CloudError] error information about async operation.
-    attr_accessor :cloud_error
+    # @return [MsRestAzure::CloudErrorData] error information about async operation.
+    attr_accessor :error
 
     # @return [Stirng] status of polling.
     attr_accessor :status
@@ -52,14 +54,21 @@ module MsRestAzure
       return status == SUCCESS_STATUS
     end
 
+    #
+    # Deserializes given hash into AsyncOperationStatus object.
+    # @param object [Hash] object to deserialize.
+    #
+    # @return [AsyncOperationStatus] deserialized object.
     def self.deserialize_object(object)
       return if object.nil?
       output_object = AsyncOperationStatus.new
 
-      deserialized_property = object['status']
+      fail AzureOperationError, 'Invalid status was recieved during polling' unless ALL_STATUSES.include?(object['status'])
+      output_object.status = object['status']
 
-      # TODO: Check that valid enum value is provided.
-      output_object.status = deserialized_property
+      output_object.error = CloudErrorData.deserialize_object(object['error'])
+
+      output_object.retry_after = Integer(object['retryAfter']) unless object['retryAfter'].nil?
 
       output_object
     end

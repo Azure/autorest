@@ -25,23 +25,23 @@ var AzureEnvironment = require('../azureEnvironment');
 * @param {object} [options.tokenCache] The token cache. Default value is null.
 */
 function UserTokenCredentials(clientId, domain, username, password, clientRedirectUri, options) {
-  if (!Boolean(clientId) || typeof clientId !== 'string') {
+  if (!Boolean(clientId) || typeof clientId.valueOf() !== 'string') {
     throw new Error('clientId must be a non empty string.');
   }
   
-  if (!Boolean(domain) || typeof domain !== 'string') {
+  if (!Boolean(domain) || typeof domain.valueOf() !== 'string') {
     throw new Error('domain must be a non empty string.');
   }
   
-  if (!Boolean(username) || typeof username !== 'string') {
+  if (!Boolean(username) || typeof username.valueOf() !== 'string') {
     throw new Error('username must be a non empty string.');
   }
   
-  if (!Boolean(password) || typeof password !== 'string') {
+  if (!Boolean(password) || typeof password.valueOf() !== 'string') {
     throw new Error('password must be a non empty string.');
   }
   
-  if (!Boolean(clientRedirectUri) || typeof clientRedirectUri !== 'string') {
+  if (!Boolean(clientRedirectUri) || typeof clientRedirectUri.valueOf() !== 'string') {
     throw new Error('clientRedirectUri cannot be null.');
   }
 

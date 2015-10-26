@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -25,6 +24,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             Parameters = new List<Parameter>();
             RequestHeaders = new Dictionary<string, string>();
             Responses = new Dictionary<HttpStatusCode, IType>();
+            InputParameterMappings = new List<ParameterMapping>();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the HTTP url.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
             Justification= "Url might be used as a template, thus making it invalid url in certain scenarios.")]
         public string Url { get; set; }
 
@@ -58,6 +58,34 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets or sets the method parameters.
         /// </summary>
         public List<Parameter> Parameters { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the logical parameter.
+        /// </summary>
+        public IEnumerable<Parameter> LogicalParameters
+        {
+            get
+            {
+                return Parameters.Where(gp => gp.Location != ParameterLocation.None)
+                    .Union(InputParameterMappings.Select(m => m.OutputParameter));
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the body parameter.
+        /// </summary>
+        public Parameter Body
+        {
+            get
+            {
+                return LogicalParameters.FirstOrDefault(p => p.Location == ParameterLocation.Body);
+            }
+        }
+
+        /// <summary>
+        /// Gets the list of input Parameter Mappings
+        /// </summary>
+        public List<ParameterMapping> InputParameterMappings { get; private set; }
 
         /// <summary>
         /// Gets or sets request headers.
@@ -90,9 +118,19 @@ namespace Microsoft.Rest.Generator.ClientModel
         public IType ReturnType { get; set; }
 
         /// <summary>
-        /// Gets or sets the documentation.
+        /// Gets or sets the description.
         /// </summary>
-        public string Documentation { get; set; }
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        public string Summary { get; set; }
+
+        /// <summary>
+        /// Gets or sets the content type.
+        /// </summary>
+        public string ContentType { get; set; }
 
         /// <summary>
         /// Gets vendor extensions dictionary.
@@ -122,8 +160,10 @@ namespace Microsoft.Rest.Generator.ClientModel
             newMethod.Parameters = new List<Parameter>();
             newMethod.RequestHeaders = new Dictionary<string, string>();
             newMethod.Responses = new Dictionary<HttpStatusCode, IType>();
+            newMethod.InputParameterMappings = new List<ParameterMapping>();
             this.Extensions.ForEach(e => newMethod.Extensions[e.Key] = e.Value);
             this.Parameters.ForEach(p => newMethod.Parameters.Add((Parameter)p.Clone()));
+            this.InputParameterMappings.ForEach(m => newMethod.InputParameterMappings.Add((ParameterMapping)m.Clone()));
             this.RequestHeaders.ForEach(r => newMethod.RequestHeaders[r.Key] = r.Value);
             this.Responses.ForEach(r => newMethod.Responses[r.Key] = r.Value);
             return newMethod;

@@ -1,0 +1,26 @@
+language: csharp
+mono:
+  - beta
+install:
+  - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | sh && source ~/.dnx/dnvm/dnvm.sh && dnvm upgrade
+  - npm install -g npm@'>=1.4.3'
+  - npm install
+  - rvm use 2.2.1 --install --binary --fuzzy
+  - gem install bundler
+  - bundle install
+  - wget https://services.gradle.org/distributions/gradle-2.6-bin.zip
+  - unzip gradle-2.6-bin.zip
+  - PATH=$PATH:$(pwd)/gradle-2.6/bin
+script:
+  - dnvm install 1.0.0-beta8
+  - dnvm use 1.0.0-beta8 -persistent
+  - gulp
+after_script:
+  - echo "========== Server log: ============"
+  - pwd
+  - ls -al
+  - ls -al TestResults
+  - cat TestResults/*.log
+notifications:
+  slack:
+    secure: d0PFVLcyqcMxNtmZ8JaEpIBzXbUbZCgKs8QtBB5qEIXDnxflSR3AhczlILNhTBKtMEBlwVzsz65yP09XcmvB6xpAfJbHqSRzk2frKa5viPcAD8Wr/NYamt9/UiTCsnql8MqzjVy0tLdMscXKRmsUey4YF570zl0b7gAbq7XTqxM=

@@ -1,0 +1,46 @@
+@using System
+@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq;
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodGroupTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.ResponseBody;
+import retrofit.Retrofit;
+import retrofit.Call;
+import retrofit.Response;
+@foreach (var importClass in Model.ImplImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
+    private @Model.MethodGroupServiceType service;
+    @Model.Name client;
+    @EmptyLine
+    public @(Model.MethodGroupType)Impl(Retrofit retrofit, @Model.Name client) {
+        this.service = retrofit.create(@(Model.MethodGroupServiceType).class);
+        this.client = client;
+    }
+    @EmptyLine
+
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:@(Include(new MethodTemplate(), method))
+    @EmptyLine
+    }
+}

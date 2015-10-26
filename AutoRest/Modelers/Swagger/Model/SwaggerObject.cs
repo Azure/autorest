@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.Rest.Generator.ClientModel;
 using System.Globalization;
+using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
@@ -50,11 +50,27 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// </summary>
         public virtual string Default { get; set; }
 
+        public virtual string MultipleOf { get; set; }
+
         public virtual string Maximum { get; set; }
+
+        public virtual bool ExclusiveMaximum { get; set; }
 
         public virtual string Minimum { get; set; }
 
+        public virtual bool ExclusiveMinimum { get; set; }
+
+        public virtual string MaxLength { get; set; }
+
+        public virtual string MinLength { get; set; }
+
         public virtual string Pattern { get; set; }
+
+        public virtual string MaxItems { get; set; }
+
+        public virtual string MinItems { get; set; }
+
+        public virtual bool UniqueItems { get; set; }
 
         public virtual IList<string> Enum { get; set; }
 
@@ -84,12 +100,24 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         return PrimaryType.DateTime;
                     }
+                    if (string.Equals("date-time-rfc1123", Format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return PrimaryType.DateTimeRfc1123;
+                    }
                     if (string.Equals("byte", Format, StringComparison.OrdinalIgnoreCase))
                     {
                         return PrimaryType.ByteArray;
                     }
+                    if (string.Equals("duration", Format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return PrimaryType.TimeSpan;
+                    }
                     return PrimaryType.String;
                 case DataType.Number:
+                    if (string.Equals("decimal", Format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return PrimaryType.Decimal;
+                    }
                     return PrimaryType.Double;
                 case DataType.Integer:
                     if (string.Equals("int64", Format, StringComparison.OrdinalIgnoreCase))

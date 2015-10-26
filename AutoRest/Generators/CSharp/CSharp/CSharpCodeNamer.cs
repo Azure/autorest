@@ -3,11 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -60,19 +59,19 @@ namespace Microsoft.Rest.Generator.CSharp
                     if (parameter.ClientProperty != null)
                     {
                         parameter.Name = string.Format(CultureInfo.InvariantCulture,
-                            "{0}.{1}", 
-                            method.Group == null ? "this" : "this.Client", 
+                            "{0}.{1}",
+                            method.Group == null ? "this" : "this.Client",
                             parameter.ClientProperty.Name);
                     }
                     else
                     {
-                        parameter.Name = scope.GetVariableName(parameter.Name);   
+                        parameter.Name = scope.GetVariableName(parameter.Name);
                     }
-                }
+                }                
             }
         }
 
-        protected override IType NormalizeType(IType type)
+        public override IType NormalizeTypeDeclaration(IType type)
         {
             if (type == null)
             {
@@ -106,8 +105,18 @@ namespace Microsoft.Rest.Generator.CSharp
                 return NormalizeEnumType(type as EnumType);
             }
 
-            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                 "Type {0} is not supported.", type.GetType()));
+        }
+
+        public override IType NormalizeTypeReference(IType type)
+        {
+            var enumType = type as EnumType;
+            if (enumType != null && enumType.ModelAsString)
+            {
+                return PrimaryType.String;
+            }
+            return NormalizeTypeDeclaration(type);
         }
 
         private IType NormalizeCompositeType(CompositeType compositeType)
@@ -117,7 +126,7 @@ namespace Microsoft.Rest.Generator.CSharp
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             return compositeType;
@@ -125,15 +134,8 @@ namespace Microsoft.Rest.Generator.CSharp
 
         private IType NormalizeEnumType(EnumType enumType)
         {
-            if (enumType.IsExpandable)
-            {
-                enumType.SerializedName = "string";
-                enumType.Name = "string";
-            }
-            else
-            {
-                enumType.Name = GetTypeName(enumType.Name) + "?";
-            }
+            enumType.Name = GetTypeName(enumType.Name) + "?";
+
             for (int i = 0; i < enumType.Values.Count; i++)
             {
                 enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
@@ -159,9 +161,17 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 primaryType.Name = "DateTime?";
             }
+            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            {
+                primaryType.Name = "DateTime?";
+            }
             else if (primaryType == PrimaryType.Double)
             {
                 primaryType.Name = "double?";
+            }
+            else if (primaryType == PrimaryType.Decimal)
+            {
+                primaryType.Name = "decimal?";
             }
             else if (primaryType == PrimaryType.Int)
             {
@@ -193,14 +203,14 @@ namespace Microsoft.Rest.Generator.CSharp
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
+            sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
             sequenceType.NameFormat = "IList<{0}>";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
+            dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             dictionaryType.NameFormat = "IDictionary<string, {0}>";
             return dictionaryType;
         }

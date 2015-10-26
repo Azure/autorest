@@ -93,7 +93,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             serializeSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
             serializeSettings.ContractResolver = new ReadOnlyJsonContractResolver();
 
-            var firstAlienJson = JsonConvert.SerializeObject(new Alien("green") { Name = "autorest", Planet = "Mars", Body = JObject.Parse(@"{ ""custom"" : ""json"" }") }, 
+            var firstAlienJson = JsonConvert.SerializeObject(new Alien("green") { Name = "autorest", Planet = "Mars", Body = JObject.Parse(@"{ ""custom"" : ""json"" }") },
                 Formatting.Indented, serializeSettings);
 
             var firstAlien = JsonConvert.DeserializeObject<Alien>(firstAlienJson, serializeSettings);
@@ -149,42 +149,41 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void DateSerializationWithoutNulls()
         {
-            var localDateTime = DateTime.Parse("2015-06-01T16:10:08.0121-07:00", CultureInfo.InvariantCulture);
+            var localDateTimeOffset = new DateTimeOffset(2015, 6, 1, 16, 10, 08, 121, new TimeSpan(-7, 0, 0));
             var utcDate = DateTime.Parse("2015-06-01T00:00:00.0", CultureInfo.InvariantCulture);
             var serializeSettings = new JsonSerializerSettings();
             serializeSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
             serializeSettings.Formatting = Formatting.Indented;
             serializeSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             serializeSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-            
+
             DateTestObject test = new DateTestObject();
-            test.Date = localDateTime;
-            test.DateNullable = localDateTime;
-            test.DateTime = localDateTime;
-            test.DateTimeNullable = localDateTime;
-            test.DateTimeOffset = new DateTimeOffset(localDateTime, new TimeSpan(-7, 0, 0));
-            test.DateTimeOffsetNullable = localDateTime;
-            test.DateTimeOffsetWithConverter = localDateTime;
-            test.DateTimeOffsetNullableWithConverter = localDateTime;
+            test.Date = localDateTimeOffset.LocalDateTime;
+            test.DateNullable = localDateTimeOffset.LocalDateTime;
+            test.DateTime = localDateTimeOffset.LocalDateTime;
+            test.DateTimeNullable = localDateTimeOffset.LocalDateTime;
+            test.DateTimeOffset = localDateTimeOffset;
+            test.DateTimeOffsetNullable = localDateTimeOffset;
+            test.DateTimeOffsetWithConverter = localDateTimeOffset;
+            test.DateTimeOffsetNullableWithConverter = localDateTimeOffset;
 
             var expectedJson = @"{
   ""d"": ""2015-06-01"",
-  ""dt"": ""2015-06-01T23:10:08.0121Z"",
-  ""dn"": ""2015-06-01T23:10:08.0121Z"",
+  ""dt"": ""2015-06-01T23:10:08.121Z"",
+  ""dn"": ""2015-06-01T23:10:08.121Z"",
   ""dtn"": ""2015-06-01"",
   ""dtoc"": ""2015-06-01"",
   ""dtonc"": ""2015-06-01"",
-  ""dto"": ""2015-06-01T16:10:08.0121-07:00"",
-  ""dton"": ""2015-06-01T16:10:08.0121-07:00""
+  ""dto"": ""2015-06-01T16:10:08.121-07:00"",
+  ""dton"": ""2015-06-01T16:10:08.121-07:00""
 }";
             var json = JsonConvert.SerializeObject(test, serializeSettings);
 
             DateTestObject testRoundtrip = JsonConvert.DeserializeObject<DateTestObject>(json, serializeSettings);
-
             Assert.Equal(expectedJson, json);
             Assert.Equal(utcDate, testRoundtrip.Date);
-            Assert.Equal(localDateTime, testRoundtrip.DateTime.ToLocalTime());
-            Assert.Equal(new DateTimeOffset(localDateTime, new TimeSpan(-7, 0, 0)), testRoundtrip.DateTimeOffset);
+            Assert.Equal(localDateTimeOffset, testRoundtrip.DateTime.ToLocalTime());
+            Assert.Equal(test.DateTimeOffset, testRoundtrip.DateTimeOffset);
         }
 
         [Fact]
@@ -241,14 +240,13 @@ namespace Microsoft.Rest.ClientRuntime.Tests
   ""dtoc"": ""9999-12-31"",
   ""dtonc"": ""9999-12-31"",
   ""dto"": ""0001-01-01T00:00:00+00:00"",
-  ""dton"": ""9999-12-31T15:59:59-08:00""
+  ""dton"": """ + localDateTime.ToString("yyyy-MM-ddTHH:mm:sszzz") + @"""
 }";
             var json = JsonConvert.SerializeObject(test, serializeSettings);
 
             DateTestObject testRoundtrip = JsonConvert.DeserializeObject<DateTestObject>(json, serializeSettings);
-
-            Assert.Equal(expectedJson, json);
             Assert.Equal(localDateTime, testRoundtrip.DateTime.ToLocalTime());
+            Assert.Equal(expectedJson, json);
         }
     }
 }

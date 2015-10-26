@@ -8,20 +8,23 @@ var http = require('http');
 var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
+var moment = require('moment');
 var fs = require('fs');
 
-var boolClient = require('../Expected/AcceptanceTests/BodyBoolean/AutoRestBoolTestService');
-var stringClient = require('../Expected/AcceptanceTests/BodyString/AutoRestSwaggerBATService');
-var integerClient = require('../Expected/AcceptanceTests/BodyInteger/AutoRestIntegerTestService');
-var numberClient = require('../Expected/AcceptanceTests/BodyNumber/AutoRestNumberTestService');
-var byteClient = require('../Expected/AcceptanceTests/BodyByte/AutoRestSwaggerBATByteService');
-var dateClient = require('../Expected/AcceptanceTests/BodyDate/AutoRestDateTestService');
-var dateTimeClient = require('../Expected/AcceptanceTests/BodyDateTime/AutoRestDateTimeTestService');
-var urlClient = require('../Expected/AcceptanceTests/Url/AutoRestUrlTestService');
-var fileClient = require('../Expected/AcceptanceTests/BodyFile/AutoRestSwaggerBATFileService');
-var arrayClient = require('../Expected/AcceptanceTests/BodyArray/AutoRestSwaggerBATArrayService');
-var dictionaryClient = require('../Expected/AcceptanceTests/BodyDictionary/AutoRestSwaggerBATdictionaryService');
-var httpClient = require('../Expected/AcceptanceTests/Http/AutoRestHttpInfrastructureTestService');
+var boolClient = require('../Expected/AcceptanceTests/BodyBoolean/autoRestBoolTestService');
+var stringClient = require('../Expected/AcceptanceTests/BodyString/autoRestSwaggerBATService');
+var integerClient = require('../Expected/AcceptanceTests/BodyInteger/autoRestIntegerTestService');
+var numberClient = require('../Expected/AcceptanceTests/BodyNumber/autoRestNumberTestService');
+var byteClient = require('../Expected/AcceptanceTests/BodyByte/autoRestSwaggerBATByteService');
+var dateClient = require('../Expected/AcceptanceTests/BodyDate/autoRestDateTestService');
+var dateTimeClient = require('../Expected/AcceptanceTests/BodyDateTime/autoRestDateTimeTestService');
+var dateTimeRfc1123Client = require('../Expected/AcceptanceTests/BodyDateTimeRfc1123/autoRestRFC1123DateTimeTestService');
+var durationClient = require('../Expected/AcceptanceTests/BodyDuration/autoRestDurationTestService');
+var urlClient = require('../Expected/AcceptanceTests/Url/autoRestUrlTestService');
+var fileClient = require('../Expected/AcceptanceTests/BodyFile/autoRestSwaggerBATFileService');
+var arrayClient = require('../Expected/AcceptanceTests/BodyArray/autoRestSwaggerBATArrayService');
+var dictionaryClient = require('../Expected/AcceptanceTests/BodyDictionary/autoRestSwaggerBATdictionaryService');
+var httpClient = require('../Expected/AcceptanceTests/Http/autoRestHttpInfrastructureTestService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -47,10 +50,10 @@ describe('nodejs', function () {
       it('should get valid boolean values', function (done) {
         testClient.bool.getTrue(function (error, result) {
           should.not.exist(error);
-          result.body.should.equal(true);
+          result.should.equal(true);
           testClient.bool.getFalse(function (error, result) {
             should.not.exist(error);
-            result.body.should.equal(false);
+            result.should.equal(false);
             done();
           });
         });
@@ -68,7 +71,7 @@ describe('nodejs', function () {
 
       it('should get null and invalid boolean value', function (done) {
         testClient.bool.getNull(function (error, result) {
-          should.not.exist(result.body);
+          should.not.exist(result);
           testClient.bool.getInvalid(function (error, result) {
             should.exist(error);
             should.not.exist(result);
@@ -102,7 +105,7 @@ describe('nodejs', function () {
 
       it('should get null and invalid integer value', function (done) {
         testClient.intModel.getNull(function (error, result) {
-          should.not.exist(result.body);
+          should.not.exist(result);
           testClient.intModel.getInvalid(function (error, result) {
             should.exist(error);
             should.not.exist(result);
@@ -114,10 +117,10 @@ describe('nodejs', function () {
       it('should get overflow and underflow for 32 bit integer value', function (done) {
         testClient.intModel.getOverflowInt32(function (error, result) {
           should.not.exist(error);
-          result.body.should.equal(2147483656);
+          result.should.equal(2147483656);
           testClient.intModel.getUnderflowInt32(function (error, result) {
             should.not.exist(error);
-            result.body.should.equal(-2147483656);
+            result.should.equal(-2147483656);
             done();
           });
         });
@@ -126,10 +129,10 @@ describe('nodejs', function () {
       it('should get overflow and underflow for 64 bit integer value', function (done) {
         testClient.intModel.getOverflowInt64(function (error, result) {
           should.not.exist(error);
-          result.body.should.equal(9223372036854775910);
+          result.should.equal(9223372036854775910);
           testClient.intModel.getUnderflowInt64(function (error, result) {
             should.not.exist(error);
-            result.body.should.equal(-9223372036854775910);
+            result.should.equal(-9223372036854775910);
             done();
           });
         });
@@ -151,10 +154,10 @@ describe('nodejs', function () {
       it('should get big float and double value', function (done) {
         testClient.number.getBigFloat(function (error, result) {
           should.not.exist(error);
-          result.body.should.equal(3.402823e+20);
+          result.should.equal(3.402823e+20);
           testClient.number.getBigDouble(function (error, result) {
             should.not.exist(error);
-            result.body.should.equal(2.5976931e+101);
+            result.should.equal(2.5976931e+101);
             done();
           });
         });
@@ -173,10 +176,10 @@ describe('nodejs', function () {
       it('should get small float and double value', function (done) {
         testClient.number.getSmallFloat(function (error, result) {
           should.not.exist(error);
-          result.body.should.equal(3.402823e-20);
+          result.should.equal(3.402823e-20);
           testClient.number.getSmallDouble(function (error, result) {
             should.not.exist(error);
-            result.body.should.equal(2.5976931e-101);
+            result.should.equal(2.5976931e-101);
             done();
           });
         });
@@ -195,10 +198,10 @@ describe('nodejs', function () {
       it('should get big positive and negative double value', function (done) {
         testClient.number.getBigDoublePositiveDecimal(function (error, result) {
           should.not.exist(error);
-          result.body.should.equal(99999999.99);
+          result.should.equal(99999999.99);
           testClient.number.getBigDoubleNegativeDecimal(function (error, result) {
             should.not.exist(error);
-            result.body.should.equal(-99999999.99);
+            result.should.equal(-99999999.99);
             done();
           });
         });
@@ -206,7 +209,7 @@ describe('nodejs', function () {
 
       it('should get null and invalid float and double values', function (done) {
         testClient.number.getNull(function (error, result) {
-          should.not.exist(result.body);
+          should.not.exist(result);
           testClient.number.getInvalidFloat(function (error, result) {
             should.exist(error);
             should.not.exist(result);
@@ -224,7 +227,7 @@ describe('nodejs', function () {
       var testClient = new stringClient(baseUri, clientOptions);
       it('should support valid null value', function (done) {
         testClient.string.getNull(function (error, result) {
-          should.not.exist(result.body);
+          should.not.exist(result);
           testClient.string.putNull(null, function (error, result) {
             should.not.exist(error);
             done();
@@ -236,7 +239,7 @@ describe('nodejs', function () {
         testClient.string.putEmpty('', function (error, result) {
           should.not.exist(error);
           testClient.string.getEmpty(function (error, result) {
-            result.body.should.equal('');
+            result.should.equal('');
             done();
           });
         });
@@ -246,7 +249,7 @@ describe('nodejs', function () {
         testClient.string.putMbcs('啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€', function (error, result) {
           should.not.exist(error);
           testClient.string.getMbcs(function (error, result) {
-            result.body.should.equal('啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€');
+            result.should.equal('啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€');
             done();
           });
         });
@@ -256,7 +259,7 @@ describe('nodejs', function () {
         testClient.string.putWhitespace('    Now is the time for all good men to come to the aid of their country    ', function (error, result) {
           should.not.exist(error);
           testClient.string.getWhitespace(function (error, result) {
-            result.body.should.equal('    Now is the time for all good men to come to the aid of their country    ');
+            result.should.equal('    Now is the time for all good men to come to the aid of their country    ');
             done();
           });
         });
@@ -265,7 +268,7 @@ describe('nodejs', function () {
       it('should support not provided value', function (done) {
         testClient.string.getNotProvided(function (error, result) {
           should.not.exist(error);
-          should.not.exist(result.body);
+          should.not.exist(result);
           done();
         });
       });
@@ -273,7 +276,7 @@ describe('nodejs', function () {
       it('should support valid enum valid value', function (done) {
         testClient.enumModel.getNotExpandable(function (error, result) {
           should.not.exist(error);
-          result.body.should.equal('red color');
+          result.should.equal('red color');
           testClient.enumModel.putNotExpandable('red color', function (error, result) {
             should.not.exist(error);
             done();
@@ -295,11 +298,11 @@ describe('nodejs', function () {
       var bytes = new Buffer([255, 254, 253, 252, 251, 250, 249, 248, 247, 246]);
       it('should support valid null and empty value', function (done) {
         testClient.byteModel.getNull(function (error, result) {
-          should.not.exist(result.body);
+          should.not.exist(result);
           should.not.exist(error);
           testClient.byteModel.getEmpty(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, new Buffer('', 'base64'));
+            assert.deepEqual(result, new Buffer('', 'base64'));
             done();
           });
         });
@@ -309,7 +312,7 @@ describe('nodejs', function () {
       it('should get invalid byte value', function (done) {
         testClient.byteModel.getInvalid(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.body, new Buffer(':::SWAGGER::::', 'base64'));
+          assert.deepEqual(result, new Buffer(':::SWAGGER::::', 'base64'));
           done();
         });
       });
@@ -319,7 +322,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           testClient.byteModel.getNonAscii(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, bytes);
+            assert.deepEqual(result, bytes);
             done();
           });
         });
@@ -331,8 +334,8 @@ describe('nodejs', function () {
       it('should get min and max date', function (done) {
         testClient.dateModel.getMinDate(function (error, result) {
           should.not.exist(error);
-          should.exist(result.body);
-          var date = result.body;
+          should.exist(result);
+          var date = result;
           date.getUTCFullYear().should.equal(1);
           date.getUTCMonth().should.equal(0);
           date.getUTCDate().should.equal(1);
@@ -342,8 +345,8 @@ describe('nodejs', function () {
           date.getUTCMilliseconds().should.equal(0);
           testClient.dateModel.getMaxDate(function (error, result) {
             should.not.exist(error);
-            should.exist(result.body);
-            var date = result.body;
+            should.exist(result);
+            var date = result;
             date.getUTCFullYear().should.equal(9999);
             date.getUTCMonth().should.equal(11);
             date.getUTCDate().should.equal(31);
@@ -358,10 +361,10 @@ describe('nodejs', function () {
 
       it('should properly handle underflow and overflow date', function (done) {
         testClient.dateModel.getUnderflowDate(function (error, result) {
-          isNaN(result.body).should.equal(true);
+          isNaN(result).should.equal(true);
           should.not.exist(error);
           testClient.dateModel.getOverflowDate(function (error, result) {
-            isNaN(result.body).should.equal(true);
+            isNaN(result).should.equal(true);
             should.not.exist(error);
             done();
           });
@@ -370,7 +373,7 @@ describe('nodejs', function () {
 
       it('should properly handle null value for Date', function (done) {
         testClient.dateModel.getNull(function (error, result) {
-          should.not.exist(result.body);
+          should.not.exist(result);
           should.not.exist(error);
           done();
         });
@@ -378,19 +381,19 @@ describe('nodejs', function () {
 
       it('should properly handle invalid Date value', function (done) {
         testClient.dateModel.getInvalidDate(function (error, result) {
-          isNaN(result.body).should.equal(true);
+          isNaN(result).should.equal(true);
           should.not.exist(error);
           done();
         });
       });
 
-      it.skip('should put min and max date - skipping as date serialization not supported', function (done) {
+      it('should put min and max date', function (done) {
         testClient.dateModel.putMinDate(new Date('0001-01-01'), function (error, result) {
           should.not.exist(error);
-          should.exist(result.body);
+          should.not.exist(result);
           testClient.dateModel.putMaxDate(new Date('9999-12-31'), function (error, result) {
             should.not.exist(error);
-            should.exist(result.body);
+            should.not.exist(result);
             done();
           });
         });
@@ -401,7 +404,7 @@ describe('nodejs', function () {
       var testClient = new dateTimeClient(baseUri, clientOptions);
       it('should properly handle null value for DateTime', function (done) {
         testClient.datetime.getNull(function (error, result) {
-          should.not.exist(result.body);
+          should.not.exist(result);
           should.not.exist(error);
           done();
         });
@@ -409,7 +412,7 @@ describe('nodejs', function () {
 
       it('should properly handle invalid dateTime value', function (done) {
         testClient.datetime.getInvalid(function (error, result) {
-          isNaN(result.body).should.equal(true);
+          isNaN(result).should.equal(true);
           should.not.exist(error);
           done();
         });
@@ -418,8 +421,8 @@ describe('nodejs', function () {
       it('should get uppercase and lowercase UTC max date time', function (done) {
         testClient.datetime.getUtcUppercaseMaxDateTime(function (error, result) {
           should.not.exist(error);
-          should.exist(result.body);
-          var date = result.body;
+          should.exist(result);
+          var date = result;
           date.getUTCFullYear().should.equal(9999);
           date.getUTCMonth().should.equal(11);
           date.getUTCDate().should.equal(31);
@@ -429,8 +432,8 @@ describe('nodejs', function () {
           date.getUTCMilliseconds().should.equal(999);
           testClient.datetime.getUtcLowercaseMaxDateTime(function (error, result) {
             should.not.exist(error);
-            should.exist(result.body);
-            var date = result.body;
+            should.exist(result);
+            var date = result;
             date.getUTCFullYear().should.equal(9999);
             date.getUTCMonth().should.equal(11);
             date.getUTCDate().should.equal(31);
@@ -445,8 +448,8 @@ describe('nodejs', function () {
       it('should get UTC min dateTime value', function (done) {
         testClient.datetime.getUtcMinDateTime(function (error, result) {
           should.not.exist(error);
-          should.exist(result.body);
-          var date = result.body;
+          should.exist(result);
+          var date = result;
           date.getUTCFullYear().should.equal(1);
           date.getUTCMonth().should.equal(0);
           date.getUTCDate().should.equal(1);
@@ -461,8 +464,8 @@ describe('nodejs', function () {
       it('should get local negative and positive offset Min DateTime value', function (done) {
         testClient.datetime.getLocalNegativeOffsetMinDateTime(function (error, result) {
           should.not.exist(error);
-          should.exist(result.body);
-          var date = result.body;
+          should.exist(result);
+          var date = result;
           date.getUTCFullYear().should.equal(1);
           date.getUTCMonth().should.equal(0);
           date.getUTCDate().should.equal(1);
@@ -472,8 +475,8 @@ describe('nodejs', function () {
           date.getUTCMilliseconds().should.equal(0);
           testClient.datetime.getLocalPositiveOffsetMinDateTime(function (error, result) {
             should.not.exist(error);
-            should.exist(result.body);
-            var date = result.body;
+            should.exist(result);
+            var date = result;
             date.getUTCFullYear().should.equal(0);
             date.getUTCMonth().should.equal(11);
             date.getUTCDate().should.equal(31);
@@ -489,9 +492,9 @@ describe('nodejs', function () {
       it('should get local negative offset lowercase and uppercase Max DateTime', function (done) {
         testClient.datetime.getLocalNegativeOffsetLowercaseMaxDateTime(function (error, result) {
           should.not.exist(error);
-          should.exist(result.body);
-          assert.deepEqual(result.body, new Date('9999-12-31t23:59:59.9999999-14:00'));
-          var date = result.body;
+          should.exist(result);
+          assert.deepEqual(result, new Date('9999-12-31t23:59:59.9999999-14:00'));
+          var date = result;
           date.getUTCFullYear().should.equal(10000);
           date.getUTCMonth().should.equal(0);
           date.getUTCDate().should.equal(1);
@@ -501,9 +504,9 @@ describe('nodejs', function () {
           date.getUTCMilliseconds().should.equal(999);
           testClient.datetime.getLocalNegativeOffsetUppercaseMaxDateTime(function (error, result) {
             should.not.exist(error);
-            should.exist(result.body);
-            assert.deepEqual(result.body, new Date('9999-12-31T23:59:59.9999999-14:00'));
-            var date = result.body;
+            should.exist(result);
+            assert.deepEqual(result, new Date('9999-12-31T23:59:59.9999999-14:00'));
+            var date = result;
             date.getUTCFullYear().should.equal(10000);
             date.getUTCMonth().should.equal(0);
             date.getUTCDate().should.equal(1);
@@ -519,9 +522,9 @@ describe('nodejs', function () {
       it('should get local positive offset lowercase and uppercase Max DateTime', function (done) {
         testClient.datetime.getLocalPositiveOffsetLowercaseMaxDateTime(function (error, result) {
           should.not.exist(error);
-          should.exist(result.body);
-          assert.deepEqual(result.body, new Date('9999-12-31t23:59:59.9999999+14:00'));
-          var date = result.body;
+          should.exist(result);
+          assert.deepEqual(result, new Date('9999-12-31t23:59:59.9999999+14:00'));
+          var date = result;
           date.getUTCFullYear().should.equal(9999);
           date.getUTCMonth().should.equal(11);
           date.getUTCDate().should.equal(31);
@@ -531,9 +534,9 @@ describe('nodejs', function () {
           date.getUTCMilliseconds().should.equal(999);
           testClient.datetime.getLocalPositiveOffsetUppercaseMaxDateTime(function (error, result) {
             should.not.exist(error);
-            should.exist(result.body);
-            assert.deepEqual(result.body, new Date('9999-12-31T23:59:59.9999999+14:00'));
-            var date = result.body;
+            should.exist(result);
+            assert.deepEqual(result, new Date('9999-12-31T23:59:59.9999999+14:00'));
+            var date = result;
             date.getUTCFullYear().should.equal(9999);
             date.getUTCMonth().should.equal(11);
             date.getUTCDate().should.equal(31);
@@ -549,8 +552,8 @@ describe('nodejs', function () {
       it('should get overflow and underflow', function (done) {
         testClient.datetime.getOverflow(function (error, result) {
           should.not.exist(error);
-          should.exist(result.body);
-          var date = result.body;
+          should.exist(result);
+          var date = result;
           date.getUTCFullYear().should.equal(10000);
           date.getUTCMonth().should.equal(0);
           date.getUTCDate().should.equal(1);
@@ -559,7 +562,7 @@ describe('nodejs', function () {
           date.getUTCSeconds().should.equal(59);
           date.getUTCMilliseconds().should.equal(999);
           testClient.datetime.getUnderflow(function (error, result) {
-            isNaN(result.body).should.equal(true);
+            isNaN(result).should.equal(true);
             should.not.exist(error);
             done();
           });
@@ -569,10 +572,10 @@ describe('nodejs', function () {
       it('should put UTC min and max date time', function (done) {
         testClient.datetime.putUtcMinDateTime('0001-01-01T00:00:00Z', function (error, result) {
           should.not.exist(error);
-          should.exist(result);
+          should.not.exist(result);
           testClient.datetime.putUtcMaxDateTime('9999-12-31T23:59:59.9999999Z', function (error, result) {
             should.not.exist(error);
-            should.exist(result);
+            should.not.exist(result);
             done();
           });
         });
@@ -581,10 +584,10 @@ describe('nodejs', function () {
       it('should put local negative and positive offset min DateTime', function (done) {
         testClient.datetime.putLocalNegativeOffsetMinDateTime('0001-01-01T00:00:00-14:00', function (error, result) {
           should.not.exist(error);
-          should.exist(result);
+          should.not.exist(result);
           testClient.datetime.putLocalPositiveOffsetMinDateTime('0001-01-01T00:00:00+14:00', function (error, result) {
             should.not.exist(error);
-            should.exist(result);
+            should.not.exist(result);
             done();
           });
         });
@@ -593,7 +596,144 @@ describe('nodejs', function () {
       it('should put local negative offset max DateTime', function (done) {
         testClient.datetime.putLocalNegativeOffsetMaxDateTime('9999-12-31T23:59:59.9999999-14:00', function (error, result) {
           should.not.exist(error);
+          should.not.exist(result);
+          done();
+        });
+      });
+    });
+
+    describe('DateTimeRfc1123 Client', function () {
+      var testClient = new dateTimeRfc1123Client(baseUri, clientOptions);
+      it('should properly handle null value for DateTimeRfc1123', function (done) {
+        testClient.datetimerfc1123.getNull(function (error, result) {
+          should.not.exist(result);
+          should.not.exist(error);
+          done();
+        });
+      });
+
+      it('should properly handle invalid dateTimeRfc1123 value', function (done) {
+        testClient.datetimerfc1123.getInvalid(function (error, result) {
+          isNaN(result).should.equal(true);
+          should.not.exist(error);
+          done();
+        });
+      });
+
+      it('should get uppercase and lowercase UTC max date time dateTimeRfc1123', function (done) {
+        testClient.datetimerfc1123.getUtcUppercaseMaxDateTime(function (error, result) {
+          should.not.exist(error);
           should.exist(result);
+          var date = result;
+          date.getUTCFullYear().should.equal(9999);
+          date.getUTCMonth().should.equal(11);
+          date.getUTCDate().should.equal(31);
+          date.getUTCHours().should.equal(23);
+          date.getUTCMinutes().should.equal(59);
+          date.getUTCSeconds().should.equal(59);
+          testClient.datetimerfc1123.getUtcLowercaseMaxDateTime(function (error, result) {
+            should.not.exist(error);
+            should.exist(result);
+            var date = result;
+            date.getUTCFullYear().should.equal(9999);
+            date.getUTCMonth().should.equal(11);
+            date.getUTCDate().should.equal(31);
+            date.getUTCHours().should.equal(23);
+            date.getUTCMinutes().should.equal(59);
+            date.getUTCSeconds().should.equal(59);
+            done();
+          });
+        });
+      });
+
+      it('should get UTC min dateTimeRfc1123 value', function (done) {
+        testClient.datetimerfc1123.getUtcMinDateTime(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          var date = result;
+          done();
+          //TODO: NodeJS doesn't deserialize this time correctly
+          var dateFormat = 'ddd, DD MMM YYYY HH:mm:ss';
+          var myMoment = moment.utc('Mon, 01 Jan 0001 00:00:00 GMT', dateFormat);
+          should.not.exist(myMoment.toDate().toUTCString());
+
+          date.getUTCFullYear().should.equal(1);
+          date.getUTCMonth().should.equal(0);
+          date.getUTCDate().should.equal(1);
+          date.getUTCHours().should.equal(0);
+          date.getUTCMinutes().should.equal(0);
+          date.getUTCSeconds().should.equal(0);
+          date.getUTCMilliseconds().should.equal(0);
+          done();
+        });
+      });
+      
+      it('should get overflow and underflow', function (done) {
+        testClient.datetimerfc1123.getOverflow(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          var date = result;
+          date.getUTCFullYear().should.equal(10000);
+          date.getUTCMonth().should.equal(0);
+          date.getUTCDate().should.equal(1);
+          date.getUTCHours().should.equal(0);
+          date.getUTCMinutes().should.equal(0);
+          date.getUTCSeconds().should.equal(0);
+          testClient.datetimerfc1123.getUnderflow(function (error, result) {
+            isNaN(result).should.equal(true);
+            should.not.exist(error);
+            done();
+          });
+        });
+      });
+
+      it('should put UTC min and max dateTimeRfc1123', function (done) {
+        testClient.datetimerfc1123.putUtcMinDateTime(new Date('Mon, 01 Jan 0001 00:00:00 GMT'), function (error, result) {
+          should.not.exist(error);
+          should.not.exist(result);
+          testClient.datetimerfc1123.putUtcMaxDateTime(new Date('Fri, 31 Dec 9999 23:59:59 GMT'), function (error, result) {
+            should.not.exist(error);
+            should.not.exist(result);
+            done();
+          });
+        });
+      });
+    });
+
+    describe('Duration Client', function () {
+      var testClient = new durationClient(baseUri, clientOptions);
+      it('should properly handle null value for Duration', function (done) {
+        testClient.duration.getNull(function (error, result) {
+          should.not.exist(result);
+          should.not.exist(error);
+          done();
+        });
+      });
+
+      it('should properly handle invalid value for Duration', function (done) {
+        testClient.duration.getInvalid(function (error, result) {
+          //For some reason moment.js allows non-ISO strings and will just construct a duration of length 0, so we don't expect an error here, but the result
+          //should be duration of length 0
+          should.not.exist(error);
+          should.equal(result.asSeconds(), 0);
+          done();
+        });
+      });
+
+      it('should properly handle positive value for Duration', function (done) {
+        testClient.duration.getPositiveDuration(function (error, result) {
+          should.exist(result);
+          should.not.exist(error);
+          should.equal(result.asSeconds(), moment.duration('P3Y6M4DT12H30M5S').asSeconds());
+          done();
+        });
+      });
+
+      it('should properly put positive value for Duration', function (done) {
+        var duration = moment.duration({days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11});
+        testClient.duration.putPositiveDuration(duration, function (error, result) {
+          should.not.exist(error);
+          should.not.exist(result);
           done();
         });
       });
@@ -606,7 +746,7 @@ describe('nodejs', function () {
         it('should get and put empty arrays', function (done) {
           testClient.arrayModel.getEmpty(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, []);
+            assert.deepEqual(result, []);
             testClient.arrayModel.putEmpty([], function (error, result) {
               should.not.exist(error);
               done();
@@ -617,7 +757,7 @@ describe('nodejs', function () {
         it('should handle null and invalid value for arrays', function (done) {
           testClient.arrayModel.getNull(function (error, result) {
             should.not.exist(error);
-            assert.equal(result.body, null);
+            assert.equal(result, null);
             testClient.arrayModel.getInvalid(function (error, result) {
               should.exist(error);
               should.not.exist(result);
@@ -630,15 +770,15 @@ describe('nodejs', function () {
           var boolArray = [true, false, false, true];
           testClient.arrayModel.getBooleanTfft(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, boolArray);
+            assert.deepEqual(result, boolArray);
             testClient.arrayModel.putBooleanTfft(boolArray, function (error, result) {
               should.not.exist(error);
               testClient.arrayModel.getBooleanInvalidNull(function (error, result) {
                 should.not.exist(error);
-                assert.deepEqual(result.body, [true, null, false]);
+                assert.deepEqual(result, [true, null, false]);
                 testClient.arrayModel.getBooleanInvalidString(function (error, result) {
                   should.not.exist(error);
-                  assert.deepEqual(result.body, [true, 'boolean', false]);
+                  assert.deepEqual(result, [true, 'boolean', false]);
                   done();
                 });
               });
@@ -650,7 +790,7 @@ describe('nodejs', function () {
           var testArray = [1, -1, 3, 300];
           testClient.arrayModel.getIntegerValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             testClient.arrayModel.putIntegerValid(testArray, function (error, result) {
               should.not.exist(error);
               testClient.arrayModel.getIntInvalidNull(function (error, result) {
@@ -668,7 +808,7 @@ describe('nodejs', function () {
           var testArray = [1, -1, 3, 300];
           testClient.arrayModel.getLongValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             testClient.arrayModel.putLongValid(testArray, function (error, result) {
               should.not.exist(error);
               testClient.arrayModel.getLongInvalidNull(function (error, result) {
@@ -686,7 +826,7 @@ describe('nodejs', function () {
           var testArray = [0, -0.01, -1.2e20];
           testClient.arrayModel.getFloatValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             testClient.arrayModel.putFloatValid(testArray, function (error, result) {
               should.not.exist(error);
               testClient.arrayModel.getFloatInvalidNull(function (error, result) {
@@ -704,7 +844,7 @@ describe('nodejs', function () {
           var testArray = [0, -0.01, -1.2e20];
           testClient.arrayModel.getDoubleValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             testClient.arrayModel.putDoubleValid(testArray, function (error, result) {
               should.not.exist(error);
               testClient.arrayModel.getDoubleInvalidNull(function (error, result) {
@@ -722,7 +862,7 @@ describe('nodejs', function () {
           var testArray = ['foo1', 'foo2', 'foo3'];
           testClient.arrayModel.getStringValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             testClient.arrayModel.putStringValid(testArray, function (error, result) {
               should.not.exist(error);
               testClient.arrayModel.getStringWithNull(function (error, result) {
@@ -740,21 +880,20 @@ describe('nodejs', function () {
           var testArray = [new Date('2000-12-01'), new Date('1980-01-02'), new Date('1492-10-12')];
           testClient.arrayModel.getDateValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             //TODO, 4213536: Fix date serialization
-            //testClient.arrayModel.putDateValid(testArray, function (error, result) {
-            //  should.not.exist(error);
+            testClient.arrayModel.putDateValid(testArray, function (error, result) {
+              should.not.exist(error);
             testClient.arrayModel.getDateInvalidNull(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, [new Date('2012-01-01'), null, new Date('1776-07-04')]);
+              assert.deepEqual(result, [new Date('2012-01-01'), null, new Date('1776-07-04')]);
               testClient.arrayModel.getDateInvalidChars(function (error, result) {
-                //TODO, 4214000: investigate how to deserialize invalid dates
                 should.not.exist(error);
-                //assert.deepEqual(result.body, [new Date('2011-03-22'), new Date('date')]);
+                JSON.stringify(result).should.equal(JSON.stringify([new Date('2011-03-22'), new Date('date')]));
                 done();
               });
             });
-            //});
+            });
           });
         });
 
@@ -762,19 +901,42 @@ describe('nodejs', function () {
           var testArray = [new Date('2000-12-01t00:00:01z'), new Date('1980-01-02T01:11:35+01:00'), new Date('1492-10-12T02:15:01-08:00')];
           testClient.arrayModel.getDateTimeValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             testClient.arrayModel.putDateTimeValid(testArray, function (error, result) {
               should.not.exist(error);
               testClient.arrayModel.getDateTimeInvalidNull(function (error, result) {
                 should.not.exist(error);
-                assert.deepEqual(result.body, [new Date('2000-12-01t00:00:01z'), null]);
+                assert.deepEqual(result, [new Date('2000-12-01t00:00:01z'), null]);
                 testClient.arrayModel.getDateTimeInvalidChars(function (error, result) {
-                  //TODO, 4214000: investigate how to deserialize invalid dates
                   should.not.exist(error);
-                  //assert.deepEqual(result.body, [new Date('2011-03-22'), new Date('date')]);
+                  JSON.stringify(result).should.equal(JSON.stringify([new Date('2000-12-01t00:00:01z'), new Date('date-time')]));
                   done();
                 });
               });
+            });
+          });
+        });
+         
+        it('should get and put dateTimeRfc1123 arrays', function (done) {
+          var testArray = [new Date('Fri, 01 Dec 2000 00:00:01 GMT'), new Date('Wed, 02 Jan 1980 00:11:35 GMT'), new Date('Wed, 12 Oct 1492 10:15:01 GMT')];
+          testClient.arrayModel.getDateTimeRfc1123Valid(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, testArray);
+            testClient.arrayModel.putDateTimeRfc1123Valid(testArray, function (error, result) {
+              should.not.exist(error);
+              done();
+            });
+          });
+        });
+
+        it('should get and put duration arrays', function (done) {
+          var testArray = [moment.duration('P123DT22H14M12.011S'), moment.duration('P5DT1H')];
+          testClient.arrayModel.getDurationValid(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, testArray);
+            testClient.arrayModel.putDurationValid(testArray, function (error, result) {
+              should.not.exist(error);
+              done();
             });
           });
         });
@@ -786,7 +948,7 @@ describe('nodejs', function () {
           var testArray = [bytes1, bytes2, bytes3];
           testClient.arrayModel.getByteValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             testClient.arrayModel.putByteValid(testArray, function (error, result) {
               should.not.exist(error);
               done();
@@ -798,8 +960,8 @@ describe('nodejs', function () {
           var testArray = [new Buffer([171, 172, 173]), null];
           testClient.arrayModel.getByteInvalidNull(function (error, result) {
             should.not.exist(error);
-            should.exist(result.body);
-            assert.deepEqual(result.body, testArray);
+            should.exist(result);
+            assert.deepEqual(result, testArray);
             done();
           });
         });
@@ -810,10 +972,10 @@ describe('nodejs', function () {
         it('should get null and empty complex types in array', function (done) {
           testClient.arrayModel.getComplexEmpty(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, []);
+            assert.deepEqual(result, []);
             testClient.arrayModel.getComplexNull(function (error, result) {
               should.not.exist(error);
-              assert.equal(result.body, null);
+              assert.equal(result, null);
               done();
             });
           });
@@ -824,10 +986,10 @@ describe('nodejs', function () {
           var testEmpty = [{ 'integer': 1, 'string': '2' }, {}, { 'integer': 5, 'string': '6' }];
           testClient.arrayModel.getComplexItemNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testNull);
+            assert.deepEqual(result, testNull);
             testClient.arrayModel.getComplexItemEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, testEmpty);
+              JSON.stringify(result).should.equal(JSON.stringify(testEmpty));
               done();
             });
           });
@@ -837,7 +999,7 @@ describe('nodejs', function () {
           var testArray = [{ 'integer': 1, 'string': '2' }, { 'integer': 3, 'string': '4' }, { 'integer': 5, 'string': '6' }];
           testClient.arrayModel.getComplexValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             testClient.arrayModel.putComplexValid(testArray, function (error, result) {
               should.not.exist(error);
               done();
@@ -851,10 +1013,10 @@ describe('nodejs', function () {
         it('should get null and empty array in an array', function (done) {
           testClient.arrayModel.getArrayNull(function (error, result) {
             should.not.exist(error);
-            assert.equal(result.body, null);
+            assert.equal(result, null);
             testClient.arrayModel.getArrayEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, []);
+              assert.deepEqual(result, []);
               done();
             });
           });
@@ -865,10 +1027,10 @@ describe('nodejs', function () {
           var testEmpty = [['1', '2', '3'], [], ['7', '8', '9']];
           testClient.arrayModel.getArrayItemNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testNull);
+            assert.deepEqual(result, testNull);
             testClient.arrayModel.getArrayItemEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, testEmpty);
+              assert.deepEqual(result, testEmpty);
               done();
             });
           });
@@ -878,7 +1040,7 @@ describe('nodejs', function () {
           var testArray = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']];
           testClient.arrayModel.getArrayValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             testClient.arrayModel.putArrayValid(testArray, function (error, result) {
               should.not.exist(error);
               done();
@@ -892,10 +1054,10 @@ describe('nodejs', function () {
         it('should get null and empty dictionary in an array', function (done) {
           testClient.arrayModel.getDictionaryNull(function (error, result) {
             should.not.exist(error);
-            assert.equal(result.body, null);
+            assert.equal(result, null);
             testClient.arrayModel.getDictionaryEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, []);
+              assert.deepEqual(result, []);
               done();
             });
           });
@@ -906,10 +1068,10 @@ describe('nodejs', function () {
           var testEmpty = [{ '1': 'one', '2': 'two', '3': 'three' }, {}, { '7': 'seven', '8': 'eight', '9': 'nine' }];
           testClient.arrayModel.getDictionaryItemNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testNull);
+            assert.deepEqual(result, testNull);
             testClient.arrayModel.getDictionaryItemEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, testEmpty);
+              assert.deepEqual(result, testEmpty);
               done();
             });
           });
@@ -919,7 +1081,7 @@ describe('nodejs', function () {
           var testArray = [{ '1': 'one', '2': 'two', '3': 'three' }, { '4': 'four', '5': 'five', '6': 'six' }, { '7': 'seven', '8': 'eight', '9': 'nine' }];
           testClient.arrayModel.getDictionaryValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testArray);
+            assert.deepEqual(result, testArray);
             testClient.arrayModel.putDictionaryValid(testArray, function (error, result) {
               should.not.exist(error);
               done();
@@ -936,7 +1098,7 @@ describe('nodejs', function () {
         it('should get and put empty dictionaries', function (done) {
           testClient.dictionary.getEmpty(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, {});
+            assert.deepEqual(result, {});
             testClient.dictionary.putEmpty({}, function (error, result) {
               should.not.exist(error);
               done();
@@ -947,7 +1109,7 @@ describe('nodejs', function () {
         it('should handle null and invalid value for dictionaries', function (done) {
           testClient.dictionary.getNull(function (error, result) {
             should.not.exist(error);
-            assert.equal(result.body, null);
+            assert.equal(result, null);
             testClient.dictionary.getInvalid(function (error, result) {
               should.exist(error);
               should.not.exist(result);
@@ -959,12 +1121,12 @@ describe('nodejs', function () {
         it('should handle null value, null key and empty key for dictionaries', function (done) {
           testClient.dictionary.getNullValue(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, { "key1": null });
+            assert.deepEqual(result, { "key1": null });
             testClient.dictionary.getNullKey(function (error, result) {
               should.exist(error);
               testClient.dictionary.getEmptyStringKey(function (error, result) {
                 should.not.exist(error);
-                assert.deepEqual(result.body, { "": "val1" });
+                assert.deepEqual(result, { "": "val1" });
                 done();
               });
             });
@@ -975,7 +1137,7 @@ describe('nodejs', function () {
           var boolDictionary = { "0": true, "1": false, "2": false, "3": true };
           testClient.dictionary.getBooleanTfft(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, boolDictionary);
+            assert.deepEqual(result, boolDictionary);
             testClient.dictionary.putBooleanTfft(boolDictionary, function (error, result) {
               should.not.exist(error);
               done();
@@ -987,7 +1149,7 @@ describe('nodejs', function () {
           var boolDictionary = { "0": true, "1": null, "2": false };
           testClient.dictionary.getBooleanInvalidNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, boolDictionary);
+            assert.deepEqual(result, boolDictionary);
             done();
           });
         });
@@ -996,7 +1158,7 @@ describe('nodejs', function () {
           var boolDictionary = { "0": true, "1": "boolean", "2": false };
           testClient.dictionary.getBooleanInvalidString(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, boolDictionary);
+            assert.deepEqual(result, boolDictionary);
             done();
           });
         });
@@ -1005,7 +1167,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 1, "1": -1, "2": 3, "3": 300 };
           testClient.dictionary.getIntegerValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             testClient.dictionary.putIntegerValid(testDictionary, function (error, result) {
               should.not.exist(error);
               done();
@@ -1017,7 +1179,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 1, "1": null, "2": 0 };
           testClient.dictionary.getIntInvalidNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1026,7 +1188,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 1, "1": "integer", "2": 0 };
           testClient.dictionary.getIntInvalidString(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1035,7 +1197,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 1, "1": -1, "2": 3, "3": 300 };
           testClient.dictionary.getLongValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             testClient.dictionary.putLongValid(testDictionary, function (error, result) {
               should.not.exist(error);
               done();
@@ -1047,7 +1209,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 1, "1": null, "2": 0 };
           testClient.dictionary.getLongInvalidNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1056,7 +1218,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 1, "1": "integer", "2": 0 };
           testClient.dictionary.getLongInvalidString(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1065,7 +1227,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 0, "1": -0.01, "2": -1.2e20 };
           testClient.dictionary.getFloatValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             testClient.dictionary.putFloatValid(testDictionary, function (error, result) {
               should.not.exist(error);
               done();
@@ -1077,7 +1239,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 0.0, "1": null, "2": -1.2e20 };
           testClient.dictionary.getFloatInvalidNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1086,7 +1248,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 1, "1": "number", "2": 0 };
           testClient.dictionary.getFloatInvalidString(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1095,7 +1257,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 0, "1": -0.01, "2": -1.2e20 };
           testClient.dictionary.getDoubleValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             testClient.dictionary.putDoubleValid(testDictionary, function (error, result) {
               should.not.exist(error);
               done();
@@ -1107,7 +1269,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 0.0, "1": null, "2": -1.2e20 };
           testClient.dictionary.getDoubleInvalidNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1116,7 +1278,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": 1, "1": "number", "2": 0 };
           testClient.dictionary.getDoubleInvalidString(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1125,7 +1287,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": "foo1", "1": "foo2", "2": "foo3" };
           testClient.dictionary.getStringValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             testClient.dictionary.putStringValid(testDictionary, function (error, result) {
               should.not.exist(error);
               done();
@@ -1137,7 +1299,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": "foo", "1": null, "2": "foo2" };
           testClient.dictionary.getStringWithNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1146,7 +1308,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": "foo", "1": 123, "2": "foo2" };
           testClient.dictionary.getStringWithInvalid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1155,11 +1317,11 @@ describe('nodejs', function () {
           var testDictionary = { 0: new Date('2000-12-01'), 1: new Date('1980-01-02'), 2: new Date('1492-10-12') };
           testClient.dictionary.getDateValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
-            //testClient.dictionary.putDateValid(testDictionary, function (error, result) {
-            //  should.not.exist(error);
+            assert.deepEqual(result, testDictionary);
+            testClient.dictionary.putDateValid(testDictionary, function (error, result) {
+              should.not.exist(error);
             done();
-            //});
+            });
           });
         });
 
@@ -1167,7 +1329,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": new Date("2012-01-01"), "1": null, "2": new Date("1776-07-04") };
           testClient.dictionary.getDateInvalidNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1176,7 +1338,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": new Date("2011-03-22"), "1": new Date("date") };
           testClient.dictionary.getDateInvalidChars(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(util.inspect(result.body), util.inspect(testDictionary));
+            assert.deepEqual(util.inspect(result), util.inspect(testDictionary));
             done();
           });
         });
@@ -1186,8 +1348,32 @@ describe('nodejs', function () {
           var putDictionary = { 0: new Date('2000-12-01T00:00:01Z'), 1: new Date('1980-01-01T23:11:35Z'), 2: new Date('1492-10-12T18:15:01Z') };
           testClient.dictionary.getDateTimeValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, getDictionary);
+            assert.deepEqual(result, getDictionary);
             testClient.dictionary.putDateTimeValid(putDictionary, function (error, result) {
+              should.not.exist(error);
+              done();
+            });
+          });
+        });
+
+        it('should get and put dateTimeRfc1123 dictionaries', function (done) {
+          var dictionary = { 0: new Date('Fri, 01 Dec 2000 00:00:01 GMT'), 1: new Date('Wed, 02 Jan 1980 00:11:35 GMT'), 2: new Date('Wed, 12 Oct 1492 10:15:01 GMT') };
+          testClient.dictionary.getDateTimeRfc1123Valid(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, dictionary);
+            testClient.dictionary.putDateTimeRfc1123Valid(dictionary, function (error, result) {
+              should.not.exist(error);
+              done();
+            });
+          });
+        });
+
+        it('should get and put duration dictionaries', function (done) {
+          var dictionary = { 0: moment.duration('P123DT22H14M12.011S'), 1: moment.duration('P5DT1H') };
+          testClient.dictionary.getDurationValid(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, dictionary);
+            testClient.dictionary.putDurationValid(dictionary, function (error, result) {
               should.not.exist(error);
               done();
             });
@@ -1198,7 +1384,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": new Date("2000-12-01t00:00:01z"), "1": null };
           testClient.dictionary.getDateTimeInvalidNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1207,7 +1393,7 @@ describe('nodejs', function () {
           var testDictionary = { "0": new Date("2000-12-01t00:00:01z"), "1": new Date("date-time") };
           testClient.dictionary.getDateTimeInvalidChars(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(util.inspect(result.body), util.inspect(testDictionary));
+            assert.deepEqual(util.inspect(result), util.inspect(testDictionary));
             done();
           });
         });
@@ -1219,7 +1405,7 @@ describe('nodejs', function () {
           var testDictionary = { 0: bytes1, 1: bytes2, 2: bytes3 };
           testClient.dictionary.getByteValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             testClient.dictionary.putByteValid(testDictionary, function (error, result) {
               should.not.exist(error);
               done();
@@ -1231,8 +1417,8 @@ describe('nodejs', function () {
           var testDictionary = { 0: new Buffer([171, 172, 173]), 1: null };
           testClient.dictionary.getByteInvalidNull(function (error, result) {
             should.not.exist(error);
-            should.exist(result.body);
-            assert.deepEqual(result.body, testDictionary);
+            should.exist(result);
+            assert.deepEqual(result, testDictionary);
             done();
           });
         });
@@ -1243,10 +1429,10 @@ describe('nodejs', function () {
         it('should get null and empty complex types in dictionary', function (done) {
           testClient.dictionary.getComplexEmpty(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, {});
+            assert.deepEqual(result, {});
             testClient.dictionary.getComplexNull(function (error, result) {
               should.not.exist(error);
-              assert.equal(result.body, null);
+              assert.equal(result, null);
               done();
             });
           });
@@ -1257,10 +1443,10 @@ describe('nodejs', function () {
           var testEmpty = { 0: { 'integer': 1, 'string': '2' }, 1: {}, 2: { 'integer': 5, 'string': '6' } };
           testClient.dictionary.getComplexItemNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testNull);
+            assert.deepEqual(result, testNull);
             testClient.dictionary.getComplexItemEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, testEmpty);
+              JSON.stringify(result).should.equal(JSON.stringify(testEmpty));
               done();
             });
           });
@@ -1270,7 +1456,7 @@ describe('nodejs', function () {
           var testDictionary = { 0: { 'integer': 1, 'string': '2' }, 1: { 'integer': 3, 'string': '4' }, 2: { 'integer': 5, 'string': '6' } };
           testClient.dictionary.getComplexValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             testClient.dictionary.putComplexValid(testDictionary, function (error, result) {
               should.not.exist(error);
               done();
@@ -1284,10 +1470,10 @@ describe('nodejs', function () {
         it('should get null and empty array in dictionary', function (done) {
           testClient.dictionary.getArrayNull(function (error, result) {
             should.not.exist(error);
-            assert.equal(result.body, null);
+            assert.equal(result, null);
             testClient.dictionary.getArrayEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, {});
+              assert.deepEqual(result, {});
               done();
             });
           });
@@ -1298,10 +1484,10 @@ describe('nodejs', function () {
           var testEmpty = { 0: ['1', '2', '3'], 1: [], 2: ['7', '8', '9'] };
           testClient.dictionary.getArrayItemNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testNull);
+            assert.deepEqual(result, testNull);
             testClient.dictionary.getArrayItemEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, testEmpty);
+              assert.deepEqual(result, testEmpty);
               done();
             });
           });
@@ -1311,7 +1497,7 @@ describe('nodejs', function () {
           var testDictionary = { 0: ['1', '2', '3'], 1: ['4', '5', '6'], 2: ['7', '8', '9'] };
           testClient.dictionary.getArrayValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             testClient.dictionary.putArrayValid(testDictionary, function (error, result) {
               should.not.exist(error);
               done();
@@ -1325,10 +1511,10 @@ describe('nodejs', function () {
         it('should get null and empty dictionary in dictionary', function (done) {
           testClient.dictionary.getDictionaryNull(function (error, result) {
             should.not.exist(error);
-            assert.equal(result.body, null);
+            assert.equal(result, null);
             testClient.dictionary.getDictionaryEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, {});
+              assert.deepEqual(result, {});
               done();
             });
           });
@@ -1339,10 +1525,10 @@ describe('nodejs', function () {
           var testEmpty = { 0: { '1': 'one', '2': 'two', '3': 'three' }, 1: {}, 2: { '7': 'seven', '8': 'eight', '9': 'nine' } };
           testClient.dictionary.getDictionaryItemNull(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testNull);
+            assert.deepEqual(result, testNull);
             testClient.dictionary.getDictionaryItemEmpty(function (error, result) {
               should.not.exist(error);
-              assert.deepEqual(result.body, testEmpty);
+              assert.deepEqual(result, testEmpty);
               done();
             });
           });
@@ -1352,7 +1538,7 @@ describe('nodejs', function () {
           var testDictionary = { 0: { '1': 'one', '2': 'two', '3': 'three' }, 1: { '4': 'four', '5': 'five', '6': 'six' }, 2: { '7': 'seven', '8': 'eight', '9': 'nine' } };
           testClient.dictionary.getDictionaryValid(function (error, result) {
             should.not.exist(error);
-            assert.deepEqual(result.body, testDictionary);
+            assert.deepEqual(result, testDictionary);
             testClient.dictionary.putDictionaryValid(testDictionary, function (error, result) {
               should.not.exist(error);
               done();
@@ -1367,8 +1553,8 @@ describe('nodejs', function () {
       it('should correctly deserialize binary streams', function(done) {
         testClient.files.getFile(function(error, result) {
           should.not.exist(error);
-          should.exist(result.body);
-          readStreamToBuffer(result.body, function(err, buff) {
+          should.exist(result);
+          readStreamToBuffer(result, function(err, buff) {
             should.not.exist(err);
             assert.deepEqual(buff, fs.readFileSync(__dirname + '/sample.png'));
             done();
@@ -1379,8 +1565,8 @@ describe('nodejs', function () {
       it('should correctly deserialize empty streams', function (done) {
         testClient.files.getEmptyFile(function (error, result) {
           should.not.exist(error);
-          should.exist(result.body);
-          readStreamToBuffer(result.body, function (err, buff) {
+          should.exist(result);
+          readStreamToBuffer(result, function (err, buff) {
             should.not.exist(err);
             buff.length.should.equal(0);
             done();
@@ -1728,54 +1914,54 @@ describe('nodejs', function () {
       });
 
       it('should work for all http redirect status codes with different verbs', function (done) {
-        testClient.httpRedirects.head300(function (error, result) {
+        testClient.httpRedirects.head300(function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
-          testClient.httpRedirects.get300(function (error, result) {
+          response.statusCode.should.equal(200);
+          testClient.httpRedirects.get300(function (error, result, request, response) {
             should.not.exist(error);
-            result.response.statusCode.should.equal(200);
-            testClient.httpRedirects.head301(function (error, result) {
+            response.statusCode.should.equal(200);
+            testClient.httpRedirects.head301(function (error, result, request, response) {
               should.not.exist(error);
-              result.response.statusCode.should.equal(200);
-              testClient.httpRedirects.get301(function (error, result) {
+              response.statusCode.should.equal(200);
+              testClient.httpRedirects.get301(function (error, result, request, response) {
                 should.not.exist(error);
-                result.response.statusCode.should.equal(200);
-                testClient.httpRedirects.put301(true, function (error, result) {
+                response.statusCode.should.equal(200);
+                testClient.httpRedirects.put301(true, function (error, result, request, response) {
                   should.not.exist(error);
-                  result.response.statusCode.should.equal(301);
-                  testClient.httpRedirects.head302(function (error, result) {
+                  response.statusCode.should.equal(301);
+                  testClient.httpRedirects.head302(function (error, result, request, response) {
                     should.not.exist(error);
-                    result.response.statusCode.should.equal(200);
-                    testClient.httpRedirects.get302(function (error, result) {
+                    response.statusCode.should.equal(200);
+                    testClient.httpRedirects.get302(function (error, result, request, response) {
                       should.not.exist(error);
-                      result.response.statusCode.should.equal(200);
-                      testClient.httpRedirects.patch302(true, function (error, result) {
+                      response.statusCode.should.equal(200);
+                      testClient.httpRedirects.patch302(true, function (error, result, request, response) {
                         should.not.exist(error);
-                        result.response.statusCode.should.equal(302);
-                        testClient.httpRedirects.post303(true, function (error, result) {
+                        response.statusCode.should.equal(302);
+                        testClient.httpRedirects.post303(true, function (error, result, request, response) {
                           should.not.exist(error);
-                          result.response.statusCode.should.equal(200);
-                          testClient.httpRedirects.head307(function (error, result) {
+                          response.statusCode.should.equal(200);
+                          testClient.httpRedirects.head307(function (error, result, request, response) {
                             should.not.exist(error);
-                            result.response.statusCode.should.equal(200);
-                            testClient.httpRedirects.get307(function (error, result) {
+                            response.statusCode.should.equal(200);
+                            testClient.httpRedirects.get307(function (error, result, request, response) {
                               should.not.exist(error);
-                              result.response.statusCode.should.equal(200);
+                              response.statusCode.should.equal(200);
                               //TODO, 4042586: Support options operations in swagger modeler
-                              //testClient.httpRedirects.options307(function (error, result) {
+                              //testClient.httpRedirects.options307(function (error, result, request, response) {
                               //  should.not.exist(error);
-                              testClient.httpRedirects.put307(true, function (error, result) {
+                              testClient.httpRedirects.put307(true, function (error, result, request, response) {
                                 should.not.exist(error);
-                                result.response.statusCode.should.equal(200);
-                                testClient.httpRedirects.post307(true, function (error, result) {
+                                response.statusCode.should.equal(200);
+                                testClient.httpRedirects.post307(true, function (error, result, request, response) {
                                   should.not.exist(error);
-                                  result.response.statusCode.should.equal(200);
-                                  testClient.httpRedirects.patch307(true, function (error, result) {
+                                  response.statusCode.should.equal(200);
+                                  testClient.httpRedirects.patch307(true, function (error, result, request, response) {
                                     should.not.exist(error);
-                                    result.response.statusCode.should.equal(200);
-                                    testClient.httpRedirects.delete307(true, function (error, result) {
+                                    response.statusCode.should.equal(200);
+                                    testClient.httpRedirects.delete307(true, function (error, result, request, response) {
                                       should.not.exist(error);
-                                      result.response.statusCode.should.equal(200);
+                                      response.statusCode.should.equal(200);
                                       done();
                                     });
                                   });
@@ -1919,30 +2105,30 @@ describe('nodejs', function () {
       });
 
       it('should properly perform the Http retry', function (done) {
-        testClient.httpRetry.head408(function (error, result) {
+        testClient.httpRetry.head408(function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
-          testClient.httpRetry.get502(function (error, result) {
+          response.statusCode.should.equal(200);
+          testClient.httpRetry.get502(function (error, result, request, response) {
             should.not.exist(error);
-            result.response.statusCode.should.equal(200);
-            testClient.httpRetry.put500(true, function (error, result) {
+            response.statusCode.should.equal(200);
+            testClient.httpRetry.put500(true, function (error, result, request, response) {
               should.not.exist(error);
-              result.response.statusCode.should.equal(200);
-              testClient.httpRetry.patch500(true, function (error, result) {
+              response.statusCode.should.equal(200);
+              testClient.httpRetry.patch500(true, function (error, result, request, response) {
                 should.not.exist(error);
-                result.response.statusCode.should.equal(200);
-                testClient.httpRetry.post503(true, function (error, result) {
+                response.statusCode.should.equal(200);
+                testClient.httpRetry.post503(true, function (error, result, request, response) {
                   should.not.exist(error);
-                  result.response.statusCode.should.equal(200);
-                  testClient.httpRetry.delete503(true, function (error, result) {
+                  response.statusCode.should.equal(200);
+                  testClient.httpRetry.delete503(true, function (error, result, request, response) {
                     should.not.exist(error);
-                    result.response.statusCode.should.equal(200);
-                    testClient.httpRetry.put504(true, function (error, result) {
+                    response.statusCode.should.equal(200);
+                    testClient.httpRetry.put504(true, function (error, result, request, response) {
                       should.not.exist(error);
-                      result.response.statusCode.should.equal(200);
-                      testClient.httpRetry.patch504(true, function (error, result) {
+                      response.statusCode.should.equal(200);
+                      testClient.httpRetry.patch504(true, function (error, result, request, response) {
                         should.not.exist(error);
-                        result.response.statusCode.should.equal(200);
+                        response.statusCode.should.equal(200);
                         done();
                       });
                     });
@@ -1957,7 +2143,7 @@ describe('nodejs', function () {
       it('should properly handle multiple responses with different verbs', function (done) {
         testClient.multipleResponses.get200Model204NoModelDefaultError200Valid(function (error, result) {
           should.not.exist(error);
-          result.body.statusCode.should.equal("200");
+          result.statusCode.should.equal("200");
           //should use models.Error to deserialize and set it as body of javascript Error object
           testClient.multipleResponses.get200Model204NoModelDefaultError201Invalid(function (error, result) {
             should.exist(error);
@@ -1969,33 +2155,33 @@ describe('nodejs', function () {
               //C3 does this Assert.Null(client.MultipleResponses.Get200Model204NoModelDefaultError204Valid());
               testClient.multipleResponses.get200Model204NoModelDefaultError204Valid(function (error, result) {
                 should.not.exist(error);
-                should.not.exist(result.body);
+                should.not.exist(result);
                 //{"message":"client error","status":400} shouldn't we set this to error model defined in swagger?
                 testClient.multipleResponses.get200Model204NoModelDefaultError400Valid(function (error, result) {
                   should.exist(error);
                   error.statusCode.should.equal(400);
                   testClient.multipleResponses.get200Model201ModelDefaultError200Valid(function (error, result) {
                     should.not.exist(error);
-                    result.body.statusCode.should.equal("200");
+                    result.statusCode.should.equal("200");
                     testClient.multipleResponses.get200Model201ModelDefaultError201Valid(function (error, result) {
                       should.not.exist(error);
-                      should.exist(result.body);
-                      assert.deepEqual(result.body, { 'statusCode': '201', 'textStatusCode': 'Created' });
+                      should.exist(result);
+                      assert.deepEqual(result, { 'statusCode': '201', 'textStatusCode': 'Created' });
                       testClient.multipleResponses.get200Model201ModelDefaultError400Valid(function (error, result) {
                         should.exist(error);
                         error.statusCode.should.equal(400);
                         testClient.multipleResponses.get200ModelA201ModelC404ModelDDefaultError200Valid(function (error, result) {
                           should.not.exist(error);
-                          should.exist(result.body);
-                          result.body.statusCode.should.equal("200");
+                          should.exist(result);
+                          result.statusCode.should.equal("200");
                           testClient.multipleResponses.get200ModelA201ModelC404ModelDDefaultError201Valid(function (error, result) {
                             should.not.exist(error);
-                            should.exist(result.body);
-                            result.body.httpCode.should.equal("201");
+                            should.exist(result);
+                            result.httpCode.should.equal("201");
                             testClient.multipleResponses.get200ModelA201ModelC404ModelDDefaultError404Valid(function (error, result) {
                               should.not.exist(error);
-                              should.exist(result.body);
-                              result.body.httpStatusCode.should.equal("404");
+                              should.exist(result);
+                              result.httpStatusCode.should.equal("404");
                               testClient.multipleResponses.get200ModelA201ModelC404ModelDDefaultError400Valid(function (error, result) {
                                 should.exist(error);
                                 error.statusCode.should.equal(400);
@@ -2018,7 +2204,7 @@ describe('nodejs', function () {
                                               error.statusCode.should.equal(400);
                                               testClient.multipleResponses.getDefaultModelA200Valid(function (error, result) {
                                                 should.not.exist(error);
-                                                //result.body.statusCode.should.equal("200");
+                                                //result.statusCode.should.equal("200");
                                                 testClient.multipleResponses.getDefaultModelA200None(function (error, result) {
                                                   should.not.exist(error);
                                                   testClient.multipleResponses.getDefaultModelA400Valid(function (error, result) {
@@ -2041,7 +2227,7 @@ describe('nodejs', function () {
                                                                 should.not.exist(error);
                                                                 testClient.multipleResponses.get200ModelA200Valid(function (error, result) {
                                                                   should.not.exist(error);
-                                                                  result.body.statusCode.should.equal("200");
+                                                                  result.statusCode.should.equal("200");
                                                                   testClient.multipleResponses.get200ModelA200Invalid(function (error, result) {
                                                                     should.not.exist(error);
                                                                     testClient.multipleResponses.get200ModelA400None(function (error, result) {

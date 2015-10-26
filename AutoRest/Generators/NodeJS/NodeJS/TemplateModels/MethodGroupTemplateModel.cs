@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -28,5 +27,24 @@ namespace Microsoft.Rest.Generator.NodeJS
         public string MethodGroupName { get; set; }
 
         public string MethodGroupType { get; set; }
+
+        public bool ContainsTimeSpan
+        {
+            get
+            {
+                Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
+                    p.Type == PrimaryType.TimeSpan ||
+                    (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.TimeSpan) ||
+                    (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.TimeSpan) ||
+                    (p.Type is CompositeType && (p.Type as CompositeType).ContainsTimeSpan())) != null);
+                
+                return  method != null;
+            }
+        }
+
+        public bool ContainsStream
+        {
+            get { return this.Methods.FirstOrDefault(m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.Stream) != null || m.ReturnType == PrimaryType.Stream) != null; }
+        }
     }
 }

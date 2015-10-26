@@ -8,6 +8,12 @@ namespace Microsoft.Rest.Generator.Ruby
     /// </summary>
     public interface IScopeProvider
     {
+        /// <summary>
+        /// Returns a non-conflicting name for new variable.
+        /// </summary>
+        /// <param name="prefix">The name prefix.</param>
+        /// <param name="suffix">The name suffix.</param>
+        /// <returns>The name for the new variable.</returns>
         string GetVariableName(string prefix, int suffix = 0);
     }
 }

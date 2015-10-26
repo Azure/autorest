@@ -43,8 +43,49 @@ namespace Microsoft.Azure.Management.Redis.Models
         }
     }
 
-    public partial class RedisResource : Resource
+    public partial class RedisResource : IResource
     {
+        /// <summary>
+        /// Gets the ID of the resource.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the resource.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets the type of the resource.
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type { get; private set; }
+
+        /// <summary>
+        /// Required. Gets or sets the location of the resource.
+        /// </summary>
+        [JsonProperty("location")]
+        public string Location { get; set; }
+
+        /// <summary>
+        /// Optional. Gets or sets the tags attached to the resource.
+        /// </summary>
+        [JsonProperty("tags")]
+        public IDictionary<string, string> Tags { get; set; }
+
+        /// <summary>
+        /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
+        /// </summary>
+        public virtual void Validate()
+        {
+            if (Location == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Location");
+            }
+        }
+
         private string _hostName;
 
         /// <summary>
@@ -85,8 +126,14 @@ namespace Microsoft.Azure.Management.Redis.Models
         public string ProvisioningState { get; set; }
     }
 
-    public partial class RedisSubResource : SubResource
+    public partial class RedisSubResource : IResource
     {
+        /// <summary>
+        /// Gets the ID of the resource.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; private set; }
+
         private string _hostName;
 
         /// <summary>
@@ -904,12 +951,12 @@ namespace Microsoft.Azure.Management.Redis
         /// </param>
         public static async Task BeginDeleteAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse result = await operations.BeginDeleteWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            await operations.BeginDeleteWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return;
         }
         public static async Task DeleteAsync(this IRedisOperations operations, string resourceGroupName, string name, string subscriptionId, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            AzureOperationResponse result = await operations.DeleteWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
+            await operations.DeleteWithHttpMessagesAsync(resourceGroupName, name, subscriptionId, cancellationToken).ConfigureAwait(false);
             return;
         }
 

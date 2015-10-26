@@ -8,9 +8,10 @@ var http = require('http');
 var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
+var moment = require('moment');
 var _ = require('underscore')
 
-var headerClient = require('../Expected/AcceptanceTests/Header/AutoRestSwaggerBATHeaderService');
+var headerClient = require('../Expected/AcceptanceTests/Header/autoRestSwaggerBATHeaderService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -25,20 +26,20 @@ describe('nodejs', function () {
     describe('Basic Header Operations', function () {
       var testClient = new headerClient(baseUri, clientOptions);
       it('should override existing headers', function (done) {
-        testClient.header.paramExistingKey('overwrite', function (error, result) {
+        testClient.header.paramExistingKey('overwrite', function (error, result, request, response) {
           should.not.exist(error);
-          testClient.header.responseExistingKey(function (error, result) {
-            result.response.headers['user-agent'].should.be.exactly('overwrite');
+          testClient.header.responseExistingKey(function (error, result, request, response) {
+            response.headers['user-agent'].should.be.exactly('overwrite');
             done();
           });
         });
       });
 
       it('should throw on changing protected headers', function(done) {
-        testClient.header.paramProtectedKey('text/html', function (error, result) {
+        testClient.header.paramProtectedKey('text/html', function (error, result, request, response) {
           should.not.exist(error);
-          testClient.header.responseProtectedKey(function (error, result) {
-           result.response.headers['content-type'].should.be.exactly('text/html; charset=utf-8');
+          testClient.header.responseProtectedKey(function (error, result, request, response) {
+           response.headers['content-type'].should.be.exactly('text/html; charset=utf-8');
            done();
           });
         });
@@ -49,12 +50,12 @@ describe('nodejs', function () {
           should.not.exist(error);
           testClient.header.paramInteger('negative', -2, function(error, result) {
             should.not.exist(error);
-            testClient.header.responseInteger('positive', function(error, result) {
+            testClient.header.responseInteger('positive', function(error, result, request, response) {
               should.not.exist(error);
-              result.response.headers['value'].should.be.exactly('1');
-              testClient.header.responseInteger('negative', function(error, result) {
+              response.headers['value'].should.be.exactly('1');
+              testClient.header.responseInteger('negative', function(error, result, request, response) {
                 should.not.exist(error);
-                result.response.headers['value'].should.be.exactly('-2');
+                response.headers['value'].should.be.exactly('-2');
                 done();
               });
             });
@@ -67,12 +68,12 @@ describe('nodejs', function () {
           should.not.exist(error);
           testClient.header.paramLong('negative', -2, function(error, result) {
             should.not.exist(error);
-            testClient.header.responseLong('positive', function(error, result) {
+            testClient.header.responseLong('positive', function(error, result, request, response) {
               should.not.exist(error);
-              result.response.headers['value'].should.be.exactly('105');
-              testClient.header.responseLong('negative', function(error, result) {
+              response.headers['value'].should.be.exactly('105');
+              testClient.header.responseLong('negative', function(error, result, request, response) {
                 should.not.exist(error);
-                result.response.headers['value'].should.be.exactly('-2');
+                response.headers['value'].should.be.exactly('-2');
                 done();
               });
             });
@@ -85,12 +86,12 @@ describe('nodejs', function () {
           should.not.exist(error);
           testClient.header.paramFloat('negative', -3.0, function(error, result) {
             should.not.exist(error);
-            testClient.header.responseFloat('positive', function(error, result) {
+            testClient.header.responseFloat('positive', function(error, result, request, response) {
               should.not.exist(error);
-              result.response.headers['value'].should.be.exactly('0.07');
-              testClient.header.responseFloat('negative', function(error, result) {
+              response.headers['value'].should.be.exactly('0.07');
+              testClient.header.responseFloat('negative', function(error, result, request, response) {
                 should.not.exist(error);
-                JSON.parse(result.response.headers['value']).should.be.exactly(-3.0);
+                JSON.parse(response.headers['value']).should.be.exactly(-3.0);
                 done();
               });
             });
@@ -103,12 +104,12 @@ describe('nodejs', function () {
           should.not.exist(error);
           testClient.header.paramDouble('negative', -3.0, function(error, result) {
             should.not.exist(error);
-            testClient.header.responseDouble('positive', function(error, result) {
+            testClient.header.responseDouble('positive', function(error, result, request, response) {
               should.not.exist(error);
-              JSON.parse(result.response.headers['value']).should.be.exactly(7e120);
-              testClient.header.responseDouble('negative', function(error, result) {
+              JSON.parse(response.headers['value']).should.be.exactly(7e120);
+              testClient.header.responseDouble('negative', function(error, result, request, response) {
                 should.not.exist(error);
-                JSON.parse(result.response.headers['value']).should.be.exactly(-3.0);
+                JSON.parse(response.headers['value']).should.be.exactly(-3.0);
                 done();
               });
             });
@@ -121,12 +122,12 @@ describe('nodejs', function () {
           should.not.exist(error);
           testClient.header.paramBool('false', false, function(error, result) {
             should.not.exist(error);
-            testClient.header.responseBool('true', function(error, result) {
+            testClient.header.responseBool('true', function(error, result, request, response) {
               should.not.exist(error);
-              result.response.headers['value'].should.be.exactly('true');
-              testClient.header.responseBool('false', function(error, result) {
+              response.headers['value'].should.be.exactly('true');
+              testClient.header.responseBool('false', function(error, result, request, response) {
                 should.not.exist(error);
-                result.response.headers['value'].should.be.exactly('false');
+                response.headers['value'].should.be.exactly('false');
                 done();
               });
             });
@@ -141,15 +142,15 @@ describe('nodejs', function () {
             should.not.exist(error);
             testClient.header.paramString('empty', '', function(error, result) {
             should.not.exist(error);
-              testClient.header.responseString('valid', function(error, result) {
+              testClient.header.responseString('valid', function(error, result, request, response) {
                 should.not.exist(error);
-                result.response.headers['value'].should.be.exactly('The quick brown fox jumps over the lazy dog');
-                testClient.header.responseString('null', function(error, result) {
+                response.headers['value'].should.be.exactly('The quick brown fox jumps over the lazy dog');
+                testClient.header.responseString('null', function(error, result, request, response) {
                   should.not.exist(error);
-                  should.not.exist(JSON.parse(result.response.headers['value']));
-                  testClient.header.responseString('empty', function(error, result) {
+                  should.not.exist(JSON.parse(response.headers['value']));
+                  testClient.header.responseString('empty', function(error, result, request, response) {
                     should.not.exist(error);
-                    result.response.headers['value'].should.be.exactly('');
+                    response.headers['value'].should.be.exactly('');
                     done();
                   });
                 });
@@ -164,12 +165,12 @@ describe('nodejs', function () {
           should.not.exist(error);
           testClient.header.paramEnum('null', null, function(error, result) {
             should.not.exist(error);
-            testClient.header.responseEnum('valid', function(error, result) {
+            testClient.header.responseEnum('valid', function(error, result, request, response) {
               should.not.exist(error);
-              result.response.headers['value'].should.be.exactly('GREY');
-              testClient.header.responseEnum('null', function(error, result) {
+              response.headers['value'].should.be.exactly('GREY');
+              testClient.header.responseEnum('null', function(error, result, request, response) {
                 should.not.exist(error);
-                should.not.exist(JSON.parse(result.response.headers['value']));
+                should.not.exist(JSON.parse(response.headers['value']));
                 done();
               });
             });
@@ -182,12 +183,12 @@ describe('nodejs', function () {
           should.not.exist(error);
           testClient.header.paramDate('min', new Date('0001-01-01'), function(error, result) {
             should.not.exist(error);
-            testClient.header.responseDate('valid', function(error, result) {
+            testClient.header.responseDate('valid', function(error, result, request, response) {
               should.not.exist(error);
-              _.isEqual(new Date(result.response.headers['value']), new Date('2010-01-01')).should.be.exactly(true);
-              testClient.header.responseDate('min', function(error, result) {
+              _.isEqual(new Date(response.headers['value']), new Date('2010-01-01')).should.be.exactly(true);
+              testClient.header.responseDate('min', function(error, result, request, response) {
                 should.not.exist(error);
-                _.isEqual(new Date(result.response.headers['value']), new Date('0001-01-01')).should.be.exactly(true);
+                _.isEqual(new Date(response.headers['value']), new Date('0001-01-01')).should.be.exactly(true);
                 done();
               });
             });
@@ -200,15 +201,45 @@ describe('nodejs', function () {
           should.not.exist(error);
           testClient.header.paramDatetime('min', new Date('0001-01-01T00:00:00Z'), function(error, result) {
             should.not.exist(error);
-            testClient.header.responseDatetime('valid', function(error, result) {
+            testClient.header.responseDatetime('valid', function(error, result, request, response) {
               should.not.exist(error);
-              _.isEqual(new Date(result.response.headers['value']), new Date('2010-01-01T12:34:56Z')).should.be.exactly(true);
-              testClient.header.responseDatetime('min', function(error, result) {
+              _.isEqual(new Date(response.headers['value']), new Date('2010-01-01T12:34:56Z')).should.be.exactly(true);
+              testClient.header.responseDatetime('min', function(error, result, request, response) {
                 should.not.exist(error);
-                _.isEqual(new Date(result.response.headers['value']), new Date('0001-01-01T00:00:00Z')).should.be.exactly(true);
+                _.isEqual(new Date(response.headers['value']), new Date('0001-01-01T00:00:00Z')).should.be.exactly(true);
                 done();
               });
             });
+          });
+        });
+      });
+      
+      it('should send and receive datetimerfc1123 type headers', function(done) {
+        testClient.header.paramDatetimeRfc1123('valid', new Date('2010-01-01T12:34:56Z'), function(error, result) {
+          should.not.exist(error);
+          testClient.header.paramDatetimeRfc1123('min', new Date('0001-01-01T00:00:00Z'), function (error, result) {
+            should.not.exist(error);
+            testClient.header.responseDatetimeRfc1123('valid', function (error, result, request, response) {
+              should.not.exist(error);
+              _.isEqual(new Date(response.headers['value']), new Date('Fri, 01 Jan 2010 12:34:56 GMT')).should.be.exactly(true);
+              testClient.header.responseDatetimeRfc1123('min', function (error, result, request, response) {
+                should.not.exist(error);
+                _.isEqual(new Date(response.headers['value']), new Date('Mon, 01 Jan 0001 00:00:00 GMT')).should.be.exactly(true);
+                done();
+              });
+            });
+          });
+        });
+      });
+
+      it('should send and receive duration type headers', function (done) {
+        var duration = moment.duration({ days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11 });
+        testClient.header.paramDuration('valid', duration, function(error, result) {
+          should.not.exist(error);
+          testClient.header.responseDuration('valid', function (error, result, request, response) {
+            should.not.exist(error);
+            _.isEqual(response.headers['value'], 'P123DT22H14M12.011S').should.be.exactly(true);
+            done();
           });
         });
       });
@@ -217,9 +248,9 @@ describe('nodejs', function () {
         var bytes = new Buffer('啊齄丂狛狜隣郎隣兀﨩');
         testClient.header.paramByte('valid', bytes, function(error, result) {
           should.not.exist(error);
-          testClient.header.responseByte('valid', function(error, result) {
+          testClient.header.responseByte('valid', function(error, result, request, response) {
             should.not.exist(error);
-            result.response.headers['value'].should.be.exactly(bytes.toString('base64'));
+            response.headers['value'].should.be.exactly(bytes.toString('base64'));
             done();
           });
         });

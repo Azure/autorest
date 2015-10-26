@@ -83,13 +83,13 @@ namespace Microsoft.Rest.Generator
             foreach (var property in client.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             var normalizedModels = new List<CompositeType>();
             foreach (var modelType in client.ModelTypes)
             {
-                normalizedModels.Add(NormalizeType(modelType) as CompositeType);
+                normalizedModels.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
             }
             client.ModelTypes.Clear();
             normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
@@ -97,25 +97,25 @@ namespace Microsoft.Rest.Generator
             var normalizedEnums = new List<EnumType>();
             foreach (var enumType in client.EnumTypes)
             {
-                var normalizedType = NormalizeType(enumType) as EnumType;
+                var normalizedType = NormalizeTypeDeclaration(enumType) as EnumType;
                 if (normalizedType != null)
                 {
-                    normalizedEnums.Add(NormalizeType(enumType) as EnumType);
+                    normalizedEnums.Add(NormalizeTypeDeclaration(enumType) as EnumType);
                 }
             }
             client.EnumTypes.Clear();
             normalizedEnums.ForEach((item) => client.EnumTypes.Add(item));
-            
+
             foreach (var method in client.Methods)
             {
                 method.Name = GetMethodName(method.Name);
-                method.Group = GetTypeName(method.Group);
-                method.ReturnType = NormalizeType(method.ReturnType);
-                method.DefaultResponse = NormalizeType(method.DefaultResponse);
+                method.Group = GetMethodGroupName(method.Group);
+                method.ReturnType = NormalizeTypeReference(method.ReturnType);
+                method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
                 var normalizedResponses = new Dictionary<HttpStatusCode, IType>();
                 foreach (var statusCode in method.Responses.Keys)
                 {
-                    normalizedResponses[statusCode] = NormalizeType(method.Responses[statusCode]);
+                    normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
                 }
 
                 method.Responses.Clear();
@@ -126,7 +126,29 @@ namespace Microsoft.Rest.Generator
                 foreach (var parameter in method.Parameters)
                 {
                     parameter.Name = GetParameterName(parameter.Name);
-                    parameter.Type = NormalizeType(parameter.Type);
+                    parameter.Type = NormalizeTypeReference(parameter.Type);
+                }
+
+                foreach (var parameterMapping in method.InputParameterMappings)
+                {
+                    parameterMapping.InputParameter.Name = GetParameterName(parameterMapping.InputParameter.Name);
+                    parameterMapping.InputParameter.Type = NormalizeTypeReference(parameterMapping.InputParameter.Type);
+                    parameterMapping.OutputParameter.Name = GetParameterName(parameterMapping.OutputParameter.Name);
+                    parameterMapping.OutputParameter.Type = NormalizeTypeReference(parameterMapping.OutputParameter.Type);
+
+                    if (parameterMapping.InputParameterProperty != null)
+                    {
+                        parameterMapping.InputParameterProperty = string.Join(".", 
+                            parameterMapping.InputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                                .Select(p => GetPropertyName(p)));
+                    }
+
+                    if (parameterMapping.OutputParameterProperty != null)
+                    {
+                        parameterMapping.OutputParameterProperty = string.Join(".",
+                            parameterMapping.OutputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                                .Select(p => GetPropertyName(p)));
+                    }
                 }
             }
         }
@@ -244,6 +266,20 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
+        /// Formats a string for naming a Method Group using Pascal case by default.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>The formatted string.</returns>
+        public virtual string GetMethodGroupName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return PascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Model")));
+        }
+
+        /// <summary>
         /// Formats a string for naming a local variable using Camel case by default.
         /// </summary>
         /// <param name="name"></param>
@@ -258,11 +294,19 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
-        /// Returns language specific type name.
+        /// Returns language specific type reference name.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        protected abstract IType NormalizeType(IType type);
+        public abstract IType NormalizeTypeReference(IType type);
+
+        /// <summary>
+        /// Returns language specific type declaration name.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public abstract IType NormalizeTypeDeclaration(IType type);
+
 
         /// <summary>
         /// Formats a string as upper or lower case. Two-letter inputs that are all upper case are both lowered.
@@ -323,7 +367,7 @@ namespace Microsoft.Rest.Generator
             var correctName = RemoveInvalidCharacters(name, allowerCharacters);
 
             // here we have only letters and digits or an empty string
-            if (string.IsNullOrEmpty(correctName) || 
+            if (string.IsNullOrEmpty(correctName) ||
                 basicLaticCharacters.ContainsKey(correctName[0]))
             {
                 var sb = new StringBuilder();
@@ -364,7 +408,7 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
-        /// If the provided name is a reserved word in a programming language then the method converts the 
+        /// If the provided name is a reserved word in a programming language then the method converts the
         /// name by appending the provided appendValue
         /// </summary>
         /// <param name="name">Name.</param>
@@ -463,7 +507,7 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <param name="exclusionDictionary"></param>
-        protected virtual void ResolveMethodGroupNameCollision(ServiceClient serviceClient, 
+        protected virtual void ResolveMethodGroupNameCollision(ServiceClient serviceClient,
             Dictionary<string, string> exclusionDictionary)
         {
             if (serviceClient == null)
@@ -545,7 +589,7 @@ namespace Microsoft.Rest.Generator
             {
                 return Enumerable.Empty<string>();
             }
-            // else we do not need the last part of the namespace 
+            // else we do not need the last part of the namespace
             return namespaceWords.Take(namespaceWords.Length - 1);
         }
 

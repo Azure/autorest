@@ -6,7 +6,6 @@ using System.IO;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Extensibility;
 using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Properties;
 using Microsoft.Rest.Generator.Test.Resource;
 using Microsoft.Rest.Generator.Utilities;
 using Xunit;
@@ -135,7 +134,8 @@ namespace Microsoft.Rest.Generator.Test
             source.Name = "Foo";
             source.Methods.Add(new Method
             {
-                Documentation = "Create or update a cache.",
+                Description = "Create or update a cache.",
+                Summary = "Some summary",
                 Name = "CreateOrUpdate",
                 Url = "/subscription/{subscriptionId}/start/{startDate}"
             });

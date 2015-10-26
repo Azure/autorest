@@ -2,16 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
 using Microsoft.Rest.Generator.Azure.NodeJS.Templates;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.Utilities;
-using System.Linq;
-using System.Threading.Tasks;
-using System.IO;
-using System.Globalization;
-using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
@@ -57,12 +57,17 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             //please do not change the following sequence as it may have undesirable results.
+
+            //TODO: Why is this list duplicated from AzureCodeGenerator.NormalizeClientModel?
+
             Settings.AddCredentials = true;
             AzureCodeGenerator.UpdateHeadMethods(serviceClient);
             AzureCodeGenerator.ParseODataExtension(serviceClient);
+            AzureCodeGenerator.FlattenResourceProperties(serviceClient);
             AzureCodeGenerator.AddPageableMethod(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
+            AzureCodeGenerator.AddParameterGroups(serviceClient);
             base.NormalizeClientModel(serviceClient);
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.ClientModel
@@ -14,17 +13,23 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Predefined dictionary of known types.
         /// </summary>
-        private static readonly Dictionary<SupportedPrimaryType, PrimaryType> KnownTypes;
+        private static Dictionary<SupportedPrimaryType, PrimaryType> KnownTypes;
 
         /// <summary>
         /// Initializes static members of PrimaryType class.
         /// </summary>
         static PrimaryType()
         {
+            Reset();
+        }
+
+        public static void Reset()
+        {
             KnownTypes = new Dictionary<SupportedPrimaryType, PrimaryType>();
             foreach (SupportedPrimaryType knownType in System.Enum.GetValues(typeof (SupportedPrimaryType)))
             {
-                KnownTypes[knownType] = new PrimaryType {Name = knownType.ToString(), Type = knownType};
+                var name = System.Enum.GetName(typeof (SupportedPrimaryType), knownType);
+                KnownTypes[knownType] = new PrimaryType {Name = name, Type = knownType};
             }
         }
 
@@ -58,6 +63,11 @@ namespace Microsoft.Rest.Generator.ClientModel
             get { return KnownTypes[SupportedPrimaryType.Double]; }
         }
 
+        public static PrimaryType Decimal
+        {
+            get { return KnownTypes[SupportedPrimaryType.Decimal]; }
+        }
+
         public static PrimaryType String
         {
             get { return KnownTypes[SupportedPrimaryType.String]; }
@@ -81,6 +91,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         public static PrimaryType DateTime
         {
             get { return KnownTypes[SupportedPrimaryType.DateTime]; }
+        }
+
+        public static PrimaryType DateTimeRfc1123
+        {
+            get { return KnownTypes[SupportedPrimaryType.DateTimeRfc1123]; }
         }
 
         public static PrimaryType TimeSpan
@@ -147,11 +162,13 @@ namespace Microsoft.Rest.Generator.ClientModel
             Int,
             Long,
             Double,
+            Decimal,
             String,
             Stream,
             ByteArray,
             Date,
             DateTime,
+            DateTimeRfc1123,
             TimeSpan,
             Boolean
         }

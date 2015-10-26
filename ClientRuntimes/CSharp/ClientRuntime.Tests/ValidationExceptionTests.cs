@@ -25,9 +25,9 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void VerifyMaximum()
         {
-            var validationException = new ValidationException(ValidationRules.Maximum, "Id", 20);
+            var validationException = new ValidationException(ValidationRules.InclusiveMaximum, "Id", 20);
 
-            Assert.Equal(ValidationRules.Maximum, validationException.Rule);
+            Assert.Equal(ValidationRules.InclusiveMaximum, validationException.Rule);
             Assert.Equal("Id", validationException.Target);
             Assert.Equal("Microsoft.Rest.ValidationException: 'Id' exceeds maximum value of '20'.", validationException.ToString());
         }
@@ -45,9 +45,9 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void VerifyMinimum()
         {
-            var validationException = new ValidationException(ValidationRules.Minimum, "Id", 3);
+            var validationException = new ValidationException(ValidationRules.InclusiveMinimum, "Id", 3);
 
-            Assert.Equal(ValidationRules.Minimum, validationException.Rule);
+            Assert.Equal(ValidationRules.InclusiveMinimum, validationException.Rule);
             Assert.Equal("Id", validationException.Target);
             Assert.Equal("Microsoft.Rest.ValidationException: 'Id' is less than minimum value of '3'.", validationException.ToString());
         }
@@ -65,9 +65,9 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void VerifyMaxLenth()
         {
-            var validationException = new ValidationException(ValidationRules.MaximumLength, "Id", 100);
+            var validationException = new ValidationException(ValidationRules.MaxLength, "Id", 100);
 
-            Assert.Equal(ValidationRules.MaximumLength, validationException.Rule);
+            Assert.Equal(ValidationRules.MaxLength, validationException.Rule);
             Assert.Equal("Id", validationException.Target);
             Assert.Equal("Microsoft.Rest.ValidationException: 'Id' exceeds maximum length of '100'.", validationException.ToString());
         }
@@ -75,9 +75,9 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void VerifyMinLenth()
         {
-            var validationException = new ValidationException(ValidationRules.MinimumLength, "Id", 12);
+            var validationException = new ValidationException(ValidationRules.MinLength, "Id", 12);
 
-            Assert.Equal(ValidationRules.MinimumLength, validationException.Rule);
+            Assert.Equal(ValidationRules.MinLength, validationException.Rule);
             Assert.Equal("Id", validationException.Target);
             Assert.Equal("Microsoft.Rest.ValidationException: 'Id' is less than minimum length of '12'.", validationException.ToString());
         }
@@ -96,9 +96,9 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void VerifyMaxItems()
         {
-            var validationException = new ValidationException(ValidationRules.MaximumItems, "Id", 2);
+            var validationException = new ValidationException(ValidationRules.MaxItems, "Id", 2);
 
-            Assert.Equal(ValidationRules.MaximumItems, validationException.Rule);
+            Assert.Equal(ValidationRules.MaxItems, validationException.Rule);
             Assert.Equal("Id", validationException.Target);
             Assert.Equal("Microsoft.Rest.ValidationException: 'Id' exceeds maximum item count of '2'.", validationException.ToString());
         }
@@ -106,9 +106,9 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void VerifyMinItems()
         {
-            var validationException = new ValidationException(ValidationRules.MinimumItems, "Id", 1);
+            var validationException = new ValidationException(ValidationRules.MinItems, "Id", 1);
 
-            Assert.Equal(ValidationRules.MinimumItems, validationException.Rule);
+            Assert.Equal(ValidationRules.MinItems, validationException.Rule);
             Assert.Equal("Id", validationException.Target);
             Assert.Equal("Microsoft.Rest.ValidationException: 'Id' contains less items than '1'.", validationException.ToString());
         }

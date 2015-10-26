@@ -12,7 +12,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis": {
       "get": {
         "description": "",
-        "x-ms-pageable": "true",
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
         "operationId": "List",
         "consumes": [],
         "produces": [

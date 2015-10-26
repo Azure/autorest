@@ -1,15 +1,13 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -21,7 +19,9 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             this.LoadFrom(source);
             ParameterTemplateModels = new List<ParameterTemplateModel>();
+            LogicalParameterTemplateModels = new List<ParameterTemplateModel>();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
             ServiceClient = serviceClient;
             MethodGroupName = source.Group ?? serviceClient.Name;
         }
@@ -30,7 +30,9 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public ServiceClient ServiceClient { get; set; }
 
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        protected List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+
+        public List<ParameterTemplateModel> LogicalParameterTemplateModels { get; private set; }
 
         public IScopeProvider Scope
         {
@@ -49,7 +51,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     List<string> predicates = new List<string>();
                     foreach (var responseStatus in Responses.Keys)
                     {
-                        predicates.Add(string.Format(CultureInfo.InvariantCulture, 
+                        predicates.Add(string.Format(CultureInfo.InvariantCulture,
                             "statusCode == {0}", GetStatusCodeReference(responseStatus)));
                     }
 
@@ -67,11 +69,24 @@ namespace Microsoft.Rest.Generator.CSharp
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in  LocalParameters)
+                foreach (var parameter in LocalParameters)
                 {
-                    string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture, 
-                        format, parameter.DeclarationExpression, parameter.Name));
+                    string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
+                    string defaultValue = string.Format(CultureInfo.InvariantCulture, "default({0})", parameter.DeclarationExpression);
+                    if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
+                    {
+                        PrimaryType type = parameter.Type as PrimaryType;
+                        if (type == PrimaryType.Boolean || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long)
+                        {
+                            defaultValue = parameter.DefaultValue;
+                        }
+                        else if (type == PrimaryType.String)
+                        {
+                            defaultValue = "\"" + parameter.DefaultValue + "\"";
+                        }
+                    }
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture,
+                        format, parameter.DeclarationExpression, parameter.Name, defaultValue ));
                 }
 
                 return string.Join(", ", declarations);
@@ -95,7 +110,7 @@ namespace Microsoft.Rest.Generator.CSharp
         public virtual string GetAsyncMethodParameterDeclaration(bool addCustomHeaderParameters)
         {
             var declarations = this.SyncMethodParameterDeclaration;
-            
+
             if (!string.IsNullOrEmpty(declarations))
             {
                 declarations += ", ";
@@ -135,7 +150,7 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Get the parameters that are actually method parameters in the order they apopear in the method signatur
+        /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
         public IEnumerable<ParameterTemplateModel> LocalParameters
@@ -158,7 +173,7 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 if (ReturnType != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, 
+                    return string.Format(CultureInfo.InvariantCulture,
                         "HttpOperationResponse<{0}>", ReturnType.Name);
                 }
                 return "HttpOperationResponse";
@@ -168,13 +183,13 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the return type for the async extension method
         /// </summary>
-        public string TaskExtensionReturnTypeString
+        public virtual string TaskExtensionReturnTypeString
         {
             get
             {
                 if (ReturnType != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, 
+                    return string.Format(CultureInfo.InvariantCulture,
                         "Task<{0}>", ReturnType.Name);
                 }
                 return "Task";
@@ -215,7 +230,7 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Gets the expression for default header setting. 
+        /// Gets the expression for default header setting.
         /// </summary>
         public virtual string SetDefaultHeaders
         {
@@ -228,7 +243,7 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
-        public string ReturnTypeString
+        public virtual string ReturnTypeString
         {
             get
             {
@@ -245,7 +260,10 @@ namespace Microsoft.Rest.Generator.CSharp
         /// </summary>
         public ParameterTemplateModel RequestBody
         {
-            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
+            get
+            {
+                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;                
+            }
         }
 
         /// <summary>
@@ -265,13 +283,18 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             SequenceType sequenceType = serializationType as SequenceType;
             DictionaryType dictionaryType = serializationType as DictionaryType;
-            if (serializationType == PrimaryType.Date || 
+            if (serializationType == PrimaryType.Date ||
                 (sequenceType != null && sequenceType.ElementType == PrimaryType.Date) ||
                 (dictionaryType != null && dictionaryType.ValueType == PrimaryType.Date))
             {
                 return "new DateJsonConverter()";
             }
-
+            else if (serializationType == PrimaryType.DateTimeRfc1123 ||
+                     (sequenceType != null && sequenceType.ElementType == PrimaryType.DateTimeRfc1123) ||
+                     (dictionaryType != null && dictionaryType.ValueType == PrimaryType.DateTimeRfc1123))
+            {
+                return "new DateTimeRfc1123JsonConverter()";
+            }
             return ClientReference + ".SerializationSettings";
         }
 
@@ -305,7 +328,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public static string GetStatusCodeReference(HttpStatusCode code)
         {
-            return string.Format(CultureInfo.InvariantCulture, 
+            return string.Format(CultureInfo.InvariantCulture,
                 "(HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), \"{0}\")", code);
         }
 
@@ -318,18 +341,17 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             var builder = new IndentedStringBuilder();
 
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
             {
                 builder.AppendLine("{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));",
                     variableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
             }
-            if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
+            if (this.LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
             {
                 builder.AppendLine("List<string> queryParameters = new List<string>();");
-                foreach (var queryParameter in ParameterTemplateModels
-                    .Where(p => p.Location == ParameterLocation.Query))
+                foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
                 {
                     builder.AppendLine("if ({0} != null)", queryParameter.Name)
                         .AppendLine("{").Indent()

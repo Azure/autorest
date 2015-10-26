@@ -1,4 +1,5 @@
-﻿@using Microsoft.Rest.Generator.CSharp
+@using System
+@using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.Templates
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.CSharp.Azure
@@ -14,14 +15,21 @@
 }
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
 {
+if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+{
 @:/// <summary>
-@WrapComment("/// ", Model.Documentation.EscapeXmlComment())@:
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
 @:/// </summary>
-@foreach (var parameter in Model.LocalParameters)
+}
+if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+}
+foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
-@:/// </param>    
+@:/// </param>
 }
 @:/// <param name='customHeaders'>
 @:/// The headers that will be added to request.
@@ -42,18 +50,25 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
 }
 else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
 {
+if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+{
 @:/// <summary>
-@WrapComment("/// ", Model.Documentation.EscapeXmlComment())@:
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
 @:/// </summary>
-@foreach (var parameter in Model.LocalParameters)
+}
+if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+}
+foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
-@:/// </param>    
+@:/// </param>
 }
 @:/// <param name='customHeaders'>
 @:/// The headers that will be added to request.
-@:/// </param>    
+@:/// </param>
 @:/// <param name='cancellationToken'>
 @:/// The cancellation token.
 @:/// </param>
@@ -64,8 +79,8 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
         @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
-    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync<@(Model.ReturnType.Name)>(response, 
-        customHeaders, 
+    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync<@(Model.ReturnType.Name)>(response,
+        customHeaders,
         cancellationToken);
 }
 </text>

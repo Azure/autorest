@@ -133,6 +133,6 @@
     <value>{0} needs to have a valid definition reference.</value>
   </data>
   <data name="ResourcePropertyMismatch" xml:space="preserve">
-    <value>Schema definition for Resource type with x-ms-external extension should have following properties: {0}</value>
+    <value>Schema definition for Resource type with x-ms-azure-resource extension should have following properties: {0}</value>
   </data>
 </root>

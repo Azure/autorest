@@ -2,7 +2,9 @@
 @using Microsoft.Rest.Generator.NodeJS.Templates
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.MethodGroupTemplateModel>
-@Header("// ")
+/*
+@Header(" * ")
+ */
 @EmptyLine
 'use strict';
 @EmptyLine
@@ -15,6 +17,10 @@ var WebResource = msRest.WebResource;
 {
 @EmptyLine
 @:var models = require('../models');
+}
+@if (Model.ContainsTimeSpan)
+{
+@:var moment = require('moment');
 }
 @EmptyLine
 /**

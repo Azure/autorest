@@ -1,14 +1,18 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Text;
 using Xunit;
 
 namespace Microsoft.Rest.Generator.Test
 {
     public class FakeCodeNamer : CodeNamer
     {
-        protected override ClientModel.IType NormalizeType(ClientModel.IType type)
+        public override ClientModel.IType NormalizeTypeReference(ClientModel.IType type)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override ClientModel.IType NormalizeTypeDeclaration(ClientModel.IType type)
         {
             throw new System.NotImplementedException();
         }

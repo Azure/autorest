@@ -3,26 +3,29 @@
 
 // TODO: file length is getting excessive.
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Collections.Generic;
-using Microsoft.Rest.Azure;
+using System.Linq;
+using Fixtures.Azure.AcceptanceTestsAzureBodyDuration;
+using Fixtures.Azure.AcceptanceTestsAzureReport;
 using Fixtures.Azure.AcceptanceTestsAzureSpecials;
-using Fixtures.Azure.AcceptanceTestsLro.Models;
+using Fixtures.Azure.AcceptanceTestsHead;
 using Fixtures.Azure.AcceptanceTestsLro;
+using Fixtures.Azure.AcceptanceTestsLro.Models;
 using Fixtures.Azure.AcceptanceTestsPaging;
+using Fixtures.Azure.AcceptanceTestsResourceFlattening;
+using Fixtures.Azure.AcceptanceTestsResourceFlattening.Models;
+using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
+using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping;
+using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models;
+using Microsoft.Rest.Azure;
 using Microsoft.Rest.Generator.CSharp.Azure.Tests.Properties;
 using Microsoft.Rest.Generator.CSharp.Tests;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
-using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
-using Fixtures.Azure.AcceptanceTestsResourceFlattening;
-using Fixtures.Azure.AcceptanceTestsResourceFlattening.Models;
-using Fixtures.Azure.AcceptanceTestsHead;
-using Fixtures.Azure.AcceptanceTestsAzureReport;
-using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
@@ -154,9 +157,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 exception = Assert.Throws<CloudException>(() => client.LROs.PostAsyncRetrycanceled());
                 Assert.Contains("Long running operation failed with status 'Canceled'", exception.Message,
                     StringComparison.Ordinal);
-                client.LROs.PostAsyncRetrySucceeded();
-                client.LROs.PostAsyncNoRetrySucceeded();
-                client.LROs.PostAsyncNoRetrySucceeded();
+                Product prod = client.LROs.PostAsyncRetrySucceeded();
+                Assert.Equal("100", prod.Id);
+                prod = client.LROs.PostAsyncNoRetrySucceeded();
+                Assert.Equal("100", prod.Id);
                 var sku = client.LROs.Post200WithPayload();
                 Assert.Equal("1", sku.Id);
                 // Retryable errors
@@ -423,7 +427,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("3", result[2].Id);
                 Assert.Equal("Resource3", result[2].Name);
 
-                var resourceArray = new List<Resource>();
+                var resourceArray = new List<Fixtures.Azure.AcceptanceTestsResourceFlattening.Models.Resource>();
                 resourceArray.Add(new FlattenedProduct
                 {
                     Location = "West US",
@@ -431,14 +435,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     {
                         {"tag1", "value1"},
                         {"tag2", "value3"}
-                    },
-                    Pname = "Product1",
-                    FlattenedProductType = "Flat"
+                    }
                 });
                 resourceArray.Add(new FlattenedProduct
                 {
-                    Location = "Building 44",
-                    Pname = "Product2"
+                    Location = "Building 44"
                 });
 
                 client.PutArray(resourceArray);
@@ -667,6 +668,113 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 var result2 = client.XMsClientRequestId.ParamGetWithHttpMessagesAsync(validClientId)
                     .ConfigureAwait(false).GetAwaiter().GetResult();
                 Assert.Equal("123", result2.RequestId);
+            }
+        }
+
+        [Fact]
+        public void CustomNamedRequestIdTest()
+        {
+            SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
+                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"));
+            
+            const string validSubscription = "1234-5678-9012-3456";
+            const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
+
+            using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
+            {
+                AzureOperationResponse response = client.Header.CustomNamedRequestIdWithHttpMessagesAsync(expectedRequestId).Result;
+
+                Assert.Equal("123", response.RequestId);
+            }
+        }
+
+        [Fact]
+        public void DurationTests()
+        {
+            SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
+                SwaggerPath("body-duration.json"), ExpectedPath("AzureBodyDuration"));
+            using (var client = new AutoRestDurationTestService(Fixture.Uri))
+            {
+                Assert.Null(client.Duration.GetNull());
+                Assert.Throws<FormatException>(() => client.Duration.GetInvalid());
+
+                client.Duration.GetPositiveDuration();
+                client.Duration.PutPositiveDuration(new TimeSpan(123, 22, 14, 12, 11));
+            }
+        }
+        
+        [Fact]
+        public void ParameterGroupingTests()
+        {
+            const int bodyParameter = 1234;
+            const string headerParameter = "header";
+            const int queryParameter = 21;
+            const string pathParameter = "path";
+
+            using (var client = new AutoRestParameterGroupingTestService(
+                Fixture.Uri,
+                new TokenCredentials(Guid.NewGuid().ToString())))
+            {
+                //Valid required parameters
+                ParameterGroupingPostRequiredParameters requiredParameters = new ParameterGroupingPostRequiredParameters(bodyParameter, pathParameter)
+                {
+                    CustomHeader = headerParameter,
+                    Query = queryParameter
+                };
+
+                client.ParameterGrouping.PostRequired(requiredParameters);
+
+                //Required parameters but null optional parameters
+                requiredParameters = new ParameterGroupingPostRequiredParameters(bodyParameter, pathParameter);
+
+                client.ParameterGrouping.PostRequired(requiredParameters);
+
+                //Required parameters object is not null, but a required property of the object is
+                requiredParameters = new ParameterGroupingPostRequiredParameters(null, pathParameter);
+
+                Assert.Throws<ValidationException>(() => client.ParameterGrouping.PostRequired(requiredParameters));
+
+                //null required parameters
+                Assert.Throws<ValidationException>(() => client.ParameterGrouping.PostRequired(null));
+
+                //Valid optional parameters
+                ParameterGroupingPostOptionalParameters optionalParameters = new ParameterGroupingPostOptionalParameters()
+                {
+                    CustomHeader = headerParameter,
+                    Query = queryParameter
+                };
+
+                client.ParameterGrouping.PostOptional(optionalParameters);
+
+                //null optional paramters
+                client.ParameterGrouping.PostOptional(null);
+
+                //Multiple grouped parameters
+                FirstParameterGroup firstGroup = new FirstParameterGroup
+                {
+                    HeaderOne = headerParameter,
+                    QueryOne = queryParameter
+                };
+                SecondParameterGroup secondGroup = new SecondParameterGroup
+                {
+                    HeaderTwo = "header2",
+                    QueryTwo = 42
+                };
+
+                client.ParameterGrouping.PostMultipleParameterGroups(firstGroup, secondGroup);
+
+                //Multiple grouped parameters -- some optional parameters omitted
+                firstGroup = new FirstParameterGroup
+                {
+                    HeaderOne = headerParameter
+                };
+                secondGroup = new SecondParameterGroup
+                {
+                    QueryTwo = 42
+                };
+
+                client.ParameterGrouping.PostMultipleParameterGroups(firstGroup, secondGroup);
             }
         }
     }

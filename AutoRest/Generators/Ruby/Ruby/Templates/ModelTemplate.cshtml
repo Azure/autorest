@@ -3,6 +3,7 @@
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Ruby.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Ruby.ModelTemplateModel>
+# encoding: utf-8
 @Header("# ")
 @EmptyLine
 module @(Settings.Namespace)
@@ -11,6 +12,16 @@ module @(Settings.Namespace)
     @WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model object." : Model.Documentation)
     #
     class @Model.Name@(Model.GetBaseTypeName())
+    @if (Model.Includes.Any())
+    {
+      @EmptyLine
+        foreach (var include in Model.Includes)
+        {
+      @:include @include
+        }
+      @EmptyLine
+    }
+
     @foreach (var property in Model.PropertyTemplateModels)
     {
       @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
@@ -20,26 +31,8 @@ module @(Settings.Namespace)
       @:
     }
 
-    @if (Model.Properties.Any(p => p.Type is SequenceType || p.Type is DictionaryType))
-    {
-      @:def initialize
-        foreach (var property in Model.PropertyTemplateModels)
-        {
-            if (property.Type is SequenceType)
-            {
-        @:@@@property.Name = [];
-            }
-            else if (property.Type is DictionaryType)
-            {
-        @:@@@property.Name = {};
-            }
-        }
-      @:end
-      @EmptyLine
-    }
-
       #
-      # Validate the object. Throws ArgumentError if validation fails.
+      # Validate the object. Throws ValidationError if validation fails.
       #
       def validate
         @{
@@ -47,7 +40,7 @@ module @(Settings.Namespace)
             foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && p.Type.IsNullable()))
             {
                 anythingToValidate = true;
-        @:fail ArgumentError, '@property.Name is nil' if @@@(property.Name).nil?
+        @:fail MsRest::ValidationError, 'property @property.Name is nil' if @@@(property.Name).nil?
             }
             foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
             {
@@ -75,7 +68,7 @@ module @(Settings.Namespace)
         {
         @EmptyLine
         @:serialized_property = @("object." + property.Name)
-        @:@Model.SerializeProperty("serialized_property", property.Type, property.IsRequired, Settings.Namespace)
+        @:@Model.SerializeProperty("serialized_property", property.Type)
         @:output_object['@(property.SerializedName)'] = serialized_property unless serialized_property.nil?
         }
 
@@ -83,7 +76,9 @@ module @(Settings.Namespace)
         {
         @EmptyLine
         @:output_object['dtype'] = object.dtype
-        }    
+        }
+
+        @EmptyLine
         output_object
       end
 
@@ -97,12 +92,12 @@ module @(Settings.Namespace)
         return if object.nil?
 
         output_object = @(Model.Name).new
-        
+
         @foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
-        @EmptyLine    
+        @EmptyLine
         @:deserialized_property = @(string.Format("object['{0}']", property.SerializedName))
-        @:@Model.DeserializeProperty("deserialized_property", property.Type, property.IsRequired, Settings.Namespace)
+        @:@Model.DeserializeProperty("deserialized_property", property.Type)
         @:output_object.@(property.Name) = deserialized_property
         }
 
@@ -111,8 +106,11 @@ module @(Settings.Namespace)
         @EmptyLine
         @:output_object.dtype = object['dtype']
         }
-    
+
+        @EmptyLine
         output_object.validate
+
+        @EmptyLine
         output_object
       end
 

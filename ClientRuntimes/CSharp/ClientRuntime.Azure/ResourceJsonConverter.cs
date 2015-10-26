@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Rest.Serialization;
@@ -26,8 +25,7 @@ namespace Microsoft.Rest.Azure
         /// <returns>True if the object being serialized is assignable from the base type. False otherwise.</returns>
         public override bool CanConvert(Type objectType)
         {
-            return typeof(Resource).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()) ||
-                   typeof(SubResource).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+            return typeof(IResource).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         /// <summary>

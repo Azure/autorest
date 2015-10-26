@@ -2,8 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using Microsoft.Rest.Generator.ClientModel;
 using System.Globalization;
+using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
 {
@@ -20,15 +20,37 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                if (SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
-                    Location == ParameterLocation.Query &&
-                    Type is CompositeType)
+                if (IsODataFilterExpression)
                 {
                     return string.Format(CultureInfo.InvariantCulture, 
                         "Expression<Func<{0}, bool>>", Type.Name);
                 }
 
                 return base.DeclarationExpression;
+            }
+        }
+
+        /// <summary>
+        /// Gets True if parameter can call .Validate method
+        /// </summary>
+        public override bool CanBeValidated
+        {
+            get
+            {
+                return !IsODataFilterExpression;
+            }
+        }
+
+        /// <summary>
+        /// Gets True if parameter is OData $filter expression
+        /// </summary>
+        public virtual bool IsODataFilterExpression
+        {
+            get
+            {
+                return SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
+                       Location == ParameterLocation.Query &&
+                       Type is CompositeType;
             }
         }
     }

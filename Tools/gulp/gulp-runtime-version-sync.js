@@ -4,6 +4,7 @@ var replace = require('gulp-replace');
 var xml2js = require('xml2js');
 var path = require('path');
 var fs = require('fs');
+var shell = require('gulp-shell')
 
 gulp.task('syncDependencies:runtime:cs', function () {
   gutil.log('Syncing C# client runtime version');
@@ -67,3 +68,12 @@ gulp.task('syncDependencies:runtime:nodeazure', function () {
     .pipe(replace(/string ClientRuntimePackage = "(.+)"/, 'string ClientRuntimePackage = "' + name + ' version ' + version + '"'))
     .pipe(gulp.dest('.'));
 });
+
+gulp.task('syncDependencies:runtime:ruby', 
+  shell.task(['bundle install', 'rake build'], { cwd: './ClientRuntimes/Ruby/ms-rest', verbosity: 3 })
+);
+
+gulp.task('syncDependencies:runtime:rubyazure',
+  shell.task(['bundle install','rake build'], { cwd: './ClientRuntimes/Ruby/ms-rest-azure', verbosity: 3 })
+);
+

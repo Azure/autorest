@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -11,7 +10,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Rest.Azure.Properties;
-using Microsoft.Rest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -52,11 +50,11 @@ namespace Microsoft.Rest.Azure
             while (!AzureAsyncOperation.TerminalStatuses.Any(s => s.Equals(pollingState.Status,
                 StringComparison.OrdinalIgnoreCase)))
             {
-                await PlatformTask.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
+                await Task.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
 
                 if (!string.IsNullOrEmpty(pollingState.AzureAsyncOperationHeaderLink))
                 {
-                    await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, customHeaders, cancellationToken);
+                    await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, customHeaders, false, cancellationToken);
                 }
                 else if (!string.IsNullOrEmpty(pollingState.LocationHeaderLink))
                 {
@@ -124,11 +122,11 @@ namespace Microsoft.Rest.Azure
             while (!AzureAsyncOperation.TerminalStatuses.Any(s => s.Equals(pollingState.Status,
                 StringComparison.OrdinalIgnoreCase)))
             {
-                await PlatformTask.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
+                await Task.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
 
                 if (!string.IsNullOrEmpty(pollingState.AzureAsyncOperationHeaderLink))
                 {
-                    await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, customHeaders, cancellationToken);
+                    await UpdateStateFromAzureAsyncOperationHeader(client, pollingState, customHeaders,true, cancellationToken);
                 }
                 else if (!string.IsNullOrEmpty(pollingState.LocationHeaderLink))
                 {
@@ -335,19 +333,22 @@ namespace Microsoft.Rest.Azure
         /// <param name="client">IAzureClient</param>
         /// <param name="pollingState">Current polling state.</param>
         /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="postOrDelete">Headers that will be added to request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task.</returns>
-        private static async Task  UpdateStateFromAzureAsyncOperationHeader<T>(
+        private static async Task UpdateStateFromAzureAsyncOperationHeader<T>(
             IAzureClient client,
             PollingState<T> pollingState,
             Dictionary<string, List<string>> customHeaders, 
+            bool postOrDelete,
             CancellationToken cancellationToken) 
             where T : class
         {
-            var asyncOperationResponse = await client.GetAsync<AzureAsyncOperation>(
-                pollingState.AzureAsyncOperationHeaderLink,
-                customHeaders,
-                cancellationToken).ConfigureAwait(false);
+            AzureOperationResponse<AzureAsyncOperation> asyncOperationResponse =
+                await client.GetAsync<AzureAsyncOperation>(
+                    pollingState.AzureAsyncOperationHeaderLink,
+                    customHeaders,
+                    cancellationToken).ConfigureAwait(false);
 
             if (asyncOperationResponse.Body == null || asyncOperationResponse.Body.Status == null)
             {
@@ -359,6 +360,18 @@ namespace Microsoft.Rest.Azure
             pollingState.Response = asyncOperationResponse.Response;
             pollingState.Request = asyncOperationResponse.Request;
             pollingState.Resource = null;
+            if (postOrDelete)
+            {
+                //Try to de-serialize to the response model. (Not required for "PutOrPatch" 
+                //which has the fallback of invoking generic "resource get".)
+                string responseContent = await pollingState.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    pollingState.Resource = 
+                        JObject.Parse(responseContent).ToObject<T>(JsonSerializer.Create(client.DeserializationSettings));
+                }
+                catch { };
+            }
         }
 
         /// <summary>

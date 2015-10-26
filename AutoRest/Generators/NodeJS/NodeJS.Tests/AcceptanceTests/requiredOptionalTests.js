@@ -9,7 +9,7 @@ var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
 
-var reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/AutoRestRequiredOptionalTestService');
+var reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/autoRestRequiredOptionalTestService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -34,25 +34,25 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for query parameters', function (done) {
-        testClient.implicit.putOptionalQuery(null, function (error, result) {
+        testClient.implicit.putOptionalQuery(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
 
       it('should accept null values for optional header parameters', function (done) {
-        testClient.implicit.putOptionalHeader(null, function (error, result) {
+        testClient.implicit.putOptionalHeader(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
 
       it('should accept null values for optional body parameters', function (done) {
-        testClient.implicit.putOptionalBody(null, function (error, result) {
+        testClient.implicit.putOptionalBody(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -66,9 +66,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional integer parameters', function (done) {
-        testClient.explicit.postOptionalIntegerParameter(null, function (error, result) {
+        testClient.explicit.postOptionalIntegerParameter(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -83,9 +83,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional integer properties', function (done) {
-        testClient.explicit.postOptionalIntegerProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postOptionalIntegerProperty({ 'value': null }, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -99,9 +99,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional integer header', function (done) {
-        testClient.explicit.postOptionalIntegerHeader(null, function (error, result) {
+        testClient.explicit.postOptionalIntegerHeader(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -115,9 +115,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional string parameters', function (done) {
-        testClient.explicit.postOptionalStringParameter(null, function (error, result) {
+        testClient.explicit.postOptionalStringParameter(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -132,9 +132,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional string properties', function (done) {
-        testClient.explicit.postOptionalStringProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postOptionalStringProperty({ 'value': null }, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -148,9 +148,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional string header', function (done) {
-        testClient.explicit.postOptionalStringHeader(null, function (error, result) {
+        testClient.explicit.postOptionalStringHeader(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -165,9 +165,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional class parameters', function (done) {
-        testClient.explicit.postOptionalClassParameter(null, function (error, result) {
+        testClient.explicit.postOptionalClassParameter(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -182,9 +182,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional class properties', function (done) {
-        testClient.explicit.postOptionalClassProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postOptionalClassProperty({ 'value': null }, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -199,9 +199,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional array parameters', function (done) {
-        testClient.explicit.postOptionalArrayParameter(null, function (error, result) {
+        testClient.explicit.postOptionalArrayParameter(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -216,9 +216,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional array properties', function (done) {
-        testClient.explicit.postOptionalArrayProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postOptionalArrayProperty({ 'value': null }, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -232,9 +232,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional array header', function (done) {
-        testClient.explicit.postOptionalArrayHeader(null, function (error, result) {
+        testClient.explicit.postOptionalArrayHeader(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });
@@ -258,9 +258,9 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional global property in query', function (done) {
-        testClient.implicit.getOptionalGlobalQuery(null, function (error, result) {
+        testClient.implicit.getOptionalGlobalQuery(null, function (error, result, request, response) {
           should.not.exist(error);
-          result.response.statusCode.should.equal(200);
+          response.statusCode.should.equal(200);
           done();
         });
       });

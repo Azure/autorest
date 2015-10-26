@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.Rest.Generator.ClientModel;
 using System;
-using Microsoft.Rest.Generator.Azure;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using Microsoft.Rest.Generator.Azure;
+using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -21,26 +21,68 @@ namespace Microsoft.Rest.Generator.CSharp
         protected override void ResolveMethodGroupNameCollision(ServiceClient serviceClient,
             Dictionary<string, string> exclusionDictionary)
         {
-            // Do nothing   
+            // Do nothing
+        }
+
+        private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
+        {
+            // default value
+            nextLinkName = null;
+            var ext = extensions[AzureCodeGenerator.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+            if (ext == null)
+            {
+                return null;
+            }
+
+            nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
+            string itemName = (string)ext["itemName"] ?? "value";
+            
+            var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
+            if (!pageClasses.ContainsKey(keypair))
+            {
+                string className = (string)ext["className"];
+                if (string.IsNullOrEmpty(className))
+                {
+                    if (pageClasses.Count > 0)
+                    {
+                        className = String.Format(CultureInfo.InvariantCulture, "Page{0}", pageClasses.Count);
+                    }
+                    else
+                    {
+                        className = "Page";
+                    }
+                }
+                pageClasses.Add(keypair, className);
+            }
+
+            return pageClasses[keypair];
         }
 
         /// <summary>
         /// Changes paginated method signatures to return Page type.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public virtual void NormalizePaginatedMethods(ServiceClient serviceClient)
+        /// <param name="pageClasses"></param>
+        public virtual void NormalizePaginatedMethods(ServiceClient serviceClient, IDictionary<KeyValuePair<string, string>, string> pageClasses)
         {
             if (serviceClient == null)
             {
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var pageTypeFormat = "Page<{0}>";
-
             var convertedTypes = new Dictionary<IType, CompositeType>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
             {
+                string nextLinkString;
+                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, out nextLinkString);
+                if (string.IsNullOrEmpty(pageClassName))
+                {
+                    continue;
+                }
+                var pageTypeFormat = "{0}<{1}>";
+                var ipageTypeFormat = "IPage<{0}>";
+
                 foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
                 {
                     var compositType = (CompositeType) method.Responses[responseStatus];
@@ -48,16 +90,18 @@ namespace Microsoft.Rest.Generator.CSharp
 
                     // if the type is a wrapper over page-able response
                     if(sequenceType != null &&
-                       compositType.Properties.Count == 2 && 
-                       compositType.Properties.Any(p => p.SerializedName.Equals("nextLink", StringComparison.OrdinalIgnoreCase)))
+                       compositType.Properties.Count == 2 &&
+                       compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
                     {
-                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, sequenceType.ElementType.Name);
-                        
+                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName, sequenceType.ElementType.Name);
+                        var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat, sequenceType.ElementType.Name);
+
                         CompositeType pagedResult = new CompositeType
                         {
                             Name = pagableTypeName
                         };
                         pagedResult.Extensions[AzureCodeGenerator.ExternalExtension] = true;
+                        pagedResult.Extensions[AzureCodeGenerator.PageableExtension] = ipagableTypeName;
 
                         convertedTypes[method.Responses[responseStatus]] = pagedResult;
                         method.Responses[responseStatus] = pagedResult;

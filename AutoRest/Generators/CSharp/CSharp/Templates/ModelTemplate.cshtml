@@ -1,12 +1,15 @@
-﻿@using System.Linq
+@using System.Linq
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ModelTemplateModel>
 @Header("// ")
+@EmptyLine
 namespace @(Settings.Namespace).Models
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using Newtonsoft.Json;
     using Microsoft.Rest;
@@ -20,10 +23,28 @@ namespace @(Settings.Namespace).Models
     /// </summary>
     @if (Model.NeedsPolymorphicConverter)
     {
-    @:[JsonObject("@Model.SerializedName")]    
+    @:[JsonObject("@Model.SerializedName")]
     }
     public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
     {
+        /// <summary>
+        @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
+        /// </summary>
+        public @(Model.Name)() { }
+
+        @EmptyLine
+
+        /// <summary>
+        @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
+        /// </summary>
+        public @(Model.Name)(@Model.ConstructorParameters)
+        {
+        @foreach (var property in Model.Properties)
+        {
+            @:@(property.Name) = @(CodeNamer.CamelCase(property.Name));
+        }
+        }
+        @EmptyLine
         @foreach (var property in Model.PropertyTemplateModels)
         {
         @:/// <summary>
@@ -33,13 +54,17 @@ namespace @(Settings.Namespace).Models
             {
         @:[JsonConverter(typeof(DateJsonConverter))]
             }
+            if (property.Type == PrimaryType.DateTimeRfc1123)
+            {
+        @:[JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
+            }
         @:[JsonProperty(PropertyName = "@property.SerializedName")]
         @:public @property.Type.Name @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine
         @:
         }
-@if(@Model.ShouldValidateChain()) 
-{   
+@if(@Model.ShouldValidateChain())
+{
         @:/// <summary>
         @:/// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.
         @:/// </summary>
@@ -52,7 +77,7 @@ namespace @(Settings.Namespace).Models
                 anythingToValidate = true;
             @:base.Validate();
             }
-            
+
             foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly))
             {
                 anythingToValidate = true;
@@ -62,10 +87,10 @@ namespace @(Settings.Namespace).Models
             @:}
             @:
             }
-            foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
+            foreach (var property in Model.Properties.Where(p => p.Constraints.Any() || !(p.Type is PrimaryType)))
             {
                 anythingToValidate = true;
-            @:@property.Type.ValidateType(Model.Scope, string.Format("this.{0}", property.Name))
+            @:@property.Type.ValidateType(Model.Scope, string.Format("this.{0}", property.Name), property.Constraints)
             @:
             }
             if (!anythingToValidate)

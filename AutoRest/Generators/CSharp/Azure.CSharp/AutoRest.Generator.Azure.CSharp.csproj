@@ -11,8 +11,14 @@
     <RootNamespace>Microsoft.Rest.Generator.CSharp.Azure</RootNamespace>
     <AssemblyName>AutoRest.Generator.Azure.CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Net45-Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -36,6 +42,7 @@
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureModelTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureParameterTemplateModel.cs" />
+    <Compile Include="TemplateModels\PageTemplateModel.cs" />
     <Compile Include="Templates\AzureMethodGroupTemplate.cs">
       <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
     </Compile>
@@ -44,6 +51,9 @@
     </Compile>
     <Compile Include="Templates\AzureServiceClientTemplate.cs">
       <DependentUpon>AzureServiceClientTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\PageTemplate.cs">
+      <DependentUpon>PageTemplate.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +80,7 @@
     <None Include="Templates\AzureMethodGroupTemplate.cshtml" />
     <None Include="Templates\AzureMethodTemplate.cshtml" />
     <None Include="Templates\AzureServiceClientTemplate.cshtml" />
+    <None Include="Templates\PageTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">

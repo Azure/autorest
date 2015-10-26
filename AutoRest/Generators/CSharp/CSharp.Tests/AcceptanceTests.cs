@@ -4,44 +4,51 @@
 // TODO: file length is getting excessive.
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Diagnostics;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Fixtures.AcceptanceTestsBodyArray;
 using Fixtures.AcceptanceTestsBodyArray.Models;
 using Fixtures.AcceptanceTestsBodyBoolean;
 using Fixtures.AcceptanceTestsBodyByte;
+using Fixtures.AcceptanceTestsBodyComplex;
+using Fixtures.AcceptanceTestsBodyComplex.Models;
 using Fixtures.AcceptanceTestsBodyDate;
 using Fixtures.AcceptanceTestsBodyDateTime;
+using Fixtures.AcceptanceTestsBodyDateTimeRfc1123;
 using Fixtures.AcceptanceTestsBodyDictionary;
 using Fixtures.AcceptanceTestsBodyDictionary.Models;
+using Fixtures.AcceptanceTestsBodyDuration;
 using Fixtures.AcceptanceTestsBodyFile;
 using Fixtures.AcceptanceTestsBodyInteger;
 using Fixtures.AcceptanceTestsBodyNumber;
 using Fixtures.AcceptanceTestsBodyString;
 using Fixtures.AcceptanceTestsBodyString.Models;
-using Fixtures.AcceptanceTestsBodyComplex;
-using Fixtures.AcceptanceTestsBodyComplex.Models;
+using Fixtures.AcceptanceTestsHeader;
+using Fixtures.AcceptanceTestsHeader.Models;
 using Fixtures.AcceptanceTestsHttp;
 using Fixtures.AcceptanceTestsHttp.Models;
 using Fixtures.AcceptanceTestsReport;
+using Fixtures.AcceptanceTestsRequiredOptional;
 using Fixtures.AcceptanceTestsUrl;
 using Fixtures.AcceptanceTestsUrl.Models;
-using Fixtures.AcceptanceTestsHeader;
-using Fixtures.AcceptanceTestsHeader.Models;
-using Fixtures.AcceptanceTestsRequiredOptional;
+using Fixtures.AcceptanceTestsValidation;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
 using Newtonsoft.Json;
 using Xunit;
-using System.Text;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
+
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
+    using Serialization;
+
+
     [Collection("AutoRest Tests")]
     [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",
         "AutoRest.Generator.CSharp.Tests")]
@@ -62,6 +69,64 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         private static string SwaggerPath(string file)
         {
             return Path.Combine("Swagger", file);
+        }
+
+        [Fact]
+        public void ValidationTests()
+        {
+            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+                SwaggerPath("validation.json"),
+                ExpectedPath("Validation"));
+            var client = new AutoRestValidationTest(Fixture.Uri);
+            client.SubscriptionId = "abc123";
+            client.ApiVersion = "12-34-5678";
+            var exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("1", 100));
+            Assert.Equal(ValidationRules.MinLength, exception.Rule);
+            Assert.Equal("resourceGroupName", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("1234567890A", 100));
+            Assert.Equal(ValidationRules.MaxLength, exception.Rule);
+            Assert.Equal("resourceGroupName", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("!@#$", 100));
+            Assert.Equal(ValidationRules.Pattern, exception.Rule);
+            Assert.Equal("resourceGroupName", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 105));
+            Assert.Equal(ValidationRules.MultipleOf, exception.Rule);
+            Assert.Equal("id", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 0));
+            Assert.Equal(ValidationRules.InclusiveMinimum, exception.Rule);
+            Assert.Equal("id", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 2000));
+            Assert.Equal(ValidationRules.InclusiveMaximum, exception.Rule);
+            Assert.Equal("id", exception.Target);
+
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfBody("123", 150, new Fixtures.AcceptanceTestsValidation.Models.Product
+            {
+                Capacity = 0
+            }));
+            Assert.Equal(ValidationRules.ExclusiveMinimum, exception.Rule);
+            Assert.Equal("Capacity", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfBody("123", 150, new Fixtures.AcceptanceTestsValidation.Models.Product
+            {
+                Capacity = 100
+            }));
+            Assert.Equal(ValidationRules.ExclusiveMaximum, exception.Rule);
+            Assert.Equal("Capacity", exception.Target);
+            exception = Assert.Throws<ValidationException>(() => client.ValidationOfBody("123", 150, new Fixtures.AcceptanceTestsValidation.Models.Product
+            {
+                DisplayNames = new List<string>
+                {
+                    "item1","item2","item3","item4","item5","item6","item7"
+                }
+            }));
+            Assert.Equal(ValidationRules.MaxItems, exception.Rule);
+            Assert.Equal("DisplayNames", exception.Target);
+
+            var client2 = new AutoRestValidationTest(Fixture.Uri);
+            client2.SubscriptionId = "abc123";
+            client2.ApiVersion = "abc";
+            exception = Assert.Throws<ValidationException>(() => client2.ValidationOfMethodParameters("123", 150));
+            Assert.Equal(ValidationRules.Pattern, exception.Rule);
+            Assert.Equal("ApiVersion", exception.Target);
         }
 
         [Fact]
@@ -250,6 +315,42 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
+        public void DateTimeRfc1123Tests()
+        {
+            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+                SwaggerPath("body-datetime-rfc1123.json"), ExpectedPath("BodyDateTimeRfc1123"));
+            using (var client = new AutoRestRFC1123DateTimeTestService(Fixture.Uri))
+            {
+                Assert.Null(client.Datetimerfc1123.GetNull());
+                Assert.Throws<JsonReaderException>(() => client.Datetimerfc1123.GetInvalid());
+                Assert.Throws<JsonReaderException>(() => client.Datetimerfc1123.GetUnderflow());
+                Assert.Throws<JsonReaderException>(() => client.Datetimerfc1123.GetOverflow());
+                client.Datetimerfc1123.GetUtcLowercaseMaxDateTime();
+                client.Datetimerfc1123.GetUtcUppercaseMaxDateTime();
+                client.Datetimerfc1123.GetUtcMinDateTime();
+
+                client.Datetimerfc1123.PutUtcMaxDateTime(DateTime.MaxValue.ToUniversalTime());
+                client.Datetimerfc1123.PutUtcMinDateTime(DateTime.Parse("0001-01-01T00:00:00Z",
+                    CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
+            }
+        }
+        
+        [Fact]
+        public void DurationTests()
+        {
+            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+                SwaggerPath("body-duration.json"), ExpectedPath("BodyDuration"));
+            using (var client = new AutoRestDurationTestService(Fixture.Uri))
+            {
+                Assert.Null(client.Duration.GetNull());
+                Assert.Throws<FormatException>(() => client.Duration.GetInvalid());
+
+                client.Duration.GetPositiveDuration();
+                client.Duration.PutPositiveDuration(new TimeSpan(123, 22, 14, 12, 11));
+            }
+        }
+
+        [Fact]
         public void ArrayTests()
         {
             SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
@@ -281,11 +382,19 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 var datetime2 = new DateTimeOffset(1980, 1, 2, 0, 11, 35, TimeSpan.Zero).UtcDateTime;
                 var datetime3 = new DateTimeOffset(1492, 10, 12, 10, 15, 1, TimeSpan.Zero).UtcDateTime;
                 var dateArray = client.Array.GetDateValid();
+                var duration1 = new TimeSpan(123, 22, 14, 12, 11);
+                var duration2 = new TimeSpan(5, 1, 0, 0, 0);
+
                 Assert.Equal(new List<DateTime?> {date1, date2, date3}, dateArray);
                 client.Array.PutDateValid(new List<DateTime?> {date1, date2, date3});
                 Assert.Equal(
                     new List<DateTime?> {datetime1, datetime2, datetime3}, client.Array.GetDateTimeValid());
                 client.Array.PutDateTimeValid(new List<DateTime?> {datetime1, datetime2, datetime3});
+                dateArray = client.Array.GetDateTimeRfc1123Valid();
+                Assert.Equal(new List<DateTime?> { datetime1, datetime2, datetime3 }, dateArray);
+                client.Array.PutDateTimeRfc1123Valid(dateArray);
+                Assert.Equal(new List<TimeSpan?> { duration1, duration2 }, client.Array.GetDurationValid());
+                client.Array.PutDurationValid(new List<TimeSpan?> { duration1, duration2 });
                 var bytes1 = new byte[] {0x0FF, 0x0FF, 0x0FF, 0x0FA};
                 var bytes2 = new byte[] {0x01, 0x02, 0x03};
                 var bytes3 = new byte[] {0x025, 0x029, 0x043};
@@ -625,6 +734,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var datetime1 = new DateTimeOffset(2000, 12, 01, 0, 0, 1, TimeSpan.Zero).UtcDateTime;
             var datetime2 = new DateTimeOffset(1980, 1, 2, 0, 11, 35, TimeSpan.FromHours(1)).UtcDateTime;
             var datetime3 = new DateTimeOffset(1492, 10, 12, 10, 15, 1, TimeSpan.FromHours(-8)).UtcDateTime;
+            var rfcDatetime1 = new DateTimeOffset(2000, 12, 01, 0, 0, 1, TimeSpan.Zero).UtcDateTime;
+            var rfcDatetime2 = new DateTimeOffset(1980, 1, 2, 0, 11, 35, TimeSpan.Zero).UtcDateTime;
+            var rfcDatetime3 = new DateTimeOffset(1492, 10, 12, 10, 15, 1, TimeSpan.Zero).UtcDateTime;
+            var duration1 = new TimeSpan(123, 22, 14, 12, 11);
+            var duration2 = new TimeSpan(5, 1, 0, 0, 0);
+
             // GET prim/date/valid
             var dateDictionary = client.Dictionary.GetDateValid();
             Assert.Equal(new Dictionary<string, DateTime?> {{"0", date1}, {"1", date2}, {"2", date3}},
@@ -659,6 +774,22 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             };
             Assert.Equal(datetimeNullDict, client.Dictionary.GetDateTimeInvalidNull());
             Assert.Throws<JsonReaderException>(() => client.Dictionary.GetDateTimeInvalidChars());
+            // GET prim/datetimerfc1123/valid
+            Assert.Equal(new Dictionary<string, DateTime?> { { "0", rfcDatetime1 }, { "1", rfcDatetime2 }, { "2", rfcDatetime3 } },
+                client.Dictionary.GetDateTimeRfc1123Valid());
+            client.Dictionary.PutDateTimeRfc1123Valid(new Dictionary<string, DateTime?>
+            {
+                {"0", rfcDatetime1},
+                {"1", rfcDatetime2},
+                {"2", rfcDatetime3}
+            });
+            // GET prim/duration/valid
+            Assert.Equal(new Dictionary<string, TimeSpan?> { {"0", duration1}, {"1", duration2 }}, client.Dictionary.GetDurationValid());
+            client.Dictionary.PutDurationValid(new Dictionary<string, TimeSpan?>
+                {
+                    {"0", duration1},
+                    {"1", duration2},
+                });
             var bytes1 = new byte[] {0x0FF, 0x0FF, 0x0FF, 0x0FA};
             var bytes2 = new byte[] {0x01, 0x02, 0x03};
             var bytes3 = new byte[] {0x025, 0x029, 0x043};
@@ -798,6 +929,20 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     Field = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                     Now = new DateTime(2015, 05, 18, 18, 38, 0, DateTimeKind.Utc)
                 });
+                // GET primitive/datetimerfc1123
+                var datetimeRfc1123Result = client.Primitive.GetDateTimeRfc1123();
+                Assert.Equal(DateTime.MinValue, datetimeRfc1123Result.Field);
+                client.Primitive.PutDateTimeRfc1123(new Datetimerfc1123Wrapper()
+                {
+                    Field = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                    Now = new DateTime(2015, 05, 18, 11, 38, 0, DateTimeKind.Utc)
+                });
+                //GET primitive/duration
+                TimeSpan expectedDuration = new TimeSpan(123, 22, 14, 12, 11);
+                var durationResult = client.Primitive.GetDuration();
+                Assert.Equal(expectedDuration, durationResult.Field);
+                client.Primitive.PutDuration(new DurationWrapper() { Field = expectedDuration });
+
                 // GET primitive/byte
                 var byteResult = client.Primitive.GetByte();
                 var bytes = new byte[] {0x0FF, 0x0FE, 0x0FD, 0x0FC, 0x000, 0x0FA, 0x0F9, 0x0F8, 0x0F7, 0x0F6};
@@ -1151,6 +1296,26 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(DateTimeOffset.MinValue,
                     JsonConvert.DeserializeObject<DateTimeOffset>(
                         "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                // POST param/prim/datetimerfc1123
+                client.Header.ParamDatetimeRfc1123("valid", new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc));
+                client.Header.ParamDatetimeRfc1123("min", DateTime.MinValue);
+                //POST response/prim/datetimerfc1123
+                response = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("valid").Result;
+                Assert.Equal(new DateTimeOffset(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc)),
+                    JsonConvert.DeserializeObject<DateTimeOffset>(
+                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                response = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("min").Result;
+                Assert.Equal(DateTimeOffset.MinValue,
+                    JsonConvert.DeserializeObject<DateTimeOffset>(
+                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                // POST param/prim/duration
+                client.Header.ParamDuration("valid", new TimeSpan(123, 22, 14, 12, 11));
+                // POST response/prim/duration
+                response = client.Header.ResponseDurationWithHttpMessagesAsync("valid").Result;
+                Assert.Equal(new TimeSpan(123, 22, 14, 12, 11),
+                    JsonConvert.DeserializeObject<TimeSpan?>(
+                    "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\"", 
+                    new Iso8601TimeSpanConverter()));
                 // POST param/prim/string
                 client.Header.ParamByte("valid", Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"));
                 // POST response/prim/string
@@ -1556,7 +1721,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 float executedTests = report.Values.Count(v => v > 0);
                 Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "The test coverage is {0}/{1}.",
                     executedTests, totalTests));
-                Assert.Equal(executedTests, totalTests);
+                Assert.Equal(totalTests, executedTests);
             }
         }
 

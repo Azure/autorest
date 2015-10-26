@@ -9,7 +9,9 @@ namespace Microsoft.Rest.Generator.Logging
     /// <summary>
     /// Code generation aggregate exception.
     /// </summary>
+#if !DNXCORE50
     [Serializable]
+#endif
     public class CodeGenerationException : AggregateException
     {
         /// <summary>
@@ -36,12 +38,14 @@ namespace Microsoft.Rest.Generator.Logging
         {
         }
 
+#if !DNXCORE50
         /// <summary>
         /// Instantiates a new instance of the CodeGenerationException class.
         /// </summary>
         protected CodeGenerationException(SerializationInfo serializationInfo, StreamingContext context) : base (serializationInfo, context)
         {
         }
+#endif
 
         /// <summary>
         /// Instantiates a new instance of the CodeGenerationException class.
