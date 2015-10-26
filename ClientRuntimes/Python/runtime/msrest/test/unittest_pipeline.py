@@ -24,6 +24,8 @@
 #
 #--------------------------------------------------------------------------
 
+import json
+
 try:
     import unittest2 as unittest
 except ImportError:
@@ -34,7 +36,11 @@ try:
 except ImportError:
     import mock
 
-from msrest.pipeline import ClientHTTPAdapter, ClientPipelineHook
+from msrest.pipeline import (
+    ClientHTTPAdapter,
+    ClientPipelineHook,
+    ClientRequest)
+
 from msrest import Configuration
 
 
@@ -138,6 +144,30 @@ class TestPiplineHooks(unittest.TestCase):
         resp = self.adp.build_response('request_obj')
         self.assertEqual(resp.headers['a'], "Changed!")
         self.assertEqual(resp.headers['b'], False)
+
+
+class TestClientRequest(unittest.TestCase):
+
+    def test_request_headers(self):
+
+        request = ClientRequest()
+        request.add_header("a", 1)
+        request.add_headers({'b':2, 'c':3})
+
+        self.assertEqual(request.headers, {'a':1, 'b':2, 'c':3})
+
+    def test_request_date(self):
+
+        class Data(object):
+
+            def __call__(self):
+                return "Lots of dataaaa"
+
+        request = ClientRequest()
+        request.add_content(Data())
+
+        self.assertEqual(request.data, json.dumps("Lots of dataaaa"))
+        self.assertEqual(request.headers.get('Content-Length'), 17)
 
 
 

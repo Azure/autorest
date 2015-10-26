@@ -54,6 +54,7 @@ class ServiceClient(object):
 
         self._adapter = ClientHTTPAdapter(config)
         self._protocols = ['http://', 'https://']
+        self._headers = {}
 
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
@@ -61,6 +62,7 @@ class ServiceClient(object):
     def _format_url(self, url):
        
         url = quote(url)
+        url = url.lstrip('/')
         url = urljoin(self.config.base_url, url)
         return url
 
@@ -80,6 +82,7 @@ class ServiceClient(object):
         Prepare and send request object according to configuration.
         """
         session = self.creds.signed_session()
+        session.headers.update(self._headers)
 
         session.max_redirects = self.config.redirect_policy()
         session.proxies = self.config.proxies()
@@ -97,7 +100,7 @@ class ServiceClient(object):
                             allow_redirects=bool(self.config.redirect_policy),
                             **kwargs)
 
-    def add_hook(self, event, hook):
+    def add_hook(self, event, hook, precall=True, overwrite=False):
         """
         Add event callback.
 
@@ -106,7 +109,18 @@ class ServiceClient(object):
               'request' and 'response'.
             - hook (func): The callback function.
         """
-        self.adapter.add_hook(event, hook)
+        self._adapter.add_hook(event, hook, precall, overwrite)
+
+    def remove_hook(self, event, hook):
+        """
+        Remove event callback.
+
+        :Args:
+            - event (str): The pipeline event to hook. Currently supports
+              'request' and 'response'.
+            - hook (func): The callback function.
+        """
+        self._adapter.remove_hook(event, hook)
 
     def add_header(self, header, value):
         """
@@ -117,7 +131,7 @@ class ServiceClient(object):
             - header (str): The header name.
             - value (str): The header value.
         """
-        self._adapter.client_headers[header] = value
+        self._headers[header] = value
 
     def get(self, url=None, params={}):
         """
@@ -141,6 +155,14 @@ class ServiceClient(object):
         """
         request = self._request(url, params)
         request.method = 'POST'
+        return request
+
+    def head(self, url=None, params={}):
+        """
+        Create a HEAD request object.
+        """
+        request = self._request(url, params)
+        request.method = 'HEAD'
         return request
 
     def patch(self, url=None, params={}):

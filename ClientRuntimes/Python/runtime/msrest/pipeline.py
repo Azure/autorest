@@ -29,6 +29,7 @@ Define custom HTTP Adapter
 """
 import requests
 import logging
+import json
 
 from requests.packages.urllib3 import Retry
 
@@ -42,7 +43,6 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
     def __init__(self, config):
 
         self._log = logging.getLogger(config.log_name)
-        self._client_headers = {}
         self._client_hooks = {
             'request':ClientPipelineHook(),
             'response':ClientPipelineHook()}
@@ -97,6 +97,19 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
         self._log.debug("Callback to overwrite original call: "
                         "{0}".format(overwrite))
         self._client_hooks[event].overwrite_call = overwrite
+
+    def remove_hook(self, event, hook):
+
+        try:
+            self._client_hooks[event].precalls = [
+                c for c in self._client_hooks[event].precalls if c != hook]
+
+            self._client_hooks[event].postcalls = [
+                c for c in self._client_hooks[event].postcalls if c != hook]
+
+        except KeyError:
+            raise KeyError(
+                "Event: '{0}' is not able to be hooked.".format(event))
 
     @event_hook("request")
     def send(self, request, stream=False, timeout=None, verify=True, 

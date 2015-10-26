@@ -46,7 +46,7 @@ from .pipeline import (
 
 class Configuration(object):
     
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(self, base_url, filepath=None):
 
         # Service
         self.base_url = base_url
