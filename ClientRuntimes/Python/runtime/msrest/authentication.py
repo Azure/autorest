@@ -72,4 +72,5 @@ class TokenAuthentication(Authentication):
             self.token['expires_in'] = countdown
 
         session = oauth.OAuth2Session(self.id, token=self.token)
+        
         return session
