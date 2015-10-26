@@ -24,6 +24,8 @@
 #
 #--------------------------------------------------------------------------
 
+import logging
+
 try:
     from urlparse import urljoin
     from urllib import quote
@@ -31,8 +33,7 @@ try:
 except ImportError:
     from urllib.parse import urljoin, quote
 
-from .request import ClientRequest
-from .adapter import ClientHTTPAdapter
+from .pipeline import ClientHTTPAdapter, ClientRequest
 from .logger import log_request, log_response
 
 class ServiceClient(object):
@@ -49,8 +50,10 @@ class ServiceClient(object):
         self.config = config
         self.creds = creds
 
-        self._adapter = ClientHTTPAdapter()
-        self._adapter.retry_handler(config)
+        self._log = logging.getLogger(config.log_name)
+
+        self._adapter = ClientHTTPAdapter(config)
+        self._protocols = ['http://', 'https://']
 
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
@@ -62,7 +65,7 @@ class ServiceClient(object):
         return url
 
     def _request(self, url, params):
-        request = ClientRequest(self.config)
+        request = ClientRequest()
 
         if url:
             request.url = self._format_url(url)
@@ -73,47 +76,93 @@ class ServiceClient(object):
         return request
 
     def send(self, request, **kwargs):
+        """
+        Prepare and send request object according to configuration.
+        """
         session = self.creds.signed_session()
-        session.proxies = self.config.proxies
 
-        for protocol in self.config.protocols:
+        session.max_redirects = self.config.redirect_policy()
+        session.proxies = self.config.proxies()
+        session.trust_env = self.config.proxies.use_env_settings
+
+        self._adapter.max_retries = self.config.retry_policy()
+
+        for protocol in self._protocols:
             session.mount(protocol, self._adapter)
 
         prepped = session.prepare_request(request)
-        return session.send(prepped)
+        kwargs.update(self.config.connection())
 
-    def add_hook(self, hook):
+        return session.send(prepped, 
+                            allow_redirects=bool(self.config.redirect_policy),
+                            **kwargs)
+
+    def add_hook(self, event, hook):
+        """
+        Add event callback.
+
+        :Args:
+            - event (str): The pipeline event to hook. Currently supports
+              'request' and 'response'.
+            - hook (func): The callback function.
+        """
         self.adapter.add_hook(event, hook)
 
     def add_header(self, header, value):
+        """
+        Add a persistent header - this header will be applied to all 
+        requests sent during the current client session.
+
+        :Args:
+            - header (str): The header name.
+            - value (str): The header value.
+        """
         self._adapter.client_headers[header] = value
 
     def get(self, url=None, params={}):
+        """
+        Create a GET request object.
+        """
         request = self._request(url, params)
         request.method = 'GET'
         return request
 
     def put(self, url=None, params={}):
+        """
+        Create a PUT request object.
+        """
         request = self._request(url, params)
         request.method = 'PUT'
         return request
 
     def post(self, url=None, params={}):
+        """
+        Create a POST request object.
+        """
         request = self._request(url, params)
         request.method = 'POST'
         return request
 
     def patch(self, url=None, params={}):
+        """
+        Create a PATCH request object.
+        """
         request = self._request(url, params)
         request.method = 'PATCH'
         return request
 
     def delete(self, url=None, params={}):
+        """
+        Create a DELETE request object.
+        """
         request = self._request(url, params)
         request.method = 'DELETE'
         return request
 
     def merge(self, url=None, params={}):
+        """
+        Create a MERGE request object.
+        """
         request = self._request(url, params)
         request.method = 'MERGE'
         return request

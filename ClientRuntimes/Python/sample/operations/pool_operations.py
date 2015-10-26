@@ -15,6 +15,7 @@ from runtime.msrestazure.azure_handlers import Paged, Polled
 
 from ..batch_exception import BatchStatusError
 
+from ..models import pool_models
 from ..models.pool_models import *
 from ..models.shared import *
 from ..models import enums
@@ -66,7 +67,7 @@ class PoolManager(object):
             #TODO: All handling of requests errors goes here.
             raise
 
-    def add(self, pool_parameters):
+    def add(self, pool_parameters, raw=False):
         """
         Add a new pool.
         """
@@ -97,6 +98,8 @@ class PoolManager(object):
             request = self._client.post(url, query)
             response = self._send(request, accept_status, headers, content)
 
+            if raw:
+                return response
             #def get_status(status_link):
             #    request = self._client.get()
             #    request.url = status_link
@@ -108,7 +111,7 @@ class PoolManager(object):
             raise #TODO: Wrap in client-specific error?
 
 
-    def delete(self, pool_name=None, access=AccessCondition()):
+    def delete(self, pool_name=None, access=AccessCondition(), raw=False):
         """
         Delete a pool.
         """
@@ -137,10 +140,13 @@ class PoolManager(object):
             request = self._client.delete(url, query)
             response = self._send(request, accept_status, headers)
 
+            if raw:
+                return response
+
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?
 
-    def disable_auto_scale(self, pool_name=None, access=AccessCondition()):
+    def disable_auto_scale(self, pool_name=None, access=AccessCondition(), raw=False):
         """
         Disable auto-scale on a pool.
         """
@@ -169,10 +175,13 @@ class PoolManager(object):
             request = self._client.post(url, query)
             response = self._send(request, accept_status, headers)
 
+            if raw:
+                return response
+
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?
 
-    def enable_auto_scale(self, auto_scale_parameters, pool_name=None, access=AccessCondition()):
+    def enable_auto_scale(self, auto_scale_parameters, pool_name=None, access=AccessCondition(), raw=False):
         """
         Enable auto-scale on a pool using given formula.
         """
@@ -208,10 +217,13 @@ class PoolManager(object):
             request = self._client.post(url, query)
             response = self._send(request, accept_status, headers, content)
 
+            if raw:
+                return response
+
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?
 
-    def evaluate_auto_scale(self, evaluation_parameters, pool_name=None, access=AccessCondition()):
+    def evaluate_auto_scale(self, evaluation_parameters, pool_name=None, access=AccessCondition(), raw=False):
         """
         Evaluate pool auto-scale formula.
         """
@@ -247,10 +259,13 @@ class PoolManager(object):
             request = self._client.post(url, query)
             response = self._send(request, accept_status, headers, content)
 
+            if raw:
+                return response
+
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?
 
-    def get(self, pool_name=None, filter=DetailLevel(), access=AccessCondition()):
+    def get(self, pool_name=None, filter=DetailLevel(), access=AccessCondition(), raw=False):
         """
         Get details on a pool.
         """
@@ -279,6 +294,9 @@ class PoolManager(object):
             request = self._client.get(url, query)
             response = self._send(request, accept_status, headers)
 
+            if raw:
+                return response
+
             # Deserialize response
             deserialize = Deserialized(Pool, response, self)
             deserialized = deserialize(response.content, self._classes)
@@ -287,12 +305,12 @@ class PoolManager(object):
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?
 
-    def list(self, max_results=None, filter=DetailLevel(), access=AccessCondition()):
+    def list(self, max_results=None, filter=DetailLevel(), access=AccessCondition(), raw=False):
         """
         List pools in account.
         """
 
-        def paging(next=None):
+        def paging(next=None, raw=False):
 
             accept_status = [200]
 
@@ -322,6 +340,9 @@ class PoolManager(object):
 
                 # Construct and send request
                 response = self._send(request, accept_status, headers)
+                    
+                if raw:
+                    return response, None
 
                 # Deserialize response
                 deserialize = Deserialized(Pool, response, self, "value")
@@ -334,11 +355,15 @@ class PoolManager(object):
                 raise #TODO: Wrap in client-specific error?
 
         response_list, next_link = paging()
+
+        if raw:
+            return response_list
+
         return Paged(response_list, next_link, paging)
 
         
 
-    def patch(self, patch_parameters, pool_name=None, access=AccessCondition()):
+    def patch(self, patch_parameters, pool_name=None, access=AccessCondition(), raw=False):
 
         accept_status = [200]
 
@@ -371,10 +396,13 @@ class PoolManager(object):
             request = self._client.patch(url, query)
             response = self._send(request, accept_status, headers, content)
 
+            if raw:
+                return response
+
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?
 
-    def resize(self, resize_parameters, pool_name=None, access=AccessCondition()):
+    def resize(self, resize_parameters, pool_name=None, access=AccessCondition(), raw=False):
 
         accept_status = [202]
 
@@ -407,10 +435,13 @@ class PoolManager(object):
             request = self._client.post(url, query)
             response = self._send(request, accept_status, headers, content)
 
+            if raw:
+                return response
+
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?
 
-    def stop_resize(self, pool_name=None, access=AccessCondition()):
+    def stop_resize(self, pool_name=None, access=AccessCondition(), raw=False):
 
         accept_status = [202]
 
@@ -436,11 +467,14 @@ class PoolManager(object):
             # Construct and send request
             request = self._client.post(url, query)
             response = self._send(request, accept_status, headers)
+
+            if raw:
+                return response
            
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?
 
-    def update_properties(self, update_properties, pool_name=None, access=AccessCondition()):
+    def update_properties(self, update_properties, pool_name=None, access=AccessCondition(), raw=False):
 
         accept_status = [204]
 
@@ -473,10 +507,13 @@ class PoolManager(object):
             request = self._client.post(url, query)
             response = self._send(request, accept_status, headers, content)
 
+            if raw:
+                return response
+
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?
 
-    def upgrade_os(self, os_parameters, pool_name=None, access=AccessCondition()):
+    def upgrade_os(self, os_parameters, pool_name=None, access=AccessCondition(), raw=False):
 
         accept_status = [202]
 
@@ -508,6 +545,9 @@ class PoolManager(object):
             # Construct and send request
             request = self._client.post(url, query)
             response = self._send(request, accept_status, headers, content)
+
+            if raw:
+                return response
 
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?

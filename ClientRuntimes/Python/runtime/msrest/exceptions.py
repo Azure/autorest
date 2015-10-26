@@ -24,6 +24,8 @@
 #
 #--------------------------------------------------------------------------
 
+from .logger import LOGGER
+
 class ClientException(Exception):
     pass
 
@@ -34,9 +36,6 @@ class DeserializationError(ClientException):
     pass
 
 class InvalidOperationError(ClientException):
-    pass
-
-class InvalidHookError(ClientException):
     pass
 
 class ResponseStatusError(ClientException):
