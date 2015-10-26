@@ -31,7 +31,9 @@ import logging
 LOGGER = None
 
 def invalid_directory(dirname):
-
+    """
+    Check directory for file log.
+    """
     try:
         if not os.path.isdir(dirname):
             os.mkdir(dirname)
@@ -46,6 +48,9 @@ def invalid_directory(dirname):
         return str(exp)
 
 def set_stream_handler(logger, format_str):
+    """
+    Set log console handler.
+    """
 
     current_handlers = [h for h in logger.handlers if isinstance(h, logging.StreamHandler)]
     for handler in current_handlers:
@@ -61,6 +66,9 @@ def set_stream_handler(logger, format_str):
     return format_str
 
 def set_file_handler(logger, file_dir, format_str):
+    """
+    Set log file handler.
+    """
 
     current_handlers = [h for h in logger.handlers if isinstance(h, logging.FileHandler)]
     for handler in current_handlers:
@@ -92,6 +100,9 @@ def set_file_handler(logger, file_dir, format_str):
     return format_str
 
 def set_log_level(logger, level):
+    """
+    Set logging verbosity.
+    """
     levels = {'debug': 10,
               'info': 20,
               'warning': 30,
@@ -110,6 +121,9 @@ def set_log_level(logger, level):
     return logger.level
 
 def setup_logger(config):
+    """
+    Create and configure new logger for client session.
+    """
     global LOGGER
 
     if LOGGER and LOGGER.name == config.log_name:
@@ -130,17 +144,29 @@ def setup_logger(config):
 
 
 def log_request(adapter, request, *args, **kwargs):
-    #TODO: Proper log formatting
-    LOGGER.debug(str(request.headers))
-    LOGGER.debug(str(request.body))
-    LOGGER.debug(request.url)
 
-    return request
+    try:
+        LOGGER.debug("Request URL: {}".format(request.url))
+        LOGGER.debug("Request method: {}".format(request.method))
+        LOGGER.debug("Request headers:")
+        for header, value in request.headers.items():
+            LOGGER.debug("    {0}: {1}".format(header, value))
+        LOGGER.debug("Request body:")
+        LOGGER.debug(str(request.body))
+
+    except Exception as err:
+        LOGGER.debug("Failed to log request: '{}'".format(err))
 
 def log_response(adapter, request, response, *args, **kwargs):
-    #TODO: Proper log formatting
-    resp = kwargs.get('result')
-    LOGGER.debug(resp.status_code)
-    LOGGER.debug(resp.content)
 
-    return resp
+    try:
+        result = kwargs['result']
+        LOGGER.debug("Response status: {}".format(result.status_code))
+        LOGGER.debug("Response headers:")
+        for header, value in result.headers.items():
+            LOGGER.debug("    {0}: {1}".format(header, value))
+        LOGGER.debug("Response content:")
+        LOGGER.debug(str(result.content))
+
+    except Exception as err:
+        LOGGER.debug("Failed to log response: '{0}'".format(err))
