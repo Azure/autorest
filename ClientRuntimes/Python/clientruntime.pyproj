@@ -49,9 +49,6 @@
     <Compile Include="runtime\msrestazure\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrest\adapter.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="runtime\msrest\authentication.py">
       <SubType>Code</SubType>
     </Compile>
@@ -61,19 +58,10 @@
     <Compile Include="runtime\msrest\exceptions.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrest\hooks.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrest\handlers.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="runtime\msrest\logger.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrest\request.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrest\response.py">
+    <Compile Include="runtime\msrest\pipeline.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrest\serialization.py">
@@ -86,9 +74,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrest\test\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrest\utils.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrest\__init__.py">
