@@ -30,6 +30,8 @@ import requests
 import requests_oauthlib as oauth
 from requests.auth import HTTPBasicAuth
 
+from .exceptions import TokenExpiredError
+
 
 
 class Authentication(object):
@@ -63,6 +65,9 @@ class TokenAuthentication(Authentication):
     def construct_auth(self):
         return "{0} {1}".format(self.scheme, self.token)
 
+    def refresh_session(self):
+        return self.signed_session()
+
     def signed_session(self):
 
         expiry = self.token.get('expires_at')
@@ -72,4 +77,5 @@ class TokenAuthentication(Authentication):
             self.token['expires_in'] = countdown
 
         session = oauth.OAuth2Session(self.id, token=self.token)
+        
         return session

@@ -167,6 +167,8 @@ def log_response(adapter, request, response, *args, **kwargs):
             LOGGER.debug("    {0}: {1}".format(header, value))
         LOGGER.debug("Response content:")
         LOGGER.debug(str(result.content))
+        return result
 
     except Exception as err:
         LOGGER.debug("Failed to log response: '{0}'".format(err))
+        return kwargs['result']

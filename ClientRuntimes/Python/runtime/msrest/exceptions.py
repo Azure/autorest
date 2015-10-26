@@ -40,3 +40,9 @@ class InvalidOperationError(ClientException):
 
 class ResponseStatusError(ClientException):
     pass
+
+class TokenExpiredError(ClientException):
+    pass
+
+class ClientRequestException(ClientException):
+    pass

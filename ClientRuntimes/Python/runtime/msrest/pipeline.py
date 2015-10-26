@@ -29,6 +29,7 @@ Define custom HTTP Adapter
 """
 import requests
 import logging
+import json
 
 from requests.packages.urllib3 import Retry
 
@@ -42,7 +43,6 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
     def __init__(self, config):
 
         self._log = logging.getLogger(config.log_name)
-        self._client_headers = {}
         self._client_hooks = {
             'request':ClientPipelineHook(),
             'response':ClientPipelineHook()}
@@ -98,6 +98,19 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
                         "{0}".format(overwrite))
         self._client_hooks[event].overwrite_call = overwrite
 
+    def remove_hook(self, event, hook):
+
+        try:
+            self._client_hooks[event].precalls = [
+                c for c in self._client_hooks[event].precalls if c != hook]
+
+            self._client_hooks[event].postcalls = [
+                c for c in self._client_hooks[event].postcalls if c != hook]
+
+        except KeyError:
+            raise KeyError(
+                "Event: '{0}' is not able to be hooked.".format(event))
+
     @event_hook("request")
     def send(self, request, stream=False, timeout=None, verify=True, 
              cert=None, proxies=None):
@@ -130,7 +143,7 @@ class ClientPipelineHook(object):
         Execute event and any wrapping callbacks. The result of the event is
         passed into all post-event callbacks with a 'result' keyword arg.
         """
-        result = None
+        result = requests.Response()
 
         for call in self.precalls:
             # Execute any pre-event callabcks
@@ -142,7 +155,7 @@ class ClientPipelineHook(object):
 
         for call in self.postcalls:
             # Execute any post-event callbacks
-            call(result=result, *args, **kwargs)
+            result = call(result=result, *args, **kwargs)
 
         return result
 
@@ -175,8 +188,17 @@ class ClientRetryPolicy(object):
         self.policy = Retry()
         self.policy.total = 3
         self.policy.connect = 3
+        self.policy.read = 3
         self.policy.backoff_factor = 0.8
         self.policy.BACKOFF_MAX = 90
+
+        safe_codes = [i for i in range(501) if i != 408]
+        safe_codes.append(501)
+        safe_codes.append(505)
+        
+
+        retry_codes = [i for i in range(999) if i not in safe_codes]
+        self.policy.status_forcelist = retry_codes
 
     def __call__(self):
         self._log.debug("Configuring retry: max_retries={}, backoff_factor={}"
@@ -193,13 +215,14 @@ class ClientRetryPolicy(object):
     def max_retries(self, value):
         self.policy.total = value
         self.policy.connect = value
+        self.policy.read = value
 
     @property
     def backoff_factor(self):
         return self.policy.backoff_factor
 
     @backoff_factor.setter
-    def connect_retries(self, value):
+    def backoff_factor(self, value):
         self.policy.backoff_factor = value
 
     @property

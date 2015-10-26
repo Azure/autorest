@@ -9,16 +9,21 @@ except ImportError:
     from urllib.parse import urljoin
 
 from runtime.msrest.serialization import Serialized, Deserialized
-from runtime.msrest.exceptions import SerializationError, DeserializationError
+from runtime.msrest.exceptions import (
+    SerializationError,
+    DeserializationError,
+    TokenExpiredError,
+    ClientRequestException)
 
 from runtime.msrestazure.azure_handlers import Paged, Polled
 
 from ..batch_exception import BatchStatusError
 
-from ..models import pool_models
-from ..models.pool_models import *
-from ..models.shared import *
-from ..models import enums
+from .. import models
+
+from ..models import *
+from ..models.enums import *
+from ..models.param_groups import *
 
 
 class PoolManager(object):
@@ -27,7 +32,9 @@ class PoolManager(object):
 
         self._client = client
         self._config = config
-        self._classes = {k:v for k,v in pool_models.__dict__.items() if isinstance(v, type)}
+        self._classes = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        print(self._classes)
+        t = Pool()
 
     def __getitem__(self, name):
         response = self.get(name)
@@ -63,9 +70,11 @@ class PoolManager(object):
 
             return response
 
-        except:
-            #TODO: All handling of requests errors goes here.
-            raise
+        except TokenExpiredError:
+            raise # If client defines own exception, raise here
+
+        except ClientRequestException:
+            raise # If client defines own exception, raise here
 
     def add(self, pool_parameters, raw=False):
         """
@@ -100,10 +109,12 @@ class PoolManager(object):
 
             if raw:
                 return response
+
             #def get_status(status_link):
+            #    accept_status = [200, 201, 202, 204]
             #    request = self._client.get()
             #    request.url = status_link
-            #    return self._send(request)
+            #    return self._send(request, accept_status)
 
             #return Polled(response, get_status)
 

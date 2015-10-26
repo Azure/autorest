@@ -25,6 +25,10 @@
 #--------------------------------------------------------------------------
 
 import logging
+import requests
+from oauthlib import oauth2
+
+from concurrent.futures import ThreadPoolExecutor
 
 try:
     from urlparse import urljoin
@@ -35,6 +39,7 @@ except ImportError:
 
 from .pipeline import ClientHTTPAdapter, ClientRequest
 from .logger import log_request, log_response
+from .exceptions import TokenExpiredError, ClientRequestException
 
 class ServiceClient(object):
 
@@ -54,6 +59,7 @@ class ServiceClient(object):
 
         self._adapter = ClientHTTPAdapter(config)
         self._protocols = ['http://', 'https://']
+        self._headers = {}
 
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
@@ -61,6 +67,7 @@ class ServiceClient(object):
     def _format_url(self, url):
        
         url = quote(url)
+        url = url.lstrip('/')
         url = urljoin(self.config.base_url, url)
         return url
 
@@ -75,11 +82,11 @@ class ServiceClient(object):
 
         return request
 
-    def send(self, request, **kwargs):
+    def _configure_session(self, session):
         """
-        Prepare and send request object according to configuration.
+        Apply configuration to session.
         """
-        session = self.creds.signed_session()
+        session.headers.update(self._headers)
 
         session.max_redirects = self.config.redirect_policy()
         session.proxies = self.config.proxies()
@@ -90,14 +97,61 @@ class ServiceClient(object):
         for protocol in self._protocols:
             session.mount(protocol, self._adapter)
 
-        prepped = session.prepare_request(request)
+    def send_async(self, request, callback, **kwargs):
+        """
+        Prepare and send request object asynchronously.
+        """
+        with ThreadPoolExecutor(max_workers=1) as executor:
+            future = executor.submit(self.send, request, **kwargs)
+            future.add_done_callback(callback)
+            return future
+
+    def send(self, request, **kwargs):
+        """
+        Prepare and send request object according to configuration.
+        """
+        session = self.creds.signed_session()
+        self._configure_session(session)
+
         kwargs.update(self.config.connection())
 
-        return session.send(prepped, 
-                            allow_redirects=bool(self.config.redirect_policy),
-                            **kwargs)
+        try:
 
-    def add_hook(self, event, hook):
+            try:
+                return session.request(
+                    request.method, request.url, data=request.data,
+                    headers=request.headers, params=request.params,
+                    allow_redirects=bool(self.config.redirect_policy), **kwargs)
+
+            except (oauth2.rfc6749.errors.InvalidGrantError,
+                oauth2.rfc6749.errors.TokenExpiredError) as err:
+
+                self._log.warning(
+                    "Token expired or is invalid. Attempting to refresh.")
+        
+            try:
+                session = self.creds.refresh_session()
+                self._configure_session(session)
+                response = session.request(
+                    request.method, request.url, request.data,
+                    request.headers, params=request.params,
+                    allow_redirects=bool(self.config.redirect_policy), **kwargs)
+
+                response.raise_for_status()
+                return response
+
+            except (oauth2.rfc6749.errors.InvalidGrantError,
+                oauth2.rfc6749.errors.TokenExpiredError) as err:
+                 raise TokenExpiredError(
+                    "Token expired or is invalid: '{0}'".format(err))
+
+        except (requests.RequestException,
+                oauth2.rfc6749.errors.OAuth2Error) as err:
+            raise ClientRequestException(err)
+
+
+
+    def add_hook(self, event, hook, precall=True, overwrite=False):
         """
         Add event callback.
 
@@ -106,7 +160,18 @@ class ServiceClient(object):
               'request' and 'response'.
             - hook (func): The callback function.
         """
-        self.adapter.add_hook(event, hook)
+        self._adapter.add_hook(event, hook, precall, overwrite)
+
+    def remove_hook(self, event, hook):
+        """
+        Remove event callback.
+
+        :Args:
+            - event (str): The pipeline event to hook. Currently supports
+              'request' and 'response'.
+            - hook (func): The callback function.
+        """
+        self._adapter.remove_hook(event, hook)
 
     def add_header(self, header, value):
         """
@@ -117,7 +182,7 @@ class ServiceClient(object):
             - header (str): The header name.
             - value (str): The header value.
         """
-        self._adapter.client_headers[header] = value
+        self._headers[header] = value
 
     def get(self, url=None, params={}):
         """
@@ -141,6 +206,14 @@ class ServiceClient(object):
         """
         request = self._request(url, params)
         request.method = 'POST'
+        return request
+
+    def head(self, url=None, params={}):
+        """
+        Create a HEAD request object.
+        """
+        request = self._request(url, params)
+        request.method = 'HEAD'
         return request
 
     def patch(self, url=None, params={}):

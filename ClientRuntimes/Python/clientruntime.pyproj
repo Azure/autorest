@@ -70,6 +70,18 @@
     <Compile Include="runtime\msrest\service_client.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="runtime\msrest\test\unittest_auth.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runtime\msrest\test\unittest_client.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runtime\msrest\test\unittest_pipeline.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runtime\msrest\test\unittest_runtime.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="runtime\msrest\test\unittest_serialization.py">
       <SubType>Code</SubType>
     </Compile>

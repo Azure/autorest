@@ -40,3 +40,4 @@ class AzureConfiguration(Configuration):
         self.tenant = "common"
         self.resource = 'https://management.core.windows.net/'
         self.keyring = "AzureAAD"
+        self.long_running_operation_timeout = 30
