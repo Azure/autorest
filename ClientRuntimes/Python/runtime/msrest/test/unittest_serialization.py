@@ -26,6 +26,8 @@
 
 import sys
 import json
+import isodate
+from datetime import datetime
 
 try:
     import unittest2 as unittest
@@ -81,19 +83,19 @@ class TestRuntimeSerialized(unittest.TestCase):
         """
         Test serializing an object with a malformed attribute_map.
         """
-        test_obj = type("BadTestObj", (), {"attribute_map":None})
+        test_obj = type("BadTestObj", (), {"_attribute_map":None})
         serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
             serialized()
 
-        test_obj.attribute_map = {"attr":"val"}
+        test_obj._attribute_map = {"attr":"val"}
         serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
             serialized()
 
-        test_obj.attribute_map = {"attr":{"val":1}}
+        test_obj._attribute_map = {"attr":{"val":1}}
         serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
@@ -103,8 +105,8 @@ class TestRuntimeSerialized(unittest.TestCase):
         """
         Test serializing an object with mismatching attributes and map.
         """
-        test_obj = type("BadTestObj", (), {"attribute_map":None})
-        test_obj.attribute_map = {"abc":{"key":"ABC", "type":"str"}}
+        test_obj = type("BadTestObj", (), {"_attribute_map":None})
+        test_obj._attribute_map = {"abc":{"key":"ABC", "type":"str"}}
         serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
@@ -332,6 +334,133 @@ class TestRuntimeSerialized(unittest.TestCase):
         with self.assertRaises(SerializationError):
             serialized.attr_e
 
+    def test_serialize_datetime(self):
+
+        date_obj = isodate.parse_datetime('2015-01-01T00:00:00')
+        date_str = Serialized.serialize_date(date_obj)
+
+        self.assertEqual(date_str, '2015-01-01T00:00:00.000Z')
+
+        date_obj = isodate.parse_datetime('1999-12-31T23:59:59-12:00')
+        date_str = Serialized.serialize_date(date_obj)
+
+        self.assertEqual(date_str, '2000-01-01T11:59:59.000Z')
+
+        with self.assertRaises(SerializationError):
+            date_obj = isodate.parse_datetime('9999-12-31T23:59:59-12:00')
+            date_str = Serialized.serialize_date(date_obj)
+
+        with self.assertRaises(SerializationError):
+            date_obj = isodate.parse_datetime('0001-01-01T00:00:00+23:59')
+            date_str = Serialized.serialize_date(date_obj)
+
+
+        date_obj = isodate.parse_datetime("2015-06-01T16:10:08.0121-07:00")
+        date_str = Serialized.serialize_date(date_obj)
+
+        self.assertEqual(date_str, '2015-06-01T23:10:08.0121Z')
+
+        date_obj = datetime.min
+        date_str = Serialized.serialize_date(date_obj)
+        self.assertEqual(date_str, '0001-01-01T00:00:00.000Z')
+
+        date_obj = datetime.max
+        date_str = Serialized.serialize_date(date_obj)
+        self.assertEqual(date_str, '9999-12-31T23:59:59.999999Z')
+
+
+    def test_serialize_primitive_types(self):
+
+        a = Serialized._serialize_data(Serialized, 1, 'int', True)
+        self.assertEqual(a, 1)
+
+        b = Serialized._serialize_data(Serialized, True, 'bool', True)
+        self.assertEqual(b, True)
+
+        c = Serialized._serialize_data(Serialized, 'True', 'str', True)
+        self.assertEqual(c, 'True')
+
+        d = Serialized._serialize_data(Serialized, 100.0123, 'float', True)
+        self.assertEqual(d, 100.0123)
+
+    def test_serialize_empty_iter(self):
+
+        a = Serialized.serialize_dict(Serialized, {}, 'int', False)
+        self.assertEqual(a, {})
+
+        b = Serialized.serialize_iter(Serialized, [], 'int', False)
+        self.assertEqual(b, [])
+
+    def test_serialize_json_obj(self):
+
+        class ComplexId(object):
+
+            _required = []
+            _attribute_map = {'id':{'key':'id','type':'int'},
+                              'name':{'key':'name','type':'str'},
+                              'age':{'key':'age','type':'float'},
+                              'male':{'key':'male','type':'bool'},
+                              'birthday':{'key':'birthday','type':'iso-date'},
+                              'anniversary':{'key':'anniversary', 'type':'iso-date'}}
+
+            id = 1
+            name = "Joey"
+            age = 23.36
+            male = True
+            birthday = '1992-01-01T00:00:00.000Z'
+            anniversary = isodate.parse_datetime('2013-12-08T00:00:00')
+
+        class ComplexJson(object):
+
+            _required = []
+            _attribute_map = {'p1':{'key':'p1','type':'str'},
+                              'p2':{'key':'p2','type':'str'},
+                              'top_date':{'key':'top_date', 'type':'iso-date'},
+                              'top_dates':{'key':'top_dates', 'type':'[iso-date]'},
+                              'insider':{'key':'insider','type':'{iso-date}'},
+                              'top_complex':{'key':'top_complex','type':'ComplexId'}}
+
+            p1 = 'value1'
+            p2 = 'value2'
+            top_date = isodate.parse_datetime('2014-01-01T00:00:00')
+            top_dates = [isodate.parse_datetime('1900-01-01T00:00:00'), isodate.parse_datetime('1901-01-01T00:00:00')]
+            insider = {
+                'k1': isodate.parse_datetime('2015-01-01T00:00:00'),
+                'k2': isodate.parse_datetime('2016-01-01T00:00:00'),
+                'k3': isodate.parse_datetime('2017-01-01T00:00:00')}
+            top_complex = ComplexId()
+
+        message = Serialized(ComplexJson())()
+
+        output = { 
+            'p1': 'value1', 
+            'p2': 'value2', 
+            'top_date': '2014-01-01T00:00:00.000Z', 
+            'top_dates': [ 
+                '1900-01-01T00:00:00.000Z', 
+                '1901-01-01T00:00:00.000Z' 
+            ], 
+            'insider': {
+                'k1': '2015-01-01T00:00:00.000Z', 
+                'k2': '2016-01-01T00:00:00.000Z', 
+                'k3': '2017-01-01T00:00:00.000Z' 
+            }, 
+            'top_complex': { 
+                'id': 1, 
+                'name': 'Joey', 
+                'age': 23.36, 
+                'male': True, 
+                'birthday': '1992-01-01T00:00:00.000Z', 
+                'anniversary': '2013-12-08T00:00:00.000Z', 
+            } 
+        }
+        self.maxDiff = None
+        self.assertEqual(message, output) 
+
+
+
+
+
 
 class TestRuntimeDeserialized(unittest.TestCase):
 
@@ -339,7 +468,8 @@ class TestRuntimeDeserialized(unittest.TestCase):
 
         def __init__(self, **kwargs):
 
-            self.body_map = {
+            self._required = []
+            self._attribute_map = {
                 'attr_a': {'key':'id', 'type':'str'},
                 'attr_b': {'key':'AttrB', 'type':'int'},
                 'attr_c': {'key':'Key_C', 'type': 'bool'},
@@ -348,15 +478,15 @@ class TestRuntimeDeserialized(unittest.TestCase):
                 #TODO: Add more here as more types are defined in serialized
                 }
 
-            self.headers_map = {
+            self._header_map = {
                 'client_request_id': {'key': 'client-request-id', 'type':'str'},
                 'e_tag': {'key': 'etag', 'type':'str'},
                 }
 
-            self.attributes_map = {
+            self._response_map = {
                 'status_code': {'key':'status_code', 'type':'str'}
                 }
-            self.status_code = None
+            #self.status_code = None
 
     def test_obj_with_no_attr(self):
         """
@@ -371,17 +501,17 @@ class TestRuntimeDeserialized(unittest.TestCase):
 
         with self.assertRaises(DeserializationError):
             deserializer = Deserialized(EmptyResponse, response_data)
+            deserializer(json.dumps({"a":"b"}))
 
         class BetterEmptyResponse(object):
-            attributes_map = {}
-            headers_map = {}
-            body_map = {}
+            _attribute_map = {}
+            _header_map = {}
 
             def __init__(*args, **kwargs):
                 pass
 
         deserializer = Deserialized(BetterEmptyResponse, response_data)
-        derserialized = deserializer(None)
+        derserialized = deserializer(json.dumps({"a":"b"}))
 
         self.assertIsInstance(derserialized, BetterEmptyResponse)
 
@@ -392,46 +522,34 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response_data = mock.create_autospec(Response)
 
         class BadResponse(object):
-            attributes_map = None
+            _attribute_map = None
 
             def __init__(*args, **kwargs):
                 pass
 
         with self.assertRaises(DeserializationError):
             deserializer = Deserialized(BadResponse, response_data)
+            deserializer(json.dumps({"a":"b"}))
 
         class BadResponse(object):
-            attributes_map = {"attr":"val"}
+            _attribute_map = {"attr":"val"}
 
             def __init__(*args, **kwargs):
                 pass
 
         with self.assertRaises(DeserializationError):
             deserializer = Deserialized(BadResponse, response_data)
+            deserializer(json.dumps({"a":"b"}))
 
         class BadResponse(object):
-            attributes_map = {"attr":{"val":1}}
+            _attribute_map = {"attr":{"val":1}}
 
             def __init__(*args, **kwargs):
                 pass
 
         with self.assertRaises(DeserializationError):
             deserializer = Deserialized(BadResponse, response_data)
-
-    def test_obj_with_mismatched_map(self):
-        """
-        Test deserializing an object with mismatching attributes and map.
-        """
-        response_data = mock.create_autospec(Response)
-
-        class BadResponse(object):
-            attributes_map =  {"abc":{"key":"ABC", "type":"str"}}
-
-            def __init__(*args, **kwargs):
-                pass
-
-        with self.assertRaises(DeserializationError):
-            deserializer = Deserialized(BadResponse, response_data)
+            deserializer(json.dumps({"a":"b"}))
 
     def test_attr_none(self):
         """
@@ -571,9 +689,9 @@ class TestRuntimeDeserialized(unittest.TestCase):
         class CmplxTestObj(object):
 
             def __init__(self, **kwargs):
-                self.attributes_map = {}
-                self.headers_map = {}
-                self.body_map = {'attr_a': {'key':'id', 'type':'[ListObj]'}}
+                self._response_map = {}
+                self._header_map = {}
+                self._attribute_map = {'attr_a': {'key':'id', 'type':'[ListObj]'}}
 
 
         response_data = mock.create_autospec(Response)
@@ -587,3 +705,88 @@ class TestRuntimeDeserialized(unittest.TestCase):
         deserialized_list = [a for a in response.attr_a]
         self.assertIsInstance(deserialized_list[0], ListObj)
         self.assertEqual(deserialized_list[0].abc, 123)
+
+    def test_deserialize_datetime(self):
+
+        a = Deserialized.deserialize_date('9999-12-31T23:59:59+23:59')
+        utc = a.utctimetuple()
+
+        self.assertEqual(utc.tm_year, 9999)
+        self.assertEqual(utc.tm_mon, 12)
+        self.assertEqual(utc.tm_mday, 31)
+        self.assertEqual(utc.tm_hour, 0)
+        self.assertEqual(utc.tm_min, 0)
+        self.assertEqual(utc.tm_sec, 59)
+        self.assertEqual(a.microsecond, 0)
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('9999-12-31T23:59:59-23:59')
+
+        a = Deserialized.deserialize_date('1999-12-31T23:59:59-23:59')
+        utc = a.utctimetuple()
+        self.assertEqual(utc.tm_year, 2000)
+        self.assertEqual(utc.tm_mon, 1)
+        self.assertEqual(utc.tm_mday, 1)
+        self.assertEqual(utc.tm_hour, 23)
+        self.assertEqual(utc.tm_min, 58)
+        self.assertEqual(utc.tm_sec, 59)
+        self.assertEqual(a.microsecond, 0)
+
+        a = Deserialized.deserialize_date('0001-01-01T23:59:00+23:59')
+        utc = a.utctimetuple()
+
+        self.assertEqual(utc.tm_year, 1)
+        self.assertEqual(utc.tm_mon, 1)
+        self.assertEqual(utc.tm_mday, 1)
+        self.assertEqual(utc.tm_hour, 0)
+        self.assertEqual(utc.tm_min, 0)
+        self.assertEqual(utc.tm_sec, 0)
+        self.assertEqual(a.microsecond, 0)
+
+        #with self.assertRaises(DeserializationError):
+        #    a = Deserialized.deserialize_date(None, '1996-01-01T23:01:54-22:66')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('1996-01-01T23:01:54-24:30')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('1996-01-01T23:01:78+00:30')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('1996-01-01T23:60:01+00:30')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('1996-01-01T24:01:01+00:30')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('1996-01-01t01:01:01/00:30')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('1996-01-01F01:01:01+00:30')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('2015-02-32')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('2015-22-01')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('2010-13-31')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('99999-12-31')
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date(True)
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date(2010)
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date(None)
+
+        with self.assertRaises(DeserializationError):
+            a = Deserialized.deserialize_date('Happy New Year 2016')
+
+
+

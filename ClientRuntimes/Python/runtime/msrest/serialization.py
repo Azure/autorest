@@ -24,7 +24,6 @@
 #
 #--------------------------------------------------------------------------
 
-from .response import HTTPResponse
 import json
 import isodate
 import datetime
@@ -121,7 +120,7 @@ class Serialized(object):
 
     @staticmethod
     def serialize_opc_date(attr):
-        date_str = date_obj.strftime('%a, %d %b %Y %H:%M:%S GMT')
+        date_str = attr.strftime('%a, %d %b %Y %H:%M:%S GMT')
         return date_str
 
     @staticmethod
@@ -187,28 +186,34 @@ class Deserialized(object):
         
 
     def __call__(self, raw=None, classes={}):
-        
+
         self.dependencies = dict(classes)
 
         if raw:
             raw = json.loads(raw)
             if self.key:
-                print(self.key, raw)
                 raw = raw.get(self.key)
 
             if isinstance(raw, list):
                 data_type = self.response.__class__.__name__
                 return DeserializedGenerator(self._deserialize_data, raw, data_type)
 
-            map_dict = getattr(self.response, '_attribute_map')
-            for attr in map_dict:
-                attr_type = map_dict[attr]['type']
-                key = map_dict[attr]['key']
+            try:
+                map_dict = getattr(self.response, '_attribute_map')
+                for attr in map_dict:
+                    attr_type = map_dict[attr]['type']
+                    key = map_dict[attr]['key']
 
-                raw_value = raw.get(key) if key else raw
+                    raw_value = raw.get(key) if key else raw
 
-                value = self._deserialize_data(raw_value, attr_type) 
-                setattr(self.response, attr, value)
+                    value = self._deserialize_data(raw_value, attr_type) 
+                    setattr(self.response, attr, value)
+
+            except (AttributeError, TypeError, KeyError) as err:
+                response_obj = self.response.__class__.__name__
+                raise DeserializationError(
+                    "Unable to deserialize to object: {}. Error: {}".format(
+                        response_obj, err))
                 
         return self.response
         
