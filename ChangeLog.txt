@@ -1,6 +1,7 @@
 2015.10.23 Version 0.12.0
 * Added Ruby language support
 * Implemented validation in C#
+* Added support for duration and decimal data types
 * Added support for dotnet (CoreClr) to Microsoft.Rest.ClientRuntime and Microsoft.Rest.ClientRuntime.Azure
 * Bug fixes and improvements to all code generators (#255, #282, #291, #293, #294, #336, #348, #349, #350, #352, #363, #373, #374, #375, #377, #390, #395, #398, #399, #402)
 
