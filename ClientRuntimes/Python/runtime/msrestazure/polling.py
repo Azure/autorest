@@ -1,5 +1,3 @@
-﻿#--------------------------------------------------------------------------
-#
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
 # The MIT License (MIT)
@@ -24,60 +22,54 @@
 #
 #--------------------------------------------------------------------------
 
+
+from ..msrest.serialization import Deserialized
 from threading import Thread, Event
 import time
-import pickle
-
-class Paged(object):
-
-    def __init__(self, items, url, command):
-
-        self.items = items
-        self.url = url
-        self.command = command
-
-    def __iter__(self):
-        for i in self.items:
-            yield i
-
-        while self.url is not None:
-            self.items, self.url = self.command(self.url)
-
-            for i in self.items:
-                yield i
-
-    def __len__(self):
-        return len(self.items)
-
-    def __getitem__(self, index):
-        return self.items[index]
-
 
 class Polled(object):
 
-    def __init__(self, response, update_cmd):
-
+    def __init__(self, response, update_cmd, status_codes, timeout=30):
+        """
+        A container for polling long-running Azure requests.
+        """
+        self._timeout = timeout
         self._response = response
         self._url = self._extract_url()
         self._callbacks = []
+        self._status_codes = status_codes
 
         self._done = Event()
         self._thread = Thread(target=self._poll, args=(update_cmd,))
         self._thread.start()
 
     def _extract_url(self):
-        if self._response.asyncoperation:
+        if self._response.headers['azure-asyncoperation']:
             return self._response.asyncoperation
 
-        elif self._response.location:
+        elif self._response.headers['location']:
             return self._response.location
+
+    def _delay(self):
+        if self._response.headers.get('retry_after'):
+            time.sleep(int(self._response.headers['retry_after']))
+
+        else:
+            time.sleep(self._timeout)
 
     def _poll(self, update):
         while True:
-            time.sleep(POLLING_DELAY)
-            self._response = update(self._url)
+            self._delay()
+            try:
+                self._response = update(self._url)
 
-            if self._response.status_code in []:
+            except Exception as err:
+                self._response = err
+                self._done.set()
+                return
+
+
+            if self._response.status_code in [200, 201, 204]:
                 self._done.set()
                 break
 
@@ -85,10 +77,9 @@ class Polled(object):
         for call in callbacks:
             call(self._response)
 
-        if len(callbacks) != len(self._callbacks):
-            more_calls = [c for c in self._callbacks if c not in callbacks]
-            for call in more_calls:
-                call(self._response)
+        more_calls = [c for c in self._callbacks if c not in callbacks]
+        for call in more_calls:
+            call(self._response)
 
     def result(timeout=None):
         self.wait(timeout)

@@ -34,22 +34,25 @@
     <Compile Include="runtime\msrestazure\azure_exceptions.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrestazure\azure_handlers.py">
+    <Compile Include="runtime\msrestazure\paging.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrestazure\azure_resource.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrestazure\azure_response.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="runtime\msrestazure\azure_service_client.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrestazure\__init__.py">
+    <Compile Include="runtime\msrestazure\polling.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrest\adapter.py">
+    <Compile Include="runtime\msrestazure\test\unittest_auth.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runtime\msrestazure\test\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runtime\msrestazure\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrest\authentication.py">
@@ -61,19 +64,10 @@
     <Compile Include="runtime\msrest\exceptions.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrest\hooks.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrest\handlers.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="runtime\msrest\logger.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrest\request.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrest\response.py">
+    <Compile Include="runtime\msrest\pipeline.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrest\serialization.py">
@@ -82,13 +76,22 @@
     <Compile Include="runtime\msrest\service_client.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="runtime\msrest\test\unittest_auth.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runtime\msrest\test\unittest_client.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runtime\msrest\test\unittest_pipeline.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runtime\msrest\test\unittest_runtime.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="runtime\msrest\test\unittest_serialization.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrest\test\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrest\utils.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrest\__init__.py">
@@ -98,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="runtime\" />
+    <Folder Include="runtime\msrestazure\test\" />
     <Folder Include="runtime\msrest\" />
     <Folder Include="runtime\msrestazure\" />
     <Folder Include="runtime\msrest\test\" />

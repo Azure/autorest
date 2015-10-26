@@ -23,6 +23,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="sample\batch_auth.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="sample\batch_client.py">
       <SubType>Code</SubType>
     </Compile>
@@ -30,13 +33,37 @@
     <Compile Include="sample\batch_exception.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="sample\models\certificate.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="sample\models\enums.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sample\models\pool_models.py">
+    <Compile Include="sample\models\pool.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sample\models\shared.py">
+    <Compile Include="sample\models\pool_autoscale.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sample\models\pool_os.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sample\models\pool_parameters.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sample\models\pool_properties.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sample\models\pool_resize.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sample\models\param_groups.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sample\models\page.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sample\models\task_reschedule_policy.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="sample\models\__init__.py">

@@ -56,4 +56,4 @@ class AzureChinaServiceClient(AzureServiceClient):
         super(AzureChinaServiceClient, self).__init__(creds, config)
 
         self.config.auth_endpoint = "login.chinacloudapi.cn/"
-        self.resource = "https://management.core.chinacloudapi.cn/"
+        self.config.resource = "https://management.core.chinacloudapi.cn/"

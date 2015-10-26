@@ -24,28 +24,36 @@
 #
 #--------------------------------------------------------------------------
 
-from .exceptions import ResponseStatusError
+from ..msrest.serialization import Deserialized
+from threading import Thread, Event
+import time
 
-class HTTPResponse(object):
 
-    accept_status = [200]
-    
-    def __init__(self):
+class Paged(object):
 
-        self.headers_map = {}
-        self.attributes_map = {
-            'status_code': {'key':'status_code', 'type':'str'}
-        }
-        self.body_map = {}
+    def __init__(self, items, url, command):
+        """
+        A collection for paged REST responses.
+        """
 
-        self._status_code = None
+        self.items = items
+        self.url = url
+        self.command = command
 
-    @property
-    def status_code(self):
-        return self._status_code
+    def __iter__(self):
+        for i in self.items:
+            yield i
 
-    @status_code.setter
-    def status_code(self, value):
-        if int(value) not in self.accept_status:
-            raise ResponseStatusError()
-        self._status_code = value
+        while self.url is not None:
+            self.items, self.url = self.command(self.url)
+
+            for i in self.items:
+                yield i
+
+    def __len__(self):
+        return len(self.items)
+
+    def __getitem__(self, index):
+        return self.items[index]
+
+

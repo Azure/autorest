@@ -33,15 +33,22 @@ import tempfile
 
 try:
     import configparser
+    from configparser import NoOptionError
 
 except ImportError:
     import ConfigParser as configparser
+    from ConfigParser import NoOptionError
 
 from . import logger
+from .pipeline import (
+    ClientRetryPolicy,
+    ClientRedirectPolicy,
+    ClientProxies,
+    ClientConnection)
 
 class Configuration(object):
     
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(self, base_url, filepath=None):
 
         # Service
         self.base_url = base_url
@@ -55,15 +62,19 @@ class Configuration(object):
 
         self._log = logger.setup_logger(self)
 
-        # Communication configuration - TODO: Populate
-        self.protocols = ['https://']
-        self.proxies = {}
-        self.timeout = None
-        self.allow_redirects = True
-        self.verify = True
-        self.cert = None
+        # Communication configuration
+        self.connection = ClientConnection(self._log_name)
 
-        self._config = configparser.RawConfigParser()
+        # ProxyConfiguration
+        self.proxies = ClientProxies(self._log_name)
+
+        # Retry configuration
+        self.retry_policy = ClientRetryPolicy(self._log_name)
+
+        # Redirect configuration
+        self.redirect_policy = ClientRedirectPolicy(self._log_name)
+
+        self._config = configparser.ConfigParser()
         self._config.optionxform = str
 
         if filepath:
@@ -114,43 +125,83 @@ class Configuration(object):
         self._log = setup_logger(self)
         self._log_name = value
 
+    def _clear_config(self):
+
+        for section in self._config.sections():
+            self._config.remove_section(section)
+
     def save(self, filepath):
-        
-        _config = configparser.RawConfigParser()
-        _config.add_section("Logging")
-        _config.add_section("HTTP")
 
-        _config.set("Logging", "log_name", self._log_name)
-        _config.set("Logging", "log_dir", self._log_dir)
-        _config.set("Logging", "stream_format", self._stream_logging)
-        _config.set("Logging", "file_format", self._file_logging)
-        _config.set("Logging", "level", self._level)
+        self._config.add_section("Logging")
+        self._config.add_section("Connection")
+        self._config.add_section("Proxies")
+        self._config.add_section("RetryPolicy")
+        self._config.add_section("RedirectPolicy")
 
-        _config.set("HTTP", "protocols", self.protocols)
-        _config.set("HTTP", "timeout", self.timeout)
-        _config.set("HTTP", "allow_redirects", self.allow_redirects)
-        _config.set("HTTP", "verify", self.verify)
-        _config.set("HTTP", "cert", self.cert)
+        self._config.set("Logging", "log_name", self._log_name)
+        self._config.set("Logging", "log_dir", self._log_dir)
+        self._config.set("Logging", "stream_format", self._stream_logging)
+        self._config.set("Logging", "file_format", self._file_logging)
+        self._config.set("Logging", "level", self._level)
 
-        with open(filepath, 'w') as configfile:
-            self._config.write(configfile)
+        self._config.set("Connection", "base_url", self.base_url)
+        self._config.set("Connection", "timeout", self.connection.timeout)
+        self._config.set("Connection", "verify", self.connection.verify)
+        self._config.set("Connection", "cert", self.connection.cert)
+
+        self._config.set("Proxies", "proxies", self.proxies.proxies)
+        self._config.set("Proxies", "env_settings", self.proxies.use_env_settings)
+
+        self._config.set("RetryPolicy", "retries", self.retry_policy.retries)
+        self._config.set("RetryPolicy", "backoff_factor", self.retry_policy.backoff_factor)
+        self._config.set("RetryPolicy", "max_backoff", self.retry_policy.max_backoff)
+
+        self._config.set("RedirectPolicy", "allow", self.redirect_policy.allow)
+        self._config.set("RedirectPolicy", "max_redirects", self.redirect_policy.max_redirects)
+
+        try:
+            with open(filepath, 'w') as configfile:
+                self._config.write(configfile)
+
+        except (KeyError, EnvironmentError) as err:
+            raise ValueError(
+                "Supplied config filepath invalid: {0}".format(err))
+
+        finally:
+            self._clear_config()
 
     def load(self, filepath):
-        
-        _config = configparser.RawConfigParser()
-        _config.read(filepath)
 
-        self._log_name = _config.get("Logging", "log_name")
-        self._log_dir = _config.get("Logging", "log_dir")
-        self._stream_logging = _config.get("Logging", "stream_format")
-        self._file_logging = _config.get("Logging", "file_format")
-        self._level = _config.getint("Logging", "level")
+        try:
+            self._config.read(filepath)
 
-        self.protocols = _config.get("HTTP", "protocols")
-        self.timeout = _config.get("HTTP", "timeout")
-        self.allow_redirects = _config.get("HTTP", "allow_redirects")
-        self.verify = _config.get("HTTP", "verify")
-        self.cert = _config.get("HTTP", "cert")
+            self._log_name = self._config.get("Logging", "log_name")
+            self._log_dir = self._config.get("Logging", "log_dir")
+            self._stream_logging = self._config.get("Logging", "stream_format", raw=True)
+            self._file_logging = self._config.get("Logging", "file_format", raw=True)
+            self._level = self._config.getint("Logging", "level")
 
-        self._log = logger.setup_logger(self)
+            self.base_url = self._config.get("Connection", "base_url")
+            self.connection.timeout = self._config.getint("Connection", "timeout")
+            self.connection.verify = self._config.getboolean("Connection", "verify")
+            self.connection.cert = self._config.get("Connection", "cert")
+
+            self.proxies.proxies = eval(self._config.get("Proxies", "proxies"))
+            self.proxies.use_env_settings = self._config.getboolean("Proxies", "env_settings")
+
+            self.retry_policy.retries = self._config.getint("RetryPolicy", "retries")
+            self.retry_policy.backoff_factor = self._config.getfloat("RetryPolicy", "backoff_factor")
+            self.retry_policy.max_backoff = self._config.getint("RetryPolicy", "max_backoff")
+
+            self.redirect_policy.allow = self._config.getboolean("RedirectPolicy", "allow")
+            self.redirect_policy.max_redirects = self._config.set("RedirectPolicy", "max_redirects")
+
+            self._log = logger.setup_logger(self)
+
+        except (ValueError, EnvironmentError, NoOptionError) as err:
+            raise ValueError(
+                "Supplied config file incompatible: {0}".format(err))
+
+        finally:
+            self._clear_config()
 
