@@ -63,6 +63,20 @@ export interface Number {
     getInvalidDouble(callback: ServiceCallback<number>): void;
 
     /**
+     * Get invalid decimal Number value
+     *
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getInvalidDecimal(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getInvalidDecimal(callback: ServiceCallback<number>): void;
+
+    /**
      * Put big float value 3.402823e+20
      *
      * @param {number} numberBody
@@ -183,6 +197,96 @@ export interface Number {
     getBigDoubleNegativeDecimal(callback: ServiceCallback<number>): void;
 
     /**
+     * Put big decimal value 2.5976931e+101
+     *
+     * @param {number} numberBody
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putBigDecimal(numberBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putBigDecimal(numberBody: number, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get big decimal value 2.5976931e+101
+     *
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getBigDecimal(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getBigDecimal(callback: ServiceCallback<number>): void;
+
+    /**
+     * Put big decimal value 99999999.99
+     *
+     * @param {number} numberBody
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putBigDecimalPositiveDecimal(numberBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putBigDecimalPositiveDecimal(numberBody: number, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get big decimal value 99999999.99
+     *
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getBigDecimalPositiveDecimal(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getBigDecimalPositiveDecimal(callback: ServiceCallback<number>): void;
+
+    /**
+     * Put big decimal value -99999999.99
+     *
+     * @param {number} numberBody
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putBigDecimalNegativeDecimal(numberBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putBigDecimalNegativeDecimal(numberBody: number, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get big decimal value -99999999.99
+     *
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getBigDecimalNegativeDecimal(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getBigDecimalNegativeDecimal(callback: ServiceCallback<number>): void;
+
+    /**
      * Put small float value 3.402823e-20
      *
      * @param {number} numberBody
@@ -241,4 +345,34 @@ export interface Number {
      */
     getSmallDouble(options: RequestOptions, callback: ServiceCallback<number>): void;
     getSmallDouble(callback: ServiceCallback<number>): void;
+
+    /**
+     * Put small decimal value 2.5976931e-101
+     *
+     * @param {number} numberBody
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putSmallDecimal(numberBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putSmallDecimal(numberBody: number, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get small decimal value 2.5976931e-101
+     *
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getSmallDecimal(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getSmallDecimal(callback: ServiceCallback<number>): void;
 }
