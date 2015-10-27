@@ -40,9 +40,9 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Get the predicate to determine of the http operation status code indicates success
+        /// Get the predicate to determine of the http operation status code indicates failure
         /// </summary>
-        public string SuccessStatusCodePredicate
+        public string FailureStatusCodePredicate
         {
             get
             {
@@ -52,12 +52,12 @@ namespace Microsoft.Rest.Generator.CSharp
                     foreach (var responseStatus in Responses.Keys)
                     {
                         predicates.Add(string.Format(CultureInfo.InvariantCulture,
-                            "statusCode == {0}", GetStatusCodeReference(responseStatus)));
+                            "(int)statusCode != {0}", GetStatusCodeReference(responseStatus)));
                     }
 
-                    return string.Join(" || ", predicates);
+                    return string.Join(" && ", predicates);
                 }
-                return "httpResponse.IsSuccessStatusCode";
+                return "!httpResponse.IsSuccessStatusCode";
             }
         }
 
@@ -328,8 +328,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public static string GetStatusCodeReference(HttpStatusCode code)
         {
-            return string.Format(CultureInfo.InvariantCulture,
-                "(HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), \"{0}\")", code);
+            return ((int)code).ToString();
         }
 
         /// <summary>
