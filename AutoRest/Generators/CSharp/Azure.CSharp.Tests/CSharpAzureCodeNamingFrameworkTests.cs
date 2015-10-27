@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 using Xunit;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
@@ -30,10 +31,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             SwaggerModeler modeler = new SwaggerModeler(settings);
             var serviceClient = modeler.Build();
             var codeNamer = new AzureCSharpCodeNamer();
-            var objName = codeNamer.NormalizeType(PrimaryType.Object).Name;
-            var strName = codeNamer.NormalizeType(PrimaryType.String).Name;
+            var objName = codeNamer.NormalizeTypeReference(PrimaryType.Object).Name;
+            var strName = codeNamer.NormalizeTypeReference(PrimaryType.String).Name;
+            IDictionary<KeyValuePair<string, string>, string> pageClass = new Dictionary<KeyValuePair<string, string>, string>();
 
-            codeNamer.NormalizePaginatedMethods(serviceClient);
+            codeNamer.NormalizePaginatedMethods(serviceClient, pageClass);
             Assert.Equal("Page<Product>", serviceClient.Methods[0].ReturnType.Name);
             Assert.Equal(objName, serviceClient.Methods[1].ReturnType.Name);
             Assert.Equal("Page<Product>", serviceClient.Methods[1].Responses.ElementAt(0).Value.Name);

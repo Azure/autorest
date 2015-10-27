@@ -54,6 +54,12 @@
             "format": "double"
           },
           {
+            "name": "decimal",
+            "in": "path",
+            "type": "number",
+            "format": "decimal"
+          },
+          {
             "name": "string",
             "in": "path",
             "type": "string"

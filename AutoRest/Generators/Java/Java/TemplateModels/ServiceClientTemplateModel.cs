@@ -74,6 +74,7 @@ namespace Microsoft.Rest.Generator.Java
                 }
 
                 classes.AddRange(new[]{
+                    "java.math.BigDecimal",
                     "com.google.common.reflect.TypeToken",
                     "com.microsoft.rest.ServiceCallback",
                     "com.microsoft.rest.ServiceException",
@@ -119,6 +120,7 @@ namespace Microsoft.Rest.Generator.Java
                 }
 
                 classes.AddRange(new[]{
+                    "java.math.BigDecimal",
                     "com.microsoft.rest.ServiceCallback",
                     "com.microsoft.rest.ServiceException",
                     "com.microsoft.rest.ServiceResponseCallback",

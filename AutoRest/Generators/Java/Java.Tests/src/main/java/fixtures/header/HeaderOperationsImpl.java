@@ -25,10 +25,10 @@ import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import com.microsoft.rest.DateTimeRfc1123;
 import org.joda.time.Period;
+import org.apache.commons.codec.binary.Base64;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.Error;
 import com.microsoft.rest.serializer.JacksonHelper;
-import org.apache.commons.codec.binary.Base64;
 
 public class HeaderOperationsImpl implements HeaderOperations {
     private HeaderService service;

@@ -20,6 +20,21 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class StringWrapper
     {
         /// <summary>
+        /// Initializes a new instance of the StringWrapper class.
+        /// </summary>
+        public StringWrapper() { }
+
+        /// <summary>
+        /// Initializes a new instance of the StringWrapper class.
+        /// </summary>
+        public StringWrapper(string field = default(string), string empty = default(string), string nullProperty = default(string))
+        {
+            Field = field;
+            Empty = empty;
+            NullProperty = nullProperty;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "field")]
         public string Field { get; set; }

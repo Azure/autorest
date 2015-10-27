@@ -21,6 +21,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     public partial class SubProduct : SubResource
     {
         /// <summary>
+        /// Initializes a new instance of the SubProduct class.
+        /// </summary>
+        public SubProduct() { }
+
+        /// <summary>
+        /// Initializes a new instance of the SubProduct class.
+        /// </summary>
+        public SubProduct(string provisioningState = default(string), string provisioningStateValues = default(string))
+        {
+            ProvisioningState = provisioningState;
+            ProvisioningStateValues = provisioningStateValues;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "properties.provisioningState")]
         public string ProvisioningState { get; set; }

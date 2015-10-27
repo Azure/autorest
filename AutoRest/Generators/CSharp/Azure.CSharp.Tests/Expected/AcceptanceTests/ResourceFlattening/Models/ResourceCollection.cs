@@ -21,6 +21,21 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening.Models
     public partial class ResourceCollection
     {
         /// <summary>
+        /// Initializes a new instance of the ResourceCollection class.
+        /// </summary>
+        public ResourceCollection() { }
+
+        /// <summary>
+        /// Initializes a new instance of the ResourceCollection class.
+        /// </summary>
+        public ResourceCollection(FlattenedProduct productresource = default(FlattenedProduct), IList<FlattenedProduct> arrayofresources = default(IList<FlattenedProduct>), IDictionary<string, FlattenedProduct> dictionaryofresources = default(IDictionary<string, FlattenedProduct>))
+        {
+            Productresource = productresource;
+            Arrayofresources = arrayofresources;
+            Dictionaryofresources = dictionaryofresources;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "productresource")]
         public FlattenedProduct Productresource { get; set; }

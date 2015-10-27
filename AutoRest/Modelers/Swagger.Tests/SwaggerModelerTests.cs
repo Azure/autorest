@@ -332,13 +332,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("Double number", clientModel.Methods[0].Parameters[3].ToString());
             Assert.Equal("Double float", clientModel.Methods[0].Parameters[4].ToString());
             Assert.Equal("Double double", clientModel.Methods[0].Parameters[5].ToString());
-            Assert.Equal("String string", clientModel.Methods[0].Parameters[6].ToString());
-            Assert.Equal("enum color", clientModel.Methods[0].Parameters[7].ToString());
-            Assert.Equal("ByteArray byte", clientModel.Methods[0].Parameters[8].ToString());
-            Assert.Equal("Boolean boolean", clientModel.Methods[0].Parameters[9].ToString());
-            Assert.Equal("Date date", clientModel.Methods[0].Parameters[10].ToString());
-            Assert.Equal("DateTime dateTime", clientModel.Methods[0].Parameters[11].ToString());
-            Assert.Equal("IList<String> array", clientModel.Methods[0].Parameters[12].ToString());
+            Assert.Equal("Decimal decimal", clientModel.Methods[0].Parameters[6].ToString());
+            Assert.Equal("String string", clientModel.Methods[0].Parameters[7].ToString());
+            Assert.Equal("enum color", clientModel.Methods[0].Parameters[8].ToString());
+            Assert.Equal("ByteArray byte", clientModel.Methods[0].Parameters[9].ToString());
+            Assert.Equal("Boolean boolean", clientModel.Methods[0].Parameters[10].ToString());
+            Assert.Equal("Date date", clientModel.Methods[0].Parameters[11].ToString());
+            Assert.Equal("DateTime dateTime", clientModel.Methods[0].Parameters[12].ToString());
+            Assert.Equal("IList<String> array", clientModel.Methods[0].Parameters[13].ToString());
 
             var variableEnumInPath =
                 clientModel.Methods.First(m => m.Name == "list" && m.Group == null).Parameters.First(p => p.Name == "color" && p.Location == ParameterLocation.Path).Type as EnumType;

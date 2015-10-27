@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.url.models.UriColor;
+import org.apache.commons.codec.binary.Base64;
 import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
 import java.util.List;

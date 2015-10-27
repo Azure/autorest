@@ -20,6 +20,19 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
     public partial class IntWrapper
     {
         /// <summary>
+        /// Initializes a new instance of the IntWrapper class.
+        /// </summary>
+        public IntWrapper() { }
+
+        /// <summary>
+        /// Initializes a new instance of the IntWrapper class.
+        /// </summary>
+        public IntWrapper(int? value)
+        {
+            Value = value;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public int? Value { get; set; }

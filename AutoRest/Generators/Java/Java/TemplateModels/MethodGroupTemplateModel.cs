@@ -47,8 +47,8 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                var parameters = this.MethodTemplateModels
-                    .SelectMany(m => m.ParameterTemplateModels);
+                //Omit parameter group types for now since they don't get generated
+                var parameters = this.MethodTemplateModels.SelectMany(m => m.Parameters);
 
                 var types = parameters.Select(p => p.Type)
                     .Concat(this.MethodTemplateModels.SelectMany(mtm => mtm.Responses.Select(res => res.Value)))
@@ -63,7 +63,7 @@ namespace Microsoft.Rest.Generator.Java
                     classes.Add("com.microsoft.rest.Validator");
                 }
 
-                IEnumerable<ParameterTemplateModel> nonBodyParams = parameters.Where(p => p.Location != ParameterLocation.Body);
+                var nonBodyParams = parameters.Where(p => p.Location != ParameterLocation.Body);
 
                 foreach (var param in nonBodyParams)
                 {
@@ -79,9 +79,13 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         classes.Add("com.microsoft.rest.serializer.CollectionFormat");
                     }
-                    if (param.Type == PrimaryType.ByteArray)
+                    if (param.Type is PrimaryType)
                     {
-                        classes.Add("org.apache.commons.codec.binary.Base64");
+                        var importedFrom = JavaCodeNamer.ImportedFrom(param.Type as PrimaryType);
+                        if (importedFrom != null)
+                        {
+                            classes.Add(importedFrom);
+                        }
                     }
                 }
                 
@@ -116,6 +120,15 @@ namespace Microsoft.Rest.Generator.Java
                         if (param.Location != ParameterLocation.None &&
                             param.Location != ParameterLocation.FormData)
                             classes.Add("retrofit.http." + param.Location.ToString());
+
+                        if (param.Type is PrimaryType)
+                        {
+                            var importedFrom = JavaCodeNamer.ImportedFrom(param.Type as PrimaryType);
+                            if (importedFrom != null)
+                            {
+                                classes.Add(importedFrom);
+                            }
+                        }
                     }
                 }
                 return classes.AsEnumerable();

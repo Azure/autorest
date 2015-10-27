@@ -8,9 +8,8 @@
  * regenerated.
 */
 
-import { RequestOptions, WebResource } from "ms-rest";
-import * as stream from "stream";
-import * as models from "../models";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import * as models from '../models';
 
 
 /**
@@ -31,19 +30,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getBooleanTrue(boolPath: boolean, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getBooleanTrue(boolPath: boolean, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getBooleanTrue(boolPath: boolean, callback: ServiceCallback<void>): void;
 
     /**
      * Get false Boolean value on path
@@ -55,19 +46,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getBooleanFalse(boolPath: boolean, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getBooleanFalse(boolPath: boolean, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getBooleanFalse(boolPath: boolean, callback: ServiceCallback<void>): void;
 
     /**
      * Get '1000000' integer value
@@ -79,19 +62,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getIntOneMillion(intPath: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getIntOneMillion(intPath: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getIntOneMillion(intPath: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '-1000000' integer value
@@ -103,19 +78,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getIntNegativeOneMillion(intPath: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getIntNegativeOneMillion(intPath: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getIntNegativeOneMillion(intPath: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '10000000000' 64 bit integer value
@@ -127,19 +94,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getTenBillion(longPath: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getTenBillion(longPath: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getTenBillion(longPath: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '-10000000000' 64 bit integer value
@@ -151,19 +110,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getNegativeTenBillion(longPath: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getNegativeTenBillion(longPath: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getNegativeTenBillion(longPath: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '1.034E+20' numeric value
@@ -175,19 +126,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    floatScientificPositive(floatPath: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    floatScientificPositive(floatPath: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    floatScientificPositive(floatPath: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '-1.034E-20' numeric value
@@ -199,19 +142,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    floatScientificNegative(floatPath: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    floatScientificNegative(floatPath: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    floatScientificNegative(floatPath: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '9999999.999' numeric value
@@ -223,19 +158,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    doubleDecimalPositive(doublePath: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    doubleDecimalPositive(doublePath: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    doubleDecimalPositive(doublePath: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '-9999999.999' numeric value
@@ -247,19 +174,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    doubleDecimalNegative(doublePath: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    doubleDecimalNegative(doublePath: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    doubleDecimalNegative(doublePath: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -272,19 +191,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    stringUnicode(stringPath: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    stringUnicode(stringPath: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    stringUnicode(stringPath: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get 'begin!*'();:@ &=+$,/?#[]end
@@ -298,19 +209,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    stringUrlEncoded(stringPath: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    stringUrlEncoded(stringPath: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    stringUrlEncoded(stringPath: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get ''
@@ -323,19 +226,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    stringEmpty(stringPath: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    stringEmpty(stringPath: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    stringEmpty(stringPath: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get null (should throw)
@@ -347,19 +242,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    stringNull(stringPath: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    stringNull(stringPath: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    stringNull(stringPath: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get using uri with 'green color' in path parameter
@@ -372,19 +259,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    enumValid(enumPath: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    enumValid(enumPath: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    enumValid(enumPath: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get null (should throw on the client before the request is sent on wire)
@@ -397,19 +276,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    enumNull(enumPath: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    enumNull(enumPath: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    enumNull(enumPath: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -422,19 +293,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    byteMultiByte(bytePath: Buffer, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    byteMultiByte(bytePath: Buffer, options: RequestOptions, callback: ServiceCallback<void>): void;
+    byteMultiByte(bytePath: Buffer, callback: ServiceCallback<void>): void;
 
     /**
      * Get '' as byte array
@@ -446,19 +309,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    byteEmpty(bytePath: Buffer, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    byteEmpty(bytePath: Buffer, options: RequestOptions, callback: ServiceCallback<void>): void;
+    byteEmpty(bytePath: Buffer, callback: ServiceCallback<void>): void;
 
     /**
      * Get null as byte array (should throw)
@@ -470,19 +325,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    byteNull(bytePath: Buffer, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    byteNull(bytePath: Buffer, options: RequestOptions, callback: ServiceCallback<void>): void;
+    byteNull(bytePath: Buffer, callback: ServiceCallback<void>): void;
 
     /**
      * Get '2012-01-01' as date
@@ -494,19 +341,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    dateValid(datePath: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    dateValid(datePath: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    dateValid(datePath: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get null as date - this should throw or be unusable on the client side,
@@ -519,19 +358,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    dateNull(datePath: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    dateNull(datePath: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    dateNull(datePath: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
@@ -543,19 +374,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    dateTimeValid(dateTimePath: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    dateTimeValid(dateTimePath: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    dateTimeValid(dateTimePath: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get null as date-time, should be disallowed or throw depending on
@@ -568,19 +391,11 @@ export interface Paths {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    dateTimeNull(dateTimePath: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    dateTimeNull(dateTimePath: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    dateTimeNull(dateTimePath: Date|string, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -601,19 +416,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getBooleanTrue(boolQuery: boolean, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getBooleanTrue(boolQuery: boolean, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getBooleanTrue(boolQuery: boolean, callback: ServiceCallback<void>): void;
 
     /**
      * Get false Boolean value on path
@@ -625,19 +432,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getBooleanFalse(boolQuery: boolean, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getBooleanFalse(boolQuery: boolean, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getBooleanFalse(boolQuery: boolean, callback: ServiceCallback<void>): void;
 
     /**
      * Get null Boolean value on query (query string should be absent)
@@ -649,19 +448,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getBooleanNull(boolQuery: boolean, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getBooleanNull(boolQuery: boolean, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getBooleanNull(boolQuery: boolean, callback: ServiceCallback<void>): void;
 
     /**
      * Get '1000000' integer value
@@ -673,19 +464,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getIntOneMillion(intQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getIntOneMillion(intQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getIntOneMillion(intQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '-1000000' integer value
@@ -697,19 +480,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getIntNegativeOneMillion(intQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getIntNegativeOneMillion(intQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getIntNegativeOneMillion(intQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get null integer value (no query parameter)
@@ -721,19 +496,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getIntNull(intQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getIntNull(intQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getIntNull(intQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '10000000000' 64 bit integer value
@@ -745,19 +512,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getTenBillion(longQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getTenBillion(longQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getTenBillion(longQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '-10000000000' 64 bit integer value
@@ -769,19 +528,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getNegativeTenBillion(longQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getNegativeTenBillion(longQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getNegativeTenBillion(longQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get 'null 64 bit integer value (no query param in uri)
@@ -793,19 +544,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getLongNull(longQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getLongNull(longQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getLongNull(longQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '1.034E+20' numeric value
@@ -817,19 +560,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    floatScientificPositive(floatQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    floatScientificPositive(floatQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    floatScientificPositive(floatQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '-1.034E-20' numeric value
@@ -841,19 +576,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    floatScientificNegative(floatQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    floatScientificNegative(floatQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    floatScientificNegative(floatQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get null numeric value (no query parameter)
@@ -865,19 +592,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    floatNull(floatQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    floatNull(floatQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    floatNull(floatQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '9999999.999' numeric value
@@ -889,19 +608,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    doubleDecimalPositive(doubleQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    doubleDecimalPositive(doubleQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    doubleDecimalPositive(doubleQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '-9999999.999' numeric value
@@ -913,19 +624,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    doubleDecimalNegative(doubleQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    doubleDecimalNegative(doubleQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    doubleDecimalNegative(doubleQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get null numeric value (no query parameter)
@@ -937,19 +640,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    doubleNull(doubleQuery: number, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    doubleNull(doubleQuery: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    doubleNull(doubleQuery: number, callback: ServiceCallback<void>): void;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -962,19 +657,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    stringUnicode(stringQuery: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    stringUnicode(stringQuery: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    stringUnicode(stringQuery: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get 'begin!*'();:@ &=+$,/?#[]end
@@ -988,19 +675,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    stringUrlEncoded(stringQuery: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    stringUrlEncoded(stringQuery: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    stringUrlEncoded(stringQuery: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get ''
@@ -1013,19 +692,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    stringEmpty(stringQuery: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    stringEmpty(stringQuery: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    stringEmpty(stringQuery: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get null (no query parameter in url)
@@ -1037,19 +708,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    stringNull(stringQuery: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    stringNull(stringQuery: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    stringNull(stringQuery: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get using uri with query parameter 'green color'
@@ -1062,19 +725,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    enumValid(enumQuery: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    enumValid(enumQuery: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    enumValid(enumQuery: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get null (no query parameter in url)
@@ -1087,19 +742,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    enumNull(enumQuery: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    enumNull(enumQuery: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    enumNull(enumQuery: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -1112,19 +759,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    byteMultiByte(byteQuery: Buffer, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    byteMultiByte(byteQuery: Buffer, options: RequestOptions, callback: ServiceCallback<void>): void;
+    byteMultiByte(byteQuery: Buffer, callback: ServiceCallback<void>): void;
 
     /**
      * Get '' as byte array
@@ -1136,19 +775,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    byteEmpty(byteQuery: Buffer, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    byteEmpty(byteQuery: Buffer, options: RequestOptions, callback: ServiceCallback<void>): void;
+    byteEmpty(byteQuery: Buffer, callback: ServiceCallback<void>): void;
 
     /**
      * Get null as byte array (no query parameters in uri)
@@ -1160,19 +791,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    byteNull(byteQuery: Buffer, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    byteNull(byteQuery: Buffer, options: RequestOptions, callback: ServiceCallback<void>): void;
+    byteNull(byteQuery: Buffer, callback: ServiceCallback<void>): void;
 
     /**
      * Get '2012-01-01' as date
@@ -1184,19 +807,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    dateValid(dateQuery: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    dateValid(dateQuery: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    dateValid(dateQuery: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get null as date - this should result in no query parameters in uri
@@ -1208,19 +823,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    dateNull(dateQuery: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    dateNull(dateQuery: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    dateNull(dateQuery: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
@@ -1232,19 +839,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    dateTimeValid(dateTimeQuery: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    dateTimeValid(dateTimeQuery: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    dateTimeValid(dateTimeQuery: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get null as date-time, should result in no query parameters in uri
@@ -1256,19 +855,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    dateTimeNull(dateTimeQuery: Date, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    dateTimeNull(dateTimeQuery: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    dateTimeNull(dateTimeQuery: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1282,19 +873,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    arrayStringCsvValid(arrayQuery: string[], options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    arrayStringCsvValid(arrayQuery: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
+    arrayStringCsvValid(arrayQuery: string[], callback: ServiceCallback<void>): void;
 
     /**
      * Get a null array of string using the csv-array format
@@ -1307,19 +890,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    arrayStringCsvNull(arrayQuery: string[], options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    arrayStringCsvNull(arrayQuery: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
+    arrayStringCsvNull(arrayQuery: string[], callback: ServiceCallback<void>): void;
 
     /**
      * Get an empty array [] of string using the csv-array format
@@ -1332,19 +907,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    arrayStringCsvEmpty(arrayQuery: string[], options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    arrayStringCsvEmpty(arrayQuery: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
+    arrayStringCsvEmpty(arrayQuery: string[], callback: ServiceCallback<void>): void;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1358,19 +925,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    arrayStringSsvValid(arrayQuery: string[], options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    arrayStringSsvValid(arrayQuery: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
+    arrayStringSsvValid(arrayQuery: string[], callback: ServiceCallback<void>): void;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1384,19 +943,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    arrayStringTsvValid(arrayQuery: string[], options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    arrayStringTsvValid(arrayQuery: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
+    arrayStringTsvValid(arrayQuery: string[], callback: ServiceCallback<void>): void;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1410,19 +961,11 @@ export interface Queries {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    arrayStringPipesValid(arrayQuery: string[], options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    arrayStringPipesValid(arrayQuery: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
+    arrayStringPipesValid(arrayQuery: string[], callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -1455,19 +998,11 @@ export interface PathItems {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getAllWithValues(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getAllWithValues(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getAllWithValues(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, callback: ServiceCallback<void>): void;
 
     /**
      * send globalStringPath='globalStringPath',
@@ -1491,19 +1026,11 @@ export interface PathItems {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getGlobalQueryNull(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getGlobalQueryNull(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getGlobalQueryNull(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, callback: ServiceCallback<void>): void;
 
     /**
      * send globalStringPath=globalStringPath,
@@ -1526,19 +1053,11 @@ export interface PathItems {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getGlobalAndLocalQueryNull(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getGlobalAndLocalQueryNull(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getGlobalAndLocalQueryNull(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, callback: ServiceCallback<void>): void;
 
     /**
      * send globalStringPath='globalStringPath',
@@ -1560,17 +1079,9 @@ export interface PathItems {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getLocalPathItemQueryNull(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    getLocalPathItemQueryNull(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getLocalPathItemQueryNull(localStringPath: string, pathItemStringPath: string, localStringQuery: string, pathItemStringQuery: string, callback: ServiceCallback<void>): void;
 }

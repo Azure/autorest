@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import org.apache.commons.codec.binary.Base64;
 import retrofit.http.GET;
 import retrofit.http.PUT;
 import retrofit.http.Body;

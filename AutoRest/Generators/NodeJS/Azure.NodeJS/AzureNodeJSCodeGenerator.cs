@@ -57,6 +57,9 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             //please do not change the following sequence as it may have undesirable results.
+
+            //TODO: Why is this list duplicated from AzureCodeGenerator.NormalizeClientModel?
+
             Settings.AddCredentials = true;
             AzureCodeGenerator.UpdateHeadMethods(serviceClient);
             AzureCodeGenerator.ParseODataExtension(serviceClient);
@@ -64,6 +67,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             AzureCodeGenerator.AddPageableMethod(serviceClient);
             AzureCodeGenerator.AddAzureProperties(serviceClient);
             AzureCodeGenerator.SetDefaultResponses(serviceClient);
+            AzureCodeGenerator.AddParameterGroups(serviceClient);
             base.NormalizeClientModel(serviceClient);
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);

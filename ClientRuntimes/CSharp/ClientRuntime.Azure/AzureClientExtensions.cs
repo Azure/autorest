@@ -50,7 +50,7 @@ namespace Microsoft.Rest.Azure
             while (!AzureAsyncOperation.TerminalStatuses.Any(s => s.Equals(pollingState.Status,
                 StringComparison.OrdinalIgnoreCase)))
             {
-                await PlatformTask.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
+                await Task.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
 
                 if (!string.IsNullOrEmpty(pollingState.AzureAsyncOperationHeaderLink))
                 {
@@ -122,7 +122,7 @@ namespace Microsoft.Rest.Azure
             while (!AzureAsyncOperation.TerminalStatuses.Any(s => s.Equals(pollingState.Status,
                 StringComparison.OrdinalIgnoreCase)))
             {
-                await PlatformTask.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
+                await Task.Delay(pollingState.DelayInMilliseconds, cancellationToken).ConfigureAwait(false);
 
                 if (!string.IsNullOrEmpty(pollingState.AzureAsyncOperationHeaderLink))
                 {

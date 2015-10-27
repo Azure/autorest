@@ -21,6 +21,21 @@ namespace Fixtures.AcceptanceTestsValidation.Models
     public partial class Product
     {
         /// <summary>
+        /// Initializes a new instance of the Product class.
+        /// </summary>
+        public Product() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Product class.
+        /// </summary>
+        public Product(IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string))
+        {
+            DisplayNames = displayNames;
+            Capacity = capacity;
+            Image = image;
+        }
+
+        /// <summary>
         /// Non required array of unique items from 0 to 6 elements.
         /// </summary>
         [JsonProperty(PropertyName = "display_names")]

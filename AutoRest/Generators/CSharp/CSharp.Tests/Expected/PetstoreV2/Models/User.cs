@@ -20,6 +20,26 @@ namespace Fixtures.PetstoreV2.Models
     public partial class User
     {
         /// <summary>
+        /// Initializes a new instance of the User class.
+        /// </summary>
+        public User() { }
+
+        /// <summary>
+        /// Initializes a new instance of the User class.
+        /// </summary>
+        public User(long? id = default(long?), string username = default(string), string firstName = default(string), string lastName = default(string), string email = default(string), string password = default(string), string phone = default(string), int? userStatus = default(int?))
+        {
+            Id = id;
+            Username = username;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+            Phone = phone;
+            UserStatus = userStatus;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public long? Id { get; set; }

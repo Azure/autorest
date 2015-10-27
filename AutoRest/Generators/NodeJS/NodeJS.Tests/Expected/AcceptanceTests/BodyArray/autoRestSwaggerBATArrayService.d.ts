@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, WebResource } from "ms-rest";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
-export default class AutoRestSwaggerBATArrayService {
+declare class AutoRestSwaggerBATArrayService {
     /**
      * @class
      * Initializes a new instance of the AutoRestSwaggerBATArrayService class.
@@ -33,3 +33,5 @@ export default class AutoRestSwaggerBATArrayService {
     // Operation groups
     arrayModel: operations.ArrayModel;
     }
+
+export = AutoRestSwaggerBATArrayService;

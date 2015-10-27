@@ -94,10 +94,10 @@ Header.prototype.customNamedRequestId = function (fooClientRequestId, options, c
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['foo-client-request-id'] = msRestAzure.generateUuid();
-  if (fooClientRequestId !== null) {
+  if (fooClientRequestId !== undefined && fooClientRequestId !== null) {
     httpRequest.headers['foo-client-request-id'] = fooClientRequestId;
   }
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {

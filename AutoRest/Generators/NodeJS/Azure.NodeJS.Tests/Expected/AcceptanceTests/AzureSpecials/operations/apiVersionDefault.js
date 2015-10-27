@@ -92,7 +92,7 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
@@ -198,7 +198,7 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
@@ -304,7 +304,7 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
@@ -410,7 +410,7 @@ ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback)
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {

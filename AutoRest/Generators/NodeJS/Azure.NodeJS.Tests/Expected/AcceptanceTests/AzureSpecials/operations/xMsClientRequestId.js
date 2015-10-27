@@ -89,7 +89,7 @@ XMsClientRequestId.prototype.get = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
@@ -198,10 +198,10 @@ XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, c
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (xMsClientRequestId !== null) {
+  if (xMsClientRequestId !== undefined && xMsClientRequestId !== null) {
     httpRequest.headers['x-ms-client-request-id'] = xMsClientRequestId;
   }
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {

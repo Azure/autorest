@@ -21,6 +21,21 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class Fish
     {
         /// <summary>
+        /// Initializes a new instance of the Fish class.
+        /// </summary>
+        public Fish() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Fish class.
+        /// </summary>
+        public Fish(double? length, string species = default(string), IList<Fish> siblings = default(IList<Fish>))
+        {
+            Species = species;
+            Length = length;
+            Siblings = siblings;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "species")]
         public string Species { get; set; }

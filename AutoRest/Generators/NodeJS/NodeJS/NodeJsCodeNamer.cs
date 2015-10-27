@@ -156,8 +156,12 @@ namespace Microsoft.Rest.Generator.NodeJS
                 }
             }
         }
+        public override IType NormalizeTypeDeclaration(IType type)
+        {
+            return NormalizeTypeReference(type);
+        }
 
-        public override IType NormalizeType(IType type)
+        public override IType NormalizeTypeReference(IType type)
         {
             if (type == null)
             {
@@ -214,7 +218,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             return compositeType;
@@ -243,6 +247,10 @@ namespace Microsoft.Rest.Generator.NodeJS
                 primaryType.Name = "Date";
             }
             else if (primaryType == PrimaryType.Double)
+            {
+                primaryType.Name = "Number";
+            }
+            else if (primaryType == PrimaryType.Decimal)
             {
                 primaryType.Name = "Number";
             }
@@ -276,14 +284,14 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
+            sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
             sequenceType.NameFormat = "Array";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
+            dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             dictionaryType.NameFormat = "Object";
             return dictionaryType;
         }

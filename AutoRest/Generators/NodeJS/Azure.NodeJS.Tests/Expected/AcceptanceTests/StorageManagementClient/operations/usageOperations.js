@@ -98,7 +98,7 @@ UsageOperations.prototype.list = function (options, callback) {
   httpRequest.url = requestUrl;
   // Set Headers
   httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  if (this.client.acceptLanguage !== null) {
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {

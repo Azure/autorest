@@ -32,6 +32,7 @@ var paging = require('./routes/paging');
 var resourceFlatten = require('./routes/resource-flatten');
 var azureUrl = require('./routes/azureUrl');
 var azureSpecial = require('./routes/azureSpecials');
+var parameterGrouping = require('./routes/azureParameterGrouping.js');
 var util = require('util');
 
 var app = express();
@@ -40,7 +41,7 @@ var app = express();
 var now = new Date();
 var logFileName = 'AccTestServer-' + now.getHours() +
     now.getMinutes() + now.getSeconds() + '.log';
-var testResultDir = '../../../../TestResults';
+var testResultDir = path.join(__dirname, '../../../TestResults');
 if (!fs.existsSync(testResultDir)) {
   fs.mkdirSync(testResultDir);
 }
@@ -446,6 +447,7 @@ app.use('/azure/resource-flatten', new resourceFlatten(azurecoverage).router);
 app.use('/azurespecials', new azureSpecial(azurecoverage).router);
 app.use('/report', new report(coverage, azurecoverage).router);
 app.use('/subscriptions', new azureUrl(azurecoverage).router);
+app.use('/parameterGrouping', new parameterGrouping(azurecoverage).router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

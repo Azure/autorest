@@ -20,6 +20,20 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
     public partial class Widget
     {
         /// <summary>
+        /// Initializes a new instance of the Widget class.
+        /// </summary>
+        public Widget() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Widget class.
+        /// </summary>
+        public Widget(int? integer = default(int?), string stringProperty = default(string))
+        {
+            Integer = integer;
+            StringProperty = stringProperty;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "integer")]
         public int? Integer { get; set; }

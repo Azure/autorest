@@ -8,9 +8,8 @@
  * regenerated.
 */
 
-import { RequestOptions, WebResource } from "ms-rest";
-import * as stream from "stream";
-import * as models from "../models";
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import * as models from '../models';
 
 
 /**
@@ -29,19 +28,11 @@ export interface Bool {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {boolean} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getTrue(options: RequestOptions, callback: (err: Error, result: boolean, request: WebResource, response: stream.Readable) => void): void;
+    getTrue(options: RequestOptions, callback: ServiceCallback<boolean>): void;
+    getTrue(callback: ServiceCallback<boolean>): void;
 
     /**
      * Set Boolean value true
@@ -53,19 +44,11 @@ export interface Bool {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putTrue(boolBody: boolean, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putTrue(boolBody: boolean, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putTrue(boolBody: boolean, callback: ServiceCallback<void>): void;
 
     /**
      * Get false Boolean value
@@ -75,19 +58,11 @@ export interface Bool {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {boolean} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getFalse(options: RequestOptions, callback: (err: Error, result: boolean, request: WebResource, response: stream.Readable) => void): void;
+    getFalse(options: RequestOptions, callback: ServiceCallback<boolean>): void;
+    getFalse(callback: ServiceCallback<boolean>): void;
 
     /**
      * Set Boolean value false
@@ -99,19 +74,11 @@ export interface Bool {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {null} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    putFalse(boolBody: boolean, options: RequestOptions, callback: (err: Error, result: void, request: WebResource, response: stream.Readable) => void): void;
+    putFalse(boolBody: boolean, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putFalse(boolBody: boolean, callback: ServiceCallback<void>): void;
 
     /**
      * Get null Boolean value
@@ -121,19 +88,11 @@ export interface Bool {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {boolean} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: (err: Error, result: boolean, request: WebResource, response: stream.Readable) => void): void;
+    getNull(options: RequestOptions, callback: ServiceCallback<boolean>): void;
+    getNull(callback: ServiceCallback<boolean>): void;
 
     /**
      * Get invalid Boolean value
@@ -143,17 +102,9 @@ export interface Bool {
      * @param {object} [options.customHeaders] headers that will be added to
      * request
      *
-     * @param {function} callback
-     *
-     * @returns {function} callback(err, result, request, response)
-     *
-     *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-     *
-     *                      {boolean} [result]   - The deserialized result object.
-     *
-     *                      {object} [request]  - The HTTP Request object if an error did not occur.
-     *
-     *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: (err: Error, result: boolean, request: WebResource, response: stream.Readable) => void): void;
+    getInvalid(options: RequestOptions, callback: ServiceCallback<boolean>): void;
+    getInvalid(callback: ServiceCallback<boolean>): void;
 }

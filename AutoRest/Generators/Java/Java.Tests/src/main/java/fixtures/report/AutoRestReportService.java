@@ -10,6 +10,7 @@
 
 package fixtures.report;
 
+import java.math.BigDecimal;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponseCallback;

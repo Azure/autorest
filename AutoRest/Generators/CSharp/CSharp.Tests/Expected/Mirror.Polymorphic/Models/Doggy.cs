@@ -20,6 +20,19 @@ namespace Fixtures.MirrorPolymorphic.Models
     public partial class Doggy : Animal
     {
         /// <summary>
+        /// Initializes a new instance of the Doggy class.
+        /// </summary>
+        public Doggy() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Doggy class.
+        /// </summary>
+        public Doggy(string name = default(string))
+        {
+            Name = name;
+        }
+
+        /// <summary>
         /// dog name
         /// </summary>
         [JsonProperty(PropertyName = "name")]

@@ -20,6 +20,21 @@ namespace Fixtures.MirrorRecursiveTypes.Models
     public partial class Product
     {
         /// <summary>
+        /// Initializes a new instance of the Product class.
+        /// </summary>
+        public Product() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Product class.
+        /// </summary>
+        public Product(string productId = default(string), Product parentProduct = default(Product), IList<Product> innerProducts = default(IList<Product>))
+        {
+            ProductId = productId;
+            ParentProduct = parentProduct;
+            InnerProducts = innerProducts;
+        }
+
+        /// <summary>
         /// Unique identifier representing a specific product for a given
         /// latitude &amp; longitude. For example, uberX in San Francisco
         /// will have a different product_id than uberX in Los Angeles.

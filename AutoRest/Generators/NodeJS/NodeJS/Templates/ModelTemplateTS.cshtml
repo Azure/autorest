@@ -10,19 +10,26 @@
  * Initializes a new instance of the @(Model.Name) class.
  * @@constructor
 @WrapComment(" * ", Model.Documentation)
-@foreach (var property in Model.DocumentationPropertyList) {
+@foreach (var property in Model.DocumentationPropertyList)
+{
     @ModelTemplateModel.ConstructPropertyDocumentation(
               WrapComment(" * ", "@member {" + ModelTemplateModel.GetPropertyDocumentationType(property)
                                              + "} " + ModelTemplateModel.GetPropertyDocumentationName(property)
                                              + " " + property.Documentation))
 }
-*/
-export interface @(Model.Name) {
+ */
+@{if (Model.BaseModelType != null)
+{
+@:export interface @(Model.Name) extends @(Model.BaseModelType.Name) {
+}
+else
+{
+@:export interface @(Model.Name) {
+}
     @{
-    var propertyList = new List<Property>(Model.ComposedProperties);
+    var propertyList = new List<Property>(Model.Properties);
     for (int i = 0; i < propertyList.Count; i++)
     {
     @:@(ModelTemplateModel.PropertyTS(propertyList[i], true));
     }
-}
-}
+@:}

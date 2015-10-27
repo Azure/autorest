@@ -1,11 +1,16 @@
+import * as stream from 'stream';
+import * as http from 'http';
+
 /**
  * REST request options
  *  
  * @property {Object.<string, string>} customHeaders - Any additional HTTP headers to be added to the request
  */
 export interface RequestOptions {
-	customHeaders?: { [headerName: string]: string; }	
+	customHeaders?: { [headerName: string]: string; }
+	jar: boolean	
 }
+// TODO: Add other request options as appropriate above
 
 /**
  * Service client options, used for all REST requests initiated by the service client.
@@ -19,6 +24,29 @@ export interface ServiceClientOptions {
 	requestOptions?: RequestOptions;
 	noRetryPolicy?: boolean;
 }
+
+export interface ServiceError extends Error {
+  statusCode: number;
+  request: WebResource;
+  response: http.IncomingMessage;
+  body: any;
+}
+
+export interface ServiceCallback<TResult> { (err: Error|ServiceError, result: TResult, request: WebResource, response: http.IncomingMessage): void }
+
+/**
+* Creates a new 'ExponentialRetryPolicyFilter' instance.
+*
+* @constructor
+* @param {number} retryCount        The client retry count.
+* @param {number} retryInterval     The client retry interval, in milliseconds.
+* @param {number} minRetryInterval  The minimum retry interval, in milliseconds.
+* @param {number} maxRetryInterval  The maximum retry interval, in milliseconds.
+*/
+export class ExponentialRetryPolicyFilter {
+  constructor(retryCount: number, retryInterval: number, minRetryInterval: number, maxRetryInterval: number);
+}
+// TODO: Should we expose anything else here, for ExponentialRetryPolicyFilter?
 
 /**
  * This class provides an abstraction over a REST call by being library / implementation agnostic and wrapping the necessary
@@ -176,5 +204,17 @@ export class WebResource {
   *
   * @return destStream
   */
-  pipeInput(inputStream: stream.Readable, destStream: stream.Writeable): stream.Writeable;
+  pipeInput(inputStream: stream.Readable, destStream: stream.Writable): stream.Writable;
+}
+
+// TODO: Finish this;  expose signRequest?
+export class TokenCredentials {
+  /**
+  * Creates a new TokenCredentials object.
+  *
+  * @constructor
+  * @param {string} token               The token.
+  * @param {string} authorizationScheme The authorization scheme. If not specified, the default of 'Bearer" is used.
+  */
+  constructor(token: string, authorizationSchema?: string);
 }

@@ -31,10 +31,10 @@
     <Compile Include="AzureClientExtensions.cs" />
     <Compile Include="CloudError.cs" />
     <Compile Include="CloudException.cs" />
+    <Compile Include="IPage.cs" />
     <Compile Include="JsonSerializerExtensions.cs" />
     <Compile Include="OData\FilterString.cs" />
     <Compile Include="OData\UrlExpressionVisitor.cs" />
-    <Compile Include="Page.cs" />
     <Compile Include="PollingState.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="CloudErrorJsonConverter.cs" />
@@ -69,5 +69,4 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition=" '$(LibraryFxTarget)' == 'portable' " />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(LibraryFxTarget)' != 'portable' " />
-  <Import Project="$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition=" Exists('$(CommonNugetPackageFolder)\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets') AND '$(LibraryFxTarget)' != 'net45' " />
 </Project>

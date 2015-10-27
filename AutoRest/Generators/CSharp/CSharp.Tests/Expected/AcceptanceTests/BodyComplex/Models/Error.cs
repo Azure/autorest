@@ -20,6 +20,20 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class Error
     {
         /// <summary>
+        /// Initializes a new instance of the Error class.
+        /// </summary>
+        public Error() { }
+
+        /// <summary>
+        /// Initializes a new instance of the Error class.
+        /// </summary>
+        public Error(int? status = default(int?), string message = default(string))
+        {
+            Status = status;
+            Message = message;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public int? Status { get; set; }

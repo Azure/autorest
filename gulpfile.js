@@ -86,6 +86,7 @@ var defaultAzureMappings = {
   'AcceptanceTests/Lro': '../../../TestServer/swagger/lro.json',
   'AcceptanceTests/Paging': '../../../TestServer/swagger/paging.json',
   'AcceptanceTests/AzureReport': '../../../TestServer/swagger/azure-report.json',
+  'AcceptanceTests/AzureParameterGrouping': '../../../TestServer/swagger/azure-parameter-grouping.json',
   'AcceptanceTests/ResourceFlattening': '../../../TestServer/swagger/resource-flattening.json',
   'AcceptanceTests/Head': '../../../TestServer/swagger/head.json',
   'AcceptanceTests/SubscriptionIdApiVersion': '../../../TestServer/swagger/subscriptionId-apiVersion.json',
@@ -379,6 +380,7 @@ var clrCmd = function(cmd){
 };
 
 var execClrCmd = function(cmd, options){
+  gutil.log(cmd);
   return shell(clrCmd(cmd), options);
 };
 
@@ -387,12 +389,12 @@ var clrTask = function(cmd, options){
 };
 
 var xunit = function(template, options){
-  var xunitRunner = path.resolve('packages/xunit.runner.console.2.1.0-beta4-build3109/tools/xunit.console.x86.exe');
+  var xunitRunner = path.resolve('packages/xunit.runner.console.2.1.0/tools/xunit.console.exe');
   return execClrCmd(xunitRunner + ' ' + template, options);
 }
 
 gulp.task('test:xunit', function () {
-  return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain', defaultShellOptions));
+  return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain -diagnostics', defaultShellOptions));
 });
 
 var nugetPath = path.resolve('Tools/NuGet.exe');
@@ -400,7 +402,7 @@ var nugetTestProjDir = path.resolve('AutoRest/NugetPackageTest');
 var packagesDir = path.resolve('binaries/packages');
 var cachedClientRuntimePackages = path.join(process.env.HOME || (process.env.HOMEDRIVE + process.env.HOMEPATH),
     'AppData', 'Local', 'NuGet', 'Cache', "Microsoft.Rest.ClientRuntime.*.nupkg");
-gulp.task('test:nugetPackages:restore', ['test:nugetPackages:clean'], clrTask(nugetPath + ' restore ' + path.join(nugetTestProjDir, '/NugetPackageTest.sln') + ' -source ' + path.resolve(packagesDir)));
+gulp.task('test:nugetPackages:restore', ['test:nugetPackages:clean'], clrTask(nugetPath + ' restore ' + path.join(nugetTestProjDir, '/NugetPackageTest.sln') + ' -source "' + path.resolve(packagesDir) + ';https://www.nuget.org/api/v2/"'));
 gulp.task('test:nugetPackages:clean', function () {
   //turn on 'force' so we can remove files outside of repo folder.
   return del([path.join(nugetTestProjDir, 'Generated'), cachedClientRuntimePackages], {'force' : true});

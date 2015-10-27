@@ -20,6 +20,20 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     public partial class IntWrapper
     {
         /// <summary>
+        /// Initializes a new instance of the IntWrapper class.
+        /// </summary>
+        public IntWrapper() { }
+
+        /// <summary>
+        /// Initializes a new instance of the IntWrapper class.
+        /// </summary>
+        public IntWrapper(int? field1 = default(int?), int? field2 = default(int?))
+        {
+            Field1 = field1;
+            Field2 = field2;
+        }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "field1")]
         public int? Field1 { get; set; }

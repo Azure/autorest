@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(SolutionDir)\packages\xunit.runner.visualstudio.2.1.0-beta4-build1109\build\net20\xunit.runner.visualstudio.props" Condition="Exists('$(SolutionDir)\packages\xunit.runner.visualstudio.2.1.0-beta4-build1109\build\net20\xunit.runner.visualstudio.props')" />
-  <Import Project="$(SolutionDir)\packages\xunit.core.2.1.0-beta4-build3109\build\portable-net45+netcore45+wp8+wpa81\xunit.core.props" Condition="Exists('$(SolutionDir)\packages\xunit.core.2.1.0-beta4-build3109\build\portable-net45+netcore45+wp8+wpa81\xunit.core.props')" />
+  <Import Project="..\..\..\..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props" Condition="Exists('..\..\..\..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props')" />
+  <Import Project="..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props" Condition="Exists('..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -14,7 +16,7 @@
     <AssemblyName>AutoRest.Generator.CSharp.Tests</AssemblyName>
     <RestorePackages>true</RestorePackages>
     <AutoRestTest>true</AutoRestTest>
-    <NuGetPackageImportStamp>c999b926</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>e5346310</NuGetPackageImportStamp>
     <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
@@ -33,11 +35,18 @@
     <Reference Include="xunit.abstractions">
       <HintPath>$(SolutionDir)\packages\xunit.abstractions.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.assert">
-      <HintPath>$(SolutionDir)\packages\xunit.assert.2.1.0-beta4-build3109\lib\portable-net45+netcore45+wp8+wpa81\xunit.assert.dll</HintPath>
+    <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\xunit.assert.2.1.0\lib\portable-net45+win8+wp8+wpa81\xunit.assert.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="xunit.core">
-      <HintPath>$(SolutionDir)\packages\xunit.extensibility.core.2.1.0-beta4-build3109\lib\portable-net45+netcore45+wp8+wpa81\xunit.core.dll</HintPath>
+    <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\xunit.extensibility.core.2.1.0\lib\portable-net45+win8+wp8+wpa81\xunit.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -174,7 +183,9 @@
       <Link>Swagger\validation.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Swagger\swagger-mirror-polymorphic.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -217,7 +228,7 @@
     <Compile Include="Utilities\ServiceController.cs" />
     <Compile Include="AcceptanceTestOrderer.cs" />
     <Compile Include="Utilities\TestExtensions.cs" />
-    <Compile Include="Expected\**\*.cs"/>
+    <Compile Include="Expected\**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\..\TestServer\server\routes\sample.png">
@@ -231,4 +242,12 @@
       <UserProperties __JSONSchema="http://json.schemastore.org/swagger-2.0" />
     </VisualStudio>
   </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props'))" />
+    <Error Condition="!Exists('..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\..\..\..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props'))" />
+  </Target>
 </Project>

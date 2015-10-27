@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * The ByteWrapper model.
