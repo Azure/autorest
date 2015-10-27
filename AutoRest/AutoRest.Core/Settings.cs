@@ -70,30 +70,37 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// Gets or sets the path to the input specification file.
         /// </summary>
         [SettingsInfo("The location of the input specification.", true)]
+        [SettingsAlias("i")]
+        [SettingsAlias("input")]
         public string Input { get; set; }
 
         /// <summary>
         /// Gets or sets a base namespace for generated code.
         /// </summary>
         [SettingsInfo("The namespace to use for generated code.")]
+        [SettingsAlias("n")]
         public string Namespace { get; set; }
 
         /// <summary>
         /// Gets or sets the output directory for generated files. If not specified, uses 'Generated' as the default.
         /// </summary>
         [SettingsInfo("The location for generated files. If not specified, uses \"Generated\" as the default.")]
+        [SettingsAlias("o")]
+        [SettingsAlias("output")]
         public string OutputDirectory { get; set; }
 
         /// <summary>
         /// Gets or sets the code generation language.
         /// </summary>
         [SettingsInfo("The code generator language. If not specified, defaults to CSharp.")]
+        [SettingsAlias("g")]
         public string CodeGenerator { get; set; }
 
         /// <summary>
         /// Gets or sets the modeler to use for processing the input specification.
         /// </summary>
         [SettingsInfo("The Modeler to use on the input. If not specified, defaults to Swagger.")]
+        [SettingsAlias("m")]
         public string Modeler { get; set; }
 
         #endregion
@@ -105,6 +112,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         [SettingsInfo("Name to use for the generated client type. By default, uses " +
                       "the value of the 'Title' field from the Swagger input.")]
+        [SettingsAlias("name")]
         public string ClientName { get; set; }
 
         /// <summary>
@@ -112,6 +120,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         [SettingsInfo("Text to include as a header comment in generated files. " +
                       "Use NONE to suppress the default header.")]
+        [SettingsAlias("header")]
         public string Header
         {
             get { return _header; }
@@ -176,7 +185,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                             AddArgumentToDictionary(key, value, argsDictionary);
                             value = null;
                         }
-                        key = argument.Substring(1);
+                        key = argument.TrimStart('-');
                     }
                     else
                     {
@@ -215,7 +224,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 foreach (var setting in settings)
                 {
                     PropertyInfo property = (typeof (Settings)).GetProperties()
-                        .FirstOrDefault(p => p.Name.Equals(setting.Key, StringComparison.OrdinalIgnoreCase));
+                        .FirstOrDefault(p => setting.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase) ||
+                                             p.GetCustomAttributes<SettingsAliasAttribute>()
+                                                .Any(a => setting.Key.Equals(a.Alias, StringComparison.OrdinalIgnoreCase)));
 
                     if (property != null)
                     {

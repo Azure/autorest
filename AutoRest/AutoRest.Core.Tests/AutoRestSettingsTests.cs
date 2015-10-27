@@ -62,6 +62,20 @@ namespace Microsoft.Rest.Generator.Test
         }
 
         [Fact]
+        public void CreateWithAliasedParametersWorks()
+        {
+            var settings = Settings.Create(new[]
+            {
+                "-h", " --i", "/c/input",
+                "-output", " c:\\output", "-clientName", "MyClient"
+            });
+            Assert.Equal("", settings.CustomSettings["h"]);
+            Assert.Equal("/c/input", settings.Input);
+            Assert.Equal("c:\\output", settings.OutputDirectory);
+            Assert.Equal("MyClient", settings.ClientName);
+        }
+
+        [Fact]
         public void MissingParameterThrowsException()
         {
             var settings = Settings.Create(new[] {"-Modeler", "foo"});
