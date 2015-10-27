@@ -100,10 +100,12 @@ class PoolManager(object):
 
             if raw:
                 return response
+
             #def get_status(status_link):
+            #    accept_status = [200, 201, 202, 204]
             #    request = self._client.get()
             #    request.url = status_link
-            #    return self._send(request)
+            #    return self._send(request, accept_status)
 
             #return Polled(response, get_status)
 

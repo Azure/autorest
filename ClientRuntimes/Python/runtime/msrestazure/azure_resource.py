@@ -23,3 +23,14 @@
 # THE SOFTWARE.
 #
 #--------------------------------------------------------------------------
+
+class AzureResource(object):
+
+    _attribute_map = {
+            'id': {'key':'id', 'type':'str'},
+            'type': {'key':'type', 'type':'str'},
+            'name': {'key':'name', 'type':'str'},
+            'location': {'key':'location', 'type':'str'},
+            'tags': {'key':'tags', 'type':'{str}'},
+            'provisioning_state': {'key':'provisioningState', 'type':'str'}
+        }
