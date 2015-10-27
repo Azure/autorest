@@ -328,7 +328,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public static string GetStatusCodeReference(HttpStatusCode code)
         {
-            return ((int)code).ToString();
+            return ((int)code).ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
