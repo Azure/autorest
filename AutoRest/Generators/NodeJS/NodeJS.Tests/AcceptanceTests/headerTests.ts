@@ -3,15 +3,15 @@
 
 'use strict';
 
-var should = require('should');
-var http = require('http');
-var util = require('util');
-var assert = require('assert');
-var msRest = require('ms-rest');
-var moment = require('moment');
+import should = require('should');
+import http = require('http');
+import util = require('util');
+import assert = require('assert');
+import msRest = require('ms-rest');
+import moment = require('moment');
 var _ = require('underscore')
 
-var headerClient = require('../Expected/AcceptanceTests/Header/autoRestSwaggerBATHeaderService');
+import headerClient = require('../Expected/AcceptanceTests/Header/autoRestSwaggerBATHeaderService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);

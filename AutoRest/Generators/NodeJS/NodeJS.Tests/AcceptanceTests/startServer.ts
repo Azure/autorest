@@ -3,9 +3,10 @@
 
 var util = require('util');
 var fs = require('fs');
-var child_process = require('child_process');
 
-var child;
+import child_process = require('child_process');
+
+var child: child_process.ChildProcess;
 
 before(function (done) {
   var isWin = /^win/.test(process.platform);
@@ -18,7 +19,7 @@ before(function (done) {
   fs.writeSync(out, 'Test run started at ' + new Date().toISOString() + '\n');
   child = child_process.spawn(nodeCmd, [__dirname + '/../../../../TestServer/server/startup/www']);
 
-  child.stdout.on('data', function (data) {
+  child.stdout.on('data', function (data: Buffer) {
     fs.writeSync(out, data.toString('UTF-8'));
     if (data.toString().indexOf('started') > 0) {
       started = true;
@@ -26,7 +27,7 @@ before(function (done) {
     }
   });
 
-  child.on('close', function (code) {
+  child.on('close', function () {
     if (!started) {
       done();
     }

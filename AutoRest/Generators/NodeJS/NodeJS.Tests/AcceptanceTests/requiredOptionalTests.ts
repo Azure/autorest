@@ -3,13 +3,13 @@
 
 'use strict';
 
-var should = require('should');
-var http = require('http');
-var util = require('util');
-var assert = require('assert');
-var msRest = require('ms-rest');
+import should = require('should');
+import http = require('http');
+import util = require('util');
+import assert = require('assert');
+import msRest = require('ms-rest');
 
-var reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/autoRestRequiredOptionalTestService');
+import reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/autoRestRequiredOptionalTestService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
