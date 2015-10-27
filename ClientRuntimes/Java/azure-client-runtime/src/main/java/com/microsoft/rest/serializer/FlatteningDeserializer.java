@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 /**
- * Custom serializer for serializing {@link Byte[]} objects into Base64 strings.
+ * Custom serializer for deserializing {@link BaseResource} with wrapped properties.
  */
 public class FlatteningDeserializer<T> extends StdDeserializer<T> implements ResolvableDeserializer {
     private final JsonDeserializer<?> defaultDeserializer;
@@ -54,7 +54,7 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
     @SuppressWarnings("unchecked")
     @Override
     public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-        JsonNode root = jp.getCodec().readTree(jp);
+        JsonNode root = new AzureJacksonHelper().getObjectMapper().readTree(jp);
         final Class<?> tClass = this.defaultDeserializer.handledType();
         for (Field field : tClass.getDeclaredFields()) {
             JsonNode node = root;

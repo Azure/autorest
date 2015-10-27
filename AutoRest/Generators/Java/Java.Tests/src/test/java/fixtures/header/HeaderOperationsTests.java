@@ -451,7 +451,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseDatetimeRfc1123Async("valid", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -468,7 +468,7 @@ public class HeaderOperationsTests {
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseDatetimeRfc1123Async("min", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
