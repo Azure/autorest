@@ -20,7 +20,7 @@ namespace Microsoft.Rest.Azure.Authentication
     {
         private AuthenticationContext _authenticationContext;
         private string _tokenAudience;
-        private IApplicationCredentialProvider _credentials;
+        private IApplicationAuthenticationProvider _authentications;
         private string _clientId;
         private DateTimeOffset _expiration;
         private string _accessToken;
@@ -49,7 +49,7 @@ namespace Microsoft.Rest.Azure.Authentication
                 throw new ArgumentNullException("authenticationResult");
             }
 
-            Initialize(context, tokenAudience, credential.ClientId, new MemoryApplicationCredentialProvider(credential), authenticationResult, authenticationResult.ExpiresOn);
+            Initialize(context, tokenAudience, credential.ClientId, new MemoryApplicationAuthenticationProvider(credential), authenticationResult, authenticationResult.ExpiresOn);
         }
 
         /// <summary>
@@ -61,17 +61,17 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="context">The authentication context to use when retrieving tokens.</param>
         /// <param name="tokenAudience">The token audience to use when retrieving tokens</param>
         /// <param name="clientId">The client Id for this active directory application</param>
-        /// <param name="credentialStore">The source of authentication information for this application.</param>
+        /// <param name="authenticationStore">The source of authentication information for this application.</param>
         /// <param name="authenticationResult">The authenticationResult of initial authentication with the application credentials.</param>
         public ApplicationTokenProvider(AuthenticationContext context, string tokenAudience, string clientId,
-             IApplicationCredentialProvider credentialStore, AuthenticationResult authenticationResult)
+             IApplicationAuthenticationProvider authenticationStore, AuthenticationResult authenticationResult)
         {
             if (authenticationResult == null)
             {
                 throw new ArgumentNullException("authenticationResult");
             }
 
-            Initialize(context, tokenAudience, clientId, credentialStore, authenticationResult, authenticationResult.ExpiresOn);
+            Initialize(context, tokenAudience, clientId, authenticationStore, authenticationResult, authenticationResult.ExpiresOn);
         }
 
         /// <summary>
@@ -83,13 +83,13 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="context">The authentication context to use when retrieving tokens.</param>
         /// <param name="tokenAudience">The token audience to use when retrieving tokens</param>
         /// <param name="clientId">The client Id for this active directory application</param>
-        /// <param name="credentialStore">The source of authentication information for this application.</param>
+        /// <param name="authenticationStore">The source of authentication information for this application.</param>
         /// <param name="authenticationResult">The authenticationResult of initial authentication with the application credentials.</param>
         /// <param name="tokenExpiration">The date of expiration for the current access token.</param>
         public ApplicationTokenProvider(AuthenticationContext context, string tokenAudience, string clientId,
-            IApplicationCredentialProvider credentialStore, AuthenticationResult authenticationResult, DateTimeOffset tokenExpiration)
+            IApplicationAuthenticationProvider authenticationStore, AuthenticationResult authenticationResult, DateTimeOffset tokenExpiration)
         {
-            Initialize(context, tokenAudience, clientId, credentialStore, authenticationResult, tokenExpiration);
+            Initialize(context, tokenAudience, clientId, authenticationStore, authenticationResult, tokenExpiration);
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Microsoft.Rest.Azure.Authentication
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, ClientCredential credential,
             ActiveDirectoryServiceSettings settings, TokenCache cache)
         {
-            return await LoginSilentAsync(domain, credential.ClientId, new MemoryApplicationCredentialProvider(credential),
+            return await LoginSilentAsync(domain, credential.ClientId, new MemoryApplicationAuthenticationProvider(credential),
                settings, cache);
         }
 
@@ -226,12 +226,12 @@ namespace Microsoft.Rest.Azure.Authentication
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
         /// <param name="clientId">The active directory clientId fo the application.</param>
-        /// <param name="credentialProvider">A source for the secure secret for this application.</param>
+        /// <param name="authenticationProvider">A source for the secure secret for this application.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId,
-            IApplicationCredentialProvider credentialProvider)
+            IApplicationAuthenticationProvider authenticationProvider)
         {
-            return await LoginSilentAsync(domain, clientId, credentialProvider, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
+            return await LoginSilentAsync(domain, clientId, authenticationProvider, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
         }
 
         /// <summary>
@@ -242,13 +242,13 @@ namespace Microsoft.Rest.Azure.Authentication
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
         /// <param name="clientId">The active directory clientId fo the application.</param>
-        /// <param name="credentialProvider">A source for the secure secret for this application.</param>
+        /// <param name="authenticationProvider">A source for the secure secret for this application.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId,
-            IApplicationCredentialProvider credentialProvider, TokenCache cache)
+            IApplicationAuthenticationProvider authenticationProvider, TokenCache cache)
         {
-            return await LoginSilentAsync(domain, clientId, credentialProvider, ActiveDirectoryServiceSettings.Azure, cache);
+            return await LoginSilentAsync(domain, clientId, authenticationProvider, ActiveDirectoryServiceSettings.Azure, cache);
         }
 
         /// <summary>
@@ -258,13 +258,13 @@ namespace Microsoft.Rest.Azure.Authentication
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
         /// <param name="clientId">The active directory clientId fo the application.</param>
-        /// <param name="credentialProvider">A source for the secure secret for this application.</param>
+        /// <param name="authenticationProvider">A source for the secure secret for this application.</param>
         /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId,
-            IApplicationCredentialProvider credentialProvider, ActiveDirectoryServiceSettings settings)
+            IApplicationAuthenticationProvider authenticationProvider, ActiveDirectoryServiceSettings settings)
         {
-            return await LoginSilentAsync(domain, clientId, credentialProvider, settings, TokenCache.DefaultShared);
+            return await LoginSilentAsync(domain, clientId, authenticationProvider, settings, TokenCache.DefaultShared);
         }
 
         /// <summary>
@@ -274,19 +274,18 @@ namespace Microsoft.Rest.Azure.Authentication
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
         /// <param name="clientId">The active directory clientId fo the application.</param>
-        /// <param name="credentialProvider">A source for the secure secret for this application.</param>
+        /// <param name="authenticationProvider">A source for the secure secret for this application.</param>
         /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId,
-            IApplicationCredentialProvider credentialProvider, ActiveDirectoryServiceSettings settings, TokenCache cache)
+            IApplicationAuthenticationProvider authenticationProvider, ActiveDirectoryServiceSettings settings, TokenCache cache)
         {
             var audience = settings.TokenAudience.ToString();
             var context = GetAuthenticationContext(domain, settings, cache);
-            var credential = await credentialProvider.GetCredentialAsync(clientId);
-            var authResult = await context.AcquireTokenAsync(audience, credential);
+            var authResult = await authenticationProvider.AuthenticateAsync(clientId, audience, context);
             return new TokenCredentials(new ApplicationTokenProvider(context, audience, clientId,
-                    credentialProvider, authResult));
+                    authenticationProvider, authResult));
         }
 
 #if DEBUG
@@ -295,20 +294,19 @@ namespace Microsoft.Rest.Azure.Authentication
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
         /// <param name="clientId">The active directory clientId fo the application.</param>
-        /// <param name="credentialProvider">A source for the secure secret for this application.</param>
+        /// <param name="authenticationProvider">A source for the secure secret for this application.</param>
         /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <param name="expiration">The token expiration.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         internal static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId,
-            IApplicationCredentialProvider credentialProvider, ActiveDirectoryServiceSettings settings, TokenCache cache, DateTimeOffset expiration)
+            IApplicationAuthenticationProvider authenticationProvider, ActiveDirectoryServiceSettings settings, TokenCache cache, DateTimeOffset expiration)
         {
             var audience = settings.TokenAudience.ToString();
             var context = GetAuthenticationContext(domain, settings, cache);
-            var credential = await credentialProvider.GetCredentialAsync(clientId);
-            var authResult = await context.AcquireTokenAsync(audience, credential);
+            var authResult = await authenticationProvider.AuthenticateAsync(clientId, audience, context);
             return new TokenCredentials(new ApplicationTokenProvider(context, audience, clientId,
-                    credentialProvider, authResult, expiration));
+                    authenticationProvider, authResult, expiration));
         }
 #endif
         /// <summary>
@@ -322,8 +320,7 @@ namespace Microsoft.Rest.Azure.Authentication
                 AuthenticationResult result;
                 if (AccessTokenExpired)
                 {
-                    var credential = await this._credentials.GetCredentialAsync(this._clientId).ConfigureAwait(false);
-                    result = await this._authenticationContext.AcquireTokenAsync(this._tokenAudience, credential).ConfigureAwait(false);
+                    result = await this._authentications.AuthenticateAsync(this._clientId, this._tokenAudience, this._authenticationContext).ConfigureAwait(false);
                     this._accessToken = result.AccessToken;
                     this._accessTokenType = result.AccessTokenType;
                     this._expiration = result.ExpiresOn;
@@ -343,7 +340,7 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         private void Initialize(AuthenticationContext context, string tokenAudience, string clientId,
-            IApplicationCredentialProvider credentialStore, AuthenticationResult authenticationResult, DateTimeOffset tokenExpiration)
+            IApplicationAuthenticationProvider authenticationStore, AuthenticationResult authenticationResult, DateTimeOffset tokenExpiration)
         {
             if (context == null)
             {
@@ -360,16 +357,16 @@ namespace Microsoft.Rest.Azure.Authentication
                 throw new ArgumentNullException("clientId");
             }
 
-            if (credentialStore == null)
+            if (authenticationStore == null)
             {
-                throw new ArgumentNullException("credentialStore");
+                throw new ArgumentNullException("authenticationStore");
             }
             if (authenticationResult == null)
             {
                 throw new ArgumentNullException("authenticationResult");
             }
 
-            this._credentials = credentialStore;
+            this._authentications = authenticationStore;
             this._clientId = clientId;
             this._authenticationContext = context;
             this._accessToken = authenticationResult.AccessToken;

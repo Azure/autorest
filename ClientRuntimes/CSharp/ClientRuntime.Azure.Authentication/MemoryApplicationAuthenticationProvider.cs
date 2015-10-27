@@ -10,14 +10,14 @@ namespace Microsoft.Rest.Azure.Authentication
     /// <summary>
     /// In memory store for application credentials.
     /// </summary>
-    internal class MemoryApplicationCredentialProvider : IApplicationCredentialProvider
+    internal class MemoryApplicationAuthenticationProvider : IApplicationAuthenticationProvider
     {
         private IDictionary<string, ClientCredential> _credentials;
 
         /// <summary>
         /// Intializes an in-memory store of application credentials
         /// </summary>
-        public MemoryApplicationCredentialProvider()
+        public MemoryApplicationAuthenticationProvider()
         {
             this._credentials = new Dictionary<string, ClientCredential>();
         }
@@ -26,7 +26,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Initializes an in-memory store of application credentials starting with the given credential
         /// </summary>
         /// <param name="credential"></param>
-        public MemoryApplicationCredentialProvider(ClientCredential credential)
+        public MemoryApplicationAuthenticationProvider(ClientCredential credential)
             : this()
         {
             AddCredential(credential);
@@ -45,16 +45,18 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Retireve a credential from the in-memory store.  Throw an AuthenticationException if no matching
-        /// credential is found.
+        /// Authenticate using the credentials stored for the given client id
         /// </summary>
-        /// <param name="clientId">The clientId to match.</param>
-        /// <returns>The credential associated with the given client Id.</returns>
-        public Task<ClientCredential> GetCredentialAsync(string clientId)
+        /// <param name="clientId">The Application ID for this service principal</param>
+        /// <param name="audience">The intended audicne for authentication</param>
+        /// <param name="context">The AD AuthenticationContext to use</param>
+        /// <returns></returns>
+        public Task<AuthenticationResult> AuthenticateAsync(string clientId, string audience, AuthenticationContext context)
         {
             if (_credentials.ContainsKey(clientId))
             {
-                return Task.FromResult(_credentials[clientId]);
+                var creds = _credentials[clientId];
+                return context.AcquireTokenAsync(audience, creds);
             }
 
             throw new AuthenticationException("Matching credentials for client id '{0}' could not be found.");

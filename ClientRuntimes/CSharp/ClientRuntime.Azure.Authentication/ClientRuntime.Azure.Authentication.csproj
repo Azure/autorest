@@ -30,10 +30,11 @@
   <ItemGroup>
     <Compile Include="ActiveDirectoryClientSettings.cs" />
     <Compile Include="ApplicationTokenProvider.cs" />
+    <Compile Include="CertificateStoreAuthenticationProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IUserCredentialProvider.cs" />
-    <Compile Include="IApplicationCredentialProvider.cs" />
-    <Compile Include="MemoryApplicationCredentialProvider.cs" />
+    <Compile Include="IApplicationAuthenticationProvider.cs" />
+    <Compile Include="MemoryApplicationAuthenticationProvider.cs" />
     <Compile Include="UserTokenProvider.cs" />
     <Compile Include="ActiveDirectoryServiceSettings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

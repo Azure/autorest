@@ -173,7 +173,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public void ApplicationCredentialsCanBeRenewed()
         {
             var cache = new TestTokenCache();
-            var credentials = ApplicationTokenProvider.LoginSilentAsync(this._domain, this._applicationId, new MemoryApplicationCredentialProvider(new ClientCredential(this._applicationId, this._secret)),
+            var credentials = ApplicationTokenProvider.LoginSilentAsync(this._domain, this._applicationId, new MemoryApplicationAuthenticationProvider(new ClientCredential(this._applicationId, this._secret)),
                  ActiveDirectoryServiceSettings.Azure, cache, DateTimeOffset.UtcNow - TimeSpan.FromMinutes(5)).GetAwaiter().GetResult();
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
