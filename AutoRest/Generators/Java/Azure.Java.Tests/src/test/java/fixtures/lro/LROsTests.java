@@ -1,22 +1,20 @@
 package fixtures.lro;
 
-import com.microsoft.rest.CloudError;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.serializer.AzureJacksonHelper;
-import com.microsoft.rest.serializer.JacksonHelper;
 import com.squareup.okhttp.OkHttpClient;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import retrofit.JacksonConverterFactory;
 import retrofit.Retrofit;
 
-import javax.xml.ws.Service;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.concurrent.CountDownLatch;
@@ -54,27 +52,6 @@ public class LROsTests {
     }
 
     @Test
-    public void put200SucceededAsync() throws Exception {
-        final CountDownLatch lock = new CountDownLatch(1);
-        Product product = new Product();
-        product.setLocation("West US");
-        client.getLROs().put200SucceededAsync(product, new ServiceCallback<Product>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Product> result) {
-                Assert.assertEquals(200, result.getResponse().code());
-                Assert.assertEquals("Succeeded", result.getBody().getProvisioningState());
-                lock.countDown();
-            }
-        });
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
-    }
-
-    @Test
     public void put200SucceededNoState() throws Exception {
         Product product = new Product();
         product.setLocation("West US");
@@ -92,7 +69,7 @@ public class LROsTests {
         Assert.assertEquals("100", response.getBody().getId());
     }
 
-    @Test
+    @Ignore("Can cause flakiness - only run manually")
     public void put202Retry200Async() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
         long startTime = System.currentTimeMillis();

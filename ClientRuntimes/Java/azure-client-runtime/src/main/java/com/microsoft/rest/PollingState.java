@@ -70,14 +70,17 @@ public class PollingState<T> {
     }
 
     public void updateFromResponseOnPut(Response<ResponseBody> response) throws ServiceException, IOException {
-        if (response.body() == null) {
-            throw new ServiceException("no body");
-        }
-
         String responseContent = null;
         if (response.body() != null) {
             responseContent = response.body().string();
         }
+
+        if (responseContent == null || responseContent.isEmpty()) {
+            ServiceException exception = new ServiceException("no body");
+            exception.setResponse(response);
+            throw exception;
+        }
+
         PollingResource resource = JacksonHelper.deserialize(responseContent, new TypeReference<PollingResource>() {});
         if (resource != null && resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
             this.setStatus(resource.getProperties().getProvisioningState());

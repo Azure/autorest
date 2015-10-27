@@ -59,7 +59,9 @@ public class AzureClient extends ServiceClient {
 
         int statusCode = response.code();
         if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
-            throw new ServiceException(statusCode + " is not a valid polling status code");
+            ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+            exception.setResponse(response);
+            throw exception;
         }
 
         PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
@@ -99,7 +101,9 @@ public class AzureClient extends ServiceClient {
 
         int statusCode = response.code();
         if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
-            callback.failure(new ServiceException(statusCode + " is not a valid polling status code"));
+            ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+            exception.setResponse(response);
+            callback.failure(exception);
             return null;
         }
 
@@ -125,7 +129,9 @@ public class AzureClient extends ServiceClient {
 
         int statusCode = response.code();
         if (statusCode != 200 && statusCode != 202 && statusCode != 204) {
-            throw new ServiceException(statusCode + " is not a valid polling status code");
+            ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+            exception.setResponse(response);
+            throw exception;
         }
 
         PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
@@ -141,7 +147,9 @@ public class AzureClient extends ServiceClient {
                     !pollingState.getLocationHeaderLink().isEmpty()) {
                 updateStateFromLocationHeaderOnPostOrDelete(pollingState);
             } else {
-                throw new ServiceException("No header in response");
+                ServiceException exception = new ServiceException("No header in response");
+                exception.setResponse(response);
+                throw exception;
             }
         }
 
@@ -162,7 +170,9 @@ public class AzureClient extends ServiceClient {
 
         int statusCode = response.code();
         if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
-            callback.failure(new ServiceException(statusCode + " is not a valid polling status code"));
+            ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+            exception.setResponse(response);
+            callback.failure(exception);
             return null;
         }
 
@@ -273,10 +283,15 @@ public class AzureClient extends ServiceClient {
     private <T> void updateStateFromAzureAsyncOperationHeader(PollingState<T> pollingState) throws ServiceException, IOException {
         Response<ResponseBody> response = poll(pollingState.getAzureAsyncOperationHeaderLink());
 
-        AzureAsyncOperation body = JacksonHelper.deserialize(response.body().byteStream(), new TypeReference<AzureAsyncOperation>() {});
+        AzureAsyncOperation body = null;
+        if (response.body() != null) {
+            body = JacksonHelper.deserialize(response.body().byteStream(), new TypeReference<AzureAsyncOperation>() {});
+        }
 
         if (body == null || body.getStatus() == null) {
-            throw new ServiceException("no body");
+            ServiceException exception = new ServiceException("no body");
+            exception.setResponse(response);
+            throw exception;
         }
 
         pollingState.setStatus(body.getStatus());
@@ -294,9 +309,14 @@ public class AzureClient extends ServiceClient {
             @Override
             public void success(ServiceResponse<ResponseBody> result) {
                 try {
-                    AzureAsyncOperation body = JacksonHelper.deserialize(result.getBody().byteStream(), new TypeReference<AzureAsyncOperation>() {});
+                    AzureAsyncOperation body = null;
+                    if (result.getBody() != null) {
+                        body = JacksonHelper.deserialize(result.getBody().byteStream(), new TypeReference<AzureAsyncOperation>() {});
+                    }
                     if (body == null || body.getStatus() == null) {
-                        failure(new ServiceException("no body"));
+                        ServiceException exception = new ServiceException("no body");
+                        exception.setResponse(result.getResponse());
+                        failure(exception);
                     } else {
                         pollingState.setStatus(body.getStatus());
                         pollingState.setResponse(result.getResponse());
@@ -310,12 +330,22 @@ public class AzureClient extends ServiceClient {
         });
     }
 
-    private Response<ResponseBody> poll(String url) throws IOException {
+    private Response<ResponseBody> poll(String url) throws ServiceException, IOException {
         URL endpoint;
         endpoint = new URL(url);
         AsyncService service = this.retrofitBuilder
                 .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + endpoint.getPort()).build().create(AsyncService.class);
-        return service.get(endpoint.getFile()).execute();
+        Response<ResponseBody> response = service.get(endpoint.getFile()).execute();
+        int statusCode = response.code();
+        if (statusCode != 200 && statusCode != 201 && statusCode != 202 && statusCode != 204) {
+            ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+            exception.setResponse(response);
+            if (response.body() != null) {
+                exception.setErrorModel(JacksonHelper.deserialize(response.body().byteStream(), new TypeReference<Object>() {}));
+            }
+            throw exception;
+        }
+        return response;
     }
 
     private Call<ResponseBody> pollAsync(String url, final ServiceCallback<ResponseBody> callback) {
@@ -332,7 +362,22 @@ public class AzureClient extends ServiceClient {
         call.enqueue(new ServiceResponseCallback<ResponseBody>(callback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                callback.success(new ServiceResponse<ResponseBody>(response.body(), response));
+                try {
+                    int statusCode = response.code();
+                    if (statusCode != 200 && statusCode != 201 && statusCode != 202 && statusCode != 204) {
+                        ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+                        exception.setResponse(response);
+                        if (response.body() != null) {
+                            exception.setErrorModel(JacksonHelper.deserialize(response.body().byteStream(), new TypeReference<Object>() {
+                            }));
+                        }
+                        callback.failure(exception);
+                        return;
+                    }
+                    callback.success(new ServiceResponse<ResponseBody>(response.body(), response));
+                } catch (IOException ex) {
+                    callback.failure(ex);
+                }
             }
         });
         return call;
