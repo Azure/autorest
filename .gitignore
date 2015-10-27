@@ -1,4 +1,4 @@
-## Ignore generated code
+## Ignore generated code 
 AutoRest/NugetPackageTest/Generated
 AutoRest/Generators/NodeJS/NodeJS.Tests/AcceptanceTests/*.js
 
