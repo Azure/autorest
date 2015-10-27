@@ -14,36 +14,13 @@ import com.microsoft.rest.Resource;
 import com.microsoft.rest.SubResource;
 
 /**
- * The Sku model.
+ * The SubResource model.
  */
-public class Sku {
+public class SubResource {
     /**
-     * The name property.
-     */
-    private String name;
-
-    /**
-     * The id property.
+     * Sub Resource Id
      */
     private String id;
-
-    /**
-     * Get the name value.
-     *
-     * @return the name value
-     */ 
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * Set the name value.
-     *
-     * @param name the name value to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
 
     /**
      * Get the id value.
