@@ -122,7 +122,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -148,7 +148,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<TimeSpan?>(responseContent, this.Client.DeserializationSettings);
@@ -245,7 +245,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -351,7 +351,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -377,7 +377,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<TimeSpan?>(responseContent, this.Client.DeserializationSettings);
@@ -463,7 +463,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -489,7 +489,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<TimeSpan?>(responseContent, this.Client.DeserializationSettings);

@@ -146,7 +146,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
 
     HttpStatusCode statusCode = httpResponse.StatusCode;
     cancellationToken.ThrowIfCancellationRequested();
-    if (!(@(Model.SuccessStatusCodePredicate)))
+    if (@(Model.FailureStatusCodePredicate))
     {
         var ex = new @(Model.OperationExceptionTypeString)(string.Format("Operation returned an invalid status code '{0}'", statusCode));
     @if (Model.DefaultResponse != null)
@@ -186,7 +186,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     {
     <text>
     // Deserialize Response
-    if (statusCode == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key))
+    if ((int)statusCode == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key))
     {
         @if (responsePair.Value == PrimaryType.Stream)
         {

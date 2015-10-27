@@ -154,7 +154,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NoContent")))
+            if ((int)statusCode != 200 && (int)statusCode != 204)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -181,7 +181,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -299,7 +299,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -326,7 +326,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -446,7 +446,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -473,7 +473,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -595,7 +595,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created")))
+            if ((int)statusCode != 200 && (int)statusCode != 201)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -622,13 +622,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created"))
+            if ((int)statusCode == 201)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -750,7 +750,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -777,7 +777,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -899,7 +899,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created")))
+            if ((int)statusCode != 200 && (int)statusCode != 201)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -926,13 +926,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created"))
+            if ((int)statusCode == 201)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -1054,7 +1054,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -1081,7 +1081,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -1201,7 +1201,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -1228,7 +1228,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -1348,7 +1348,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -1375,7 +1375,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -1495,7 +1495,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -1522,7 +1522,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -1642,7 +1642,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -1669,7 +1669,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -1789,7 +1789,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -1816,7 +1816,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -1936,7 +1936,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created")))
+            if ((int)statusCode != 201)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -1963,7 +1963,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Created"))
+            if ((int)statusCode == 201)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -2079,7 +2079,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2106,7 +2106,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
@@ -2222,7 +2222,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2249,7 +2249,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
@@ -2365,7 +2365,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2392,7 +2392,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<SubProduct>(responseContent, this.Client.DeserializationSettings);
@@ -2508,7 +2508,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2535,7 +2535,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<SubProduct>(responseContent, this.Client.DeserializationSettings);
@@ -2644,7 +2644,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 200 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2671,13 +2671,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -2786,7 +2786,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 200 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2813,13 +2813,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -2928,7 +2928,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 200 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2955,13 +2955,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -3064,7 +3064,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NoContent")))
+            if ((int)statusCode != 204)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -3192,7 +3192,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 200 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -3219,7 +3219,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -3326,7 +3326,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 200 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -3353,7 +3353,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -3460,7 +3460,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NoContent") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 204 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -3588,7 +3588,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "NoContent") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 204 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -3716,7 +3716,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -3844,7 +3844,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -3972,7 +3972,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -4100,7 +4100,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -4228,7 +4228,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 202 && (int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -4255,13 +4255,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
@@ -4379,7 +4379,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -4516,7 +4516,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -4543,7 +4543,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted"))
+            if ((int)statusCode == 202)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -4661,7 +4661,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 202 && (int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -4688,7 +4688,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -4806,7 +4806,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted") || statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK")))
+            if ((int)statusCode != 202 && (int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -4833,7 +4833,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
             // Deserialize Response
-            if (statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "OK"))
+            if ((int)statusCode == 200)
             {
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
@@ -4951,7 +4951,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -5090,7 +5090,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if (!(statusCode == (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), "Accepted")))
+            if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
