@@ -23,7 +23,7 @@ import retrofit.http.GET;
 import retrofit.http.Header;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.CloudError;
-import com.microsoft.rest.Resource;
+import com.microsoft.rest.BaseResource;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.

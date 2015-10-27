@@ -33,7 +33,7 @@ import fixtures.resourceflattening.models.Resource;
 import fixtures.resourceflattening.models.FlattenedProduct;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.CloudError;
-import com.microsoft.rest.Resource;
+import com.microsoft.rest.BaseResource;
 import retrofit.Callback;
 
 /**

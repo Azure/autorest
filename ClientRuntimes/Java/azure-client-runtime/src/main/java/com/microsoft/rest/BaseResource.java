@@ -7,5 +7,5 @@
 
 package com.microsoft.rest;
 
-public abstract class Resource {
+public abstract class BaseResource {
 }

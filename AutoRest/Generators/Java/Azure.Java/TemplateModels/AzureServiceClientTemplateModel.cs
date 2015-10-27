@@ -51,7 +51,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     .ForEach(t => res.Remove(t));
                 res.Add("com.microsoft.rest.AzureClient");
                 res.Add("com.microsoft.rest.CloudError");
-                res.Add("com.microsoft.rest.Resource");
+                res.Add("com.microsoft.rest.BaseResource");
                 return res;
             }
         }
@@ -66,7 +66,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     .ForEach(t => res.Remove(t));
                 res.Add("com.microsoft.rest.AzureClient");
                 res.Add("com.microsoft.rest.CloudError");
-                res.Add("com.microsoft.rest.Resource");
+                res.Add("com.microsoft.rest.BaseResource");
                 res.Add("retrofit.Callback");
                 return res;
             }

@@ -10,9 +10,6 @@
 
 package fixtures.resourceflattening.models;
 
-import com.microsoft.rest.Resource;
-import com.microsoft.rest.SubResource;
-
 /**
  * The FlattenedProductProperties model.
  */

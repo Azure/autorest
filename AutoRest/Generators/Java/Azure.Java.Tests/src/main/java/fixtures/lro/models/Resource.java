@@ -11,12 +11,12 @@
 package fixtures.lro.models;
 
 import java.util.Map;
-import com.microsoft.rest.Resource;
+import com.microsoft.rest.BaseResource;
 
 /**
  * The Resource model.
  */
-public class Resource {
+public class Resource extends BaseResource {
     /**
      * Resource Id
      */

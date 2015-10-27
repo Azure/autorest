@@ -29,7 +29,7 @@ import java.util.Map;
 import fixtures.azurereport.models.Error;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.CloudError;
-import com.microsoft.rest.Resource;
+import com.microsoft.rest.BaseResource;
 import retrofit.Callback;
 
 /**

@@ -14,7 +14,7 @@ package com.microsoft.rest;
 /**
  * The SubResource model.
  */
-public class SubResource extends Resource {
+public class SubResource extends BaseResource {
     /**
      * Sub Resource Id
      */

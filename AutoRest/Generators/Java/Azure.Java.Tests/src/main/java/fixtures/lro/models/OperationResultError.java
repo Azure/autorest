@@ -10,7 +10,7 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.Resource;
+import com.microsoft.rest.BaseResource;
 
 /**
  * The OperationResultError model.

@@ -11,7 +11,7 @@
 package fixtures.lro;
 
 import com.microsoft.rest.CloudError;
-import com.microsoft.rest.Resource;
+import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;

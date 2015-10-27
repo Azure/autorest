@@ -67,6 +67,21 @@ namespace Microsoft.Rest.Generator.Java.Azure
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient);
+            ExtendAllResourcesToBaseResource(serviceClient);
+        }
+
+        private static void ExtendAllResourcesToBaseResource(ServiceClient serviceClient)
+        {
+            if (serviceClient != null)
+            {
+                foreach (var model in serviceClient.ModelTypes)
+                {
+                    if (model.Extensions.ContainsKey(AzureResourceExtension) && (bool)model.Extensions[AzureResourceExtension])
+                    {
+                        model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
+                    }
+                }
+            }
         }
 
         private static void NormalizeAllModelsToExtendResource(ServiceClient serviceClient)

@@ -13,7 +13,7 @@ package fixtures.head;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.CloudError;
-import com.microsoft.rest.Resource;
+import com.microsoft.rest.BaseResource;
 
 /**
  * The interface for AutoRestHeadTestService class.

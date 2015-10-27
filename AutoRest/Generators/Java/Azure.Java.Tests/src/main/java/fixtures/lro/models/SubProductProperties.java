@@ -10,9 +10,6 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.Resource;
-import com.microsoft.rest.SubResource;
-
 /**
  * The SubProductProperties model.
  */

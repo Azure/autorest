@@ -10,7 +10,6 @@ package com.microsoft.rest.serializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -22,11 +21,10 @@ import com.fasterxml.jackson.databind.deser.ResolvableDeserializer;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.microsoft.rest.Resource;
+import com.microsoft.rest.BaseResource;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 
 /**
  * Custom serializer for serializing {@link Byte[]} objects into Base64 strings.
@@ -40,13 +38,13 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
     }
 
     public static SimpleModule getModule() {
-        final Class<?> vc = Resource.class;
+        final Class<?> vc = BaseResource.class;
         SimpleModule module = new SimpleModule();
         module.setDeserializerModifier(new BeanDeserializerModifier() {
             @Override
             public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
                 if (vc.isAssignableFrom(beanDesc.getBeanClass()) && vc != beanDesc.getBeanClass())
-                    return new FlatteningDeserializer<Resource>(vc, deserializer);
+                    return new FlatteningDeserializer<BaseResource>(vc, deserializer);
                 return deserializer;
             }
         });
