@@ -48,7 +48,8 @@ public interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getMethodGlobalValid() throws ServiceException;
 
@@ -63,7 +64,8 @@ public interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ServiceException;
 
@@ -78,7 +80,8 @@ public interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getPathGlobalValid() throws ServiceException;
 
@@ -93,7 +96,8 @@ public interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getSwaggerGlobalValid() throws ServiceException;
 

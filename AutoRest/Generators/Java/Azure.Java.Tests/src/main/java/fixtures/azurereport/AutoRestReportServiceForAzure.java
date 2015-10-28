@@ -89,8 +89,8 @@ public interface AutoRestReportServiceForAzure {
     /**
      * Get test coverage report
      *
-     * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the Map&lt;String, Integer&gt; object wrapped in ServiceResponse if successful.
      */
     ServiceResponse<Map<String, Integer>> getReport() throws ServiceException;
 

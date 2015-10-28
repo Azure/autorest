@@ -49,7 +49,8 @@ public interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ServiceException;
 
@@ -66,7 +67,8 @@ public interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ServiceException;
 
@@ -83,7 +85,8 @@ public interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ServiceException;
 
@@ -100,7 +103,8 @@ public interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ServiceException;
 

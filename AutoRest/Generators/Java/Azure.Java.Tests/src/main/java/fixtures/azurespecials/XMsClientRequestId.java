@@ -41,7 +41,8 @@ public interface XMsClientRequestId {
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> get() throws ServiceException;
 
@@ -57,7 +58,8 @@ public interface XMsClientRequestId {
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ServiceException;
 

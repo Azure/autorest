@@ -52,7 +52,8 @@ public interface SubscriptionInCredentials {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> postMethodGlobalValid() throws ServiceException;
 
@@ -67,7 +68,8 @@ public interface SubscriptionInCredentials {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> postMethodGlobalNull() throws ServiceException;
 
@@ -82,7 +84,8 @@ public interface SubscriptionInCredentials {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> postMethodGlobalNotProvidedValid() throws ServiceException;
 
@@ -97,7 +100,8 @@ public interface SubscriptionInCredentials {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> postPathGlobalValid() throws ServiceException;
 
@@ -112,7 +116,8 @@ public interface SubscriptionInCredentials {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> postSwaggerGlobalValid() throws ServiceException;
 

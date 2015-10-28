@@ -39,7 +39,8 @@ public interface HeaderOperations {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
      *
      * @param fooClientRequestId The fooRequestId
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> customNamedRequestId(String fooClientRequestId) throws ServiceException;
 

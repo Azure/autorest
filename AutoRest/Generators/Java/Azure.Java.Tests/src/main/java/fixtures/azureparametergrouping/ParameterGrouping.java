@@ -51,7 +51,8 @@ public interface ParameterGrouping {
      * @param body the int value
      * @param customHeader the String value
      * @param query Query parameter with default
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> postRequired(String path, int body, String customHeader, Integer query) throws ServiceException;
 
@@ -72,7 +73,8 @@ public interface ParameterGrouping {
      *
      * @param customHeader the String value
      * @param query Query parameter with default
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> postOptional(String customHeader, Integer query) throws ServiceException;
 
@@ -93,7 +95,8 @@ public interface ParameterGrouping {
      * @param queryOne Query parameter with default
      * @param headerTwo the String value
      * @param queryTwo Query parameter with default
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> postMultipleParameterGroups(String headerOne, Integer queryOne, String headerTwo, Integer queryTwo) throws ServiceException;
 

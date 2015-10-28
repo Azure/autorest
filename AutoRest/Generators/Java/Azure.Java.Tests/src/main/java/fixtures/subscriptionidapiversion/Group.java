@@ -42,8 +42,8 @@ public interface Group {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @return the SampleResourceGroup object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the SampleResourceGroup object wrapped in ServiceResponse if successful.
      */
     ServiceResponse<SampleResourceGroup> getSampleResourceGroup(String resourceGroupName) throws ServiceException;
 

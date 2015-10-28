@@ -29,11 +29,18 @@ else
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
+@foreach (var exception in Model.ExceptionStatements)
+{
+@: * @@throws @exception
+}
 @if (Model.ReturnType != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object if successful.
+@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in ServiceResponse if successful.
 }
- * @@throws ServiceException the exception wrapped in ServiceException if failed.
+else
+{
+@: * @@return the ServiceResponse object if successful.
+}
  */
 public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
     Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterInvocation).execute();

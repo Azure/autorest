@@ -59,7 +59,8 @@ public interface SkipUrlEncoding {
      * Get method with unencoded path parameter with value 'path1/path2/path3'
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getMethodPathValid(String unencodedPathParam) throws ServiceException;
 
@@ -76,7 +77,8 @@ public interface SkipUrlEncoding {
      * Get method with unencoded path parameter with value 'path1/path2/path3'
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getPathPathValid(String unencodedPathParam) throws ServiceException;
 
@@ -93,7 +95,8 @@ public interface SkipUrlEncoding {
      * Get method with unencoded path parameter with value 'path1/path2/path3'
      *
      * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getSwaggerPathValid(String unencodedPathParam) throws ServiceException;
 
@@ -110,7 +113,8 @@ public interface SkipUrlEncoding {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getMethodQueryValid(String q1) throws ServiceException;
 
@@ -127,7 +131,8 @@ public interface SkipUrlEncoding {
      * Get method with unencoded query parameter with value null
      *
      * @param q1 Unencoded query parameter with value null
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getMethodQueryNull(String q1) throws ServiceException;
 
@@ -144,7 +149,8 @@ public interface SkipUrlEncoding {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getPathQueryValid(String q1) throws ServiceException;
 
@@ -161,7 +167,8 @@ public interface SkipUrlEncoding {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ServiceException;
 

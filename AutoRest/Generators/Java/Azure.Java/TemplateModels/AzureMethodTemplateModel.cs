@@ -72,6 +72,21 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public List<string> ExceptionStatements
+        {
+            get
+            {
+                List<string> exceptions = new List<string>();
+                exceptions.Add("ServiceException exception thrown from REST call");
+                if (this.IsLongRunningOperation)
+                {
+                    exceptions.Add("IOException exception thrown from serialization/deserialization");
+                    exceptions.Add("InterruptedException exception thrown when long running operation is interrupted");
+                }
+                return exceptions;
+            }
+        }
+
         public string PollingMethod
         {
             get

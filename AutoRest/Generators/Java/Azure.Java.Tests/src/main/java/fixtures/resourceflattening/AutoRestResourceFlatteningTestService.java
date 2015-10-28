@@ -111,7 +111,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array
      *
      * @param resourceArray External Resource as an Array to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ServiceException;
 
@@ -127,8 +128,8 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as an Array
      *
-     * @return the List&lt;FlattenedProduct&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the List&lt;FlattenedProduct&gt; object wrapped in ServiceResponse if successful.
      */
     ServiceResponse<List<FlattenedProduct>> getArray() throws ServiceException;
 
@@ -144,7 +145,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary
      *
      * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException;
 
@@ -160,8 +162,8 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a Dictionary
      *
-     * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the Map&lt;String, FlattenedProduct&gt; object wrapped in ServiceResponse if successful.
      */
     ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ServiceException;
 
@@ -177,7 +179,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a ResourceCollection
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
     ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException;
 
@@ -193,8 +196,8 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a ResourceCollection
      *
-     * @return the ResourceCollection object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ResourceCollection object wrapped in ServiceResponse if successful.
      */
     ServiceResponse<ResourceCollection> getResourceCollection() throws ServiceException;
 

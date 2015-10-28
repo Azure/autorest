@@ -41,8 +41,8 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful
      *
-     * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the Boolean object wrapped in ServiceResponse if successful.
      */
     ServiceResponse<Boolean> head204() throws ServiceException;
 
@@ -57,8 +57,8 @@ public interface HttpSuccess {
     /**
      * Return 404 status code if successful
      *
-     * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the Boolean object wrapped in ServiceResponse if successful.
      */
     ServiceResponse<Boolean> head404() throws ServiceException;
 
