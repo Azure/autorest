@@ -36,6 +36,14 @@ public class PollingState<T> {
     private Type resourceType;
     private CloudError error;
 
+    /**
+     * Initializes an instance of {@link PollingState}.
+     *
+     * @param response the response from Retrofit REST call.
+     * @param retryTimeout the long running operation retry timeout.
+     * @param resourceType the type of the resource the long running operation returns
+     * @throws IOException thrown by deserialization
+     */
     public PollingState(Response<ResponseBody> response, int retryTimeout, Type resourceType) throws IOException {
         this.retryTimeout = retryTimeout;
         this.setResponse(response);
@@ -69,7 +77,14 @@ public class PollingState<T> {
         }
     }
 
-    public void updateFromResponseOnPut(Response<ResponseBody> response) throws ServiceException, IOException {
+    /**
+     * Updates the polling state from a PUT or PATCH operation.
+     *
+     * @param response the response from Retrofit REST call
+     * @throws ServiceException thrown if the response is invalid
+     * @throws IOException thrown by deserialization
+     */
+    public void updateFromResponseOnPutPatch(Response<ResponseBody> response) throws ServiceException, IOException {
         String responseContent = null;
         if (response.body() != null) {
             responseContent = response.body().string();
@@ -101,7 +116,14 @@ public class PollingState<T> {
         }));
     }
 
-    public void updateFromResponseOnDelete(Response<ResponseBody> response) throws IOException {
+    /**
+     * Updates the polling state from a DELETE or POST operation.
+     *
+     * @param response the response from Retrofit REST call
+     * @throws IOException thrown by deserialization
+     */
+
+    public void updateFromResponseOnDeletePost(Response<ResponseBody> response) throws IOException {
         this.setResponse(response);
         String responseContent = null;
         if (response.body() != null) {
@@ -116,6 +138,11 @@ public class PollingState<T> {
         setStatus(AzureAsyncOperation.successStatus);
     }
 
+    /**
+     * Gets long running operation delay in milliseconds.
+     *
+     * @return the delay in milliseconds.
+     */
     public int getDelayInMilliseconds() {
         if (this.retryTimeout != null) {
             return this.retryTimeout * 1000;
@@ -126,10 +153,21 @@ public class PollingState<T> {
         return AzureAsyncOperation.defaultDelay * 1000;
     }
 
+    /**
+     * Gets the polling status.
+     *
+     * @return the polling status.
+     */
     public String getStatus() {
         return status;
     }
 
+
+    /**
+     * Sets the polling status.
+     *
+     * @param status the polling status.
+     */
     public void setStatus(String status) throws IllegalArgumentException {
         if (status == null) {
             throw new IllegalArgumentException("Status is null.");
@@ -137,10 +175,21 @@ public class PollingState<T> {
         this.status = status;
     }
 
+    /**
+     * Gets the last operation response.
+     *
+     * @return the last operation response.
+     */
     public Response getResponse() {
         return this.response;
     }
 
+
+    /**
+     * Sets the last operation response.
+     *
+     * @param response the last operation response.
+     */
     public void setResponse(Response response) {
         this.response = response;
         if (response != null) {
@@ -155,30 +204,64 @@ public class PollingState<T> {
         }
     }
 
+    /**
+     * Gets the latest value captured from Azure-AsyncOperation header.
+     *
+     * @return the link in the header.
+     */
     public String getAzureAsyncOperationHeaderLink() {
         return azureAsyncOperationHeaderLink;
     }
 
+    /**
+     * Gets the latest value captured from Location header.
+     *
+     * @return the link in the header.
+     */
     public String getLocationHeaderLink() {
         return locationHeaderLink;
     }
 
+    /**
+     * Gets the resource.
+     *
+     * @return the resource.
+     */
     public T getResource() {
         return resource;
     }
 
+    /**
+     * Sets the resource.
+     *
+     * @param resource the resource.
+     */
     public void setResource(T resource) {
         this.resource = resource;
     }
 
+    /**
+     * Gets {@link CloudError} from current instance.
+     *
+     * @return the cloud error.
+     */
     public CloudError getError() {
         return error;
     }
 
+    /**
+     * Sets {@link CloudError} from current instance.
+     *
+     * @param error the cloud error.
+     */
     public void setError(CloudError error) {
         this.error = error;
     }
 
+    /**
+     * An instance of this class describes the status of a long running operation
+     * and is returned from server each time.
+     */
     static class PollingResource {
         @JsonProperty(value = "properties")
         private Properties properties;

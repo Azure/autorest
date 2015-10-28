@@ -28,6 +28,8 @@ import java.lang.reflect.Field;
 
 /**
  * Custom serializer for deserializing {@link BaseResource} with wrapped properties.
+ * For example, a property with annotation @JsonProperty(value = "properties.name")
+ * will be mapped to a top level "name" property in the POJO model.
  */
 public class FlatteningDeserializer<T> extends StdDeserializer<T> implements ResolvableDeserializer {
     private final JsonDeserializer<?> defaultDeserializer;

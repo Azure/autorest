@@ -10,7 +10,8 @@ package com.microsoft.rest.serializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Custom serializer for serializing {@link Byte[]} objects into Base64 strings.
+ * A serialization helper class overriding {@link JacksonHelper} with extra
+ * functionality useful for Azure operations.
  */
 public final class AzureJacksonHelper extends JacksonHelper {
     @Override

@@ -7,5 +7,8 @@
 
 package com.microsoft.rest;
 
+/**
+ * Defines Azure resource.
+ */
 public abstract class BaseResource {
 }

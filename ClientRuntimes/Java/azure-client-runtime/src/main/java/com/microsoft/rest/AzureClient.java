@@ -27,17 +27,27 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * The base class for all REST clients for accessing Azure resources.
+ * An instance of this class defines a ServiceClient that handles polling and
+ * retrying for long running operations when accessing Azure resources.
  */
 public class AzureClient extends ServiceClient {
     private int longRunningOperationRetryTimeout;
     private ServiceClientCredentials credentials;
     private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
+    /**
+     * Initializes an instance of this class.
+     */
     public AzureClient() {
         super();
     }
 
+    /**
+     * Initializes an instance of this class with customized client metadata.
+     *
+     * @param client customized http client.
+     * @param retrofitBuilder customized retrofit builder
+     */
     public AzureClient(OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
     }
@@ -47,10 +57,12 @@ public class AzureClient extends ServiceClient {
      * the status of the operation until the long running operation terminates.
      *
      * @param response  the initial response from the PUT or PATCH operation.
-     * @param <T>       the generic type of the resource
+     * @param <T>       the return type of the caller
+     * @param resourceType the type of the resource
      * @return          the terminal response for the operation.
      * @throws ServiceException service exception
      * @throws InterruptedException interrupted exception
+     * @throws IOException thrown by deserialization
      */
     public <T> ServiceResponse<T> getPutOrPatchResult(Response<ResponseBody> response, Type resourceType) throws ServiceException, InterruptedException, IOException {
         if (response == null) {
@@ -93,6 +105,17 @@ public class AzureClient extends ServiceClient {
         return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
     }
 
+    /**
+     * Handles an initial response from a PUT or PATCH operation response by polling
+     * the status of the operation asynchronously, calling the user provided callback
+     * when the operation terminates.
+     *
+     * @param response  the initial response from the PUT or PATCH operation.
+     * @param <T>       the return type of the caller.
+     * @param resourceType the type of the resource.
+     * @param callback  the user callback to call when operation terminates.
+     * @return          the task describing the asynchronous polling.
+     */
     public <T> AsyncPollingTask<T> getPutOrPatchResultAsync(Response<ResponseBody> response, Type resourceType, ServiceCallback<T> callback) {
         if (response == null) {
             callback.failure(new ServiceException("response is null."));
@@ -122,6 +145,18 @@ public class AzureClient extends ServiceClient {
         return task;
     }
 
+    /**
+     * Handles an initial response from a POST or DELETE operation response by polling
+     * the status of the operation until the long running operation terminates.
+     *
+     * @param response  the initial response from the POST or DELETE operation.
+     * @param <T>       the return type of the caller
+     * @param resourceType the type of the resource
+     * @return          the terminal response for the operation.
+     * @throws ServiceException service exception
+     * @throws InterruptedException interrupted exception
+     * @throws IOException thrown by deserialization
+     */
     public <T> ServiceResponse<T> getPostOrDeleteResult(Response<ResponseBody> response, Type resourceType) throws ServiceException, InterruptedException, IOException {
         if (response == null) {
             throw new ServiceException("response is null.");
@@ -162,6 +197,17 @@ public class AzureClient extends ServiceClient {
         return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
     }
 
+    /**
+     * Handles an initial response from a POST or DELETE operation response by polling
+     * the status of the operation asynchronously, calling the user provided callback
+     * when the operation terminates.
+     *
+     * @param response  the initial response from the POST or DELETE operation.
+     * @param <T>       the return type of the caller.
+     * @param resourceType the type of the resource.
+     * @param callback  the user callback to call when operation terminates.
+     * @return          the task describing the asynchronous polling.
+     */
     public <T> AsyncPollingTask<T> getPostOrDeleteResultAsync(Response<ResponseBody> response, Type resourceType, ServiceCallback<T> callback) {
         if (response == null) {
             callback.failure(new ServiceException("response is null."));
@@ -197,7 +243,7 @@ public class AzureClient extends ServiceClient {
             pollingState.setResponse(response);
             pollingState.setStatus(AzureAsyncOperation.inProgressStatus);
         } else if (statusCode == 200 || statusCode == 201) {
-            pollingState.updateFromResponseOnPut(response);
+            pollingState.updateFromResponseOnPutPatch(response);
         }
     }
 
@@ -214,7 +260,7 @@ public class AzureClient extends ServiceClient {
                         pollingState.setResponse(result.getResponse());
                         pollingState.setStatus(AzureAsyncOperation.inProgressStatus);
                     } else if (statusCode == 200 || statusCode == 201) {
-                        pollingState.updateFromResponseOnPut(result.getResponse());
+                        pollingState.updateFromResponseOnPutPatch(result.getResponse());
                     }
                     callback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
                 } catch (Throwable t) {
@@ -231,7 +277,7 @@ public class AzureClient extends ServiceClient {
             pollingState.setResponse(response);
             pollingState.setStatus(AzureAsyncOperation.inProgressStatus);
         } else if (statusCode == 200 || statusCode == 201 || statusCode == 204) {
-            pollingState.updateFromResponseOnDelete(response);
+            pollingState.updateFromResponseOnDeletePost(response);
         }
     }
 
@@ -248,7 +294,7 @@ public class AzureClient extends ServiceClient {
                         pollingState.setResponse(result.getResponse());
                         pollingState.setStatus(AzureAsyncOperation.inProgressStatus);
                     } else if (statusCode == 200 || statusCode == 201 || statusCode == 204) {
-                        pollingState.updateFromResponseOnDelete(result.getResponse());
+                        pollingState.updateFromResponseOnDeletePost(result.getResponse());
                     }
                     callback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
                 } catch (Throwable t) {
@@ -260,7 +306,7 @@ public class AzureClient extends ServiceClient {
 
     private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws ServiceException, IOException {
         Response<ResponseBody> response = poll(url);
-        pollingState.updateFromResponseOnPut(response);
+        pollingState.updateFromResponseOnPutPatch(response);
     }
 
     private <T> Call<ResponseBody> updateStateFromGetResourceOperationAsync(final PollingState<T> pollingState, String url, final ServiceCallback<T> callback) {
@@ -271,7 +317,7 @@ public class AzureClient extends ServiceClient {
             @Override
             public void success(ServiceResponse<ResponseBody> result) {
                 try {
-                    pollingState.updateFromResponseOnPut(result.getResponse());
+                    pollingState.updateFromResponseOnPutPatch(result.getResponse());
                     callback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
                 } catch (Throwable t) {
                     failure(t);
@@ -404,6 +450,12 @@ public class AzureClient extends ServiceClient {
         Call<ResponseBody> get(@Url String url);
     }
 
+    /**
+     * The task runner that describes the state of an asynchronous long running
+     * operation.
+     *
+     * @param <T> the return type of the caller.
+     */
     abstract class AsyncPollingTask<T> implements Runnable {
         protected Call<ResponseBody> call;
         protected PollingState<T> pollingState;
@@ -415,6 +467,11 @@ public class AzureClient extends ServiceClient {
         }
     }
 
+    /**
+     * The task runner that handles PUT or PATCH operations.
+     *
+     * @param <T> the return type of the caller.
+     */
     class PutPatchPollingTask<T> extends AsyncPollingTask<T> {
         private String url;
 
@@ -466,7 +523,11 @@ public class AzureClient extends ServiceClient {
             }
         }
     }
-
+    /**
+     * The task runner that handles POST or DELETE operations.
+     *
+     * @param <T> the return type of the caller.
+     */
     class PostDeletePollingTask<T> extends AsyncPollingTask<T> {
         public PostDeletePollingTask(final PollingState<T> pollingState, final ServiceCallback<T> clientCallback) {
             this.create(pollingState, clientCallback);
