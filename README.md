@@ -4,11 +4,10 @@
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Swagger](http://github.com/swagger-api/swagger-spec) format.
 
-##Getting AutoRest##
-The AutoRest tools can be installed with Nuget for use in a Visual Studio project.
+##Getting AutoRest
+The AutoRest tools can be installed with Nuget for use in a Visual Studio project:
+[![AutoRest NuGet](https://img.shields.io/nuget/v/autorest.svg)](https://www.nuget.org/packages/autorest/)
 [![AutoRest NuGet](https://img.shields.io/nuget/v/autorest.svg?style=flat-square)](https://www.nuget.org/packages/autorest/)
-
-    nuget.exe install AutoRest
 
 Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by running:
 [![AutoRest Chocolatey](https://img.shields.io/chocolatey/v/autorest.svg?style=flat-square)](https://chocolatey.org/packages/AutoRest)
