@@ -1,4 +1,4 @@
-﻿#--------------------------------------------------------------------------
+#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -24,15 +24,42 @@
 #
 #--------------------------------------------------------------------------
 
-class AzureResponse(HTTPResponse):
+import sys
+import os
 
-    def __init__(self):
+if sys.version_info[:2] < (2, 7, ):
+    try:
+        import unittest2
+        from unittest2 import TestLoader, TextTestRunner
 
-        super(AzureResponse, self).__init__()
+    except ImportError:
+        raise ImportError("The Python Client Runtime test suite requires "
+                          "the unittest2 package to run on Python 2.6 and "
+                          "below.\nPlease install this package to continue.")
+else:
+    import unittest
+    from unittest import TestLoader, TextTestRunner
 
-        self.headers_map.update(
-            {'asyncoperation':{'key':'azure-asyncoperation','type':'str'},
-             'location':{'key':'location','type':'str'}})
+if sys.version_info[:2] >= (3, 3, ):
+    from unittest import mock
+else:
+    try:
+        import mock
 
-        self.asyncoperation = None
-        self.location = None
+    except ImportError:
+        raise ImportError("The Python Client runtime test suite requires "
+                          "the mock package to run on Python 3.2 and below.\n"
+                          "Please install this package to continue.")
+
+
+if __name__ == '__main__':
+
+    test_dir = os.path.dirname(__file__)
+    top_dir = os.path.dirname(os.path.dirname(os.path.dirname(test_dir)))
+    sys.path.append(top_dir)
+
+    from runtime.msrestazure.test import unittest_auth
+
+    unittest.main(unittest_auth)
+
+

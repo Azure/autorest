@@ -24,10 +24,14 @@
 #
 #--------------------------------------------------------------------------
 
-from .logger import LOGGER
+from . import logger
 
 class ClientException(Exception):
-    pass
+    
+    def __init__(self, message, *args):
+
+        logger.LOGGER.debug(message)
+        super(ClientException, self).__init__(message, *args)
 
 class SerializationError(ClientException):
     pass
@@ -45,4 +49,7 @@ class TokenExpiredError(ClientException):
     pass
 
 class ClientRequestException(ClientException):
+    pass
+
+class AuthenticationError(ClientException):
     pass

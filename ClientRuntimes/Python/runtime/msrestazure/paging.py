@@ -24,36 +24,36 @@
 #
 #--------------------------------------------------------------------------
 
-from ..msrest import ServiceClient
-from .azure_configuration import AzureConfiguration
+from ..msrest.serialization import Deserialized
+from threading import Thread, Event
+import time
 
-class AzureServiceClient(ServiceClient):
 
-    def __init__(self, creds, config):
+class Paged(object):
+
+    def __init__(self, items, url, command):
         """
-        Create service client.
-
-        :Args:
-            - config (`.Configuration`): Service configuration.
-            - creds (`.Authentication`): Authenticated credentials.
-
+        A collection for paged REST responses.
         """
-        if not config:
-            config = AzureConfiguration()
 
-        if not isinstance(config, AzureConfiguration):
-            raise TypeError("AzureServiceClient must use AzureConfiguration")
+        self.items = items
+        self.url = url
+        self.command = command
 
-        
+    def __iter__(self):
+        for i in self.items:
+            yield i
 
-        super(AzureServiceClient, self).__init__(creds, config)
+        while self.url is not None:
+            self.items, self.url = self.command(self.url)
+
+            for i in self.items:
+                yield i
+
+    def __len__(self):
+        return len(self.items)
+
+    def __getitem__(self, index):
+        return self.items[index]
 
 
-class AzureChinaServiceClient(AzureServiceClient):
-
-    def __init__(self, creds, config):
-
-        super(AzureChinaServiceClient, self).__init__(creds, config)
-
-        self.config.auth_endpoint = "login.chinacloudapi.cn/"
-        self.config.resource = "https://management.core.chinacloudapi.cn/"
