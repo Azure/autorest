@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
@@ -51,12 +52,12 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="audience">The intended audicne for authentication</param>
         /// <param name="context">The AD AuthenticationContext to use</param>
         /// <returns></returns>
-        public Task<AuthenticationResult> AuthenticateAsync(string clientId, string audience, AuthenticationContext context)
+        public async Task<AuthenticationResult> AuthenticateAsync(string clientId, string audience, AuthenticationContext context)
         {
             if (_credentials.ContainsKey(clientId))
             {
                 var creds = _credentials[clientId];
-                return context.AcquireTokenAsync(audience, creds);
+                return await context.AcquireTokenAsync(audience, creds);
             }
 
             throw new AuthenticationException("Matching credentials for client id '{0}' could not be found.");

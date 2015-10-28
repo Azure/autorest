@@ -30,7 +30,7 @@
   <ItemGroup>
     <Compile Include="ActiveDirectoryClientSettings.cs" />
     <Compile Include="ApplicationTokenProvider.cs" />
-    <Compile Include="CertificateStoreAuthenticationProvider.cs" />
+    <Compile Include="CertificateAuthenticationProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IUserCredentialProvider.cs" />
     <Compile Include="IApplicationAuthenticationProvider.cs" />
