@@ -8,6 +8,7 @@ using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -368,13 +369,64 @@ namespace Microsoft.Rest.Generator.CSharp
             return builder.ToString();
         }
 
-        public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
+        public virtual string BuildInputMappings()
         {
             var builder = new IndentedStringBuilder();
+            HashSet<string> initializedVariables = new HashSet<string>();
+            foreach (var mapping in InputParameterMappings)
+            {
+                var output = mapping.OutputParameter.Name;
+                if (!string.IsNullOrEmpty(mapping.OutputParameterProperty))
+                {
+                    output += "." + mapping.OutputParameterProperty;
+                }
 
-            builder.AppendLine("// trim all duplicate forward slashes in the url");
-            builder.AppendLine("{0} = Regex.Replace({0}, \"([^:]/)/+\", \"$1\");", urlVariableName);
+                var input = mapping.InputParameter.Name;
+                if (!string.IsNullOrEmpty(mapping.InputParameterProperty))
+                {
+                    input += "." + mapping.InputParameterProperty;
+                }
+
+                if (!initializedVariables.Contains(mapping.OutputParameter.Name))
+                {
+                    builder.AppendLine("{0} {1} = null;", 
+                        mapping.OutputParameter.Type.Name, 
+                        mapping.OutputParameter.Name);
+                    builder.AppendLine("if ({0})", BuildNullCheckExpression(input))
+                           .AppendLine("{")
+                             .Indent();
+                    if (!string.IsNullOrEmpty(mapping.OutputParameterProperty))
+                    {
+                        builder.AppendLine("{0} = default({1});", mapping.OutputParameter.Name, mapping.OutputParameter.Type.Name);
+                    }
+                             
+                    builder.AppendLine("{0} = {1};", output, input)
+                           .Outdent()
+                           .AppendLine("}");
+                }
+                initializedVariables.Add(mapping.OutputParameter.Name);
+            }
+
             return builder.ToString();
+        }
+
+        private string BuildNullCheckExpression(string propertyPath)
+        {
+            if (string.IsNullOrEmpty(propertyPath))
+            {
+                return propertyPath;
+            }
+
+            var builder = new List<string>();
+            var tokens = propertyPath.Split(new [] {'.'}, StringSplitOptions.RemoveEmptyEntries);
+            var currentToken = tokens[0];
+            for (int i = 1; i < tokens.Length; i++)
+            {
+                builder.Add(currentToken + " != null");
+                currentToken += "." + tokens[i];
+            }
+            builder.Add(currentToken + " != null");
+            return string.Join(" && ", builder);
         }
     }
 }

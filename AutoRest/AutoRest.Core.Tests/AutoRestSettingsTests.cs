@@ -76,6 +76,16 @@ namespace Microsoft.Rest.Generator.Test
         }
 
         [Fact]
+        public void IntegerParameterWorks()
+        {
+            var settings = Settings.Create(new[]
+            {
+                "-ft", "3", "-PayloadFlatteningThreshold", "4"
+            });
+            Assert.Equal(4, settings.PayloadFlatteningThreshold);
+        }
+
+        [Fact]
         public void MissingParameterThrowsException()
         {
             var settings = Settings.Create(new[] {"-Modeler", "foo"});

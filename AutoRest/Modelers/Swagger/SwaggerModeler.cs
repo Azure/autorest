@@ -97,6 +97,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     if (verb.ToHttpMethod() != HttpMethod.Options)
                     {
                         var method = BuildMethod(verb.ToHttpMethod(), path.Key, methodName, operation);
+                        FlattenRequestPayload(method);
                         method.Group = methodGroup;
                         ServiceClient.Methods.Add(method);
                     }
@@ -120,6 +121,39 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             return ServiceClient;
+        }
+
+        /// <summary>
+        /// Flattens the request payload if the number of properties of the 
+        /// payload is less than or equal to the PayloadFlatteningThreshold.
+        /// </summary>
+        /// <param name="method">Method to process</param>
+        private void FlattenRequestPayload(Method method)
+        {
+            var bodyParameter = method.Parameters.FirstOrDefault(
+                p => p.Location == Generator.ClientModel.ParameterLocation.Body);
+
+            if (bodyParameter != null)
+            {
+                var bodyParameterType = bodyParameter.Type as CompositeType;
+                if (bodyParameterType != null && bodyParameterType.Properties.Count <= Settings.PayloadFlatteningThreshold)
+                {
+                    foreach (var property in bodyParameterType.Properties)
+                    {
+                        var newMethodParameter = new Parameter();
+                        newMethodParameter.LoadFrom(property);
+                        method.Parameters.Add(newMethodParameter);
+                        method.InputParameterMappings.Add(new ParameterMapping 
+                        {
+                            InputParameter = newMethodParameter,
+                            OutputParameter = bodyParameter,
+                            OutputParameterProperty = property.Name
+                        });
+                    }
+
+                    method.Parameters.Remove(bodyParameter);
+                }
+            }
         }
 
         /// <summary>

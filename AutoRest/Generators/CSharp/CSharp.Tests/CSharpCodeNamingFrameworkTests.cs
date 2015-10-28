@@ -259,5 +259,52 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.Equal("IList<GreetingsModel>", serviceClient.Methods[0].ReturnType.Name);
             Assert.Equal("IDictionary<string, GreetingsModel>", serviceClient.Methods[1].ReturnType.Name);
         }
+
+        [Fact]
+        public void VerifyInputMappings()
+        {
+            var serviceClient = new ServiceClient();
+            serviceClient.Name = "test service client";
+
+            var customObjectType = new CompositeType();
+            customObjectType.Name = "Foo";
+            customObjectType.Properties.Add(new Property
+            {
+                Name = "A",
+                Type = PrimaryType.Boolean
+            });
+            customObjectType.Properties.Add(new Property
+            {
+                Name = "B",
+                Type = PrimaryType.String
+            });
+
+
+            serviceClient.Methods.Add(new Method
+            {
+                Name = "method1",
+                Group = "mGroup",
+                ReturnType = customObjectType
+            });
+
+            serviceClient.Methods[0].Parameters.Add(new Parameter { Name = "paramA", Type = PrimaryType.Boolean, SerializedName = "paramA" });
+            serviceClient.Methods[0].Parameters.Add(new Parameter { Name = "paramB", Type = PrimaryType.String, SerializedName = "paramB" });
+            serviceClient.Methods[0].InputParameterMappings.Add(new ParameterMapping
+            {
+                InputParameter = serviceClient.Methods[0].Parameters[0],
+                OutputParameter = new Parameter {  Name = "body", Type = customObjectType},
+                OutputParameterProperty = "A"
+            });
+            serviceClient.Methods[0].InputParameterMappings.Add(new ParameterMapping 
+            { 
+                InputParameter = serviceClient.Methods[0].Parameters[1],
+                OutputParameter = new Parameter { Name = "body", Type = customObjectType },
+                OutputParameterProperty = "B"
+            });
+
+            MethodTemplateModel templateModel = new MethodTemplateModel(serviceClient.Methods[0], serviceClient);
+            var output = templateModel.BuildInputMappings();
+            Assert.Equal("Foo body = null;\r\nif (paramA != null)\r\n{\r\n    body = default(Foo);\r\n    body.A = paramA;\r\n}\r\n", output);
+        }
     }
 }
