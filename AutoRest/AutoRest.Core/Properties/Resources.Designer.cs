@@ -223,6 +223,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is not expected..
+        /// </summary>
+        internal static string ParameterIsNotValid {
+            get {
+                return ResourceManager.GetString("ParameterIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is required..
         /// </summary>
         internal static string ParameterValueIsMissing {

@@ -69,7 +69,7 @@ namespace Microsoft.Rest.Generator.Test
                 "-h", " --i", "/c/input",
                 "-output", " c:\\output", "-clientName", "MyClient"
             });
-            Assert.Equal("", settings.CustomSettings["h"]);
+            Assert.True(settings.ShowHelp);
             Assert.Equal("/c/input", settings.Input);
             Assert.Equal("c:\\output", settings.OutputDirectory);
             Assert.Equal("MyClient", settings.ClientName);

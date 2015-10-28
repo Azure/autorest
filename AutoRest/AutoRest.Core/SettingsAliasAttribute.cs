@@ -26,6 +26,6 @@ namespace Microsoft.Rest.Generator
             Alias = alias;
         }
 
-        public string Alias { get; set; }
+        public string Alias { get; private set; }
     }
 }
