@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.Cli.Properties;
 using Microsoft.Rest.Generator.Extensibility;
@@ -54,6 +55,22 @@ namespace Microsoft.Rest.Generator.Cli
                             Console.ForegroundColor = ConsoleColor.Yellow;
                         }
 
+                        if (settings != null)
+                        {
+                            if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
+                            {
+                                Console.WriteLine(Resources.GenerationFailed);
+                                Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
+                                    typeof(Program).Assembly.ManifestModule.Name,
+                                    string.Join(" ", args)));
+                            }
+                            else
+                            {
+                                Console.WriteLine(Resources.GenerationComplete,
+                                    settings.CodeGenerator, settings.Input);
+                            }
+                        }
+
                         Logger.WriteErrors(Console.Error,
                             args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
 
@@ -63,12 +80,6 @@ namespace Microsoft.Rest.Generator.Cli
                         if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
                         {
                             Logger.WriteInfos(Console.Out);
-                        }
-
-                        if (settings != null)
-                        {
-                            Console.WriteLine(Resources.GenerationComplete,
-                                settings.CodeGenerator, settings.Input);
                         }
 
                         Console.ResetColor();

@@ -295,8 +295,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             foreach (PropertyInfo property in (typeof (Settings)).GetProperties())
             {
                 // If property value is not set - throw exception.
-                var doc = (SettingsInfoAttribute) property
-                    .GetCustomAttributes(typeof (SettingsInfoAttribute)).FirstOrDefault();
+                var doc = property.GetCustomAttributes<SettingsInfoAttribute>().FirstOrDefault();
                 if (doc != null && doc.IsRequired && property.GetValue(this) == null)
                 {
                     Logger.LogError(new ArgumentException(property.Name),
