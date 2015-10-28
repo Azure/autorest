@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Microsoft Rest Azure Client Runtime Authentication")]
 [assembly: AssemblyDescription("Client authentication infrastructure for Azure client libraries.")]
-[assembly: AssemblyVersion("0.9.0.0")]
-[assembly: AssemblyFileVersion("0.9.3.0")]
+[assembly: AssemblyVersion("0.11.0.0")]
+[assembly: AssemblyFileVersion("0.11.0.0")]
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft Corporation")]

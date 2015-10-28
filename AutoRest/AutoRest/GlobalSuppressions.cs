@@ -26,3 +26,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", 
     "CA1703:ResourceStringsShouldBeSpelledCorrectly", MessageId = "uto", Scope = "resource", 
     Target = "Microsoft.Rest.Generator.Cli.Properties.Resources.resources")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)", Scope = "member", Target = "Microsoft.Rest.Generator.Cli.Program.#Main(System.String[])")]
+

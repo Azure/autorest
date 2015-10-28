@@ -68,11 +68,11 @@ namespace Microsoft.Rest.Generator.Test
         public void NullOrEmptyAutoRestSettings()
         {
             Assert.Throws<ArgumentNullException>(() => ExtensionsLoader.GetCodeGenerator(null));
-            Assert.Throws<ArgumentNullException>(() => ExtensionsLoader.GetCodeGenerator(
+            Assert.Throws<ArgumentException>(() => ExtensionsLoader.GetCodeGenerator(
                 new Settings {CodeGenerator = string.Empty, FileSystem = _fileSystem}));
 
             Assert.Throws<ArgumentNullException>(() => ExtensionsLoader.GetModeler(null));
-            Assert.Throws<ArgumentNullException>(() => ExtensionsLoader.GetModeler(
+            Assert.Throws<ArgumentException>(() => ExtensionsLoader.GetModeler(
                 new Settings {Modeler = string.Empty, FileSystem = _fileSystem}));
         }
 
