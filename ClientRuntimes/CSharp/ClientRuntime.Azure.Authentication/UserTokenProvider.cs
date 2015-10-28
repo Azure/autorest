@@ -35,7 +35,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Tokens are retrieved from the token cache.
         /// </summary>
         /// <param name="context">The active directory authentication context to use for retrieving tokens.</param>
-        /// <param name="clientId">The active directory client Id to match when retieving tokens.</param>
+        /// <param name="clientId">The active directory client Id to match when retrieving tokens.</param>
         /// <param name="tokenAudience">The audience to match when retrieving tokens.</param>
         /// <param name="userId">The user id to match when retrieving tokens.</param>
         public UserTokenProvider(AuthenticationContext context, string clientId, Uri tokenAudience,
@@ -68,7 +68,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Log in to Azure active directory common tenant with user account and authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
         /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginWithPromptAsync(
             ActiveDirectoryClientSettings clientSettings)
@@ -81,7 +81,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Log in to Azure active directory common tenant using the given username, with authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
         /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
@@ -96,7 +96,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Log in to Azure active directory common tenant using the given username, with authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
         /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="username">The username to use for authentication.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginWithPromptAsync(
@@ -110,7 +110,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Log in to Azure active directory common tenant with user account and authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
         /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>ServiceClientCredentials object for the common tenant that match provided authentication credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginWithPromptAsync(
@@ -125,7 +125,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
         /// <param name="domain">The domain to authenticate against.</param>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
             ActiveDirectoryClientSettings clientSettings)
@@ -139,7 +139,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
         /// <param name="domain">The domain to authenticate against.</param>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
@@ -155,7 +155,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
         /// <param name="domain">The domain to authenticate against.</param>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="username">The username to use for authentication.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
@@ -170,7 +170,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
         /// <param name="domain">The domain to authenticate against.</param>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
@@ -185,7 +185,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
         /// <param name="domain">The domain to authenticate against.</param>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="serviceSettings">The settings for ad service, including endpoint and token audience</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain,
@@ -201,7 +201,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
         /// <param name="domain">The domain to authenticate against.</param>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="serviceSettings">The settings for ad service, including endpoint and token audience</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
@@ -218,7 +218,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
         /// <param name="domain">The domain to authenticate against.</param>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="serviceSettings">The settings for ad service, including endpoint and token audience</param>
         /// <param name="username">The username to use for authentication.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
@@ -235,7 +235,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
         /// <param name="domain">The domain to authenticate against.</param>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="serviceSettings">The settings for ad service, including endpoint and token audience</param>
         /// <param name="username">The username to use for authentication.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
@@ -253,7 +253,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// dialog, depending on the supplied client settings and the state of the token cache and user cookies.
         /// </summary>
         /// <param name="domain">The domain to authenticate against.</param>
-        /// <param name="clientSettings">The client settings to use for authentication. These determien when a dialog will be displayed.</param>
+        /// <param name="clientSettings">The client settings to use for authentication. These determine when a dialog will be displayed.</param>
         /// <param name="serviceSettings">The settings for ad service, including endpoint and token audience</param>
         /// <param name="userId">The userid of the desired credentials</param>
         /// <param name="cache">The token cache to target during authentication.</param>
@@ -300,7 +300,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="clientId">The active directory client id for this application.</param>
         /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
         /// <param name="username">The organizational account user name, given in the form of a user principal name (e.g. user1@contoso.org).</param>
-        /// <param name="password">The organziational account password.</param>
+        /// <param name="password">The organizational account password.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string clientId, string domain, string username, string password)
         {
@@ -308,14 +308,14 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Log in to azure active directory in non-interactive mode using organizational id credentials. Default service settings (autheority, audience) 
+        /// Log in to azure active directory in non-interactive mode using organizational id credentials. Default service settings (authority, audience) 
         /// for logging in to azure resource manager are used.
         /// </summary>
         /// <param name="clientId">The active directory client id for this application.</param>
         /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
         /// <param name="username">The organizational account user name, given in the form of a user principal name (e.g. user1@contoso.org).</param>
-        /// <param name="password">The organziational account password.</param>
-        /// <param name="cache">The token cahe to target during authentication.</param>
+        /// <param name="password">The organizational account password.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string clientId, string domain, string username,
             string password, TokenCache cache)
@@ -324,12 +324,12 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Log in to azure active directory in non-interactive mode using organizational id credentials and the defautl token cache.
+        /// Log in to azure active directory in non-interactive mode using organizational id credentials and the default token cache.
         /// </summary>
         /// <param name="clientId">The active directory client id for this application.</param>
         /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
         /// <param name="username">The organizational account user name, given in the form of a user principal name (e.g. user1@contoso.org).</param>
-        /// <param name="password">The organziational account password.</param>
+        /// <param name="password">The organizational account password.</param>
         /// <param name="serviceSettings">The active directory service details, including authentication endpoints and the intended token audience.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string clientId, string domain, string username,
@@ -344,9 +344,9 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="clientId">The active directory client id for this application.</param>
         /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
         /// <param name="username">The organizational account user name, given in the form of a user principal name (e.g. user1@contoso.org).</param>
-        /// <param name="password">The organziational account password.</param>
+        /// <param name="password">The organizational account password.</param>
         /// <param name="serviceSettings">The active directory service details, including authentication endpoints and the intended token audience.</param>
-        /// <param name="cache">The token cahe to target during authentication.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string clientId, string domain, string username, string password, 
             ActiveDirectoryServiceSettings serviceSettings, TokenCache cache)
@@ -371,7 +371,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Create service client credentials using information cached from a previous login to azure resource manager using the default token cache. 
         /// Parameters are used to match existing tokens.
         /// </summary>
-        /// <param name="clientId">The clientId to matchg when retrieving authentication tokens.</param>
+        /// <param name="clientId">The clientId to match when retrieving authentication tokens.</param>
         /// <param name="domain">The active directory domain or tenant id to match when retrieving authentication tokens.</param>
         /// <param name="username">The account username to match when retrieving authentication tokens.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the retrieved credentials. If no 
@@ -386,7 +386,7 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Create service client credentials using information cached from a previous login to azure resource manager. Parameters are used to match 
         /// existing tokens.
         /// </summary>
-        /// <param name="clientId">The clientId to matchg when retrieving authentication tokens.</param>
+        /// <param name="clientId">The clientId to match when retrieving authentication tokens.</param>
         /// <param name="domain">The active directory domain or tenant id to match when retrieving authentication tokens.</param>
         /// <param name="username">The account username to match when retrieving authentication tokens.</param>
         /// <param name="cache">The token cache to target when retrieving tokens.</param>
@@ -402,10 +402,10 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Create service client credentials using information cached from a previous login in the default token cache. Parameters are used to match 
         /// existing tokens.
         /// </summary>
-        /// <param name="clientId">The clientId to matchg when retrieving authentication tokens.</param>
+        /// <param name="clientId">The clientId to match when retrieving authentication tokens.</param>
         /// <param name="domain">The active directory domain or tenant id to match when retrieving authentication tokens.</param>
         /// <param name="username">The account username to match when retrieving authentication tokens.</param>
-        /// <param name="serviceSettings">The active directory service settings, including token authoroity and audience to match when retrieving tokens.</param>
+        /// <param name="serviceSettings">The active directory service settings, including token authority and audience to match when retrieving tokens.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the retrieved credentials. If no 
         /// credentials can be retrieved, an authentication exception is thrown.</returns>
         public static async Task<ServiceClientCredentials> CreateCredentialsFromCache(string clientId, string domain,
@@ -417,10 +417,10 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <summary>
         /// Create service client credentials using information cached from a previous login. Parameters are used to match existing tokens.
         /// </summary>
-        /// <param name="clientId">The clientId to matchg when retrieving authentication tokens.</param>
+        /// <param name="clientId">The clientId to match when retrieving authentication tokens.</param>
         /// <param name="domain">The active directory domain or tenant id to match when retrieving authentication tokens.</param>
         /// <param name="username">The account username to match when retrieving authentication tokens.</param>
-        /// <param name="serviceSettings">The active directory service settings, including token authoroity and audience to match when retrieving tokens.</param>
+        /// <param name="serviceSettings">The active directory service settings, including token authority and audience to match when retrieving tokens.</param>
         /// <param name="cache">The token cache to target when retrieving tokens.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the retrieved credentials. If no 
         /// credentials can be retrieved, an authentication exception is thrown.</returns>
