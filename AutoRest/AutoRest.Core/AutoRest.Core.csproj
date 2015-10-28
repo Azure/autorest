@@ -36,6 +36,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Modeler.cs" />
+    <Compile Include="SettingsAliasAttribute.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="ClientModel\ServiceClient.cs" />
     <Compile Include="ClientModel\DictionaryType.cs" />
