@@ -7,7 +7,7 @@ from .models import *
 
 class BatchClient(AzureServiceClient):
 
-    def __init__(self, credentials, config=AzureConfiguration()):
+    def __init__(self, credentials, config):
 
         super(BatchClient, self).__init__(credentials, config)
 

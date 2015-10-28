@@ -212,7 +212,7 @@ class ClientRetryPolicy(object):
         return self.policy.total
 
     @retries.setter
-    def max_retries(self, value):
+    def retries(self, value):
         self.policy.total = value
         self.policy.connect = value
         self.policy.read = value
@@ -276,7 +276,7 @@ class ClientConnection(object):
     def __init__(self, log_name):
 
         self._log = logging.getLogger(log_name)
-        self.timeout = None
+        self.timeout = 100
         self.verify = True
         self.cert = None
 

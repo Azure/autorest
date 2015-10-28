@@ -20,10 +20,7 @@ from runtime.msrestazure.azure_handlers import Paged, Polled
 from ..batch_exception import BatchStatusError
 
 from .. import models
-
 from ..models import *
-from ..models.enums import *
-from ..models.param_groups import *
 
 
 class PoolManager(object):
@@ -33,8 +30,6 @@ class PoolManager(object):
         self._client = client
         self._config = config
         self._classes = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
-        print(self._classes)
-        t = Pool()
 
     def __getitem__(self, name):
         response = self.get(name)
