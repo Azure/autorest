@@ -120,8 +120,9 @@ class TestPiplineHooks(unittest.TestCase):
 
         def hook(*args, **kwargs):
             self.assertEqual(args[1], "request_obj")
+            return None
 
-        self.adp.add_hook('request', hook, overwrite=True)
+        self.adp.add_hook('request', hook, precall=False, overwrite=True)
         resp = self.adp.send("request_obj")
         self.assertIsNone(resp)
 
@@ -130,6 +131,7 @@ class TestPiplineHooks(unittest.TestCase):
         def hook(*args, **kwargs):
             self.assertTrue('result' in kwargs)
             self.assertEqual(kwargs['result'].result, 200)
+            return kwargs['result']
 
         self.adp.add_hook('response', hook, precall=False)
         resp = self.adp.build_response('request_obj')
@@ -139,6 +141,7 @@ class TestPiplineHooks(unittest.TestCase):
         
         def hook(*args, **kwargs):
             kwargs['result'].headers['a'] = "Changed!"
+            return kwargs['result']
 
         self.adp.add_hook('response', hook, precall=False)
         resp = self.adp.build_response('request_obj')
