@@ -1,5 +1,3 @@
-﻿#--------------------------------------------------------------------------
-#
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
 # The MIT License (MIT)
@@ -24,38 +22,10 @@
 #
 #--------------------------------------------------------------------------
 
+
 from ..msrest.serialization import Deserialized
 from threading import Thread, Event
 import time
-
-
-class Paged(object):
-
-    def __init__(self, items, url, command):
-        """
-        A collection for paged REST responses.
-        """
-
-        self.items = items
-        self.url = url
-        self.command = command
-
-    def __iter__(self):
-        for i in self.items:
-            yield i
-
-        while self.url is not None:
-            self.items, self.url = self.command(self.url)
-
-            for i in self.items:
-                yield i
-
-    def __len__(self):
-        return len(self.items)
-
-    def __getitem__(self, index):
-        return self.items[index]
-
 
 class Polled(object):
 

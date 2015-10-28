@@ -26,10 +26,16 @@
 
 
 from ..msrest.authentication import Authentication, TokenAuthentication
+from ..msrest.exceptions import TokenExpiredError, AuthenticationError
 from .azure_configuration import AzureConfiguration
+
 import requests_oauthlib as oauth
 from oauthlib.oauth2 import BackendApplicationClient, LegacyApplicationClient
-from requests.auth import AuthBase
+from oauthlib.oauth2.rfc6749.errors import (
+    InvalidGrantError,
+    MismatchingStateError,
+    OAuth2Error)
+
 import time
 import keyring
 import ast
@@ -44,40 +50,53 @@ except ImportError:
     from urllib.parse import urlparse, parse_qs
 
 def _http(base_uri, *extra):
+    """
+    Convert https URL to http.
+    """
 
-    parts = [str(e).strip('/') for e in extra]
-    str_parts = '/'.join(parts)
+    path = [str(e).strip('/') for e in extra]
+    str_path = '/'.join(path)
     str_base = str(base_uri)
 
     if str_base.startswith("http://"):
-        return "{0}/{1}".format(str_base, str_parts)
+        return "{0}/{1}".format(str_base, str_path)
 
     elif str_base.startswith("https://"):
-        return "{0}/{1}".format(str_base.replace("https:","http:", 1), str_parts)
+        return "{0}/{1}".format(str_base.replace("https:","http:", 1), str_path)
 
     else:
-        return "http://{0}/{1}".format(str_base, str_parts)
+        return "http://{0}/{1}".format(str_base, str_path)
 
 def _https(base_uri, *extra):
-
-    parts = [str(e).strip('/') for e in extra]
-    str_parts = '/'.join(parts)
+    """
+    Convert http URL to https.
+    """
+    path = [str(e).strip('/') for e in extra]
+    str_path = '/'.join(path)
     str_base = str(base_uri)
 
     if str_base.startswith("https://"):
-        return "{0}/{1}".format(str_base, str_parts)
+        return "{0}/{1}".format(str_base, str_path)
 
     elif str_base.startswith("http://"):
-        return "{0}/{1}".format(str_base.replace("http:","https:", 1), str_parts)
+        return "{0}/{1}".format(str_base.replace("http:","https:", 1), str_path)
 
     else:
-        return "https://{0}/{1}".format(str_base, str_parts)
+        return "https://{0}/{1}".format(str_base, str_path)
 
 
 class AADMixin(object):
+    """
+    Mixin for Authentication object.
+    Provides some AAD functionality:
+        - State validation
+        - Token caching and retrieval
+    """
 
     def _configure(self, config):
-        
+        """
+        Configure authentication endpoint.
+        """
         if not config:
             config = AzureConfiguration()
 
@@ -88,7 +107,10 @@ class AADMixin(object):
         
         self.state = state = oauth.oauth2_session.generate_token()
 
-    def _check_state(response):
+    def _check_state(self, response):
+        """
+        Validate state returned by AAD server.
+        """
 
         state_key = '&state='
         state_idx = response.find(state_key)
@@ -102,22 +124,28 @@ class AADMixin(object):
         return state_val == self.state
 
     def _store_token(self, token):
-
+        """
+        Store token for future sessions.
+        """
         self.token = token
         keyring.set_password(self.cred_store, self.id, str(token))
 
     def _retrieve_stored_token(self):
-
+        """
+        Retrieve stored token for new session.
+        """
         token = keyring.get_password(self.cred_store, self.id)
 
         if token is None:
-            raise Exception() #TODO
+            raise ValueError("No stored token found.")
 
         else:
             return ast.literal_eval(str(token))
 
     def _clear_token(self):
-
+        """
+        Clear any stored tokens.
+        """
         try:
             keyring.delete_password(self.cred_store, self.id)
 
@@ -128,9 +156,10 @@ class AADMixin(object):
 class UserPassCredentials(TokenAuthentication, AADMixin):
     
 
-    def __init__(self, client_id, username, password, secret=None, config=None):
+    def __init__(self, client_id, username, password, 
+                 secret=None, config=None):
 
-        super(InteractiveAuth, self).__init__(client_id, None)
+        super(UserPassCredentials, self).__init__(client_id, None)
         self._configure(config)
 
         self.username = username
@@ -148,7 +177,8 @@ class UserPassCredentials(TokenAuthentication, AADMixin):
 
         try:
             token = session.fetch_token(self.token_uri, client_id=self.id,
-                                        username=self.username, password=self.password,
+                                        username=self.username,
+                                        password=self.password,
                                         **optional)
 
         except:
@@ -160,7 +190,8 @@ class UserPassCredentials(TokenAuthentication, AADMixin):
 
 class ServicePrincipalCredentials(TokenAuthentication, AADMixin):
     
-    def __init__(self, client_id, secret, resource, tenant=None, config=None):
+    def __init__(self, client_id, secret, resource,
+                 tenant=None, config=None):
 
         if not config:
             config = AzureConfiguration()
@@ -168,7 +199,7 @@ class ServicePrincipalCredentials(TokenAuthentication, AADMixin):
         if tenant:
             config.tenant = tenant
 
-        super(InteractiveAuth, self).__init__(client_id, None)
+        super(ServicePrincipalCredentials, self).__init__(client_id, None)
         self._configure(config)
 
         self.secret = secret
@@ -200,26 +231,29 @@ class ServicePrincipalCredentials(TokenAuthentication, AADMixin):
 class InteractiveCredentials(TokenAuthentication, AADMixin):
     
     def __init__(self, client_id, resource, redirect, config=None):
-
-        super(InteractiveAuth, self).__init__(client_id, None)
+        """
+        Interactive/Web AAD authentication
+        """
+        super(InteractiveCredentials, self).__init__(client_id, None)
         self._configure(config)
 
         self.resource = resource
         self.redirect = redirect
 
     def _setup_session(self):
-        return oauth.OAuth2Session(self.id, redirect_uri=self.redirect,
-                                               state=self.state)
+        return oauth.OAuth2Session(self.id,
+                                   redirect_uri=self.redirect,
+                                   state=self.state)
 
     def retrieve_session(self):
 
         try:
             self.token = self._retrieve_stored_token()
             self.signed_session()
-            return token
+            return self.token
 
-        except:
-            raise
+        except (ValueError, TokenExpiredError):
+            return None
 
     def get_auth_url(self, msa=False, **additional_args):
 
@@ -227,13 +261,15 @@ class InteractiveCredentials(TokenAuthentication, AADMixin):
             additional_args['domain_hint'] = 'live.com'
 
         session = self._setup_session()
-        auth_url, state = session.authorization_url(self.auth_uri, resource=self.resource, **additional_args)
+        auth_url, state = session.authorization_url(self.auth_uri,
+                                                    resource=self.resource,
+                                                    **additional_args)
         return auth_url, state
 
     def get_token(self, response_url):
 
         if not self._check_state(response_url):
-            raise Exception() #TODO
+            raise ValueError("Invalid state returned.")
 
         session = self._setup_session()
 
@@ -241,21 +277,16 @@ class InteractiveCredentials(TokenAuthentication, AADMixin):
             response_url = _https(response_url)
 
         elif not response_url.startswith(_https(self.redirect)):
-            response_url = _https(self.redirect) + response_url
+            response_url = _https(self.redirect, response_url) 
 
         try:
             token = session.fetch_token(self.token_uri,
                                         authorization_response=response_url,
                                         verify=self.verify)
 
-        except oauth2.rfc6749.errors.InvalidGrantError as excp:
-            raise
-
-        except oauth2.rfc6749.errors.OAuth2Error as excp:
-            raise
-
-        except oauth2.rfc6749.errors.MismatchingStateError as excep:
-            raise
+        except (InvalidGrantError, OAuth2Error,
+                MismatchingStateError) as err:
+            raise AuthenticationError(err)
 
         self.token = token
         return token
@@ -273,14 +304,13 @@ class InteractiveCredentials(TokenAuthentication, AADMixin):
                 auto_refresh_url=self.token_uri,
                 auto_refresh_kwargs={'client_id':self.id,
                                      'resource':self.resource},
-                token_updater=self._store_auth)
+                token_updater=self._store_token)
 
             return new_session
 
 
         except oauth2.rfc6749.errors.TokenExpiredError as err:
-            #TODO: Error handling
-            raise
+            raise TokenExpiredError(err)
 
 
 

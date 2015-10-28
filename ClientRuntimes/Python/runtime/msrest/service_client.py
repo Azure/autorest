@@ -97,12 +97,12 @@ class ServiceClient(object):
         for protocol in self._protocols:
             session.mount(protocol, self._adapter)
 
-    def send_async(self, request, callback, **kwargs):
+    def send_async(self, request_cmd, callback, *args, **kwargs):
         """
         Prepare and send request object asynchronously.
         """
         with ThreadPoolExecutor(max_workers=1) as executor:
-            future = executor.submit(self.send, request, **kwargs)
+            future = executor.submit(request_cmd, *args, **kwargs)
             future.add_done_callback(callback)
             return future
 
