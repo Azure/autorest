@@ -57,6 +57,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override ServiceClient Build()
         {
             PrimaryType.Reset();
