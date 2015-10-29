@@ -17,10 +17,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
         }
 
-        public override IEnumerable<String> Imports {
+        public override IEnumerable<String> ImportList {
             get
             {
-                var imports = base.Imports.ToList();
+                var imports = base.ImportList.ToList();
                 imports.Add("com.microsoft.rest.BaseResource");
                 return imports;
             }

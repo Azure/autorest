@@ -12,7 +12,7 @@
 package @(Settings.Namespace.ToLower()).models;
 @EmptyLine
 
-@foreach (var importClass in Model.Imports)
+@foreach (var importClass in Model.ImportList)
 {
 @:import @importClass;
 }

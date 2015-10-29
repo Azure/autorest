@@ -84,12 +84,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        private static void NormalizeAllModelsToExtendResource(ServiceClient serviceClient)
-        {
-            serviceClient.ModelTypes.Where(t => t.BaseModelType == null)
-                .ForEach(t => t.BaseModelType = new CompositeType { Name = "Resource" });
-        }
-
         /// <summary>
         /// Generates C# code for service client.
         /// </summary>
