@@ -136,26 +136,32 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             return imports;
         }
 
-        public static List<string> ImportFrom(this Parameter parameter, string ns)
+        public static List<string> ImportFrom(this Parameter parameter)
         {
-            var type = parameter.Type;
             List<string> imports = new List<string>();
+            if (parameter == null)
+            {
+                return imports;
+            }
+            var type = parameter.Type;
             if (type == PrimaryType.ByteArray ||
                 type.Name == "ByteArray")
             {
                 imports.Add("org.apache.commons.codec.binary.Base64");
             }
+
+            SequenceType sequenceType = type as SequenceType;
             if (parameter.Location != ParameterLocation.Body)
             {
                 if (type.Name == "LocalDate" ||
                     type.Name == "DateTime" ||
                     type is CompositeType ||
-                    type is SequenceType ||
+                    sequenceType != null ||
                     type is DictionaryType)
                 {
                     imports.Add("com.microsoft.rest.serializer.JacksonHelper");
                 }
-                if (type is SequenceType)
+                if (sequenceType != null)
                 {
                     imports.Add("com.microsoft.rest.serializer.CollectionFormat");
                 }
@@ -173,7 +179,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
             else
             {
-                return package + httpMethod.ToString().ToUpper();
+                return package + httpMethod.ToString().ToUpper(CultureInfo.InvariantCulture);
             }
         }
 

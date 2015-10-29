@@ -109,7 +109,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 var imports = base.InterfaceImports;
                 this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
-                    .ForEach(ex => imports.Add(JavaCodeNamer.getJavaException(ex)));
+                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
                 return imports;
             }
         }
@@ -120,7 +120,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 var imports = base.ImplImports;
                 this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
-                    .ForEach(ex => imports.Add(JavaCodeNamer.getJavaException(ex)));
+                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
                 if (this.IsLongRunningOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");

@@ -378,7 +378,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public static string getJavaException(string exception)
+        public static string GetJavaException(string exception)
         {
             switch (exception) {
                 case "IOException": 

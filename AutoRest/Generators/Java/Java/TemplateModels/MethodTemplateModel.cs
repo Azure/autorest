@@ -393,7 +393,7 @@ namespace Microsoft.Rest.Generator.Java
                 // parameter types
                 this.LocalParameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter utils
-                this.LocalParameters.ForEach(p => imports.AddRange(p.ImportFrom(ServiceClient.Namespace)));
+                this.LocalParameters.ForEach(p => imports.AddRange(p.ImportFrom()));
                 // return type
                 imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
                 // response type (can be different from return type)
