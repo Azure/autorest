@@ -102,5 +102,38 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 throw new InvalidOperationException("Invalid long running operation HTTP method " + this.HttpMethod);
             }
         }
+
+        public override List<string> InterfaceImports
+        {
+            get
+            {
+                var imports = base.InterfaceImports;
+                this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
+                return imports;
+            }
+        }
+
+        public override List<string> ImplImports
+        {
+            get
+            {
+                var imports = base.ImplImports;
+                this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
+                if (this.IsLongRunningOperation)
+                {
+                    imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
+                    imports.Remove("com.microsoft.rest.ServiceResponseCallback");
+                    imports.Remove("com.microsoft.rest.ServiceResponseBuilder");
+                    imports.Add("retrofit.Callback");
+                    this.Responses.Select(r => r.Value).Concat(new IType[]{ DefaultResponse })
+                        .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
+                        .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace).Contains(i)))
+                        .ForEach(i => imports.Remove(i));
+                }
+                return imports;
+            }
+        }
     }
 }

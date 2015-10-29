@@ -10,18 +10,18 @@
 
 package fixtures.header;
 
+import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
-import org.joda.time.LocalDate;
-import org.joda.time.DateTime;
-import com.microsoft.rest.DateTimeRfc1123;
-import org.joda.time.Period;
-import org.apache.commons.codec.binary.Base64;
 import fixtures.header.models.GreyscaleColors;
-import retrofit.http.POST;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import retrofit.Call;
 import retrofit.http.Header;
+import retrofit.http.POST;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -127,7 +127,7 @@ public interface HeaderOperations {
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramExistingKey(String userAgent) throws ServiceException;
+    ServiceResponse<Void> paramExistingKey(String userAgent) throws ServiceException;
 
     /**
      * Send a post request with header value "User-Agent": "overwrite"
@@ -143,7 +143,7 @@ public interface HeaderOperations {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseExistingKey() throws ServiceException;
+    ServiceResponse<Void> responseExistingKey() throws ServiceException;
 
     /**
      * Get a response with header value "User-Agent": "overwrite"
@@ -159,7 +159,7 @@ public interface HeaderOperations {
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramProtectedKey(String contentType) throws ServiceException;
+    ServiceResponse<Void> paramProtectedKey(String contentType) throws ServiceException;
 
     /**
      * Send a post request with header value "Content-Type": "text/html"
@@ -175,7 +175,7 @@ public interface HeaderOperations {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseProtectedKey() throws ServiceException;
+    ServiceResponse<Void> responseProtectedKey() throws ServiceException;
 
     /**
      * Get a response with header value "Content-Type": "text/html"
@@ -192,7 +192,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values 1 or -2
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramInteger(String scenario, int value) throws ServiceException;
+    ServiceResponse<Void> paramInteger(String scenario, int value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2 
@@ -210,7 +210,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseInteger(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseInteger(String scenario) throws ServiceException;
 
     /**
      * Get a response with header value "value": 1 or -2
@@ -228,7 +228,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values 105 or -2
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramLong(String scenario, long value) throws ServiceException;
+    ServiceResponse<Void> paramLong(String scenario, long value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2 
@@ -246,7 +246,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseLong(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseLong(String scenario) throws ServiceException;
 
     /**
      * Get a response with header value "value": 105 or -2
@@ -264,7 +264,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values 0.07 or -3.0
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramFloat(String scenario, double value) throws ServiceException;
+    ServiceResponse<Void> paramFloat(String scenario, double value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0
@@ -282,7 +282,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseFloat(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseFloat(String scenario) throws ServiceException;
 
     /**
      * Get a response with header value "value": 0.07 or -3.0
@@ -300,7 +300,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values 7e120 or -3.0
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramDouble(String scenario, double value) throws ServiceException;
+    ServiceResponse<Void> paramDouble(String scenario, double value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0
@@ -318,7 +318,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseDouble(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseDouble(String scenario) throws ServiceException;
 
     /**
      * Get a response with header value "value": 7e120 or -3.0
@@ -336,7 +336,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values true or false
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramBool(String scenario, boolean value) throws ServiceException;
+    ServiceResponse<Void> paramBool(String scenario, boolean value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false
@@ -354,7 +354,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseBool(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseBool(String scenario) throws ServiceException;
 
     /**
      * Get a response with header value "value": true or false
@@ -372,7 +372,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramString(String scenario, String value) throws ServiceException;
+    ServiceResponse<Void> paramString(String scenario, String value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": ""
@@ -390,7 +390,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseString(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseString(String scenario) throws ServiceException;
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
@@ -408,7 +408,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramDate(String scenario, LocalDate value) throws ServiceException;
+    ServiceResponse<Void> paramDate(String scenario, LocalDate value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"
@@ -426,7 +426,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseDate(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseDate(String scenario) throws ServiceException;
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01"
@@ -444,7 +444,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramDatetime(String scenario, DateTime value) throws ServiceException;
+    ServiceResponse<Void> paramDatetime(String scenario, DateTime value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"
@@ -462,7 +462,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseDatetime(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseDatetime(String scenario) throws ServiceException;
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
@@ -480,7 +480,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramDatetimeRfc1123(String scenario, DateTimeRfc1123 value) throws ServiceException;
+    ServiceResponse<Void> paramDatetimeRfc1123(String scenario, DateTimeRfc1123 value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT"
@@ -498,7 +498,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseDatetimeRfc1123(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseDatetimeRfc1123(String scenario) throws ServiceException;
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
@@ -516,7 +516,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramDuration(String scenario, Period value) throws ServiceException;
+    ServiceResponse<Void> paramDuration(String scenario, Period value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
@@ -534,7 +534,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseDuration(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseDuration(String scenario) throws ServiceException;
 
     /**
      * Get a response with header values "P123DT22H14M12.011S"
@@ -552,7 +552,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramByte(String scenario, byte[] value) throws ServiceException;
+    ServiceResponse<Void> paramByte(String scenario, byte[] value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
@@ -570,7 +570,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseByte(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseByte(String scenario) throws ServiceException;
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
@@ -588,7 +588,7 @@ public interface HeaderOperations {
      * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void paramEnum(String scenario, GreyscaleColors value) throws ServiceException;
+    ServiceResponse<Void> paramEnum(String scenario, GreyscaleColors value) throws ServiceException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null
@@ -606,7 +606,7 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void responseEnum(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseEnum(String scenario) throws ServiceException;
 
     /**
      * Get a response with header values "GREY" or null
@@ -622,7 +622,7 @@ public interface HeaderOperations {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void customRequestId() throws ServiceException;
+    ServiceResponse<Void> customRequestId() throws ServiceException;
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request

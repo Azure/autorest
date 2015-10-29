@@ -24,29 +24,5 @@ namespace Microsoft.Rest.Generator.Java.Azure
             Methods.Where(m => m.Group == methodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
         }
-
-        public override IEnumerable<string> ImplImports
-        {
-            get
-            {
-                var res = base.InterfaceImports.ToList();
-                this.ModelTypes.Where(m => m.Extensions.ContainsKey(ExternalExtension) && (bool)m.Extensions[ExternalExtension])
-                    .Select(m => (IType)m).ToList().TypeImports(this.Namespace)
-                    .ForEach(t => res.Remove(t));
-                return res;
-            }
-        }
-
-        public override IEnumerable<string> InterfaceImports
-        {
-            get
-            {
-                var res = base.InterfaceImports.ToList();
-                this.ModelTypes.Where(m => m.Extensions.ContainsKey(ExternalExtension) && (bool)m.Extensions[ExternalExtension])
-                    .Select(m => (IType)m).ToList().TypeImports(this.Namespace)
-                    .ForEach(t => res.Remove(t));
-                return res;
-            }
-        }
     }
 }

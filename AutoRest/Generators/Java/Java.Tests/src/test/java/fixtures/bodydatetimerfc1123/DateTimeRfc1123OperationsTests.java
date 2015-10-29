@@ -18,7 +18,7 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getDatetimerfc1123().getNull());
+        Assert.assertNull(client.getDatetimerfc1123().getNull().getBody());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void getOverflowDate() throws Exception {
-        DateTimeRfc1123 result = client.getDatetimerfc1123().getOverflow();
+        DateTimeRfc1123 result = client.getDatetimerfc1123().getOverflow().getBody();
         DateTime expected = new DateTime(10000, 1, 1, 00, 00, 00, 0, DateTimeZone.UTC);
         expected = expected.toDateTime(DateTimeZone.UTC);
         Assert.assertEquals(expected, result.getDateTime());
@@ -61,14 +61,14 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void getUtcLowercaseMaxDateTime() throws Exception {
-        DateTimeRfc1123 result = client.getDatetimerfc1123().getUtcLowercaseMaxDateTime();
+        DateTimeRfc1123 result = client.getDatetimerfc1123().getUtcLowercaseMaxDateTime().getBody();
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 0, DateTimeZone.UTC);
         Assert.assertEquals(expected, result.getDateTime());
     }
 
     @Test
     public void getUtcUppercaseMaxDateTime() throws Exception {
-        DateTimeRfc1123 result = client.getDatetimerfc1123().getUtcUppercaseMaxDateTime();
+        DateTimeRfc1123 result = client.getDatetimerfc1123().getUtcUppercaseMaxDateTime().getBody();
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 0, DateTimeZone.UTC);
         Assert.assertEquals(expected, result.getDateTime());
     }
@@ -81,7 +81,7 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void getUtcMinDateTime() throws Exception {
-        DateTimeRfc1123 result = client.getDatetimerfc1123().getUtcMinDateTime();
+        DateTimeRfc1123 result = client.getDatetimerfc1123().getUtcMinDateTime().getBody();
         DateTime expected = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC);
         Assert.assertEquals(expected, result.getDateTime());
     }

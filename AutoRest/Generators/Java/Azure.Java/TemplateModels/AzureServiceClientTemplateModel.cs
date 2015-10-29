@@ -41,18 +41,13 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override IEnumerable<string> InterfaceImports
+        public override List<string> InterfaceImports
         {
             get
             {
-                var res = base.InterfaceImports.ToList();
-                this.ModelTypes.Where(m => m.Extensions.ContainsKey(ExternalExtension) && (bool)m.Extensions[ExternalExtension])
-                    .Select(m => (IType)m).ToList().TypeImports(this.Namespace)
-                    .ForEach(t => res.Remove(t));
-                res.Add("com.microsoft.rest.AzureClient");
-                res.Add("com.microsoft.rest.CloudError");
-                res.Add("com.microsoft.rest.BaseResource");
-                return res;
+                var imports = base.InterfaceImports;
+                imports.Add("com.microsoft.rest.AzureClient");
+                return imports.OrderBy(i => i).ToList();
             }
         }
 
@@ -60,15 +55,9 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                var res = base.ImplImports.ToList();
-                this.ModelTypes.Where(m => m.Extensions.ContainsKey(ExternalExtension) && (bool)m.Extensions[ExternalExtension])
-                    .Select(m => (IType)m).ToList().TypeImports(this.Namespace)
-                    .ForEach(t => res.Remove(t));
-                res.Add("com.microsoft.rest.AzureClient");
-                res.Add("com.microsoft.rest.CloudError");
-                res.Add("com.microsoft.rest.BaseResource");
-                res.Add("retrofit.Callback");
-                return res;
+                var imports = base.ImplImports.ToList();
+                imports.Add("com.microsoft.rest.AzureClient");
+                return imports.OrderBy(i => i).ToList();
             }
         }
     }

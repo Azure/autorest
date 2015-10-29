@@ -18,10 +18,10 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.http.models.Error;
 import retrofit.Call;
 import retrofit.Response;
-import fixtures.http.models.Error;
+import retrofit.Retrofit;
 
 public class HttpServerFailureImpl implements HttpServerFailure {
     private HttpServerFailureService service;
@@ -38,11 +38,10 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error head501() throws ServiceException {
+    public ServiceResponse<Error> head501() throws ServiceException {
         try {
             Call<Void> call = service.head501();
-            ServiceResponse<Error> response = head501Delegate(call.execute(), null);
-            return response.getBody();
+            return head501Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -82,11 +81,10 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error get501() throws ServiceException {
+    public ServiceResponse<Error> get501() throws ServiceException {
         try {
             Call<ResponseBody> call = service.get501();
-            ServiceResponse<Error> response = get501Delegate(call.execute(), null);
-            return response.getBody();
+            return get501Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -127,11 +125,10 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error post505(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Error> post505(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.post505(booleanValue);
-            ServiceResponse<Error> response = post505Delegate(call.execute(), null);
-            return response.getBody();
+            return post505Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -173,11 +170,10 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Error delete505(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Error> delete505(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.delete505(booleanValue);
-            ServiceResponse<Error> response = delete505Delegate(call.execute(), null);
-            return response.getBody();
+            return delete505Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

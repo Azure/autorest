@@ -12,12 +12,13 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Basic;
+import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.PUT;
-import retrofit.http.Body;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -54,7 +55,7 @@ public interface BasicOperations {
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Basic getValid() throws ServiceException;
+    ServiceResponse<Basic> getValid() throws ServiceException;
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
@@ -70,7 +71,7 @@ public interface BasicOperations {
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putValid(Basic complexBody) throws ServiceException;
+    ServiceResponse<Void> putValid(Basic complexBody) throws ServiceException;
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}
@@ -87,7 +88,7 @@ public interface BasicOperations {
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Basic getInvalid() throws ServiceException;
+    ServiceResponse<Basic> getInvalid() throws ServiceException;
 
     /**
      * Get a basic complex type that is invalid for the local strong type
@@ -103,7 +104,7 @@ public interface BasicOperations {
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Basic getEmpty() throws ServiceException;
+    ServiceResponse<Basic> getEmpty() throws ServiceException;
 
     /**
      * Get a basic complex type that is empty
@@ -119,7 +120,7 @@ public interface BasicOperations {
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Basic getNull() throws ServiceException;
+    ServiceResponse<Basic> getNull() throws ServiceException;
 
     /**
      * Get a basic complex type whose properties are null
@@ -135,7 +136,7 @@ public interface BasicOperations {
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Basic getNotProvided() throws ServiceException;
+    ServiceResponse<Basic> getNotProvided() throws ServiceException;
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload

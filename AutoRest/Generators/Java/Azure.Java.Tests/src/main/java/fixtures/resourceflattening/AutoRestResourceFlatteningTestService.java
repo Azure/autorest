@@ -10,26 +10,22 @@
 
 package fixtures.resourceflattening;
 
+import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import java.math.BigDecimal;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Call;
+import fixtures.resourceflattening.models.FlattenedProduct;
+import fixtures.resourceflattening.models.Resource;
+import fixtures.resourceflattening.models.ResourceCollection;
 import java.util.List;
 import java.util.Map;
-import fixtures.resourceflattening.models.ResourceCollection;
-import fixtures.resourceflattening.models.Resource;
-import fixtures.resourceflattening.models.FlattenedProduct;
-import retrofit.http.PUT;
+import retrofit.Call;
 import retrofit.http.Body;
-import retrofit.http.Header;
 import retrofit.http.GET;
-import com.microsoft.rest.AzureClient;
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
+import retrofit.http.Header;
+import retrofit.http.PUT;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.

@@ -21,7 +21,7 @@ public class IntOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getIntOperations().getNull());
+        Assert.assertNull(client.getIntOperations().getNull().getBody());
     }
 
     @Test
@@ -60,7 +60,7 @@ public class IntOperationsTests {
     @Test
     public void getOverflowInt64() throws Exception {
         try {
-            long value = client.getIntOperations().getOverflowInt64();
+            long value = client.getIntOperations().getOverflowInt64().getBody();
             Assert.assertEquals(Long.MAX_VALUE, value);
         } catch (Exception exception) {
             Assert.assertEquals(ServiceException.class, exception.getClass());
@@ -71,7 +71,7 @@ public class IntOperationsTests {
     @Test
     public void getUnderflowInt64() throws Exception {
         try {
-            long value = client.getIntOperations().getUnderflowInt64();
+            long value = client.getIntOperations().getUnderflowInt64().getBody();
             Assert.assertEquals(Long.MIN_VALUE, value);
         } catch (Exception exception) {
             Assert.assertEquals(ServiceException.class, exception.getClass());

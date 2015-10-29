@@ -16,14 +16,13 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.microsoft.rest.Validator;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
-import retrofit.Call;
-import retrofit.Response;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.Error;
-import com.microsoft.rest.Validator;
+import retrofit.Call;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class BasicOperationsImpl implements BasicOperations {
     private BasicService service;
@@ -40,11 +39,10 @@ public class BasicOperationsImpl implements BasicOperations {
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Basic getValid() throws ServiceException {
+    public ServiceResponse<Basic> getValid() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getValid();
-            ServiceResponse<Basic> response = getValidDelegate(call.execute(), null);
-            return response.getBody();
+            return getValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -85,7 +83,7 @@ public class BasicOperationsImpl implements BasicOperations {
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putValid(Basic complexBody) throws ServiceException {
+    public ServiceResponse<Void> putValid(Basic complexBody) throws ServiceException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
@@ -93,8 +91,7 @@ public class BasicOperationsImpl implements BasicOperations {
         Validator.validate(complexBody);
         try {
             Call<ResponseBody> call = service.putValid(complexBody);
-            ServiceResponse<Void> response = putValidDelegate(call.execute(), null);
-            response.getBody();
+            return putValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -141,11 +138,10 @@ public class BasicOperationsImpl implements BasicOperations {
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Basic getInvalid() throws ServiceException {
+    public ServiceResponse<Basic> getInvalid() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getInvalid();
-            ServiceResponse<Basic> response = getInvalidDelegate(call.execute(), null);
-            return response.getBody();
+            return getInvalidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -186,11 +182,10 @@ public class BasicOperationsImpl implements BasicOperations {
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Basic getEmpty() throws ServiceException {
+    public ServiceResponse<Basic> getEmpty() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getEmpty();
-            ServiceResponse<Basic> response = getEmptyDelegate(call.execute(), null);
-            return response.getBody();
+            return getEmptyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -231,11 +226,10 @@ public class BasicOperationsImpl implements BasicOperations {
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Basic getNull() throws ServiceException {
+    public ServiceResponse<Basic> getNull() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getNull();
-            ServiceResponse<Basic> response = getNullDelegate(call.execute(), null);
-            return response.getBody();
+            return getNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -276,11 +270,10 @@ public class BasicOperationsImpl implements BasicOperations {
      * @return the Basic object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Basic getNotProvided() throws ServiceException {
+    public ServiceResponse<Basic> getNotProvided() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getNotProvided();
-            ServiceResponse<Basic> response = getNotProvidedDelegate(call.execute(), null);
-            return response.getBody();
+            return getNotProvidedDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

@@ -10,20 +10,16 @@
 
 package fixtures.azurereport;
 
+import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import java.math.BigDecimal;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Call;
 import java.util.Map;
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
-import com.microsoft.rest.AzureClient;
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.

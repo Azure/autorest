@@ -11,15 +11,6 @@
 
 package @(Settings.Namespace.ToLower());
 @EmptyLine
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import retrofit.Call;
-import com.squareup.okhttp.ResponseBody;
-import java.io.IOException;
-
 @foreach (var importClass in Model.InterfaceImports)
 {
 @:import @importClass;

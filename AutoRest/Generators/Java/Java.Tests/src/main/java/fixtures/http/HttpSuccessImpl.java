@@ -18,10 +18,10 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.http.models.Error;
 import retrofit.Call;
 import retrofit.Response;
-import fixtures.http.models.Error;
+import retrofit.Retrofit;
 
 public class HttpSuccessImpl implements HttpSuccess {
     private HttpSuccessService service;
@@ -37,11 +37,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void head200() throws ServiceException {
+    public ServiceResponse<Void> head200() throws ServiceException {
         try {
             Call<Void> call = service.head200();
-            ServiceResponse<Void> response = head200Delegate(call.execute(), null);
-            response.getBody();
+            return head200Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -82,11 +81,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Boolean get200() throws ServiceException {
+    public ServiceResponse<Boolean> get200() throws ServiceException {
         try {
             Call<ResponseBody> call = service.get200();
-            ServiceResponse<Boolean> response = get200Delegate(call.execute(), null);
-            return response.getBody();
+            return get200Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -127,11 +125,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put200(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> put200(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.put200(booleanValue);
-            ServiceResponse<Void> response = put200Delegate(call.execute(), null);
-            response.getBody();
+            return put200Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -173,11 +170,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch200(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> patch200(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.patch200(booleanValue);
-            ServiceResponse<Void> response = patch200Delegate(call.execute(), null);
-            response.getBody();
+            return patch200Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -219,11 +215,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post200(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> post200(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.post200(booleanValue);
-            ServiceResponse<Void> response = post200Delegate(call.execute(), null);
-            response.getBody();
+            return post200Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -265,11 +260,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete200(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> delete200(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.delete200(booleanValue);
-            ServiceResponse<Void> response = delete200Delegate(call.execute(), null);
-            response.getBody();
+            return delete200Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -311,11 +305,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put201(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> put201(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.put201(booleanValue);
-            ServiceResponse<Void> response = put201Delegate(call.execute(), null);
-            response.getBody();
+            return put201Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -357,11 +350,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post201(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> post201(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.post201(booleanValue);
-            ServiceResponse<Void> response = post201Delegate(call.execute(), null);
-            response.getBody();
+            return post201Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -403,11 +395,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put202(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> put202(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.put202(booleanValue);
-            ServiceResponse<Void> response = put202Delegate(call.execute(), null);
-            response.getBody();
+            return put202Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -449,11 +440,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch202(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> patch202(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.patch202(booleanValue);
-            ServiceResponse<Void> response = patch202Delegate(call.execute(), null);
-            response.getBody();
+            return patch202Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -495,11 +485,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post202(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> post202(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.post202(booleanValue);
-            ServiceResponse<Void> response = post202Delegate(call.execute(), null);
-            response.getBody();
+            return post202Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -541,11 +530,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete202(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> delete202(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.delete202(booleanValue);
-            ServiceResponse<Void> response = delete202Delegate(call.execute(), null);
-            response.getBody();
+            return delete202Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -586,11 +574,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void head204() throws ServiceException {
+    public ServiceResponse<Void> head204() throws ServiceException {
         try {
             Call<Void> call = service.head204();
-            ServiceResponse<Void> response = head204Delegate(call.execute(), null);
-            response.getBody();
+            return head204Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -631,11 +618,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put204(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> put204(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.put204(booleanValue);
-            ServiceResponse<Void> response = put204Delegate(call.execute(), null);
-            response.getBody();
+            return put204Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -677,11 +663,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch204(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> patch204(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.patch204(booleanValue);
-            ServiceResponse<Void> response = patch204Delegate(call.execute(), null);
-            response.getBody();
+            return patch204Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -723,11 +708,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post204(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> post204(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.post204(booleanValue);
-            ServiceResponse<Void> response = post204Delegate(call.execute(), null);
-            response.getBody();
+            return post204Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -769,11 +753,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete204(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> delete204(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.delete204(booleanValue);
-            ServiceResponse<Void> response = delete204Delegate(call.execute(), null);
-            response.getBody();
+            return delete204Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -814,11 +797,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void head404() throws ServiceException {
+    public ServiceResponse<Void> head404() throws ServiceException {
         try {
             Call<Void> call = service.head404();
-            ServiceResponse<Void> response = head404Delegate(call.execute(), null);
-            response.getBody();
+            return head404Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

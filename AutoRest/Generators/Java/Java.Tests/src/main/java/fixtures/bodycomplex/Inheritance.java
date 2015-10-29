@@ -12,12 +12,13 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Siamese;
+import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.PUT;
-import retrofit.http.Body;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -42,7 +43,7 @@ public interface Inheritance {
      * @return the Siamese object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Siamese getValid() throws ServiceException;
+    ServiceResponse<Siamese> getValid() throws ServiceException;
 
     /**
      * Get complex types that extend others
@@ -58,7 +59,7 @@ public interface Inheritance {
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putValid(Siamese complexBody) throws ServiceException;
+    ServiceResponse<Void> putValid(Siamese complexBody) throws ServiceException;
 
     /**
      * Put complex types that extend others
