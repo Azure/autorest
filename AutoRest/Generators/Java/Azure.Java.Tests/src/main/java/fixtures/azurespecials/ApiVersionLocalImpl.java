@@ -11,23 +11,16 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.azurespecials.models.Error;
 import retrofit.Call;
-import retrofit.Callback;
 import retrofit.Response;
-import java.io.IOException;
-import retrofit.http.GET;
-import retrofit.http.Query;
-import retrofit.http.Header;
+import retrofit.Retrofit;
 
 public class ApiVersionLocalImpl implements ApiVersionLocal {
     private ApiVersionLocalService service;

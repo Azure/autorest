@@ -11,24 +11,23 @@
 package fixtures.header;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.serializer.JacksonHelper;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.header.models.Error;
+import fixtures.header.models.GreyscaleColors;
+import org.apache.commons.codec.binary.Base64;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
 import retrofit.Call;
 import retrofit.Response;
-import org.joda.time.LocalDate;
-import org.joda.time.DateTime;
-import com.microsoft.rest.DateTimeRfc1123;
-import org.joda.time.Period;
-import org.apache.commons.codec.binary.Base64;
-import fixtures.header.models.GreyscaleColors;
-import fixtures.header.models.Error;
-import com.microsoft.rest.serializer.JacksonHelper;
+import retrofit.Retrofit;
 
 public class HeaderOperationsImpl implements HeaderOperations {
     private HeaderService service;
@@ -45,15 +44,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramExistingKey(String userAgent) throws ServiceException {
+    public ServiceResponse<Void> paramExistingKey(String userAgent) throws ServiceException {
         if (userAgent == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter userAgent is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramExistingKey(userAgent);
-            ServiceResponse<Void> response = paramExistingKeyDelegate(call.execute(), null);
-            response.getBody();
+            return paramExistingKeyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -98,11 +96,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseExistingKey() throws ServiceException {
+    public ServiceResponse<Void> responseExistingKey() throws ServiceException {
         try {
             Call<ResponseBody> call = service.responseExistingKey();
-            ServiceResponse<Void> response = responseExistingKeyDelegate(call.execute(), null);
-            response.getBody();
+            return responseExistingKeyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -143,15 +140,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramProtectedKey(String contentType) throws ServiceException {
+    public ServiceResponse<Void> paramProtectedKey(String contentType) throws ServiceException {
         if (contentType == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter contentType is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramProtectedKey(contentType);
-            ServiceResponse<Void> response = paramProtectedKeyDelegate(call.execute(), null);
-            response.getBody();
+            return paramProtectedKeyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -196,11 +192,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseProtectedKey() throws ServiceException {
+    public ServiceResponse<Void> responseProtectedKey() throws ServiceException {
         try {
             Call<ResponseBody> call = service.responseProtectedKey();
-            ServiceResponse<Void> response = responseProtectedKeyDelegate(call.execute(), null);
-            response.getBody();
+            return responseProtectedKeyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -242,15 +237,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values 1 or -2
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramInteger(String scenario, int value) throws ServiceException {
+    public ServiceResponse<Void> paramInteger(String scenario, int value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramInteger(scenario, value);
-            ServiceResponse<Void> response = paramIntegerDelegate(call.execute(), null);
-            response.getBody();
+            return paramIntegerDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -297,15 +291,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseInteger(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseInteger(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseInteger(scenario);
-            ServiceResponse<Void> response = responseIntegerDelegate(call.execute(), null);
-            response.getBody();
+            return responseIntegerDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -352,15 +345,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values 105 or -2
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramLong(String scenario, long value) throws ServiceException {
+    public ServiceResponse<Void> paramLong(String scenario, long value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramLong(scenario, value);
-            ServiceResponse<Void> response = paramLongDelegate(call.execute(), null);
-            response.getBody();
+            return paramLongDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -407,15 +399,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseLong(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseLong(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseLong(scenario);
-            ServiceResponse<Void> response = responseLongDelegate(call.execute(), null);
-            response.getBody();
+            return responseLongDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -462,15 +453,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values 0.07 or -3.0
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramFloat(String scenario, double value) throws ServiceException {
+    public ServiceResponse<Void> paramFloat(String scenario, double value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramFloat(scenario, value);
-            ServiceResponse<Void> response = paramFloatDelegate(call.execute(), null);
-            response.getBody();
+            return paramFloatDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -517,15 +507,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseFloat(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseFloat(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseFloat(scenario);
-            ServiceResponse<Void> response = responseFloatDelegate(call.execute(), null);
-            response.getBody();
+            return responseFloatDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -572,15 +561,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values 7e120 or -3.0
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramDouble(String scenario, double value) throws ServiceException {
+    public ServiceResponse<Void> paramDouble(String scenario, double value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramDouble(scenario, value);
-            ServiceResponse<Void> response = paramDoubleDelegate(call.execute(), null);
-            response.getBody();
+            return paramDoubleDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -627,15 +615,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseDouble(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseDouble(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseDouble(scenario);
-            ServiceResponse<Void> response = responseDoubleDelegate(call.execute(), null);
-            response.getBody();
+            return responseDoubleDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -682,15 +669,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values true or false
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramBool(String scenario, boolean value) throws ServiceException {
+    public ServiceResponse<Void> paramBool(String scenario, boolean value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramBool(scenario, value);
-            ServiceResponse<Void> response = paramBoolDelegate(call.execute(), null);
-            response.getBody();
+            return paramBoolDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -737,15 +723,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseBool(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseBool(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseBool(scenario);
-            ServiceResponse<Void> response = responseBoolDelegate(call.execute(), null);
-            response.getBody();
+            return responseBoolDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -792,15 +777,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramString(String scenario, String value) throws ServiceException {
+    public ServiceResponse<Void> paramString(String scenario, String value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramString(scenario, value);
-            ServiceResponse<Void> response = paramStringDelegate(call.execute(), null);
-            response.getBody();
+            return paramStringDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -847,15 +831,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseString(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseString(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseString(scenario);
-            ServiceResponse<Void> response = responseStringDelegate(call.execute(), null);
-            response.getBody();
+            return responseStringDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -902,7 +885,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramDate(String scenario, LocalDate value) throws ServiceException {
+    public ServiceResponse<Void> paramDate(String scenario, LocalDate value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
@@ -913,8 +896,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         }
         try {
             Call<ResponseBody> call = service.paramDate(scenario, JacksonHelper.serializeRaw(value));
-            ServiceResponse<Void> response = paramDateDelegate(call.execute(), null);
-            response.getBody();
+            return paramDateDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -965,15 +947,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseDate(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseDate(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseDate(scenario);
-            ServiceResponse<Void> response = responseDateDelegate(call.execute(), null);
-            response.getBody();
+            return responseDateDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1020,7 +1001,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramDatetime(String scenario, DateTime value) throws ServiceException {
+    public ServiceResponse<Void> paramDatetime(String scenario, DateTime value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
@@ -1031,8 +1012,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         }
         try {
             Call<ResponseBody> call = service.paramDatetime(scenario, JacksonHelper.serializeRaw(value));
-            ServiceResponse<Void> response = paramDatetimeDelegate(call.execute(), null);
-            response.getBody();
+            return paramDatetimeDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1083,15 +1063,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseDatetime(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseDatetime(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseDatetime(scenario);
-            ServiceResponse<Void> response = responseDatetimeDelegate(call.execute(), null);
-            response.getBody();
+            return responseDatetimeDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1138,15 +1117,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramDatetimeRfc1123(String scenario, DateTimeRfc1123 value) throws ServiceException {
+    public ServiceResponse<Void> paramDatetimeRfc1123(String scenario, DateTimeRfc1123 value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, value);
-            ServiceResponse<Void> response = paramDatetimeRfc1123Delegate(call.execute(), null);
-            response.getBody();
+            return paramDatetimeRfc1123Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1193,15 +1171,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseDatetimeRfc1123(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseDatetimeRfc1123(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseDatetimeRfc1123(scenario);
-            ServiceResponse<Void> response = responseDatetimeRfc1123Delegate(call.execute(), null);
-            response.getBody();
+            return responseDatetimeRfc1123Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1248,7 +1225,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramDuration(String scenario, Period value) throws ServiceException {
+    public ServiceResponse<Void> paramDuration(String scenario, Period value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
@@ -1259,8 +1236,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         }
         try {
             Call<ResponseBody> call = service.paramDuration(scenario, value);
-            ServiceResponse<Void> response = paramDurationDelegate(call.execute(), null);
-            response.getBody();
+            return paramDurationDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1311,15 +1287,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseDuration(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseDuration(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseDuration(scenario);
-            ServiceResponse<Void> response = responseDurationDelegate(call.execute(), null);
-            response.getBody();
+            return responseDurationDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1366,7 +1341,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramByte(String scenario, byte[] value) throws ServiceException {
+    public ServiceResponse<Void> paramByte(String scenario, byte[] value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
@@ -1377,8 +1352,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         }
         try {
             Call<ResponseBody> call = service.paramByte(scenario, Base64.encodeBase64String(value));
-            ServiceResponse<Void> response = paramByteDelegate(call.execute(), null);
-            response.getBody();
+            return paramByteDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1429,15 +1403,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseByte(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseByte(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseByte(scenario);
-            ServiceResponse<Void> response = responseByteDelegate(call.execute(), null);
-            response.getBody();
+            return responseByteDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1484,15 +1457,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramEnum(String scenario, GreyscaleColors value) throws ServiceException {
+    public ServiceResponse<Void> paramEnum(String scenario, GreyscaleColors value) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramEnum(scenario, JacksonHelper.serializeRaw(value));
-            ServiceResponse<Void> response = paramEnumDelegate(call.execute(), null);
-            response.getBody();
+            return paramEnumDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1539,15 +1511,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void responseEnum(String scenario) throws ServiceException {
+    public ServiceResponse<Void> responseEnum(String scenario) throws ServiceException {
         if (scenario == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.responseEnum(scenario);
-            ServiceResponse<Void> response = responseEnumDelegate(call.execute(), null);
-            response.getBody();
+            return responseEnumDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1592,11 +1563,10 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void customRequestId() throws ServiceException {
+    public ServiceResponse<Void> customRequestId() throws ServiceException {
         try {
             Call<ResponseBody> call = service.customRequestId();
-            ServiceResponse<Void> response = customRequestIdDelegate(call.execute(), null);
-            response.getBody();
+            return customRequestIdDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

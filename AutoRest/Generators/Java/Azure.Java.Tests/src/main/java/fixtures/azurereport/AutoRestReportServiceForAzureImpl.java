@@ -10,27 +10,22 @@
 
 package fixtures.azurereport;
 
-import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
-import java.math.BigDecimal;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.azurereport.models.Error;
+import java.util.Map;
 import retrofit.Call;
 import retrofit.Response;
-import java.util.Map;
-import fixtures.azurereport.models.Error;
-import com.microsoft.rest.AzureClient;
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
-import retrofit.Callback;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzure class.

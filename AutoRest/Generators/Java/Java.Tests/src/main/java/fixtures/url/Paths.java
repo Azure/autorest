@@ -12,12 +12,12 @@ package fixtures.url;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.url.models.UriColor;
-import org.apache.commons.codec.binary.Base64;
-import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
@@ -107,7 +107,7 @@ public interface Paths {
      * @param boolPath true boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getBooleanTrue(boolean boolPath) throws ServiceException;
+    ServiceResponse<Void> getBooleanTrue(boolean boolPath) throws ServiceException;
 
     /**
      * Get true Boolean value on path
@@ -124,7 +124,7 @@ public interface Paths {
      * @param boolPath false boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getBooleanFalse(boolean boolPath) throws ServiceException;
+    ServiceResponse<Void> getBooleanFalse(boolean boolPath) throws ServiceException;
 
     /**
      * Get false Boolean value on path
@@ -141,7 +141,7 @@ public interface Paths {
      * @param intPath '1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getIntOneMillion(int intPath) throws ServiceException;
+    ServiceResponse<Void> getIntOneMillion(int intPath) throws ServiceException;
 
     /**
      * Get '1000000' integer value
@@ -158,7 +158,7 @@ public interface Paths {
      * @param intPath '-1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getIntNegativeOneMillion(int intPath) throws ServiceException;
+    ServiceResponse<Void> getIntNegativeOneMillion(int intPath) throws ServiceException;
 
     /**
      * Get '-1000000' integer value
@@ -175,7 +175,7 @@ public interface Paths {
      * @param longPath '10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getTenBillion(long longPath) throws ServiceException;
+    ServiceResponse<Void> getTenBillion(long longPath) throws ServiceException;
 
     /**
      * Get '10000000000' 64 bit integer value
@@ -192,7 +192,7 @@ public interface Paths {
      * @param longPath '-10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getNegativeTenBillion(long longPath) throws ServiceException;
+    ServiceResponse<Void> getNegativeTenBillion(long longPath) throws ServiceException;
 
     /**
      * Get '-10000000000' 64 bit integer value
@@ -209,7 +209,7 @@ public interface Paths {
      * @param floatPath '1.034E+20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void floatScientificPositive(double floatPath) throws ServiceException;
+    ServiceResponse<Void> floatScientificPositive(double floatPath) throws ServiceException;
 
     /**
      * Get '1.034E+20' numeric value
@@ -226,7 +226,7 @@ public interface Paths {
      * @param floatPath '-1.034E-20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void floatScientificNegative(double floatPath) throws ServiceException;
+    ServiceResponse<Void> floatScientificNegative(double floatPath) throws ServiceException;
 
     /**
      * Get '-1.034E-20' numeric value
@@ -243,7 +243,7 @@ public interface Paths {
      * @param doublePath '9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void doubleDecimalPositive(double doublePath) throws ServiceException;
+    ServiceResponse<Void> doubleDecimalPositive(double doublePath) throws ServiceException;
 
     /**
      * Get '9999999.999' numeric value
@@ -260,7 +260,7 @@ public interface Paths {
      * @param doublePath '-9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void doubleDecimalNegative(double doublePath) throws ServiceException;
+    ServiceResponse<Void> doubleDecimalNegative(double doublePath) throws ServiceException;
 
     /**
      * Get '-9999999.999' numeric value
@@ -277,7 +277,7 @@ public interface Paths {
      * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void stringUnicode(String stringPath) throws ServiceException;
+    ServiceResponse<Void> stringUnicode(String stringPath) throws ServiceException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -294,7 +294,7 @@ public interface Paths {
      * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void stringUrlEncoded(String stringPath) throws ServiceException;
+    ServiceResponse<Void> stringUrlEncoded(String stringPath) throws ServiceException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end
@@ -311,7 +311,7 @@ public interface Paths {
      * @param stringPath '' string value. Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void stringEmpty(String stringPath) throws ServiceException;
+    ServiceResponse<Void> stringEmpty(String stringPath) throws ServiceException;
 
     /**
      * Get ''
@@ -328,7 +328,7 @@ public interface Paths {
      * @param stringPath null string value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void stringNull(String stringPath) throws ServiceException;
+    ServiceResponse<Void> stringNull(String stringPath) throws ServiceException;
 
     /**
      * Get null (should throw)
@@ -345,7 +345,7 @@ public interface Paths {
      * @param enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void enumValid(UriColor enumPath) throws ServiceException;
+    ServiceResponse<Void> enumValid(UriColor enumPath) throws ServiceException;
 
     /**
      * Get using uri with 'green color' in path parameter
@@ -362,7 +362,7 @@ public interface Paths {
      * @param enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void enumNull(UriColor enumPath) throws ServiceException;
+    ServiceResponse<Void> enumNull(UriColor enumPath) throws ServiceException;
 
     /**
      * Get null (should throw on the client before the request is sent on wire)
@@ -379,7 +379,7 @@ public interface Paths {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteMultiByte(byte[] bytePath) throws ServiceException;
+    ServiceResponse<Void> byteMultiByte(byte[] bytePath) throws ServiceException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -396,7 +396,7 @@ public interface Paths {
      * @param bytePath '' as byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteEmpty(byte[] bytePath) throws ServiceException;
+    ServiceResponse<Void> byteEmpty(byte[] bytePath) throws ServiceException;
 
     /**
      * Get '' as byte array
@@ -413,7 +413,7 @@ public interface Paths {
      * @param bytePath null as byte array (should throw)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteNull(byte[] bytePath) throws ServiceException;
+    ServiceResponse<Void> byteNull(byte[] bytePath) throws ServiceException;
 
     /**
      * Get null as byte array (should throw)
@@ -430,7 +430,7 @@ public interface Paths {
      * @param datePath '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateValid(LocalDate datePath) throws ServiceException;
+    ServiceResponse<Void> dateValid(LocalDate datePath) throws ServiceException;
 
     /**
      * Get '2012-01-01' as date
@@ -447,7 +447,7 @@ public interface Paths {
      * @param datePath null as date (should throw)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateNull(LocalDate datePath) throws ServiceException;
+    ServiceResponse<Void> dateNull(LocalDate datePath) throws ServiceException;
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation
@@ -464,7 +464,7 @@ public interface Paths {
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateTimeValid(DateTime dateTimePath) throws ServiceException;
+    ServiceResponse<Void> dateTimeValid(DateTime dateTimePath) throws ServiceException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
@@ -481,7 +481,7 @@ public interface Paths {
      * @param dateTimePath null as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateTimeNull(DateTime dateTimePath) throws ServiceException;
+    ServiceResponse<Void> dateTimeNull(DateTime dateTimePath) throws ServiceException;
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time

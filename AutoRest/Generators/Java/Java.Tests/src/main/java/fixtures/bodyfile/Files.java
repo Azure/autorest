@@ -12,9 +12,10 @@ package fixtures.bodyfile;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import java.io.InputStream;
+import retrofit.Call;
 import retrofit.http.GET;
 
 /**
@@ -40,7 +41,7 @@ public interface Files {
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    InputStream getFile() throws ServiceException;
+    ServiceResponse<InputStream> getFile() throws ServiceException;
 
     /**
      * Get file
@@ -56,7 +57,7 @@ public interface Files {
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    InputStream getEmptyFile() throws ServiceException;
+    ServiceResponse<InputStream> getEmptyFile() throws ServiceException;
 
     /**
      * Get empty file

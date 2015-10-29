@@ -12,11 +12,12 @@ package fixtures.bodyinteger;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.PUT;
-import retrofit.http.Body;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -65,7 +66,7 @@ public interface IntOperations {
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Integer getNull() throws ServiceException;
+    ServiceResponse<Integer> getNull() throws ServiceException;
 
     /**
      * Get null Int value
@@ -81,7 +82,7 @@ public interface IntOperations {
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Integer getInvalid() throws ServiceException;
+    ServiceResponse<Integer> getInvalid() throws ServiceException;
 
     /**
      * Get invalid Int value
@@ -97,7 +98,7 @@ public interface IntOperations {
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Integer getOverflowInt32() throws ServiceException;
+    ServiceResponse<Integer> getOverflowInt32() throws ServiceException;
 
     /**
      * Get overflow Int32 value
@@ -113,7 +114,7 @@ public interface IntOperations {
      * @return the Integer object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Integer getUnderflowInt32() throws ServiceException;
+    ServiceResponse<Integer> getUnderflowInt32() throws ServiceException;
 
     /**
      * Get underflow Int32 value
@@ -129,7 +130,7 @@ public interface IntOperations {
      * @return the Long object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Long getOverflowInt64() throws ServiceException;
+    ServiceResponse<Long> getOverflowInt64() throws ServiceException;
 
     /**
      * Get overflow Int64 value
@@ -145,7 +146,7 @@ public interface IntOperations {
      * @return the Long object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Long getUnderflowInt64() throws ServiceException;
+    ServiceResponse<Long> getUnderflowInt64() throws ServiceException;
 
     /**
      * Get underflow Int64 value
@@ -161,7 +162,7 @@ public interface IntOperations {
      * @param intBody the int value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putMax32(int intBody) throws ServiceException;
+    ServiceResponse<Void> putMax32(int intBody) throws ServiceException;
 
     /**
      * Put max int32 value
@@ -178,7 +179,7 @@ public interface IntOperations {
      * @param intBody the long value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putMax64(long intBody) throws ServiceException;
+    ServiceResponse<Void> putMax64(long intBody) throws ServiceException;
 
     /**
      * Put max int64 value
@@ -195,7 +196,7 @@ public interface IntOperations {
      * @param intBody the int value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putMin32(int intBody) throws ServiceException;
+    ServiceResponse<Void> putMin32(int intBody) throws ServiceException;
 
     /**
      * Put min int32 value
@@ -212,7 +213,7 @@ public interface IntOperations {
      * @param intBody the long value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putMin64(long intBody) throws ServiceException;
+    ServiceResponse<Void> putMin64(long intBody) throws ServiceException;
 
     /**
      * Put min int64 value

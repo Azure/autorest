@@ -11,28 +11,19 @@
 package fixtures.lro;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import java.io.IOException;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
-import retrofit.http.PUT;
-import retrofit.http.Body;
-import retrofit.http.Header;
-import retrofit.http.HTTP;
-import retrofit.http.POST;
+import java.io.IOException;
+import java.lang.InterruptedException;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class LROsImpl implements LROs {
     private LROsService service;

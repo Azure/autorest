@@ -10,6 +10,8 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
 {
     public static class ClientModelExtensions
     {
+        public const string ExternalExtension = "x-ms-external";
+
         public static bool NeedsSpecialSerialization(this IType type)
         {
             var known = type as PrimaryType;
@@ -86,31 +88,35 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
-        public static HashSet<string> TypeImports(this IList<IType> types, String ns)
+        public static List<string> ImportFrom(this IType type, string ns)
         {
-            HashSet<string> imports = new HashSet<string>();
-            if (types == null || ns == null)
+            List<string> imports = new List<string>();
+            var sequenceType = type as SequenceType;
+            var dictionaryType = type as DictionaryType;
+            var primaryType = type as PrimaryType;
+            var compositeType = type as CompositeType;
+            if (sequenceType != null)
             {
-                return imports;
+                imports.Add("java.util.List");
+                imports.AddRange(sequenceType.ElementType.ImportFrom(ns));
             }
-
-            for (int i = 0; i < types.Count; i++)
+            else if (dictionaryType != null)
             {
-                var type = types[i];
-                var sequenceType = type as SequenceType;
-                var dictionaryType = type as DictionaryType;
-                var primaryType = type as PrimaryType;
-                if (sequenceType != null)
+                imports.Add("java.util.Map");
+                imports.AddRange(dictionaryType.ValueType.ImportFrom(ns));
+            }
+            else if ((compositeType != null || type is EnumType) && ns != null)
+            {
+                if (compositeType != null &&
+                    compositeType.Extensions.ContainsKey(ExternalExtension) &&
+                    (bool)compositeType.Extensions[ExternalExtension])
                 {
-                    imports.Add("java.util.List");
-                    types.Add(sequenceType.ElementType);
+                    imports.Add(string.Join(
+                        ".",
+                        "com.microsoft.rest",
+                        type.Name));
                 }
-                else if (dictionaryType != null)
-                {
-                    imports.Add("java.util.Map");
-                    types.Add(dictionaryType.ValueType);
-                }
-                else if (type is CompositeType || type is EnumType)
+                else
                 {
                     imports.Add(string.Join(
                         ".",
@@ -118,16 +124,66 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
                         "models",
                         type.Name));
                 }
-                else if (primaryType != null)
+            }
+            else if (primaryType != null)
+            {
+                var importedFrom = JavaCodeNamer.GetJavaType(primaryType);
+                if (importedFrom != null)
                 {
-                    var importedFrom = JavaCodeNamer.ImportedFrom(primaryType);
-                    if (importedFrom != null)
-                    {
-                        imports.Add(importedFrom);
-                    }
+                    imports.Add(importedFrom);
                 }
             }
             return imports;
+        }
+
+        public static List<string> ImportFrom(this Parameter parameter, string ns)
+        {
+            var type = parameter.Type;
+            List<string> imports = new List<string>();
+            if (type == PrimaryType.ByteArray ||
+                type.Name == "ByteArray")
+            {
+                imports.Add("org.apache.commons.codec.binary.Base64");
+            }
+            if (parameter.Location != ParameterLocation.Body)
+            {
+                if (type.Name == "LocalDate" ||
+                    type.Name == "DateTime" ||
+                    type is CompositeType ||
+                    type is SequenceType ||
+                    type is DictionaryType)
+                {
+                    imports.Add("com.microsoft.rest.serializer.JacksonHelper");
+                }
+                if (type is SequenceType)
+                {
+                    imports.Add("com.microsoft.rest.serializer.CollectionFormat");
+                }
+            }
+
+            return imports;
+        }
+
+        public static string ImportFrom(this HttpMethod httpMethod)
+        {
+            string package = "retrofit.http.";
+            if (httpMethod == HttpMethod.Delete)
+            {
+                return package + "HTTP";
+            }
+            else
+            {
+                return package + httpMethod.ToString().ToUpper();
+            }
+        }
+
+        public static string ImportFrom(this ParameterLocation parameterLocation)
+        {
+            if (parameterLocation != ParameterLocation.None &&
+                parameterLocation != ParameterLocation.FormData)
+                return "retrofit.http." + parameterLocation.ToString();
+            else
+                return null;
         }
     }
 }

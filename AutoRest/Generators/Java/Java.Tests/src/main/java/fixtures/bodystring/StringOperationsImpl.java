@@ -16,12 +16,11 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.bodystring.models.Error;
 import retrofit.Call;
 import retrofit.Response;
-import fixtures.bodystring.models.Error;
+import retrofit.Retrofit;
 
 public class StringOperationsImpl implements StringOperations {
     private StringService service;
@@ -38,11 +37,10 @@ public class StringOperationsImpl implements StringOperations {
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public String getNull() throws ServiceException {
+    public ServiceResponse<String> getNull() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getNull();
-            ServiceResponse<String> response = getNullDelegate(call.execute(), null);
-            return response.getBody();
+            return getNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -83,11 +81,10 @@ public class StringOperationsImpl implements StringOperations {
      * @param stringBody Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putNull(String stringBody) throws ServiceException {
+    public ServiceResponse<Void> putNull(String stringBody) throws ServiceException {
         try {
             Call<ResponseBody> call = service.putNull(stringBody);
-            ServiceResponse<Void> response = putNullDelegate(call.execute(), null);
-            response.getBody();
+            return putNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -129,11 +126,10 @@ public class StringOperationsImpl implements StringOperations {
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public String getEmpty() throws ServiceException {
+    public ServiceResponse<String> getEmpty() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getEmpty();
-            ServiceResponse<String> response = getEmptyDelegate(call.execute(), null);
-            return response.getBody();
+            return getEmptyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -174,15 +170,14 @@ public class StringOperationsImpl implements StringOperations {
      * @param stringBody Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putEmpty(String stringBody) throws ServiceException {
+    public ServiceResponse<Void> putEmpty(String stringBody) throws ServiceException {
         if (stringBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.putEmpty(stringBody);
-            ServiceResponse<Void> response = putEmptyDelegate(call.execute(), null);
-            response.getBody();
+            return putEmptyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -228,11 +223,10 @@ public class StringOperationsImpl implements StringOperations {
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public String getMbcs() throws ServiceException {
+    public ServiceResponse<String> getMbcs() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getMbcs();
-            ServiceResponse<String> response = getMbcsDelegate(call.execute(), null);
-            return response.getBody();
+            return getMbcsDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -273,15 +267,14 @@ public class StringOperationsImpl implements StringOperations {
      * @param stringBody Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putMbcs(String stringBody) throws ServiceException {
+    public ServiceResponse<Void> putMbcs(String stringBody) throws ServiceException {
         if (stringBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.putMbcs(stringBody);
-            ServiceResponse<Void> response = putMbcsDelegate(call.execute(), null);
-            response.getBody();
+            return putMbcsDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -327,11 +320,10 @@ public class StringOperationsImpl implements StringOperations {
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public String getWhitespace() throws ServiceException {
+    public ServiceResponse<String> getWhitespace() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getWhitespace();
-            ServiceResponse<String> response = getWhitespaceDelegate(call.execute(), null);
-            return response.getBody();
+            return getWhitespaceDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -372,15 +364,14 @@ public class StringOperationsImpl implements StringOperations {
      * @param stringBody Possible values for this parameter include: '    Now is the time for all good men to come to the aid of their country    '
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putWhitespace(String stringBody) throws ServiceException {
+    public ServiceResponse<Void> putWhitespace(String stringBody) throws ServiceException {
         if (stringBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.putWhitespace(stringBody);
-            ServiceResponse<Void> response = putWhitespaceDelegate(call.execute(), null);
-            response.getBody();
+            return putWhitespaceDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -426,11 +417,10 @@ public class StringOperationsImpl implements StringOperations {
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public String getNotProvided() throws ServiceException {
+    public ServiceResponse<String> getNotProvided() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getNotProvided();
-            ServiceResponse<String> response = getNotProvidedDelegate(call.execute(), null);
-            return response.getBody();
+            return getNotProvidedDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

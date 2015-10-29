@@ -10,31 +10,27 @@
 
 package fixtures.resourceflattening;
 
-import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
-import java.math.BigDecimal;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Call;
-import retrofit.Response;
+import fixtures.resourceflattening.models.Error;
+import fixtures.resourceflattening.models.FlattenedProduct;
+import fixtures.resourceflattening.models.Resource;
+import fixtures.resourceflattening.models.ResourceCollection;
 import java.util.List;
 import java.util.Map;
-import fixtures.resourceflattening.models.ResourceCollection;
-import fixtures.resourceflattening.models.Error;
-import fixtures.resourceflattening.models.Resource;
-import fixtures.resourceflattening.models.FlattenedProduct;
-import com.microsoft.rest.AzureClient;
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
-import retrofit.Callback;
+import retrofit.Call;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.

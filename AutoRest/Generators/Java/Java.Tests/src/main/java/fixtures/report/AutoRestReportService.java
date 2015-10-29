@@ -10,13 +10,12 @@
 
 package fixtures.report;
 
-import java.math.BigDecimal;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Call;
 import java.util.Map;
+import retrofit.Call;
 import retrofit.http.GET;
 
 /**
@@ -45,7 +44,7 @@ public interface AutoRestReportService {
      * @return the Map&lt;String, Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Map<String, Integer> getReport() throws ServiceException;
+    ServiceResponse<Map<String, Integer>> getReport() throws ServiceException;
 
     /**
      * Get test coverage report

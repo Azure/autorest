@@ -12,23 +12,16 @@ package fixtures.paging;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import java.io.IOException;
 import fixtures.paging.models.ProductResult;
-import retrofit.http.GET;
-import retrofit.http.Header;
-import retrofit.http.Path;
+import retrofit.Call;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class PagingImpl implements Paging {
     private PagingService service;

@@ -141,7 +141,7 @@ namespace Microsoft.Rest.Generator.Java
                     }
                     else if (property.Type is PrimaryType)
                     {
-                        var importedFrom = JavaCodeNamer.ImportedFrom(property.Type as PrimaryType);
+                        var importedFrom = JavaCodeNamer.GetJavaType(property.Type as PrimaryType);
                         if (importedFrom != null)
                         {
                             classes.Add(importedFrom);

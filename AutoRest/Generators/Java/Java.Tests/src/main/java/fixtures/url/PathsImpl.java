@@ -11,22 +11,21 @@
 package fixtures.url;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.serializer.JacksonHelper;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
-import retrofit.Call;
-import retrofit.Response;
+import fixtures.url.models.Error;
 import fixtures.url.models.UriColor;
 import org.apache.commons.codec.binary.Base64;
-import org.joda.time.LocalDate;
 import org.joda.time.DateTime;
-import fixtures.url.models.Error;
-import com.microsoft.rest.serializer.JacksonHelper;
+import org.joda.time.LocalDate;
+import retrofit.Call;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class PathsImpl implements Paths {
     private PathsService service;
@@ -43,11 +42,10 @@ public class PathsImpl implements Paths {
      * @param boolPath true boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getBooleanTrue(boolean boolPath) throws ServiceException {
+    public ServiceResponse<Void> getBooleanTrue(boolean boolPath) throws ServiceException {
         try {
             Call<ResponseBody> call = service.getBooleanTrue(boolPath);
-            ServiceResponse<Void> response = getBooleanTrueDelegate(call.execute(), null);
-            response.getBody();
+            return getBooleanTrueDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -89,11 +87,10 @@ public class PathsImpl implements Paths {
      * @param boolPath false boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getBooleanFalse(boolean boolPath) throws ServiceException {
+    public ServiceResponse<Void> getBooleanFalse(boolean boolPath) throws ServiceException {
         try {
             Call<ResponseBody> call = service.getBooleanFalse(boolPath);
-            ServiceResponse<Void> response = getBooleanFalseDelegate(call.execute(), null);
-            response.getBody();
+            return getBooleanFalseDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -135,11 +132,10 @@ public class PathsImpl implements Paths {
      * @param intPath '1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getIntOneMillion(int intPath) throws ServiceException {
+    public ServiceResponse<Void> getIntOneMillion(int intPath) throws ServiceException {
         try {
             Call<ResponseBody> call = service.getIntOneMillion(intPath);
-            ServiceResponse<Void> response = getIntOneMillionDelegate(call.execute(), null);
-            response.getBody();
+            return getIntOneMillionDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -181,11 +177,10 @@ public class PathsImpl implements Paths {
      * @param intPath '-1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getIntNegativeOneMillion(int intPath) throws ServiceException {
+    public ServiceResponse<Void> getIntNegativeOneMillion(int intPath) throws ServiceException {
         try {
             Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
-            ServiceResponse<Void> response = getIntNegativeOneMillionDelegate(call.execute(), null);
-            response.getBody();
+            return getIntNegativeOneMillionDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -227,11 +222,10 @@ public class PathsImpl implements Paths {
      * @param longPath '10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getTenBillion(long longPath) throws ServiceException {
+    public ServiceResponse<Void> getTenBillion(long longPath) throws ServiceException {
         try {
             Call<ResponseBody> call = service.getTenBillion(longPath);
-            ServiceResponse<Void> response = getTenBillionDelegate(call.execute(), null);
-            response.getBody();
+            return getTenBillionDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -273,11 +267,10 @@ public class PathsImpl implements Paths {
      * @param longPath '-10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getNegativeTenBillion(long longPath) throws ServiceException {
+    public ServiceResponse<Void> getNegativeTenBillion(long longPath) throws ServiceException {
         try {
             Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
-            ServiceResponse<Void> response = getNegativeTenBillionDelegate(call.execute(), null);
-            response.getBody();
+            return getNegativeTenBillionDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -319,11 +312,10 @@ public class PathsImpl implements Paths {
      * @param floatPath '1.034E+20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void floatScientificPositive(double floatPath) throws ServiceException {
+    public ServiceResponse<Void> floatScientificPositive(double floatPath) throws ServiceException {
         try {
             Call<ResponseBody> call = service.floatScientificPositive(floatPath);
-            ServiceResponse<Void> response = floatScientificPositiveDelegate(call.execute(), null);
-            response.getBody();
+            return floatScientificPositiveDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -365,11 +357,10 @@ public class PathsImpl implements Paths {
      * @param floatPath '-1.034E-20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void floatScientificNegative(double floatPath) throws ServiceException {
+    public ServiceResponse<Void> floatScientificNegative(double floatPath) throws ServiceException {
         try {
             Call<ResponseBody> call = service.floatScientificNegative(floatPath);
-            ServiceResponse<Void> response = floatScientificNegativeDelegate(call.execute(), null);
-            response.getBody();
+            return floatScientificNegativeDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -411,11 +402,10 @@ public class PathsImpl implements Paths {
      * @param doublePath '9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void doubleDecimalPositive(double doublePath) throws ServiceException {
+    public ServiceResponse<Void> doubleDecimalPositive(double doublePath) throws ServiceException {
         try {
             Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
-            ServiceResponse<Void> response = doubleDecimalPositiveDelegate(call.execute(), null);
-            response.getBody();
+            return doubleDecimalPositiveDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -457,11 +447,10 @@ public class PathsImpl implements Paths {
      * @param doublePath '-9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void doubleDecimalNegative(double doublePath) throws ServiceException {
+    public ServiceResponse<Void> doubleDecimalNegative(double doublePath) throws ServiceException {
         try {
             Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
-            ServiceResponse<Void> response = doubleDecimalNegativeDelegate(call.execute(), null);
-            response.getBody();
+            return doubleDecimalNegativeDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -503,15 +492,14 @@ public class PathsImpl implements Paths {
      * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void stringUnicode(String stringPath) throws ServiceException {
+    public ServiceResponse<Void> stringUnicode(String stringPath) throws ServiceException {
         if (stringPath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.stringUnicode(stringPath);
-            ServiceResponse<Void> response = stringUnicodeDelegate(call.execute(), null);
-            response.getBody();
+            return stringUnicodeDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -557,15 +545,14 @@ public class PathsImpl implements Paths {
      * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void stringUrlEncoded(String stringPath) throws ServiceException {
+    public ServiceResponse<Void> stringUrlEncoded(String stringPath) throws ServiceException {
         if (stringPath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
-            ServiceResponse<Void> response = stringUrlEncodedDelegate(call.execute(), null);
-            response.getBody();
+            return stringUrlEncodedDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -611,15 +598,14 @@ public class PathsImpl implements Paths {
      * @param stringPath '' string value. Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void stringEmpty(String stringPath) throws ServiceException {
+    public ServiceResponse<Void> stringEmpty(String stringPath) throws ServiceException {
         if (stringPath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.stringEmpty(stringPath);
-            ServiceResponse<Void> response = stringEmptyDelegate(call.execute(), null);
-            response.getBody();
+            return stringEmptyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -665,15 +651,14 @@ public class PathsImpl implements Paths {
      * @param stringPath null string value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void stringNull(String stringPath) throws ServiceException {
+    public ServiceResponse<Void> stringNull(String stringPath) throws ServiceException {
         if (stringPath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.stringNull(stringPath);
-            ServiceResponse<Void> response = stringNullDelegate(call.execute(), null);
-            response.getBody();
+            return stringNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -719,15 +704,14 @@ public class PathsImpl implements Paths {
      * @param enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void enumValid(UriColor enumPath) throws ServiceException {
+    public ServiceResponse<Void> enumValid(UriColor enumPath) throws ServiceException {
         if (enumPath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.enumValid(JacksonHelper.serializeRaw(enumPath));
-            ServiceResponse<Void> response = enumValidDelegate(call.execute(), null);
-            response.getBody();
+            return enumValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -773,15 +757,14 @@ public class PathsImpl implements Paths {
      * @param enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void enumNull(UriColor enumPath) throws ServiceException {
+    public ServiceResponse<Void> enumNull(UriColor enumPath) throws ServiceException {
         if (enumPath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.enumNull(JacksonHelper.serializeRaw(enumPath));
-            ServiceResponse<Void> response = enumNullDelegate(call.execute(), null);
-            response.getBody();
+            return enumNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -827,15 +810,14 @@ public class PathsImpl implements Paths {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void byteMultiByte(byte[] bytePath) throws ServiceException {
+    public ServiceResponse<Void> byteMultiByte(byte[] bytePath) throws ServiceException {
         if (bytePath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(bytePath));
-            ServiceResponse<Void> response = byteMultiByteDelegate(call.execute(), null);
-            response.getBody();
+            return byteMultiByteDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -881,15 +863,14 @@ public class PathsImpl implements Paths {
      * @param bytePath '' as byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void byteEmpty(byte[] bytePath) throws ServiceException {
+    public ServiceResponse<Void> byteEmpty(byte[] bytePath) throws ServiceException {
         if (bytePath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
-            ServiceResponse<Void> response = byteEmptyDelegate(call.execute(), null);
-            response.getBody();
+            return byteEmptyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -935,15 +916,14 @@ public class PathsImpl implements Paths {
      * @param bytePath null as byte array (should throw)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void byteNull(byte[] bytePath) throws ServiceException {
+    public ServiceResponse<Void> byteNull(byte[] bytePath) throws ServiceException {
         if (bytePath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(bytePath));
-            ServiceResponse<Void> response = byteNullDelegate(call.execute(), null);
-            response.getBody();
+            return byteNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -989,15 +969,14 @@ public class PathsImpl implements Paths {
      * @param datePath '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateValid(LocalDate datePath) throws ServiceException {
+    public ServiceResponse<Void> dateValid(LocalDate datePath) throws ServiceException {
         if (datePath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter datePath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.dateValid(JacksonHelper.serializeRaw(datePath));
-            ServiceResponse<Void> response = dateValidDelegate(call.execute(), null);
-            response.getBody();
+            return dateValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1043,15 +1022,14 @@ public class PathsImpl implements Paths {
      * @param datePath null as date (should throw)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateNull(LocalDate datePath) throws ServiceException {
+    public ServiceResponse<Void> dateNull(LocalDate datePath) throws ServiceException {
         if (datePath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter datePath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.dateNull(JacksonHelper.serializeRaw(datePath));
-            ServiceResponse<Void> response = dateNullDelegate(call.execute(), null);
-            response.getBody();
+            return dateNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1097,15 +1075,14 @@ public class PathsImpl implements Paths {
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateTimeValid(DateTime dateTimePath) throws ServiceException {
+    public ServiceResponse<Void> dateTimeValid(DateTime dateTimePath) throws ServiceException {
         if (dateTimePath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.dateTimeValid(JacksonHelper.serializeRaw(dateTimePath));
-            ServiceResponse<Void> response = dateTimeValidDelegate(call.execute(), null);
-            response.getBody();
+            return dateTimeValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -1151,15 +1128,14 @@ public class PathsImpl implements Paths {
      * @param dateTimePath null as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void dateTimeNull(DateTime dateTimePath) throws ServiceException {
+    public ServiceResponse<Void> dateTimeNull(DateTime dateTimePath) throws ServiceException {
         if (dateTimePath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.dateTimeNull(JacksonHelper.serializeRaw(dateTimePath));
-            ServiceResponse<Void> response = dateTimeNullDelegate(call.execute(), null);
-            response.getBody();
+            return dateTimeNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

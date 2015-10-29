@@ -16,12 +16,11 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.bodyboolean.models.Error;
 import retrofit.Call;
 import retrofit.Response;
-import fixtures.bodyboolean.models.Error;
+import retrofit.Retrofit;
 
 public class BoolImpl implements Bool {
     private BoolService service;
@@ -38,11 +37,10 @@ public class BoolImpl implements Bool {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Boolean getTrue() throws ServiceException {
+    public ServiceResponse<Boolean> getTrue() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getTrue();
-            ServiceResponse<Boolean> response = getTrueDelegate(call.execute(), null);
-            return response.getBody();
+            return getTrueDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -83,11 +81,10 @@ public class BoolImpl implements Bool {
      * @param boolBody the boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putTrue(boolean boolBody) throws ServiceException {
+    public ServiceResponse<Void> putTrue(boolean boolBody) throws ServiceException {
         try {
             Call<ResponseBody> call = service.putTrue(boolBody);
-            ServiceResponse<Void> response = putTrueDelegate(call.execute(), null);
-            response.getBody();
+            return putTrueDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -129,11 +126,10 @@ public class BoolImpl implements Bool {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Boolean getFalse() throws ServiceException {
+    public ServiceResponse<Boolean> getFalse() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getFalse();
-            ServiceResponse<Boolean> response = getFalseDelegate(call.execute(), null);
-            return response.getBody();
+            return getFalseDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -174,11 +170,10 @@ public class BoolImpl implements Bool {
      * @param boolBody the boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putFalse(boolean boolBody) throws ServiceException {
+    public ServiceResponse<Void> putFalse(boolean boolBody) throws ServiceException {
         try {
             Call<ResponseBody> call = service.putFalse(boolBody);
-            ServiceResponse<Void> response = putFalseDelegate(call.execute(), null);
-            response.getBody();
+            return putFalseDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -220,11 +215,10 @@ public class BoolImpl implements Bool {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Boolean getNull() throws ServiceException {
+    public ServiceResponse<Boolean> getNull() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getNull();
-            ServiceResponse<Boolean> response = getNullDelegate(call.execute(), null);
-            return response.getBody();
+            return getNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -265,11 +259,10 @@ public class BoolImpl implements Bool {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Boolean getInvalid() throws ServiceException {
+    public ServiceResponse<Boolean> getInvalid() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getInvalid();
-            ServiceResponse<Boolean> response = getInvalidDelegate(call.execute(), null);
-            return response.getBody();
+            return getInvalidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

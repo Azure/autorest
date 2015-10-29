@@ -10,10 +10,8 @@
 
 package fixtures.subscriptionidapiversion;
 
-import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.AzureClient;
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
+import com.microsoft.rest.credentials.ServiceClientCredentials;
 
 /**
  * The interface for MicrosoftAzureTestUrl class.

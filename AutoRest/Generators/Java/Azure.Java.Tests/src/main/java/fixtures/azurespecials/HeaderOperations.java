@@ -10,16 +10,13 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
-import java.io.IOException;
-import retrofit.http.POST;
+import retrofit.Call;
 import retrofit.http.Header;
+import retrofit.http.POST;
 
 /**
  * An instance of this class provides access to all the operations defined

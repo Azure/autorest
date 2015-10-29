@@ -11,25 +11,16 @@
 package fixtures.azureparametergrouping;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.azureparametergrouping.models.Error;
 import retrofit.Call;
-import retrofit.Callback;
 import retrofit.Response;
-import java.io.IOException;
-import retrofit.http.POST;
-import retrofit.http.Body;
-import retrofit.http.Header;
-import retrofit.http.Query;
-import retrofit.http.Path;
+import retrofit.Retrofit;
 
 public class ParameterGroupingImpl implements ParameterGrouping {
     private ParameterGroupingService service;

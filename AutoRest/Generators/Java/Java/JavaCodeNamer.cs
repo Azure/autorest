@@ -335,7 +335,7 @@ namespace Microsoft.Rest.Generator.Java
             return dictionaryType;
         }
 
-        public static String ImportedFrom(PrimaryType primaryType)
+        public static string GetJavaType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
@@ -367,11 +367,6 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return "java.io.InputStream";
             }
-            else if (primaryType == PrimaryType.ByteArray ||
-                primaryType.Name == "ByteArray")
-            {
-                return "org.apache.commons.codec.binary.Base64";
-            }
             else if (primaryType == PrimaryType.TimeSpan ||
                 primaryType.Name == "Period")
             {
@@ -380,6 +375,20 @@ namespace Microsoft.Rest.Generator.Java
             else
             {
                 return null;
+            }
+        }
+
+        public static string getJavaException(string exception)
+        {
+            switch (exception) {
+                case "IOException": 
+                    return "java.io.IOException";
+                case "ServiceException":
+                    return "com.microsoft.rest.ServiceException";
+                case "InterruptedException":
+                    return "java.lang.InterruptedException";
+                default:
+                    return null;
             }
         }
     }

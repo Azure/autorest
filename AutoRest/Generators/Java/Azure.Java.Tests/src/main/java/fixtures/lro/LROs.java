@@ -10,22 +10,21 @@
 
 package fixtures.lro;
 
-import com.microsoft.rest.CloudError;
-import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
-import java.io.IOException;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
-import retrofit.http.PUT;
+import java.io.IOException;
+import java.lang.InterruptedException;
+import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.Header;
 import retrofit.http.HTTP;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined

@@ -12,12 +12,12 @@ package fixtures.bodybyte;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
-import org.apache.commons.codec.binary.Base64;
+import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.PUT;
-import retrofit.http.Body;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -51,7 +51,7 @@ public interface ByteOperations {
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    byte[] getNull() throws ServiceException;
+    ServiceResponse<byte[]> getNull() throws ServiceException;
 
     /**
      * Get null byte value
@@ -67,7 +67,7 @@ public interface ByteOperations {
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    byte[] getEmpty() throws ServiceException;
+    ServiceResponse<byte[]> getEmpty() throws ServiceException;
 
     /**
      * Get empty byte value ''
@@ -83,7 +83,7 @@ public interface ByteOperations {
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    byte[] getNonAscii() throws ServiceException;
+    ServiceResponse<byte[]> getNonAscii() throws ServiceException;
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
@@ -99,7 +99,7 @@ public interface ByteOperations {
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putNonAscii(byte[] byteBody) throws ServiceException;
+    ServiceResponse<Void> putNonAscii(byte[] byteBody) throws ServiceException;
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
@@ -116,7 +116,7 @@ public interface ByteOperations {
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    byte[] getInvalid() throws ServiceException;
+    ServiceResponse<byte[]> getInvalid() throws ServiceException;
 
     /**
      * Get invalid byte value ':::SWAGGER::::'
