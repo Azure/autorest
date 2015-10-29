@@ -459,12 +459,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("String subscriptionId", clientModel.Methods[1].Parameters[0].ToString());
             Assert.Equal("String resourceGroupName", clientModel.Methods[1].Parameters[1].ToString());
             Assert.Equal("String apiVersion", clientModel.Methods[1].Parameters[2].ToString());
-            Assert.Equal("String min_product_id", clientModel.Methods[1].Parameters[3].ToString());
+            Assert.Equal("String base_product_id", clientModel.Methods[1].Parameters[3].ToString());
             Assert.Equal(true, clientModel.Methods[1].Parameters[3].IsRequired);
-            Assert.Equal("MaxProduct max_product_reference", clientModel.Methods[1].Parameters[4].ToString());
+            Assert.Equal("String base_product_description", clientModel.Methods[1].Parameters[4].ToString());
             Assert.Equal(false, clientModel.Methods[1].Parameters[4].IsRequired);
-            Assert.Equal("String min_product_display_name", clientModel.Methods[1].Parameters[5].ToString());
-            Assert.Equal(true, clientModel.Methods[1].Parameters[5].IsRequired);
+            Assert.Equal("MaxProduct max_product_reference", clientModel.Methods[1].Parameters[5].ToString());
+            Assert.Equal(false, clientModel.Methods[1].Parameters[5].IsRequired);
             Assert.Equal(1, clientModel.Methods[1].InputParameterTransformation.Count);
             Assert.Equal(3, clientModel.Methods[1].InputParameterTransformation[0].ParameterMappings.Count);
         }

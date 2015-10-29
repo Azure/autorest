@@ -139,9 +139,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Put complex types with dictionary property
         /// </summary>
-        /// <param name='complexBody'>
-        /// Please put a dictionary with 5 key-value pairs: "txt":"notepad",
-        /// "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+        /// <param name='defaultProgram'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -149,11 +147,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(DictionaryWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (complexBody == null)
+            DictionaryWrapper complexBody = null;
+            if (defaultProgram != null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
+                complexBody = new DictionaryWrapper();
+                complexBody.DefaultProgram = defaultProgram;
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -322,8 +322,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Put complex types with dictionary property which is empty
         /// </summary>
-        /// <param name='complexBody'>
-        /// Please put an empty dictionary
+        /// <param name='defaultProgram'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -331,11 +330,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(DictionaryWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (complexBody == null)
+            DictionaryWrapper complexBody = null;
+            if (defaultProgram != null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
+                complexBody = new DictionaryWrapper();
+                complexBody.DefaultProgram = defaultProgram;
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

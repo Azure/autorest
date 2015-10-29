@@ -61,22 +61,6 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Gets the list of properties of object including inherted ones.
-        /// </summary>
-        public IEnumerable<Property> ComposedProperties
-        {
-            get
-            {
-                if (this.parent != null)
-                {
-                    return parent.ComposedProperties.Union(this.Properties);
-                }
-
-                return this.Properties;
-            }
-        }
-
-        /// <summary>
         /// Gets the value indicating whether current object is polymorhic.
         /// </summary>
         public bool IsPolymorphic

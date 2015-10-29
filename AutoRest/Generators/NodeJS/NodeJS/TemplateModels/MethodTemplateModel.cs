@@ -781,9 +781,10 @@ namespace Microsoft.Rest.Generator.NodeJS
                 builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
                        .AppendLine("{").Indent();
 
-                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
+                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                    transformation.OutputParameter.Type is CompositeType)
                 {
-                    builder.AppendLine("{0} = default({1});",
+                    builder.AppendLine("{0} = new client._models['{1}']();",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name);
                 }

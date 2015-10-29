@@ -97,7 +97,6 @@ namespace Microsoft.Rest.Modeler.Swagger
                     if (verb.ToHttpMethod() != HttpMethod.Options)
                     {
                         var method = BuildMethod(verb.ToHttpMethod(), path.Key, methodName, operation);
-                        FlattenRequestPayload(method);
                         method.Group = methodGroup;
                         ServiceClient.Methods.Add(method);
                     }
@@ -120,6 +119,12 @@ namespace Microsoft.Rest.Modeler.Swagger
                 ServiceClient.ModelTypes.Add(objectType);
             }
 
+            // Flatten request payload
+            foreach (var method in ServiceClient.Methods)
+            {
+                FlattenRequestPayload(method);
+            }
+
             return ServiceClient;
         }
 
@@ -136,7 +141,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             if (bodyParameter != null)
             {
                 var bodyParameterType = bodyParameter.Type as CompositeType;
-                if (bodyParameterType != null && bodyParameterType.Properties.Count <= Settings.PayloadFlatteningThreshold)
+                if (bodyParameterType != null && bodyParameterType.ComposedProperties.Count() <= Settings.PayloadFlatteningThreshold)
                 {
                     var parameterTransformation = new ParameterTransformation
                     {
@@ -144,7 +149,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     };
                     method.InputParameterTransformation.Add(parameterTransformation);
 
-                    foreach (var property in bodyParameterType.Properties)
+                    foreach (var property in bodyParameterType.ComposedProperties)
                     {
                         var newMethodParameter = new Parameter();
                         newMethodParameter.LoadFrom(property);

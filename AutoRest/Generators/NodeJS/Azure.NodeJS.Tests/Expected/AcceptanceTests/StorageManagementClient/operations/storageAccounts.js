@@ -1359,11 +1359,8 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
  * 
- * @param {object} regenerateKey Specifies name of the key which should be
- * regenerated.
- * 
- * @param {string} [regenerateKey.keyName] Possible values for this property
- * include: 'key1', 'key2'.
+ * @param {string} [keyName] Possible values for this property include:
+ * 'key1', 'key2'.
  * 
  * @param {object} [options]
  *
@@ -1383,7 +1380,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountName, regenerateKey, options, callback) {
+StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountName, keyName, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1400,20 +1397,29 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
     }
-    if (regenerateKey === null || regenerateKey === undefined) {
-      throw new Error('regenerateKey cannot be null or undefined.');
-    }
     if (this.client.apiVersion === null || this.client.apiVersion === undefined || typeof this.client.apiVersion.valueOf() !== 'string') {
       throw new Error('this.client.apiVersion cannot be null or undefined and it must be of type string.');
     }
     if (this.client.subscriptionId === null || this.client.subscriptionId === undefined || typeof this.client.subscriptionId.valueOf() !== 'string') {
       throw new Error('this.client.subscriptionId cannot be null or undefined and it must be of type string.');
     }
+    if (keyName) {
+      var allowedValues = [ 'key1', 'key2' ];
+      if (!allowedValues.some( function(item) { return item === keyName; })) {
+        throw new Error(keyName + ' is not a valid value. The valid values are: ' + allowedValues);
+      }
+    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
+  }
+  var regenerateKey;
+  if ((keyName !== null && keyName !== undefined))
+  {
+      regenerateKey = new client._models['StorageAccountRegenerateKeyParameters']();
+      regenerateKey.keyName = keyName;
   }
 
   // Construct URL
