@@ -2,40 +2,53 @@
 @using Microsoft.Rest.Generator.Python.Templates
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
-/*
-@Header(" * ")
- */
+import sys
+from datetime import datetime
 @EmptyLine
-'use strict';
+try:
+    from urlparse import urljoin
 @EmptyLine
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
-
-@if (Model.ModelTypes.Any())
-{
+except ImportError:
+    from urllib.parse import urljoin
 @EmptyLine
-@:var models = require('../models');
-}
-@if (Model.ContainsTimeSpan)
-{
-@:var moment = require('moment');
-}
+from runtime.msrest.serialization import Serialized, Deserialized
+from runtime.msrest.exceptions import (
+    SerializationError,
+    DeserializationError,
+    TokenExpiredError,
+    ClientRequestException)
 @EmptyLine
-/**
- * @@class
- * @Model.MethodGroupType
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the @Model.Name.
- * Initializes a new instance of the @Model.MethodGroupType class.
- * @@constructor
- *
- * @@param {@Model.Name} client Reference to the service client.
- */
-function @(Model.MethodGroupType)(client) {
-  this.client = client;
-}
+from runtime.msrestazure.azure_handlers import Paged, Polled
+@EmptyLine
+@*from ..batch_exception import BatchStatusError*@
+@EmptyLine
+from .. import models
+@EmptyLine
+from ..models import *
+@EmptyLine
+class @(Model.MethodGroupType)(object):
+@EmptyLine
+    def __init__(self, client, config):
+@EmptyLine
+        self._client = client
+        self._config = config
+        self._classes = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+@EmptyLine
+    def _url(self, *extension):
+@EmptyLine
+        path = [x.strip('/') for x in extension if x]
+        return '/' + '/'.join(path)
+@EmptyLine
+    def _send(self, request, accept_status, headers, content=None):
+@EmptyLine
+        try:
+            request.add_headers(headers)
+            if content:
+                request.add_content(content)
+@EmptyLine
+            response =  self._client.send(request)
+@EmptyLine
+            return response
 
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
@@ -44,4 +57,3 @@ function @(Model.MethodGroupType)(client) {
 @EmptyLine
 }
 @EmptyLine
-module.exports = @(Model.MethodGroupType);

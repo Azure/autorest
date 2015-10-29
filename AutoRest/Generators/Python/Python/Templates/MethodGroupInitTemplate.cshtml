@@ -1,0 +1,14 @@
+﻿@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
+@{
+  if (Model.MethodGroupModels.Any())
+  {
+    foreach (var modelGroupType in Model.MethodGroupModels)
+    {
+@:from .@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
+    }
+  }
+}
