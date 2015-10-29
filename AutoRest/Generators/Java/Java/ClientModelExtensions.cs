@@ -47,7 +47,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
             else if (sequence != null)
             {
-                return "JacksonUtils.serializeList(" + reference + 
+                return "JacksonUtils.serializeList(" + reference +
                     ", CollectionFormat." + parameter.CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture) + ")";
             }
             else
