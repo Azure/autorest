@@ -39,7 +39,7 @@ try:
 except ImportError:
     import mock
 
-from msrest import Serialized, Deserialized
+from msrest import Serializer, Deserializer
 from msrest.exceptions import SerializationError, DeserializationError
 
 from requests import Response
@@ -67,6 +67,7 @@ class TestRuntimeSerialized(unittest.TestCase):
             self.attr_e = None
 
     def setUp(self):
+        self.s = Serializer()
         return super(TestRuntimeSerialized, self).setUp()
 
     def test_obj_without_attr_map(self):
@@ -74,32 +75,28 @@ class TestRuntimeSerialized(unittest.TestCase):
         Test serializing an object with no attribute_map.
         """
         test_obj = type("BadTestObj", (), {})
-        serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized()
+            self.s(test_obj)
 
     def test_obj_with_malformed_map(self):
         """
         Test serializing an object with a malformed attribute_map.
         """
         test_obj = type("BadTestObj", (), {"_attribute_map":None})
-        serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized()
+            self.s(test_obj)
 
         test_obj._attribute_map = {"attr":"val"}
-        serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized()
+            self.s(test_obj)
 
         test_obj._attribute_map = {"attr":{"val":1}}
-        serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized()
+            self.s(test_obj)
 
     def test_obj_with_mismatched_map(self):
         """
@@ -107,19 +104,17 @@ class TestRuntimeSerialized(unittest.TestCase):
         """
         test_obj = type("BadTestObj", (), {"_attribute_map":None})
         test_obj._attribute_map = {"abc":{"key":"ABC", "type":"str"}}
-        serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized()
+            self.s(test_obj)
 
     def test_attr_none(self):
         """
         Test serializing an object with None attributes.
         """
         test_obj = self.TestObj()
-        serialized = Serialized(test_obj)
+        message = self.s(test_obj)
 
-        message = serialized()
         self.assertIsInstance(message, dict)
         self.assertFalse('id' in message)
 
@@ -131,32 +126,23 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj._required = ['attr_b']
         test_obj.attr_b = None
 
-        serialized = Serialized(test_obj)
-
         with self.assertRaises(SerializationError):
-            serialized()
+            self.s(test_obj)
 
         test_obj.attr_b = 25
 
-        serialized = Serialized(test_obj)
-        self.assertEqual(serialized.attr_b, 25)
-
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message['AttrB'], 25)
 
         test_obj.attr_b = "34534"
 
-        serialized = Serialized(test_obj)
-        self.assertEqual(serialized.attr_b, 34534)
-
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message['AttrB'], 34534)
 
         test_obj.attr_b = "NotANumber"
-        serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized()
+            self.s(test_obj)
 
     def test_attr_str(self):
         """
@@ -166,34 +152,28 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj._required = ['attr_a']
         test_obj.attr_a = None
 
-        serialized = Serialized(test_obj)
         with self.assertRaises(SerializationError):
-            self.assertIsNone(serialized.attr_a)
+            self.s(test_obj)
 
         test_obj._required = []
-        serialized = Serialized(test_obj)
-
         test_obj.attr_a = "TestString"
 
-        serialized = Serialized(test_obj)
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message['id'], "TestString")
 
         test_obj.attr_a = 1234
 
-        serialized = Serialized(test_obj)
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message['id'], "1234")
 
         test_obj.attr_a = list()
 
-        serialized = Serialized(test_obj)
-        message = serialized()
+        message = self.s(test_obj)
         self.assertFalse('id' in message)
 
         test_obj.attr_a = [1]
-        serialized = Serialized(test_obj)
-        message = serialized()
+
+        message = self.s(test_obj)
         self.assertEqual(message['id'], "[1]")
 
     def test_attr_bool(self):
@@ -203,31 +183,22 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj = self.TestObj()
         test_obj.attr_c = True
 
-        serialized = Serialized(test_obj)
-        self.assertIs(serialized.attr_c, True)
-
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message['Key_C'], True)
 
         test_obj.attr_c = ""
 
-        serialized = Serialized(test_obj)
-
-        message = serialized()
+        message = self.s(test_obj)
         self.assertFalse('Key_C' in message)
 
         test_obj.attr_c = None
 
-        serialized = Serialized(test_obj)
-        message = serialized()
+        message = self.s(test_obj)
         self.assertFalse('Key_C' in message)
 
         test_obj.attr_c = "NotEmpty"
 
-        serialized = Serialized(test_obj)
-        self.assertIs(serialized.attr_c, True)
-
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message['Key_C'], True)
 
     def test_attr_list_simple(self):
@@ -237,37 +208,28 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj = self.TestObj()
         test_obj.attr_d = []
 
-        serialized = Serialized(test_obj)
-        message = serialized()
+        message = self.s(test_obj)
         self.assertFalse('AttrD' in message)
 
         test_obj.attr_d = [1,2,3]
 
-        serialized = Serialized(test_obj)
-        self.assertEqual(serialized.attr_d, [1,2,3])
-
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message['AttrD'], [1,2,3])
 
         test_obj.attr_d = ["1","2","3"]
 
-        serialized = Serialized(test_obj)
-        self.assertEqual(serialized.attr_d, [1,2,3])
-
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message['AttrD'], [1,2,3])
 
         test_obj.attr_d = ["test","test2","test3"]
-        serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized()
+            self.s(test_obj)
 
         test_obj.attr_d = "NotAList"
-        serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized()
+            self.s(test_obj)
 
     def test_attr_list_complex(self):
         """
@@ -286,19 +248,15 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj._attribute_map = {"test_list":{"key":"_list", "type":"[ListObj]"}}
         test_obj.test_list = [list_obj]
 
-        serialized = Serialized(test_obj)
-        self.assertEqual(serialized.test_list[0].get('ABC'), 123)
-
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message, {'_list':[{'ABC':123}]})
 
         list_obj = type("BadListObj", (), {"map":None})
         test_obj.attribute_map = {"test_list":{"key":"_list", "type":"[BadListObj]"}}
         test_obj.test_list = [list_obj]
 
-        serialized = Serialized(test_obj)
         with self.assertRaises(SerializationError):
-            serialized.test_list
+            self.s(test_obj)
 
     def test_attr_dict_simple(self):
         """
@@ -308,87 +266,79 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj = self.TestObj()
         test_obj.attr_e = {"value": 3.14}
 
-        serialized = Serialized(test_obj)
-        self.assertEqual(serialized.attr_e["value"], 3.14)
-
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message['AttrE']['value'], 3.14)
 
         test_obj.attr_e = {1: "3.14"}
 
-        serialized = Serialized(test_obj)
-        self.assertEqual(serialized.attr_e["1"], 3.14)
-
-        message = serialized()
+        message = self.s(test_obj)
         self.assertEqual(message['AttrE']['1'], 3.14)
 
         test_obj.attr_e = "NotADict"
-        serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized.attr_e
+            self.s(test_obj)
 
         test_obj.attr_e = {"value": "NotAFloat"}
-        serialized = Serialized(test_obj)
 
         with self.assertRaises(SerializationError):
-            serialized.attr_e
+            self.s(test_obj)
 
     def test_serialize_datetime(self):
 
         date_obj = isodate.parse_datetime('2015-01-01T00:00:00')
-        date_str = Serialized.serialize_date(date_obj)
+        date_str = Serializer.serialize_date(date_obj)
 
         self.assertEqual(date_str, '2015-01-01T00:00:00.000Z')
 
         date_obj = isodate.parse_datetime('1999-12-31T23:59:59-12:00')
-        date_str = Serialized.serialize_date(date_obj)
+        date_str = Serializer.serialize_date(date_obj)
 
         self.assertEqual(date_str, '2000-01-01T11:59:59.000Z')
 
         with self.assertRaises(SerializationError):
             date_obj = isodate.parse_datetime('9999-12-31T23:59:59-12:00')
-            date_str = Serialized.serialize_date(date_obj)
+            date_str = Serializer.serialize_date(date_obj)
 
         with self.assertRaises(SerializationError):
             date_obj = isodate.parse_datetime('0001-01-01T00:00:00+23:59')
-            date_str = Serialized.serialize_date(date_obj)
+            date_str = Serializer.serialize_date(date_obj)
 
 
         date_obj = isodate.parse_datetime("2015-06-01T16:10:08.0121-07:00")
-        date_str = Serialized.serialize_date(date_obj)
+        date_str = Serializer.serialize_date(date_obj)
 
         self.assertEqual(date_str, '2015-06-01T23:10:08.0121Z')
 
         date_obj = datetime.min
-        date_str = Serialized.serialize_date(date_obj)
+        date_str = Serializer.serialize_date(date_obj)
         self.assertEqual(date_str, '0001-01-01T00:00:00.000Z')
 
         date_obj = datetime.max
-        date_str = Serialized.serialize_date(date_obj)
+        date_str = Serializer.serialize_date(date_obj)
         self.assertEqual(date_str, '9999-12-31T23:59:59.999999Z')
 
 
     def test_serialize_primitive_types(self):
 
-        a = Serialized._serialize_data(Serialized, 1, 'int', True)
+        a = Serializer._serialize_data(Serializer, 1, 'int', True)
         self.assertEqual(a, 1)
 
-        b = Serialized._serialize_data(Serialized, True, 'bool', True)
+        b = Serializer._serialize_data(Serializer, True, 'bool', True)
         self.assertEqual(b, True)
 
-        c = Serialized._serialize_data(Serialized, 'True', 'str', True)
+        c = Serializer._serialize_data(Serializer, 'True', 'str', True)
         self.assertEqual(c, 'True')
 
-        d = Serialized._serialize_data(Serialized, 100.0123, 'float', True)
+        d = Serializer._serialize_data(Serializer, 100.0123, 'float', True)
         self.assertEqual(d, 100.0123)
 
     def test_serialize_empty_iter(self):
 
-        a = Serialized.serialize_dict(Serialized, {}, 'int', False)
+        a = Serializer.serialize_dict(Serializer, {}, 'int', False)
         self.assertEqual(a, {})
 
-        b = Serialized.serialize_iter(Serialized, [], 'int', False)
+        b = Serializer.serialize_iter(Serializer, [], 'int', False)
         self.assertEqual(b, [])
 
     def test_serialize_json_obj(self):
@@ -430,7 +380,7 @@ class TestRuntimeSerialized(unittest.TestCase):
                 'k3': isodate.parse_datetime('2017-01-01T00:00:00')}
             top_complex = ComplexId()
 
-        message = Serialized(ComplexJson())()
+        message =self.s(ComplexJson())
 
         output = { 
             'p1': 'value1', 
@@ -488,6 +438,10 @@ class TestRuntimeDeserialized(unittest.TestCase):
                 }
             #self.status_code = None
 
+    def setUp(self):
+        self.d = Deserializer()
+        return super().setUp()
+
     def test_obj_with_no_attr(self):
         """
         Test deserializing an object with no attributes.
@@ -498,10 +452,10 @@ class TestRuntimeDeserialized(unittest.TestCase):
                 pass
 
         response_data = mock.create_autospec(Response)
+        response_data.content = json.dumps({"a":"b"})
 
         with self.assertRaises(DeserializationError):
-            deserializer = Deserialized(EmptyResponse, response_data)
-            deserializer(json.dumps({"a":"b"}))
+            self.d(EmptyResponse, response_data)
 
         class BetterEmptyResponse(object):
             _attribute_map = {}
@@ -510,9 +464,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
             def __init__(*args, **kwargs):
                 pass
 
-        deserializer = Deserialized(BetterEmptyResponse, response_data)
-        derserialized = deserializer(json.dumps({"a":"b"}))
-
+        derserialized = self.d(BetterEmptyResponse, response_data)
         self.assertIsInstance(derserialized, BetterEmptyResponse)
 
     def test_obj_with_malformed_map(self):
@@ -520,6 +472,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
         Test deserializing an object with a malformed attributes_map.
         """
         response_data = mock.create_autospec(Response)
+        response_data.content = json.dumps({"a":"b"})
 
         class BadResponse(object):
             _attribute_map = None
@@ -528,8 +481,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
                 pass
 
         with self.assertRaises(DeserializationError):
-            deserializer = Deserialized(BadResponse, response_data)
-            deserializer(json.dumps({"a":"b"}))
+            self.d(BadResponse, response_data)
 
         class BadResponse(object):
             _attribute_map = {"attr":"val"}
@@ -538,8 +490,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
                 pass
 
         with self.assertRaises(DeserializationError):
-            deserializer = Deserialized(BadResponse, response_data)
-            deserializer(json.dumps({"a":"b"}))
+            self.d(BadResponse, response_data)
 
         class BadResponse(object):
             _attribute_map = {"attr":{"val":1}}
@@ -548,8 +499,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
                 pass
 
         with self.assertRaises(DeserializationError):
-            deserializer = Deserialized(BadResponse, response_data)
-            deserializer(json.dumps({"a":"b"}))
+            self.d(BadResponse, response_data)
 
     def test_attr_none(self):
         """
@@ -558,14 +508,13 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response_data = mock.create_autospec(Response)
 
         with self.assertRaises(DeserializationError):
-            deserializer = Deserialized(self.TestObj, response_data)
-            self.assertIsNone(deserializer.attr_a)
+            self.d(self.TestObj, response_data)
 
         response_data.status_code = None
         response_data.headers = {'client-request-id':None, 'etag':None}
+        response_data.content = None
 
-        deserializer = Deserialized(self.TestObj, response_data)
-        response = deserializer(None)
+        response = self.d(self.TestObj, response_data)
 
         self.assertIsNone(response.status_code)
         self.assertIsNone(response.client_request_id)
@@ -581,20 +530,22 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response_data = mock.create_autospec(Response)
         response_data.status_code = 200
         response_data.headers = {'client-request-id':"123", 'etag':456.3}
+        response_data.content = None
 
-        deserializer = Deserialized(self.TestObj, response_data)
-        response = deserializer(None)
+        response = self.d(self.TestObj, response_data)
 
         self.assertEqual(response.status_code, "200")
         self.assertEqual(response.client_request_id, "123")
         self.assertEqual(response.e_tag, "456.3")
 
-        response = deserializer(json.dumps({'AttrB':'1234'}))
+        response_data.content = json.dumps({'AttrB':'1234'})
+        response = self.d(self.TestObj, response_data)
         self.assertTrue(hasattr(response, 'attr_b'))
         self.assertEqual(response.attr_b, 1234)
 
         with self.assertRaises(DeserializationError):
-            response = deserializer(json.dumps({'AttrB':'NotANumber'}))
+            response_data.content = json.dumps({'AttrB':'NotANumber'})
+            response = self.d(self.TestObj, response_data)
 
     def test_attr_str(self):
         """
@@ -603,20 +554,22 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response_data = mock.create_autospec(Response)
         response_data.status_code = 200
         response_data.headers = {'client-request-id': 'a', 'etag': 'b'}
+        response_data.content = json.dumps({'id':'InterestingValue'})
 
-        deserializer = Deserialized(self.TestObj, response_data)
-        response = deserializer(json.dumps({'id':'InterestingValue'}))
-
+        response = self.d(self.TestObj, response_data)
         self.assertTrue(hasattr(response, 'attr_a'))
         self.assertEqual(response.attr_a, 'InterestingValue')
 
-        response = deserializer(json.dumps({'id':1234}))
+        response_data.content = json.dumps({'id':1234})
+        response = self.d(self.TestObj, response_data)
         self.assertEqual(response.attr_a, '1234')
 
-        response = deserializer(json.dumps({'id':list()}))
+        response_data.content = json.dumps({'id':list()})
+        response = self.d(self.TestObj, response_data)
         self.assertEqual(response.attr_a, '[]')
 
-        response = deserializer(json.dumps({'id':None}))
+        response_data.content = json.dumps({'id':None})
+        response = self.d(self.TestObj, response_data)
         self.assertEqual(response.attr_a, None)
 
     def test_attr_bool(self):
@@ -626,20 +579,23 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response_data = mock.create_autospec(Response)
         response_data.status_code = 200
         response_data.headers = {'client-request-id': 'a', 'etag': 'b'}
+        response_data.content = json.dumps({'Key_C':True})
 
-        deserializer = Deserialized(self.TestObj, response_data)
-        response = deserializer(json.dumps({'Key_C':True}))
+        response = self.d(self.TestObj, response_data)
 
         self.assertTrue(hasattr(response, 'attr_c'))
         self.assertEqual(response.attr_c, True)
 
-        response = deserializer(json.dumps({'Key_C':[]}))
+        response_data.content = json.dumps({'Key_C':[]})
+        response = self.d(self.TestObj, response_data)
         self.assertEqual(response.attr_c, False)
 
-        response = deserializer(json.dumps({'Key_C':0}))
+        response_data.content = json.dumps({'Key_C':0})
+        response = self.d(self.TestObj, response_data)
         self.assertEqual(response.attr_c, False)
 
-        response = deserializer(json.dumps({'Key_C':"Value"}))
+        response_data.content = json.dumps({'Key_C':"value"})
+        response = self.d(self.TestObj, response_data)
         self.assertEqual(response.attr_c, True)
 
     def test_attr_list_simple(self):
@@ -649,31 +605,30 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response_data = mock.create_autospec(Response)
         response_data.status_code = 200
         response_data.headers = {'client-request-id': 'a', 'etag': 'b'}
+        response_data.content = json.dumps({'AttrD': []})
 
-        deserializer = Deserialized(self.TestObj, response_data)
-        data = {'AttrD': []}
-        response = deserializer(json.dumps(data))
+        response = self.d(self.TestObj, response_data)
         deserialized_list = [d for d in response.attr_d]
         self.assertEqual(deserialized_list, [])
 
-        data['AttrD'] = [1,2,3]
-        response = deserializer(json.dumps(data))
+        response_data.content = json.dumps({'AttrD': [1,2,3]})
+        response = self.d(self.TestObj, response_data)
         deserialized_list = [d for d in response.attr_d]
         self.assertEqual(deserialized_list, [1,2,3])
 
-        data['AttrD'] = ["1","2","3"]
-        response = deserializer(json.dumps(data))
+        response_data.content = json.dumps({'AttrD': ["1","2","3"]})
+        response = self.d(self.TestObj, response_data)
         deserialized_list = [d for d in response.attr_d]
         self.assertEqual(deserialized_list, [1,2,3])
 
-        data['AttrD'] = ["test","test2","test3"]
+        response_data.content = json.dumps({'AttrD': ["test","test2","test3"]})
         with self.assertRaises(DeserializationError):
-            response = deserializer(json.dumps(data))
+            response = self.d(self.TestObj, response_data)
             deserialized_list = [d for d in response.attr_d]
         
-        data['AttrD'] = "NotAList"
+        response_data.content = json.dumps({'AttrD': "NotAList"})
         with self.assertRaises(DeserializationError):
-            response = deserializer(json.dumps(data))
+            response = self.d(self.TestObj, response_data)
             deserialized_list = [d for d in response.attr_d]
 
     def test_attr_list_complex(self):
@@ -697,18 +652,18 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response_data = mock.create_autospec(Response)
         response_data.status_code = 200
         response_data.headers = {'client-request-id': 'a', 'etag': 'b'}
+        response_data.content = json.dumps({"id":[{"ABC": "123"}]})
 
-        deserializer = Deserialized(CmplxTestObj)
-        data = {"id":[{"ABC": "123"}]}
-
-        response = deserializer(json.dumps(data), {'ListObj':ListObj})
+        d = Deserializer({'ListObj':ListObj})
+        response = d(CmplxTestObj, response_data)
         deserialized_list = [a for a in response.attr_a]
+
         self.assertIsInstance(deserialized_list[0], ListObj)
         self.assertEqual(deserialized_list[0].abc, 123)
 
     def test_deserialize_datetime(self):
 
-        a = Deserialized.deserialize_date('9999-12-31T23:59:59+23:59')
+        a = Deserializer.deserialize_date('9999-12-31T23:59:59+23:59')
         utc = a.utctimetuple()
 
         self.assertEqual(utc.tm_year, 9999)
@@ -720,9 +675,9 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertEqual(a.microsecond, 0)
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('9999-12-31T23:59:59-23:59')
+            a = Deserializer.deserialize_date('9999-12-31T23:59:59-23:59')
 
-        a = Deserialized.deserialize_date('1999-12-31T23:59:59-23:59')
+        a = Deserializer.deserialize_date('1999-12-31T23:59:59-23:59')
         utc = a.utctimetuple()
         self.assertEqual(utc.tm_year, 2000)
         self.assertEqual(utc.tm_mon, 1)
@@ -732,7 +687,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertEqual(utc.tm_sec, 59)
         self.assertEqual(a.microsecond, 0)
 
-        a = Deserialized.deserialize_date('0001-01-01T23:59:00+23:59')
+        a = Deserializer.deserialize_date('0001-01-01T23:59:00+23:59')
         utc = a.utctimetuple()
 
         self.assertEqual(utc.tm_year, 1)
@@ -747,46 +702,46 @@ class TestRuntimeDeserialized(unittest.TestCase):
         #    a = Deserialized.deserialize_date(None, '1996-01-01T23:01:54-22:66')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('1996-01-01T23:01:54-24:30')
+            a = Deserializer.deserialize_date('1996-01-01T23:01:54-24:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('1996-01-01T23:01:78+00:30')
+            a = Deserializer.deserialize_date('1996-01-01T23:01:78+00:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('1996-01-01T23:60:01+00:30')
+            a = Deserializer.deserialize_date('1996-01-01T23:60:01+00:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('1996-01-01T24:01:01+00:30')
+            a = Deserializer.deserialize_date('1996-01-01T24:01:01+00:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('1996-01-01t01:01:01/00:30')
+            a = Deserializer.deserialize_date('1996-01-01t01:01:01/00:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('1996-01-01F01:01:01+00:30')
+            a = Deserializer.deserialize_date('1996-01-01F01:01:01+00:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('2015-02-32')
+            a = Deserializer.deserialize_date('2015-02-32')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('2015-22-01')
+            a = Deserializer.deserialize_date('2015-22-01')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('2010-13-31')
+            a = Deserializer.deserialize_date('2010-13-31')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('99999-12-31')
+            a = Deserializer.deserialize_date('99999-12-31')
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date(True)
+            a = Deserializer.deserialize_date(True)
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date(2010)
+            a = Deserializer.deserialize_date(2010)
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date(None)
+            a = Deserializer.deserialize_date(None)
 
         with self.assertRaises(DeserializationError):
-            a = Deserialized.deserialize_date('Happy New Year 2016')
+            a = Deserializer.deserialize_date('Happy New Year 2016')
 
 
 

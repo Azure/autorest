@@ -34,7 +34,7 @@
     <Compile Include="runtime\msrestazure\azure_exceptions.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrestazure\paging.py">
+    <Compile Include="runtime\msrest\paging.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrestazure\azure_resource.py">

@@ -3,7 +3,14 @@
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
 import sys
-from datetime import datetime
+@if (Model.ContainsDecimal)
+{
+@:from decimal import *
+}
+@if (Model.ContainsDatetime)
+{
+@:from datetime import *
+}
 @EmptyLine
 try:
     from urlparse import urljoin
@@ -49,7 +56,6 @@ class @(Model.MethodGroupType)(object):
             response =  self._client.send(request)
 @EmptyLine
             return response
-
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {

@@ -159,15 +159,10 @@ class TestClientRequest(unittest.TestCase):
 
         self.assertEqual(request.headers, {'a':1, 'b':2, 'c':3})
 
-    def test_request_date(self):
-
-        class Data(object):
-
-            def __call__(self):
-                return "Lots of dataaaa"
+    def test_request_data(self):
 
         request = ClientRequest()
-        request.add_content(Data())
+        request.add_content("Lots of dataaaa")
 
         self.assertEqual(request.data, json.dumps("Lots of dataaaa"))
         self.assertEqual(request.headers.get('Content-Length'), 17)

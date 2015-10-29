@@ -53,7 +53,20 @@ namespace Microsoft.Rest.Generator.Python
                 "try",
                 "while",
                 "with",
-                "yield"
+                "yield",
+                // Though the following word is not python keyword, but it will cause trouble if we use them as variable, field, etc.
+                "int",
+                "bool",
+                "bytearray",
+                "date",
+                "datetime",
+                "float",
+                "long",
+                "object",
+                "Decimal",
+                "str",
+                "timedelta"
+
             }.ForEach(s => ReservedWords.Add(s));
 
             _normalizedTypes = new HashSet<IType>();
@@ -82,12 +95,12 @@ namespace Microsoft.Rest.Generator.Python
 
         public override string GetParameterName(string name)
         {
-            return base.GetParameterName(GetEscapedReservedName(name, "Parameter"));
+            return PythonCase(GetEscapedReservedName(name, "Parameter"));
         }
 
         public override string GetVariableName(string name)
         {
-            return base.GetVariableName(GetEscapedReservedName(name, "Variable"));
+            return PythonCase(GetEscapedReservedName(name, "Variable"));
         }
 
         public override void NormalizeClientModel(ServiceClient client)
@@ -122,7 +135,12 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public override IType NormalizeType(IType type)
+        public override IType NormalizeTypeDeclaration(IType type)
+        {
+            return NormalizeTypeReference(type);
+        }
+
+        public override IType NormalizeTypeReference(IType type)
         {
             if (type == null)
             {
@@ -179,7 +197,7 @@ namespace Microsoft.Rest.Generator.Python
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             return compositeType;
@@ -231,6 +249,10 @@ namespace Microsoft.Rest.Generator.Python
             {
                 primaryType.Name = "timedelta"; 
             }
+            else if (primaryType == PrimaryType.Decimal)
+            {
+                primaryType.Name = "Decimal";
+            }
             else if (primaryType == PrimaryType.Object)  // Revisit here
             {
                 primaryType.Name = "object";
@@ -241,14 +263,14 @@ namespace Microsoft.Rest.Generator.Python
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
+            sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
             sequenceType.NameFormat = "list";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
+            dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             dictionaryType.NameFormat = "dict";
             return dictionaryType;
         }

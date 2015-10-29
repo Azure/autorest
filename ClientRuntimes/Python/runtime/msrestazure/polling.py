@@ -1,4 +1,4 @@
-# Copyright (c) Microsoft Corporation. All rights reserved. 
+﻿# Copyright (c) Microsoft Corporation. All rights reserved. 
 #
 # The MIT License (MIT)
 #
@@ -23,7 +23,7 @@
 #--------------------------------------------------------------------------
 
 
-from ..msrest.serialization import Deserialized
+from ..msrest.serialization import Deserializer
 from threading import Thread, Event
 import time
 

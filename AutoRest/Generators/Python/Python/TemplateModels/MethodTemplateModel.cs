@@ -90,35 +90,6 @@ namespace Microsoft.Rest.Generator.Python
         }
 		
         /// <summary>
-        /// Generate the method parameter declarations for a method, using TypeScript declaration syntax
-        /// </summary>
-        public string MethodParameterDeclarationTS {
-            get
-            {
-                StringBuilder declarations = new StringBuilder();
-
-                bool first = true;
-                foreach (var parameter in LocalParameters) {
-                    if (!first)
-                        declarations.Append(", ");
-
-                    declarations.Append(parameter.Name);
-                    declarations.Append(": ");
-                    declarations.Append(parameter.Type.TSType(false));
-
-                    first = false;
-                }
-
-                if (!first)
-                    declarations.Append(", ");
-                declarations.Append("options: RequestOptions");
-                
-                return declarations.ToString();
-            }
-        }
-
-
-        /// <summary>
         /// Generate the method parameter declarations with callback for a method
         /// </summary>
         public string MethodParameterDeclarationWithCallback
@@ -127,19 +98,6 @@ namespace Microsoft.Rest.Generator.Python
             {
                 var parameters = MethodParameterDeclaration;
                 parameters += "callback";
-                return parameters;
-            }
-        }
-
-        /// <summary>
-        /// Generate the method parameter declarations with callback for a method, using TypeScript method syntax
-        /// </summary>
-        public string MethodParameterDeclarationWithCallbackTS {
-            get
-            {
-                var parameters = MethodParameterDeclarationTS;
-                var returnTypeTSString = ReturnType == null ? "void" : ReturnType.TSType(false);
-                parameters += ", callback: (err: Error, result: " + returnTypeTSString + ", request: WebResource, response: stream.Readable) => void";
                 return parameters;
             }
         }
@@ -217,7 +175,7 @@ namespace Microsoft.Rest.Generator.Python
 
         public static string ConstructParameterDocumentation(string documentation)
         {
-            var builder = new IndentedStringBuilder("  ");
+            var builder = new IndentedStringBuilder("    ");
             return builder.AppendLine(documentation)
                           .AppendLine(" * ").ToString();
         }
@@ -246,7 +204,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                var builder = new IndentedStringBuilder("  ");
+                var builder = new IndentedStringBuilder("    ");
                 var errorVariable = this.Scope.GetVariableName("deserializationError");
                 return builder.AppendLine("var {0} = new Error(util.format('Error \"%s\" occurred in " +
                     "deserializing the responseBody - \"%s\"', error, responseBody));", errorVariable)
@@ -309,7 +267,7 @@ namespace Microsoft.Rest.Generator.Python
             DictionaryType dictionary = type as DictionaryType;
             PrimaryType primary = type as PrimaryType;
             EnumType enumType = type as EnumType;
-            var builder = new IndentedStringBuilder("  ");
+            var builder = new IndentedStringBuilder("    ");
             if (primary != null)
             {
                 if (primary == PrimaryType.DateTime ||
@@ -423,7 +381,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get 
             {
-                var builder = new IndentedStringBuilder("  ");
+                var builder = new IndentedStringBuilder("    ");
                 foreach (var parameter in ParameterTemplateModels)
                 {
                     if ((HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
@@ -480,7 +438,7 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("type");
             }
 
-            var builder = new IndentedStringBuilder("  ");
+            var builder = new IndentedStringBuilder("    ");
             builder.AppendLine("var {0} = null;", responseVariable)
                    .AppendLine("try {")
                    .Indent()
@@ -534,7 +492,7 @@ namespace Microsoft.Rest.Generator.Python
         /// <returns></returns>
         public virtual string BuildUrl(string variableName)
         {
-            var builder = new IndentedStringBuilder("  ");
+            var builder = new IndentedStringBuilder("    ");
             BuildPathParameters(variableName, builder);
             if (HasQueryParameters())
             {
@@ -635,7 +593,7 @@ namespace Microsoft.Rest.Generator.Python
         /// <returns></returns>
         public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
         {
-            var builder = new IndentedStringBuilder("  ");
+            var builder = new IndentedStringBuilder("    ");
 
             builder.AppendLine("// trim all duplicate forward slashes in the url");
             builder.AppendLine("var regex = /([^:]\\/)\\/+/gi;");
@@ -658,7 +616,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                var builder = new IndentedStringBuilder("  ");
+                var builder = new IndentedStringBuilder("    ");
                 if (this.RequestBody != null)
                 {
                     if (this.RequestBody.Type is CompositeType)

@@ -3,7 +3,16 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
-from runtime.msrestazure import AzureServiceClient, AzureConfiguration
+@if (Model.ContainsDecimal)
+{
+@:from decimal import *
+}
+@if (Model.ContainsDatetime)
+{
+@:from datetime import *
+}
+@EmptyLine
+from runtime.msrest import ServiceClient, Configuration
 @{
   if (Model.MethodGroupModels.Any())
   {
@@ -15,7 +24,7 @@ from runtime.msrestazure import AzureServiceClient, AzureConfiguration
 }
 from .models import *
 @EmptyLine
-class @(Model.Name)Configuration(AzureConfiguration):
+class @(Model.Name)Configuration(Configuration):
 @EmptyLine
     def __init__(self, base_url=None, filepath=None, @(Model.RequiredConstructorParameters)):
 @EmptyLine
@@ -23,13 +32,14 @@ class @(Model.Name)Configuration(AzureConfiguration):
              base_url = '@Model.BaseUrl'
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
-@EmptyLine
+@*EmptyLine
         self.api_version = '2015-06-01.2.0'
+*@
 @EmptyLine
 @EmptyLine
-class @(Model.Name)(AzureServiceClient):
+class @(Model.Name)(ServiceClient):
 @EmptyLine
-    def __init__(self, credentials, config=AzureConfiguration()):
+    def __init__(self, credentials, config=Configuration()):
 @EmptyLine
         super(@(Model.Name), self).__init__(credentials, config)
 @EmptyLine
@@ -38,10 +48,33 @@ class @(Model.Name)(AzureServiceClient):
         @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self, config)
   }
 @EmptyLine
-  @foreach (var method in Model.MethodTemplateModels)
-  {
-@:@(Include(new MethodTemplate(), method))
+@if (Model.MethodTemplateModels.Any())
+{
+<text>
 @EmptyLine
-  @:
+    def _url(self, *extension):
+@EmptyLine
+        path = [x.strip('/') for x in extension if x]
+        return '/' + '/'.join(path)
+@EmptyLine
+    def _send(self, request, accept_status, headers, content=None):
+@EmptyLine
+        try:
+            request.add_headers(headers)
+            if content:
+                request.add_content(content)
+@EmptyLine
+            response =  self._client.send(request)
+@EmptyLine
+            return response
+@EmptyLine
+</text>
+  foreach (var method in Model.MethodTemplateModels)
+  {
+@(Include(new MethodTemplate(), method))
+@EmptyLine
+@:
   }
+}
+
 

@@ -173,7 +173,7 @@ class ClientRequest(requests.Request):
             self.add_header(key, value)
 
     def add_content(self, data):
-        self.data = json.dumps(data())
+        self.data = json.dumps(data)
         self.headers['Content-Length'] = len(self.data)
 
 

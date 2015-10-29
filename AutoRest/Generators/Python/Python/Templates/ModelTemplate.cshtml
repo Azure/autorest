@@ -5,6 +5,16 @@
 @using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ModelTemplateModel>
+@if (Model.ContainsDecimal)
+{
+@:from decimal import *
+@EmptyLine
+}
+@if (Model.ContainsDatetime)
+{
+@:from datetime import *
+@EmptyLine
+}
 class @(Model.Name)(object):
 @* Need to handle the base class, default value, comment*@
 @{
