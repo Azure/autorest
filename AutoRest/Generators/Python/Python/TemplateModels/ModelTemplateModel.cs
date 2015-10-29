@@ -213,14 +213,38 @@ namespace Microsoft.Rest.Generator.Python
             else return property.Name + ": " + typeString;
         }
 
-        public string InitializeProperty(string objectName, string valueName, Property property)
+        public IList<string> GetRequiredFieldsList()
+        {
+            List<string> requiredFields = new List<string>();
+            foreach (var property in Properties)
+            {
+                if (property.IsRequired)
+                {
+                    requiredFields.Add(property.Name);
+                }
+            }
+            return requiredFields;
+        }
+
+        public string InitializePythonProperty(Property property)
         {
             if (property == null || property.Type == null)
             {
                 throw new ArgumentNullException("property");
             }
 
-            return property.Type.InitializeType(_scope, objectName + "." + property.Name, valueName + "." + property.Name);
+            //'id':{'key':'id', 'type':'str'},
+            return string.Format(CultureInfo.InvariantCulture, "'{0}':{{'key':'{1}', 'type':'{2}'}},", property.Name, property.SerializedName, property.Type.ToString());
+        }
+
+        public string InitializeProperty(string objectName, Property property)
+        {
+            if (property == null || property.Type == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            return property.Type.NullInitializeType(_scope, objectName + "." + property.Name);
         }
 
         public string SerializeProperty(string objectName, string serializedName, Property property)

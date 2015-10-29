@@ -70,7 +70,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 var requireParams = new List<string>();
                 this.Properties.Where(p => p.IsRequired)
-                    .ForEach(p => requireParams.Add(p.Name.ToCamelCase()));
+                    .ForEach(p => requireParams.Add(p.Name.ToPythonCase()));
                 requireParams.Add("baseUri");
                 return string.Join(", ", requireParams);
             }

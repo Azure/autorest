@@ -11,18 +11,6 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
 {
     public static class ClientModelExtensions
     {
-        public static string GetHttpMethod(this HttpMethod method)
-        {
-            if (method == HttpMethod.Patch)
-            {
-                return "new HttpMethod(\"Patch\")";
-            }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, "HttpMethod.{0}", method);
-            }
-        }
-
         /// <summary>
         /// Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
         /// </summary>
@@ -1027,6 +1015,28 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             }
 
             return builder.ToString();
+        }
+
+        public static string NullInitializeType(this IType type, IScopeProvider scope, string objectReference, string modelReference = "models")
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException("scope");
+            }
+
+            SequenceType sequence = type as SequenceType;
+            DictionaryType dictionary = type as DictionaryType;
+            string nullValue = "None";
+            if (sequence != null)
+            {
+                nullValue = "[]";
+            }
+            else if (dictionary != null)
+            {
+                nullValue = "{}";
+            }
+
+            return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", objectReference, nullValue);
         }
 
         public static string InitializeType(this IType type, IScopeProvider scope, string objectReference, string valueReference, string modelReference = "models")

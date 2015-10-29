@@ -1,129 +1,53 @@
-﻿@using System.Linq
+﻿@using System
+@using System.Linq
 @using System.Collections.Generic
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ModelTemplateModel>
-/*
-@Header(" * ")
- */
-@EmptyLine
-'use strict';
-@EmptyLine
-@if (Model.ContainsPropertiesInCompositeType() || Model.BaseModelType != null)
-{
-@:var models = require('./index');
-@EmptyLine
-}
-@if (Model.ContainsPropertiesInSequenceType() || Model.BaseModelType != null)
-{
-@:var util = require('util');
-@EmptyLine
-}
-@if (Model.ContainsDurationProperty())
-{
-@:var moment = require('moment');
-@EmptyLine
-}
-/**
- * @@class
- * Initializes a new instance of the @(Model.Name) class.
- * @@constructor
-@WrapComment(" * ", Model.Documentation)
-@foreach (var property in Model.DocumentationPropertyList)
-{
-    @ModelTemplateModel.ConstructPropertyDocumentation(
-              WrapComment(" * ", "@member {" + ModelTemplateModel.GetPropertyDocumentationType(property)
-                                             + "} " + ModelTemplateModel.GetPropertyDocumentationName(property)
-                                             + " " + property.Documentation))
-}
- */
-function @(Model.Name)(parameters) {
+class @(Model.Name)(object):
+@* Need to handle the base class, default value, comment*@
 @{
-  if (Model.BaseModelType != null)
+  var requiredFieldList = Model.GetRequiredFieldsList();
+  var requiredStr = String.Empty;
+  if (requiredFieldList.Count > 0)
   {
-  @:@(Model.Name)['super_'].call(this, parameters);
+    for (int i = 0; i < requiredFieldList.Count; i++) 
+    {
+      requiredFieldList[i] = "'" + requiredFieldList[i] + "'";
+    }
+    requiredStr = string.Join(",", requiredFieldList);
   }
+@EmptyLine
+    @:_required = [@requiredStr]
+}
+@EmptyLine
+    _attribute_map = {
+@{
   var propertyList = new List<Property>(Model.Properties);
   if (propertyList.Count > 0)
   {
-  @:if (parameters !== null && parameters !== undefined) {
     for (int i = 0; i < propertyList.Count; i++) 
     {
-    @:@(Model.InitializeProperty("this", "parameters", propertyList[i]))
+        @:@(Model.InitializePythonProperty(propertyList[i]))
     }
-  @:}    
   }
 }
-}
+    }
+@EmptyLine
+    def __init__(self, *args, **kwargs):
 @EmptyLine
 @{
-if (Model.BaseModelType != null)
-{
-@:util.inherits(@(Model.Name), models['@(Model.BaseModelType.Name)']);
-}
-}
-@EmptyLine
-/**
- * Validate the payload against the @Model.Name schema
- *
- * @@param {JSON} payload
- *
- */
-@(Model.Name).prototype.serialize = function () {
-@{
-  if (Model.BaseModelType != null)
+  if (propertyList.Count > 0)
   {
-  @:var payload = @(Model.Name)['super_'].prototype.serialize.call(this);
-  }
-  else
-  {
-  @:var payload = {};
-  }
-  var serializationPropertyList = new List<Property>(Model.Properties);
-  for (int i = 0; i < serializationPropertyList.Count; i++)
-  {
-  @:@(Model.SerializeProperty("this", "payload", serializationPropertyList[i]))
-  if (i != serializationPropertyList.Count - 1)
-  {
-  @EmptyLine
-  }
-  }
-  @EmptyLine
-  @:return payload;
-}
-};
-@EmptyLine
-/**
- * Deserialize the instance to @Model.Name schema
- *
- * @@param {JSON} instance
- *
- */
-@(Model.Name).prototype.deserialize = function (instance) {
-  @{
-  if (Model.BaseModelType != null)
-  {
-  @:@(Model.Name)['super_'].prototype.deserialize.call(this, instance);
-  }
-  var properties = Model.Properties;
-  if (properties.Count > 0)
-  {
-  @:if (instance) {
-    var propertiesList = new List<Property>(Model.Properties);
-    for (int i = 0; i < propertiesList.Count; i++)
+    for (int i = 0; i < propertyList.Count; i++) 
     {
-    @:@(Model.DeserializeProperty("this", "instance", propertiesList[i]))
-    if (i != propertiesList.Count - 1)
-    {
-    @EmptyLine
+        @:@(Model.InitializeProperty("self", propertyList[i]))
     }
-    }
-  @:}
   }
-  }
-  @EmptyLine
-  return this;
-};
+}
 @EmptyLine
-module.exports = @(Model.Name);
+        for k in kwargs:
+            if hasattr(self, k):
+                setattr(self, k, kwargs[k])
+
