@@ -406,7 +406,7 @@ namespace Microsoft.Rest.Generator.CSharp
             return builder.ToString();
         }
 
-        private string BuildNullCheckExpression(ParameterTransformation transformation)
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
         {
             if (transformation == null)
             {

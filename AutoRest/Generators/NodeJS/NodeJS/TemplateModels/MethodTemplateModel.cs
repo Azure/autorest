@@ -802,7 +802,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             return builder.ToString();
         }
 
-        private string BuildNullCheckExpression(ParameterTransformation transformation)
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
         {
             if (transformation == null)
             {

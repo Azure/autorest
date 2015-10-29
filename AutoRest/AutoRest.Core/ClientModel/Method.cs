@@ -85,7 +85,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets the list of input Parameter transformations
         /// </summary>
-        public List<ParameterTransformation> InputParameterTransformation { get; private set; }
+        public IList<ParameterTransformation> InputParameterTransformation { get; private set; }
 
         /// <summary>
         /// Gets or sets request headers.
