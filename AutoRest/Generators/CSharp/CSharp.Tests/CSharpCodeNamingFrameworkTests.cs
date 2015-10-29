@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Xunit;
@@ -380,6 +381,105 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             MultilineAreEqual(expected, output.Trim());
         }
 
+        [Fact (Skip = "TODO: Implement more robust mapping for resource transformation")]
+        public void VerifyInputMappingsForResources()
+        {
+            var serviceClient = new ServiceClient();
+            serviceClient.Name = "test service client";
+
+            var flattenedPropertyType = new CompositeType();
+            flattenedPropertyType.Name = "FooFlattened";
+            flattenedPropertyType.Properties.Add(new Property
+            {
+                Name = "Sku",
+                Type = PrimaryType.String
+            });
+            flattenedPropertyType.Properties.Add(new Property
+            {
+                Name = "ProvState",
+                Type = PrimaryType.String
+            });
+            flattenedPropertyType.Properties.Add(new Property
+            {
+                Name = "Id",
+                Type = PrimaryType.Int
+            });
+
+            var customObjectPropertyType = new CompositeType();
+            customObjectPropertyType.Name = "FooProperty";
+            customObjectPropertyType.Properties.Add(new Property
+            {
+                Name = "Sku",
+                Type = PrimaryType.String
+            });
+            customObjectPropertyType.Properties.Add(new Property
+            {
+                Name = "ProvState",
+                Type = PrimaryType.String
+            });
+
+            var customObjectType = new CompositeType();
+            customObjectType.Name = "Foo";
+            customObjectType.Properties.Add(new Property
+            {
+                Name = "Property",
+                Type = customObjectPropertyType
+            });
+            customObjectType.Properties.Add(new Property
+            {
+                Name = "Id",
+                Type = PrimaryType.Int
+            });
+
+            var method = new Method
+            {
+                Name = "method1",
+                Group = "mGroup",
+                ReturnType = flattenedPropertyType
+            };
+            var inputParameter = new Parameter { Name = "prop", Type = flattenedPropertyType };
+            serviceClient.Methods.Add(method);
+            method.Parameters.Add(inputParameter);
+            method.InputParameterTransformation.Add(new ParameterTransformation
+            {
+                OutputParameter = new Parameter { Name = "body", Type = customObjectType, SerializedName = "body" }
+            });
+            method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
+            {
+                InputParameter = inputParameter,
+                InputParameterProperty = "Id",
+                OutputParameterProperty = "Id"
+            });
+            method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
+            {
+                InputParameter = inputParameter,
+                InputParameterProperty = "Sku",
+                OutputParameterProperty = "Property.Sku"
+            });
+            method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
+            {
+                InputParameter = inputParameter,
+                InputParameterProperty = "ProvState",
+                OutputParameterProperty = "Property.ProvState"
+            });            
+
+            MethodTemplateModel templateModel = new MethodTemplateModel(method, serviceClient);
+            var output = templateModel.BuildInputMappings();
+            string expected =
+          @"String paramA = null;
+            if (body != null)
+            {
+                paramA = body.A;
+            }
+            String paramB = null;
+            if (body != null)
+            {
+                paramB = body.B;
+            }";
+
+            MultilineAreEqual(expected, output.Trim());
+        }
+
         private static void MultilineAreEqual(string expectedText, string actualText)
         {
             string[] expectedLines = expectedText.Split('\n').Select(p => p.TrimEnd('\r')).ToArray();
@@ -390,7 +490,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             for (int i = 0; i < expectedLines.Length; i++)
             {
                 Assert.True(expectedLines[i].Trim().Equals(actualLines[i].Trim()),
-                    string.Format("Difference on line {0}.\r\nExpected: {1}\r\nActual: {2}", i, expectedLines[i], actualLines[i]));
+                    string.Format(CultureInfo.InvariantCulture, "Difference on line {0}.\r\nExpected: {1}\r\nActual: {2}", i, expectedLines[i], actualLines[i]));
             }
         }
     }
