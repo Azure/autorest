@@ -76,42 +76,21 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        /// <summary>
-        /// Return the service client constructor required parameters, in TypeScript syntax.
-        /// </summary>
-        public string RequiredConstructorParametersTS {
-            get {
-                StringBuilder requiredParams = new StringBuilder();
-
-                bool first = true;
-                foreach (var p in this.Properties) {
-                    if (! p.IsRequired)
-                        continue;
-
-                    if (!first)
-                        requiredParams.Append(", ");
-
-                    requiredParams.Append(p.Name);
-                    requiredParams.Append(": ");
-                    requiredParams.Append(p.Type.TSType(false));
-
-                    first = false;
-                }
-
-                if (!first)
-                    requiredParams.Append(", ");
-
-                requiredParams.Append("baseUri: string");
-                return requiredParams.ToString();
-            }
-        }
-
-        public bool ContainsTimeSpan
+        public bool ContainsDecimal
         {
             get
             {
                 return this.Methods.FirstOrDefault(
-                    m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.TimeSpan) != null) != null;
+                    m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.Decimal) != null) != null;
+            }
+        }
+
+        public bool ContainsDatetime
+        {
+            get
+            {
+                return this.Methods.FirstOrDefault(
+                    m => m.Parameters.FirstOrDefault(p => ClientModelExtensions.PythonDatetimeModuleType.Contains(p.Type)) != null) != null;
             }
         }
     }

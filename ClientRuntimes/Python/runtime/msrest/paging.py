@@ -24,28 +24,30 @@
 #
 #--------------------------------------------------------------------------
 
-from ..msrest.serialization import Deserialized
-from threading import Thread, Event
-import time
-
+from .serialization import Deserializer
+from .exceptions import DeserializationError
 
 class Paged(object):
 
-    def __init__(self, items, url, command):
+    def __init__(self, response, command, classes):
         """
         A collection for paged REST responses.
         """
+        self.next_link = None
+        self.items = []
 
-        self.items = items
-        self.url = url
+        self.derserializer = Deserializer(classes)
+        self.derserializer(self, response)
+
         self.command = command
 
     def __iter__(self):
         for i in self.items:
             yield i
 
-        while self.url is not None:
-            self.items, self.url = self.command(self.url)
+        while self.next_link is not None:
+            response = self.command(self.next_link)
+            self.derserializer(self, response)
 
             for i in self.items:
                 yield i

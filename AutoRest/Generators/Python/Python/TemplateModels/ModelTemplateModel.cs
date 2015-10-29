@@ -166,7 +166,7 @@ namespace Microsoft.Rest.Generator.Python
 
         public static string ConstructPropertyDocumentation(string propertyDocumentation)
         {
-            var builder = new IndentedStringBuilder("  ");
+            var builder = new IndentedStringBuilder("    ");
             return builder.AppendLine(propertyDocumentation)
                           .AppendLine(" * ").ToString();
         }
@@ -184,33 +184,29 @@ namespace Microsoft.Rest.Generator.Python
             return sample != null;
         }
 
-        public bool ContainsDurationProperty()
+        public bool ContainsDecimal
         {
-            Property prop = ComposedProperties.FirstOrDefault(p =>
-                (p.Type is PrimaryType && (p.Type as PrimaryType) == PrimaryType.TimeSpan) ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.TimeSpan) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.TimeSpan));
-            return prop != null;
+            get 
+            {
+                Property prop = ComposedProperties.FirstOrDefault(p =>
+                    (p.Type is PrimaryType && (p.Type as PrimaryType) == PrimaryType.Decimal) ||
+                    (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.Decimal) ||
+                    (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.Decimal));
+                return prop != null;
+
+            }
         }
 
-        /// <summary>
-        /// Returns the TypeScript string to define the specified property, including its type and whether it's optional or not
-        /// </summary>
-        /// <param name="property">Model property to query</param>
-        /// <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
-        /// <returns>TypeScript property definition</returns>
-        public static string PropertyTS(Property property, bool inModelsModule) 
+        public bool ContainsDatetime
         {
-            if (property == null) 
+            get 
             {
-                throw new ArgumentNullException("property");
+                Property prop = ComposedProperties.FirstOrDefault(p =>
+                    (p.Type is PrimaryType && ClientModelExtensions.PythonDatetimeModuleType.Contains(p.Type as PrimaryType) ||
+                    (p.Type is SequenceType && ClientModelExtensions.PythonDatetimeModuleType.Contains((p.Type as SequenceType).ElementType)) ||
+                    (p.Type is DictionaryType && ClientModelExtensions.PythonDatetimeModuleType.Contains((p.Type as DictionaryType).ValueType))));
+                return prop != null;
             }
-
-            string typeString = property.Type.TSType(inModelsModule);
-
-            if (! property.IsRequired)
-                return property.Name + "?: " + typeString;
-            else return property.Name + ": " + typeString;
         }
 
         public IList<string> GetRequiredFieldsList()

@@ -8,14 +8,15 @@ try:
 except ImportError:
     from urllib.parse import urljoin
 
-from runtime.msrest.serialization import Serialized, Deserialized
+from runtime.msrest.serialization import Serializer, Deserializer
+from runtime.msrest.paging import Paged
 from runtime.msrest.exceptions import (
     SerializationError,
     DeserializationError,
     TokenExpiredError,
     ClientRequestException)
 
-from runtime.msrestazure.azure_handlers import Paged, Polled
+from runtime.msrestazure.polling import Polled
 
 from ..batch_exception import BatchStatusError
 
@@ -31,18 +32,8 @@ class PoolManager(object):
         self._config = config
         self._classes = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
 
-    def __getitem__(self, name):
-        response = self.get(name)
-        return response
-
-    def __setitem__(self, name, value):
-        raise InvalidOperationError("Pool cannot be overwritten.")
-
-    def __iter__(self):
-        pools = self.list(self.max_results)
-        
-        for p in pools:
-            yield p
+        self.serializer = Serializer()
+        self.deserializer = Deserializer(self._classes)
 
     def _url(self, *extension):
         path = [x.strip('/') for x in extension if x]
@@ -59,8 +50,7 @@ class PoolManager(object):
 
             if response.status_code not in accept_status:
        
-                deserialize = Deserialized(BatchStatusError, response, self)
-                deserialized = deserialize(response.content, self._classes)
+                deserialized = self.deserializer(BatchStatusError, response, self._classes)
                 raise deserialized
 
             return response
@@ -92,11 +82,11 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers['Content-Type'] = 'application/json;odata=minimalmetadata'
 
             # Construct body
-            content = Serialized(pool_parameters)
+            content = self.serializer(pool_parameters)
 
             # Construct and send request
             request = self._client.post(url, query)
@@ -139,7 +129,7 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers.update(access.get_headers())
 
             # Construct and send request
@@ -174,7 +164,7 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers.update(access.get_headers())
 
             # Construct and send request
@@ -212,12 +202,12 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers['Content-Type'] = 'application/json;odata=minimalmetadata'
             headers.update(access.get_headers())
 
             # Construct body
-            content = Serialized(auto_scale_parameters)
+            content = self.serializer(auto_scale_parameters)
 
             # Construct and send request
             request = self._client.post(url, query)
@@ -254,12 +244,12 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers['Content-Type'] = 'application/json;odata=minimalmetadata'
             headers.update(access.get_headers())
 
             # Construct body
-            content = Serialized(evaluation_parameters)
+            content = self.serializer(evaluation_parameters)
 
             # Construct and send request
             request = self._client.post(url, query)
@@ -293,7 +283,7 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers.update(access.get_headers())
 
             # Construct and send request
@@ -304,9 +294,7 @@ class PoolManager(object):
                 return response
 
             # Deserialize response
-            deserialize = Deserialized(Pool, response, self)
-            deserialized = deserialize(response.content, self._classes)
-            return deserialized
+            return self.deserializer(Pool, response, self._classes)
 
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?
@@ -341,31 +329,23 @@ class PoolManager(object):
 
                 # Construct headers
                 headers = {}
-                headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+                headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
                 headers.update(access.get_headers())
 
                 # Construct and send request
                 response = self._send(request, accept_status, headers)
                     
-                if raw:
-                    return response, None
-
-                # Deserialize response
-                deserialize = Deserialized(Pool, response, self, "value")
-                deserialized = deserialize(response.content, self._classes)
-                page = Deserialized(Page, response, self, "odata.next_link")()
-
-                return deserialized, page.next_link
+                return response
 
             except (SerializationError, DeserializationError):
                 raise #TODO: Wrap in client-specific error?
 
-        response_list, next_link = paging()
+        response = paging()
 
         if raw:
-            return response_list
+            return response
 
-        return Paged(response_list, next_link, paging)
+        return PoolsPaged(response, paging, self._classes)
 
         
 
@@ -391,12 +371,12 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers['Content-Type'] = 'application/json;odata=minimalmetadata'
             headers.update(access.get_headers())
 
             # Construct body
-            content = Serialized(patch_parameters)
+            content = self.serializer(patch_parameters)
 
             # Construct and send request
             request = self._client.patch(url, query)
@@ -430,12 +410,12 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers['Content-Type'] = 'application/json;odata=minimalmetadata'
             headers.update(access.get_headers())
 
             # Construct body
-            content = Serialized(resize_parameters)
+            content = self.serializer(resize_parameters)
 
             # Construct and send request
             request = self._client.post(url, query)
@@ -466,7 +446,7 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers['Content-Type'] = 'application/json;odata=minimalmetadata'
             headers.update(access.get_headers())
 
@@ -502,12 +482,12 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers['Content-Type'] = 'application/json;odata=minimalmetadata'
             headers.update(access.get_headers())
 
             # Construct body
-            content = Serialized(update_properties)
+            content = self.serializer(update_properties)
 
             # Construct and send request
             request = self._client.post(url, query)
@@ -541,12 +521,12 @@ class PoolManager(object):
 
             # Construct headers
             headers = {}
-            headers['ocp-date'] = Serialized.serialize_opc_date(datetime.utcnow())
+            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
             headers['Content-Type'] = 'application/json;odata=minimalmetadata'
             headers.update(access.get_headers())
 
             # Construct body
-            content = Serialized(os_parameters)
+            content = self.serializer(os_parameters)
 
             # Construct and send request
             request = self._client.post(url, query)
